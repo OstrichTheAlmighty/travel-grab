@@ -820,82 +820,53 @@ def run_app():
 
         def _render_category_explanation(resp: dict):
             category = str(resp.get("category", "")).strip() or "This category"
-            current = resp.get("current", {}) or {}
-            previous = resp.get("previous", {}) or {}
-            delta = resp.get("delta", {}) or {}
-            top_current = resp.get("top_merchants_current", []) or []
-            top_previous = resp.get("top_merchants_previous", []) or []
-            largest_current = resp.get("largest_transactions_current", []) or []
-
-            current_total = float(current.get("spend_total", 0.0))
-            previous_total = float(previous.get("spend_total", 0.0))
-            spend_delta = float(delta.get("spend_delta", current_total - previous_total))
-            pct_change = delta.get("pct_change")
-            current_count = int(current.get("tx_count", 0))
-            previous_count = int(previous.get("tx_count", 0))
-
-            if spend_delta > 0:
-                headline = f"{category} spending is higher this month."
-            elif spend_delta < 0:
-                headline = f"{category} spending is lower this month."
-            else:
-                headline = f"{category} spending is flat versus last month."
-
-            st.subheader(headline)
             explanation = str(resp.get("explanation", "")).strip()
             if explanation:
                 st.write(explanation)
             else:
-                bullets = [
-                    f"This month: {_fmt_money(current_total)} across {current_count} transactions.",
-                    f"Previous month: {_fmt_money(previous_total)} across {previous_count} transactions.",
-                ]
-                if pct_change is None:
-                    bullets.append(f"Change vs previous month: {_fmt_money(spend_delta)}.")
+                st.write(f"No comparison summary is available for {category}.")
+
+            current_total = float(resp.get("current_month_total", 0.0))
+            previous_total = float(resp.get("previous_month_total", 0.0))
+            dollar_change = float(resp.get("dollar_change", current_total - previous_total))
+            percent_change = resp.get("percent_change")
+            tx_count_change = int(resp.get("transaction_count_change", 0))
+            current_tx_count = int(resp.get("current_transaction_count", 0))
+            previous_tx_count = int(resp.get("previous_transaction_count", 0))
+            current_avg_spend = float(resp.get("current_avg_spend", 0.0))
+            previous_avg_spend = float(resp.get("previous_avg_spend", 0.0))
+            top_merchants = resp.get("top_merchants", []) or []
+
+            with st.expander("Details", expanded=False):
+                st.write(f"Current month total: {_fmt_money(current_total)}")
+                if bool(resp.get("has_previous_data", False)):
+                    st.write(f"Previous month total: {_fmt_money(previous_total)}")
                 else:
-                    direction = "up" if spend_delta > 0 else "down" if spend_delta < 0 else "flat"
-                    bullets.append(
-                        f"Change vs previous month: {direction} {abs(float(pct_change)):.1f}% "
-                        f"({_fmt_money(spend_delta)})."
+                    st.write("Previous month total: No data")
+
+                if percent_change is None:
+                    st.write(f"Dollar change: {_fmt_signed_money(dollar_change)}")
+                else:
+                    st.write(
+                        f"Change vs previous month: {_fmt_signed_money(dollar_change)} ({float(percent_change):+.1f}%)"
                     )
 
-                for item in bullets:
-                    st.write(f"- {item}")
-
-            st.write("Top merchants")
-            merchant_cols = st.columns(2)
-            with merchant_cols[0]:
-                st.caption("This month")
-                if top_current:
-                    for merchant in top_current:
-                        st.write(
-                            f"- {merchant.get('merchant', 'Unknown')}: "
-                            f"{_fmt_money(float(merchant.get('total', 0.0)))} "
-                            f"across {int(merchant.get('tx_count', 0))} transactions"
-                        )
-                else:
-                    st.write("No transactions yet.")
-            with merchant_cols[1]:
-                st.caption("Previous month")
-                if top_previous:
-                    for merchant in top_previous:
-                        st.write(
-                            f"- {merchant.get('merchant', 'Unknown')}: "
-                            f"{_fmt_money(float(merchant.get('total', 0.0)))} "
-                            f"across {int(merchant.get('tx_count', 0))} transactions"
-                        )
-                else:
-                    st.write("No transactions last month.")
-
-            st.write("Largest transactions this month")
-            if largest_current:
-                largest_df = pd.DataFrame(largest_current).rename(
-                    columns={"date": "Date", "merchant": "Merchant", "amount": "Amount"}
+                st.write(
+                    f"Transaction count change: {tx_count_change:+d} "
+                    f"({current_tx_count} this month vs {previous_tx_count} last month)"
                 )
-                largest_df["Amount"] = largest_df["Amount"].map(lambda x: _fmt_money(float(x)))
-                st.dataframe(largest_df[["Date", "Merchant", "Amount"]], width="stretch")
-            else:
-                st.write("No transactions yet.")
+                st.write(
+                    f"Average spend per transaction: {_fmt_money(current_avg_spend)} "
+                    f"vs {_fmt_money(previous_avg_spend)} last month"
+                )
+
+                if top_merchants:
+                    st.write("Top merchants driving the change")
+                    for merchant in top_merchants:
+                        st.write(
+                            f"- {merchant.get('merchant', 'Unknown')}: "
+                            f"{_fmt_signed_money(float(merchant.get('dollar_change', 0.0)))}"
+                        )
 
         def _load_financial_overview():
             insights_key = f"{st.session_state.user_id}:{as_of_str}:monthly:insights"

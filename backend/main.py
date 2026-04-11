@@ -369,6 +369,204 @@ def trends(user_id: str = USER_DEFAULT, period: PERIOD = "monthly", as_of: Optio
     }
 
 
+def _category_window_bounds(as_of_d: date, period: PERIOD):
+    start_this, _ = period_bounds(as_of_d, period)
+    end_this = as_of_d
+    if period == "weekly":
+        start_prev = start_this - timedelta(days=7)
+        end_prev = start_this - timedelta(days=1)
+    else:
+        prev_month_end = start_this - timedelta(days=1)
+        start_prev = prev_month_end.replace(day=1)
+        end_prev = prev_month_end
+    return start_this, end_this, start_prev, end_prev
+
+
+def _category_period_summary(user_id: str, category: str, start_d: date, end_d: date) -> Dict[str, object]:
+    with get_conn() as conn:
+        rows = conn.execute(
+            """
+            SELECT date, merchant, amount
+            FROM transactions
+            WHERE user_id = ? AND category = ? AND date >= ? AND date <= ?
+            ORDER BY date ASC
+            """,
+            (user_id, category, start_d.isoformat(), end_d.isoformat()),
+        ).fetchall()
+
+    merchants: Dict[str, Dict[str, float | int | str]] = {}
+    total = 0.0
+    tx_count = 0
+    for row in rows:
+        amount = abs(float(row["amount"]))
+        merchant = str(row["merchant"]).strip() or "Unknown"
+        total += amount
+        tx_count += 1
+        merchant_row = merchants.setdefault(
+            merchant,
+            {"merchant": merchant, "total": 0.0, "tx_count": 0},
+        )
+        merchant_row["total"] = float(merchant_row["total"]) + amount
+        merchant_row["tx_count"] = int(merchant_row["tx_count"]) + 1
+
+    avg_spend = (total / tx_count) if tx_count > 0 else 0.0
+    return {
+        "total": round(total, 2),
+        "tx_count": int(tx_count),
+        "avg_spend": round(avg_spend, 2),
+        "merchants": merchants,
+    }
+
+
+def _join_labels(labels: List[str]) -> str:
+    clean = [str(label).strip() for label in labels if str(label).strip()]
+    if not clean:
+        return ""
+    if len(clean) == 1:
+        return clean[0]
+    if len(clean) == 2:
+        return f"{clean[0]} and {clean[1]}"
+    return f"{', '.join(clean[:-1])}, and {clean[-1]}"
+
+
+def _build_category_explanation_text(
+    *,
+    category: str,
+    period: PERIOD,
+    current_total: float,
+    previous_total: float,
+    dollar_change: float,
+    percent_change: Optional[float],
+    current_tx_count: int,
+    transaction_count_change: int,
+    current_avg_spend: float,
+    previous_avg_spend: float,
+    top_merchants: List[Dict[str, object]],
+) -> str:
+    period_label = "month" if period == "monthly" else "week"
+    category_lower = str(category).strip().lower()
+    merchant_names = _join_labels([str(m.get("merchant", "")).strip() for m in top_merchants[:2]])
+
+    if current_total <= 0 and previous_total <= 0:
+        return f"No {category_lower} spending was recorded this {period_label} or last {period_label}."
+
+    if previous_total <= 0:
+        explanation = f"There’s no previous {period_label} data for {category} yet."
+        if current_total > 0:
+            explanation += f" This {period_label} you spent {_fmt_money(current_total)} across {int(current_tx_count)} transactions"
+            if merchant_names:
+                explanation += f", mainly at {merchant_names}"
+            explanation += "."
+        return explanation
+
+    direction = "up" if dollar_change > 0 else "down" if dollar_change < 0 else "flat"
+    pct_text = f" ({percent_change:+.0f}%)" if percent_change is not None else ""
+    explanation = f"{category} is {direction} {_fmt_money(abs(dollar_change))}{pct_text} vs last {period_label}"
+    if dollar_change > 0 and merchant_names:
+        explanation += f", mainly from higher spending at {merchant_names}"
+    elif dollar_change < 0 and merchant_names:
+        explanation += f", mostly due to lower spending at {merchant_names}"
+    explanation += "."
+
+    avg_phrase = ""
+    if current_avg_spend > previous_avg_spend + 0.01:
+        avg_phrase = " and a higher average spend per transaction"
+    elif current_avg_spend < previous_avg_spend - 0.01:
+        avg_phrase = " and a lower average spend per transaction"
+
+    if transaction_count_change > 0:
+        explanation += f" You had {transaction_count_change} more {category_lower} transactions{avg_phrase}."
+    elif transaction_count_change < 0:
+        explanation += f" You had {abs(transaction_count_change)} fewer {category_lower} transactions{avg_phrase}."
+    elif avg_phrase:
+        explanation += f" You had the same number of {category_lower} transactions{avg_phrase}."
+
+    return explanation
+
+
+@app.get("/explain/category")
+def explain_category(user_id: str = USER_DEFAULT, category: str = "", period: PERIOD = "monthly", as_of: Optional[str] = None):
+    if not as_of:
+        as_of = date.today().isoformat()
+    as_of_d = parse_date(as_of)
+    category_name = str(category).strip()
+    start_this, end_this, start_prev, end_prev = _category_window_bounds(as_of_d, period)
+
+    current = _category_period_summary(user_id, category_name, start_this, end_this)
+    previous = _category_period_summary(user_id, category_name, start_prev, end_prev)
+
+    current_total = float(current.get("total", 0.0))
+    previous_total = float(previous.get("total", 0.0))
+    current_tx_count = int(current.get("tx_count", 0))
+    previous_tx_count = int(previous.get("tx_count", 0))
+    current_avg_spend = float(current.get("avg_spend", 0.0))
+    previous_avg_spend = float(previous.get("avg_spend", 0.0))
+    dollar_change = round(current_total - previous_total, 2)
+    percent_change = None if previous_total == 0 else round((dollar_change / previous_total) * 100.0, 1)
+    transaction_count_change = current_tx_count - previous_tx_count
+
+    current_merchants = current.get("merchants", {}) or {}
+    previous_merchants = previous.get("merchants", {}) or {}
+    merchant_changes: List[Dict[str, object]] = []
+    delta_sign = 1 if dollar_change >= 0 else -1
+    for merchant in set(current_merchants) | set(previous_merchants):
+        current_merchant = current_merchants.get(merchant, {}) or {}
+        previous_merchant = previous_merchants.get(merchant, {}) or {}
+        merchant_delta = round(
+            float(current_merchant.get("total", 0.0)) - float(previous_merchant.get("total", 0.0)),
+            2,
+        )
+        if delta_sign > 0 and merchant_delta <= 0:
+            continue
+        if delta_sign < 0 and merchant_delta >= 0:
+            continue
+        merchant_changes.append(
+            {
+                "merchant": merchant,
+                "current_total": round(float(current_merchant.get("total", 0.0)), 2),
+                "previous_total": round(float(previous_merchant.get("total", 0.0)), 2),
+                "dollar_change": merchant_delta,
+                "current_tx_count": int(current_merchant.get("tx_count", 0)),
+                "previous_tx_count": int(previous_merchant.get("tx_count", 0)),
+            }
+        )
+
+    merchant_changes.sort(key=lambda item: abs(float(item.get("dollar_change", 0.0))), reverse=True)
+    top_merchants = merchant_changes[:3]
+
+    explanation = _build_category_explanation_text(
+        category=category_name,
+        period=period,
+        current_total=current_total,
+        previous_total=previous_total,
+        dollar_change=dollar_change,
+        percent_change=percent_change,
+        current_tx_count=current_tx_count,
+        transaction_count_change=transaction_count_change,
+        current_avg_spend=current_avg_spend,
+        previous_avg_spend=previous_avg_spend,
+        top_merchants=top_merchants,
+    )
+
+    return {
+        "category": category_name,
+        "period": period,
+        "as_of": as_of_d.isoformat(),
+        "current_month_total": round(current_total, 2),
+        "previous_month_total": round(previous_total, 2),
+        "dollar_change": float(dollar_change),
+        "percent_change": percent_change,
+        "transaction_count_change": int(transaction_count_change),
+        "current_transaction_count": int(current_tx_count),
+        "previous_transaction_count": int(previous_tx_count),
+        "current_avg_spend": round(current_avg_spend, 2),
+        "previous_avg_spend": round(previous_avg_spend, 2),
+        "top_merchants": top_merchants,
+        "has_previous_data": bool(previous_total > 0 or previous_tx_count > 0),
+        "explanation": explanation,
+    }
+
+
 # -----------------------------
 # Insights bundle + Coach
 # -----------------------------
