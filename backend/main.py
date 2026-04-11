@@ -480,16 +480,15 @@ def _affordability_deterministic_explanation(
     after_balance: float,
     max_safe_spend_amount: float,
 ) -> str:
-    balance_text = _fmt_money(after_balance)
     state_key = _normalize_affordability_state(decision_state=decision_state, verdict=verdict)
 
     if state_key == "SAFE":
-        return f"Yes — safe. You're comfortably within your safe range after this, with your balance at {balance_text}."
+        return "Yes — safe. This leaves a meaningful buffer after expenses."
     if state_key == "TIGHT":
-        return (
-            f"Tight — proceed carefully. This is close to your safe-to-spend limit, with your balance at {balance_text}."
-        )
-    return f"No — not recommended. This is above your safe-to-spend limit, and your balance after this would be {balance_text}."
+        return "Tight — proceed carefully. This slightly reduces your buffer."
+    if float(after_balance) < 0:
+        return "No — not recommended. This risks pushing your projected balance below zero."
+    return "No — not recommended. This materially reduces your buffer."
 
 
 def _affordability_verdict_label(decision_state: str = "", verdict: str = "") -> str:
@@ -607,8 +606,9 @@ def _generate_affordability_coach_explanation(
         "- Keep the exact meaning\n"
         "- Keep all numbers exactly the same\n"
         "- Do not change the decision state\n"
-        "- If the source says a purchase is above the safe-to-spend limit, it must stay not recommended\n"
-        "- Do not imply a purchase is acceptable if it is above the safe-to-spend limit\n"
+        "- SAFE means the purchase leaves a meaningful buffer after expenses\n"
+        "- TIGHT means the purchase slightly reduces the user's buffer\n"
+        "- NOT RECOMMENDED means the purchase materially reduces the user's buffer or risks going negative\n"
         "- Do not mention 'safe limit' or 'max safe spend'\n"
         "- Use natural phrasing like 'safe range', 'buffer', or 'threshold'\n"
         "- Treat safe-to-spend as the true affordability limit\n"
@@ -620,9 +620,10 @@ def _generate_affordability_coach_explanation(
         "- Do not repeat the amount unnecessarily\n"
         "- Do not add extra reasoning\n"
         "Output format examples:\n"
-        "- Yes — safe. You're comfortably within your safe range after this, with your balance at $1,956.94.\n"
-        "- Tight — proceed carefully. This is close to your safe-to-spend limit, with your balance at $1,781.94.\n"
-        "- No — not recommended. This is above your safe-to-spend limit, and your balance after this would be $1,281.94.\n"
+        "- Yes — safe. This leaves a meaningful buffer after expenses.\n"
+        "- Tight — proceed carefully. This slightly reduces your buffer.\n"
+        "- No — not recommended. This materially reduces your buffer.\n"
+        "- No — not recommended. This risks pushing your projected balance below zero.\n"
         f"Text to rewrite:\n{deterministic}"
     )
 
@@ -808,6 +809,14 @@ def afford(payload: AffordRequest):
     scenario = simulate_afford(float(payload.amount), cash)
     safe_limit = max_safe_spend(cash)
     response = build_afford_response(scenario, safe_limit)
+    income_ahead = float(cash.get("forecast_income_total", 0.0)) - float(cash.get("income_to_date", 0.0))
+    upcoming_expenses = float(cash.get("forecast_spending_total", 0.0)) - float(cash.get("spending_to_date", 0.0))
+    projected_balance_before_purchase = income_ahead - upcoming_expenses
+    projected_balance_after_purchase = projected_balance_before_purchase - float(payload.amount)
+    response["before_end_balance"] = float(projected_balance_before_purchase)
+    response["after_end_balance"] = float(projected_balance_after_purchase)
+    response["projected_balance_before_purchase"] = float(projected_balance_before_purchase)
+    response["projected_balance_after_purchase"] = float(projected_balance_after_purchase)
     coach = _generate_affordability_coach_explanation(
         decision_state=str(response.get("decision_state", "")),
         verdict=str(response.get("verdict", scenario.verdict)),
@@ -821,43 +830,18 @@ def afford(payload: AffordRequest):
     response_dict["source"] = coach["source"]
     response_dict["coach_explanation"] = coach["answer"]
     response_dict["coach_source"] = coach["source"]
-    dataset_event = _get_transaction_dataset_event(payload.user_id)
-    current_balance = float(cash.get("starting_balance", 0.0)) + float(cash.get("income_to_date", 0.0)) - float(cash.get("spending_to_date", 0.0))
-    income_ahead = max(0.0, float(cash.get("forecast_income_total", 0.0)) - float(cash.get("income_to_date", 0.0)))
-    upcoming_expenses = max(0.0, float(cash.get("forecast_spending_total", 0.0)) - float(cash.get("spending_to_date", 0.0)))
-    projected_balance_before_purchase = current_balance + income_ahead - upcoming_expenses
     protected_balance = float(response_dict.get("protected_balance", response_dict.get("safe_threshold", 0.0)))
-    decision_band_used = float(response_dict.get("safe_buffer_band", 0.0))
-    affordability_debug = {
-        "user_id": payload.user_id,
-        "period": payload.period,
-        "as_of": as_of,
-        "current_balance": float(current_balance),
-        "income_ahead": float(income_ahead),
-        "upcoming_expenses": float(upcoming_expenses),
-        "projected_balance_before_purchase": float(projected_balance_before_purchase),
-        "protected_balance": float(protected_balance),
-        "safe_to_spend": float(response_dict.get("max_safe_spend", 0.0)),
-        "amount": float(response_dict.get("amount", payload.amount)),
-        "projected_balance_after_purchase": float(response_dict.get("after_end_balance", 0.0)),
-        "verdict": str(response_dict.get("decision_state", response_dict.get("verdict", ""))),
-        "decision_band_used": float(decision_band_used),
-        "formulas": {
-            "current_balance": "starting_balance + income_to_date - spending_to_date",
-            "income_ahead": "max(0, forecast_income_total - income_to_date)",
-            "upcoming_expenses": "max(0, forecast_spending_total - spending_to_date)",
-            "projected_balance_before_purchase": "current_balance + income_ahead - upcoming_expenses",
-            "projected_balance_after_purchase": "projected_balance_before_purchase - amount",
-            "protected_balance": "max($250, 10% of projected_balance_before_purchase) [context only]",
-            "safe_to_spend": "max(0, forecast_end_balance + income_ahead) * 0.30",
-            "verdict": "SAFE if amount <= 85% of safe_to_spend; TIGHT if amount > 85% of safe_to_spend and amount <= safe_to_spend; NOT_RECOMMENDED if amount > safe_to_spend",
+    print(
+        "AFFORD DEBUG:",
+        {
+            "projected_balance_before_purchase": float(projected_balance_before_purchase),
+            "safe_to_spend": float(response_dict.get("max_safe_spend", 0.0)),
+            "protected_balance": float(protected_balance),
+            "projected_balance_after_purchase": float(projected_balance_after_purchase),
+            "verdict": str(response_dict.get("decision_state", response_dict.get("verdict", ""))),
         },
-        "transaction_count": int(cash.get("transaction_count", 0)),
-        "dataset_event": dataset_event,
-        "sample_month_changed_dataset": str(dataset_event.get("action", "")) == "sample_month",
-        "cleared_transactions_changed_dataset": str(dataset_event.get("action", "")) == "clear_transactions",
-    }
-    print("AFFORD DEBUG:", affordability_debug, flush=True)
+        flush=True,
+    )
     print("FINAL /afford RESPONSE:", response_dict, flush=True)
     return response_dict
 

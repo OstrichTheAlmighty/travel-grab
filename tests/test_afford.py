@@ -1,9 +1,12 @@
+from fastapi.testclient import TestClient
+
 from backend.coach_afford import (
     simulate_afford,
     format_afford_response,
     build_afford_response,
     max_safe_spend,
 )
+from backend.main import app
 
 
 def cash_base():
@@ -88,3 +91,114 @@ def test_afford_response_uses_amount_not_cached():
     r1 = build_afford_response(s1, max_safe)
     r2 = build_afford_response(s2, max_safe)
     assert r1["after_end_balance"] != r2["after_end_balance"]
+
+
+def test_max_safe_spend_uses_projected_balance_minus_fixed_buffer():
+    cash = {
+        "starting_balance": 0.0,
+        "income_to_date": 1173.33,
+        "spending_to_date": 638.28,
+        "forecast_income_total": 3200.0,
+        "forecast_spending_total": 1739.95,
+        "forecast_end_balance": 1460.05,
+    }
+    assert round(max_safe_spend(cash), 2) == 704.31
+
+
+def test_max_safe_spend_allows_negative_values():
+    cash = {
+        "income_to_date": 0.0,
+        "spending_to_date": 0.0,
+        "forecast_income_total": 100.0,
+        "forecast_spending_total": 500.0,
+    }
+    assert round(max_safe_spend(cash), 2) == -500.0
+
+
+def test_affordability_policy_on_sample_month():
+    client = TestClient(app)
+    user = "test_afford_policy_sample_month"
+
+    client.delete("/transactions", params={"user_id": user})
+    client.post(
+        "/budget",
+        json={
+            "user_id": user,
+            "period": "monthly",
+            "income_amount": 3200,
+            "allocations": {
+                "Bills": 1400,
+                "Groceries": 250,
+                "Food": 120,
+                "Entertainment": 80,
+                "Transportation": 100,
+            },
+        },
+    )
+    client.post("/transactions/sample-month", json={"user_id": user, "as_of": "2026-04-11"})
+
+    expected = {
+        25: "SAFE",
+        500: "SAFE",
+        700: "SAFE",
+        750: "TIGHT",
+        800: "NOT_RECOMMENDED",
+        900: "NOT_RECOMMENDED",
+        1000: "NOT_RECOMMENDED",
+        1300: "NOT_RECOMMENDED",
+        1500: "NOT_RECOMMENDED",
+    }
+
+    for amount, verdict in expected.items():
+        response = client.post(
+            "/afford",
+            json={"user_id": user, "period": "monthly", "amount": amount, "as_of": "2026-04-11"},
+        )
+        body = response.json()
+        assert response.status_code == 200
+        assert round(body["max_safe_spend"], 2) == 704.31
+        assert round(body["protected_balance"], 2) == 0.0
+        assert round(body["projected_balance_before_purchase"], 2) == 924.70
+        assert round(body["before_end_balance"], 2) == 924.70
+        assert body["decision_state"] == verdict
+
+
+def test_afford_response_exposes_correct_projected_balances():
+    client = TestClient(app)
+    user = "test_afford_projected_balance_binding"
+
+    client.delete("/transactions", params={"user_id": user})
+    client.post(
+        "/budget",
+        json={
+            "user_id": user,
+            "period": "monthly",
+            "income_amount": 3200,
+            "allocations": {
+                "Bills": 1400,
+                "Groceries": 250,
+                "Food": 120,
+                "Entertainment": 80,
+                "Transportation": 100,
+            },
+        },
+    )
+    client.post("/transactions/sample-month", json={"user_id": user, "as_of": "2026-04-11"})
+
+    expected_after = {
+        25: 899.70,
+        705: 219.70,
+        1000: -75.30,
+    }
+
+    for amount, projected_after in expected_after.items():
+        response = client.post(
+            "/afford",
+            json={"user_id": user, "period": "monthly", "amount": amount, "as_of": "2026-04-11"},
+        )
+        body = response.json()
+        assert response.status_code == 200
+        assert round(body["projected_balance_before_purchase"], 2) == 924.70
+        assert round(body["before_end_balance"], 2) == 924.70
+        assert round(body["projected_balance_after_purchase"], 2) == projected_after
+        assert round(body["after_end_balance"], 2) == projected_after

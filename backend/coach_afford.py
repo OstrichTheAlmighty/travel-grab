@@ -18,11 +18,9 @@ MATERIAL_IMPACT_DOLLARS = 100.0
 MATERIAL_IMPACT_PERCENT = 0.05
 SHORTFALL_SOON_DAYS = 7
 HEALTHY_CUSHION = 500.0
-SAFE_BUFFER_BAND_RATIO = 0.15
-SAFE_TIGHT_THRESHOLD_RATIO = 0.85
-SAFE_TO_SPEND_RISK_FACTOR = 0.30
-MIN_PROTECTED_BALANCE = 250.0
-PROTECTED_BALANCE_RATIO = 0.10
+COMFORT_BUFFER_RATIO = 0.20
+PROTECTED_BALANCE = 0.0
+TIGHT_UPPER_MULTIPLIER = 1.10
 
 DECISION_LABELS = {
     "SAFE": "Yes — safe",
@@ -134,7 +132,9 @@ def _shortfall_date(as_of: Optional[str], days: Optional[int]) -> Optional[str]:
 
 
 def simulate_afford(amount: float, cash: Dict[str, float]) -> AffordScenario:
-    before_end = float(cash.get("forecast_end_balance", 0.0))
+    income_ahead = float(cash.get("forecast_income_total", 0.0)) - float(cash.get("income_to_date", 0.0))
+    upcoming_expenses = float(cash.get("forecast_spending_total", 0.0)) - float(cash.get("spending_to_date", 0.0))
+    before_end = income_ahead - upcoming_expenses
     before_safe = float(cash.get("safe_to_spend_per_day_budget", 0.0))
     days_remaining = int(cash.get("days_remaining", 0))
     days_elapsed = int(cash.get("days_elapsed", 0))
@@ -256,28 +256,21 @@ def _risk_label(risk: str) -> str:
     return "medium" if risk == "med" else risk
 
 
+def _projected_balance_before_purchase(cash: Dict[str, float]) -> float:
+    income_ahead = float(cash.get("forecast_income_total", 0.0)) - float(cash.get("income_to_date", 0.0))
+    upcoming_expenses = float(cash.get("forecast_spending_total", 0.0)) - float(cash.get("spending_to_date", 0.0))
+    return float(income_ahead - upcoming_expenses)
+
+
 def _protected_balance_floor(projected_balance_before_purchase: float) -> float:
-    projected_balance = max(0.0, float(projected_balance_before_purchase))
-    return round(max(MIN_PROTECTED_BALANCE, projected_balance * PROTECTED_BALANCE_RATIO), 2)
-
-
-def _true_capacity(cash: Dict[str, float]) -> float:
-    # Use the forecasted end balance plus income still ahead as a stable
-    # discretionary-capacity proxy for the current dataset.
-    projected_balance_before_purchase = float(cash.get("forecast_end_balance", 0.0))
-    income_ahead = max(
-        0.0,
-        float(cash.get("forecast_income_total", 0.0)) - float(cash.get("income_to_date", 0.0)),
-    )
-    return max(0.0, projected_balance_before_purchase + income_ahead)
+    return float(PROTECTED_BALANCE)
 
 
 def max_safe_spend(cash: Dict[str, float]) -> float:
-    true_capacity = _true_capacity(cash)
-    if true_capacity <= 0:
-        return 0.0
-
-    return round(true_capacity * SAFE_TO_SPEND_RISK_FACTOR, 2)
+    projected_balance = _projected_balance_before_purchase(cash)
+    comfort_buffer = float(cash.get("forecast_spending_total", 0.0)) - float(cash.get("spending_to_date", 0.0))
+    comfort_buffer *= COMFORT_BUFFER_RATIO
+    return round(projected_balance - comfort_buffer, 2)
 
 
 def build_afford_reasons(
@@ -294,19 +287,22 @@ def build_afford_reasons(
 
     if effective_verdict in {"YES_SAFE", "SAFE"}:
         reasons.append(balance_reason)
-        reasons.append("This stays comfortably below your safe-to-spend limit.")
+        reasons.append("This leaves a meaningful buffer after expenses.")
     elif effective_verdict in {"YES_RISKY", "TIGHT"}:
         reasons.append(balance_reason)
-        reasons.append("This is close to your safe-to-spend limit.")
+        reasons.append("This is slightly above your safe-to-spend limit and slightly reduces your buffer.")
     else:
-        if max_safe_spend_amount is not None:
+        if s.after_end_balance < 0:
+            reasons.append(balance_reason)
+            reasons.append("This risks pushing your projected balance below zero.")
+        elif max_safe_spend_amount is not None:
             reasons.append(
-                f"This is above your safe-to-spend limit of ${float(max_safe_spend_amount):,.2f}."
+                f"This is materially above your safe-to-spend limit of ${float(max_safe_spend_amount):,.2f}."
             )
             reasons.append(balance_reason)
         else:
             reasons.append(balance_reason)
-            reasons.append("This is above your safe-to-spend limit.")
+            reasons.append("This materially reduces your buffer.")
 
     return reasons[:2]
 
@@ -320,7 +316,7 @@ def _decision_state_meta(
 ) -> Dict[str, float | str]:
     safe_threshold = _protected_balance_floor(before_end_balance)
     safe_buffer = float(after_end_balance) - safe_threshold
-    safe_band = max(0.0, float(max_safe_spend_amount) * SAFE_BUFFER_BAND_RATIO)
+    tight_band = max(0.0, float(max_safe_spend_amount) * (TIGHT_UPPER_MULTIPLIER - 1.0))
     legacy_key = str(legacy_verdict or "").strip().upper()
 
     # Keep protected balance for display/debugging, but let the original
@@ -338,7 +334,7 @@ def _decision_state_meta(
         "safe_threshold": float(safe_threshold),
         "protected_balance": float(safe_threshold),
         "safe_buffer": float(safe_buffer),
-        "safe_buffer_band": float(safe_band),
+        "safe_buffer_band": float(tight_band),
     }
 
 
@@ -377,7 +373,7 @@ def _build_path_back(s: AffordScenario) -> Dict[str, object] | None:
 
 
 def build_afford_response(s: AffordScenario, max_safe_spend_amount: float) -> Dict[str, object]:
-    remaining_safe = max(0.0, float(max_safe_spend_amount) - float(s.amount))
+    remaining_safe = float(max_safe_spend_amount) - float(s.amount)
     decision = {
         "amount": float(s.amount),
         "verdict": s.verdict,
@@ -394,12 +390,15 @@ def build_afford_response(s: AffordScenario, max_safe_spend_amount: float) -> Di
     }
     decision = finalize_affordability_decision(decision)
     if str(decision.get("verdict", "")).strip().upper() == "NO_UNSAFE":
+        protected_balance = _protected_balance_floor(float(decision.get("before_end_balance", s.before_end_balance)))
+        after_end_balance = float(decision.get("after_end_balance", s.after_end_balance))
         shortfall_amount = max(
             0.0,
             float(decision.get("amount", s.amount)) - float(decision.get("max_safe_spend", max_safe_spend_amount)),
+            protected_balance - after_end_balance,
         )
         decision["path_back"] = {
-            "message": f"Wait until your next income or reduce spending by about ${shortfall_amount:,.2f} to stay within your safe-to-spend limit.",
+            "message": f"Wait until your next income or reduce spending by about ${shortfall_amount:,.2f} to get back within your safe-to-spend limit.",
             "amount": float(shortfall_amount),
             "days": 0,
             "category": None,
@@ -434,20 +433,20 @@ def finalize_affordability_decision(decision: Dict[str, object]) -> Dict[str, ob
     amount = float(decision.get("amount", 0.0))
     max_safe = float(decision.get("max_safe_spend", 0.0))
     before_end = float(decision.get("before_end_balance", 0.0))
+    after_end = float(decision.get("after_end_balance", 0.0))
     protected_balance = _protected_balance_floor(before_end)
-    tight_threshold = max(0.0, max_safe * SAFE_TIGHT_THRESHOLD_RATIO)
+    tight_upper_bound = max_safe * TIGHT_UPPER_MULTIPLIER
 
-    if amount > max_safe:
+    if after_end < protected_balance:
         decision["verdict"] = "NO_UNSAFE"
-        return decision
-
-    if amount > tight_threshold:
+    elif amount > tight_upper_bound:
+        decision["verdict"] = "NO_UNSAFE"
+    elif amount > max_safe:
         decision["verdict"] = "YES_RISKY"
-        return decision
-
-    decision["verdict"] = "YES_SAFE"
+    else:
+        decision["verdict"] = "YES_SAFE"
     decision["protected_balance"] = float(protected_balance)
-    decision["safe_buffer_band"] = float(max(0.0, max_safe - tight_threshold))
+    decision["safe_buffer_band"] = float(tight_upper_bound - max_safe)
 
     return decision
 

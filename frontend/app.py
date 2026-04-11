@@ -545,6 +545,12 @@ def run_app():
     
         def _fmt_money(value: float) -> str:
             return f"${value:,.2f}"
+
+        def _fmt_signed_money(value: float) -> str:
+            amount = abs(float(value))
+            if value < 0:
+                return f"-${amount:,.2f}"
+            return f"${amount:,.2f}"
     
         def is_unsafe(verdict_text_or_enum: str) -> bool:
             v = (verdict_text_or_enum or "").strip().upper()
@@ -595,8 +601,8 @@ def run_app():
             decision_state = _affordability_state(resp)
             amount = max(0.0, float(resp.get("amount", 0.0) or 0.0))
             max_safe = max(0.0, float(resp.get("max_safe_spend", 0.0) or 0.0))
-            remaining_safe = max(0.0, max_safe - amount)
-            remaining_display = _fmt_money(max(0.0, remaining_safe))
+            remaining_safe = max_safe - amount
+            remaining_display = _fmt_signed_money(remaining_safe)
 
             if max_safe <= 0:
                 if decision_state == "NOT_RECOMMENDED":
@@ -609,7 +615,7 @@ def run_app():
                     f"This uses about {usage_pct:.0f}% of your safe-to-spend room and has minimal impact on your plan."
                 )
             if amount < max_safe * 0.50:
-                return f"After this purchase, you'd still have {remaining_display} of safe-to-spend room left."
+                return f"Buffer remaining after purchase: {remaining_display}."
             if decision_state == "NOT_RECOMMENDED":
                 overage = max(0.0, amount - max_safe)
                 if overage > 0:
@@ -707,14 +713,20 @@ def run_app():
 
             max_safe = float(resp.get("max_safe_spend", 0.0))
             amount = max(0.0, float(resp.get("amount", 0.0) or 0.0))
-            remaining_safe = max(0.0, max_safe - amount)
+            remaining_safe = max_safe - amount
             protected_balance = float(resp.get("protected_balance", resp.get("safe_threshold", 0.0)))
-            after_end = float(resp.get("after_end_balance", 0.0))
+            projected_before = float(
+                resp.get("projected_balance_before_purchase", resp.get("before_end_balance", 0.0))
+            )
+            projected_after = float(
+                resp.get("projected_balance_after_purchase", resp.get("after_end_balance", 0.0))
+            )
 
+            st.write(f"Projected balance before purchase: {_fmt_money(projected_before)}")
+            st.write(f"Projected balance after purchase: {_fmt_money(projected_after)}")
             st.write(f"Safe to spend: {_fmt_money(max_safe)}")
             if decision_state != "SAFE":
                 st.write(f"Protected balance: {_fmt_money(protected_balance)}")
-            st.write(f"Projected balance after purchase: {_fmt_money(after_end)}")
             st.write(_affordability_limit_comparison(resp))
 
             breakdown_days_remaining = resp.get("days_remaining")
@@ -736,7 +748,7 @@ def run_app():
                     income_ahead = None
 
             with st.expander("Safe to spend details ⓘ", expanded=False):
-                st.write(f"After this purchase: {_fmt_money(max(0.0, remaining_safe))} remaining")
+                st.write(f"Buffer remaining after purchase: {_fmt_signed_money(remaining_safe)}")
                 if upcoming_expenses is not None:
                     st.write(f"Upcoming expenses: {_fmt_money(upcoming_expenses)}")
                 if income_ahead is not None:
