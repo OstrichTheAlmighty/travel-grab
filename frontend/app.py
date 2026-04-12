@@ -2,11 +2,14 @@ import datetime
 import calendar
 import traceback
 import os
+import json
 import pandas as pd
 import streamlit as st
 import requests
 import altair as alt
 import re
+from types import SimpleNamespace
+from urllib.parse import urlparse
 
 print("FRONTEND START", flush=True)
 
@@ -117,10 +120,133 @@ def run_app():
     }
     
     
+    _local_backend_module = None
+
+    def use_local_backend() -> bool:
+        return bool(st.session_state.get("demo_mode", False))
+
+    def get_local_backend():
+        nonlocal _local_backend_module
+        if _local_backend_module is None:
+            from backend import main as backend_main
+            _local_backend_module = backend_main
+        return _local_backend_module
+
+    class LocalBackendResponse:
+        def __init__(self, *, method: str, url: str, status_code: int, data=None, text: str = ""):
+            self.status_code = int(status_code)
+            self.ok = 200 <= self.status_code < 300
+            self._data = data
+            self.text = text or (json.dumps(data, default=str) if data is not None else "")
+            self.reason = "OK" if self.ok else "ERROR"
+            self.request = SimpleNamespace(method=method, url=url)
+
+        def json(self):
+            return self._data
+
+    def _local_backend_call(method: str, url: str, *, params=None, payload=None):
+        backend = get_local_backend()
+        path = urlparse(url).path
+        params = dict(params or {})
+        payload = dict(payload or {})
+
+        try:
+            if method == "GET" and path == "/transactions":
+                data = backend.transactions(
+                    user_id=params.get("user_id", backend.USER_DEFAULT),
+                    start=params.get("start"),
+                    end=params.get("end"),
+                )
+            elif method == "POST" and path == "/transactions":
+                data = backend.add_transaction(backend.NewTransaction(**payload))
+            elif method == "DELETE" and path == "/transactions":
+                data = backend.clear_transactions(user_id=params.get("user_id", backend.USER_DEFAULT))
+            elif method == "POST" and path == "/transactions/sample-month":
+                data = backend.load_sample_month(backend.SampleMonthIn(**payload))
+            elif method == "GET" and path == "/budget/active":
+                data = backend.budget_active(
+                    user_id=params.get("user_id", backend.USER_DEFAULT),
+                    period=params.get("period"),
+                )
+            elif method == "POST" and path == "/budget":
+                data = backend.budget_upsert(backend.BudgetUpsertIn(**payload))
+            elif method == "GET" and path == "/budget/report":
+                data = backend.budget_report(
+                    user_id=params.get("user_id", backend.USER_DEFAULT),
+                    period=params.get("period", "weekly"),
+                    as_of=params.get("as_of"),
+                )
+            elif method == "GET" and path == "/forecast/eop":
+                data = backend.forecast_eop(
+                    user_id=params.get("user_id", backend.USER_DEFAULT),
+                    period=params.get("period", "monthly"),
+                    as_of=params.get("as_of"),
+                )
+            elif method == "GET" and path == "/forecast/cash":
+                data = backend.forecast_cash(
+                    user_id=params.get("user_id", backend.USER_DEFAULT),
+                    period=params.get("period", "monthly"),
+                    as_of=params.get("as_of"),
+                    starting_balance=float(params.get("starting_balance", 0.0) or 0.0),
+                )
+            elif method == "GET" and path == "/insights":
+                data = backend.insights(
+                    user_id=params.get("user_id", backend.USER_DEFAULT),
+                    period=params.get("period", "monthly"),
+                    as_of=params.get("as_of"),
+                )
+            elif method == "GET" and path == "/trends":
+                data = backend.trends(
+                    user_id=params.get("user_id", backend.USER_DEFAULT),
+                    period=params.get("period", "monthly"),
+                    as_of=params.get("as_of"),
+                )
+            elif method == "GET" and path in {"/insights_bundle", "/insight_bundle"}:
+                data = backend.insights_bundle(
+                    user_id=params.get("user_id", backend.USER_DEFAULT),
+                    period=params.get("period", "monthly"),
+                    as_of=params.get("as_of"),
+                )
+            elif method == "GET" and path == "/explain/category":
+                data = backend.explain_category(
+                    user_id=params.get("user_id", backend.USER_DEFAULT),
+                    category=params.get("category", ""),
+                    period=params.get("period", "monthly"),
+                    as_of=params.get("as_of"),
+                )
+            elif method == "POST" and path == "/coach/respond":
+                data = backend.coach_respond(payload)
+            elif method == "POST" and path == "/afford":
+                data = backend.afford(backend.AffordRequest(**payload))
+            elif method == "GET" and path == "/health":
+                data = backend.health()
+            else:
+                return LocalBackendResponse(
+                    method=method,
+                    url=url,
+                    status_code=404,
+                    data={"detail": f"Unsupported local backend route: {method} {path}"},
+                )
+
+            return LocalBackendResponse(method=method, url=url, status_code=200, data=data)
+        except Exception as e:
+            print(
+                "LOCAL BACKEND ERROR:",
+                {"method": method, "path": path, "error": str(e)},
+                flush=True,
+            )
+            return LocalBackendResponse(
+                method=method,
+                url=url,
+                status_code=500,
+                data={"detail": str(e)},
+                text=traceback.format_exc(),
+            )
+
     # -----------------------------
     # Debug helpers
     # -----------------------------
-    def show_http_error(resp: requests.Response):
+    def show_http_error(resp):
         st.error(f"HTTP {resp.status_code} — {resp.request.method} {resp.request.url}")
         try:
             st.json(resp.json())
@@ -131,7 +257,14 @@ def run_app():
     def backend_get(*args, **kwargs):
         kwargs.setdefault("timeout", BACKEND_TIMEOUT_SECONDS)
         print("BEFORE BACKEND CALL", flush=True)
-        response = requests.get(*args, **kwargs)
+        if use_local_backend():
+            response = _local_backend_call(
+                "GET",
+                args[0],
+                params=kwargs.get("params"),
+            )
+        else:
+            response = requests.get(*args, **kwargs)
         print("AFTER BACKEND CALL", flush=True)
         return response
     
@@ -139,7 +272,14 @@ def run_app():
     def backend_post(*args, **kwargs):
         kwargs.setdefault("timeout", BACKEND_TIMEOUT_SECONDS)
         print("BEFORE BACKEND CALL", flush=True)
-        response = requests.post(*args, **kwargs)
+        if use_local_backend():
+            response = _local_backend_call(
+                "POST",
+                args[0],
+                payload=kwargs.get("json"),
+            )
+        else:
+            response = requests.post(*args, **kwargs)
         print("AFTER BACKEND CALL", flush=True)
         return response
     
@@ -147,7 +287,14 @@ def run_app():
     def backend_delete(*args, **kwargs):
         kwargs.setdefault("timeout", BACKEND_TIMEOUT_SECONDS)
         print("BEFORE BACKEND CALL", flush=True)
-        response = requests.delete(*args, **kwargs)
+        if use_local_backend():
+            response = _local_backend_call(
+                "DELETE",
+                args[0],
+                params=kwargs.get("params"),
+            )
+        else:
+            response = requests.delete(*args, **kwargs)
         print("AFTER BACKEND CALL", flush=True)
         return response
     
