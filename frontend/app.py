@@ -83,6 +83,19 @@ def run_app():
         "Shopping": 0.05,
         "Other": 0.06,
     }
+
+    DEFAULT_MONTHLY_CATEGORY_BUDGETS = {
+        "Bills": 1300.0,
+        "Groceries": 300.0,
+        "Food": 180.0,
+        "Transportation": 120.0,
+        "Entertainment": 120.0,
+        "Shopping": 120.0,
+        "Subscriptions": 60.0,
+        "Health": 100.0,
+        "Education": 100.0,
+        "Other": 80.0,
+    }
     
     
     # -----------------------------
@@ -1490,9 +1503,23 @@ def run_app():
     # Budget Report tab
     # ============================================================
     with tab_report:
-        st.subheader("Budget Report (Month-to-date)")
+        st.subheader("Am I on track?")
         st.caption(f"Showing {month_start.strftime('%B %Y')}")
         report_period = "monthly"
+
+        def _budget_status(pct_used: float) -> str:
+            if pct_used < 70.0:
+                return "On track"
+            if pct_used <= 100.0:
+                return "Getting close"
+            return "Over budget"
+
+        def _budget_coaching_message(status: str) -> str:
+            if status == "On track":
+                return "You're comfortably within your plan here."
+            if status == "Getting close":
+                return "You're approaching your budget—worth keeping an eye on."
+            return "You've exceeded your budget here—consider adjusting spending."
     
         report_key = f"{st.session_state.user_id}:{as_of_str}:monthly:report"
         if st.session_state.get("report_cache_key") != report_key:
@@ -1504,39 +1531,70 @@ def run_app():
             except Exception as e:
                 st.code(str(e))
     
-        report = st.session_state.get("report_cache", {})
-        rows = report.get("rows", [])
-    
-        if not rows:
-            st.info("No saved budget found for this period. Save a budget first.")
-        else:
-            rep = pd.DataFrame(rows).rename(
-                columns={
-                    "category": "Category",
-                    "budget": "Budget",
-                    "spent_ptd": "Spent (PTD)",
-                    "remaining": "Remaining",
-                    "pct_used": "% Used",
+        tx_key = f"{st.session_state.user_id}:{month_start.isoformat()}:{as_of_str}:tx"
+        if st.session_state.get("tx_cache_key") != tx_key:
+            try:
+                data = api_get_transactions(month_start.isoformat(), as_of_str)
+                st.session_state.tx_cache = data.get("transactions", [])
+                st.session_state.tx_cache_key = tx_key
+            except Exception as e:
+                st.code(str(e))
+
+        report = st.session_state.get("report_cache", {}) or {}
+        saved_rows = report.get("rows", []) or []
+        tx_rows = st.session_state.get("tx_cache", []) or []
+
+        spend_by_category = {cat: 0.0 for cat in SPEND_CATEGORIES}
+        for tx in tx_rows:
+            category = str(tx.get("category", "")).strip()
+            if category in spend_by_category and category != "Income":
+                spend_by_category[category] += abs(float(tx.get("amount", 0.0) or 0.0))
+
+        budget_map = DEFAULT_MONTHLY_CATEGORY_BUDGETS.copy()
+        report_map = {}
+        for row in saved_rows:
+            category = str(row.get("category", "")).strip()
+            if category in SPEND_CATEGORIES:
+                report_map[category] = row
+                budget_map[category] = float(row.get("budget", budget_map.get(category, 0.0)))
+
+        if not saved_rows:
+            st.caption("Using default monthly category budgets until you save your own budget.")
+
+        tracking_rows = []
+        for category in SPEND_CATEGORIES:
+            budget_amount = float(budget_map.get(category, 0.0))
+            report_row = report_map.get(category, {})
+            spent_amount = float(report_row.get("spent_ptd", spend_by_category.get(category, 0.0)))
+            pct_used = (spent_amount / budget_amount * 100.0) if budget_amount > 0 else 0.0
+            status = _budget_status(pct_used)
+            tracking_rows.append(
+                {
+                    "Category": category,
+                    "Budget": budget_amount,
+                    "Spent this month": spent_amount,
+                    "% Used": pct_used,
+                    "Status": status,
+                    "Coach": _budget_coaching_message(status),
                 }
             )
-    
-            rep_display = rep.copy()
-            rep_display["Budget"] = rep_display["Budget"].map(lambda x: f"${float(x):,.0f}")
-            rep_display["Spent (PTD)"] = rep_display["Spent (PTD)"].map(lambda x: f"${float(x):,.2f}")
-            rep_display["Remaining"] = rep_display["Remaining"].map(lambda x: f"${float(x):,.2f}")
-            rep_display["% Used"] = rep_display["% Used"].map(lambda x: f"{float(x):.0f}%")
-    
-            st.dataframe(rep_display, width="stretch")
-    
-            over = report.get("over_budget", [])
-            near = report.get("near_budget", [])
-    
-            if over:
-                st.error("Over budget: " + ", ".join(over))
-            elif near:
-                st.warning("Close to budget: " + ", ".join(near))
-            else:
-                st.success("Looking good — no categories near or over budget.")
+
+        tracking_df = pd.DataFrame(tracking_rows).sort_values("% Used", ascending=False)
+        tracking_display = tracking_df.copy()
+        tracking_display["Budget"] = tracking_display["Budget"].map(lambda x: f"${float(x):,.2f}")
+        tracking_display["Spent this month"] = tracking_display["Spent this month"].map(lambda x: f"${float(x):,.2f}")
+        tracking_display["% Used"] = tracking_display["% Used"].map(lambda x: f"{float(x):.0f}%")
+        st.dataframe(tracking_display, width="stretch")
+
+        over_budget = tracking_df[tracking_df["Status"] == "Over budget"]["Category"].tolist()
+        getting_close = tracking_df[tracking_df["Status"] == "Getting close"]["Category"].tolist()
+
+        if over_budget:
+            st.error("Over budget: " + ", ".join(over_budget))
+        elif getting_close:
+            st.warning("Getting close: " + ", ".join(getting_close))
+        else:
+            st.success("You're on track across all categories right now.")
     
     
     # ============================================================
