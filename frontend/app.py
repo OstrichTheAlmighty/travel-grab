@@ -14,8 +14,9 @@ BACKEND_TIMEOUT_SECONDS = 10
 AI_EXPLANATION_TIMEOUT_SECONDS = 3
 
 def run_app():
-    if "user_id" not in st.session_state:
-        st.session_state.user_id = "default"
+    legacy_user_id = str(st.session_state.get("user_id", "default")).strip() or "default"
+    if "entered_user_id" not in st.session_state:
+        st.session_state.entered_user_id = legacy_user_id
     if "site_page" not in st.session_state:
         st.session_state.site_page = "Home"
     if "demo_mode" not in st.session_state:
@@ -56,9 +57,18 @@ def run_app():
     )
     as_of_date = today if (selected_month_date.year, selected_month_date.month) == (today.year, today.month) else month_end
     as_of_str = as_of_date.isoformat()
-    
-    st.sidebar.text_input("User ID (name or email)", key="user_id")
+
+    DEMO_USER_ID = "demo"
+
+    def active_user_id() -> str:
+        if st.session_state.get("demo_mode", False):
+            return DEMO_USER_ID
+        return str(st.session_state.get("entered_user_id", "default")).strip() or "default"
+
+    st.sidebar.text_input("User ID (name or email)", key="entered_user_id")
     st.sidebar.checkbox("Debug mode", value=False, key="debug_mode")
+    if st.session_state.get("demo_mode", False):
+        st.sidebar.caption("Demo mode is active. The app is using sample data for `demo`.")
     st.sidebar.caption(f"Viewing {month_start.strftime('%B %Y')}")
     
     SPEND_CATEGORIES = [
@@ -142,7 +152,7 @@ def run_app():
     def api_get_budget_active():
         r = backend_get(
             f"{BASE_URL}/budget/active",
-            params={"user_id": st.session_state.user_id},
+            params={"user_id": active_user_id()},
             timeout=10,
         )
         if not r.ok:
@@ -153,7 +163,7 @@ def run_app():
     
     def api_save_budget(period, income_amount, allocations):
         payload = {
-            "user_id": st.session_state.user_id,
+            "user_id": active_user_id(),
             "period": period,
             "income_amount": float(income_amount),
             "allocations": {k: float(v) for k, v in allocations.items()},
@@ -168,7 +178,7 @@ def run_app():
     def api_get_budget_report(period, as_of):
         r = backend_get(
             f"{BASE_URL}/budget/report",
-            params={"user_id": st.session_state.user_id, "period": period, "as_of": as_of},
+            params={"user_id": active_user_id(), "period": period, "as_of": as_of},
             timeout=10,
         )
         if not r.ok:
@@ -180,7 +190,7 @@ def run_app():
     def api_get_forecast(period, as_of):
         r = backend_get(
             f"{BASE_URL}/forecast/eop",
-            params={"user_id": st.session_state.user_id, "period": period, "as_of": as_of},
+            params={"user_id": active_user_id(), "period": period, "as_of": as_of},
             timeout=10,
         )
         if not r.ok:
@@ -192,7 +202,7 @@ def run_app():
     def api_get_transactions(start, end):
         r = backend_get(
             f"{BASE_URL}/transactions",
-            params={"user_id": st.session_state.user_id, "start": start, "end": end},
+            params={"user_id": active_user_id(), "start": start, "end": end},
             timeout=10,
         )
         if not r.ok:
@@ -204,7 +214,7 @@ def run_app():
     def api_clear_transactions():
         r = backend_delete(
             f"{BASE_URL}/transactions",
-            params={"user_id": st.session_state.user_id},
+            params={"user_id": active_user_id()},
             timeout=10,
         )
         if not r.ok:
@@ -216,7 +226,7 @@ def run_app():
     def api_load_sample_month(as_of):
         r = backend_post(
             f"{BASE_URL}/transactions/sample-month",
-            json={"user_id": st.session_state.user_id, "as_of": as_of},
+            json={"user_id": active_user_id(), "as_of": as_of},
             timeout=10,
         )
         if not r.ok:
@@ -252,7 +262,6 @@ def run_app():
         ]:
             st.session_state.pop(key, None)
 
-    DEMO_USER_ID = "demo"
     DEMO_BUDGET = {
         "Bills": 1300.0,
         "Groceries": 300.0,
@@ -268,11 +277,11 @@ def run_app():
     }
 
     def activate_demo_mode(force: bool = False):
-        if str(st.session_state.get("user_id", "")).strip() != DEMO_USER_ID:
-            st.session_state.last_real_user_id = str(st.session_state.get("user_id", "default")).strip() or "default"
-
-        st.session_state.user_id = DEMO_USER_ID
+        entered_user = str(st.session_state.get("entered_user_id", "default")).strip() or "default"
+        if entered_user != DEMO_USER_ID:
+            st.session_state.last_real_user_id = entered_user
         st.session_state.demo_mode = True
+        st.session_state.site_page = "Demo"
         demo_key = f"{DEMO_USER_ID}:{as_of_str}:monthly"
         if not force and st.session_state.get("demo_ready_key") == demo_key:
             return None
@@ -285,7 +294,6 @@ def run_app():
 
     def deactivate_demo_mode():
         st.session_state.demo_mode = False
-        st.session_state.user_id = str(st.session_state.get("last_real_user_id", "default")).strip() or "default"
         reset_data_caches()
 
     def render_page_intro(title: str, subtitle: str):
@@ -367,7 +375,7 @@ def run_app():
     )
 
     current_page = str(st.session_state.get("site_page", "Home")).strip() or "Home"
-    nav_pages = ["Home", "Demo", "Can I afford this?", "Spending Insights", "Budget", "Sign In"]
+    nav_pages = ["Home", "Demo", "Sign In"]
 
     st.markdown(
         f"""
@@ -382,7 +390,7 @@ def run_app():
         unsafe_allow_html=True,
     )
 
-    nav_cols = st.columns([1.0, 1.0, 1.35, 1.25, 1.0, 0.95])
+    nav_cols = st.columns([1.0, 1.0, 1.0, 4.0])
     for idx, page_name in enumerate(nav_pages):
         button_type = "primary" if current_page == page_name else "secondary"
         if nav_cols[idx].button(page_name, key=f"nav_{page_name}", type=button_type, use_container_width=True):
@@ -403,7 +411,7 @@ def run_app():
             deactivate_demo_mode()
             st.session_state.site_page = "Home"
             st.rerun()
-        demo_banner_cols[1].caption(f"Signed in as demo user: `{st.session_state.user_id}`")
+        demo_banner_cols[1].caption(f"Signed in as demo user: `{DEMO_USER_ID}`")
 
     if current_page == "Home":
         hero_cols = st.columns([1.2, 1.0])
@@ -414,7 +422,7 @@ def run_app():
             )
             primary_cols = st.columns([1, 1.2, 2.8])
             if primary_cols[0].button("Try the demo", key="home_try_demo", type="primary", use_container_width=True):
-                loaded = activate_demo_mode()
+                loaded = activate_demo_mode(force=True)
                 st.session_state.site_page = "Demo"
                 if loaded:
                     st.session_state.home_demo_message = f"Loaded {loaded} sample transactions for the demo."
@@ -475,8 +483,8 @@ def run_app():
         )
         st.info("Sign-in is a placeholder for now. The demo gives you the full product flow using sample transactions.")
         sign_cols = st.columns([1, 1.2, 2.8])
-        if sign_cols[0].button("Try the demo", key="signin_try_demo", type="primary", use_container_width=True):
-            loaded = activate_demo_mode()
+        if sign_cols[0].button("Start demo mode", key="signin_try_demo", type="primary", use_container_width=True):
+            loaded = activate_demo_mode(force=True)
             st.session_state.site_page = "Demo"
             if loaded:
                 st.session_state.home_demo_message = f"Loaded {loaded} sample transactions for the demo."
@@ -507,9 +515,11 @@ def run_app():
             "Demo workspace",
             "Explore the full product using sample transactions and a sample monthly budget.",
         )
+        if st.session_state.get("home_demo_message"):
+            st.success(st.session_state.pop("home_demo_message"))
         if not st.session_state.get("demo_mode", False):
             if st.button("Start demo mode", key="demo_start", type="primary"):
-                loaded = activate_demo_mode()
+                loaded = activate_demo_mode(force=True)
                 if loaded:
                     st.success(f"Loaded {loaded} sample transactions for the demo.")
                 st.rerun()
@@ -518,50 +528,28 @@ def run_app():
             if loaded:
                 st.success(f"Reloaded {loaded} sample transactions.")
             st.rerun()
-    elif current_page == "Spending Insights":
-        render_page_intro(
-            "Spending Insights",
-            "See what changed this month, what is driving category movement, and how it affects your spending buffer.",
-        )
-        st.info("The full workspace is below. Start with the Spending Insights tab for category coaching and month-to-month explanations.")
-    elif current_page == "Can I afford this?":
-        render_page_intro(
-            "Can I afford this?",
-            "Use the existing affordability math to check a purchase before you make it, with a clean explanation and supporting context.",
-        )
-        st.info("The full workspace is below. Start with the Spending Insights tab to use the affordability calculator.")
-    elif current_page == "Budget":
-        render_page_intro(
-            "Budget",
-            "Set a monthly plan, then check whether each category is still on track against that plan.",
-        )
-        st.info("The full workspace is below. Use the Budget and On Track tabs to manage your plan and review category pacing.")
     
     
     # -----------------------------
     # Tabs
     # -----------------------------
     print("BEFORE RENDER", flush=True)
-    show_demo_workspace = current_page in {"Demo", "Spending Insights", "Can I afford this?", "Budget"}
-    show_transactions_section = show_demo_workspace
-    show_budget_setup_section = show_demo_workspace
-    show_spending_insights_section = show_demo_workspace
-    show_budget_tracking_section = show_demo_workspace
-    show_forecast_section = show_demo_workspace
+    show_demo_workspace = current_page == "Demo"
 
     if show_demo_workspace:
-        tab_tx, tab_budget, tab_insights, tab_report, tab_forecast = st.tabs(
-            ["Transactions", "Budget", "Spending Insights", "On Track", "Forecast"]
+        tab_afford, tab_insights, tab_budget, tab_forecast = st.tabs(
+            ["Can I afford this?", "Spending Insights", "Budget", "Forecast"]
         )
     else:
-        tab_tx = tab_budget = tab_insights = tab_report = tab_forecast = None
+        tab_afford = tab_insights = tab_budget = tab_forecast = None
     
     # ============================================================
     # Transactions tab
     # ============================================================
-    if show_transactions_section:
-        with tab_tx:
-            st.subheader("Add a Transaction")
+    if show_demo_workspace:
+        with tab_budget:
+            st.subheader("Transactions")
+            st.caption(f"Showing {month_start.strftime('%B %Y')}")
 
             with st.form("add_tx_form"):
                 tx_type = st.selectbox("Transaction type", ["Spending", "Income"], index=0)
@@ -591,7 +579,7 @@ def run_app():
                         "merchant": merchant.strip(),
                         "amount": signed_amount,
                         "category": category,
-                        "user_id": st.session_state.user_id,
+                        "user_id": active_user_id(),
                     }
                     resp = backend_post(f"{BASE_URL}/transactions", json=payload, timeout=10)
                     if not resp.ok:
@@ -622,10 +610,8 @@ def run_app():
                     st.code(str(e))
 
             st.divider()
-            st.subheader("Transactions")
-            st.caption(f"Showing {month_start.strftime('%B %Y')}")
 
-            tx_key = f"{st.session_state.user_id}:{month_start.isoformat()}:{as_of_str}:tx"
+            tx_key = f"{active_user_id()}:{month_start.isoformat()}:{as_of_str}:tx"
             if st.session_state.get("tx_cache_key") != tx_key:
                 try:
                     data = api_get_transactions(month_start.isoformat(), as_of_str)
@@ -801,13 +787,13 @@ def run_app():
             st.session_state.insights_status_line = ""
     
         # Proactive status line (lightweight)
-        status_key = f"{st.session_state.user_id}:{as_of_str}:monthly"
+        status_key = f"{active_user_id()}:{as_of_str}:monthly"
         if st.session_state.insights_status_key != status_key:
             try:
                 bundle_resp = backend_get(
                     f"{BASE_URL}/insight_bundle",
                     params={
-                        "user_id": st.session_state.user_id,
+                        "user_id": active_user_id(),
                         "period": "monthly",
                         "as_of": as_of_str,
                     },
@@ -1123,7 +1109,7 @@ def run_app():
             st.write(coach_explanation)
 
         def _load_category_safe_to_spend() -> float | None:
-            cache_key = f"{st.session_state.user_id}:{as_of_str}:{int(beginner_mode)}:category_safe_to_spend"
+            cache_key = f"{active_user_id()}:{as_of_str}:{int(beginner_mode)}:category_safe_to_spend"
             if st.session_state.get("category_safe_to_spend_key") == cache_key:
                 cached_value = st.session_state.get("category_safe_to_spend")
                 return None if cached_value is None else float(cached_value)
@@ -1132,7 +1118,7 @@ def run_app():
             cash_context = None
             afford_breakdown_key = str(st.session_state.get("afford_breakdown_key", "")).strip()
             afford_breakdown_data = st.session_state.get("afford_breakdown_data") or {}
-            breakdown_key = f"{st.session_state.user_id}:{as_of_str}:cash_breakdown"
+            breakdown_key = f"{active_user_id()}:{as_of_str}:cash_breakdown"
             if afford_breakdown_data and afford_breakdown_key == breakdown_key:
                 cash_context = afford_breakdown_data
             else:
@@ -1140,7 +1126,7 @@ def run_app():
                     cash_resp = backend_get(
                         f"{BASE_URL}/forecast/cash",
                         params={
-                            "user_id": st.session_state.user_id,
+                            "user_id": active_user_id(),
                             "period": "monthly",
                             "as_of": as_of_str,
                             "starting_balance": 0.0,
@@ -1545,12 +1531,12 @@ def run_app():
                         )
 
         def _load_financial_overview():
-            insights_key = f"{st.session_state.user_id}:{as_of_str}:monthly:insights"
+            insights_key = f"{active_user_id()}:{as_of_str}:monthly:insights"
             if st.session_state.get("insights_cache_key") != insights_key:
                 try:
                     resp = backend_get(
                         f"{BASE_URL}/insights",
-                        params={"user_id": st.session_state.user_id, "period": "monthly", "as_of": as_of_str},
+                        params={"user_id": active_user_id(), "period": "monthly", "as_of": as_of_str},
                         timeout=10,
                     )
                     if not resp.ok:
@@ -1561,7 +1547,7 @@ def run_app():
 
                     t_resp = backend_get(
                         f"{BASE_URL}/trends",
-                        params={"user_id": st.session_state.user_id, "period": "monthly", "as_of": as_of_str},
+                        params={"user_id": active_user_id(), "period": "monthly", "as_of": as_of_str},
                         timeout=10,
                     )
                     if not t_resp.ok:
@@ -1634,7 +1620,7 @@ def run_app():
                 resp = backend_get(
                     f"{BASE_URL}/explain/category",
                     params={
-                        "user_id": st.session_state.user_id,
+                        "user_id": active_user_id(),
                         "category": explain_category,
                         "period": "monthly",
                         "as_of": as_of_str,
@@ -1647,92 +1633,16 @@ def run_app():
                 else:
                     st.session_state.category_explanation = resp.json() or {}
                     st.session_state.category_explanation_key = (
-                        f"{st.session_state.user_id}:{explain_category}:{as_of_str}:monthly"
+                        f"{active_user_id()}:{explain_category}:{as_of_str}:monthly"
                     )
             except Exception as e:
                 st.code(str(e))
     
-        explain_key = f"{st.session_state.user_id}:{explain_category}:{as_of_str}:monthly"
+        explain_key = f"{active_user_id()}:{explain_category}:{as_of_str}:monthly"
         if st.session_state.get("category_explanation_key") == explain_key:
             category_explanation = st.session_state.get("category_explanation") or {}
             if category_explanation:
                 _render_category_explanation(category_explanation)
-    
-        st.divider()
-        st.subheader("Can I afford this?")
-        afford_cols = st.columns([2, 1])
-        afford_amount = afford_cols[0].number_input(
-            "Amount ($)",
-            min_value=1.0,
-            step=5.0,
-            value=25.0,
-            key="afford_amount",
-        )
-        wait_days = int(
-            afford_cols[1].number_input(
-                "Wait (days)",
-                min_value=0,
-                max_value=7,
-                step=1,
-                value=0,
-                key="afford_wait_days",
-            )
-        )
-
-        amount = float(afford_amount)
-        afford_as_of_date = min(month_end, as_of_date + datetime.timedelta(days=wait_days))
-        afford_as_of = afford_as_of_date.isoformat()
-        afford_url = f"{BASE_URL}/afford"
-        afford_payload = {
-            "user_id": st.session_state.user_id,
-            "period": "monthly",
-            "as_of": afford_as_of,
-            "amount": amount,
-            "beginner_mode": beginner_mode,
-        }
-        afford_key = f"{st.session_state.user_id}:{afford_as_of}:{amount:.2f}:{int(beginner_mode)}:afford"
-        if st.session_state.get("afford_live_key") != afford_key:
-            try:
-                afford_resp = backend_post(afford_url, json=afford_payload, timeout=10)
-                if not afford_resp.ok:
-                    raise RuntimeError("POST /afford failed")
-                st.session_state.afford_live_data = afford_resp.json() or {}
-                st.session_state.afford_live_error = ""
-                st.session_state.afford_live_key = afford_key
-            except Exception as e:
-                st.session_state.afford_live_data = {}
-                st.session_state.afford_live_error = str(e)
-                st.session_state.afford_live_key = afford_key
-
-        breakdown_key = f"{st.session_state.user_id}:{afford_as_of}:cash_breakdown"
-        if st.session_state.get("afford_breakdown_key") != breakdown_key:
-            try:
-                cash_resp = backend_get(
-                    f"{BASE_URL}/forecast/cash",
-                    params={
-                        "user_id": st.session_state.user_id,
-                        "period": "monthly",
-                        "as_of": afford_as_of,
-                        "starting_balance": 0.0,
-                    },
-                    timeout=8,
-                )
-                if cash_resp.ok:
-                    st.session_state.afford_breakdown_data = cash_resp.json() or {}
-                else:
-                    st.session_state.afford_breakdown_data = {}
-                st.session_state.afford_breakdown_key = breakdown_key
-            except Exception:
-                st.session_state.afford_breakdown_data = {}
-                st.session_state.afford_breakdown_key = breakdown_key
-
-        afford_data = st.session_state.get("afford_live_data") or {}
-        afford_error = st.session_state.get("afford_live_error", "")
-        afford_breakdown = st.session_state.get("afford_breakdown_data") or {}
-        if afford_data:
-            _render_afford_response(afford_data, cash_breakdown=afford_breakdown)
-        elif afford_error:
-            st.code(afford_error)
     
         ask_clicked = st.session_state.insight_ask_now
         if ask_clicked:
@@ -1744,7 +1654,7 @@ def run_app():
                     st.session_state.last_insights_mode = "afford"
                     afford_url = f"{BASE_URL}/afford"
                     afford_payload = {
-                        "user_id": st.session_state.user_id,
+                        "user_id": active_user_id(),
                         "period": "monthly",
                         "as_of": as_of_str,
                         "amount": float(parsed_amount),
@@ -1762,7 +1672,7 @@ def run_app():
                     bundle_resp = backend_get(
                         f"{BASE_URL}/insights_bundle",
                         params={
-                            "user_id": st.session_state.user_id,
+                            "user_id": active_user_id(),
                             "period": "monthly",
                             "as_of": as_of_str,
                         },
@@ -1813,12 +1723,90 @@ def run_app():
         if insights:
             with st.expander("Financial overview", expanded=False):
                 _render_financial_overview(insights, trends)
+
+    with tab_afford:
+        st.subheader("Can I afford this?")
+        st.caption(f"Showing {month_start.strftime('%B %Y')}")
+        afford_cols = st.columns([2, 1])
+        afford_amount = afford_cols[0].number_input(
+            "Amount ($)",
+            min_value=1.0,
+            step=5.0,
+            value=25.0,
+            key="afford_amount",
+        )
+        wait_days = int(
+            afford_cols[1].number_input(
+                "Wait (days)",
+                min_value=0,
+                max_value=7,
+                step=1,
+                value=0,
+                key="afford_wait_days",
+            )
+        )
+
+        amount = float(afford_amount)
+        afford_as_of_date = min(month_end, as_of_date + datetime.timedelta(days=wait_days))
+        afford_as_of = afford_as_of_date.isoformat()
+        afford_url = f"{BASE_URL}/afford"
+        afford_payload = {
+            "user_id": active_user_id(),
+            "period": "monthly",
+            "as_of": afford_as_of,
+            "amount": amount,
+            "beginner_mode": beginner_mode,
+        }
+        afford_key = f"{active_user_id()}:{afford_as_of}:{amount:.2f}:{int(beginner_mode)}:afford"
+        if st.session_state.get("afford_live_key") != afford_key:
+            try:
+                afford_resp = backend_post(afford_url, json=afford_payload, timeout=10)
+                if not afford_resp.ok:
+                    raise RuntimeError("POST /afford failed")
+                st.session_state.afford_live_data = afford_resp.json() or {}
+                st.session_state.afford_live_error = ""
+                st.session_state.afford_live_key = afford_key
+            except Exception as e:
+                st.session_state.afford_live_data = {}
+                st.session_state.afford_live_error = str(e)
+                st.session_state.afford_live_key = afford_key
+
+        breakdown_key = f"{active_user_id()}:{afford_as_of}:cash_breakdown"
+        if st.session_state.get("afford_breakdown_key") != breakdown_key:
+            try:
+                cash_resp = backend_get(
+                    f"{BASE_URL}/forecast/cash",
+                    params={
+                        "user_id": active_user_id(),
+                        "period": "monthly",
+                        "as_of": afford_as_of,
+                        "starting_balance": 0.0,
+                    },
+                    timeout=8,
+                )
+                if cash_resp.ok:
+                    st.session_state.afford_breakdown_data = cash_resp.json() or {}
+                else:
+                    st.session_state.afford_breakdown_data = {}
+                st.session_state.afford_breakdown_key = breakdown_key
+            except Exception:
+                st.session_state.afford_breakdown_data = {}
+                st.session_state.afford_breakdown_key = breakdown_key
+
+        afford_data = st.session_state.get("afford_live_data") or {}
+        afford_error = st.session_state.get("afford_live_error", "")
+        afford_breakdown = st.session_state.get("afford_breakdown_data") or {}
+        if afford_data:
+            _render_afford_response(afford_data, cash_breakdown=afford_breakdown)
+        elif afford_error:
+            st.code(afford_error)
     
     
     # ============================================================
     # Budget Report tab
     # ============================================================
-    with tab_report:
+    with tab_budget:
+        st.divider()
         st.subheader("Am I on track?")
         st.caption(f"Showing {month_start.strftime('%B %Y')}")
         report_period = "monthly"
@@ -1837,7 +1825,7 @@ def run_app():
                 return "You're approaching your budget—worth keeping an eye on."
             return "You've exceeded your budget here—consider adjusting spending."
     
-        report_key = f"{st.session_state.user_id}:{as_of_str}:monthly:report"
+        report_key = f"{active_user_id()}:{as_of_str}:monthly:report"
         if st.session_state.get("report_cache_key") != report_key:
             try:
                 as_of = as_of_str
@@ -1847,7 +1835,7 @@ def run_app():
             except Exception as e:
                 st.code(str(e))
     
-        tx_key = f"{st.session_state.user_id}:{month_start.isoformat()}:{as_of_str}:tx"
+        tx_key = f"{active_user_id()}:{month_start.isoformat()}:{as_of_str}:tx"
         if st.session_state.get("tx_cache_key") != tx_key:
             try:
                 data = api_get_transactions(month_start.isoformat(), as_of_str)
@@ -1929,7 +1917,7 @@ def run_app():
             key="starting_balance_forecast",
         )
     
-        forecast_key = f"{st.session_state.user_id}:{as_of_str}:monthly:forecast:{float(starting_balance):.2f}"
+        forecast_key = f"{active_user_id()}:{as_of_str}:monthly:forecast:{float(starting_balance):.2f}"
         if st.session_state.get("forecast_cache_key") != forecast_key:
             try:
                 as_of = as_of_str
@@ -1941,7 +1929,7 @@ def run_app():
                 cash_resp = backend_get(
                     f"{BASE_URL}/forecast/cash",
                     params={
-                        "user_id": st.session_state.user_id,
+                        "user_id": active_user_id(),
                         "period": forecast_period,
                         "as_of": as_of,
                         "starting_balance": float(starting_balance),
