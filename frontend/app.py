@@ -421,6 +421,8 @@ def run_app():
             "tx_cache_key",
             "insights_cache",
             "insights_cache_key",
+            "insights_bundle_cache",
+            "insights_bundle_cache_key",
             "trends_cache",
             "report_cache",
             "report_cache_key",
@@ -957,40 +959,61 @@ def run_app():
             st.session_state.insights_status_key = ""
         if "insights_status_line" not in st.session_state:
             st.session_state.insights_status_line = ""
-    
+        if "insights_bundle_cache_key" not in st.session_state:
+            st.session_state.insights_bundle_cache_key = ""
+        if "insights_bundle_cache" not in st.session_state:
+            st.session_state.insights_bundle_cache = {}
+
+        def _load_monthly_bundle() -> dict:
+            bundle_key = f"{active_user_id()}:{as_of_str}:monthly:bundle"
+            if st.session_state.get("insights_bundle_cache_key") != bundle_key:
+                try:
+                    bundle_resp = backend_get(
+                        f"{BASE_URL}/insight_bundle",
+                        params={
+                            "user_id": active_user_id(),
+                            "period": "monthly",
+                            "as_of": as_of_str,
+                        },
+                        timeout=6,
+                    )
+                    if bundle_resp.ok:
+                        st.session_state.insights_bundle_cache = bundle_resp.json() or {}
+                        st.session_state.insights_bundle_cache_key = bundle_key
+                except Exception:
+                    pass
+            return st.session_state.get("insights_bundle_cache", {}) or {}
+
         # Proactive status line (lightweight)
         status_key = f"{active_user_id()}:{as_of_str}:monthly"
         if st.session_state.insights_status_key != status_key:
             try:
-                bundle_resp = backend_get(
-                    f"{BASE_URL}/insight_bundle",
-                    params={
-                        "user_id": active_user_id(),
-                        "period": "monthly",
-                        "as_of": as_of_str,
-                    },
-                    timeout=6,
-                )
-                if bundle_resp.ok:
-                    bundle = bundle_resp.json() or {}
-                    report = bundle.get("budget_report", {}) or {}
-                    over = report.get("over_budget", []) or []
-                    near = report.get("near_budget", []) or []
-    
-                    if over:
-                        st.session_state.insights_status_line = f"You're over budget in {len(over)} categories."
-                    elif near:
-                        st.session_state.insights_status_line = "One thing needs attention this week."
-                    else:
-                        st.session_state.insights_status_line = "Nothing urgent this month."
-                    st.session_state.insights_status_key = status_key
+                bundle = _load_monthly_bundle()
+                report = bundle.get("budget_report", {}) or {}
+                cash = bundle.get("cash_forecast", {}) or {}
+                over = report.get("over_budget", []) or []
+                near = report.get("near_budget", []) or []
+                top_above = cash.get("top_above_pace_categories", []) or []
+
+                if over:
+                    st.session_state.insights_status_line = f"You're over budget in {len(over)} categories."
+                elif near or top_above:
+                    st.session_state.insights_status_line = "One thing needs attention this week."
+                else:
+                    st.session_state.insights_status_line = "Nothing urgent this month."
+                st.session_state.insights_status_key = status_key
             except Exception:
                 pass
     
         if st.session_state.insights_status_line:
             st.caption(st.session_state.insights_status_line)
-    
+
         beginner_mode = st.toggle("Beginner mode", value=True, key="insights_beginner_mode")
+        st.caption(
+            "Beginner mode keeps guidance shorter and simpler."
+            if beginner_mode
+            else "Analytical mode shows more pace, budget, and forecast detail."
+        )
         debug_mode = bool(st.session_state.get("debug_mode", False))
         def _set_question(q: str):
             st.session_state.insight_question = q
@@ -1013,6 +1036,151 @@ def run_app():
             if value < 0:
                 return f"-${amount:,.2f}"
             return f"${amount:,.2f}"
+
+        def _budget_status_meta(pct_used: float, *, projected_total: float | None = None, budget_amount: float = 0.0) -> tuple[str, str]:
+            pct = float(pct_used or 0.0)
+            projected = float(projected_total or 0.0)
+            budget = float(budget_amount or 0.0)
+            if budget > 0 and (pct > 100.0 or projected > budget):
+                return "off_track", "off-track"
+            if pct >= 70.0 or (budget > 0 and projected >= budget * 0.9):
+                return "tight", "tight"
+            return "healthy", "healthy"
+
+        def _bundle_budget_row_map(bundle: dict) -> dict[str, dict]:
+            report = bundle.get("budget_report", {}) or {}
+            rows = report.get("rows", []) or []
+            return {
+                str(row.get("category", "")).strip(): row
+                for row in rows
+                if str(row.get("category", "")).strip()
+            }
+
+        def _build_monthly_summary(bundle: dict) -> dict:
+            summary = bundle.get("summary", {}) or {}
+            cash = bundle.get("cash_forecast", {}) or {}
+            report = bundle.get("budget_report", {}) or {}
+            row_map = _bundle_budget_row_map(bundle)
+            over = report.get("over_budget", []) or []
+            near = report.get("near_budget", []) or []
+            top_above = cash.get("top_above_pace_categories", []) or []
+            spending_by_category = bundle.get("spending_by_category", {}) or {}
+            top_category = str(bundle.get("top_category", "") or "").strip()
+            top_category_total = float(bundle.get("top_category_total", 0.0) or 0.0)
+            forecast_end = float(cash.get("forecast_end_balance", 0.0) or 0.0)
+            safe_per_day = float(cash.get("safe_to_spend_per_day_budget", 0.0) or 0.0)
+            days_remaining = int(cash.get("days_remaining", 0) or 0)
+            fixed_categories = {"Bills", "Rent", "Utilities", "Insurance"}
+
+            flexible_category = ""
+            flexible_items = [
+                (str(category).strip(), float(total or 0.0))
+                for category, total in spending_by_category.items()
+                if str(category).strip() and str(category).strip() not in fixed_categories
+            ]
+            if flexible_items:
+                flexible_items.sort(key=lambda item: item[1], reverse=True)
+                flexible_category = flexible_items[0][0]
+
+            priority_category = ""
+            if top_above:
+                priority_category = str(top_above[0].get("category", "")).strip()
+            elif over:
+                priority_category = str(over[0]).strip()
+            elif near:
+                priority_category = str(near[0]).strip()
+            else:
+                priority_category = flexible_category or top_category
+
+            priority_row = row_map.get(priority_category, {})
+            priority_budget = float((priority_row or {}).get("budget", 0.0) or 0.0)
+            priority_pct = float((priority_row or {}).get("pct_used", 0.0) or 0.0)
+            priority_spent = float((priority_row or {}).get("spent_ptd", spending_by_category.get(priority_category, top_category_total)) or 0.0)
+            top_above_amount = float(top_above[0].get("above_pace", 0.0) or 0.0) if top_above else 0.0
+
+            if forecast_end < 0 or over:
+                on_track_line = (
+                    "Not quite. Your current pace is likely to create pressure before month-end."
+                    if beginner_mode
+                    else f"Not quite. You're projected to end the month at {_fmt_money(forecast_end)}, and at least one category is already over budget."
+                )
+            elif near or top_above:
+                on_track_line = (
+                    "Mostly, but the month is getting tight."
+                    if beginner_mode
+                    else f"Mostly. You're still projected positive at {_fmt_money(forecast_end)}, but one category is starting to squeeze the rest of the month."
+                )
+            else:
+                on_track_line = (
+                    "Yes. This month still looks on track."
+                    if beginner_mode
+                    else f"Yes. You're projected to finish around {_fmt_money(forecast_end)} with about {_fmt_money(safe_per_day)}/day of safe room left."
+                )
+
+            if priority_category and top_above and priority_category == str(top_above[0].get("category", "")).strip():
+                focus_line = (
+                    f"{priority_category} matters most right now because it's running above your usual pace."
+                    if beginner_mode
+                    else f"{priority_category} matters most right now: it's about {_fmt_money(top_above_amount)} above pace and already at {priority_pct:.0f}% of budget."
+                )
+            elif priority_category and priority_budget > 0:
+                focus_line = (
+                    f"{priority_category} matters most right now."
+                    if beginner_mode
+                    else f"{priority_category} matters most right now: you've spent {_fmt_money(priority_spent)}, or {priority_pct:.0f}% of its {_fmt_money(priority_budget)} budget."
+                )
+            elif priority_category:
+                focus_line = (
+                    f"{priority_category} matters most right now."
+                    if beginner_mode
+                    else f"{priority_category} is your largest category so far at {_fmt_money(priority_spent)}."
+                )
+            else:
+                focus_line = "No single category is driving the month right now."
+
+            if forecast_end < 0:
+                urgent_line = (
+                    "Yes. The current pace could leave you short before the month ends."
+                    if beginner_mode
+                    else f"Yes. Your projected end balance is {_fmt_money(forecast_end)}, so the current pace is not sustainable."
+                )
+            elif over:
+                labels = ", ".join(over[:2])
+                urgent_line = (
+                    f"Yes. {labels} needs attention now."
+                    if beginner_mode
+                    else f"Yes. {labels} {'is' if len(over[:2]) == 1 else 'are'} already over budget and should be the first correction."
+                )
+            elif near or top_above:
+                urgent_line = (
+                    "Not urgent, but one category is getting close to the line."
+                    if beginner_mode
+                    else f"Nothing is broken yet, but you only have {days_remaining} days left and one category is already tightening the plan."
+                )
+            else:
+                urgent_line = "No. Nothing urgent stands out right now."
+
+            return {
+                "on_track_line": on_track_line,
+                "focus_line": focus_line,
+                "urgent_line": urgent_line,
+            }
+
+        def _render_monthly_summary(bundle: dict):
+            if not bundle:
+                return
+            summary = _build_monthly_summary(bundle)
+            st.subheader("This month at a glance")
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.caption("On track?")
+                st.write(summary.get("on_track_line", ""))
+            with col2:
+                st.caption("What matters most?")
+                st.write(summary.get("focus_line", ""))
+            with col3:
+                st.caption("Anything urgent?")
+                st.write(summary.get("urgent_line", ""))
     
         def is_unsafe(verdict_text_or_enum: str) -> bool:
             v = (verdict_text_or_enum or "").strip().upper()
@@ -1322,6 +1490,38 @@ def run_app():
             st.session_state.category_safe_to_spend = safe_to_spend
             st.session_state.category_safe_to_spend_key = cache_key
             return safe_to_spend
+
+        def _category_budget_pace_line(category: str, current_total: float) -> str:
+            bundle = _load_monthly_bundle()
+            row = _bundle_budget_row_map(bundle).get(str(category).strip(), {})
+            budget_amount = float((row or {}).get("budget", 0.0) or 0.0)
+            pct_used = float((row or {}).get("pct_used", 0.0) or 0.0)
+            if budget_amount <= 0:
+                return ""
+
+            days_elapsed = max(1, (as_of_date - month_start).days + 1)
+            days_total = max(days_elapsed, (month_end - month_start).days + 1)
+            projected_total = float(current_total) / float(days_elapsed) * float(days_total)
+            status_key, status_label = _budget_status_meta(
+                pct_used,
+                projected_total=projected_total,
+                budget_amount=budget_amount,
+            )
+
+            if status_key == "off_track":
+                return (
+                    f"Budget pace: {category} looks off-track. You've used {pct_used:.0f}% of your "
+                    f"{_fmt_money(budget_amount)} budget, and this pace points to about {_fmt_money(projected_total)} for the month."
+                )
+            if status_key == "tight":
+                return (
+                    f"Budget pace: {category} looks tight. You've used {pct_used:.0f}% of your "
+                    f"{_fmt_money(budget_amount)} budget, and this pace points to about {_fmt_money(projected_total)} for the month."
+                )
+            return (
+                f"Budget pace: {category} looks healthy. You've used {pct_used:.0f}% of your "
+                f"{_fmt_money(budget_amount)} budget so far."
+            )
 
         def _category_spend_evaluation(category_spend: float, safe_to_spend: float | None) -> tuple[str, float | None]:
             if safe_to_spend is None or safe_to_spend <= 0:
@@ -1639,6 +1839,9 @@ def run_app():
                     current_avg_spend=current_avg_spend,
                 )
             )
+            budget_pace_line = _category_budget_pace_line(category, current_total)
+            if budget_pace_line:
+                st.caption(budget_pace_line)
             st.caption(_category_buffer_impact_line(category, current_total=current_total, safe_to_spend=safe_to_spend))
             st.caption(_category_monthly_projection_line(current_total))
             remaining_safe_line = _category_remaining_safe_line(current_total, safe_to_spend)
@@ -1693,6 +1896,9 @@ def run_app():
                     )
                 else:
                     st.write(f"Average transaction size: {_fmt_money(current_avg_spend)}")
+
+                if budget_pace_line:
+                    st.write(budget_pace_line)
 
                 if top_merchants:
                     st.write("Biggest contributors")
@@ -1770,6 +1976,44 @@ def run_app():
             spike_amt = trends.get("biggest_spike_amount", 0)
             if spike_cat:
                 st.write(f"Biggest increase: {spike_cat} (+${spike_amt:.2f})")
+
+        def _render_coach_response(coach: dict):
+            headline = str(coach.get("headline", "")).strip()
+            why_items = [str(item).strip() for item in (coach.get("why", []) or []) if str(item).strip()]
+            impact = str(coach.get("impact", "")).strip()
+            next_step = str(coach.get("next_step", "")).strip()
+            actions = [str(item).strip() for item in (coach.get("actions", []) or []) if str(item).strip()]
+            data_note = str(coach.get("data_note", "")).strip()
+
+            st.subheader("Coach take")
+            if headline:
+                st.write(headline)
+
+            if beginner_mode:
+                for item in why_items[:2]:
+                    st.write(item)
+                if impact:
+                    st.caption(impact)
+                primary_actions = actions[:2] if actions else ([next_step] if next_step else [])
+                if primary_actions:
+                    st.write("What to do next")
+                    for item in primary_actions:
+                        st.write(f"- {item}")
+            else:
+                if why_items:
+                    st.write("Why it matters")
+                    for item in why_items:
+                        st.write(f"- {item}")
+                if impact:
+                    st.caption(impact)
+                primary_actions = actions[:3] if actions else ([next_step] if next_step else [])
+                if primary_actions:
+                    st.write("Recommended moves")
+                    for item in primary_actions:
+                        st.write(f"- {item}")
+
+            if data_note:
+                st.caption(data_note)
     
         st.text_input("Ask Insighta", key="insight_question")
         helper_text = (
@@ -1778,7 +2022,11 @@ def run_app():
             else "I analyze your transactions, find what changed, and help you decide what to do next."
         )
         st.caption(helper_text)
-    
+
+        monthly_bundle = _load_monthly_bundle()
+        if monthly_bundle:
+            _render_monthly_summary(monthly_bundle)
+
         cols = st.columns(4)
         cols[0].button("Explain this month", on_click=_set_question, args=("Explain this month",))
         cols[1].button("What's driving Food?", on_click=_set_question, args=("What's driving Food?",))
@@ -1841,20 +2089,9 @@ def run_app():
                     _render_afford_response(afford_data)
                 else:
                     st.session_state.last_insights_mode = "coach"
-                    bundle_resp = backend_get(
-                        f"{BASE_URL}/insights_bundle",
-                        params={
-                            "user_id": active_user_id(),
-                            "period": "monthly",
-                            "as_of": as_of_str,
-                        },
-                        timeout=10,
-                    )
-                    if not bundle_resp.ok:
-                        show_http_error(bundle_resp)
+                    bundle = _load_monthly_bundle()
+                    if not bundle:
                         raise RuntimeError("GET /insights_bundle failed")
-    
-                    bundle = bundle_resp.json()
     
                     coach_resp = backend_post(
                         f"{BASE_URL}/coach/respond",
@@ -1870,24 +2107,7 @@ def run_app():
                         raise RuntimeError("POST /coach/respond failed")
     
                     coach = coach_resp.json() or {}
-                    st.subheader("Coach Response")
-                    st.write(coach.get("headline", ""))
-                    why_items = coach.get("why", []) or []
-                    if why_items:
-                        st.write("Why:")
-                        for item in why_items[:2]:
-                            st.write(f"- {item}")
-                    impact = coach.get("impact", "")
-                    if impact:
-                        st.write("Impact:")
-                        st.write(impact)
-                    next_step = coach.get("next_step", "")
-                    if next_step:
-                        st.write("Next step:")
-                        st.write(next_step)
-                    data_note = coach.get("data_note", "")
-                    if data_note:
-                        st.write(data_note)
+                    _render_coach_response(coach)
             except Exception as e:
                 st.code(str(e))
     

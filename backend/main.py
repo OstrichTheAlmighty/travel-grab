@@ -642,6 +642,9 @@ class AffordRequest(BaseModel):
 class CoachResponse(BaseModel):
     headline: str
     why: List[str]
+    impact: str = ""
+    next_step: str = ""
+    actions: List[str] = []
     action: str
     data_note: str
     used_bundle_keys: List[str]
@@ -664,6 +667,22 @@ def _parse_amount(question: str) -> Optional[float]:
 
 def _fmt_money(value: float) -> str:
     return f"${float(value):,.2f}"
+
+
+def _fmt_signed_money(value: float) -> str:
+    amount = abs(float(value))
+    if value < 0:
+        return f"-${amount:,.2f}"
+    return f"${amount:,.2f}"
+
+
+def _extract_category_from_question(question: str, categories: List[str]) -> Optional[str]:
+    q_lower = str(question or "").lower()
+    for category in categories:
+        name = str(category).strip()
+        if name and name.lower() in q_lower:
+            return name
+    return None
 
 
 def _normalize_affordability_state(decision_state: str = "", verdict: str = "") -> str:
@@ -894,56 +913,440 @@ def coach_respond(payload: Dict[str, object]):
             return f"Based on your current budget and spending with {days_remaining} days left."
         return "Based on your current saved budget and transactions."
 
-    def simple(text: str) -> str:
+    def budget_status_meta(pct_used: float) -> tuple[str, str]:
+        pct = float(pct_used or 0.0)
+        if pct > 100.0:
+            return "off_track", "Off-track"
+        if pct >= 70.0:
+            return "tight", "Tight"
+        return "healthy", "Healthy"
+
+    def month_status_meta() -> tuple[str, str]:
+        if forecast_end < 0 or over_budget:
+            return "off_track", "Needs attention"
+        if near_budget or top_above_cat:
+            return "tight", "Getting tight"
+        return "healthy", "On track"
+
+    def projected_category_total(current_total: float) -> float:
+        bundle_as_of = str(b.get("as_of", "")).strip()
+        bundle_period = str(b.get("period", "monthly")).strip() or "monthly"
+        if not bundle_as_of:
+            return float(current_total)
+        as_of_d = parse_date(bundle_as_of)
+        start_d, end_d = period_bounds(as_of_d, bundle_period)  # type: ignore[arg-type]
+        days_elapsed = max(1, (as_of_d - start_d).days + 1)
+        days_total = max(days_elapsed, (end_d - start_d).days + 1)
+        return float(current_total) / float(days_elapsed) * float(days_total)
+
+    fixed_categories = {"Bills", "Rent", "Utilities", "Insurance"}
+
+    def top_flexible_category() -> str:
+        variable_items = [
+            (str(category).strip(), float(total or 0.0))
+            for category, total in spending_by_category.items()
+            if str(category).strip() and str(category).strip() not in fixed_categories
+        ]
+        if not variable_items:
+            return str(top_cat or "").strip()
+        variable_items.sort(key=lambda item: item[1], reverse=True)
+        return variable_items[0][0]
+
+    def primary_priority_category() -> str:
+        if top_above_cat:
+            return top_above_cat
+        if over_budget:
+            return str(over_budget[0]).strip()
+        if near_budget:
+            return str(near_budget[0]).strip()
+        return top_flexible_category()
+
+    def budget_pace_line(
+        *,
+        category: str,
+        row: Optional[Dict[str, object]],
+        current_total: float,
+    ) -> str:
+        budget_amount = float((row or {}).get("budget", 0.0) or 0.0)
+        pct_used = float((row or {}).get("pct_used", 0.0) or 0.0)
+        projection = projected_category_total(current_total)
+        status_key, status_label = budget_status_meta(pct_used)
+        if budget_amount <= 0:
+            return (
+                f"At this pace, {category} would finish around {_fmt_money(projection)} this month."
+            )
+        if status_key == "off_track":
+            return (
+                f"{category} looks off-track: you've used {pct_used:.0f}% of your "
+                f"{_fmt_money(budget_amount)} budget, and pace points to about {_fmt_money(projection)} for the month."
+            )
+        if status_key == "tight":
+            return (
+                f"{category} looks tight: you've used {pct_used:.0f}% of your "
+                f"{_fmt_money(budget_amount)} budget, and pace points to about {_fmt_money(projection)} for the month."
+            )
+        return (
+            f"{category} looks healthy against plan: you've used {pct_used:.0f}% of your "
+            f"{_fmt_money(budget_amount)} budget so far."
+        )
+
+    def action_impact_amount(
+        *,
+        category: str,
+        row: Optional[Dict[str, object]] = None,
+        above_pace_amount: float = 0.0,
+        avg_spend: float = 0.0,
+    ) -> float:
+        budget_amount = float((row or {}).get("budget", 0.0) or 0.0)
+        base = max(abs(float(above_pace_amount or 0.0)), float(avg_spend or 0.0), budget_amount * 0.08, 15.0)
+        if category in {"Food", "Dining", "Shopping"}:
+            base = max(base, 25.0)
+        if category == "Entertainment":
+            base = max(base, 20.0)
+        return round(min(60.0, base), 2)
+
+    def action_line(
+        *,
+        category: str,
+        status_key: str,
+        row: Optional[Dict[str, object]] = None,
+        above_pace_amount: float = 0.0,
+        avg_spend: float = 0.0,
+    ) -> str:
+        impact_amount = action_impact_amount(
+            category=category,
+            row=row,
+            above_pace_amount=above_pace_amount,
+            avg_spend=avg_spend,
+        )
+        if category in {"Food", "Dining"}:
+            if status_key == "healthy":
+                return "Keep restaurant spending near the current pace this week."
+            if status_key == "tight":
+                return f"Keep restaurant spending to one lower-cost meal this week. Likely impact: about {_fmt_money(impact_amount)}."
+            return f"Cut 1-2 restaurant meals this week. Likely impact: about {_fmt_money(impact_amount)}."
+        if category == "Entertainment":
+            if status_key == "healthy":
+                return "Entertainment looks fine right now; just avoid adding extra impulse plans this week."
+            if status_key == "tight":
+                return f"Skip one lower-value entertainment purchase this week. Likely impact: about {_fmt_money(impact_amount)}."
+            return f"Cut one entertainment purchase this week. Likely impact: about {_fmt_money(impact_amount)}."
+        if category == "Shopping":
+            if status_key == "healthy":
+                return "Shopping is still under control, so the goal is simply to pause before the next nonessential buy."
+            if status_key == "tight":
+                return f"Delay one nonessential purchase this week. Likely impact: about {_fmt_money(impact_amount)}."
+            return f"Pause one nonessential purchase this week. Likely impact: about {_fmt_money(impact_amount)}."
+        if category == "Groceries":
+            if status_key == "healthy":
+                return "Groceries look healthy so far; keep the next trip close to your usual size."
+            if status_key == "tight":
+                return f"Plan one tighter grocery trip this week. Likely impact: about {_fmt_money(impact_amount)}."
+            return f"Tighten one grocery trip this week or switch one trip to a lower-cost store. Likely impact: about {_fmt_money(impact_amount)}."
+        if category == "Transportation":
+            if status_key == "healthy":
+                return "Transportation looks manageable right now; keep the current pace if you can."
+            if status_key == "tight":
+                return f"Combine a few trips or cut one low-value ride this week. Likely impact: about {_fmt_money(impact_amount)}."
+            return f"Trim one or two low-value rides this week. Likely impact: about {_fmt_money(impact_amount)}."
+        if category in {"Bills", "Rent", "Utilities", "Insurance"}:
+            return "This category looks mostly fixed, so focus your changes on more flexible spending this week."
+        if status_key == "healthy":
+            return f"{category} looks healthy so far; keep the current pace steady this week."
+        if status_key == "tight":
+            return f"Trim one lower-value {category.lower()} purchase this week. Likely impact: about {_fmt_money(impact_amount)}."
+        return f"Cut one or two lower-value {category.lower()} purchases this week. Likely impact: about {_fmt_money(impact_amount)}."
+
+    def build_response(
+        *,
+        headline: str,
+        why: List[str],
+        impact: str = "",
+        next_step: str = "",
+        actions: Optional[List[str]] = None,
+    ) -> Dict[str, object]:
+        why_items = [str(item).strip() for item in why if str(item).strip()]
+        action_items = [str(item).strip() for item in (actions or []) if str(item).strip()]
         if coach_payload.beginner_mode:
-            return text
-        return text
+            why_items = why_items[:2]
+            action_items = action_items[:2]
+        else:
+            why_items = why_items[:4]
+            action_items = action_items[:3]
+
+        next_step_text = str(next_step or "").strip()
+        if not next_step_text and action_items:
+            next_step_text = action_items[0]
+
+        return {
+            "headline": headline.strip(),
+            "why": why_items,
+            "impact": impact.strip(),
+            "next_step": next_step_text,
+            "actions": action_items,
+            "action": next_step_text,
+            "data_note": data_note_text(),
+            "used_bundle_keys": ["summary", "spending_by_category", "trends", "budget_report", "cash_forecast"],
+        }
+
+    row_map = {str(r.get("category", "")).strip(): r for r in rows if str(r.get("category", "")).strip()}
+    top_above = cash.get("top_above_pace_categories", []) or []
+    top_above_cat = str(top_above[0].get("category", "")).strip() if top_above else ""
+    top_above_amt = float(top_above[0].get("above_pace", 0.0) or 0.0) if top_above else 0.0
+    forecast_end = float(cash.get("forecast_end_balance", 0.0))
+    days_remaining = int(cash.get("days_remaining", 0) or 0)
+    safe_per_day = float(cash.get("safe_to_spend_per_day_budget", 0.0))
+    bundle_user_id = str(b.get("user_id", USER_DEFAULT)).strip() or USER_DEFAULT
+    bundle_period = str(b.get("period", "monthly")).strip() or "monthly"
+    bundle_as_of = str(b.get("as_of", date.today().isoformat())).strip() or date.today().isoformat()
 
     q_lower = q.lower()
-    headline = ""
-    why = []
-    action = ""
+    available_categories = sorted({*spending_by_category.keys(), *row_map.keys()})
+    requested_category = _extract_category_from_question(q, available_categories)
+
     if "explain" in q_lower and "month" in q_lower:
-        msg = trends_data.get("message", "")
-        headline = f"This month you earned ${income:,.2f} and spent ${spending:,.2f}."
-        why = [
-            f"Net change is ${net:,.2f}.",
-            f"Top category is {top_cat or 'N/A'} at ${top_total:,.2f}.",
-            msg or "No trend message available.",
-        ]
-        action = f"Pick one category to trim this week; start with {top_cat or 'your largest spend'}."
-    elif "food" in q_lower and "higher" in q_lower:
-        this_food = float(trends_data.get("category_spend_this_period", {}).get("Food", 0.0))
-        last_food = float(trends_data.get("category_spend_last_period", {}).get("Food", 0.0))
-        delta = this_food - last_food
-        if last_food == 0 and this_food == 0:
-            headline = "Food spending is flat."
-            why = ["No Food spending recorded for this or last period."]
-        elif last_food == 0:
-            headline = "Food is higher this period."
-            why = [f"It moved from $0.00 last period to ${this_food:,.2f} this period."]
+        month_status_key, month_status_label = month_status_meta()
+        primary_cat = primary_priority_category()
+        primary_row = row_map.get(primary_cat, {})
+        primary_pct = float((primary_row or {}).get("pct_used", 0.0) or 0.0)
+        primary_budget = float((primary_row or {}).get("budget", 0.0) or 0.0)
+        primary_spent = float((primary_row or {}).get("spent_ptd", spending_by_category.get(primary_cat, 0.0)) or 0.0)
+
+        if month_status_key == "off_track":
+            headline = "This month needs attention." if coach_payload.beginner_mode else "Monthly check: your month is off track."
+        elif month_status_key == "tight":
+            headline = "This month is getting tight." if coach_payload.beginner_mode else "Monthly check: your month is getting tight."
         else:
-            pct = (delta / last_food) * 100.0
-            headline = "Food is higher this period."
-            why = [f"Up ${delta:,.2f} ({pct:.1f}%) vs last period."]
-        action = "Set a small weekly Food cap and check it mid-week."
+            headline = "This month looks on track." if coach_payload.beginner_mode else "Monthly check: your month looks on track."
+
+        if primary_cat and top_above_cat == primary_cat and top_above_amt > 0:
+            focus_line = (
+                f"{primary_cat} matters most right now. You're about {_fmt_money(top_above_amt)} above pace there."
+            )
+        elif primary_cat and primary_budget > 0:
+            focus_line = (
+                f"{primary_cat} matters most right now at {_fmt_money(primary_spent)} spent, "
+                f"or {primary_pct:.0f}% of its budget."
+            )
+        elif primary_cat:
+            focus_line = f"{primary_cat} matters most right now at {_fmt_money(primary_spent)} spent so far."
+        else:
+            focus_line = "No single category is driving the month right now."
+
+        if forecast_end < 0:
+            urgent_line = (
+                f"Your projected end balance is {_fmt_money(forecast_end)}, so the month turns risky if the current pace holds."
+            )
+        elif over_budget:
+            urgent_line = (
+                f"{_join_labels(over_budget[:2])} already {'is' if len(over_budget[:2]) == 1 else 'are'} over budget."
+            )
+        elif near_budget or top_above_cat:
+            urgent_line = "Nothing is broken yet, but one or two categories are putting pressure on the rest of the month."
+        else:
+            urgent_line = "Nothing urgent stands out right now."
+
+        why = []
+        if coach_payload.beginner_mode:
+            why.append(
+                f"You've spent {_fmt_money(spending)} so far and you're projected to end the month at {_fmt_money(forecast_end)}."
+            )
+            why.append(focus_line)
+            if month_status_key != "healthy":
+                why.append(urgent_line)
+        else:
+            why.append(
+                f"Income is {_fmt_money(income)}, spending is {_fmt_money(spending)}, and net is {_fmt_signed_money(net)} so far this month."
+            )
+            why.append(
+                f"Projected end balance is {_fmt_money(forecast_end)} with about {_fmt_money(safe_per_day)}/day of safe budget left for the rest of the month."
+            )
+            why.append(focus_line)
+            why.append(urgent_line)
+
+        if primary_cat:
+            primary_row = row_map.get(primary_cat, {})
+            primary_status_key, _ = budget_status_meta(float((primary_row or {}).get("pct_used", 0.0) or 0.0))
+            next_step = action_line(
+                category=primary_cat,
+                status_key=primary_status_key,
+                row=primary_row,
+                above_pace_amount=top_above_amt if primary_cat == top_above_cat else 0.0,
+            )
+        else:
+            next_step = "Keep discretionary spending near the current pace this week."
+
+        return build_response(
+            headline=headline,
+            why=why,
+            impact=(
+                f"Month status: {month_status_label}. {urgent_line}"
+                if coach_payload.beginner_mode
+                else f"Budget pressure: {len(over_budget)} over budget, {len(near_budget)} near budget, with {days_remaining} days left."
+            ),
+            next_step=next_step,
+        )
+    elif requested_category and any(keyword in q_lower for keyword in {"driving", "higher", "category", "food"}):
+        category_name = requested_category
+        category_data = explain_category(
+            user_id=bundle_user_id,
+            category=category_name,
+            period=bundle_period,  # type: ignore[arg-type]
+            as_of=bundle_as_of,
+        )
+        row = row_map.get(category_name, {})
+        pct_used = float((row or {}).get("pct_used", 0.0) or 0.0)
+        budget_amount = float((row or {}).get("budget", 0.0) or 0.0)
+        remaining_amount = float((row or {}).get("remaining", 0.0) or 0.0)
+        status_key, status_label = budget_status_meta(pct_used)
+        current_total = float(category_data.get("current_month_total", 0.0))
+        current_avg_spend = float(category_data.get("current_avg_spend", 0.0))
+        percent_change = category_data.get("percent_change")
+        top_merchants = category_data.get("top_merchants", []) or []
+        merchant_names = _join_labels([str(item.get("merchant", "")).strip() for item in top_merchants[:2]])
+        projection = projected_category_total(current_total)
+        projection_delta = projection - budget_amount
+
+        if coach_payload.beginner_mode:
+            headline = f"{category_name} looks {status_label.lower()} right now."
+            why = [str(category_data.get("explanation", "")).strip() or f"You've spent {_fmt_money(current_total)} on {category_name} so far this month."]
+            if budget_amount > 0:
+                why.append(budget_pace_line(category=category_name, row=row, current_total=current_total))
+            elif merchant_names:
+                why.append(f"Most of the spending is coming from {merchant_names}.")
+        else:
+            headline = f"{category_name} check: {status_label.lower()} against plan."
+            why = [f"You've spent {_fmt_money(current_total)} across {int(category_data.get('current_transaction_count', 0))} purchases, averaging {_fmt_money(current_avg_spend)} each."]
+            if merchant_names:
+                why.append(f"Most of the activity is coming from {merchant_names}.")
+            if percent_change is not None:
+                why.append(
+                    f"That's {_fmt_signed_money(float(category_data.get('dollar_change', 0.0)))} ({float(percent_change):+.1f}%) vs last month."
+                )
+            why.append(budget_pace_line(category=category_name, row=row, current_total=current_total))
+
+        if budget_amount > 0:
+            if projection_delta > 0:
+                impact = (
+                    f"At this pace, {category_name} would finish around {_fmt_money(projection)} this month, "
+                    f"or about {_fmt_money(projection_delta)} above budget."
+                )
+            else:
+                impact = (
+                    f"At this pace, {category_name} would finish around {_fmt_money(projection)} this month, "
+                    f"leaving about {_fmt_money(remaining_amount)} of budget room right now."
+                )
+        else:
+            impact = f"At this pace, {category_name} would finish around {_fmt_money(projection)} for the month."
+
+        next_step = action_line(
+            category=category_name,
+            status_key=status_key,
+            row=row,
+            above_pace_amount=max(0.0, current_total - budget_amount) if budget_amount > 0 else 0.0,
+            avg_spend=current_avg_spend,
+        )
+
+        return build_response(
+            headline=headline,
+            why=why,
+            impact=impact,
+            next_step=next_step,
+        )
     elif "change" in q_lower and "week" in q_lower:
-        if over_budget:
-            headline = "One change to make this week."
-            why = [f"Over budget: {', '.join(over_budget)}."]
-            action = f"Pause or cut spending in {over_budget[0]}."
-        elif near_budget:
-            headline = "One change to make this week."
-            why = [f"Near budget: {', '.join(near_budget)}."]
-            action = f"Reduce spending in {near_budget[0]}."
-        elif top_cat:
-            headline = "One change to make this week."
-            why = [f"Top spend is {top_cat} at ${top_total:,.2f}."]
-            action = f"Trim {top_cat} by $10–$25 this week."
+        priority_categories: List[str] = []
+        for item in top_above:
+            category_name = str(item.get("category", "")).strip()
+            if category_name and category_name not in priority_categories:
+                priority_categories.append(category_name)
+        for category_name in over_budget + near_budget:
+            category_name = str(category_name or "").strip()
+            if category_name and category_name not in priority_categories:
+                priority_categories.append(category_name)
+
+        if not priority_categories:
+            flexible_category = top_flexible_category()
+            fallback_category = flexible_category or str(top_cat or "").strip()
+            priority_categories = [fallback_category] if fallback_category else []
+
+        if priority_categories:
+            flexible_by_spend = [
+                str(category).strip()
+                for category, _ in sorted(
+                    spending_by_category.items(),
+                    key=lambda item: float(item[1] or 0.0),
+                    reverse=True,
+                )
+                if str(category).strip() and str(category).strip() not in fixed_categories
+            ]
+            for category_name in flexible_by_spend:
+                if category_name not in priority_categories:
+                    priority_categories.append(category_name)
+
+        actions: List[str] = []
+        why: List[str] = []
+        total_estimated_impact = 0.0
+        for category_name in priority_categories[:3]:
+            row = row_map.get(category_name, {})
+            pct_used = float((row or {}).get("pct_used", 0.0) or 0.0)
+            status_key, status_label = budget_status_meta(pct_used)
+            above_pace_amount = 0.0
+            for item in top_above:
+                if str(item.get("category", "")).strip() == category_name:
+                    above_pace_amount = float(item.get("above_pace", 0.0) or 0.0)
+                    break
+
+            actions.append(
+                action_line(
+                    category=category_name,
+                    status_key=status_key,
+                    row=row,
+                    above_pace_amount=above_pace_amount,
+                )
+            )
+            total_estimated_impact += action_impact_amount(
+                category=category_name,
+                row=row,
+                above_pace_amount=above_pace_amount,
+            )
+            spent_amount = float((row or {}).get("spent_ptd", spending_by_category.get(category_name, 0.0)) or 0.0)
+            if row:
+                why.append(f"{category_name} is at {pct_used:.0f}% of budget after {_fmt_money(spent_amount)} spent so far.")
+            else:
+                why.append(f"{category_name} is your biggest variable category at {_fmt_money(spent_amount)} so far.")
+
+        if not actions:
+            return build_response(
+                headline="This week looks steady.",
+                why=["Nothing urgent stands out in the current month data."],
+                impact="You do not need a major change this week if the current pace holds.",
+                next_step="Keep discretionary spending near the current pace.",
+            )
+
+        headline = (
+            "The best changes this week are small and specific."
+            if coach_payload.beginner_mode
+            else "This week's highest-leverage changes"
+        )
+        if coach_payload.beginner_mode:
+            why = why[:2]
+            why.insert(
+                0,
+                "The biggest pressure is coming from the categories that are closest to or above plan right now.",
+            )
         else:
-            headline = "Not enough data yet."
-            why = ["Add a few transactions this week so I can spot patterns."]
-            action = "Log spending for a few days, then ask again."
+            why.insert(
+                0,
+                f"These are the categories putting the most pressure on your remaining monthly buffer, with {days_remaining} days left."
+            )
+        impact = f"If you follow the top changes, you could protect about {_fmt_money(total_estimated_impact)} of buffer this week."
+        return build_response(
+            headline=headline,
+            why=why,
+            impact=impact,
+            next_step=actions[0],
+            actions=actions,
+        )
     elif "afford" in q_lower:
         amt = _parse_amount(q)
         if amt is None:
@@ -991,16 +1394,25 @@ def coach_respond(payload: Dict[str, object]):
             why = [f"This would use ${amt:,.2f} of your remaining budget (${remaining_budget:,.2f})."]
             action = "Guardrail: If you spend this, reduce other discretionary spending this month."
     else:
-        headline = "Ask me about your month."
-        why = [f"Income ${income:,.2f}, spending ${spending:,.2f}, net ${net:,.2f}."]
-        action = "Try: “Explain this month” or “What should I change this week?”"
+        return build_response(
+            headline="Ask me about this month.",
+            why=[
+                f"Income is {_fmt_money(income)}, spending is {_fmt_money(spending)}, and net is {_fmt_signed_money(net)}.",
+                f"{top_cat or 'Your top category'} matters most right now.",
+            ],
+            impact="Try one of the quick actions for a more specific answer.",
+            next_step="Try: “Explain this month” or “What should I change this week?”",
+        )
 
     return {
-        "headline": simple(headline),
+        "headline": headline,
         "why": why,
-        "action": simple(action),
+        "impact": "",
+        "next_step": action,
+        "actions": [],
+        "action": action,
         "data_note": data_note_text(),
-        "used_bundle_keys": ["summary", "spending_by_category", "trends", "budget_report"],
+        "used_bundle_keys": ["summary", "spending_by_category", "trends", "budget_report", "cash_forecast"],
     }
 
 
