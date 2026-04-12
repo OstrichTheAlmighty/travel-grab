@@ -444,42 +444,51 @@ def _build_category_explanation_text(
     top_merchants: List[Dict[str, object]],
 ) -> str:
     period_label = "month" if period == "monthly" else "week"
-    category_lower = str(category).strip().lower()
+    category_name = str(category).strip() or "This category"
+    category_lower = category_name.lower()
     merchant_names = _join_labels([str(m.get("merchant", "")).strip() for m in top_merchants[:2]])
 
     if current_total <= 0 and previous_total <= 0:
-        return f"No {category_lower} spending was recorded this {period_label} or last {period_label}."
+        return f"You have not spent in {category_lower} this {period_label} or last {period_label}."
 
     if previous_total <= 0:
-        explanation = f"There’s no previous {period_label} data for {category} yet."
+        explanation = f"This looks like your first {period_label} tracking {category_name}."
         if current_total > 0:
-            explanation += f" This {period_label} you spent {_fmt_money(current_total)} across {int(current_tx_count)} transactions"
+            explanation += f" You've spent {_fmt_money(current_total)} so far"
             if merchant_names:
-                explanation += f", mainly at {merchant_names}"
+                explanation += f", mostly on {merchant_names}"
             explanation += "."
         return explanation
 
-    direction = "up" if dollar_change > 0 else "down" if dollar_change < 0 else "flat"
-    pct_text = f" ({percent_change:+.0f}%)" if percent_change is not None else ""
-    explanation = f"{category} is {direction} {_fmt_money(abs(dollar_change))}{pct_text} vs last {period_label}"
-    if dollar_change > 0 and merchant_names:
-        explanation += f", mainly from higher spending at {merchant_names}"
-    elif dollar_change < 0 and merchant_names:
-        explanation += f", mostly due to lower spending at {merchant_names}"
-    explanation += "."
+    change_amount = _fmt_money(abs(dollar_change))
+    if dollar_change > 0:
+        explanation = f"{category_name} is up {change_amount} vs last {period_label}"
+        if merchant_names:
+            explanation += f", mostly due to more spending at {merchant_names}"
+        explanation += "."
+    elif dollar_change < 0:
+        explanation = f"{category_name} is down {change_amount} vs last {period_label}"
+        if merchant_names:
+            explanation += f", mainly because spending was lower at {merchant_names}"
+        explanation += "."
+    else:
+        explanation = f"{category_name} looks steady vs last {period_label}."
 
-    avg_phrase = ""
-    if current_avg_spend > previous_avg_spend + 0.01:
-        avg_phrase = " and a higher average spend per transaction"
-    elif current_avg_spend < previous_avg_spend - 0.01:
-        avg_phrase = " and a lower average spend per transaction"
+    if dollar_change == 0:
+        return explanation
 
-    if transaction_count_change > 0:
-        explanation += f" You had {transaction_count_change} more {category_lower} transactions{avg_phrase}."
+    if transaction_count_change > 0 and current_avg_spend > previous_avg_spend + 0.01:
+        explanation += " You made more purchases, and they were a bit larger on average."
+    elif transaction_count_change > 0:
+        explanation += " You made more purchases than last month."
+    elif transaction_count_change < 0 and current_avg_spend < previous_avg_spend - 0.01:
+        explanation += " You made fewer purchases, and they were smaller on average."
     elif transaction_count_change < 0:
-        explanation += f" You had {abs(transaction_count_change)} fewer {category_lower} transactions{avg_phrase}."
-    elif avg_phrase:
-        explanation += f" You had the same number of {category_lower} transactions{avg_phrase}."
+        explanation += " You made fewer purchases than last month."
+    elif current_avg_spend > previous_avg_spend + 0.01:
+        explanation += " The average purchase was a bit larger."
+    elif current_avg_spend < previous_avg_spend - 0.01:
+        explanation += " The average purchase was a bit smaller."
 
     return explanation
 

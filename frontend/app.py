@@ -818,9 +818,40 @@ def run_app():
 
             st.write(coach_explanation)
 
+        def _category_interpretation_line(category: str, *, has_previous_data: bool, current_total: float, previous_total: float) -> str:
+            category_name = str(category).strip()
+            fixed_essential = {"Bills", "Rent", "Utilities", "Insurance"}
+            discretionary = {"Food", "Entertainment", "Shopping", "Dining"}
+            mixed = {"Groceries", "Transportation"}
+
+            if category_name in fixed_essential:
+                return "Most of this category looks fixed and essential."
+            if category_name in discretionary:
+                return "This category appears more discretionary and easier to reduce."
+            if category_name in mixed:
+                return "This category is partly necessary, but it still has some flexibility."
+            if has_previous_data and previous_total > 0 and abs(current_total - previous_total) <= previous_total * 0.2:
+                return "This category is stable and likely to recur month to month."
+            return "This category can vary month to month."
+
+        def _category_affordability_line(category: str) -> str:
+            category_name = str(category).strip()
+            fixed_essential = {"Bills", "Rent", "Utilities", "Insurance"}
+            discretionary = {"Food", "Entertainment", "Shopping", "Dining"}
+            mixed = {"Groceries", "Transportation"}
+
+            if category_name in fixed_essential:
+                return "Because most of this is fixed, it limits what you can safely spend elsewhere."
+            if category_name in discretionary:
+                return "This spending reduces your available buffer for the rest of the month."
+            if category_name in mixed:
+                return "If this runs high, it can tighten your buffer for the rest of the month."
+            return "Changes here can affect how much buffer you have left for the rest of the month."
+
         def _render_category_explanation(resp: dict):
             category = str(resp.get("category", "")).strip() or "This category"
             explanation = str(resp.get("explanation", "")).strip()
+            has_previous_data = bool(resp.get("has_previous_data", False))
             if explanation:
                 st.write(explanation)
             else:
@@ -830,38 +861,61 @@ def run_app():
             previous_total = float(resp.get("previous_month_total", 0.0))
             dollar_change = float(resp.get("dollar_change", current_total - previous_total))
             percent_change = resp.get("percent_change")
-            tx_count_change = int(resp.get("transaction_count_change", 0))
             current_tx_count = int(resp.get("current_transaction_count", 0))
             previous_tx_count = int(resp.get("previous_transaction_count", 0))
             current_avg_spend = float(resp.get("current_avg_spend", 0.0))
             previous_avg_spend = float(resp.get("previous_avg_spend", 0.0))
             top_merchants = resp.get("top_merchants", []) or []
 
+            st.caption(
+                _category_interpretation_line(
+                    category,
+                    has_previous_data=has_previous_data,
+                    current_total=current_total,
+                    previous_total=previous_total,
+                )
+            )
+            st.caption(_category_affordability_line(category))
+
             with st.expander("Details", expanded=False):
-                st.write(f"Current month total: {_fmt_money(current_total)}")
-                if bool(resp.get("has_previous_data", False)):
-                    st.write(f"Previous month total: {_fmt_money(previous_total)}")
+                st.write(f"Spent this month: {_fmt_money(current_total)}")
+                if has_previous_data:
+                    st.write(f"Spent last month: {_fmt_money(previous_total)}")
                 else:
-                    st.write("Previous month total: No data")
+                    st.write("Spent last month: No previous month data yet.")
 
-                if percent_change is None:
-                    st.write(f"Dollar change: {_fmt_signed_money(dollar_change)}")
+                if has_previous_data:
+                    if percent_change is None:
+                        st.write(f"Change vs last month: {_fmt_signed_money(dollar_change)}")
+                    else:
+                        st.write(
+                            f"Change vs last month: {_fmt_signed_money(dollar_change)} ({float(percent_change):+.1f}%)"
+                        )
+
+                if has_previous_data:
+                    if current_tx_count == previous_tx_count:
+                        st.write(f"You made {current_tx_count} transactions this month, the same as last month.")
+                    elif current_tx_count > previous_tx_count:
+                        st.write(
+                            f"You made {current_tx_count} transactions this month, up from {previous_tx_count} last month."
+                        )
+                    else:
+                        st.write(
+                            f"You made {current_tx_count} transactions this month, down from {previous_tx_count} last month."
+                        )
                 else:
+                    st.write(f"You made {current_tx_count} transactions this month.")
+
+                if has_previous_data:
                     st.write(
-                        f"Change vs previous month: {_fmt_signed_money(dollar_change)} ({float(percent_change):+.1f}%)"
+                        f"Average transaction size: {_fmt_money(current_avg_spend)} "
+                        f"vs {_fmt_money(previous_avg_spend)} last month"
                     )
-
-                st.write(
-                    f"Transaction count change: {tx_count_change:+d} "
-                    f"({current_tx_count} this month vs {previous_tx_count} last month)"
-                )
-                st.write(
-                    f"Average spend per transaction: {_fmt_money(current_avg_spend)} "
-                    f"vs {_fmt_money(previous_avg_spend)} last month"
-                )
+                else:
+                    st.write(f"Average transaction size: {_fmt_money(current_avg_spend)}")
 
                 if top_merchants:
-                    st.write("Top merchants driving the change")
+                    st.write("Biggest contributors")
                     for merchant in top_merchants:
                         st.write(
                             f"- {merchant.get('merchant', 'Unknown')}: "
@@ -947,10 +1001,10 @@ def run_app():
     
         cols = st.columns(4)
         cols[0].button("Explain this month", on_click=_set_question, args=("Explain this month",))
-        cols[1].button("Why is Food higher?", on_click=_set_question, args=("Why is Food higher?",))
+        cols[1].button("What's driving Food?", on_click=_set_question, args=("What's driving Food?",))
         cols[2].button("What should I change this week?", on_click=_set_question, args=("What should I change this week?",))
     
-        st.subheader("Why is this category higher?")
+        st.subheader("What's driving this category?")
         explain_category = st.selectbox("Category", SPEND_CATEGORIES, key="insights_explain_category")
         if st.button("Explain this category"):
             try:

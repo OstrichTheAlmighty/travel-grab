@@ -53,7 +53,7 @@ def test_explain_category_compares_current_month_vs_previous_month():
         "Pizza Night",
         "Sweetgreen",
     ]
-    assert "Food is up $75.00" in body["explanation"]
+    assert "Food is up $75.00 vs last month" in body["explanation"]
     assert "Chipotle and Pizza Night" in body["explanation"]
 
 
@@ -81,4 +81,31 @@ def test_explain_category_handles_no_previous_month_data():
     assert round(body["previous_month_total"], 2) == 0.00
     assert body["percent_change"] is None
     assert body["has_previous_data"] is False
-    assert "no previous month data" in body["explanation"].lower()
+    assert "first month tracking Food" in body["explanation"]
+
+
+def test_explain_category_handles_bills_with_no_previous_month_data():
+    client = TestClient(app)
+    user = "test_explain_category_bills_no_previous"
+
+    client.delete("/transactions", params={"user_id": user})
+    _add_expense(client, user_id=user, date="2026-04-02", merchant="Apartment Rent", category="Bills", amount=348.33)
+    _add_expense(client, user_id=user, date="2026-04-08", merchant="City Utilities", category="Bills", amount=55.00)
+
+    response = client.get(
+        "/explain/category",
+        params={
+            "user_id": user,
+            "category": "Bills",
+            "period": "monthly",
+            "as_of": "2026-04-30",
+        },
+    )
+
+    body = response.json()
+    assert response.status_code == 200
+    assert round(body["current_month_total"], 2) == 403.33
+    assert round(body["previous_month_total"], 2) == 0.00
+    assert body["has_previous_data"] is False
+    assert "first month tracking Bills" in body["explanation"]
+    assert "Apartment Rent and City Utilities" in body["explanation"]
