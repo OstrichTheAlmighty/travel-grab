@@ -887,6 +887,29 @@ def run_app():
                 return "medium", percent_of_safe
             return "high", percent_of_safe
 
+        def _category_action_heading(spend_level: str) -> str:
+            if spend_level == "high":
+                return "How to improve this"
+            return "Keep it on track"
+
+        def _category_monthly_projection_line(current_total: float) -> str:
+            days_elapsed = max(1, (as_of_date - month_start).days + 1)
+            days_total = max(days_elapsed, (month_end - month_start).days + 1)
+            projected_total = float(current_total)
+            if days_elapsed > 0:
+                projected_total = float(current_total) / float(days_elapsed) * float(days_total)
+            return f"At this pace, you'll spend about {_fmt_money(projected_total)} this month."
+
+        def _category_remaining_safe_line(current_total: float, safe_to_spend: float | None) -> str:
+            if safe_to_spend is None or safe_to_spend <= 0:
+                return ""
+
+            healthy_cap = float(safe_to_spend) * 0.30
+            remaining_safe = healthy_cap - float(current_total)
+            if remaining_safe > 0:
+                return f"You could spend about {_fmt_money(remaining_safe)} more this month and still stay in a healthy range."
+            return "You've already exceeded a typical healthy range for this category."
+
         def _category_interpretation_line(
             category: str,
             *,
@@ -1030,7 +1053,7 @@ def run_app():
                 if spend_level == "medium":
                     return (
                         f"You've made {current_tx_count} restaurant purchases so far and spent {_fmt_money(current_total)}. "
-                        "This is still reasonable, but keeping it to roughly the current pace would help protect your buffer."
+                        "This is still reasonable, and keeping it around the current pace would keep this category on track."
                     )
                 if has_previous_data and current_total > previous_total:
                     return (
@@ -1050,7 +1073,7 @@ def run_app():
                 if spend_level == "medium":
                     return (
                         f"You're averaging about {_fmt_money(current_avg_spend)} per entertainment purchase. "
-                        "This still looks manageable, but choosing a lower-cost plan for the next outing would protect more buffer."
+                        "This still looks manageable, and staying near the current pace would keep this category on track."
                     )
                 return (
                     f"You're averaging about {_fmt_money(current_avg_spend)} per entertainment purchase. "
@@ -1065,7 +1088,7 @@ def run_app():
                 if spend_level == "medium":
                     return (
                         f"You've spent {_fmt_money(current_total)} here so far. "
-                        "This is reasonable, but delaying the next nonessential purchase would help keep more room in your buffer."
+                        "This is reasonable, and pausing before the next nonessential purchase would help keep it on track."
                     )
                 return (
                     f"You've spent {_fmt_money(current_total)} here so far. "
@@ -1080,7 +1103,7 @@ def run_app():
                 if spend_level == "medium":
                     return (
                         f"You've already spent {_fmt_money(current_total)} here, and it looks reasonable for a mostly fixed cost. "
-                        "If you want extra room, review one bill or provider rather than trying to cut this category much."
+                        "The main focus here is just to watch for bill changes rather than trying to cut this category much."
                     )
                 return (
                     f"You've already spent {_fmt_money(current_total)} here, and most of it looks fixed. "
@@ -1096,7 +1119,7 @@ def run_app():
                     if spend_level == "medium":
                         return (
                             f"You've made {current_tx_count} grocery trips averaging about {_fmt_money(current_avg_spend)} each. "
-                            "This is reasonable, but tightening one trip or shifting a few items to a lower-cost store would preserve more buffer."
+                            "This is reasonable, and planning the next trip before you shop would help keep it on track."
                         )
                     return (
                         f"You've made {current_tx_count} grocery trips averaging about {_fmt_money(current_avg_spend)} each. "
@@ -1110,7 +1133,7 @@ def run_app():
                 if spend_level == "medium":
                     return (
                         f"You're averaging about {_fmt_money(current_avg_spend)} per transportation purchase. "
-                        "This is manageable, but combining a few trips would help protect more buffer."
+                        "This is manageable, and staying near the current pace would keep it on track."
                     )
                 return (
                     f"You're averaging about {_fmt_money(current_avg_spend)} per transportation purchase. "
@@ -1124,7 +1147,7 @@ def run_app():
             if spend_level == "medium":
                 return (
                     f"You've spent {_fmt_money(current_total)} in this category so far. "
-                    "This still looks reasonable, but keeping a close eye on the next few purchases would help protect your buffer."
+                    "This still looks reasonable, and maintaining the current pace would keep it on track."
                 )
             return (
                 f"You've spent {_fmt_money(current_total)} in this category so far. "
@@ -1170,7 +1193,11 @@ def run_app():
                 )
             )
             st.caption(_category_buffer_impact_line(category, current_total=current_total, safe_to_spend=safe_to_spend))
-            st.write("**How to improve this**")
+            st.caption(_category_monthly_projection_line(current_total))
+            remaining_safe_line = _category_remaining_safe_line(current_total, safe_to_spend)
+            if remaining_safe_line:
+                st.caption(remaining_safe_line)
+            st.write(f"**{_category_action_heading(spend_level)}**")
             st.write(
                 _category_coaching_line(
                     category,
