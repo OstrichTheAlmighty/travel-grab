@@ -16,9 +16,15 @@ AI_EXPLANATION_TIMEOUT_SECONDS = 3
 def run_app():
     if "user_id" not in st.session_state:
         st.session_state.user_id = "default"
+    if "site_page" not in st.session_state:
+        st.session_state.site_page = "Home"
+    if "demo_mode" not in st.session_state:
+        st.session_state.demo_mode = False
+    if "last_real_user_id" not in st.session_state:
+        st.session_state.last_real_user_id = "default"
     
     st.set_page_config(page_title="AI Finance Coach", layout="wide")
-    st.title("AI Finance Coach")
+    product_name = "AI Finance Coach"
     
     # -----------------------------
     # Month selector (global)
@@ -245,127 +251,410 @@ def run_app():
             "category_safe_to_spend_key",
         ]:
             st.session_state.pop(key, None)
+
+    DEMO_USER_ID = "demo"
+    DEMO_BUDGET = {
+        "Bills": 1300.0,
+        "Groceries": 300.0,
+        "Food": 180.0,
+        "Transportation": 120.0,
+        "Entertainment": 120.0,
+        "Subscriptions": 0.0,
+        "Health": 0.0,
+        "Education": 0.0,
+        "Shopping": 0.0,
+        "Other": 80.0,
+        "Savings": 0.0,
+    }
+
+    def activate_demo_mode(force: bool = False):
+        if str(st.session_state.get("user_id", "")).strip() != DEMO_USER_ID:
+            st.session_state.last_real_user_id = str(st.session_state.get("user_id", "default")).strip() or "default"
+
+        st.session_state.user_id = DEMO_USER_ID
+        st.session_state.demo_mode = True
+        demo_key = f"{DEMO_USER_ID}:{as_of_str}:monthly"
+        if not force and st.session_state.get("demo_ready_key") == demo_key:
+            return None
+
+        api_save_budget("monthly", 3200.0, DEMO_BUDGET)
+        out = api_load_sample_month(as_of_str)
+        reset_data_caches()
+        st.session_state.demo_ready_key = demo_key
+        return int(out.get("loaded", 0))
+
+    def deactivate_demo_mode():
+        st.session_state.demo_mode = False
+        st.session_state.user_id = str(st.session_state.get("last_real_user_id", "default")).strip() or "default"
+        reset_data_caches()
+
+    def render_page_intro(title: str, subtitle: str):
+        st.markdown(f"## {title}")
+        st.caption(subtitle)
+
+    def render_shell_footer():
+        st.divider()
+        foot_cols = st.columns([1, 1, 4])
+        if foot_cols[0].button("Privacy", key="footer_privacy", use_container_width=True):
+            st.session_state.site_page = "Privacy"
+            st.rerun()
+        if foot_cols[1].button("Feedback / About", key="footer_about", use_container_width=True):
+            st.session_state.site_page = "Feedback / About"
+            st.rerun()
+
+    st.markdown(
+        """
+        <style>
+        .block-container {
+            max-width: 1180px;
+            padding-top: 1.4rem;
+            padding-bottom: 3rem;
+        }
+        div[data-testid="stButton"] > button {
+            border-radius: 999px;
+            border: 1px solid #d7dadd;
+            padding: 0.55rem 1rem;
+            font-weight: 600;
+        }
+        .product-shell {
+            padding: 1rem 0 0.25rem 0;
+        }
+        .product-brand {
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin-bottom: 0.35rem;
+        }
+        .product-title {
+            font-size: 2.4rem;
+            line-height: 1.05;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 0.35rem;
+        }
+        .product-subtitle {
+            color: #4b5563;
+            max-width: 52rem;
+            margin-bottom: 1rem;
+        }
+        .product-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
+            padding: 1.1rem 1.15rem;
+            background: #fbfcfd;
+            min-height: 100%;
+        }
+        .product-card h4 {
+            margin: 0 0 0.35rem 0;
+            color: #111827;
+        }
+        .product-card p {
+            margin: 0;
+            color: #4b5563;
+        }
+        .demo-banner {
+            border: 1px solid #d6e4ff;
+            background: #f5f8ff;
+            border-radius: 16px;
+            padding: 0.8rem 0.95rem;
+            margin: 0.25rem 0 1rem 0;
+            color: #1f3a5f;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    current_page = str(st.session_state.get("site_page", "Home")).strip() or "Home"
+    nav_pages = ["Home", "Demo", "Can I afford this?", "Spending Insights", "Budget", "Sign In"]
+
+    st.markdown(
+        f"""
+        <div class="product-shell">
+            <div class="product-brand">{product_name}</div>
+            <div class="product-title">Money guidance that feels product-ready, not spreadsheet-heavy.</div>
+            <div class="product-subtitle">
+                Understand where your cash is going, decide what you can safely buy, and stay on pace without connecting a real bank account.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    nav_cols = st.columns([1.0, 1.0, 1.35, 1.25, 1.0, 0.95])
+    for idx, page_name in enumerate(nav_pages):
+        button_type = "primary" if current_page == page_name else "secondary"
+        if nav_cols[idx].button(page_name, key=f"nav_{page_name}", type=button_type, use_container_width=True):
+            st.session_state.site_page = page_name
+            st.rerun()
+
+    if st.session_state.get("demo_mode", False):
+        st.markdown(
+            """
+            <div class="demo-banner">
+                Demo mode is active. You're exploring sample transactions and a sample budget, not a connected account.
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        demo_banner_cols = st.columns([1, 5])
+        if demo_banner_cols[0].button("Exit demo", key="exit_demo_mode"):
+            deactivate_demo_mode()
+            st.session_state.site_page = "Home"
+            st.rerun()
+        demo_banner_cols[1].caption(f"Signed in as demo user: `{st.session_state.user_id}`")
+
+    if current_page == "Home":
+        hero_cols = st.columns([1.2, 1.0])
+        with hero_cols[0]:
+            render_page_intro(
+                "Know what you can afford before you spend.",
+                "Use the demo to explore affordability guidance, spending insights, and simple budget tracking in one place.",
+            )
+            primary_cols = st.columns([1, 1.2, 2.8])
+            if primary_cols[0].button("Try the demo", key="home_try_demo", type="primary", use_container_width=True):
+                loaded = activate_demo_mode()
+                st.session_state.site_page = "Demo"
+                if loaded:
+                    st.session_state.home_demo_message = f"Loaded {loaded} sample transactions for the demo."
+                st.rerun()
+            if primary_cols[1].button("See how it works", key="home_how_it_works", use_container_width=True):
+                st.session_state.show_how_it_works = not bool(st.session_state.get("show_how_it_works", False))
+            if st.session_state.get("home_demo_message"):
+                st.success(st.session_state.pop("home_demo_message"))
+
+            if st.session_state.get("show_how_it_works", False):
+                step_cols = st.columns(3)
+                step_cols[0].markdown(
+                    "<div class='product-card'><h4>1. Load the demo</h4><p>Start with healthy sample data so you can explore the product without connecting anything.</p></div>",
+                    unsafe_allow_html=True,
+                )
+                step_cols[1].markdown(
+                    "<div class='product-card'><h4>2. Ask real questions</h4><p>Use affordability and category coaching to see what your current month can support.</p></div>",
+                    unsafe_allow_html=True,
+                )
+                step_cols[2].markdown(
+                    "<div class='product-card'><h4>3. Stay on track</h4><p>Set category budgets, monitor pace, and keep your spending buffer intact.</p></div>",
+                    unsafe_allow_html=True,
+                )
+
+        with hero_cols[1]:
+            st.markdown(
+                """
+                <div class="product-card">
+                    <h4>What you can do here</h4>
+                    <p>Check a purchase before you buy it, understand why a category is rising, and see whether you're still on budget this month.</p>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+            st.write("")
+            st.markdown(
+                """
+                <div class="product-card">
+                    <h4>Built for trust</h4>
+                    <p>No live bank connection yet. Demo mode is explicit, and every result stays tied to the same deterministic math already in the app.</p>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+        st.divider()
+        with st.expander("Privacy", expanded=False):
+            st.write("No bank connection is enabled yet. Demo mode uses sample data only, and local testing stays inside this app workspace.")
+        with st.expander("Feedback / About", expanded=False):
+            st.write("AI Finance Coach is a local product shell around the existing affordability, insights, and budget coaching tools.")
+            st.write("Feedback placeholder: add the flows you want users to trust first, then connect real accounts later.")
+        return
+
+    if current_page == "Sign In":
+        render_page_intro(
+            "Sign in",
+            "Account connection is not live yet. Use demo mode to explore the product experience without connecting a bank.",
+        )
+        st.info("Sign-in is a placeholder for now. The demo gives you the full product flow using sample transactions.")
+        sign_cols = st.columns([1, 1.2, 2.8])
+        if sign_cols[0].button("Try the demo", key="signin_try_demo", type="primary", use_container_width=True):
+            loaded = activate_demo_mode()
+            st.session_state.site_page = "Demo"
+            if loaded:
+                st.session_state.home_demo_message = f"Loaded {loaded} sample transactions for the demo."
+            st.rerun()
+        with st.expander("Privacy", expanded=False):
+            st.write("No credentials or bank connections are collected in this version.")
+        with st.expander("Feedback / About", expanded=False):
+            st.write("Sign-in will stay disabled until the core budgeting and coaching experience is stable.")
+        return
+
+    if current_page == "Privacy":
+        render_page_intro("Privacy", "A simple placeholder while the product is still in local demo mode.")
+        st.write("No live bank connection is enabled yet.")
+        st.write("Demo mode loads sample data only.")
+        st.write("This app currently operates as a local product prototype.")
+        render_shell_footer()
+        return
+
+    if current_page == "Feedback / About":
+        render_page_intro("Feedback / About", "A lightweight placeholder section for product context.")
+        st.write("This product combines affordability coaching, spending insights, and budget tracking in one workspace.")
+        st.write("The current focus is making the experience clear and trustworthy before adding account connection.")
+        render_shell_footer()
+        return
+
+    if current_page == "Demo":
+        render_page_intro(
+            "Demo workspace",
+            "Explore the full product using sample transactions and a sample monthly budget.",
+        )
+        if not st.session_state.get("demo_mode", False):
+            if st.button("Start demo mode", key="demo_start", type="primary"):
+                loaded = activate_demo_mode()
+                if loaded:
+                    st.success(f"Loaded {loaded} sample transactions for the demo.")
+                st.rerun()
+        elif st.button("Refresh demo data", key="demo_refresh"):
+            loaded = activate_demo_mode(force=True)
+            if loaded:
+                st.success(f"Reloaded {loaded} sample transactions.")
+            st.rerun()
+    elif current_page == "Spending Insights":
+        render_page_intro(
+            "Spending Insights",
+            "See what changed this month, what is driving category movement, and how it affects your spending buffer.",
+        )
+        st.info("The full workspace is below. Start with the Spending Insights tab for category coaching and month-to-month explanations.")
+    elif current_page == "Can I afford this?":
+        render_page_intro(
+            "Can I afford this?",
+            "Use the existing affordability math to check a purchase before you make it, with a clean explanation and supporting context.",
+        )
+        st.info("The full workspace is below. Start with the Spending Insights tab to use the affordability calculator.")
+    elif current_page == "Budget":
+        render_page_intro(
+            "Budget",
+            "Set a monthly plan, then check whether each category is still on track against that plan.",
+        )
+        st.info("The full workspace is below. Use the Budget and On Track tabs to manage your plan and review category pacing.")
     
     
     # -----------------------------
     # Tabs
     # -----------------------------
     print("BEFORE RENDER", flush=True)
-    tab_tx, tab_budget, tab_insights, tab_report, tab_forecast = st.tabs(
-        ["Transactions", "Budget", "Insights", "Budget Report", "Forecast"]
-    )
+    show_demo_workspace = current_page in {"Demo", "Spending Insights", "Can I afford this?", "Budget"}
+    show_transactions_section = show_demo_workspace
+    show_budget_setup_section = show_demo_workspace
+    show_spending_insights_section = show_demo_workspace
+    show_budget_tracking_section = show_demo_workspace
+    show_forecast_section = show_demo_workspace
+
+    if show_demo_workspace:
+        tab_tx, tab_budget, tab_insights, tab_report, tab_forecast = st.tabs(
+            ["Transactions", "Budget", "Spending Insights", "On Track", "Forecast"]
+        )
+    else:
+        tab_tx = tab_budget = tab_insights = tab_report = tab_forecast = None
     
     # ============================================================
     # Transactions tab
     # ============================================================
-    with tab_tx:
-        st.subheader("Add a Transaction")
-    
-        with st.form("add_tx_form"):
-            tx_type = st.selectbox("Transaction type", ["Spending", "Income"], index=0)
-            date = st.date_input("Date", value=datetime.date.today())
-            merchant = st.text_input("Merchant", value="Starbucks")
-            amount = st.number_input(
-                "Amount ($)",
-                value=6.75,
-                step=0.01,
-                format="%.2f",
-            )
-            if tx_type == "Income":
-                category = st.selectbox("Category", ["Income"], index=0)
-            else:
-                category = st.selectbox("Category", SPEND_CATEGORIES, index=0)
-            submitted = st.form_submit_button("Add Transaction")
-    
-        if submitted:
-            try:
-                signed_amount = float(amount)
-                if tx_type == "Spending":
-                    signed_amount = -abs(signed_amount)
+    if show_transactions_section:
+        with tab_tx:
+            st.subheader("Add a Transaction")
+
+            with st.form("add_tx_form"):
+                tx_type = st.selectbox("Transaction type", ["Spending", "Income"], index=0)
+                date = st.date_input("Date", value=datetime.date.today())
+                merchant = st.text_input("Merchant", value="Starbucks")
+                amount = st.number_input(
+                    "Amount ($)",
+                    value=6.75,
+                    step=0.01,
+                    format="%.2f",
+                )
+                if tx_type == "Income":
+                    category = st.selectbox("Category", ["Income"], index=0)
                 else:
-                    signed_amount = abs(signed_amount)
-                payload = {
-                    "date": str(date),
-                    "merchant": merchant.strip(),
-                    "amount": signed_amount,
-                    "category": category,
-                    "user_id": st.session_state.user_id,
-                }
-                resp = backend_post(f"{BASE_URL}/transactions", json=payload, timeout=10)
-                if not resp.ok:
-                    show_http_error(resp)
-                    raise RuntimeError("POST /transactions failed")
-                reset_data_caches()
-                st.success("✅ Transaction added!")
-            except Exception as e:
-                st.code(str(e))
+                    category = st.selectbox("Category", SPEND_CATEGORIES, index=0)
+                submitted = st.form_submit_button("Add Transaction")
 
-        action_cols = st.columns(2)
-        if action_cols[0].button("Load healthy sample month"):
-            try:
-                demo_budget = {
-                    "Bills": 1300.0,
-                    "Groceries": 300.0,
-                    "Food": 180.0,
-                    "Transportation": 120.0,
-                    "Entertainment": 120.0,
-                    "Subscriptions": 0.0,
-                    "Health": 0.0,
-                    "Education": 0.0,
-                    "Shopping": 0.0,
-                    "Other": 80.0,
-                    "Savings": 0.0,
-                }
-                api_save_budget("monthly", 3200.0, demo_budget)
-                out = api_load_sample_month(as_of_str)
+            if submitted:
+                try:
+                    signed_amount = float(amount)
+                    if tx_type == "Spending":
+                        signed_amount = -abs(signed_amount)
+                    else:
+                        signed_amount = abs(signed_amount)
+                    payload = {
+                        "date": str(date),
+                        "merchant": merchant.strip(),
+                        "amount": signed_amount,
+                        "category": category,
+                        "user_id": st.session_state.user_id,
+                    }
+                    resp = backend_post(f"{BASE_URL}/transactions", json=payload, timeout=10)
+                    if not resp.ok:
+                        show_http_error(resp)
+                        raise RuntimeError("POST /transactions failed")
+                    reset_data_caches()
+                    st.success("✅ Transaction added!")
+                except Exception as e:
+                    st.code(str(e))
 
-                reset_data_caches()
-                st.success(f"✅ Loaded {int(out.get('loaded', 0))} sample transactions for testing.")
-            except Exception as e:
-                st.code(str(e))
-    
-        if action_cols[1].button("Clear all transactions"):
-            try:
-                out = api_clear_transactions()
-                reset_data_caches()
-                st.success(f"✅ Cleared {int(out.get('deleted', 0))} transactions.")
-            except Exception as e:
-                st.code(str(e))
-    
-        st.divider()
-        st.subheader("Transactions")
-        st.caption(f"Showing {month_start.strftime('%B %Y')}")
-    
-        tx_key = f"{st.session_state.user_id}:{month_start.isoformat()}:{as_of_str}:tx"
-        if st.session_state.get("tx_cache_key") != tx_key:
-            try:
-                data = api_get_transactions(month_start.isoformat(), as_of_str)
-                st.session_state.tx_cache = data.get("transactions", [])
-                st.session_state.tx_cache_key = tx_key
-            except Exception as e:
-                st.code(str(e))
-    
-        transactions = st.session_state.get("tx_cache", [])
-        df = pd.DataFrame(transactions)
-    
-        if df.empty:
-            st.write("No transactions found yet.")
-        else:
-            df["date"] = pd.to_datetime(df["date"], errors="coerce")
-            df["amount_num"] = pd.to_numeric(df["amount"], errors="coerce").abs()
-            df["amount"] = df["amount_num"].map(lambda x: f"${x:,.2f}" if pd.notna(x) else "")
-    
-            df["date"] = df["date"].dt.strftime("%B %d, %Y")
-            df = df.rename(columns={"date": "Date", "merchant": "Merchant", "amount": "Amount", "category": "Category"})
-    
-            categories = ["All"] + sorted(df["Category"].dropna().unique().tolist())
-            chosen_cat = st.selectbox("Category filter", categories, index=0, key="tx_cat_filter")
-            if chosen_cat != "All":
-                df = df[df["Category"] == chosen_cat]
-    
-            df = df.sort_values("Date", ascending=False)
-            show_df = df[["Date", "Merchant", "Amount", "Category"]]
-            st.dataframe(show_df, width="stretch")
+            action_cols = st.columns(2)
+            if action_cols[0].button("Load healthy sample month"):
+                try:
+                    loaded = activate_demo_mode(force=True)
+                    if loaded:
+                        st.success(f"✅ Loaded {loaded} sample transactions for testing.")
+                    else:
+                        st.success("✅ Demo data is already loaded.")
+                except Exception as e:
+                    st.code(str(e))
+
+            if action_cols[1].button("Clear all transactions"):
+                try:
+                    out = api_clear_transactions()
+                    reset_data_caches()
+                    st.success(f"✅ Cleared {int(out.get('deleted', 0))} transactions.")
+                except Exception as e:
+                    st.code(str(e))
+
+            st.divider()
+            st.subheader("Transactions")
+            st.caption(f"Showing {month_start.strftime('%B %Y')}")
+
+            tx_key = f"{st.session_state.user_id}:{month_start.isoformat()}:{as_of_str}:tx"
+            if st.session_state.get("tx_cache_key") != tx_key:
+                try:
+                    data = api_get_transactions(month_start.isoformat(), as_of_str)
+                    st.session_state.tx_cache = data.get("transactions", [])
+                    st.session_state.tx_cache_key = tx_key
+                except Exception as e:
+                    st.code(str(e))
+
+            transactions = st.session_state.get("tx_cache", [])
+            df = pd.DataFrame(transactions)
+
+            if df.empty:
+                st.write("No transactions found yet.")
+            else:
+                df["date"] = pd.to_datetime(df["date"], errors="coerce")
+                df["amount_num"] = pd.to_numeric(df["amount"], errors="coerce").abs()
+                df["amount"] = df["amount_num"].map(lambda x: f"${x:,.2f}" if pd.notna(x) else "")
+
+                df["date"] = df["date"].dt.strftime("%B %d, %Y")
+                df = df.rename(columns={"date": "Date", "merchant": "Merchant", "amount": "Amount", "category": "Category"})
+
+                categories = ["All"] + sorted(df["Category"].dropna().unique().tolist())
+                chosen_cat = st.selectbox("Category filter", categories, index=0, key="tx_cat_filter")
+                if chosen_cat != "All":
+                    df = df[df["Category"] == chosen_cat]
+
+                df = df.sort_values("Date", ascending=False)
+                show_df = df[["Date", "Merchant", "Amount", "Category"]]
+                st.dataframe(show_df, width="stretch")
     
     
     # ============================================================
@@ -1858,6 +2147,9 @@ def run_app():
             st.warning(f"Projected end balance: **-${abs(forecast_end_balance):,.2f}**")
         else:
             st.success(f"Projected end balance: **${forecast_end_balance:,.2f}**")
+
+    if current_page in {"Demo", "Spending Insights", "Can I afford this?", "Budget"}:
+        render_shell_footer()
 
 try:
     run_app()
