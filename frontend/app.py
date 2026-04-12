@@ -13,7 +13,8 @@ from urllib.parse import urlparse
 
 print("FRONTEND START", flush=True)
 
-BASE_URL = os.environ.get("BACKEND_URL", "http://127.0.0.1:8000").rstrip("/")
+DEMO_LOCAL_ONLY = os.environ.get("DEMO_LOCAL_ONLY", "1").strip() != "0"
+BASE_URL = os.environ.get("BACKEND_URL", "").rstrip("/")
 BACKEND_TIMEOUT_SECONDS = 10
 AI_EXPLANATION_TIMEOUT_SECONDS = 3
 
@@ -123,7 +124,7 @@ def run_app():
     _local_backend_module = None
 
     def use_local_backend() -> bool:
-        return bool(st.session_state.get("demo_mode", False))
+        return bool(DEMO_LOCAL_ONLY or st.session_state.get("demo_mode", False))
 
     def get_local_backend():
         nonlocal _local_backend_module
@@ -131,6 +132,27 @@ def run_app():
             from backend import main as backend_main
             _local_backend_module = backend_main
         return _local_backend_module
+
+    def _ensure_http_backend_url():
+        if not BASE_URL:
+            raise RuntimeError("BACKEND_URL is required when DEMO_LOCAL_ONLY=0.")
+
+    def _run_local_without_external_http(callable_obj, *call_args, **call_kwargs):
+        backend = get_local_backend()
+        original_generate_ai = getattr(backend, "generate_ai_explanation", None)
+        original_api_key = os.environ.get("GOOGLE_API_KEY")
+        try:
+            if hasattr(backend, "generate_ai_explanation"):
+                backend.generate_ai_explanation = lambda prompt: None
+            os.environ.pop("GOOGLE_API_KEY", None)
+            return callable_obj(*call_args, **call_kwargs)
+        finally:
+            if original_generate_ai is not None:
+                backend.generate_ai_explanation = original_generate_ai
+            if original_api_key is None:
+                os.environ.pop("GOOGLE_API_KEY", None)
+            else:
+                os.environ["GOOGLE_API_KEY"] = original_api_key
 
     class LocalBackendResponse:
         def __init__(self, *, method: str, url: str, status_code: int, data=None, text: str = ""):
@@ -215,9 +237,12 @@ def run_app():
                     as_of=params.get("as_of"),
                 )
             elif method == "POST" and path == "/coach/respond":
-                data = backend.coach_respond(payload)
+                data = _run_local_without_external_http(backend.coach_respond, payload)
             elif method == "POST" and path == "/afford":
-                data = backend.afford(backend.AffordRequest(**payload))
+                data = _run_local_without_external_http(
+                    backend.afford,
+                    backend.AffordRequest(**payload),
+                )
             elif method == "GET" and path == "/health":
                 data = backend.health()
             else:
@@ -264,6 +289,7 @@ def run_app():
                 params=kwargs.get("params"),
             )
         else:
+            _ensure_http_backend_url()
             response = requests.get(*args, **kwargs)
         print("AFTER BACKEND CALL", flush=True)
         return response
@@ -279,6 +305,7 @@ def run_app():
                 payload=kwargs.get("json"),
             )
         else:
+            _ensure_http_backend_url()
             response = requests.post(*args, **kwargs)
         print("AFTER BACKEND CALL", flush=True)
         return response
@@ -294,6 +321,7 @@ def run_app():
                 params=kwargs.get("params"),
             )
         else:
+            _ensure_http_backend_url()
             response = requests.delete(*args, **kwargs)
         print("AFTER BACKEND CALL", flush=True)
         return response
