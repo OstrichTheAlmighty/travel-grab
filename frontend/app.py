@@ -228,6 +228,8 @@ def run_app():
             "afford_live_key",
             "afford_breakdown_data",
             "afford_breakdown_key",
+            "category_safe_to_spend",
+            "category_safe_to_spend_key",
         ]:
             st.session_state.pop(key, None)
     
@@ -818,18 +820,88 @@ def run_app():
 
             st.write(coach_explanation)
 
-        def _category_interpretation_line(category: str, *, has_previous_data: bool, current_total: float, previous_total: float) -> str:
+        def _load_category_safe_to_spend() -> float | None:
+            cache_key = f"{st.session_state.user_id}:{as_of_str}:{int(beginner_mode)}:category_safe_to_spend"
+            if st.session_state.get("category_safe_to_spend_key") == cache_key:
+                cached_value = st.session_state.get("category_safe_to_spend")
+                return None if cached_value is None else float(cached_value)
+
+            safe_to_spend = None
+            cash_context = None
+            afford_breakdown_key = str(st.session_state.get("afford_breakdown_key", "")).strip()
+            afford_breakdown_data = st.session_state.get("afford_breakdown_data") or {}
+            breakdown_key = f"{st.session_state.user_id}:{as_of_str}:cash_breakdown"
+            if afford_breakdown_data and afford_breakdown_key == breakdown_key:
+                cash_context = afford_breakdown_data
+            else:
+                try:
+                    cash_resp = backend_get(
+                        f"{BASE_URL}/forecast/cash",
+                        params={
+                            "user_id": st.session_state.user_id,
+                            "period": "monthly",
+                            "as_of": as_of_str,
+                            "starting_balance": 0.0,
+                        },
+                        timeout=6,
+                    )
+                    if cash_resp.ok:
+                        cash_context = cash_resp.json() or {}
+                except Exception:
+                    cash_context = None
+
+            if cash_context:
+                try:
+                    income_ahead = float(cash_context.get("forecast_income_total", 0.0)) - float(cash_context.get("income_to_date", 0.0))
+                    upcoming_expenses = float(cash_context.get("forecast_spending_total", 0.0)) - float(cash_context.get("spending_to_date", 0.0))
+                    projected_balance_before_purchase = income_ahead - upcoming_expenses
+                    safe_to_spend = round(projected_balance_before_purchase - (upcoming_expenses * 0.20), 2)
+                except Exception:
+                    safe_to_spend = None
+
+            st.session_state.category_safe_to_spend = safe_to_spend
+            st.session_state.category_safe_to_spend_key = cache_key
+            return safe_to_spend
+
+        def _category_spend_evaluation(category_spend: float, safe_to_spend: float | None) -> tuple[str, float | None]:
+            if safe_to_spend is None or safe_to_spend <= 0:
+                return "neutral", None
+
+            percent_of_safe = float(category_spend) / float(safe_to_spend)
+            if percent_of_safe < 0.10:
+                return "low", percent_of_safe
+            if percent_of_safe <= 0.30:
+                return "medium", percent_of_safe
+            return "high", percent_of_safe
+
+        def _category_interpretation_line(
+            category: str,
+            *,
+            has_previous_data: bool,
+            current_total: float,
+            previous_total: float,
+            spend_level: str,
+        ) -> str:
             category_name = str(category).strip()
             fixed_essential = {"Bills", "Rent", "Utilities", "Insurance"}
             discretionary = {"Food", "Entertainment", "Shopping", "Dining"}
             mixed = {"Groceries", "Transportation"}
 
+            if spend_level == "low":
+                if category_name in fixed_essential:
+                    return "This category looks manageable right now and well within a healthy range."
+                return "Your spending here is currently low and well within a healthy range."
+            if spend_level == "medium":
+                if category_name in fixed_essential:
+                    return "This category looks reasonable for this point in the month."
+                return "This category is reasonable but worth keeping an eye on."
+
             if category_name in fixed_essential:
                 return "Most of this category looks fixed and essential."
             if category_name in discretionary:
-                return "This category appears more discretionary and easier to reduce."
+                return "This category is taking a meaningful share of your spending room and is easier to adjust."
             if category_name in mixed:
-                return "This category is partly necessary, but it still has some flexibility."
+                return "This category is partly necessary, and the pace here matters."
             if has_previous_data and previous_total > 0 and abs(current_total - previous_total) <= previous_total * 0.2:
                 return "This category is stable and likely to recur month to month."
             return "This category can vary month to month."
@@ -847,6 +919,204 @@ def run_app():
             if category_name in mixed:
                 return "If this runs high, it can tighten your buffer for the rest of the month."
             return "Changes here can affect how much buffer you have left for the rest of the month."
+
+        def _join_category_merchants(top_merchants: list[dict], limit: int = 2) -> str:
+            names = [str(item.get("merchant", "")).strip() for item in top_merchants[:limit] if str(item.get("merchant", "")).strip()]
+            if not names:
+                return ""
+            if len(names) == 1:
+                return names[0]
+            return f"{names[0]} and {names[1]}"
+
+        def _category_pattern_insight(category: str, *, top_merchants: list[dict], current_tx_count: int, current_avg_spend: float) -> str:
+            category_name = str(category).strip()
+            merchant_names = _join_category_merchants(top_merchants)
+
+            if category_name in {"Food", "Dining"}:
+                if merchant_names:
+                    return f"Most of this comes from restaurant purchases at {merchant_names}, which tend to add up quickly."
+                return "Most of this appears to come from restaurant spending, which tends to build up faster than expected."
+            if category_name == "Bills":
+                if merchant_names:
+                    return f"Most of this is tied to recurring bills like {merchant_names}, so it is likely to show up again next month."
+                return "Most of this looks recurring, so it is likely to show up again next month."
+            if category_name in {"Utilities", "Rent", "Insurance"}:
+                return "This looks driven by recurring essentials rather than one-off spending."
+            if category_name == "Entertainment":
+                if current_tx_count >= 3:
+                    return "This looks spread across several discretionary purchases, which can quietly build up over the month."
+                return "This looks driven by discretionary spending, which is usually easier to adjust."
+            if category_name == "Shopping":
+                return "This looks like optional spending rather than a recurring obligation, which gives you more control over it."
+            if category_name == "Groceries":
+                return "This looks like necessary spending, but the pace of purchases still matters over the month."
+            if category_name == "Transportation":
+                return "Transportation tends to feel essential day to day, but repeated smaller trips can still add up."
+            if current_tx_count > 0 and current_avg_spend > 0:
+                return f"This category is being shaped by about {_fmt_money(current_avg_spend)} per purchase on average."
+            return "This category can meaningfully affect how much room you have left for the month."
+
+        def _category_buffer_impact_line(category: str, *, current_total: float, safe_to_spend: float | None) -> str:
+            category_name = str(category).strip()
+            discretionary = {"Food", "Dining", "Entertainment"}
+            fixed_essential = {"Bills", "Rent", "Utilities", "Insurance"}
+            mixed = {"Groceries", "Transportation"}
+            spend_level, percent_of_safe = _category_spend_evaluation(current_total, safe_to_spend)
+
+            if percent_of_safe is not None:
+                percent_text = f", about {percent_of_safe * 100:.0f}% of your safe-to-spend room"
+                if spend_level == "low":
+                    return (
+                        f"This has reduced your available buffer by {_fmt_money(current_total)} so far this month"
+                        f"{percent_text}, which is still a healthy range."
+                    )
+                if spend_level == "medium":
+                    return (
+                        f"This has reduced your available buffer by {_fmt_money(current_total)} so far this month"
+                        f"{percent_text}, so it is worth keeping an eye on."
+                    )
+                if category_name in fixed_essential:
+                    return (
+                        f"This has reduced your available buffer by {_fmt_money(current_total)} so far this month"
+                        f"{percent_text}, and because most of it is fixed it limits what you can safely spend elsewhere."
+                    )
+                return (
+                    f"This has reduced your available buffer by {_fmt_money(current_total)} so far this month"
+                    f"{percent_text}, so it is taking a meaningful share of your buffer."
+                )
+
+            if category_name in fixed_essential:
+                return f"This has reduced your available buffer by {_fmt_money(current_total)} so far this month, and most of it is hard to avoid."
+            if category_name in discretionary:
+                return f"This has reduced your available buffer by {_fmt_money(current_total)} so far this month."
+            if category_name in mixed:
+                return f"This has reduced your available buffer by {_fmt_money(current_total)} so far this month, so the pace here matters."
+            return f"This has reduced your available buffer by {_fmt_money(current_total)} so far this month."
+
+        def _category_coaching_line(
+            category: str,
+            *,
+            has_previous_data: bool,
+            current_total: float,
+            previous_total: float,
+            current_tx_count: int,
+            current_avg_spend: float,
+            safe_to_spend: float | None,
+        ) -> str:
+            category_name = str(category).strip()
+            fixed_essential = {"Bills", "Rent", "Utilities", "Insurance"}
+            mixed = {"Groceries", "Transportation"}
+            spend_level, _ = _category_spend_evaluation(current_total, safe_to_spend)
+
+            if category_name == "Food" or category_name == "Dining":
+                if spend_level == "low":
+                    return (
+                        f"You've made {current_tx_count} restaurant purchases so far and spent {_fmt_money(current_total)}. "
+                        "That is still within a healthy range, so the main goal is just to keep the current pace steady."
+                    )
+                if spend_level == "medium":
+                    return (
+                        f"You've made {current_tx_count} restaurant purchases so far and spent {_fmt_money(current_total)}. "
+                        "This is still reasonable, but keeping it to roughly the current pace would help protect your buffer."
+                    )
+                if has_previous_data and current_total > previous_total:
+                    return (
+                        f"You've made {current_tx_count} restaurant purchases so far and spent {_fmt_money(current_total)}. "
+                        "Reducing that pace by one or two meals this week or swapping in a lower-cost option would help rebuild your buffer."
+                    )
+                return (
+                    f"You've spent {_fmt_money(current_total)} across {current_tx_count} restaurant purchases so far. "
+                    "Keeping the next one or two meals lower-cost would help keep this category in check."
+                )
+            if category_name == "Entertainment":
+                if spend_level == "low":
+                    return (
+                        f"You're averaging about {_fmt_money(current_avg_spend)} per entertainment purchase. "
+                        "This is still in a healthy range, so no major change is needed if the current pace holds."
+                    )
+                if spend_level == "medium":
+                    return (
+                        f"You're averaging about {_fmt_money(current_avg_spend)} per entertainment purchase. "
+                        "This still looks manageable, but choosing a lower-cost plan for the next outing would protect more buffer."
+                    )
+                return (
+                    f"You're averaging about {_fmt_money(current_avg_spend)} per entertainment purchase. "
+                    "Skipping one outing or choosing a lower-cost plan this week would free up more buffer quickly."
+                )
+            if category_name == "Shopping":
+                if spend_level == "low":
+                    return (
+                        f"You've spent {_fmt_money(current_total)} here so far. "
+                        "This is still within a healthy range, so the best move is simply to keep impulse purchases in check."
+                    )
+                if spend_level == "medium":
+                    return (
+                        f"You've spent {_fmt_money(current_total)} here so far. "
+                        "This is reasonable, but delaying the next nonessential purchase would help keep more room in your buffer."
+                    )
+                return (
+                    f"You've spent {_fmt_money(current_total)} here so far. "
+                    "Delaying one nonessential purchase before buying again is the simplest way to protect more buffer."
+                )
+            if category_name in fixed_essential:
+                if spend_level == "low":
+                    return (
+                        f"You've already spent {_fmt_money(current_total)} here, and it still looks well contained. "
+                        "This category does not need attention right now unless the bill changes."
+                    )
+                if spend_level == "medium":
+                    return (
+                        f"You've already spent {_fmt_money(current_total)} here, and it looks reasonable for a mostly fixed cost. "
+                        "If you want extra room, review one bill or provider rather than trying to cut this category much."
+                    )
+                return (
+                    f"You've already spent {_fmt_money(current_total)} here, and most of it looks fixed. "
+                    "Focus on optimizing one bill or provider rather than trying to cut this category much."
+                )
+            if category_name in mixed:
+                if category_name == "Groceries":
+                    if spend_level == "low":
+                        return (
+                            f"You've made {current_tx_count} grocery trips averaging about {_fmt_money(current_avg_spend)} each. "
+                            "That is still in a healthy range, so this is more about maintaining the current pace than cutting back."
+                        )
+                    if spend_level == "medium":
+                        return (
+                            f"You've made {current_tx_count} grocery trips averaging about {_fmt_money(current_avg_spend)} each. "
+                            "This is reasonable, but tightening one trip or shifting a few items to a lower-cost store would preserve more buffer."
+                        )
+                    return (
+                        f"You've made {current_tx_count} grocery trips averaging about {_fmt_money(current_avg_spend)} each. "
+                        "Planning one tighter trip or shifting a few items to a lower-cost store would create some room without cutting essentials."
+                    )
+                if spend_level == "low":
+                    return (
+                        f"You're averaging about {_fmt_money(current_avg_spend)} per transportation purchase. "
+                        "This is still within a healthy range, so no major adjustment is needed right now."
+                    )
+                if spend_level == "medium":
+                    return (
+                        f"You're averaging about {_fmt_money(current_avg_spend)} per transportation purchase. "
+                        "This is manageable, but combining a few trips would help protect more buffer."
+                    )
+                return (
+                    f"You're averaging about {_fmt_money(current_avg_spend)} per transportation purchase. "
+                    "Combining trips or trimming a few low-value rides would be the most practical adjustment here."
+                )
+            if spend_level == "low":
+                return (
+                    f"You've spent {_fmt_money(current_total)} in this category so far. "
+                    "That is still within a healthy range, so the goal is just to keep the current pace steady."
+                )
+            if spend_level == "medium":
+                return (
+                    f"You've spent {_fmt_money(current_total)} in this category so far. "
+                    "This still looks reasonable, but keeping a close eye on the next few purchases would help protect your buffer."
+                )
+            return (
+                f"You've spent {_fmt_money(current_total)} in this category so far. "
+                "Cutting one or two lower-value purchases is the simplest place to start."
+            )
 
         def _render_category_explanation(resp: dict):
             category = str(resp.get("category", "")).strip() or "This category"
@@ -866,6 +1136,8 @@ def run_app():
             current_avg_spend = float(resp.get("current_avg_spend", 0.0))
             previous_avg_spend = float(resp.get("previous_avg_spend", 0.0))
             top_merchants = resp.get("top_merchants", []) or []
+            safe_to_spend = _load_category_safe_to_spend()
+            spend_level, _ = _category_spend_evaluation(current_total, safe_to_spend)
 
             st.caption(
                 _category_interpretation_line(
@@ -873,9 +1145,30 @@ def run_app():
                     has_previous_data=has_previous_data,
                     current_total=current_total,
                     previous_total=previous_total,
+                    spend_level=spend_level,
                 )
             )
-            st.caption(_category_affordability_line(category))
+            st.caption(
+                _category_pattern_insight(
+                    category,
+                    top_merchants=top_merchants,
+                    current_tx_count=current_tx_count,
+                    current_avg_spend=current_avg_spend,
+                )
+            )
+            st.caption(_category_buffer_impact_line(category, current_total=current_total, safe_to_spend=safe_to_spend))
+            st.write("**How to improve this**")
+            st.write(
+                _category_coaching_line(
+                    category,
+                    has_previous_data=has_previous_data,
+                    current_total=current_total,
+                    previous_total=previous_total,
+                    current_tx_count=current_tx_count,
+                    current_avg_spend=current_avg_spend,
+                    safe_to_spend=safe_to_spend,
+                )
+            )
 
             with st.expander("Details", expanded=False):
                 st.write(f"Spent this month: {_fmt_money(current_total)}")
