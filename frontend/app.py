@@ -2311,8 +2311,13 @@ def run_app():
     if current_page in {"Demo", "Spending Insights", "Can I afford this?", "Budget"}:
         render_shell_footer()
 
-try:
-    run_app()
-except Exception as e:
-    traceback.print_exc()
-    st.error(f"Frontend error: {e}")
+def main():
+    try:
+        run_app()
+    except Exception as e:
+        traceback.print_exc()
+        st.error(f"Frontend error: {e}")
+
+
+if __name__ == "__main__":
+    main()
