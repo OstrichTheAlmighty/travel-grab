@@ -1,13 +1,8 @@
-from pathlib import Path
+import os
 import sys
 
+ROOT = os.path.dirname(os.path.abspath(__file__))
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
 
-ROOT_DIR = Path(__file__).resolve().parent
-if str(ROOT_DIR) not in sys.path:
-    sys.path.insert(0, str(ROOT_DIR))
-
-
-from frontend.app import main
-
-
-main()
+from frontend.app import *
