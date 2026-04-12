@@ -331,43 +331,43 @@ def run_app():
             font-size: 0.9rem;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: #6b7280;
+            color: #cbd5e1;
             margin-bottom: 0.35rem;
         }
         .product-title {
             font-size: 2.4rem;
             line-height: 1.05;
             font-weight: 700;
-            color: #111827;
+            color: #f8fafc;
             margin-bottom: 0.35rem;
         }
         .product-subtitle {
-            color: #4b5563;
+            color: #dbe4f0;
             max-width: 52rem;
             margin-bottom: 1rem;
         }
         .product-card {
-            border: 1px solid #e5e7eb;
+            border: 1px solid rgba(148, 163, 184, 0.28);
             border-radius: 18px;
             padding: 1.1rem 1.15rem;
-            background: #fbfcfd;
+            background: rgba(15, 23, 42, 0.72);
             min-height: 100%;
         }
         .product-card h4 {
             margin: 0 0 0.35rem 0;
-            color: #111827;
+            color: #f8fafc;
         }
         .product-card p {
             margin: 0;
-            color: #4b5563;
+            color: #dbe4f0;
         }
         .demo-banner {
-            border: 1px solid #d6e4ff;
-            background: #f5f8ff;
+            border: 1px solid rgba(96, 165, 250, 0.35);
+            background: rgba(30, 41, 59, 0.78);
             border-radius: 16px;
             padding: 0.8rem 0.95rem;
             margin: 0.25rem 0 1rem 0;
-            color: #1f3a5f;
+            color: #dbeafe;
         }
         </style>
         """,
@@ -537,17 +537,17 @@ def run_app():
     show_demo_workspace = current_page == "Demo"
 
     if show_demo_workspace:
-        tab_afford, tab_insights, tab_budget, tab_forecast = st.tabs(
-            ["Can I afford this?", "Spending Insights", "Budget", "Forecast"]
+        tab_tx, tab_afford, tab_insights, tab_budget, tab_forecast = st.tabs(
+            ["Transactions", "Can I afford this?", "Spending Insights", "Budget", "Forecast"]
         )
     else:
-        tab_afford = tab_insights = tab_budget = tab_forecast = None
+        tab_tx = tab_afford = tab_insights = tab_budget = tab_forecast = None
     
     # ============================================================
     # Transactions tab
     # ============================================================
     if show_demo_workspace:
-        with tab_budget:
+        with tab_tx:
             st.subheader("Transactions")
             st.caption(f"Showing {month_start.strftime('%B %Y')}")
 
