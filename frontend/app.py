@@ -1,6 +1,7 @@
 import datetime
 import calendar
 import traceback
+import os
 import pandas as pd
 import streamlit as st
 import requests
@@ -9,7 +10,7 @@ import re
 
 print("FRONTEND START", flush=True)
 
-BASE_URL = "http://127.0.0.1:8000"
+BASE_URL = os.environ.get("BACKEND_URL", "http://127.0.0.1:8000").rstrip("/")
 BACKEND_TIMEOUT_SECONDS = 10
 AI_EXPLANATION_TIMEOUT_SECONDS = 3
 
@@ -23,6 +24,10 @@ def run_app():
         st.session_state.demo_mode = False
     if "last_real_user_id" not in st.session_state:
         st.session_state.last_real_user_id = "default"
+    if "debug_mode" not in st.session_state:
+        st.session_state.debug_mode = False
+    if "public_demo_bootstrapped" not in st.session_state:
+        st.session_state.public_demo_bootstrapped = False
     
     st.set_page_config(page_title="AI Finance Coach", layout="wide")
     product_name = "AI Finance Coach"
@@ -65,10 +70,8 @@ def run_app():
             return DEMO_USER_ID
         return str(st.session_state.get("entered_user_id", "default")).strip() or "default"
 
-    st.sidebar.text_input("User ID (name or email)", key="entered_user_id")
-    st.sidebar.checkbox("Debug mode", value=False, key="debug_mode")
-    if st.session_state.get("demo_mode", False):
-        st.sidebar.caption("Demo mode is active. The app is using sample data for `demo`.")
+    st.sidebar.caption("Public demo")
+    st.sidebar.caption("This experience uses sample transactions and a sample budget.")
     st.sidebar.caption(f"Viewing {month_start.strftime('%B %Y')}")
     
     SPEND_CATEGORIES = [
@@ -161,7 +164,7 @@ def run_app():
         return r.json()
     
     
-    def api_save_budget(period, income_amount, allocations):
+    def api_save_budget(period, income_amount, allocations, *, show_errors: bool = True):
         payload = {
             "user_id": active_user_id(),
             "period": period,
@@ -170,7 +173,8 @@ def run_app():
         }
         r = backend_post(f"{BASE_URL}/budget", json=payload, timeout=10)
         if not r.ok:
-            show_http_error(r)
+            if show_errors:
+                show_http_error(r)
             raise RuntimeError("POST /budget failed")
         return r.json()
     
@@ -223,14 +227,15 @@ def run_app():
         return r.json()
 
 
-    def api_load_sample_month(as_of):
+    def api_load_sample_month(as_of, *, show_errors: bool = True):
         r = backend_post(
             f"{BASE_URL}/transactions/sample-month",
             json={"user_id": active_user_id(), "as_of": as_of},
             timeout=10,
         )
         if not r.ok:
-            show_http_error(r)
+            if show_errors:
+                show_http_error(r)
             raise RuntimeError("POST /transactions/sample-month failed")
         return r.json()
     
@@ -276,7 +281,7 @@ def run_app():
         "Savings": 0.0,
     }
 
-    def activate_demo_mode(force: bool = False):
+    def activate_demo_mode(force: bool = False, *, show_errors: bool = True):
         entered_user = str(st.session_state.get("entered_user_id", "default")).strip() or "default"
         if entered_user != DEMO_USER_ID:
             st.session_state.last_real_user_id = entered_user
@@ -286,8 +291,8 @@ def run_app():
         if not force and st.session_state.get("demo_ready_key") == demo_key:
             return None
 
-        api_save_budget("monthly", 3200.0, DEMO_BUDGET)
-        out = api_load_sample_month(as_of_str)
+        api_save_budget("monthly", 3200.0, DEMO_BUDGET, show_errors=show_errors)
+        out = api_load_sample_month(as_of_str, show_errors=show_errors)
         reset_data_caches()
         st.session_state.demo_ready_key = demo_key
         return int(out.get("loaded", 0))
@@ -295,6 +300,18 @@ def run_app():
     def deactivate_demo_mode():
         st.session_state.demo_mode = False
         reset_data_caches()
+
+    if not st.session_state.get("public_demo_bootstrapped", False):
+        landing_page = str(st.session_state.get("site_page", "Home")).strip() or "Home"
+        st.session_state.public_demo_bootstrapped = True
+        st.session_state.demo_mode = True
+        try:
+            activate_demo_mode(force=True, show_errors=False)
+        except Exception:
+            traceback.print_exc()
+            st.session_state.demo_ready_key = ""
+            reset_data_caches()
+        st.session_state.site_page = landing_page
 
     def render_page_intro(title: str, subtitle: str):
         st.markdown(f"## {title}")
@@ -375,7 +392,11 @@ def run_app():
     )
 
     current_page = str(st.session_state.get("site_page", "Home")).strip() or "Home"
-    nav_pages = ["Home", "Demo", "Sign In"]
+    allowed_pages = {"Home", "Demo", "Privacy", "Feedback / About"}
+    if current_page not in allowed_pages:
+        current_page = "Home"
+        st.session_state.site_page = "Home"
+    nav_pages = ["Home", "Demo"]
 
     st.markdown(
         f"""
@@ -390,7 +411,7 @@ def run_app():
         unsafe_allow_html=True,
     )
 
-    nav_cols = st.columns([1.0, 1.0, 1.0, 4.0])
+    nav_cols = st.columns([1.0, 1.0, 5.0])
     for idx, page_name in enumerate(nav_pages):
         button_type = "primary" if current_page == page_name else "secondary"
         if nav_cols[idx].button(page_name, key=f"nav_{page_name}", type=button_type, use_container_width=True):
@@ -401,24 +422,19 @@ def run_app():
         st.markdown(
             """
             <div class="demo-banner">
-                Demo mode is active. You're exploring sample transactions and a sample budget, not a connected account.
+                Public demo: you're viewing sample transactions, sample budgets, and simulated coaching only.
             </div>
             """,
             unsafe_allow_html=True,
         )
-        demo_banner_cols = st.columns([1, 5])
-        if demo_banner_cols[0].button("Exit demo", key="exit_demo_mode"):
-            deactivate_demo_mode()
-            st.session_state.site_page = "Home"
-            st.rerun()
-        demo_banner_cols[1].caption(f"Signed in as demo user: `{DEMO_USER_ID}`")
+        st.caption(f"Demo profile: `{DEMO_USER_ID}`")
 
     if current_page == "Home":
         hero_cols = st.columns([1.2, 1.0])
         with hero_cols[0]:
             render_page_intro(
                 "Know what you can afford before you spend.",
-                "Use the demo to explore affordability guidance, spending insights, and simple budget tracking in one place.",
+                "Explore affordability guidance, spending insights, budget tracking, and forecasting using sample data.",
             )
             primary_cols = st.columns([1, 1.2, 2.8])
             if primary_cols[0].button("Try the demo", key="home_try_demo", type="primary", use_container_width=True):
@@ -461,8 +477,8 @@ def run_app():
             st.markdown(
                 """
                 <div class="product-card">
-                    <h4>Built for trust</h4>
-                    <p>No live bank connection yet. Demo mode is explicit, and every result stays tied to the same deterministic math already in the app.</p>
+                    <h4>Built for public demo use</h4>
+                    <p>This shareable version uses sample data only. Every result stays tied to the same deterministic math already in the app.</p>
                 </div>
                 """,
                 unsafe_allow_html=True,
@@ -474,25 +490,6 @@ def run_app():
         with st.expander("Feedback / About", expanded=False):
             st.write("AI Finance Coach is a local product shell around the existing affordability, insights, and budget coaching tools.")
             st.write("Feedback placeholder: add the flows you want users to trust first, then connect real accounts later.")
-        return
-
-    if current_page == "Sign In":
-        render_page_intro(
-            "Sign in",
-            "Account connection is not live yet. Use demo mode to explore the product experience without connecting a bank.",
-        )
-        st.info("Sign-in is a placeholder for now. The demo gives you the full product flow using sample transactions.")
-        sign_cols = st.columns([1, 1.2, 2.8])
-        if sign_cols[0].button("Start demo mode", key="signin_try_demo", type="primary", use_container_width=True):
-            loaded = activate_demo_mode(force=True)
-            st.session_state.site_page = "Demo"
-            if loaded:
-                st.session_state.home_demo_message = f"Loaded {loaded} sample transactions for the demo."
-            st.rerun()
-        with st.expander("Privacy", expanded=False):
-            st.write("No credentials or bank connections are collected in this version.")
-        with st.expander("Feedback / About", expanded=False):
-            st.write("Sign-in will stay disabled until the core budgeting and coaching experience is stable.")
         return
 
     if current_page == "Privacy":
