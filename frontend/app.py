@@ -2274,8 +2274,89 @@ def run_app():
                 return None
             return ranked[0]
 
+        def _is_hard_to_change_category(category: str) -> bool:
+            return _actionability_weight(category) <= 0.0
+
+        def _build_focus_shift_context(bundle: dict) -> dict:
+            driver = _compute_spending_driver(bundle)
+            actionable = _best_actionable_category(bundle)
+            if not driver:
+                return {}
+
+            important_category = str(driver.get("category", "")).strip()
+            current_total = float(driver.get("current_total", 0.0) or 0.0)
+            budget_amount = float(driver.get("budget_amount", 0.0) or 0.0)
+            pct_used = float(driver.get("pct_used", 0.0) or 0.0)
+            above_pace = float(driver.get("above_pace", 0.0) or 0.0)
+            selection_mode = str(driver.get("selection_mode", "spend")).strip()
+
+            if selection_mode == "budget" and budget_amount > 0 and above_pace > 0:
+                insight_line = (
+                    f"{important_category} matters most right now because you've spent {_fmt_money(current_total)} there and it's running ahead of plan."
+                    if beginner_mode
+                    else f"{important_category} matters most right now because it's about {_fmt_money(above_pace)} above pace and already at {pct_used:.0f}% of its {_fmt_money(budget_amount)} budget."
+                )
+            elif selection_mode == "budget" and budget_amount > 0:
+                insight_line = (
+                    f"{important_category} matters most right now because you've already used {pct_used:.0f}% of its budget."
+                    if beginner_mode
+                    else f"{important_category} matters most right now because you've spent {_fmt_money(current_total)}, or {pct_used:.0f}% of its {_fmt_money(budget_amount)} budget."
+                )
+            else:
+                insight_line = (
+                    f"{important_category} matters most right now because you've spent {_fmt_money(current_total)} there so far."
+                    if beginner_mode
+                    else f"{important_category} matters most right now because you've spent {_fmt_money(current_total)} there so far."
+                )
+
+            actionable_category = str((actionable or {}).get("category", "")).strip()
+            actionable_recommendation = ""
+            if actionable_category:
+                actionable_resp = _load_category_explanation_data(actionable_category)
+                actionable_snapshot = _category_budget_snapshot(bundle, actionable_category, actionable_resp) if actionable_resp else {}
+                if actionable_resp and actionable_snapshot:
+                    actionable_recommendation = _category_recommendation(
+                        actionable_category,
+                        actionable_resp,
+                        actionable_snapshot,
+                    )
+
+            constraint_line = ""
+            shift_line = ""
+            if actionable_category and actionable_category != important_category:
+                if _is_hard_to_change_category(important_category):
+                    constraint_line = (
+                        f"However, {important_category} is mostly fixed and harder to adjust in the short term."
+                    )
+                else:
+                    constraint_line = (
+                        f"However, {important_category} is not the easiest place to make a quick change this week."
+                    )
+                shift_line = (
+                    f"For this week, your best opportunity to improve is in {actionable_category} spending."
+                )
+            elif actionable_category:
+                shift_line = (
+                    f"For this week, your best opportunity to improve is in {actionable_category} spending."
+                )
+            elif _is_hard_to_change_category(important_category):
+                constraint_line = (
+                    f"However, {important_category} is mostly fixed and harder to adjust in the short term."
+                )
+                shift_line = "For this week, the easiest changes will come from your more flexible spending."
+
+            return {
+                "important_category": important_category,
+                "actionable_category": actionable_category,
+                "insight_line": insight_line,
+                "constraint_line": constraint_line,
+                "shift_line": shift_line,
+                "actionable_recommendation": actionable_recommendation,
+            }
+
         def _build_spending_driver_answer_block(bundle: dict) -> dict:
             driver = _compute_spending_driver(bundle)
+            focus_context = _build_focus_shift_context(bundle)
             if not driver:
                 return {
                     "label": "What's driving my spending?",
@@ -2290,39 +2371,7 @@ def run_app():
             snapshot = _category_budget_snapshot(bundle, category_name, category_resp) if category_resp else {}
             current_total = float(category_resp.get("current_month_total", 0.0) or 0.0)
             budget_amount = float(snapshot.get("budget_amount", 0.0) or 0.0)
-            pct_used = float(snapshot.get("pct_used", 0.0) or 0.0)
-            above_pace_amount = float(driver.get("above_pace", snapshot.get("above_pace_amount", 0.0)) or 0.0)
             projected_total = float(snapshot.get("projected_total", 0.0) or 0.0)
-            selection_mode = str(driver.get("selection_mode", "spend")).strip()
-            runner_up_category = str(driver.get("runner_up_category", "")).strip()
-            runner_up_total = float(driver.get("runner_up_total", 0.0) or 0.0)
-            actionable = _best_actionable_category(bundle)
-            actionable_category = str((actionable or {}).get("category", "")).strip()
-
-            if selection_mode == "budget" and budget_amount > 0 and above_pace_amount > 0:
-                driver_line = (
-                    f"{category_name} is driving your spending right now because it's running ahead of plan."
-                    if beginner_mode
-                    else f"{category_name} is driving your spending right now because it's about {_fmt_money(above_pace_amount)} above pace and already at {pct_used:.0f}% of budget."
-                )
-            elif selection_mode == "budget" and budget_amount > 0:
-                driver_line = (
-                    f"{category_name} is driving your spending right now because it's the most stretched category in your budget."
-                    if beginner_mode
-                    else f"{category_name} is driving your spending right now because you've spent {_fmt_money(current_total)}, or {pct_used:.0f}% of its {_fmt_money(budget_amount)} budget, which is the most concerning budget position this month."
-                )
-            elif runner_up_category:
-                driver_line = (
-                    f"{category_name} is driving your spending right now because it's your biggest category so far."
-                    if beginner_mode
-                    else f"{category_name} is driving your spending right now because you've spent {_fmt_money(current_total)} there so far versus {_fmt_money(runner_up_total)} in {runner_up_category}."
-                )
-            else:
-                driver_line = (
-                    f"{category_name} is driving your spending right now at {_fmt_money(current_total)} so far."
-                    if beginner_mode
-                    else f"{category_name} is the largest spending category so far at {_fmt_money(current_total)}."
-                )
 
             if budget_amount > 0 and projected_total > 0:
                 outlook_line = (
@@ -2331,16 +2380,15 @@ def run_app():
             else:
                 outlook_line = ""
 
-            extra_bullets = [driver_line]
+            extra_bullets = [str(focus_context.get("insight_line", "")).strip()]
+            constraint_line = str(focus_context.get("constraint_line", "")).strip()
+            shift_line = str(focus_context.get("shift_line", "")).strip()
+            if constraint_line:
+                extra_bullets.append(constraint_line)
+            if shift_line:
+                extra_bullets.append(shift_line)
             if outlook_line:
                 extra_bullets.append(outlook_line)
-            if actionable_category and actionable_category != category_name:
-                distinction_line = (
-                    f"But for this week's changes, {actionable_category} is the easiest category to trim."
-                    if beginner_mode
-                    else f"{category_name} matters most overall, but {actionable_category} is the best category to change this week because it's more flexible."
-                )
-                extra_bullets.append(distinction_line)
 
             existing_bullets = [str(item).strip() for item in (category_answer.get("bullets", []) or []) if str(item).strip()]
             bullet_limit = 3 if beginner_mode else 4
@@ -2349,22 +2397,10 @@ def run_app():
                 if item and item not in merged_bullets:
                     merged_bullets.append(item)
 
-            recommendation = str(category_answer.get("recommendation", "")).strip()
-            if actionable_category:
-                actionable_resp = _load_category_explanation_data(actionable_category)
-                actionable_snapshot = _category_budget_snapshot(bundle, actionable_category, actionable_resp) if actionable_resp else {}
-                actionable_recommendation = (
-                    _category_recommendation(actionable_category, actionable_resp, actionable_snapshot)
-                    if actionable_resp and actionable_snapshot
-                    else recommendation
-                )
-                if actionable_category != category_name:
-                    recommendation = (
-                        f"But for this week's changes, {actionable_category} is the easiest category to trim. "
-                        f"{actionable_recommendation}"
-                    )
-                else:
-                    recommendation = actionable_recommendation
+            recommendation = (
+                str(focus_context.get("actionable_recommendation", "")).strip()
+                or str(category_answer.get("recommendation", "")).strip()
+            )
 
             return {
                 "label": "What's driving my spending?",
@@ -2383,11 +2419,10 @@ def run_app():
             cash = bundle.get("cash_forecast", {}) or {}
             report = bundle.get("budget_report", {}) or {}
             overview = _build_monthly_summary(bundle)
+            focus_context = _build_focus_shift_context(bundle)
             priority_category = _priority_category_from_bundle(bundle)
             category_resp = _load_category_explanation_data(priority_category) if priority_category else {}
             snapshot = _category_budget_snapshot(bundle, priority_category, category_resp) if category_resp else {}
-            actionable = _best_actionable_category(bundle)
-            actionable_category = str((actionable or {}).get("category", "")).strip()
             trend_this = float(trends.get("this_period_spending", 0.0) or 0.0)
             trend_last = float(trends.get("last_period_spending", 0.0) or 0.0)
             trend_delta = trend_this - trend_last
@@ -2435,19 +2470,17 @@ def run_app():
                 else:
                     bullets.append(overview.get("urgent_line", ""))
 
-            if actionable_category and priority_category and actionable_category != priority_category:
-                bullets.append(
-                    f"But for this week's changes, {actionable_category} is the easiest category to trim."
-                    if beginner_mode
-                    else f"{priority_category} matters most overall, but {actionable_category} is the better short-term lever because it's more flexible."
-                )
+            constraint_line = str(focus_context.get("constraint_line", "")).strip()
+            shift_line = str(focus_context.get("shift_line", "")).strip()
+            if constraint_line:
+                bullets.append(constraint_line)
+            if shift_line:
+                bullets.append(shift_line)
 
             recommendation = "Keep discretionary spending near the current pace this week."
-            if actionable_category:
-                actionable_resp = _load_category_explanation_data(actionable_category)
-                actionable_snapshot = _category_budget_snapshot(bundle, actionable_category, actionable_resp) if actionable_resp else {}
-                if actionable_resp and actionable_snapshot:
-                    recommendation = _category_recommendation(actionable_category, actionable_resp, actionable_snapshot)
+            actionable_recommendation = str(focus_context.get("actionable_recommendation", "")).strip()
+            if actionable_recommendation:
+                recommendation = actionable_recommendation
             elif priority_category and category_resp and snapshot:
                 recommendation = _category_recommendation(priority_category, category_resp, snapshot)
             return {
@@ -2524,6 +2557,7 @@ def run_app():
 
         def _build_weekly_change_answer_block(bundle: dict) -> dict:
             driver = _compute_spending_driver(bundle)
+            focus_context = _build_focus_shift_context(bundle)
             driver_category = str((driver or {}).get("category", "")).strip()
             actionable_ranked = _rank_actionable_categories(bundle)
             candidates = [str(item.get("category", "")).strip() for item in actionable_ranked if str(item.get("category", "")).strip()]
@@ -2533,12 +2567,15 @@ def run_app():
 
             bullets = []
             recommendation = "Keep discretionary spending near the current pace this week."
-            if driver_category and candidates and candidates[0] != driver_category:
-                bullets.append(
-                    f"{driver_category} matters most overall, but {candidates[0]} is the easiest category to trim this week."
-                    if beginner_mode
-                    else f"{driver_category} carries the biggest budget pressure overall, but {candidates[0]} is the better short-term lever because it's more flexible."
-                )
+            insight_line = str(focus_context.get("insight_line", "")).strip()
+            constraint_line = str(focus_context.get("constraint_line", "")).strip()
+            shift_line = str(focus_context.get("shift_line", "")).strip()
+            if insight_line:
+                bullets.append(insight_line)
+            if constraint_line:
+                bullets.append(constraint_line)
+            if shift_line:
+                bullets.append(shift_line)
             for category_name in candidates[: (2 if beginner_mode else 3)]:
                 category_resp = _load_category_explanation_data(category_name)
                 if not category_resp:
@@ -2573,6 +2610,10 @@ def run_app():
                 bullets.append(line)
                 if recommendation == "Keep discretionary spending near the current pace this week.":
                     recommendation = _category_recommendation(category_name, category_resp, snapshot)
+
+            actionable_recommendation = str(focus_context.get("actionable_recommendation", "")).strip()
+            if actionable_recommendation:
+                recommendation = actionable_recommendation
 
             if not bullets:
                 bullets = ["Nothing urgent stands out in the current month data."]
