@@ -1059,47 +1059,110 @@ def run_app():
                 if str(row.get("category", "")).strip()
             }
 
+        def _compute_spending_driver(bundle: dict) -> dict | None:
+            spending_by_category = bundle.get("spending_by_category", {}) or {}
+            if not spending_by_category:
+                return None
+
+            row_map = _bundle_budget_row_map(bundle)
+            candidate_rows = [row for row in row_map.values() if float((row or {}).get("budget", 0.0) or 0.0) > 0]
+            has_budget_data = bool(candidate_rows)
+            days_elapsed = max(1, (as_of_date - month_start).days + 1)
+            days_total = max(days_elapsed, (month_end - month_start).days + 1)
+
+            candidates: list[dict] = []
+            for raw_category, raw_total in spending_by_category.items():
+                category_name = str(raw_category).strip()
+                current_total = float(raw_total or 0.0)
+                if not category_name or current_total <= 0:
+                    continue
+
+                row = row_map.get(category_name, {})
+                budget_amount = float((row or {}).get("budget", 0.0) or 0.0)
+                pct_used = float((row or {}).get("pct_used", 0.0) or 0.0)
+                projected_total = _projected_category_total(current_total)
+                pace_allowed = budget_amount * (days_elapsed / days_total) if budget_amount > 0 else 0.0
+                above_pace = current_total - pace_allowed if budget_amount > 0 else 0.0
+                forecast_ratio = (projected_total / budget_amount) if budget_amount > 0 else 0.0
+                pace_ratio = (current_total / pace_allowed) if pace_allowed > 0 else (1.0 if budget_amount > 0 else 0.0)
+                status_key, status_label = _budget_status_meta(
+                    pct_used,
+                    projected_total=projected_total,
+                    budget_amount=budget_amount,
+                )
+                severity = {"healthy": 0, "tight": 1, "off_track": 2}.get(status_key, 0)
+                concern_score = float(current_total)
+                if budget_amount > 0:
+                    concern_score = (
+                        severity * 10.0
+                        + max(forecast_ratio, pct_used / 100.0) * 4.0
+                        + max(0.0, pace_ratio - 1.0) * 2.0
+                        + max(0.0, above_pace / max(budget_amount, 1.0))
+                    )
+
+                candidates.append(
+                    {
+                        "category": category_name,
+                        "current_total": current_total,
+                        "row": row,
+                        "budget_amount": budget_amount,
+                        "pct_used": pct_used,
+                        "projected_total": projected_total,
+                        "pace_allowed": pace_allowed,
+                        "above_pace": above_pace,
+                        "forecast_ratio": forecast_ratio,
+                        "pace_ratio": pace_ratio,
+                        "status_key": status_key,
+                        "status_label": status_label,
+                        "severity": severity,
+                        "concern_score": concern_score,
+                    }
+                )
+
+            if not candidates:
+                return None
+
+            if has_budget_data and any(float(item.get("budget_amount", 0.0) or 0.0) > 0 for item in candidates):
+                ranked = [item for item in candidates if float(item.get("budget_amount", 0.0) or 0.0) > 0]
+                ranked.sort(
+                    key=lambda item: (
+                        int(item.get("severity", 0)),
+                        float(item.get("concern_score", 0.0)),
+                        float(item.get("forecast_ratio", 0.0)),
+                        float(item.get("pct_used", 0.0)),
+                        float(item.get("current_total", 0.0)),
+                    ),
+                    reverse=True,
+                )
+                selection_mode = "budget"
+            else:
+                ranked = sorted(
+                    candidates,
+                    key=lambda item: float(item.get("current_total", 0.0)),
+                    reverse=True,
+                )
+                selection_mode = "spend"
+
+            leader = dict(ranked[0])
+            runner_up = ranked[1] if len(ranked) > 1 else None
+            leader["selection_mode"] = selection_mode
+            leader["runner_up_category"] = str((runner_up or {}).get("category", "")).strip()
+            leader["runner_up_total"] = float((runner_up or {}).get("current_total", 0.0) or 0.0)
+            leader["gap_to_runner_up"] = float(leader.get("current_total", 0.0) or 0.0) - float(
+                (runner_up or {}).get("current_total", 0.0) or 0.0
+            )
+            return leader
+
         def _build_monthly_summary(bundle: dict) -> dict:
-            summary = bundle.get("summary", {}) or {}
             cash = bundle.get("cash_forecast", {}) or {}
             report = bundle.get("budget_report", {}) or {}
-            row_map = _bundle_budget_row_map(bundle)
+            driver = _compute_spending_driver(bundle)
             over = report.get("over_budget", []) or []
             near = report.get("near_budget", []) or []
             top_above = cash.get("top_above_pace_categories", []) or []
-            spending_by_category = bundle.get("spending_by_category", {}) or {}
-            top_category = str(bundle.get("top_category", "") or "").strip()
-            top_category_total = float(bundle.get("top_category_total", 0.0) or 0.0)
             forecast_end = float(cash.get("forecast_end_balance", 0.0) or 0.0)
             safe_per_day = float(cash.get("safe_to_spend_per_day_budget", 0.0) or 0.0)
             days_remaining = int(cash.get("days_remaining", 0) or 0)
-            fixed_categories = {"Bills", "Rent", "Utilities", "Insurance"}
-
-            flexible_category = ""
-            flexible_items = [
-                (str(category).strip(), float(total or 0.0))
-                for category, total in spending_by_category.items()
-                if str(category).strip() and str(category).strip() not in fixed_categories
-            ]
-            if flexible_items:
-                flexible_items.sort(key=lambda item: item[1], reverse=True)
-                flexible_category = flexible_items[0][0]
-
-            priority_category = ""
-            if top_above:
-                priority_category = str(top_above[0].get("category", "")).strip()
-            elif over:
-                priority_category = str(over[0]).strip()
-            elif near:
-                priority_category = str(near[0]).strip()
-            else:
-                priority_category = flexible_category or top_category
-
-            priority_row = row_map.get(priority_category, {})
-            priority_budget = float((priority_row or {}).get("budget", 0.0) or 0.0)
-            priority_pct = float((priority_row or {}).get("pct_used", 0.0) or 0.0)
-            priority_spent = float((priority_row or {}).get("spent_ptd", spending_by_category.get(priority_category, top_category_total)) or 0.0)
-            top_above_amount = float(top_above[0].get("above_pace", 0.0) or 0.0) if top_above else 0.0
 
             if forecast_end < 0 or over:
                 on_track_line = (
@@ -1120,26 +1183,42 @@ def run_app():
                     else f"Yes. You're projected to finish around {_fmt_money(forecast_end)} with about {_fmt_money(safe_per_day)}/day of safe room left."
                 )
 
-            if priority_category and top_above and priority_category == str(top_above[0].get("category", "")).strip():
-                focus_line = (
-                    f"{priority_category} matters most right now because it's running above your usual pace."
-                    if beginner_mode
-                    else f"{priority_category} matters most right now: it's about {_fmt_money(top_above_amount)} above pace and already at {priority_pct:.0f}% of budget."
-                )
-            elif priority_category and priority_budget > 0:
-                focus_line = (
-                    f"{priority_category} matters most right now."
-                    if beginner_mode
-                    else f"{priority_category} matters most right now: you've spent {_fmt_money(priority_spent)}, or {priority_pct:.0f}% of its {_fmt_money(priority_budget)} budget."
-                )
-            elif priority_category:
-                focus_line = (
-                    f"{priority_category} matters most right now."
-                    if beginner_mode
-                    else f"{priority_category} is your largest category so far at {_fmt_money(priority_spent)}."
-                )
+            if driver:
+                category_name = str(driver.get("category", "")).strip()
+                current_total = float(driver.get("current_total", 0.0) or 0.0)
+                budget_amount = float(driver.get("budget_amount", 0.0) or 0.0)
+                pct_used = float(driver.get("pct_used", 0.0) or 0.0)
+                above_pace = float(driver.get("above_pace", 0.0) or 0.0)
+                runner_up_category = str(driver.get("runner_up_category", "")).strip()
+                runner_up_total = float(driver.get("runner_up_total", 0.0) or 0.0)
+                selection_mode = str(driver.get("selection_mode", "spend")).strip()
+
+                if selection_mode == "budget" and budget_amount > 0 and above_pace > 0:
+                    focus_line = (
+                        f"The category to watch right now is {category_name}. It's running ahead of plan."
+                        if beginner_mode
+                        else f"The category to watch right now is {category_name}: you've spent {_fmt_money(current_total)}, it's about {_fmt_money(above_pace)} above pace, and it's at {pct_used:.0f}% of its {_fmt_money(budget_amount)} budget."
+                    )
+                elif selection_mode == "budget" and budget_amount > 0:
+                    focus_line = (
+                        f"The category to watch right now is {category_name}. It's taking the biggest share of its budget."
+                        if beginner_mode
+                        else f"The category to watch right now is {category_name}: you've spent {_fmt_money(current_total)}, or {pct_used:.0f}% of its {_fmt_money(budget_amount)} budget, which is the most concerning budget position this month."
+                    )
+                elif runner_up_category:
+                    focus_line = (
+                        f"The category to watch right now is {category_name}. It's your biggest spending category so far."
+                        if beginner_mode
+                        else f"The category to watch right now is {category_name}: you've spent {_fmt_money(current_total)} there so far versus {_fmt_money(runner_up_total)} in {runner_up_category}."
+                    )
+                else:
+                    focus_line = (
+                        f"The category to watch right now is {category_name}."
+                        if beginner_mode
+                        else f"The category to watch right now is {category_name} at {_fmt_money(current_total)} spent so far."
+                    )
             else:
-                focus_line = "No single category is driving the month right now."
+                focus_line = "Not enough data yet to determine what's driving your spending."
 
             if forecast_end < 0:
                 urgent_line = (
@@ -2105,59 +2184,51 @@ def run_app():
             return f"Cut one or two lower-value {category.lower()} purchases this week. Estimated impact: about {_fmt_money(impact_amount)}."
 
         def _priority_category_from_bundle(bundle: dict) -> str:
-            report = bundle.get("budget_report", {}) or {}
-            cash = bundle.get("cash_forecast", {}) or {}
-            spending_by_category = bundle.get("spending_by_category", {}) or {}
-            fixed_categories = {"Bills", "Rent", "Utilities", "Insurance"}
-            top_above = cash.get("top_above_pace_categories", []) or []
-            over = report.get("over_budget", []) or []
-            near = report.get("near_budget", []) or []
-            if top_above:
-                return str(top_above[0].get("category", "")).strip()
-            if over:
-                return str(over[0]).strip()
-            if near:
-                return str(near[0]).strip()
-            flexible_items = [
-                (str(category_name).strip(), float(total or 0.0))
-                for category_name, total in spending_by_category.items()
-                if str(category_name).strip() and str(category_name).strip() not in fixed_categories
-            ]
-            if flexible_items:
-                flexible_items.sort(key=lambda item: item[1], reverse=True)
-                return flexible_items[0][0]
-            return str(bundle.get("top_category", "") or "").strip()
+            driver = _compute_spending_driver(bundle)
+            if not driver:
+                return ""
+            return str(driver.get("category", "")).strip()
 
         def _build_spending_driver_answer_block(bundle: dict) -> dict:
-            category_name = _priority_category_from_bundle(bundle)
-            if not category_name:
+            driver = _compute_spending_driver(bundle)
+            if not driver:
                 return {
                     "label": "What's driving my spending?",
-                    "headline": "No category stands out yet.",
-                    "bullets": ["There is not enough current-month spending data to identify a primary driver right now."],
+                    "headline": "Not enough data yet to determine what's driving your spending.",
+                    "bullets": ["Add more transaction data or switch to a month with activity to see a clear category driver."],
                     "recommendation": "Add more transaction data or switch to a month with activity.",
                 }
 
+            category_name = str(driver.get("category", "")).strip()
             category_answer = _build_category_answer_block(category_name, bundle)
             category_resp = _load_category_explanation_data(category_name)
             snapshot = _category_budget_snapshot(bundle, category_name, category_resp) if category_resp else {}
             current_total = float(category_resp.get("current_month_total", 0.0) or 0.0)
             budget_amount = float(snapshot.get("budget_amount", 0.0) or 0.0)
             pct_used = float(snapshot.get("pct_used", 0.0) or 0.0)
-            above_pace_amount = float(snapshot.get("above_pace_amount", 0.0) or 0.0)
+            above_pace_amount = float(driver.get("above_pace", snapshot.get("above_pace_amount", 0.0)) or 0.0)
             projected_total = float(snapshot.get("projected_total", 0.0) or 0.0)
+            selection_mode = str(driver.get("selection_mode", "spend")).strip()
+            runner_up_category = str(driver.get("runner_up_category", "")).strip()
+            runner_up_total = float(driver.get("runner_up_total", 0.0) or 0.0)
 
-            if above_pace_amount > 0:
+            if selection_mode == "budget" and budget_amount > 0 and above_pace_amount > 0:
                 driver_line = (
-                    f"{category_name} is driving your spending right now because it's about {_fmt_money(above_pace_amount)} above pace."
+                    f"{category_name} is driving your spending right now because it's running ahead of plan."
                     if beginner_mode
-                    else f"{category_name} is the highest-impact category right now: it's running about {_fmt_money(above_pace_amount)} above pace."
+                    else f"{category_name} is driving your spending right now because it's about {_fmt_money(above_pace_amount)} above pace and already at {pct_used:.0f}% of budget."
                 )
-            elif budget_amount > 0:
+            elif selection_mode == "budget" and budget_amount > 0:
                 driver_line = (
-                    f"{category_name} matters most because you've already used {pct_used:.0f}% of its budget."
+                    f"{category_name} is driving your spending right now because it's the most stretched category in your budget."
                     if beginner_mode
-                    else f"{category_name} matters most because you've spent {_fmt_money(current_total)} so far, or {pct_used:.0f}% of its {_fmt_money(budget_amount)} budget."
+                    else f"{category_name} is driving your spending right now because you've spent {_fmt_money(current_total)}, or {pct_used:.0f}% of its {_fmt_money(budget_amount)} budget, which is the most concerning budget position this month."
+                )
+            elif runner_up_category:
+                driver_line = (
+                    f"{category_name} is driving your spending right now because it's your biggest category so far."
+                    if beginner_mode
+                    else f"{category_name} is driving your spending right now because you've spent {_fmt_money(current_total)} there so far versus {_fmt_money(runner_up_total)} in {runner_up_category}."
                 )
             else:
                 driver_line = (
@@ -2436,6 +2507,7 @@ def run_app():
                 "where am i spending most",
                 "what is my highest category",
                 "what's my highest category",
+                "what matters most right now",
             ]
             if any(phrase in q_lower for phrase in driver_phrases):
                 return True
