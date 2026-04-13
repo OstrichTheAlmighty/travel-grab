@@ -953,6 +953,10 @@ def run_app():
             st.session_state.insight_question = ""
         if "insight_ask_now" not in st.session_state:
             st.session_state.insight_ask_now = False
+        if "selected_insight_action" not in st.session_state:
+            st.session_state.selected_insight_action = ""
+        if "insight_result_source" not in st.session_state:
+            st.session_state.insight_result_source = ""
         if "last_insights_mode" not in st.session_state:
             st.session_state.last_insights_mode = ""
         if "insights_status_key" not in st.session_state:
@@ -1017,9 +1021,6 @@ def run_app():
             else "Analytical mode shows more pace, budget, and forecast detail."
         )
         debug_mode = bool(st.session_state.get("debug_mode", False))
-        def _set_question(q: str):
-            st.session_state.insight_question = q
-            st.session_state.insight_ask_now = True
     
         def _parse_amount_from_text(text: str):
             m = re.search(r"\$?\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)", text or "")
@@ -2395,6 +2396,13 @@ def run_app():
                     st.write(recommendation)
 
         def _submit_typed_insight():
+            st.session_state.selected_insight_action = ""
+            st.session_state.insight_result_source = "typed"
+            st.session_state.insight_ask_now = True
+
+        def _queue_insight_action(action: str):
+            st.session_state.selected_insight_action = str(action).strip()
+            st.session_state.insight_result_source = "quick_action"
             st.session_state.insight_ask_now = True
 
         st.text_input(
@@ -2415,24 +2423,33 @@ def run_app():
             _render_monthly_summary(monthly_bundle)
 
         button_cols = st.columns(3)
-        explain_month_clicked = button_cols[0].button("Explain this month", use_container_width=True)
-        food_clicked = button_cols[1].button("What's driving Food?", use_container_width=True)
-        weekly_clicked = button_cols[2].button("What should I change this week?", use_container_width=True)
-
-        if explain_month_clicked and monthly_bundle:
-            st.session_state.insight_question = "Explain this month"
-            st.session_state.insight_result = _build_month_answer_block(monthly_bundle)
-        elif food_clicked and monthly_bundle:
-            st.session_state.insight_question = "What's driving Food?"
-            st.session_state.insight_result = _build_category_answer_block("Food", monthly_bundle)
-        elif weekly_clicked and monthly_bundle:
-            st.session_state.insight_question = "What should I change this week?"
-            st.session_state.insight_result = _build_weekly_change_answer_block(monthly_bundle)
+        button_cols[0].button(
+            "Explain this month",
+            use_container_width=True,
+            on_click=_queue_insight_action,
+            args=("Explain this month",),
+        )
+        button_cols[1].button(
+            "What's driving Food?",
+            use_container_width=True,
+            on_click=_queue_insight_action,
+            args=("What's driving Food?",),
+        )
+        button_cols[2].button(
+            "What should I change this week?",
+            use_container_width=True,
+            on_click=_queue_insight_action,
+            args=("What should I change this week?",),
+        )
 
         if st.session_state.insight_ask_now:
             st.session_state.insight_ask_now = False
+            effective_question = (
+                str(st.session_state.get("selected_insight_action", "")).strip()
+                or str(st.session_state.get("insight_question", "")).strip()
+            )
             st.session_state.insight_result = _build_insight_answer_for_question(
-                st.session_state.get("insight_question", ""),
+                effective_question,
                 monthly_bundle or {},
             )
 
