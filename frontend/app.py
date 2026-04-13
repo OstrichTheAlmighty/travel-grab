@@ -11,12 +11,18 @@ import re
 from types import SimpleNamespace
 from urllib.parse import urlparse
 
+try:
+    from openai import OpenAI
+except Exception:
+    OpenAI = None
+
 print("FRONTEND START", flush=True)
 
 DEMO_LOCAL_ONLY = os.environ.get("DEMO_LOCAL_ONLY", "1").strip() != "0"
 BASE_URL = os.environ.get("BACKEND_URL", "").rstrip("/")
 BACKEND_TIMEOUT_SECONDS = 10
 AI_EXPLANATION_TIMEOUT_SECONDS = 3
+OPENAI_RESPONSES_MODEL = os.environ.get("OPENAI_RESPONSES_MODEL", "gpt-5-1-mini").strip() or "gpt-5-1-mini"
 
 def run_app():
     legacy_user_id = str(st.session_state.get("user_id", "default")).strip() or "default"
@@ -2642,6 +2648,289 @@ def run_app():
                 "recommendation": "Use one of those prompts, or ask: Am I on track? or What am I overspending on?",
             }
 
+        def _ai_unavailable_answer() -> dict:
+            return {
+                "label": "Ask Insighta",
+                "headline": "AI answers aren't configured yet, but I can still answer the guided questions below.",
+                "bullets": [
+                    "Try: Explain this month",
+                    "Try: What's driving my spending?",
+                    "Try: What should I change this week?",
+                ],
+                "recommendation": "Use one of the guided prompts above, or ask: Am I on track? or What am I overspending on?",
+            }
+
+        def _get_openai_api_key() -> str:
+            env_key = str(os.environ.get("OPENAI_API_KEY", "")).strip()
+            if env_key:
+                return env_key
+            try:
+                secret_key = str(st.secrets.get("OPENAI_API_KEY", "")).strip()
+                if secret_key:
+                    return secret_key
+            except Exception:
+                pass
+            return ""
+
+        def _load_month_transactions_for_insights() -> list[dict]:
+            tx_key = f"{active_user_id()}:{month_start.isoformat()}:{as_of_str}:tx"
+            if st.session_state.get("tx_cache_key") == tx_key:
+                return st.session_state.get("tx_cache", []) or []
+            try:
+                data = api_get_transactions(month_start.isoformat(), as_of_str)
+                transactions = data.get("transactions", []) or []
+                st.session_state.tx_cache = transactions
+                st.session_state.tx_cache_key = tx_key
+                return transactions
+            except Exception:
+                return st.session_state.get("tx_cache", []) or []
+
+        def _serialize_month_transactions(transactions: list[dict]) -> list[dict]:
+            serialized = []
+            for tx in transactions:
+                try:
+                    signed_amount = float(tx.get("amount", 0.0) or 0.0)
+                except Exception:
+                    signed_amount = 0.0
+                serialized.append(
+                    {
+                        "date": str(tx.get("date", "")).strip(),
+                        "merchant": str(tx.get("merchant", "")).strip(),
+                        "category": str(tx.get("category", "")).strip(),
+                        "type": "income" if signed_amount > 0 else "spending",
+                        "signed_amount": round(signed_amount, 2),
+                        "amount": round(abs(signed_amount), 2),
+                    }
+                )
+            return serialized
+
+        def _summarize_top_merchants(transactions: list[dict], *, limit: int = 5) -> list[dict]:
+            merchant_totals: dict[str, dict] = {}
+            for tx in transactions:
+                merchant = str(tx.get("merchant", "")).strip()
+                if not merchant:
+                    continue
+                try:
+                    signed_amount = float(tx.get("signed_amount", tx.get("amount", 0.0)) or 0.0)
+                except Exception:
+                    signed_amount = 0.0
+                if signed_amount >= 0:
+                    continue
+                entry = merchant_totals.setdefault(merchant, {"merchant": merchant, "spend": 0.0, "transaction_count": 0})
+                entry["spend"] += abs(signed_amount)
+                entry["transaction_count"] += 1
+            ranked = sorted(
+                merchant_totals.values(),
+                key=lambda item: (float(item.get("spend", 0.0) or 0.0), int(item.get("transaction_count", 0) or 0)),
+                reverse=True,
+            )
+            return [
+                {
+                    "merchant": str(item.get("merchant", "")).strip(),
+                    "spend": round(float(item.get("spend", 0.0) or 0.0), 2),
+                    "transaction_count": int(item.get("transaction_count", 0) or 0),
+                }
+                for item in ranked[:limit]
+            ]
+
+        def _highest_transaction_summary(transactions: list[dict]) -> dict:
+            if not transactions:
+                return {}
+            ranked = sorted(
+                transactions,
+                key=lambda tx: abs(float(tx.get("signed_amount", tx.get("amount", 0.0)) or 0.0)),
+                reverse=True,
+            )
+            top = ranked[0]
+            try:
+                signed_amount = float(top.get("signed_amount", top.get("amount", 0.0)) or 0.0)
+            except Exception:
+                signed_amount = 0.0
+            return {
+                "date": str(top.get("date", "")).strip(),
+                "merchant": str(top.get("merchant", "")).strip(),
+                "category": str(top.get("category", "")).strip(),
+                "type": str(top.get("type", "spending")).strip(),
+                "amount": round(abs(signed_amount), 2),
+                "signed_amount": round(signed_amount, 2),
+            }
+
+        def _build_ai_insight_context(bundle: dict) -> dict:
+            transactions = _serialize_month_transactions(_load_month_transactions_for_insights())
+            budget_rows = []
+            for row in (_bundle_budget_row_map(bundle).values() if bundle else []):
+                budget_rows.append(
+                    {
+                        "category": str(row.get("category", "")).strip(),
+                        "budget": round(float(row.get("budget", 0.0) or 0.0), 2),
+                        "spent_this_month": round(float(row.get("spent_ptd", 0.0) or 0.0), 2),
+                        "percent_used": round(float(row.get("pct_used", 0.0) or 0.0), 1),
+                        "remaining": round(float(row.get("remaining", 0.0) or 0.0), 2),
+                    }
+                )
+
+            summary = bundle.get("summary", {}) or {}
+            trends = bundle.get("trends", {}) or {}
+            cash = bundle.get("cash_forecast", {}) or {}
+            spending_by_category = bundle.get("spending_by_category", {}) or {}
+            monthly_summary = _build_monthly_summary(bundle) if bundle else {}
+            driver = _compute_spending_driver(bundle) if bundle else None
+            actionable = _best_actionable_category(bundle) if bundle else None
+            top_category = str((driver or {}).get("category", "")).strip()
+
+            return {
+                "month": month_start.strftime("%B %Y"),
+                "as_of": as_of_str,
+                "beginner_mode": bool(beginner_mode),
+                "summary": {
+                    "income": round(float(summary.get("income", 0.0) or 0.0), 2),
+                    "spending": round(float(summary.get("spending", 0.0) or 0.0), 2),
+                    "net": round(float(summary.get("net", 0.0) or 0.0), 2),
+                    "transaction_count": len(transactions),
+                },
+                "spending_by_category": {
+                    str(category).strip(): round(float(total or 0.0), 2)
+                    for category, total in spending_by_category.items()
+                    if str(category).strip()
+                },
+                "budget_by_category": budget_rows,
+                "forecast": {
+                    "days_remaining": int(cash.get("days_remaining", 0) or 0),
+                    "income_ahead": round(
+                        float(cash.get("forecast_income_total", 0.0) or 0.0) - float(cash.get("income_to_date", 0.0) or 0.0),
+                        2,
+                    ),
+                    "upcoming_expenses": round(
+                        float(cash.get("forecast_spending_total", 0.0) or 0.0) - float(cash.get("spending_to_date", 0.0) or 0.0),
+                        2,
+                    ),
+                    "forecast_end_balance": round(float(cash.get("forecast_end_balance", 0.0) or 0.0), 2),
+                    "safe_to_spend_per_day_budget": round(float(cash.get("safe_to_spend_per_day_budget", 0.0) or 0.0), 2),
+                    "top_above_pace_categories": [
+                        {
+                            "category": str(item.get("category", "")).strip(),
+                            "above_pace": round(float(item.get("above_pace", 0.0) or 0.0), 2),
+                            "spent_to_date": round(float(item.get("spent_to_date", 0.0) or 0.0), 2),
+                            "budget": round(float(item.get("budget", 0.0) or 0.0), 2),
+                        }
+                        for item in (cash.get("top_above_pace_categories", []) or [])[:5]
+                        if str(item.get("category", "")).strip()
+                    ],
+                },
+                "trends": {
+                    "this_period_spending": round(float(trends.get("this_period_spending", 0.0) or 0.0), 2),
+                    "last_period_spending": round(float(trends.get("last_period_spending", 0.0) or 0.0), 2),
+                    "delta": round(float(trends.get("delta", 0.0) or 0.0), 2),
+                    "delta_pct": (
+                        round(float(trends.get("delta_pct", 0.0) or 0.0), 1)
+                        if trends.get("delta_pct") is not None
+                        else None
+                    ),
+                },
+                "top_merchants": _summarize_top_merchants(transactions),
+                "highest_transaction": _highest_transaction_summary(transactions),
+                "largest_transactions": sorted(
+                    transactions,
+                    key=lambda tx: abs(float(tx.get("signed_amount", tx.get("amount", 0.0)) or 0.0)),
+                    reverse=True,
+                )[:12],
+                "month_summary": {
+                    "on_track": str(monthly_summary.get("on_track_line", "")).strip(),
+                    "what_matters_most": str(monthly_summary.get("focus_line", "")).strip(),
+                    "urgent": str(monthly_summary.get("urgent_line", "")).strip(),
+                },
+                "detected_focus": {
+                    "most_important_category": top_category,
+                    "most_actionable_category": str((actionable or {}).get("category", "")).strip(),
+                },
+            }
+
+        def _extract_json_object_from_text(text: str) -> dict:
+            cleaned = str(text or "").strip()
+            if not cleaned:
+                return {}
+            if cleaned.startswith("```"):
+                cleaned = re.sub(r"^```(?:json)?\s*", "", cleaned)
+                cleaned = re.sub(r"\s*```$", "", cleaned)
+            start = cleaned.find("{")
+            end = cleaned.rfind("}")
+            if start == -1 or end == -1 or end <= start:
+                return {}
+            try:
+                data = json.loads(cleaned[start : end + 1])
+            except Exception:
+                return {}
+            if not isinstance(data, dict):
+                return {}
+            return data
+
+        def _normalize_ai_answer_payload(payload: dict, raw_text: str = "") -> dict:
+            headline = str(payload.get("headline", "")).strip()
+            bullets = [
+                str(item).strip()
+                for item in (payload.get("bullets", []) or [])
+                if str(item).strip()
+            ]
+            recommendation = str(payload.get("recommendation", "")).strip()
+            if not headline and raw_text:
+                headline = "Here’s what stands out."
+            if not bullets and raw_text:
+                bullets = [line.strip("- ").strip() for line in str(raw_text).splitlines() if line.strip()]
+            return {
+                "label": "AI answer",
+                "headline": headline or "Here’s what stands out.",
+                "bullets": bullets[: 3 if beginner_mode else 4],
+                "recommendation": recommendation,
+            }
+
+        def _build_ai_fallback_answer(question: str, bundle: dict) -> dict:
+            api_key = _get_openai_api_key()
+            if not api_key or OpenAI is None:
+                return _ai_unavailable_answer()
+
+            context = _build_ai_insight_context(bundle or {})
+            if not (context.get("largest_transactions") or context.get("spending_by_category")):
+                return {
+                    "label": "Ask Insighta",
+                    "headline": "Not enough current-month data yet to answer that well.",
+                    "bullets": ["Load the demo data or switch to a month with transactions, then try again."],
+                    "recommendation": "Try one of the guided prompts once there is month activity to analyze.",
+                }
+
+            instructions = (
+                "You are Insighta, a calm personal finance coach inside a consumer finance app. "
+                "Answer the user's question using only the provided month data. "
+                "Do not invent transactions, categories, budgets, or trends. "
+                "If the data does not support a claim, say so clearly. "
+                "Return valid JSON with exactly these keys: headline, bullets, recommendation. "
+                "headline must be one short sentence. bullets must be an array of 2 to 4 concise strings. "
+                "recommendation must be one short practical next step. "
+                f"The response mode is {'beginner' if beginner_mode else 'analytical'}. "
+                "In beginner mode, use simpler language and fewer numbers. "
+                "In analytical mode, be more specific with pacing, budget, forecast, and merchant details when they are relevant. "
+                "Keep the tone grounded, helpful, and product-ready."
+            )
+
+            prompt = (
+                f"User question: {str(question or '').strip()}\n\n"
+                f"Month data JSON:\n{json.dumps(context, ensure_ascii=True)}"
+            )
+
+            try:
+                client = OpenAI(api_key=api_key, timeout=12.0)
+                response = client.responses.create(
+                    model=OPENAI_RESPONSES_MODEL,
+                    instructions=instructions,
+                    input=prompt,
+                    max_output_tokens=320,
+                )
+                output_text = str(getattr(response, "output_text", "") or "").strip()
+                payload = _extract_json_object_from_text(output_text)
+                return _normalize_ai_answer_payload(payload, raw_text=output_text)
+            except Exception as e:
+                print("INSIGHT AI ERROR:", str(e), flush=True)
+                return _ai_unavailable_answer()
+
         def _is_spending_driver_question(question: str) -> bool:
             q_lower = str(question or "").lower()
             driver_phrases = [
@@ -2658,7 +2947,7 @@ def run_app():
                 return True
             return "driving" in q_lower and "spending" in q_lower
 
-        def _build_insight_answer_for_question(question: str, bundle: dict) -> dict:
+        def _build_deterministic_insight_answer(question: str, bundle: dict) -> dict | None:
             q = str(question or "").strip()
             q_lower = q.lower()
             category_name = _match_category_in_question(q)
@@ -2678,7 +2967,13 @@ def run_app():
                 return _build_weekly_change_answer_block(bundle)
             if category_name:
                 return _build_category_answer_block(category_name, bundle)
-            return _fallback_question_answer(q)
+            return None
+
+        def _build_insight_answer_for_question(question: str, bundle: dict) -> dict:
+            deterministic = _build_deterministic_insight_answer(question, bundle)
+            if deterministic is not None:
+                return deterministic
+            return _build_ai_fallback_answer(question, bundle)
 
         def _render_insight_result_block(answer: dict):
             if not answer:
