@@ -2128,6 +2128,72 @@ def run_app():
                 return flexible_items[0][0]
             return str(bundle.get("top_category", "") or "").strip()
 
+        def _build_spending_driver_answer_block(bundle: dict) -> dict:
+            category_name = _priority_category_from_bundle(bundle)
+            if not category_name:
+                return {
+                    "label": "What's driving my spending?",
+                    "headline": "No category stands out yet.",
+                    "bullets": ["There is not enough current-month spending data to identify a primary driver right now."],
+                    "recommendation": "Add more transaction data or switch to a month with activity.",
+                }
+
+            category_answer = _build_category_answer_block(category_name, bundle)
+            category_resp = _load_category_explanation_data(category_name)
+            snapshot = _category_budget_snapshot(bundle, category_name, category_resp) if category_resp else {}
+            current_total = float(category_resp.get("current_month_total", 0.0) or 0.0)
+            budget_amount = float(snapshot.get("budget_amount", 0.0) or 0.0)
+            pct_used = float(snapshot.get("pct_used", 0.0) or 0.0)
+            above_pace_amount = float(snapshot.get("above_pace_amount", 0.0) or 0.0)
+            projected_total = float(snapshot.get("projected_total", 0.0) or 0.0)
+
+            if above_pace_amount > 0:
+                driver_line = (
+                    f"{category_name} is driving your spending right now because it's about {_fmt_money(above_pace_amount)} above pace."
+                    if beginner_mode
+                    else f"{category_name} is the highest-impact category right now: it's running about {_fmt_money(above_pace_amount)} above pace."
+                )
+            elif budget_amount > 0:
+                driver_line = (
+                    f"{category_name} matters most because you've already used {pct_used:.0f}% of its budget."
+                    if beginner_mode
+                    else f"{category_name} matters most because you've spent {_fmt_money(current_total)} so far, or {pct_used:.0f}% of its {_fmt_money(budget_amount)} budget."
+                )
+            else:
+                driver_line = (
+                    f"{category_name} is driving your spending right now at {_fmt_money(current_total)} so far."
+                    if beginner_mode
+                    else f"{category_name} is the largest spending category so far at {_fmt_money(current_total)}."
+                )
+
+            if budget_amount > 0 and projected_total > 0:
+                outlook_line = (
+                    f"At this pace, {category_name} should finish around {_fmt_money(projected_total)} this month."
+                )
+            else:
+                outlook_line = ""
+
+            extra_bullets = [driver_line]
+            if outlook_line:
+                extra_bullets.append(outlook_line)
+
+            existing_bullets = [str(item).strip() for item in (category_answer.get("bullets", []) or []) if str(item).strip()]
+            bullet_limit = 3 if beginner_mode else 4
+            merged_bullets: list[str] = []
+            for item in extra_bullets + existing_bullets:
+                if item and item not in merged_bullets:
+                    merged_bullets.append(item)
+            return {
+                "label": "What's driving my spending?",
+                "headline": (
+                    f"{category_name} is driving your spending right now."
+                    if beginner_mode
+                    else f"{category_name} is the key spending driver this month."
+                ),
+                "bullets": merged_bullets[:bullet_limit],
+                "recommendation": str(category_answer.get("recommendation", "")).strip(),
+            }
+
         def _build_month_answer_block(bundle: dict) -> dict:
             summary = bundle.get("summary", {}) or {}
             trends = bundle.get("trends", {}) or {}
@@ -2354,11 +2420,26 @@ def run_app():
                 "headline": "I can answer the most useful money questions directly from this month's data.",
                 "bullets": [
                     "Try: Explain this month",
-                    "Try: What's driving Food?",
+                    "Try: What's driving my spending?",
                     "Try: What should I change this week?",
                 ],
                 "recommendation": "Use one of those prompts, or ask: Am I on track? or What am I overspending on?",
             }
+
+        def _is_spending_driver_question(question: str) -> bool:
+            q_lower = str(question or "").lower()
+            driver_phrases = [
+                "what's driving my spending",
+                "what is driving my spending",
+                "what category is highest",
+                "where am i spending the most",
+                "where am i spending most",
+                "what is my highest category",
+                "what's my highest category",
+            ]
+            if any(phrase in q_lower for phrase in driver_phrases):
+                return True
+            return "driving" in q_lower and "spending" in q_lower
 
         def _build_insight_answer_for_question(question: str, bundle: dict) -> dict:
             q = str(question or "").strip()
@@ -2372,6 +2453,8 @@ def run_app():
                 return _build_month_answer_block(bundle)
             if "overspending" in q_lower or "over spending" in q_lower or "over budget" in q_lower:
                 return _build_weekly_change_answer_block(bundle)
+            if _is_spending_driver_question(q):
+                return _build_spending_driver_answer_block(bundle)
             if category_name and any(token in q_lower for token in {"driving", "higher", "behind"}):
                 return _build_category_answer_block(category_name, bundle)
             if "change" in q_lower and "week" in q_lower:
@@ -2408,7 +2491,7 @@ def run_app():
         st.text_input(
             "Ask Insighta",
             key="insight_question",
-            placeholder="Try: explain this month, what's driving Food?, am I on track?",
+            placeholder="Try: explain this month, what's driving my spending?, am I on track?",
             on_change=_submit_typed_insight,
         )
         helper_text = (
@@ -2430,10 +2513,10 @@ def run_app():
             args=("Explain this month",),
         )
         button_cols[1].button(
-            "What's driving Food?",
+            "What's driving my spending?",
             use_container_width=True,
             on_click=_queue_insight_action,
-            args=("What's driving Food?",),
+            args=("What's driving my spending?",),
         )
         button_cols[2].button(
             "What should I change this week?",
