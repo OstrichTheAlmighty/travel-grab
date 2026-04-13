@@ -25,7 +25,10 @@ AI_EXPLANATION_TIMEOUT_SECONDS = 3
 OPENAI_RESPONSES_MODEL = os.environ.get("OPENAI_RESPONSES_MODEL", "gpt-5-1-mini").strip() or "gpt-5-1-mini"
 
 def run_app():
+    print("DEBUG: entering run_app", flush=True)
+    print("DEBUG: run_app before initial session_state read", flush=True)
     legacy_user_id = str(st.session_state.get("user_id", "default")).strip() or "default"
+    print("DEBUG: run_app after initial session_state read", flush=True)
     if "entered_user_id" not in st.session_state:
         st.session_state.entered_user_id = legacy_user_id
     if "site_page" not in st.session_state:
@@ -38,6 +41,7 @@ def run_app():
         st.session_state.debug_mode = False
     if "public_demo_bootstrapped" not in st.session_state:
         st.session_state.public_demo_bootstrapped = False
+    print("DEBUG: run_app after initial session_state setup", flush=True)
     
     st.set_page_config(page_title="AI Finance Coach", layout="wide")
     product_name = "AI Finance Coach"
@@ -952,9 +956,11 @@ def run_app():
     # Insights tab
     # ============================================================
     with tab_insights:
+        print("DEBUG: entering Insights tab render", flush=True)
         st.subheader("Insights + Trends")
         st.caption(f"Showing {month_start.strftime('%B %Y')}")
     
+        print("DEBUG: before insights session_state init", flush=True)
         if "insight_question" not in st.session_state:
             st.session_state.insight_question = ""
         if "insight_ask_now" not in st.session_state:
@@ -975,8 +981,10 @@ def run_app():
             st.session_state.insights_bundle_cache = {}
         if "insight_result" not in st.session_state:
             st.session_state.insight_result = {}
+        print("DEBUG: after insights session_state init", flush=True)
 
         def _load_monthly_bundle() -> dict:
+            print("DEBUG: before _load_monthly_bundle", flush=True)
             bundle_key = f"{active_user_id()}:{as_of_str}:monthly:bundle"
             if st.session_state.get("insights_bundle_cache_key") != bundle_key:
                 try:
@@ -994,7 +1002,9 @@ def run_app():
                         st.session_state.insights_bundle_cache_key = bundle_key
                 except Exception:
                     pass
-            return st.session_state.get("insights_bundle_cache", {}) or {}
+            result = st.session_state.get("insights_bundle_cache", {}) or {}
+            print("DEBUG: after _load_monthly_bundle", flush=True)
+            return result
 
         # Proactive status line (lightweight)
         status_key = f"{active_user_id()}:{as_of_str}:monthly"
@@ -1160,6 +1170,7 @@ def run_app():
             return leader
 
         def _build_monthly_summary(bundle: dict) -> dict:
+            print("DEBUG: before _build_monthly_summary", flush=True)
             cash = bundle.get("cash_forecast", {}) or {}
             report = bundle.get("budget_report", {}) or {}
             driver = _compute_spending_driver(bundle)
@@ -1248,14 +1259,18 @@ def run_app():
             else:
                 urgent_line = "No. Nothing urgent stands out right now."
 
-            return {
+            result = {
                 "on_track_line": on_track_line,
                 "focus_line": focus_line,
                 "urgent_line": urgent_line,
             }
+            print("DEBUG: after _build_monthly_summary", flush=True)
+            return result
 
         def _render_monthly_summary(bundle: dict):
+            print("DEBUG: before _render_monthly_summary", flush=True)
             if not bundle:
+                print("DEBUG: after _render_monthly_summary (empty bundle)", flush=True)
                 return
             summary = _build_monthly_summary(bundle)
             st.subheader("This month at a glance")
@@ -1269,6 +1284,7 @@ def run_app():
             with col3:
                 st.caption("Anything urgent?")
                 st.write(summary.get("urgent_line", ""))
+            print("DEBUG: after _render_monthly_summary", flush=True)
     
         def is_unsafe(verdict_text_or_enum: str) -> bool:
             v = (verdict_text_or_enum or "").strip().upper()
@@ -2361,15 +2377,18 @@ def run_app():
             }
 
         def _build_spending_driver_answer_block(bundle: dict) -> dict:
+            print("DEBUG: before _build_spending_driver_answer_block", flush=True)
             driver = _compute_spending_driver(bundle)
             focus_context = _build_focus_shift_context(bundle)
             if not driver:
-                return {
+                result = {
                     "label": "What's driving my spending?",
                     "headline": "Not enough data yet to determine what's driving your spending.",
                     "bullets": ["Add more transaction data or switch to a month with activity to see a clear category driver."],
                     "recommendation": "Add more transaction data or switch to a month with activity.",
                 }
+                print("DEBUG: after _build_spending_driver_answer_block (no driver)", flush=True)
+                return result
 
             category_name = str(driver.get("category", "")).strip()
             category_answer = _build_category_answer_block(category_name, bundle)
@@ -2408,7 +2427,7 @@ def run_app():
                 or str(category_answer.get("recommendation", "")).strip()
             )
 
-            return {
+            result = {
                 "label": "What's driving my spending?",
                 "headline": (
                     f"{category_name} is driving your spending right now."
@@ -2418,8 +2437,11 @@ def run_app():
                 "bullets": merged_bullets[:bullet_limit],
                 "recommendation": recommendation,
             }
+            print("DEBUG: after _build_spending_driver_answer_block", flush=True)
+            return result
 
         def _build_month_answer_block(bundle: dict) -> dict:
+            print("DEBUG: before _build_month_answer_block", flush=True)
             summary = bundle.get("summary", {}) or {}
             trends = bundle.get("trends", {}) or {}
             cash = bundle.get("cash_forecast", {}) or {}
@@ -2489,12 +2511,14 @@ def run_app():
                 recommendation = actionable_recommendation
             elif priority_category and category_resp and snapshot:
                 recommendation = _category_recommendation(priority_category, category_resp, snapshot)
-            return {
+            result = {
                 "label": "Explain this month",
                 "headline": headline,
                 "bullets": [item for item in bullets if str(item).strip()][: 3 if beginner_mode else 4],
                 "recommendation": recommendation,
             }
+            print("DEBUG: after _build_month_answer_block", flush=True)
+            return result
 
         def _build_category_answer_block(category: str, bundle: dict) -> dict:
             category_name = str(category).strip() or "Food"
@@ -2562,6 +2586,7 @@ def run_app():
             }
 
         def _build_weekly_change_answer_block(bundle: dict) -> dict:
+            print("DEBUG: before _build_weekly_change_answer_block", flush=True)
             driver = _compute_spending_driver(bundle)
             focus_context = _build_focus_shift_context(bundle)
             driver_category = str((driver or {}).get("category", "")).strip()
@@ -2629,12 +2654,14 @@ def run_app():
                 if beginner_mode
                 else "This week's highest-leverage moves"
             )
-            return {
+            result = {
                 "label": "What should I change this week?",
                 "headline": headline,
                 "bullets": bullets[: 3 if beginner_mode else 4],
                 "recommendation": recommendation,
             }
+            print("DEBUG: after _build_weekly_change_answer_block", flush=True)
+            return result
 
         def _fallback_question_answer(question: str) -> dict:
             return {
@@ -2884,6 +2911,9 @@ def run_app():
             }
 
         def _build_ai_fallback_answer(question: str, bundle: dict) -> dict:
+            print("DEBUG: before _build_ai_fallback_answer", flush=True)
+            print("DEBUG: after _build_ai_fallback_answer (disabled)", flush=True)
+            return _ai_unavailable_answer()
             api_key = _get_openai_api_key()
             if not api_key or OpenAI is None:
                 return _ai_unavailable_answer()
@@ -2948,35 +2978,52 @@ def run_app():
             return "driving" in q_lower and "spending" in q_lower
 
         def _build_deterministic_insight_answer(question: str, bundle: dict) -> dict | None:
+            print("DEBUG: before _build_deterministic_insight_answer", flush=True)
             q = str(question or "").strip()
             q_lower = q.lower()
             category_name = _match_category_in_question(q)
             if not q:
+                print("DEBUG: _build_deterministic_insight_answer matched empty question", flush=True)
                 return _fallback_question_answer(q)
             if "explain" in q_lower and "month" in q_lower:
+                print("DEBUG: _build_deterministic_insight_answer matched explain month", flush=True)
                 return _build_month_answer_block(bundle)
             if "on track" in q_lower:
+                print("DEBUG: _build_deterministic_insight_answer matched on track", flush=True)
                 return _build_month_answer_block(bundle)
             if "overspending" in q_lower or "over spending" in q_lower or "over budget" in q_lower:
+                print("DEBUG: _build_deterministic_insight_answer matched overspending", flush=True)
                 return _build_weekly_change_answer_block(bundle)
             if _is_spending_driver_question(q):
+                print("DEBUG: _build_deterministic_insight_answer matched spending driver", flush=True)
                 return _build_spending_driver_answer_block(bundle)
             if category_name and any(token in q_lower for token in {"driving", "higher", "behind"}):
+                print("DEBUG: _build_deterministic_insight_answer matched category drilldown", flush=True)
                 return _build_category_answer_block(category_name, bundle)
             if "change" in q_lower and "week" in q_lower:
+                print("DEBUG: _build_deterministic_insight_answer matched weekly change", flush=True)
                 return _build_weekly_change_answer_block(bundle)
             if category_name:
+                print("DEBUG: _build_deterministic_insight_answer matched category name", flush=True)
                 return _build_category_answer_block(category_name, bundle)
+            print("DEBUG: after _build_deterministic_insight_answer (no deterministic match)", flush=True)
             return None
 
         def _build_insight_answer_for_question(question: str, bundle: dict) -> dict:
+            print("DEBUG: before _build_insight_answer_for_question", flush=True)
             deterministic = _build_deterministic_insight_answer(question, bundle)
             if deterministic is not None:
+                print("DEBUG: after _build_insight_answer_for_question (deterministic)", flush=True)
                 return deterministic
-            return _build_ai_fallback_answer(question, bundle)
+            print("DEBUG: _build_insight_answer_for_question routing to AI fallback", flush=True)
+            result = _build_ai_fallback_answer(question, bundle)
+            print("DEBUG: after _build_insight_answer_for_question (ai fallback)", flush=True)
+            return result
 
         def _render_insight_result_block(answer: dict):
+            print("DEBUG: before _render_insight_result_block", flush=True)
             if not answer:
+                print("DEBUG: after _render_insight_result_block (empty answer)", flush=True)
                 return
             with st.container(border=True):
                 st.caption(str(answer.get("label", "Insight")).strip())
@@ -2989,6 +3036,7 @@ def run_app():
                 if recommendation:
                     st.write("Recommendation")
                     st.write(recommendation)
+            print("DEBUG: after _render_insight_result_block", flush=True)
 
         def _submit_typed_insight():
             st.session_state.selected_insight_action = ""
@@ -3000,6 +3048,7 @@ def run_app():
             st.session_state.insight_result_source = "quick_action"
             st.session_state.insight_ask_now = True
 
+        print("DEBUG: before Ask Insighta render", flush=True)
         st.text_input(
             "Ask Insighta",
             key="insight_question",
@@ -3012,10 +3061,15 @@ def run_app():
             else "Ask for a month summary, a category drilldown, or weekly coaching tied to your forecast and budget pace."
         )
         st.caption(helper_text)
+        print("DEBUG: after Ask Insighta render", flush=True)
 
+        print("DEBUG: before monthly bundle load in Insights render", flush=True)
         monthly_bundle = _load_monthly_bundle()
+        print("DEBUG: after monthly bundle load in Insights render", flush=True)
         if monthly_bundle:
+            print("DEBUG: before monthly summary render in Insights", flush=True)
             _render_monthly_summary(monthly_bundle)
+            print("DEBUG: after monthly summary render in Insights", flush=True)
 
         button_cols = st.columns(3)
         button_cols[0].button(
@@ -3037,18 +3091,26 @@ def run_app():
             args=("What should I change this week?",),
         )
 
+        print("DEBUG: before insight action session_state read", flush=True)
         if st.session_state.insight_ask_now:
             st.session_state.insight_ask_now = False
+            print("DEBUG: before effective_question session_state reads", flush=True)
             effective_question = (
                 str(st.session_state.get("selected_insight_action", "")).strip()
                 or str(st.session_state.get("insight_question", "")).strip()
             )
+            print("DEBUG: after effective_question session_state reads", flush=True)
+            print(f"DEBUG: routing Ask Insighta question: {effective_question}", flush=True)
             st.session_state.insight_result = _build_insight_answer_for_question(
                 effective_question,
                 monthly_bundle or {},
             )
+            print("DEBUG: after insight result build", flush=True)
+        print("DEBUG: after insight action session_state read", flush=True)
 
+        print("DEBUG: before insight result render", flush=True)
         _render_insight_result_block(st.session_state.get("insight_result") or {})
+        print("DEBUG: after insight result render", flush=True)
     
         st.subheader("What's driving this category?")
         explain_category = st.selectbox("Category", SPEND_CATEGORIES, key="insights_explain_category")
@@ -3484,6 +3546,7 @@ def run_app():
 
 def main():
     try:
+        print("DEBUG: entering main", flush=True)
         run_app()
     except Exception as e:
         traceback.print_exc()
