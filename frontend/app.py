@@ -2189,6 +2189,91 @@ def run_app():
                 return ""
             return str(driver.get("category", "")).strip()
 
+        def _actionability_weight(category: str) -> float:
+            category_name = str(category).strip()
+            if category_name in {"Food", "Dining", "Entertainment", "Shopping", "Travel"}:
+                return 3.0
+            if category_name in {"Groceries", "Transportation", "Subscriptions", "Other"}:
+                return 2.0
+            if category_name in {"Bills", "Rent", "Utilities", "Insurance", "Health", "Education"}:
+                return 0.0
+            return 1.0
+
+        def _rank_actionable_categories(bundle: dict) -> list[dict]:
+            spending_by_category = bundle.get("spending_by_category", {}) or {}
+            if not spending_by_category:
+                return []
+
+            row_map = _bundle_budget_row_map(bundle)
+            total_spending = sum(max(0.0, float(value or 0.0)) for value in spending_by_category.values())
+            above_pace_map = {
+                str(item.get("category", "")).strip(): float(item.get("above_pace", 0.0) or 0.0)
+                for item in (bundle.get("cash_forecast", {}) or {}).get("top_above_pace_categories", []) or []
+                if str(item.get("category", "")).strip()
+            }
+
+            ranked: list[dict] = []
+            for raw_category, raw_total in spending_by_category.items():
+                category_name = str(raw_category).strip()
+                current_total = float(raw_total or 0.0)
+                if not category_name or current_total <= 0:
+                    continue
+
+                flexibility = _actionability_weight(category_name)
+                if flexibility <= 0:
+                    continue
+
+                row = row_map.get(category_name, {})
+                budget_amount = float((row or {}).get("budget", 0.0) or 0.0)
+                pct_used = float((row or {}).get("pct_used", 0.0) or 0.0)
+                projected_total = _projected_category_total(current_total)
+                above_pace = float(above_pace_map.get(category_name, 0.0) or 0.0)
+                forecast_ratio = (projected_total / budget_amount) if budget_amount > 0 else 0.0
+                status_key, _ = _budget_status_meta(
+                    pct_used,
+                    projected_total=projected_total,
+                    budget_amount=budget_amount,
+                )
+                severity = {"healthy": 0, "tight": 1, "off_track": 2}.get(status_key, 0)
+                materiality_ratio = current_total / max(total_spending, 1.0)
+
+                score = flexibility * 10.0 + severity * 5.0 + materiality_ratio * 4.0
+                if budget_amount > 0:
+                    score += max(forecast_ratio, pct_used / 100.0) * 3.0
+                    score += max(0.0, above_pace / max(budget_amount, 1.0)) * 2.0
+                else:
+                    score += min(current_total / 50.0, 4.0)
+
+                ranked.append(
+                    {
+                        "category": category_name,
+                        "score": score,
+                        "current_total": current_total,
+                        "budget_amount": budget_amount,
+                        "pct_used": pct_used,
+                        "projected_total": projected_total,
+                        "above_pace": above_pace,
+                        "status_key": status_key,
+                        "materiality_ratio": materiality_ratio,
+                    }
+                )
+
+            ranked.sort(
+                key=lambda item: (
+                    float(item.get("score", 0.0)),
+                    float(item.get("projected_total", 0.0)),
+                    float(item.get("current_total", 0.0)),
+                ),
+                reverse=True,
+            )
+            return ranked
+
+        def _best_actionable_category(bundle: dict) -> dict | None:
+            ranked = _rank_actionable_categories(bundle)
+            if not ranked:
+                return None
+            return ranked[0]
+
         def _build_spending_driver_answer_block(bundle: dict) -> dict:
             driver = _compute_spending_driver(bundle)
             if not driver:
@@ -2211,6 +2296,8 @@ def run_app():
             selection_mode = str(driver.get("selection_mode", "spend")).strip()
             runner_up_category = str(driver.get("runner_up_category", "")).strip()
             runner_up_total = float(driver.get("runner_up_total", 0.0) or 0.0)
+            actionable = _best_actionable_category(bundle)
+            actionable_category = str((actionable or {}).get("category", "")).strip()
 
             if selection_mode == "budget" and budget_amount > 0 and above_pace_amount > 0:
                 driver_line = (
@@ -2247,6 +2334,13 @@ def run_app():
             extra_bullets = [driver_line]
             if outlook_line:
                 extra_bullets.append(outlook_line)
+            if actionable_category and actionable_category != category_name:
+                distinction_line = (
+                    f"But for this week's changes, {actionable_category} is the easiest category to trim."
+                    if beginner_mode
+                    else f"{category_name} matters most overall, but {actionable_category} is the best category to change this week because it's more flexible."
+                )
+                extra_bullets.append(distinction_line)
 
             existing_bullets = [str(item).strip() for item in (category_answer.get("bullets", []) or []) if str(item).strip()]
             bullet_limit = 3 if beginner_mode else 4
@@ -2254,6 +2348,24 @@ def run_app():
             for item in extra_bullets + existing_bullets:
                 if item and item not in merged_bullets:
                     merged_bullets.append(item)
+
+            recommendation = str(category_answer.get("recommendation", "")).strip()
+            if actionable_category:
+                actionable_resp = _load_category_explanation_data(actionable_category)
+                actionable_snapshot = _category_budget_snapshot(bundle, actionable_category, actionable_resp) if actionable_resp else {}
+                actionable_recommendation = (
+                    _category_recommendation(actionable_category, actionable_resp, actionable_snapshot)
+                    if actionable_resp and actionable_snapshot
+                    else recommendation
+                )
+                if actionable_category != category_name:
+                    recommendation = (
+                        f"But for this week's changes, {actionable_category} is the easiest category to trim. "
+                        f"{actionable_recommendation}"
+                    )
+                else:
+                    recommendation = actionable_recommendation
+
             return {
                 "label": "What's driving my spending?",
                 "headline": (
@@ -2262,7 +2374,7 @@ def run_app():
                     else f"{category_name} is the key spending driver this month."
                 ),
                 "bullets": merged_bullets[:bullet_limit],
-                "recommendation": str(category_answer.get("recommendation", "")).strip(),
+                "recommendation": recommendation,
             }
 
         def _build_month_answer_block(bundle: dict) -> dict:
@@ -2274,6 +2386,8 @@ def run_app():
             priority_category = _priority_category_from_bundle(bundle)
             category_resp = _load_category_explanation_data(priority_category) if priority_category else {}
             snapshot = _category_budget_snapshot(bundle, priority_category, category_resp) if category_resp else {}
+            actionable = _best_actionable_category(bundle)
+            actionable_category = str((actionable or {}).get("category", "")).strip()
             trend_this = float(trends.get("this_period_spending", 0.0) or 0.0)
             trend_last = float(trends.get("last_period_spending", 0.0) or 0.0)
             trend_delta = trend_this - trend_last
@@ -2321,11 +2435,21 @@ def run_app():
                 else:
                     bullets.append(overview.get("urgent_line", ""))
 
-            recommendation = (
-                _category_recommendation(priority_category, category_resp, snapshot)
-                if priority_category and category_resp and snapshot
-                else "Keep discretionary spending near the current pace this week."
-            )
+            if actionable_category and priority_category and actionable_category != priority_category:
+                bullets.append(
+                    f"But for this week's changes, {actionable_category} is the easiest category to trim."
+                    if beginner_mode
+                    else f"{priority_category} matters most overall, but {actionable_category} is the better short-term lever because it's more flexible."
+                )
+
+            recommendation = "Keep discretionary spending near the current pace this week."
+            if actionable_category:
+                actionable_resp = _load_category_explanation_data(actionable_category)
+                actionable_snapshot = _category_budget_snapshot(bundle, actionable_category, actionable_resp) if actionable_resp else {}
+                if actionable_resp and actionable_snapshot:
+                    recommendation = _category_recommendation(actionable_category, actionable_resp, actionable_snapshot)
+            elif priority_category and category_resp and snapshot:
+                recommendation = _category_recommendation(priority_category, category_resp, snapshot)
             return {
                 "label": "Explain this month",
                 "headline": headline,
@@ -2399,42 +2523,22 @@ def run_app():
             }
 
         def _build_weekly_change_answer_block(bundle: dict) -> dict:
-            report = bundle.get("budget_report", {}) or {}
-            cash = bundle.get("cash_forecast", {}) or {}
-            spending_by_category = bundle.get("spending_by_category", {}) or {}
-            fixed_categories = {"Bills", "Rent", "Utilities", "Insurance"}
-            candidates: list[str] = []
+            driver = _compute_spending_driver(bundle)
+            driver_category = str((driver or {}).get("category", "")).strip()
+            actionable_ranked = _rank_actionable_categories(bundle)
+            candidates = [str(item.get("category", "")).strip() for item in actionable_ranked if str(item.get("category", "")).strip()]
 
-            for item in cash.get("top_above_pace_categories", []) or []:
-                category_name = str(item.get("category", "")).strip()
-                if category_name and category_name not in candidates:
-                    candidates.append(category_name)
-
-            for category_name in (report.get("over_budget", []) or []) + (report.get("near_budget", []) or []):
-                category_name = str(category_name).strip()
-                if category_name and category_name not in candidates and category_name not in fixed_categories:
-                    candidates.append(category_name)
-
-            ranked_flexible = [
-                str(category_name).strip()
-                for category_name, _ in sorted(
-                    spending_by_category.items(),
-                    key=lambda item: float(item[1] or 0.0),
-                    reverse=True,
-                )
-                if str(category_name).strip() and str(category_name).strip() not in fixed_categories
-            ]
-            for category_name in ranked_flexible:
-                if category_name not in candidates:
-                    candidates.append(category_name)
-
-            if not candidates:
-                fallback_category = _priority_category_from_bundle(bundle)
-                if fallback_category:
-                    candidates = [fallback_category]
+            if not candidates and driver_category:
+                candidates = [driver_category]
 
             bullets = []
             recommendation = "Keep discretionary spending near the current pace this week."
+            if driver_category and candidates and candidates[0] != driver_category:
+                bullets.append(
+                    f"{driver_category} matters most overall, but {candidates[0]} is the easiest category to trim this week."
+                    if beginner_mode
+                    else f"{driver_category} carries the biggest budget pressure overall, but {candidates[0]} is the better short-term lever because it's more flexible."
+                )
             for category_name in candidates[: (2 if beginner_mode else 3)]:
                 category_resp = _load_category_explanation_data(category_name)
                 if not category_resp:
