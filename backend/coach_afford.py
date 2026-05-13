@@ -29,6 +29,16 @@ DECISION_LABELS = {
 }
 
 
+def _safe_int(value) -> int:
+    try:
+        return int(value or 0)
+    except (TypeError, ValueError):
+        try:
+            return int(float(value or 0))
+        except (TypeError, ValueError):
+            return 0
+
+
 @dataclass
 class AffordScenario:
     amount: float
@@ -136,9 +146,9 @@ def simulate_afford(amount: float, cash: Dict[str, float]) -> AffordScenario:
     upcoming_expenses = float(cash.get("forecast_spending_total", 0.0)) - float(cash.get("spending_to_date", 0.0))
     before_end = income_ahead - upcoming_expenses
     before_safe = float(cash.get("safe_to_spend_per_day_budget", 0.0))
-    days_remaining = int(cash.get("days_remaining", 0))
-    days_elapsed = int(cash.get("days_elapsed", 0))
-    days_total = int(cash.get("days_total", 0))
+    days_remaining = _safe_int(cash.get("days_remaining", 0))
+    days_elapsed = _safe_int(cash.get("days_elapsed", 0))
+    days_total = _safe_int(cash.get("days_total", 0))
     as_of = str(cash.get("as_of", "")) or None
 
     spend_to_date = float(cash.get("spending_to_date", 0.0))

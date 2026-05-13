@@ -506,8 +506,8 @@ def explain_category(user_id: str = USER_DEFAULT, category: str = "", period: PE
 
     current_total = float(current.get("total", 0.0))
     previous_total = float(previous.get("total", 0.0))
-    current_tx_count = int(current.get("tx_count", 0))
-    previous_tx_count = int(previous.get("tx_count", 0))
+    current_tx_count = _safe_int(current.get("tx_count", 0))
+    previous_tx_count = _safe_int(previous.get("tx_count", 0))
     current_avg_spend = float(current.get("avg_spend", 0.0))
     previous_avg_spend = float(previous.get("avg_spend", 0.0))
     dollar_change = round(current_total - previous_total, 2)
@@ -535,8 +535,8 @@ def explain_category(user_id: str = USER_DEFAULT, category: str = "", period: PE
                 "current_total": round(float(current_merchant.get("total", 0.0)), 2),
                 "previous_total": round(float(previous_merchant.get("total", 0.0)), 2),
                 "dollar_change": merchant_delta,
-                "current_tx_count": int(current_merchant.get("tx_count", 0)),
-                "previous_tx_count": int(previous_merchant.get("tx_count", 0)),
+                "current_tx_count": _safe_int(current_merchant.get("tx_count", 0)),
+                "previous_tx_count": _safe_int(previous_merchant.get("tx_count", 0)),
             }
         )
 
@@ -674,6 +674,16 @@ def _fmt_signed_money(value: float) -> str:
     if value < 0:
         return f"-${amount:,.2f}"
     return f"${amount:,.2f}"
+
+
+def _safe_int(value) -> int:
+    try:
+        return int(value or 0)
+    except (TypeError, ValueError):
+        try:
+            return int(float(value or 0))
+        except (TypeError, ValueError):
+            return 0
 
 
 def _extract_category_from_question(question: str, categories: List[str]) -> Optional[str]:
@@ -908,7 +918,7 @@ def coach_respond(payload: Dict[str, object]):
             continue
 
     def data_note_text() -> str:
-        days_remaining = int(cash.get("days_remaining", 0))
+        days_remaining = _safe_int(cash.get("days_remaining", 0))
         if days_remaining > 0:
             return f"Based on your current budget and spending with {days_remaining} days left."
         return "Based on your current saved budget and transactions."
@@ -1094,7 +1104,7 @@ def coach_respond(payload: Dict[str, object]):
     top_above_cat = str(top_above[0].get("category", "")).strip() if top_above else ""
     top_above_amt = float(top_above[0].get("above_pace", 0.0) or 0.0) if top_above else 0.0
     forecast_end = float(cash.get("forecast_end_balance", 0.0))
-    days_remaining = int(cash.get("days_remaining", 0) or 0)
+    days_remaining = _safe_int(cash.get("days_remaining", 0))
     safe_per_day = float(cash.get("safe_to_spend_per_day_budget", 0.0))
     bundle_user_id = str(b.get("user_id", USER_DEFAULT)).strip() or USER_DEFAULT
     bundle_period = str(b.get("period", "monthly")).strip() or "monthly"
@@ -1216,7 +1226,7 @@ def coach_respond(payload: Dict[str, object]):
                 why.append(f"Most of the spending is coming from {merchant_names}.")
         else:
             headline = f"{category_name} check: {status_label.lower()} against plan."
-            why = [f"You've spent {_fmt_money(current_total)} across {int(category_data.get('current_transaction_count', 0))} purchases, averaging {_fmt_money(current_avg_spend)} each."]
+            why = [f"You've spent {_fmt_money(current_total)} across {_safe_int(category_data.get('current_transaction_count', 0))} purchases, averaging {_fmt_money(current_avg_spend)} each."]
             if merchant_names:
                 why.append(f"Most of the activity is coming from {merchant_names}.")
             if percent_change is not None:
@@ -1356,7 +1366,7 @@ def coach_respond(payload: Dict[str, object]):
         elif cash:
             forecast_end = float(cash.get("forecast_end_balance", 0.0))
             safe_per_day = float(cash.get("safe_to_spend_per_day_budget", 0.0))
-            days_remaining = int(cash.get("days_remaining", 0))
+            days_remaining = _safe_int(cash.get("days_remaining", 0))
             target_pace = float(cash.get("target_spend_daily_budget", 0.0))
 
             new_end = forecast_end - amt
