@@ -38,12 +38,28 @@ def hello():
 # -----------------------------
 # Helpers
 # -----------------------------
+COFFEE_MERCHANTS = ["starbucks", "blue bottle", "peet", "philz", "neighborhood cafe"]
+DINING_MERCHANTS = ["chipotle", "sweetgreen", "doordash", "thai basil", "panera", "taco stand", "local pizza"]
+
+
 def parse_date(s: str) -> date:
     return datetime.strptime(s, "%Y-%m-%d").date()
 
 
 def is_income_category(cat: str) -> bool:
     return str(cat).strip() == "Income"
+
+
+def normalize_category(merchant: str, category: str) -> str:
+    raw_category = str(category or "").strip()
+    merchant_l = str(merchant or "").lower()
+    if raw_category == "Food":
+        if any(name in merchant_l for name in COFFEE_MERCHANTS):
+            return "Coffee"
+        if any(name in merchant_l for name in DINING_MERCHANTS):
+            return "Restaurants / dining"
+        return "Restaurants / dining"
+    return raw_category
 
 
 def period_bounds(as_of: date, period: PERIOD):
@@ -91,7 +107,7 @@ def transactions(user_id: str = USER_DEFAULT, start: Optional[str] = None, end: 
         {"user_id": user_id, "start": start, "end": end},
         flush=True,
     )
-    query = "SELECT date, merchant, amount, category FROM transactions WHERE user_id = ?"
+    query = "SELECT date, merchant, amount, category, source, scenario FROM transactions WHERE user_id = ?"
     params: List[str] = []
     if start and end:
         query += " AND date >= ? AND date <= ?"
@@ -102,7 +118,15 @@ def transactions(user_id: str = USER_DEFAULT, start: Optional[str] = None, end: 
     with get_conn() as conn:
         rows = conn.execute(query, params).fetchall()
     print("LOADED TRANSACTIONS:", {"user_id": user_id, "count": len(rows)}, flush=True)
-    return {"transactions": [dict(r) for r in rows]}
+    transactions_out = []
+    for row in rows:
+        tx = dict(row)
+        tx["raw_category"] = tx["category"]
+        tx["category"] = normalize_category(tx["merchant"], tx["category"])
+        tx["source"] = tx.get("source") or "demo"
+        tx["scenario"] = tx.get("scenario")
+        transactions_out.append(tx)
+    return {"transactions": transactions_out}
 
 
 class NewTransaction(BaseModel):
@@ -128,15 +152,15 @@ def add_transaction(tx: NewTransaction):
     )
     # Canonical sign: income positive, spending negative.
     amt = float(tx.amount)
-    cat = tx.category.strip()
+    cat = normalize_category(tx.merchant, tx.category.strip())
     if is_income_category(cat):
         amt = abs(amt)
     else:
         amt = -abs(amt)
     with get_conn() as conn:
         conn.execute(
-            "INSERT INTO transactions (date, merchant, amount, category, user_id) VALUES (?, ?, ?, ?, ?)",
-            (tx.date, tx.merchant.strip(), amt, cat, tx.user_id),
+            "INSERT INTO transactions (date, merchant, amount, category, user_id, source, scenario) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            (tx.date, tx.merchant.strip(), amt, cat, tx.user_id, "manual", None),
         )
         conn.commit()
     _mark_transaction_dataset_event(tx.user_id, "add_transaction", amount=float(amt), category=cat, date=tx.date)
@@ -257,8 +281,8 @@ def load_sample_month(sample: SampleMonthIn):
             (sample.user_id, month_start.isoformat(), month_end.isoformat()),
         )
         conn.executemany(
-            "INSERT INTO transactions (date, merchant, amount, category, user_id) VALUES (?, ?, ?, ?, ?)",
-            sample_transactions,
+            "INSERT INTO transactions (date, merchant, amount, category, user_id, source, scenario) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [(*tx, "demo", None) for tx in sample_transactions],
         )
         conn.commit()
     _mark_transaction_dataset_event(
@@ -280,48 +304,81 @@ def simulate_week(sim: SimulateWeekIn):
     as_of_d = parse_date(sim.as_of) if sim.as_of else date.today()
     week_start = as_of_d - timedelta(days=as_of_d.weekday())
     week_end = min(as_of_d, week_start + timedelta(days=6))
+    elapsed_days = max(1, (week_end - week_start).days + 1)
+    baseline_start = week_start - timedelta(days=28)
+    baseline_end = week_start - timedelta(days=1)
 
     def tx(day_offset: int, merchant: str, amount: float, category: str):
         d = min(week_end, week_start + timedelta(days=day_offset))
-        return (d.isoformat(), merchant, -abs(float(amount)), category, sim.user_id)
+        return (d.isoformat(), merchant, -abs(float(amount)), category, sim.user_id, "simulation", sim.scenario)
 
-    scenario_transactions = {
-        "good": [
-            tx(0, "Home Coffee Supplies", 8.50, "Food"),
-            tx(1, "Chipotle", 14.20, "Food"),
-            tx(3, "Metro Transit", 12.50, "Transportation"),
-            tx(4, "Kindle Books", 7.99, "Entertainment"),
-        ],
-        "average": [
-            tx(0, "Starbucks", 6.75, "Food"),
-            tx(1, "Sweetgreen", 18.25, "Food"),
-            tx(2, "Amazon", 31.40, "Shopping"),
-            tx(3, "Uber", 19.80, "Transportation"),
-            tx(4, "Local Pizza Co.", 28.70, "Food"),
-        ],
-        "overspending": [
-            tx(0, "Starbucks", 7.20, "Food"),
-            tx(1, "DoorDash", 42.60, "Food"),
-            tx(2, "Amazon", 118.90, "Shopping"),
-            tx(3, "Concert Tickets", 96.00, "Entertainment"),
-            tx(4, "Lyft", 34.40, "Transportation"),
-            tx(4, "Italian Kitchen", 67.25, "Food"),
-        ],
-    }[sim.scenario]
+    fallback_weekly = {
+        "Coffee": 45.0,
+        "Restaurants / dining": 125.0,
+        "Shopping": 90.0,
+        "Entertainment": 55.0,
+        "Subscriptions": 30.0,
+        "Other": 25.0,
+    }
+    merchants = {
+        "Coffee": {"good": "Home Coffee Supplies", "average": "Starbucks", "overspending": "Starbucks"},
+        "Restaurants / dining": {"good": "Chipotle", "average": "Sweetgreen", "overspending": "DoorDash"},
+        "Shopping": {"good": "Target", "average": "Amazon", "overspending": "Amazon"},
+        "Entertainment": {"good": "Kindle Books", "average": "AMC Theatres", "overspending": "Concert Tickets"},
+        "Subscriptions": {"good": "Spotify", "average": "Netflix", "overspending": "Streaming Bundle"},
+        "Other": {"good": "Local Errand", "average": "Convenience Store", "overspending": "Impulse Purchase"},
+    }
+    multipliers = {"good": 0.25, "average": 1.0, "overspending": 1.75}
 
     with get_conn() as conn:
+        baseline_rows = conn.execute(
+            """
+            SELECT merchant, category, amount
+            FROM transactions
+            WHERE user_id = ?
+              AND amount < 0
+              AND date >= ?
+              AND date <= ?
+              AND category IN ('Food', 'Coffee', 'Restaurants / dining', 'Shopping', 'Entertainment', 'Subscriptions', 'Other')
+              AND COALESCE(source, 'demo') != 'simulation'
+            """,
+            (sim.user_id, baseline_start.isoformat(), baseline_end.isoformat()),
+        ).fetchall()
+        baseline_totals = {}
+        for row in baseline_rows:
+            category = normalize_category(row["merchant"], row["category"])
+            baseline_totals[category] = baseline_totals.get(category, 0.0) + abs(float(row["amount"] or 0.0))
+        baseline_weekly = {category: amount / 4.0 for category, amount in baseline_totals.items()}
+        for category, amount in fallback_weekly.items():
+            baseline_weekly.setdefault(category, amount)
+
+        scenario_transactions = []
+        for idx, (category, weekly_amount) in enumerate(baseline_weekly.items()):
+            target_to_date = weekly_amount * (elapsed_days / 7.0) * multipliers[sim.scenario]
+            if target_to_date < 1:
+                continue
+            scenario_transactions.append(
+                tx(
+                    min(idx, elapsed_days - 1),
+                    merchants.get(category, {}).get(sim.scenario, category),
+                    round(target_to_date, 2),
+                    category,
+                )
+            )
+
         cur = conn.execute(
             """
             DELETE FROM transactions
             WHERE user_id = ?
               AND date >= ?
               AND date <= ?
-              AND category IN ('Food', 'Shopping', 'Entertainment', 'Subscriptions', 'Other')
+              AND category IN ('Food', 'Coffee', 'Restaurants / dining', 'Shopping', 'Entertainment', 'Subscriptions', 'Other')
+              AND COALESCE(source, 'demo') IN ('demo', 'simulation')
             """,
             (sim.user_id, week_start.isoformat(), week_end.isoformat()),
         )
         conn.executemany(
-            "INSERT INTO transactions (date, merchant, amount, category, user_id) VALUES (?, ?, ?, ?, ?)",
+            "INSERT INTO transactions (date, merchant, amount, category, user_id, source, scenario) VALUES (?, ?, ?, ?, ?, ?, ?)",
             scenario_transactions,
         )
         conn.commit()

@@ -67,6 +67,8 @@ st.sidebar.caption(f"Viewing {month_start.strftime('%B %Y')}")
 
 SPEND_CATEGORIES = [
     "Food",
+    "Coffee",
+    "Restaurants / dining",
     "Groceries",
     "Shopping",
     "Subscriptions",
@@ -256,6 +258,15 @@ FLEXIBLE_CUT_RULES = {
 
 SEMI_FLEXIBLE_CATEGORIES = {"Groceries", "Transportation", "Health", "Education"}
 PROTECTED_CATEGORIES = {"Bills", SAVINGS_CATEGORY}
+BEHAVIOR_TRACKED_CATEGORIES = {
+    "Subscriptions",
+    "Shopping",
+    "Restaurants / dining",
+    "Coffee",
+    "Entertainment",
+    "Other discretionary",
+    "Transportation",
+}
 
 PREFERENCE_CATEGORY_GROUPS = {
     "Protected by default": [
@@ -332,8 +343,12 @@ def flexible_bucket(tx):
     category = str(tx.get("category", "")).strip()
     merchant = str(tx.get("merchant", "")).lower()
 
+    if category == "Coffee":
+        return "coffee"
+    if category == "Restaurants / dining":
+        return "restaurants"
     if category == "Food":
-        if any(word in merchant for word in ["cafe", "coffee", "starbucks"]):
+        if any(word in merchant for word in ["cafe", "coffee", "starbucks", "blue bottle", "peet", "philz"]):
             return "coffee"
         return "restaurants"
     if category == "Shopping":
@@ -359,6 +374,20 @@ def intelligence_bucket(tx):
     return "Other discretionary"
 
 
+def transaction_source_label(tx):
+    source = str(tx.get("source") or "demo").strip().lower()
+    scenario = str(tx.get("scenario") or "").strip().lower()
+    if source == "simulation":
+        return {
+            "good": "Simulation: good week",
+            "average": "Simulation: average week",
+            "overspending": "Simulation: overspending week",
+        }.get(scenario, "Simulation")
+    if source == "manual":
+        return "Manual"
+    return "Demo"
+
+
 def category_flexibility(category_name):
     if category_name in {"Rent / bills", "Bills", SAVINGS_CATEGORY}:
         return "protected"
@@ -380,6 +409,8 @@ def category_priority(category_name):
     for rule in FLEXIBLE_CUT_RULES.values():
         if category_name == rule["label"]:
             return int(rule["priority"])
+    if category_name == "Transportation":
+        return 7
     if category_flexibility(category_name) == "semi-flexible":
         return 50
     return 99
@@ -518,7 +549,7 @@ def build_behavior_progress(transactions, as_of):
         if amount >= 0:
             continue
         category_name = intelligence_bucket(tx)
-        if category_flexibility(category_name) != "flexible":
+        if category_name not in BEHAVIOR_TRACKED_CATEGORIES:
             continue
         d = parse_tx_date(tx)
         spend = abs(amount)
@@ -548,8 +579,15 @@ def build_behavior_progress(transactions, as_of):
                 "Status": status,
             }
         )
-    total_positive = sum(max(0.0, row["Estimated savings"]) for row in rows)
-    return {"rows": rows, "weekly_savings": total_positive}
+    net_savings = sum(float(row["Estimated savings"]) for row in rows)
+    positive_savings = sum(max(0.0, float(row["Estimated savings"])) for row in rows)
+    return {
+        "rows": rows,
+        "weekly_savings": net_savings,
+        "positive_weekly_savings": positive_savings,
+        "baseline_weekly_discretionary": sum(float(row["Baseline weekly"]) for row in rows),
+        "current_weekly_discretionary": sum(float(row["Current weekly pace"]) for row in rows),
+    }
 
 
 def savings_detection_sentence(row):
@@ -1023,8 +1061,7 @@ def build_goal_plan(goal_name, goal_cost, target_date, allow_protected):
         build_strategy_plan("Aggressive", weekly_needed, category_rows, allow_protected, preferences),
     ]
     realistic = gap <= max(5.0, weekly_needed * 0.10)
-
-    return {
+    plan = {
         "goal_name": goal_name.strip() or "this goal",
         "goal_cost": float(goal_cost),
         "target_date": target_date,
@@ -1053,6 +1090,15 @@ def build_goal_plan(goal_name, goal_cost, target_date, allow_protected):
         "allow_protected": allow_protected,
         "created_at": datetime.datetime.now().isoformat(timespec="seconds"),
     }
+    plan["goalAnalysis"] = build_goal_analysis(
+        plan["goal_name"],
+        plan["goal_cost"],
+        plan["target_date"],
+        plan["weekly_needed"],
+        behavior_progress,
+        plan.get("progress", 0.0),
+    )
+    return plan
 
 
 def top_behavior_rows(behavior_rows, limit=3):
@@ -1065,17 +1111,15 @@ def top_behavior_rows(behavior_rows, limit=3):
 
 def plan_success_likelihood(plan):
     weekly_needed = float(plan.get("weekly_needed", 0.0))
-    total_cut = float(plan.get("total_weekly_cut", 0.0))
     detected = float((plan.get("behavior_progress", {}) or {}).get("weekly_savings", 0.0))
-    coverage = (total_cut + detected) / max(1.0, weekly_needed)
+    coverage = detected / max(1.0, weekly_needed)
     return max(0, min(100, round(coverage * 100)))
 
 
 def plan_coverage(plan):
     weekly_needed = float(plan.get("weekly_needed", 0.0))
-    planned = float(plan.get("total_weekly_cut", 0.0))
     detected = float((plan.get("behavior_progress", {}) or {}).get("weekly_savings", 0.0))
-    return (planned + detected) / max(1.0, weekly_needed)
+    return detected / max(1.0, weekly_needed)
 
 
 def realistic_pace_label(plan):
@@ -1111,10 +1155,10 @@ def goal_trajectory_label(plan):
     weekly_needed = float(plan.get("weekly_needed", 0.0))
     detected = float((plan.get("behavior_progress", {}) or {}).get("weekly_savings", 0.0))
     if detected >= weekly_needed * 1.10:
-        return "Ahead of pace"
+        return "Ahead"
     if detected >= weekly_needed * 0.75:
         return "On track"
-    return "Falling behind"
+    return "Behind"
 
 
 def weekly_pace_delta(plan):
@@ -1123,14 +1167,160 @@ def weekly_pace_delta(plan):
     return detected - weekly_needed
 
 
-def projected_goal_date(plan):
-    detected = float((plan.get("behavior_progress", {}) or {}).get("weekly_savings", 0.0))
-    planned = float(plan.get("total_weekly_cut", 0.0))
-    weekly_pace = max(detected, planned)
-    if weekly_pace <= 0:
+def projected_goal_date_from_gap(target_date, weekly_needed, pace_vs_target):
+    if weekly_needed <= 0:
         return None
-    weeks_needed = float(plan.get("goal_cost", 0.0)) / weekly_pace
-    return today + datetime.timedelta(days=max(1, round(weeks_needed * 7)))
+    delta_weeks = float(pace_vs_target) / float(weekly_needed)
+    shift_days = round(delta_weeks * 7)
+    return target_date - datetime.timedelta(days=shift_days)
+
+
+def projected_goal_date(plan):
+    return projected_goal_date_from_gap(
+        plan["target_date"],
+        float(plan.get("weekly_needed", 0.0)),
+        weekly_pace_delta(plan),
+    )
+
+
+def build_goal_analysis(goal_name, target_amount, target_date, weekly_target, behavior_progress, progress_amount=0.0):
+    category_deltas = list(behavior_progress.get("rows", []) or [])
+    detected = sum(float(row.get("Estimated savings", 0.0)) for row in category_deltas)
+    baseline_total = sum(float(row.get("Baseline weekly", 0.0)) for row in category_deltas)
+    current_total = sum(float(row.get("Current weekly pace", 0.0)) for row in category_deltas)
+    pace_vs_target = detected - float(weekly_target)
+    if detected >= float(weekly_target) * 1.10:
+        trajectory = "Ahead"
+    elif detected >= float(weekly_target) * 0.75:
+        trajectory = "On track"
+    else:
+        trajectory = "Behind"
+    progress_delta = max(0.0, detected)
+    progress_amount = min(float(target_amount), max(0.0, float(progress_amount)) + progress_delta)
+    return {
+        "goalName": goal_name,
+        "detectedSavings": detected,
+        "categoryDeltas": category_deltas,
+        "paceVsTarget": pace_vs_target,
+        "projectionDate": projected_goal_date_from_gap(target_date, float(weekly_target), pace_vs_target),
+        "trajectory": trajectory,
+        "remaining": max(0.0, float(target_amount) - progress_amount),
+        "weeklyTarget": float(weekly_target),
+        "progressAmount": progress_amount,
+        "baselineTotals": baseline_total,
+        "currentTotals": current_total,
+        "visibleCategoryDeltaTotal": sum(float(row.get("Estimated savings", 0.0)) for row in category_deltas),
+        "hiddenContributingCategories": [],
+    }
+
+
+def goal_status_snapshot(plan):
+    analysis = plan.get("goalAnalysis") or build_goal_analysis(
+        plan["goal_name"],
+        plan["goal_cost"],
+        plan["target_date"],
+        plan["weekly_needed"],
+        plan.get("behavior_progress", {}) or {},
+        plan.get("progress", 0.0),
+    )
+    return {
+        "target": analysis["weeklyTarget"],
+        "detected": analysis["detectedSavings"],
+        "gap": analysis["paceVsTarget"],
+        "status": analysis["trajectory"],
+        "projected_date": analysis["projectionDate"],
+    }
+
+
+def projected_date_label(value):
+    if not value:
+        return "Needs momentum"
+    return value.strftime("%b %-d, %Y")
+
+
+def signed_money(value):
+    value = float(value)
+    if value >= 0:
+        return f"+{money(value)}"
+    return f"-{money(abs(value))}"
+
+
+def detected_savings_text(value):
+    value = float(value)
+    if value >= 0:
+        return f"freed up {money(value)}"
+    return f"overspent baseline by {money(abs(value))}"
+
+
+def simulation_debug_rows(plan):
+    transactions = load_demo_transactions_if_needed()
+    simulated = [tx for tx in transactions if str(tx.get("source") or "").lower() == "simulation"]
+    scenarios = sorted({str(tx.get("scenario") or "") for tx in simulated if tx.get("scenario")})
+    analysis = plan.get("goalAnalysis") or build_goal_analysis(
+        plan["goal_name"],
+        plan["goal_cost"],
+        plan["target_date"],
+        plan["weekly_needed"],
+        plan.get("behavior_progress", {}) or {},
+        plan.get("progress", 0.0),
+    )
+    return [
+        {"Metric": "Active simulation scenario", "Value": ", ".join(scenarios) if scenarios else "None"},
+        {"Metric": "Simulated transactions", "Value": str(len(simulated))},
+        {"Metric": "Current week tracked spend", "Value": money(analysis["currentTotals"])},
+        {"Metric": "Baseline weekly tracked spend", "Value": money(analysis["baselineTotals"])},
+        {"Metric": "Detected savings", "Value": signed_money(analysis["detectedSavings"])},
+        {"Metric": "Target weekly savings", "Value": money(analysis["weeklyTarget"])},
+        {"Metric": "Gap vs target", "Value": signed_money(analysis["paceVsTarget"])},
+        {"Metric": "Projected date", "Value": projected_date_label(analysis["projectionDate"])},
+    ]
+
+
+def reconciliation_debug(plan):
+    analysis = plan.get("goalAnalysis") or build_goal_analysis(
+        plan["goal_name"],
+        plan["goal_cost"],
+        plan["target_date"],
+        plan["weekly_needed"],
+        plan.get("behavior_progress", {}) or {},
+        plan.get("progress", 0.0),
+    )
+    category_rows = analysis["categoryDeltas"]
+    visible_total = sum(float(row.get("Estimated savings", 0.0)) for row in category_rows)
+    detected_total = float(analysis["detectedSavings"])
+    hidden = [
+        row for row in category_rows
+        if abs(float(row.get("Estimated savings", 0.0))) >= 0.01
+        and row.get("Category") not in {visible.get("Category") for visible in top_behavior_rows(category_rows, limit=3)}
+    ]
+    return {
+        "visible_total": visible_total,
+        "detected_total": detected_total,
+        "hidden": hidden,
+        "baseline_total": float(analysis["baselineTotals"]),
+        "current_total": float(analysis["currentTotals"]),
+        "mismatch": abs(visible_total - detected_total) > 0.01,
+    }
+
+
+def category_totals_match_transactions(plan):
+    transactions = load_demo_transactions_if_needed()
+    tx_totals = {}
+    for tx in transactions:
+        amount = float(tx.get("amount", 0.0))
+        if amount < 0:
+            bucket = intelligence_bucket(tx)
+            tx_totals[bucket] = tx_totals.get(bucket, 0.0) + abs(amount)
+    displayed = {
+        row["Category"]: float(row["Monthly spend"])
+        for row in plan.get("category_intelligence", [])
+    }
+    keys = set(tx_totals) | set(displayed)
+    mismatches = []
+    for key in sorted(keys):
+        if abs(tx_totals.get(key, 0.0) - displayed.get(key, 0.0)) > 0.01:
+            mismatches.append((key, tx_totals.get(key, 0.0), displayed.get(key, 0.0)))
+    return mismatches
 
 
 def dining_streak(transactions, as_of):
@@ -1175,45 +1365,66 @@ def affordability_status(plan):
 def render_goal_plan(plan):
     st.caption(f"Using local transactions plus monthly budget guardrails for {month_start.strftime('%B %Y')}.")
     target_label = plan["target_date"].strftime("%b %-d, %Y")
-    status = affordability_status(plan)
+    analysis = plan.get("goalAnalysis") or build_goal_analysis(
+        plan["goal_name"],
+        plan["goal_cost"],
+        plan["target_date"],
+        plan["weekly_needed"],
+        plan.get("behavior_progress", {}) or {},
+        plan.get("progress", 0.0),
+    )
+    status = analysis["trajectory"]
     pace = realistic_pace_label(plan)
     adjustment = lifestyle_adjustment_label(plan)
-    trajectory = goal_trajectory_label(plan)
-    projected_date = projected_goal_date(plan)
-    pace_delta = weekly_pace_delta(plan)
+    projected_date = analysis["projectionDate"]
+    pace_delta = analysis["paceVsTarget"]
+    detected = analysis["detectedSavings"]
+    remaining_after_week = analysis["remaining"]
     top_recommendations = plan.get("recommendations", [])[:3]
     top_categories = [str(row.get("Category", "")).replace(" (protected)", "") for row in top_recommendations]
     if top_categories:
         action_text = ", ".join(top_categories[:-1]) + (f", and {top_categories[-1]}" if len(top_categories) > 1 else top_categories[0])
-        answer = f"{plan['goal_name']} is {status.lower()} if you focus this week on {action_text}."
+        answer = f"You need {money(plan['weekly_needed'])}/week to stay on pace. This week you {detected_savings_text(detected)}, so you are {money(abs(pace_delta))} {'ahead of' if pace_delta >= 0 else 'behind'} pace."
     else:
-        answer = f"{plan['goal_name']} needs a longer timeline or more approved categories before the plan is realistic."
+        answer = f"You need {money(plan['weekly_needed'])}/week to stay on pace. This week you {detected_savings_text(detected)}, leaving a gap of {money(abs(pace_delta))}."
 
     with st.container(border=True):
-        st.subheader(f"{plan['goal_name']}: {status}")
+        st.subheader("Goal status")
+        cols = st.columns([1.2, 0.9, 1.0, 0.9])
+        cols[0].write(f"Goal: **{plan['goal_name']}**")
+        cols[1].write(f"Cost: **{money(plan['goal_cost'])}**")
+        cols[2].write(f"Target date: **{target_label}**")
+        cols[3].write(f"Status: **{status}**")
+        st.metric("Need to save", f"{money(plan['weekly_needed'])}/week")
+        detail_cols = st.columns(3)
+        detail_cols[0].metric("This week saved", signed_money(detected))
+        detail_cols[1].metric("Gap vs target", signed_money(pace_delta))
+        detail_cols[2].metric("Remaining", money(remaining_after_week))
         st.write(answer)
-        cols = st.columns(4)
-        cols[0].metric("Weekly needed", money(plan["weekly_needed"]))
-        cols[1].metric("Realistic pace", pace)
-        cols[2].metric("Lifestyle adjustment", adjustment)
-        cols[3].metric("Time left", f"{plan['days_until']} days")
+        secondary_cols = st.columns(3)
+        secondary_cols[0].metric("Realistic pace", pace)
+        secondary_cols[1].metric("Lifestyle adjustment", adjustment)
+        secondary_cols[2].metric("Current projection", projected_date_label(projected_date))
         st.caption(
             f"Approved categories can realistically free up about {money(plan.get('preference_capacity_monthly', 0.0))}/month. "
-            f"Target date: {target_label}."
+            "The weekly gap is calculated from detected spending changes against your recent baseline."
         )
 
-    previous_pace = st.session_state.pop("previous_realistic_pace", None)
+    previous_snapshot = st.session_state.pop("previous_goal_snapshot", None)
     simulated_scenario = st.session_state.pop("last_simulated_week", None)
-    if previous_pace and simulated_scenario:
-        if previous_pace != pace:
+    if simulated_scenario:
+        scenario_label = simulated_scenario.replace("_", " ")
+        if previous_snapshot:
+            previous_gap = float(previous_snapshot.get("gap", 0.0))
+            previous_date = previous_snapshot.get("projected_date")
+            movement = "improved" if pace_delta > previous_gap else "worsened" if pace_delta < previous_gap else "stayed about the same"
             st.info(
-                f"After the simulated {simulated_scenario} week, your {plan['goal_name']} moved from "
-                f"'{previous_pace}' to '{pace}'."
+                f"Simulated {scenario_label} week: your weekly gap {movement} from {signed_money(previous_gap)} "
+                f"to {signed_money(pace_delta)}, moving your projected date from "
+                f"{projected_date_label(previous_date)} to {projected_date_label(projected_date)}."
             )
-        elif pace_delta >= 0:
-            st.success(f"After the simulated {simulated_scenario} week, you are ahead of pace by {money(pace_delta)}/week.")
         else:
-            st.warning(f"After the simulated {simulated_scenario} week, you are behind pace by {money(abs(pace_delta))}/week.")
+            st.info(f"Simulated {scenario_label} week: you {detected_savings_text(detected)} versus baseline.")
 
     st.subheader("Simulate my week")
     sim_cols = st.columns(3)
@@ -1225,7 +1436,10 @@ def render_goal_plan(plan):
     for col, (label, scenario) in zip(sim_cols, scenarios):
         if col.button(label, width="stretch"):
             try:
-                st.session_state.previous_realistic_pace = pace
+                st.session_state.previous_goal_snapshot = {
+                    "gap": analysis["paceVsTarget"],
+                    "projected_date": analysis["projectionDate"],
+                }
                 api_simulate_week(scenario)
                 st.session_state.last_simulated_week = scenario
                 st.session_state.pop("goal_plan", None)
@@ -1237,15 +1451,14 @@ def render_goal_plan(plan):
     with st.container(border=True):
         st.subheader("Goal trajectory")
         trajectory_cols = st.columns(3)
-        trajectory_cols[0].metric("Trajectory", trajectory)
+        trajectory_cols[0].metric("Trajectory", status)
         if pace_delta >= 0:
             trajectory_cols[1].metric("Pace vs target", f"+{money(pace_delta)}/week")
         else:
             trajectory_cols[1].metric("Pace vs target", f"-{money(abs(pace_delta))}/week")
         if projected_date:
             delta_days = (projected_date - plan["target_date"]).days
-            projection_text = projected_date.strftime("%b %-d, %Y")
-            trajectory_cols[2].metric("Current projection", projection_text)
+            trajectory_cols[2].metric("Current projection", projected_date_label(projected_date))
             if delta_days > 0:
                 st.caption(f"At your current pace, you would reach this goal {delta_days} days after the target date.")
             elif delta_days < 0:
@@ -1260,6 +1473,10 @@ def render_goal_plan(plan):
             st.caption(f"You have stayed under your restaurant baseline for {streak} week{'s' if streak != 1 else ''}.")
 
     st.subheader("What should I do this week?")
+    if pace_delta < 0:
+        st.caption(f"You are {money(abs(pace_delta))} short this week. These actions could close the gap.")
+    else:
+        st.caption(f"You are {money(pace_delta)} ahead this week. These actions help protect that progress.")
     if top_recommendations:
         card_cols = st.columns(min(3, len(top_recommendations)))
         for idx, row in enumerate(top_recommendations):
@@ -1269,6 +1486,16 @@ def render_goal_plan(plan):
                     st.metric("Estimated weekly savings", money(row["Recommended weekly cut"]))
                     st.caption(row.get("Lifestyle impact", "moderate impact"))
                     st.write(row.get("Recommendation", row.get("Behavior change", "")))
+        recommended_categories = {str(row.get("Category", "")).replace(" (protected)", "") for row in top_recommendations}
+        contributing_rows = [
+            row for row in analysis["categoryDeltas"]
+            if abs(float(row.get("Estimated savings", 0.0))) >= 1
+            and row.get("Category") not in recommended_categories
+        ]
+        if contributing_rows:
+            with st.expander("Other behavior affecting this goal"):
+                for row in contributing_rows:
+                    st.write(f"- {savings_detection_sentence(row)}")
     else:
         st.info("This week, the clearest action is to move the date out or approve more flexible categories.")
 
@@ -1284,11 +1511,12 @@ def render_goal_plan(plan):
     st.subheader("Progress this week")
     behavior = plan.get("behavior_progress", {})
     if behavior:
-        detected = float(behavior.get("weekly_savings", 0.0))
-        progress_cols = st.columns([1, 2])
-        progress_cols[0].metric("Net detected savings", money(detected))
-        rows = top_behavior_rows(behavior.get("rows", []), limit=3)
-        with progress_cols[1]:
+        progress_cols = st.columns([0.9, 0.9, 0.9, 1.6])
+        progress_cols[0].metric("Target this week", money(analysis["weeklyTarget"]))
+        progress_cols[1].metric("Detected savings", signed_money(detected))
+        progress_cols[2].metric("Gap", signed_money(pace_delta))
+        rows = analysis["categoryDeltas"]
+        with progress_cols[3]:
             if rows:
                 for row in rows:
                     st.write(f"- {savings_detection_sentence(row)}")
@@ -1309,7 +1537,7 @@ def render_goal_plan(plan):
         if row["Flexibility"] == "flexible" and row["Monthly spend"] > 0
     ]
     if flexible_rows:
-        st.subheader("Spending overview")
+        st.subheader("Where your flexible spending is going this week")
         overview_df = pd.DataFrame(
             {
                 "Category": [row["Category"] for row in flexible_rows],
@@ -1343,6 +1571,55 @@ def render_goal_plan(plan):
                 st.dataframe(pd.DataFrame(protected_rows), width="stretch", hide_index=True)
             else:
                 st.write("No protected category spending found.")
+
+    if show_legacy_tools:
+        with st.expander("Simulation debug"):
+            st.dataframe(pd.DataFrame(simulation_debug_rows(plan)), width="stretch", hide_index=True)
+            reconciliation = reconciliation_debug(plan)
+            recon_cols = st.columns(4)
+            recon_cols[0].metric("Total visible category deltas", signed_money(reconciliation["visible_total"]))
+            recon_cols[1].metric("Detected savings total", signed_money(reconciliation["detected_total"]))
+            recon_cols[2].metric("Baseline totals", money(reconciliation["baseline_total"]))
+            recon_cols[3].metric("Current totals", money(reconciliation["current_total"]))
+            if reconciliation["mismatch"]:
+                st.warning("Analytics mismatch detected")
+            hidden = reconciliation["hidden"]
+            st.markdown("**Hidden contributing categories**")
+            if hidden:
+                st.dataframe(
+                    pd.DataFrame(
+                        [
+                            {
+                                "Category": row["Category"],
+                                "Baseline weekly": money(row["Baseline weekly"]),
+                                "Current weekly pace": money(row["Current weekly pace"]),
+                                "Delta": signed_money(row["Estimated savings"]),
+                            }
+                            for row in hidden
+                        ]
+                    ),
+                    width="stretch",
+                    hide_index=True,
+                )
+            else:
+                st.caption("None. All contributing category deltas are visible in Progress this week.")
+            mismatches = category_totals_match_transactions(plan)
+            if mismatches:
+                st.warning("Displayed category totals do not match transaction-derived totals.")
+                st.dataframe(
+                    pd.DataFrame(
+                        [
+                            {
+                                "Category": category,
+                                "Transaction total": money(tx_total),
+                                "Displayed total": money(displayed_total),
+                            }
+                            for category, tx_total, displayed_total in mismatches
+                        ]
+                    ),
+                    width="stretch",
+                    hide_index=True,
+                )
 
 
 st.sidebar.divider()
@@ -1457,8 +1734,25 @@ elif page == "Transaction History":
         if df.empty:
             st.write("No transactions found.")
         else:
+            df["source_label"] = [transaction_source_label(tx) for tx in transactions]
             df["amount"] = df["amount"].map(money)
-            st.dataframe(df.rename(columns={"date": "Date", "merchant": "Merchant", "amount": "Amount", "category": "Category"}), width="stretch", hide_index=True)
+            display_cols = ["date", "merchant", "amount", "category", "source_label"]
+            if "raw_category" in df.columns:
+                display_cols.append("raw_category")
+            st.dataframe(
+                df[display_cols].rename(
+                    columns={
+                        "date": "Date",
+                        "merchant": "Merchant",
+                        "amount": "Amount",
+                        "category": "Category",
+                        "source_label": "Source",
+                        "raw_category": "Raw category",
+                    }
+                ),
+                width="stretch",
+                hide_index=True,
+            )
     except Exception as e:
         st.error("Could not load transactions.")
         st.code(str(e))
@@ -1575,10 +1869,10 @@ elif page == "Goals / Saved Plans":
         behavior_progress = {"rows": [], "weekly_savings": 0.0}
 
     detected_weekly_savings = float(behavior_progress.get("weekly_savings", 0.0))
-    top_changes = top_behavior_rows(behavior_progress.get("rows", []), limit=3)
+    top_changes = behavior_progress.get("rows", [])
     with st.container(border=True):
         metric_cols = st.columns([1, 2])
-        metric_cols[0].metric("Detected this week", money(detected_weekly_savings))
+        metric_cols[0].metric("Detected this week", signed_money(detected_weekly_savings))
         with metric_cols[1]:
             if top_changes:
                 for row in top_changes:
@@ -1602,23 +1896,27 @@ elif page == "Goals / Saved Plans":
                 top[1].write(f"Target: {money(saved_plan['target_amount'])}")
                 top[2].write(f"By: {saved_plan['target_date']}")
                 target_amount = float(saved_plan["target_amount"])
-                automatic_progress = min(target_amount, float(saved_plan.get("progress", 0.0)) + detected_weekly_savings)
-                st.progress(min(1.0, automatic_progress / max(1.0, target_amount)))
-                remaining = max(0.0, target_amount - automatic_progress)
-                goal_cols = st.columns(3)
-                goal_cols[0].metric("Auto progress", money(automatic_progress))
-                goal_cols[1].metric("Remaining", money(remaining))
-                goal_cols[2].metric("Weekly target", money(saved_plan["weekly_needed"]))
                 target_date = datetime.datetime.strptime(saved_plan["target_date"], "%Y-%m-%d").date()
-                weeks_left = max(1.0, (target_date - today).days / 7)
-                expected_progress = target_amount - (float(saved_plan["weekly_needed"]) * weeks_left)
-                pace_delta = automatic_progress - max(0.0, expected_progress)
-                if pace_delta >= 0:
-                    st.success(f"Ahead of pace by {money(pace_delta)}.")
+                analysis = build_goal_analysis(
+                    saved_plan["goal_name"],
+                    target_amount,
+                    target_date,
+                    float(saved_plan["weekly_needed"]),
+                    behavior_progress,
+                    float(saved_plan.get("progress", 0.0)),
+                )
+                st.progress(min(1.0, analysis["progressAmount"] / max(1.0, target_amount)))
+                goal_cols = st.columns(3)
+                goal_cols[0].metric("Auto progress", money(analysis["progressAmount"]))
+                goal_cols[1].metric("Remaining", money(analysis["remaining"]))
+                goal_cols[2].metric("Weekly gap", signed_money(analysis["paceVsTarget"]))
+                if analysis["paceVsTarget"] >= 0:
+                    st.success(f"{analysis['trajectory']}: ahead of this week's pace by {money(analysis['paceVsTarget'])}.")
                 else:
-                    st.warning(f"Behind pace by {money(abs(pace_delta))}.")
-                slowing = [row for row in behavior_progress.get("rows", []) if row["Estimated savings"] < -1]
-                successful = [row for row in behavior_progress.get("rows", []) if row["Estimated savings"] > 1]
+                    st.warning(f"{analysis['trajectory']}: behind this week's pace by {money(abs(analysis['paceVsTarget']))}.")
+                st.caption(f"Projected date: {projected_date_label(analysis['projectionDate'])}.")
+                slowing = [row for row in analysis["categoryDeltas"] if row["Estimated savings"] < -1]
+                successful = [row for row in analysis["categoryDeltas"] if row["Estimated savings"] > 1]
                 if successful:
                     st.caption(f"{successful[0]['Category']} reductions are tracking successfully.")
                 if slowing:

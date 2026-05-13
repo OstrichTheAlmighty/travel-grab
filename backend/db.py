@@ -27,7 +27,9 @@ def init_db():
             merchant TEXT NOT NULL,
             amount REAL NOT NULL,
             category TEXT NOT NULL,
-            user_id TEXT NOT NULL DEFAULT 'default'
+            user_id TEXT NOT NULL DEFAULT 'default',
+            source TEXT NOT NULL DEFAULT 'demo',
+            scenario TEXT
         )
         """
     )
@@ -35,6 +37,10 @@ def init_db():
     cols = {row["name"] for row in cur.execute("PRAGMA table_info(transactions)").fetchall()}
     if "user_id" not in cols:
         cur.execute("ALTER TABLE transactions ADD COLUMN user_id TEXT NOT NULL DEFAULT 'default'")
+    if "source" not in cols:
+        cur.execute("ALTER TABLE transactions ADD COLUMN source TEXT NOT NULL DEFAULT 'demo'")
+    if "scenario" not in cols:
+        cur.execute("ALTER TABLE transactions ADD COLUMN scenario TEXT")
 
     # -----------------------------
     # Budgets tables (NEW)
@@ -115,13 +121,13 @@ def init_db():
 
     if n == 0:
         seed = [
-            ("2025-12-20", "Target", -32.18, "Shopping", "default"),
-            ("2025-12-21", "Chipotle", -12.45, "Food", "default"),
-            ("2025-12-22", "Paycheck", 250.00, "Income", "default"),
-            ("2025-12-23", "Netflix", -15.49, "Subscriptions", "default"),
+            ("2025-12-20", "Target", -32.18, "Shopping", "default", "demo", None),
+            ("2025-12-21", "Chipotle", -12.45, "Food", "default", "demo", None),
+            ("2025-12-22", "Paycheck", 250.00, "Income", "default", "demo", None),
+            ("2025-12-23", "Netflix", -15.49, "Subscriptions", "default", "demo", None),
         ]
         cur.executemany(
-            "INSERT INTO transactions (date, merchant, amount, category, user_id) VALUES (?, ?, ?, ?, ?)",
+            "INSERT INTO transactions (date, merchant, amount, category, user_id, source, scenario) VALUES (?, ?, ?, ?, ?, ?, ?)",
             seed,
         )
 
