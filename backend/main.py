@@ -160,6 +160,12 @@ class SampleMonthIn(BaseModel):
     as_of: Optional[str] = None
 
 
+class SimulateWeekIn(BaseModel):
+    user_id: str = USER_DEFAULT
+    as_of: Optional[str] = None
+    scenario: Literal["good", "average", "overspending"]
+
+
 @app.post("/transactions/sample-month")
 def load_sample_month(sample: SampleMonthIn):
     as_of_d = parse_date(sample.as_of) if sample.as_of else date.today()
@@ -267,6 +273,76 @@ def load_sample_month(sample: SampleMonthIn):
         flush=True,
     )
     return {"status": "ok", "loaded": len(sample_transactions)}
+
+
+@app.post("/transactions/simulate-week")
+def simulate_week(sim: SimulateWeekIn):
+    as_of_d = parse_date(sim.as_of) if sim.as_of else date.today()
+    week_start = as_of_d - timedelta(days=as_of_d.weekday())
+    week_end = min(as_of_d, week_start + timedelta(days=6))
+
+    def tx(day_offset: int, merchant: str, amount: float, category: str):
+        d = min(week_end, week_start + timedelta(days=day_offset))
+        return (d.isoformat(), merchant, -abs(float(amount)), category, sim.user_id)
+
+    scenario_transactions = {
+        "good": [
+            tx(0, "Home Coffee Supplies", 8.50, "Food"),
+            tx(1, "Chipotle", 14.20, "Food"),
+            tx(3, "Metro Transit", 12.50, "Transportation"),
+            tx(4, "Kindle Books", 7.99, "Entertainment"),
+        ],
+        "average": [
+            tx(0, "Starbucks", 6.75, "Food"),
+            tx(1, "Sweetgreen", 18.25, "Food"),
+            tx(2, "Amazon", 31.40, "Shopping"),
+            tx(3, "Uber", 19.80, "Transportation"),
+            tx(4, "Local Pizza Co.", 28.70, "Food"),
+        ],
+        "overspending": [
+            tx(0, "Starbucks", 7.20, "Food"),
+            tx(1, "DoorDash", 42.60, "Food"),
+            tx(2, "Amazon", 118.90, "Shopping"),
+            tx(3, "Concert Tickets", 96.00, "Entertainment"),
+            tx(4, "Lyft", 34.40, "Transportation"),
+            tx(4, "Italian Kitchen", 67.25, "Food"),
+        ],
+    }[sim.scenario]
+
+    with get_conn() as conn:
+        cur = conn.execute(
+            """
+            DELETE FROM transactions
+            WHERE user_id = ?
+              AND date >= ?
+              AND date <= ?
+              AND category IN ('Food', 'Shopping', 'Entertainment', 'Subscriptions', 'Other')
+            """,
+            (sim.user_id, week_start.isoformat(), week_end.isoformat()),
+        )
+        conn.executemany(
+            "INSERT INTO transactions (date, merchant, amount, category, user_id) VALUES (?, ?, ?, ?, ?)",
+            scenario_transactions,
+        )
+        conn.commit()
+
+    _mark_transaction_dataset_event(
+        sim.user_id,
+        "simulate_week",
+        scenario=sim.scenario,
+        deleted=int(cur.rowcount or 0),
+        loaded=len(scenario_transactions),
+        week_start=week_start.isoformat(),
+        week_end=week_end.isoformat(),
+    )
+    return {
+        "status": "ok",
+        "scenario": sim.scenario,
+        "deleted": int(cur.rowcount or 0),
+        "loaded": len(scenario_transactions),
+        "week_start": week_start.isoformat(),
+        "week_end": week_end.isoformat(),
+    }
 
 
 # -----------------------------

@@ -221,6 +221,18 @@ def api_load_realistic_transaction_history():
     return r.json()
 
 
+def api_simulate_week(scenario):
+    r = requests.post(
+        f"{BASE_URL}/transactions/simulate-week",
+        json={"user_id": st.session_state.user_id, "as_of": as_of_str, "scenario": scenario},
+        timeout=10,
+    )
+    if not r.ok:
+        show_http_error(r)
+        raise RuntimeError("POST /transactions/simulate-week failed")
+    return r.json()
+
+
 # -----------------------------
 # Goal affordability planner
 # -----------------------------
@@ -557,7 +569,7 @@ def behavior_difficulty_label(strategy):
         return "Easy win"
     if weekly_cuts < 90 and high_impact_count <= 1 and item_count <= 4:
         return "Moderate adjustment"
-    return "Significant lifestyle change"
+    return "Major lifestyle adjustment"
 
 
 def build_category_intelligence(transactions, previous_transactions=None):
@@ -709,9 +721,11 @@ def recommend_goal_cuts(
     budget_allocations=None,
     preferences=None,
     plan_style="Balanced",
+    improved_categories=None,
 ):
     preferences = preferences or ensure_flexibility_preferences()
     budget_allocations = budget_allocations or {}
+    improved_categories = improved_categories or set()
     weeks_elapsed = max(1.0, ((as_of_date - month_start).days + 1) / 7)
     weekly_spend = {k: v / weeks_elapsed for k, v in flexible.items()}
     budget_weekly = {k: 0.0 for k in FLEXIBLE_CUT_RULES}
@@ -731,19 +745,28 @@ def recommend_goal_cuts(
         if not preference_for_category(rule["label"], preferences).get("enabled", False):
             continue
         rate = preference_adjusted_cut_rate(rule["label"], preferences, plan_style)
+        if rule["label"] in improved_categories:
+            rate *= 0.25
         capacity = baseline_weekly.get(key, 0.0) * rate
         cut = min(remaining, capacity)
         if cut >= 1:
+            if rule["label"] in improved_categories:
+                why_selected = (
+                    f"You already improved {rule['label']} this week, so this is a small maintenance adjustment "
+                    "instead of asking for another major cut."
+                )
+            else:
+                why_selected = (
+                    f"You approved {rule['label']} at "
+                    f"{preference_for_category(rule['label'], preferences).get('aggressiveness', 'Moderate cuts').lower()}, "
+                    "and your recent transactions show optional spend there."
+                )
             recommendations.append(
                 {
                     "Category": rule["label"],
                     "Current weekly spend": baseline_weekly.get(key, 0.0),
                     "Recommended weekly cut": cut,
-                    "Why selected": (
-                        f"You approved {rule['label']} at "
-                        f"{preference_for_category(rule['label'], preferences).get('aggressiveness', 'Moderate cuts').lower()}, "
-                        "and your recent transactions show optional spend there."
-                    ),
+                    "Why selected": why_selected,
                 }
             )
             remaining -= cut
@@ -834,7 +857,23 @@ def build_strategy_plan(name, weekly_needed, category_rows, allow_protected, pre
     total_weekly_cut = sum(item["Weekly cut"] for item in recommendations)
     likelihood = min(100, round((total_weekly_cut / max(1.0, weekly_needed)) * 100))
     categories_affected = ", ".join(item["Category"] for item in recommendations) or "None"
-    difficulty = min(10, max(1, round(difficulty_base + (len(recommendations) * 0.6) + (remaining / max(1.0, weekly_needed) * 3))))
+    adjustment_score = min(10, max(1, round(difficulty_base + (len(recommendations) * 0.6) + (remaining / max(1.0, weekly_needed) * 3))))
+    if likelihood >= 95:
+        pace_label = "Very achievable"
+    elif likelihood >= 75:
+        pace_label = "Achievable with consistency"
+    elif likelihood >= 45:
+        pace_label = "Tight timeline"
+    else:
+        pace_label = "Unrealistic without major changes"
+    if adjustment_score <= 3:
+        adjustment_label = "Minimal"
+    elif adjustment_score <= 6:
+        adjustment_label = "Noticeable"
+    elif adjustment_score <= 8:
+        adjustment_label = "Major"
+    else:
+        adjustment_label = "Extreme"
     if likelihood >= 95:
         explanation = f"This plan can cover the goal using {categories_affected} while staying explainable and tied to current spending."
     elif likelihood >= 60:
@@ -844,10 +883,10 @@ def build_strategy_plan(name, weekly_needed, category_rows, allow_protected, pre
 
     return {
         "Plan": f"{name} plan",
-        "Target completion likelihood": f"{likelihood}%",
+        "Realistic pace": pace_label,
         "Estimated weekly cuts": total_weekly_cut,
         "Categories affected": categories_affected,
-        "Difficulty score": f"{difficulty}/10",
+        "Lifestyle adjustment": adjustment_label,
         "Explanation": explanation,
         "items": recommendations,
         "remaining_gap": max(0.0, remaining),
@@ -938,6 +977,11 @@ def build_goal_plan(goal_name, goal_cost, target_date, allow_protected):
     )
     all_transactions = all_tx_resp.json().get("transactions", []) if all_tx_resp.ok else transactions
     behavior_progress = build_behavior_progress(all_transactions, as_of_date)
+    improved_categories = {
+        row["Category"]
+        for row in behavior_progress.get("rows", [])
+        if float(row.get("Estimated savings", 0.0)) > 5
+    }
     flexible, protected = spending_summary(transactions)
     prev_start, prev_end = month_bounds(previous_month(month_start))
     try:
@@ -969,6 +1013,7 @@ def build_goal_plan(goal_name, goal_cost, target_date, allow_protected):
         budget_allocations=budget_allocations,
         preferences=preferences,
         plan_style=plan_style,
+        improved_categories=improved_categories,
     )
     recommendations = enrich_recommendations(recommendations, category_rows)
     total_weekly_cut = sum(float(r["Recommended weekly cut"]) for r in recommendations)
@@ -1000,6 +1045,8 @@ def build_goal_plan(goal_name, goal_cost, target_date, allow_protected):
         "plan_style": plan_style,
         "what_this_changes": what_this_changes(recommendations),
         "behavior_progress": behavior_progress,
+        "improved_categories": sorted(improved_categories),
+        "dining_streak": dining_streak(all_transactions, as_of_date),
         "gap": gap,
         "total_weekly_cut": total_weekly_cut,
         "realistic": realistic,
@@ -1024,23 +1071,103 @@ def plan_success_likelihood(plan):
     return max(0, min(100, round(coverage * 100)))
 
 
-def plan_difficulty_label(plan):
+def plan_coverage(plan):
+    weekly_needed = float(plan.get("weekly_needed", 0.0))
+    planned = float(plan.get("total_weekly_cut", 0.0))
+    detected = float((plan.get("behavior_progress", {}) or {}).get("weekly_savings", 0.0))
+    return (planned + detected) / max(1.0, weekly_needed)
+
+
+def realistic_pace_label(plan):
+    coverage = plan_coverage(plan)
+    if coverage >= 1.15:
+        return "Very achievable"
+    if coverage >= 0.90:
+        return "Achievable with consistency"
+    if coverage >= 0.60:
+        return "Tight timeline"
+    return "Unrealistic without major changes"
+
+
+def lifestyle_adjustment_label(plan):
     recommendations = plan.get("recommendations", [])
     high_impact = sum(1 for item in recommendations if item.get("Lifestyle impact") == "high impact")
     moderate_impact = sum(1 for item in recommendations if item.get("Lifestyle impact") == "moderate impact")
     weekly_cut = float(plan.get("total_weekly_cut", 0.0))
-    if weekly_cut < 35 and high_impact == 0 and moderate_impact <= 1:
-        return "Easy win"
-    if weekly_cut < 90 and high_impact <= 1:
-        return "Moderate adjustment"
-    return "Significant lifestyle change"
+    if weekly_cut < 30 and high_impact == 0 and moderate_impact <= 1:
+        return "Minimal"
+    if weekly_cut < 85 and high_impact <= 1:
+        return "Noticeable"
+    if weekly_cut < 150 and high_impact <= 2:
+        return "Major"
+    return "Extreme"
+
+
+def plan_difficulty_label(plan):
+    return lifestyle_adjustment_label(plan)
+
+
+def goal_trajectory_label(plan):
+    weekly_needed = float(plan.get("weekly_needed", 0.0))
+    detected = float((plan.get("behavior_progress", {}) or {}).get("weekly_savings", 0.0))
+    if detected >= weekly_needed * 1.10:
+        return "Ahead of pace"
+    if detected >= weekly_needed * 0.75:
+        return "On track"
+    return "Falling behind"
+
+
+def weekly_pace_delta(plan):
+    weekly_needed = float(plan.get("weekly_needed", 0.0))
+    detected = float((plan.get("behavior_progress", {}) or {}).get("weekly_savings", 0.0))
+    return detected - weekly_needed
+
+
+def projected_goal_date(plan):
+    detected = float((plan.get("behavior_progress", {}) or {}).get("weekly_savings", 0.0))
+    planned = float(plan.get("total_weekly_cut", 0.0))
+    weekly_pace = max(detected, planned)
+    if weekly_pace <= 0:
+        return None
+    weeks_needed = float(plan.get("goal_cost", 0.0)) / weekly_pace
+    return today + datetime.timedelta(days=max(1, round(weeks_needed * 7)))
+
+
+def dining_streak(transactions, as_of):
+    current_week_start, _ = week_bounds(as_of)
+    weekly = {}
+    for tx in transactions:
+        if float(tx.get("amount", 0.0)) >= 0:
+            continue
+        if intelligence_bucket(tx) != "Restaurants / dining":
+            continue
+        d = parse_tx_date(tx)
+        start, _ = week_bounds(d)
+        if current_week_start - datetime.timedelta(days=35) <= start <= current_week_start:
+            weekly[start] = weekly.get(start, 0.0) + abs(float(tx.get("amount", 0.0)))
+    previous_values = [
+        amount
+        for start, amount in weekly.items()
+        if current_week_start - datetime.timedelta(days=35) <= start < current_week_start
+    ]
+    baseline = sum(previous_values) / max(1, len(previous_values))
+    if baseline <= 0:
+        return 0
+    streak = 0
+    for offset in range(0, 6):
+        start = current_week_start - datetime.timedelta(days=offset * 7)
+        if weekly.get(start, 0.0) <= baseline * 0.90:
+            streak += 1
+        else:
+            break
+    return streak
 
 
 def affordability_status(plan):
-    likelihood = plan_success_likelihood(plan)
-    if plan.get("realistic") and likelihood >= 90:
+    pace = realistic_pace_label(plan)
+    if pace in {"Very achievable", "Achievable with consistency"}:
         return "Possible"
-    if likelihood >= 60:
+    if pace == "Tight timeline":
         return "Tight"
     return "Unrealistic without changes"
 
@@ -1049,8 +1176,11 @@ def render_goal_plan(plan):
     st.caption(f"Using local transactions plus monthly budget guardrails for {month_start.strftime('%B %Y')}.")
     target_label = plan["target_date"].strftime("%b %-d, %Y")
     status = affordability_status(plan)
-    likelihood = plan_success_likelihood(plan)
-    difficulty = plan_difficulty_label(plan)
+    pace = realistic_pace_label(plan)
+    adjustment = lifestyle_adjustment_label(plan)
+    trajectory = goal_trajectory_label(plan)
+    projected_date = projected_goal_date(plan)
+    pace_delta = weekly_pace_delta(plan)
     top_recommendations = plan.get("recommendations", [])[:3]
     top_categories = [str(row.get("Category", "")).replace(" (protected)", "") for row in top_recommendations]
     if top_categories:
@@ -1064,13 +1194,70 @@ def render_goal_plan(plan):
         st.write(answer)
         cols = st.columns(4)
         cols[0].metric("Weekly needed", money(plan["weekly_needed"]))
-        cols[1].metric("Likelihood", f"{likelihood}%")
-        cols[2].metric("Difficulty", difficulty)
+        cols[1].metric("Realistic pace", pace)
+        cols[2].metric("Lifestyle adjustment", adjustment)
         cols[3].metric("Time left", f"{plan['days_until']} days")
         st.caption(
             f"Approved categories can realistically free up about {money(plan.get('preference_capacity_monthly', 0.0))}/month. "
             f"Target date: {target_label}."
         )
+
+    previous_pace = st.session_state.pop("previous_realistic_pace", None)
+    simulated_scenario = st.session_state.pop("last_simulated_week", None)
+    if previous_pace and simulated_scenario:
+        if previous_pace != pace:
+            st.info(
+                f"After the simulated {simulated_scenario} week, your {plan['goal_name']} moved from "
+                f"'{previous_pace}' to '{pace}'."
+            )
+        elif pace_delta >= 0:
+            st.success(f"After the simulated {simulated_scenario} week, you are ahead of pace by {money(pace_delta)}/week.")
+        else:
+            st.warning(f"After the simulated {simulated_scenario} week, you are behind pace by {money(abs(pace_delta))}/week.")
+
+    st.subheader("Simulate my week")
+    sim_cols = st.columns(3)
+    scenarios = [
+        ("Simulate good week", "good"),
+        ("Simulate average week", "average"),
+        ("Simulate overspending week", "overspending"),
+    ]
+    for col, (label, scenario) in zip(sim_cols, scenarios):
+        if col.button(label, width="stretch"):
+            try:
+                st.session_state.previous_realistic_pace = pace
+                api_simulate_week(scenario)
+                st.session_state.last_simulated_week = scenario
+                st.session_state.pop("goal_plan", None)
+                st.rerun()
+            except Exception as e:
+                st.error("Could not simulate this week.")
+                st.code(str(e))
+
+    with st.container(border=True):
+        st.subheader("Goal trajectory")
+        trajectory_cols = st.columns(3)
+        trajectory_cols[0].metric("Trajectory", trajectory)
+        if pace_delta >= 0:
+            trajectory_cols[1].metric("Pace vs target", f"+{money(pace_delta)}/week")
+        else:
+            trajectory_cols[1].metric("Pace vs target", f"-{money(abs(pace_delta))}/week")
+        if projected_date:
+            delta_days = (projected_date - plan["target_date"]).days
+            projection_text = projected_date.strftime("%b %-d, %Y")
+            trajectory_cols[2].metric("Current projection", projection_text)
+            if delta_days > 0:
+                st.caption(f"At your current pace, you would reach this goal {delta_days} days after the target date.")
+            elif delta_days < 0:
+                st.caption(f"At your current pace, you would reach this goal {abs(delta_days)} days before the target date.")
+            else:
+                st.caption("At your current pace, you would reach this goal right on the target date.")
+        else:
+            trajectory_cols[2].metric("Current projection", "Needs momentum")
+            st.caption("The projection will update once the app detects savings or approved plan changes.")
+        streak = int(plan.get("dining_streak", 0))
+        if streak > 0:
+            st.caption(f"You have stayed under your restaurant baseline for {streak} week{'s' if streak != 1 else ''}.")
 
     st.subheader("What should I do this week?")
     if top_recommendations:
