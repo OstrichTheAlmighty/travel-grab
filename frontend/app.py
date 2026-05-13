@@ -8,8 +8,28 @@ BASE_URL = "http://127.0.0.1:8000"
 if "user_id" not in st.session_state:
     st.session_state.user_id = "default"
 
-st.set_page_config(page_title="AI Finance Coach", layout="wide")
-st.title("AI Finance Coach")
+st.set_page_config(page_title="How can I afford this?", layout="wide")
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background: #0f1218;
+        color: #f4f7fb;
+    }
+    section[data-testid="stSidebar"] {
+        background: #151923;
+    }
+    div[data-testid="stMetric"] {
+        background: #171c27;
+        border: 1px solid #2b3342;
+        border-radius: 8px;
+        padding: 14px 16px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+st.title("How can I afford this?")
 
 # -----------------------------
 # Month selector (global)
@@ -146,6 +166,247 @@ def api_get_transactions(start, end):
         show_http_error(r)
         raise RuntimeError("GET /transactions failed")
     return r.json()
+
+
+# -----------------------------
+# Goal affordability planner
+# -----------------------------
+PROTECTED_CATEGORY_LABELS = {
+    "Bills": "rent and bills",
+    "Groceries": "essentials",
+    "Transportation": "essentials",
+    "Health": "essentials",
+    "Education": "essentials",
+    SAVINGS_CATEGORY: "savings",
+}
+
+FLEXIBLE_CUT_RULES = {
+    "coffee": {"label": "Coffee", "priority": 1, "max_cut_pct": 0.70},
+    "restaurants": {"label": "Restaurants / dining", "priority": 2, "max_cut_pct": 0.45},
+    "shopping": {"label": "Shopping", "priority": 3, "max_cut_pct": 0.50},
+    "entertainment": {"label": "Entertainment", "priority": 4, "max_cut_pct": 0.40},
+    "other": {"label": "Other discretionary", "priority": 5, "max_cut_pct": 0.30},
+}
+
+
+def load_demo_transactions_if_needed():
+    data = api_get_transactions(month_start.isoformat(), as_of_str)
+    transactions = data.get("transactions", [])
+    if transactions:
+        return transactions
+
+    all_data = requests.get(
+        f"{BASE_URL}/transactions",
+        params={"user_id": st.session_state.user_id},
+        timeout=10,
+    )
+    if not all_data.ok:
+        show_http_error(all_data)
+        raise RuntimeError("GET /transactions failed")
+    transactions = all_data.json().get("transactions", [])
+    if transactions:
+        return transactions
+
+    r = requests.post(
+        f"{BASE_URL}/transactions/sample-month",
+        json={"user_id": st.session_state.user_id, "as_of": as_of_str},
+        timeout=10,
+    )
+    if not r.ok:
+        show_http_error(r)
+        raise RuntimeError("POST /transactions/sample-month failed")
+    return api_get_transactions(month_start.isoformat(), as_of_str).get("transactions", [])
+
+
+def flexible_bucket(tx):
+    category = str(tx.get("category", "")).strip()
+    merchant = str(tx.get("merchant", "")).lower()
+
+    if category == "Food":
+        if any(word in merchant for word in ["cafe", "coffee", "starbucks"]):
+            return "coffee"
+        return "restaurants"
+    if category == "Shopping":
+        return "shopping"
+    if category == "Entertainment":
+        return "entertainment"
+    if category in {"Other", "Subscriptions"}:
+        return "other"
+    return None
+
+
+def spending_summary(transactions):
+    flexible = {key: 0.0 for key in FLEXIBLE_CUT_RULES}
+    protected = {}
+
+    for tx in transactions:
+        amount = float(tx.get("amount", 0.0))
+        if amount >= 0:
+            continue
+        spend = abs(amount)
+        category = str(tx.get("category", "")).strip()
+        bucket = flexible_bucket(tx)
+        if bucket:
+            flexible[bucket] += spend
+        else:
+            protected[category] = protected.get(category, 0.0) + spend
+
+    return flexible, protected
+
+
+def recommend_goal_cuts(weekly_needed, flexible, allow_protected, protected):
+    weeks_elapsed = max(1.0, ((as_of_date - month_start).days + 1) / 7)
+    weekly_spend = {k: v / weeks_elapsed for k, v in flexible.items()}
+    recommendations = []
+    remaining = float(weekly_needed)
+
+    for key, rule in sorted(FLEXIBLE_CUT_RULES.items(), key=lambda item: item[1]["priority"]):
+        capacity = weekly_spend.get(key, 0.0) * rule["max_cut_pct"]
+        cut = min(remaining, capacity)
+        if cut >= 1:
+            recommendations.append(
+                {
+                    "Category": rule["label"],
+                    "Current weekly spend": weekly_spend.get(key, 0.0),
+                    "Recommended weekly cut": cut,
+                }
+            )
+            remaining -= cut
+        if remaining <= 0.5:
+            break
+
+    if allow_protected and remaining > 0.5:
+        protected_weekly = {k: v / weeks_elapsed for k, v in protected.items()}
+        for category, amount in sorted(protected_weekly.items(), key=lambda item: item[1], reverse=True):
+            if category == "Income":
+                continue
+            capacity = amount * 0.05
+            cut = min(remaining, capacity)
+            if cut >= 1:
+                recommendations.append(
+                    {
+                        "Category": f"{category} (protected)",
+                        "Current weekly spend": amount,
+                        "Recommended weekly cut": cut,
+                    }
+                )
+                remaining -= cut
+            if remaining <= 0.5:
+                break
+
+    return recommendations, max(0.0, remaining)
+
+
+def money(value):
+    return f"${float(value):,.2f}"
+
+
+st.sidebar.divider()
+show_legacy_tools = st.sidebar.checkbox("Show old dashboard tools", value=False)
+
+with st.form("afford_goal_form"):
+    goal_name = st.text_input("What do you want to afford?", value="New laptop")
+    goal_cost = st.number_input("Estimated cost", min_value=1.0, value=1200.0, step=25.0, format="%.2f")
+    target_date = st.date_input("Target date", value=today + datetime.timedelta(days=90), min_value=today)
+    allow_protected = st.checkbox(
+        "Allow cuts to protected categories",
+        value=False,
+        help="Protected categories include rent, bills, savings, and essentials.",
+    )
+    submitted_goal = st.form_submit_button("How can I afford this?")
+
+if submitted_goal or "goal_plan" not in st.session_state:
+    try:
+        transactions = load_demo_transactions_if_needed()
+        flexible, protected = spending_summary(transactions)
+        days_until = max(1, (target_date - today).days)
+        weeks_until = max(1.0, days_until / 7)
+        months_until = max(1.0, days_until / 30.4375)
+        weekly_needed = float(goal_cost) / weeks_until
+        monthly_needed = float(goal_cost) / months_until
+        recommendations, gap = recommend_goal_cuts(weekly_needed, flexible, allow_protected, protected)
+        realistic = gap <= max(5.0, weekly_needed * 0.10)
+
+        st.session_state.goal_plan = {
+            "goal_name": goal_name.strip() or "this goal",
+            "goal_cost": float(goal_cost),
+            "target_date": target_date,
+            "days_until": days_until,
+            "weeks_until": weeks_until,
+            "monthly_needed": monthly_needed,
+            "weekly_needed": weekly_needed,
+            "flexible": flexible,
+            "protected": protected,
+            "recommendations": recommendations,
+            "gap": gap,
+            "realistic": realistic,
+            "allow_protected": allow_protected,
+        }
+    except Exception as e:
+        st.error("Could not build the affordability plan.")
+        st.code(str(e))
+
+plan = st.session_state.get("goal_plan")
+if plan:
+    st.caption(f"Using local demo transactions for {month_start.strftime('%B %Y')}.")
+
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Goal cost", money(plan["goal_cost"]))
+    col2.metric("Time left", f"{plan['days_until']} days")
+    col3.metric("Weekly savings needed", money(plan["weekly_needed"]))
+    col4.metric("Monthly savings needed", money(plan["monthly_needed"]))
+
+    if plan["realistic"]:
+        st.success(f"{plan['goal_name']} looks realistic by {plan['target_date'].strftime('%b %-d, %Y')} if you follow the weekly cuts below.")
+    else:
+        st.warning(
+            f"{plan['goal_name']} is tight by {plan['target_date'].strftime('%b %-d, %Y')}. "
+            f"The current flexible-spending plan is short by about {money(plan['gap'])} per week."
+        )
+
+    st.subheader("Recommended weekly cuts")
+    if plan["recommendations"]:
+        cuts_df = pd.DataFrame(plan["recommendations"])
+        for col in ["Current weekly spend", "Recommended weekly cut"]:
+            cuts_df[col] = cuts_df[col].map(money)
+        st.dataframe(cuts_df, width="stretch", hide_index=True)
+    else:
+        st.write("No flexible spending cuts were found in the current demo data.")
+
+    st.subheader("Categories not touched")
+    protected_rows = [
+        {
+            "Category": category,
+            "Protected as": PROTECTED_CATEGORY_LABELS.get(category, "essential"),
+            "Month-to-date spend": amount,
+        }
+        for category, amount in sorted(plan["protected"].items())
+        if amount > 0 and (not plan["allow_protected"] or category in PROTECTED_CATEGORY_LABELS)
+    ]
+    if protected_rows:
+        protected_df = pd.DataFrame(protected_rows)
+        protected_df["Month-to-date spend"] = protected_df["Month-to-date spend"].map(money)
+        st.dataframe(protected_df, width="stretch", hide_index=True)
+    else:
+        st.write("No protected category spending found in the current demo data.")
+
+    total_cut = sum(float(r["Recommended weekly cut"]) for r in plan["recommendations"])
+    if plan["realistic"]:
+        explanation = (
+            f"To afford {plan['goal_name']}, set aside {money(plan['weekly_needed'])} each week. "
+            f"The plan gets there by trimming discretionary spending first, especially coffee, dining, shopping, "
+            f"and entertainment, while leaving rent, bills, savings, and essentials alone."
+        )
+    else:
+        explanation = (
+            f"To afford {plan['goal_name']} by the target date, you need {money(plan['weekly_needed'])} per week. "
+            f"The current flexible categories can cover about {money(total_cut)} per week, so either extend the date, "
+            f"lower the cost, or explicitly allow changes to protected categories."
+        )
+    st.info(explanation)
+
+if not show_legacy_tools:
+    st.stop()
 
 
 # -----------------------------
