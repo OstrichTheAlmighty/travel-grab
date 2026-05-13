@@ -1,7 +1,67 @@
+# OS / editor
 .DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Python caches / build output
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Virtual environments
 .venv/
+.venv*/
+venv/
+env/
+ENV/
+
+# Environment files and local secrets
 .env
-.codex/
+.env.*
+!.env.example
+*.env
+*.local
+secrets/
+*.secret
+*.secrets
+
+# API keys / certificates / private key material
+*.pem
+*.key
+*.p8
+*.p12
+*.crt
+*.cer
+*.jks
+id_rsa*
+id_ed25519*
+google-credentials*.json
+service-account*.json
+credentials*.json
+
+# Local databases and user data
+*.db
+*.sqlite
+*.sqlite3
 backend/finance.db
+
+# Logs / runtime state
+*.log
+logs/
+*.pid
+*.pid.lock
+.streamlit/secrets.toml
+
+# Local agent/tooling state
+.codex/

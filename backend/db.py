@@ -96,11 +96,15 @@ def init_db():
             realistic INTEGER NOT NULL DEFAULT 0,
             recommendations_json TEXT NOT NULL DEFAULT '[]',
             protected_json TEXT NOT NULL DEFAULT '{}',
+            flexibility_preferences_json TEXT NOT NULL DEFAULT '{}',
             created_at TEXT NOT NULL DEFAULT (datetime('now')),
             updated_at TEXT NOT NULL DEFAULT (datetime('now'))
         )
         """
     )
+    goal_cols = {row["name"] for row in cur.execute("PRAGMA table_info(goal_plans)").fetchall()}
+    if "flexibility_preferences_json" not in goal_cols:
+        cur.execute("ALTER TABLE goal_plans ADD COLUMN flexibility_preferences_json TEXT NOT NULL DEFAULT '{}'")
     cur.execute("CREATE INDEX IF NOT EXISTS idx_goal_plans_user_id ON goal_plans(user_id)")
 
     # -----------------------------

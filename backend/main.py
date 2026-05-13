@@ -175,23 +175,69 @@ def load_sample_month(sample: SampleMonthIn):
         return (month_start + timedelta(days=int(scaled_index))).isoformat()
 
     def scaled_spend(amount_value: float) -> float:
-        return round(float(amount_value) * sample_progress, 2)
+        return round(float(amount_value), 2)
 
     sample_transactions = [
-        (sample_date(2), "Employer Payroll", 3200.0, "Income", sample.user_id),
-        (sample_date(3), "Apartment Rent", -scaled_spend(950.0), "Bills", sample.user_id),
-        (sample_date(8), "City Utilities", -scaled_spend(150.0), "Bills", sample.user_id),
-        (sample_date(12), "Phone Plan", -scaled_spend(100.0), "Bills", sample.user_id),
-        (sample_date(6), "Trader Joe's", -scaled_spend(110.0), "Groceries", sample.user_id),
-        (sample_date(19), "Whole Foods", -scaled_spend(140.0), "Groceries", sample.user_id),
-        (sample_date(9), "Sweetgreen", -scaled_spend(35.0), "Food", sample.user_id),
-        (sample_date(15), "Chipotle", -scaled_spend(30.0), "Food", sample.user_id),
-        (sample_date(22), "Neighborhood Cafe", -scaled_spend(20.0), "Food", sample.user_id),
-        (sample_date(26), "Pizza Night", -scaled_spend(35.0), "Food", sample.user_id),
-        (sample_date(14), "Movie Theater", -scaled_spend(35.0), "Entertainment", sample.user_id),
-        (sample_date(27), "Bowling Alley", -scaled_spend(45.0), "Entertainment", sample.user_id),
-        (sample_date(7), "Gas Station", -scaled_spend(40.0), "Transportation", sample.user_id),
-        (sample_date(23), "Uber", -scaled_spend(50.0), "Transportation", sample.user_id),
+        (sample_date(1), "Employer Payroll", 3200.0, "Income", sample.user_id),
+        (sample_date(15), "Employer Payroll", 3200.0, "Income", sample.user_id),
+        (sample_date(2), "Apartment Rent", -scaled_spend(1850.0), "Bills", sample.user_id),
+        (sample_date(3), "SoCal Edison", -scaled_spend(82.14), "Bills", sample.user_id),
+        (sample_date(4), "City Water Utility", -scaled_spend(44.68), "Bills", sample.user_id),
+        (sample_date(5), "Verizon Wireless", -scaled_spend(96.20), "Bills", sample.user_id),
+        (sample_date(6), "Spectrum Internet", -scaled_spend(69.99), "Bills", sample.user_id),
+        (sample_date(1), "Automatic Savings Transfer", -scaled_spend(350.0), "Savings", sample.user_id),
+        (sample_date(3), "Trader Joe's", -scaled_spend(87.42), "Groceries", sample.user_id),
+        (sample_date(7), "Costco", -scaled_spend(146.31), "Groceries", sample.user_id),
+        (sample_date(11), "Whole Foods Market", -scaled_spend(64.27), "Groceries", sample.user_id),
+        (sample_date(16), "Safeway", -scaled_spend(72.88), "Groceries", sample.user_id),
+        (sample_date(21), "Trader Joe's", -scaled_spend(59.34), "Groceries", sample.user_id),
+        (sample_date(27), "Target Grocery", -scaled_spend(44.16), "Groceries", sample.user_id),
+        (sample_date(2), "Starbucks", -scaled_spend(6.85), "Food", sample.user_id),
+        (sample_date(4), "Blue Bottle Coffee", -scaled_spend(7.40), "Food", sample.user_id),
+        (sample_date(6), "Starbucks", -scaled_spend(5.95), "Food", sample.user_id),
+        (sample_date(9), "Neighborhood Cafe", -scaled_spend(13.25), "Food", sample.user_id),
+        (sample_date(12), "Starbucks", -scaled_spend(6.35), "Food", sample.user_id),
+        (sample_date(15), "Philz Coffee", -scaled_spend(8.10), "Food", sample.user_id),
+        (sample_date(18), "Starbucks", -scaled_spend(6.15), "Food", sample.user_id),
+        (sample_date(22), "Peet's Coffee", -scaled_spend(7.20), "Food", sample.user_id),
+        (sample_date(26), "Starbucks", -scaled_spend(5.75), "Food", sample.user_id),
+        (sample_date(3), "Chipotle", -scaled_spend(16.84), "Food", sample.user_id),
+        (sample_date(5), "Sweetgreen", -scaled_spend(18.62), "Food", sample.user_id),
+        (sample_date(8), "Thai Basil", -scaled_spend(42.37), "Food", sample.user_id),
+        (sample_date(10), "DoorDash", -scaled_spend(31.49), "Food", sample.user_id),
+        (sample_date(13), "Local Pizza Co.", -scaled_spend(28.70), "Food", sample.user_id),
+        (sample_date(17), "Sushi House", -scaled_spend(54.22), "Food", sample.user_id),
+        (sample_date(20), "Panera Bread", -scaled_spend(14.95), "Food", sample.user_id),
+        (sample_date(24), "Taco Stand", -scaled_spend(19.18), "Food", sample.user_id),
+        (sample_date(29), "Italian Kitchen", -scaled_spend(63.80), "Food", sample.user_id),
+        (sample_date(4), "Shell Gas", -scaled_spend(48.72), "Transportation", sample.user_id),
+        (sample_date(6), "Downtown Parking", -scaled_spend(12.00), "Transportation", sample.user_id),
+        (sample_date(9), "Uber", -scaled_spend(22.46), "Transportation", sample.user_id),
+        (sample_date(14), "Chevron", -scaled_spend(52.18), "Transportation", sample.user_id),
+        (sample_date(18), "Metro Transit", -scaled_spend(25.00), "Transportation", sample.user_id),
+        (sample_date(23), "Lyft", -scaled_spend(18.64), "Transportation", sample.user_id),
+        (sample_date(28), "Shell Gas", -scaled_spend(46.51), "Transportation", sample.user_id),
+        (sample_date(2), "Netflix", -scaled_spend(15.49), "Subscriptions", sample.user_id),
+        (sample_date(8), "Spotify", -scaled_spend(10.99), "Subscriptions", sample.user_id),
+        (sample_date(14), "iCloud Storage", -scaled_spend(2.99), "Subscriptions", sample.user_id),
+        (sample_date(20), "Hulu", -scaled_spend(17.99), "Subscriptions", sample.user_id),
+        (sample_date(24), "Planet Fitness", -scaled_spend(29.99), "Subscriptions", sample.user_id),
+        (sample_date(27), "Apple Music", -scaled_spend(10.99), "Subscriptions", sample.user_id),
+        (sample_date(7), "AMC Theatres", -scaled_spend(34.50), "Entertainment", sample.user_id),
+        (sample_date(12), "Bowling Alley", -scaled_spend(41.20), "Entertainment", sample.user_id),
+        (sample_date(19), "Concert Tickets", -scaled_spend(88.00), "Entertainment", sample.user_id),
+        (sample_date(26), "Kindle Books", -scaled_spend(18.98), "Entertainment", sample.user_id),
+        (sample_date(5), "Amazon", -scaled_spend(39.84), "Shopping", sample.user_id),
+        (sample_date(10), "Target", -scaled_spend(76.45), "Shopping", sample.user_id),
+        (sample_date(16), "Old Navy", -scaled_spend(58.32), "Shopping", sample.user_id),
+        (sample_date(22), "Amazon", -scaled_spend(24.17), "Shopping", sample.user_id),
+        (sample_date(28), "Best Buy", -scaled_spend(92.61), "Shopping", sample.user_id),
+        (sample_date(11), "CVS Pharmacy", -scaled_spend(18.44), "Health", sample.user_id),
+        (sample_date(25), "Walgreens", -scaled_spend(23.79), "Health", sample.user_id),
+        (sample_date(13), "Venmo - Birthday Gift", -scaled_spend(35.00), "Other", sample.user_id),
+        (sample_date(18), "Etsy", -scaled_spend(27.45), "Other", sample.user_id),
+        (sample_date(21), "Pet Supplies Plus", -scaled_spend(31.26), "Other", sample.user_id),
+        (sample_date(30), "Farmers Market", -scaled_spend(22.80), "Other", sample.user_id),
     ]
 
     print(
@@ -200,7 +246,10 @@ def load_sample_month(sample: SampleMonthIn):
         flush=True,
     )
     with get_conn() as conn:
-        conn.execute("DELETE FROM transactions WHERE user_id = ?", (sample.user_id,))
+        conn.execute(
+            "DELETE FROM transactions WHERE user_id = ? AND date >= ? AND date <= ?",
+            (sample.user_id, month_start.isoformat(), month_end.isoformat()),
+        )
         conn.executemany(
             "INSERT INTO transactions (date, merchant, amount, category, user_id) VALUES (?, ?, ?, ?, ?)",
             sample_transactions,
@@ -800,16 +849,13 @@ def generate_ai_explanation(prompt: str) -> Optional[str]:
             timeout=(3, 6),
         )
         print("GEMINI STATUS:", response.status_code, flush=True)
-        print("GEMINI BODY:", response.text, flush=True)
         if response.status_code != 200:
             return None
         response_json = response.json() or {}
-        print("GEMINI RESPONSE:", response_json, flush=True)
         explanation = str(response_json["candidates"][0]["content"]["parts"][0]["text"]).strip()
         return explanation or None
     except Exception as e:
         print("GEMINI STATUS:", getattr(response, "status_code", None), flush=True)
-        print("GEMINI BODY:", getattr(response, "text", ""), flush=True)
         print("GEMINI ERROR:", str(e), flush=True)
         return None
 
@@ -1491,6 +1537,7 @@ class GoalPlanIn(BaseModel):
     realistic: bool = False
     recommendations: List[Dict[str, object]] = Field(default_factory=list)
     protected: Dict[str, float] = Field(default_factory=dict)
+    flexibility_preferences: Dict[str, object] = Field(default_factory=dict)
 
 
 class GoalProgressIn(BaseModel):
@@ -1510,6 +1557,7 @@ def _goal_row_to_dict(row):
         "realistic": bool(row["realistic"]),
         "recommendations": json.loads(row["recommendations_json"] or "[]"),
         "protected": json.loads(row["protected_json"] or "{}"),
+        "flexibility_preferences": json.loads(row["flexibility_preferences_json"] or "{}"),
         "created_at": row["created_at"],
         "updated_at": row["updated_at"],
     }
@@ -1532,9 +1580,10 @@ def save_goal(goal: GoalPlanIn):
             """
             INSERT INTO goal_plans (
                 user_id, goal_name, target_amount, target_date, progress,
-                weekly_needed, monthly_needed, realistic, recommendations_json, protected_json
+                weekly_needed, monthly_needed, realistic, recommendations_json, protected_json,
+                flexibility_preferences_json
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 goal.user_id,
@@ -1547,6 +1596,7 @@ def save_goal(goal: GoalPlanIn):
                 1 if goal.realistic else 0,
                 json.dumps(goal.recommendations),
                 json.dumps(goal.protected),
+                json.dumps(goal.flexibility_preferences),
             ),
         )
         conn.commit()

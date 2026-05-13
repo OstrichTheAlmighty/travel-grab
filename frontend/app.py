@@ -188,6 +188,7 @@ def api_save_goal(plan):
         "realistic": bool(plan["realistic"]),
         "recommendations": plan.get("recommendations", []),
         "protected": plan.get("protected", {}),
+        "flexibility_preferences": plan.get("flexibility_preferences", {}),
     }
     r = requests.post(f"{BASE_URL}/goals", json=payload, timeout=10)
     if not r.ok:
@@ -208,11 +209,23 @@ def api_update_goal_progress(goal_id, progress):
     return r.json().get("goal", {})
 
 
+def api_load_realistic_transaction_history():
+    r = requests.post(
+        f"{BASE_URL}/transactions/sample-month",
+        json={"user_id": st.session_state.user_id, "as_of": as_of_str},
+        timeout=10,
+    )
+    if not r.ok:
+        show_http_error(r)
+        raise RuntimeError("POST /transactions/sample-month failed")
+    return r.json()
+
+
 # -----------------------------
 # Goal affordability planner
 # -----------------------------
 PROTECTED_CATEGORY_LABELS = {
-    "Bills": "rent and bills",
+    "Bills": "rent / bills",
     "Groceries": "essentials",
     "Transportation": "essentials",
     "Health": "essentials",
@@ -221,11 +234,56 @@ PROTECTED_CATEGORY_LABELS = {
 }
 
 FLEXIBLE_CUT_RULES = {
-    "coffee": {"label": "Coffee", "priority": 1, "max_cut_pct": 0.70},
-    "restaurants": {"label": "Restaurants / dining", "priority": 2, "max_cut_pct": 0.45},
-    "shopping": {"label": "Shopping", "priority": 3, "max_cut_pct": 0.50},
-    "entertainment": {"label": "Entertainment", "priority": 4, "max_cut_pct": 0.40},
-    "other": {"label": "Other discretionary", "priority": 5, "max_cut_pct": 0.30},
+    "subscriptions": {"label": "Subscriptions", "priority": 1, "max_cut_pct": 0.40},
+    "shopping": {"label": "Shopping", "priority": 2, "max_cut_pct": 0.30},
+    "restaurants": {"label": "Restaurants / dining", "priority": 3, "max_cut_pct": 0.35},
+    "coffee": {"label": "Coffee", "priority": 4, "max_cut_pct": 0.45},
+    "entertainment": {"label": "Entertainment", "priority": 5, "max_cut_pct": 0.30},
+    "other": {"label": "Other discretionary", "priority": 6, "max_cut_pct": 0.25},
+}
+
+SEMI_FLEXIBLE_CATEGORIES = {"Groceries", "Transportation", "Health", "Education"}
+PROTECTED_CATEGORIES = {"Bills", SAVINGS_CATEGORY}
+
+PREFERENCE_CATEGORY_GROUPS = {
+    "Protected by default": [
+        ("Bills", "Rent / bills"),
+        ("Groceries", "Groceries"),
+        ("Transportation", "Transportation"),
+        (SAVINGS_CATEGORY, "Savings"),
+        ("Health", "Health"),
+    ],
+    "Flexible by default": [
+        ("restaurants", "Restaurants / dining"),
+        ("coffee", "Coffee"),
+        ("entertainment", "Entertainment"),
+        ("shopping", "Shopping"),
+        ("subscriptions", "Subscriptions"),
+        ("other", "Other discretionary"),
+    ],
+}
+
+AGGRESSIVENESS_MULTIPLIERS = {
+    "Light cuts": 0.55,
+    "Moderate cuts": 1.0,
+    "Aggressive cuts": 1.35,
+}
+
+PLAN_STYLE_MULTIPLIERS = {
+    "Minimal lifestyle change": 0.65,
+    "Balanced": 1.0,
+    "Fastest possible": 1.3,
+    "Conservative": 0.65,
+    "Aggressive": 1.3,
+}
+
+REALISM_CAPS = {
+    "Subscriptions": {"Minimal lifestyle change": 0.25, "Balanced": 0.40, "Fastest possible": 0.65},
+    "Restaurants / dining": {"Minimal lifestyle change": 0.20, "Balanced": 0.35, "Fastest possible": 0.50},
+    "Coffee": {"Minimal lifestyle change": 0.30, "Balanced": 0.45, "Fastest possible": 0.60},
+    "Entertainment": {"Minimal lifestyle change": 0.20, "Balanced": 0.30, "Fastest possible": 0.40},
+    "Shopping": {"Minimal lifestyle change": 0.20, "Balanced": 0.35, "Fastest possible": 0.50},
+    "Other discretionary": {"Minimal lifestyle change": 0.15, "Balanced": 0.25, "Fastest possible": 0.35},
 }
 
 
@@ -270,9 +328,281 @@ def flexible_bucket(tx):
         return "shopping"
     if category == "Entertainment":
         return "entertainment"
-    if category in {"Other", "Subscriptions"}:
+    if category == "Subscriptions":
+        return "subscriptions"
+    if category == "Other":
         return "other"
     return None
+
+
+def intelligence_bucket(tx):
+    category = str(tx.get("category", "")).strip()
+    bucket = flexible_bucket(tx)
+    if bucket:
+        return FLEXIBLE_CUT_RULES[bucket]["label"]
+    if category == "Bills":
+        return "Rent / bills"
+    if category:
+        return category
+    return "Other discretionary"
+
+
+def category_flexibility(category_name):
+    if category_name in {"Rent / bills", "Bills", SAVINGS_CATEGORY}:
+        return "protected"
+    if category_name in {"Groceries", "Transportation", "Health", "Education"}:
+        return "semi-flexible"
+    return "flexible"
+
+
+def category_cut_rate(category_name):
+    for rule in FLEXIBLE_CUT_RULES.values():
+        if category_name == rule["label"]:
+            return float(rule["max_cut_pct"])
+    if category_flexibility(category_name) == "semi-flexible":
+        return 0.08
+    return 0.0
+
+
+def category_priority(category_name):
+    for rule in FLEXIBLE_CUT_RULES.values():
+        if category_name == rule["label"]:
+            return int(rule["priority"])
+    if category_flexibility(category_name) == "semi-flexible":
+        return 50
+    return 99
+
+
+def default_flexibility_preferences():
+    preferences = {}
+    for group_name, categories in PREFERENCE_CATEGORY_GROUPS.items():
+        for key, label in categories:
+            flexible_default = group_name == "Flexible by default"
+            preferences[label] = {
+                "enabled": flexible_default,
+                "aggressiveness": "Moderate cuts" if flexible_default else "Light cuts",
+                "source_key": key,
+                "group": group_name,
+            }
+    return preferences
+
+
+def ensure_flexibility_preferences():
+    defaults = default_flexibility_preferences()
+    current = st.session_state.get("flexibility_preferences")
+    if not current:
+        st.session_state.flexibility_preferences = defaults
+        return st.session_state.flexibility_preferences
+    for label, pref in defaults.items():
+        current.setdefault(label, pref)
+        current[label].setdefault("enabled", pref["enabled"])
+        current[label].setdefault("aggressiveness", pref["aggressiveness"])
+        current[label].setdefault("source_key", pref["source_key"])
+        current[label].setdefault("group", pref["group"])
+    st.session_state.flexibility_preferences = current
+    return current
+
+
+def preference_for_category(category_name, preferences=None):
+    preferences = preferences or ensure_flexibility_preferences()
+    aliases = {
+        "Bills": "Rent / bills",
+        "Rent / bills": "Rent / bills",
+        "Food": "Restaurants / dining",
+    }
+    label = aliases.get(category_name, category_name)
+    return preferences.get(label, {"enabled": False, "aggressiveness": "Light cuts"})
+
+
+def canonical_plan_style(plan_style):
+    if plan_style in {"Minimal lifestyle change", "Balanced", "Fastest possible"}:
+        return plan_style
+    if plan_style == "Conservative":
+        return "Minimal lifestyle change"
+    if plan_style == "Aggressive":
+        return "Fastest possible"
+    return "Balanced"
+
+
+def realism_cap(category_name, plan_style):
+    style = canonical_plan_style(plan_style)
+    if category_name in REALISM_CAPS:
+        return REALISM_CAPS[category_name][style]
+    if category_flexibility(category_name) == "semi-flexible":
+        return {"Minimal lifestyle change": 0.05, "Balanced": 0.08, "Fastest possible": 0.12}[style]
+    if category_flexibility(category_name) == "protected":
+        return {"Minimal lifestyle change": 0.02, "Balanced": 0.04, "Fastest possible": 0.06}[style]
+    return {"Minimal lifestyle change": 0.15, "Balanced": 0.25, "Fastest possible": 0.35}[style]
+
+
+def preference_adjusted_cut_rate(category_name, preferences=None, plan_style="Balanced"):
+    pref = preference_for_category(category_name, preferences)
+    if not pref.get("enabled", False):
+        return 0.0
+    base_rate = category_cut_rate(category_name)
+    if base_rate <= 0 and category_flexibility(category_name) in {"protected", "semi-flexible"}:
+        base_rate = 0.05 if category_flexibility(category_name) == "protected" else 0.08
+    multiplier = AGGRESSIVENESS_MULTIPLIERS.get(pref.get("aggressiveness", "Moderate cuts"), 1.0)
+    style_multiplier = PLAN_STYLE_MULTIPLIERS.get(plan_style, 1.0)
+    rate = base_rate * multiplier * style_multiplier
+    return min(rate, realism_cap(category_name, plan_style))
+
+
+def approved_reduction_capacity(category_rows, preferences=None, plan_style="Balanced"):
+    preferences = preferences or ensure_flexibility_preferences()
+    return sum(
+        float(row["Monthly spend"]) * preference_adjusted_cut_rate(row["Category"], preferences, plan_style)
+        for row in category_rows
+    )
+
+
+def category_insight(category_name, monthly_spend, suggested_cut, total_spend):
+    if suggested_cut <= 0:
+        return "Protected by default. The planner avoids this unless you explicitly allow it."
+    pct = (suggested_cut / monthly_spend * 100) if monthly_spend > 0 else 0
+    if category_name == "Coffee":
+        return f"Reducing coffee by {pct:.0f}% frees up {money(suggested_cut)}/month without touching essentials."
+    if category_name == "Restaurants / dining":
+        return f"Dining is a strong tradeoff lever; a {pct:.0f}% cut saves {money(suggested_cut)}/month."
+    if category_name == "Subscriptions":
+        return f"Canceling or pausing low-use subscriptions could save about {money(suggested_cut)}/month."
+    if category_name in {"Entertainment", "Shopping", "Other discretionary"}:
+        return f"This is flexible spending. A realistic trim could redirect {money(suggested_cut)}/month toward a goal."
+    return f"This is semi-flexible. Small changes could save {money(suggested_cut)}/month, but avoid aggressive cuts."
+
+
+def month_bounds(d):
+    start = d.replace(day=1)
+    end = start.replace(day=calendar.monthrange(start.year, start.month)[1])
+    return start, end
+
+
+def previous_month(d):
+    if d.month == 1:
+        return d.replace(year=d.year - 1, month=12, day=1)
+    return d.replace(month=d.month - 1, day=1)
+
+
+def week_bounds(d):
+    start = d - datetime.timedelta(days=d.weekday())
+    end = start + datetime.timedelta(days=6)
+    return start, end
+
+
+def parse_tx_date(tx):
+    return datetime.datetime.strptime(str(tx.get("date")), "%Y-%m-%d").date()
+
+
+def build_behavior_progress(transactions, as_of):
+    current_week_start, current_week_end = week_bounds(as_of)
+    elapsed_days = max(1, (min(as_of, current_week_end) - current_week_start).days + 1)
+    baseline_start = current_week_start - datetime.timedelta(days=28)
+    baseline_end = current_week_start - datetime.timedelta(days=1)
+
+    baseline = {}
+    current = {}
+    for tx in transactions:
+        amount = float(tx.get("amount", 0.0))
+        if amount >= 0:
+            continue
+        category_name = intelligence_bucket(tx)
+        if category_flexibility(category_name) != "flexible":
+            continue
+        d = parse_tx_date(tx)
+        spend = abs(amount)
+        if baseline_start <= d <= baseline_end:
+            baseline[category_name] = baseline.get(category_name, 0.0) + spend
+        if current_week_start <= d <= min(as_of, current_week_end):
+            current[category_name] = current.get(category_name, 0.0) + spend
+
+    rows = []
+    all_categories = sorted(set(baseline) | set(current), key=category_priority)
+    for category_name in all_categories:
+        baseline_weekly = baseline.get(category_name, 0.0) / 4.0
+        current_projected_weekly = current.get(category_name, 0.0) / elapsed_days * 7
+        estimated_savings = baseline_weekly - current_projected_weekly
+        if abs(estimated_savings) < 1:
+            status = "tracking normally"
+        elif estimated_savings > 0:
+            status = "savings detected"
+        else:
+            status = "spending increased"
+        rows.append(
+            {
+                "Category": category_name,
+                "Baseline weekly": baseline_weekly,
+                "Current weekly pace": current_projected_weekly,
+                "Estimated savings": estimated_savings,
+                "Status": status,
+            }
+        )
+    total_positive = sum(max(0.0, row["Estimated savings"]) for row in rows)
+    return {"rows": rows, "weekly_savings": total_positive}
+
+
+def savings_detection_sentence(row):
+    amount = abs(float(row["Estimated savings"]))
+    if row["Estimated savings"] > 0:
+        return f"{row['Category']} spending is down {money(amount)} this week."
+    if row["Estimated savings"] < 0:
+        return f"{row['Category']} spending increased {money(amount)} this week."
+    return f"{row['Category']} is tracking normally this week."
+
+
+def behavior_difficulty_label(strategy):
+    weekly_cuts = float(strategy.get("Estimated weekly cuts", 0.0))
+    item_count = len(strategy.get("items", []))
+    high_impact_count = sum(1 for item in strategy.get("items", []) if item.get("Lifestyle impact") == "high impact")
+    if weekly_cuts < 35 and high_impact_count == 0:
+        return "Easy win"
+    if weekly_cuts < 90 and high_impact_count <= 1 and item_count <= 4:
+        return "Moderate adjustment"
+    return "Significant lifestyle change"
+
+
+def build_category_intelligence(transactions, previous_transactions=None):
+    previous_transactions = previous_transactions or []
+    totals = {}
+    counts = {}
+    prev_totals = {}
+    for tx in transactions:
+        amount = float(tx.get("amount", 0.0))
+        if amount < 0:
+            bucket = intelligence_bucket(tx)
+            totals[bucket] = totals.get(bucket, 0.0) + abs(amount)
+            counts[bucket] = counts.get(bucket, 0) + 1
+    for tx in previous_transactions:
+        amount = float(tx.get("amount", 0.0))
+        if amount < 0:
+            bucket = intelligence_bucket(tx)
+            prev_totals[bucket] = prev_totals.get(bucket, 0.0) + abs(amount)
+
+    total_spend = sum(totals.values())
+    weeks_in_month = max(1.0, calendar.monthrange(month_start.year, month_start.month)[1] / 7)
+    rows = []
+    for category_name, monthly_spend in sorted(totals.items(), key=lambda item: category_priority(item[0])):
+        cut_rate = category_cut_rate(category_name)
+        suggested_cut = monthly_spend * cut_rate
+        prev = prev_totals.get(category_name)
+        if prev is None:
+            trend = None
+        else:
+            trend = monthly_spend - prev
+        rows.append(
+            {
+                "Category": category_name,
+                "Monthly spend": monthly_spend,
+                "Weekly average": monthly_spend / weeks_in_month,
+                "Transaction count": counts.get(category_name, 0),
+                "Average transaction": monthly_spend / max(1, counts.get(category_name, 0)),
+                "% of spend": (monthly_spend / total_spend * 100) if total_spend > 0 else 0.0,
+                "Trend": trend,
+                "Flexibility": category_flexibility(category_name),
+                "Suggested cut": suggested_cut,
+                "Insight": category_insight(category_name, monthly_spend, suggested_cut, total_spend),
+            }
+        )
+    return rows
 
 
 def spending_summary(transactions):
@@ -294,7 +624,93 @@ def spending_summary(transactions):
     return flexible, protected
 
 
-def recommend_goal_cuts(weekly_needed, flexible, allow_protected, protected, budget_allocations=None):
+def lifestyle_impact(category_name, cut_rate):
+    if cut_rate <= 0.20:
+        return "low impact"
+    if category_name == "Subscriptions" and cut_rate <= 0.45:
+        return "low impact"
+    if cut_rate <= 0.45:
+        return "moderate impact"
+    return "high impact"
+
+
+def category_action_phrase(category_name):
+    return {
+        "Subscriptions": "Pause unused subscriptions",
+        "Restaurants / dining": "Reduce takeout frequency",
+        "Coffee": "Replace some cafe purchases with home coffee",
+        "Shopping": "Delay discretionary purchases temporarily",
+        "Entertainment": "Choose fewer paid nights out",
+        "Other discretionary": "Trim impulse and one-off discretionary spending",
+        "Groceries": "Switch a few premium grocery items to lower-cost staples",
+        "Transportation": "Reduce ride share or paid parking where practical",
+        "Health": "Avoid non-urgent pharmacy extras",
+        "Rent / bills": "Review bills only where there is a real lower-cost option",
+        "Savings": "Temporarily lower extra savings transfers",
+    }.get(category_name, "Reduce flexible spending")
+
+
+def recommendation_language(category_name, weekly_cut, current_weekly_spend, avg_transaction=0.0):
+    if category_name == "Coffee":
+        purchases = max(1, round(float(weekly_cut) / max(1.0, float(avg_transaction or 6.5))))
+        if purchases == 1:
+            return f"Skipping about 1 cafe purchase per week could free up {money(weekly_cut)}/week."
+        return f"Cutting {purchases}-{purchases + 1} coffee purchases per week could free up about {money(weekly_cut)}/week."
+    if category_name == "Restaurants / dining":
+        meals = max(1, round(float(weekly_cut) / max(12.0, float(avg_transaction or 25.0))))
+        return f"Replacing about {meals} takeout or restaurant order per week could free up {money(weekly_cut)}/week."
+    if category_name == "Subscriptions":
+        return f"Pausing unused or duplicate subscriptions could free up about {money(weekly_cut)}/week."
+    if category_name == "Shopping":
+        return f"Delaying discretionary purchases could free up about {money(weekly_cut)}/week without touching essentials."
+    if category_name == "Entertainment":
+        return f"Choosing a lower-cost plan for nights out could free up about {money(weekly_cut)}/week."
+    return f"{category_action_phrase(category_name)} to free up about {money(weekly_cut)}/week."
+
+
+def what_this_changes(recommendations):
+    categories = [str(r.get("Category", "")).replace(" (protected)", "") for r in recommendations]
+    if not categories:
+        return "This plan keeps your routine intact, but it does not create enough savings on its own."
+    protected_touched = any(category_flexibility(cat) == "protected" for cat in categories)
+    primary = ", ".join(categories[:3])
+    if protected_touched:
+        return f"This plan mainly changes {primary}, including protected areas you explicitly approved."
+    return f"This plan mainly reduces {primary} while avoiding essentials."
+
+
+def enrich_recommendations(recommendations, category_rows):
+    by_category = {row["Category"]: row for row in category_rows}
+    enriched = []
+    for rec in recommendations:
+        base_category = str(rec["Category"]).replace(" (protected)", "")
+        row = by_category.get(base_category, {})
+        current_weekly = float(rec.get("Current weekly spend", 0.0))
+        weekly_cut = float(rec.get("Recommended weekly cut", rec.get("Weekly cut", 0.0)))
+        cut_rate = weekly_cut / max(1.0, current_weekly)
+        rec = dict(rec)
+        rec["Lifestyle impact"] = lifestyle_impact(base_category, cut_rate)
+        rec["Behavior change"] = category_action_phrase(base_category)
+        rec["Recommendation"] = recommendation_language(
+            base_category,
+            weekly_cut,
+            current_weekly,
+            avg_transaction=float(row.get("Average transaction", 0.0)),
+        )
+        enriched.append(rec)
+    return enriched
+
+
+def recommend_goal_cuts(
+    weekly_needed,
+    flexible,
+    allow_protected,
+    protected,
+    budget_allocations=None,
+    preferences=None,
+    plan_style="Balanced",
+):
+    preferences = preferences or ensure_flexibility_preferences()
     budget_allocations = budget_allocations or {}
     weeks_elapsed = max(1.0, ((as_of_date - month_start).days + 1) / 7)
     weekly_spend = {k: v / weeks_elapsed for k, v in flexible.items()}
@@ -312,7 +728,10 @@ def recommend_goal_cuts(weekly_needed, flexible, allow_protected, protected, bud
     remaining = float(weekly_needed)
 
     for key, rule in sorted(FLEXIBLE_CUT_RULES.items(), key=lambda item: item[1]["priority"]):
-        capacity = baseline_weekly.get(key, 0.0) * rule["max_cut_pct"]
+        if not preference_for_category(rule["label"], preferences).get("enabled", False):
+            continue
+        rate = preference_adjusted_cut_rate(rule["label"], preferences, plan_style)
+        capacity = baseline_weekly.get(key, 0.0) * rate
         cut = min(remaining, capacity)
         if cut >= 1:
             recommendations.append(
@@ -320,25 +739,35 @@ def recommend_goal_cuts(weekly_needed, flexible, allow_protected, protected, bud
                     "Category": rule["label"],
                     "Current weekly spend": baseline_weekly.get(key, 0.0),
                     "Recommended weekly cut": cut,
+                    "Why selected": (
+                        f"You approved {rule['label']} at "
+                        f"{preference_for_category(rule['label'], preferences).get('aggressiveness', 'Moderate cuts').lower()}, "
+                        "and your recent transactions show optional spend there."
+                    ),
                 }
             )
             remaining -= cut
         if remaining <= 0.5:
             break
 
-    if allow_protected and remaining > 0.5:
+    if remaining > 0.5:
         protected_weekly = {k: v / weeks_elapsed for k, v in protected.items()}
         for category, amount in sorted(protected_weekly.items(), key=lambda item: item[1], reverse=True):
             if category == "Income":
                 continue
-            capacity = amount * 0.05
+            display_category = "Rent / bills" if category == "Bills" else category
+            pref = preference_for_category(display_category, preferences)
+            if not pref.get("enabled", False):
+                continue
+            capacity = amount * preference_adjusted_cut_rate(display_category, preferences, plan_style)
             cut = min(remaining, capacity)
             if cut >= 1:
                 recommendations.append(
                     {
-                        "Category": f"{category} (protected)",
+                        "Category": f"{display_category} (protected)",
                         "Current weekly spend": amount,
                         "Recommended weekly cut": cut,
+                        "Why selected": "Only included because you explicitly approved this protected category.",
                     }
                 )
                 remaining -= cut
@@ -348,13 +777,174 @@ def recommend_goal_cuts(weekly_needed, flexible, allow_protected, protected, bud
     return recommendations, max(0.0, remaining)
 
 
+def build_strategy_plan(name, weekly_needed, category_rows, allow_protected, preferences=None):
+    preferences = preferences or ensure_flexibility_preferences()
+    style_multiplier = {"Conservative": 0.65, "Balanced": 1.0, "Aggressive": 1.35}[name]
+    difficulty_base = {"Conservative": 2, "Balanced": 4, "Aggressive": 7}[name]
+    remaining = float(weekly_needed)
+    recommendations = []
+
+    candidate_rows = []
+    for row in category_rows:
+        flexibility = row["Flexibility"]
+        pref = preference_for_category(row["Category"], preferences)
+        if not pref.get("enabled", False):
+            continue
+        if flexibility == "protected" and not allow_protected and not pref.get("enabled", False):
+            continue
+        if flexibility == "semi-flexible" and name != "Aggressive" and pref.get("aggressiveness") != "Aggressive cuts":
+            continue
+        strategy_style = canonical_plan_style(name)
+        cut_rate = preference_adjusted_cut_rate(row["Category"], preferences, strategy_style) * style_multiplier
+        if flexibility == "semi-flexible":
+            cut_rate = min(cut_rate, 0.10)
+        if flexibility == "protected":
+            cut_rate = min(cut_rate, 0.08)
+        cut_rate = min(cut_rate, realism_cap(row["Category"], strategy_style))
+        weekly_baseline = float(row["Weekly average"])
+        weekly_capacity = weekly_baseline * cut_rate
+        if weekly_capacity >= 1:
+            candidate_rows.append((category_priority(row["Category"]), row, weekly_capacity, pref))
+
+    for _, row, weekly_capacity, pref in sorted(candidate_rows, key=lambda item: item[0]):
+        cut = min(remaining, weekly_capacity)
+        if cut >= 1:
+            recommendations.append(
+                {
+                    "Category": row["Category"],
+                    "Weekly cut": cut,
+                    "Monthly impact": cut * 4.345,
+                    "Lifestyle impact": lifestyle_impact(row["Category"], cut / max(1.0, float(row["Weekly average"]))),
+                    "Recommendation": recommendation_language(
+                        row["Category"],
+                        cut,
+                        float(row["Weekly average"]),
+                        avg_transaction=float(row.get("Average transaction", 0.0)),
+                    ),
+                    "Why selected": (
+                        f"You approved {row['Category']} at {pref.get('aggressiveness', 'moderate cuts').lower()}. "
+                        f"{row['Insight']}"
+                    ),
+                }
+            )
+            remaining -= cut
+        if remaining <= 0.5:
+            break
+
+    total_weekly_cut = sum(item["Weekly cut"] for item in recommendations)
+    likelihood = min(100, round((total_weekly_cut / max(1.0, weekly_needed)) * 100))
+    categories_affected = ", ".join(item["Category"] for item in recommendations) or "None"
+    difficulty = min(10, max(1, round(difficulty_base + (len(recommendations) * 0.6) + (remaining / max(1.0, weekly_needed) * 3))))
+    if likelihood >= 95:
+        explanation = f"This plan can cover the goal using {categories_affected} while staying explainable and tied to current spending."
+    elif likelihood >= 60:
+        explanation = f"This plan makes meaningful progress, but it leaves about {money(remaining)}/week uncovered."
+    else:
+        explanation = f"This plan is not enough on its own; move the date, reduce the target, or add income."
+
+    return {
+        "Plan": f"{name} plan",
+        "Target completion likelihood": f"{likelihood}%",
+        "Estimated weekly cuts": total_weekly_cut,
+        "Categories affected": categories_affected,
+        "Difficulty score": f"{difficulty}/10",
+        "Explanation": explanation,
+        "items": recommendations,
+        "remaining_gap": max(0.0, remaining),
+    }
+
+
+def build_target_date_simulations(goal_cost, target_date):
+    rows = []
+    current_days = max(1, (target_date - today).days)
+    current_weekly = float(goal_cost) / max(1.0, current_days / 7)
+    for extra_days in [30, 60, 90]:
+        new_target = target_date + datetime.timedelta(days=extra_days)
+        new_days = max(1, (new_target - today).days)
+        new_weekly = float(goal_cost) / max(1.0, new_days / 7)
+        rows.append(
+            {
+                "New target date": new_target.strftime("%b %-d, %Y"),
+                "Required weekly savings": new_weekly,
+                "Weekly reduction": current_weekly - new_weekly,
+            }
+        )
+    return rows
+
+
 def money(value):
     return f"${float(value):,.2f}"
 
 
+@st.dialog("Flexibility preferences")
+def flexibility_preferences_dialog():
+    preferences = ensure_flexibility_preferences()
+    st.write("You stay in control. The planner only recommends reductions in categories you approve.")
+
+    updated = {}
+    for group_name, categories in PREFERENCE_CATEGORY_GROUPS.items():
+        st.markdown(f"**{group_name}**")
+        for source_key, label in categories:
+            pref = preferences.get(label, {})
+            cols = st.columns([1.5, 1.8])
+            enabled = cols[0].toggle(
+                label,
+                value=bool(pref.get("enabled", group_name == "Flexible by default")),
+                key=f"pref_enabled_{source_key}",
+            )
+            aggressiveness = cols[1].select_slider(
+                "Aggressiveness",
+                options=["Light cuts", "Moderate cuts", "Aggressive cuts"],
+                value=str(pref.get("aggressiveness", "Moderate cuts" if enabled else "Light cuts")),
+                key=f"pref_aggr_{source_key}",
+                label_visibility="collapsed",
+                disabled=not enabled,
+            )
+            updated[label] = {
+                "enabled": enabled,
+                "aggressiveness": aggressiveness,
+                "source_key": source_key,
+                "group": group_name,
+            }
+
+    left, right = st.columns(2)
+    if left.button("Save preferences", type="primary", width="stretch"):
+        st.session_state.flexibility_preferences = updated
+        st.session_state.pop("goal_plan", None)
+        st.rerun()
+    if right.button("Reset to recommended defaults", width="stretch"):
+        st.session_state.flexibility_preferences = default_flexibility_preferences()
+        for group_name, categories in PREFERENCE_CATEGORY_GROUPS.items():
+            for source_key, _ in categories:
+                st.session_state.pop(f"pref_enabled_{source_key}", None)
+                st.session_state.pop(f"pref_aggr_{source_key}", None)
+        st.session_state.pop("goal_plan", None)
+        st.rerun()
+
+
 def build_goal_plan(goal_name, goal_cost, target_date, allow_protected):
+    plan_style = st.session_state.get("plan_style", "Balanced")
+    preferences = {k: dict(v) for k, v in ensure_flexibility_preferences().items()}
+    if allow_protected:
+        for label in ["Rent / bills", "Groceries", "Transportation", "Savings", "Health"]:
+            if label in preferences:
+                preferences[label]["enabled"] = True
+                preferences[label].setdefault("aggressiveness", "Light cuts")
     transactions = load_demo_transactions_if_needed()
+    all_tx_resp = requests.get(
+        f"{BASE_URL}/transactions",
+        params={"user_id": st.session_state.user_id},
+        timeout=10,
+    )
+    all_transactions = all_tx_resp.json().get("transactions", []) if all_tx_resp.ok else transactions
+    behavior_progress = build_behavior_progress(all_transactions, as_of_date)
     flexible, protected = spending_summary(transactions)
+    prev_start, prev_end = month_bounds(previous_month(month_start))
+    try:
+        previous_transactions = api_get_transactions(prev_start.isoformat(), prev_end.isoformat()).get("transactions", [])
+    except Exception:
+        previous_transactions = []
+    category_rows = build_category_intelligence(transactions, previous_transactions)
     try:
         active_budget = api_get_budget_active()
         budget_allocations = active_budget.get("allocations", {}) or {}
@@ -377,8 +967,16 @@ def build_goal_plan(goal_name, goal_cost, target_date, allow_protected):
         allow_protected,
         protected,
         budget_allocations=budget_allocations,
+        preferences=preferences,
+        plan_style=plan_style,
     )
+    recommendations = enrich_recommendations(recommendations, category_rows)
     total_weekly_cut = sum(float(r["Recommended weekly cut"]) for r in recommendations)
+    strategy_plans = [
+        build_strategy_plan("Conservative", weekly_needed, category_rows, allow_protected, preferences),
+        build_strategy_plan("Balanced", weekly_needed, category_rows, allow_protected, preferences),
+        build_strategy_plan("Aggressive", weekly_needed, category_rows, allow_protected, preferences),
+    ]
     realistic = gap <= max(5.0, weekly_needed * 0.10)
 
     return {
@@ -393,7 +991,15 @@ def build_goal_plan(goal_name, goal_cost, target_date, allow_protected):
         "protected": protected,
         "budget": active_budget,
         "budget_allocations": budget_allocations,
+        "category_intelligence": category_rows,
+        "flexibility_preferences": {k: dict(v) for k, v in preferences.items()},
+        "preference_capacity_monthly": approved_reduction_capacity(category_rows, preferences, plan_style),
         "recommendations": recommendations,
+        "strategy_plans": strategy_plans,
+        "date_simulations": build_target_date_simulations(float(goal_cost), target_date),
+        "plan_style": plan_style,
+        "what_this_changes": what_this_changes(recommendations),
+        "behavior_progress": behavior_progress,
         "gap": gap,
         "total_weekly_cut": total_weekly_cut,
         "realistic": realistic,
@@ -402,94 +1008,212 @@ def build_goal_plan(goal_name, goal_cost, target_date, allow_protected):
     }
 
 
+def top_behavior_rows(behavior_rows, limit=3):
+    return sorted(
+        behavior_rows or [],
+        key=lambda row: abs(float(row.get("Estimated savings", 0.0))),
+        reverse=True,
+    )[:limit]
+
+
+def plan_success_likelihood(plan):
+    weekly_needed = float(plan.get("weekly_needed", 0.0))
+    total_cut = float(plan.get("total_weekly_cut", 0.0))
+    detected = float((plan.get("behavior_progress", {}) or {}).get("weekly_savings", 0.0))
+    coverage = (total_cut + detected) / max(1.0, weekly_needed)
+    return max(0, min(100, round(coverage * 100)))
+
+
+def plan_difficulty_label(plan):
+    recommendations = plan.get("recommendations", [])
+    high_impact = sum(1 for item in recommendations if item.get("Lifestyle impact") == "high impact")
+    moderate_impact = sum(1 for item in recommendations if item.get("Lifestyle impact") == "moderate impact")
+    weekly_cut = float(plan.get("total_weekly_cut", 0.0))
+    if weekly_cut < 35 and high_impact == 0 and moderate_impact <= 1:
+        return "Easy win"
+    if weekly_cut < 90 and high_impact <= 1:
+        return "Moderate adjustment"
+    return "Significant lifestyle change"
+
+
+def affordability_status(plan):
+    likelihood = plan_success_likelihood(plan)
+    if plan.get("realistic") and likelihood >= 90:
+        return "Possible"
+    if likelihood >= 60:
+        return "Tight"
+    return "Unrealistic without changes"
+
+
 def render_goal_plan(plan):
     st.caption(f"Using local transactions plus monthly budget guardrails for {month_start.strftime('%B %Y')}.")
-
-    col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Target amount", money(plan["goal_cost"]))
-    col2.metric("Time left", f"{plan['days_until']} days")
-    col3.metric("Save per week", money(plan["weekly_needed"]))
-    col4.metric("Save per month", money(plan["monthly_needed"]))
-
     target_label = plan["target_date"].strftime("%b %-d, %Y")
-    if plan["realistic"]:
-        st.success(f"{plan['goal_name']} looks realistic by {target_label} with the plan below.")
+    status = affordability_status(plan)
+    likelihood = plan_success_likelihood(plan)
+    difficulty = plan_difficulty_label(plan)
+    top_recommendations = plan.get("recommendations", [])[:3]
+    top_categories = [str(row.get("Category", "")).replace(" (protected)", "") for row in top_recommendations]
+    if top_categories:
+        action_text = ", ".join(top_categories[:-1]) + (f", and {top_categories[-1]}" if len(top_categories) > 1 else top_categories[0])
+        answer = f"{plan['goal_name']} is {status.lower()} if you focus this week on {action_text}."
     else:
-        st.warning(
-            f"{plan['goal_name']} is not fully covered by flexible spending yet. "
-            f"You still need about {money(plan['gap'])} more per week."
+        answer = f"{plan['goal_name']} needs a longer timeline or more approved categories before the plan is realistic."
+
+    with st.container(border=True):
+        st.subheader(f"{plan['goal_name']}: {status}")
+        st.write(answer)
+        cols = st.columns(4)
+        cols[0].metric("Weekly needed", money(plan["weekly_needed"]))
+        cols[1].metric("Likelihood", f"{likelihood}%")
+        cols[2].metric("Difficulty", difficulty)
+        cols[3].metric("Time left", f"{plan['days_until']} days")
+        st.caption(
+            f"Approved categories can realistically free up about {money(plan.get('preference_capacity_monthly', 0.0))}/month. "
+            f"Target date: {target_label}."
         )
 
-    left, right = st.columns([1.4, 1])
-    with left:
-        st.subheader("Affordability plan")
-        if plan["recommendations"]:
-            cut_phrases = [
-                f"{row['Category']} by {money(row['Recommended weekly cut'])}/week"
-                for row in plan["recommendations"]
-            ]
-            st.write(f"Reduce {', '.join(cut_phrases)}.")
-            cuts_df = pd.DataFrame(plan["recommendations"])
-            for col in ["Current weekly spend", "Recommended weekly cut"]:
-                cuts_df[col] = cuts_df[col].map(money)
-            st.dataframe(cuts_df, width="stretch", hide_index=True)
-        else:
-            st.write("No realistic discretionary cuts were found in the current local demo data.")
+    st.subheader("What should I do this week?")
+    if top_recommendations:
+        card_cols = st.columns(min(3, len(top_recommendations)))
+        for idx, row in enumerate(top_recommendations):
+            with card_cols[idx % len(card_cols)]:
+                with st.container(border=True):
+                    st.markdown(f"**{row['Category']}**")
+                    st.metric("Estimated weekly savings", money(row["Recommended weekly cut"]))
+                    st.caption(row.get("Lifestyle impact", "moderate impact"))
+                    st.write(row.get("Recommendation", row.get("Behavior change", "")))
+    else:
+        st.info("This week, the clearest action is to move the date out or approve more flexible categories.")
 
-    with right:
-        st.subheader("Protected by default")
-        protected_rows = [
+    st.subheader("What this changes")
+    st.write(plan.get("what_this_changes", "This plan is based on the categories you approved."))
+    if plan.get("plan_style") == "Minimal lifestyle change":
+        st.caption("This keeps your routine mostly intact, but may require more time.")
+    elif plan.get("plan_style") == "Fastest possible":
+        st.caption("This moves faster, but asks for more noticeable lifestyle changes.")
+    else:
+        st.caption("This balances speed with realistic behavior changes.")
+
+    st.subheader("Progress this week")
+    behavior = plan.get("behavior_progress", {})
+    if behavior:
+        detected = float(behavior.get("weekly_savings", 0.0))
+        progress_cols = st.columns([1, 2])
+        progress_cols[0].metric("Net detected savings", money(detected))
+        rows = top_behavior_rows(behavior.get("rows", []), limit=3)
+        with progress_cols[1]:
+            if rows:
+                for row in rows:
+                    st.write(f"- {savings_detection_sentence(row)}")
+            else:
+                st.write("No meaningful spending change detected yet this week.")
+
+    if not plan["realistic"]:
+        simulation_rows = plan.get("date_simulations", [])
+        if simulation_rows:
+            first = simulation_rows[-1]
+            st.info(
+                f"Moving {plan['goal_name']} from {target_label} to {first['New target date']} lowers required weekly savings "
+                f"from {money(plan['weekly_needed'])}/week to {money(first['Required weekly savings'])}/week."
+            )
+
+    flexible_rows = [
+        row for row in plan.get("category_intelligence", [])
+        if row["Flexibility"] == "flexible" and row["Monthly spend"] > 0
+    ]
+    if flexible_rows:
+        st.subheader("Spending overview")
+        overview_df = pd.DataFrame(
             {
-                "Category": category,
-                "Reason": PROTECTED_CATEGORY_LABELS.get(category, "essential"),
-                "Month-to-date": amount,
-                "Budget": float((plan.get("budget_allocations", {}) or {}).get(category, 0.0)),
+                "Category": [row["Category"] for row in flexible_rows],
+                "Potential savings": [float(row["Suggested cut"]) for row in flexible_rows],
             }
-            for category, amount in sorted(plan["protected"].items())
-            if (amount > 0 or float((plan.get("budget_allocations", {}) or {}).get(category, 0.0)) > 0)
-            and (not plan["allow_protected"] or category in PROTECTED_CATEGORY_LABELS)
-        ]
-        if protected_rows:
-            protected_df = pd.DataFrame(protected_rows)
-            protected_df["Month-to-date"] = protected_df["Month-to-date"].map(money)
-            protected_df["Budget"] = protected_df["Budget"].map(money)
-            st.dataframe(protected_df, width="stretch", hide_index=True)
-        else:
-            st.write("No protected category spending found.")
+        ).set_index("Category")
+        st.bar_chart(overview_df)
 
-    if plan["realistic"]:
-        explanation = (
-            f"To afford {plan['goal_name']} by {target_label}, set aside {money(plan['weekly_needed'])} each week. "
-            f"The plan uses discretionary spending first and avoids rent, bills, savings, and essentials."
-        )
-    else:
-        explanation = (
-            f"To afford {plan['goal_name']} by {target_label}, you need {money(plan['weekly_needed'])} per week. "
-            f"Your flexible categories cover about {money(plan.get('total_weekly_cut', 0.0))} per week, so the practical move is "
-            f"to extend the date, lower the target, add income, or explicitly allow protected-category tradeoffs."
-        )
-    st.info(explanation)
+    with st.expander("Show planning details"):
+        detail_cols = st.columns(2)
+        with detail_cols[0]:
+            st.markdown("**Recommended changes**")
+            if plan["recommendations"]:
+                detail_df = pd.DataFrame(plan["recommendations"])
+                for col in ["Current weekly spend", "Recommended weekly cut"]:
+                    detail_df[col] = detail_df[col].map(money)
+                visible_cols = ["Category", "Recommended weekly cut", "Lifestyle impact", "Why selected"]
+                st.dataframe(detail_df[[col for col in visible_cols if col in detail_df.columns]], width="stretch", hide_index=True)
+        with detail_cols[1]:
+            st.markdown("**Protected categories**")
+            protected_rows = [
+                {
+                    "Category": category,
+                    "Reason": PROTECTED_CATEGORY_LABELS.get(category, "essential"),
+                    "Month-to-date": money(amount),
+                }
+                for category, amount in sorted(plan["protected"].items())
+                if amount > 0
+            ]
+            if protected_rows:
+                st.dataframe(pd.DataFrame(protected_rows), width="stretch", hide_index=True)
+            else:
+                st.write("No protected category spending found.")
 
 
 st.sidebar.divider()
+if st.sidebar.button("Load realistic transaction history", width="stretch"):
+    try:
+        result = api_load_realistic_transaction_history()
+        st.session_state.pop("goal_plan", None)
+        st.sidebar.success(f"Loaded {int(result.get('loaded', 0))} demo transactions.")
+        st.rerun()
+    except Exception as e:
+        st.sidebar.error("Could not load demo history.")
+        st.sidebar.code(str(e))
+
 page = st.sidebar.radio(
     "Plan",
-    ["How can I afford this?", "Transactions", "Transaction History", "Budget", "Goals / Saved Plans"],
+    [
+        "How can I afford this?",
+        "Transactions",
+        "Transaction History",
+        "Spending by Category",
+        "Budget",
+        "Goals / Saved Plans",
+    ],
     label_visibility="collapsed",
 )
 show_legacy_tools = st.sidebar.checkbox("Show advanced legacy tools", value=False)
 
 if page == "How can I afford this?":
+    previous_plan_style = st.session_state.get("plan_style", "Balanced")
+    setup_cols = st.columns([1.2, 1, 1.6])
+    if setup_cols[0].button("Choose what I’m willing to cut", width="stretch"):
+        flexibility_preferences_dialog()
+    plan_style = setup_cols[1].selectbox(
+        "Plan style",
+        ["Minimal lifestyle change", "Balanced", "Fastest possible"],
+        index=["Minimal lifestyle change", "Balanced", "Fastest possible"].index(previous_plan_style)
+        if previous_plan_style in ["Minimal lifestyle change", "Balanced", "Fastest possible"]
+        else 1,
+        help="Minimal keeps routines intact, Balanced uses realistic tradeoffs, Fastest possible uses the strongest approved cuts.",
+    )
+    setup_cols[2].caption("You stay in control. The planner only recommends reductions in categories you approve.")
+    if plan_style != previous_plan_style:
+        st.session_state.plan_style = plan_style
+        st.session_state.pop("goal_plan", None)
+        st.rerun()
+    st.session_state.plan_style = plan_style
+
     with st.form("afford_goal_form"):
-        goal_name = st.text_input("Goal or item", value="Hawaii trip")
-        goal_cost = st.number_input("Estimated cost", min_value=1.0, value=1800.0, step=25.0, format="%.2f")
-        target_date = st.date_input("Target date", value=today + datetime.timedelta(days=90), min_value=today)
-        allow_protected = st.checkbox(
-            "Allow cuts to protected categories",
+        goal_cols = st.columns([1.4, 0.8, 0.9, 1.0])
+        goal_name = goal_cols[0].text_input("Goal", value="Hawaii trip")
+        goal_cost = goal_cols[1].number_input("Cost", min_value=1.0, value=1800.0, step=25.0, format="%.2f")
+        target_date = goal_cols[2].date_input("Date", value=today + datetime.timedelta(days=90), min_value=today)
+        allow_protected = goal_cols[3].checkbox(
+            "Allow protected cuts",
             value=False,
             help="Protected categories include rent, bills, savings, and essentials.",
         )
-        submitted_goal = st.form_submit_button("How can I afford this?")
+        submitted_goal = st.form_submit_button("How can I afford this?", width="stretch")
 
     if submitted_goal or "goal_plan" not in st.session_state:
         try:
@@ -552,6 +1276,78 @@ elif page == "Transaction History":
         st.error("Could not load transactions.")
         st.code(str(e))
 
+elif page == "Spending by Category":
+    st.subheader("Spending by category")
+    st.caption("What should I actually do this week? Focus on the flexible categories with the clearest savings potential.")
+    try:
+        transactions = load_demo_transactions_if_needed()
+        prev_start, prev_end = month_bounds(previous_month(month_start))
+        previous_transactions = api_get_transactions(prev_start.isoformat(), prev_end.isoformat()).get("transactions", [])
+        rows = build_category_intelligence(transactions, previous_transactions)
+        if not rows:
+            st.write("No spending found for this month.")
+        else:
+            total_spend = sum(float(row["Monthly spend"]) for row in rows)
+            flexible_cut_total = sum(float(row["Suggested cut"]) for row in rows)
+            top = st.columns(3)
+            top[0].metric("Monthly spend", money(total_spend))
+            top[1].metric("Suggested cut potential", money(flexible_cut_total))
+            top[2].metric("Flexible categories", str(sum(1 for row in rows if row["Flexibility"] == "flexible")))
+
+            savings_rows = [
+                {
+                    "Category": row["Category"],
+                    "Potential savings": row["Suggested cut"],
+                }
+                for row in rows
+                if row["Flexibility"] == "flexible" and row["Suggested cut"] > 0
+            ]
+            if savings_rows:
+                st.subheader("Potential savings by category")
+                st.bar_chart(pd.DataFrame(savings_rows).set_index("Category"))
+
+            st.subheader("Best next moves")
+            best_rows = sorted(
+                [row for row in rows if row["Suggested cut"] > 0],
+                key=lambda row: row["Suggested cut"],
+                reverse=True,
+            )[:5]
+            card_cols = st.columns(min(3, max(1, len(best_rows))))
+            for idx, row in enumerate(best_rows):
+                with card_cols[idx % len(card_cols)]:
+                    with st.container(border=True):
+                        st.markdown(f"**{row['Category']}**")
+                        st.metric("Monthly opportunity", money(row["Suggested cut"]))
+                        st.caption(row["Flexibility"])
+                        st.write(row["Insight"])
+
+            with st.expander("Show category details"):
+                display_rows = []
+                for row in rows:
+                    trend = row["Trend"]
+                    trend_text = "No previous month"
+                    if trend is not None:
+                        if abs(float(trend)) < 0.01:
+                            trend_text = "Flat"
+                        else:
+                            direction = "up" if trend > 0 else "down"
+                            trend_text = f"{direction} {money(abs(trend))}"
+                    display_rows.append(
+                        {
+                            "Category": row["Category"],
+                            "Monthly spend": money(row["Monthly spend"]),
+                            "Weekly avg": money(row["Weekly average"]),
+                            "% of spend": f"{row['% of spend']:.1f}%",
+                            "Trend": trend_text,
+                            "Flexibility": row["Flexibility"],
+                            "Suggested cut": money(row["Suggested cut"]),
+                        }
+                    )
+                st.dataframe(pd.DataFrame(display_rows), width="stretch", hide_index=True)
+    except Exception as e:
+        st.error("Could not load spending intelligence.")
+        st.code(str(e))
+
 elif page == "Budget":
     st.subheader("Budget guardrails")
     st.caption("Budgets help the planner understand what should be protected before suggesting tradeoffs.")
@@ -579,6 +1375,30 @@ elif page == "Budget":
 
 elif page == "Goals / Saved Plans":
     st.subheader("Saved goals")
+    st.caption("Automatic progress tracking compares this week's discretionary spending against your recent baseline.")
+    try:
+        all_tx_resp = requests.get(
+            f"{BASE_URL}/transactions",
+            params={"user_id": st.session_state.user_id},
+            timeout=10,
+        )
+        all_transactions = all_tx_resp.json().get("transactions", []) if all_tx_resp.ok else []
+        behavior_progress = build_behavior_progress(all_transactions, as_of_date)
+    except Exception:
+        behavior_progress = {"rows": [], "weekly_savings": 0.0}
+
+    detected_weekly_savings = float(behavior_progress.get("weekly_savings", 0.0))
+    top_changes = top_behavior_rows(behavior_progress.get("rows", []), limit=3)
+    with st.container(border=True):
+        metric_cols = st.columns([1, 2])
+        metric_cols[0].metric("Detected this week", money(detected_weekly_savings))
+        with metric_cols[1]:
+            if top_changes:
+                for row in top_changes:
+                    st.caption(savings_detection_sentence(row))
+            else:
+                st.caption("No meaningful spending change detected yet this week.")
+
     try:
         saved_goal_plans = api_get_goals()
     except Exception as e:
@@ -590,37 +1410,36 @@ elif page == "Goals / Saved Plans":
     else:
         for idx, saved_plan in enumerate(saved_goal_plans):
             with st.container(border=True):
-                top = st.columns([1.5, 1, 1])
+                top = st.columns([1.4, 0.9, 0.9])
                 top[0].markdown(f"**{saved_plan['goal_name']}**")
                 top[1].write(f"Target: {money(saved_plan['target_amount'])}")
                 top[2].write(f"By: {saved_plan['target_date']}")
-                progress = st.slider(
-                    "Progress",
-                    min_value=0.0,
-                    max_value=float(saved_plan["target_amount"]),
-                    value=float(saved_plan.get("progress", 0.0)),
-                    step=25.0,
-                    key=f"goal_progress_{idx}",
-                )
-                if st.button("Update progress", key=f"update_goal_progress_{idx}"):
-                    try:
-                        api_update_goal_progress(saved_plan["id"], progress)
-                        st.success("Progress updated.")
-                    except Exception as e:
-                        st.error("Could not update progress.")
-                        st.code(str(e))
-                st.progress(min(1.0, progress / max(1.0, float(saved_plan["target_amount"]))))
-                remaining = max(0.0, float(saved_plan["target_amount"]) - progress)
-                st.write(
-                    f"Remaining: {money(remaining)}. Current weekly adjustment: "
-                    f"{money(saved_plan['weekly_needed'])}/week."
-                )
+                target_amount = float(saved_plan["target_amount"])
+                automatic_progress = min(target_amount, float(saved_plan.get("progress", 0.0)) + detected_weekly_savings)
+                st.progress(min(1.0, automatic_progress / max(1.0, target_amount)))
+                remaining = max(0.0, target_amount - automatic_progress)
+                goal_cols = st.columns(3)
+                goal_cols[0].metric("Auto progress", money(automatic_progress))
+                goal_cols[1].metric("Remaining", money(remaining))
+                goal_cols[2].metric("Weekly target", money(saved_plan["weekly_needed"]))
+                target_date = datetime.datetime.strptime(saved_plan["target_date"], "%Y-%m-%d").date()
+                weeks_left = max(1.0, (target_date - today).days / 7)
+                expected_progress = target_amount - (float(saved_plan["weekly_needed"]) * weeks_left)
+                pace_delta = automatic_progress - max(0.0, expected_progress)
+                if pace_delta >= 0:
+                    st.success(f"Ahead of pace by {money(pace_delta)}.")
+                else:
+                    st.warning(f"Behind pace by {money(abs(pace_delta))}.")
+                slowing = [row for row in behavior_progress.get("rows", []) if row["Estimated savings"] < -1]
+                successful = [row for row in behavior_progress.get("rows", []) if row["Estimated savings"] > 1]
+                if successful:
+                    st.caption(f"{successful[0]['Category']} reductions are tracking successfully.")
+                if slowing:
+                    st.caption(f"{slowing[0]['Category']} spend is slowing goal progress.")
                 if saved_plan.get("recommendations"):
-                    adjustments = [
-                        f"{row['Category']} {money(row['Recommended weekly cut'])}/week"
-                        for row in saved_plan["recommendations"][:3]
-                    ]
-                    st.caption(f"Recommended adjustments: {', '.join(adjustments)}")
+                    with st.expander("Recommended actions"):
+                        for row in saved_plan["recommendations"][:3]:
+                            st.write(f"- {row.get('Recommendation', row['Category'])}")
 
 if not show_legacy_tools:
     st.stop()
