@@ -80,6 +80,30 @@ def init_db():
     )
 
     # -----------------------------
+    # Goal plans
+    # -----------------------------
+    cur.execute(
+        """
+        CREATE TABLE IF NOT EXISTS goal_plans (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id TEXT NOT NULL,
+            goal_name TEXT NOT NULL,
+            target_amount REAL NOT NULL,
+            target_date TEXT NOT NULL,
+            progress REAL NOT NULL DEFAULT 0,
+            weekly_needed REAL NOT NULL DEFAULT 0,
+            monthly_needed REAL NOT NULL DEFAULT 0,
+            realistic INTEGER NOT NULL DEFAULT 0,
+            recommendations_json TEXT NOT NULL DEFAULT '[]',
+            protected_json TEXT NOT NULL DEFAULT '{}',
+            created_at TEXT NOT NULL DEFAULT (datetime('now')),
+            updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+        )
+        """
+    )
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_goal_plans_user_id ON goal_plans(user_id)")
+
+    # -----------------------------
     # Seed only if empty (existing)
     # -----------------------------
     cur.execute("SELECT COUNT(*) AS n FROM transactions")

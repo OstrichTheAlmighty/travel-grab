@@ -168,6 +168,46 @@ def api_get_transactions(start, end):
     return r.json()
 
 
+def api_get_goals():
+    r = requests.get(f"{BASE_URL}/goals", params={"user_id": st.session_state.user_id}, timeout=10)
+    if not r.ok:
+        show_http_error(r)
+        raise RuntimeError("GET /goals failed")
+    return r.json().get("goals", [])
+
+
+def api_save_goal(plan):
+    payload = {
+        "user_id": st.session_state.user_id,
+        "goal_name": plan["goal_name"],
+        "target_amount": float(plan["goal_cost"]),
+        "target_date": plan["target_date"].isoformat(),
+        "progress": float(plan.get("progress", 0.0)),
+        "weekly_needed": float(plan["weekly_needed"]),
+        "monthly_needed": float(plan["monthly_needed"]),
+        "realistic": bool(plan["realistic"]),
+        "recommendations": plan.get("recommendations", []),
+        "protected": plan.get("protected", {}),
+    }
+    r = requests.post(f"{BASE_URL}/goals", json=payload, timeout=10)
+    if not r.ok:
+        show_http_error(r)
+        raise RuntimeError("POST /goals failed")
+    return r.json().get("goal", {})
+
+
+def api_update_goal_progress(goal_id, progress):
+    r = requests.patch(
+        f"{BASE_URL}/goals/{int(goal_id)}/progress",
+        json={"progress": float(progress)},
+        timeout=10,
+    )
+    if not r.ok:
+        show_http_error(r)
+        raise RuntimeError("PATCH /goals/{goal_id}/progress failed")
+    return r.json().get("goal", {})
+
+
 # -----------------------------
 # Goal affordability planner
 # -----------------------------
@@ -254,20 +294,31 @@ def spending_summary(transactions):
     return flexible, protected
 
 
-def recommend_goal_cuts(weekly_needed, flexible, allow_protected, protected):
+def recommend_goal_cuts(weekly_needed, flexible, allow_protected, protected, budget_allocations=None):
+    budget_allocations = budget_allocations or {}
     weeks_elapsed = max(1.0, ((as_of_date - month_start).days + 1) / 7)
     weekly_spend = {k: v / weeks_elapsed for k, v in flexible.items()}
+    budget_weekly = {k: 0.0 for k in FLEXIBLE_CUT_RULES}
+    for category, monthly_amount in budget_allocations.items():
+        bucket = flexible_bucket({"category": category, "merchant": ""})
+        if bucket:
+            budget_weekly[bucket] += float(monthly_amount) / 4.345
+
+    baseline_weekly = {
+        key: max(weekly_spend.get(key, 0.0), budget_weekly.get(key, 0.0))
+        for key in FLEXIBLE_CUT_RULES
+    }
     recommendations = []
     remaining = float(weekly_needed)
 
     for key, rule in sorted(FLEXIBLE_CUT_RULES.items(), key=lambda item: item[1]["priority"]):
-        capacity = weekly_spend.get(key, 0.0) * rule["max_cut_pct"]
+        capacity = baseline_weekly.get(key, 0.0) * rule["max_cut_pct"]
         cut = min(remaining, capacity)
         if cut >= 1:
             recommendations.append(
                 {
                     "Category": rule["label"],
-                    "Current weekly spend": weekly_spend.get(key, 0.0),
+                    "Current weekly spend": baseline_weekly.get(key, 0.0),
                     "Recommended weekly cut": cut,
                 }
             )
@@ -301,109 +352,275 @@ def money(value):
     return f"${float(value):,.2f}"
 
 
-st.sidebar.divider()
-show_legacy_tools = st.sidebar.checkbox("Show old dashboard tools", value=False)
-
-with st.form("afford_goal_form"):
-    goal_name = st.text_input("What do you want to afford?", value="New laptop")
-    goal_cost = st.number_input("Estimated cost", min_value=1.0, value=1200.0, step=25.0, format="%.2f")
-    target_date = st.date_input("Target date", value=today + datetime.timedelta(days=90), min_value=today)
-    allow_protected = st.checkbox(
-        "Allow cuts to protected categories",
-        value=False,
-        help="Protected categories include rent, bills, savings, and essentials.",
-    )
-    submitted_goal = st.form_submit_button("How can I afford this?")
-
-if submitted_goal or "goal_plan" not in st.session_state:
+def build_goal_plan(goal_name, goal_cost, target_date, allow_protected):
+    transactions = load_demo_transactions_if_needed()
+    flexible, protected = spending_summary(transactions)
     try:
-        transactions = load_demo_transactions_if_needed()
-        flexible, protected = spending_summary(transactions)
-        days_until = max(1, (target_date - today).days)
-        weeks_until = max(1.0, days_until / 7)
-        months_until = max(1.0, days_until / 30.4375)
-        weekly_needed = float(goal_cost) / weeks_until
-        monthly_needed = float(goal_cost) / months_until
-        recommendations, gap = recommend_goal_cuts(weekly_needed, flexible, allow_protected, protected)
-        realistic = gap <= max(5.0, weekly_needed * 0.10)
+        active_budget = api_get_budget_active()
+        budget_allocations = active_budget.get("allocations", {}) or {}
+    except Exception:
+        active_budget = {"income_amount": 0.0, "allocations": {}}
+        budget_allocations = {}
 
-        st.session_state.goal_plan = {
-            "goal_name": goal_name.strip() or "this goal",
-            "goal_cost": float(goal_cost),
-            "target_date": target_date,
-            "days_until": days_until,
-            "weeks_until": weeks_until,
-            "monthly_needed": monthly_needed,
-            "weekly_needed": weekly_needed,
-            "flexible": flexible,
-            "protected": protected,
-            "recommendations": recommendations,
-            "gap": gap,
-            "realistic": realistic,
-            "allow_protected": allow_protected,
-        }
-    except Exception as e:
-        st.error("Could not build the affordability plan.")
-        st.code(str(e))
+    for category, amount in budget_allocations.items():
+        if category in PROTECTED_CATEGORY_LABELS and float(amount) > 0:
+            protected.setdefault(category, 0.0)
 
-plan = st.session_state.get("goal_plan")
-if plan:
-    st.caption(f"Using local demo transactions for {month_start.strftime('%B %Y')}.")
+    days_until = max(1, (target_date - today).days)
+    weeks_until = max(1.0, days_until / 7)
+    months_until = max(1.0, days_until / 30.4375)
+    weekly_needed = float(goal_cost) / weeks_until
+    monthly_needed = float(goal_cost) / months_until
+    recommendations, gap = recommend_goal_cuts(
+        weekly_needed,
+        flexible,
+        allow_protected,
+        protected,
+        budget_allocations=budget_allocations,
+    )
+    total_weekly_cut = sum(float(r["Recommended weekly cut"]) for r in recommendations)
+    realistic = gap <= max(5.0, weekly_needed * 0.10)
+
+    return {
+        "goal_name": goal_name.strip() or "this goal",
+        "goal_cost": float(goal_cost),
+        "target_date": target_date,
+        "days_until": days_until,
+        "weeks_until": weeks_until,
+        "monthly_needed": monthly_needed,
+        "weekly_needed": weekly_needed,
+        "flexible": flexible,
+        "protected": protected,
+        "budget": active_budget,
+        "budget_allocations": budget_allocations,
+        "recommendations": recommendations,
+        "gap": gap,
+        "total_weekly_cut": total_weekly_cut,
+        "realistic": realistic,
+        "allow_protected": allow_protected,
+        "created_at": datetime.datetime.now().isoformat(timespec="seconds"),
+    }
+
+
+def render_goal_plan(plan):
+    st.caption(f"Using local transactions plus monthly budget guardrails for {month_start.strftime('%B %Y')}.")
 
     col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Goal cost", money(plan["goal_cost"]))
+    col1.metric("Target amount", money(plan["goal_cost"]))
     col2.metric("Time left", f"{plan['days_until']} days")
-    col3.metric("Weekly savings needed", money(plan["weekly_needed"]))
-    col4.metric("Monthly savings needed", money(plan["monthly_needed"]))
+    col3.metric("Save per week", money(plan["weekly_needed"]))
+    col4.metric("Save per month", money(plan["monthly_needed"]))
 
+    target_label = plan["target_date"].strftime("%b %-d, %Y")
     if plan["realistic"]:
-        st.success(f"{plan['goal_name']} looks realistic by {plan['target_date'].strftime('%b %-d, %Y')} if you follow the weekly cuts below.")
+        st.success(f"{plan['goal_name']} looks realistic by {target_label} with the plan below.")
     else:
         st.warning(
-            f"{plan['goal_name']} is tight by {plan['target_date'].strftime('%b %-d, %Y')}. "
-            f"The current flexible-spending plan is short by about {money(plan['gap'])} per week."
+            f"{plan['goal_name']} is not fully covered by flexible spending yet. "
+            f"You still need about {money(plan['gap'])} more per week."
         )
 
-    st.subheader("Recommended weekly cuts")
-    if plan["recommendations"]:
-        cuts_df = pd.DataFrame(plan["recommendations"])
-        for col in ["Current weekly spend", "Recommended weekly cut"]:
-            cuts_df[col] = cuts_df[col].map(money)
-        st.dataframe(cuts_df, width="stretch", hide_index=True)
-    else:
-        st.write("No flexible spending cuts were found in the current demo data.")
+    left, right = st.columns([1.4, 1])
+    with left:
+        st.subheader("Affordability plan")
+        if plan["recommendations"]:
+            cut_phrases = [
+                f"{row['Category']} by {money(row['Recommended weekly cut'])}/week"
+                for row in plan["recommendations"]
+            ]
+            st.write(f"Reduce {', '.join(cut_phrases)}.")
+            cuts_df = pd.DataFrame(plan["recommendations"])
+            for col in ["Current weekly spend", "Recommended weekly cut"]:
+                cuts_df[col] = cuts_df[col].map(money)
+            st.dataframe(cuts_df, width="stretch", hide_index=True)
+        else:
+            st.write("No realistic discretionary cuts were found in the current local demo data.")
 
-    st.subheader("Categories not touched")
-    protected_rows = [
-        {
-            "Category": category,
-            "Protected as": PROTECTED_CATEGORY_LABELS.get(category, "essential"),
-            "Month-to-date spend": amount,
-        }
-        for category, amount in sorted(plan["protected"].items())
-        if amount > 0 and (not plan["allow_protected"] or category in PROTECTED_CATEGORY_LABELS)
-    ]
-    if protected_rows:
-        protected_df = pd.DataFrame(protected_rows)
-        protected_df["Month-to-date spend"] = protected_df["Month-to-date spend"].map(money)
-        st.dataframe(protected_df, width="stretch", hide_index=True)
-    else:
-        st.write("No protected category spending found in the current demo data.")
+    with right:
+        st.subheader("Protected by default")
+        protected_rows = [
+            {
+                "Category": category,
+                "Reason": PROTECTED_CATEGORY_LABELS.get(category, "essential"),
+                "Month-to-date": amount,
+                "Budget": float((plan.get("budget_allocations", {}) or {}).get(category, 0.0)),
+            }
+            for category, amount in sorted(plan["protected"].items())
+            if (amount > 0 or float((plan.get("budget_allocations", {}) or {}).get(category, 0.0)) > 0)
+            and (not plan["allow_protected"] or category in PROTECTED_CATEGORY_LABELS)
+        ]
+        if protected_rows:
+            protected_df = pd.DataFrame(protected_rows)
+            protected_df["Month-to-date"] = protected_df["Month-to-date"].map(money)
+            protected_df["Budget"] = protected_df["Budget"].map(money)
+            st.dataframe(protected_df, width="stretch", hide_index=True)
+        else:
+            st.write("No protected category spending found.")
 
-    total_cut = sum(float(r["Recommended weekly cut"]) for r in plan["recommendations"])
     if plan["realistic"]:
         explanation = (
-            f"To afford {plan['goal_name']}, set aside {money(plan['weekly_needed'])} each week. "
-            f"The plan gets there by trimming discretionary spending first, especially coffee, dining, shopping, "
-            f"and entertainment, while leaving rent, bills, savings, and essentials alone."
+            f"To afford {plan['goal_name']} by {target_label}, set aside {money(plan['weekly_needed'])} each week. "
+            f"The plan uses discretionary spending first and avoids rent, bills, savings, and essentials."
         )
     else:
         explanation = (
-            f"To afford {plan['goal_name']} by the target date, you need {money(plan['weekly_needed'])} per week. "
-            f"The current flexible categories can cover about {money(total_cut)} per week, so either extend the date, "
-            f"lower the cost, or explicitly allow changes to protected categories."
+            f"To afford {plan['goal_name']} by {target_label}, you need {money(plan['weekly_needed'])} per week. "
+            f"Your flexible categories cover about {money(plan.get('total_weekly_cut', 0.0))} per week, so the practical move is "
+            f"to extend the date, lower the target, add income, or explicitly allow protected-category tradeoffs."
         )
     st.info(explanation)
+
+
+st.sidebar.divider()
+page = st.sidebar.radio(
+    "Plan",
+    ["How can I afford this?", "Transactions", "Transaction History", "Budget", "Goals / Saved Plans"],
+    label_visibility="collapsed",
+)
+show_legacy_tools = st.sidebar.checkbox("Show advanced legacy tools", value=False)
+
+if page == "How can I afford this?":
+    with st.form("afford_goal_form"):
+        goal_name = st.text_input("Goal or item", value="Hawaii trip")
+        goal_cost = st.number_input("Estimated cost", min_value=1.0, value=1800.0, step=25.0, format="%.2f")
+        target_date = st.date_input("Target date", value=today + datetime.timedelta(days=90), min_value=today)
+        allow_protected = st.checkbox(
+            "Allow cuts to protected categories",
+            value=False,
+            help="Protected categories include rent, bills, savings, and essentials.",
+        )
+        submitted_goal = st.form_submit_button("How can I afford this?")
+
+    if submitted_goal or "goal_plan" not in st.session_state:
+        try:
+            st.session_state.goal_plan = build_goal_plan(goal_name, goal_cost, target_date, allow_protected)
+        except Exception as e:
+            st.error("Could not build the affordability plan.")
+            st.code(str(e))
+
+    plan = st.session_state.get("goal_plan")
+    if plan:
+        render_goal_plan(plan)
+        if st.button("Save this plan"):
+            try:
+                api_save_goal(plan)
+                st.success("Plan saved.")
+            except Exception as e:
+                st.error("Could not save plan.")
+                st.code(str(e))
+
+elif page == "Transactions":
+    st.subheader("Add transaction")
+    with st.form("focused_add_tx_form"):
+        tx_type = st.segmented_control("Type", ["Spending", "Income"], default="Spending")
+        tx_date = st.date_input("Date", value=today)
+        merchant = st.text_input("Merchant", value="Neighborhood Cafe")
+        amount = st.number_input("Amount", value=12.00, step=0.50, format="%.2f")
+        category_options = ["Income"] if tx_type == "Income" else SPEND_CATEGORIES
+        category = st.selectbox("Category", category_options, index=0)
+        add_tx = st.form_submit_button("Add transaction")
+    if add_tx:
+        signed_amount = abs(float(amount)) if tx_type == "Income" else -abs(float(amount))
+        resp = requests.post(
+            f"{BASE_URL}/transactions",
+            json={
+                "date": tx_date.isoformat(),
+                "merchant": merchant.strip(),
+                "amount": signed_amount,
+                "category": category,
+                "user_id": st.session_state.user_id,
+            },
+            timeout=10,
+        )
+        if resp.ok:
+            st.success("Transaction added.")
+            st.session_state.pop("goal_plan", None)
+        else:
+            show_http_error(resp)
+
+elif page == "Transaction History":
+    st.subheader("Transaction history")
+    try:
+        transactions = load_demo_transactions_if_needed()
+        df = pd.DataFrame(transactions)
+        if df.empty:
+            st.write("No transactions found.")
+        else:
+            df["amount"] = df["amount"].map(money)
+            st.dataframe(df.rename(columns={"date": "Date", "merchant": "Merchant", "amount": "Amount", "category": "Category"}), width="stretch", hide_index=True)
+    except Exception as e:
+        st.error("Could not load transactions.")
+        st.code(str(e))
+
+elif page == "Budget":
+    st.subheader("Budget guardrails")
+    st.caption("Budgets help the planner understand what should be protected before suggesting tradeoffs.")
+    try:
+        active_budget = api_get_budget_active()
+    except Exception:
+        active_budget = {"income_amount": 3200.0, "allocations": {}}
+    with st.form("focused_budget_form"):
+        income_amount = st.number_input("Monthly income", min_value=0.0, value=float(active_budget.get("income_amount", 3200.0)), step=100.0)
+        allocations = {}
+        cols = st.columns(2)
+        for idx, category in enumerate(BUDGET_CATEGORIES):
+            default_amount = float((active_budget.get("allocations", {}) or {}).get(category, 0.0))
+            with cols[idx % 2]:
+                allocations[category] = st.number_input(category, min_value=0.0, value=default_amount, step=25.0, key=f"focused_budget_{category}")
+        save_budget = st.form_submit_button("Save budget")
+    if save_budget:
+        try:
+            api_save_budget("monthly", income_amount, allocations)
+            st.success("Budget saved.")
+            st.session_state.pop("goal_plan", None)
+        except Exception as e:
+            st.error("Could not save budget.")
+            st.code(str(e))
+
+elif page == "Goals / Saved Plans":
+    st.subheader("Saved goals")
+    try:
+        saved_goal_plans = api_get_goals()
+    except Exception as e:
+        saved_goal_plans = []
+        st.error("Could not load saved goals.")
+        st.code(str(e))
+    if not saved_goal_plans:
+        st.write("No saved plans yet. Build a plan on the main page and save it here.")
+    else:
+        for idx, saved_plan in enumerate(saved_goal_plans):
+            with st.container(border=True):
+                top = st.columns([1.5, 1, 1])
+                top[0].markdown(f"**{saved_plan['goal_name']}**")
+                top[1].write(f"Target: {money(saved_plan['target_amount'])}")
+                top[2].write(f"By: {saved_plan['target_date']}")
+                progress = st.slider(
+                    "Progress",
+                    min_value=0.0,
+                    max_value=float(saved_plan["target_amount"]),
+                    value=float(saved_plan.get("progress", 0.0)),
+                    step=25.0,
+                    key=f"goal_progress_{idx}",
+                )
+                if st.button("Update progress", key=f"update_goal_progress_{idx}"):
+                    try:
+                        api_update_goal_progress(saved_plan["id"], progress)
+                        st.success("Progress updated.")
+                    except Exception as e:
+                        st.error("Could not update progress.")
+                        st.code(str(e))
+                st.progress(min(1.0, progress / max(1.0, float(saved_plan["target_amount"]))))
+                remaining = max(0.0, float(saved_plan["target_amount"]) - progress)
+                st.write(
+                    f"Remaining: {money(remaining)}. Current weekly adjustment: "
+                    f"{money(saved_plan['weekly_needed'])}/week."
+                )
+                if saved_plan.get("recommendations"):
+                    adjustments = [
+                        f"{row['Category']} {money(row['Recommended weekly cut'])}/week"
+                        for row in saved_plan["recommendations"][:3]
+                    ]
+                    st.caption(f"Recommended adjustments: {', '.join(adjustments)}")
 
 if not show_legacy_tools:
     st.stop()

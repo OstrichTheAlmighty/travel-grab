@@ -6,6 +6,7 @@ import statistics
 import re
 import os
 import time
+import json
 import requests
 
 from backend.db import init_db, DB_PATH, get_conn
@@ -1473,6 +1474,96 @@ def afford(payload: AffordRequest):
     )
     print("FINAL /afford RESPONSE:", response_dict, flush=True)
     return response_dict
+
+
+# ============================================================
+# Goal plans
+# ============================================================
+
+class GoalPlanIn(BaseModel):
+    user_id: str = USER_DEFAULT
+    goal_name: str
+    target_amount: float = Field(ge=0)
+    target_date: str
+    progress: float = Field(default=0, ge=0)
+    weekly_needed: float = Field(default=0, ge=0)
+    monthly_needed: float = Field(default=0, ge=0)
+    realistic: bool = False
+    recommendations: List[Dict[str, object]] = Field(default_factory=list)
+    protected: Dict[str, float] = Field(default_factory=dict)
+
+
+class GoalProgressIn(BaseModel):
+    progress: float = Field(ge=0)
+
+
+def _goal_row_to_dict(row):
+    return {
+        "id": int(row["id"]),
+        "user_id": row["user_id"],
+        "goal_name": row["goal_name"],
+        "target_amount": float(row["target_amount"]),
+        "target_date": row["target_date"],
+        "progress": float(row["progress"]),
+        "weekly_needed": float(row["weekly_needed"]),
+        "monthly_needed": float(row["monthly_needed"]),
+        "realistic": bool(row["realistic"]),
+        "recommendations": json.loads(row["recommendations_json"] or "[]"),
+        "protected": json.loads(row["protected_json"] or "{}"),
+        "created_at": row["created_at"],
+        "updated_at": row["updated_at"],
+    }
+
+
+@app.get("/goals")
+def list_goals(user_id: str = USER_DEFAULT):
+    with get_conn() as conn:
+        rows = conn.execute(
+            "SELECT * FROM goal_plans WHERE user_id = ? ORDER BY created_at DESC, id DESC",
+            (user_id,),
+        ).fetchall()
+    return {"goals": [_goal_row_to_dict(row) for row in rows]}
+
+
+@app.post("/goals")
+def save_goal(goal: GoalPlanIn):
+    with get_conn() as conn:
+        cur = conn.execute(
+            """
+            INSERT INTO goal_plans (
+                user_id, goal_name, target_amount, target_date, progress,
+                weekly_needed, monthly_needed, realistic, recommendations_json, protected_json
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                goal.user_id,
+                goal.goal_name.strip(),
+                float(goal.target_amount),
+                goal.target_date,
+                float(goal.progress),
+                float(goal.weekly_needed),
+                float(goal.monthly_needed),
+                1 if goal.realistic else 0,
+                json.dumps(goal.recommendations),
+                json.dumps(goal.protected),
+            ),
+        )
+        conn.commit()
+        row = conn.execute("SELECT * FROM goal_plans WHERE id = ?", (cur.lastrowid,)).fetchone()
+    return {"status": "ok", "goal": _goal_row_to_dict(row)}
+
+
+@app.patch("/goals/{goal_id}/progress")
+def update_goal_progress(goal_id: int, payload: GoalProgressIn):
+    with get_conn() as conn:
+        conn.execute(
+            "UPDATE goal_plans SET progress = ?, updated_at = datetime('now') WHERE id = ?",
+            (float(payload.progress), int(goal_id)),
+        )
+        conn.commit()
+        row = conn.execute("SELECT * FROM goal_plans WHERE id = ?", (int(goal_id),)).fetchone()
+    return {"status": "ok", "goal": _goal_row_to_dict(row)}
 
 
 # ============================================================
