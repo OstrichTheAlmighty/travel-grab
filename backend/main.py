@@ -194,6 +194,11 @@ class SimulateWeekIn(BaseModel):
 def load_sample_month(sample: SampleMonthIn):
     as_of_d = parse_date(sample.as_of) if sample.as_of else date.today()
     month_start, month_end = period_bounds(as_of_d, "monthly")
+    if month_start.month == 1:
+        prior_anchor = month_start.replace(year=month_start.year - 1, month=12, day=1)
+    else:
+        prior_anchor = month_start.replace(month=month_start.month - 1, day=1)
+    prior_month_start, prior_month_end = period_bounds(prior_anchor, "monthly")
     days_total = (month_end - month_start).days + 1
     days_elapsed = min(days_total, max(1, (as_of_d - month_start).days + 1))
     sample_progress = min(1.0, max(0.0, days_elapsed / days_total)) if days_total > 0 else 1.0
@@ -203,6 +208,11 @@ def load_sample_month(sample: SampleMonthIn):
             return month_start.isoformat()
         scaled_index = round(((day_hint - 1) / max(1, days_total - 1)) * (days_elapsed - 1))
         return (month_start + timedelta(days=int(scaled_index))).isoformat()
+
+    def baseline_date(day_hint: int) -> str:
+        prior_days = (prior_month_end - prior_month_start).days + 1
+        safe_day = min(max(1, day_hint), prior_days)
+        return (prior_month_start + timedelta(days=safe_day - 1)).isoformat()
 
     def scaled_spend(amount_value: float) -> float:
         return round(float(amount_value), 2)
@@ -269,6 +279,67 @@ def load_sample_month(sample: SampleMonthIn):
         (sample_date(21), "Pet Supplies Plus", -scaled_spend(31.26), "Other", sample.user_id),
         (sample_date(30), "Farmers Market", -scaled_spend(22.80), "Other", sample.user_id),
     ]
+    baseline_transactions = [
+        (baseline_date(1), "Employer Payroll", 3200.0, "Income", sample.user_id),
+        (baseline_date(15), "Employer Payroll", 3200.0, "Income", sample.user_id),
+        (baseline_date(2), "Apartment Rent", -1850.0, "Bills", sample.user_id),
+        (baseline_date(3), "SoCal Edison", -82.14, "Bills", sample.user_id),
+        (baseline_date(5), "Verizon Wireless", -96.20, "Bills", sample.user_id),
+        (baseline_date(6), "Spectrum Internet", -69.99, "Bills", sample.user_id),
+        (baseline_date(1), "Automatic Savings Transfer", -350.0, "Savings", sample.user_id),
+        (baseline_date(3), "Trader Joe's", -91.42, "Groceries", sample.user_id),
+        (baseline_date(8), "Costco", -156.31, "Groceries", sample.user_id),
+        (baseline_date(13), "Whole Foods Market", -84.27, "Groceries", sample.user_id),
+        (baseline_date(19), "Safeway", -78.88, "Groceries", sample.user_id),
+        (baseline_date(25), "Trader Joe's", -69.34, "Groceries", sample.user_id),
+        (baseline_date(2), "Starbucks", -11.50, "Coffee", sample.user_id),
+        (baseline_date(4), "Blue Bottle Coffee", -13.25, "Coffee", sample.user_id),
+        (baseline_date(7), "Starbucks", -10.95, "Coffee", sample.user_id),
+        (baseline_date(9), "Neighborhood Cafe", -18.25, "Coffee", sample.user_id),
+        (baseline_date(12), "Starbucks", -11.35, "Coffee", sample.user_id),
+        (baseline_date(15), "Philz Coffee", -14.10, "Coffee", sample.user_id),
+        (baseline_date(18), "Starbucks", -10.15, "Coffee", sample.user_id),
+        (baseline_date(22), "Peet's Coffee", -13.20, "Coffee", sample.user_id),
+        (baseline_date(26), "Starbucks", -10.75, "Coffee", sample.user_id),
+        (baseline_date(28), "Blue Bottle Coffee", -15.40, "Coffee", sample.user_id),
+        (baseline_date(3), "Chipotle", -34.84, "Restaurants / dining", sample.user_id),
+        (baseline_date(5), "Sweetgreen", -38.62, "Restaurants / dining", sample.user_id),
+        (baseline_date(8), "Thai Basil", -72.37, "Restaurants / dining", sample.user_id),
+        (baseline_date(10), "DoorDash", -61.49, "Restaurants / dining", sample.user_id),
+        (baseline_date(13), "Local Pizza Co.", -58.70, "Restaurants / dining", sample.user_id),
+        (baseline_date(17), "Sushi House", -84.22, "Restaurants / dining", sample.user_id),
+        (baseline_date(20), "Panera Bread", -34.95, "Restaurants / dining", sample.user_id),
+        (baseline_date(24), "Taco Stand", -49.18, "Restaurants / dining", sample.user_id),
+        (baseline_date(27), "DoorDash", -66.80, "Restaurants / dining", sample.user_id),
+        (baseline_date(29), "Italian Kitchen", -83.80, "Restaurants / dining", sample.user_id),
+        (baseline_date(4), "Shell Gas", -54.72, "Transportation", sample.user_id),
+        (baseline_date(6), "Downtown Parking", -18.00, "Transportation", sample.user_id),
+        (baseline_date(9), "Uber", -32.46, "Transportation", sample.user_id),
+        (baseline_date(14), "Chevron", -58.18, "Transportation", sample.user_id),
+        (baseline_date(18), "Metro Transit", -25.00, "Transportation", sample.user_id),
+        (baseline_date(23), "Lyft", -28.64, "Transportation", sample.user_id),
+        (baseline_date(28), "Shell Gas", -56.51, "Transportation", sample.user_id),
+        (baseline_date(2), "Netflix", -15.49, "Subscriptions", sample.user_id),
+        (baseline_date(8), "Spotify", -10.99, "Subscriptions", sample.user_id),
+        (baseline_date(14), "iCloud Storage", -2.99, "Subscriptions", sample.user_id),
+        (baseline_date(20), "Hulu", -17.99, "Subscriptions", sample.user_id),
+        (baseline_date(24), "Planet Fitness", -29.99, "Subscriptions", sample.user_id),
+        (baseline_date(7), "AMC Theatres", -58.50, "Entertainment", sample.user_id),
+        (baseline_date(12), "Bowling Alley", -66.20, "Entertainment", sample.user_id),
+        (baseline_date(19), "Concert Tickets", -128.00, "Entertainment", sample.user_id),
+        (baseline_date(26), "Kindle Books", -38.98, "Entertainment", sample.user_id),
+        (baseline_date(5), "Amazon", -89.84, "Shopping", sample.user_id),
+        (baseline_date(10), "Target", -136.45, "Shopping", sample.user_id),
+        (baseline_date(16), "Old Navy", -118.32, "Shopping", sample.user_id),
+        (baseline_date(22), "Amazon", -94.17, "Shopping", sample.user_id),
+        (baseline_date(28), "Best Buy", -162.61, "Shopping", sample.user_id),
+        (baseline_date(11), "CVS Pharmacy", -18.44, "Health", sample.user_id),
+        (baseline_date(25), "Walgreens", -23.79, "Health", sample.user_id),
+        (baseline_date(13), "Venmo - Birthday Gift", -45.00, "Other", sample.user_id),
+        (baseline_date(18), "Etsy", -47.45, "Other", sample.user_id),
+        (baseline_date(21), "Pet Supplies Plus", -51.26, "Other", sample.user_id),
+        (baseline_date(30), "Farmers Market", -42.80, "Other", sample.user_id),
+    ]
 
     print(
         "LOADING SAMPLE MONTH:",
@@ -278,11 +349,15 @@ def load_sample_month(sample: SampleMonthIn):
     with get_conn() as conn:
         conn.execute(
             "DELETE FROM transactions WHERE user_id = ? AND date >= ? AND date <= ?",
-            (sample.user_id, month_start.isoformat(), month_end.isoformat()),
+            (sample.user_id, prior_month_start.isoformat(), month_end.isoformat()),
         )
         conn.executemany(
             "INSERT INTO transactions (date, merchant, amount, category, user_id, source, scenario) VALUES (?, ?, ?, ?, ?, ?, ?)",
             [(*tx, "demo", None) for tx in sample_transactions],
+        )
+        conn.executemany(
+            "INSERT INTO transactions (date, merchant, amount, category, user_id, source, scenario) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [(*tx, "baseline", None) for tx in baseline_transactions],
         )
         conn.commit()
     _mark_transaction_dataset_event(
@@ -290,13 +365,14 @@ def load_sample_month(sample: SampleMonthIn):
         "sample_month",
         as_of=as_of_d.isoformat(),
         loaded=len(sample_transactions),
+        baseline_loaded=len(baseline_transactions),
     )
     print(
         "LOADED SAMPLE MONTH:",
         {"user_id": sample.user_id, "as_of": as_of_d.isoformat(), "count": len(sample_transactions)},
         flush=True,
     )
-    return {"status": "ok", "loaded": len(sample_transactions)}
+    return {"status": "ok", "loaded": len(sample_transactions), "baseline_loaded": len(baseline_transactions)}
 
 
 @app.post("/transactions/simulate-week")
@@ -305,8 +381,13 @@ def simulate_week(sim: SimulateWeekIn):
     week_start = as_of_d - timedelta(days=as_of_d.weekday())
     week_end = min(as_of_d, week_start + timedelta(days=6))
     elapsed_days = max(1, (week_end - week_start).days + 1)
-    baseline_start = week_start - timedelta(days=28)
-    baseline_end = week_start - timedelta(days=1)
+    month_start, _ = period_bounds(as_of_d, "monthly")
+    if month_start.month == 1:
+        prior_anchor = month_start.replace(year=month_start.year - 1, month=12, day=1)
+    else:
+        prior_anchor = month_start.replace(month=month_start.month - 1, day=1)
+    baseline_start, baseline_end = period_bounds(prior_anchor, "monthly")
+    baseline_weeks = max(1.0, ((baseline_end - baseline_start).days + 1) / 7.0)
 
     def tx(day_offset: int, merchant: str, amount: float, category: str):
         d = min(week_end, week_start + timedelta(days=day_offset))
@@ -319,6 +400,7 @@ def simulate_week(sim: SimulateWeekIn):
         "Entertainment": 55.0,
         "Subscriptions": 30.0,
         "Other": 25.0,
+        "Transportation": 60.0,
     }
     merchants = {
         "Coffee": {"good": "Home Coffee Supplies", "average": "Starbucks", "overspending": "Starbucks"},
@@ -327,8 +409,37 @@ def simulate_week(sim: SimulateWeekIn):
         "Entertainment": {"good": "Kindle Books", "average": "AMC Theatres", "overspending": "Concert Tickets"},
         "Subscriptions": {"good": "Spotify", "average": "Netflix", "overspending": "Streaming Bundle"},
         "Other": {"good": "Local Errand", "average": "Convenience Store", "overspending": "Impulse Purchase"},
+        "Transportation": {"good": "Metro Transit", "average": "Uber", "overspending": "Lyft"},
     }
-    multipliers = {"good": 0.25, "average": 1.0, "overspending": 1.75}
+    scenario_multipliers = {
+        "good": {
+            "Coffee": 0.60,
+            "Restaurants / dining": 0.65,
+            "Shopping": 0.70,
+            "Entertainment": 0.75,
+            "Subscriptions": 0.90,
+            "Other": 0.80,
+            "Transportation": 0.90,
+        },
+        "average": {
+            "Coffee": 1.0,
+            "Restaurants / dining": 1.0,
+            "Shopping": 1.0,
+            "Entertainment": 1.0,
+            "Subscriptions": 1.0,
+            "Other": 1.0,
+            "Transportation": 1.0,
+        },
+        "overspending": {
+            "Coffee": 1.20,
+            "Restaurants / dining": 1.40,
+            "Shopping": 1.50,
+            "Entertainment": 1.35,
+            "Subscriptions": 1.0,
+            "Other": 1.25,
+            "Transportation": 1.10,
+        },
+    }
 
     with get_conn() as conn:
         baseline_rows = conn.execute(
@@ -339,7 +450,7 @@ def simulate_week(sim: SimulateWeekIn):
               AND amount < 0
               AND date >= ?
               AND date <= ?
-              AND category IN ('Food', 'Coffee', 'Restaurants / dining', 'Shopping', 'Entertainment', 'Subscriptions', 'Other')
+              AND category IN ('Food', 'Coffee', 'Restaurants / dining', 'Shopping', 'Entertainment', 'Subscriptions', 'Other', 'Transportation')
               AND COALESCE(source, 'demo') != 'simulation'
             """,
             (sim.user_id, baseline_start.isoformat(), baseline_end.isoformat()),
@@ -348,13 +459,14 @@ def simulate_week(sim: SimulateWeekIn):
         for row in baseline_rows:
             category = normalize_category(row["merchant"], row["category"])
             baseline_totals[category] = baseline_totals.get(category, 0.0) + abs(float(row["amount"] or 0.0))
-        baseline_weekly = {category: amount / 4.0 for category, amount in baseline_totals.items()}
+        baseline_weekly = {category: amount / baseline_weeks for category, amount in baseline_totals.items()}
         for category, amount in fallback_weekly.items():
             baseline_weekly.setdefault(category, amount)
 
         scenario_transactions = []
         for idx, (category, weekly_amount) in enumerate(baseline_weekly.items()):
-            target_to_date = weekly_amount * (elapsed_days / 7.0) * multipliers[sim.scenario]
+            multiplier = scenario_multipliers[sim.scenario].get(category, 1.0)
+            target_to_date = weekly_amount * (elapsed_days / 7.0) * multiplier
             if target_to_date < 1:
                 continue
             scenario_transactions.append(
@@ -372,7 +484,7 @@ def simulate_week(sim: SimulateWeekIn):
             WHERE user_id = ?
               AND date >= ?
               AND date <= ?
-              AND category IN ('Food', 'Coffee', 'Restaurants / dining', 'Shopping', 'Entertainment', 'Subscriptions', 'Other')
+              AND category IN ('Food', 'Coffee', 'Restaurants / dining', 'Shopping', 'Entertainment', 'Subscriptions', 'Other', 'Transportation')
               AND COALESCE(source, 'demo') IN ('demo', 'simulation')
             """,
             (sim.user_id, week_start.isoformat(), week_end.isoformat()),

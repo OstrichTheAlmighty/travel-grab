@@ -314,7 +314,20 @@ def load_demo_transactions_if_needed():
     data = api_get_transactions(month_start.isoformat(), as_of_str)
     transactions = data.get("transactions", [])
     if transactions:
-        return transactions
+        prev_start, prev_end = month_bounds(previous_month(month_start))
+        previous = api_get_transactions(prev_start.isoformat(), prev_end.isoformat()).get("transactions", [])
+        has_baseline = any(str(tx.get("source") or "").lower() == "baseline" for tx in previous)
+        if has_baseline:
+            return transactions
+        r = requests.post(
+            f"{BASE_URL}/transactions/sample-month",
+            json={"user_id": st.session_state.user_id, "as_of": as_of_str},
+            timeout=10,
+        )
+        if not r.ok:
+            show_http_error(r)
+            raise RuntimeError("POST /transactions/sample-month failed")
+        return api_get_transactions(month_start.isoformat(), as_of_str).get("transactions", [])
 
     all_data = requests.get(
         f"{BASE_URL}/transactions",
@@ -385,7 +398,9 @@ def transaction_source_label(tx):
         }.get(scenario, "Simulation")
     if source == "manual":
         return "Manual"
-    return "Demo"
+    if source == "baseline":
+        return "Baseline month transactions"
+    return "Current month transactions"
 
 
 def category_flexibility(category_name):
@@ -539,8 +554,8 @@ def parse_tx_date(tx):
 def build_behavior_progress(transactions, as_of):
     current_week_start, current_week_end = week_bounds(as_of)
     elapsed_days = max(1, (min(as_of, current_week_end) - current_week_start).days + 1)
-    baseline_start = current_week_start - datetime.timedelta(days=28)
-    baseline_end = current_week_start - datetime.timedelta(days=1)
+    baseline_start, baseline_end = month_bounds(previous_month(month_start))
+    baseline_weeks = max(1.0, ((baseline_end - baseline_start).days + 1) / 7.0)
 
     baseline = {}
     current = {}
@@ -561,7 +576,7 @@ def build_behavior_progress(transactions, as_of):
     rows = []
     all_categories = sorted(set(baseline) | set(current), key=category_priority)
     for category_name in all_categories:
-        baseline_weekly = baseline.get(category_name, 0.0) / 4.0
+        baseline_weekly = baseline.get(category_name, 0.0) / baseline_weeks
         current_projected_weekly = current.get(category_name, 0.0) / elapsed_days * 7
         estimated_savings = baseline_weekly - current_projected_weekly
         if abs(estimated_savings) < 1:
@@ -1156,7 +1171,7 @@ def goal_trajectory_label(plan):
     detected = float((plan.get("behavior_progress", {}) or {}).get("weekly_savings", 0.0))
     if detected >= weekly_needed * 1.10:
         return "Ahead"
-    if detected >= weekly_needed * 0.75:
+    if detected >= weekly_needed * 0.60:
         return "On track"
     return "Behind"
 
@@ -1191,7 +1206,7 @@ def build_goal_analysis(goal_name, target_amount, target_date, weekly_target, be
     pace_vs_target = detected - float(weekly_target)
     if detected >= float(weekly_target) * 1.10:
         trajectory = "Ahead"
-    elif detected >= float(weekly_target) * 0.75:
+    elif detected >= float(weekly_target) * 0.60:
         trajectory = "On track"
     else:
         trajectory = "Behind"
@@ -1267,8 +1282,8 @@ def simulation_debug_rows(plan):
     return [
         {"Metric": "Active simulation scenario", "Value": ", ".join(scenarios) if scenarios else "None"},
         {"Metric": "Simulated transactions", "Value": str(len(simulated))},
-        {"Metric": "Current week tracked spend", "Value": money(analysis["currentTotals"])},
-        {"Metric": "Baseline weekly tracked spend", "Value": money(analysis["baselineTotals"])},
+        {"Metric": "Current simulated week flexible spend", "Value": money(analysis["currentTotals"])},
+        {"Metric": "Baseline week flexible spend", "Value": money(analysis["baselineTotals"])},
         {"Metric": "Detected savings", "Value": signed_money(analysis["detectedSavings"])},
         {"Metric": "Target weekly savings", "Value": money(analysis["weeklyTarget"])},
         {"Metric": "Gap vs target", "Value": signed_money(analysis["paceVsTarget"])},
@@ -1729,7 +1744,9 @@ elif page == "Transactions":
 elif page == "Transaction History":
     st.subheader("Transaction history")
     try:
-        transactions = load_demo_transactions_if_needed()
+        load_demo_transactions_if_needed()
+        history_start = month_bounds(previous_month(month_start))[0]
+        transactions = api_get_transactions(history_start.isoformat(), as_of_str).get("transactions", [])
         df = pd.DataFrame(transactions)
         if df.empty:
             st.write("No transactions found.")
