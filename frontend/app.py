@@ -3,7 +3,7 @@ import calendar
 import pandas as pd
 import streamlit as st
 import requests
-from frontend.affordability_engine import calculateGoalTrajectory
+from affordability_engine import calculateGoalTrajectory
 
 BASE_URL = "http://127.0.0.1:8000"
 if "user_id" not in st.session_state:
