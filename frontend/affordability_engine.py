@@ -11,7 +11,7 @@ def _projected_date_from_gap(target_date, weekly_target, gap_vs_target):
 
 def _trajectory_status(gap_vs_target, weekly_target):
     if abs(float(gap_vs_target)) < 5:
-        return "Approximately on track"
+        return "Near target"
     if gap_vs_target >= weekly_target * 0.10:
         return "Ahead"
     if gap_vs_target >= weekly_target * -0.40:
@@ -66,11 +66,16 @@ def calculateGoalTrajectory(
         "baselineWeeklyFlexibleSpend": float(baseline_weekly_flexible_spend),
         "currentWeekFlexibleSpend": float(current_week_flexible_spend),
         "behaviorImprovement": behavior_improvement,
+        "behaviorDelta": behavior_improvement,
         "detectedSavings": detected_savings,
         "addedToGoalThisWeek": max(0.0, float(added_to_goal_this_week)),
+        "movedToGoalThisWeek": max(0.0, float(added_to_goal_this_week)),
         "weeklyTarget": weekly_target,
+        "weeklyGoalNeed": weekly_target,
         "gapVsTarget": gap_vs_target,
+        "behaviorGap": gap_vs_target,
         "actualGoalGapVsTarget": actual_goal_gap_vs_target,
+        "goalFundingGap": actual_goal_gap_vs_target,
         "remaining": remaining,
         "projectedDate": projected_date,
         "actualGoalProjectedDate": actual_goal_projected_date,
