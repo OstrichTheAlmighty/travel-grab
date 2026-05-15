@@ -41,7 +41,6 @@ def calculateGoalTrajectory(
     active_simulation,
     baseline_weekly_flexible_spend,
     current_week_flexible_spend,
-    added_to_goal_this_week,
     goal_cost,
     goal_progress,
     target_date,
@@ -51,14 +50,13 @@ def calculateGoalTrajectory(
     number_of_simulation_transactions,
 ):
     behavior_improvement = float(baseline_weekly_flexible_spend) - float(current_week_flexible_spend)
-    detected_savings = behavior_improvement
-    remaining = max(0.0, float(goal_cost) - max(0.0, float(goal_progress)))
+    detected_savings = max(0.0, behavior_improvement)
+    starting_remaining = max(0.0, float(goal_cost) - max(0.0, float(goal_progress)))
+    remaining = max(0.0, starting_remaining - detected_savings)
     weeks_until_target = max(1.0, (target_date - today).days / 7.0)
-    weekly_target = remaining / weeks_until_target
+    weekly_target = starting_remaining / weeks_until_target
     gap_vs_target = behavior_improvement - weekly_target
-    actual_goal_gap_vs_target = max(0.0, float(added_to_goal_this_week)) - weekly_target
     projected_date = _projected_date_from_gap(target_date, weekly_target, gap_vs_target)
-    actual_goal_projected_date = _projected_date_from_gap(target_date, weekly_target, actual_goal_gap_vs_target)
     trajectory_status = _trajectory_status(gap_vs_target, weekly_target)
 
     return {
@@ -68,17 +66,14 @@ def calculateGoalTrajectory(
         "behaviorImprovement": behavior_improvement,
         "behaviorDelta": behavior_improvement,
         "detectedSavings": detected_savings,
-        "addedToGoalThisWeek": max(0.0, float(added_to_goal_this_week)),
-        "movedToGoalThisWeek": max(0.0, float(added_to_goal_this_week)),
+        "savedTowardGoalThisWeek": detected_savings,
         "weeklyTarget": weekly_target,
         "weeklyGoalNeed": weekly_target,
         "gapVsTarget": gap_vs_target,
         "behaviorGap": gap_vs_target,
-        "actualGoalGapVsTarget": actual_goal_gap_vs_target,
-        "goalFundingGap": actual_goal_gap_vs_target,
+        "savingsGap": gap_vs_target,
         "remaining": remaining,
         "projectedDate": projected_date,
-        "actualGoalProjectedDate": actual_goal_projected_date,
         "trajectoryStatus": trajectory_status,
         "categoryDeltas": list(category_deltas or []),
         "recommendedActions": list(recommended_actions or []),
