@@ -1,11 +1,12 @@
 import datetime
 import calendar
+import os
 import pandas as pd
 import streamlit as st
 import requests
 from affordability_engine import calculateGoalTrajectory
 
-BASE_URL = "http://127.0.0.1:8000"
+BASE_URL = os.getenv("FINANCE_COACH_API_URL", "").rstrip("/")
 if "user_id" not in st.session_state:
     st.session_state.user_id = "default"
 
@@ -134,15 +135,19 @@ def show_http_error(resp: requests.Response):
 
 
 def api_get_budget_active():
-    r = requests.get(
-        f"{BASE_URL}/budget/active",
-        params={"user_id": st.session_state.user_id},
-        timeout=10,
-    )
-    if not r.ok:
-        show_http_error(r)
-        raise RuntimeError("GET /budget/active failed")
-    return r.json()
+    if not BASE_URL:
+        return st.session_state.get("local_budget", {"income_amount": 0.0, "allocations": {}})
+    try:
+        r = requests.get(
+            f"{BASE_URL}/budget/active",
+            params={"user_id": st.session_state.user_id},
+            timeout=3,
+        )
+        if r.ok:
+            return r.json()
+    except requests.RequestException:
+        pass
+    return st.session_state.get("local_budget", {"income_amount": 0.0, "allocations": {}})
 
 
 def api_save_budget(period, income_amount, allocations):
@@ -152,55 +157,94 @@ def api_save_budget(period, income_amount, allocations):
         "income_amount": float(income_amount),
         "allocations": {k: float(v) for k, v in allocations.items()},
     }
-    r = requests.post(f"{BASE_URL}/budget", json=payload, timeout=10)
-    if not r.ok:
-        show_http_error(r)
-        raise RuntimeError("POST /budget failed")
-    return r.json()
+    if BASE_URL:
+        try:
+            r = requests.post(f"{BASE_URL}/budget", json=payload, timeout=3)
+            if r.ok:
+                return r.json()
+        except requests.RequestException:
+            pass
+    st.session_state.local_budget = {
+        "income_amount": float(income_amount),
+        "allocations": {k: float(v) for k, v in allocations.items()},
+    }
+    return st.session_state.local_budget
 
 
 def api_get_budget_report(period, as_of):
-    r = requests.get(
-        f"{BASE_URL}/budget/report",
-        params={"user_id": st.session_state.user_id, "period": period, "as_of": as_of},
-        timeout=10,
-    )
-    if not r.ok:
-        show_http_error(r)
-        raise RuntimeError("GET /budget/report failed")
-    return r.json()
+    if not BASE_URL:
+        return {"period": period, "income": 0.0, "categories": []}
+    try:
+        r = requests.get(
+            f"{BASE_URL}/budget/report",
+            params={"user_id": st.session_state.user_id, "period": period, "as_of": as_of},
+            timeout=3,
+        )
+        if r.ok:
+            return r.json()
+    except requests.RequestException:
+        pass
+    return {"period": period, "income": 0.0, "categories": []}
 
 
 def api_get_forecast(period, as_of):
-    r = requests.get(
-        f"{BASE_URL}/forecast/eop",
-        params={"user_id": st.session_state.user_id, "period": period, "as_of": as_of},
-        timeout=10,
-    )
-    if not r.ok:
-        show_http_error(r)
-        raise RuntimeError("GET /forecast/eop failed")
-    return r.json()
+    if not BASE_URL:
+        return {"period": period, "projected_end_balance": 0.0, "series": []}
+    try:
+        r = requests.get(
+            f"{BASE_URL}/forecast/eop",
+            params={"user_id": st.session_state.user_id, "period": period, "as_of": as_of},
+            timeout=3,
+        )
+        if r.ok:
+            return r.json()
+    except requests.RequestException:
+        pass
+    return {"period": period, "projected_end_balance": 0.0, "series": []}
 
 
 def api_get_transactions(start, end):
-    r = requests.get(
-        f"{BASE_URL}/transactions",
-        params={"user_id": st.session_state.user_id, "start": start, "end": end},
-        timeout=10,
-    )
-    if not r.ok:
-        show_http_error(r)
-        raise RuntimeError("GET /transactions failed")
-    return r.json()
+    if not BASE_URL:
+        return {"transactions": local_get_transactions(start, end)}
+    try:
+        r = requests.get(
+            f"{BASE_URL}/transactions",
+            params={"user_id": st.session_state.user_id, "start": start, "end": end},
+            timeout=3,
+        )
+        if r.ok:
+            return r.json()
+    except requests.RequestException:
+        pass
+    return {"transactions": local_get_transactions(start, end)}
+
+
+def api_get_all_transactions():
+    if not BASE_URL:
+        return list(st.session_state.get("local_transactions", []))
+    try:
+        r = requests.get(
+            f"{BASE_URL}/transactions",
+            params={"user_id": st.session_state.user_id},
+            timeout=3,
+        )
+        if r.ok:
+            return r.json().get("transactions", [])
+    except requests.RequestException:
+        pass
+    return list(st.session_state.get("local_transactions", []))
 
 
 def api_get_goals():
-    r = requests.get(f"{BASE_URL}/goals", params={"user_id": st.session_state.user_id}, timeout=10)
-    if not r.ok:
-        show_http_error(r)
-        raise RuntimeError("GET /goals failed")
-    return r.json().get("goals", [])
+    if not BASE_URL:
+        return list(st.session_state.get("local_goals", []))
+    try:
+        r = requests.get(f"{BASE_URL}/goals", params={"user_id": st.session_state.user_id}, timeout=3)
+        if r.ok:
+            return r.json().get("goals", [])
+    except requests.RequestException:
+        pass
+    return list(st.session_state.get("local_goals", []))
 
 
 def api_save_goal(plan):
@@ -217,47 +261,113 @@ def api_save_goal(plan):
         "protected": plan.get("protected", {}),
         "flexibility_preferences": plan.get("flexibility_preferences", {}),
     }
-    r = requests.post(f"{BASE_URL}/goals", json=payload, timeout=10)
-    if not r.ok:
-        show_http_error(r)
-        raise RuntimeError("POST /goals failed")
-    return r.json().get("goal", {})
+    if BASE_URL:
+        try:
+            r = requests.post(f"{BASE_URL}/goals", json=payload, timeout=3)
+            if r.ok:
+                return r.json().get("goal", {})
+        except requests.RequestException:
+            pass
+    goals = list(st.session_state.get("local_goals", []))
+    goal = dict(payload)
+    goal["id"] = max([int(g.get("id", 0)) for g in goals] or [0]) + 1
+    goals.append(goal)
+    st.session_state.local_goals = goals
+    return goal
 
 
 def api_update_goal_progress(goal_id, progress):
-    r = requests.patch(
-        f"{BASE_URL}/goals/{int(goal_id)}/progress",
-        json={"progress": float(progress)},
-        timeout=10,
-    )
-    if not r.ok:
-        show_http_error(r)
-        raise RuntimeError("PATCH /goals/{goal_id}/progress failed")
-    return r.json().get("goal", {})
+    if not BASE_URL:
+        goals = list(st.session_state.get("local_goals", []))
+        updated = {}
+        for goal in goals:
+            if int(goal.get("id", -1)) == int(goal_id):
+                goal["progress"] = float(progress)
+                updated = goal
+                break
+        st.session_state.local_goals = goals
+        return updated
+    try:
+        r = requests.patch(
+            f"{BASE_URL}/goals/{int(goal_id)}/progress",
+            json={"progress": float(progress)},
+            timeout=3,
+        )
+        if r.ok:
+            return r.json().get("goal", {})
+    except requests.RequestException:
+        pass
+    goals = list(st.session_state.get("local_goals", []))
+    updated = {}
+    for goal in goals:
+        if int(goal.get("id", -1)) == int(goal_id):
+            goal["progress"] = float(progress)
+            updated = goal
+            break
+    st.session_state.local_goals = goals
+    return updated
 
 
 def api_load_realistic_transaction_history():
-    r = requests.post(
-        f"{BASE_URL}/transactions/sample-month",
-        json={"user_id": st.session_state.user_id, "as_of": as_of_str},
-        timeout=10,
-    )
-    if not r.ok:
-        show_http_error(r)
-        raise RuntimeError("POST /transactions/sample-month failed")
-    return r.json()
+    if not BASE_URL:
+        return local_load_realistic_transaction_history(as_of_date)
+    try:
+        r = requests.post(
+            f"{BASE_URL}/transactions/sample-month",
+            json={"user_id": st.session_state.user_id, "as_of": as_of_str},
+            timeout=3,
+        )
+        if r.ok:
+            return r.json()
+    except requests.RequestException:
+        pass
+    return local_load_realistic_transaction_history(as_of_date)
 
 
 def api_simulate_week(scenario):
-    r = requests.post(
-        f"{BASE_URL}/transactions/simulate-week",
-        json={"user_id": st.session_state.user_id, "as_of": as_of_str, "scenario": scenario},
-        timeout=10,
-    )
-    if not r.ok:
-        show_http_error(r)
-        raise RuntimeError("POST /transactions/simulate-week failed")
-    return r.json()
+    if not BASE_URL:
+        return local_simulate_week(scenario, as_of_date)
+    try:
+        r = requests.post(
+            f"{BASE_URL}/transactions/simulate-week",
+            json={"user_id": st.session_state.user_id, "as_of": as_of_str, "scenario": scenario},
+            timeout=3,
+        )
+        if r.ok:
+            return r.json()
+    except requests.RequestException:
+        pass
+    return local_simulate_week(scenario, as_of_date)
+
+
+def api_add_transaction(tx):
+    if not BASE_URL:
+        local_tx = {
+            "date": tx["date"],
+            "merchant": tx.get("merchant", ""),
+            "amount": float(tx.get("amount", 0.0)),
+            "category": tx.get("category", "Other"),
+            "source": "manual",
+            "scenario": None,
+        }
+        st.session_state.local_transactions = list(st.session_state.get("local_transactions", [])) + [local_tx]
+        return {"transaction": local_tx, "local": True}
+    try:
+        r = requests.post(f"{BASE_URL}/transactions", json=tx, timeout=3)
+        if r.ok:
+            return r.json()
+    except requests.RequestException:
+        pass
+    local_tx = {
+        "date": tx["date"],
+        "merchant": tx.get("merchant", ""),
+        "amount": float(tx.get("amount", 0.0)),
+        "category": tx.get("category", "Other"),
+        "source": "manual",
+        "scenario": None,
+    }
+    st.session_state.local_transactions = list(st.session_state.get("local_transactions", [])) + [local_tx]
+    return {"transaction": local_tx, "local": True}
 
 
 # -----------------------------
@@ -344,36 +454,14 @@ def load_demo_transactions_if_needed():
         has_baseline = any(str(tx.get("source") or "").lower() == "baseline" for tx in previous)
         if has_baseline:
             return transactions
-        r = requests.post(
-            f"{BASE_URL}/transactions/sample-month",
-            json={"user_id": st.session_state.user_id, "as_of": as_of_str},
-            timeout=10,
-        )
-        if not r.ok:
-            show_http_error(r)
-            raise RuntimeError("POST /transactions/sample-month failed")
+        api_load_realistic_transaction_history()
         return api_get_transactions(month_start.isoformat(), as_of_str).get("transactions", [])
 
-    all_data = requests.get(
-        f"{BASE_URL}/transactions",
-        params={"user_id": st.session_state.user_id},
-        timeout=10,
-    )
-    if not all_data.ok:
-        show_http_error(all_data)
-        raise RuntimeError("GET /transactions failed")
-    transactions = all_data.json().get("transactions", [])
+    transactions = api_get_all_transactions()
     if transactions:
         return transactions
 
-    r = requests.post(
-        f"{BASE_URL}/transactions/sample-month",
-        json={"user_id": st.session_state.user_id, "as_of": as_of_str},
-        timeout=10,
-    )
-    if not r.ok:
-        show_http_error(r)
-        raise RuntimeError("POST /transactions/sample-month failed")
+    api_load_realistic_transaction_history()
     return api_get_transactions(month_start.isoformat(), as_of_str).get("transactions", [])
 
 
@@ -574,6 +662,175 @@ def week_bounds(d):
 
 def parse_tx_date(tx):
     return datetime.datetime.strptime(str(tx.get("date")), "%Y-%m-%d").date()
+
+
+def _local_tx(d, merchant, amount, category, source="demo", scenario=None):
+    return {
+        "date": d.isoformat() if isinstance(d, datetime.date) else str(d),
+        "merchant": merchant,
+        "amount": float(amount),
+        "category": category,
+        "source": source,
+        "scenario": scenario,
+    }
+
+
+def local_get_transactions(start=None, end=None):
+    transactions = list(st.session_state.get("local_transactions", []))
+    if not start and not end:
+        return transactions
+    start_d = datetime.date.min if not start else datetime.date.fromisoformat(str(start))
+    end_d = datetime.date.max if not end else datetime.date.fromisoformat(str(end))
+    return [tx for tx in transactions if start_d <= parse_tx_date(tx) <= end_d]
+
+
+def _dated(month_anchor, day):
+    last_day = calendar.monthrange(month_anchor.year, month_anchor.month)[1]
+    return month_anchor.replace(day=min(day, last_day))
+
+
+def local_sample_transactions(as_of):
+    current_month = as_of.replace(day=1)
+    prior_month = previous_month(current_month)
+    current_specs = [
+        (1, "Employer Payroll", 3200.0, "Income"), (15, "Employer Payroll", 3200.0, "Income"),
+        (2, "Apartment Rent", -1850.0, "Bills"), (3, "SoCal Edison", -82.14, "Bills"),
+        (4, "City Water Utility", -44.68, "Bills"), (5, "Verizon Wireless", -96.20, "Bills"),
+        (6, "Spectrum Internet", -69.99, "Bills"), (1, "Automatic Savings Transfer", -350.0, "Savings"),
+        (3, "Trader Joe's", -87.42, "Groceries"), (7, "Costco", -146.31, "Groceries"),
+        (11, "Whole Foods Market", -64.27, "Groceries"), (16, "Safeway", -72.88, "Groceries"),
+        (21, "Trader Joe's", -59.34, "Groceries"), (27, "Target Grocery", -44.16, "Groceries"),
+        (2, "Starbucks", -6.85, "Food"), (4, "Blue Bottle Coffee", -7.40, "Food"),
+        (6, "Starbucks", -5.95, "Food"), (9, "Neighborhood Cafe", -13.25, "Food"),
+        (12, "Starbucks", -6.35, "Food"), (15, "Philz Coffee", -8.10, "Food"),
+        (18, "Starbucks", -6.15, "Food"), (22, "Peet's Coffee", -7.20, "Food"),
+        (26, "Starbucks", -5.75, "Food"), (3, "Chipotle", -16.84, "Food"),
+        (5, "Sweetgreen", -18.62, "Food"), (8, "Thai Basil", -42.37, "Food"),
+        (10, "DoorDash", -31.49, "Food"), (13, "Local Pizza Co.", -28.70, "Food"),
+        (17, "Sushi House", -54.22, "Food"), (20, "Panera Bread", -14.95, "Food"),
+        (24, "Taco Stand", -19.18, "Food"), (29, "Italian Kitchen", -63.80, "Food"),
+        (4, "Shell Gas", -48.72, "Transportation"), (6, "Downtown Parking", -12.00, "Transportation"),
+        (9, "Uber", -22.46, "Transportation"), (14, "Chevron", -52.18, "Transportation"),
+        (18, "Metro Transit", -25.00, "Transportation"), (23, "Lyft", -18.64, "Transportation"),
+        (28, "Shell Gas", -46.51, "Transportation"), (2, "Netflix", -15.49, "Subscriptions"),
+        (8, "Spotify", -10.99, "Subscriptions"), (14, "iCloud Storage", -2.99, "Subscriptions"),
+        (20, "Hulu", -17.99, "Subscriptions"), (24, "Planet Fitness", -29.99, "Subscriptions"),
+        (27, "Apple Music", -10.99, "Subscriptions"), (7, "AMC Theatres", -34.50, "Entertainment"),
+        (12, "Bowling Alley", -41.20, "Entertainment"), (19, "Concert Tickets", -88.00, "Entertainment"),
+        (26, "Kindle Books", -18.98, "Entertainment"), (5, "Amazon", -39.84, "Shopping"),
+        (10, "Target", -76.45, "Shopping"), (16, "Old Navy", -58.32, "Shopping"),
+        (22, "Amazon", -24.17, "Shopping"), (28, "Best Buy", -92.61, "Shopping"),
+        (11, "CVS Pharmacy", -18.44, "Health"), (25, "Walgreens", -23.79, "Health"),
+        (13, "Venmo - Birthday Gift", -35.00, "Other"), (18, "Etsy", -27.45, "Other"),
+        (21, "Pet Supplies Plus", -31.26, "Other"), (30, "Farmers Market", -22.80, "Other"),
+    ]
+    baseline_specs = [
+        (1, "Employer Payroll", 3200.0, "Income"), (15, "Employer Payroll", 3200.0, "Income"),
+        (2, "Apartment Rent", -1850.0, "Bills"), (3, "SoCal Edison", -82.14, "Bills"),
+        (5, "Verizon Wireless", -96.20, "Bills"), (6, "Spectrum Internet", -69.99, "Bills"),
+        (1, "Automatic Savings Transfer", -350.0, "Savings"), (3, "Trader Joe's", -91.42, "Groceries"),
+        (8, "Costco", -156.31, "Groceries"), (13, "Whole Foods Market", -84.27, "Groceries"),
+        (19, "Safeway", -78.88, "Groceries"), (25, "Trader Joe's", -69.34, "Groceries"),
+        (2, "Starbucks", -11.50, "Coffee"), (4, "Blue Bottle Coffee", -13.25, "Coffee"),
+        (7, "Starbucks", -10.95, "Coffee"), (9, "Neighborhood Cafe", -18.25, "Coffee"),
+        (12, "Starbucks", -11.35, "Coffee"), (15, "Philz Coffee", -14.10, "Coffee"),
+        (18, "Starbucks", -10.15, "Coffee"), (22, "Peet's Coffee", -13.20, "Coffee"),
+        (26, "Starbucks", -10.75, "Coffee"), (28, "Blue Bottle Coffee", -15.40, "Coffee"),
+        (3, "Chipotle", -34.84, "Restaurants / dining"), (5, "Sweetgreen", -38.62, "Restaurants / dining"),
+        (8, "Thai Basil", -72.37, "Restaurants / dining"), (10, "DoorDash", -61.49, "Restaurants / dining"),
+        (13, "Local Pizza Co.", -58.70, "Restaurants / dining"), (17, "Sushi House", -84.22, "Restaurants / dining"),
+        (20, "Panera Bread", -34.95, "Restaurants / dining"), (24, "Taco Stand", -49.18, "Restaurants / dining"),
+        (27, "DoorDash", -66.80, "Restaurants / dining"), (29, "Italian Kitchen", -83.80, "Restaurants / dining"),
+        (4, "Shell Gas", -54.72, "Transportation"), (6, "Downtown Parking", -18.00, "Transportation"),
+        (9, "Uber", -32.46, "Transportation"), (14, "Chevron", -58.18, "Transportation"),
+        (18, "Metro Transit", -25.00, "Transportation"), (23, "Lyft", -28.64, "Transportation"),
+        (28, "Shell Gas", -56.51, "Transportation"), (2, "Netflix", -15.49, "Subscriptions"),
+        (8, "Spotify", -10.99, "Subscriptions"), (14, "iCloud Storage", -2.99, "Subscriptions"),
+        (20, "Hulu", -17.99, "Subscriptions"), (24, "Planet Fitness", -29.99, "Subscriptions"),
+        (7, "AMC Theatres", -58.50, "Entertainment"), (12, "Bowling Alley", -66.20, "Entertainment"),
+        (19, "Concert Tickets", -128.00, "Entertainment"), (26, "Kindle Books", -38.98, "Entertainment"),
+        (5, "Amazon", -89.84, "Shopping"), (10, "Target", -136.45, "Shopping"),
+        (16, "Old Navy", -118.32, "Shopping"), (22, "Amazon", -94.17, "Shopping"),
+        (28, "Best Buy", -162.61, "Shopping"), (11, "CVS Pharmacy", -18.44, "Health"),
+        (25, "Walgreens", -23.79, "Health"), (13, "Venmo - Birthday Gift", -45.00, "Other"),
+        (18, "Etsy", -47.45, "Other"), (21, "Pet Supplies Plus", -51.26, "Other"),
+        (30, "Farmers Market", -42.80, "Other"),
+    ]
+    txs = [_local_tx(_dated(current_month, day), merchant, amount, category, "demo") for day, merchant, amount, category in current_specs]
+    txs += [_local_tx(_dated(prior_month, day), merchant, amount, category, "baseline") for day, merchant, amount, category in baseline_specs]
+    return txs
+
+
+def local_load_realistic_transaction_history(as_of):
+    existing = [
+        tx for tx in st.session_state.get("local_transactions", [])
+        if parse_tx_date(tx) < previous_month(as_of.replace(day=1)) or parse_tx_date(tx) > month_bounds(as_of.replace(day=1))[1]
+    ]
+    sample = local_sample_transactions(as_of)
+    st.session_state.local_transactions = existing + sample
+    return {
+        "status": "ok",
+        "loaded": sum(1 for tx in sample if tx.get("source") == "demo"),
+        "baseline_loaded": sum(1 for tx in sample if tx.get("source") == "baseline"),
+        "local": True,
+    }
+
+
+def local_simulate_week(scenario, as_of):
+    if not st.session_state.get("local_transactions"):
+        local_load_realistic_transaction_history(as_of)
+    week_start, week_end = week_bounds(as_of)
+    baseline_start, baseline_end = month_bounds(previous_month(as_of.replace(day=1)))
+    baseline_weeks = max(1.0, ((baseline_end - baseline_start).days + 1) / 7.0)
+    tracked = {"Food", "Coffee", "Restaurants / dining", "Shopping", "Entertainment", "Subscriptions", "Other", "Transportation", "Other discretionary"}
+    kept = []
+    baseline_totals = {}
+    deleted = 0
+    for tx in st.session_state.get("local_transactions", []):
+        tx_date = parse_tx_date(tx)
+        bucket = intelligence_bucket(tx)
+        if baseline_start <= tx_date <= baseline_end and float(tx.get("amount", 0.0)) < 0 and bucket in BEHAVIOR_TRACKED_CATEGORIES:
+            baseline_totals[bucket] = baseline_totals.get(bucket, 0.0) + abs(float(tx["amount"]))
+        is_current_week_tracked = week_start <= tx_date <= week_end and str(tx.get("category")) in tracked
+        if is_current_week_tracked and str(tx.get("source", "demo")).lower() in {"demo", "simulation"}:
+            deleted += 1
+            continue
+        if str(tx.get("source", "")).lower() == "simulation":
+            deleted += 1
+            continue
+        kept.append(tx)
+
+    multipliers = SIMULATION_MULTIPLIERS[scenario]
+    merchants = {
+        "Coffee": {"good": "Home Coffee Supplies", "average": "Starbucks", "overspending": "Starbucks"},
+        "Restaurants / dining": {"good": "Chipotle", "average": "Sweetgreen", "overspending": "DoorDash"},
+        "Shopping": {"good": "Target", "average": "Amazon", "overspending": "Amazon"},
+        "Entertainment": {"good": "Kindle Books", "average": "AMC Theatres", "overspending": "Concert Tickets"},
+        "Subscriptions": {"good": "Spotify", "average": "Netflix", "overspending": "Streaming Bundle"},
+        "Other discretionary": {"good": "Local Errand", "average": "Convenience Store", "overspending": "Impulse Purchase"},
+        "Transportation": {"good": "Metro Transit", "average": "Uber", "overspending": "Lyft"},
+    }
+    elapsed_days = max(1, (min(as_of, week_end) - week_start).days + 1)
+    simulation_txs = []
+    for idx, category in enumerate(BEHAVIOR_TRACKED_CATEGORIES):
+        weekly_amount = baseline_totals.get(category, 0.0) / baseline_weeks
+        if weekly_amount <= 0:
+            continue
+        amount = round(weekly_amount * (elapsed_days / 7.0) * multipliers.get(category, 1.0), 2)
+        if amount < 1:
+            continue
+        simulation_txs.append(
+            _local_tx(
+                min(week_end, week_start + datetime.timedelta(days=min(idx, elapsed_days - 1))),
+                merchants.get(category, {}).get(scenario, category),
+                -amount,
+                "Other" if category == "Other discretionary" else category,
+                "simulation",
+                scenario,
+            )
+        )
+    st.session_state.local_transactions = kept + simulation_txs
+    return {"status": "ok", "scenario": scenario, "deleted": deleted, "loaded": len(simulation_txs), "local": True}
 
 
 SIMULATION_MULTIPLIERS = {
@@ -1273,12 +1530,7 @@ def build_goal_plan(goal_name, goal_cost, target_date, allow_protected):
                 preferences[label]["enabled"] = True
                 preferences[label].setdefault("aggressiveness", "Light cuts")
     transactions = load_demo_transactions_if_needed()
-    all_tx_resp = requests.get(
-        f"{BASE_URL}/transactions",
-        params={"user_id": st.session_state.user_id},
-        timeout=10,
-    )
-    all_transactions = all_tx_resp.json().get("transactions", []) if all_tx_resp.ok else transactions
+    all_transactions = api_get_all_transactions() or transactions
     flexible, protected = spending_summary(transactions)
     prev_start, prev_end = month_bounds(previous_month(month_start))
     try:
@@ -1975,22 +2227,20 @@ elif page == "Transactions":
         add_tx = st.form_submit_button("Add transaction")
     if add_tx:
         signed_amount = abs(float(amount)) if tx_type == "Income" else -abs(float(amount))
-        resp = requests.post(
-            f"{BASE_URL}/transactions",
-            json={
-                "date": tx_date.isoformat(),
-                "merchant": merchant.strip(),
-                "amount": signed_amount,
-                "category": category,
-                "user_id": st.session_state.user_id,
-            },
-            timeout=10,
-        )
-        if resp.ok:
+        try:
+            api_add_transaction(
+                {
+                    "date": tx_date.isoformat(),
+                    "merchant": merchant.strip(),
+                    "amount": signed_amount,
+                    "category": category,
+                    "user_id": st.session_state.user_id,
+                }
+            )
             st.success("Transaction added.")
             st.session_state.pop("goal_plan", None)
-        else:
-            show_http_error(resp)
+        except Exception:
+            st.error("Could not add transaction. Please try again.")
 
 elif page == "Transaction History":
     st.subheader("Transaction history")
@@ -2126,12 +2376,10 @@ elif page == "Goals / Saved Plans":
     st.subheader("Saved goals")
     st.caption("Automatic progress tracking compares this week's discretionary spending against your recent baseline.")
     try:
-        all_tx_resp = requests.get(
-            f"{BASE_URL}/transactions",
-            params={"user_id": st.session_state.user_id},
-            timeout=10,
-        )
-        all_transactions = all_tx_resp.json().get("transactions", []) if all_tx_resp.ok else []
+        all_transactions = api_get_all_transactions()
+        if not all_transactions:
+            load_demo_transactions_if_needed()
+            all_transactions = api_get_all_transactions()
         summary_preferences = dict(ensure_flexibility_preferences())
         summary_analysis = calculate_goal_analysis(
             transactions=all_transactions,
@@ -2260,13 +2508,10 @@ with tab_tx:
                 "category": category,
                 "user_id": st.session_state.user_id,
             }
-            resp = requests.post(f"{BASE_URL}/transactions", json=payload, timeout=10)
-            if not resp.ok:
-                show_http_error(resp)
-                raise RuntimeError("POST /transactions failed")
-            st.success("✅ Transaction added!")
-        except Exception as e:
-            st.code(str(e))
+            api_add_transaction(payload)
+            st.success("Transaction added.")
+        except Exception:
+            st.error("Could not add transaction. Please try again.")
 
     st.divider()
     st.subheader("Transactions")
@@ -2278,8 +2523,8 @@ with tab_tx:
             data = api_get_transactions(month_start.isoformat(), as_of_str)
             st.session_state.tx_cache = data.get("transactions", [])
             st.session_state.tx_cache_key = tx_key
-        except Exception as e:
-            st.code(str(e))
+        except Exception:
+            st.warning("No local transaction history is available yet.")
 
     transactions = st.session_state.get("tx_cache", [])
     df = pd.DataFrame(transactions)
@@ -2331,7 +2576,7 @@ with tab_budget:
                     st.dataframe(alloc_df, use_container_width=True)
             except Exception as e:
                 st.warning("No saved budget found yet.")
-                st.code(str(e))
+                st.caption("Local fallback mode is active.")
 
     with col2:
         if st.button("Clear Loaded Budget"):
@@ -2425,7 +2670,7 @@ with tab_budget:
                 alloc_df["Budget"] = alloc_df["Budget"].map(lambda x: f"${x:,.2f}")
                 st.dataframe(alloc_df, use_container_width=True)
         except Exception as e:
-            st.code(str(e))
+            st.info("The optional coach backend is not available in this deployment.")
 
 
 # ============================================================
@@ -2446,7 +2691,7 @@ with tab_insights:
 
     # Proactive status line (lightweight)
     status_key = f"{st.session_state.user_id}:{as_of_str}:monthly"
-    if st.session_state.insights_status_key != status_key:
+    if BASE_URL and st.session_state.insights_status_key != status_key:
         try:
             bundle_resp = requests.get(
                 f"{BASE_URL}/insight_bundle",
@@ -2524,6 +2769,11 @@ with tab_insights:
     ask_clicked = st.button("Ask") or st.session_state.insight_ask_now
     if ask_clicked:
         st.session_state.insight_ask_now = False
+        if not BASE_URL:
+            st.subheader("Coach Response")
+            st.write("Use the affordability planner above for local goal coaching. Optional conversational insights need a backend URL.")
+            st.caption("The deployed MVP still works for transaction history, simulations, and goal affordability without FastAPI.")
+            raise RuntimeError("Optional backend disabled")
         try:
             bundle_resp = requests.get(
                 f"{BASE_URL}/insights_bundle",
@@ -2569,10 +2819,10 @@ with tab_insights:
             if data_note:
                 st.caption(data_note)
         except Exception as e:
-            st.code(str(e))
+            st.info("Optional insight services are not available in this deployment.")
 
     insights_key = f"{st.session_state.user_id}:{as_of_str}:monthly:insights"
-    if st.session_state.get("insights_cache_key") != insights_key:
+    if BASE_URL and st.session_state.get("insights_cache_key") != insights_key:
         try:
             resp = requests.get(
                 f"{BASE_URL}/insights",
@@ -2595,7 +2845,7 @@ with tab_insights:
                 raise RuntimeError("GET /trends failed")
             st.session_state.trends_cache = t_resp.json()
         except Exception as e:
-            st.code(str(e))
+            st.info("Optional forecast services are not available in this deployment.")
 
     insights = st.session_state.get("insights_cache", {})
     if insights:
@@ -2652,7 +2902,7 @@ with tab_report:
             st.session_state.report_cache = report
             st.session_state.report_cache_key = report_key
         except Exception as e:
-            st.code(str(e))
+            st.info("Budget report is unavailable in local fallback mode.")
 
     report = st.session_state.get("report_cache", {})
     rows = report.get("rows", [])
@@ -2714,23 +2964,24 @@ with tab_forecast:
             st.session_state.forecast_cache = forecast
             st.session_state.forecast_cache_key = forecast_key
 
-            cash_resp = requests.get(
-                f"{BASE_URL}/forecast/cash",
-                params={
-                    "user_id": st.session_state.user_id,
-                    "period": forecast_period,
-                    "as_of": as_of,
-                    "starting_balance": float(starting_balance),
-                },
-                timeout=10,
-            )
-            if cash_resp.status_code != 200:
-                st.error("❌ Could not load cash forecast")
-                st.code(f"{cash_resp.status_code} {cash_resp.reason}\n\n{cash_resp.text}")
-                raise RuntimeError("Cash forecast request failed")
-            st.session_state.cash_forecast_cache = cash_resp.json() or {}
+            if BASE_URL:
+                cash_resp = requests.get(
+                    f"{BASE_URL}/forecast/cash",
+                    params={
+                        "user_id": st.session_state.user_id,
+                        "period": forecast_period,
+                        "as_of": as_of,
+                        "starting_balance": float(starting_balance),
+                    },
+                    timeout=10,
+                )
+                if cash_resp.status_code != 200:
+                    raise RuntimeError("Cash forecast request failed")
+                st.session_state.cash_forecast_cache = cash_resp.json() or {}
+            else:
+                st.session_state.cash_forecast_cache = {}
         except Exception as e:
-            st.code(str(e))
+            st.info("Cash forecast is unavailable in local fallback mode.")
 
     forecast = st.session_state.get("forecast_cache", {}) or {}
     rows = forecast.get("rows", []) or []
