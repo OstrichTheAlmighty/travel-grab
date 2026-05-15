@@ -489,6 +489,14 @@ def simulate_week(sim: SimulateWeekIn):
             """,
             (sim.user_id, week_start.isoformat(), week_end.isoformat()),
         )
+        stale_sim = conn.execute(
+            """
+            DELETE FROM transactions
+            WHERE user_id = ?
+              AND COALESCE(source, 'demo') = 'simulation'
+            """,
+            (sim.user_id,),
+        )
         conn.executemany(
             "INSERT INTO transactions (date, merchant, amount, category, user_id, source, scenario) VALUES (?, ?, ?, ?, ?, ?, ?)",
             scenario_transactions,
@@ -499,7 +507,7 @@ def simulate_week(sim: SimulateWeekIn):
         sim.user_id,
         "simulate_week",
         scenario=sim.scenario,
-        deleted=int(cur.rowcount or 0),
+        deleted=int(cur.rowcount or 0) + int(stale_sim.rowcount or 0),
         loaded=len(scenario_transactions),
         week_start=week_start.isoformat(),
         week_end=week_end.isoformat(),
@@ -507,7 +515,7 @@ def simulate_week(sim: SimulateWeekIn):
     return {
         "status": "ok",
         "scenario": sim.scenario,
-        "deleted": int(cur.rowcount or 0),
+        "deleted": int(cur.rowcount or 0) + int(stale_sim.rowcount or 0),
         "loaded": len(scenario_transactions),
         "week_start": week_start.isoformat(),
         "week_end": week_end.isoformat(),
