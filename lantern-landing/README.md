@@ -1,13 +1,17 @@
-# Runway Landing Page
+# Lantern Landing Page
 
-Public-facing Next.js + Tailwind landing page for Runway.
+Public-facing Next.js + Tailwind landing page for Lantern.
+
+Primary hook: “How can I afford this by this date?”
+
+Supporting tagline: “See the path to what you want.”
 
 The Streamlit affordability product remains separate. This app is only the marketing site.
 
 ## Local Development
 
 ```bash
-cd runway-landing
+cd lantern-landing
 npm install
 npm run dev
 ```
@@ -19,25 +23,25 @@ Open `http://localhost:3000`.
 The `Try the demo` buttons use:
 
 ```bash
-NEXT_PUBLIC_DEMO_URL=https://runway.streamlit.app
+NEXT_PUBLIC_DEMO_URL=https://lantern.streamlit.app
 ```
 
-If the env var is not set, the app falls back to `https://runway.streamlit.app`.
+If the env var is not set, the app falls back to `https://lantern.streamlit.app`.
 
 ## Push To GitHub
 
 From the repo root:
 
 ```bash
-git add runway-landing
-git commit -m "Add Runway Next.js landing page"
+git add lantern-landing
+git commit -m "Add Lantern Next.js landing page"
 git push
 ```
 
 ## Deploy To Vercel
 
 1. Go to Vercel and import the GitHub repository.
-2. Set the project root directory to `runway-landing`.
+2. Set the project root directory to `lantern-landing`.
 3. Use the default Next.js build settings:
    - Install command: `npm install`
    - Build command: `npm run build`
@@ -45,7 +49,7 @@ git push
 4. Add the environment variable:
 
 ```bash
-NEXT_PUBLIC_DEMO_URL=https://runway.streamlit.app
+NEXT_PUBLIC_DEMO_URL=https://lantern.streamlit.app
 ```
 
 5. Deploy.

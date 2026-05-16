@@ -428,7 +428,7 @@ def build_afford_response(s: AffordScenario, max_safe_spend_amount: float) -> Di
         if state_meta["decision_state"] == "TIGHT"
         else None
     )
-    decision["safety_runway_days"] = (
+    decision["safety_buffer_days"] = (
         int(s.shortfall_days_after) if s.shortfall_days_after is not None and int(s.shortfall_days_after) > 0 else None
     )
     decision["reasons"] = build_afford_reasons(

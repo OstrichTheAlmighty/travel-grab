@@ -10,7 +10,7 @@ BASE_URL = ""
 if "user_id" not in st.session_state:
     st.session_state.user_id = "default"
 
-st.set_page_config(page_title="How can I afford this?", layout="wide")
+st.set_page_config(page_title="Lantern", layout="wide")
 st.markdown(
     """
     <style>
@@ -55,7 +55,8 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-st.title("How can I afford this?")
+st.title("How can I afford this by this date?")
+st.caption("See the path to what you want.")
 
 # -----------------------------
 # Month selector (global)
@@ -1474,7 +1475,7 @@ def money(value):
     return f"${float(value):,.2f}"
 
 
-RUNWAY_DEMO_CATEGORIES = {
+LANTERN_DEMO_CATEGORIES = {
     "restaurants": {
         "label": "restaurants",
         "share": 0.30,
@@ -1503,7 +1504,7 @@ RUNWAY_DEMO_CATEGORIES = {
 }
 
 
-def calculate_runway_demo(
+def calculate_lantern_demo(
     goal_name,
     cost,
     target_date,
@@ -1522,15 +1523,15 @@ def calculate_runway_demo(
     flexible_weekly = max(0.0, float(flexible_spending) * 12 / 52)
     weekly_gap = max(0.0, required_weekly_savings - current_weekly_savings)
 
-    selected = [key for key in selected_categories if key in RUNWAY_DEMO_CATEGORIES]
-    selected_share_total = sum(RUNWAY_DEMO_CATEGORIES[key]["share"] for key in selected)
+    selected = [key for key in selected_categories if key in LANTERN_DEMO_CATEGORIES]
+    selected_share_total = sum(LANTERN_DEMO_CATEGORIES[key]["share"] for key in selected)
     selected_weekly_spend = flexible_weekly * min(1.0, selected_share_total)
     suggested_cut_total = min(weekly_gap, selected_weekly_spend * 0.35)
     share_denominator = selected_share_total or 1.0
 
     plan_rows = []
     for key in selected:
-        category = RUNWAY_DEMO_CATEGORIES[key]
+        category = LANTERN_DEMO_CATEGORIES[key]
         suggested_cut = suggested_cut_total * (category["share"] / share_denominator)
         if suggested_cut >= 0.50:
             plan_rows.append(
@@ -1580,11 +1581,11 @@ def calculate_runway_demo(
     }
 
 
-def render_runway_demo_page():
+def render_lantern_demo_page():
     st.title("Can I afford this?")
-    st.caption("Runway demo. Local calculations only.")
+    st.caption("Lantern demo. Local calculations only.")
 
-    with st.form("runway_demo_form"):
+    with st.form("lantern_demo_form"):
         goal_cols = st.columns([1.4, 0.8, 0.8])
         goal_name = goal_cols[0].text_input("What do you want to afford?", value="Hawaii trip")
         cost = goal_cols[1].number_input("How much does it cost?", min_value=1.0, value=1800.0, step=25.0)
@@ -1611,19 +1612,19 @@ def render_runway_demo_page():
 
         st.write("Categories the user is willing to reduce")
         selected_categories = []
-        category_cols = st.columns(len(RUNWAY_DEMO_CATEGORIES))
-        for col, (key, category) in zip(category_cols, RUNWAY_DEMO_CATEGORIES.items()):
+        category_cols = st.columns(len(LANTERN_DEMO_CATEGORIES))
+        for col, (key, category) in zip(category_cols, LANTERN_DEMO_CATEGORIES.items()):
             if col.checkbox(category["label"], value=True, key=f"demo_reduce_{key}"):
                 selected_categories.append(key)
 
         email = st.text_input("Want updates? Enter your email", placeholder="you@example.com")
-        submitted = st.form_submit_button("Build my runway", width="stretch")
+        submitted = st.form_submit_button("Show my path", width="stretch")
 
     if not submitted:
-        st.info("Enter a goal and click Build my runway to see the weekly plan.")
+        st.info("Enter a goal and click Show my path to see the weekly plan.")
         return
 
-    result = calculate_runway_demo(
+    result = calculate_lantern_demo(
         goal_name=goal_name,
         cost=cost,
         target_date=target_date,
@@ -1634,10 +1635,10 @@ def render_runway_demo_page():
     )
 
     if email.strip():
-        st.session_state.setdefault("runway_emails", [])
-        if email.strip() not in st.session_state.runway_emails:
-            st.session_state.runway_emails.append(email.strip())
-        st.success("Email saved. You are on the Runway updates list.")
+        st.session_state.setdefault("lantern_emails", [])
+        if email.strip() not in st.session_state.lantern_emails:
+            st.session_state.lantern_emails.append(email.strip())
+        st.success("Email saved. You are on the Lantern updates list.")
 
     metric_cols = st.columns(3)
     metric_cols[0].metric("Required weekly savings", money(result["required_weekly_savings"]))
@@ -2323,6 +2324,7 @@ def render_goal_plan(plan):
                 )
 
 
+st.sidebar.title("Lantern")
 st.sidebar.divider()
 if st.sidebar.button("Load realistic transaction history", width="stretch"):
     try:
@@ -2400,7 +2402,7 @@ if page == "How can I afford this?":
                 st.code(str(e))
 
 elif page == "Demo":
-    render_runway_demo_page()
+    render_lantern_demo_page()
 
 elif page == "Transactions":
     st.subheader("Add transaction")

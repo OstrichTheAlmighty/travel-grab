@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Runway | How can I afford this by this date?",
+  title: "Lantern | How can I afford this by this date?",
   description:
-    "Runway helps people turn a goal, price, and deadline into a realistic affordability plan.",
+    "See the path to what you want. Lantern helps you understand how to afford a goal by a target date.",
 };
 
 export default function RootLayout({

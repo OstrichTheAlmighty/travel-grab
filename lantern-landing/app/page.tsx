@@ -3,20 +3,20 @@
 import { FormEvent, useState } from "react";
 
 const demoUrl =
-  process.env.NEXT_PUBLIC_DEMO_URL || "https://runway.streamlit.app";
+  process.env.NEXT_PUBLIC_DEMO_URL || "https://lantern.streamlit.app";
 
 const steps = [
   {
     title: "Name the thing",
-    copy: "Tell Runway what you want, what it costs, and the date you want it by.",
+    copy: "Lantern helps you understand how to afford a goal by a target date.",
   },
   {
     title: "See the real tradeoff",
-    copy: "Runway reads spending patterns and finds the flexible categories that can move the timeline.",
+    copy: "Lantern turns spending habits into clear weekly actions.",
   },
   {
     title: "Choose the path",
-    copy: "Get a practical weekly plan that protects essentials and focuses on changes that feel realistic.",
+    copy: "Lantern shows the path from what you want to what you need to change.",
   },
 ];
 
@@ -54,20 +54,20 @@ export default function Page() {
         <nav className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-line bg-white/[0.04] px-5 py-3 backdrop-blur">
           <div className="flex items-center gap-3">
             <div className="grid h-9 w-9 place-items-center rounded-full bg-white text-sm font-black text-ink">
-              R
+              L
             </div>
             <span className="text-sm font-semibold tracking-wide text-white">
-              Runway
+              Lantern
             </span>
           </div>
           <div className="hidden items-center gap-8 text-sm text-white/68 md:flex">
             <a href="#how">How it works</a>
             <a href="#plans">Plans</a>
-            <a href="#why">Why Runway</a>
+            <a href="#why">Why Lantern</a>
           </div>
           <a
             href={demoUrl}
-            className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink transition hover:bg-runway-mint"
+            className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink transition hover:bg-lantern-mint"
           >
             Try the demo
           </a>
@@ -75,21 +75,20 @@ export default function Page() {
 
         <div className="mx-auto grid max-w-7xl items-center gap-14 pb-8 pt-20 lg:grid-cols-[1.03fr_0.97fr] lg:pt-28">
           <div>
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-runway-mint/30 bg-runway-mint/10 px-4 py-2 text-sm text-runway-mint">
-              AI financial planning around goals
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-lantern-mint/30 bg-lantern-mint/10 px-4 py-2 text-sm text-lantern-mint">
+              See the path to what you want.
             </div>
             <h1 className="max-w-5xl text-5xl font-semibold leading-[0.95] tracking-tight text-white sm:text-7xl lg:text-8xl">
               How can I afford this by this date?
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-8 text-white/70 sm:text-xl">
-              Runway turns the thing you want into a clear plan: what it takes
-              each week, what spending changes would help, and how realistic the
-              timeline feels.
+              Lantern helps you understand how to afford a goal by a target date.
+              It turns spending habits into clear weekly actions.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <a
                 href={demoUrl}
-                className="rounded-full bg-runway-mint px-6 py-4 text-center text-sm font-bold text-ink shadow-glow transition hover:scale-[1.02]"
+                className="rounded-full bg-lantern-mint px-6 py-4 text-center text-sm font-bold text-ink shadow-glow transition hover:scale-[1.02]"
               >
                 Try the demo
               </a>
@@ -113,7 +112,7 @@ export default function Page() {
           </div>
 
           <div className="relative">
-            <div className="absolute -inset-8 -z-10 rounded-[3rem] bg-runway-blue/20 blur-3xl" />
+            <div className="absolute -inset-8 -z-10 rounded-[3rem] bg-lantern-blue/20 blur-3xl" />
             <div className="rounded-[2rem] border border-line bg-panel/90 p-4 shadow-card backdrop-blur">
               <div className="rounded-[1.5rem] border border-line bg-ink p-5">
                 <div className="flex items-center justify-between border-b border-line pb-4">
@@ -121,7 +120,7 @@ export default function Page() {
                     <p className="text-sm text-white/50">Goal</p>
                     <p className="mt-1 text-2xl font-semibold">Hawaii trip</p>
                   </div>
-                  <div className="rounded-full bg-runway-mint/12 px-3 py-1 text-sm font-medium text-runway-mint">
+                  <div className="rounded-full bg-lantern-mint/12 px-3 py-1 text-sm font-medium text-lantern-mint">
                     Achievable
                   </div>
                 </div>
@@ -143,9 +142,9 @@ export default function Page() {
                   </div>
                 </div>
 
-                <div className="mt-4 rounded-2xl border border-runway-blue/20 bg-runway-blue/10 p-4">
+                <div className="mt-4 rounded-2xl border border-lantern-blue/20 bg-lantern-blue/10 p-4">
                   <p className="text-sm text-white/62">
-                    Runway protects rent, bills, savings, groceries, health, and
+                    Lantern protects rent, bills, savings, groceries, health, and
                     essential transportation by default.
                   </p>
                 </div>
@@ -158,11 +157,11 @@ export default function Page() {
       <section className="px-6 py-16 sm:px-8 lg:px-12">
         <div className="mx-auto grid max-w-7xl gap-8 border-y border-line py-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-runway-mint">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-lantern-mint">
               Early access
             </p>
             <h2 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
-              Want early access to Runway?
+              Want early access to Lantern?
             </h2>
           </div>
           <form
@@ -182,16 +181,16 @@ export default function Page() {
                 setWaitlistSubmitted(false);
               }}
               placeholder="you@example.com"
-              className="min-h-14 flex-1 rounded-full border border-line bg-white/[0.05] px-5 text-white outline-none transition placeholder:text-white/36 focus:border-runway-mint"
+              className="min-h-14 flex-1 rounded-full border border-line bg-white/[0.05] px-5 text-white outline-none transition placeholder:text-white/36 focus:border-lantern-mint"
             />
             <button
               type="submit"
-              className="min-h-14 rounded-full bg-runway-mint px-6 text-sm font-bold text-ink shadow-glow transition hover:scale-[1.02]"
+              className="min-h-14 rounded-full bg-lantern-mint px-6 text-sm font-bold text-ink shadow-glow transition hover:scale-[1.02]"
             >
               Join the waitlist
             </button>
             {waitlistSubmitted ? (
-              <p className="self-center text-sm font-medium text-runway-mint">
+              <p className="self-center text-sm font-medium text-lantern-mint">
                 You're on the waitlist.
               </p>
             ) : null}
@@ -202,7 +201,7 @@ export default function Page() {
       <section id="how" className="px-6 py-20 sm:px-8 lg:px-12">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-runway-mint">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-lantern-mint">
               How it works
             </p>
             <h2 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
@@ -229,15 +228,15 @@ export default function Page() {
       <section id="plans" className="px-6 py-20 sm:px-8 lg:px-12">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-runway-blue">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-lantern-blue">
               Affordability intelligence
             </p>
             <h2 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
               Plans that feel human, not punitive.
             </h2>
             <p className="mt-6 text-lg leading-8 text-white/64">
-              Runway focuses on flexible spending first, explains the tradeoff,
-              and shows whether the plan changes the timeline enough to matter.
+              Lantern shows the path from what you want to what you need to change,
+              with weekly actions that keep the target date in view.
             </p>
           </div>
           <div className="grid gap-3">
@@ -247,7 +246,7 @@ export default function Page() {
                 className="flex items-center justify-between rounded-2xl border border-line bg-white/[0.04] p-4"
               >
                 <span className="font-medium">{signal}</span>
-                <span className="text-sm text-runway-mint">
+                <span className="text-sm text-lantern-mint">
                   flexible signal
                 </span>
               </div>
@@ -260,21 +259,20 @@ export default function Page() {
         <div className="mx-auto max-w-7xl rounded-[2rem] border border-line bg-white/[0.04] p-8 sm:p-12">
           <div className="grid gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-end">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-runway-gold">
-                Why Runway
+              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-lantern-gold">
+                Why Lantern
               </p>
               <h2 className="mt-4 max-w-4xl text-4xl font-semibold tracking-tight sm:text-6xl">
                 Because wanting something should come with a path, not guilt.
               </h2>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-white/64">
-                Runway helps people understand what would have to change this
-                week to make a goal possible, without turning their life into a
-                spreadsheet.
+                Lantern turns spending habits into clear weekly actions, so a
+                goal comes with a path instead of guesswork.
               </p>
             </div>
             <a
               href={demoUrl}
-              className="rounded-full bg-white px-6 py-4 text-center text-sm font-bold text-ink transition hover:bg-runway-mint"
+              className="rounded-full bg-white px-6 py-4 text-center text-sm font-bold text-ink transition hover:bg-lantern-mint"
             >
               Try the demo
             </a>
@@ -300,7 +298,7 @@ function PlanRow({ action, amount }: { action: string; amount: string }) {
   return (
     <div className="flex items-center justify-between gap-4 rounded-xl bg-white/[0.04] px-4 py-3">
       <span className="text-sm text-white/78">{action}</span>
-      <span className="shrink-0 text-sm font-semibold text-runway-mint">
+      <span className="shrink-0 text-sm font-semibold text-lantern-mint">
         {amount}
       </span>
     </div>

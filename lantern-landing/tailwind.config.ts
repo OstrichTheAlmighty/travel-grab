@@ -11,7 +11,7 @@ const config: Config = {
         ink: "#070A12",
         panel: "#0E1422",
         line: "rgba(255,255,255,0.12)",
-        runway: {
+        lantern: {
           mint: "#8FF7D0",
           blue: "#77A7FF",
           violet: "#A78BFA",
