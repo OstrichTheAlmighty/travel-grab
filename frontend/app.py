@@ -2387,16 +2387,12 @@ def affordability_status(plan):
 
 
 def render_goal_plan(plan):
-    st.caption(f"Using local transactions plus monthly budget guardrails for {month_start.strftime('%B %Y')}.")
+    st.caption(f"Goal Command Center uses local transactions plus budget rules for {month_start.strftime('%B %Y')}.")
     target_label = plan["target_date"].strftime("%b %-d, %Y")
     analysis = plan["goalAnalysis"]
-    status = analysis["savingsTrajectoryStatus"]
     behavior_status = analysis["behaviorTrajectoryStatus"]
-    pace = behavior_status
-    adjustment = lifestyle_adjustment_label(plan)
     projected_date = analysis["projectedDate"]
     behavior_projected_date = analysis["behaviorProjectedDate"]
-    pace_delta = analysis["gapVsTarget"]
     behavior_pace_delta = analysis["behaviorGapVsTarget"]
     detected = analysis["behaviorImprovement"]
     saved_toward_goal = analysis["savedTowardGoalThisWeek"]
@@ -2406,98 +2402,60 @@ def render_goal_plan(plan):
     projection_delta_days = goal_timeline_delta(behavior_projected_date, plan["target_date"])
     momentum = plan.get("momentum", {}) or {}
     top_recommendations = plan.get("recommendations", [])[:3]
-    top_categories = [str(row.get("Category", "")).replace(" (protected)", "") for row in top_recommendations]
-    if top_categories:
-        action_text = ", ".join(top_categories[:-1]) + (f", and {top_categories[-1]}" if len(top_categories) > 1 else top_categories[0])
-        answer = f"You need {money(analysis['weeklyTarget'])}/week to stay on pace. This week, reduced discretionary spending saved {money(saved_toward_goal)} toward {plan['goal_name']}."
+    progress_ratio = min(1.0, float(analysis.get("effective_progress_amount", 0.0)) / max(1.0, float(plan["goal_cost"])))
+    if projection_delta_days is None:
+        time_signal = "Needs momentum"
+        time_caption = "Lantern needs savings progress before it can estimate time gained or lost."
+    elif projection_delta_days > 0:
+        time_signal = f"{projection_delta_days} days late"
+        time_caption = f"At this pace, {plan['goal_name']} lands after the target date."
+    elif projection_delta_days < 0:
+        time_signal = f"{abs(projection_delta_days)} days early"
+        time_caption = f"Your current pace moves {plan['goal_name']} ahead of schedule."
     else:
-        answer = f"You need {money(analysis['weeklyTarget'])}/week to stay on pace. This week, reduced discretionary spending saved {money(saved_toward_goal)} toward {plan['goal_name']}."
+        time_signal = "On date"
+        time_caption = "Your current pace lines up with the target date."
 
     with st.container(border=True):
-        st.subheader("Goal status")
-        cols = st.columns([1.2, 0.9, 1.0, 0.9])
-        cols[0].write(f"Goal: **{plan['goal_name']}**")
-        cols[1].write(f"Cost: **{money(plan['goal_cost'])}**")
-        cols[2].write(f"Target date: **{target_label}**")
-        cols[3].write(f"Status: **{status}**")
-        st.metric(
-            "Required weekly savings",
-            f"{money(analysis['weeklyTarget'])}/week",
-            help="Remaining goal cost divided by the number of weeks until the target date.",
-        )
-        detail_cols = st.columns(4)
-        detail_cols[0].metric(
-            behavior_delta_label(detected),
-            behavior_delta_value(detected),
-            help="Reduced flexible spending this week compared with your normal recent pace. Only positive reductions count toward the goal.",
-        )
-        detail_cols[1].metric(
-            "Weekly savings pace",
-            money(max(0.0, detected)),
-            help="How much flexible spending you are currently freeing up per week based on transaction history.",
-        )
-        detail_cols[2].metric(
-            pace_delta_label(pace_delta),
-            pace_delta_value(pace_delta),
-            help="Required weekly savings minus what you have already freed up this week. If this is ahead, your current pace is above target.",
-        )
-        detail_cols[3].metric(
-            "Remaining",
-            money(remaining_after_week),
-            help="Goal cost minus saved progress and any flexible-spending reduction detected this week.",
-        )
-        st.write(answer)
-        secondary_cols = st.columns(3)
-        secondary_cols[0].metric("Savings pace", behavior_status)
-        secondary_cols[1].metric("Goal progress", status)
-        secondary_cols[2].metric(
+        header_cols = st.columns([1.6, 1.0, 1.0])
+        header_cols[0].subheader("Goal Command Center")
+        header_cols[1].write(f"Goal: **{plan['goal_name']}**")
+        header_cols[2].write(f"Target: **{target_label}**")
+        st.progress(progress_ratio)
+        status_cols = st.columns(5)
+        status_cols[0].metric("Status", behavior_status)
+        status_cols[1].metric(
             "Current projection",
-            projected_date_label(projected_date),
-            help="Estimated date you would reach the goal if this weekly savings pace continued.",
+            projected_date_label(behavior_projected_date or projected_date),
+            help="Estimated completion date if your current weekly savings pace continues.",
+        )
+        status_cols[2].metric("Time gained/lost", time_signal)
+        status_cols[3].metric(
+            "Weekly pace",
+            f"{money(max(0.0, saved_toward_goal))}/week",
+            help="Reduced flexible spending this week compared with your normal recent pace.",
+        )
+        if behavior_pace_delta >= 0:
+            status_cols[4].metric(
+                "Pace gap",
+                f"{money(behavior_pace_delta)}/week ahead",
+                help="Current weekly savings pace minus required weekly savings.",
+            )
+        else:
+            status_cols[4].metric(
+                "Pace gap",
+                f"{money(abs(behavior_pace_delta))}/week needed",
+                help="Required weekly savings minus the flexible-spending savings detected this week.",
+            )
+        st.caption(
+            f"{money(plan['goal_cost'])} goal. {money(remaining_after_week)} remaining after saved progress and this week's detected savings. "
+            f"Required pace is {money(analysis['weeklyTarget'])}/week. {time_caption}"
         )
         if weekly_flexible_limit > 0:
             st.caption(
-                f"Budget context: your monthly flexible spending limit is {money(budget_summary['flexible_spending_limit'])}, "
+                f"Budget rule context: flexible spending limit is {money(budget_summary['flexible_spending_limit'])}/month "
                 f"or about {money(weekly_flexible_limit)}/week."
             )
-            if analysis.get("budgetProgressSource") == "budget":
-                st.caption(
-                    f"Saved toward the goal is using your budget: flexible spending is pacing at "
-                    f"{money(analysis.get('budgetFlexibleCurrentPace', 0.0))}/week against a "
-                    f"{money(analysis.get('budgetFlexibleWeeklyLimit', weekly_flexible_limit))}/week flexible limit."
-                )
-        st.caption(
-            f"Approved categories can realistically free up about {money(plan.get('preference_capacity_monthly', 0.0))}/month. "
-            "For this MVP, reduced discretionary spending is automatically counted toward the goal."
-        )
-        if detected < 0:
-            st.caption(f"Spending ran {money(abs(detected))} above normal this week, so the plan needs more savings next week.")
-
-    progress_ratio = min(1.0, float(analysis.get("effective_progress_amount", 0.0)) / max(1.0, float(plan["goal_cost"])))
-    st.progress(progress_ratio)
-
-    with st.container(border=True):
-        st.subheader("Timeline pulse")
-        pulse_cols = st.columns(4)
-        if projection_delta_days is None:
-            pulse_cols[0].metric("Timeline", "Needs momentum")
-        elif projection_delta_days > 0:
-            pulse_cols[0].metric("Timeline", f"{projection_delta_days} days late")
-        elif projection_delta_days < 0:
-            pulse_cols[0].metric("Timeline", f"{abs(projection_delta_days)} days early")
-        else:
-            pulse_cols[0].metric("Timeline", "On date")
-        pulse_cols[1].metric("Savings velocity", f"{money(max(0.0, saved_toward_goal))}/week")
-        pulse_cols[2].metric("Weekly streak", f"{int(momentum.get('weekly_savings_streak', 0))} week{'s' if int(momentum.get('weekly_savings_streak', 0)) != 1 else ''}")
-        days_gained = 0 if projection_delta_days is None else max(0, -projection_delta_days)
-        pulse_cols[3].metric("Estimated time gained", f"{days_gained} days")
-        st.caption(
-            f"Progress toward target: {progress_ratio * 100:.0f}% of {plan['goal_name']} is covered by saved progress and this week's detected savings."
-        )
-
-    st.subheader("Lantern insights")
-    for insight in timeline_insights(plan):
-        st.info(insight)
 
     previous_snapshot = st.session_state.pop("previous_goal_snapshot", None)
     simulated_scenario = st.session_state.pop("last_simulated_week", None)
@@ -2516,125 +2474,71 @@ def render_goal_plan(plan):
         else:
             st.info(f"Simulated {scenario_label} week: you {detected_savings_text(detected)} versus baseline.")
 
-    st.subheader("Simulate my week")
-    sim_cols = st.columns(3)
-    scenarios = [
-        ("Simulate good week", "good"),
-        ("Simulate average week", "average"),
-        ("Simulate overspending week", "overspending"),
-    ]
-    for col, (label, scenario) in zip(sim_cols, scenarios):
-        if col.button(label, width="stretch"):
-            try:
-                st.session_state.previous_goal_snapshot = {
-                    "gap": analysis["behaviorGapVsTarget"],
-                    "projected_date": analysis["behaviorProjectedDate"],
-                }
-                api_simulate_week(scenario)
-                st.session_state.last_simulated_week = scenario
-                st.session_state.pop("goal_plan", None)
-                st.rerun()
-            except Exception as e:
-                st.error("Could not simulate this week.")
-                st.code(str(e))
-
-    with st.container(border=True):
-        st.subheader("Savings trajectory")
-        trajectory_cols = st.columns(3)
-        trajectory_cols[0].metric("Trajectory", behavior_status)
-        if behavior_pace_delta >= 0:
-            trajectory_cols[1].metric("Ahead weekly", f"{money(behavior_pace_delta)}/week")
-        else:
-            trajectory_cols[1].metric(
-                "Still needed weekly",
-                f"{money(abs(behavior_pace_delta))}/week",
-                help="Required weekly savings minus the flexible-spending savings detected this week.",
+    insight_col, action_col = st.columns([1.0, 1.25])
+    with insight_col:
+        with st.container(border=True):
+            st.subheader("AI insights")
+            st.caption("Rules-based MVP insights. No external AI calls are used.")
+            for insight in timeline_insights(plan)[:4]:
+                st.write(f"- {insight}")
+            st.caption(f"Projection confidence: {analysis['simulationSummary']['projection_confidence']}.")
+            streak = int(momentum.get("weekly_savings_streak", 0))
+            track_weeks = int(momentum.get("consecutive_weeks_on_track", 0))
+            st.caption(
+                f"Momentum: {streak} week{'s' if streak != 1 else ''} of savings momentum; "
+                f"{track_weeks} consecutive week{'s' if track_weeks != 1 else ''} on track."
             )
-        if behavior_projected_date:
-            delta_days = (behavior_projected_date - plan["target_date"]).days
-            trajectory_cols[2].metric(
-                "Current projection",
-                projected_date_label(behavior_projected_date),
-                help="Estimated completion date if your current weekly savings pace continues.",
-            )
-            if delta_days > 0:
-                st.caption(f"At your current pace, you would reach this goal {delta_days} days after the target date.")
-            elif delta_days < 0:
-                st.caption(f"At your current pace, you would reach this goal {abs(delta_days)} days before the target date.")
+    with action_col:
+        with st.container(border=True):
+            st.subheader("Recommended actions")
+            if behavior_pace_delta < 0:
+                st.caption(f"Close a {money(abs(behavior_pace_delta))}/week gap with the highest-impact flexible categories.")
             else:
-                st.caption("Near target.")
-        else:
-            trajectory_cols[2].metric(
-                "Current projection",
-                "Needs momentum",
-                help="The projection appears once there is enough spending reduction or savings progress to estimate a date.",
-            )
-            st.caption("The projection will update once the app detects savings or approved plan changes.")
-        st.caption("This projection assumes reduced discretionary spending continues to count toward the goal.")
-        st.caption(f"Projection confidence: {analysis['simulationSummary']['projection_confidence']}.")
-        streak = int(plan.get("dining_streak", 0))
-        if streak > 0:
-            st.caption(f"You have stayed under your restaurant baseline for {streak} week{'s' if streak != 1 else ''}.")
+                st.caption(f"Protect your {money(behavior_pace_delta)}/week pace advantage.")
+            if top_recommendations:
+                for row in top_recommendations:
+                    action_cols = st.columns([1.2, 0.8])
+                    action_cols[0].write(f"**{row['Category']}**")
+                    action_cols[0].caption(row.get("Recommendation", row.get("Behavior change", "")))
+                    action_cols[1].metric("Weekly lift", f"+{money(row['Recommended weekly cut'])}")
+            else:
+                st.info("Move the date out, lower the goal cost, or mark more categories as Flexible in Settings / Budget Rules.")
 
-    st.subheader("What should I do this week?")
-    if behavior_pace_delta < 0:
-        st.caption(f"You still need about {money(abs(behavior_pace_delta))}/week. These actions can improve your savings pace.")
-    else:
-        st.caption(f"You are {money(behavior_pace_delta)}/week ahead. These actions help protect that progress.")
-    if top_recommendations:
-        card_cols = st.columns(min(3, len(top_recommendations)))
-        for idx, row in enumerate(top_recommendations):
-            with card_cols[idx % len(card_cols)]:
-                with st.container(border=True):
-                    st.markdown(f"**{row['Category']}**")
-                    st.metric(row.get("Action", "Estimated weekly savings"), f"+{money(row['Recommended weekly cut'])}/week")
-                    st.caption(row.get("Lifestyle impact", "moderate impact"))
-                    st.write(row.get("Recommendation", row.get("Behavior change", "")))
-                    st.caption(row.get("Timeline impact", "This improves your goal timeline."))
-        recommended_categories = {str(row.get("Category", "")).replace(" (protected)", "") for row in top_recommendations}
-        contributing_rows = [
-            row for row in analysis["category_deltas"]
-            if abs(float(row.get("Estimated savings", 0.0))) >= 1
-            and row.get("Category") not in recommended_categories
-        ]
-        if contributing_rows:
-            with st.expander("Other behavior affecting this goal"):
-                for row in contributing_rows:
-                    st.write(f"- {savings_detection_sentence(row)}")
-    else:
-        st.info("This week, the clearest action is to move the date out or approve more flexible categories.")
-
-    recurring_patterns = plan.get("recurring_patterns", [])[:3]
-    if recurring_patterns:
-        with st.expander("Recurring spending patterns affecting the timeline"):
-            for pattern in recurring_patterns:
-                st.write(
-                    f"- {pattern['Merchant']} appears {int(pattern['Transactions'])} times in {pattern['Category']} "
-                    f"for {money(pattern['Monthly total'])} this month."
-                )
-
-    st.subheader("What this changes")
-    st.write(plan.get("what_this_changes", "This plan is based on the categories you approved."))
-    if plan.get("plan_style") == "Minimal lifestyle change":
-        st.caption("This keeps your routine mostly intact, but may require more time.")
-    elif plan.get("plan_style") == "Fastest possible":
-        st.caption("This moves faster, but asks for more noticeable lifestyle changes.")
-    else:
-        st.caption("This balances speed with realistic behavior changes.")
-
-    st.subheader("Progress this week")
-    if analysis:
-        progress_cols = st.columns([0.9, 0.9, 0.9, 1.6])
-        progress_cols[0].metric("Target this week", money(analysis["weeklyTarget"]))
-        progress_cols[1].metric(behavior_delta_label(detected), behavior_delta_value(detected))
-        progress_cols[2].metric(pace_delta_label(behavior_pace_delta), pace_delta_value(behavior_pace_delta))
-        rows = analysis["category_deltas"]
-        with progress_cols[3]:
+    sim_container, context_container = st.columns([1.0, 1.0])
+    with sim_container:
+        with st.container(border=True):
+            st.subheader("Simulations")
+            sim_cols = st.columns(3)
+            scenarios = [
+                ("Good week", "good"),
+                ("Average week", "average"),
+                ("Overspend", "overspending"),
+            ]
+            for col, (label, scenario) in zip(sim_cols, scenarios):
+                if col.button(label, width="stretch"):
+                    try:
+                        st.session_state.previous_goal_snapshot = {
+                            "gap": analysis["behaviorGapVsTarget"],
+                            "projected_date": analysis["behaviorProjectedDate"],
+                        }
+                        api_simulate_week(scenario)
+                        st.session_state.last_simulated_week = scenario
+                        st.session_state.pop("goal_plan", None)
+                        st.rerun()
+                    except Exception as e:
+                        st.error("Could not simulate this week.")
+                        st.code(str(e))
+            st.caption("Simulations show how one week of spending behavior changes the projected goal date.")
+    with context_container:
+        with st.container(border=True):
+            st.subheader("This week")
+            rows = analysis["category_deltas"]
             if rows:
-                for row in rows:
+                for row in rows[:5]:
                     st.write(f"- {savings_detection_sentence(row)}")
             else:
                 st.write("No meaningful spending change detected yet this week.")
+            st.caption(plan.get("what_this_changes", "This plan is based on the categories marked Flexible."))
 
     if not plan["realistic"]:
         simulation_rows = plan.get("date_simulations", [])
@@ -2644,20 +2548,6 @@ def render_goal_plan(plan):
                 f"Moving {plan['goal_name']} from {target_label} to {first['New target date']} lowers required weekly savings "
                 f"from {money(plan['weekly_needed'])}/week to {money(first['Required weekly savings'])}/week."
             )
-
-    flexible_rows = [
-        row for row in plan.get("category_intelligence", [])
-        if row["Flexibility"] == "flexible" and row["Monthly spend"] > 0
-    ]
-    if flexible_rows:
-        st.subheader("Where your flexible spending is going this week")
-        overview_df = pd.DataFrame(
-            {
-                "Category": [row["Category"] for row in flexible_rows],
-                "Potential savings": [float(row["Suggested cut"]) for row in flexible_rows],
-            }
-        ).set_index("Category")
-        st.bar_chart(overview_df)
 
     with st.expander("Show planning details"):
         detail_cols = st.columns(2)
@@ -2765,21 +2655,21 @@ if st.sidebar.button("Load realistic transaction history", width="stretch"):
 page = st.sidebar.radio(
     "Plan",
     [
-        "How can I afford this?",
+        "Goal Command Center",
+        "Spending Intelligence",
         "Demo",
         "Transaction History",
-        "Spending by Category",
-        "Budget",
-        "Goals / Saved Plans",
+        "Settings / Budget Rules",
+        "Saved Plans",
     ],
     label_visibility="collapsed",
 )
 show_legacy_tools = st.sidebar.checkbox("Show advanced legacy tools", value=False)
 
-if page == "How can I afford this?":
+if page == "Goal Command Center":
     if not st.session_state.get("local_budget") or not st.session_state.get("local_transactions"):
         st.info(
-            "Start with Budget and Transaction History when you want the planner to use your own numbers. "
+            "Start with Settings / Budget Rules and Transaction History when you want the planner to use your own numbers. "
             "You can also load realistic demo history from the sidebar to see how the product works."
         )
     previous_plan_style = st.session_state.get("plan_style", "Balanced")
@@ -2792,7 +2682,7 @@ if page == "How can I afford this?":
         else 1,
         help="Minimal keeps routines intact, Balanced uses realistic tradeoffs, Fastest possible uses the strongest approved cuts.",
     )
-    setup_cols[1].caption("Category roles are managed on the Budget page. The planner only recommends reductions in flexible categories.")
+    setup_cols[1].caption("Category roles are managed in Settings / Budget Rules. The planner only recommends reductions in flexible categories.")
     if plan_style != previous_plan_style:
         st.session_state.plan_style = plan_style
         st.session_state.pop("goal_plan", None)
@@ -2830,36 +2720,37 @@ elif page == "Demo":
 
 elif page == "Transaction History":
     st.subheader("Transaction history")
-    st.caption("Add or edit local transactions. These values drive category totals and goal progress.")
+    st.caption("Local transaction history is the stand-in for future synced financial accounts. Newest transactions appear first.")
 
-    with st.form("history_add_tx_form"):
-        add_cols = st.columns([0.9, 1.2, 0.8, 1.0, 1.0])
-        tx_type = add_cols[0].selectbox("Type", ["Spending", "Income"], index=0, key="history_add_type")
-        tx_date = add_cols[1].date_input("Date", value=today, key="history_add_date")
-        merchant = add_cols[2].text_input("Merchant", value="Neighborhood Cafe", key="history_add_merchant")
-        amount = add_cols[3].number_input("Amount", min_value=0.0, value=12.00, step=0.50, format="%.2f", key="history_add_amount")
-        category_options = ["Income"] if tx_type == "Income" else SPEND_CATEGORIES
-        category = add_cols[4].selectbox("Category", category_options, index=0, key="history_add_category")
-        add_history_tx = st.form_submit_button("Add transaction")
+    with st.expander("Add a manual transaction"):
+        with st.form("history_add_tx_form"):
+            add_cols = st.columns([0.9, 1.2, 0.8, 1.0, 1.0])
+            tx_type = add_cols[0].selectbox("Type", ["Spending", "Income"], index=0, key="history_add_type")
+            tx_date = add_cols[1].date_input("Date", value=today, key="history_add_date")
+            merchant = add_cols[2].text_input("Merchant", value="Neighborhood Cafe", key="history_add_merchant")
+            amount = add_cols[3].number_input("Amount", min_value=0.0, value=12.00, step=0.50, format="%.2f", key="history_add_amount")
+            category_options = ["Income"] if tx_type == "Income" else SPEND_CATEGORIES
+            category = add_cols[4].selectbox("Category", category_options, index=0, key="history_add_category")
+            add_history_tx = st.form_submit_button("Add transaction")
 
-    if add_history_tx:
-        signed_amount = abs(float(amount)) if tx_type == "Income" else -abs(float(amount))
-        api_add_transaction(
-            {
-                "date": tx_date.isoformat(),
-                "merchant": merchant.strip(),
-                "amount": signed_amount,
-                "category": category,
-                "user_id": st.session_state.user_id,
-            }
-        )
-        st.session_state.pop("goal_plan", None)
-        st.success("Transaction added.")
+        if add_history_tx:
+            signed_amount = abs(float(amount)) if tx_type == "Income" else -abs(float(amount))
+            api_add_transaction(
+                {
+                    "date": tx_date.isoformat(),
+                    "merchant": merchant.strip(),
+                    "amount": signed_amount,
+                    "category": category,
+                    "user_id": st.session_state.user_id,
+                }
+            )
+            st.session_state.pop("goal_plan", None)
+            st.success("Transaction added.")
 
     try:
         load_demo_transactions_if_needed()
         all_transactions = api_get_all_transactions()
-        newest_first = st.toggle("Newest first", value=True)
+        newest_first = True
         visible_rows = []
         for idx, tx in enumerate(all_transactions):
             tx_date = parse_tx_date(tx)
@@ -2880,7 +2771,7 @@ elif page == "Transaction History":
                 }
             )
 
-        st.subheader("Monthly totals by category")
+        st.subheader("Monthly category totals")
         month_transactions = sorted(
             [tx for tx in all_transactions if month_start <= parse_tx_date(tx) <= month_end],
             key=parse_tx_date,
@@ -2902,56 +2793,61 @@ elif page == "Transaction History":
         else:
             st.info("No spending transactions for this month yet.")
 
-        st.subheader("Edit transactions")
+        st.subheader("Transactions")
         if not visible_rows:
             st.write("No transactions found for the selected month.")
         else:
             visible_df = pd.DataFrame(visible_rows).sort_values("Date", ascending=not newest_first)
-            edited_df = st.data_editor(
-                visible_df,
-                width="stretch",
-                hide_index=True,
-                disabled=["row_id", "Role", "Source"],
-                column_config={
-                    "row_id": None,
-                    "Date": st.column_config.DateColumn("Date"),
-                    "Type": st.column_config.SelectboxColumn("Type", options=["Spending", "Income"]),
-                    "Amount": st.column_config.NumberColumn("Amount", min_value=0.0, step=0.01, format="$%.2f"),
-                    "Category": st.column_config.SelectboxColumn("Category", options=["Income"] + SPEND_CATEGORIES),
-                },
-                key="transaction_history_editor",
-            )
-            if st.button("Save transaction edits", type="primary"):
-                updated_transactions = list(all_transactions)
-                for _, row in edited_df.iterrows():
-                    original_index = int(row["row_id"])
-                    row_type = str(row["Type"])
-                    row_category = "Income" if row_type == "Income" else str(row["Category"])
-                    row_amount = abs(float(row["Amount"]))
-                    signed_amount = row_amount if row_type == "Income" else -row_amount
-                    updated = dict(updated_transactions[original_index])
-                    updated.update(
-                        {
-                            "date": transaction_date_value(row["Date"]),
-                            "merchant": str(row["Merchant"]).strip(),
-                            "amount": signed_amount,
-                            "category": row_category,
-                            "source": updated.get("source", "manual"),
-                        }
-                    )
-                    updated_transactions[original_index] = updated
-                st.session_state.local_transactions = updated_transactions
-                st.session_state.pop("goal_plan", None)
-                st.success("Transactions updated.")
-                st.rerun()
-        st.caption("Category roles are managed on the Budget page.")
+            display_df = visible_df.drop(columns=["row_id"])
+            display_df["Amount"] = display_df["Amount"].map(money)
+            st.dataframe(display_df, width="stretch", hide_index=True)
+            with st.expander("Edit local transaction details"):
+                st.caption("Manual editing is temporary for the MVP. With account sync, this becomes mostly recategorization.")
+                edited_df = st.data_editor(
+                    visible_df,
+                    width="stretch",
+                    hide_index=True,
+                    disabled=["row_id", "Role", "Source"],
+                    column_config={
+                        "row_id": None,
+                        "Date": st.column_config.DateColumn("Date"),
+                        "Type": st.column_config.SelectboxColumn("Type", options=["Spending", "Income"]),
+                        "Amount": st.column_config.NumberColumn("Amount", min_value=0.0, step=0.01, format="$%.2f"),
+                        "Category": st.column_config.SelectboxColumn("Category", options=["Income"] + SPEND_CATEGORIES),
+                    },
+                    key="transaction_history_editor",
+                )
+                if st.button("Save transaction edits", type="primary"):
+                    updated_transactions = list(all_transactions)
+                    for _, row in edited_df.iterrows():
+                        original_index = int(row["row_id"])
+                        row_type = str(row["Type"])
+                        row_category = "Income" if row_type == "Income" else str(row["Category"])
+                        row_amount = abs(float(row["Amount"]))
+                        signed_amount = row_amount if row_type == "Income" else -row_amount
+                        updated = dict(updated_transactions[original_index])
+                        updated.update(
+                            {
+                                "date": transaction_date_value(row["Date"]),
+                                "merchant": str(row["Merchant"]).strip(),
+                                "amount": signed_amount,
+                                "category": row_category,
+                                "source": updated.get("source", "manual"),
+                            }
+                        )
+                        updated_transactions[original_index] = updated
+                    st.session_state.local_transactions = updated_transactions
+                    st.session_state.pop("goal_plan", None)
+                    st.success("Transactions updated.")
+                    st.rerun()
+        st.caption("Category roles are managed in Settings / Budget Rules.")
     except Exception as e:
         st.error("Could not load transactions.")
         st.code(str(e))
 
-elif page == "Spending by Category":
-    st.subheader("Spending by category")
-    st.caption("What should I actually do this week? Focus on the flexible categories with the clearest savings potential.")
+elif page == "Spending Intelligence":
+    st.subheader("Spending Intelligence")
+    st.caption("A single view of flexible spend, timeline drag, recurring patterns, and realistic cuts.")
     try:
         transactions = load_demo_transactions_if_needed()
         prev_start, prev_end = month_bounds(previous_month(month_start))
@@ -2962,11 +2858,6 @@ elif page == "Spending by Category":
         else:
             total_spend = sum(float(row["Monthly spend"]) for row in rows)
             flexible_cut_total = sum(float(row["Suggested cut"]) for row in rows)
-            top = st.columns(3)
-            top[0].metric("Monthly spend", money(total_spend))
-            top[1].metric("Suggested cut potential", money(flexible_cut_total))
-            top[2].metric("Flexible categories", str(sum(1 for row in rows if row["Flexibility"] == "flexible")))
-
             savings_rows = [
                 {
                     "Category": row["Category"],
@@ -2975,44 +2866,66 @@ elif page == "Spending by Category":
                 for row in rows
                 if row["Flexibility"] == "flexible" and row["Suggested cut"] > 0
             ]
-            if savings_rows:
-                st.subheader("Potential savings by category")
-                st.bar_chart(pd.DataFrame(savings_rows).set_index("Category"))
-
             recurring = recurring_spending_patterns(transactions, month_start)
-            if recurring:
-                st.subheader("Recurring patterns")
-                recurring_df = pd.DataFrame(recurring[:8])
-                recurring_df["Monthly total"] = recurring_df["Monthly total"].map(money)
-                st.dataframe(recurring_df, width="stretch", hide_index=True)
-
             drag_rows = sorted(
                 [row for row in rows if row["Trend"] is not None and float(row["Trend"]) > 0],
                 key=lambda row: float(row["Trend"]),
                 reverse=True,
             )[:3]
-            if drag_rows:
-                st.subheader("Timeline drags")
-                for row in drag_rows:
-                    st.caption(
-                        f"{row['Category']} is up {money(row['Trend'])} versus last month. "
-                        f"That reduces room for goal savings unless another category comes down."
-                    )
-
-            st.subheader("Best next moves")
             best_rows = sorted(
                 [row for row in rows if row["Suggested cut"] > 0],
                 key=lambda row: row["Suggested cut"],
                 reverse=True,
             )[:5]
-            card_cols = st.columns(min(3, max(1, len(best_rows))))
-            for idx, row in enumerate(best_rows):
-                with card_cols[idx % len(card_cols)]:
-                    with st.container(border=True):
-                        st.markdown(f"**{row['Category']}**")
-                        st.metric("Monthly opportunity", money(row["Suggested cut"]))
-                        st.caption(row["Flexibility"])
-                        st.write(row["Insight"])
+            top = st.columns(3)
+            top[0].metric("Monthly spend", money(total_spend))
+            top[1].metric("Flexible cut potential", money(flexible_cut_total))
+            top[2].metric("Flexible categories", str(sum(1 for row in rows if row["Flexibility"] == "flexible")))
+
+            chart_col, narrative_col = st.columns([1.25, 1.0])
+            with chart_col:
+                with st.container(border=True):
+                    st.subheader("Acceleration opportunities")
+                    if savings_rows:
+                        st.bar_chart(pd.DataFrame(savings_rows).set_index("Category"))
+                    else:
+                        st.info("No flexible cut potential found under the current budget rules.")
+            with narrative_col:
+                with st.container(border=True):
+                    st.subheader("Timeline drags")
+                    if drag_rows:
+                        for row in drag_rows:
+                            st.write(
+                                f"- **{row['Category']}** is up {money(row['Trend'])} versus last month, "
+                                "which reduces goal acceleration unless another category comes down."
+                            )
+                    else:
+                        st.write("No major month-over-month spending drags detected.")
+
+                    if recurring:
+                        st.markdown("**Recurring patterns**")
+                        for pattern in recurring[:3]:
+                            st.caption(
+                                f"{pattern['Merchant']} appears {int(pattern['Transactions'])} times in "
+                                f"{pattern['Category']} for {money(pattern['Monthly total'])} this month."
+                            )
+
+            st.subheader("Recommended cuts")
+            if best_rows:
+                cut_rows = []
+                for row in best_rows:
+                    cut_rows.append(
+                        {
+                            "Category": row["Category"],
+                            "Role": row["Flexibility"].title(),
+                            "Monthly spend": money(row["Monthly spend"]),
+                            "Monthly opportunity": money(row["Suggested cut"]),
+                            "Why it matters": row["Insight"],
+                        }
+                    )
+                st.dataframe(pd.DataFrame(cut_rows), width="stretch", hide_index=True)
+            else:
+                st.info("Mark more categories as Flexible in Settings / Budget Rules to unlock cut recommendations.")
 
             with st.expander("Show category details"):
                 display_rows = []
@@ -3041,9 +2954,9 @@ elif page == "Spending by Category":
         st.error("Could not load spending intelligence.")
         st.code(str(e))
 
-elif page == "Budget":
-    st.subheader("Budget")
-    st.caption("Set the guardrails Lantern should respect before it suggests weekly tradeoffs.")
+elif page == "Settings / Budget Rules":
+    st.subheader("Settings / Budget Rules")
+    st.caption("Set the income, budget rules, and category roles Lantern should respect before it suggests tradeoffs.")
     try:
         active_budget = api_get_budget_active()
     except Exception:
@@ -3150,7 +3063,7 @@ elif page == "Budget":
             st.error("Could not save budget.")
             st.code(str(e))
 
-elif page == "Goals / Saved Plans":
+elif page == "Saved Plans":
     st.subheader("Saved goals")
     st.caption("Automatic progress tracking compares this week's discretionary spending against your recent baseline.")
     try:
@@ -3223,19 +3136,19 @@ elif page == "Goals / Saved Plans":
                     target_date,
                 )
                 st.progress(min(1.0, analysis["effective_progress_amount"] / max(1.0, target_amount)))
-                goal_cols = st.columns(5)
+                goal_cols = st.columns(4)
                 goal_cols[0].metric("Goal progress", money(analysis["effective_progress_amount"]))
                 goal_cols[1].metric("Remaining", money(analysis["remaining"]))
-                goal_cols[2].metric("Weekly target", money(analysis["weeklyTarget"]))
-                goal_cols[3].metric("Saved this week", money(analysis["savedTowardGoalThisWeek"]))
-                goal_cols[4].metric("Savings pace", analysis["trajectoryStatus"])
+                goal_cols[2].metric("Current projection", projected_date_label(analysis["projectedDate"]))
+                goal_cols[3].metric("Weekly pace", money(analysis["savedTowardGoalThisWeek"]))
                 if analysis["behaviorImprovement"] < 0:
                     st.caption(f"Spending is {money(abs(analysis['behaviorImprovement']))} above normal this week.")
-                if analysis["gapVsTarget"] >= 0:
-                    st.success(f"{analysis['trajectoryStatus']}: ahead of this week's pace by {money(analysis['gapVsTarget'])}.")
-                else:
-                    st.warning(f"{analysis['trajectoryStatus']}: still needs {money(abs(analysis['gapVsTarget']))}/week.")
-                st.caption(f"Projected date: {projected_date_label(analysis['projectedDate'])}.")
+                gap_text = (
+                    f"{money(analysis['gapVsTarget'])}/week ahead"
+                    if analysis["gapVsTarget"] >= 0
+                    else f"{money(abs(analysis['gapVsTarget']))}/week needed"
+                )
+                st.caption(f"{analysis['trajectoryStatus']}. Weekly target: {money(analysis['weeklyTarget'])}. Pace gap: {gap_text}.")
                 slowing = [row for row in analysis["category_deltas"] if row["Estimated savings"] < -1]
                 successful = [row for row in analysis["category_deltas"] if row["Estimated savings"] > 1]
                 if successful:
