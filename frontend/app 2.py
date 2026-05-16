@@ -6,7 +6,7 @@ import streamlit as st
 import requests
 from affordability_engine import calculateGoalTrajectory
 
-BASE_URL = ""
+BASE_URL = os.getenv("FINANCE_COACH_API_URL", "").rstrip("/")
 if "user_id" not in st.session_state:
     st.session_state.user_id = "default"
 
@@ -1474,189 +1474,6 @@ def money(value):
     return f"${float(value):,.2f}"
 
 
-RUNWAY_DEMO_CATEGORIES = {
-    "restaurants": {
-        "label": "restaurants",
-        "share": 0.30,
-        "action": "Limit restaurant spending by planning one lower-cost meal.",
-    },
-    "shopping": {
-        "label": "shopping",
-        "share": 0.25,
-        "action": "Pause non-essential shopping until next week.",
-    },
-    "entertainment": {
-        "label": "entertainment",
-        "share": 0.20,
-        "action": "Choose one lower-cost entertainment option.",
-    },
-    "coffee": {
-        "label": "coffee",
-        "share": 0.10,
-        "action": "Make coffee at home a few extra days.",
-    },
-    "subscriptions": {
-        "label": "subscriptions",
-        "share": 0.15,
-        "action": "Pause or cancel one subscription you are not using.",
-    },
-}
-
-
-def calculate_runway_demo(
-    goal_name,
-    cost,
-    target_date,
-    monthly_income,
-    essential_spending,
-    flexible_spending,
-    selected_categories,
-):
-    target_date = canonical_target_date(target_date)
-    days_until = max(1, (target_date - today).days)
-    weeks_until = max(1.0, days_until / 7)
-    required_weekly_savings = float(cost) / weeks_until
-
-    monthly_surplus = float(monthly_income) - float(essential_spending) - float(flexible_spending)
-    current_weekly_savings = max(0.0, monthly_surplus * 12 / 52)
-    flexible_weekly = max(0.0, float(flexible_spending) * 12 / 52)
-    weekly_gap = max(0.0, required_weekly_savings - current_weekly_savings)
-
-    selected = [key for key in selected_categories if key in RUNWAY_DEMO_CATEGORIES]
-    selected_share_total = sum(RUNWAY_DEMO_CATEGORIES[key]["share"] for key in selected)
-    selected_weekly_spend = flexible_weekly * min(1.0, selected_share_total)
-    suggested_cut_total = min(weekly_gap, selected_weekly_spend * 0.35)
-    share_denominator = selected_share_total or 1.0
-
-    plan_rows = []
-    for key in selected:
-        category = RUNWAY_DEMO_CATEGORIES[key]
-        suggested_cut = suggested_cut_total * (category["share"] / share_denominator)
-        if suggested_cut >= 0.50:
-            plan_rows.append(
-                {
-                    "Category": category["label"],
-                    "Weekly cut": suggested_cut,
-                    "This week": category["action"],
-                }
-            )
-
-    planned_weekly_savings = current_weekly_savings + suggested_cut_total
-    if planned_weekly_savings >= required_weekly_savings:
-        status = "On track"
-    elif planned_weekly_savings >= required_weekly_savings * 0.75:
-        status = "Near target"
-    else:
-        status = "Behind"
-
-    if planned_weekly_savings > 0:
-        projected_weeks = float(cost) / planned_weekly_savings
-        projected_date = today + datetime.timedelta(days=round(projected_weeks * 7))
-    else:
-        projected_date = None
-
-    clean_goal_name = goal_name.strip() or "this goal"
-    if plan_rows:
-        plan_text = (
-            f"Move {money(required_weekly_savings)} toward {clean_goal_name} this week. "
-            f"The selected categories can contribute about {money(suggested_cut_total)} per week."
-        )
-    elif current_weekly_savings >= required_weekly_savings:
-        plan_text = (
-            f"Your current surplus can cover the goal. Set aside {money(required_weekly_savings)} this week."
-        )
-    else:
-        plan_text = (
-            "Select at least one flexible category, move the target date, reduce the cost, or increase income."
-        )
-
-    return {
-        "required_weekly_savings": required_weekly_savings,
-        "suggested_cut_total": suggested_cut_total,
-        "projected_date": projected_date,
-        "status": status,
-        "plan_text": plan_text,
-        "plan_rows": plan_rows,
-    }
-
-
-def render_runway_demo_page():
-    st.title("Can I afford this?")
-    st.caption("Runway demo. Local calculations only.")
-
-    with st.form("runway_demo_form"):
-        goal_cols = st.columns([1.4, 0.8, 0.8])
-        goal_name = goal_cols[0].text_input("What do you want to afford?", value="Hawaii trip")
-        cost = goal_cols[1].number_input("How much does it cost?", min_value=1.0, value=1800.0, step=25.0)
-        target_date = goal_cols[2].date_input(
-            "By what date?",
-            value=today + datetime.timedelta(days=90),
-            min_value=today,
-        )
-
-        cash_cols = st.columns(3)
-        monthly_income = cash_cols[0].number_input("Monthly income", min_value=0.0, value=4200.0, step=100.0)
-        essential_spending = cash_cols[1].number_input(
-            "Monthly essential spending",
-            min_value=0.0,
-            value=2600.0,
-            step=100.0,
-        )
-        flexible_spending = cash_cols[2].number_input(
-            "Monthly flexible spending",
-            min_value=0.0,
-            value=900.0,
-            step=50.0,
-        )
-
-        st.write("Categories the user is willing to reduce")
-        selected_categories = []
-        category_cols = st.columns(len(RUNWAY_DEMO_CATEGORIES))
-        for col, (key, category) in zip(category_cols, RUNWAY_DEMO_CATEGORIES.items()):
-            if col.checkbox(category["label"], value=True, key=f"demo_reduce_{key}"):
-                selected_categories.append(key)
-
-        email = st.text_input("Want updates? Enter your email", placeholder="you@example.com")
-        submitted = st.form_submit_button("Build my runway", width="stretch")
-
-    if not submitted:
-        st.info("Enter a goal and click Build my runway to see the weekly plan.")
-        return
-
-    result = calculate_runway_demo(
-        goal_name=goal_name,
-        cost=cost,
-        target_date=target_date,
-        monthly_income=monthly_income,
-        essential_spending=essential_spending,
-        flexible_spending=flexible_spending,
-        selected_categories=selected_categories,
-    )
-
-    if email.strip():
-        st.session_state.setdefault("runway_emails", [])
-        if email.strip() not in st.session_state.runway_emails:
-            st.session_state.runway_emails.append(email.strip())
-        st.success("Email saved. You are on the Runway updates list.")
-
-    metric_cols = st.columns(3)
-    metric_cols[0].metric("Required weekly savings", money(result["required_weekly_savings"]))
-    metric_cols[1].metric(
-        "Projected affordability date",
-        result["projected_date"].strftime("%b %-d, %Y") if result["projected_date"] else "Not projected",
-    )
-    metric_cols[2].metric("Status", result["status"])
-
-    st.subheader("Suggested weekly plan")
-    st.write(result["plan_text"])
-    if result["plan_rows"]:
-        plan_df = pd.DataFrame(result["plan_rows"])
-        plan_df["Weekly cut"] = plan_df["Weekly cut"].map(money)
-        st.dataframe(plan_df, width="stretch", hide_index=True)
-    else:
-        st.info("No category cuts are available from the current selections.")
-
-
 @st.dialog("Flexibility preferences")
 def flexibility_preferences_dialog():
     preferences = ensure_flexibility_preferences()
@@ -2338,7 +2155,6 @@ page = st.sidebar.radio(
     "Plan",
     [
         "How can I afford this?",
-        "Demo",
         "Transactions",
         "Transaction History",
         "Spending by Category",
@@ -2398,9 +2214,6 @@ if page == "How can I afford this?":
             except Exception as e:
                 st.error("Could not save plan.")
                 st.code(str(e))
-
-elif page == "Demo":
-    render_runway_demo_page()
 
 elif page == "Transactions":
     st.subheader("Add transaction")

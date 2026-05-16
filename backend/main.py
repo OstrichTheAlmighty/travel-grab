@@ -4,10 +4,7 @@ from typing import Dict, List, Literal, Optional
 from datetime import date, datetime, timedelta
 import statistics
 import re
-import os
-import time
 import json
-import requests
 
 from backend.db import init_db, DB_PATH, get_conn
 from backend.coach_afford import build_afford_response, max_safe_spend, simulate_afford
@@ -17,8 +14,6 @@ init_db()
 
 PERIOD = Literal["weekly", "monthly"]
 USER_DEFAULT = "default"
-GEMINI_MODEL = "gemini-2.5-flash"
-GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models"
 TRANSACTION_DATASET_EVENTS: Dict[str, Dict[str, object]] = {}
 
 
@@ -1076,43 +1071,6 @@ def _is_valid_affordability_rewrite(
     return True
 
 
-def generate_ai_explanation(prompt: str) -> Optional[str]:
-    api_key = os.getenv("GOOGLE_API_KEY", "").strip()
-    if not api_key:
-        print("ERROR: GOOGLE_API_KEY missing", flush=True)
-        return None
-
-    url = f"{GEMINI_URL}/{GEMINI_MODEL}:generateContent?key={api_key}"
-    logged_url = f"{GEMINI_URL}/{GEMINI_MODEL}:generateContent?key=[REDACTED]"
-    response = None
-    try:
-        print("CALLING GEMINI", flush=True)
-        print("GEMINI URL:", logged_url, flush=True)
-        response = requests.post(
-            url,
-            json={
-                "contents": [
-                    {
-                        "parts": [
-                            {"text": prompt}
-                        ]
-                    }
-                ]
-            },
-            timeout=(3, 6),
-        )
-        print("GEMINI STATUS:", response.status_code, flush=True)
-        if response.status_code != 200:
-            return None
-        response_json = response.json() or {}
-        explanation = str(response_json["candidates"][0]["content"]["parts"][0]["text"]).strip()
-        return explanation or None
-    except Exception as e:
-        print("GEMINI STATUS:", getattr(response, "status_code", None), flush=True)
-        print("GEMINI ERROR:", str(e), flush=True)
-        return None
-
-
 def _generate_affordability_coach_explanation(
     *,
     decision_state: str = "",
@@ -1131,43 +1089,7 @@ def _generate_affordability_coach_explanation(
         max_safe_spend_amount=max_safe_spend_amount,
     )
 
-    prompt = (
-        "You are a financial assistant embedded in a consumer fintech app.\n"
-        "Task: Answer the question: 'Can I afford this purchase?'\n"
-        "Use the provided text as the source of truth.\n"
-        "Rules:\n"
-        "- Respond in 2 short sentences maximum\n"
-        "- First sentence: clear decision using the exact decision meaning from the source text\n"
-        "- Second sentence: explain the impact on balance in plain language\n"
-        "- Keep the exact meaning\n"
-        "- Keep all numbers exactly the same\n"
-        "- Do not change the decision state\n"
-        "- SAFE means the purchase leaves a meaningful buffer after expenses\n"
-        "- TIGHT means the purchase slightly reduces the user's buffer\n"
-        "- NOT RECOMMENDED means the purchase materially reduces the user's buffer or risks going negative\n"
-        "- Do not mention 'safe limit' or 'max safe spend'\n"
-        "- Use natural phrasing like 'safe range', 'buffer', or 'threshold'\n"
-        "- Treat safe-to-spend as the true affordability limit\n"
-        "- Avoid robotic or overly technical wording\n"
-        "- Sound like a polished finance app: calm, confident, human\n"
-        "- Do not use awkward phrasing like 'leaves your projected balance'\n"
-        "- Make SAFE feel lightweight, TIGHT feel cautionary, and NOT RECOMMENDED feel decisive\n"
-        "- Avoid repeating the same phrasing across states\n"
-        "- Do not repeat the amount unnecessarily\n"
-        "- Do not add extra reasoning\n"
-        "Output format examples:\n"
-        "- Yes — safe. This leaves a meaningful buffer after expenses.\n"
-        "- Tight — proceed carefully. This slightly reduces your buffer.\n"
-        "- No — not recommended. This materially reduces your buffer.\n"
-        "- No — not recommended. This risks pushing your projected balance below zero.\n"
-        f"Text to rewrite:\n{deterministic}"
-    )
-
-    answer = generate_ai_explanation(prompt)
-    if answer:
-        return {"answer": answer, "source": "gemini"}
-
-    return {"answer": deterministic, "source": "deterministic"}
+    return {"answer": deterministic, "source": "local"}
 
 
 @app.post("/coach/respond", response_model=CoachResponse | AffordCoachResponse)
