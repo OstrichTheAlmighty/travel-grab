@@ -5,6 +5,7 @@ import pandas as pd
 import streamlit as st
 import requests
 from affordability_engine import calculateGoalTrajectory
+from budget_utils import detect_income_sources, monthly_spending_totals
 
 BASE_URL = ""
 if "user_id" not in st.session_state:
@@ -221,48 +222,7 @@ def budget_summary_defaults(active_budget=None):
 
 
 def spending_totals_by_category(transactions):
-    totals = {}
-    for tx in transactions:
-        amount = float(tx.get("amount", 0.0))
-        if amount >= 0:
-            continue
-        category = str(tx.get("category") or "Other")
-        totals[category] = totals.get(category, 0.0) + abs(amount)
-    return totals
-
-
-def auto_create_budget_from_transactions(transactions):
-    roles = dict(DEFAULT_CATEGORY_ROLES)
-    month_transactions = [
-        tx for tx in transactions
-        if month_start <= parse_tx_date(tx) <= month_end
-    ]
-    income = sum(
-        abs(float(tx.get("amount", 0.0)))
-        for tx in month_transactions
-        if float(tx.get("amount", 0.0)) > 0 or str(tx.get("category")) == "Income"
-    )
-    totals = spending_totals_by_category(month_transactions)
-    allocations = {category: float(totals.get(category, 0.0)) for category in BUDGET_CATEGORIES}
-    essential_spending = sum(
-        amount
-        for category, amount in totals.items()
-        if roles.get(category, "flexible") in {"protected", "essential"}
-    )
-    flexible_spending_limit = sum(
-        amount
-        for category, amount in totals.items()
-        if roles.get(category, "flexible") == "flexible"
-    )
-    return {
-        "income_amount": float(income),
-        "allocations": allocations,
-        "essential_spending": float(essential_spending),
-        "flexible_spending_limit": float(flexible_spending_limit),
-        "protected_categories": [category for category, role in roles.items() if role == "protected"],
-        "reducible_categories": [category for category, role in roles.items() if role == "flexible"],
-        "roles": roles,
-    }
+    return monthly_spending_totals(transactions)
 
 
 def transaction_date_value(value):
@@ -271,6 +231,158 @@ def transaction_date_value(value):
     if isinstance(value, datetime.date):
         return value.isoformat()
     return str(value)
+
+
+SIMPLE_BUDGET_CATEGORIES = [
+    "Housing / bills",
+    "Groceries",
+    "Food & dining",
+    "Transportation",
+    "Shopping",
+    "Subscriptions",
+    "Entertainment",
+    "Health",
+    "Education",
+    "Savings",
+    "Other",
+]
+
+RAW_TO_SIMPLE_CATEGORY = {
+    "Bills": "Housing / bills",
+    "Groceries": "Groceries",
+    "Food": "Food & dining",
+    "Coffee": "Food & dining",
+    "Restaurants / dining": "Food & dining",
+    "Transportation": "Transportation",
+    "Shopping": "Shopping",
+    "Subscriptions": "Subscriptions",
+    "Entertainment": "Entertainment",
+    "Health": "Health",
+    "Education": "Education",
+    "Savings": "Savings",
+    "Other": "Other",
+}
+
+SIMPLE_TO_RAW_CATEGORY = {
+    "Housing / bills": "Bills",
+    "Groceries": "Groceries",
+    "Food & dining": "Food",
+    "Transportation": "Transportation",
+    "Shopping": "Shopping",
+    "Subscriptions": "Subscriptions",
+    "Entertainment": "Entertainment",
+    "Health": "Health",
+    "Education": "Education",
+    "Savings": "Savings",
+    "Other": "Other",
+}
+
+
+def simple_budget_category(category):
+    return RAW_TO_SIMPLE_CATEGORY.get(str(category or "Other"), "Other")
+
+
+def simple_spending_totals(transactions):
+    totals = {category: 0.0 for category in SIMPLE_BUDGET_CATEGORIES}
+    for tx in transactions:
+        amount = float(tx.get("amount", 0.0))
+        if amount >= 0:
+            continue
+        totals[simple_budget_category(tx.get("category", "Other"))] += abs(amount)
+    return totals
+
+
+def simple_category_role(simple_category):
+    raw_categories = [
+        raw_category
+        for raw_category, mapped_category in RAW_TO_SIMPLE_CATEGORY.items()
+        if mapped_category == simple_category
+    ]
+    role_rank = {"flexible": 0, "essential": 1, "protected": 2}
+    role = "flexible"
+    for raw_category in raw_categories:
+        raw_role = category_role(raw_category)
+        if role_rank[raw_role] > role_rank[role]:
+            role = raw_role
+    return role
+
+
+def categorization_explanation(tx):
+    merchant = str(tx.get("merchant", "")).strip()
+    category = str(tx.get("category") or "Other")
+    source = str(tx.get("source") or "").lower()
+    if category == "Income":
+        return "Marked as income because the amount is positive or the category is Income."
+    if source in {"manual", "user"}:
+        return "You entered or edited this category."
+    if category in {"Coffee", "Food", "Restaurants / dining"}:
+        return "Grouped into Food & dining for planning because coffee, restaurants, and dining are part of the same lifestyle tradeoff."
+    if category == "Subscriptions":
+        return "Marked as a subscription because the merchant looks like a recurring service."
+    if merchant:
+        return f"Categorized from the merchant name and current category rules for {merchant}."
+    return "This category is a starting guess. Review it before relying on the baseline."
+
+
+def transaction_confidence(tx, recurring_keys=None):
+    category = str(tx.get("category") or "Other")
+    source = str(tx.get("source") or "").lower()
+    merchant = str(tx.get("merchant") or "").strip()
+    if source in {"manual", "user"}:
+        return "User verified"
+    if category == "Other" or not merchant:
+        return "Low"
+    if recurring_keys and recurring_transaction_key(tx) in recurring_keys:
+        return "High"
+    if category in {"Coffee", "Food", "Restaurants / dining", "Shopping", "Entertainment"}:
+        return "Review"
+    return "Medium"
+
+
+def recurring_transaction_key(tx):
+    return (str(tx.get("merchant") or "").strip().lower(), str(tx.get("category") or "").strip())
+
+
+def recurring_subscription_patterns(transactions):
+    grouped = {}
+    for tx in transactions:
+        amount = float(tx.get("amount", 0.0))
+        if amount >= 0:
+            continue
+        merchant = str(tx.get("merchant") or "").strip()
+        if not merchant:
+            continue
+        key = recurring_transaction_key(tx)
+        grouped.setdefault(key, {"Merchant": merchant, "Category": simple_budget_category(tx.get("category")), "Dates": [], "Amounts": []})
+        grouped[key]["Dates"].append(parse_tx_date(tx))
+        grouped[key]["Amounts"].append(abs(amount))
+
+    patterns = []
+    for key, group in grouped.items():
+        dates = sorted(group["Dates"])
+        amounts = group["Amounts"]
+        if len(dates) < 2:
+            continue
+        gaps = [(right - left).days for left, right in zip(dates, dates[1:])]
+        amount_range = max(amounts) - min(amounts)
+        looks_monthly = any(24 <= gap <= 37 for gap in gaps)
+        small_variance = amount_range <= max(2.0, sum(amounts) / len(amounts) * 0.10)
+        if looks_monthly and small_variance:
+            patterns.append(
+                {
+                    "Key": key,
+                    "Merchant": group["Merchant"],
+                    "Category": group["Category"],
+                    "Typical amount": sum(amounts) / len(amounts),
+                    "Confidence": "High" if str(key[1]) == "Subscriptions" else "Medium",
+                }
+            )
+    return sorted(patterns, key=lambda row: row["Typical amount"], reverse=True)
+
+
+def save_local_transaction_updates(updated_transactions):
+    st.session_state.local_transactions = updated_transactions
+    st.session_state.pop("goal_plan", None)
 
 
 def trajectory_status_from_gap(gap_vs_target, weekly_target):
@@ -933,7 +1045,7 @@ def local_sample_transactions(as_of):
     current_month = as_of.replace(day=1)
     prior_month = previous_month(current_month)
     current_specs = [
-        (1, "Employer Payroll", 3200.0, "Income"), (15, "Employer Payroll", 3200.0, "Income"),
+        (1, "Employer Payroll", 5200.0, "Income"),
         (2, "Apartment Rent", -1850.0, "Bills"), (3, "SoCal Edison", -82.14, "Bills"),
         (4, "City Water Utility", -44.68, "Bills"), (5, "Verizon Wireless", -96.20, "Bills"),
         (6, "Spectrum Internet", -69.99, "Bills"), (1, "Automatic Savings Transfer", -350.0, "Savings"),
@@ -965,7 +1077,7 @@ def local_sample_transactions(as_of):
         (21, "Pet Supplies Plus", -31.26, "Other"), (30, "Farmers Market", -22.80, "Other"),
     ]
     baseline_specs = [
-        (1, "Employer Payroll", 3200.0, "Income"), (15, "Employer Payroll", 3200.0, "Income"),
+        (1, "Employer Payroll", 5200.0, "Income"),
         (2, "Apartment Rent", -1850.0, "Bills"), (3, "SoCal Edison", -82.14, "Bills"),
         (5, "Verizon Wireless", -96.20, "Bills"), (6, "Spectrum Internet", -69.99, "Bills"),
         (1, "Automatic Savings Transfer", -350.0, "Savings"), (3, "Trader Joe's", -91.42, "Groceries"),
@@ -2502,7 +2614,7 @@ def render_goal_plan(plan):
                     action_cols[0].caption(row.get("Recommendation", row.get("Behavior change", "")))
                     action_cols[1].metric("Weekly lift", f"+{money(row['Recommended weekly cut'])}")
             else:
-                st.info("Move the date out, lower the goal cost, or mark more categories as Flexible in Settings / Budget Rules.")
+                st.info("Move the date out, lower the goal cost, or mark more categories as Flexible in Budget Planner.")
 
     sim_container, context_container = st.columns([1.0, 1.0])
     with sim_container:
@@ -2659,7 +2771,7 @@ page = st.sidebar.radio(
         "Spending Intelligence",
         "Demo",
         "Transaction History",
-        "Settings / Budget Rules",
+        "Budget Planner",
         "Saved Plans",
     ],
     label_visibility="collapsed",
@@ -2669,7 +2781,7 @@ show_legacy_tools = st.sidebar.checkbox("Show advanced legacy tools", value=Fals
 if page == "Goal Command Center":
     if not st.session_state.get("local_budget") or not st.session_state.get("local_transactions"):
         st.info(
-            "Start with Settings / Budget Rules and Transaction History when you want the planner to use your own numbers. "
+            "Start with Budget Planner and Transaction History when you want the planner to use your own numbers. "
             "You can also load realistic demo history from the sidebar to see how the product works."
         )
     previous_plan_style = st.session_state.get("plan_style", "Balanced")
@@ -2682,7 +2794,7 @@ if page == "Goal Command Center":
         else 1,
         help="Minimal keeps routines intact, Balanced uses realistic tradeoffs, Fastest possible uses the strongest approved cuts.",
     )
-    setup_cols[1].caption("Category roles are managed in Settings / Budget Rules. The planner only recommends reductions in flexible categories.")
+    setup_cols[1].caption("Category roles are managed in Budget Planner. The planner only recommends reductions in flexible categories.")
     if plan_style != previous_plan_style:
         st.session_state.plan_style = plan_style
         st.session_state.pop("goal_plan", None)
@@ -2720,7 +2832,7 @@ elif page == "Demo":
 
 elif page == "Transaction History":
     st.subheader("Transaction history")
-    st.caption("Local transaction history is the stand-in for future synced financial accounts. Newest transactions appear first.")
+    st.caption("Review and shape the transaction picture Lantern uses. Categories are editable because the baseline is a suggestion, not truth.")
 
     with st.expander("Add a manual transaction"):
         with st.form("history_add_tx_form"):
@@ -2729,12 +2841,13 @@ elif page == "Transaction History":
             tx_date = add_cols[1].date_input("Date", value=today, key="history_add_date")
             merchant = add_cols[2].text_input("Merchant", value="Neighborhood Cafe", key="history_add_merchant")
             amount = add_cols[3].number_input("Amount", min_value=0.0, value=12.00, step=0.50, format="%.2f", key="history_add_amount")
-            category_options = ["Income"] if tx_type == "Income" else SPEND_CATEGORIES
-            category = add_cols[4].selectbox("Category", category_options, index=0, key="history_add_category")
+            category_options = ["Income"] if tx_type == "Income" else SIMPLE_BUDGET_CATEGORIES
+            selected_category = add_cols[4].selectbox("Category", category_options, index=0, key="history_add_category")
             add_history_tx = st.form_submit_button("Add transaction")
 
         if add_history_tx:
             signed_amount = abs(float(amount)) if tx_type == "Income" else -abs(float(amount))
+            category = "Income" if tx_type == "Income" else SIMPLE_TO_RAW_CATEGORY.get(selected_category, "Other")
             api_add_transaction(
                 {
                     "date": tx_date.isoformat(),
@@ -2750,7 +2863,9 @@ elif page == "Transaction History":
     try:
         load_demo_transactions_if_needed()
         all_transactions = api_get_all_transactions()
-        newest_first = True
+        newest_first = st.toggle("Newest first", value=True, key="history_newest_first")
+        recurring_patterns = recurring_subscription_patterns(all_transactions)
+        recurring_keys = {pattern["Key"] for pattern in recurring_patterns}
         visible_rows = []
         for idx, tx in enumerate(all_transactions):
             tx_date = parse_tx_date(tx)
@@ -2758,6 +2873,7 @@ elif page == "Transaction History":
                 continue
             amount_value = float(tx.get("amount", 0.0))
             tx_type = "Income" if amount_value >= 0 or str(tx.get("category")) == "Income" else "Spending"
+            confidence = "Income" if tx_type == "Income" else transaction_confidence(tx, recurring_keys)
             visible_rows.append(
                 {
                     "row_id": idx,
@@ -2765,11 +2881,36 @@ elif page == "Transaction History":
                     "Merchant": str(tx.get("merchant", "")),
                     "Type": tx_type,
                     "Amount": abs(amount_value),
-                    "Category": str(tx.get("category", "Other")),
+                    "Category": "Income" if tx_type == "Income" else simple_budget_category(tx.get("category", "Other")),
                     "Role": "income" if tx_type == "Income" else category_role(tx.get("category", "Other")),
+                    "Confidence": confidence,
+                    "Recurring": "Yes" if recurring_transaction_key(tx) in recurring_keys else "No",
+                    "Why": categorization_explanation(tx),
                     "Source": transaction_source_label(tx),
                 }
             )
+
+        review_count = sum(1 for row in visible_rows if row["Confidence"] in {"Low", "Review"})
+        trust_cols = st.columns(3)
+        trust_cols[0].metric("Transactions to review", str(review_count))
+        trust_cols[1].metric("Recurring subscriptions", str(len(recurring_patterns)))
+        trust_cols[2].metric("Baseline trust", "Needs review" if review_count else "Reviewed")
+
+        if recurring_patterns:
+            with st.expander("Recurring subscriptions detected"):
+                st.caption("These look recurring based on merchant, amount, and timing. They are separated from one-time charges.")
+                recurring_df = pd.DataFrame(
+                    [
+                        {
+                            "Merchant": pattern["Merchant"],
+                            "Category": pattern["Category"],
+                            "Typical amount": money(pattern["Typical amount"]),
+                            "Confidence": pattern["Confidence"],
+                        }
+                        for pattern in recurring_patterns
+                    ]
+                )
+                st.dataframe(recurring_df, width="stretch", hide_index=True)
 
         st.subheader("Monthly category totals")
         month_transactions = sorted(
@@ -2777,15 +2918,16 @@ elif page == "Transaction History":
             key=parse_tx_date,
             reverse=newest_first,
         )
-        totals = spending_totals_by_category(month_transactions)
-        if totals:
+        totals = simple_spending_totals(month_transactions)
+        if sum(totals.values()) > 0:
             total_rows = [
                 {
                     "Category": category,
-                    "Role": category_role(category),
+                    "Role": simple_category_role(category),
                     "Monthly spending": amount,
                 }
                 for category, amount in sorted(totals.items(), key=lambda item: item[1], reverse=True)
+                if amount > 0
             ]
             totals_df = pd.DataFrame(total_rows)
             totals_df["Monthly spending"] = totals_df["Monthly spending"].map(money)
@@ -2801,19 +2943,23 @@ elif page == "Transaction History":
             display_df = visible_df.drop(columns=["row_id"])
             display_df["Amount"] = display_df["Amount"].map(money)
             st.dataframe(display_df, width="stretch", hide_index=True)
-            with st.expander("Edit local transaction details"):
+            with st.expander("Why were these categorized this way?"):
+                st.caption("Categorization is deterministic for now. Review low-confidence rows before using the baseline for planning.")
+                why_rows = display_df[["Merchant", "Category", "Confidence", "Recurring", "Why"]]
+                st.dataframe(why_rows, width="stretch", hide_index=True)
+            with st.expander("Review and edit transaction details", expanded=review_count > 0):
                 st.caption("Manual editing is temporary for the MVP. With account sync, this becomes mostly recategorization.")
                 edited_df = st.data_editor(
                     visible_df,
                     width="stretch",
                     hide_index=True,
-                    disabled=["row_id", "Role", "Source"],
+                    disabled=["row_id", "Role", "Confidence", "Recurring", "Why", "Source"],
                     column_config={
                         "row_id": None,
                         "Date": st.column_config.DateColumn("Date"),
                         "Type": st.column_config.SelectboxColumn("Type", options=["Spending", "Income"]),
                         "Amount": st.column_config.NumberColumn("Amount", min_value=0.0, step=0.01, format="$%.2f"),
-                        "Category": st.column_config.SelectboxColumn("Category", options=["Income"] + SPEND_CATEGORIES),
+                        "Category": st.column_config.SelectboxColumn("Category", options=["Income"] + SIMPLE_BUDGET_CATEGORIES),
                     },
                     key="transaction_history_editor",
                 )
@@ -2822,7 +2968,7 @@ elif page == "Transaction History":
                     for _, row in edited_df.iterrows():
                         original_index = int(row["row_id"])
                         row_type = str(row["Type"])
-                        row_category = "Income" if row_type == "Income" else str(row["Category"])
+                        row_category = "Income" if row_type == "Income" else SIMPLE_TO_RAW_CATEGORY.get(str(row["Category"]), "Other")
                         row_amount = abs(float(row["Amount"]))
                         signed_amount = row_amount if row_type == "Income" else -row_amount
                         updated = dict(updated_transactions[original_index])
@@ -2832,15 +2978,14 @@ elif page == "Transaction History":
                                 "merchant": str(row["Merchant"]).strip(),
                                 "amount": signed_amount,
                                 "category": row_category,
-                                "source": updated.get("source", "manual"),
+                                "source": "user",
                             }
                         )
                         updated_transactions[original_index] = updated
-                    st.session_state.local_transactions = updated_transactions
-                    st.session_state.pop("goal_plan", None)
+                    save_local_transaction_updates(updated_transactions)
                     st.success("Transactions updated.")
                     st.rerun()
-        st.caption("Category roles are managed in Settings / Budget Rules.")
+        st.caption("Category roles are managed in Budget Planner.")
     except Exception as e:
         st.error("Could not load transactions.")
         st.code(str(e))
@@ -2925,7 +3070,7 @@ elif page == "Spending Intelligence":
                     )
                 st.dataframe(pd.DataFrame(cut_rows), width="stretch", hide_index=True)
             else:
-                st.info("Mark more categories as Flexible in Settings / Budget Rules to unlock cut recommendations.")
+                st.info("Mark more categories as Flexible in Budget Planner to unlock cut recommendations.")
 
             with st.expander("Show category details"):
                 display_rows = []
@@ -2954,111 +3099,396 @@ elif page == "Spending Intelligence":
         st.error("Could not load spending intelligence.")
         st.code(str(e))
 
-elif page == "Settings / Budget Rules":
-    st.subheader("Settings / Budget Rules")
-    st.caption("Set the income, budget rules, and category roles Lantern should respect before it suggests tradeoffs.")
+elif page == "Budget Planner":
+    st.subheader("Budget Planner")
+    st.caption("Use past spending as context, then create the future budget you plan to follow.")
     try:
         active_budget = api_get_budget_active()
     except Exception:
         active_budget = {"income_amount": 3200.0, "allocations": {}}
     active_budget_summary = budget_summary_defaults(active_budget)
 
-    if st.button("Auto-create budget", help="Estimate budget totals and category roles from this month's local transaction history."):
-        transactions = api_get_all_transactions()
-        if not transactions:
-            load_demo_transactions_if_needed()
-            transactions = api_get_all_transactions()
-        auto_budget = auto_create_budget_from_transactions(transactions)
-        save_category_roles(auto_budget["roles"])
-        api_save_budget(
-            "monthly",
-            auto_budget["income_amount"],
-            auto_budget["allocations"],
-            essential_spending=auto_budget["essential_spending"],
-            flexible_spending_limit=auto_budget["flexible_spending_limit"],
-            protected_categories=auto_budget["protected_categories"],
-            reducible_categories=auto_budget["reducible_categories"],
+    # Baseline = what happened. It is read-only and comes from transaction history.
+    try:
+        baseline_transactions = api_get_all_transactions()
+        month_baseline_transactions = [
+            tx for tx in baseline_transactions
+            if month_start <= parse_tx_date(tx) <= month_end
+        ]
+    except Exception:
+        baseline_transactions = []
+        month_baseline_transactions = []
+    baseline_totals = spending_totals_by_category(month_baseline_transactions)
+    income_sources, detected_income = detect_income_sources(
+        baseline_transactions,
+        month_start,
+        month_end,
+        fallback_income=float(active_budget_summary["income"] or 0.0),
+    )
+    default_manual_income = float(active_budget_summary["income"] or detected_income or 3200.0)
+    st.session_state.setdefault("planner_manual_income", default_manual_income)
+    st.session_state.setdefault("planner_use_detected_income", detected_income > 0)
+    income_cols = st.columns([0.8, 1.2])
+    use_detected_income = income_cols[0].toggle("Use detected income", key="planner_use_detected_income")
+    manual_income = income_cols[1].number_input(
+        "Manual income override",
+        min_value=0.0,
+        step=100.0,
+        key="planner_manual_income",
+        help="Use this when paycheck detection is incomplete or your next month will be different.",
+    )
+    income_amount = float(detected_income if use_detected_income and detected_income > 0 else manual_income)
+    ensure_category_roles()
+
+    budget_category_order = SIMPLE_BUDGET_CATEGORIES
+    display_category_map = RAW_TO_SIMPLE_CATEGORY
+    raw_categories_by_budget_category = {
+        category: [
+            raw_category
+            for raw_category, budget_category in display_category_map.items()
+            if budget_category == category
+        ]
+        for category in budget_category_order
+    }
+    role_rank = {"flexible": 0, "essential": 1, "protected": 2}
+    budget_baselines = {category: 0.0 for category in budget_category_order}
+    budget_roles = {category: "flexible" for category in budget_category_order}
+    for raw_category in BUDGET_CATEGORIES:
+        budget_category = display_category_map.get(raw_category, "Other")
+        budget_baselines[budget_category] += float(baseline_totals.get(raw_category, 0.0))
+        raw_role = category_role(raw_category)
+        if role_rank[raw_role] > role_rank[budget_roles[budget_category]]:
+            budget_roles[budget_category] = raw_role
+
+    protected_categories = [category for category, role in budget_roles.items() if role == "protected"]
+    essential_categories = [category for category, role in budget_roles.items() if role == "essential"]
+    flexible_categories = [category for category, role in budget_roles.items() if role == "flexible"]
+    protected_total = sum(float(budget_baselines.get(category, 0.0)) for category in protected_categories)
+    essential_total = sum(float(budget_baselines.get(category, 0.0)) for category in essential_categories)
+    protected_essential_baseline = protected_total + essential_total
+    flexible_baseline_total = sum(float(budget_baselines.get(category, 0.0)) for category in flexible_categories)
+    total_spending = protected_essential_baseline + flexible_baseline_total
+    available_after_essentials = income_amount - protected_essential_baseline
+
+    # Goal requirement = the savings pace needed to afford the active goal by its target date.
+    active_goal = st.session_state.get("goal_plan", {}) or {}
+    goal_name = str(active_goal.get("goal_name") or "your goal")
+    goal_cost = float(active_goal.get("goal_cost", 0.0) or 0.0)
+    goal_saved = float(active_goal.get("progress", 0.0) or 0.0)
+    goal_target = canonical_target_date(active_goal.get("target_date", today + datetime.timedelta(days=90)))
+    remaining_goal = max(0.0, goal_cost - goal_saved)
+    weeks_until_goal = max(1.0, (goal_target - today).days / 7)
+    required_weekly_goal_savings = float(active_goal.get("weekly_needed", 0.0) or 0.0)
+    if required_weekly_goal_savings <= 0 and remaining_goal > 0:
+        required_weekly_goal_savings = remaining_goal / weeks_until_goal
+    required_monthly_goal_savings = required_weekly_goal_savings * 4.33
+
+    st.markdown("**Current baseline**")
+    st.caption("Transaction history is a starting point, not truth. Review categories before relying on the baseline.")
+    baseline_cols = st.columns(5)
+    baseline_cols[0].metric("Monthly income detected", money(detected_income))
+    baseline_cols[1].metric("Protected + essential", money(protected_essential_baseline))
+    baseline_cols[2].metric("Flexible spending", money(flexible_baseline_total))
+    baseline_cols[3].metric("Total spending", money(total_spending))
+    baseline_cols[4].metric("Available after essentials", money(available_after_essentials))
+    with st.expander("Income sources detected"):
+        if income_sources:
+            income_df = pd.DataFrame(
+                [
+                    {
+                        "Merchant/source": source["merchant"],
+                        "Cadence": source["cadence"],
+                        "Detected monthly amount": money(source["detected_monthly_amount"]),
+                    }
+                    for source in income_sources
+                ]
+            )
+            st.dataframe(income_df, width="stretch", hide_index=True)
+        else:
+            st.caption("No payroll or income-like deposits were detected for this month.")
+    st.dataframe(
+        pd.DataFrame(
+            [
+                {
+                    "Category": category,
+                    "Role": budget_roles.get(category, "flexible").title(),
+                    "Current monthly spend": money(budget_baselines.get(category, 0.0)),
+                }
+                for category in budget_category_order
+            ]
+        ),
+        width="stretch",
+        hide_index=True,
+    )
+    recurring_patterns = recurring_subscription_patterns(baseline_transactions)
+    recurring_keys = {pattern["Key"] for pattern in recurring_patterns}
+    low_confidence_count = sum(
+        1
+        for tx in month_baseline_transactions
+        if float(tx.get("amount", 0.0)) < 0 and transaction_confidence(tx, recurring_keys) in {"Low", "Review"}
+    )
+    trust_cols = st.columns(3)
+    trust_cols[0].metric("Transactions to review", str(low_confidence_count))
+    trust_cols[1].metric("Recurring subscriptions found", str(len(recurring_patterns)))
+    trust_cols[2].metric("Baseline confidence", "Needs review" if low_confidence_count else "Reviewed")
+    if recurring_patterns:
+        with st.expander("Recurring subscriptions detected"):
+            st.caption("Recurring subscriptions are separated from one-time charges so the baseline is easier to trust.")
+            recurring_df = pd.DataFrame(
+                [
+                    {
+                        "Merchant": pattern["Merchant"],
+                        "Category": pattern["Category"],
+                        "Typical amount": money(pattern["Typical amount"]),
+                        "Confidence": pattern["Confidence"],
+                    }
+                    for pattern in recurring_patterns
+                ]
+            )
+            st.dataframe(recurring_df, width="stretch", hide_index=True)
+    with st.expander("Review or recategorize transactions behind this baseline"):
+        st.caption("Edits here update Transaction History too. This keeps the future budget grounded in verified transactions.")
+        review_rows = []
+        for idx, tx in enumerate(baseline_transactions):
+            tx_date = parse_tx_date(tx)
+            if not (month_start <= tx_date <= month_end) or float(tx.get("amount", 0.0)) >= 0:
+                continue
+            review_rows.append(
+                {
+                    "row_id": idx,
+                    "Date": tx_date,
+                    "Merchant": str(tx.get("merchant", "")),
+                    "Amount": abs(float(tx.get("amount", 0.0))),
+                    "Category": simple_budget_category(tx.get("category", "Other")),
+                    "Confidence": transaction_confidence(tx, recurring_keys),
+                    "Why": categorization_explanation(tx),
+                }
+            )
+        if review_rows:
+            review_df = pd.DataFrame(review_rows).sort_values("Date", ascending=False)
+            edited_review_df = st.data_editor(
+                review_df,
+                width="stretch",
+                hide_index=True,
+                disabled=["row_id", "Date", "Merchant", "Amount", "Confidence", "Why"],
+                column_config={
+                    "row_id": None,
+                    "Date": st.column_config.DateColumn("Date"),
+                    "Amount": st.column_config.NumberColumn("Amount", min_value=0.0, step=0.01, format="$%.2f"),
+                    "Category": st.column_config.SelectboxColumn("Category", options=SIMPLE_BUDGET_CATEGORIES),
+                },
+                key="budget_transaction_review_editor",
+            )
+            if st.button("Save transaction categories", type="primary"):
+                updated_transactions = list(baseline_transactions)
+                for _, row in edited_review_df.iterrows():
+                    original_index = int(row["row_id"])
+                    updated = dict(updated_transactions[original_index])
+                    updated["category"] = SIMPLE_TO_RAW_CATEGORY.get(str(row["Category"]), "Other")
+                    updated["source"] = "user"
+                    updated_transactions[original_index] = updated
+                save_local_transaction_updates(updated_transactions)
+                st.success("Transaction categories updated. Baseline will refresh with your verified categories.")
+                st.rerun()
+        else:
+            st.caption("No spending transactions found for this month.")
+
+    st.markdown("**Goal requirement**")
+    if goal_cost > 0:
+        st.write(
+            f"To afford **{goal_name}** by **{goal_target.strftime('%b %-d, %Y')}**, "
+            f"you need about **{money(required_weekly_goal_savings)}/week** or "
+            f"**{money(required_monthly_goal_savings)}/month**."
         )
-        st.session_state.pop("goal_plan", None)
-        st.success("Budget created from transaction history. You can tweak the numbers and category roles below.")
+        goal_cols = st.columns(4)
+        goal_cols[0].metric("Goal cost", money(goal_cost))
+        goal_cols[1].metric("Already saved", money(goal_saved))
+        goal_cols[2].metric("Remaining", money(remaining_goal))
+        goal_cols[3].metric("Target date", goal_target.strftime("%b %-d, %Y"))
+    else:
+        st.info("Build a goal in Goal Command Center first. Budget Planner will still show a baseline, but goal savings will be $0.")
+
+    role_counts = {
+        "protected": sum(1 for role in budget_roles.values() if role == "protected"),
+        "essential": sum(1 for role in budget_roles.values() if role == "essential"),
+        "flexible": sum(1 for role in budget_roles.values() if role == "flexible"),
+    }
+    st.caption(
+        f"{role_counts['flexible']} flexible categories • "
+        f"{role_counts['essential']} essential • {role_counts['protected']} protected"
+    )
+    with st.expander("Category role controls"):
+        st.caption("Each category has exactly one role. Protected categories are locked from cuts unless you unlock them below.")
+        role_header = st.columns([1.5, 0.8, 2.1])
+        role_header[0].caption("Category")
+        role_header[1].caption("Current role")
+        role_header[2].caption("Set role")
+        for category in budget_category_order:
+            current_role = budget_roles.get(category, "flexible")
+            row_cols = st.columns([1.5, 0.8, 2.1])
+            row_cols[0].write(category)
+            row_cols[1].write(current_role.title())
+            role_buttons = row_cols[2].columns(3)
+            for role_idx, role in enumerate(CATEGORY_ROLE_OPTIONS):
+                if role_buttons[role_idx].button(
+                    role.title(),
+                    key=f"planner_role_{category}_{role}",
+                    type="primary" if current_role == role else "secondary",
+                    width="stretch",
+                ):
+                    for raw_category in raw_categories_by_budget_category.get(category, []):
+                        set_category_role(raw_category, role)
+                    st.rerun()
+
+    st.markdown("**Your future budget**")
+    st.caption("Each row starts from current baseline. Edit the future budget to show what you plan to spend next month.")
+    unlock_protected = st.checkbox(
+        "Unlock protected categories",
+        key="planner_unlock_protected",
+        help="Protected categories cannot be cut unless this is enabled.",
+    )
+    if st.button("Reset all to baseline"):
+        for category in budget_category_order:
+            safe_category = category.lower().replace(" ", "_").replace("/", "_").replace("&", "and")
+            st.session_state[f"future_budget_{month_start.isoformat()}_{safe_category}"] = float(
+                budget_baselines.get(category, 0.0)
+            )
         st.rerun()
 
-    top_cols = st.columns(3)
-    income_amount = top_cols[0].number_input(
-        "Monthly income",
-        min_value=0.0,
-        value=float(active_budget_summary["income"] or 4200.0),
-        step=100.0,
-        help="Your expected take-home income for a normal month.",
-    )
-    essential_spending = top_cols[1].number_input(
-        "Monthly essential spending",
-        min_value=0.0,
-        value=float(active_budget_summary["essential_spending"] or 2600.0),
-        step=100.0,
-        help="Spending that should usually be protected, such as rent, bills, groceries, health, and basic transportation.",
-    )
-    flexible_spending_limit = top_cols[2].number_input(
-        "Monthly flexible spending limit",
-        min_value=0.0,
-        value=float(active_budget_summary["flexible_spending_limit"] or 900.0),
-        step=50.0,
-        help="The monthly cap for spending that can move up or down, such as restaurants, shopping, entertainment, coffee, and subscriptions.",
-    )
-
-    monthly_surplus = float(income_amount) - float(essential_spending) - float(flexible_spending_limit)
-    summary_cols = st.columns(4)
-    summary_cols[0].metric("Income", money(income_amount))
-    summary_cols[1].metric("Essentials", money(essential_spending))
-    summary_cols[2].metric("Flexible limit", money(flexible_spending_limit))
-    summary_cols[3].metric("Planned surplus", money(monthly_surplus))
-
-    st.markdown("**Category rules**")
-    st.caption("Each category has exactly one role. Protected: Lantern will never suggest cutting this. Essential: necessary spending, usually not reduced. Flexible: Lantern may suggest reducing this to reach goals.")
-    role_header = st.columns([1.5, 0.8, 2.1])
-    role_header[0].caption("Category")
-    role_header[1].caption("Current role")
-    role_header[2].caption("Set role")
-    for category in BUDGET_CATEGORIES:
-        current_role = category_role(category)
-        row_cols = st.columns([1.5, 0.8, 2.1])
-        row_cols[0].write(category)
-        row_cols[1].write(current_role.title())
-        button_cols = row_cols[2].columns(3)
-        for role_idx, role in enumerate(CATEGORY_ROLE_OPTIONS):
-            if button_cols[role_idx].button(
-                role.title(),
-                key=f"role_{category}_{role}",
-                type="primary" if current_role == role else "secondary",
-                width="stretch",
-            ):
-                set_category_role(category, role)
-                st.session_state.pop("goal_plan", None)
-                st.rerun()
-
-    st.markdown("**Optional category budgets**")
-    st.caption("Use these if you want category-level totals in reports. The top-line essential and flexible numbers are enough to use the planner.")
+    # Future budget = the user's plan. It changes only through manual edits or explicit quick actions.
     allocations = {}
+    category_rows = []
     cols = st.columns(2)
-    for idx, category in enumerate(BUDGET_CATEGORIES):
-        default_amount = float((active_budget.get("allocations", {}) or {}).get(category, 0.0))
+    for idx, category in enumerate(budget_category_order):
+        baseline_amount = float(budget_baselines.get(category, 0.0))
+        role = budget_roles.get(category, "flexible")
+        safe_category = category.lower().replace(" ", "_").replace("/", "_").replace("&", "and")
+        input_key = f"future_budget_{month_start.isoformat()}_{safe_category}"
+        st.session_state.setdefault(input_key, baseline_amount)
+        is_protected_locked = role == "protected" and not unlock_protected
+        if is_protected_locked and float(st.session_state.get(input_key, 0.0)) < baseline_amount:
+            st.session_state[input_key] = baseline_amount
         with cols[idx % 2]:
-            allocations[category] = st.number_input(category, min_value=0.0, value=default_amount, step=25.0, key=f"focused_budget_{category}")
+            st.write(f"**{category}**")
+            st.caption(f"{role.title()} • Current baseline: {money(baseline_amount)}")
+            allocations[category] = st.number_input(
+                "My future budget",
+                min_value=0.0,
+                step=25.0,
+                key=input_key,
+                disabled=is_protected_locked,
+                help="This is what you plan to spend going forward.",
+            )
+            action_cols = st.columns(4)
+            cut_disabled = is_protected_locked or baseline_amount <= 0
+            if action_cols[0].button("Cut 10%", key=f"cut_10_{safe_category}", disabled=cut_disabled):
+                st.session_state[input_key] = max(0.0, baseline_amount * 0.90)
+                st.rerun()
+            if action_cols[1].button("Cut 25%", key=f"cut_25_{safe_category}", disabled=cut_disabled):
+                st.session_state[input_key] = max(0.0, baseline_amount * 0.75)
+                st.rerun()
+            if action_cols[2].button("Set to $0", key=f"zero_{safe_category}", disabled=is_protected_locked):
+                st.session_state[input_key] = 0.0
+                st.rerun()
+            if action_cols[3].button("Reset", key=f"reset_{safe_category}"):
+                st.session_state[input_key] = baseline_amount
+                st.rerun()
+        category_rows.append(
+            {
+                "Category": category,
+                "Role": role.title(),
+                "Current baseline": money(baseline_amount),
+                "My future budget": money(allocations[category]),
+                "Difference": signed_money(float(allocations[category]) - baseline_amount),
+            }
+        )
+    st.dataframe(pd.DataFrame(category_rows), width="stretch", hide_index=True)
+
+    # Goal impact = whether the user's future budget creates enough room for the target date.
+    future_budget_total = sum(float(value) for value in allocations.values())
+    monthly_available_for_goal = income_amount - future_budget_total
+    surplus_or_shortfall = monthly_available_for_goal - required_monthly_goal_savings
+    projected_affordability_date = None
+    if monthly_available_for_goal > 0 and remaining_goal > 0:
+        projected_weeks = remaining_goal / (monthly_available_for_goal / 4.33)
+        projected_affordability_date = today + datetime.timedelta(days=round(projected_weeks * 7))
+    elif remaining_goal <= 0:
+        projected_affordability_date = today
+
+    st.markdown("**Goal impact**")
+    impact_cols = st.columns(4)
+    impact_cols[0].metric("Income", money(income_amount))
+    impact_cols[1].metric("Planned future spending", money(future_budget_total))
+    impact_cols[2].metric("Available for goals", money(monthly_available_for_goal))
+    impact_cols[3].metric("Required monthly savings", money(required_monthly_goal_savings))
+    st.caption(
+        f"{money(income_amount)} monthly income - {money(future_budget_total)} future budget "
+        f"= {money(monthly_available_for_goal)} available for the goal."
+    )
+    st.metric("Projected affordability date", projected_date_label(projected_affordability_date))
+    if surplus_or_shortfall >= 0:
+        status_text = "On track" if surplus_or_shortfall < 1 else f"Ahead by {money(surplus_or_shortfall)}/month"
+        st.success(status_text)
+    else:
+        st.info(f"Current plan won't fully fund this goal yet. It needs about {money(abs(surplus_or_shortfall))}/month more.")
+
+    st.markdown("**Suggestions**")
+    flexible_cut_options = sorted(
+        [
+            {
+                "Category": category,
+                "Available cut": max(
+                    0.0,
+                    float(allocations.get(category, 0.0)) - (float(budget_baselines.get(category, 0.0)) * 0.50),
+                ),
+            }
+            for category in budget_category_order
+            if budget_roles.get(category, "flexible") == "flexible"
+            and float(allocations.get(category, 0.0)) > 0
+        ],
+        key=lambda row: row["Available cut"],
+        reverse=True,
+    )
+    if surplus_or_shortfall >= 0:
+        st.caption("Your future budget already creates enough room for the goal. Suggestions will appear if the plan falls short.")
+    elif flexible_cut_options and flexible_cut_options[0]["Available cut"] > 0:
+        suggestion = flexible_cut_options[0]
+        suggested_cut = min(abs(surplus_or_shortfall), suggestion["Available cut"])
+        if suggested_cut >= abs(surplus_or_shortfall):
+            st.write(f"Cutting **{suggestion['Category']}** by **{money(suggested_cut)}/month** would make this goal achievable.")
+        else:
+            st.write(f"Cutting **{suggestion['Category']}** by **{money(suggested_cut)}/month** would close part of the gap.")
+        if st.button("Apply this suggestion", type="primary"):
+            safe_category = suggestion["Category"].lower().replace(" ", "_").replace("/", "_").replace("&", "and")
+            input_key = f"future_budget_{month_start.isoformat()}_{safe_category}"
+            st.session_state[input_key] = max(0.0, float(st.session_state.get(input_key, 0.0)) - suggested_cut)
+            st.rerun()
+    else:
+        st.caption("No flexible cut has enough room yet. Try lowering a flexible category manually or changing the goal date.")
+
     save_budget = st.button("Save budget", type="primary")
     if save_budget:
         try:
-            current_roles = ensure_category_roles()
+            future_protected_essential = sum(
+                float(allocations.get(category, 0.0))
+                for category, role in budget_roles.items()
+                if role in {"protected", "essential"}
+            )
+            future_flexible_budget = sum(
+                float(allocations.get(category, 0.0))
+                for category, role in budget_roles.items()
+                if role == "flexible"
+            )
             api_save_budget(
                 "monthly",
                 income_amount,
                 allocations,
-                essential_spending=essential_spending,
-                flexible_spending_limit=flexible_spending_limit,
-                protected_categories=[category for category, role in current_roles.items() if role == "protected"],
-                reducible_categories=[category for category, role in current_roles.items() if role == "flexible"],
+                essential_spending=future_protected_essential,
+                flexible_spending_limit=future_flexible_budget,
+                protected_categories=[category for category, role in budget_roles.items() if role == "protected"],
+                reducible_categories=[category for category, role in budget_roles.items() if role == "flexible"],
             )
             st.success("Budget saved.")
-            st.session_state.pop("goal_plan", None)
         except Exception as e:
             st.error("Could not save budget.")
             st.code(str(e))
