@@ -950,7 +950,7 @@ class CoachResponse(BaseModel):
 
 class AffordCoachResponse(BaseModel):
     answer: str
-    source: Literal["gemini", "deterministic"]
+    source: Literal["local", "deterministic"]
 
 
 def _parse_amount(question: str) -> Optional[float]:

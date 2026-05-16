@@ -55,9 +55,10 @@ def calculateGoalTrajectory(
     remaining = max(0.0, starting_remaining - detected_savings)
     weeks_until_target = max(1.0, (target_date - today).days / 7.0)
     weekly_target = starting_remaining / weeks_until_target
-    gap_vs_target = behavior_improvement - weekly_target
-    projected_date = _projected_date_from_gap(target_date, weekly_target, gap_vs_target)
-    trajectory_status = _trajectory_status(gap_vs_target, weekly_target)
+    savings_gap_vs_target = detected_savings - weekly_target
+    behavior_gap_vs_target = behavior_improvement - weekly_target
+    projected_date = _projected_date_from_gap(target_date, weekly_target, savings_gap_vs_target)
+    trajectory_status = _trajectory_status(savings_gap_vs_target, weekly_target)
 
     return {
         "active_simulation": active_simulation,
@@ -69,9 +70,9 @@ def calculateGoalTrajectory(
         "savedTowardGoalThisWeek": detected_savings,
         "weeklyTarget": weekly_target,
         "weeklyGoalNeed": weekly_target,
-        "gapVsTarget": gap_vs_target,
-        "behaviorGap": gap_vs_target,
-        "savingsGap": gap_vs_target,
+        "gapVsTarget": savings_gap_vs_target,
+        "behaviorGap": behavior_gap_vs_target,
+        "savingsGap": savings_gap_vs_target,
         "remaining": remaining,
         "projectedDate": projected_date,
         "trajectoryStatus": trajectory_status,
