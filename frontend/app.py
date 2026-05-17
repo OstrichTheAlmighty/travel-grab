@@ -1,5 +1,6 @@
 import datetime
 import calendar
+import html
 import os
 import pandas as pd
 import streamlit as st
@@ -15,20 +16,44 @@ st.set_page_config(page_title="Lantern", layout="wide")
 st.markdown(
     """
     <style>
+    html {
+        scroll-behavior: smooth;
+    }
     .stApp {
         background: #0f1218;
         color: #f4f7fb;
+    }
+    .block-container {
+        padding-top: 3.5rem;
+        padding-bottom: 3rem;
+        max-width: 1180px;
+    }
+    h1 {
+        letter-spacing: 0;
+        line-height: 1.08;
+        margin-top: 0.35rem;
+        margin-bottom: 0.35rem;
+        padding-top: 0.25rem;
+    }
+    h2, h3 {
+        letter-spacing: 0;
     }
     section[data-testid="stSidebar"] {
         background: #151923;
     }
     div[data-testid="stMetric"] {
-        background: #171c27;
-        border: 1px solid #2b3342;
+        background: linear-gradient(180deg, #1a202c 0%, #151b25 100%);
+        border: 1px solid rgba(148, 163, 184, 0.18);
         border-radius: 8px;
-        padding: 14px 16px;
+        padding: 16px 18px;
         min-width: 0;
         overflow: visible;
+        box-shadow: 0 10px 26px rgba(0, 0, 0, 0.16);
+        transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+    div[data-testid="stMetric"]:hover {
+        transform: translateY(-1px);
+        border-color: rgba(125, 211, 252, 0.34);
     }
     div[data-testid="stMetric"] > div {
         min-width: 0;
@@ -51,6 +76,158 @@ st.markdown(
     div[data-testid="stMetricLabel"] {
         white-space: normal;
         overflow-wrap: anywhere;
+    }
+    div[data-testid="stMetricDelta"] {
+        transition: color 160ms ease;
+    }
+    button[kind="primary"], .stButton > button {
+        border-radius: 8px;
+        transition: transform 140ms ease, border-color 140ms ease, background 140ms ease, box-shadow 140ms ease;
+    }
+    .stButton > button:hover {
+        transform: translateY(-1px);
+        border-color: rgba(125, 211, 252, 0.46);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
+    }
+    .stButton > button:focus, input:focus, textarea:focus {
+        outline: 2px solid rgba(125, 211, 252, 0.45) !important;
+        outline-offset: 2px;
+    }
+    div[data-testid="stExpander"] {
+        border: 1px solid rgba(148, 163, 184, 0.14);
+        border-radius: 8px;
+        background: rgba(21, 27, 37, 0.58);
+        margin-top: 0.65rem;
+        margin-bottom: 0.65rem;
+    }
+    div[data-testid="stExpander"] details summary {
+        padding-top: 0.35rem;
+        padding-bottom: 0.35rem;
+    }
+    div[data-testid="stDataFrame"] {
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid rgba(148, 163, 184, 0.14);
+    }
+    div[role="progressbar"] > div {
+        background: linear-gradient(90deg, #22c55e, #38bdf8) !important;
+        transition: width 240ms ease;
+    }
+    div[data-testid="stProgress"] {
+        max-width: 460px;
+        margin: 0.85rem 0 0.35rem;
+    }
+    div[data-testid="stProgress"] div[role="progressbar"] {
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(148, 163, 184, 0.16);
+    }
+    .lantern-section {
+        margin-top: 1.35rem;
+        padding-top: 0.35rem;
+        animation: lanternFade 220ms ease both;
+    }
+    .lantern-section-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 0.1rem;
+    }
+    .lantern-muted {
+        color: #a8b3c7;
+        font-size: 0.92rem;
+        line-height: 1.45;
+    }
+    .lantern-highlight {
+        border: 1px solid rgba(74, 222, 128, 0.26);
+        background: linear-gradient(135deg, rgba(34, 197, 94, 0.14), rgba(14, 165, 233, 0.08));
+        border-radius: 8px;
+        padding: 14px 16px;
+        margin: 0.85rem 0 0.35rem;
+        animation: lanternPulse 420ms ease both;
+    }
+    .lantern-highlight strong {
+        color: #d9ffe5;
+    }
+    .lantern-goal-card {
+        border: 1px solid rgba(125, 211, 252, 0.20);
+        background: linear-gradient(135deg, rgba(14, 165, 233, 0.13), rgba(34, 197, 94, 0.10));
+        border-radius: 8px;
+        padding: 18px;
+        margin: 1rem 0;
+        box-shadow: 0 18px 38px rgba(0, 0, 0, 0.18);
+        animation: lanternFade 240ms ease both;
+    }
+    .lantern-goal-title {
+        font-size: 1.2rem;
+        font-weight: 750;
+        margin-bottom: 0.2rem;
+    }
+    .lantern-goal-subtitle {
+        color: #b9c6d8;
+        font-size: 0.95rem;
+    }
+    .budget-row-shell {
+        padding: 0.3rem 0;
+        border-top: 1px solid rgba(148, 163, 184, 0.08);
+    }
+    .role-copy {
+        display: inline-block;
+        color: #9fb0c6;
+        font-size: 0.78rem;
+        line-height: 1.25;
+        margin-top: 0.12rem;
+    }
+    .delta-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 76px;
+        padding: 0.28rem 0.55rem;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        margin-top: 0.38rem;
+        transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+    }
+    .delta-good {
+        color: #bbf7d0;
+        background: rgba(34, 197, 94, 0.14);
+        border: 1px solid rgba(74, 222, 128, 0.22);
+    }
+    .delta-neutral {
+        color: #cbd5e1;
+        background: rgba(148, 163, 184, 0.10);
+        border: 1px solid rgba(148, 163, 184, 0.16);
+    }
+    .delta-bad {
+        color: #fecaca;
+        background: rgba(248, 113, 113, 0.13);
+        border: 1px solid rgba(248, 113, 113, 0.22);
+    }
+    @keyframes lanternFade {
+        from { opacity: 0; transform: translateY(4px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes lanternPulse {
+        from { transform: scale(0.992); }
+        to { transform: scale(1); }
+    }
+    @media (max-width: 760px) {
+        .block-container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-top: 3rem;
+        }
+        div[data-testid="stMetric"] {
+            padding: 13px 14px;
+        }
+        .lantern-goal-title {
+            font-size: 1.05rem;
+        }
+        .delta-pill {
+            min-width: 0;
+            width: 100%;
+        }
     }
     </style>
     """,
@@ -2257,6 +2434,32 @@ def signed_money(value):
     return f"-{money(abs(value))}"
 
 
+def delta_class(value):
+    value = float(value)
+    if value < -0.01:
+        return "delta-good"
+    if value > 0.01:
+        return "delta-bad"
+    return "delta-neutral"
+
+
+def monthly_change_text(value):
+    value = float(value)
+    if value < -0.01:
+        return f"{money(abs(value))} saved"
+    if value > 0.01:
+        return f"{money(value)} more"
+    return "No change"
+
+
+def role_microcopy(role):
+    return {
+        "protected": "Difficult to reduce",
+        "essential": "Necessary spending",
+        "flexible": "Easiest to adjust",
+    }.get(str(role), "Editable")
+
+
 def detected_savings_text(value):
     value = float(value)
     if value >= 0:
@@ -3168,16 +3371,24 @@ elif page == "Budget Planner":
     default_manual_income = float(active_budget_summary["income"] or detected_income or 3200.0)
     st.session_state.setdefault("planner_manual_income", default_manual_income)
     st.session_state.setdefault("planner_use_detected_income", detected_income > 0)
-    income_cols = st.columns([0.8, 1.2])
-    use_detected_income = income_cols[0].toggle("Use detected income", key="planner_use_detected_income")
-    manual_income = income_cols[1].number_input(
-        "Manual income override",
-        min_value=0.0,
-        step=100.0,
-        key="planner_manual_income",
-        help="Use this when paycheck detection is incomplete or your next month will be different.",
+    use_detected_income = st.toggle(
+        "Use detected income",
+        key="planner_use_detected_income",
+        disabled=detected_income <= 0,
     )
-    income_amount = float(detected_income if use_detected_income and detected_income > 0 else manual_income)
+    if use_detected_income and detected_income > 0:
+        st.caption(f"Using detected income: {money(detected_income)}")
+        manual_income = float(st.session_state.get("planner_manual_income", default_manual_income))
+        income_amount = float(detected_income)
+    else:
+        manual_income = st.number_input(
+            "Manual income override",
+            min_value=0.0,
+            step=100.0,
+            key="planner_manual_income",
+            help="Use this when paycheck detection is incomplete or your next month will be different.",
+        )
+        income_amount = float(manual_income)
     ensure_category_roles()
 
     budget_category_order = SIMPLE_BUDGET_CATEGORIES
@@ -3232,16 +3443,22 @@ elif page == "Budget Planner":
     initial_future_budget_total = sum(initial_allocations.values())
     initial_available_for_goals = income_amount - initial_future_budget_total
 
-    st.markdown("**Summary**")
+    st.markdown('<div class="lantern-section"><div class="lantern-section-title">Summary</div></div>', unsafe_allow_html=True)
     summary_cols = st.columns(4)
     summary_cols[0].metric("Monthly income", money(income_amount))
     summary_cols[1].metric("Planned future spending", money(initial_future_budget_total))
     summary_cols[2].metric("Available for goals", money(initial_available_for_goals))
     summary_cols[3].metric("Goal target date", goal_target.strftime("%b %-d, %Y"))
     st.caption("Lantern helps you shape a plan: income minus planned future spending equals what is available for your goals.")
+    st.markdown(
+        f"""
+        <div class="lantern-highlight">
+            <strong>{money(initial_available_for_goals)}</strong> is available for goals under your current plan.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-    st.markdown("**Transaction trust & review**")
-    st.caption("Transaction history is a starting point. Confirm anything that looks off before using it as your baseline.")
     recurring_patterns = recurring_subscription_patterns(baseline_transactions)
     recurring_keys = {pattern["Key"] for pattern in recurring_patterns}
     low_confidence_count = sum(
@@ -3250,10 +3467,269 @@ elif page == "Budget Planner":
         if float(tx.get("amount", 0.0)) < 0
         and transaction_confidence(tx, recurring_keys) in {"Review recommended", "Some transactions may need confirmation"}
     )
+
+    st.markdown('<div class="lantern-section"><div class="lantern-section-title">Future budget editor</div></div>', unsafe_allow_html=True)
+    st.caption("This is the core workspace. Start from your baseline, then shape the plan you actually want to follow.")
+    st.caption("Protected = difficult to reduce • Essential = necessary spending • Flexible = easiest to adjust")
+    role_counts = {
+        "protected": sum(1 for role in budget_roles.values() if role == "protected"),
+        "essential": sum(1 for role in budget_roles.values() if role == "essential"),
+        "flexible": sum(1 for role in budget_roles.values() if role == "flexible"),
+    }
+    st.caption(
+        f"{role_counts['flexible']} flexible categories • "
+        f"{role_counts['essential']} essential • {role_counts['protected']} protected"
+    )
+    with st.expander("Category role controls"):
+        st.caption("Each category has exactly one role. Protected categories are locked from cuts unless you unlock them below.")
+        role_header = st.columns([1.5, 0.8, 2.1])
+        role_header[0].caption("Category")
+        role_header[1].caption("Current role")
+        role_header[2].caption("Set role")
+        for category in budget_category_order:
+            current_role = budget_roles.get(category, "flexible")
+            row_cols = st.columns([1.5, 0.8, 2.1])
+            row_cols[0].write(category)
+            row_cols[1].write(current_role.title())
+            role_buttons = row_cols[2].columns(3)
+            for role_idx, role in enumerate(CATEGORY_ROLE_OPTIONS):
+                if role_buttons[role_idx].button(
+                    role.title(),
+                    key=f"planner_role_{category}_{role}",
+                    type="primary" if current_role == role else "secondary",
+                    width="stretch",
+                ):
+                    for raw_category in raw_categories_by_budget_category.get(category, []):
+                        set_category_role(raw_category, role)
+                    st.rerun()
+    unlock_protected = st.checkbox(
+        "Unlock protected categories",
+        key="planner_unlock_protected",
+        help="Protected categories cannot be cut unless this is enabled.",
+    )
+    if st.button("Reset all to baseline"):
+        for category in budget_category_order:
+            safe_category = category.lower().replace(" ", "_").replace("/", "_").replace("&", "and")
+            st.session_state[f"future_budget_{month_start.isoformat()}_{safe_category}"] = float(
+                budget_baselines.get(category, 0.0)
+            )
+        st.rerun()
+    if st.button("Apply recommended cuts", type="primary"):
+        current_future_total = sum(
+            float(st.session_state.get(
+                f"future_budget_{month_start.isoformat()}_{category.lower().replace(' ', '_').replace('/', '_').replace('&', 'and')}",
+                budget_baselines.get(category, 0.0),
+            ))
+            for category in budget_category_order
+        )
+        current_available_for_goal = income_amount - current_future_total
+        amount_to_find = max(0.0, required_monthly_goal_savings - current_available_for_goal)
+        remaining_to_cut = amount_to_find
+        cut_total = 0.0
+        flexible_cut_candidates = sorted(
+            [
+                (
+                    category,
+                    float(st.session_state.get(
+                        f"future_budget_{month_start.isoformat()}_{category.lower().replace(' ', '_').replace('/', '_').replace('&', 'and')}",
+                        budget_baselines.get(category, 0.0),
+                    )),
+                    float(budget_baselines.get(category, 0.0)),
+                )
+                for category in budget_category_order
+                if budget_roles.get(category, "flexible") == "flexible"
+            ],
+            key=lambda item: item[1],
+            reverse=True,
+        )
+        cut_details = []
+        for category, current_amount, baseline_amount in flexible_cut_candidates:
+            if remaining_to_cut <= 0:
+                break
+            safe_category = category.lower().replace(" ", "_").replace("/", "_").replace("&", "and")
+            input_key = f"future_budget_{month_start.isoformat()}_{safe_category}"
+            floor_amount = baseline_amount * 0.50
+            available_cut = max(0.0, current_amount - floor_amount)
+            cut_amount = min(available_cut, remaining_to_cut)
+            if cut_amount <= 0:
+                continue
+            st.session_state[input_key] = max(floor_amount, current_amount - cut_amount)
+            remaining_to_cut -= cut_amount
+            cut_total += cut_amount
+            cut_details.append((category, cut_amount))
+        if cut_total > 0:
+            if len(cut_details) == 1:
+                category, amount = cut_details[0]
+                st.session_state.planner_cut_message = f"Reduced {category} by {money(amount)} to keep the goal on track."
+            else:
+                detail_text = " and ".join(f"{category} by {money(amount)}" for category, amount in cut_details[:3])
+                extra_count = max(0, len(cut_details) - 3)
+                if extra_count:
+                    detail_text += f" and {extra_count} more"
+                st.session_state.planner_cut_message = f"Reduced {detail_text} to keep the goal on track."
+        else:
+            st.session_state.planner_cut_message = "No additional flexible cuts are available under the 50% baseline floor."
+        st.rerun()
+    if st.session_state.get("planner_cut_message"):
+        st.caption(st.session_state.pop("planner_cut_message"))
+
+    # Future budget = the user's plan. It changes only through manual edits or explicit quick actions.
+    allocations = {}
+    category_rows = []
+    header_cols = st.columns([1.25, 0.9, 1.0, 0.8, 1.35])
+    header_cols[0].caption("Category")
+    header_cols[1].caption("Current baseline")
+    header_cols[2].caption("Planned future budget")
+    header_cols[3].caption("Monthly change")
+    header_cols[4].caption("Quick actions")
+    for category in budget_category_order:
+        baseline_amount = float(budget_baselines.get(category, 0.0))
+        role = budget_roles.get(category, "flexible")
+        safe_category = category.lower().replace(" ", "_").replace("/", "_").replace("&", "and")
+        input_key = f"future_budget_{month_start.isoformat()}_{safe_category}"
+        st.session_state.setdefault(input_key, baseline_amount)
+        is_protected_locked = role == "protected" and not unlock_protected
+        if is_protected_locked and float(st.session_state.get(input_key, 0.0)) < baseline_amount:
+            st.session_state[input_key] = baseline_amount
+        st.markdown('<div class="budget-row-shell">', unsafe_allow_html=True)
+        row_cols = st.columns([1.25, 0.9, 1.0, 0.8, 1.35])
+        row_cols[0].write(f"**{category}**")
+        row_cols[0].markdown(
+            f'<span class="role-copy">{role.title()} · {role_microcopy(role)}</span>',
+            unsafe_allow_html=True,
+        )
+        row_cols[1].write(money(baseline_amount))
+        with row_cols[2]:
+            allocations[category] = st.number_input(
+                "My future budget",
+                min_value=0.0,
+                step=25.0,
+                key=input_key,
+                disabled=is_protected_locked,
+                help="This is what you plan to spend going forward.",
+                label_visibility="collapsed",
+            )
+        difference = float(allocations[category]) - baseline_amount
+        row_cols[3].markdown(
+            f'<span class="delta-pill {delta_class(difference)}">{monthly_change_text(difference)}</span>',
+            unsafe_allow_html=True,
+        )
+        action_cols = row_cols[4].columns(3)
+        cut_disabled = is_protected_locked or baseline_amount <= 0
+        if action_cols[0].button("Cut 10%", key=f"cut_10_{safe_category}", disabled=cut_disabled):
+            st.session_state[input_key] = max(0.0, baseline_amount * 0.90)
+            st.rerun()
+        if action_cols[1].button("Cut 25%", key=f"cut_25_{safe_category}", disabled=cut_disabled):
+            st.session_state[input_key] = max(0.0, baseline_amount * 0.75)
+            st.rerun()
+        if action_cols[2].button("Reset", key=f"reset_{safe_category}"):
+            st.session_state[input_key] = baseline_amount
+            st.rerun()
+        st.markdown("</div>", unsafe_allow_html=True)
+        category_rows.append(
+            {
+                "Category": category,
+                "Role": role.title(),
+                "Current baseline": money(baseline_amount),
+                "My future budget": money(allocations[category]),
+                "Monthly change": monthly_change_text(float(allocations[category]) - baseline_amount),
+            }
+        )
+    with st.expander("Detailed budget table"):
+        st.dataframe(pd.DataFrame(category_rows), width="stretch", hide_index=True)
+
+    # Goal impact = whether the user's future budget creates enough room for the target date.
+    future_budget_total = sum(float(value) for value in allocations.values())
+    monthly_available_for_goal = income_amount - future_budget_total
+    surplus_or_shortfall = monthly_available_for_goal - required_monthly_goal_savings
+    projected_affordability_date = None
+    if monthly_available_for_goal > 0 and remaining_goal > 0:
+        projected_weeks = remaining_goal / (monthly_available_for_goal / 4.33)
+        projected_affordability_date = today + datetime.timedelta(days=round(projected_weeks * 7))
+    elif remaining_goal <= 0:
+        projected_affordability_date = today
+
+    st.markdown('<div class="lantern-section"><div class="lantern-section-title">Goal outcome</div></div>', unsafe_allow_html=True)
+    if goal_cost > 0:
+        st.caption(
+            f"To afford {goal_name} by {goal_target.strftime('%b %-d, %Y')}, "
+            f"you need about {money(required_monthly_goal_savings)}/month."
+        )
+    else:
+        st.info("Build a goal in Goal Command Center first. Budget Planner will show how much room your future budget creates.")
+    impact_cols = st.columns(4)
+    plan_status = "On track" if surplus_or_shortfall >= 0 else "Needs a little more room"
+    impact_cols[0].metric("Required monthly savings", money(required_monthly_goal_savings))
+    impact_cols[1].metric("Available for goals", money(monthly_available_for_goal))
+    impact_cols[2].metric("Projected affordability date", projected_date_label(projected_affordability_date))
+    impact_cols[3].metric("Plan status", plan_status)
+    affordability_progress = 1.0
+    if required_monthly_goal_savings > 0:
+        affordability_progress = max(0.0, min(1.0, monthly_available_for_goal / required_monthly_goal_savings))
+    st.progress(affordability_progress)
+    if surplus_or_shortfall >= 0:
+        if goal_name and goal_name != "your goal":
+            outcome_title = f"On track for {goal_name}"
+        else:
+            outcome_title = "On track for your goal"
+        projected_text = projected_date_label(projected_affordability_date)
+        outcome_detail = (
+            f"Projected affordability date: {projected_text}."
+            if surplus_or_shortfall < 1
+            else f"Ahead by {money(surplus_or_shortfall)}/month. Projected affordability date: {projected_text}."
+        )
+    else:
+        outcome_title = "A small adjustment gets this closer"
+        outcome_detail = f"Find {money(abs(surplus_or_shortfall))}/month more to fully fund this goal."
+    outcome_title = html.escape(outcome_title)
+    outcome_detail = html.escape(outcome_detail)
+    st.markdown(
+        f"""
+        <div class="lantern-goal-card">
+            <div class="lantern-goal-title">{outcome_title}</div>
+            <div class="lantern-goal-subtitle">{outcome_detail}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    st.caption(
+        f"{money(income_amount)} monthly income - {money(future_budget_total)} future budget "
+        f"= {money(monthly_available_for_goal)} available for the goal."
+    )
+
+    save_budget = st.button("Save budget", type="primary", width="stretch")
+    if save_budget:
+        try:
+            future_protected_essential = sum(
+                float(allocations.get(category, 0.0))
+                for category, role in budget_roles.items()
+                if role in {"protected", "essential"}
+            )
+            future_flexible_budget = sum(
+                float(allocations.get(category, 0.0))
+                for category, role in budget_roles.items()
+                if role == "flexible"
+            )
+            api_save_budget(
+                "monthly",
+                income_amount,
+                allocations,
+                essential_spending=future_protected_essential,
+                flexible_spending_limit=future_flexible_budget,
+                protected_categories=[category for category, role in budget_roles.items() if role == "protected"],
+                reducible_categories=[category for category, role in budget_roles.items() if role == "flexible"],
+            )
+            st.success("Budget saved.")
+        except Exception as e:
+            st.error("Could not save budget.")
+            st.code(str(e))
+
+    st.markdown('<div class="lantern-section"><div class="lantern-section-title">Transaction trust & review</div></div>', unsafe_allow_html=True)
+    st.caption("Transaction history is a starting point. Confirm anything that looks off when you want to refine the baseline.")
     trust_cols = st.columns(3)
     trust_cols[0].metric("Transactions to review", str(low_confidence_count))
     trust_cols[1].metric("Recurring monthly charges", str(len(recurring_patterns)))
-    trust_cols[2].metric("Baseline confidence", "Review recommended" if low_confidence_count else "Moderate confidence")
+    trust_cols[2].metric("Review needed", "Yes" if low_confidence_count else "No")
     if low_confidence_count:
         st.caption("Some transactions may need confirmation.")
     with st.expander("Income sources detected"):
@@ -3345,205 +3821,6 @@ elif page == "Budget Planner":
                 st.rerun()
         else:
             st.caption("No spending transactions found for this month.")
-
-    role_counts = {
-        "protected": sum(1 for role in budget_roles.values() if role == "protected"),
-        "essential": sum(1 for role in budget_roles.values() if role == "essential"),
-        "flexible": sum(1 for role in budget_roles.values() if role == "flexible"),
-    }
-    st.caption(
-        f"{role_counts['flexible']} flexible categories • "
-        f"{role_counts['essential']} essential • {role_counts['protected']} protected"
-    )
-    with st.expander("Category role controls"):
-        st.caption("Each category has exactly one role. Protected categories are locked from cuts unless you unlock them below.")
-        role_header = st.columns([1.5, 0.8, 2.1])
-        role_header[0].caption("Category")
-        role_header[1].caption("Current role")
-        role_header[2].caption("Set role")
-        for category in budget_category_order:
-            current_role = budget_roles.get(category, "flexible")
-            row_cols = st.columns([1.5, 0.8, 2.1])
-            row_cols[0].write(category)
-            row_cols[1].write(current_role.title())
-            role_buttons = row_cols[2].columns(3)
-            for role_idx, role in enumerate(CATEGORY_ROLE_OPTIONS):
-                if role_buttons[role_idx].button(
-                    role.title(),
-                    key=f"planner_role_{category}_{role}",
-                    type="primary" if current_role == role else "secondary",
-                    width="stretch",
-                ):
-                    for raw_category in raw_categories_by_budget_category.get(category, []):
-                        set_category_role(raw_category, role)
-                    st.rerun()
-
-    st.markdown("**Future budget editor**")
-    st.caption("This is the core workspace. Start from your baseline, then shape the plan you actually want to follow.")
-    unlock_protected = st.checkbox(
-        "Unlock protected categories",
-        key="planner_unlock_protected",
-        help="Protected categories cannot be cut unless this is enabled.",
-    )
-    if st.button("Reset all to baseline"):
-        for category in budget_category_order:
-            safe_category = category.lower().replace(" ", "_").replace("/", "_").replace("&", "and")
-            st.session_state[f"future_budget_{month_start.isoformat()}_{safe_category}"] = float(
-                budget_baselines.get(category, 0.0)
-            )
-        st.rerun()
-
-    # Future budget = the user's plan. It changes only through manual edits or explicit quick actions.
-    allocations = {}
-    category_rows = []
-    header_cols = st.columns([1.25, 0.9, 1.0, 0.8, 1.35])
-    header_cols[0].caption("Category")
-    header_cols[1].caption("Current baseline")
-    header_cols[2].caption("Planned future budget")
-    header_cols[3].caption("Difference")
-    header_cols[4].caption("Quick actions")
-    for category in budget_category_order:
-        baseline_amount = float(budget_baselines.get(category, 0.0))
-        role = budget_roles.get(category, "flexible")
-        safe_category = category.lower().replace(" ", "_").replace("/", "_").replace("&", "and")
-        input_key = f"future_budget_{month_start.isoformat()}_{safe_category}"
-        st.session_state.setdefault(input_key, baseline_amount)
-        is_protected_locked = role == "protected" and not unlock_protected
-        if is_protected_locked and float(st.session_state.get(input_key, 0.0)) < baseline_amount:
-            st.session_state[input_key] = baseline_amount
-        row_cols = st.columns([1.25, 0.9, 1.0, 0.8, 1.35])
-        row_cols[0].write(f"**{category}**")
-        row_cols[0].caption(role.title())
-        row_cols[1].write(money(baseline_amount))
-        with row_cols[2]:
-            allocations[category] = st.number_input(
-                "My future budget",
-                min_value=0.0,
-                step=25.0,
-                key=input_key,
-                disabled=is_protected_locked,
-                help="This is what you plan to spend going forward.",
-                label_visibility="collapsed",
-            )
-        row_cols[3].write(signed_money(float(allocations[category]) - baseline_amount))
-        action_cols = row_cols[4].columns(3)
-        cut_disabled = is_protected_locked or baseline_amount <= 0
-        if action_cols[0].button("Cut 10%", key=f"cut_10_{safe_category}", disabled=cut_disabled):
-            st.session_state[input_key] = max(0.0, baseline_amount * 0.90)
-            st.rerun()
-        if action_cols[1].button("Cut 25%", key=f"cut_25_{safe_category}", disabled=cut_disabled):
-            st.session_state[input_key] = max(0.0, baseline_amount * 0.75)
-            st.rerun()
-        if action_cols[2].button("Reset", key=f"reset_{safe_category}"):
-            st.session_state[input_key] = baseline_amount
-            st.rerun()
-        category_rows.append(
-            {
-                "Category": category,
-                "Role": role.title(),
-                "Current baseline": money(baseline_amount),
-                "My future budget": money(allocations[category]),
-                "Difference": signed_money(float(allocations[category]) - baseline_amount),
-            }
-        )
-    with st.expander("Detailed budget table"):
-        st.dataframe(pd.DataFrame(category_rows), width="stretch", hide_index=True)
-
-    # Goal impact = whether the user's future budget creates enough room for the target date.
-    future_budget_total = sum(float(value) for value in allocations.values())
-    monthly_available_for_goal = income_amount - future_budget_total
-    surplus_or_shortfall = monthly_available_for_goal - required_monthly_goal_savings
-    projected_affordability_date = None
-    if monthly_available_for_goal > 0 and remaining_goal > 0:
-        projected_weeks = remaining_goal / (monthly_available_for_goal / 4.33)
-        projected_affordability_date = today + datetime.timedelta(days=round(projected_weeks * 7))
-    elif remaining_goal <= 0:
-        projected_affordability_date = today
-
-    st.markdown("**Goal outcome**")
-    if goal_cost > 0:
-        st.caption(
-            f"To afford {goal_name} by {goal_target.strftime('%b %-d, %Y')}, "
-            f"you need about {money(required_monthly_goal_savings)}/month."
-        )
-    else:
-        st.info("Build a goal in Goal Command Center first. Budget Planner will show how much room your future budget creates.")
-    impact_cols = st.columns(4)
-    plan_status = "On track" if surplus_or_shortfall >= 0 else "Needs a little more room"
-    impact_cols[0].metric("Required monthly savings", money(required_monthly_goal_savings))
-    impact_cols[1].metric("Available for goals", money(monthly_available_for_goal))
-    impact_cols[2].metric("Projected affordability date", projected_date_label(projected_affordability_date))
-    impact_cols[3].metric("Plan status", plan_status)
-    st.caption(
-        f"{money(income_amount)} monthly income - {money(future_budget_total)} future budget "
-        f"= {money(monthly_available_for_goal)} available for the goal."
-    )
-    if surplus_or_shortfall >= 0:
-        status_text = "On track" if surplus_or_shortfall < 1 else f"Ahead by {money(surplus_or_shortfall)}/month"
-        st.success(status_text)
-    else:
-        st.info(f"Current plan won't fully fund this goal yet. It needs about {money(abs(surplus_or_shortfall))}/month more.")
-
-    st.markdown("**Suggestions**")
-    flexible_cut_options = sorted(
-        [
-            {
-                "Category": category,
-                "Available cut": max(
-                    0.0,
-                    float(allocations.get(category, 0.0)) - (float(budget_baselines.get(category, 0.0)) * 0.50),
-                ),
-            }
-            for category in budget_category_order
-            if budget_roles.get(category, "flexible") == "flexible"
-            and float(allocations.get(category, 0.0)) > 0
-        ],
-        key=lambda row: row["Available cut"],
-        reverse=True,
-    )
-    if surplus_or_shortfall >= 0:
-        st.caption("Your future budget already creates enough room for the goal. Suggestions will appear if the plan falls short.")
-    elif flexible_cut_options and flexible_cut_options[0]["Available cut"] > 0:
-        suggestion = flexible_cut_options[0]
-        suggested_cut = min(abs(surplus_or_shortfall), suggestion["Available cut"])
-        if suggested_cut >= abs(surplus_or_shortfall):
-            st.write(f"Cutting **{suggestion['Category']}** by **{money(suggested_cut)}/month** would make this goal achievable.")
-        else:
-            st.write(f"Cutting **{suggestion['Category']}** by **{money(suggested_cut)}/month** would close part of the gap.")
-        if st.button("Apply this suggestion", type="primary"):
-            safe_category = suggestion["Category"].lower().replace(" ", "_").replace("/", "_").replace("&", "and")
-            input_key = f"future_budget_{month_start.isoformat()}_{safe_category}"
-            st.session_state[input_key] = max(0.0, float(st.session_state.get(input_key, 0.0)) - suggested_cut)
-            st.rerun()
-    else:
-        st.caption("No flexible cut has enough room yet. Try lowering a flexible category manually or changing the goal date.")
-
-    save_budget = st.button("Save budget", type="primary")
-    if save_budget:
-        try:
-            future_protected_essential = sum(
-                float(allocations.get(category, 0.0))
-                for category, role in budget_roles.items()
-                if role in {"protected", "essential"}
-            )
-            future_flexible_budget = sum(
-                float(allocations.get(category, 0.0))
-                for category, role in budget_roles.items()
-                if role == "flexible"
-            )
-            api_save_budget(
-                "monthly",
-                income_amount,
-                allocations,
-                essential_spending=future_protected_essential,
-                flexible_spending_limit=future_flexible_budget,
-                protected_categories=[category for category, role in budget_roles.items() if role == "protected"],
-                reducible_categories=[category for category, role in budget_roles.items() if role == "flexible"],
-            )
-            st.success("Budget saved.")
-        except Exception as e:
-            st.error("Could not save budget.")
-            st.code(str(e))
 
 elif page == "Saved Plans":
     st.subheader("Saved goals")
