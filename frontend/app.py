@@ -2342,6 +2342,38 @@ def show_missing_ai_key_sources():
     )
 
 
+def response_output_text(result):
+    output_text = result.get("output_text", "")
+    if output_text:
+        return output_text
+    chunks = []
+    for item in result.get("output", []):
+        for content in item.get("content", []):
+            if content.get("type") in {"output_text", "text"}:
+                chunks.append(content.get("text", ""))
+    return "".join(chunks).strip()
+
+
+class AIJsonParseError(ValueError):
+    def __init__(self, message, raw_response=""):
+        super().__init__(message)
+        self.raw_response = raw_response
+
+
+def parse_ai_json_response(output_text):
+    cleaned = str(output_text or "").strip()
+    if not cleaned:
+        raise ValueError("AI returned an empty response. Try again.")
+    try:
+        return json.loads(cleaned)
+    except json.JSONDecodeError:
+        start = cleaned.find("{")
+        end = cleaned.rfind("}")
+        if start >= 0 and end > start:
+            return json.loads(cleaned[start : end + 1])
+        raise
+
+
 def generate_ai_coach_advice(api_key, coach_data):
     """Ask AI to explain existing Lantern calculations without recalculating them."""
     prompt = (
@@ -2456,57 +2488,74 @@ def generate_goal_ai_coaching_plan(api_key, coach_data):
 def generate_goal_discovery_ideas(api_key, discovery_data):
     """Generate inspirational goal ideas. Affordability math still happens in Lantern."""
     prompt = (
-        "You are Lantern's Goal Discovery coach. Generate inspiring but realistic goals based on the user's interests. "
+        "You are Lantern's onboarding recommendation coach. Generate inspiring but realistic goals based on the user's interests, location, budget range, target month, and preference. "
         "All costs are estimates unless they come from user budget data. "
-        "Do not decide affordability and do not override budget calculations. "
-        "Return valid JSON only with key ideas. ideas must contain exactly 3 objects. "
-        "Each object must have: goal_name, why_it_fits, estimated_total_cost, suggested_target_date, "
-        "monthly_savings_required, example_plan. "
-        "Use specific, concrete experiences instead of generic goals. "
-        "Keep each explanation short and practical."
+        "Suggestions can be trips, events, products, experiences, courses, gear, or packages. "
+        "Do not decide affordability, invent income, or override budget calculations. "
+        "Return strict JSON only with key ideas. ideas must contain exactly 3 objects. "
+        "Each object must have: title, category, why_it_matches, estimated_cost, target_date_or_month, monthly_savings, ways_to_afford, example_plan. "
+        "ways_to_afford must contain 2 or 3 concrete actions. "
+        "Use specific, concrete suggestions instead of generic goals. "
+        "Keep each explanation short, aspirational, and practical."
     )
+    request_body = {
+        "model": "gpt-4o-mini",
+        "input": [
+            {"role": "system", "content": prompt},
+            {"role": "user", "content": json.dumps(discovery_data, sort_keys=True)},
+        ],
+        "max_output_tokens": 1000,
+        "response_format": {"type": "json_object"},
+    }
     response = requests.post(
         "https://api.openai.com/v1/responses",
         headers={
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
         },
-        json={
-            "model": "gpt-4o-mini",
-            "input": [
-                {"role": "system", "content": prompt},
-                {"role": "user", "content": json.dumps(discovery_data, sort_keys=True)},
-            ],
-            "max_output_tokens": 900,
-        },
+        json=request_body,
         timeout=30,
     )
+    if response.status_code == 400 and "response_format" in response.text:
+        request_body.pop("response_format", None)
+        response = requests.post(
+            "https://api.openai.com/v1/responses",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+            },
+            json=request_body,
+            timeout=30,
+        )
     response.raise_for_status()
     result = response.json()
-    output_text = result.get("output_text", "")
-    if not output_text:
-        for item in result.get("output", []):
-            for content in item.get("content", []):
-                if content.get("type") in {"output_text", "text"}:
-                    output_text += content.get("text", "")
-    parsed = json.loads(output_text)
+    output_text = response_output_text(result)
+    try:
+        parsed = parse_ai_json_response(output_text)
+    except ValueError as e:
+        raise AIJsonParseError(str(e), output_text) from e
     ideas = []
     for item in parsed.get("ideas", [])[:3]:
         try:
-            cost = float(item.get("estimated_total_cost", 0.0) or 0.0)
+            cost = float(item.get("estimated_cost", item.get("estimated_total_cost", 0.0)) or 0.0)
         except Exception:
             cost = 0.0
         try:
-            monthly = float(item.get("monthly_savings_required", 0.0) or 0.0)
+            monthly = float(item.get("monthly_savings", item.get("monthly_savings_required", 0.0)) or 0.0)
         except Exception:
             monthly = 0.0
+        ways = item.get("ways_to_afford", [])
+        if not isinstance(ways, list):
+            ways = [str(ways)]
         ideas.append(
             {
-                "goal_name": str(item.get("goal_name", "Goal idea")).strip(),
-                "why_it_fits": str(item.get("why_it_fits", "Matches your interests.")).strip(),
-                "estimated_total_cost": max(1.0, cost),
-                "suggested_target_date": str(item.get("suggested_target_date", "")).strip(),
-                "monthly_savings_required": max(0.0, monthly),
+                "title": str(item.get("title", item.get("goal_name", "Goal idea"))).strip(),
+                "category": str(item.get("category", "Experience")).strip(),
+                "why_it_matches": str(item.get("why_it_matches", item.get("why_it_fits", "Matches your interests."))).strip(),
+                "estimated_cost": max(1.0, cost),
+                "target_date_or_month": str(item.get("target_date_or_month", item.get("suggested_target_date", ""))).strip(),
+                "monthly_savings": max(0.0, monthly),
+                "ways_to_afford": [str(way).strip() for way in ways if str(way).strip()][:3],
                 "example_plan": str(item.get("example_plan", "A simple plan with a few memorable activities.")).strip(),
             }
         )
@@ -2514,73 +2563,145 @@ def generate_goal_discovery_ideas(api_key, discovery_data):
 
 
 def parse_discovery_target_date(value):
+    text = str(value or "").strip()
     try:
-        return datetime.date.fromisoformat(str(value)[:10])
+        return datetime.date.fromisoformat(text[:10])
     except Exception:
-        return today + datetime.timedelta(days=120)
+        pass
+    for fmt in ("%B", "%b"):
+        try:
+            month_num = datetime.datetime.strptime(text.split()[0], fmt).month
+            year = today.year if month_num >= today.month else today.year + 1
+            return datetime.date(year, month_num, 1)
+        except Exception:
+            continue
+    return today + datetime.timedelta(days=120)
+
+
+def fallback_goal_discovery_ideas(discovery_data):
+    interests = str(discovery_data.get("interests") or "new experiences").strip()
+    location = str(discovery_data.get("location") or "your area").strip()
+    target = str(discovery_data.get("target_month") or "the next few months").strip()
+    preference = str(discovery_data.get("preference") or "surprise me").strip()
+    return [
+        {
+            "title": f"{interests.title()} local experience bundle",
+            "category": "Experience",
+            "why_it_matches": f"Built around {interests} without requiring a major trip.",
+            "estimated_cost": 450.0,
+            "target_date_or_month": target,
+            "monthly_savings": 150.0,
+            "ways_to_afford": [
+                "Trim one flexible dining or entertainment purchase each week.",
+                "Move unused subscription money into the goal.",
+                "Book the core experience first and add extras only if the plan stays on track.",
+            ],
+            "example_plan": f"Pick one anchor event in {location}, add a class or workshop, and include a simple meal or gear budget.",
+        },
+        {
+            "title": f"{interests.title()} gear or course upgrade",
+            "category": "Product / learning",
+            "why_it_matches": f"Turns your interest in {interests} into something useful you can keep building on.",
+            "estimated_cost": 800.0,
+            "target_date_or_month": target,
+            "monthly_savings": 200.0,
+            "ways_to_afford": [
+                "Set a fixed monthly transfer for the gear or course.",
+                "Reduce shopping or entertainment until the target is funded.",
+                "Choose a starter version now and upgrade later if needed.",
+            ],
+            "example_plan": "Buy the core item or course, reserve a small setup budget, and schedule time to use it.",
+        },
+        {
+            "title": f"{interests.title()} weekend plan",
+            "category": "Travel" if preference == "travel" else "Experience",
+            "why_it_matches": f"A focused plan for {interests} with a clear cost ceiling.",
+            "estimated_cost": 1200.0,
+            "target_date_or_month": target,
+            "monthly_savings": 300.0,
+            "ways_to_afford": [
+                "Cap flexible spending before adding trip extras.",
+                "Use lower-cost lodging or off-peak timing.",
+                "Cut the largest flexible category first if Lantern shows a shortfall.",
+            ],
+            "example_plan": "Plan two main activities, one flexible backup, transportation, food, and a small cushion.",
+        },
+    ]
 
 
 def render_goal_discovery():
     st.markdown("**Goal Discovery**")
-    st.caption("Start with what you want to do. Lantern turns an idea into a target, then the planner checks affordability with your budget math.")
+    st.caption("Tell Lantern what you are into. It will suggest goals, then your budget math decides what is realistic.")
     openai_api_key = get_openai_api_key()
     show_ai_key_detection(openai_api_key)
-    interest_cols = st.columns([1.5, 1.0, 1.0])
+    interest_cols = st.columns([1.4, 1.0])
     interests = interest_cols[0].text_input(
-        "What are you interested in?",
+        "Interests",
         value=st.session_state.get("discovery_interests", ""),
-        placeholder="Asian culture, concerts, wellness, gaming...",
+        placeholder="Asian culture, concerts, gaming, new tech, fitness...",
         key="discovery_interests",
     )
-    budget_range = interest_cols[1].text_input(
+    location = interest_cols[1].text_input(
+        "Location",
+        value=st.session_state.get("discovery_location", ""),
+        placeholder="Los Angeles, online, anywhere",
+        key="discovery_location",
+    )
+    followup_cols = st.columns([1.0, 1.0, 1.0])
+    budget_range = followup_cols[0].text_input(
         "Preferred budget range",
         value=st.session_state.get("discovery_budget_range", ""),
         placeholder="$500-$2,000",
         key="discovery_budget_range",
     )
-    target_month = interest_cols[2].text_input(
+    target_month = followup_cols[1].text_input(
         "Target month",
         value=st.session_state.get("discovery_target_month", ""),
         placeholder="September",
         key="discovery_target_month",
     )
-    followup_cols = st.columns(2)
-    location = followup_cols[0].text_input(
-        "Location",
-        value=st.session_state.get("discovery_location", ""),
-        placeholder="Los Angeles, remote, anywhere",
-        key="discovery_location",
+    preference = followup_cols[2].selectbox(
+        "Preference",
+        ["surprise me", "local", "online", "travel", "product"],
+        key="discovery_preference",
     )
-    travel_distance = followup_cols[1].text_input(
-        "Travel distance",
-        value=st.session_state.get("discovery_travel_distance", ""),
-        placeholder="local, weekend flight, international",
-        key="discovery_travel_distance",
-    )
-    if not openai_api_key:
-        show_missing_ai_key_sources()
-        st.button("Generate goal ideas", disabled=True)
-        return
     discovery_payload = {
         "interests": interests,
+        "location": location,
         "preferred_budget_range": budget_range,
         "target_month": target_month,
-        "location": location,
-        "travel_distance": travel_distance,
+        "preference": preference,
         "today": today.isoformat(),
-        "note": "Generate estimates only. Lantern will calculate affordability after the user selects an idea.",
+        "note": "Generate estimated goals only. Do not infer income or affordability.",
     }
     discovery_key = "discovery:" + ai_coach_cache_key(discovery_payload)
     discovery_cache = st.session_state.setdefault("goal_discovery_cache", {})
-    if st.button("Generate goal ideas", type="primary"):
-        if discovery_key not in discovery_cache:
-            try:
+    if not openai_api_key:
+        show_missing_ai_key_sources()
+    if st.button("Generate ideas", type="primary", disabled=not bool(openai_api_key)):
+        try:
+            if discovery_key not in discovery_cache:
                 with st.spinner("Finding goal ideas..."):
                     discovery_cache[discovery_key] = generate_goal_discovery_ideas(openai_api_key, discovery_payload)
-            except Exception as e:
-                st.error("Goal Discovery could not generate ideas.")
-                st.code(str(e))
-                return
+        except AIJsonParseError as e:
+            message = str(e)
+            if "empty response" in message:
+                st.warning("AI returned an empty response. Try again.")
+            else:
+                st.error("Goal Discovery could not parse the AI response.")
+                if e.raw_response:
+                    with st.expander("Raw model response"):
+                        st.code(e.raw_response)
+            discovery_cache[discovery_key] = fallback_goal_discovery_ideas(discovery_payload)
+            st.info("Showing sample suggestions instead.")
+        except Exception as e:
+            st.error("Goal Discovery could not generate ideas.")
+            st.code(str(e))
+            discovery_cache[discovery_key] = fallback_goal_discovery_ideas(discovery_payload)
+            st.info("Showing sample suggestions instead.")
+        st.session_state.active_goal_discovery_key = discovery_key
+    if not openai_api_key and st.button("Show sample ideas"):
+        discovery_cache[discovery_key] = fallback_goal_discovery_ideas(discovery_payload)
         st.session_state.active_goal_discovery_key = discovery_key
     active_key = st.session_state.get("active_goal_discovery_key")
     if active_key == discovery_key and discovery_key in discovery_cache:
@@ -2590,22 +2711,27 @@ def render_goal_discovery():
             return
         for idx, idea in enumerate(ideas):
             with st.container(border=True):
-                st.markdown(f"**{idea['goal_name']}**")
-                st.caption(idea["why_it_fits"])
+                st.markdown(f"**{idea['title']}**")
+                st.caption(f"{idea['category']} · {idea['why_it_matches']}")
                 idea_cols = st.columns(3)
-                idea_cols[0].metric("Estimated cost", money(idea["estimated_total_cost"]))
-                idea_cols[1].metric("Suggested date", idea["suggested_target_date"] or "Flexible")
-                idea_cols[2].metric("Monthly estimate", money(idea["monthly_savings_required"]))
+                idea_cols[0].metric("Estimated cost", money(idea["estimated_cost"]))
+                idea_cols[1].metric("Target", idea["target_date_or_month"] or "Flexible")
+                idea_cols[2].metric("Save monthly", money(idea["monthly_savings"]))
                 st.write(idea["example_plan"])
+                ways = idea.get("ways_to_afford", [])
+                if ways:
+                    st.markdown("**Ways to afford it**")
+                    for way in ways[:3]:
+                        st.caption(f"- {way}")
                 if st.button("Use this goal", key=f"use_discovery_goal_{discovery_key}_{idx}"):
-                    selected_date = parse_discovery_target_date(idea["suggested_target_date"])
-                    st.session_state.goal_input_name = idea["goal_name"]
-                    st.session_state.goal_input_cost = float(idea["estimated_total_cost"])
+                    selected_date = parse_discovery_target_date(idea["target_date_or_month"])
+                    st.session_state.goal_input_name = idea["title"]
+                    st.session_state.goal_input_cost = float(idea["estimated_cost"])
                     st.session_state.goal_input_date = selected_date
                     try:
                         st.session_state.goal_plan = build_goal_plan(
-                            idea["goal_name"],
-                            float(idea["estimated_total_cost"]),
+                            idea["title"],
+                            float(idea["estimated_cost"]),
                             selected_date,
                             False,
                         )
