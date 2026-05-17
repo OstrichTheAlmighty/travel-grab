@@ -2490,13 +2490,18 @@ def generate_goal_discovery_ideas(api_key, discovery_data):
     prompt = (
         "You are Lantern's onboarding recommendation coach. Generate inspiring but realistic goals based on the user's interests, location, budget range, target month, and preference. "
         "All costs are estimates unless they come from user budget data. "
+        "Generate 4 to 6 ideas across different types: travel, local experiences, classes/events, products/tech, and hobbies. Do not make every idea travel. "
         "Suggestions can be trips, events, products, experiences, courses, gear, or packages. "
         "Do not decide affordability, invent income, or override budget calculations. "
+        "Keep ideas within or near the user's preferred budget range. "
+        "If an idea is international travel, do not use an unrealistically low full-trip cost unless it is clearly labeled as partial funding or airfare-only. "
+        "If no live web search is available, say in affordability_note that these are planning estimates, not live prices. "
         "Return valid JSON only. Do not include markdown, prose, code fences, or comments. "
-        "The JSON object must have key ideas. ideas must contain exactly 3 objects. "
-        "Each object must have: title, category, why_it_matches, estimated_cost, target_date_or_month, monthly_savings, ways_to_afford, example_plan. "
-        "ways_to_afford must contain 2 or 3 concrete actions. "
-        "Use specific, concrete suggestions instead of generic goals. "
+        "The JSON object must have key ideas. ideas must contain between 4 and 6 objects. "
+        "Each object must have: title, goal_type, estimated_cost, target_month, monthly_savings_required, why_it_matches_user_interest, package_deal_angle, what_to_check_next, affordability_note, ways_to_afford_it. "
+        "package_deal_angle should be concrete, such as flight + hostel, local class series, used/refurbished tech, or event tickets + food budget. "
+        "ways_to_afford_it must contain 2 or 3 concrete actions. "
+        "Use specific, deal-grounded suggestions instead of generic goals. "
         "Keep each explanation short, aspirational, and practical."
     )
     request_body = {
@@ -2505,7 +2510,7 @@ def generate_goal_discovery_ideas(api_key, discovery_data):
             {"role": "system", "content": prompt},
             {"role": "user", "content": json.dumps(discovery_data, sort_keys=True)},
         ],
-        "max_output_tokens": 1000,
+        "max_output_tokens": 1400,
         "response_format": {"type": "json_object"},
     }
     response = requests.post(
@@ -2536,34 +2541,52 @@ def generate_goal_discovery_ideas(api_key, discovery_data):
     except ValueError as e:
         raise AIJsonParseError(str(e), output_text) from e
     ideas = []
-    for item in parsed.get("ideas", [])[:3]:
+    for item in parsed.get("ideas", [])[:6]:
         try:
             cost = float(item.get("estimated_cost", item.get("estimated_total_cost", 0.0)) or 0.0)
         except Exception:
             cost = 0.0
         try:
-            monthly = float(item.get("monthly_savings", item.get("monthly_savings_required", 0.0)) or 0.0)
+            monthly = float(item.get("monthly_savings_required", item.get("monthly_savings", 0.0)) or 0.0)
         except Exception:
             monthly = 0.0
-        ways = item.get("ways_to_afford", [])
+        ways = item.get("ways_to_afford_it", item.get("ways_to_afford", []))
         if not isinstance(ways, list):
             ways = [str(ways)]
-        reasoning = str(item.get("reasoning", item.get("why_it_matches", item.get("why_it_fits", "Matches your interests.")))).strip()
+        why = str(
+            item.get(
+                "why_it_matches_user_interest",
+                item.get("why_it_matches", item.get("why_it_fits", "Matches your interests.")),
+            )
+        ).strip()
+        target_label = str(item.get("target_month", item.get("target_date_or_month", item.get("suggested_target_date", "")))).strip()
+        package_angle = str(item.get("package_deal_angle", item.get("example_plan", "Planning estimate package."))).strip()
+        check_next = str(item.get("what_to_check_next", "Check current prices before committing.")).strip()
+        affordability_note = str(
+            item.get("affordability_note", "Planning estimate only, not a live price.")
+        ).strip()
         ideas.append(
             {
                 "title": str(item.get("title", item.get("goal_name", "Goal idea"))).strip(),
-                "category": str(item.get("category", "Experience")).strip(),
-                "why_it_matches": str(item.get("why_it_matches", item.get("why_it_fits", "Matches your interests."))).strip(),
+                "goal_type": str(item.get("goal_type", item.get("category", "Experience"))).strip(),
+                "category": str(item.get("goal_type", item.get("category", "Experience"))).strip(),
+                "why_it_matches_user_interest": why,
+                "why_it_matches": why,
                 "estimated_cost": max(1.0, cost),
-                "target_date_or_month": str(item.get("target_date_or_month", item.get("suggested_target_date", ""))).strip(),
+                "target_month": target_label,
+                "target_date_or_month": target_label,
                 "monthly_savings": max(0.0, monthly),
                 "monthly_savings_needed": max(0.0, monthly),
-                "reasoning": reasoning,
+                "monthly_savings_required": max(0.0, monthly),
+                "package_deal_angle": package_angle,
+                "what_to_check_next": check_next,
+                "affordability_note": affordability_note,
+                "reasoning": affordability_note,
+                "ways_to_afford_it": [str(way).strip() for way in ways if str(way).strip()][:3],
                 "ways_to_afford": [str(way).strip() for way in ways if str(way).strip()][:3],
-                "example_plan": str(item.get("example_plan", "A simple plan with a few memorable activities.")).strip(),
             }
         )
-    return ideas[:3]
+    return ideas[:6]
 
 
 def parse_discovery_target_date(value):
@@ -2587,14 +2610,26 @@ def fallback_goal_discovery_ideas(discovery_data):
     return [
         {
             "title": "Tokyo food + culture trip",
+            "goal_type": "Travel",
             "category": "Travel",
+            "why_it_matches_user_interest": "A food-market, neighborhood, and culture-focused trip for someone drawn to Japanese food and design.",
             "why_it_matches": "A food-market, neighborhood, and culture-focused trip for someone drawn to Japanese food and design.",
             "estimated_cost": 2800.0,
+            "target_month": target,
             "target_date_or_month": target,
             "monthly_savings": 467.0,
             "monthly_savings_needed": 467.0,
+            "monthly_savings_required": 467.0,
+            "package_deal_angle": "Flight + hostel/private room + food market budget.",
+            "what_to_check_next": "Check current airfare, capsule hotels or hostels, and whether the target month is peak season.",
+            "affordability_note": "Planning estimate only, not a live price; lower costs may mean partial funding or airfare-first.",
             "reasoning": "Flights, lodging, local transit, meals, and a few ticketed cultural experiences make this a meaningful but bounded goal.",
             "ways_to_afford": [
+                "Start with flight alerts and book lodging outside peak dates.",
+                "Trim Food & dining and Shopping first if the planner shows a shortfall.",
+                "Set a monthly travel transfer before adding optional tours.",
+            ],
+            "ways_to_afford_it": [
                 "Start with flight alerts and book lodging outside peak dates.",
                 "Trim Food & dining and Shopping first if the planner shows a shortfall.",
                 "Set a monthly travel transfer before adding optional tours.",
@@ -2603,14 +2638,26 @@ def fallback_goal_discovery_ideas(discovery_data):
         },
         {
             "title": "Seoul gaming + tech trip",
+            "goal_type": "Travel",
             "category": "Travel",
+            "why_it_matches_user_interest": "Blends PC cafes, esports culture, street food, shopping, and consumer tech into one focused trip.",
             "why_it_matches": "Blends PC cafes, esports culture, street food, shopping, and consumer tech into one focused trip.",
             "estimated_cost": 2400.0,
+            "target_month": target,
             "target_date_or_month": target,
             "monthly_savings": 400.0,
             "monthly_savings_needed": 400.0,
+            "monthly_savings_required": 400.0,
+            "package_deal_angle": "Long-weekend flight + guesthouse + PC cafe and tech-shopping budget.",
+            "what_to_check_next": "Check flight sales, esports event calendars, and neighborhood lodging prices.",
+            "affordability_note": "Planning estimate only, not a live price; keep it short if the budget is tight.",
             "reasoning": "A short Seoul trip can stay lower-cost than a longer international itinerary while still feeling distinctive.",
             "ways_to_afford": [
+                "Cap Shopping until the flight and lodging are funded.",
+                "Use flexible entertainment cuts for tickets and experiences.",
+                "Keep the itinerary to a long weekend if monthly savings are tight.",
+            ],
+            "ways_to_afford_it": [
                 "Cap Shopping until the flight and lodging are funded.",
                 "Use flexible entertainment cuts for tickets and experiences.",
                 "Keep the itinerary to a long weekend if monthly savings are tight.",
@@ -2619,14 +2666,26 @@ def fallback_goal_discovery_ideas(discovery_data):
         },
         {
             "title": "New VR gaming setup",
+            "goal_type": "Product / tech",
             "category": "Product",
+            "why_it_matches_user_interest": "A concrete gaming goal that turns savings into something you can use regularly at home.",
             "why_it_matches": "A concrete gaming goal that turns savings into something you can use regularly at home.",
             "estimated_cost": 900.0,
+            "target_month": target,
             "target_date_or_month": target,
             "monthly_savings": 150.0,
             "monthly_savings_needed": 150.0,
+            "monthly_savings_required": 150.0,
+            "package_deal_angle": "Used/refurbished headset + comfort strap + starter game bundle.",
+            "what_to_check_next": "Compare refurbished listings, warranty coverage, and game bundle prices.",
+            "affordability_note": "Planning estimate only; refurbished or previous-generation gear can materially change the cost.",
             "reasoning": "A headset, key accessories, and a starter game budget create a realistic product goal.",
             "ways_to_afford": [
+                "Reduce Entertainment until the headset is funded.",
+                "Buy the headset first and delay accessories if needed.",
+                "Use wish-list sales instead of paying full price for every game.",
+            ],
+            "ways_to_afford_it": [
                 "Reduce Entertainment until the headset is funded.",
                 "Buy the headset first and delay accessories if needed.",
                 "Use wish-list sales instead of paying full price for every game.",
@@ -2635,14 +2694,26 @@ def fallback_goal_discovery_ideas(discovery_data):
         },
         {
             "title": "Concert weekend package",
+            "goal_type": "Class / event",
             "category": "Event",
+            "why_it_matches_user_interest": "A music-focused goal that combines tickets, food, transport, and one night away.",
             "why_it_matches": "A music-focused goal that combines tickets, food, transport, and one night away.",
             "estimated_cost": 750.0,
+            "target_month": target,
             "target_date_or_month": target,
             "monthly_savings": 125.0,
             "monthly_savings_needed": 125.0,
+            "monthly_savings_required": 125.0,
+            "package_deal_angle": "Event tickets + fees + food budget + local hotel or rideshare.",
+            "what_to_check_next": "Check ticket tiers, venue fees, and whether lodging is needed.",
+            "affordability_note": "Planning estimate only; ticket tiers and fees can move the total quickly.",
             "reasoning": "Bundling the full weekend cost avoids underestimating tickets, fees, food, rides, and lodging.",
             "ways_to_afford": [
+                "Set the ticket ceiling before choosing seats.",
+                "Trim Food & dining for the month before the show.",
+                "Use local lodging or shared transport to keep the weekend affordable.",
+            ],
+            "ways_to_afford_it": [
                 "Set the ticket ceiling before choosing seats.",
                 "Trim Food & dining for the month before the show.",
                 "Use local lodging or shared transport to keep the weekend affordable.",
@@ -2651,14 +2722,26 @@ def fallback_goal_discovery_ideas(discovery_data):
         },
         {
             "title": "Wellness retreat",
+            "goal_type": "Hobby / wellness",
             "category": "Wellness",
+            "why_it_matches_user_interest": "A restorative goal with a clear package cost and flexible local or travel options.",
             "why_it_matches": "A restorative goal with a clear package cost and flexible local or travel options.",
             "estimated_cost": 1100.0,
+            "target_month": target,
             "target_date_or_month": target,
             "monthly_savings": 184.0,
             "monthly_savings_needed": 184.0,
+            "monthly_savings_required": 184.0,
+            "package_deal_angle": "Two-night retreat package with classes, meals, and transport cushion.",
+            "what_to_check_next": "Check local retreat packages, refund policy, and what meals/classes are included.",
+            "affordability_note": "Planning estimate only; local retreats are usually easier to fit than destination retreats.",
             "reasoning": "A weekend retreat can include lodging, classes, meals, and recovery time without becoming open-ended.",
             "ways_to_afford": [
+                "Choose a local retreat if travel pushes the goal off pace.",
+                "Cut Subscriptions or Entertainment temporarily to fund the deposit.",
+                "Book the package first and skip premium add-ons unless the plan is ahead.",
+            ],
+            "ways_to_afford_it": [
                 "Choose a local retreat if travel pushes the goal off pace.",
                 "Cut Subscriptions or Entertainment temporarily to fund the deposit.",
                 "Book the package first and skip premium add-ons unless the plan is ahead.",
@@ -2750,20 +2833,21 @@ def render_goal_discovery():
         for idx, idea in enumerate(ideas):
             with st.container(border=True):
                 st.markdown(f"**{idea['title']}**")
-                st.caption(f"{idea['category']} · {idea['why_it_matches']}")
+                st.caption(f"{idea.get('goal_type', idea.get('category', 'Goal'))} · {idea['why_it_matches_user_interest']}")
                 idea_cols = st.columns(3)
                 idea_cols[0].metric("Estimated cost", money(idea["estimated_cost"]))
-                idea_cols[1].metric("Target", idea["target_date_or_month"] or "Flexible")
-                idea_cols[2].metric("Save monthly", money(idea.get("monthly_savings_needed", idea["monthly_savings"])))
-                st.caption(idea.get("reasoning", "Estimate only. Lantern checks affordability with your budget."))
-                st.write(idea["example_plan"])
-                ways = idea.get("ways_to_afford", [])
+                idea_cols[1].metric("Target month", idea.get("target_month") or idea.get("target_date_or_month") or "Flexible")
+                idea_cols[2].metric("Save monthly", money(idea.get("monthly_savings_required", idea.get("monthly_savings_needed", 0.0))))
+                st.write(f"**Deal/package angle:** {idea.get('package_deal_angle', 'Planning estimate package.')}")
+                st.write(f"**What to check next:** {idea.get('what_to_check_next', 'Check current prices before committing.')}")
+                st.caption(idea.get("affordability_note", "Planning estimate only. Lantern checks affordability with your budget."))
+                ways = idea.get("ways_to_afford_it", idea.get("ways_to_afford", []))
                 if ways:
                     st.markdown("**Ways to afford it**")
                     for way in ways[:3]:
                         st.caption(f"- {way}")
                 if st.button("Use this goal", key=f"use_discovery_goal_{discovery_key}_{idx}"):
-                    selected_date = parse_discovery_target_date(idea["target_date_or_month"])
+                    selected_date = parse_discovery_target_date(idea.get("target_month") or idea.get("target_date_or_month"))
                     st.session_state.goal_input_name = idea["title"]
                     st.session_state.goal_input_cost = float(idea["estimated_cost"])
                     st.session_state.goal_input_date = selected_date
