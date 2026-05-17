@@ -2363,7 +2363,7 @@ class AIJsonParseError(ValueError):
 def parse_ai_json_response(output_text):
     cleaned = str(output_text or "").strip()
     if not cleaned:
-        raise ValueError("AI returned an empty response. Try again.")
+        raise ValueError("AI returned an empty response.")
     try:
         return json.loads(cleaned)
     except json.JSONDecodeError:
@@ -2492,7 +2492,8 @@ def generate_goal_discovery_ideas(api_key, discovery_data):
         "All costs are estimates unless they come from user budget data. "
         "Suggestions can be trips, events, products, experiences, courses, gear, or packages. "
         "Do not decide affordability, invent income, or override budget calculations. "
-        "Return strict JSON only with key ideas. ideas must contain exactly 3 objects. "
+        "Return valid JSON only. Do not include markdown, prose, code fences, or comments. "
+        "The JSON object must have key ideas. ideas must contain exactly 3 objects. "
         "Each object must have: title, category, why_it_matches, estimated_cost, target_date_or_month, monthly_savings, ways_to_afford, example_plan. "
         "ways_to_afford must contain 2 or 3 concrete actions. "
         "Use specific, concrete suggestions instead of generic goals. "
@@ -2547,6 +2548,7 @@ def generate_goal_discovery_ideas(api_key, discovery_data):
         ways = item.get("ways_to_afford", [])
         if not isinstance(ways, list):
             ways = [str(ways)]
+        reasoning = str(item.get("reasoning", item.get("why_it_matches", item.get("why_it_fits", "Matches your interests.")))).strip()
         ideas.append(
             {
                 "title": str(item.get("title", item.get("goal_name", "Goal idea"))).strip(),
@@ -2555,6 +2557,8 @@ def generate_goal_discovery_ideas(api_key, discovery_data):
                 "estimated_cost": max(1.0, cost),
                 "target_date_or_month": str(item.get("target_date_or_month", item.get("suggested_target_date", ""))).strip(),
                 "monthly_savings": max(0.0, monthly),
+                "monthly_savings_needed": max(0.0, monthly),
+                "reasoning": reasoning,
                 "ways_to_afford": [str(way).strip() for way in ways if str(way).strip()][:3],
                 "example_plan": str(item.get("example_plan", "A simple plan with a few memorable activities.")).strip(),
             }
@@ -2579,52 +2583,87 @@ def parse_discovery_target_date(value):
 
 
 def fallback_goal_discovery_ideas(discovery_data):
-    interests = str(discovery_data.get("interests") or "new experiences").strip()
-    location = str(discovery_data.get("location") or "your area").strip()
     target = str(discovery_data.get("target_month") or "the next few months").strip()
-    preference = str(discovery_data.get("preference") or "surprise me").strip()
     return [
         {
-            "title": f"{interests.title()} local experience bundle",
-            "category": "Experience",
-            "why_it_matches": f"Built around {interests} without requiring a major trip.",
-            "estimated_cost": 450.0,
+            "title": "Tokyo food + culture trip",
+            "category": "Travel",
+            "why_it_matches": "A food-market, neighborhood, and culture-focused trip for someone drawn to Japanese food and design.",
+            "estimated_cost": 2800.0,
+            "target_date_or_month": target,
+            "monthly_savings": 467.0,
+            "monthly_savings_needed": 467.0,
+            "reasoning": "Flights, lodging, local transit, meals, and a few ticketed cultural experiences make this a meaningful but bounded goal.",
+            "ways_to_afford": [
+                "Start with flight alerts and book lodging outside peak dates.",
+                "Trim Food & dining and Shopping first if the planner shows a shortfall.",
+                "Set a monthly travel transfer before adding optional tours.",
+            ],
+            "example_plan": "Spend a week around Tokyo food halls, old neighborhoods, museums, and one guided cultural workshop.",
+        },
+        {
+            "title": "Seoul gaming + tech trip",
+            "category": "Travel",
+            "why_it_matches": "Blends PC cafes, esports culture, street food, shopping, and consumer tech into one focused trip.",
+            "estimated_cost": 2400.0,
+            "target_date_or_month": target,
+            "monthly_savings": 400.0,
+            "monthly_savings_needed": 400.0,
+            "reasoning": "A short Seoul trip can stay lower-cost than a longer international itinerary while still feeling distinctive.",
+            "ways_to_afford": [
+                "Cap Shopping until the flight and lodging are funded.",
+                "Use flexible entertainment cuts for tickets and experiences.",
+                "Keep the itinerary to a long weekend if monthly savings are tight.",
+            ],
+            "example_plan": "Plan PC cafe time, an esports venue, street food neighborhoods, and a tech shopping afternoon.",
+        },
+        {
+            "title": "New VR gaming setup",
+            "category": "Product",
+            "why_it_matches": "A concrete gaming goal that turns savings into something you can use regularly at home.",
+            "estimated_cost": 900.0,
             "target_date_or_month": target,
             "monthly_savings": 150.0,
+            "monthly_savings_needed": 150.0,
+            "reasoning": "A headset, key accessories, and a starter game budget create a realistic product goal.",
             "ways_to_afford": [
-                "Trim one flexible dining or entertainment purchase each week.",
-                "Move unused subscription money into the goal.",
-                "Book the core experience first and add extras only if the plan stays on track.",
+                "Reduce Entertainment until the headset is funded.",
+                "Buy the headset first and delay accessories if needed.",
+                "Use wish-list sales instead of paying full price for every game.",
             ],
-            "example_plan": f"Pick one anchor event in {location}, add a class or workshop, and include a simple meal or gear budget.",
+            "example_plan": "Pick the headset, one comfort accessory, and two starter games with a small setup cushion.",
         },
         {
-            "title": f"{interests.title()} gear or course upgrade",
-            "category": "Product / learning",
-            "why_it_matches": f"Turns your interest in {interests} into something useful you can keep building on.",
-            "estimated_cost": 800.0,
+            "title": "Concert weekend package",
+            "category": "Event",
+            "why_it_matches": "A music-focused goal that combines tickets, food, transport, and one night away.",
+            "estimated_cost": 750.0,
             "target_date_or_month": target,
-            "monthly_savings": 200.0,
+            "monthly_savings": 125.0,
+            "monthly_savings_needed": 125.0,
+            "reasoning": "Bundling the full weekend cost avoids underestimating tickets, fees, food, rides, and lodging.",
             "ways_to_afford": [
-                "Set a fixed monthly transfer for the gear or course.",
-                "Reduce shopping or entertainment until the target is funded.",
-                "Choose a starter version now and upgrade later if needed.",
+                "Set the ticket ceiling before choosing seats.",
+                "Trim Food & dining for the month before the show.",
+                "Use local lodging or shared transport to keep the weekend affordable.",
             ],
-            "example_plan": "Buy the core item or course, reserve a small setup budget, and schedule time to use it.",
+            "example_plan": "Cover two tickets, fees, a simple hotel or rideshare budget, meals, and one backup fund.",
         },
         {
-            "title": f"{interests.title()} weekend plan",
-            "category": "Travel" if preference == "travel" else "Experience",
-            "why_it_matches": f"A focused plan for {interests} with a clear cost ceiling.",
-            "estimated_cost": 1200.0,
+            "title": "Wellness retreat",
+            "category": "Wellness",
+            "why_it_matches": "A restorative goal with a clear package cost and flexible local or travel options.",
+            "estimated_cost": 1100.0,
             "target_date_or_month": target,
-            "monthly_savings": 300.0,
+            "monthly_savings": 184.0,
+            "monthly_savings_needed": 184.0,
+            "reasoning": "A weekend retreat can include lodging, classes, meals, and recovery time without becoming open-ended.",
             "ways_to_afford": [
-                "Cap flexible spending before adding trip extras.",
-                "Use lower-cost lodging or off-peak timing.",
-                "Cut the largest flexible category first if Lantern shows a shortfall.",
+                "Choose a local retreat if travel pushes the goal off pace.",
+                "Cut Subscriptions or Entertainment temporarily to fund the deposit.",
+                "Book the package first and skip premium add-ons unless the plan is ahead.",
             ],
-            "example_plan": "Plan two main activities, one flexible backup, transportation, food, and a small cushion.",
+            "example_plan": "Reserve a two-night retreat with classes, meals, and a small transport budget.",
         },
     ]
 
@@ -2686,12 +2725,11 @@ def render_goal_discovery():
         except AIJsonParseError as e:
             message = str(e)
             if "empty response" in message:
-                st.warning("AI returned an empty response. Try again.")
+                st.warning("AI returned an empty response.")
             else:
-                st.error("Goal Discovery could not parse the AI response.")
-                if e.raw_response:
-                    with st.expander("Raw model response"):
-                        st.code(e.raw_response)
+                st.error("Goal Discovery could not parse the AI response. Showing sample suggestions instead.")
+            with st.expander("Raw AI response"):
+                st.code(e.raw_response or "[empty response]")
             discovery_cache[discovery_key] = fallback_goal_discovery_ideas(discovery_payload)
             st.info("Showing sample suggestions instead.")
         except Exception as e:
@@ -2716,7 +2754,8 @@ def render_goal_discovery():
                 idea_cols = st.columns(3)
                 idea_cols[0].metric("Estimated cost", money(idea["estimated_cost"]))
                 idea_cols[1].metric("Target", idea["target_date_or_month"] or "Flexible")
-                idea_cols[2].metric("Save monthly", money(idea["monthly_savings"]))
+                idea_cols[2].metric("Save monthly", money(idea.get("monthly_savings_needed", idea["monthly_savings"])))
+                st.caption(idea.get("reasoning", "Estimate only. Lantern checks affordability with your budget."))
                 st.write(idea["example_plan"])
                 ways = idea.get("ways_to_afford", [])
                 if ways:
