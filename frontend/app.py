@@ -33,7 +33,7 @@ SESSION_DEFAULTS = {
     "flexibility_preferences": {},
     "merchant_category_memory": {},
     "planner_manual_income": 0.0,
-    "planner_use_detected_income": False,
+    "planner_use_detected_income": True,
     "ai_coach_cache": {},
 }
 for key, value in SESSION_DEFAULTS.items():
@@ -2346,12 +2346,19 @@ def generate_ai_coach_advice(api_key, coach_data):
     """Ask AI to explain existing Lantern calculations without recalculating them."""
     prompt = (
         "You are Lantern's AI Coach. Use only the structured data provided. "
-        "Do not recalculate totals, invent transactions, or change the plan. "
-        "Explain the existing plan in concise, practical language. "
+        "Do not recalculate totals, invent transactions, or change budget numbers. "
+        "Reference actual dollar amounts from the input. "
+        "Recommend only flexible categories unless protected_cuts_enabled is true. "
+        "Identify the 3 most useful categories to adjust from category_baseline_and_future_budget_table. "
+        "If transaction_confidence_low is true, mention reviewing suspicious transactions. "
+        "Keep every item short, specific, and practical. "
         "Return valid JSON only with exactly these keys: "
-        "summary_sentences, recommended_actions. "
-        "summary_sentences must contain exactly 3 plain-English sentences. "
-        "recommended_actions must contain exactly 3 practical actions."
+        "status, summary, recommended_actions, categories_to_watch, confidence_warning. "
+        "status must say whether the goal is on track or short using the provided available_for_goals and required_monthly_savings. "
+        "summary must be one plain-English sentence. "
+        "recommended_actions must contain exactly 3 practical category-specific actions with dollar amounts. "
+        "categories_to_watch must contain exactly 3 category names. "
+        "confidence_warning must be one sentence if transaction_confidence_low is true, otherwise an empty string."
     )
     response = requests.post(
         "https://api.openai.com/v1/responses",
@@ -2378,13 +2385,17 @@ def generate_ai_coach_advice(api_key, coach_data):
                 if content.get("type") in {"output_text", "text"}:
                     output_text += content.get("text", "")
     parsed = json.loads(output_text)
-    summary = [str(item).strip() for item in parsed.get("summary_sentences", []) if str(item).strip()][:3]
     actions = [str(item).strip() for item in parsed.get("recommended_actions", []) if str(item).strip()][:3]
-    while len(summary) < 3:
-        summary.append("Your plan is based on the current Lantern budget numbers.")
+    watch = [str(item).strip() for item in parsed.get("categories_to_watch", []) if str(item).strip()][:3]
     while len(actions) < 3:
-        actions.append("Review one flexible category and decide whether the planned amount still feels realistic.")
-    return {"summary_sentences": summary, "recommended_actions": actions}
+        actions.append("Review one flexible category and decide whether its planned amount can come down this month.")
+    return {
+        "status": str(parsed.get("status", "Review the current plan.")).strip(),
+        "summary": str(parsed.get("summary", "This guidance uses Lantern's current budget numbers.")).strip(),
+        "recommended_actions": actions,
+        "categories_to_watch": watch,
+        "confidence_warning": str(parsed.get("confidence_warning", "")).strip(),
+    }
 
 
 def generate_goal_ai_coaching_plan(api_key, coach_data):
@@ -2392,11 +2403,16 @@ def generate_goal_ai_coaching_plan(api_key, coach_data):
     prompt = (
         "You are Lantern's AI Coach. Use only the structured data provided. "
         "Do not recalculate totals, invent categories, or change any budget numbers. "
+        "Reference actual dollar amounts from the input. "
+        "Recommend only flexible categories unless protected_cuts_enabled is true. "
+        "Identify the 3 most useful categories to adjust from category_budgets_and_roles. "
+        "If transaction_confidence_low is true, mention reviewing suspicious transactions. "
+        "Keep the response short, specific, and practical. "
         "Return valid JSON only with exactly these keys: "
-        "on_track, practical_changes, categories_to_watch, summary. "
-        "on_track should be a short string saying whether the goal is on track. "
-        "practical_changes must contain exactly 3 concrete changes. "
-        "categories_to_watch must contain concise category names from the input. "
+        "on_track, practical_changes, categories_to_watch, summary, confidence_warning. "
+        "on_track should be a short string saying whether the goal is on track or short using the provided available_for_goals and required_monthly_savings. "
+        "practical_changes must contain exactly 3 concrete category-specific changes with dollar amounts. "
+        "categories_to_watch must contain exactly 3 concise category names from the input. "
         "summary must be one plain-English sentence."
     )
     response = requests.post(
@@ -2425,16 +2441,180 @@ def generate_goal_ai_coaching_plan(api_key, coach_data):
                     output_text += content.get("text", "")
     parsed = json.loads(output_text)
     changes = [str(item).strip() for item in parsed.get("practical_changes", []) if str(item).strip()][:3]
+    watch = [str(item).strip() for item in parsed.get("categories_to_watch", []) if str(item).strip()][:3]
     while len(changes) < 3:
         changes.append("Review one flexible category and decide whether the planned amount still feels realistic.")
     return {
         "on_track": str(parsed.get("on_track", "Review the current plan.")).strip(),
         "practical_changes": changes,
-        "categories_to_watch": [
-            str(item).strip() for item in parsed.get("categories_to_watch", []) if str(item).strip()
-        ],
+        "categories_to_watch": watch,
         "summary": str(parsed.get("summary", "This plan is based on the current Lantern budget numbers.")).strip(),
+        "confidence_warning": str(parsed.get("confidence_warning", "")).strip(),
     }
+
+
+def generate_goal_discovery_ideas(api_key, discovery_data):
+    """Generate inspirational goal ideas. Affordability math still happens in Lantern."""
+    prompt = (
+        "You are Lantern's Goal Discovery coach. Generate inspiring but realistic goals based on the user's interests. "
+        "All costs are estimates unless they come from user budget data. "
+        "Do not decide affordability and do not override budget calculations. "
+        "Return valid JSON only with key ideas. ideas must contain exactly 3 objects. "
+        "Each object must have: goal_name, why_it_fits, estimated_total_cost, suggested_target_date, "
+        "monthly_savings_required, example_plan. "
+        "Use specific, concrete experiences instead of generic goals. "
+        "Keep each explanation short and practical."
+    )
+    response = requests.post(
+        "https://api.openai.com/v1/responses",
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+        },
+        json={
+            "model": "gpt-4o-mini",
+            "input": [
+                {"role": "system", "content": prompt},
+                {"role": "user", "content": json.dumps(discovery_data, sort_keys=True)},
+            ],
+            "max_output_tokens": 900,
+        },
+        timeout=30,
+    )
+    response.raise_for_status()
+    result = response.json()
+    output_text = result.get("output_text", "")
+    if not output_text:
+        for item in result.get("output", []):
+            for content in item.get("content", []):
+                if content.get("type") in {"output_text", "text"}:
+                    output_text += content.get("text", "")
+    parsed = json.loads(output_text)
+    ideas = []
+    for item in parsed.get("ideas", [])[:3]:
+        try:
+            cost = float(item.get("estimated_total_cost", 0.0) or 0.0)
+        except Exception:
+            cost = 0.0
+        try:
+            monthly = float(item.get("monthly_savings_required", 0.0) or 0.0)
+        except Exception:
+            monthly = 0.0
+        ideas.append(
+            {
+                "goal_name": str(item.get("goal_name", "Goal idea")).strip(),
+                "why_it_fits": str(item.get("why_it_fits", "Matches your interests.")).strip(),
+                "estimated_total_cost": max(1.0, cost),
+                "suggested_target_date": str(item.get("suggested_target_date", "")).strip(),
+                "monthly_savings_required": max(0.0, monthly),
+                "example_plan": str(item.get("example_plan", "A simple plan with a few memorable activities.")).strip(),
+            }
+        )
+    return ideas[:3]
+
+
+def parse_discovery_target_date(value):
+    try:
+        return datetime.date.fromisoformat(str(value)[:10])
+    except Exception:
+        return today + datetime.timedelta(days=120)
+
+
+def render_goal_discovery():
+    st.markdown("**Goal Discovery**")
+    st.caption("Start with what you want to do. Lantern turns an idea into a target, then the planner checks affordability with your budget math.")
+    openai_api_key = get_openai_api_key()
+    show_ai_key_detection(openai_api_key)
+    interest_cols = st.columns([1.5, 1.0, 1.0])
+    interests = interest_cols[0].text_input(
+        "What are you interested in?",
+        value=st.session_state.get("discovery_interests", ""),
+        placeholder="Asian culture, concerts, wellness, gaming...",
+        key="discovery_interests",
+    )
+    budget_range = interest_cols[1].text_input(
+        "Preferred budget range",
+        value=st.session_state.get("discovery_budget_range", ""),
+        placeholder="$500-$2,000",
+        key="discovery_budget_range",
+    )
+    target_month = interest_cols[2].text_input(
+        "Target month",
+        value=st.session_state.get("discovery_target_month", ""),
+        placeholder="September",
+        key="discovery_target_month",
+    )
+    followup_cols = st.columns(2)
+    location = followup_cols[0].text_input(
+        "Location",
+        value=st.session_state.get("discovery_location", ""),
+        placeholder="Los Angeles, remote, anywhere",
+        key="discovery_location",
+    )
+    travel_distance = followup_cols[1].text_input(
+        "Travel distance",
+        value=st.session_state.get("discovery_travel_distance", ""),
+        placeholder="local, weekend flight, international",
+        key="discovery_travel_distance",
+    )
+    if not openai_api_key:
+        show_missing_ai_key_sources()
+        st.button("Generate goal ideas", disabled=True)
+        return
+    discovery_payload = {
+        "interests": interests,
+        "preferred_budget_range": budget_range,
+        "target_month": target_month,
+        "location": location,
+        "travel_distance": travel_distance,
+        "today": today.isoformat(),
+        "note": "Generate estimates only. Lantern will calculate affordability after the user selects an idea.",
+    }
+    discovery_key = "discovery:" + ai_coach_cache_key(discovery_payload)
+    discovery_cache = st.session_state.setdefault("goal_discovery_cache", {})
+    if st.button("Generate goal ideas", type="primary"):
+        if discovery_key not in discovery_cache:
+            try:
+                with st.spinner("Finding goal ideas..."):
+                    discovery_cache[discovery_key] = generate_goal_discovery_ideas(openai_api_key, discovery_payload)
+            except Exception as e:
+                st.error("Goal Discovery could not generate ideas.")
+                st.code(str(e))
+                return
+        st.session_state.active_goal_discovery_key = discovery_key
+    active_key = st.session_state.get("active_goal_discovery_key")
+    if active_key == discovery_key and discovery_key in discovery_cache:
+        ideas = discovery_cache[discovery_key]
+        if not ideas:
+            st.info("No goal ideas came back. Try adding a little more detail about your interests.")
+            return
+        for idx, idea in enumerate(ideas):
+            with st.container(border=True):
+                st.markdown(f"**{idea['goal_name']}**")
+                st.caption(idea["why_it_fits"])
+                idea_cols = st.columns(3)
+                idea_cols[0].metric("Estimated cost", money(idea["estimated_total_cost"]))
+                idea_cols[1].metric("Suggested date", idea["suggested_target_date"] or "Flexible")
+                idea_cols[2].metric("Monthly estimate", money(idea["monthly_savings_required"]))
+                st.write(idea["example_plan"])
+                if st.button("Use this goal", key=f"use_discovery_goal_{discovery_key}_{idx}"):
+                    selected_date = parse_discovery_target_date(idea["suggested_target_date"])
+                    st.session_state.goal_input_name = idea["goal_name"]
+                    st.session_state.goal_input_cost = float(idea["estimated_total_cost"])
+                    st.session_state.goal_input_date = selected_date
+                    try:
+                        st.session_state.goal_plan = build_goal_plan(
+                            idea["goal_name"],
+                            float(idea["estimated_total_cost"]),
+                            selected_date,
+                            False,
+                        )
+                    except Exception as e:
+                        st.error("Could not send this goal into the planner.")
+                        st.code(str(e))
+                        return
+                    st.success("Goal sent to the planner. Lantern will use your budget math to check affordability.")
+                    st.rerun()
 
 
 def render_goal_ai_coach_panel(plan, budget_summary):
@@ -2457,6 +2637,15 @@ def render_goal_ai_coach_panel(plan, budget_summary):
             budget_summary.get("flexible_spending_limit", 0.0) or 0.0
         )
     available_for_goals = monthly_income - planned_future_spending
+    required_monthly_savings = float(plan.get("monthly_needed", 0.0))
+    plan_gap = available_for_goals - required_monthly_savings
+    confidence_low = bool(
+        plan.get("goalAnalysis", {})
+        .get("simulationSummary", {})
+        .get("projection_confidence", "")
+        .lower()
+        in {"low", "limited"}
+    )
     coach_payload = {
         "goal_name": plan.get("goal_name", "your goal"),
         "goal_cost": round(float(plan.get("goal_cost", 0.0)), 2),
@@ -2464,7 +2653,11 @@ def render_goal_ai_coach_panel(plan, budget_summary):
         "monthly_income": round(monthly_income, 2),
         "planned_future_spending": round(planned_future_spending, 2),
         "available_for_goals": round(available_for_goals, 2),
-        "required_monthly_savings": round(float(plan.get("monthly_needed", 0.0)), 2),
+        "required_monthly_savings": round(required_monthly_savings, 2),
+        "monthly_surplus_or_shortfall": round(plan_gap, 2),
+        "goal_status_from_lantern": "on track" if plan_gap >= 0 else "short",
+        "protected_cuts_enabled": bool(plan.get("allow_protected", False)),
+        "transaction_confidence_low": confidence_low,
         "category_budgets_and_roles": category_budget_rows,
     }
     coach_key = "goal:" + ai_coach_cache_key(coach_payload)
@@ -2495,6 +2688,8 @@ def render_goal_ai_coach_panel(plan, budget_summary):
         watch = advice.get("categories_to_watch") or []
         st.markdown("**Categories to watch**")
         st.write(", ".join(watch) if watch else "No specific categories flagged.")
+        if advice.get("confidence_warning"):
+            st.warning(advice["confidence_warning"])
 
 
 def detected_savings_text(value):
@@ -3057,6 +3252,9 @@ page = st.sidebar.radio(
 show_legacy_tools = st.sidebar.checkbox("Show advanced legacy tools", value=False)
 
 if page == "Goal Command Center":
+    render_goal_discovery()
+    st.divider()
+
     if not st.session_state.get("local_budget") or not st.session_state.get("local_transactions"):
         st.info(
             "Start with Budget Planner and Transaction History when you want the planner to use your own numbers. "
@@ -3079,11 +3277,21 @@ if page == "Goal Command Center":
         st.rerun()
     st.session_state.plan_style = plan_style
 
+    st.session_state.setdefault("goal_input_name", "Hawaii trip")
+    st.session_state.setdefault("goal_input_cost", 1800.0)
+    st.session_state.setdefault("goal_input_date", today + datetime.timedelta(days=90))
+
     with st.form("afford_goal_form"):
         goal_cols = st.columns([1.4, 0.8, 0.9])
-        goal_name = goal_cols[0].text_input("Goal", value="Hawaii trip")
-        goal_cost = goal_cols[1].number_input("Cost", min_value=1.0, value=1800.0, step=25.0, format="%.2f")
-        target_date = goal_cols[2].date_input("Date", value=today + datetime.timedelta(days=90), min_value=today)
+        goal_name = goal_cols[0].text_input("Goal", key="goal_input_name")
+        goal_cost = goal_cols[1].number_input(
+            "Cost",
+            min_value=1.0,
+            step=25.0,
+            format="%.2f",
+            key="goal_input_cost",
+        )
+        target_date = goal_cols[2].date_input("Date", min_value=today, key="goal_input_date")
         allow_protected = False
         submitted_goal = st.form_submit_button("How can I afford this?", width="stretch")
 
@@ -3409,6 +3617,9 @@ elif page == "Budget Planner":
     )
     default_manual_income = float(active_budget_summary["income"] or detected_income or 3200.0)
     st.session_state.setdefault("planner_manual_income", default_manual_income)
+    if detected_income > 0 and "planner_income_defaulted_to_detected" not in st.session_state:
+        st.session_state.planner_use_detected_income = True
+        st.session_state.planner_income_defaulted_to_detected = True
     st.session_state.setdefault("planner_use_detected_income", detected_income > 0)
     use_detected_income = st.toggle(
         "Use detected income",
@@ -3738,10 +3949,12 @@ elif page == "Budget Planner":
             "category": category,
             "baseline": round(float(budget_baselines.get(category, 0.0)), 2),
             "future_budget": round(float(allocations.get(category, 0.0)), 2),
+            "monthly_change": round(float(allocations.get(category, 0.0)) - float(budget_baselines.get(category, 0.0)), 2),
             "role": budget_roles.get(category, "flexible"),
         }
         for category in budget_category_order
     ]
+    coach_gap = float(monthly_available_for_goal) - float(required_monthly_goal_savings)
     coach_payload = {
         "monthly_income": round(float(income_amount), 2),
         "planned_future_spending": round(float(future_budget_total), 2),
@@ -3750,6 +3963,10 @@ elif page == "Budget Planner":
         "goal_cost": round(float(goal_cost), 2),
         "target_date": goal_target.isoformat(),
         "required_monthly_savings": round(float(required_monthly_goal_savings), 2),
+        "monthly_surplus_or_shortfall": round(coach_gap, 2),
+        "goal_status_from_lantern": "on track" if coach_gap >= 0 else "short",
+        "protected_cuts_enabled": bool(unlock_protected),
+        "transaction_confidence_low": bool(low_confidence_count),
         "category_baseline_and_future_budget_table": coach_category_table,
         "categories": {
             "protected": [category for category, role in budget_roles.items() if role == "protected"],
@@ -3776,14 +3993,16 @@ elif page == "Budget Planner":
     active_coach_key = st.session_state.get("active_ai_coach_key")
     if active_coach_key == coach_key and coach_key in ai_coach_cache:
         coach_advice = ai_coach_cache[coach_key]
-        st.markdown("**Summary**")
-        for sentence in coach_advice["summary_sentences"][:3]:
-            st.write(sentence)
+        st.write(f"**Goal status:** {coach_advice.get('status', 'Review the current plan.')}")
+        st.write(coach_advice.get("summary", "This guidance uses Lantern's current budget numbers."))
         st.markdown("**Recommended actions**")
         for idx, action in enumerate(coach_advice["recommended_actions"][:3], start=1):
             st.write(f"{idx}. {action}")
-        if low_confidence_count:
-            st.warning("Some transaction history may need confirmation, so review uncategorized or low-confidence items before relying on this plan.")
+        watch = coach_advice.get("categories_to_watch") or []
+        st.markdown("**Categories to watch**")
+        st.write(", ".join(watch) if watch else "No specific categories flagged.")
+        if coach_advice.get("confidence_warning"):
+            st.warning(coach_advice["confidence_warning"])
     st.caption(
         f"{money(income_amount)} monthly income - {money(future_budget_total)} future budget "
         f"= {money(monthly_available_for_goal)} available for the goal."
