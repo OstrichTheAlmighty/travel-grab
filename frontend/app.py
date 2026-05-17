@@ -3,10 +3,12 @@ import calendar
 import hashlib
 import json
 import os
+import re
 import sys
 import pandas as pd
 import streamlit as st
 import requests
+from openai import OpenAI
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(CURRENT_DIR)
@@ -2331,6 +2333,17 @@ def get_openai_api_key():
     return str(api_key or "").strip()
 
 
+def get_tavily_api_key():
+    api_key = ""
+    try:
+        api_key = st.secrets.get("TAVILY_API_KEY", "")
+    except Exception:
+        api_key = ""
+    if not api_key:
+        api_key = os.environ.get("TAVILY_API_KEY", "")
+    return str(api_key or "").strip()
+
+
 def show_ai_key_detection(api_key):
     st.caption(f"AI key detected: {'Yes' if api_key else 'No'}")
 
@@ -2340,6 +2353,11 @@ def show_missing_ai_key_sources():
         'AI Coach checked st.secrets.get("OPENAI_API_KEY") and '
         'os.environ.get("OPENAI_API_KEY").'
     )
+
+
+def show_ai_debug_response(raw_response):
+    with st.expander("Raw API response"):
+        st.code(raw_response or "[empty response]")
 
 
 def response_output_text(result):
@@ -2360,18 +2378,156 @@ class AIJsonParseError(ValueError):
         self.raw_response = raw_response
 
 
-def parse_ai_json_response(output_text):
-    cleaned = str(output_text or "").strip()
+def safe_parse_json(response_text):
+    cleaned = str(response_text or "").strip()
     if not cleaned:
-        raise ValueError("AI returned an empty response.")
+        return {
+            "success": False,
+            "error": "AI returned an empty response.",
+            "raw_response": response_text or "",
+        }
     try:
-        return json.loads(cleaned)
-    except json.JSONDecodeError:
+        return {"success": True, "data": json.loads(cleaned), "raw_response": cleaned}
+    except json.JSONDecodeError as first_error:
         start = cleaned.find("{")
         end = cleaned.rfind("}")
         if start >= 0 and end > start:
-            return json.loads(cleaned[start : end + 1])
-        raise
+            candidate = cleaned[start : end + 1]
+            try:
+                return {"success": True, "data": json.loads(candidate), "raw_response": cleaned}
+            except json.JSONDecodeError:
+                pass
+        return {
+            "success": False,
+            "error": f"AI returned invalid structured data. {first_error}",
+            "raw_response": cleaned,
+        }
+
+
+def parse_ai_json_response(output_text):
+    parsed = safe_parse_json(output_text)
+    if parsed["success"]:
+        return parsed["data"]
+    raise AIJsonParseError(parsed["error"], parsed.get("raw_response", ""))
+
+
+def openai_responses_json(api_key, prompt, payload, max_output_tokens=700, retries=1):
+    request_body = {
+        "model": "gpt-4o-mini",
+        "input": [
+            {"role": "system", "content": prompt},
+            {"role": "user", "content": json.dumps(payload, sort_keys=True)},
+        ],
+        "max_output_tokens": max_output_tokens,
+        "response_format": {"type": "json_object"},
+    }
+    last_error = None
+    for attempt in range(retries + 1):
+        body = dict(request_body)
+        try:
+            response = requests.post(
+                "https://api.openai.com/v1/responses",
+                headers={
+                    "Authorization": f"Bearer {api_key}",
+                    "Content-Type": "application/json",
+                },
+                json=body,
+                timeout=35,
+            )
+            if response.status_code == 400 and "response_format" in response.text:
+                body.pop("response_format", None)
+                response = requests.post(
+                    "https://api.openai.com/v1/responses",
+                    headers={
+                        "Authorization": f"Bearer {api_key}",
+                        "Content-Type": "application/json",
+                    },
+                    json=body,
+                    timeout=35,
+                )
+            response.raise_for_status()
+            raw_response = response_output_text(response.json())
+            parsed = safe_parse_json(raw_response)
+            parsed["raw_response"] = raw_response
+            return parsed
+        except Exception as e:
+            last_error = e
+            if attempt >= retries:
+                return {
+                    "success": False,
+                    "error": str(last_error),
+                    "raw_response": getattr(last_error, "response", None).text
+                    if getattr(last_error, "response", None) is not None
+                    else "",
+                }
+    return {"success": False, "error": str(last_error or "OpenAI request failed."), "raw_response": ""}
+
+
+def detected_price_strings(text):
+    matches = re.findall(r"\$\s?\d[\d,]*(?:\.\d{2})?", str(text or ""))
+    return list(dict.fromkeys(match.replace(" ", "") for match in matches))[:4]
+
+
+def build_goal_search_queries(discovery_data):
+    interests = str(discovery_data.get("interests") or "experiences").strip()
+    first_interest = interests.split(",")[0].strip() or interests
+    location = str(discovery_data.get("location") or "near me").strip()
+    budget = str(discovery_data.get("preferred_budget_range") or "budget friendly").strip()
+    target_month = str(discovery_data.get("target_month") or "").strip()
+    travel_distance = str(discovery_data.get("travel_distance") or discovery_data.get("preference") or "").strip()
+    queries = [
+        f"{first_interest} experiences near {location} under {budget}",
+        f"{first_interest} events {target_month} {location}".strip(),
+        f"{first_interest} classes workshops {location} {target_month}".strip(),
+        f"best {first_interest} products under {budget}",
+    ]
+    if travel_distance and travel_distance != "online":
+        queries.append(f"{first_interest} travel package {budget} {target_month} {travel_distance}".strip())
+    return [query for query in queries if query][:5]
+
+
+def search_goal_options(discovery_data):
+    """Search live web results for goal options. The AI only summarizes these results."""
+    tavily_key = get_tavily_api_key()
+    if not tavily_key:
+        return {"results": [], "error": "TAVILY_API_KEY is not configured."}
+    search_results = []
+    seen_urls = set()
+    for query in build_goal_search_queries(discovery_data):
+        try:
+            response = requests.post(
+                "https://api.tavily.com/search",
+                json={
+                    "api_key": tavily_key,
+                    "query": query,
+                    "search_depth": "basic",
+                    "max_results": 4,
+                    "include_answer": False,
+                    "include_raw_content": False,
+                },
+                timeout=20,
+            )
+            response.raise_for_status()
+            payload = response.json()
+        except Exception as e:
+            return {"results": search_results, "error": f"Search failed for query '{query}': {e}"}
+        for result in payload.get("results", []):
+            url = str(result.get("url", "")).strip()
+            if not url or url in seen_urls:
+                continue
+            seen_urls.add(url)
+            title = str(result.get("title", "")).strip()
+            snippet = str(result.get("content", "")).strip()
+            search_results.append(
+                {
+                    "query": query,
+                    "title": title,
+                    "url": url,
+                    "snippet": snippet,
+                    "detected_prices": detected_price_strings(f"{title} {snippet}"),
+                }
+            )
+    return {"results": search_results[:16], "error": ""}
 
 
 def generate_ai_coach_advice(api_key, coach_data):
@@ -2392,36 +2548,17 @@ def generate_ai_coach_advice(api_key, coach_data):
         "categories_to_watch must contain exactly 3 category names. "
         "confidence_warning must be one sentence if transaction_confidence_low is true, otherwise an empty string."
     )
-    response = requests.post(
-        "https://api.openai.com/v1/responses",
-        headers={
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
-        },
-        json={
-            "model": "gpt-4o-mini",
-            "input": [
-                {"role": "system", "content": prompt},
-                {"role": "user", "content": json.dumps(coach_data, sort_keys=True)},
-            ],
-            "max_output_tokens": 500,
-        },
-        timeout=30,
-    )
-    response.raise_for_status()
-    result = response.json()
-    output_text = result.get("output_text", "")
-    if not output_text:
-        for item in result.get("output", []):
-            for content in item.get("content", []):
-                if content.get("type") in {"output_text", "text"}:
-                    output_text += content.get("text", "")
-    parsed = json.loads(output_text)
+    parsed_result = openai_responses_json(api_key, prompt, coach_data, max_output_tokens=600, retries=1)
+    if not parsed_result["success"]:
+        return parsed_result
+    parsed = parsed_result["data"]
     actions = [str(item).strip() for item in parsed.get("recommended_actions", []) if str(item).strip()][:3]
     watch = [str(item).strip() for item in parsed.get("categories_to_watch", []) if str(item).strip()][:3]
     while len(actions) < 3:
         actions.append("Review one flexible category and decide whether its planned amount can come down this month.")
     return {
+        "success": True,
+        "raw_response": parsed_result.get("raw_response", ""),
         "status": str(parsed.get("status", "Review the current plan.")).strip(),
         "summary": str(parsed.get("summary", "This guidance uses Lantern's current budget numbers.")).strip(),
         "recommended_actions": actions,
@@ -2433,63 +2570,93 @@ def generate_ai_coach_advice(api_key, coach_data):
 def generate_goal_ai_coaching_plan(api_key, coach_data):
     """Generate narrative coaching from existing affordability calculations only."""
     prompt = (
-        "You are Lantern's AI Coach. Use only the structured data provided. "
-        "Do not recalculate totals, invent categories, or change any budget numbers. "
-        "Reference actual dollar amounts from the input. "
-        "Recommend only flexible categories unless protected_cuts_enabled is true. "
-        "Identify the 3 most useful categories to adjust from category_budgets_and_roles. "
-        "If transaction_confidence_low is true, mention reviewing suspicious transactions. "
-        "Keep the response short, specific, and practical. "
-        "Return valid JSON only with exactly these keys: "
-        "on_track, practical_changes, categories_to_watch, summary, confidence_warning. "
-        "on_track should be a short string saying whether the goal is on track or short using the provided available_for_goals and required_monthly_savings. "
-        "practical_changes must contain exactly 3 concrete category-specific changes with dollar amounts. "
-        "categories_to_watch must contain exactly 3 concise category names from the input. "
-        "summary must be one plain-English sentence."
+        "Use only this Lantern budget data. Do not recalculate totals, invent categories, or change any budget numbers. "
+        "Reference actual dollar amounts from the data. Recommend only flexible categories unless protected_cuts_enabled is true. "
+        "Return valid JSON only with this exact schema: "
+        '{"summary":"...","recommended_actions":["...","...","..."],"risk_warning":"...","next_best_step":"..."}. '
+        "summary should explain whether the goal is on track or short. "
+        "recommended_actions must be exactly 3 specific actions using current category/budget numbers. "
+        "risk_warning should mention transaction review if transaction_confidence_low is true, otherwise be brief. "
+        "next_best_step should be the single most useful next action."
     )
-    response = requests.post(
-        "https://api.openai.com/v1/responses",
-        headers={
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
-        },
-        json={
-            "model": "gpt-4o-mini",
-            "input": [
-                {"role": "system", "content": prompt},
-                {"role": "user", "content": json.dumps(coach_data, sort_keys=True)},
-            ],
-            "max_output_tokens": 500,
-        },
-        timeout=30,
+    def fallback_coaching(error, raw_response="", parse_succeeded=False):
+        status_text = str(coach_data.get("goal_status_from_lantern", "review")).replace("_", " ")
+        gap = float(coach_data.get("monthly_surplus_or_shortfall", 0.0) or 0.0)
+        flexible_categories = [
+            row.get("category", "a flexible category")
+            for row in coach_data.get("category_budgets_and_roles", [])
+            if row.get("role") == "flexible"
+        ][:3]
+        while len(flexible_categories) < 3:
+            flexible_categories.append("a flexible category")
+        gap_text = money(abs(gap))
+        summary = (
+            f"Lantern's math shows this goal is {status_text}; "
+            f"the plan is {'ahead by' if gap >= 0 else 'short by'} {gap_text} per month."
+        )
+        actions = [
+            f"Review {flexible_categories[0]} and decide whether it can move closer to the goal this month.",
+            f"Look for a smaller cut in {flexible_categories[1]} before touching protected spending.",
+            f"Use {flexible_categories[2]} as the backup tradeoff if the target date still feels tight.",
+        ]
+        return {
+            "success": True,
+            "error": error,
+            "raw_response": raw_response,
+            "raw_text_length": len(raw_response or ""),
+            "parse_succeeded": parse_succeeded,
+            "summary": summary,
+            "recommended_actions": actions,
+            "risk_warning": "This fallback uses Lantern's deterministic budget numbers because AI did not return usable structured data.",
+            "next_best_step": "Check the flexible categories above, then regenerate AI coaching once the API response is healthy.",
+        }
+
+    client = OpenAI(api_key=api_key)
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "You are a practical budgeting coach. Return valid JSON only."},
+            {"role": "user", "content": f"{prompt}\n\nLantern budget data:\n{json.dumps(coach_data, sort_keys=True)}"},
+        ],
+        response_format={"type": "json_object"},
+        temperature=0.3,
     )
-    response.raise_for_status()
-    result = response.json()
-    output_text = result.get("output_text", "")
-    if not output_text:
-        for item in result.get("output", []):
-            for content in item.get("content", []):
-                if content.get("type") in {"output_text", "text"}:
-                    output_text += content.get("text", "")
-    parsed = json.loads(output_text)
-    changes = [str(item).strip() for item in parsed.get("practical_changes", []) if str(item).strip()][:3]
-    watch = [str(item).strip() for item in parsed.get("categories_to_watch", []) if str(item).strip()][:3]
-    while len(changes) < 3:
-        changes.append("Review one flexible category and decide whether the planned amount still feels realistic.")
+    raw_text = ""
+    try:
+        raw_text = response.choices[0].message.content or ""
+    except Exception:
+        raw_text = ""
+    with st.expander("AI raw response debug"):
+        st.code(raw_text or "[empty response]")
+    if not raw_text.strip():
+        return fallback_coaching("OpenAI returned an empty response", raw_text, False)
+    parsed_result = safe_parse_json(raw_text)
+    if not parsed_result["success"]:
+        return fallback_coaching("AI returned invalid JSON", raw_text, False)
+    parsed = parsed_result["data"]
+    actions = [str(item).strip() for item in parsed.get("recommended_actions", []) if str(item).strip()][:3]
+    while len(actions) < 3:
+        actions.append("Review one flexible category and decide whether the planned amount still feels realistic.")
     return {
-        "on_track": str(parsed.get("on_track", "Review the current plan.")).strip(),
-        "practical_changes": changes,
-        "categories_to_watch": watch,
+        "success": True,
+        "raw_response": raw_text,
+        "raw_text_length": len(raw_text),
+        "parse_succeeded": True,
         "summary": str(parsed.get("summary", "This plan is based on the current Lantern budget numbers.")).strip(),
-        "confidence_warning": str(parsed.get("confidence_warning", "")).strip(),
+        "recommended_actions": actions,
+        "risk_warning": str(parsed.get("risk_warning", "")).strip(),
+        "next_best_step": str(parsed.get("next_best_step", "")).strip(),
     }
 
 
 def generate_goal_discovery_ideas(api_key, discovery_data):
     """Generate inspirational goal ideas. Affordability math still happens in Lantern."""
     prompt = (
-        "You are Lantern's onboarding recommendation coach. Generate inspiring but realistic goals based on the user's interests, location, budget range, target month, and preference. "
-        "All costs are estimates unless they come from user budget data. "
+        "You are Lantern's onboarding recommendation coach. Convert the provided web search results into inspiring but realistic goal cards. "
+        "The web results are the source of truth. Do not make up URLs, source titles, or live prices. "
+        "Use source_urls and source_titles only from search_results. "
+        "Never present an estimated_cost as fact unless a price appears in detected_prices or snippet. "
+        "If price is inferred from snippets or typical planning assumptions, set confidence to low or medium and explain that in affordability_note. "
         "Generate 4 to 6 ideas across different types: travel, local experiences, classes/events, products/tech, and hobbies. Do not make every idea travel. "
         "Suggestions can be trips, events, products, experiences, courses, gear, or packages. "
         "Do not decide affordability, invent income, or override budget calculations. "
@@ -2498,48 +2665,18 @@ def generate_goal_discovery_ideas(api_key, discovery_data):
         "If no live web search is available, say in affordability_note that these are planning estimates, not live prices. "
         "Return valid JSON only. Do not include markdown, prose, code fences, or comments. "
         "The JSON object must have key ideas. ideas must contain between 4 and 6 objects. "
-        "Each object must have: title, goal_type, estimated_cost, target_month, monthly_savings_required, why_it_matches_user_interest, package_deal_angle, what_to_check_next, affordability_note, ways_to_afford_it. "
-        "package_deal_angle should be concrete, such as flight + hostel, local class series, used/refurbished tech, or event tickets + food budget. "
+        "Each object must have: title, type, estimated_cost, confidence, source_urls, source_titles, target_month, monthly_savings_required, why_it_matches_user_interest, package_or_deal_angle, what_to_check_next, affordability_note, ways_to_afford_it. "
+        "type must be one of: travel, event, product, class, hobby, local experience. "
+        "confidence must be high, medium, or low. Use high only when a source provides a clear price. "
+        "package_or_deal_angle should be concrete, such as flight + hostel, local class series, used/refurbished tech, or event tickets + food budget. "
         "ways_to_afford_it must contain 2 or 3 concrete actions. "
-        "Use specific, deal-grounded suggestions instead of generic goals. "
+        "Use specific, source-grounded suggestions instead of generic goals. "
         "Keep each explanation short, aspirational, and practical."
     )
-    request_body = {
-        "model": "gpt-4o-mini",
-        "input": [
-            {"role": "system", "content": prompt},
-            {"role": "user", "content": json.dumps(discovery_data, sort_keys=True)},
-        ],
-        "max_output_tokens": 1400,
-        "response_format": {"type": "json_object"},
-    }
-    response = requests.post(
-        "https://api.openai.com/v1/responses",
-        headers={
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
-        },
-        json=request_body,
-        timeout=30,
-    )
-    if response.status_code == 400 and "response_format" in response.text:
-        request_body.pop("response_format", None)
-        response = requests.post(
-            "https://api.openai.com/v1/responses",
-            headers={
-                "Authorization": f"Bearer {api_key}",
-                "Content-Type": "application/json",
-            },
-            json=request_body,
-            timeout=30,
-        )
-    response.raise_for_status()
-    result = response.json()
-    output_text = response_output_text(result)
-    try:
-        parsed = parse_ai_json_response(output_text)
-    except ValueError as e:
-        raise AIJsonParseError(str(e), output_text) from e
+    parsed_result = openai_responses_json(api_key, prompt, discovery_data, max_output_tokens=1400, retries=1)
+    if not parsed_result["success"]:
+        raise AIJsonParseError(parsed_result["error"], parsed_result.get("raw_response", ""))
+    parsed = parsed_result["data"]
     ideas = []
     for item in parsed.get("ideas", [])[:6]:
         try:
@@ -2560,25 +2697,39 @@ def generate_goal_discovery_ideas(api_key, discovery_data):
             )
         ).strip()
         target_label = str(item.get("target_month", item.get("target_date_or_month", item.get("suggested_target_date", "")))).strip()
-        package_angle = str(item.get("package_deal_angle", item.get("example_plan", "Planning estimate package."))).strip()
+        package_angle = str(item.get("package_or_deal_angle", item.get("package_deal_angle", item.get("example_plan", "Planning estimate package.")))).strip()
         check_next = str(item.get("what_to_check_next", "Check current prices before committing.")).strip()
         affordability_note = str(
             item.get("affordability_note", "Planning estimate only, not a live price.")
         ).strip()
+        source_urls = item.get("source_urls", [])
+        source_titles = item.get("source_titles", [])
+        if not isinstance(source_urls, list):
+            source_urls = [str(source_urls)]
+        if not isinstance(source_titles, list):
+            source_titles = [str(source_titles)]
+        confidence = str(item.get("confidence", "low")).strip().lower()
+        if confidence not in {"high", "medium", "low"}:
+            confidence = "low"
         ideas.append(
             {
                 "title": str(item.get("title", item.get("goal_name", "Goal idea"))).strip(),
-                "goal_type": str(item.get("goal_type", item.get("category", "Experience"))).strip(),
-                "category": str(item.get("goal_type", item.get("category", "Experience"))).strip(),
+                "goal_type": str(item.get("type", item.get("goal_type", item.get("category", "local experience")))).strip(),
+                "type": str(item.get("type", item.get("goal_type", item.get("category", "local experience")))).strip(),
+                "category": str(item.get("type", item.get("goal_type", item.get("category", "local experience")))).strip(),
                 "why_it_matches_user_interest": why,
                 "why_it_matches": why,
                 "estimated_cost": max(1.0, cost),
+                "confidence": confidence,
+                "source_urls": [str(url).strip() for url in source_urls if str(url).strip()][:4],
+                "source_titles": [str(title).strip() for title in source_titles if str(title).strip()][:4],
                 "target_month": target_label,
                 "target_date_or_month": target_label,
                 "monthly_savings": max(0.0, monthly),
                 "monthly_savings_needed": max(0.0, monthly),
                 "monthly_savings_required": max(0.0, monthly),
                 "package_deal_angle": package_angle,
+                "package_or_deal_angle": package_angle,
                 "what_to_check_next": check_next,
                 "affordability_note": affordability_note,
                 "reasoning": affordability_note,
@@ -2611,16 +2762,21 @@ def fallback_goal_discovery_ideas(discovery_data):
         {
             "title": "Tokyo food + culture trip",
             "goal_type": "Travel",
+            "type": "travel",
             "category": "Travel",
             "why_it_matches_user_interest": "A food-market, neighborhood, and culture-focused trip for someone drawn to Japanese food and design.",
             "why_it_matches": "A food-market, neighborhood, and culture-focused trip for someone drawn to Japanese food and design.",
             "estimated_cost": 2800.0,
+            "confidence": "low",
+            "source_urls": [],
+            "source_titles": [],
             "target_month": target,
             "target_date_or_month": target,
             "monthly_savings": 467.0,
             "monthly_savings_needed": 467.0,
             "monthly_savings_required": 467.0,
             "package_deal_angle": "Flight + hostel/private room + food market budget.",
+            "package_or_deal_angle": "Flight + hostel/private room + food market budget.",
             "what_to_check_next": "Check current airfare, capsule hotels or hostels, and whether the target month is peak season.",
             "affordability_note": "Planning estimate only, not a live price; lower costs may mean partial funding or airfare-first.",
             "reasoning": "Flights, lodging, local transit, meals, and a few ticketed cultural experiences make this a meaningful but bounded goal.",
@@ -2639,16 +2795,21 @@ def fallback_goal_discovery_ideas(discovery_data):
         {
             "title": "Seoul gaming + tech trip",
             "goal_type": "Travel",
+            "type": "travel",
             "category": "Travel",
             "why_it_matches_user_interest": "Blends PC cafes, esports culture, street food, shopping, and consumer tech into one focused trip.",
             "why_it_matches": "Blends PC cafes, esports culture, street food, shopping, and consumer tech into one focused trip.",
             "estimated_cost": 2400.0,
+            "confidence": "low",
+            "source_urls": [],
+            "source_titles": [],
             "target_month": target,
             "target_date_or_month": target,
             "monthly_savings": 400.0,
             "monthly_savings_needed": 400.0,
             "monthly_savings_required": 400.0,
             "package_deal_angle": "Long-weekend flight + guesthouse + PC cafe and tech-shopping budget.",
+            "package_or_deal_angle": "Long-weekend flight + guesthouse + PC cafe and tech-shopping budget.",
             "what_to_check_next": "Check flight sales, esports event calendars, and neighborhood lodging prices.",
             "affordability_note": "Planning estimate only, not a live price; keep it short if the budget is tight.",
             "reasoning": "A short Seoul trip can stay lower-cost than a longer international itinerary while still feeling distinctive.",
@@ -2667,16 +2828,21 @@ def fallback_goal_discovery_ideas(discovery_data):
         {
             "title": "New VR gaming setup",
             "goal_type": "Product / tech",
+            "type": "product",
             "category": "Product",
             "why_it_matches_user_interest": "A concrete gaming goal that turns savings into something you can use regularly at home.",
             "why_it_matches": "A concrete gaming goal that turns savings into something you can use regularly at home.",
             "estimated_cost": 900.0,
+            "confidence": "low",
+            "source_urls": [],
+            "source_titles": [],
             "target_month": target,
             "target_date_or_month": target,
             "monthly_savings": 150.0,
             "monthly_savings_needed": 150.0,
             "monthly_savings_required": 150.0,
             "package_deal_angle": "Used/refurbished headset + comfort strap + starter game bundle.",
+            "package_or_deal_angle": "Used/refurbished headset + comfort strap + starter game bundle.",
             "what_to_check_next": "Compare refurbished listings, warranty coverage, and game bundle prices.",
             "affordability_note": "Planning estimate only; refurbished or previous-generation gear can materially change the cost.",
             "reasoning": "A headset, key accessories, and a starter game budget create a realistic product goal.",
@@ -2695,16 +2861,21 @@ def fallback_goal_discovery_ideas(discovery_data):
         {
             "title": "Concert weekend package",
             "goal_type": "Class / event",
+            "type": "event",
             "category": "Event",
             "why_it_matches_user_interest": "A music-focused goal that combines tickets, food, transport, and one night away.",
             "why_it_matches": "A music-focused goal that combines tickets, food, transport, and one night away.",
             "estimated_cost": 750.0,
+            "confidence": "low",
+            "source_urls": [],
+            "source_titles": [],
             "target_month": target,
             "target_date_or_month": target,
             "monthly_savings": 125.0,
             "monthly_savings_needed": 125.0,
             "monthly_savings_required": 125.0,
             "package_deal_angle": "Event tickets + fees + food budget + local hotel or rideshare.",
+            "package_or_deal_angle": "Event tickets + fees + food budget + local hotel or rideshare.",
             "what_to_check_next": "Check ticket tiers, venue fees, and whether lodging is needed.",
             "affordability_note": "Planning estimate only; ticket tiers and fees can move the total quickly.",
             "reasoning": "Bundling the full weekend cost avoids underestimating tickets, fees, food, rides, and lodging.",
@@ -2723,16 +2894,21 @@ def fallback_goal_discovery_ideas(discovery_data):
         {
             "title": "Wellness retreat",
             "goal_type": "Hobby / wellness",
+            "type": "hobby",
             "category": "Wellness",
             "why_it_matches_user_interest": "A restorative goal with a clear package cost and flexible local or travel options.",
             "why_it_matches": "A restorative goal with a clear package cost and flexible local or travel options.",
             "estimated_cost": 1100.0,
+            "confidence": "low",
+            "source_urls": [],
+            "source_titles": [],
             "target_month": target,
             "target_date_or_month": target,
             "monthly_savings": 184.0,
             "monthly_savings_needed": 184.0,
             "monthly_savings_required": 184.0,
             "package_deal_angle": "Two-night retreat package with classes, meals, and transport cushion.",
+            "package_or_deal_angle": "Two-night retreat package with classes, meals, and transport cushion.",
             "what_to_check_next": "Check local retreat packages, refund policy, and what meals/classes are included.",
             "affordability_note": "Planning estimate only; local retreats are usually easier to fit than destination retreats.",
             "reasoning": "A weekend retreat can include lodging, classes, meals, and recovery time without becoming open-ended.",
@@ -2787,14 +2963,21 @@ def render_goal_discovery():
         ["surprise me", "local", "online", "travel", "product"],
         key="discovery_preference",
     )
+    travel_distance = st.text_input(
+        "Travel distance",
+        value=st.session_state.get("discovery_travel_distance", ""),
+        placeholder="local, weekend drive, domestic flight, international",
+        key="discovery_travel_distance",
+    )
     discovery_payload = {
         "interests": interests,
         "location": location,
         "preferred_budget_range": budget_range,
         "target_month": target_month,
         "preference": preference,
+        "travel_distance": travel_distance,
         "today": today.isoformat(),
-        "note": "Generate estimated goals only. Do not infer income or affordability.",
+        "note": "Use search results as source of truth. Do not infer income or affordability.",
     }
     discovery_key = "discovery:" + ai_coach_cache_key(discovery_payload)
     discovery_cache = st.session_state.setdefault("goal_discovery_cache", {})
@@ -2804,7 +2987,20 @@ def render_goal_discovery():
         try:
             if discovery_key not in discovery_cache:
                 with st.spinner("Finding goal ideas..."):
-                    discovery_cache[discovery_key] = generate_goal_discovery_ideas(openai_api_key, discovery_payload)
+                    search_payload = search_goal_options(discovery_payload)
+                    if search_payload.get("error") or not search_payload.get("results"):
+                        st.warning("Could not verify live options, showing planning estimates only.")
+                        if search_payload.get("error"):
+                            st.caption(search_payload["error"])
+                        discovery_cache[discovery_key] = fallback_goal_discovery_ideas(discovery_payload)
+                    else:
+                        discovery_payload_with_search = {
+                            **discovery_payload,
+                            "search_results": search_payload["results"],
+                            "search_result_count": len(search_payload["results"]),
+                        }
+                        st.session_state.goal_discovery_last_search = search_payload["results"]
+                        discovery_cache[discovery_key] = generate_goal_discovery_ideas(openai_api_key, discovery_payload_with_search)
         except AIJsonParseError as e:
             message = str(e)
             if "empty response" in message:
@@ -2818,6 +3014,7 @@ def render_goal_discovery():
         except Exception as e:
             st.error("Goal Discovery could not generate ideas.")
             st.code(str(e))
+            st.warning("Could not verify live options, showing planning estimates only.")
             discovery_cache[discovery_key] = fallback_goal_discovery_ideas(discovery_payload)
             st.info("Showing sample suggestions instead.")
         st.session_state.active_goal_discovery_key = discovery_key
@@ -2838,9 +3035,17 @@ def render_goal_discovery():
                 idea_cols[0].metric("Estimated cost", money(idea["estimated_cost"]))
                 idea_cols[1].metric("Target month", idea.get("target_month") or idea.get("target_date_or_month") or "Flexible")
                 idea_cols[2].metric("Save monthly", money(idea.get("monthly_savings_required", idea.get("monthly_savings_needed", 0.0))))
-                st.write(f"**Deal/package angle:** {idea.get('package_deal_angle', 'Planning estimate package.')}")
+                st.caption(f"Confidence: {str(idea.get('confidence', 'low')).title()}")
+                st.write(f"**Deal/package angle:** {idea.get('package_or_deal_angle', idea.get('package_deal_angle', 'Planning estimate package.'))}")
                 st.write(f"**What to check next:** {idea.get('what_to_check_next', 'Check current prices before committing.')}")
                 st.caption(idea.get("affordability_note", "Planning estimate only. Lantern checks affordability with your budget."))
+                source_urls = idea.get("source_urls", [])
+                source_titles = idea.get("source_titles", [])
+                if source_urls:
+                    st.markdown("**Sources**")
+                    for source_idx, source_url in enumerate(source_urls[:4]):
+                        source_title = source_titles[source_idx] if source_idx < len(source_titles) else source_url
+                        st.markdown(f"- [{source_title}]({source_url})")
                 ways = idea.get("ways_to_afford_it", idea.get("ways_to_afford", []))
                 if ways:
                     st.markdown("**Ways to afford it**")
@@ -2867,6 +3072,7 @@ def render_goal_discovery():
 
 
 def render_goal_ai_coach_panel(plan, budget_summary):
+    st.caption("AI_COACH_VERSION_2_LOADED")
     st.markdown("**AI Coach**")
     st.caption("Optional guidance based on the current affordability plan. Lantern keeps the budget math as the source of truth.")
     budget_allocations = plan.get("budget_allocations", {}) or {}
@@ -2923,22 +3129,43 @@ def render_goal_ai_coach_panel(plan, budget_summary):
                 with st.spinner("Generating AI coaching plan..."):
                     ai_coach_cache[coach_key] = generate_goal_ai_coaching_plan(openai_api_key, coach_payload)
             except Exception as e:
-                st.error("AI Coach API call failed.")
-                st.code(str(e))
-                return
+                ai_coach_cache[coach_key] = {
+                    "success": True,
+                    "error": f"AI coaching plan could not be generated: {e}",
+                    "raw_response": "",
+                    "raw_text_length": 0,
+                    "parse_succeeded": False,
+                    "summary": "Lantern could not reach AI coaching, so this fallback uses the current budget math only.",
+                    "recommended_actions": [
+                        "Review the largest flexible category before changing protected spending.",
+                        "Adjust one planned future budget number and check whether the goal moves on track.",
+                        "Try generating AI coaching again after the API call is healthy.",
+                    ],
+                    "risk_warning": "AI coaching was unavailable; budget calculations above are still deterministic.",
+                    "next_best_step": "Use the Budget Planner numbers to make one flexible tradeoff.",
+                }
+                st.error(ai_coach_cache[coach_key]["error"])
+                show_ai_debug_response("")
         st.session_state.active_goal_ai_coach_key = coach_key
     if st.session_state.get("active_goal_ai_coach_key") == coach_key and coach_key in ai_coach_cache:
         advice = ai_coach_cache[coach_key]
-        st.write(f"**Goal status:** {advice['on_track']}")
+        if advice.get("error"):
+            st.error(advice["error"])
+            if advice.get("raw_response"):
+                show_ai_debug_response(advice.get("raw_response", ""))
+        st.caption(
+            "API key detected: Yes · "
+            f"OpenAI text length > 0: {'Yes' if int(advice.get('raw_text_length', 0)) > 0 else 'No'} · "
+            f"JSON parse succeeded: {'Yes' if advice.get('parse_succeeded') else 'No'}"
+        )
         st.write(advice["summary"])
-        st.markdown("**3 practical changes**")
-        for idx, action in enumerate(advice["practical_changes"][:3], start=1):
+        st.markdown("**Recommended actions**")
+        for idx, action in enumerate(advice["recommended_actions"][:3], start=1):
             st.write(f"{idx}. {action}")
-        watch = advice.get("categories_to_watch") or []
-        st.markdown("**Categories to watch**")
-        st.write(", ".join(watch) if watch else "No specific categories flagged.")
-        if advice.get("confidence_warning"):
-            st.warning(advice["confidence_warning"])
+        if advice.get("risk_warning"):
+            st.warning(advice["risk_warning"])
+        if advice.get("next_best_step"):
+            st.info(f"Next best step: {advice['next_best_step']}")
 
 
 def detected_savings_text(value):
@@ -4238,20 +4465,27 @@ elif page == "Budget Planner":
             except Exception as e:
                 st.error("AI Coach could not generate advice right now.")
                 st.code(str(e))
+            if coach_key in ai_coach_cache and not ai_coach_cache[coach_key].get("success", True):
+                st.error(ai_coach_cache[coach_key].get("error", "AI returned invalid structured data."))
+                show_ai_debug_response(ai_coach_cache[coach_key].get("raw_response", ""))
         st.session_state.active_ai_coach_key = coach_key
     active_coach_key = st.session_state.get("active_ai_coach_key")
     if active_coach_key == coach_key and coach_key in ai_coach_cache:
         coach_advice = ai_coach_cache[coach_key]
-        st.write(f"**Goal status:** {coach_advice.get('status', 'Review the current plan.')}")
-        st.write(coach_advice.get("summary", "This guidance uses Lantern's current budget numbers."))
-        st.markdown("**Recommended actions**")
-        for idx, action in enumerate(coach_advice["recommended_actions"][:3], start=1):
-            st.write(f"{idx}. {action}")
-        watch = coach_advice.get("categories_to_watch") or []
-        st.markdown("**Categories to watch**")
-        st.write(", ".join(watch) if watch else "No specific categories flagged.")
-        if coach_advice.get("confidence_warning"):
-            st.warning(coach_advice["confidence_warning"])
+        if not coach_advice.get("success", True):
+            st.error(coach_advice.get("error", "AI returned invalid structured data."))
+            show_ai_debug_response(coach_advice.get("raw_response", ""))
+        else:
+            st.write(f"**Goal status:** {coach_advice.get('status', 'Review the current plan.')}")
+            st.write(coach_advice.get("summary", "This guidance uses Lantern's current budget numbers."))
+            st.markdown("**Recommended actions**")
+            for idx, action in enumerate(coach_advice["recommended_actions"][:3], start=1):
+                st.write(f"{idx}. {action}")
+            watch = coach_advice.get("categories_to_watch") or []
+            st.markdown("**Categories to watch**")
+            st.write(", ".join(watch) if watch else "No specific categories flagged.")
+            if coach_advice.get("confidence_warning"):
+                st.warning(coach_advice["confidence_warning"])
     st.caption(
         f"{money(income_amount)} monthly income - {money(future_budget_total)} future budget "
         f"= {money(monthly_available_for_goal)} available for the goal."
