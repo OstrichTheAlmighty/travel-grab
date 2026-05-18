@@ -179,6 +179,9 @@ def classify_source(url, title="", snippet=""):
         "lenovo.com",
         "logitech.com",
         "meta.com",
+        "onepeloton.com",
+        "alomoves.com",
+        "fitonapp.com",
         "store.steampowered.com",
     )
     event_domains = ("ticketmaster.com", "livenation.com", "eventbrite.com", "bandsintown.com")
@@ -261,6 +264,10 @@ def source_text_for_idea(idea, search_results=None):
         str(idea.get("source_price_or_price_note", "")),
         str(idea.get("package_or_deal_angle", "")),
         str(idea.get("what_to_check_next", "")),
+        str(idea.get("source_title", "")),
+        str(idea.get("source_url", "")),
+        str(idea.get("source_snippet", "")),
+        " ".join(str(snippet) for snippet in (idea.get("source_snippets", []) or [])),
     ]
     for idx, url in enumerate(source_urls):
         result = by_url.get(str(url).strip(), {})
@@ -329,6 +336,7 @@ def validate_goal_idea(idea, discovery_data=None, today=None):
     source_date_valid = bool(source_date and source_date >= today)
     event_like = is_concert_or_event(idea, discovery_data)
     product_like = is_product_like(idea, discovery_data)
+    subscription_like = "subscription" in idea_type or "membership" in source_text.lower()
     class_like = "class" in idea_type or "workshop" in source_text.lower() or "course" in source_text.lower()
     product_name = str(idea.get("product_name") or idea.get("title") or "").strip()
     product_specific = product_name_is_specific(product_name)
@@ -346,7 +354,7 @@ def validate_goal_idea(idea, discovery_data=None, today=None):
             source_type = candidate_type
     if source_urls:
         extraction_source = source_urls[0]
-    if product_like:
+    if product_like or subscription_like:
         trusted_price_source = source_type in {"official_retailer", "marketplace", "review_article"}
     elif event_like:
         trusted_price_source = source_type == "official_event"
@@ -373,9 +381,9 @@ def validate_goal_idea(idea, discovery_data=None, today=None):
         reasons.append("source date is in the past")
     if has_unavailable_or_stale_text(source_text):
         reasons.append("source indicates unavailable or stale tickets")
-    if not price_candidates and not explicit_free and (product_like or event_like or class_like):
+    if not price_candidates and not explicit_free and (product_like or event_like or class_like or subscription_like):
         reasons.append("real extracted price is missing")
-    elif price_candidates and not trusted_price_source and (product_like or event_like or class_like):
+    elif price_candidates and not trusted_price_source and (product_like or event_like or class_like or subscription_like):
         reasons.append("price came from an untrusted source type")
     if source_type == "roundup_article" and not price_valid:
         reasons.append("roundup article has no verified price")
@@ -391,7 +399,7 @@ def validate_goal_idea(idea, discovery_data=None, today=None):
             reasons.append("event source does not match the selected location")
         if not explicit_free and (extracted_price is None or extracted_price < 50):
             reasons.append("concert/event estimate is below $50 without an explicit free source")
-    if product_like:
+    if product_like or subscription_like:
         if not source_urls:
             reasons.append("product has no source URL")
         if not product_specific:
@@ -419,7 +427,7 @@ def validate_goal_idea(idea, discovery_data=None, today=None):
         reasons.append("estimated cost used an invalid one-dollar fallback")
 
     if str(idea.get("confidence", "")).lower() == "high":
-        if product_like:
+        if product_like or subscription_like:
             if not (source_urls and product_specific and price_valid and source_type in {"official_retailer", "marketplace", "review_article"}):
                 idea["confidence"] = "medium"
         elif event_like and not (source_urls and source_date_valid and price_valid and source_location_valid and source_type == "official_event"):
