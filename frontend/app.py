@@ -3949,10 +3949,20 @@ def source_badge(source_type):
     return {
         "verified_booking_page": "Verified price source",
         "verified_product_page": "Verified price source",
-        "pricing_reference": "Pricing reference",
-        "inspiration_only": "Estimate only",
-        "no_source": "Estimate only",
-    }.get(source_type, "Estimate only")
+        "pricing_reference": "Research source",
+        "inspiration_only": "Estimated price",
+        "no_source": "Estimated price",
+    }.get(source_type, "Estimated price")
+
+
+def display_source_label(label):
+    return {
+        "Catalog fallback": "Template suggestion",
+        "AI personalized": "AI personalized",
+        "Verified price source": "Verified price source",
+        "Pricing reference": "Research source",
+        "Estimate only": "Estimated price",
+    }.get(str(label or "").strip(), str(label or "").strip() or "Estimated price")
 
 
 def validate_tavily_source(result):
@@ -4130,8 +4140,8 @@ def normalize_ai_goal_card(card, target_month, location="", budget=0.0):
         "source_title": "",
         "source_url": "",
         "source_type": "no_source",
-        "source_badge": "Estimate only",
-        "source_mode": "Estimate only",
+        "source_badge": "Estimated price",
+        "source_mode": "Estimated price",
         "generated_by": "AI",
     }
     live_link, source_debug = tavily_link_for_card(normalized, location, budget)
@@ -4315,7 +4325,6 @@ def render_goal_discovery():
             )
             raw = response.choices[0].message.content
             if DEV_MODE:
-                st.write("AI_GENERATION_SUCCEEDED")
                 st.code(raw)
             parsed_cards = parse_ai_card_list(raw)
             cards = [
@@ -4332,7 +4341,6 @@ def render_goal_discovery():
 
         except Exception as e:
             if DEV_MODE:
-                st.write("AI_GENERATION_FAILED")
                 st.exception(e)
             fallback_cards = hard_rule_goal_cards(interests)
             if fallback_cards is None:
@@ -4375,7 +4383,7 @@ def render_goal_discovery():
         selected_goals = hard_rule_cards
 
     if active_goal_source:
-        action_cols[2].caption(f"Source: {active_goal_source}. Each card shows its own source badge.")
+        action_cols[2].caption(f"Source: {display_source_label(active_goal_source)}. Each card shows its own source badge.")
     else:
         action_cols[2].caption("Each card shows its own source badge.")
 
@@ -4408,7 +4416,7 @@ def render_goal_discovery():
                     st.caption(f"Target: {target_date.strftime('%B %Y')}")
                     source_title = idea.get("source_title") or "Source needed"
                     source_label = idea.get("source_badge") or idea.get("source_mode", "Catalog fallback")
-                    st.caption(f"{source_label} · {source_title}")
+                    st.caption(f"{display_source_label(source_label)} · {source_title}")
                     if idea.get("description"):
                         st.caption(idea["description"])
                     elif idea.get("why_match"):
