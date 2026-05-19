@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Byable | How can I afford this?</title>
+    <meta
+      name="description"
+      content="Byable helps you discover experiences, products, and goals personalized to your interests, then see realistic ways to afford them."
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #070b10;
+        --panel: rgba(255, 255, 255, 0.055);
+        --panel-strong: rgba(255, 255, 255, 0.09);
+        --line: rgba(255, 255, 255, 0.12);
+        --text: #f7fbff;
+        --muted: rgba(247, 251, 255, 0.68);
+        --soft: rgba(247, 251, 255, 0.46);
+        --mint: #8ff0c7;
+        --blue: #8cc7ff;
+        --gold: #f2d27c;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background:
+          radial-gradient(circle at 20% 12%, rgba(140, 199, 255, 0.18), transparent 34rem),
+          radial-gradient(circle at 78% 18%, rgba(143, 240, 199, 0.14), transparent 30rem),
+          linear-gradient(145deg, #070b10 0%, #0b1118 52%, #05070a 100%);
+        color: var(--text);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+      }
+
+      body {
+        display: flex;
+        align-items: stretch;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding: 28px 0;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 750;
+        letter-spacing: 0.01em;
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 11px;
+        background: linear-gradient(135deg, var(--mint), var(--blue));
+        box-shadow: 0 0 34px rgba(143, 240, 199, 0.24);
+      }
+
+      .nav-cta {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 10px 16px;
+        color: var(--muted);
+        font-size: 0.92rem;
+        transition: border-color 160ms ease, color 160ms ease, background 160ms ease;
+      }
+
+      .nav-cta:hover {
+        border-color: rgba(143, 240, 199, 0.42);
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      main {
+        flex: 1;
+        display: grid;
+        align-content: center;
+        padding: 70px 0 34px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+        gap: 46px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        width: fit-content;
+        border: 1px solid rgba(143, 240, 199, 0.3);
+        border-radius: 999px;
+        background: rgba(143, 240, 199, 0.08);
+        color: var(--mint);
+        padding: 8px 12px;
+        font-size: 0.82rem;
+        font-weight: 650;
+        margin-bottom: 22px;
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 760px;
+        font-size: clamp(3rem, 8vw, 6.4rem);
+        line-height: 0.92;
+        letter-spacing: -0.055em;
+      }
+
+      .subheadline {
+        max-width: 680px;
+        margin: 26px 0 0;
+        color: var(--muted);
+        font-size: clamp(1.05rem, 2vw, 1.35rem);
+        line-height: 1.58;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        align-items: center;
+        margin-top: 34px;
+      }
+
+      .primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 54px;
+        padding: 0 22px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--mint), #d8fff0);
+        color: #07100d;
+        font-weight: 800;
+        box-shadow: 0 18px 50px rgba(143, 240, 199, 0.18);
+        transition: transform 160ms ease, box-shadow 160ms ease;
+      }
+
+      .primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 22px 64px rgba(143, 240, 199, 0.24);
+      }
+
+      .note {
+        color: var(--soft);
+        font-size: 0.93rem;
+      }
+
+      .preview {
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.035));
+        box-shadow: 0 28px 90px rgba(0, 0, 0, 0.32);
+        padding: 22px;
+        overflow: hidden;
+      }
+
+      .preview-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        color: var(--muted);
+        font-size: 0.88rem;
+        margin-bottom: 18px;
+      }
+
+      .status {
+        color: var(--mint);
+      }
+
+      .goal-row {
+        display: grid;
+        gap: 12px;
+      }
+
+      .goal {
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        background: rgba(7, 11, 16, 0.62);
+        padding: 16px;
+      }
+
+      .goal strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 1.02rem;
+      }
+
+      .goal span {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.45;
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 54px;
+      }
+
+      .feature-card {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--panel);
+        padding: 20px;
+        min-height: 142px;
+        transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(143, 240, 199, 0.32);
+        background: var(--panel-strong);
+      }
+
+      .feature-card small {
+        color: var(--gold);
+        font-weight: 750;
+      }
+
+      .feature-card h2 {
+        margin: 14px 0 8px;
+        font-size: 1.05rem;
+      }
+
+      .feature-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.94rem;
+        line-height: 1.5;
+      }
+
+      footer {
+        color: var(--soft);
+        font-size: 0.85rem;
+        padding: 18px 0 0;
+      }
+
+      @media (max-width: 840px) {
+        .page {
+          width: min(100% - 28px, 680px);
+          padding-top: 22px;
+        }
+
+        header {
+          align-items: flex-start;
+        }
+
+        .hero {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+
+        main {
+          align-content: start;
+          padding-top: 54px;
+        }
+
+        .features {
+          grid-template-columns: 1fr;
+          margin-top: 34px;
+        }
+
+        .preview {
+          border-radius: 20px;
+          padding: 16px;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .nav-cta {
+          display: none;
+        }
+
+        .actions {
+          align-items: stretch;
+        }
+
+        .primary {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <a class="brand" href="/" aria-label="Byable home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Byable</span>
+        </a>
+        <a class="nav-cta" href="https://ai-finance-coach-hxi2at7oduv873vmhpgukl.streamlit.app/">
+          Try the live demo
+        </a>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="hero-title">
+          <div>
+            <div class="eyebrow">Goal discovery meets affordability planning</div>
+            <h1 id="hero-title">How can I afford this?</h1>
+            <p class="subheadline">
+              Discover experiences, products, and goals personalized to your interests — then see realistic ways to make them happen.
+            </p>
+            <div class="actions">
+              <a class="primary" href="https://ai-finance-coach-hxi2at7oduv873vmhpgukl.streamlit.app/">
+                Try the live demo
+              </a>
+              <span class="note">No spreadsheets. No generic budget lecture.</span>
+            </div>
+          </div>
+
+          <aside class="preview" aria-label="Byable preview">
+            <div class="preview-top">
+              <span>Goal ideas</span>
+              <span class="status">Plan ready</span>
+            </div>
+            <div class="goal-row">
+              <div class="goal">
+                <strong>Beginner scuba certification</strong>
+                <span>Estimated cost, monthly savings, and practical tradeoffs in one plan.</span>
+              </div>
+              <div class="goal">
+                <strong>Weekend climbing trip</strong>
+                <span>Turn a goal into a target date, source links, and next actions.</span>
+              </div>
+              <div class="goal">
+                <strong>Concert weekend package</strong>
+                <span>Compare what you want with what your future budget can support.</span>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="features" aria-label="Byable features">
+          <article class="feature-card">
+            <small>01</small>
+            <h2>Personalized goal ideas</h2>
+            <p>Start with interests like travel, concerts, gear, classes, wellness, or hobbies.</p>
+          </article>
+          <article class="feature-card">
+            <small>02</small>
+            <h2>Realistic savings plans</h2>
+            <p>See the monthly path, tradeoffs, and budget room needed to reach the goal.</p>
+          </article>
+          <article class="feature-card">
+            <small>03</small>
+            <h2>Live source links</h2>
+            <p>Use source-backed links where available, with estimates clearly labeled when pricing is not verified.</p>
+          </article>
+        </section>
+      </main>
+
+      <footer>© 2026 Byable. See the path to what you want.</footer>
+    </div>
+  </body>
+</html>
