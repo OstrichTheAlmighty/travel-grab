@@ -1,6 +1,6 @@
-# Lantern Landing Page
+# Byable Landing Page
 
-Public-facing Next.js + Tailwind landing page for Lantern.
+Public-facing Next.js + Tailwind landing page for Byable.
 
 Primary hook: “How can I afford this by this date?”
 
@@ -23,10 +23,10 @@ Open `http://localhost:3000`.
 The `Try the demo` buttons use:
 
 ```bash
-NEXT_PUBLIC_DEMO_URL=https://lantern.streamlit.app
+NEXT_PUBLIC_DEMO_URL=https://byable.streamlit.app
 ```
 
-If the env var is not set, the app falls back to `https://lantern.streamlit.app`.
+If the env var is not set, the app falls back to `https://byable.streamlit.app`.
 
 ## Push To GitHub
 
@@ -34,7 +34,7 @@ From the repo root:
 
 ```bash
 git add lantern-landing
-git commit -m "Add Lantern Next.js landing page"
+git commit -m "Add Byable Next.js landing page"
 git push
 ```
 
@@ -49,7 +49,7 @@ git push
 4. Add the environment variable:
 
 ```bash
-NEXT_PUBLIC_DEMO_URL=https://lantern.streamlit.app
+NEXT_PUBLIC_DEMO_URL=https://byable.streamlit.app
 ```
 
 5. Deploy.

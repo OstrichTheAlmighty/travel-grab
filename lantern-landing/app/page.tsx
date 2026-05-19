@@ -3,20 +3,20 @@
 import { FormEvent, useState } from "react";
 
 const demoUrl =
-  process.env.NEXT_PUBLIC_DEMO_URL || "https://lantern.streamlit.app";
+  process.env.NEXT_PUBLIC_DEMO_URL || "https://byable.streamlit.app";
 
 const steps = [
   {
     title: "Name the thing",
-    copy: "Lantern helps you understand how to afford a goal by a target date.",
+    copy: "Byable helps you understand how to afford a goal by a target date.",
   },
   {
     title: "See the real tradeoff",
-    copy: "Lantern turns spending habits into clear weekly actions.",
+    copy: "Byable turns spending habits into clear weekly actions.",
   },
   {
     title: "Choose the path",
-    copy: "Lantern shows the path from what you want to what you need to change.",
+    copy: "Byable shows the path from what you want to what you need to change.",
   },
 ];
 
@@ -57,13 +57,13 @@ export default function Page() {
               L
             </div>
             <span className="text-sm font-semibold tracking-wide text-white">
-              Lantern
+              Byable
             </span>
           </div>
           <div className="hidden items-center gap-8 text-sm text-white/68 md:flex">
             <a href="#how">How it works</a>
             <a href="#plans">Plans</a>
-            <a href="#why">Why Lantern</a>
+            <a href="#why">Why Byable</a>
           </div>
           <a
             href={demoUrl}
@@ -82,7 +82,7 @@ export default function Page() {
               How can I afford this by this date?
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-8 text-white/70 sm:text-xl">
-              Lantern helps you understand how to afford a goal by a target date.
+              Byable helps you understand how to afford a goal by a target date.
               It turns spending habits into clear weekly actions.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
@@ -144,7 +144,7 @@ export default function Page() {
 
                 <div className="mt-4 rounded-2xl border border-lantern-blue/20 bg-lantern-blue/10 p-4">
                   <p className="text-sm text-white/62">
-                    Lantern protects rent, bills, savings, groceries, health, and
+                    Byable protects rent, bills, savings, groceries, health, and
                     essential transportation by default.
                   </p>
                 </div>
@@ -161,7 +161,7 @@ export default function Page() {
               Early access
             </p>
             <h2 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
-              Want early access to Lantern?
+              Want early access to Byable?
             </h2>
           </div>
           <form
@@ -235,7 +235,7 @@ export default function Page() {
               Plans that feel human, not punitive.
             </h2>
             <p className="mt-6 text-lg leading-8 text-white/64">
-              Lantern shows the path from what you want to what you need to change,
+              Byable shows the path from what you want to what you need to change,
               with weekly actions that keep the target date in view.
             </p>
           </div>
@@ -260,13 +260,13 @@ export default function Page() {
           <div className="grid gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-end">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-lantern-gold">
-                Why Lantern
+                Why Byable
               </p>
               <h2 className="mt-4 max-w-4xl text-4xl font-semibold tracking-tight sm:text-6xl">
                 Because wanting something should come with a path, not guilt.
               </h2>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-white/64">
-                Lantern turns spending habits into clear weekly actions, so a
+                Byable turns spending habits into clear weekly actions, so a
                 goal comes with a path instead of guesswork.
               </p>
             </div>

@@ -18,10 +18,10 @@ except Exception as exc:
         import streamlit as st
 
         try:
-            st.set_page_config(page_title="Lantern", layout="wide")
+            st.set_page_config(page_title="Byable", layout="wide")
         except Exception:
             pass
-        st.error("Lantern could not start.")
+        st.error("Byable could not start.")
         st.write("The app hit an initialization error before the main interface could render.")
         st.code("".join(traceback.format_exception(type(exc), exc, exc.__traceback__)))
     except Exception:

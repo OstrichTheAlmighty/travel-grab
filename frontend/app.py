@@ -28,7 +28,7 @@ DEV_MODE = str(os.environ.get("DEV_MODE", "")).lower() in {"1", "true", "yes", "
 PROVIDER_CACHE_PATH = os.path.join(CURRENT_DIR, "provider_results_cache.json")
 PROVIDER_CACHE_TTL_DAYS = 7
 
-st.set_page_config(page_title="Lantern", layout="wide")
+st.set_page_config(page_title="Byable", layout="wide")
 
 SESSION_DEFAULTS = {
     "user_id": "default",
@@ -1005,7 +1005,7 @@ def approved_reduction_capacity(category_rows, preferences=None, plan_style="Bal
 def category_insight(category_name, monthly_spend, suggested_cut, total_spend):
     if suggested_cut <= 0:
         if category_flexibility(category_name) == "protected":
-            return "Protected. Lantern will never suggest cutting this."
+            return "Protected. Byable will never suggest cutting this."
         return "Essential. Necessary spending usually stays out of reduction plans."
     pct = (suggested_cut / monthly_spend * 100) if monthly_spend > 0 else 0
     if category_name == "Coffee":
@@ -1906,7 +1906,7 @@ def render_need_more_price_data(search_links):
     if not search_links:
         return
     st.markdown("**Need more price data**")
-    st.caption("Lantern found ideas, but not enough verified prices. These searches are more likely to surface purchasable pages.")
+    st.caption("Byable found ideas, but not enough verified prices. These searches are more likely to surface purchasable pages.")
     cols = st.columns(min(3, len(search_links)))
     for idx, link in enumerate(search_links[:3]):
         with cols[idx % len(cols)]:
@@ -2021,7 +2021,7 @@ def calculate_lantern_demo(
 
 def render_lantern_demo_page():
     st.title("Can I afford this?")
-    st.caption("Lantern demo. Local calculations only.")
+    st.caption("Byable demo. Local calculations only.")
 
     with st.form("lantern_demo_form"):
         goal_cols = st.columns([1.4, 0.8, 0.8])
@@ -2076,7 +2076,7 @@ def render_lantern_demo_page():
         st.session_state.setdefault("lantern_emails", [])
         if email.strip() not in st.session_state.lantern_emails:
             st.session_state.lantern_emails.append(email.strip())
-        st.success("Email saved. You are on the Lantern updates list.")
+        st.success("Email saved. You are on the Byable updates list.")
 
     metric_cols = st.columns(3)
     metric_cols[0].metric("Required weekly savings", money(result["required_weekly_savings"]))
@@ -2833,7 +2833,7 @@ def generate_goal_intents(api_key, discovery_data):
     if not api_key:
         return fallback
     prompt = (
-        "Return strict JSON only. Generate 4 to 6 structured goal intents for Lantern Goal Discovery. "
+        "Return strict JSON only. Generate 4 to 6 structured goal intents for Byable Goal Discovery. "
         "Do not generate final products, source URLs, source titles, exact prices, or estimated_cost. "
         "Only describe intent and product search queries. Every item must include exactly these fields: "
         "title, category, experience_score, confidence, why_match, product_search_queries. "
@@ -2941,7 +2941,7 @@ def provider_cards_from_intents(intents, discovery_data):
                 "package_deal_angle": "Deterministic provider result.",
                 "package_or_deal_angle": "Deterministic provider result.",
                 "what_to_check_next": "Open the source to confirm current availability, fees, and taxes.",
-                "affordability_note": "Provider result. Lantern checks affordability with your budget math.",
+                "affordability_note": "Provider result. Byable checks affordability with your budget math.",
                 "travel_cost_buckets": {"flight": None, "lodging": None, "activities": None, "food_local_transport": None},
                 "ways_to_afford_it": [
                     "Use the Budget Planner to test this goal against your current plan.",
@@ -2997,9 +2997,9 @@ def cached_provider_cards(intents, discovery_data, refresh=False):
 
 
 def generate_ai_coach_advice(api_key, coach_data):
-    """Ask AI to explain existing Lantern calculations without recalculating them."""
+    """Ask AI to explain existing Byable calculations without recalculating them."""
     prompt = (
-        "You are Lantern's AI Coach. Use only the structured data provided. "
+        "You are Byable's AI Coach. Use only the structured data provided. "
         "Do not recalculate totals, invent transactions, or change budget numbers. "
         "Reference actual dollar amounts from the input. "
         "Recommend only flexible categories unless protected_cuts_enabled is true. "
@@ -3026,7 +3026,7 @@ def generate_ai_coach_advice(api_key, coach_data):
         "success": True,
         "raw_response": parsed_result.get("raw_response", ""),
         "status": str(parsed.get("status", "Review the current plan.")).strip(),
-        "summary": str(parsed.get("summary", "This guidance uses Lantern's current budget numbers.")).strip(),
+        "summary": str(parsed.get("summary", "This guidance uses Byable's current budget numbers.")).strip(),
         "recommended_actions": actions,
         "categories_to_watch": watch,
         "confidence_warning": str(parsed.get("confidence_warning", "")).strip(),
@@ -3036,7 +3036,7 @@ def generate_ai_coach_advice(api_key, coach_data):
 def generate_goal_ai_coaching_plan(api_key, coach_data):
     """Generate narrative coaching from existing affordability calculations only."""
     prompt = (
-        "Use only this Lantern budget data. Do not recalculate totals, invent categories, or change any budget numbers. "
+        "Use only this Byable budget data. Do not recalculate totals, invent categories, or change any budget numbers. "
         "Reference actual dollar amounts from the data. Recommend only flexible categories unless protected_cuts_enabled is true. "
         "Return valid JSON only with this exact schema: "
         '{"summary":"...","recommended_actions":["...","...","..."],"risk_warning":"...","next_best_step":"..."}. '
@@ -3057,7 +3057,7 @@ def generate_goal_ai_coaching_plan(api_key, coach_data):
             flexible_categories.append("a flexible category")
         gap_text = money(abs(gap))
         summary = (
-            f"Lantern's math shows this goal is {status_text}; "
+            f"Byable's math shows this goal is {status_text}; "
             f"the plan is {'ahead by' if gap >= 0 else 'short by'} {gap_text} per month."
         )
         actions = [
@@ -3073,7 +3073,7 @@ def generate_goal_ai_coaching_plan(api_key, coach_data):
             "parse_succeeded": parse_succeeded,
             "summary": summary,
             "recommended_actions": actions,
-            "risk_warning": "This fallback uses Lantern's deterministic budget numbers because AI did not return usable structured data.",
+            "risk_warning": "This fallback uses Byable's deterministic budget numbers because AI did not return usable structured data.",
             "next_best_step": "Check the flexible categories above, then regenerate AI coaching once the API response is healthy.",
         }
 
@@ -3082,7 +3082,7 @@ def generate_goal_ai_coaching_plan(api_key, coach_data):
         model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": "You are a practical budgeting coach. Return valid JSON only."},
-            {"role": "user", "content": f"{prompt}\n\nLantern budget data:\n{json.dumps(coach_data, sort_keys=True)}"},
+            {"role": "user", "content": f"{prompt}\n\nByable budget data:\n{json.dumps(coach_data, sort_keys=True)}"},
         ],
         response_format={"type": "json_object"},
         temperature=0.3,
@@ -3109,7 +3109,7 @@ def generate_goal_ai_coaching_plan(api_key, coach_data):
         "raw_response": raw_text,
         "raw_text_length": len(raw_text),
         "parse_succeeded": True,
-        "summary": str(parsed.get("summary", "This plan is based on the current Lantern budget numbers.")).strip(),
+        "summary": str(parsed.get("summary", "This plan is based on the current Byable budget numbers.")).strip(),
         "recommended_actions": actions,
         "risk_warning": str(parsed.get("risk_warning", "")).strip(),
         "next_best_step": str(parsed.get("next_best_step", "")).strip(),
@@ -3446,10 +3446,10 @@ def generate_ai_goal_cards(api_key, discovery_payload):
         return {"success": False, "error": "OpenAI key missing", "cards": [], "raw_response": ""}
     budget = float(discovery_payload.get("budget", 1000.0) or 1000.0)
     prompt = (
-        "You are Lantern's Goal Discovery assistant. Return JSON only. "
+        "You are Byable's Goal Discovery assistant. Return JSON only. "
         "Generate exactly 5 goal ideas based on the user's interests, location, budget, target_month, and preference. "
         "Each goal must include: title, category, estimated_cost, source_title, source_url, why_match, ways_to_afford_it. "
-        "Use categories that match the user's stated interest, even when the interest is not in Lantern's catalog. "
+        "Use categories that match the user's stated interest, even when the interest is not in Byable's catalog. "
         "If the user says concerts, use concerts/events/music/festivals only. "
         "If the user says scuba diving, generate cards like beginner scuba certification, local dive trip, "
         "mask/fins/snorkel starter kit, advanced open water course, and warm-water dive vacation fund. "
@@ -4173,7 +4173,8 @@ def parse_discovery_target_date(value):
 
 def render_goal_discovery():
     st.markdown("**Goal Discovery**")
-    st.caption("Tell Lantern what you are into. Catalog suggestions always load first; live links are optional.")
+    st.caption("BYABLE_BRANDING_LOADED")
+    st.caption("Tell Byable what you are into. Catalog suggestions always load first; live links are optional.")
 
     input_cols = st.columns([1.4, 1.0, 0.8, 0.8])
     interests = input_cols[0].text_input(
@@ -4284,7 +4285,7 @@ def render_goal_discovery():
 
         Every card must include:
         title, category, estimated_cost, monthly_savings, description, ways_to_afford_it, search_query.
-        Do not include source_url or source_title. Lantern will find live links separately.
+        Do not include source_url or source_title. Byable will find live links separately.
         Make search_query target purchasable or bookable pages:
         - products: "{{goal}} buy price under {budget_range}"
         - classes: "{{goal}} registration price"
@@ -4444,7 +4445,7 @@ def render_goal_discovery():
                             if DEV_MODE:
                                 st.code(str(e))
                             return
-                        st.success("Goal sent to the planner. Lantern will use your budget math to check affordability.")
+                        st.success("Goal sent to the planner. Byable will use your budget math to check affordability.")
                         st.rerun()
                 card_idx += 1
 
@@ -4453,7 +4454,7 @@ def render_goal_ai_coach_panel(plan, budget_summary):
     if DEV_MODE:
         st.caption("AI_COACH_VERSION_2_LOADED")
     st.markdown("**AI Coach**")
-    st.caption("Optional guidance based on the current affordability plan. Lantern keeps the budget math as the source of truth.")
+    st.caption("Optional guidance based on the current affordability plan. Byable keeps the budget math as the source of truth.")
     budget_allocations = plan.get("budget_allocations", {}) or {}
     roles = ensure_category_roles()
     category_budget_rows = [
@@ -4515,7 +4516,7 @@ def render_goal_ai_coach_panel(plan, budget_summary):
                     "raw_response": "",
                     "raw_text_length": 0,
                     "parse_succeeded": False,
-                    "summary": "Lantern could not reach AI coaching, so this fallback uses the current budget math only.",
+                    "summary": "Byable could not reach AI coaching, so this fallback uses the current budget math only.",
                     "recommended_actions": [
                         "Review the largest flexible category before changing protected spending.",
                         "Adjust one planned future budget number and check whether the goal moves on track.",
@@ -4845,7 +4846,7 @@ def render_goal_plan(plan):
     progress_ratio = min(1.0, float(analysis.get("effective_progress_amount", 0.0)) / max(1.0, float(plan["goal_cost"])))
     if projection_delta_days is None:
         time_signal = "Needs momentum"
-        time_caption = "Lantern needs savings progress before it can estimate time gained or lost."
+        time_caption = "Byable needs savings progress before it can estimate time gained or lost."
     elif projection_delta_days > 0:
         time_signal = f"{projection_delta_days} days late"
         time_caption = f"At this pace, {plan['goal_name']} lands after the target date."
@@ -5082,7 +5083,7 @@ def render_goal_plan(plan):
                 )
 
 
-st.sidebar.title("Lantern")
+st.sidebar.title("Byable")
 st.sidebar.divider()
 if st.sidebar.button("Load realistic transaction history", width="stretch"):
     try:
@@ -5175,7 +5176,7 @@ elif page == "Demo":
 
 elif page == "Transaction History":
     st.subheader("Transaction history")
-    st.caption("Review and shape the transaction picture Lantern uses. Categories are editable because the baseline is a suggestion, not truth.")
+    st.caption("Review and shape the transaction picture Byable uses. Categories are editable because the baseline is a suggestion, not truth.")
 
     with st.expander("Add a manual transaction"):
         with st.form("history_add_tx_form"):
@@ -5556,7 +5557,7 @@ elif page == "Budget Planner":
     summary_cols[1].metric("Planned future spending", money(initial_future_budget_total))
     summary_cols[2].metric("Available for goals", money(initial_available_for_goals))
     summary_cols[3].metric("Goal target date", goal_target.strftime("%b %-d, %Y"))
-    st.caption("Lantern helps you shape a plan: income minus planned future spending equals what is available for your goals.")
+    st.caption("Byable helps you shape a plan: income minus planned future spending equals what is available for your goals.")
     st.info(f"{money(initial_available_for_goals)} is available for goals under your current plan.")
 
     recurring_patterns = recurring_subscription_patterns(baseline_transactions)
@@ -5800,7 +5801,7 @@ elif page == "Budget Planner":
             st.caption(f"- {insight}")
 
     st.markdown("**AI Coach**")
-    st.caption("Optional guidance based on the budget numbers already calculated above. Lantern keeps the math here as the source of truth.")
+    st.caption("Optional guidance based on the budget numbers already calculated above. Byable keeps the math here as the source of truth.")
     coach_category_table = [
         {
             "category": category,
@@ -5859,7 +5860,7 @@ elif page == "Budget Planner":
             show_ai_debug_response(coach_advice.get("raw_response", ""))
         else:
             st.write(f"**Goal status:** {coach_advice.get('status', 'Review the current plan.')}")
-            st.write(coach_advice.get("summary", "This guidance uses Lantern's current budget numbers."))
+            st.write(coach_advice.get("summary", "This guidance uses Byable's current budget numbers."))
             st.markdown("**Recommended actions**")
             for idx, action in enumerate(coach_advice["recommended_actions"][:3], start=1):
                 st.write(f"{idx}. {action}")

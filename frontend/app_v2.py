@@ -7,7 +7,7 @@ import requests
 import streamlit as st
 
 
-st.set_page_config(page_title="Lantern Goal Discovery V2", layout="wide")
+st.set_page_config(page_title="Byable Goal Discovery V2", layout="wide")
 
 TODAY = datetime.date.today()
 DEV_MODE = str(os.environ.get("DEV_MODE", "")).lower() in {"1", "true", "yes", "on"}
@@ -294,7 +294,7 @@ def render_goal_card(goal, target_month, idx):
 
 
 def main():
-    st.sidebar.title("Lantern")
+    st.sidebar.title("Byable")
     st.sidebar.caption("See the path to what you want.")
     page = st.sidebar.radio(
         "Navigation",
@@ -312,7 +312,7 @@ def main():
             unsafe_allow_html=True,
         )
         st.markdown(
-            '<div class="placeholder-panel">This page is available in the main Lantern app. The clean V2 entrypoint focuses on Goal Discovery.</div>',
+            '<div class="placeholder-panel">This page is available in the main Byable app. The clean V2 entrypoint focuses on Goal Discovery.</div>',
             unsafe_allow_html=True,
         )
         return
@@ -321,7 +321,7 @@ def main():
         """
         <div class="lantern-hero">
             <h1>How can I afford this?</h1>
-            <p>Pick something you want. Lantern turns it into a simple monthly path.</p>
+            <p>Pick something you want. Byable turns it into a simple monthly path.</p>
         </div>
         """,
         unsafe_allow_html=True,
