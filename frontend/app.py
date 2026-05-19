@@ -3813,7 +3813,11 @@ PREFERRED_SOURCE_DOMAINS = {
     "mindbodyonline.com",
     "airbnb.com",
     "expedia.com",
+    "travelocity.com",
     "kayak.com",
+    "booking.com",
+    "hotels.com",
+    "getyourguide.com",
     "padi.com",
     "viator.com",
     "masterliveaboards.com",
@@ -3942,7 +3946,11 @@ def classify_source(result):
             "mindbodyonline.com",
             "airbnb.com",
             "expedia.com",
+            "travelocity.com",
             "kayak.com",
+            "booking.com",
+            "hotels.com",
+            "getyourguide.com",
             "padi.com",
             "viator.com",
             "masterliveaboards.com",
@@ -3974,10 +3982,479 @@ def display_source_label(label):
     return {
         "Catalog fallback": "Template suggestion",
         "AI personalized": "AI personalized",
-        "Verified price source": "Verified price source",
+        "Verified price source": "Price source",
+        "Price source": "Price source",
         "Pricing reference": "Research source",
+        "Research source": "Research source",
         "Estimate only": "Estimated price",
+        "Search fallback": "Search fallback",
+        "Needs better source": "Needs better source",
     }.get(str(label or "").strip(), str(label or "").strip() or "Estimated price")
+
+
+def travel_source_quality(idea):
+    url = str(idea.get("source_url") or "").strip()
+    source_type = str(idea.get("source_type") or "").strip()
+    if not url:
+        return {
+            "label": "Search fallback",
+            "confidence": "Rough planning estimate — verify prices before booking",
+            "primary_pricing": False,
+        }
+    domain = source_domain(url)
+    if not domain or domain_matches(domain, BLOCKED_SOURCE_DOMAINS) or "google.com/search" in url.lower():
+        return {
+            "label": "Needs better source",
+            "confidence": "Rough planning estimate — verify prices before booking",
+            "primary_pricing": False,
+        }
+    if source_type in {"verified_booking_page", "verified_product_page"}:
+        return {
+            "label": "Price source",
+            "confidence": "verified estimate",
+            "primary_pricing": True,
+        }
+    if source_type == "pricing_reference" or domain_matches(domain, PREFERRED_SOURCE_DOMAINS):
+        return {
+            "label": "Research source",
+            "confidence": "estimated from sources",
+            "primary_pricing": False,
+        }
+    return {
+        "label": "Needs better source",
+        "confidence": "Rough planning estimate — verify prices before booking",
+        "primary_pricing": False,
+    }
+
+
+def infer_trip_days(trip_length, itinerary):
+    text = str(trip_length or "").lower()
+    match = re.search(r"\d+", text)
+    if match:
+        return max(1, min(14, int(match.group(0))))
+    if itinerary:
+        return max(1, min(14, len(itinerary)))
+    return 5
+
+
+def compact_text_list(value, limit=5):
+    if isinstance(value, list):
+        raw_items = value
+    elif isinstance(value, str):
+        raw_items = [part.strip(" -") for part in re.split(r"\n|;", value) if part.strip(" -")]
+    else:
+        raw_items = []
+    items = []
+    for item in raw_items:
+        if isinstance(item, dict):
+            text = item.get("label") or item.get("title") or item.get("name") or item.get("description")
+            if text:
+                items.append(str(text).strip())
+        elif str(item).strip():
+            items.append(str(item).strip())
+    return items[:limit]
+
+
+def trip_text_bundle(idea):
+    parts = [
+        str(idea.get("title", "")),
+        str(idea.get("destination", "")),
+        str(idea.get("description", "")),
+        str(idea.get("budget_angle", "")),
+    ]
+    for item in idea.get("itinerary", []) or []:
+        if isinstance(item, dict):
+            parts.extend(str(item.get(key, "")) for key in ("day", "morning", "afternoon", "evening", "budget_tip"))
+        else:
+            parts.append(str(item))
+    return " ".join(parts).lower()
+
+
+def default_flight_strategy(idea, starting_city, target_date, travel_style):
+    destination = str(idea.get("destination") or idea.get("title") or "the destination")
+    return {
+        "airport_strategy": f"Compare routes from {starting_city or 'your home airport'} into the destination's main airport and one nearby alternate if available.",
+        "routing_approach": f"For {destination}, check direct flights first, then one-stop routes if the fare gap is meaningful.",
+        "best_timing": f"Start checking fares 2-4 months before {target_date.strftime('%B %Y')} and compare midweek departures.",
+        "budget_airlines": "Use budget carriers only when baggage, seat, and airport-transfer fees still keep the total lower.",
+        "departure_tip": "Avoid Friday departures and Sunday returns when possible; Tuesday/Wednesday often price better.",
+        "open_jaw": "If the trip spans multiple cities, test flying into one city and home from another before booking round trips.",
+    }
+
+
+def default_hotel_strategy(idea, travel_style):
+    destination = str(idea.get("destination") or idea.get("title") or "the destination")
+    style = str(travel_style or "balanced").lower()
+    if style == "budget":
+        nightly = (80, 140, 220)
+    elif style == "premium":
+        nightly = (170, 280, 450)
+    else:
+        nightly = (120, 200, 330)
+    return {
+        "recommended_neighborhoods": f"Stay in transit-friendly, central-adjacent areas of {destination} instead of the most expensive landmark blocks.",
+        "best_value_areas": "Look for business hotels, aparthotels, or guesthouses one or two transit stops from the main attraction zone.",
+        "options": [
+            {"tier": "Budget option", "nightly_cost": money(nightly[0]), "why": "Prioritizes location and clean basics over amenities."},
+            {"tier": "Balanced option", "nightly_cost": money(nightly[1]), "why": "Good default for comfort, transit access, and predictable total cost."},
+            {"tier": "Premium option", "nightly_cost": money(nightly[2]), "why": "Worth considering only if lodging is part of the trip experience."},
+        ],
+    }
+
+
+def default_food_experience_highlights(idea):
+    text = trip_text_bundle(idea)
+    if "japan" in text or "tokyo" in text or "osaka" in text:
+        return {
+            "must_try_foods": ["Ramen or udon", "Conveyor-belt sushi", "Depachika food hall snacks"],
+            "famous_experiences": ["Neighborhood food crawl", "Temple or garden visit", "Train-based day trip"],
+            "underrated_cheap_experiences": ["Convenience-store breakfast", "Department-store rooftop", "Local shotengai shopping street"],
+            "nightlife": ["Izakaya alley or low-key listening bar"],
+        }
+    if "scuba" in text or "dive" in text:
+        return {
+            "must_try_foods": ["Local seafood", "Beach-town casual meals", "Fresh fruit or market snacks"],
+            "famous_experiences": ["Guided dive or snorkel trip", "Sunset beach walk", "Marine reserve visit"],
+            "underrated_cheap_experiences": ["Shoreline hikes", "Public beaches", "Self-guided sunrise or sunset spots"],
+            "nightlife": ["Casual waterfront dinner rather than club-heavy nights"],
+        }
+    return {
+        "must_try_foods": ["One iconic local meal", "Market or food-hall stop", "Casual neighborhood dinner"],
+        "famous_experiences": ["One anchor tour or attraction", "A scenic neighborhood walk", "A local museum, show, or cultural stop"],
+        "underrated_cheap_experiences": ["Public parks", "Self-guided food route", "Transit-accessible viewpoints"],
+        "nightlife": ["One planned night out with a fixed cap"],
+    }
+
+
+def default_savings_comparison(idea):
+    text = trip_text_bundle(idea)
+    rows = [
+        {"Do This": "Fly midweek or shoulder season", "Avoid This": "Friday departures and Sunday returns"},
+        {"Do This": "Use public transit and walkable lodging", "Avoid This": "Defaulting to taxis for every transfer"},
+        {"Do This": "Book one anchor paid experience", "Avoid This": "Stacking paid tours every day"},
+        {"Do This": "Business hotels or central-adjacent stays", "Avoid This": "Luxury chains in the landmark zone"},
+    ]
+    if "japan" in text or "tokyo" in text or "osaka" in text:
+        rows.insert(0, {"Do This": "Michelin lunch or casual ramen stops", "Avoid This": "Michelin dinner as the default"})
+    if "scuba" in text or "dive" in text:
+        rows.insert(0, {"Do This": "Rent specialty gear first", "Avoid This": "Buying a full dive kit before the trip"})
+    return rows[:5]
+
+
+def build_trip_cost_breakdown(idea, starting_city, trip_length, travel_style):
+    canonical_items = [
+        "Flights",
+        "Lodging",
+        "Food",
+        "Local transport",
+        "Activities",
+        "Buffer",
+        "Total",
+    ]
+    item_aliases = {
+        "flight": "Flights",
+        "local transportation": "Local transport",
+        "local transport": "Local transport",
+        "local": "Local transport",
+        "transit": "Local transport",
+        "transportation": "Flights",
+        "lodging": "Lodging",
+        "hotel": "Lodging",
+        "food": "Food",
+        "meal": "Food",
+        "activities": "Activities",
+        "activity": "Activities",
+        "attraction": "Activities",
+        "scuba": "Activities",
+        "special": "Activities",
+        "buffer": "Buffer",
+        "emergency": "Buffer",
+        "total": "Total",
+    }
+    raw_breakdown = idea.get("cost_breakdown")
+    if isinstance(raw_breakdown, list) and raw_breakdown:
+        merged = {item: {"estimate": 0.0, "notes": [], "source": []} for item in canonical_items}
+        for row in raw_breakdown:
+            if not isinstance(row, dict):
+                continue
+            raw_item = str(row.get("item") or "Trip cost").strip()
+            lowered = raw_item.lower()
+            item = next((label for token, label in item_aliases.items() if token in lowered), "")
+            if not item:
+                item = "Activities"
+            estimate = parse_goal_card_cost(row.get("estimate") or row.get("cost") or row.get("amount")) or 0.0
+            if item == "Total":
+                merged[item]["estimate"] = estimate
+            else:
+                merged[item]["estimate"] += estimate
+            note = str(row.get("notes") or row.get("note") or "").strip()
+            source = str(row.get("source_label") or row.get("source_quality") or row.get("source") or "Planning estimate").strip()
+            if note:
+                merged[item]["notes"].append(note)
+            if source:
+                merged[item]["source"].append(source)
+        subtotal = sum(merged[item]["estimate"] for item in canonical_items if item != "Total")
+        if merged["Total"]["estimate"] <= 0:
+            merged["Total"]["estimate"] = subtotal
+        if subtotal > 0:
+            return [
+                {
+                    "Item": item,
+                    "Estimate": money(merged[item]["estimate"]),
+                    "Notes": " ".join(merged[item]["notes"][:2]) or default_cost_note(item, starting_city, trip_length),
+                    "Confidence": str(idea.get("confidence") or "rough estimate").strip(),
+                    "Source quality": merged[item]["source"][0] if merged[item]["source"] else "Planning estimate",
+                }
+                for item in canonical_items
+            ]
+
+    total = float(idea.get("estimated_cost", 0.0) or 0.0)
+    days = infer_trip_days(trip_length, idea.get("itinerary", []))
+    special_activity = "scuba" in trip_text_bundle(idea) or "dive" in trip_text_bundle(idea)
+    style = str(travel_style or "balanced").lower()
+    if style == "budget":
+        weights = {
+            "Flights": 0.32,
+            "Lodging": 0.28,
+            "Food": 0.16,
+            "Local transport": 0.07,
+            "Activities": 0.09,
+            "Buffer": 0.08,
+        }
+    elif style == "premium":
+        weights = {
+            "Flights": 0.30,
+            "Lodging": 0.36,
+            "Food": 0.14,
+            "Local transport": 0.06,
+            "Activities": 0.08,
+            "Buffer": 0.06,
+        }
+    else:
+        weights = {
+            "Flights": 0.31,
+            "Lodging": 0.32,
+            "Food": 0.15,
+            "Local transport": 0.07,
+            "Activities": 0.08,
+            "Buffer": 0.07,
+        }
+    if special_activity:
+        weights["Activities"] = weights["Activities"] + 0.08
+        weights["Lodging"] = max(0.22, weights["Lodging"] - 0.04)
+        weights["Flights"] = max(0.24, weights["Flights"] - 0.04)
+
+    rows = []
+    source_quality = travel_source_quality(idea)
+    source_label = source_quality["label"] if source_quality["primary_pricing"] else "Planning estimate"
+    confidence = source_quality["confidence"]
+    for item in canonical_items:
+        if item == "Total":
+            continue
+        weight = weights.get(item, 0.0)
+        estimate = round(total * weight, 2)
+        rows.append(
+            {
+                "Item": item,
+                "Estimate": money(estimate),
+                "Notes": default_cost_note(item, starting_city, trip_length),
+                "Confidence": confidence,
+                "Source quality": source_label,
+            }
+        )
+    rows.append(
+        {
+            "Item": "Total",
+            "Estimate": money(total),
+            "Notes": "Sum of estimated trip components.",
+            "Confidence": confidence,
+            "Source quality": source_quality["label"],
+        }
+    )
+    return rows
+
+
+def default_cost_note(item, starting_city, trip_length):
+    days = infer_trip_days(trip_length, [])
+    return {
+        "Flights": f"Estimate from {starting_city or 'your starting city'}; compare flight, rail, or drive costs.",
+        "Lodging": f"Assumes {days} day trip and {max(1, days - 1)} night stay.",
+        "Food": "Daily meals and casual dining.",
+        "Local transport": "Transit, rideshare, parking, or local transfers.",
+        "Activities": "Tours, museums, entry fees, or one anchor activity.",
+        "Buffer": "Small cushion for fees, price changes, and surprises.",
+        "Total": "Sum of estimated trip components.",
+    }.get(item, "")
+
+
+def normalize_day_plan(item, day_number, daily_cost):
+    if isinstance(item, dict):
+        return {
+            "day": str(item.get("day") or f"Day {day_number}").strip(),
+            "morning": str(item.get("morning") or "").strip(),
+            "afternoon": str(item.get("afternoon") or "").strip(),
+            "evening": str(item.get("evening") or "").strip(),
+            "estimated_daily_cost": parse_goal_card_cost(item.get("estimated_daily_cost") or item.get("daily_cost")) or daily_cost,
+            "budget_tip": str(item.get("budget_tip") or "").strip(),
+        }
+    text = str(item or "").strip()
+    cleaned = re.sub(r"^day\s*\d+\s*[:.-]?\s*", "", text, flags=re.IGNORECASE).strip()
+    return {
+        "day": f"Day {day_number}",
+        "morning": cleaned or "Travel, explore, or settle in.",
+        "afternoon": "Anchor activity or neighborhood exploration.",
+        "evening": "Simple dinner and low-cost local time.",
+        "estimated_daily_cost": daily_cost,
+        "budget_tip": "Keep one paid anchor activity and fill the rest with lower-cost local time.",
+    }
+
+
+def build_day_by_day_itinerary(idea, trip_length):
+    days = infer_trip_days(trip_length, idea.get("itinerary", []))
+    total = float(idea.get("estimated_cost", 0.0) or 0.0)
+    daily_cost = round(total / max(days, 1), 2)
+    raw_items = idea.get("itinerary", []) or []
+    plans = [normalize_day_plan(item, idx + 1, daily_cost) for idx, item in enumerate(raw_items[:days])]
+    defaults = [
+        ("Travel + check-in", "Travel from your starting city.", "Check in and orient around lodging.", "Casual nearby dinner.", "Book transport early and keep arrival day simple."),
+        ("Main activity day", "Start with the trip's anchor experience.", "Use the afternoon for the core tour, dive, event, or neighborhood.", "Low-key dinner.", "Spend on the anchor activity, not every hour."),
+        ("Low-cost nature or neighborhood day", "Walkable market, beach, park, or scenic area.", "Free or low-cost local exploration.", "Casual food stop.", "Use public transit and avoid stacking paid attractions."),
+        ("Culture + local food day", "Museum, historic district, or class.", "Food crawl or self-guided route.", "One memorable dinner or show.", "Pick one splurge meal and keep the rest simple."),
+        ("Return travel", "Pack and checkout.", "Return travel or final quick stop.", "Arrive home.", "Avoid late checkout and baggage fees where possible."),
+    ]
+    while len(plans) < days and len(plans) < 5:
+        idx = len(plans)
+        title, morning, afternoon, evening, tip = defaults[min(idx, len(defaults) - 1)]
+        plans.append(
+            {
+                "day": f"Day {idx + 1}: {title}",
+                "morning": morning,
+                "afternoon": afternoon,
+                "evening": evening,
+                "estimated_daily_cost": daily_cost,
+                "budget_tip": tip,
+            }
+        )
+    return plans[:5]
+
+
+def render_trip_itinerary_panel(idea, starting_city, trip_length, travel_style, target_date, source_quality):
+    destination = str(idea.get("destination") or idea.get("title") or "Trip").strip()
+    source_title = str(idea.get("source_title") or "").strip()
+    source_url = str(idea.get("source_url") or "").strip()
+    confidence = source_quality["confidence"] if source_quality else str(idea.get("confidence") or "rough estimate")
+
+    st.markdown("**Trip planning brief**")
+    overview_cols = st.columns(4)
+    overview_cols[0].metric("Destination", destination)
+    overview_cols[1].metric("Trip length", str(trip_length or "Flexible"))
+    overview_cols[2].metric("Estimated total", money(idea.get("estimated_cost")))
+    overview_cols[3].metric("Price confidence", confidence)
+    st.caption(f"Starting city: {starting_city or 'Not specified'} · Style: {str(travel_style or 'balanced').title()} · Target: {target_date.strftime('%B %Y')}")
+
+    with st.expander("Cheapest flight strategy", expanded=True):
+        flight_strategy = idea.get("flight_strategy") if isinstance(idea.get("flight_strategy"), dict) else {}
+        strategy = default_flight_strategy(idea, starting_city, target_date, travel_style)
+        strategy.update({key: value for key, value in flight_strategy.items() if value})
+        flight_rows = [
+            ("Best airport strategy", strategy.get("airport_strategy")),
+            ("Cheapest routing approach", strategy.get("routing_approach")),
+            ("Best months/weeks", strategy.get("best_timing")),
+            ("Budget airline opportunities", strategy.get("budget_airlines")),
+            ("Departure timing", strategy.get("departure_tip")),
+            ("Open-jaw option", strategy.get("open_jaw")),
+        ]
+        for label, value in flight_rows:
+            st.caption(f"**{label}:** {value}")
+
+    with st.expander("Hotel strategy", expanded=False):
+        hotel_strategy = idea.get("hotel_strategy") if isinstance(idea.get("hotel_strategy"), dict) else {}
+        fallback_hotel = default_hotel_strategy(idea, travel_style)
+        neighborhoods = hotel_strategy.get("recommended_neighborhoods") or fallback_hotel["recommended_neighborhoods"]
+        value_areas = hotel_strategy.get("best_value_areas") or fallback_hotel["best_value_areas"]
+        st.caption(f"**Recommended neighborhoods:** {neighborhoods}")
+        st.caption(f"**Best value areas:** {value_areas}")
+        options = hotel_strategy.get("options") if isinstance(hotel_strategy.get("options"), list) else fallback_hotel["options"]
+        hotel_rows = []
+        for option in options[:3]:
+            if not isinstance(option, dict):
+                continue
+            hotel_rows.append(
+                {
+                    "Option": option.get("tier") or option.get("name") or "Hotel option",
+                    "Approx. nightly cost": option.get("nightly_cost") or money(parse_goal_card_cost(option.get("cost")) or 0.0),
+                    "Why": option.get("why") or option.get("notes") or "Balances location, comfort, and total trip cost.",
+                }
+            )
+        st.dataframe(pd.DataFrame(hotel_rows), hide_index=True, width="stretch")
+
+    st.markdown("**Day-by-day plan**")
+    for day in build_day_by_day_itinerary(idea, trip_length):
+        with st.expander(day["day"], expanded=False):
+            day_cols = st.columns(2)
+            day_cols[0].caption(f"**Morning:** {day['morning']}")
+            day_cols[0].caption(f"**Afternoon:** {day['afternoon']}")
+            day_cols[1].caption(f"**Dinner/night:** {day['evening']}")
+            day_cols[1].caption(f"**Estimated spend:** {money(day['estimated_daily_cost'])}")
+            st.caption(f"**Local transit note:** Use transit, walking, or one planned rideshare instead of ad hoc taxis.")
+            st.caption(f"**Optional splurge:** Upgrade the anchor activity only if the rest of the day stays light.")
+            st.caption(f"**Budget tip:** {day['budget_tip']}")
+
+    with st.expander("Food & experience highlights", expanded=False):
+        highlights = idea.get("food_highlights") if isinstance(idea.get("food_highlights"), dict) else {}
+        fallback_highlights = default_food_experience_highlights(idea)
+        highlights = {**fallback_highlights, **{key: value for key, value in highlights.items() if value}}
+        highlight_cols = st.columns(2)
+        highlight_sections = [
+            ("Must-try foods", highlights.get("must_try_foods")),
+            ("Famous local experiences", highlights.get("famous_experiences")),
+            ("Underrated cheap experiences", highlights.get("underrated_cheap_experiences")),
+            ("Nightlife", highlights.get("nightlife")),
+        ]
+        for idx, (label, values) in enumerate(highlight_sections):
+            with highlight_cols[idx % 2]:
+                st.markdown(f"**{label}**")
+                for item in compact_text_list(values, limit=4):
+                    st.caption(f"- {item}")
+
+    with st.expander("Ways to save money", expanded=False):
+        raw_savings = idea.get("ways_to_save")
+        if isinstance(raw_savings, list) and raw_savings:
+            savings_rows = []
+            for row in raw_savings:
+                if isinstance(row, dict):
+                    savings_rows.append(
+                        {
+                            "Do This": row.get("do_this") or row.get("do") or row.get("good") or "",
+                            "Avoid This": row.get("avoid_this") or row.get("avoid") or row.get("bad") or "",
+                        }
+                    )
+            savings_rows = [row for row in savings_rows if row["Do This"] or row["Avoid This"]]
+        else:
+            savings_rows = default_savings_comparison(idea)
+        st.dataframe(pd.DataFrame(savings_rows), hide_index=True, width="stretch")
+
+    with st.expander("Cost breakdown", expanded=True):
+        breakdown_rows = build_trip_cost_breakdown(idea, starting_city, trip_length, travel_style)
+        st.dataframe(pd.DataFrame(breakdown_rows), hide_index=True, width="stretch")
+
+    with st.expander("Sources to verify", expanded=False):
+        source_label = source_quality["label"] if source_quality else "Research source"
+        if source_url:
+            contribution = {
+                "Price source": f"{source_title or source_domain(source_url)} contributed a pricing or bookable-package reference.",
+                "Research source": f"{source_title or source_domain(source_url)} contributed destination or planning context, not a final bookable price.",
+                "Needs better source": f"{source_title or source_domain(source_url)} is not strong enough for primary pricing.",
+            }.get(source_label, f"{source_title or source_domain(source_url)} contributed planning context.")
+            st.caption(contribution)
+            st.link_button("Open external link", source_url, width="stretch")
+            if not source_quality.get("primary_pricing", False):
+                st.caption("Treat this as research support. Verify flights, lodging, and activities before booking.")
+        else:
+            search_query = str(idea.get("search_query") or idea.get("title") or destination)
+            search_url = f"https://www.google.com/search?q={quote_plus(search_query)}"
+            st.caption("Search fallback: Byable could not attach a strong source with usable pricing yet.")
+            st.link_button("Open search", search_url, width="stretch")
 
 
 def validate_tavily_source(result):
@@ -4142,6 +4619,22 @@ def normalize_list_field(value, limit=5):
     return [str(item).strip() for item in items if str(item).strip()][:limit]
 
 
+def normalize_itinerary_field(value, limit=5):
+    if isinstance(value, list):
+        items = value
+    elif isinstance(value, str):
+        items = [part.strip(" -") for part in re.split(r"\n|;", value) if part.strip(" -")]
+    else:
+        items = []
+    normalized = []
+    for item in items:
+        if isinstance(item, dict):
+            normalized.append(item)
+        elif str(item).strip():
+            normalized.append(str(item).strip())
+    return normalized[:limit]
+
+
 def normalize_ai_goal_card(card, target_month, location="", budget=0.0):
     raw_card = dict(card or {})
     estimated_cost = parse_goal_card_cost(
@@ -4160,7 +4653,7 @@ def normalize_ai_goal_card(card, target_month, location="", budget=0.0):
     if monthly_savings is None:
         monthly_savings = calculate_monthly_savings_from_cost(estimated_cost, card_target_month)
     ways = normalize_list_field(raw_card.get("ways_to_afford_it", []), limit=3)
-    itinerary = normalize_list_field(raw_card.get("itinerary", []), limit=5)
+    itinerary = normalize_itinerary_field(raw_card.get("itinerary", []), limit=5)
     search_query = purchasable_search_query(raw_card, location, budget)
     title = str(
         raw_card.get("title")
@@ -4191,6 +4684,11 @@ def normalize_ai_goal_card(card, target_month, location="", budget=0.0):
             or ""
         ).strip(),
         "confidence": str(raw_card.get("confidence") or "rough estimate").strip(),
+        "cost_breakdown": raw_card.get("cost_breakdown", []),
+        "flight_strategy": raw_card.get("flight_strategy", {}),
+        "hotel_strategy": raw_card.get("hotel_strategy", {}),
+        "food_highlights": raw_card.get("food_highlights", {}),
+        "ways_to_save": raw_card.get("ways_to_save", []),
         "ways_to_afford_it": ways,
         "search_query": search_query,
         "source_title": "",
@@ -4351,7 +4849,9 @@ def render_goal_discovery():
             if ai_result:
                 st.json(ai_result)
 
+    st.caption("ITINERARY_PANEL_V1_LOADED")
     st.markdown("#### Suggested trips")
+    st.caption("Byable estimates trip costs from available sources. Always verify final prices before booking.")
     action_cols = st.columns([1, 1, 2])
     if action_cols[0].button("Generate travel ideas", type="primary"):
         api_key = get_openai_api_key()
@@ -4368,11 +4868,17 @@ def render_goal_discovery():
 
         Every card must include:
         title, destination, category, estimated_cost, monthly_savings, target_month, itinerary,
+        cost_breakdown, flight_strategy, hotel_strategy, food_highlights, ways_to_save,
         budget_angle, description, confidence, ways_to_afford_it, search_query.
 
         Rules:
         - category should be "Travel".
-        - itinerary must include 3 to 5 short day-by-day items.
+        - itinerary must include 3 to 5 day objects with morning, afternoon, evening, estimated_daily_cost, and budget_tip.
+        - cost_breakdown must include exactly these item rows: Flights, Lodging, Food, Local transport, Activities, Buffer, Total.
+        - flight_strategy must include airport_strategy, routing_approach, best_timing, budget_airlines, departure_tip, and open_jaw.
+        - hotel_strategy must include recommended_neighborhoods, best_value_areas, and options for budget, balanced, premium with nightly_cost and why.
+        - food_highlights must include must_try_foods, famous_experiences, underrated_cheap_experiences, and nightlife.
+        - ways_to_save must be a comparison table with do_this and avoid_this rows.
         - budget_angle should explain the cheapest or most realistic way to make the trip work.
         - confidence must be one of: "verified estimate", "estimated from sources", "rough estimate".
         - Keep estimates near the user's budget and travel style.
@@ -4390,7 +4896,47 @@ def render_goal_discovery():
             "estimated_cost": 1200,
             "monthly_savings": 300,
             "target_month": "{target_month}",
-            "itinerary": ["Day 1: Arrive and beach dinner", "Day 2: Guided beginner dive", "Day 3: La Jolla and return"],
+            "itinerary": [
+              {{"day": "Day 1", "morning": "Travel from {starting_city}", "afternoon": "Check in near the beach", "evening": "Casual local dinner", "estimated_daily_cost": 300, "budget_tip": "Keep arrival day simple."}},
+              {{"day": "Day 2", "morning": "Guided beginner dive", "afternoon": "La Jolla beach time", "evening": "Low-cost tacos or market food", "estimated_daily_cost": 450, "budget_tip": "Make the dive the main splurge."}},
+              {{"day": "Day 3", "morning": "Coastal walk", "afternoon": "Return travel", "evening": "Arrive home", "estimated_daily_cost": 250, "budget_tip": "Avoid extra paid attractions before leaving."}}
+            ],
+            "cost_breakdown": [
+              {{"item": "Flights", "estimate": 350, "notes": "Compare flights, train, or driving from {starting_city}.", "source_label": "Planning estimate"}},
+              {{"item": "Lodging", "estimate": 360, "notes": "Modest hotel or shared stay for two nights.", "source_label": "Planning estimate"}},
+              {{"item": "Food", "estimate": 180, "notes": "Casual meals and one better dinner.", "source_label": "Planning estimate"}},
+              {{"item": "Local transport", "estimate": 80, "notes": "Transit, rideshare, or parking.", "source_label": "Planning estimate"}},
+              {{"item": "Activities", "estimate": 180, "notes": "Guided intro dive or tour deposit.", "source_label": "Planning estimate"}},
+              {{"item": "Buffer", "estimate": 50, "notes": "Fees or price changes.", "source_label": "Planning estimate"}},
+              {{"item": "Total", "estimate": 1200, "notes": "Estimated trip budget.", "source_label": "Planning estimate"}}
+            ],
+            "flight_strategy": {{
+              "airport_strategy": "Compare SFO, OAK, and SJC departures if the starting city is the Bay Area.",
+              "routing_approach": "Prioritize direct or one-stop routes with lower baggage fees.",
+              "best_timing": "Check midweek departures in the target month and nearby weeks.",
+              "budget_airlines": "Use budget airlines only if baggage and seat fees keep the total lower.",
+              "departure_tip": "Avoid Friday departures and Sunday returns when possible.",
+              "open_jaw": "Not needed for a simple weekend; useful only if adding a second city."
+            }},
+            "hotel_strategy": {{
+              "recommended_neighborhoods": "Stay near the main activity zone or reliable transit.",
+              "best_value_areas": "Choose central-adjacent hotels instead of the most expensive beachfront blocks.",
+              "options": [
+                {{"tier": "Budget option", "nightly_cost": "$120", "why": "Clean basics near transit."}},
+                {{"tier": "Balanced option", "nightly_cost": "$180", "why": "Better location with predictable total cost."}},
+                {{"tier": "Premium option", "nightly_cost": "$280", "why": "Worth it if lodging is part of the experience."}}
+              ]
+            }},
+            "food_highlights": {{
+              "must_try_foods": ["Local seafood", "Casual beach-town dinner"],
+              "famous_experiences": ["Guided dive", "La Jolla coastal walk"],
+              "underrated_cheap_experiences": ["Public beaches", "Sunset viewpoint"],
+              "nightlife": ["Low-key waterfront dinner"]
+            }},
+            "ways_to_save": [
+              {{"do_this": "Book the guided dive as the one splurge", "avoid_this": "Stacking paid tours every day"}},
+              {{"do_this": "Use public transit or planned rideshares", "avoid_this": "Taking taxis for every transfer"}}
+            ],
             "budget_angle": "Drive or book early flights, choose a modest hotel, and keep one paid activity as the trip anchor.",
             "description": "A short coastal trip that matches scuba and warm-weather interests without requiring a full international budget.",
             "confidence": "rough estimate",
@@ -4516,18 +5062,19 @@ def render_goal_discovery():
                     confidence = str(idea.get("confidence") or "").strip()
                     if confidence:
                         st.caption(f"Confidence: {confidence}")
-                    source_title = idea.get("source_title") or "Source needed"
-                    source_label = idea.get("source_badge") or idea.get("source_mode", "Catalog fallback")
-                    st.caption(f"{display_source_label(source_label)} · {source_title}")
+                    source_quality = travel_source_quality(idea) if is_trip else None
+                    if is_trip and source_quality and source_quality["primary_pricing"]:
+                        st.caption("Price source available in itinerary details")
+                    elif is_trip:
+                        st.caption("Rough planning estimate — verify prices before booking")
+                    else:
+                        source_title = idea.get("source_title") or "Source needed"
+                        source_label = idea.get("source_badge") or idea.get("source_mode", "Catalog fallback")
+                        st.caption(f"{display_source_label(source_label)} · {source_title}")
                     if idea.get("description"):
                         st.caption(idea["description"])
                     elif idea.get("why_match"):
                         st.caption(idea["why_match"])
-                    itinerary = idea.get("itinerary", []) or []
-                    if itinerary:
-                        st.markdown("**3-5 day itinerary**")
-                        for step in itinerary[:5]:
-                            st.caption(f"- {step}")
                     if idea.get("budget_angle"):
                         st.markdown("**Budget angle**")
                         st.caption(idea["budget_angle"])
@@ -4538,12 +5085,9 @@ def render_goal_discovery():
                             st.caption(f"- {way}")
                     link_url = idea.get("source_url")
                     action_cols = st.columns(2)
-                    if link_url:
-                        action_cols[0].link_button("View source", link_url, width="stretch")
-                    else:
-                        search_url = f"https://www.google.com/search?q={quote_plus(str(idea.get('search_query') or idea.get('title') or ''))}"
-                        search_label = "Search this trip" if is_trip else "Search this goal"
-                        action_cols[0].link_button(search_label, search_url, width="stretch")
+                    itinerary_key = f"show_itinerary_{discovery_key}_{card_idx}"
+                    if action_cols[0].button("View itinerary", key=f"view_itinerary_{discovery_key}_{card_idx}", width="stretch"):
+                        st.session_state[itinerary_key] = not st.session_state.get(itinerary_key, False)
                     if DEV_MODE and idea.get("source_debug"):
                         with st.expander("Source debug", expanded=False):
                             st.json(idea["source_debug"])
@@ -4567,6 +5111,16 @@ def render_goal_discovery():
                             return
                         st.success("Trip sent to the planner. Byable will use your budget math to check affordability.")
                         st.rerun()
+                    if st.session_state.get(itinerary_key, False):
+                        with st.container(border=True):
+                            render_trip_itinerary_panel(
+                                idea,
+                                starting_city,
+                                trip_length,
+                                travel_style,
+                                target_date,
+                                source_quality or travel_source_quality(idea),
+                            )
                 card_idx += 1
 
 
