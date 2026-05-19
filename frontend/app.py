@@ -3883,23 +3883,55 @@ def render_goal_discovery():
     st.caption("ROCK_CLIMBING_MATCHING_FIX_LOADED")
     st.markdown("#### Suggested goals")
     action_cols = st.columns([1, 1, 2])
-    if action_cols[0].button("Generate ideas", type="primary", key=f"generate_ai_goals_{discovery_key}"):
-        ai_response = generate_ai_goal_cards(get_openai_api_key(), discovery_payload)
-        valid_ai_cards, rejected_ai_cards = validate_ai_goal_cards(
-            ai_response.get("cards", []),
-            interests,
-            target_budget,
-        )
-        st.session_state[f"{discovery_key}_ai_result"] = {
-            "success": ai_response.get("success", False),
-            "error": ai_response.get("error", ""),
-            "valid_cards": valid_ai_cards,
-            "valid_count": len(valid_ai_cards),
-            "rejected_cards": rejected_ai_cards,
-            "raw_response": ai_response.get("raw_response", ""),
-        }
-        st.session_state.pop(f"{discovery_key}_refreshed_goals", None)
-        st.rerun()
+    disable_catalog_fallback = False
+    if action_cols[0].button("Generate ideas", type="primary"):
+        st.write("AI_GENERATION_ATTEMPTED")
+
+        from openai import OpenAI
+        import json
+
+        client = OpenAI(api_key=st.secrets.get("OPENAI_API_KEY"))
+
+        budget = budget_range
+        prompt = f"""
+        Return ONLY valid JSON.
+        Generate 3 goal ideas for interest: {interests}
+        Location: {location}
+        Budget: {budget}
+        Target month: {target_month}
+
+        Format:
+        [
+          {{
+            "title": "Beginner scuba certification",
+            "category": "Scuba diving",
+            "estimated_cost": 600,
+            "monthly_savings": 150,
+            "description": "Get certified and start diving safely.",
+            "ways_to_afford_it": ["Save weekly", "Rent gear first"]
+          }}
+        ]
+        """
+
+        try:
+            response = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.4,
+            )
+            raw = response.choices[0].message.content
+            st.write("AI_GENERATION_SUCCEEDED")
+            st.code(raw)
+
+            cards = json.loads(raw)
+            st.session_state["goal_cards"] = cards
+            st.session_state["goal_source"] = "AI personalized"
+
+        except Exception as e:
+            st.write("AI_GENERATION_FAILED")
+            st.exception(e)
+            st.session_state["goal_cards"] = []
+            st.session_state["goal_source"] = "AI failed"
     if action_cols[1].button("Refresh live links", key=f"refresh_clean_links_{discovery_key}"):
         refreshed = []
         for goal in selected_goals:
@@ -3914,13 +3946,16 @@ def render_goal_discovery():
         st.rerun()
 
     hard_rule_cards = hard_rule_goal_cards(interests)
-    if hard_rule_cards is not None and not ai_cards_active:
+    if hard_rule_cards is not None and not ai_cards_active and not disable_catalog_fallback:
         selected_goals = hard_rule_cards
 
     active_source_mode = selected_goals[0].get("source_mode", "Catalog fallback") if selected_goals else "Catalog fallback"
     action_cols[2].caption(f"Source: {active_source_mode}. Catalog cards stay available if AI or live links fail.")
 
     if not selected_goals:
+        if disable_catalog_fallback:
+            st.info("Catalog fallback is temporarily disabled while debugging the AI generation call.")
+            return
         if ai_result is None:
             st.info("Click Generate ideas to ask AI for personalized goal cards.")
             return
