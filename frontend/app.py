@@ -3772,6 +3772,262 @@ def optional_tavily_link_for_goal(goal, location):
     }
 
 
+BLOCKED_SOURCE_DOMAINS = {
+    "youtube.com",
+    "youtu.be",
+    "reddit.com",
+    "facebook.com",
+    "pinterest.com",
+    "wikipedia.org",
+    "medium.com",
+}
+
+PREFERRED_SOURCE_DOMAINS = {
+    "ticketmaster.com",
+    "eventbrite.com",
+    "stubhub.com",
+    "seatgeek.com",
+    "rei.com",
+    "amazon.com",
+    "bestbuy.com",
+    "target.com",
+    "walmart.com",
+    "peloton.com",
+    "classpass.com",
+    "thumbtack.com",
+    "mindbodyonline.com",
+    "airbnb.com",
+    "expedia.com",
+    "kayak.com",
+    "padi.com",
+    "viator.com",
+    "masterliveaboards.com",
+    "pchscuba.com",
+}
+
+PRICE_SIGNALS = (
+    "$",
+    "price",
+    "cost",
+    "from",
+    "starting at",
+    "per month",
+    "membership",
+    "ticket",
+    "book",
+    "buy",
+    "register",
+    "enroll",
+)
+
+ARTICLE_SIGNALS = (
+    "blog",
+    "article",
+    "guide",
+    "review",
+    "reviews",
+    "best ",
+    "top ",
+    "tips",
+    "what ",
+    "why ",
+    "how ",
+)
+
+BOOKING_SIGNALS = (
+    "book",
+    "booking",
+    "reserve",
+    "reservation",
+    "register",
+    "enroll",
+    "course",
+    "class",
+    "certification",
+    "ticket",
+    "tickets",
+    "from",
+    "starting at",
+)
+
+PRODUCT_SIGNALS = (
+    "buy",
+    "shop",
+    "add to cart",
+    "product",
+    "shipping",
+    "in stock",
+)
+
+
+def source_domain(url):
+    try:
+        domain = urlparse(str(url or "")).netloc.lower()
+    except Exception:
+        return ""
+    return domain[4:] if domain.startswith("www.") else domain
+
+
+def domain_matches(domain, candidates):
+    return any(domain == candidate or domain.endswith(f".{candidate}") for candidate in candidates)
+
+
+def extract_source_price(text):
+    cleaned = str(text or "").replace(",", "")
+    patterns = [
+        r"(?:from|starting at|starts at|price|cost)\s*:?\s*\$([1-9]\d{1,5}(?:\.\d{1,2})?)",
+        r"\$([1-9]\d{1,5}(?:\.\d{1,2})?)",
+    ]
+    for pattern in patterns:
+        for match in re.finditer(pattern, cleaned, flags=re.IGNORECASE):
+            try:
+                value = float(match.group(1))
+            except Exception:
+                continue
+            if value >= 10:
+                return value
+    return None
+
+
+def source_text_bundle(result):
+    return " ".join(
+        [
+            str(result.get("title") or ""),
+            str(result.get("content") or result.get("snippet") or ""),
+            str(result.get("url") or ""),
+        ]
+    )
+
+
+def classify_source(result):
+    url = str(result.get("url") or "").strip()
+    domain = source_domain(url)
+    text = source_text_bundle(result).lower()
+    path = urlparse(url).path.lower() if url else ""
+    if not url or not domain:
+        return "no_source"
+    if domain_matches(domain, BLOCKED_SOURCE_DOMAINS):
+        return "no_source"
+    is_article = any(signal in text for signal in ARTICLE_SIGNALS) or any(
+        segment in path for segment in ("/blog", "/article", "/guide", "/reviews", "/best")
+    )
+    has_price = extract_source_price(text) is not None
+    has_booking = any(signal in text for signal in BOOKING_SIGNALS)
+    has_product = any(signal in text for signal in PRODUCT_SIGNALS)
+    is_product_domain = domain_matches(domain, {"amazon.com", "bestbuy.com", "target.com", "walmart.com", "rei.com", "peloton.com"})
+    is_booking_domain = domain_matches(
+        domain,
+        {
+            "ticketmaster.com",
+            "eventbrite.com",
+            "stubhub.com",
+            "seatgeek.com",
+            "classpass.com",
+            "thumbtack.com",
+            "mindbodyonline.com",
+            "airbnb.com",
+            "expedia.com",
+            "kayak.com",
+            "padi.com",
+            "viator.com",
+            "masterliveaboards.com",
+            "pchscuba.com",
+        },
+    )
+    if is_article:
+        return "pricing_reference" if has_price else "inspiration_only"
+    if has_price and (is_product_domain or has_product):
+        return "verified_product_page"
+    if has_price and (is_booking_domain or has_booking):
+        return "verified_booking_page"
+    if has_price:
+        return "pricing_reference"
+    return "inspiration_only"
+
+
+def source_badge(source_type):
+    return {
+        "verified_booking_page": "Verified price source",
+        "verified_product_page": "Verified price source",
+        "pricing_reference": "Pricing reference",
+        "inspiration_only": "Estimate only",
+        "no_source": "Estimate only",
+    }.get(source_type, "Estimate only")
+
+
+def validate_tavily_source(result):
+    url = str(result.get("url") or "").strip()
+    domain = source_domain(url)
+    snippet = str(result.get("content") or result.get("snippet") or "").lower()
+    title = str(result.get("title") or "").strip()
+    full_text = source_text_bundle(result)
+    source_type = classify_source(result)
+    source_price = extract_source_price(full_text)
+    debug = {
+        "source_url": url,
+        "source_title": title,
+        "source_domain": domain,
+        "snippet": snippet[:500],
+        "source_type": source_type,
+        "source_price": source_price,
+        "accepted_source_url": "",
+        "rejected_source_url": "",
+        "rejected_reason": "",
+    }
+    if not url or not domain:
+        debug["rejected_reason"] = "missing source URL"
+        return None, debug
+    if domain_matches(domain, BLOCKED_SOURCE_DOMAINS):
+        debug["rejected_source_url"] = url
+        debug["rejected_reason"] = "blocked source domain"
+        return None, debug
+    if not snippet:
+        debug["rejected_source_url"] = url
+        debug["rejected_reason"] = "missing snippet/content"
+        return None, debug
+    if not any(signal in snippet for signal in PRICE_SIGNALS):
+        debug["rejected_source_url"] = url
+        debug["rejected_reason"] = "snippet has no price or purchase signal"
+        return None, debug
+    if source_type in {"inspiration_only", "no_source"}:
+        debug["rejected_source_url"] = url
+        debug["rejected_reason"] = "source does not verify pricing"
+        return None, debug
+    preferred = domain_matches(domain, PREFERRED_SOURCE_DOMAINS)
+    if not preferred and not any(signal in snippet for signal in ("$", "ticket", "book", "buy", "register", "enroll", "membership")):
+        debug["rejected_source_url"] = url
+        debug["rejected_reason"] = "non-preferred domain without strong purchase intent"
+        return None, debug
+    debug["accepted_source_url"] = url
+    return {
+        "source_title": title or domain,
+        "source_url": url,
+        "source_type": source_type,
+        "source_price": source_price,
+    }, debug
+
+
+def purchasable_search_query(card, location, budget):
+    title = str(card.get("title") or card.get("search_query") or "").strip()
+    category = str(card.get("category") or "").lower()
+    existing_query = str(card.get("search_query") or "").strip()
+    if "subscription" in category or "membership" in title.lower():
+        return f"{title} membership price"
+    if any(term in category for term in ("event", "concert", "festival")):
+        return f"{title} tickets price {location}".strip()
+    if any(term in category for term in ("travel", "trip", "vacation")):
+        return f"{title} package price"
+    if any(term in category for term in ("class", "course", "certification", "lesson")) or any(
+        term in title.lower() for term in ("class", "course", "certification", "lesson", "coaching")
+    ):
+        return f"{title} registration price"
+    if any(term in category for term in ("product", "tech", "gaming", "gear", "photography", "fashion")):
+        return f"{title} buy price under {int(float(budget or 0) or 1000)}"
+    if existing_query:
+        return f"{existing_query} price register buy"
+    return f"{title} price register buy"
+
+
 def optional_tavily_link_for_query(search_query):
     api_key = get_tavily_api_key()
     query = str(search_query or "").strip()
@@ -3796,14 +4052,41 @@ def optional_tavily_link_for_query(search_query):
         return None
     if not results:
         return None
-    result = results[0]
-    result_url = str(result.get("url") or "").strip()
-    if "facebook.com" in result_url.lower():
-        return None
-    return {
-        "source_title": result.get("title") or "Source",
-        "source_url": result_url,
-    }
+    source, _debug = validate_tavily_source(results[0])
+    return source
+
+
+def tavily_link_for_card(card, location, budget):
+    api_key = get_tavily_api_key()
+    query = purchasable_search_query(card, location, budget)
+    debug = {"query": query, "accepted_source_url": "", "rejected_source_url": "", "rejected_reason": ""}
+    if not api_key or not query:
+        debug["rejected_reason"] = "Tavily key or query missing"
+        return None, debug
+    try:
+        response = requests.post(
+            "https://api.tavily.com/search",
+            json={
+                "api_key": api_key,
+                "query": query,
+                "search_depth": "basic",
+                "max_results": 1,
+                "include_answer": False,
+                "include_raw_content": False,
+            },
+            timeout=12,
+        )
+        response.raise_for_status()
+        results = response.json().get("results", [])
+    except Exception as e:
+        debug["rejected_reason"] = f"Tavily request failed: {e}"
+        return None, debug
+    if not results:
+        debug["rejected_reason"] = "no Tavily results"
+        return None, debug
+    source, source_debug = validate_tavily_source(results[0])
+    source_debug["query"] = query
+    return source, source_debug
 
 
 def parse_ai_card_list(raw):
@@ -3824,7 +4107,7 @@ def parse_ai_card_list(raw):
     return parsed if isinstance(parsed, list) else []
 
 
-def normalize_ai_goal_card(card, target_month):
+def normalize_ai_goal_card(card, target_month, location="", budget=0.0):
     raw_card = dict(card or {})
     estimated_cost = parse_goal_card_cost(raw_card.get("estimated_cost"))
     if estimated_cost is None:
@@ -3835,7 +4118,7 @@ def normalize_ai_goal_card(card, target_month):
     ways = raw_card.get("ways_to_afford_it", [])
     if isinstance(ways, str):
         ways = [ways]
-    search_query = str(raw_card.get("search_query") or raw_card.get("title") or "").strip()
+    search_query = purchasable_search_query(raw_card, location, budget)
     normalized = {
         "title": str(raw_card.get("title") or "Goal").strip(),
         "category": str(raw_card.get("category") or "Goal").strip(),
@@ -3844,13 +4127,30 @@ def normalize_ai_goal_card(card, target_month):
         "description": str(raw_card.get("description") or raw_card.get("why_match") or "").strip(),
         "ways_to_afford_it": [str(item).strip() for item in ways if str(item).strip()][:3],
         "search_query": search_query,
-        "source_title": str(raw_card.get("source_title") or "").strip(),
-        "source_url": str(raw_card.get("source_url") or "").strip(),
-        "source_mode": "AI personalized + live links",
+        "source_title": "",
+        "source_url": "",
+        "source_type": "no_source",
+        "source_badge": "Estimate only",
+        "source_mode": "Estimate only",
+        "generated_by": "AI",
     }
-    live_link = optional_tavily_link_for_query(search_query)
+    live_link, source_debug = tavily_link_for_card(normalized, location, budget)
+    normalized["source_debug"] = source_debug
     if live_link:
         normalized.update(live_link)
+        source_type = normalized.get("source_type", "pricing_reference")
+        source_price = normalized.get("source_price")
+        if source_type in {"verified_booking_page", "verified_product_page"} and source_price:
+            ai_estimate = float(normalized.get("estimated_cost", 0.0) or 0.0)
+            if ai_estimate <= 0 or abs(float(source_price) - ai_estimate) / max(ai_estimate, 1.0) > 0.25:
+                normalized["estimated_cost"] = float(source_price)
+                normalized["monthly_savings"] = calculate_monthly_savings_from_cost(float(source_price), target_month)
+        elif source_price:
+            ai_estimate = float(normalized.get("estimated_cost", 0.0) or 0.0)
+            if ai_estimate > 0 and abs(float(source_price) - ai_estimate) / max(ai_estimate, 1.0) > 0.25:
+                normalized["source_type"] = "inspiration_only"
+        normalized["source_badge"] = source_badge(normalized.get("source_type"))
+        normalized["source_mode"] = normalized["source_badge"]
     return normalized
 
 
@@ -3923,7 +4223,7 @@ def render_goal_discovery():
         else ""
     )
     selected_goals = []
-    if current_goal_source in {"AI personalized + live links", "AI personalized", "Catalog fallback"}:
+    if current_goal_source in {"AI personalized", "Catalog fallback"}:
         selected_goals = st.session_state.get("goal_cards", []) or []
     matched_categories = detected_goal_categories(interests)
     matched_keywords = detected_goal_keywords(interests)
@@ -3951,7 +4251,7 @@ def render_goal_discovery():
     refreshed_goals = st.session_state.get(f"{discovery_key}_refreshed_goals")
     if isinstance(refreshed_goals, list) and len(refreshed_goals) >= 3:
         selected_goals = refreshed_goals
-        ai_cards_active = any(goal.get("source_mode") in {"AI personalized", "Live enriched"} for goal in refreshed_goals)
+        ai_cards_active = any(goal.get("generated_by") == "AI" for goal in refreshed_goals)
 
     if DEV_MODE:
         with st.expander("Goal Discovery debug", expanded=False):
@@ -3984,6 +4284,13 @@ def render_goal_discovery():
 
         Every card must include:
         title, category, estimated_cost, monthly_savings, description, ways_to_afford_it, search_query.
+        Do not include source_url or source_title. Lantern will find live links separately.
+        Make search_query target purchasable or bookable pages:
+        - products: "{{goal}} buy price under {budget_range}"
+        - classes: "{{goal}} registration price"
+        - events: "{{goal}} tickets price {location}"
+        - travel: "{{goal}} package price"
+        - subscriptions: "{{goal}} membership price"
 
         Format exactly as a JSON array:
         [
@@ -4011,13 +4318,13 @@ def render_goal_discovery():
                 st.code(raw)
             parsed_cards = parse_ai_card_list(raw)
             cards = [
-                normalize_ai_goal_card(card, target_month)
+                normalize_ai_goal_card(card, target_month, location=location, budget=target_budget)
                 for card in parsed_cards[:5]
             ]
             if not cards:
                 raise ValueError("OpenAI returned no goal cards.")
             st.session_state["goal_cards"] = cards
-            st.session_state["goal_source"] = "AI personalized + live links"
+            st.session_state["goal_source"] = "AI personalized"
             st.session_state["goal_cards_key"] = discovery_key
             selected_goals = cards
             ai_cards_active = True
@@ -4038,12 +4345,18 @@ def render_goal_discovery():
         refreshed = []
         for goal in selected_goals:
             updated = dict(goal)
-            live_link = optional_tavily_link_for_goal(goal, location)
+            live_link, source_debug = tavily_link_for_card(goal, location, target_budget)
+            updated["source_debug"] = source_debug
             if live_link:
                 updated.update(live_link)
                 updated["last_checked"] = today.isoformat()
-                updated["source_mode"] = "Live enriched"
+                updated["source_badge"] = source_badge(updated.get("source_type"))
+                updated["source_mode"] = updated["source_badge"]
             refreshed.append(updated)
+        if refreshed:
+            st.session_state["goal_cards"] = refreshed
+            st.session_state["goal_source"] = "AI personalized"
+            st.session_state["goal_cards_key"] = discovery_key
         st.session_state[f"{discovery_key}_refreshed_goals"] = refreshed
         st.rerun()
 
@@ -4060,10 +4373,10 @@ def render_goal_discovery():
     ):
         selected_goals = hard_rule_cards
 
-    active_source_mode = active_goal_source or (
-        selected_goals[0].get("source_mode", "Catalog fallback") if selected_goals else "Catalog fallback"
-    )
-    action_cols[2].caption(f"Source: {active_source_mode}")
+    if active_goal_source:
+        action_cols[2].caption(f"Source: {active_goal_source}. Each card shows its own source badge.")
+    else:
+        action_cols[2].caption("Each card shows its own source badge.")
 
     if not selected_goals:
         if not active_goal_source:
@@ -4079,7 +4392,7 @@ def render_goal_discovery():
         for col, idea in zip(card_cols, row):
             with col:
                 idea = dict(idea)
-                if not str(idea.get("source_mode", "")).startswith("AI") and not valid_catalog_source(idea):
+                if idea.get("generated_by") != "AI" and not valid_catalog_source(idea):
                     continue
                 monthly = idea.get("monthly_savings")
                 if monthly in {None, ""}:
@@ -4092,7 +4405,9 @@ def render_goal_discovery():
                     metric_cols[0].metric("Estimated cost", money(idea.get("estimated_cost")))
                     metric_cols[1].metric("Save monthly", money(monthly))
                     st.caption(f"Target: {target_date.strftime('%B %Y')}")
-                    st.caption(f"Source: {idea.get('source_mode', 'Catalog fallback')} · {idea.get('source_title', 'Catalog estimate')}")
+                    source_title = idea.get("source_title") or "Source needed"
+                    source_label = idea.get("source_badge") or idea.get("source_mode", "Catalog fallback")
+                    st.caption(f"{source_label} · {source_title}")
                     if idea.get("description"):
                         st.caption(idea["description"])
                     elif idea.get("why_match"):
@@ -4109,6 +4424,9 @@ def render_goal_discovery():
                     else:
                         search_url = f"https://www.google.com/search?q={quote_plus(str(idea.get('search_query') or idea.get('title') or ''))}"
                         action_cols[0].link_button("Search this goal", search_url, width="stretch")
+                    if DEV_MODE and idea.get("source_debug"):
+                        with st.expander("Source debug", expanded=False):
+                            st.json(idea["source_debug"])
                     if action_cols[1].button("Use this goal", key=f"use_clean_goal_{discovery_key}_{card_idx}"):
                         selected_date = target_date
                         st.session_state.goal_input_name = idea.get("title", "Goal")
