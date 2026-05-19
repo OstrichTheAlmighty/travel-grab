@@ -19,12 +19,17 @@ for import_path in (CURRENT_DIR, ROOT_DIR):
 
 from affordability_engine import calculateGoalTrajectory
 from budget_utils import detect_income_sources, monthly_spending_totals
-from goal_discovery import classify_source, is_product_interest, validate_goal_ideas
+from goal_discovery import is_product_interest
+from providers import route_intents
 
 BASE_URL = ""
+DEV_MODE = str(os.environ.get("DEV_MODE", "")).lower() in {"1", "true", "yes", "on"}
+PROVIDER_CACHE_PATH = os.path.join(CURRENT_DIR, "provider_results_cache.json")
+PROVIDER_CACHE_TTL_DAYS = 7
 
 st.set_page_config(page_title="Lantern", layout="wide")
 st.title("APP LOADED")
+st.success("LIVE BUILD: MAY 17 CLEAN REDEPLOY V1")
 # Custom CSS is intentionally disabled while diagnosing Streamlit Cloud's blank
 # frontend render. Keep startup visible and rely on native Streamlit layout.
 
@@ -1907,128 +1912,6 @@ def render_need_more_price_data(search_links):
             st.link_button(link["label"], link["url"])
 
 
-def online_fitness_subscription_fallbacks(discovery_data):
-    if not is_online_fitness_interest(discovery_data):
-        return []
-    target = normalized_target_month(discovery_data.get("target_month"))
-    return [
-        {
-            "title": "Peloton App Membership",
-            "goal_type": "subscription",
-            "type": "subscription",
-            "category": "subscription",
-            "product_name": "Peloton App Membership",
-            "retailer_or_source": "Peloton",
-            "why_it_matches_user_interest": "A guided online fitness subscription with cycling, strength, yoga, running, and meditation classes.",
-            "why_it_matches": "A guided online fitness subscription with cycling, strength, yoga, running, and meditation classes.",
-            "estimated_cost": 24.0,
-            "current_price": 24.0,
-            "confidence": "medium",
-            "experience_score": 7,
-            "source_urls": ["https://www.onepeloton.com/membership"],
-            "source_titles": ["Peloton Membership"],
-            "source_snippets": ["Peloton App membership price fallback: $24/month."],
-            "source_url": "https://www.onepeloton.com/membership",
-            "source_title": "Peloton Membership",
-            "source_snippet": "Peloton App membership price fallback: $24/month.",
-            "source_price_or_price_note": "Deterministic fallback price: $24/month.",
-            "target_month": target,
-            "target_date_or_month": target,
-            "monthly_savings": 24.0,
-            "monthly_savings_needed": 24.0,
-            "monthly_savings_required": 24.0,
-            "package_deal_angle": "Monthly fitness app subscription.",
-            "package_or_deal_angle": "Monthly fitness app subscription.",
-            "what_to_check_next": "Confirm the current Peloton App membership price before subscribing.",
-            "affordability_note": "Recurring subscription; Lantern treats the monthly price as the monthly goal cost.",
-            "travel_cost_buckets": {"flight": None, "lodging": None, "activities": None, "food_local_transport": None},
-            "ways_to_afford_it": ["Swap one other subscription.", "Use entertainment budget for the first month."],
-            "validation_debug": {
-                "price_verified": True,
-                "extracted_price": 24.0,
-                "source_type": "official_retailer",
-                "accepted_or_rejected_reason": "Accepted deterministic online fitness fallback.",
-            },
-        },
-        {
-            "title": "Apple Fitness+",
-            "goal_type": "subscription",
-            "type": "subscription",
-            "category": "subscription",
-            "product_name": "Apple Fitness+",
-            "retailer_or_source": "Apple",
-            "why_it_matches_user_interest": "A low-friction online fitness subscription for guided workouts across strength, yoga, HIIT, cycling, and meditation.",
-            "why_it_matches": "A low-friction online fitness subscription for guided workouts across strength, yoga, HIIT, cycling, and meditation.",
-            "estimated_cost": 9.99,
-            "current_price": 9.99,
-            "confidence": "medium",
-            "experience_score": 7,
-            "source_urls": ["https://www.apple.com/apple-fitness-plus/"],
-            "source_titles": ["Apple Fitness+"],
-            "source_snippets": ["Apple Fitness+ deterministic fallback price: $9.99/month."],
-            "source_url": "https://www.apple.com/apple-fitness-plus/",
-            "source_title": "Apple Fitness+",
-            "source_snippet": "Apple Fitness+ deterministic fallback price: $9.99/month.",
-            "source_price_or_price_note": "Deterministic fallback price: $9.99/month.",
-            "target_month": target,
-            "target_date_or_month": target,
-            "monthly_savings": 9.99,
-            "monthly_savings_needed": 9.99,
-            "monthly_savings_required": 9.99,
-            "package_deal_angle": "Monthly fitness app subscription.",
-            "package_or_deal_angle": "Monthly fitness app subscription.",
-            "what_to_check_next": "Confirm the current Apple Fitness+ price and device requirements.",
-            "affordability_note": "Recurring subscription; Lantern treats the monthly price as the monthly goal cost.",
-            "travel_cost_buckets": {"flight": None, "lodging": None, "activities": None, "food_local_transport": None},
-            "ways_to_afford_it": ["Replace one small subscription.", "Use part of the entertainment budget."],
-            "validation_debug": {
-                "price_verified": True,
-                "extracted_price": 9.99,
-                "source_type": "official_retailer",
-                "accepted_or_rejected_reason": "Accepted deterministic online fitness fallback.",
-            },
-        },
-        {
-            "title": "Alo Moves",
-            "goal_type": "subscription",
-            "type": "subscription",
-            "category": "subscription",
-            "product_name": "Alo Moves",
-            "retailer_or_source": "Alo Moves",
-            "why_it_matches_user_interest": "An online wellness and fitness subscription with yoga, pilates, strength, barre, and mindfulness classes.",
-            "why_it_matches": "An online wellness and fitness subscription with yoga, pilates, strength, barre, and mindfulness classes.",
-            "estimated_cost": 12.99,
-            "current_price": 12.99,
-            "confidence": "medium",
-            "experience_score": 6,
-            "source_urls": ["https://www.alomoves.com/"],
-            "source_titles": ["Alo Moves"],
-            "source_snippets": ["Alo Moves deterministic fallback annualized monthly price: $12.99/month if paid annually."],
-            "source_url": "https://www.alomoves.com/",
-            "source_title": "Alo Moves",
-            "source_snippet": "Alo Moves deterministic fallback annualized monthly price: $12.99/month if paid annually.",
-            "source_price_or_price_note": "Deterministic fallback price: $12.99/month if paid annually.",
-            "target_month": target,
-            "target_date_or_month": target,
-            "monthly_savings": 12.99,
-            "monthly_savings_needed": 12.99,
-            "monthly_savings_required": 12.99,
-            "package_deal_angle": "Annualized monthly fitness subscription.",
-            "package_or_deal_angle": "Annualized monthly fitness subscription.",
-            "what_to_check_next": "Confirm whether you want monthly billing or annual billing before subscribing.",
-            "affordability_note": "Recurring subscription; Lantern treats the annualized monthly price as the monthly goal cost.",
-            "travel_cost_buckets": {"flight": None, "lodging": None, "activities": None, "food_local_transport": None},
-            "ways_to_afford_it": ["Cancel one unused app.", "Fund it from the wellness budget."],
-            "validation_debug": {
-                "price_verified": True,
-                "extracted_price": 12.99,
-                "source_type": "official_retailer",
-                "accepted_or_rejected_reason": "Accepted deterministic online fitness fallback.",
-            },
-        },
-    ]
-
-
 LANTERN_DEMO_CATEGORIES = {
     "restaurants": {
         "label": "restaurants",
@@ -2550,6 +2433,17 @@ def get_tavily_api_key():
     return str(api_key or "").strip()
 
 
+def get_serpapi_api_key():
+    api_key = ""
+    try:
+        api_key = st.secrets["SERPAPI_API_KEY"]
+    except Exception:
+        api_key = ""
+    if not api_key:
+        api_key = os.environ.get("SERPAPI_API_KEY", "")
+    return str(api_key or "").strip()
+
+
 def show_ai_key_detection(api_key):
     st.caption(f"AI key detected: {'Yes' if api_key else 'No'}")
 
@@ -2692,10 +2586,13 @@ def budget_quality_context(discovery_data):
     numbers = parse_budget_numbers(discovery_data.get("preferred_budget_range"))
     budget_reference = max(numbers) if numbers else 1000.0
     return {
+        "target_budget": budget_reference,
         "budget_reference": budget_reference,
-        "preferred_min_cost": round(budget_reference * 0.4, 2),
-        "preferred_max_cost": round(budget_reference, 2),
-        "avoid_under_cost": round(max(25.0, budget_reference * 0.1), 2),
+        "preferred_min_cost": round(budget_reference * 0.6, 2),
+        "preferred_max_cost": round(budget_reference * 1.1, 2),
+        "acceptable_min_cost": round(budget_reference * 0.25, 2),
+        "acceptable_max_cost": round(budget_reference * 1.25, 2),
+        "avoid_under_cost": round(max(25.0, budget_reference * 0.25), 2),
         "budget_numbers_detected": numbers,
     }
 
@@ -2706,6 +2603,14 @@ def user_requested_budget_free(discovery_data):
         for key in ("interests", "preferred_budget_range", "preference", "travel_distance")
     ).lower()
     return any(term in text for term in ("free", "cheap", "budget", "low cost", "low-cost", "$0", "under $25"))
+
+
+def user_requested_subscription_app(discovery_data):
+    text = " ".join(
+        str(discovery_data.get(key, ""))
+        for key in ("interests", "preferred_budget_range", "preference", "travel_distance", "location")
+    ).lower()
+    return any(term in text for term in ("app", "apps", "subscription", "membership", "monthly"))
 
 
 def is_destination_interest(interests):
@@ -2722,449 +2627,370 @@ def is_online_fitness_interest(discovery_data):
     return "fitness" in text and any(term in text for term in ("online", "subscription", "app", "home", "digital", "virtual", "workout"))
 
 
-def source_quality_details(url, title="", snippet=""):
-    host = urlparse(str(url or "")).netloc.lower().replace("www.", "")
-    text = f"{host} {title} {snippet}".lower()
-    preferred_terms = (
-        "official",
-        "bestbuy",
-        "best buy",
-        "amazon",
-        "apple",
-        "target",
-        "walmart",
-        "b&h",
-        "bhphoto",
-        "rei",
-        "nike",
-        "ticketmaster",
-        "eventbrite",
-        "stubhub",
-        "seatgeek",
-        "airlines",
-        "flights",
-        "hotel",
-        "hostel",
-        "expedia",
-        "kayak",
-        "booking.com",
-        "tripadvisor",
-        "tourism",
-        "visit",
-        "timeout",
-        "lonely planet",
-        "conde nast",
-        "thrillist",
-        "meetup",
-    )
-    low_quality_terms = (
-        "facebook.com",
-        "allevents",
-        "eventseeker",
-        "evvnt",
-        "community calendar",
-        "calendar",
-        "things to do near me",
-        "submit event",
-        "powered by",
-    )
-    score = 5
-    if any(term in text for term in preferred_terms):
-        score += 3
-    if any(term in text for term in low_quality_terms):
-        score -= 4
-    if "$" in text or re.search(r"\b(ticket|price|from|package|admission|pass)\b", text):
-        score += 1
-    if len(str(snippet or "")) < 80:
-        score -= 1
-    score = max(1, min(10, score))
-    if score >= 8:
-        label = "strong"
-    elif score >= 5:
-        label = "usable"
-    else:
-        label = "weak"
-    return score, label
+def is_fitness_interest(discovery_data):
+    text = " ".join(
+        str(discovery_data.get(key, ""))
+        for key in ("interests", "preference", "travel_distance", "location")
+    ).lower()
+    return any(term in text for term in ("fitness", "wellness", "workout", "training", "gym", "running", "yoga"))
 
 
-def source_research_score(url, title="", snippet=""):
-    host = urlparse(str(url or "")).netloc.lower().replace("www.", "")
-    path = urlparse(str(url or "")).path.lower()
-    text = f"{title} {snippet}".lower()
-    score = 0
-    trusted_domain_terms = (
-        "ticketmaster.com",
-        "eventbrite.com",
-        "livenation.com",
-        "bandsintown.com",
-        "bestbuy.com",
-        "amazon.com",
-        "target.com",
-        "walmart.com",
-        "apple.com",
-        "bhphotovideo.com",
-        "newegg.com",
-        "rei.com",
-        "nike.com",
-        "onepeloton.com",
-        "alomoves.com",
-        "fitonapp.com",
-        "sony.com",
-        "samsung.com",
-        "dell.com",
-        "lenovo.com",
-        "logitech.com",
-        "meta.com",
-    )
-    if "$" in text:
-        score += 3
-    if any(domain in host for domain in trusted_domain_terms) or re.search(r"\b(venue|theatre|theater|arena|bowl|auditorium)\b", text):
-        score += 3
-    if re.search(r"\b(tickets|price|buy|register|membership|subscription)\b", text):
-        score += 2
-    if any(bad in path for bad in ("/lp/", "theme-vacations", "blog", "best", "ideas", "guide")):
-        score -= 5
-    if any(bad in text for bad in ("theme vacations", "travel ideas", "best things to do", "guide to", "blog")):
-        score -= 5
-    return score
+ALLOWED_GOAL_CATEGORIES = {
+    "gaming",
+    "travel",
+    "concerts",
+    "fitness",
+    "photography",
+    "learning",
+    "fashion",
+    "tech",
+    "wellness",
+}
 
 
-def normalized_target_month(value):
-    text = str(value or "").strip()
-    if text:
-        for fmt in ("%B %Y", "%b %Y"):
-            try:
-                parsed = datetime.datetime.strptime(text, fmt)
-                return parsed.strftime("%B %Y")
-            except Exception:
-                pass
-        for fmt in ("%B", "%b"):
-            try:
-                month_num = datetime.datetime.strptime(text.split()[0], fmt).month
-                year = today.year if month_num >= today.month else today.year + 1
-                return datetime.date(year, month_num, 1).strftime("%B %Y")
-            except Exception:
-                pass
-    target = today + datetime.timedelta(days=120)
-    return target.strftime("%B %Y")
-
-
-def build_goal_search_queries(discovery_data):
-    interests = str(discovery_data.get("interests") or "experiences").strip()
-    first_interest = interests.split(",")[0].strip() or interests
-    location = str(discovery_data.get("location") or "near me").strip()
-    budget = str(discovery_data.get("preferred_budget_range") or "budget friendly").strip()
-    target_month = normalized_target_month(discovery_data.get("target_month"))
-    if is_online_fitness_interest(discovery_data):
-        return [
-            "online fitness subscription price",
-            "Peloton app membership price",
-            "Alo Moves membership price",
-            "Apple Fitness Plus price",
-            "FitOn Pro price",
-            "Nike Training Club premium price",
-        ]
-    if is_product_interest(discovery_data):
-        return [
-            f"{first_interest} product under {budget} site:amazon.com OR site:bestbuy.com OR site:target.com OR site:walmart.com".strip(),
-            f"{first_interest} deal under {budget} buy price".strip(),
-            f"{first_interest} best product under {budget} price".strip(),
-        ]
-    return [
-        f"{first_interest} {location} tickets {target_month} price".strip(),
-        f"{first_interest} {location} class price".strip(),
-        f"{first_interest} {location} eventbrite tickets".strip(),
-        f"{first_interest} {location} ticketmaster".strip(),
-        f"{first_interest} {location} workshop price".strip(),
-    ]
-
-
-def goal_search_links(discovery_data):
-    return [
-        {"label": query[:72], "url": f"https://www.google.com/search?q={quote_plus(query)}"}
-        for query in build_goal_search_queries(discovery_data)[:3]
-    ]
-
-
-def search_goal_options(discovery_data):
-    """Search live web results for goal options. The AI only summarizes these results."""
-    tavily_key = get_tavily_api_key()
-    if not tavily_key:
-        return {"results": [], "error": "TAVILY_API_KEY is not configured."}
-    search_results = []
-    raw_results = []
-    seen_urls = set()
-    for query in build_goal_search_queries(discovery_data):
-        try:
-            response = requests.post(
-                "https://api.tavily.com/search",
-                json={
-                    "api_key": tavily_key,
-                    "query": query,
-                    "search_depth": "basic",
-                    "max_results": 4,
-                    "include_answer": False,
-                    "include_raw_content": False,
-                },
-                timeout=20,
-            )
-            response.raise_for_status()
-            payload = response.json()
-        except Exception as e:
-            return {"results": search_results, "error": f"Search failed for query '{query}': {e}"}
-        for result in payload.get("results", []):
-            url = str(result.get("url", "")).strip()
-            if not url or url in seen_urls:
-                continue
-            seen_urls.add(url)
-            title = str(result.get("title", "")).strip()
-            snippet = str(result.get("content", "")).strip()
-            raw_results.append({"query": query, "title": title, "url": url, "snippet": snippet, "content": snippet})
-            quality_score, quality_label = source_quality_details(url, title, snippet)
-            research_score = source_research_score(url, title, snippet)
-            if quality_score <= 2 or research_score <= 0:
-                continue
-            search_results.append(
-                {
-                    "query": query,
-                    "title": title,
-                    "source_title": title,
-                    "url": url,
-                    "source_url": url,
-                    "snippet": snippet,
-                    "content": snippet,
-                    "source_snippet": snippet,
-                    "detected_prices": detected_price_strings(f"{title} {snippet}"),
-                    "source_quality_score": quality_score,
-                    "source_quality": quality_label,
-                    "source_type": classify_source(url, title, snippet),
-                    "research_score": research_score,
-                }
-            )
-    search_results = sorted(
-        search_results,
-        key=lambda item: (item.get("research_score", 0), item.get("source_quality_score", 0)),
-        reverse=True,
-    )
-    return {"results": search_results[:5], "raw_results": raw_results[:5], "error": ""}
-
-
-def normalize_goal_idea(item, default_target):
-    try:
-        raw_cost = item.get("estimated_cost", item.get("current_price", item.get("estimated_total_cost", None)))
-        cost = float(raw_cost) if raw_cost not in {None, ""} else None
-    except Exception:
-        cost = None
-    monthly = None
-    ways = item.get("ways_to_afford_it", item.get("ways_to_afford", []))
-    if not isinstance(ways, list):
-        ways = [str(ways)]
-    source_urls = item.get("source_urls", [])
-    if not source_urls and item.get("source_url"):
-        source_urls = [item.get("source_url")]
-    source_titles = item.get("source_titles", [])
-    if not source_titles and item.get("source_title"):
-        source_titles = [item.get("source_title")]
-    source_snippets = item.get("source_snippets", [])
-    if not source_snippets and item.get("source_snippet"):
-        source_snippets = [item.get("source_snippet")]
-    if not isinstance(source_urls, list):
-        source_urls = [str(source_urls)]
-    if not isinstance(source_titles, list):
-        source_titles = [str(source_titles)]
-    if not isinstance(source_snippets, list):
-        source_snippets = [str(source_snippets)]
-    source_urls = [str(url).strip() for url in source_urls if str(url).strip()][:4]
-    source_titles = [str(title).strip() for title in source_titles if str(title).strip()][:4]
-    source_snippets = [str(snippet).strip() for snippet in source_snippets if str(snippet).strip()][:4]
-    confidence = str(item.get("confidence", "low")).strip().lower()
-    if confidence not in {"high", "medium", "low"}:
-        confidence = "low"
-    if confidence == "high" and not source_urls:
-        confidence = "medium"
-    try:
-        experience_score = int(round(float(item.get("experience_score", item.get("score", 6)) or 6)))
-    except Exception:
-        experience_score = 6
-    experience_score = max(1, min(10, experience_score))
-    goal_type = str(item.get("type", item.get("goal_type", item.get("category", "experience")))).strip().lower()
-    type_map = {
-        "travel": "trip",
-        "local experience": "experience",
-        "hobby": "experience",
-        "product / tech": "product",
-        "class / event": "event",
+def normalize_goal_category(value, discovery_data=None):
+    text = str(value or "").strip().lower()
+    aliases = {
+        "concert": "concerts",
+        "music": "concerts",
+        "event": "concerts",
+        "events": "concerts",
+        "trip": "travel",
+        "product": "tech",
+        "technology": "tech",
+        "gadgets": "tech",
+        "camera": "photography",
+        "photo": "photography",
+        "course": "learning",
+        "class": "learning",
+        "health": "wellness",
     }
-    goal_type = type_map.get(goal_type, goal_type)
-    if goal_type not in {"product", "event", "trip", "class", "experience", "subscription"}:
-        goal_type = "experience"
-    why = str(
-        item.get(
-            "why_it_matches_user_interest",
-            item.get("why_it_matches", item.get("why_it_fits", "Matches your interests.")),
-        )
-    ).strip()
-    target_label = normalized_target_month(item.get("target_month", item.get("target_date_or_month", default_target)))
-    package_angle = str(
-        item.get("package_or_deal_angle", item.get("package_deal_angle", item.get("example_plan", "Planning estimate package.")))
-    ).strip()
-    affordability_note = str(item.get("affordability_note", "")).strip()
-    if not source_urls:
-        affordability_note = "Planning estimate, not verified." if not affordability_note else f"Planning estimate, not verified. {affordability_note}"
-    buckets = item.get("travel_cost_buckets", {}) or {}
-    if not isinstance(buckets, dict):
-        buckets = {}
-    travel_cost_buckets = {
-        "flight": float(buckets.get("flight", 0.0) or 0.0),
-        "lodging": float(buckets.get("lodging", 0.0) or 0.0),
-        "activities": float(buckets.get("activities", 0.0) or 0.0),
-        "food_local_transport": float(buckets.get("food_local_transport", 0.0) or 0.0),
+    text = aliases.get(text, text)
+    if text in ALLOWED_GOAL_CATEGORIES:
+        return text
+    source_text = ""
+    if discovery_data:
+        source_text = " ".join(
+            str(discovery_data.get(key, ""))
+            for key in ("interests", "preference", "travel_distance", "location")
+        ).lower()
+    source_text = f"{text} {source_text}"
+    category_terms = {
+        "gaming": ("gaming", "game", "playstation", "xbox", "steam", "pc"),
+        "travel": ("travel", "trip", "flight", "hotel", "destination", "weekend"),
+        "concerts": ("concert", "music", "festival", "ticket", "show"),
+        "fitness": ("fitness", "workout", "training", "gym", "running"),
+        "photography": ("photo", "camera", "lens", "photography"),
+        "learning": ("learning", "course", "class", "workshop", "education"),
+        "fashion": ("fashion", "style", "clothing", "shoes", "sneakers"),
+        "tech": ("tech", "gadget", "laptop", "phone", "headphones", "vr"),
+        "wellness": ("wellness", "retreat", "spa", "yoga", "health"),
     }
-    return {
-        "title": str(item.get("title", item.get("goal_name", "Goal idea"))).strip(),
-        "goal_type": goal_type,
-        "type": goal_type,
-        "category": goal_type,
-        "product_name": str(item.get("product_name", item.get("title", ""))).strip(),
-        "retailer_or_source": str(item.get("retailer_or_source", item.get("retailer", ""))).strip(),
-        "current_price": cost,
-        "why_it_matches_user_interest": why,
-        "why_it_matches": why,
-        "estimated_cost": cost,
-        "experience_score": experience_score,
-        "confidence": confidence,
-        "source_urls": source_urls,
-        "source_titles": source_titles,
-        "source_snippets": source_snippets,
-        "source_url": source_urls[0] if source_urls else "",
-        "source_title": source_titles[0] if source_titles else "",
-        "source_snippet": source_snippets[0] if source_snippets else "",
-        "source_price_or_price_note": str(item.get("source_price_or_price_note", "Planning estimate, not verified.")).strip(),
-        "target_month": target_label,
-        "target_date_or_month": target_label,
-        "monthly_savings": monthly,
-        "monthly_savings_needed": monthly,
-        "monthly_savings_required": monthly,
-        "package_deal_angle": package_angle,
-        "package_or_deal_angle": package_angle,
-        "what_to_check_next": str(item.get("what_to_check_next", "Check current prices before committing.")).strip(),
-        "affordability_note": affordability_note,
-        "reasoning": affordability_note,
-        "travel_cost_buckets": travel_cost_buckets,
-        "ways_to_afford_it": [str(way).strip() for way in ways if str(way).strip()][:3],
-        "ways_to_afford": [str(way).strip() for way in ways if str(way).strip()][:3],
-    }
+    for category, terms in category_terms.items():
+        if any(term in source_text for term in terms):
+            return category
+    return "tech" if is_product_interest(discovery_data or {}) else "travel"
 
 
-def idea_has_concrete_activity(idea):
-    title = str(idea.get("title", "")).lower()
-    angle = str(idea.get("package_or_deal_angle", idea.get("package_deal_angle", ""))).lower()
-    check_next = str(idea.get("what_to_check_next", "")).lower()
-    generic_terms = ("free event", "community event", "local event", "concert experience", "things to do")
-    if any(term in title for term in generic_terms):
-        return False
-    concrete_terms = (
-        "ticket",
-        "venue",
-        "flight",
-        "hotel",
-        "hostel",
-        "class",
-        "course",
-        "pass",
-        "bundle",
-        "package",
-        "festival",
-        "retreat",
-        "setup",
-        "gear",
-        "workshop",
-    )
-    return any(term in f"{angle} {check_next} {title}" for term in concrete_terms)
-
-
-def filter_and_rank_goal_ideas(ideas, discovery_data):
+def budget_range_label(discovery_data):
     quality = budget_quality_context(discovery_data)
-    allow_budget_free = user_requested_budget_free(discovery_data)
-    filtered = []
-    for idea in ideas:
-        raw_cost = idea.get("estimated_cost")
-        cost = float(raw_cost) if raw_cost not in {None, ""} else None
-        score = int(idea.get("experience_score", 6) or 6)
-        source_urls = idea.get("source_urls", []) or []
-        if cost is None:
-            idea["confidence"] = "low"
-            score -= 2
-        elif not allow_budget_free:
-            if cost < 25:
-                continue
-            if cost < quality["avoid_under_cost"] and score < 9:
-                continue
-            if not idea_has_concrete_activity(idea):
-                continue
-        if str(idea.get("confidence", "")).lower() == "high" and not source_urls:
-            idea["confidence"] = "medium"
-        if cost is not None and cost < quality["preferred_min_cost"]:
-            score -= 1
-        if cost is not None and quality["preferred_min_cost"] <= cost <= quality["preferred_max_cost"]:
-            score += 1
-        if source_urls:
-            score += 1
-        if "Planning estimate, not verified." in str(idea.get("affordability_note", "")):
-            score -= 1
-        idea["experience_score"] = max(1, min(10, score))
-        filtered.append(idea)
-    type_order = {"trip": 0, "event": 1, "class": 2, "product": 3, "experience": 4}
-    filtered.sort(
-        key=lambda item: (
-            int(item.get("experience_score", 0) or 0),
-            -type_order.get(str(item.get("type", item.get("goal_type", ""))).lower(), 6),
-            float(item.get("estimated_cost") or 0.0),
-        ),
-        reverse=True,
+    return f"${quality['preferred_min_cost']:.0f}-${quality['preferred_max_cost']:.0f}"
+
+
+def normalized_cache_text(value):
+    text = str(value or "").strip().lower()
+    text = re.sub(r"[^a-z0-9]+", "-", text)
+    return text.strip("-") or "any"
+
+
+def provider_budget_band(discovery_data):
+    quality = budget_quality_context(discovery_data)
+    return f"{int(quality['acceptable_min_cost'])}-{int(quality['acceptable_max_cost'])}"
+
+
+def provider_cache_key(discovery_data, intents):
+    categories = sorted({normalize_goal_category(intent.get("category"), discovery_data) for intent in intents})
+    category_key = "-".join(categories) or normalize_goal_category(discovery_data.get("interests"), discovery_data)
+    return "|".join(
+        [
+            normalized_cache_text(discovery_data.get("interests")),
+            normalized_cache_text(category_key),
+            normalized_cache_text(provider_budget_band(discovery_data)),
+            normalized_cache_text(discovery_data.get("location")),
+        ]
     )
-    selected = []
-    seen_types = set()
-    for idea in filtered:
-        idea_type = str(idea.get("type", idea.get("goal_type", ""))).lower()
-        if idea_type not in seen_types:
-            selected.append(idea)
-            seen_types.add(idea_type)
-        if len(selected) >= 4:
-            break
-    for idea in filtered:
-        if idea not in selected:
-            selected.append(idea)
-        if len(selected) >= 6:
-            break
-    selected.sort(key=lambda item: int(item.get("experience_score", 0) or 0), reverse=True)
-    return selected[:6]
 
 
-def attach_missing_source_metadata(ideas, search_results):
-    enriched = []
-    for idx, idea in enumerate(ideas):
-        item = dict(idea)
-        source_urls = item.get("source_urls") or []
-        source_titles = item.get("source_titles") or []
-        if not isinstance(source_urls, list):
-            source_urls = [str(source_urls)]
-        if not isinstance(source_titles, list):
-            source_titles = [str(source_titles)]
-        source_urls = [url for url in source_urls if str(url).strip()]
-        source_titles = [title for title in source_titles if str(title).strip()]
-        if search_results and (not source_urls or not source_titles):
-            result = search_results[min(idx, len(search_results) - 1)]
-            source_urls = source_urls or [result.get("url", "")]
-            source_titles = source_titles or [result.get("title", "")]
-            item["source_snippets"] = item.get("source_snippets") or [result.get("snippet", result.get("content", ""))]
-            item["source_snippet"] = item.get("source_snippet") or result.get("snippet", result.get("content", ""))
-        item["source_urls"] = source_urls
-        item["source_titles"] = source_titles
-        item["source_url"] = source_urls[0] if source_urls else ""
-        item["source_title"] = source_titles[0] if source_titles else ""
-        enriched.append(item)
-    return enriched
+def load_provider_cache():
+    try:
+        with open(PROVIDER_CACHE_PATH, "r", encoding="utf-8") as fh:
+            data = json.load(fh)
+            return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
+def save_provider_cache(cache):
+    try:
+        with open(PROVIDER_CACHE_PATH, "w", encoding="utf-8") as fh:
+            json.dump(cache, fh, indent=2, sort_keys=True)
+    except Exception:
+        if DEV_MODE:
+            st.caption("Provider cache could not be written.")
+
+
+def provider_cache_entry(cache_key):
+    cache = load_provider_cache()
+    entry = cache.get(cache_key)
+    if not isinstance(entry, dict):
+        return None, False
+    checked_at = entry.get("checked_at", "")
+    try:
+        checked_date = datetime.date.fromisoformat(str(checked_at)[:10])
+    except Exception:
+        return None, False
+    is_fresh = (today - checked_date).days < PROVIDER_CACHE_TTL_DAYS
+    return entry, is_fresh
+
+
+def write_provider_cache(cache_key, cards):
+    cache = load_provider_cache()
+    checked_at = today.isoformat()
+    serialized_cards = []
+    for card in cards:
+        item = dict(card)
+        item["last_checked"] = checked_at
+        serialized_cards.append(item)
+    cache[cache_key] = {"checked_at": checked_at, "cards": serialized_cards}
+    save_provider_cache(cache)
+    return serialized_cards
+
+
+def normalize_goal_intent(item, discovery_data):
+    category = normalize_goal_category(item.get("category"), discovery_data)
+    title = str(item.get("title", "")).strip()
+    if not title:
+        title = f"{category.title()} goal"
+    try:
+        score = int(round(float(item.get("experience_score", 7) or 7)))
+    except Exception:
+        score = 7
+    score = max(1, min(10, score))
+    confidence = str(item.get("confidence", "medium")).strip().lower()
+    if confidence not in {"high", "medium", "low"}:
+        confidence = "medium"
+    return {
+        "category": category,
+        "title": title,
+        "estimated_budget_range": str(item.get("estimated_budget_range") or budget_range_label(discovery_data)).strip(),
+        "experience_score": score,
+        "confidence": confidence,
+        "why_match": str(item.get("why_match", item.get("why_it_matches", "Matches your interests."))).strip(),
+        "product_search_queries": [
+            str(query).strip()
+            for query in item.get("product_search_queries", [])
+            if str(query).strip()
+        ]
+        if isinstance(item.get("product_search_queries", []), list)
+        else [],
+    }
+
+
+def default_goal_intents(discovery_data):
+    text = " ".join(
+        str(discovery_data.get(key, ""))
+        for key in ("interests", "preference", "travel_distance", "location")
+    ).lower()
+    budget_range = budget_range_label(discovery_data)
+    if "gaming" in text or "game" in text:
+        titles = ["Gaming laptop", "Gaming PC", "Gaming monitor", "Meta Quest 3", "PlayStation 5 bundle", "Steam Deck OLED"]
+        return [
+            {
+                "category": "gaming",
+                "title": title,
+                "estimated_budget_range": budget_range,
+                "experience_score": 8,
+                "confidence": "medium",
+                "why_match": "A concrete gaming goal with shopping-result pricing.",
+                "product_search_queries": [f"{title}"],
+            }
+            for title in titles
+        ]
+    first_interest = str(discovery_data.get("interests") or "product").split(",")[0].strip()
+    category = normalize_goal_category(first_interest, discovery_data)
+    return [
+        {"category": category, "title": first_interest.title(), "estimated_budget_range": budget_range, "experience_score": 7, "confidence": "medium", "why_match": "Matches the category you entered.", "product_search_queries": [first_interest]},
+        {"category": category, "title": f"{first_interest.title()} premium option", "estimated_budget_range": budget_range, "experience_score": 8, "confidence": "medium", "why_match": "A higher-quality option near your preferred range.", "product_search_queries": [f"{first_interest} premium"]},
+        {"category": category, "title": f"{first_interest.title()} bundle", "estimated_budget_range": budget_range, "experience_score": 7, "confidence": "medium", "why_match": "A bundled version of the goal you described.", "product_search_queries": [f"{first_interest} bundle"]},
+    ]
+
+
+def generate_goal_intents(api_key, discovery_data):
+    fallback = [normalize_goal_intent(item, discovery_data) for item in default_goal_intents(discovery_data)]
+    if not api_key:
+        return fallback
+    prompt = (
+        "Return strict JSON only. Generate 4 to 6 structured goal intents for Lantern Goal Discovery. "
+        "Do not generate final products, source URLs, source titles, exact prices, or estimated_cost. "
+        "Only describe intent and product search queries. Every item must include exactly these fields: "
+        "title, category, experience_score, confidence, why_match, product_search_queries. "
+        "Allowed categories: gaming, travel, concerts, fitness, photography, learning, fashion, tech, wellness. "
+        "Do not include exact prices, estimated_cost, source_url, or source_title. "
+        "product_search_queries should be 1 to 3 concise Google Shopping queries for product-like goals, otherwise an empty list. "
+        "experience_score must be 1-10. confidence must be high, medium, or low. "
+        'Schema: {"goals":[{"title":"...","category":"gaming","experience_score":8,"confidence":"medium","why_match":"...","product_search_queries":["gaming laptop under 1500"]}]}'
+    )
+    parsed = openai_responses_json(api_key, prompt, discovery_data, max_output_tokens=700, retries=0)
+    if not parsed.get("success"):
+        return fallback
+    intents = []
+    for item in (parsed.get("data") or {}).get("goals", (parsed.get("data") or {}).get("intents", [])):
+        intent = normalize_goal_intent(item, discovery_data)
+        if intent["category"] in ALLOWED_GOAL_CATEGORIES:
+            intents.append(intent)
+    return intents[:6] or fallback
+
+
+def goal_intent_search_query(intent, discovery_data):
+    category = normalize_goal_category(intent.get("category"), discovery_data)
+    title = str(intent.get("title") or category).strip()
+    location = str(discovery_data.get("location") or "near me").strip()
+    target_month = normalized_target_month(discovery_data.get("target_month"))
+    if category == "gaming":
+        exact_queries = {
+            "gaming laptop": "gaming laptop site:bestbuy.com $1000 $1500",
+            "gaming pc": "gaming pc site:bestbuy.com $1000 $1500",
+            "gaming monitor": "gaming monitor site:bestbuy.com $500 $1500",
+            "meta quest 3": "Meta Quest 3 price site:meta.com",
+            "playstation 5 bundle": "PlayStation 5 bundle price",
+            "steam deck oled": "Steam Deck OLED price",
+        }
+        return exact_queries.get(title.lower(), f"{title} price site:bestbuy.com")
+    if category in {"tech", "photography", "fashion", "fitness"} and is_product_interest({"interests": title, **discovery_data}):
+        return f"{title} price buy"
+    if category == "concerts":
+        return f"{title} {location} tickets {target_month} price"
+    if category in {"learning", "fitness", "wellness"}:
+        return f"{title} {location} class workshop price"
+    if category == "travel":
+        return f"{title} travel package {target_month} price"
+    return f"{title} {location} price"
+
+
+def provider_categories_for_intent(category):
+    category = normalize_goal_category(category)
+    if category in {"gaming", "travel", "concerts", "fitness", "tech"}:
+        return [category]
+    if category in {"photography", "fashion"}:
+        return ["tech"]
+    if category == "learning":
+        return ["fitness", "tech"]
+    if category == "wellness":
+        return ["fitness", "travel"]
+    return ["tech"]
+
+
+def provider_cards_from_intents(intents, discovery_data):
+    cards = []
+    seen = set()
+    target_month = normalized_target_month(discovery_data.get("target_month"))
+    for item in route_intents(intents, discovery_data):
+        intent = item.get("intent", {})
+        if not item.get("price_verified"):
+            continue
+        try:
+            price = float(item["price"])
+        except Exception:
+            continue
+        key = (item.get("title"), item.get("source_url"))
+        if key in seen:
+            continue
+        seen.add(key)
+        provider_category = normalize_goal_category(intent.get("category"), discovery_data)
+        cards.append(
+            {
+                "title": str(item.get("title", intent.get("title", "Goal"))).strip(),
+                "goal_type": provider_category,
+                "type": provider_category,
+                "category": provider_category,
+                "estimated_cost": price,
+                "current_price": price,
+                "confidence": str(intent.get("confidence", "medium")).lower(),
+                "experience_score": int(intent.get("experience_score", 7) or 7),
+                "why_it_matches_user_interest": str(intent.get("why_match", "Matches the goal direction you described.")),
+                "why_it_matches": str(intent.get("why_match", "Matches the goal direction you described.")),
+                "source_urls": [item.get("source_url", "")],
+                "source_titles": [item.get("source_title", "")],
+                "source_url": item.get("source_url", ""),
+                "source_title": item.get("source_title", ""),
+                "image": item.get("image", ""),
+                "rating": item.get("rating"),
+                "merchant": item.get("merchant", ""),
+                "provider": item.get("provider", "catalog"),
+                "source_price_or_price_note": f"Shopping price: {money(price)}"
+                if item.get("provider") == "serpapi_google_shopping"
+                else f"Provider price: {money(price)}",
+                "target_month": target_month,
+                "target_date_or_month": target_month,
+                "monthly_savings": None,
+                "monthly_savings_needed": None,
+                "monthly_savings_required": None,
+                "package_deal_angle": "Deterministic provider result.",
+                "package_or_deal_angle": "Deterministic provider result.",
+                "what_to_check_next": "Open the source to confirm current availability, fees, and taxes.",
+                "affordability_note": "Provider result. Lantern checks affordability with your budget math.",
+                "travel_cost_buckets": {"flight": None, "lodging": None, "activities": None, "food_local_transport": None},
+                "ways_to_afford_it": [
+                    "Use the Budget Planner to test this goal against your current plan.",
+                    "Adjust flexible categories if the target month is tight.",
+                ],
+                "validation_debug": {
+                    "source_type": item.get("provider", "provider"),
+                    "price_verified": True,
+                    "extracted_price": price,
+                    "accepted_or_rejected_reason": "Accepted structured provider result.",
+                },
+            }
+        )
+    cards.sort(key=lambda item: (int(item.get("experience_score", 0) or 0), float(item.get("estimated_cost", 0.0))), reverse=True)
+    return cards[:6]
+
+
+def cached_provider_cards(intents, discovery_data, refresh=False):
+    cache_key = provider_cache_key(discovery_data, intents)
+    entry, is_fresh = provider_cache_entry(cache_key)
+    if entry and is_fresh and not refresh:
+        return entry.get("cards", []), {
+            "cache_key": cache_key,
+            "source": "cache",
+            "last_checked": entry.get("checked_at", ""),
+        }
+
+    live_context = dict(discovery_data)
+    live_context["use_live_prices"] = True
+    live_context["serpapi_api_key"] = get_serpapi_api_key()
+    live_cards = provider_cards_from_intents(intents, live_context)
+    if live_cards:
+        cards = write_provider_cache(cache_key, live_cards)
+        return cards, {"cache_key": cache_key, "source": "live", "last_checked": today.isoformat()}
+
+    if entry and not refresh:
+        return entry.get("cards", []), {
+            "cache_key": cache_key,
+            "source": "stale_cache",
+            "last_checked": entry.get("checked_at", ""),
+        }
+
+    catalog_context = dict(discovery_data)
+    catalog_context["use_live_prices"] = False
+    catalog_cards = provider_cards_from_intents(intents, catalog_context)
+    cards = write_provider_cache(cache_key, catalog_cards) if catalog_cards else []
+    return cards, {
+        "cache_key": cache_key,
+        "source": "catalog",
+        "last_checked": today.isoformat() if cards else "",
+    }
+
 
 
 def generate_ai_coach_advice(api_key, coach_data):
@@ -3286,74 +3112,6 @@ def generate_goal_ai_coaching_plan(api_key, coach_data):
     }
 
 
-def generate_goal_discovery_ideas(api_key, discovery_data):
-    """Generate inspirational goal ideas. Affordability math still happens in Lantern."""
-    quality = budget_quality_context(discovery_data)
-    allow_budget_free = user_requested_budget_free(discovery_data)
-    prompt = (
-        "You are Lantern's onboarding recommendation coach. Convert the provided web search results into inspiring but realistic goal cards. "
-        "The web results are the source of truth. Do not make up URLs, source titles, or live prices. "
-        "Use source_urls, source_titles, and source_snippets only from search_results. "
-        "Every card must preserve source_title, source_url, and source_snippet from the Tavily result it uses. "
-        "Never present an estimated_cost as fact unless a price appears in detected_prices or snippet. "
-        "If price is inferred from snippets or typical planning assumptions, set confidence to low or medium and explain that in affordability_note. "
-        "If price cannot be extracted from the source results, reject the card instead of guessing. "
-        "Do not use 0, 1, the user budget amount, or monthly savings as estimated_cost. "
-        "Only use a price when it appears in a trusted source result. Weak sources may inspire an idea but must not supply pricing. "
-        "Classify sources mentally as official_retailer, official_event, marketplace, review_article, roundup_article, or unknown. "
-        "For products, prefer direct retailer pages over article pages. For events, prefer Ticketmaster, Eventbrite, Live Nation, Bandsintown, or live venue pages. "
-        "Never use a one-dollar placeholder as a fallback price. "
-        "For concerts and events, include the artist/event name, city or nearby city, future date, and ticket price or clear price range from the source. "
-        "For concerts, estimated_cost must be at least $50 unless the source explicitly says the event is free. "
-        "The goal should feel exciting enough that the user would genuinely want to save for it. "
-        "Generate 4 to 6 ideas across these goal types only: product, event, trip, class, experience, subscription. "
-        "If product_mode is true, prioritize product cards and return individual purchasable products only, not generic article pages. "
-        "Product cards must include product_name, retailer_or_source, current_price, source_url, why_it_matches_user_interest, monthly_savings_required, confidence, and source_price_or_price_note. "
-        "For products, reject broad roundup/listicle ideas unless a specific product and current price are clearly extracted. "
-        "Accept product sources from Best Buy, Amazon, Apple, Target, Walmart, B&H, REI, Nike, official brand sites, or PCMag/Wirecutter only when a specific product and price are present. "
-        "Reject generic '20 deals under $200' ideas, vague deal pages, unknown pricing, stale deals, and expired deals. "
-        "If product_mode is false, include a balanced mix of products, events, trips, classes, and experiences when sources support them. "
-        "Suggestions can be trips, events, products, experiences, courses, gear, or packages. "
-        "Do not decide affordability, invent income, or override budget calculations. "
-        f"The user's budget reference is about ${quality['budget_reference']:.0f}. Prefer ideas between ${quality['preferred_min_cost']:.0f} and ${quality['preferred_max_cost']:.0f}. "
-        f"Avoid ideas under ${quality['avoid_under_cost']:.0f} unless they are unusually distinctive and the user explicitly asked for cheap/free ideas. "
-        f"User explicitly asked for cheap/free ideas: {'yes' if allow_budget_free else 'no'}. "
-        "Do not prioritize free events unless the user explicitly asked for cheap or free ideas. "
-        "Reject generic free events, placeholder experiences, vague concerts, and low-information listings. "
-        "Reject ideas with estimated_cost under $25, no meaningful itinerary, or no concrete venue/activity unless cheap/free was requested. "
-        "Rank ideas by relevance to interests, uniqueness, excitement, social value, realistic affordability, and source quality. "
-        "Include a mix of premium/high aspiration, realistic mid-budget, and smaller quick-win goals. "
-        "If interests include concerts, gaming, anime, fashion, tech, food, or wellness, prefer destination-based experiences before local free events. "
-        "Prefer official venue pages, Ticketmaster, Eventbrite, airline/hotel aggregators, tourism boards, and reputable publications. "
-        "Penalize Facebook events, spam calendars, scraped directories, and low-information community calendars. "
-        "Filter out old dates, unavailable tickets, and generic tour pages without a matching city/date. "
-        "If an idea is international travel, do not use an unrealistically low full-trip cost unless it is clearly labeled as partial funding or airfare-only. "
-        "target_month must be a real month and year string like September 2026. Never use vague dates like the next few months. "
-        "If no live web search is available, say in affordability_note that these are planning estimates, not live prices. "
-        "Return valid JSON only. Do not include markdown, prose, code fences, or comments. "
-        "The JSON object must have key ideas. ideas must contain between 4 and 6 objects. "
-        "Each object must have: title, type, estimated_cost, confidence, experience_score, source_urls, source_titles, source_price_or_price_note, target_month, monthly_savings_required, why_it_matches_user_interest, package_or_deal_angle, what_to_check_next, affordability_note, ways_to_afford_it, travel_cost_buckets. "
-        "For product objects also include product_name, retailer_or_source, current_price, and source_url. "
-        "For recurring subscription objects, estimated_cost must be the monthly price, monthly_savings_required must equal estimated_cost, and type must be subscription. "
-        "type must be one of: product, event, trip, class, experience, subscription. "
-        "experience_score must be an integer from 1 to 10 and ideas must be sorted from highest to lowest score. "
-        "confidence must be high, medium, or low. Use high only when a source provides a clear price. "
-        "travel_cost_buckets must include flight, lodging, activities, and food_local_transport for travel ideas; for non-travel ideas use 0 values. "
-        "package_or_deal_angle should be concrete, such as flight + hostel, local class series, used/refurbished tech, or event tickets + food budget. "
-        "ways_to_afford_it must contain 2 or 3 concrete actions. "
-        "Use specific, source-grounded suggestions instead of generic goals. "
-        "Keep each explanation short, aspirational, and practical."
-    )
-    parsed_result = openai_responses_json(api_key, prompt, discovery_data, max_output_tokens=1400, retries=1)
-    if not parsed_result["success"]:
-        raise AIJsonParseError(parsed_result["error"], parsed_result.get("raw_response", ""))
-    parsed = parsed_result["data"]
-    ideas = []
-    for item in parsed.get("ideas", [])[:6]:
-        ideas.append(normalize_goal_idea(item, discovery_data.get("target_month")))
-    ideas = attach_missing_source_metadata(ideas, discovery_data.get("search_results", []))
-    return filter_and_rank_goal_ideas(ideas, discovery_data)
-
 
 def parse_discovery_target_date(value):
     text = str(value or "").strip()
@@ -3371,220 +3129,19 @@ def parse_discovery_target_date(value):
     return today + datetime.timedelta(days=120)
 
 
-def fallback_goal_discovery_ideas(discovery_data):
-    target = normalized_target_month(discovery_data.get("target_month"))
-    ideas = [
-        {
-            "title": "Tokyo food + culture trip",
-            "goal_type": "Travel",
-            "type": "travel",
-            "category": "Travel",
-            "why_it_matches_user_interest": "A food-market, neighborhood, and culture-focused trip for someone drawn to Japanese food and design.",
-            "why_it_matches": "A food-market, neighborhood, and culture-focused trip for someone drawn to Japanese food and design.",
-            "estimated_cost": None,
-            "confidence": "low",
-            "experience_score": 9,
-            "source_urls": [],
-            "source_titles": [],
-            "source_price_or_price_note": "Planning estimate, not verified.",
-            "target_month": target,
-            "target_date_or_month": target,
-            "monthly_savings": None,
-            "monthly_savings_needed": None,
-            "monthly_savings_required": None,
-            "package_deal_angle": "Flight + hostel/private room + food market budget.",
-            "package_or_deal_angle": "Flight + hostel/private room + food market budget.",
-            "travel_cost_buckets": {"flight": None, "lodging": None, "activities": None, "food_local_transport": None},
-            "what_to_check_next": "Check current airfare, capsule hotels or hostels, and whether the target month is peak season.",
-            "affordability_note": "Planning estimate only, not a live price; lower costs may mean partial funding or airfare-first.",
-            "reasoning": "Flights, lodging, local transit, meals, and a few ticketed cultural experiences make this a meaningful but bounded goal.",
-            "ways_to_afford": [
-                "Start with flight alerts and book lodging outside peak dates.",
-                "Trim Food & dining and Shopping first if the planner shows a shortfall.",
-                "Set a monthly travel transfer before adding optional tours.",
-            ],
-            "ways_to_afford_it": [
-                "Start with flight alerts and book lodging outside peak dates.",
-                "Trim Food & dining and Shopping first if the planner shows a shortfall.",
-                "Set a monthly travel transfer before adding optional tours.",
-            ],
-            "example_plan": "Spend a week around Tokyo food halls, old neighborhoods, museums, and one guided cultural workshop.",
-        },
-        {
-            "title": "Seoul gaming + tech trip",
-            "goal_type": "Travel",
-            "type": "travel",
-            "category": "Travel",
-            "why_it_matches_user_interest": "Blends PC cafes, esports culture, street food, shopping, and consumer tech into one focused trip.",
-            "why_it_matches": "Blends PC cafes, esports culture, street food, shopping, and consumer tech into one focused trip.",
-            "estimated_cost": None,
-            "confidence": "low",
-            "experience_score": 8,
-            "source_urls": [],
-            "source_titles": [],
-            "source_price_or_price_note": "Planning estimate, not verified.",
-            "target_month": target,
-            "target_date_or_month": target,
-            "monthly_savings": None,
-            "monthly_savings_needed": None,
-            "monthly_savings_required": None,
-            "package_deal_angle": "Long-weekend flight + guesthouse + PC cafe and tech-shopping budget.",
-            "package_or_deal_angle": "Long-weekend flight + guesthouse + PC cafe and tech-shopping budget.",
-            "travel_cost_buckets": {"flight": None, "lodging": None, "activities": None, "food_local_transport": None},
-            "what_to_check_next": "Check flight sales, esports event calendars, and neighborhood lodging prices.",
-            "affordability_note": "Planning estimate only, not a live price; keep it short if the budget is tight.",
-            "reasoning": "A short Seoul trip can stay lower-cost than a longer international itinerary while still feeling distinctive.",
-            "ways_to_afford": [
-                "Cap Shopping until the flight and lodging are funded.",
-                "Use flexible entertainment cuts for tickets and experiences.",
-                "Keep the itinerary to a long weekend if monthly savings are tight.",
-            ],
-            "ways_to_afford_it": [
-                "Cap Shopping until the flight and lodging are funded.",
-                "Use flexible entertainment cuts for tickets and experiences.",
-                "Keep the itinerary to a long weekend if monthly savings are tight.",
-            ],
-            "example_plan": "Plan PC cafe time, an esports venue, street food neighborhoods, and a tech shopping afternoon.",
-        },
-        {
-            "title": "New VR gaming setup",
-            "goal_type": "Product / tech",
-            "type": "product",
-            "category": "Product",
-            "why_it_matches_user_interest": "A concrete gaming goal that turns savings into something you can use regularly at home.",
-            "why_it_matches": "A concrete gaming goal that turns savings into something you can use regularly at home.",
-            "estimated_cost": None,
-            "confidence": "low",
-            "experience_score": 8,
-            "source_urls": [],
-            "source_titles": [],
-            "source_price_or_price_note": "Planning estimate, not verified.",
-            "target_month": target,
-            "target_date_or_month": target,
-            "monthly_savings": None,
-            "monthly_savings_needed": None,
-            "monthly_savings_required": None,
-            "package_deal_angle": "Used/refurbished headset + comfort strap + starter game bundle.",
-            "package_or_deal_angle": "Used/refurbished headset + comfort strap + starter game bundle.",
-            "travel_cost_buckets": {"flight": None, "lodging": None, "activities": None, "food_local_transport": None},
-            "what_to_check_next": "Compare refurbished listings, warranty coverage, and game bundle prices.",
-            "affordability_note": "Planning estimate only; refurbished or previous-generation gear can materially change the cost.",
-            "reasoning": "A headset, key accessories, and a starter game budget create a realistic product goal.",
-            "ways_to_afford": [
-                "Reduce Entertainment until the headset is funded.",
-                "Buy the headset first and delay accessories if needed.",
-                "Use wish-list sales instead of paying full price for every game.",
-            ],
-            "ways_to_afford_it": [
-                "Reduce Entertainment until the headset is funded.",
-                "Buy the headset first and delay accessories if needed.",
-                "Use wish-list sales instead of paying full price for every game.",
-            ],
-            "example_plan": "Pick the headset, one comfort accessory, and two starter games with a small setup cushion.",
-        },
-        {
-            "title": "Concert weekend package",
-            "goal_type": "Class / event",
-            "type": "event",
-            "category": "Event",
-            "why_it_matches_user_interest": "A music-focused goal that combines tickets, food, transport, and one night away.",
-            "why_it_matches": "A music-focused goal that combines tickets, food, transport, and one night away.",
-            "estimated_cost": None,
-            "confidence": "low",
-            "experience_score": 7,
-            "source_urls": [],
-            "source_titles": [],
-            "source_price_or_price_note": "Planning estimate, not verified.",
-            "target_month": target,
-            "target_date_or_month": target,
-            "monthly_savings": None,
-            "monthly_savings_needed": None,
-            "monthly_savings_required": None,
-            "package_deal_angle": "Event tickets + fees + food budget + local hotel or rideshare.",
-            "package_or_deal_angle": "Event tickets + fees + food budget + local hotel or rideshare.",
-            "travel_cost_buckets": {"flight": None, "lodging": None, "activities": None, "food_local_transport": None},
-            "what_to_check_next": "Check ticket tiers, venue fees, and whether lodging is needed.",
-            "affordability_note": "Planning estimate only; ticket tiers and fees can move the total quickly.",
-            "reasoning": "Bundling the full weekend cost avoids underestimating tickets, fees, food, rides, and lodging.",
-            "ways_to_afford": [
-                "Set the ticket ceiling before choosing seats.",
-                "Trim Food & dining for the month before the show.",
-                "Use local lodging or shared transport to keep the weekend affordable.",
-            ],
-            "ways_to_afford_it": [
-                "Set the ticket ceiling before choosing seats.",
-                "Trim Food & dining for the month before the show.",
-                "Use local lodging or shared transport to keep the weekend affordable.",
-            ],
-            "example_plan": "Cover two tickets, fees, a simple hotel or rideshare budget, meals, and one backup fund.",
-        },
-        {
-            "title": "Wellness retreat",
-            "goal_type": "Hobby / wellness",
-            "type": "hobby",
-            "category": "Wellness",
-            "why_it_matches_user_interest": "A restorative goal with a clear package cost and flexible local or travel options.",
-            "why_it_matches": "A restorative goal with a clear package cost and flexible local or travel options.",
-            "estimated_cost": None,
-            "confidence": "low",
-            "experience_score": 7,
-            "source_urls": [],
-            "source_titles": [],
-            "source_price_or_price_note": "Planning estimate, not verified.",
-            "target_month": target,
-            "target_date_or_month": target,
-            "monthly_savings": None,
-            "monthly_savings_needed": None,
-            "monthly_savings_required": None,
-            "package_deal_angle": "Two-night retreat package with classes, meals, and transport cushion.",
-            "package_or_deal_angle": "Two-night retreat package with classes, meals, and transport cushion.",
-            "travel_cost_buckets": {"flight": None, "lodging": None, "activities": None, "food_local_transport": None},
-            "what_to_check_next": "Check local retreat packages, refund policy, and what meals/classes are included.",
-            "affordability_note": "Planning estimate only; local retreats are usually easier to fit than destination retreats.",
-            "reasoning": "A weekend retreat can include lodging, classes, meals, and recovery time without becoming open-ended.",
-            "ways_to_afford": [
-                "Choose a local retreat if travel pushes the goal off pace.",
-                "Cut Subscriptions or Entertainment temporarily to fund the deposit.",
-                "Book the package first and skip premium add-ons unless the plan is ahead.",
-            ],
-            "ways_to_afford_it": [
-                "Choose a local retreat if travel pushes the goal off pace.",
-                "Cut Subscriptions or Entertainment temporarily to fund the deposit.",
-                "Book the package first and skip premium add-ons unless the plan is ahead.",
-            ],
-            "example_plan": "Reserve a two-night retreat with classes, meals, and a small transport budget.",
-        },
-    ]
-    for idea in ideas:
-        idea["estimated_cost"] = None
-        idea["current_price"] = None
-        idea["monthly_savings"] = None
-        idea["monthly_savings_needed"] = None
-        idea["monthly_savings_required"] = None
-        idea["source_price_or_price_note"] = "Price unavailable — check source."
-        idea["confidence"] = "low"
-        idea["validation_debug"] = {
-            "extracted_price": None,
-            "extraction_source": "",
-            "source_type": "unknown",
-            "price_verified": False,
-            "extraction_snippet": "",
-            "accepted_or_rejected_reason": "Planning estimate only; no verified source price.",
-        }
-    return ideas
-
 
 def render_goal_discovery():
     st.markdown("**Goal Discovery**")
-    st.caption("GOAL_VALIDATOR_VERSION_3_LOADED")
-    st.caption("Tell Lantern what you are into. It will suggest goals, then your budget math decides what is realistic.")
+    st.caption("Tell Lantern what you are into. It will suggest goal directions, then provider results give stable priced options.")
     openai_api_key = get_openai_api_key()
-    show_ai_key_detection(openai_api_key)
+    if DEV_MODE:
+        show_ai_key_detection(openai_api_key)
+
     interest_cols = st.columns([1.4, 1.0])
     interests = interest_cols[0].text_input(
         "Interests",
         value=st.session_state.get("discovery_interests", ""),
-        placeholder="Asian culture, concerts, gaming, new tech, fitness...",
+        placeholder="gaming, concerts, new tech, fitness, travel...",
         key="discovery_interests",
     )
     location = interest_cols[1].text_input(
@@ -3617,267 +3174,135 @@ def render_goal_discovery():
         placeholder="local, weekend drive, domestic flight, international",
         key="discovery_travel_distance",
     )
-    normalized_month = normalized_target_month(target_month)
-    tavily_api_key = get_tavily_api_key()
-    st.caption(f"TAVILY_KEY_DETECTED: {'Yes' if tavily_api_key else 'No'}")
+
     discovery_payload = {
         "interests": interests,
         "location": location,
         "preferred_budget_range": budget_range,
-        "target_month": normalized_month,
+        "target_month": normalized_target_month(target_month),
         "preference": preference,
         "travel_distance": travel_distance,
-        "product_mode": is_product_interest(
-            {
-                "interests": interests,
-                "preference": preference,
-                "travel_distance": travel_distance,
-            }
-        ),
         "today": today.isoformat(),
         **budget_quality_context({"preferred_budget_range": budget_range}),
-        "user_requested_budget_free": user_requested_budget_free(
-            {
-                "interests": interests,
-                "preferred_budget_range": budget_range,
-                "preference": preference,
-                "travel_distance": travel_distance,
-            }
-        ),
-        "note": "Use search results as source of truth. Do not infer income or affordability.",
     }
-    discovery_key = "discovery:" + ai_coach_cache_key(discovery_payload)
+    discovery_key = "provider_discovery:" + ai_coach_cache_key(discovery_payload)
     discovery_cache = st.session_state.setdefault("goal_discovery_cache", {})
-    live_research_used = bool(st.session_state.get(f"{discovery_key}_live_research_used", False))
-    st.caption(f"LIVE_RESEARCH_USED: {'Yes' if live_research_used else 'No'}")
-    tavily_debug_results = st.session_state.get(f"{discovery_key}_tavily_debug_results", [])
-    st.caption(f"TAVILY_RESULT_COUNT: {len(tavily_debug_results)}")
-    if tavily_debug_results:
-        with st.expander("Tavily search debug", expanded=False):
-            for idx, result in enumerate(tavily_debug_results[:5], start=1):
-                st.markdown(f"**{idx}. {result.get('title', 'Untitled')}**")
-                st.caption(result.get("url", ""))
-                st.write(result.get("content") or result.get("snippet") or "")
-    if not openai_api_key:
-        show_missing_ai_key_sources()
-    if st.button("Generate ideas", type="primary", disabled=not bool(openai_api_key)):
+
+    if DEV_MODE:
+        st.caption(f"DEV_MODE: {DEV_MODE}")
+        st.caption(f"TAVILY_KEY_DETECTED: {'Yes' if get_tavily_api_key() else 'No'}")
+        st.caption(f"SERPAPI_KEY_DETECTED: {'Yes' if get_serpapi_api_key() else 'No'}")
+        st.caption(f"TARGET_BUDGET: {money(budget_quality_context(discovery_payload)['target_budget'])}")
+
+    if st.button("Generate ideas", type="primary"):
         try:
-            if discovery_key not in discovery_cache:
-                with st.spinner("Finding goal ideas..."):
-                    search_payload = search_goal_options(discovery_payload)
-                    tavily_raw_results = search_payload.get("raw_results") or search_payload.get("results") or []
-                    st.session_state[f"{discovery_key}_tavily_debug_results"] = tavily_raw_results[:5]
-                    st.caption(f"TAVILY_RESULT_COUNT: {len(tavily_raw_results)}")
-                    if tavily_raw_results:
-                        with st.expander("First 5 Tavily results", expanded=False):
-                            for idx, result in enumerate(tavily_raw_results[:5], start=1):
-                                st.markdown(f"**{idx}. {result.get('title', 'Untitled')}**")
-                                st.caption(result.get("url", ""))
-                                st.write(result.get("content") or result.get("snippet") or "")
-                    if search_payload.get("error") or not search_payload.get("results"):
-                        st.warning("Live research not configured. Showing planning estimates." if not tavily_api_key else "Could not verify live options, showing planning estimates only.")
-                        if search_payload.get("error"):
-                            st.caption(search_payload["error"])
-                        if tavily_api_key and is_online_fitness_interest(discovery_payload):
-                            discovery_cache[discovery_key] = online_fitness_subscription_fallbacks(discovery_payload)
-                        else:
-                            discovery_cache[discovery_key] = fallback_goal_discovery_ideas(discovery_payload)
-                        st.session_state[f"{discovery_key}_live_research_used"] = False
-                    else:
-                        discovery_payload_with_search = {
-                            **discovery_payload,
-                            "search_results": search_payload["results"],
-                            "search_result_count": len(search_payload["results"]),
-                        }
-                        st.session_state.goal_discovery_last_search = search_payload["results"]
-                        st.session_state[f"{discovery_key}_price_search_links"] = goal_search_links(discovery_payload)
-                        researched_ideas = generate_goal_discovery_ideas(openai_api_key, discovery_payload_with_search)
-                        valid_ideas, rejected_ideas = validate_goal_ideas(researched_ideas, discovery_payload_with_search, today=today)
-                        if len(valid_ideas) < 3 and is_online_fitness_interest(discovery_payload):
-                            existing_titles = {str(idea.get("title", "")).lower() for idea in valid_ideas}
-                            for fallback in online_fitness_subscription_fallbacks(discovery_payload):
-                                if str(fallback.get("title", "")).lower() not in existing_titles:
-                                    valid_ideas.append(fallback)
-                                if len(valid_ideas) >= 3:
-                                    break
-                        discovery_cache[discovery_key] = valid_ideas
-                        st.session_state[f"{discovery_key}_rejected_goal_ideas"] = rejected_ideas
-                        if len(valid_ideas) < 3:
-                            st.warning("I found fewer than 3 verified options. Try broadening location, budget, or interest.")
-                        if not valid_ideas:
-                            if discovery_payload.get("product_mode"):
-                                st.warning("No verified products found. Try a more specific interest like headphones, gaming laptop, camera, or running shoes.")
-                                discovery_cache[discovery_key] = []
-                            else:
-                                st.warning("Live results did not include enough verified prices.")
-                                discovery_cache[discovery_key] = []
-                            st.session_state[f"{discovery_key}_live_research_used"] = False
-                        else:
-                            st.session_state[f"{discovery_key}_live_research_used"] = True
-        except AIJsonParseError as e:
-            message = str(e)
-            if "empty response" in message:
-                st.warning("AI returned an empty response.")
-            else:
-                st.error("Goal Discovery could not parse the AI response. Showing sample suggestions instead.")
-            with st.expander("Raw AI response"):
-                st.code(e.raw_response or "[empty response]")
-            discovery_cache[discovery_key] = fallback_goal_discovery_ideas(discovery_payload)
-            st.session_state[f"{discovery_key}_live_research_used"] = False
-            st.info("Showing sample suggestions instead.")
+            intents = generate_goal_intents(openai_api_key, discovery_payload)
+            provider_cards, cache_info = cached_provider_cards(intents, discovery_payload, refresh=False)
+            discovery_cache[discovery_key] = provider_cards
+            st.session_state[f"{discovery_key}_intents"] = intents
+            st.session_state[f"{discovery_key}_provider_card_count"] = len(provider_cards)
+            st.session_state[f"{discovery_key}_cache_info"] = cache_info
+            st.session_state.active_goal_discovery_key = discovery_key
         except Exception as e:
-            st.error("Goal Discovery could not generate ideas.")
-            st.code(str(e))
-            st.warning("Could not verify live options, showing planning estimates only.")
-            discovery_cache[discovery_key] = fallback_goal_discovery_ideas(discovery_payload)
-            st.session_state[f"{discovery_key}_live_research_used"] = False
-            st.info("Showing sample suggestions instead.")
-        st.session_state.active_goal_discovery_key = discovery_key
-    if not openai_api_key and st.button("Show sample ideas"):
-        discovery_cache[discovery_key] = fallback_goal_discovery_ideas(discovery_payload)
-        st.session_state[f"{discovery_key}_live_research_used"] = False
-        st.session_state.active_goal_discovery_key = discovery_key
+            st.error("Goal Discovery could not generate provider results.")
+            if DEV_MODE:
+                st.code(str(e))
+            discovery_cache[discovery_key] = []
+            st.session_state.active_goal_discovery_key = discovery_key
+
     active_key = st.session_state.get("active_goal_discovery_key")
-    if active_key == discovery_key and discovery_key in discovery_cache:
-        ideas = discovery_cache[discovery_key]
-        price_search_links = st.session_state.get(f"{discovery_key}_price_search_links", goal_search_links(discovery_payload))
-        renderable_ideas = []
-        final_rejections = []
-        for idea in ideas:
-            accepted, gated_idea, rejection = final_goal_card_gate(dict(idea))
-            if accepted:
-                renderable_ideas.append(gated_idea)
-            else:
-                final_rejections.append(rejection)
-        if final_rejections:
-            with st.expander("Rejected card price debug", expanded=True):
-                for rejection in final_rejections:
-                    st.caption(rejection["reason"])
-                    st.json(
-                        {
-                            "raw_price": rejection.get("raw_price"),
-                            "estimated_cost": rejection.get("estimated_cost"),
-                            "source_title": rejection.get("source_title"),
-                            "source_url": rejection.get("source_url"),
-                        }
-                    )
-        ideas = renderable_ideas
-        if not ideas:
-            if discovery_payload.get("product_mode"):
-                st.info("No verified products found. Try a more specific interest like headphones, gaming laptop, camera, or running shoes.")
-                render_need_more_price_data(price_search_links)
-                return
-            st.info("No verified priced goal ideas came back. Try broadening location, budget, or interest.")
-            render_need_more_price_data(price_search_links)
-            return
-        if len(ideas) < 3:
-            render_need_more_price_data(price_search_links)
-        rejected_debug = st.session_state.get(f"{discovery_key}_rejected_goal_ideas", [])
-        if rejected_debug:
-            with st.expander("Rejected goal validation debug", expanded=False):
-                for rejected in rejected_debug[:8]:
-                    debug = rejected.get("validation_debug", {}) or {}
-                    source_urls = rejected.get("source_urls", []) or []
-                    source_titles = rejected.get("source_titles", []) or []
-                    st.caption(f"{rejected.get('title', 'Rejected idea')}: {debug.get('accepted_or_rejected_reason', 'Rejected')}")
-                    st.json(
-                        {
-                            "raw_price": debug.get("raw_price", rejected.get("current_price")),
-                            "estimated_cost": rejected.get("estimated_cost"),
-                            "source_title": source_titles[0] if source_titles else "",
-                            "source_url": source_urls[0] if source_urls else debug.get("extraction_source", ""),
-                        }
-                    )
-        for idx, idea in enumerate(ideas):
-            if source_text_says_free(idea):
-                idea["estimated_cost"] = 0.0
-                idea["current_price"] = 0.0
-                idea["monthly_savings"] = 0.0
-                idea["monthly_savings_needed"] = 0.0
-                idea["monthly_savings_required"] = 0.0
-            else:
+    if active_key != discovery_key or discovery_key not in discovery_cache:
+        return
+
+    ideas = discovery_cache.get(discovery_key, [])
+    if DEV_MODE:
+        with st.expander("Goal Discovery debug", expanded=False):
+            st.caption(f"PROVIDER_CARD_COUNT: {st.session_state.get(f'{discovery_key}_provider_card_count', len(ideas))}")
+            st.caption("AI_GENERATED_PRICE_COUNT: 0")
+            st.json(st.session_state.get(f"{discovery_key}_cache_info", {}))
+            st.json(st.session_state.get(f"{discovery_key}_intents", []))
+
+    if not ideas:
+        st.info("No provider results yet. Try a broader category like gaming, fitness, travel, concerts, or tech.")
+        return
+
+    cache_info = st.session_state.get(f"{discovery_key}_cache_info", {})
+    if cache_info.get("last_checked"):
+        st.caption(f"Last checked: {cache_info['last_checked']}")
+    if st.button("Refresh live prices", key=f"refresh_live_prices_{discovery_key}"):
+        intents = st.session_state.get(f"{discovery_key}_intents", [])
+        refreshed_cards, refreshed_info = cached_provider_cards(intents, discovery_payload, refresh=True)
+        discovery_cache[discovery_key] = refreshed_cards
+        st.session_state[f"{discovery_key}_provider_card_count"] = len(refreshed_cards)
+        st.session_state[f"{discovery_key}_cache_info"] = refreshed_info
+        st.rerun()
+
+    for idx, idea in enumerate(ideas):
+        idea = dict(idea)
+        try:
+            structured_price = float(idea.get("estimated_cost"))
+        except Exception:
+            if DEV_MODE:
+                st.caption("Skipped provider card without structured price.")
+                st.json(idea)
+            continue
+        monthly = calculate_monthly_savings_from_cost(
+            structured_price,
+            idea.get("target_month") or idea.get("target_date_or_month"),
+        )
+        idea["monthly_savings"] = monthly
+        idea["monthly_savings_needed"] = monthly
+        idea["monthly_savings_required"] = monthly
+        with st.container(border=True):
+            st.markdown(f"**{idea['title']}**")
+            st.caption(f"{str(idea.get('category', 'goal')).title()} · {idea['why_it_matches_user_interest']}")
+            idea_cols = st.columns(4)
+            idea_cols[0].metric("Estimated cost", money(idea["estimated_cost"]))
+            idea_cols[1].metric("Target month", idea.get("target_month") or idea.get("target_date_or_month") or "Flexible")
+            idea_cols[2].metric("Save monthly", money(idea.get("monthly_savings_required", idea.get("monthly_savings_needed", 0.0))))
+            idea_cols[3].metric("Experience score", f"{int(idea.get('experience_score', 6) or 6)}/10")
+            st.caption(f"Confidence: {str(idea.get('confidence', 'medium')).title()}")
+            source_urls = idea.get("source_urls", []) or []
+            source_titles = idea.get("source_titles", []) or []
+            st.write(f"**Provider price:** {idea.get('source_price_or_price_note', money(idea.get('estimated_cost')))}")
+            if idea.get("merchant"):
+                st.caption(f"Merchant: {idea['merchant']}")
+            if idea.get("rating"):
+                st.caption(f"Rating: {idea['rating']}")
+            if idea.get("image"):
+                st.image(idea["image"], width=120)
+            st.write(f"**What to check next:** {idea.get('what_to_check_next', 'Check current prices before committing.')}")
+            if source_urls:
+                checked_label = idea.get("last_checked") or cache_info.get("last_checked") or today.isoformat()
+                st.markdown(f"[{source_titles[0] if source_titles else source_urls[0]}]({source_urls[0]})")
+                st.caption(f"Last checked: {checked_label}")
+            ways = idea.get("ways_to_afford_it", []) or []
+            if ways:
+                st.markdown("**Ways to afford it**")
+                for way in ways[:3]:
+                    st.caption(f"- {way}")
+            if DEV_MODE and idea.get("validation_debug"):
+                with st.expander("Validation debug", expanded=False):
+                    st.json(idea["validation_debug"])
+            if st.button("Use this goal", key=f"use_discovery_goal_{discovery_key}_{idx}"):
+                selected_date = parse_discovery_target_date(idea.get("target_month") or idea.get("target_date_or_month"))
+                st.session_state.goal_input_name = idea["title"]
+                st.session_state.goal_input_cost = float(idea["estimated_cost"])
+                st.session_state.goal_input_date = selected_date
                 try:
-                    loop_estimated_cost = float(idea["estimated_cost"]) if idea.get("estimated_cost") not in {None, ""} else None
-                except Exception:
-                    loop_estimated_cost = None
-                if loop_estimated_cost is None or loop_estimated_cost <= 5:
-                    source_urls = idea.get("source_urls", []) or []
-                    source_titles = idea.get("source_titles", []) or []
-                    st.caption("Rejected invalid price:")
-                    st.json(
-                        {
-                            "raw estimated_cost": idea.get("estimated_cost"),
-                            "title": idea.get("title", ""),
-                            "source": source_urls[0] if source_urls else "",
-                            "source_title": source_titles[0] if source_titles else "",
-                        }
+                    st.session_state.goal_plan = build_goal_plan(
+                        idea["title"],
+                        float(idea["estimated_cost"]),
+                        selected_date,
+                        False,
                     )
-                    continue
-            with st.container(border=True):
-                st.markdown(f"**{idea['title']}**")
-                st.caption(f"{idea.get('goal_type', idea.get('category', 'Goal'))} · {idea['why_it_matches_user_interest']}")
-                idea_cols = st.columns(4)
-                idea_cols[0].metric("Estimated cost", money(idea["estimated_cost"]))
-                idea_cols[1].metric("Target month", idea.get("target_month") or idea.get("target_date_or_month") or "Flexible")
-                idea_cols[2].metric("Save monthly", money(idea.get("monthly_savings_required", idea.get("monthly_savings_needed", 0.0))))
-                idea_cols[3].metric("Experience score", f"{int(idea.get('experience_score', 6) or 6)}/10")
-                st.caption(f"Confidence: {str(idea.get('confidence', 'low')).title()}")
-                validation_debug = idea.get("validation_debug")
-                if validation_debug:
-                    with st.expander("Validation debug", expanded=False):
-                        st.json(validation_debug)
-                source_urls = idea.get("source_urls", [])
-                source_titles = idea.get("source_titles", [])
-                if str(idea.get("type", idea.get("goal_type", ""))).lower() == "product":
-                    st.write(f"**Product:** {idea.get('product_name') or idea['title']}")
-                    retailer_label = idea.get("retailer_or_source") or (source_titles[0] if source_titles else "Source")
-                    st.write(f"**Retailer/source:** {retailer_label}")
-                    st.write(f"**Current price:** {money(idea.get('current_price', idea.get('estimated_cost')))}")
-                st.write(f"**Deal/package angle:** {idea.get('package_or_deal_angle', idea.get('package_deal_angle', 'Planning estimate package.'))}")
-                st.write(f"**What to check next:** {idea.get('what_to_check_next', 'Check current prices before committing.')}")
-                st.caption(idea.get("affordability_note", "Planning estimate only. Lantern checks affordability with your budget."))
-                if not source_urls:
-                    st.warning("Planning estimate, not verified.")
-                st.write(f"**Source price / note:** {idea.get('source_price_or_price_note', 'Planning estimate, not verified.')}")
-                if idea.get("estimated_cost") in {None, ""}:
-                    st.warning("Price unavailable — check source.")
-                if source_urls:
-                    st.markdown("**Sources**")
-                    for source_idx, source_url in enumerate(source_urls[:4]):
-                        source_title = source_titles[source_idx] if source_idx < len(source_titles) else source_url
-                        st.markdown(f"- [{source_title}]({source_url})")
-                if str(idea.get("type", idea.get("goal_type", ""))).lower() in {"travel", "trip"}:
-                    buckets = idea.get("travel_cost_buckets", {}) or {}
-                    st.markdown("**Estimated travel buckets**")
-                    bucket_cols = st.columns(4)
-                    bucket_cols[0].metric("Flight", money(buckets.get("flight", 0.0)))
-                    bucket_cols[1].metric("Lodging", money(buckets.get("lodging", 0.0)))
-                    bucket_cols[2].metric("Activities", money(buckets.get("activities", 0.0)))
-                    bucket_cols[3].metric("Food/local transport", money(buckets.get("food_local_transport", 0.0)))
-                ways = idea.get("ways_to_afford_it", idea.get("ways_to_afford", []))
-                if ways:
-                    st.markdown("**Ways to afford it**")
-                    for way in ways[:3]:
-                        st.caption(f"- {way}")
-                use_disabled = idea.get("estimated_cost") in {None, ""}
-                if st.button("Use this goal", key=f"use_discovery_goal_{discovery_key}_{idx}", disabled=use_disabled):
-                    selected_date = parse_discovery_target_date(idea.get("target_month") or idea.get("target_date_or_month"))
-                    st.session_state.goal_input_name = idea["title"]
-                    st.session_state.goal_input_cost = float(idea["estimated_cost"])
-                    st.session_state.goal_input_date = selected_date
-                    try:
-                        st.session_state.goal_plan = build_goal_plan(
-                            idea["title"],
-                            float(idea["estimated_cost"]),
-                            selected_date,
-                            False,
-                        )
-                    except Exception as e:
-                        st.error("Could not send this goal into the planner.")
+                except Exception as e:
+                    st.error("Could not send this goal into the planner.")
+                    if DEV_MODE:
                         st.code(str(e))
-                        return
-                    st.success("Goal sent to the planner. Lantern will use your budget math to check affordability.")
-                    st.rerun()
+                    return
+                st.success("Goal sent to the planner. Lantern will use your budget math to check affordability.")
+                st.rerun()
 
 
 def render_goal_ai_coach_panel(plan, budget_summary):

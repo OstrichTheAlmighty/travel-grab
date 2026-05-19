@@ -167,6 +167,7 @@ def classify_source(url, title="", snippet=""):
         "bhphotovideo.com",
         "bhphoto.com",
         "newegg.com",
+        "playstation.com",
     )
     official_brand_domains = (
         "apple.com",
@@ -179,6 +180,7 @@ def classify_source(url, title="", snippet=""):
         "lenovo.com",
         "logitech.com",
         "meta.com",
+        "razer.com",
         "onepeloton.com",
         "alomoves.com",
         "fitonapp.com",
