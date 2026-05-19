@@ -1,5 +1,6 @@
 import datetime
 import calendar
+import ast
 import hashlib
 import json
 import os
@@ -28,10 +29,6 @@ PROVIDER_CACHE_PATH = os.path.join(CURRENT_DIR, "provider_results_cache.json")
 PROVIDER_CACHE_TTL_DAYS = 7
 
 st.set_page_config(page_title="Lantern", layout="wide")
-st.title("APP LOADED")
-st.success("LIVE BUILD: MAY 17 CLEAN REDEPLOY V1")
-# Custom CSS is intentionally disabled while diagnosing Streamlit Cloud's blank
-# frontend render. Keep startup visible and rely on native Streamlit layout.
 
 SESSION_DEFAULTS = {
     "user_id": "default",
@@ -1857,6 +1854,10 @@ def calculate_monthly_savings_from_cost(estimated_cost, target_month):
     return cost / months_until
 
 
+def normalize_target_month(value):
+    return parse_discovery_target_date(value).strftime("%B %Y")
+
+
 def final_goal_card_gate(idea):
     debug = idea.get("validation_debug", {}) or {}
     source_urls = idea.get("source_urls", []) or []
@@ -2456,6 +2457,8 @@ def show_missing_ai_key_sources():
 
 
 def show_ai_debug_response(raw_response):
+    if not DEV_MODE:
+        return
     with st.expander("Raw API response"):
         st.code(raw_response or "[empty response]")
 
@@ -2855,7 +2858,7 @@ def goal_intent_search_query(intent, discovery_data):
     category = normalize_goal_category(intent.get("category"), discovery_data)
     title = str(intent.get("title") or category).strip()
     location = str(discovery_data.get("location") or "near me").strip()
-    target_month = normalized_target_month(discovery_data.get("target_month"))
+    target_month = normalize_target_month(discovery_data.get("target_month"))
     if category == "gaming":
         exact_queries = {
             "gaming laptop": "gaming laptop site:bestbuy.com $1000 $1500",
@@ -2893,7 +2896,7 @@ def provider_categories_for_intent(category):
 def provider_cards_from_intents(intents, discovery_data):
     cards = []
     seen = set()
-    target_month = normalized_target_month(discovery_data.get("target_month"))
+    target_month = normalize_target_month(discovery_data.get("target_month"))
     for item in route_intents(intents, discovery_data):
         intent = item.get("intent", {})
         if not item.get("price_verified"):
@@ -3089,8 +3092,9 @@ def generate_goal_ai_coaching_plan(api_key, coach_data):
         raw_text = response.choices[0].message.content or ""
     except Exception:
         raw_text = ""
-    with st.expander("AI raw response debug"):
-        st.code(raw_text or "[empty response]")
+    if DEV_MODE:
+        with st.expander("AI raw response debug"):
+            st.code(raw_text or "[empty response]")
     if not raw_text.strip():
         return fallback_coaching("OpenAI returned an empty response", raw_text, False)
     parsed_result = safe_parse_json(raw_text)
@@ -3111,6 +3115,149 @@ def generate_goal_ai_coaching_plan(api_key, coach_data):
         "next_best_step": str(parsed.get("next_best_step", "")).strip(),
     }
 
+@st.cache_data(show_spinner=False)
+def load_clean_goal_catalog():
+    """Load the deterministic V2 catalog without importing/running app_v2 UI code."""
+    fallback_catalog = [
+        {
+            "title": "Gaming laptop",
+            "category": "gaming",
+            "estimated_cost": 1500,
+            "keywords": ["gaming", "laptop", "pc"],
+            "source_title": "Best Buy gaming laptops",
+            "source_url": "https://www.bestbuy.com/site/searchpage.jsp?st=gaming+laptop",
+            "ways_to_afford_it": ["Cut dining and shopping first.", "Compare open-box models.", "Delay accessories until after purchase."],
+        },
+        {
+            "title": "Peloton Bike fund",
+            "category": "fitness",
+            "estimated_cost": 1445,
+            "keywords": ["fitness", "bike", "cycling"],
+            "source_title": "Peloton Bike",
+            "source_url": "https://www.onepeloton.com/bike",
+            "ways_to_afford_it": ["Reduce restaurants for 8 weeks.", "Compare used options.", "Budget for membership separately."],
+        },
+        {
+            "title": "Tokyo food + culture trip starter fund",
+            "category": "travel",
+            "estimated_cost": 2500,
+            "keywords": ["travel", "japan", "asian culture", "food"],
+            "source_title": "Google Flights",
+            "source_url": "https://www.google.com/travel/flights",
+            "ways_to_afford_it": ["Track flight deals.", "Choose shoulder season.", "Reduce flexible spending before booking."],
+        },
+        {
+            "title": "Concert weekend package",
+            "category": "concerts",
+            "estimated_cost": 650,
+            "keywords": ["concert", "music", "event"],
+            "source_title": "Ticketmaster",
+            "source_url": "https://www.ticketmaster.com/",
+            "ways_to_afford_it": ["Set a ticket ceiling.", "Budget for fees.", "Choose local lodging only if needed."],
+        },
+        {
+            "title": "Wellness retreat weekend",
+            "category": "wellness",
+            "estimated_cost": 900,
+            "keywords": ["wellness", "retreat", "yoga"],
+            "source_title": "Booking wellness stays",
+            "source_url": "https://www.booking.com/",
+            "ways_to_afford_it": ["Choose local first.", "Book deposit early.", "Pause nonessential shopping."],
+        },
+    ]
+    app_v2_path = os.path.join(CURRENT_DIR, "app_v2.py")
+    try:
+        with open(app_v2_path, "r", encoding="utf-8") as handle:
+            tree = ast.parse(handle.read(), filename=app_v2_path)
+        for node in tree.body:
+            if isinstance(node, ast.Assign) and any(
+                isinstance(target, ast.Name) and target.id == "GOAL_CATALOG" for target in node.targets
+            ):
+                catalog = ast.literal_eval(node.value)
+                if isinstance(catalog, list) and len(catalog) >= 5:
+                    return catalog
+    except Exception:
+        pass
+    return fallback_catalog
+
+
+def parse_clean_discovery_budget(value):
+    numbers = []
+    for raw, suffix in re.findall(r"\$?\s*(\d+(?:\.\d+)?)\s*([kK]?)", str(value or "").replace(",", "")):
+        amount = float(raw)
+        if suffix.lower() == "k":
+            amount *= 1000
+        numbers.append(amount)
+    return max(numbers) if numbers else 1000.0
+
+
+def clean_goal_score(goal, interest_terms, target_budget):
+    text = " ".join(
+        [
+            str(goal.get("title", "")),
+            str(goal.get("category", "")),
+            " ".join(str(item) for item in goal.get("keywords", [])),
+        ]
+    ).lower()
+    keyword_score = sum(1 for term in interest_terms if term and term in text)
+    budget_distance = abs(float(goal.get("estimated_cost", 0.0) or 0.0) - target_budget) / max(target_budget, 1.0)
+    return (keyword_score * 10) - budget_distance
+
+
+def select_clean_goal_cards(interests, budget):
+    terms = [
+        term.strip().lower()
+        for term in re.split(r"[,/ ]+", str(interests or ""))
+        if term.strip()
+    ]
+    catalog = load_clean_goal_catalog()
+    ranked = sorted(catalog, key=lambda goal: clean_goal_score(goal, terms, budget), reverse=True)
+    selected = []
+    seen_categories = set()
+    for goal in ranked:
+        category = str(goal.get("category", "goal"))
+        if category not in seen_categories or len(selected) >= 3:
+            selected.append(dict(goal))
+            seen_categories.add(category)
+        if len(selected) == 5:
+            break
+    for goal in ranked:
+        if len(selected) == 5:
+            break
+        if not any(existing.get("title") == goal.get("title") for existing in selected):
+            selected.append(dict(goal))
+    return selected[:5]
+
+
+def optional_tavily_link_for_goal(goal, location):
+    api_key = get_tavily_api_key()
+    if not api_key:
+        return None
+    query = f"{goal.get('title', '')} {location or ''} price".strip()
+    try:
+        response = requests.post(
+            "https://api.tavily.com/search",
+            json={
+                "api_key": api_key,
+                "query": query,
+                "search_depth": "basic",
+                "max_results": 1,
+                "include_answer": False,
+                "include_raw_content": False,
+            },
+            timeout=12,
+        )
+        response.raise_for_status()
+        results = response.json().get("results", [])
+    except Exception:
+        return None
+    if not results:
+        return None
+    result = results[0]
+    return {
+        "source_title": result.get("title") or goal.get("source_title", "Source"),
+        "source_url": result.get("url") or goal.get("source_url", ""),
+    }
 
 
 def parse_discovery_target_date(value):
@@ -3132,181 +3279,122 @@ def parse_discovery_target_date(value):
 
 def render_goal_discovery():
     st.markdown("**Goal Discovery**")
-    st.caption("Tell Lantern what you are into. It will suggest goal directions, then provider results give stable priced options.")
-    openai_api_key = get_openai_api_key()
-    if DEV_MODE:
-        show_ai_key_detection(openai_api_key)
+    st.caption("Tell Lantern what you are into. Catalog suggestions always load first; live links are optional.")
 
-    interest_cols = st.columns([1.4, 1.0])
-    interests = interest_cols[0].text_input(
+    input_cols = st.columns([1.4, 1.0, 0.8, 0.8])
+    interests = input_cols[0].text_input(
         "Interests",
         value=st.session_state.get("discovery_interests", ""),
-        placeholder="gaming, concerts, new tech, fitness, travel...",
+        placeholder="gaming, Japan, fitness, fashion",
         key="discovery_interests",
     )
-    location = interest_cols[1].text_input(
+    location = input_cols[1].text_input(
         "Location",
         value=st.session_state.get("discovery_location", ""),
         placeholder="Los Angeles, online, anywhere",
         key="discovery_location",
     )
-    followup_cols = st.columns([1.0, 1.0, 1.0])
-    budget_range = followup_cols[0].text_input(
-        "Preferred budget range",
+    budget_range = input_cols[2].text_input(
+        "Budget",
         value=st.session_state.get("discovery_budget_range", ""),
-        placeholder="$500-$2,000",
+        placeholder="$1,500",
         key="discovery_budget_range",
     )
-    target_month = followup_cols[1].text_input(
+    target_month = input_cols[3].text_input(
         "Target month",
         value=st.session_state.get("discovery_target_month", ""),
         placeholder="September",
         key="discovery_target_month",
     )
-    preference = followup_cols[2].selectbox(
-        "Preference",
-        ["surprise me", "local", "online", "travel", "product"],
-        key="discovery_preference",
+
+    target_budget = parse_clean_discovery_budget(budget_range)
+    selected_goals = select_clean_goal_cards(interests, target_budget)
+    discovery_key = "clean_goal_discovery:" + ai_coach_cache_key(
+        {
+            "interests": interests,
+            "location": location,
+            "budget": target_budget,
+            "target_month": str(target_month or ""),
+        }
     )
-    travel_distance = st.text_input(
-        "Travel distance",
-        value=st.session_state.get("discovery_travel_distance", ""),
-        placeholder="local, weekend drive, domestic flight, international",
-        key="discovery_travel_distance",
-    )
 
-    discovery_payload = {
-        "interests": interests,
-        "location": location,
-        "preferred_budget_range": budget_range,
-        "target_month": normalized_target_month(target_month),
-        "preference": preference,
-        "travel_distance": travel_distance,
-        "today": today.isoformat(),
-        **budget_quality_context({"preferred_budget_range": budget_range}),
-    }
-    discovery_key = "provider_discovery:" + ai_coach_cache_key(discovery_payload)
-    discovery_cache = st.session_state.setdefault("goal_discovery_cache", {})
+    refreshed_goals = st.session_state.get(f"{discovery_key}_refreshed_goals")
+    if isinstance(refreshed_goals, list) and len(refreshed_goals) == 5:
+        selected_goals = refreshed_goals
 
-    if DEV_MODE:
-        st.caption(f"DEV_MODE: {DEV_MODE}")
-        st.caption(f"TAVILY_KEY_DETECTED: {'Yes' if get_tavily_api_key() else 'No'}")
-        st.caption(f"SERPAPI_KEY_DETECTED: {'Yes' if get_serpapi_api_key() else 'No'}")
-        st.caption(f"TARGET_BUDGET: {money(budget_quality_context(discovery_payload)['target_budget'])}")
-
-    if st.button("Generate ideas", type="primary"):
-        try:
-            intents = generate_goal_intents(openai_api_key, discovery_payload)
-            provider_cards, cache_info = cached_provider_cards(intents, discovery_payload, refresh=False)
-            discovery_cache[discovery_key] = provider_cards
-            st.session_state[f"{discovery_key}_intents"] = intents
-            st.session_state[f"{discovery_key}_provider_card_count"] = len(provider_cards)
-            st.session_state[f"{discovery_key}_cache_info"] = cache_info
-            st.session_state.active_goal_discovery_key = discovery_key
-        except Exception as e:
-            st.error("Goal Discovery could not generate provider results.")
-            if DEV_MODE:
-                st.code(str(e))
-            discovery_cache[discovery_key] = []
-            st.session_state.active_goal_discovery_key = discovery_key
-
-    active_key = st.session_state.get("active_goal_discovery_key")
-    if active_key != discovery_key or discovery_key not in discovery_cache:
-        return
-
-    ideas = discovery_cache.get(discovery_key, [])
     if DEV_MODE:
         with st.expander("Goal Discovery debug", expanded=False):
-            st.caption(f"PROVIDER_CARD_COUNT: {st.session_state.get(f'{discovery_key}_provider_card_count', len(ideas))}")
-            st.caption("AI_GENERATED_PRICE_COUNT: 0")
-            st.json(st.session_state.get(f"{discovery_key}_cache_info", {}))
-            st.json(st.session_state.get(f"{discovery_key}_intents", []))
+            st.caption("Pipeline: clean deterministic catalog")
+            st.caption(f"CATALOG_CARD_COUNT: {len(selected_goals)}")
+            st.caption(f"TAVILY_KEY_DETECTED: {'Yes' if get_tavily_api_key() else 'No'}")
+            st.caption(f"TARGET_BUDGET: {money(target_budget)}")
 
-    if not ideas:
-        st.info("No provider results yet. Try a broader category like gaming, fitness, travel, concerts, or tech.")
-        return
-
-    cache_info = st.session_state.get(f"{discovery_key}_cache_info", {})
-    if cache_info.get("last_checked"):
-        st.caption(f"Last checked: {cache_info['last_checked']}")
-    if st.button("Refresh live prices", key=f"refresh_live_prices_{discovery_key}"):
-        intents = st.session_state.get(f"{discovery_key}_intents", [])
-        refreshed_cards, refreshed_info = cached_provider_cards(intents, discovery_payload, refresh=True)
-        discovery_cache[discovery_key] = refreshed_cards
-        st.session_state[f"{discovery_key}_provider_card_count"] = len(refreshed_cards)
-        st.session_state[f"{discovery_key}_cache_info"] = refreshed_info
+    st.markdown("#### Suggested goals")
+    refresh_cols = st.columns([1, 3])
+    if refresh_cols[0].button("Refresh live links", key=f"refresh_clean_links_{discovery_key}"):
+        refreshed = []
+        for goal in selected_goals:
+            updated = dict(goal)
+            live_link = optional_tavily_link_for_goal(goal, location)
+            if live_link:
+                updated.update(live_link)
+                updated["last_checked"] = today.isoformat()
+            refreshed.append(updated)
+        st.session_state[f"{discovery_key}_refreshed_goals"] = refreshed
         st.rerun()
+    refresh_cols[1].caption("Optional. Lantern keeps showing catalog cards if live enrichment is unavailable.")
 
-    for idx, idea in enumerate(ideas):
-        idea = dict(idea)
-        try:
-            structured_price = float(idea.get("estimated_cost"))
-        except Exception:
-            if DEV_MODE:
-                st.caption("Skipped provider card without structured price.")
-                st.json(idea)
-            continue
-        monthly = calculate_monthly_savings_from_cost(
-            structured_price,
-            idea.get("target_month") or idea.get("target_date_or_month"),
-        )
-        idea["monthly_savings"] = monthly
-        idea["monthly_savings_needed"] = monthly
-        idea["monthly_savings_required"] = monthly
-        with st.container(border=True):
-            st.markdown(f"**{idea['title']}**")
-            st.caption(f"{str(idea.get('category', 'goal')).title()} · {idea['why_it_matches_user_interest']}")
-            idea_cols = st.columns(4)
-            idea_cols[0].metric("Estimated cost", money(idea["estimated_cost"]))
-            idea_cols[1].metric("Target month", idea.get("target_month") or idea.get("target_date_or_month") or "Flexible")
-            idea_cols[2].metric("Save monthly", money(idea.get("monthly_savings_required", idea.get("monthly_savings_needed", 0.0))))
-            idea_cols[3].metric("Experience score", f"{int(idea.get('experience_score', 6) or 6)}/10")
-            st.caption(f"Confidence: {str(idea.get('confidence', 'medium')).title()}")
-            source_urls = idea.get("source_urls", []) or []
-            source_titles = idea.get("source_titles", []) or []
-            st.write(f"**Provider price:** {idea.get('source_price_or_price_note', money(idea.get('estimated_cost')))}")
-            if idea.get("merchant"):
-                st.caption(f"Merchant: {idea['merchant']}")
-            if idea.get("rating"):
-                st.caption(f"Rating: {idea['rating']}")
-            if idea.get("image"):
-                st.image(idea["image"], width=120)
-            st.write(f"**What to check next:** {idea.get('what_to_check_next', 'Check current prices before committing.')}")
-            if source_urls:
-                checked_label = idea.get("last_checked") or cache_info.get("last_checked") or today.isoformat()
-                st.markdown(f"[{source_titles[0] if source_titles else source_urls[0]}]({source_urls[0]})")
-                st.caption(f"Last checked: {checked_label}")
-            ways = idea.get("ways_to_afford_it", []) or []
-            if ways:
-                st.markdown("**Ways to afford it**")
-                for way in ways[:3]:
-                    st.caption(f"- {way}")
-            if DEV_MODE and idea.get("validation_debug"):
-                with st.expander("Validation debug", expanded=False):
-                    st.json(idea["validation_debug"])
-            if st.button("Use this goal", key=f"use_discovery_goal_{discovery_key}_{idx}"):
-                selected_date = parse_discovery_target_date(idea.get("target_month") or idea.get("target_date_or_month"))
-                st.session_state.goal_input_name = idea["title"]
-                st.session_state.goal_input_cost = float(idea["estimated_cost"])
-                st.session_state.goal_input_date = selected_date
-                try:
-                    st.session_state.goal_plan = build_goal_plan(
-                        idea["title"],
-                        float(idea["estimated_cost"]),
-                        selected_date,
-                        False,
-                    )
-                except Exception as e:
-                    st.error("Could not send this goal into the planner.")
-                    if DEV_MODE:
-                        st.code(str(e))
-                    return
-                st.success("Goal sent to the planner. Lantern will use your budget math to check affordability.")
-                st.rerun()
+    rows = [selected_goals[:3], selected_goals[3:]]
+    card_idx = 0
+    for row in rows:
+        card_cols = st.columns(len(row))
+        for col, idea in zip(card_cols, row):
+            with col:
+                idea = dict(idea)
+                monthly = calculate_monthly_savings_from_cost(idea.get("estimated_cost"), target_month)
+                target_date = parse_discovery_target_date(target_month)
+                with st.container(border=True):
+                    st.markdown(f"**{idea.get('title', 'Goal')}**")
+                    st.caption(str(idea.get("category", "goal")).title())
+                    metric_cols = st.columns(2)
+                    metric_cols[0].metric("Estimated cost", money(idea.get("estimated_cost")))
+                    metric_cols[1].metric("Save monthly", money(monthly))
+                    st.caption(f"Target: {target_date.strftime('%B %Y')}")
+                    st.caption(f"Source: {idea.get('source_title', 'Catalog estimate')}")
+                    ways = idea.get("ways_to_afford_it", []) or []
+                    if ways:
+                        st.markdown("**Ways to afford it**")
+                        for way in ways[:2]:
+                            st.caption(f"- {way}")
+                    link_url = idea.get("source_url")
+                    action_cols = st.columns(2)
+                    if link_url:
+                        action_cols[0].link_button("View source", link_url, width="stretch")
+                    if action_cols[1].button("Use this goal", key=f"use_clean_goal_{discovery_key}_{card_idx}"):
+                        selected_date = target_date
+                        st.session_state.goal_input_name = idea.get("title", "Goal")
+                        st.session_state.goal_input_cost = float(idea.get("estimated_cost", 0.0) or 0.0)
+                        st.session_state.goal_input_date = selected_date
+                        try:
+                            st.session_state.goal_plan = build_goal_plan(
+                                st.session_state.goal_input_name,
+                                st.session_state.goal_input_cost,
+                                selected_date,
+                                False,
+                            )
+                        except Exception as e:
+                            st.error("Could not send this goal into the planner.")
+                            if DEV_MODE:
+                                st.code(str(e))
+                            return
+                        st.success("Goal sent to the planner. Lantern will use your budget math to check affordability.")
+                        st.rerun()
+                card_idx += 1
 
 
 def render_goal_ai_coach_panel(plan, budget_summary):
-    st.caption("AI_COACH_VERSION_2_LOADED")
+    if DEV_MODE:
+        st.caption("AI_COACH_VERSION_2_LOADED")
     st.markdown("**AI Coach**")
     st.caption("Optional guidance based on the current affordability plan. Lantern keeps the budget math as the source of truth.")
     budget_allocations = plan.get("budget_allocations", {}) or {}
@@ -3352,7 +3440,8 @@ def render_goal_ai_coach_panel(plan, budget_summary):
     coach_key = "goal:" + ai_coach_cache_key(coach_payload)
     ai_coach_cache = st.session_state.setdefault("ai_coach_cache", {})
     openai_api_key = get_openai_api_key()
-    show_ai_key_detection(openai_api_key)
+    if DEV_MODE:
+        show_ai_key_detection(openai_api_key)
     if not openai_api_key:
         show_missing_ai_key_sources()
         st.button("Generate AI coaching plan", disabled=True)
@@ -3387,11 +3476,12 @@ def render_goal_ai_coach_panel(plan, budget_summary):
             st.error(advice["error"])
             if advice.get("raw_response"):
                 show_ai_debug_response(advice.get("raw_response", ""))
-        st.caption(
-            "API key detected: Yes · "
-            f"OpenAI text length > 0: {'Yes' if int(advice.get('raw_text_length', 0)) > 0 else 'No'} · "
-            f"JSON parse succeeded: {'Yes' if advice.get('parse_succeeded') else 'No'}"
-        )
+        if DEV_MODE:
+            st.caption(
+                "API key detected: Yes · "
+                f"OpenAI text length > 0: {'Yes' if int(advice.get('raw_text_length', 0)) > 0 else 'No'} · "
+                f"JSON parse succeeded: {'Yes' if advice.get('parse_succeeded') else 'No'}"
+            )
         st.write(advice["summary"])
         st.markdown("**Recommended actions**")
         for idx, action in enumerate(advice["recommended_actions"][:3], start=1):
@@ -4687,7 +4777,8 @@ elif page == "Budget Planner":
     coach_key = ai_coach_cache_key(coach_payload)
     ai_coach_cache = st.session_state.setdefault("ai_coach_cache", {})
     openai_api_key = get_openai_api_key()
-    show_ai_key_detection(openai_api_key)
+    if DEV_MODE:
+        show_ai_key_detection(openai_api_key)
     if not openai_api_key:
         show_missing_ai_key_sources()
         st.button("Generate AI coach advice", disabled=True)
