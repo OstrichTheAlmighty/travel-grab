@@ -3166,6 +3166,107 @@ def load_clean_goal_catalog():
         },
     ]
     app_v2_path = os.path.join(CURRENT_DIR, "app_v2.py")
+    supplemental_catalog = [
+        {
+            "title": "VIP concert package",
+            "category": "concerts",
+            "estimated_cost": 1450,
+            "keywords": ["concert", "concerts", "music", "vip", "event", "events"],
+            "source_title": "Ticketmaster VIP packages",
+            "source_url": "https://www.ticketmaster.com/",
+            "ways_to_afford_it": ["Set a ticket ceiling before fees.", "Trim dining and shopping for the next few pay periods.", "Keep hotel and rideshare costs capped."],
+        },
+        {
+            "title": "Music festival weekend",
+            "category": "concerts",
+            "estimated_cost": 1350,
+            "keywords": ["concert", "concerts", "festival", "music", "event", "events"],
+            "source_title": "Live Nation festivals",
+            "source_url": "https://www.livenation.com/festivals",
+            "ways_to_afford_it": ["Buy passes early if pricing is tiered.", "Share lodging with friends.", "Set a fixed food and merch budget."],
+        },
+        {
+            "title": "Season concert pass fund",
+            "category": "concerts",
+            "estimated_cost": 1500,
+            "keywords": ["concert", "concerts", "music", "season", "pass", "events"],
+            "source_title": "Ticketmaster concerts",
+            "source_url": "https://www.ticketmaster.com/concerts",
+            "ways_to_afford_it": ["Pick a monthly ticket budget.", "Prioritize must-see artists first.", "Move unused entertainment spend into the pass fund."],
+        },
+        {
+            "title": "Premium show + hotel night",
+            "category": "concerts",
+            "estimated_cost": 1200,
+            "keywords": ["concert", "concerts", "music", "hotel", "weekend", "event"],
+            "source_title": "Ticketmaster concerts",
+            "source_url": "https://www.ticketmaster.com/concerts",
+            "ways_to_afford_it": ["Choose one premium show instead of several smaller nights.", "Compare nearby hotel prices before booking.", "Cut flexible dining for the month before the show."],
+        },
+        {
+            "title": "Artist meet-and-greet fund",
+            "category": "concerts",
+            "estimated_cost": 1600,
+            "keywords": ["concert", "concerts", "music", "meet and greet", "vip", "event"],
+            "source_title": "VIP Nation",
+            "source_url": "https://www.vipnation.com/",
+            "ways_to_afford_it": ["Treat it as a premium one-time goal.", "Pause lower-priority entertainment buys.", "Keep travel and merch spending separate."],
+        },
+        {
+            "title": "Indoor climbing gym membership",
+            "category": "climbing",
+            "estimated_cost": 900,
+            "keywords": ["rock climbing", "climbing", "bouldering", "indoor climbing", "climbing gym"],
+            "source_title": "Movement climbing gyms",
+            "source_url": "https://movementgyms.com/",
+            "ways_to_afford_it": ["Swap one flexible fitness or entertainment expense.", "Start with a monthly membership before buying extra gear.", "Set a weekly climbing fund."],
+        },
+        {
+            "title": "Outdoor guided climbing day",
+            "category": "climbing",
+            "estimated_cost": 450,
+            "keywords": ["rock climbing", "climbing", "outdoor climbing", "guided climbing"],
+            "source_title": "REI climbing classes and events",
+            "source_url": "https://www.rei.com/events/a/outdoor-classes-climbing-rappelling",
+            "ways_to_afford_it": ["Book a single guided day first.", "Use entertainment savings for the guide fee.", "Rent gear before buying it."],
+        },
+        {
+            "title": "Climbing shoes + chalk bag starter kit",
+            "category": "climbing",
+            "estimated_cost": 220,
+            "keywords": ["rock climbing", "climbing", "bouldering", "climbing shoes", "chalk bag"],
+            "source_title": "REI climbing gear",
+            "source_url": "https://www.rei.com/c/climbing-gear",
+            "ways_to_afford_it": ["Buy shoes first and borrow other gear.", "Use a small monthly gear fund.", "Compare entry-level shoes before upgrading."],
+        },
+        {
+            "title": "Bouldering crash pad",
+            "category": "climbing",
+            "estimated_cost": 300,
+            "keywords": ["rock climbing", "climbing", "bouldering", "crash pad", "outdoor climbing"],
+            "source_title": "REI bouldering crash pads",
+            "source_url": "https://www.rei.com/c/crash-pads",
+            "ways_to_afford_it": ["Split outdoor gear costs with a climbing partner.", "Wait until you know your outdoor routine.", "Cut one shopping category for a month."],
+        },
+        {
+            "title": "Weekend climbing trip",
+            "category": "climbing",
+            "estimated_cost": 750,
+            "keywords": ["rock climbing", "climbing", "bouldering", "outdoor climbing", "weekend trip"],
+            "source_title": "Mountain Project climbing areas",
+            "source_url": "https://www.mountainproject.com/",
+            "ways_to_afford_it": ["Keep lodging simple.", "Share transportation with friends.", "Cap food and gear purchases before the trip."],
+        },
+        {
+            "title": "Private climbing coaching package",
+            "category": "climbing",
+            "estimated_cost": 600,
+            "keywords": ["rock climbing", "climbing", "bouldering", "private coaching", "climbing gym"],
+            "source_title": "Movement private instruction",
+            "source_url": "https://movementgyms.com/classes/private-instruction/",
+            "ways_to_afford_it": ["Book a short coaching block.", "Reduce subscriptions while training.", "Pair coaching with practice days instead of more sessions."],
+        },
+    ]
     try:
         with open(app_v2_path, "r", encoding="utf-8") as handle:
             tree = ast.parse(handle.read(), filename=app_v2_path)
@@ -3175,10 +3276,14 @@ def load_clean_goal_catalog():
             ):
                 catalog = ast.literal_eval(node.value)
                 if isinstance(catalog, list) and len(catalog) >= 5:
-                    return catalog
+                    titles = {str(item.get("title", "")).lower() for item in catalog if isinstance(item, dict)}
+                    return catalog + [
+                        item for item in supplemental_catalog if item["title"].lower() not in titles
+                    ]
     except Exception:
         pass
-    return fallback_catalog
+    titles = {str(item.get("title", "")).lower() for item in fallback_catalog}
+    return fallback_catalog + [item for item in supplemental_catalog if item["title"].lower() not in titles]
 
 
 def parse_clean_discovery_budget(value):
@@ -3204,14 +3309,186 @@ def clean_goal_score(goal, interest_terms, target_budget):
     return (keyword_score * 10) - budget_distance
 
 
+GOAL_CATEGORY_TERMS = {
+    "concerts": {"concert", "concerts", "event", "events", "music", "festival", "festivals", "show", "shows"},
+    "gaming": {"gaming", "game", "games", "gamer", "playstation", "xbox", "pc", "vr"},
+    "fitness": {"fitness", "workout", "gym", "running", "training", "wellness"},
+    "tech": {"tech", "technology", "gadgets", "gadget", "laptop", "computer", "headphones"},
+    "travel": {"travel", "trip", "trips", "vacation", "flight", "hotel", "japan", "korea"},
+    "climbing": {"climbing", "climb", "bouldering", "boulder"},
+}
+
+
+def detected_goal_categories(interests):
+    text = str(interests or "").lower()
+    tokens = set(re.findall(r"[a-z0-9]+", text))
+    if any(
+        phrase in text
+        for phrase in ("rock climbing", "indoor climbing", "outdoor climbing", "climbing gym")
+    ) or tokens & GOAL_CATEGORY_TERMS["climbing"]:
+        return ["climbing"]
+    matches = []
+    for category, terms in GOAL_CATEGORY_TERMS.items():
+        if tokens & terms:
+            matches.append(category)
+    return matches
+
+
+def detected_goal_keywords(interests):
+    text = str(interests or "").lower()
+    tokens = set(re.findall(r"[a-z0-9]+", text))
+    matched = []
+    for terms in GOAL_CATEGORY_TERMS.values():
+        matched.extend(sorted(tokens & terms))
+    if "rock climbing" in text:
+        matched.append("rock climbing")
+    if "indoor climbing" in text:
+        matched.append("indoor climbing")
+    if "outdoor climbing" in text:
+        matched.append("outdoor climbing")
+    if "climbing gym" in text:
+        matched.append("climbing gym")
+    return sorted(set(matched))
+
+
+def valid_catalog_source(goal):
+    source_url = str(goal.get("source_url", "") or "").strip()
+    if not source_url:
+        return False
+    if "facebook.com" in source_url.lower():
+        return False
+    return True
+
+
+def parse_goal_card_cost(value):
+    if isinstance(value, (int, float)):
+        return float(value)
+    text = str(value or "").replace(",", "")
+    matches = re.findall(r"\$?\s*(\d+(?:\.\d+)?)\s*([kK]?)", text)
+    if not matches:
+        return None
+    amount = float(matches[-1][0])
+    if matches[-1][1].lower() == "k":
+        amount *= 1000
+    return amount
+
+
+def goal_category_matches_interest(category, interests):
+    matched_categories = detected_goal_categories(interests)
+    if not matched_categories:
+        text = str(interests or "").lower().strip()
+        return not text or "surprise" in text
+    return str(category or "").lower().strip() in matched_categories
+
+
+def validate_ai_goal_cards(raw_cards, interests, budget):
+    valid_cards = []
+    rejected_cards = []
+    min_cost = budget * 0.25
+    max_cost = budget * 1.25
+    for raw in raw_cards or []:
+        card = dict(raw or {})
+        title = str(card.get("title", "") or "").strip()
+        category = str(card.get("category", "") or "").strip().lower()
+        estimated_cost = parse_goal_card_cost(card.get("estimated_cost"))
+        source_url = str(card.get("source_url", "") or "").strip()
+        reasons = []
+        if not title:
+            reasons.append("missing title")
+        if not category or not goal_category_matches_interest(category, interests):
+            reasons.append("category does not match interest")
+        if estimated_cost is None or estimated_cost < min_cost or estimated_cost > max_cost:
+            reasons.append("outside budget band")
+        if not source_url:
+            reasons.append("missing source_url")
+        if "facebook.com" in source_url.lower():
+            reasons.append("facebook source")
+        if reasons:
+            rejected_cards.append({"title": title or "[missing]", "reasons": reasons, "raw": card})
+            continue
+        ways = card.get("ways_to_afford_it", [])
+        if isinstance(ways, str):
+            ways = [ways]
+        valid_cards.append(
+            {
+                "title": title,
+                "category": category,
+                "estimated_cost": estimated_cost,
+                "source_title": str(card.get("source_title", "") or "Source").strip(),
+                "source_url": source_url,
+                "why_match": str(card.get("why_match", "") or "").strip(),
+                "ways_to_afford_it": [str(item).strip() for item in ways if str(item).strip()][:3],
+                "source_mode": "AI personalized",
+            }
+        )
+    valid_cards = sorted(
+        valid_cards,
+        key=lambda goal: abs(float(goal.get("estimated_cost", 0.0) or 0.0) - budget),
+    )
+    return valid_cards[:5], rejected_cards
+
+
+def generate_ai_goal_cards(api_key, discovery_payload):
+    if not api_key:
+        return {"success": False, "error": "OpenAI key missing", "cards": [], "raw_response": ""}
+    budget = float(discovery_payload.get("budget", 1000.0) or 1000.0)
+    prompt = (
+        "You are Lantern's Goal Discovery assistant. Return JSON only. "
+        "Generate exactly 5 goal ideas based on the user's interests, location, budget, target_month, and preference. "
+        "Each goal must include: title, category, estimated_cost, source_title, source_url, why_match, ways_to_afford_it. "
+        "Use categories that match the user's stated interest. If the user says concerts, use concerts/events/music/festivals only. "
+        f"estimated_cost must be between {budget * 0.25:.2f} and {budget * 1.25:.2f}. "
+        "source_url must be a real-looking public URL. Do not use Facebook. "
+        'Return schema: {"goals":[{"title":"...","category":"concerts","estimated_cost":1200,"source_title":"Ticketmaster","source_url":"https://www.ticketmaster.com/","why_match":"...","ways_to_afford_it":["...","...","..."]}]}'
+    )
+    try:
+        client = OpenAI(api_key=api_key)
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": prompt},
+                {"role": "user", "content": json.dumps(discovery_payload, sort_keys=True)},
+            ],
+            response_format={"type": "json_object"},
+            temperature=0.4,
+        )
+        raw_text = response.choices[0].message.content or ""
+    except Exception as e:
+        return {"success": False, "error": str(e), "cards": [], "raw_response": ""}
+    parsed = safe_parse_json(raw_text)
+    if not parsed.get("success"):
+        return {
+            "success": False,
+            "error": parsed.get("error", "AI returned invalid JSON"),
+            "cards": [],
+            "raw_response": raw_text,
+        }
+    data = parsed.get("data") or {}
+    cards = data.get("goals") if isinstance(data, dict) else []
+    return {"success": True, "error": "", "cards": cards or [], "raw_response": raw_text}
+
+
 def select_clean_goal_cards(interests, budget):
     terms = [
         term.strip().lower()
         for term in re.split(r"[,/ ]+", str(interests or ""))
         if term.strip()
     ]
-    catalog = load_clean_goal_catalog()
-    ranked = sorted(catalog, key=lambda goal: clean_goal_score(goal, terms, budget), reverse=True)
+    catalog = [goal for goal in load_clean_goal_catalog() if valid_catalog_source(goal)]
+    matched_categories = detected_goal_categories(interests)
+    surprise_me = "surprise" in str(interests or "").lower()
+    if terms and not matched_categories and not surprise_me:
+        return []
+    if matched_categories and not surprise_me:
+        catalog = [goal for goal in catalog if str(goal.get("category", "")).lower() in matched_categories]
+    ranked = sorted(
+        catalog,
+        key=lambda goal: (
+            -abs(float(goal.get("estimated_cost", 0.0) or 0.0) - budget) / max(budget, 1.0),
+            clean_goal_score(goal, terms, budget),
+        ),
+        reverse=True,
+    )
     selected = []
     seen_categories = set()
     for goal in ranked:
@@ -3227,6 +3504,222 @@ def select_clean_goal_cards(interests, budget):
         if not any(existing.get("title") == goal.get("title") for existing in selected):
             selected.append(dict(goal))
     return selected[:5]
+
+
+def hard_rule_goal_cards(interests):
+    """Return fixed templates for common interests so unrelated fallback cards cannot leak in."""
+    user_interest = str(interests or "").lower()
+    if "rock climbing" in user_interest or "climbing" in user_interest or "bouldering" in user_interest:
+        return [
+            {
+                "title": "Indoor climbing gym membership",
+                "category": "Rock climbing",
+                "estimated_cost": 900,
+                "source_title": "Movement Climbing gyms",
+                "source_url": "https://movementgyms.com/",
+                "ways_to_afford_it": ["Start with monthly membership.", "Buy shoes after trying rentals.", "Use entertainment budget first."],
+                "source_mode": "Catalog fallback",
+            },
+            {
+                "title": "Climbing shoes + chalk starter kit",
+                "category": "Rock climbing",
+                "estimated_cost": 180,
+                "source_title": "REI climbing shoes",
+                "source_url": "https://www.rei.com/c/climbing-shoes",
+                "ways_to_afford_it": ["Save for shoes first.", "Rent harness until needed.", "Buy chalk bag used."],
+                "source_mode": "Catalog fallback",
+            },
+            {
+                "title": "Outdoor guided climbing day",
+                "category": "Rock climbing",
+                "estimated_cost": 350,
+                "source_title": "REI climbing classes and events",
+                "source_url": "https://www.rei.com/events/a/climbing",
+                "ways_to_afford_it": ["Book one guided day first.", "Go with friends to split costs.", "Use local trip budget."],
+                "source_mode": "Catalog fallback",
+            },
+        ]
+    if "concert" in user_interest or "music" in user_interest or "festival" in user_interest:
+        return [
+            {
+                "title": "VIP concert package",
+                "category": "Concerts",
+                "estimated_cost": 1450,
+                "source_title": "Ticketmaster",
+                "source_url": "https://www.ticketmaster.com/",
+                "ways_to_afford_it": ["Set a ticket ceiling.", "Budget for fees.", "Limit merch spending."],
+                "source_mode": "Catalog fallback",
+            },
+            {
+                "title": "Music festival weekend",
+                "category": "Concerts",
+                "estimated_cost": 1350,
+                "source_title": "Live Nation festivals",
+                "source_url": "https://www.livenation.com/festivals",
+                "ways_to_afford_it": ["Buy early tiers.", "Share lodging.", "Set a fixed food budget."],
+                "source_mode": "Catalog fallback",
+            },
+            {
+                "title": "Premium show + hotel night",
+                "category": "Concerts",
+                "estimated_cost": 1200,
+                "source_title": "Ticketmaster concerts",
+                "source_url": "https://www.ticketmaster.com/concerts",
+                "ways_to_afford_it": ["Choose one premium show.", "Compare hotel prices.", "Cut dining before the event."],
+                "source_mode": "Catalog fallback",
+            },
+        ]
+    if "gaming" in user_interest or "game" in user_interest or "playstation" in user_interest or "xbox" in user_interest:
+        return [
+            {
+                "title": "Gaming laptop",
+                "category": "Gaming",
+                "estimated_cost": 1500,
+                "source_title": "Best Buy gaming laptops",
+                "source_url": "https://www.bestbuy.com/site/searchpage.jsp?st=gaming+laptop",
+                "ways_to_afford_it": ["Compare open-box models.", "Delay accessories.", "Cut entertainment first."],
+                "source_mode": "Catalog fallback",
+            },
+            {
+                "title": "PlayStation 5 bundle",
+                "category": "Gaming",
+                "estimated_cost": 575,
+                "source_title": "PlayStation 5",
+                "source_url": "https://www.playstation.com/en-us/ps5/",
+                "ways_to_afford_it": ["Cap game purchases.", "Use entertainment budget.", "Buy one game first."],
+                "source_mode": "Catalog fallback",
+            },
+            {
+                "title": "Meta Quest 3 setup",
+                "category": "Gaming",
+                "estimated_cost": 600,
+                "source_title": "Meta Quest 3",
+                "source_url": "https://www.meta.com/quest/quest-3/",
+                "ways_to_afford_it": ["Start with base headset.", "Add accessories later.", "Trim entertainment spending."],
+                "source_mode": "Catalog fallback",
+            },
+        ]
+    if "fitness" in user_interest or "gym" in user_interest or "workout" in user_interest or "training" in user_interest:
+        return [
+            {
+                "title": "Peloton Bike fund",
+                "category": "Fitness",
+                "estimated_cost": 1445,
+                "source_title": "Peloton Bike",
+                "source_url": "https://www.onepeloton.com/bike",
+                "ways_to_afford_it": ["Compare used options.", "Budget membership separately.", "Reduce restaurants temporarily."],
+                "source_mode": "Catalog fallback",
+            },
+            {
+                "title": "Home gym dumbbell set",
+                "category": "Fitness",
+                "estimated_cost": 430,
+                "source_title": "Bowflex SelectTech",
+                "source_url": "https://www.bowflex.com/product/selecttech-552/100131.html",
+                "ways_to_afford_it": ["Buy bench later.", "Trade an unused subscription.", "Use wellness budget."],
+                "source_mode": "Catalog fallback",
+            },
+            {
+                "title": "Personal training package",
+                "category": "Fitness",
+                "estimated_cost": 900,
+                "source_title": "Thumbtack personal trainers",
+                "source_url": "https://www.thumbtack.com/k/personal-trainers/near-me/",
+                "ways_to_afford_it": ["Book a limited session pack.", "Cut shopping first.", "Use a monthly health allocation."],
+                "source_mode": "Catalog fallback",
+            },
+        ]
+    if "travel" in user_interest or "trip" in user_interest or "vacation" in user_interest:
+        return [
+            {
+                "title": "Domestic city weekend",
+                "category": "Travel",
+                "estimated_cost": 900,
+                "source_title": "Booking.com",
+                "source_url": "https://www.booking.com/",
+                "ways_to_afford_it": ["Travel off-peak.", "Use public transit.", "Set a food budget."],
+                "source_mode": "Catalog fallback",
+            },
+            {
+                "title": "Tokyo food + culture trip starter fund",
+                "category": "Travel",
+                "estimated_cost": 2500,
+                "source_title": "Google Flights",
+                "source_url": "https://www.google.com/travel/flights",
+                "ways_to_afford_it": ["Track flight deals.", "Choose shoulder season.", "Reduce flexible spending before booking."],
+                "source_mode": "Catalog fallback",
+            },
+            {
+                "title": "National park long weekend",
+                "category": "Travel",
+                "estimated_cost": 750,
+                "source_title": "Recreation.gov",
+                "source_url": "https://www.recreation.gov/",
+                "ways_to_afford_it": ["Book early.", "Split lodging.", "Pack meals."],
+                "source_mode": "Catalog fallback",
+            },
+        ]
+    if "tech" in user_interest or "laptop" in user_interest or "computer" in user_interest or "headphones" in user_interest:
+        return [
+            {
+                "title": "MacBook Air upgrade",
+                "category": "Tech",
+                "estimated_cost": 999,
+                "source_title": "Apple MacBook Air",
+                "source_url": "https://www.apple.com/macbook-air/",
+                "ways_to_afford_it": ["Use a monthly tech fund.", "Compare refurbished pricing.", "Cut subscriptions temporarily."],
+                "source_mode": "Catalog fallback",
+            },
+            {
+                "title": "Sony noise-canceling headphones",
+                "category": "Tech",
+                "estimated_cost": 399,
+                "source_title": "Best Buy headphones",
+                "source_url": "https://www.bestbuy.com/site/searchpage.jsp?st=sony+wh-1000xm5",
+                "ways_to_afford_it": ["Wait for sale pricing.", "Redirect entertainment spending.", "Use cash-back rewards if available."],
+                "source_mode": "Catalog fallback",
+            },
+            {
+                "title": "iPad Air creative setup",
+                "category": "Tech",
+                "estimated_cost": 750,
+                "source_title": "Apple iPad Air",
+                "source_url": "https://www.apple.com/ipad-air/",
+                "ways_to_afford_it": ["Buy accessories later.", "Pause shopping for one month.", "Set a dedicated weekly transfer."],
+                "source_mode": "Catalog fallback",
+            },
+        ]
+    if "photography" in user_interest or "camera" in user_interest or "photo" in user_interest:
+        return [
+            {
+                "title": "Mirrorless camera starter kit",
+                "category": "Photography",
+                "estimated_cost": 1000,
+                "source_title": "Best Buy cameras",
+                "source_url": "https://www.bestbuy.com/site/searchpage.jsp?st=mirrorless+camera",
+                "ways_to_afford_it": ["Buy body first.", "Rent lenses before purchasing.", "Sell old gear."],
+                "source_mode": "Catalog fallback",
+            },
+            {
+                "title": "Portrait photography workshop",
+                "category": "Photography",
+                "estimated_cost": 300,
+                "source_title": "CreativeLive photography",
+                "source_url": "https://www.creativelive.com/photography",
+                "ways_to_afford_it": ["Start with one workshop.", "Delay gear upgrades.", "Use learning budget."],
+                "source_mode": "Catalog fallback",
+            },
+            {
+                "title": "Lightroom editing setup",
+                "category": "Photography",
+                "estimated_cost": 250,
+                "source_title": "Adobe Lightroom",
+                "source_url": "https://www.adobe.com/products/photoshop-lightroom.html",
+                "ways_to_afford_it": ["Use subscription budget.", "Avoid buying presets early.", "Start with mobile workflow."],
+                "source_mode": "Catalog fallback",
+            },
+        ]
+    return None
 
 
 def optional_tavily_link_for_goal(goal, location):
@@ -3254,9 +3747,12 @@ def optional_tavily_link_for_goal(goal, location):
     if not results:
         return None
     result = results[0]
+    result_url = str(result.get("url") or "").strip()
+    if "facebook.com" in result_url.lower():
+        return None
     return {
         "source_title": result.get("title") or goal.get("source_title", "Source"),
-        "source_url": result.get("url") or goal.get("source_url", ""),
+        "source_url": result_url or goal.get("source_url", ""),
     }
 
 
@@ -3306,20 +3802,45 @@ def render_goal_discovery():
         placeholder="September",
         key="discovery_target_month",
     )
+    preference = st.selectbox(
+        "Preference",
+        ["surprise me", "local", "online", "travel", "product", "event"],
+        key="discovery_preference",
+    )
 
     target_budget = parse_clean_discovery_budget(budget_range)
-    selected_goals = select_clean_goal_cards(interests, target_budget)
+    catalog_goals = select_clean_goal_cards(interests, target_budget)
+    selected_goals = [dict(goal, source_mode="Catalog fallback") for goal in catalog_goals]
+    matched_categories = detected_goal_categories(interests)
+    matched_keywords = detected_goal_keywords(interests)
+    fallback_reason = ""
+    if str(interests or "").strip() and not matched_categories and "surprise" not in str(interests or "").lower():
+        fallback_reason = "No matching catalog category found."
+    elif matched_categories and not selected_goals:
+        fallback_reason = "Matching category found, but no catalog cards have valid source links."
     discovery_key = "clean_goal_discovery:" + ai_coach_cache_key(
         {
             "interests": interests,
             "location": location,
             "budget": target_budget,
             "target_month": str(target_month or ""),
+            "preference": preference,
         }
     )
 
+    discovery_payload = {
+        "interests": interests,
+        "location": location,
+        "budget": target_budget,
+        "target_month": str(target_month or ""),
+        "preference": preference,
+    }
+    ai_result = st.session_state.get(f"{discovery_key}_ai_result")
+    if isinstance(ai_result, dict) and len(ai_result.get("valid_cards", [])) >= 3:
+        selected_goals = ai_result["valid_cards"][:5]
+
     refreshed_goals = st.session_state.get(f"{discovery_key}_refreshed_goals")
-    if isinstance(refreshed_goals, list) and len(refreshed_goals) == 5:
+    if isinstance(refreshed_goals, list) and len(refreshed_goals) >= 3:
         selected_goals = refreshed_goals
 
     if DEV_MODE:
@@ -3327,11 +3848,38 @@ def render_goal_discovery():
             st.caption("Pipeline: clean deterministic catalog")
             st.caption(f"CATALOG_CARD_COUNT: {len(selected_goals)}")
             st.caption(f"TAVILY_KEY_DETECTED: {'Yes' if get_tavily_api_key() else 'No'}")
+            st.caption(f"OPENAI_KEY_DETECTED: {'Yes' if get_openai_api_key() else 'No'}")
             st.caption(f"TARGET_BUDGET: {money(target_budget)}")
+            st.json(
+                {
+                    "matched_keywords": matched_keywords,
+                    "matched_category": matched_categories,
+                    "fallback_reason": fallback_reason,
+                }
+            )
+            if ai_result:
+                st.json(ai_result)
 
     st.markdown("#### Suggested goals")
-    refresh_cols = st.columns([1, 3])
-    if refresh_cols[0].button("Refresh live links", key=f"refresh_clean_links_{discovery_key}"):
+    action_cols = st.columns([1, 1, 2])
+    if action_cols[0].button("Generate ideas", type="primary", key=f"generate_ai_goals_{discovery_key}"):
+        ai_response = generate_ai_goal_cards(get_openai_api_key(), discovery_payload)
+        valid_ai_cards, rejected_ai_cards = validate_ai_goal_cards(
+            ai_response.get("cards", []),
+            interests,
+            target_budget,
+        )
+        st.session_state[f"{discovery_key}_ai_result"] = {
+            "success": ai_response.get("success", False),
+            "error": ai_response.get("error", ""),
+            "valid_cards": valid_ai_cards,
+            "valid_count": len(valid_ai_cards),
+            "rejected_cards": rejected_ai_cards,
+            "raw_response": ai_response.get("raw_response", ""),
+        }
+        st.session_state.pop(f"{discovery_key}_refreshed_goals", None)
+        st.rerun()
+    if action_cols[1].button("Refresh live links", key=f"refresh_clean_links_{discovery_key}"):
         refreshed = []
         for goal in selected_goals:
             updated = dict(goal)
@@ -3339,10 +3887,21 @@ def render_goal_discovery():
             if live_link:
                 updated.update(live_link)
                 updated["last_checked"] = today.isoformat()
+                updated["source_mode"] = "Live enriched"
             refreshed.append(updated)
         st.session_state[f"{discovery_key}_refreshed_goals"] = refreshed
         st.rerun()
-    refresh_cols[1].caption("Optional. Lantern keeps showing catalog cards if live enrichment is unavailable.")
+
+    hard_rule_cards = hard_rule_goal_cards(interests)
+    if hard_rule_cards is not None:
+        selected_goals = hard_rule_cards
+
+    active_source_mode = selected_goals[0].get("source_mode", "Catalog fallback") if selected_goals else "Catalog fallback"
+    action_cols[2].caption(f"Source: {active_source_mode}. Catalog cards stay available if AI or live links fail.")
+
+    if not selected_goals:
+        st.info("No matching goal templates yet. Try gaming, concerts, fitness, travel, tech, photography, or rock climbing.")
+        return
 
     rows = [selected_goals[:3], selected_goals[3:]]
     card_idx = 0
@@ -3351,6 +3910,8 @@ def render_goal_discovery():
         for col, idea in zip(card_cols, row):
             with col:
                 idea = dict(idea)
+                if not valid_catalog_source(idea):
+                    continue
                 monthly = calculate_monthly_savings_from_cost(idea.get("estimated_cost"), target_month)
                 target_date = parse_discovery_target_date(target_month)
                 with st.container(border=True):
@@ -3360,7 +3921,9 @@ def render_goal_discovery():
                     metric_cols[0].metric("Estimated cost", money(idea.get("estimated_cost")))
                     metric_cols[1].metric("Save monthly", money(monthly))
                     st.caption(f"Target: {target_date.strftime('%B %Y')}")
-                    st.caption(f"Source: {idea.get('source_title', 'Catalog estimate')}")
+                    st.caption(f"Source: {idea.get('source_mode', 'Catalog fallback')} · {idea.get('source_title', 'Catalog estimate')}")
+                    if idea.get("why_match"):
+                        st.caption(idea["why_match"])
                     ways = idea.get("ways_to_afford_it", []) or []
                     if ways:
                         st.markdown("**Ways to afford it**")
