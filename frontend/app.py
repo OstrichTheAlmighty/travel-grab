@@ -29,6 +29,7 @@ PROVIDER_CACHE_PATH = os.path.join(CURRENT_DIR, "provider_results_cache.json")
 PROVIDER_CACHE_TTL_DAYS = 7
 
 st.set_page_config(page_title="Lantern", layout="wide")
+st.write("OPENAI KEY EXISTS:", bool(st.secrets.get("OPENAI_API_KEY")))
 
 SESSION_DEFAULTS = {
     "user_id": "default",
@@ -3373,11 +3374,19 @@ def parse_goal_card_cost(value):
     return amount
 
 
-def goal_category_matches_interest(category, interests):
+def goal_category_matches_interest(category, interests, title="", why_match=""):
     matched_categories = detected_goal_categories(interests)
     if not matched_categories:
         text = str(interests or "").lower().strip()
-        return not text or "surprise" in text
+        if not text or "surprise" in text:
+            return True
+        terms = [
+            term
+            for term in re.findall(r"[a-z0-9]+", text)
+            if len(term) > 2 and term not in {"and", "for", "the", "with"}
+        ]
+        card_text = " ".join([str(category), str(title), str(why_match)]).lower()
+        return bool(terms) and any(term in card_text for term in terms)
     return str(category or "").lower().strip() in matched_categories
 
 
@@ -3395,7 +3404,12 @@ def validate_ai_goal_cards(raw_cards, interests, budget):
         reasons = []
         if not title:
             reasons.append("missing title")
-        if not category or not goal_category_matches_interest(category, interests):
+        if not category or not goal_category_matches_interest(
+            category,
+            interests,
+            title=title,
+            why_match=card.get("why_match", ""),
+        ):
             reasons.append("category does not match interest")
         if estimated_cost is None or estimated_cost < min_cost or estimated_cost > max_cost:
             reasons.append("outside budget band")
@@ -3436,7 +3450,10 @@ def generate_ai_goal_cards(api_key, discovery_payload):
         "You are Lantern's Goal Discovery assistant. Return JSON only. "
         "Generate exactly 5 goal ideas based on the user's interests, location, budget, target_month, and preference. "
         "Each goal must include: title, category, estimated_cost, source_title, source_url, why_match, ways_to_afford_it. "
-        "Use categories that match the user's stated interest. If the user says concerts, use concerts/events/music/festivals only. "
+        "Use categories that match the user's stated interest, even when the interest is not in Lantern's catalog. "
+        "If the user says concerts, use concerts/events/music/festivals only. "
+        "If the user says scuba diving, generate cards like beginner scuba certification, local dive trip, "
+        "mask/fins/snorkel starter kit, advanced open water course, and warm-water dive vacation fund. "
         f"estimated_cost must be between {budget * 0.25:.2f} and {budget * 1.25:.2f}. "
         "source_url must be a real-looking public URL. Do not use Facebook. "
         'Return schema: {"goals":[{"title":"...","category":"concerts","estimated_cost":1200,"source_title":"Ticketmaster","source_url":"https://www.ticketmaster.com/","why_match":"...","ways_to_afford_it":["...","...","..."]}]}'
@@ -3836,12 +3853,15 @@ def render_goal_discovery():
         "preference": preference,
     }
     ai_result = st.session_state.get(f"{discovery_key}_ai_result")
+    ai_cards_active = False
     if isinstance(ai_result, dict) and len(ai_result.get("valid_cards", [])) >= 3:
         selected_goals = ai_result["valid_cards"][:5]
+        ai_cards_active = True
 
     refreshed_goals = st.session_state.get(f"{discovery_key}_refreshed_goals")
     if isinstance(refreshed_goals, list) and len(refreshed_goals) >= 3:
         selected_goals = refreshed_goals
+        ai_cards_active = any(goal.get("source_mode") in {"AI personalized", "Live enriched"} for goal in refreshed_goals)
 
     if DEV_MODE:
         with st.expander("Goal Discovery debug", expanded=False):
@@ -3860,6 +3880,7 @@ def render_goal_discovery():
             if ai_result:
                 st.json(ai_result)
 
+    st.caption("ROCK_CLIMBING_MATCHING_FIX_LOADED")
     st.markdown("#### Suggested goals")
     action_cols = st.columns([1, 1, 2])
     if action_cols[0].button("Generate ideas", type="primary", key=f"generate_ai_goals_{discovery_key}"):
@@ -3893,13 +3914,16 @@ def render_goal_discovery():
         st.rerun()
 
     hard_rule_cards = hard_rule_goal_cards(interests)
-    if hard_rule_cards is not None:
+    if hard_rule_cards is not None and not ai_cards_active:
         selected_goals = hard_rule_cards
 
     active_source_mode = selected_goals[0].get("source_mode", "Catalog fallback") if selected_goals else "Catalog fallback"
     action_cols[2].caption(f"Source: {active_source_mode}. Catalog cards stay available if AI or live links fail.")
 
     if not selected_goals:
+        if ai_result is None:
+            st.info("Click Generate ideas to ask AI for personalized goal cards.")
+            return
         st.info("No matching goal templates yet. Try gaming, concerts, fitness, travel, tech, photography, or rock climbing.")
         return
 
