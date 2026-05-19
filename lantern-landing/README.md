@@ -23,10 +23,10 @@ Open `http://localhost:3000`.
 The `Try the demo` buttons use:
 
 ```bash
-NEXT_PUBLIC_DEMO_URL=https://byable.streamlit.app
+NEXT_PUBLIC_DEMO_URL=https://byable-demo.streamlit.app
 ```
 
-If the env var is not set, the app falls back to `https://byable.streamlit.app`.
+If the env var is not set, the app falls back to `https://byable-demo.streamlit.app`.
 
 ## Push To GitHub
 
@@ -49,7 +49,7 @@ git push
 4. Add the environment variable:
 
 ```bash
-NEXT_PUBLIC_DEMO_URL=https://byable.streamlit.app
+NEXT_PUBLIC_DEMO_URL=https://byable-demo.streamlit.app
 ```
 
 5. Deploy.

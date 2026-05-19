@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 
 const demoUrl =
-  process.env.NEXT_PUBLIC_DEMO_URL || "https://byable.streamlit.app";
+  process.env.NEXT_PUBLIC_DEMO_URL || "https://byable-demo.streamlit.app";
 
 const steps = [
   {
