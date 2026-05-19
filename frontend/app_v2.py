@@ -10,6 +10,99 @@ import streamlit as st
 st.set_page_config(page_title="Lantern Goal Discovery V2", layout="wide")
 
 TODAY = datetime.date.today()
+DEV_MODE = str(os.environ.get("DEV_MODE", "")).lower() in {"1", "true", "yes", "on"}
+
+st.markdown(
+    """
+    <style>
+    .block-container {
+        padding-top: 2rem;
+        max-width: 1180px;
+    }
+    [data-testid="stSidebar"] {
+        background: #0e141b;
+        border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .lantern-hero {
+        padding: 1.2rem 0 0.75rem 0;
+    }
+    .lantern-hero h1 {
+        font-size: 2.6rem;
+        line-height: 1.05;
+        margin: 0 0 0.35rem 0;
+        letter-spacing: 0;
+    }
+    .lantern-hero p {
+        color: rgba(255,255,255,0.68);
+        margin: 0;
+        font-size: 1rem;
+    }
+    .goal-card {
+        border: 1px solid rgba(255,255,255,0.09);
+        background: rgba(255,255,255,0.035);
+        border-radius: 12px;
+        padding: 1rem;
+        min-height: 235px;
+        transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+    .goal-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(125, 211, 252, 0.35);
+        background: rgba(255,255,255,0.055);
+    }
+    .goal-card h3 {
+        margin: 0.2rem 0 0.3rem 0;
+        font-size: 1.05rem;
+    }
+    .goal-pill {
+        display: inline-flex;
+        font-size: 0.72rem;
+        color: #cbd5e1;
+        border: 1px solid rgba(148, 163, 184, 0.28);
+        border-radius: 999px;
+        padding: 0.15rem 0.5rem;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+    }
+    .goal-metrics {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.55rem;
+        margin: 0.8rem 0;
+    }
+    .goal-metric {
+        background: rgba(15, 23, 42, 0.68);
+        border-radius: 10px;
+        padding: 0.55rem;
+    }
+    .goal-metric span {
+        display: block;
+        color: rgba(255,255,255,0.52);
+        font-size: 0.72rem;
+    }
+    .goal-metric strong {
+        font-size: 1rem;
+    }
+    .goal-actions {
+        color: rgba(255,255,255,0.68);
+        font-size: 0.82rem;
+        margin: 0.5rem 0 0 0;
+        padding-left: 1rem;
+    }
+    .goal-actions li {
+        margin-bottom: 0.25rem;
+    }
+    .placeholder-panel {
+        border: 1px solid rgba(255,255,255,0.09);
+        background: rgba(255,255,255,0.035);
+        border-radius: 12px;
+        padding: 1rem;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
 
 def money(value):
@@ -169,17 +262,30 @@ def tavily_link_for_goal(goal, location):
 
 def render_goal_card(goal, target_month, idx):
     monthly = save_monthly(goal["estimated_cost"], target_month)
-    with st.container(border=True):
-        st.markdown(f"**{goal['title']}**")
-        st.caption(goal["category"].title())
-        cols = st.columns(3)
-        cols[0].metric("Estimated cost", money(goal["estimated_cost"]))
-        cols[1].metric("Save monthly", money(monthly))
-        cols[2].metric("Target", parse_target_month(target_month).strftime("%B %Y"))
-        st.markdown(f"[{goal['source_title']}]({goal['source_url']})")
-        st.markdown("**Ways to afford it**")
-        for way in goal["ways_to_afford_it"][:3]:
-            st.caption(f"- {way}")
+    target_label = parse_target_month(target_month).strftime("%B %Y")
+    st.markdown(
+        f"""
+        <div class="goal-card">
+            <div class="goal-pill">{goal["category"].title()}</div>
+            <h3>{goal["title"]}</h3>
+            <div class="goal-metrics">
+                <div class="goal-metric"><span>Estimated cost</span><strong>{money(goal["estimated_cost"])}</strong></div>
+                <div class="goal-metric"><span>Save monthly</span><strong>{money(monthly)}</strong></div>
+                <div class="goal-metric"><span>Target</span><strong>{target_label}</strong></div>
+                <div class="goal-metric"><span>Source</span><strong>{goal["source_title"]}</strong></div>
+            </div>
+            <ul class="goal-actions">
+                <li>{goal["ways_to_afford_it"][0]}</li>
+                <li>{goal["ways_to_afford_it"][1]}</li>
+            </ul>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    link_cols = st.columns([1, 1])
+    with link_cols[0]:
+        st.link_button("View source", goal["source_url"], width="stretch")
+    with link_cols[1]:
         if st.button("Use this goal", key=f"app_v2_use_goal_{idx}"):
             st.session_state.goal_input_name = goal["title"]
             st.session_state.goal_input_cost = float(goal["estimated_cost"])
@@ -188,9 +294,38 @@ def render_goal_card(goal, target_month, idx):
 
 
 def main():
-    st.title("APP_V2_CLEAN_PIPELINE_LOADED")
-    st.subheader("Goal Discovery")
-    st.caption("A deterministic MVP that always shows goal ideas. Live links are optional.")
+    st.sidebar.title("Lantern")
+    st.sidebar.caption("See the path to what you want.")
+    page = st.sidebar.radio(
+        "Navigation",
+        ["Goal Discovery", "Budget Planner", "Saved Plans"],
+        label_visibility="collapsed",
+    )
+    if page != "Goal Discovery":
+        st.markdown(
+            f"""
+            <div class="lantern-hero">
+                <h1>{page}</h1>
+                <p>This V2 shell keeps navigation in place while Goal Discovery is polished.</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            '<div class="placeholder-panel">This page is available in the main Lantern app. The clean V2 entrypoint focuses on Goal Discovery.</div>',
+            unsafe_allow_html=True,
+        )
+        return
+
+    st.markdown(
+        """
+        <div class="lantern-hero">
+            <h1>How can I afford this?</h1>
+            <p>Pick something you want. Lantern turns it into a simple monthly path.</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
     cols = st.columns(4)
     interests = cols[0].text_input("Interests", placeholder="gaming, Japan, fitness, fashion")
@@ -215,8 +350,15 @@ def main():
     if len(goals_to_render) != 5:
         goals_to_render = goals
 
-    for idx, goal in enumerate(goals_to_render):
-        render_goal_card(goal, target_month, idx)
+    st.markdown("#### Suggested goals")
+    rows = [goals_to_render[:3], goals_to_render[3:]]
+    card_idx = 0
+    for row in rows:
+        card_cols = st.columns(len(row))
+        for col, goal in zip(card_cols, row):
+            with col:
+                render_goal_card(goal, target_month, card_idx)
+            card_idx += 1
 
 
 if __name__ == "__main__":
