@@ -29,7 +29,6 @@ PROVIDER_CACHE_PATH = os.path.join(CURRENT_DIR, "provider_results_cache.json")
 PROVIDER_CACHE_TTL_DAYS = 7
 
 st.set_page_config(page_title="Lantern", layout="wide")
-st.write("OPENAI KEY EXISTS:", bool(st.secrets.get("OPENAI_API_KEY")))
 
 SESSION_DEFAULTS = {
     "user_id": "default",
@@ -3773,6 +3772,88 @@ def optional_tavily_link_for_goal(goal, location):
     }
 
 
+def optional_tavily_link_for_query(search_query):
+    api_key = get_tavily_api_key()
+    query = str(search_query or "").strip()
+    if not api_key or not query:
+        return None
+    try:
+        response = requests.post(
+            "https://api.tavily.com/search",
+            json={
+                "api_key": api_key,
+                "query": query,
+                "search_depth": "basic",
+                "max_results": 1,
+                "include_answer": False,
+                "include_raw_content": False,
+            },
+            timeout=12,
+        )
+        response.raise_for_status()
+        results = response.json().get("results", [])
+    except Exception:
+        return None
+    if not results:
+        return None
+    result = results[0]
+    result_url = str(result.get("url") or "").strip()
+    if "facebook.com" in result_url.lower():
+        return None
+    return {
+        "source_title": result.get("title") or "Source",
+        "source_url": result_url,
+    }
+
+
+def parse_ai_card_list(raw):
+    cleaned = str(raw or "").strip()
+    if not cleaned:
+        return []
+    try:
+        parsed = json.loads(cleaned)
+    except json.JSONDecodeError:
+        start = cleaned.find("[")
+        end = cleaned.rfind("]")
+        if start >= 0 and end > start:
+            parsed = json.loads(cleaned[start : end + 1])
+        else:
+            raise
+    if isinstance(parsed, dict):
+        parsed = parsed.get("cards") or parsed.get("goals") or []
+    return parsed if isinstance(parsed, list) else []
+
+
+def normalize_ai_goal_card(card, target_month):
+    raw_card = dict(card or {})
+    estimated_cost = parse_goal_card_cost(raw_card.get("estimated_cost"))
+    if estimated_cost is None:
+        estimated_cost = 0.0
+    monthly_savings = parse_goal_card_cost(raw_card.get("monthly_savings"))
+    if monthly_savings is None:
+        monthly_savings = calculate_monthly_savings_from_cost(estimated_cost, target_month)
+    ways = raw_card.get("ways_to_afford_it", [])
+    if isinstance(ways, str):
+        ways = [ways]
+    search_query = str(raw_card.get("search_query") or raw_card.get("title") or "").strip()
+    normalized = {
+        "title": str(raw_card.get("title") or "Goal").strip(),
+        "category": str(raw_card.get("category") or "Goal").strip(),
+        "estimated_cost": float(estimated_cost or 0.0),
+        "monthly_savings": monthly_savings,
+        "description": str(raw_card.get("description") or raw_card.get("why_match") or "").strip(),
+        "ways_to_afford_it": [str(item).strip() for item in ways if str(item).strip()][:3],
+        "search_query": search_query,
+        "source_title": str(raw_card.get("source_title") or "").strip(),
+        "source_url": str(raw_card.get("source_url") or "").strip(),
+        "source_mode": "AI personalized + live links",
+    }
+    live_link = optional_tavily_link_for_query(search_query)
+    if live_link:
+        normalized.update(live_link)
+    return normalized
+
+
 def parse_discovery_target_date(value):
     text = str(value or "").strip()
     try:
@@ -3827,14 +3908,6 @@ def render_goal_discovery():
 
     target_budget = parse_clean_discovery_budget(budget_range)
     catalog_goals = select_clean_goal_cards(interests, target_budget)
-    selected_goals = [dict(goal, source_mode="Catalog fallback") for goal in catalog_goals]
-    matched_categories = detected_goal_categories(interests)
-    matched_keywords = detected_goal_keywords(interests)
-    fallback_reason = ""
-    if str(interests or "").strip() and not matched_categories and "surprise" not in str(interests or "").lower():
-        fallback_reason = "No matching catalog category found."
-    elif matched_categories and not selected_goals:
-        fallback_reason = "Matching category found, but no catalog cards have valid source links."
     discovery_key = "clean_goal_discovery:" + ai_coach_cache_key(
         {
             "interests": interests,
@@ -3844,6 +3917,21 @@ def render_goal_discovery():
             "preference": preference,
         }
     )
+    current_goal_source = (
+        st.session_state.get("goal_source", "")
+        if st.session_state.get("goal_cards_key") == discovery_key
+        else ""
+    )
+    selected_goals = []
+    if current_goal_source in {"AI personalized + live links", "AI personalized", "Catalog fallback"}:
+        selected_goals = st.session_state.get("goal_cards", []) or []
+    matched_categories = detected_goal_categories(interests)
+    matched_keywords = detected_goal_keywords(interests)
+    fallback_reason = ""
+    if str(interests or "").strip() and not matched_categories and "surprise" not in str(interests or "").lower():
+        fallback_reason = "No matching catalog category found."
+    elif matched_categories and not selected_goals:
+        fallback_reason = "Matching category found, but no catalog cards have valid source links."
 
     discovery_payload = {
         "interests": interests,
@@ -3854,8 +3942,10 @@ def render_goal_discovery():
     }
     ai_result = st.session_state.get(f"{discovery_key}_ai_result")
     ai_cards_active = False
-    if isinstance(ai_result, dict) and len(ai_result.get("valid_cards", [])) >= 3:
+    if not selected_goals and isinstance(ai_result, dict) and len(ai_result.get("valid_cards", [])) >= 3:
         selected_goals = ai_result["valid_cards"][:5]
+        ai_cards_active = True
+    if selected_goals and current_goal_source.startswith("AI personalized"):
         ai_cards_active = True
 
     refreshed_goals = st.session_state.get(f"{discovery_key}_refreshed_goals")
@@ -3880,27 +3970,22 @@ def render_goal_discovery():
             if ai_result:
                 st.json(ai_result)
 
-    st.caption("ROCK_CLIMBING_MATCHING_FIX_LOADED")
     st.markdown("#### Suggested goals")
     action_cols = st.columns([1, 1, 2])
-    disable_catalog_fallback = False
     if action_cols[0].button("Generate ideas", type="primary"):
-        st.write("AI_GENERATION_ATTEMPTED")
-
-        from openai import OpenAI
-        import json
-
         client = OpenAI(api_key=st.secrets.get("OPENAI_API_KEY"))
-
-        budget = budget_range
         prompt = f"""
         Return ONLY valid JSON.
-        Generate 3 goal ideas for interest: {interests}
+        Generate 5 goal ideas for interest: {interests}
         Location: {location}
-        Budget: {budget}
+        Budget: {budget_range}
         Target month: {target_month}
+        Preference: {preference}
 
-        Format:
+        Every card must include:
+        title, category, estimated_cost, monthly_savings, description, ways_to_afford_it, search_query.
+
+        Format exactly as a JSON array:
         [
           {{
             "title": "Beginner scuba certification",
@@ -3908,7 +3993,8 @@ def render_goal_discovery():
             "estimated_cost": 600,
             "monthly_savings": 150,
             "description": "Get certified and start diving safely.",
-            "ways_to_afford_it": ["Save weekly", "Rent gear first"]
+            "ways_to_afford_it": ["Save weekly", "Rent gear first"],
+            "search_query": "beginner scuba certification {location} price"
           }}
         ]
         """
@@ -3920,18 +4006,34 @@ def render_goal_discovery():
                 temperature=0.4,
             )
             raw = response.choices[0].message.content
-            st.write("AI_GENERATION_SUCCEEDED")
-            st.code(raw)
-
-            cards = json.loads(raw)
+            if DEV_MODE:
+                st.write("AI_GENERATION_SUCCEEDED")
+                st.code(raw)
+            parsed_cards = parse_ai_card_list(raw)
+            cards = [
+                normalize_ai_goal_card(card, target_month)
+                for card in parsed_cards[:5]
+            ]
+            if not cards:
+                raise ValueError("OpenAI returned no goal cards.")
             st.session_state["goal_cards"] = cards
-            st.session_state["goal_source"] = "AI personalized"
+            st.session_state["goal_source"] = "AI personalized + live links"
+            st.session_state["goal_cards_key"] = discovery_key
+            selected_goals = cards
+            ai_cards_active = True
 
         except Exception as e:
-            st.write("AI_GENERATION_FAILED")
-            st.exception(e)
-            st.session_state["goal_cards"] = []
-            st.session_state["goal_source"] = "AI failed"
+            if DEV_MODE:
+                st.write("AI_GENERATION_FAILED")
+                st.exception(e)
+            fallback_cards = hard_rule_goal_cards(interests)
+            if fallback_cards is None:
+                fallback_cards = [dict(goal, source_mode="Catalog fallback") for goal in catalog_goals]
+            st.session_state["goal_cards"] = fallback_cards or []
+            st.session_state["goal_source"] = "Catalog fallback" if fallback_cards else "AI failed"
+            st.session_state["goal_cards_key"] = discovery_key
+            selected_goals = st.session_state["goal_cards"]
+            ai_cards_active = False
     if action_cols[1].button("Refresh live links", key=f"refresh_clean_links_{discovery_key}"):
         refreshed = []
         for goal in selected_goals:
@@ -3946,17 +4048,25 @@ def render_goal_discovery():
         st.rerun()
 
     hard_rule_cards = hard_rule_goal_cards(interests)
-    if hard_rule_cards is not None and not ai_cards_active and not disable_catalog_fallback:
+    active_goal_source = (
+        st.session_state.get("goal_source", "")
+        if st.session_state.get("goal_cards_key") == discovery_key
+        else current_goal_source
+    )
+    if (
+        hard_rule_cards is not None
+        and not ai_cards_active
+        and active_goal_source == "Catalog fallback"
+    ):
         selected_goals = hard_rule_cards
 
-    active_source_mode = selected_goals[0].get("source_mode", "Catalog fallback") if selected_goals else "Catalog fallback"
-    action_cols[2].caption(f"Source: {active_source_mode}. Catalog cards stay available if AI or live links fail.")
+    active_source_mode = active_goal_source or (
+        selected_goals[0].get("source_mode", "Catalog fallback") if selected_goals else "Catalog fallback"
+    )
+    action_cols[2].caption(f"Source: {active_source_mode}")
 
     if not selected_goals:
-        if disable_catalog_fallback:
-            st.info("Catalog fallback is temporarily disabled while debugging the AI generation call.")
-            return
-        if ai_result is None:
+        if not active_goal_source:
             st.info("Click Generate ideas to ask AI for personalized goal cards.")
             return
         st.info("No matching goal templates yet. Try gaming, concerts, fitness, travel, tech, photography, or rock climbing.")
@@ -3969,9 +4079,11 @@ def render_goal_discovery():
         for col, idea in zip(card_cols, row):
             with col:
                 idea = dict(idea)
-                if not valid_catalog_source(idea):
+                if not str(idea.get("source_mode", "")).startswith("AI") and not valid_catalog_source(idea):
                     continue
-                monthly = calculate_monthly_savings_from_cost(idea.get("estimated_cost"), target_month)
+                monthly = idea.get("monthly_savings")
+                if monthly in {None, ""}:
+                    monthly = calculate_monthly_savings_from_cost(idea.get("estimated_cost"), target_month)
                 target_date = parse_discovery_target_date(target_month)
                 with st.container(border=True):
                     st.markdown(f"**{idea.get('title', 'Goal')}**")
@@ -3981,7 +4093,9 @@ def render_goal_discovery():
                     metric_cols[1].metric("Save monthly", money(monthly))
                     st.caption(f"Target: {target_date.strftime('%B %Y')}")
                     st.caption(f"Source: {idea.get('source_mode', 'Catalog fallback')} · {idea.get('source_title', 'Catalog estimate')}")
-                    if idea.get("why_match"):
+                    if idea.get("description"):
+                        st.caption(idea["description"])
+                    elif idea.get("why_match"):
                         st.caption(idea["why_match"])
                     ways = idea.get("ways_to_afford_it", []) or []
                     if ways:
@@ -3992,6 +4106,9 @@ def render_goal_discovery():
                     action_cols = st.columns(2)
                     if link_url:
                         action_cols[0].link_button("View source", link_url, width="stretch")
+                    else:
+                        search_url = f"https://www.google.com/search?q={quote_plus(str(idea.get('search_query') or idea.get('title') or ''))}"
+                        action_cols[0].link_button("Search this goal", search_url, width="stretch")
                     if action_cols[1].button("Use this goal", key=f"use_clean_goal_{discovery_key}_{card_idx}"):
                         selected_date = target_date
                         st.session_state.goal_input_name = idea.get("title", "Goal")
