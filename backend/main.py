@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from pydantic import BaseModel, Field
 from typing import Dict, List, Literal, Optional
 from datetime import date, datetime, timedelta
@@ -8,6 +8,7 @@ import json
 
 from backend.db import init_db, DB_PATH, get_conn
 from backend.coach_afford import build_afford_response, max_safe_spend, simulate_afford
+from backend.providers.duffel import get_duffel_api_key, search_flight_offers
 
 app = FastAPI()
 init_db()
@@ -15,6 +16,21 @@ init_db()
 PERIOD = Literal["weekly", "monthly"]
 USER_DEFAULT = "default"
 TRANSACTION_DATASET_EVENTS: Dict[str, Dict[str, object]] = {}
+
+
+def _validate_flight_dates(departure_date: Optional[str], return_date: Optional[str]) -> Optional[str]:
+    try:
+        departure = datetime.strptime(str(departure_date), "%Y-%m-%d").date()
+    except (TypeError, ValueError):
+        return "departure_date must be in YYYY-MM-DD format."
+    if return_date:
+        try:
+            returning = datetime.strptime(str(return_date), "%Y-%m-%d").date()
+        except (TypeError, ValueError):
+            return "return_date must be in YYYY-MM-DD format."
+        if returning < departure:
+            return "return_date must be on or after departure_date."
+    return None
 
 
 # -----------------------------
@@ -28,6 +44,72 @@ def health():
 @app.get("/hello")
 def hello():
     return {"message": "Hello! Your backend is running."}
+
+
+@app.get("/flights/test-sfo-hnd")
+def test_sfo_hnd_flight_search(
+    origin: str = Query("SFO", min_length=3, max_length=3),
+    destination: str = Query("HND", min_length=3, max_length=3),
+    departure_date: Optional[str] = Query(
+        "2026-10-14",
+        description="Departure date in YYYY-MM-DD format.",
+    ),
+    return_date: Optional[str] = Query(
+        "2026-10-24",
+        description="Optional return date in YYYY-MM-DD format.",
+    ),
+    adults: int = Query(1, ge=1, le=9),
+    max_results: int = Query(5, ge=1, le=10),
+    cabin_class: str = Query("economy"),
+):
+    origin_code = origin.upper()
+    destination_code = destination.upper()
+    date_error = _validate_flight_dates(departure_date, return_date)
+    if date_error:
+        return {
+            "status": "error",
+            "source": "duffel",
+            "message": date_error,
+            "route": f"{origin_code}-{destination_code}",
+            "flights": [],
+            "duffel_key_loaded": bool(get_duffel_api_key()),
+            "test_mode": True,
+            "test_mode_label": "Duffel test mode — prices are API test fares, not final ticketed prices.",
+        }
+    result = search_flight_offers(
+        origin=origin_code,
+        destination=destination_code,
+        departure_date=departure_date,
+        return_date=return_date,
+        adults=adults,
+        max_results=max_results,
+        cabin_class=cabin_class,
+    )
+    flights = [
+        {
+            "airline": offer.get("airline"),
+            "flight_number": offer.get("flight_number"),
+            "origin": offer.get("origin"),
+            "destination": offer.get("destination"),
+            "departure_time": offer.get("departure_time"),
+            "arrival_time": offer.get("arrival_time"),
+            "duration": offer.get("duration"),
+            "stops": offer.get("stops"),
+            "cabin": offer.get("cabin"),
+            "price": offer.get("price"),
+            "currency": offer.get("currency"),
+            "source": "duffel",
+        }
+        for offer in result.get("offers", [])
+    ]
+    return {
+        **result,
+        "route": f"{origin_code}-{destination_code}",
+        "flights": flights,
+        "duffel_key_loaded": bool(get_duffel_api_key()),
+        "test_mode": True,
+        "test_mode_label": "Duffel test mode — prices are API test fares, not final ticketed prices.",
+    }
 
 
 # -----------------------------

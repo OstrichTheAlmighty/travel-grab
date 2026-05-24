@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Byable | How can I afford this?</title>
+    <title>Byable | Where should I go next?</title>
     <meta
       name="description"
-      content="Byable helps you discover experiences, products, and goals personalized to your interests, then see realistic ways to afford them."
+      content="Byable is an AI-native travel planning platform that turns a travel idea into a curated, bookable itinerary."
     />
     <style>
       :root {
@@ -168,6 +168,26 @@
         box-shadow: 0 22px 64px rgba(143, 240, 199, 0.24);
       }
 
+      .secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 54px;
+        padding: 0 22px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        color: var(--text);
+        font-weight: 750;
+        background: rgba(255, 255, 255, 0.045);
+        transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+      }
+
+      .secondary:hover {
+        transform: translateY(-2px);
+        border-color: rgba(140, 199, 255, 0.42);
+        background: rgba(255, 255, 255, 0.075);
+      }
+
       .note {
         color: var(--soft);
         font-size: 0.93rem;
@@ -222,7 +242,7 @@
 
       .features {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 16px;
         margin-top: 54px;
       }
@@ -286,7 +306,7 @@
         }
 
         .features {
-          grid-template-columns: 1fr;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
           margin-top: 34px;
         }
 
@@ -308,54 +328,64 @@
         .primary {
           width: 100%;
         }
+
+        .secondary {
+          width: 100%;
+        }
+
+        .features {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
   <body>
+    TEST LANDING PAGE ACTIVE
     <div class="page">
       <header>
         <a class="brand" href="/" aria-label="Byable home">
           <span class="brand-mark" aria-hidden="true"></span>
           <span>Byable</span>
         </a>
-        <a class="nav-cta" href="https://byable-demo.streamlit.app">
-          Try the live demo
-        </a>
+        <a class="nav-cta" href="https://byable-demo.streamlit.app">Plan a trip</a>
       </header>
 
       <main>
         <section class="hero" aria-labelledby="hero-title">
           <div>
-            <div class="eyebrow">Goal discovery meets affordability planning</div>
-            <h1 id="hero-title">How can I afford this?</h1>
+            <div class="eyebrow">AI-native travel planning</div>
+            <h1 id="hero-title">Where should I go next?</h1>
             <p class="subheadline">
-              Discover experiences, products, and goals personalized to your interests — then see realistic ways to make them happen.
+              Describe your trip style, budget, dates, and interests. Byable builds a personalized travel plan with flights, stays, restaurants, activities, and AI-powered upgrades.
             </p>
             <div class="actions">
               <a class="primary" href="https://byable-demo.streamlit.app">
-                Try the live demo
+                Plan a trip
               </a>
-              <span class="note">No spreadsheets. No generic budget lecture.</span>
+              <a class="secondary" href="https://byable-demo.streamlit.app">
+                Explore demo trip
+              </a>
+              <span class="note">Curated routes, stays, food, and experiences in one flow.</span>
             </div>
           </div>
 
           <aside class="preview" aria-label="Byable preview">
             <div class="preview-top">
-              <span>Goal ideas</span>
-              <span class="status">Plan ready</span>
+              <span>Tokyo food + culture</span>
+              <span class="status">Itinerary ready</span>
             </div>
             <div class="goal-row">
               <div class="goal">
-                <strong>Beginner scuba certification</strong>
-                <span>Estimated cost, monthly savings, and practical tradeoffs in one plan.</span>
+                <strong>Flights + stay</strong>
+                <span>Compare routes, neighborhoods, and stay styles with clear source links.</span>
               </div>
               <div class="goal">
-                <strong>Weekend climbing trip</strong>
-                <span>Turn a goal into a target date, source links, and next actions.</span>
+                <strong>Food + experiences</strong>
+                <span>Build days around restaurants, hidden gems, tours, and local moments.</span>
               </div>
               <div class="goal">
-                <strong>Concert weekend package</strong>
-                <span>Compare what you want with what your future budget can support.</span>
+                <strong>Smarter upgrades</strong>
+                <span>Find better dates, better routes, and worthwhile splurges before booking.</span>
               </div>
             </div>
           </aside>
@@ -364,23 +394,28 @@
         <section class="features" aria-label="Byable features">
           <article class="feature-card">
             <small>01</small>
-            <h2>Personalized goal ideas</h2>
-            <p>Start with interests like travel, concerts, gear, classes, wellness, or hobbies.</p>
+            <h2>Live travel options</h2>
+            <p>Flights, stays, and experiences connected to real travel data.</p>
           </article>
           <article class="feature-card">
             <small>02</small>
-            <h2>Realistic savings plans</h2>
-            <p>See the monthly path, tradeoffs, and budget room needed to reach the goal.</p>
+            <h2>AI-curated itinerary</h2>
+            <p>A complete trip plan built around your taste, timing, and travel style.</p>
           </article>
           <article class="feature-card">
             <small>03</small>
-            <h2>Live source links</h2>
-            <p>Use source-backed links where available, with estimates clearly labeled when pricing is not verified.</p>
+            <h2>Smarter upgrades</h2>
+            <p>Find better dates, better routes, better stays, and hidden-gem experiences.</p>
+          </article>
+          <article class="feature-card">
+            <small>04</small>
+            <h2>Built for every style</h2>
+            <p>Budget, standard, premium, and luxury trips all in one flow.</p>
           </article>
         </section>
       </main>
 
-      <footer>© 2026 Byable. See the path to what you want.</footer>
+      <footer>© 2026 Byable. AI-native travel planning for your next trip.</footer>
     </div>
   </body>
 </html>

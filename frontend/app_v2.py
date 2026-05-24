@@ -8,6 +8,7 @@ import streamlit as st
 
 
 st.set_page_config(page_title="Byable Goal Discovery V2", layout="wide")
+st.write("ENTRYPOINT TEST: frontend/app_v2.py")
 
 TODAY = datetime.date.today()
 DEV_MODE = str(os.environ.get("DEV_MODE", "")).lower() in {"1", "true", "yes", "on"}

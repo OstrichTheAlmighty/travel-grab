@@ -1,28 +1,19 @@
 import os
 import sys
-import traceback
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 FRONTEND = os.path.join(ROOT, "frontend")
 
-if ROOT not in sys.path:
-    sys.path.insert(0, ROOT)
+for p in (FRONTEND, ROOT):
+    if p not in sys.path:
+        sys.path.insert(0, p)
 
-if FRONTEND not in sys.path:
-    sys.path.insert(0, FRONTEND)
-
-try:
-    import frontend.app  # noqa: F401
-except Exception as exc:
-    try:
-        import streamlit as st
-
-        try:
-            st.set_page_config(page_title="Byable", layout="wide")
-        except Exception:
-            pass
-        st.error("Byable could not start.")
-        st.write("The app hit an initialization error before the main interface could render.")
-        st.code("".join(traceback.format_exception(type(exc), exc, exc.__traceback__)))
-    except Exception:
-        raise
+# Execute frontend/app.py as a script so Streamlit replays it properly on reruns.
+# Using exec() rather than import avoids the module-cache problem where
+# subsequent Streamlit reruns skip re-executing top-level code.
+_app_path = os.path.join(FRONTEND, "app.py")
+with open(_app_path, "r") as _f:
+    exec(
+        compile(_f.read(), _app_path, "exec"),
+        {"__file__": _app_path, "__name__": "__main__", "_ENTRYPOINT_TEST_LABEL": "streamlit_app.py"},
+    )
