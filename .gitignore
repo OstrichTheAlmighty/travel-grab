@@ -28,6 +28,7 @@ ENV/
 
 # Environment files and local secrets
 .env
+backend/.env
 .env.*
 !.env.example
 *.env

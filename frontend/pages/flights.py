@@ -3,16 +3,37 @@ import json
 import os
 import re
 from datetime import date, datetime
-from urllib.error import HTTPError, URLError
-from urllib.parse import urlencode
-from urllib.request import urlopen
+from pathlib import Path
 
+import certifi
+import requests
 import streamlit as st
 import streamlit.components.v1 as components
 
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    def load_dotenv(dotenv_path=None, **_kwargs):
+        path = Path(dotenv_path or ".env")
+        if not path.exists():
+            return False
+        for raw_line in path.read_text().splitlines():
+            line = raw_line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, value = line.split("=", 1)
+            os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+        return True
+
 _TABLER = "https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
-BACKEND_URL = os.environ.get("BYABLE_BACKEND_URL", "http://127.0.0.1:8000").rstrip("/")
 ISO_DATE_FORMAT = "%Y-%m-%d"
+DUFFEL_BASE_URL = "https://api.duffel.com"
+DUFFEL_VERSION = "v2"
+SANDBOX_AIRLINES = {"duffel airways"}
+SANDBOX_OWNER_IATA_CODES = {"ZZ"}
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+load_dotenv(dotenv_path=PROJECT_ROOT / ".env")
 
 
 def _time_from_iso(value):
@@ -116,16 +137,6 @@ def _validate_iso_date(value, label):
     return parsed.isoformat(), None
 
 
-def _extract_backend_error(payload):
-    if not payload:
-        return "Backend returned an empty response."
-    message = payload.get("message") or payload.get("detail") or "Duffel route did not return live flights."
-    details = payload.get("details")
-    if details:
-        return f"{message} Details: {details}"
-    return str(message)
-
-
 def _api_status(payload, live, offers):
     if live and offers:
         return "Live Duffel results"
@@ -133,10 +144,6 @@ def _api_status(payload, live, offers):
     if status == "ok":
         return "No fares found"
     return "Duffel unavailable"
-
-
-def _duffel_debug(payload):
-    return (payload or {}).get("debug") or {}
 
 
 def _apply_flight_filters(offers, nonstop_only=False, max_price=None):
@@ -167,39 +174,136 @@ def _sort_flights(offers, sort_mode):
     return sorted(offers, key=lambda offer: (price(offer), duration(offer), stops(offer)))
 
 
-@st.cache_data(ttl=900, show_spinner=False)
-def load_flight_offers(origin, destination, departure_date, return_date, adults, cabin_class, max_results=5):
-    query = urlencode(
-        {
-            "origin": origin,
-            "destination": destination,
-            "departure_date": departure_date,
-            "return_date": return_date,
-            "adults": adults,
-            "cabin_class": cabin_class,
-            "max_results": max_results,
-        }
-    )
-    url = f"{BACKEND_URL}/flights/test-sfo-hnd?{query}"
+def _duffel_api_key():
     try:
-        with urlopen(url, timeout=20) as response:
-            payload = json.loads(response.read().decode("utf-8"))
-        flights = payload.get("flights") or []
-        if payload.get("status") == "ok" and flights:
-            normalized = [_normalize_duffel_flight(flight, adults) for flight in flights]
-            return [flight for flight in normalized if flight], True, payload
-        return [], False, payload
-    except HTTPError as exc:
+        secret_key = st.secrets.get("DUFFEL_API_KEY", "")
+    except Exception:
+        secret_key = ""
+    return str(secret_key or os.getenv("DUFFEL_API_KEY", "")).strip()
+
+
+def _segment_summary(segment):
+    origin = segment.get("origin") or {}
+    destination = segment.get("destination") or {}
+    marketing_carrier = segment.get("marketing_carrier") or {}
+    operating_carrier = segment.get("operating_carrier") or {}
+    return {
+        "origin": origin.get("iata_code") or origin.get("id"),
+        "destination": destination.get("iata_code") or destination.get("id"),
+        "departure_at": segment.get("departing_at"),
+        "arrival_at": segment.get("arriving_at"),
+        "marketing_carrier": marketing_carrier.get("name") or marketing_carrier.get("iata_code"),
+        "operating_carrier": operating_carrier.get("name") or operating_carrier.get("iata_code"),
+        "flight_number": segment.get("marketing_carrier_flight_number"),
+        "duration": segment.get("duration"),
+    }
+
+
+def _segment_cabin(segment):
+    passengers = segment.get("passengers") or []
+    if passengers:
+        cabin = passengers[0].get("cabin_class_marketing_name") or passengers[0].get("cabin_class")
+        if cabin:
+            return str(cabin)
+    return "Economy"
+
+
+def _is_sandbox_offer(offer):
+    owner = offer.get("owner") or {}
+    owner_name = str(owner.get("name") or "").strip().lower()
+    owner_iata = str(owner.get("iata_code") or "").strip().upper()
+    if owner_name in SANDBOX_AIRLINES or owner_iata in SANDBOX_OWNER_IATA_CODES:
+        return True
+    for flight_slice in offer.get("slices") or []:
+        for segment in flight_slice.get("segments") or []:
+            marketing_carrier = segment.get("marketing_carrier") or {}
+            operating_carrier = segment.get("operating_carrier") or {}
+            marketing_name = str(marketing_carrier.get("name") or "").strip()
+            operating_name = str(operating_carrier.get("name") or "").strip()
+            if not marketing_name and not operating_name:
+                return True
+            if {marketing_name.lower(), operating_name.lower()} & SANDBOX_AIRLINES:
+                return True
+    return False
+
+
+def _normalize_duffel_offer(offer):
+    slices = offer.get("slices") or []
+    first_slice = slices[0] if slices else {}
+    segments = first_slice.get("segments") or []
+    if not segments:
+        return None
+    first_summary = _segment_summary(segments[0])
+    last_summary = _segment_summary(segments[-1])
+    owner = offer.get("owner") or {}
+    airline = first_summary.get("marketing_carrier") or owner.get("name") or owner.get("iata_code")
+    return {
+        "airline": airline,
+        "flight_number": first_summary.get("flight_number"),
+        "origin": first_summary.get("origin"),
+        "destination": last_summary.get("destination"),
+        "departure_time": first_summary.get("departure_at"),
+        "arrival_time": last_summary.get("arrival_at"),
+        "duration": first_slice.get("duration"),
+        "stops": max(0, len(segments) - 1),
+        "cabin": _segment_cabin(segments[0]),
+        "price": offer.get("total_amount"),
+        "currency": offer.get("total_currency") or "USD",
+        "provider": "Duffel",
+        "source": "duffel",
+    }
+
+
+def load_flight_offers(origin, destination, departure_date, return_date, adults, cabin_class, max_results=5):
+    api_key = _duffel_api_key()
+    if not api_key:
+        return [], False, {"status": "not_configured", "message": "Duffel API key not configured."}
+
+    payload = {
+        "data": {
+            "slices": [
+                {"origin": origin.upper(), "destination": destination.upper(), "departure_date": departure_date},
+                {"origin": destination.upper(), "destination": origin.upper(), "departure_date": return_date},
+            ],
+            "passengers": [{"type": "adult"} for _ in range(max(1, int(adults)))],
+            "cabin_class": cabin_class,
+        }
+    }
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Duffel-Version": DUFFEL_VERSION,
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+    }
+
+    try:
+        response = requests.post(
+            f"{DUFFEL_BASE_URL}/air/offer_requests",
+            json=payload,
+            headers=headers,
+            timeout=30,
+            verify=certifi.where(),
+        )
+        response.raise_for_status()
+        data = response.json().get("data") or {}
+        raw_offers = data.get("offers") or []
+        offers = [offer for offer in raw_offers if not _is_sandbox_offer(offer)]
+        flights = [_normalize_duffel_offer(offer) for offer in offers[: max(1, int(max_results))]]
+        if flights:
+            normalized = [_normalize_duffel_flight(flight, adults) for flight in flights if flight]
+            return [flight for flight in normalized if flight], True, {"status": "ok", "message": None, "offer_count": len(offers)}
+        return [], False, {"status": "ok", "message": "No live fares found for these dates."}
+    except requests.HTTPError as exc:
         try:
-            payload = json.loads(exc.read().decode("utf-8"))
-        except (ValueError, json.JSONDecodeError):
-            payload = {"status": "error", "message": f"Backend HTTP {exc.code}: {exc.reason}"}
-        return [], False, payload
-    except (OSError, URLError, ValueError, json.JSONDecodeError) as exc:
+            error_payload = exc.response.json() if exc.response is not None else {}
+            error_message = error_payload.get("errors", [{}])[0].get("message") or f"Duffel API error ({exc.response.status_code})."
+        except (ValueError, json.JSONDecodeError, AttributeError):
+            error_message = str(exc)
+        return [], False, {"status": "error", "message": error_message}
+    except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
         return [], False, {
             "status": "error",
             "message": str(exc),
-            "url": url,
         }
 
 
@@ -284,6 +388,8 @@ def render():
     selected_flight = st.session_state.get("selected_flight")
     if isinstance(selected_flight, dict) and selected_flight.get("source") != "duffel":
         st.session_state.pop("selected_flight", None)
+
+    st.caption(f"DUFFEL_API_KEY loaded: {bool(_duffel_api_key())}")
 
     st.markdown(
         """
@@ -437,10 +543,7 @@ def render():
     if offers:
         cards = flight_cards_html(offers, live, selected_index, adults)
     else:
-        if (debug_payload or {}).get("status") == "ok":
-            empty_message = debug_payload.get("message") or "No live fares found for these dates. Try different dates or airports."
-        else:
-            empty_message = "Duffel backend unavailable. Start backend on port 8000."
+        empty_message = (debug_payload or {}).get("message") or "No live fares found for these dates."
         cards = empty_state_html(api_status, empty_message)
     date_label = f"{departure_iso} → {return_iso}"
     traveler_label = f"{adults} {'traveler' if adults == 1 else 'travelers'}"
