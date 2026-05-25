@@ -15,5 +15,5 @@ _app_path = os.path.join(FRONTEND, "app.py")
 with open(_app_path, "r") as _f:
     exec(
         compile(_f.read(), _app_path, "exec"),
-        {"__file__": _app_path, "__name__": "__main__", "_ENTRYPOINT_TEST_LABEL": "streamlit_app.py"},
+        {"__file__": _app_path, "__name__": "__main__"},
     )

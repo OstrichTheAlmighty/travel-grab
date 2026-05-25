@@ -13,6 +13,15 @@ from urllib.request import Request, urlopen
 DUFFEL_BASE_URL = "https://api.duffel.com"
 DUFFEL_VERSION = "v2"
 SANDBOX_AIRLINES = {"duffel airways"}
+SANDBOX_OWNER_IATA_CODES = {"ZZ"}
+
+
+def _debug_log(event: str, payload: Dict[str, Any]) -> None:
+    """Print structured Duffel diagnostics without exposing API secrets."""
+    try:
+        print(f"[duffel] {event}: {json.dumps(payload, default=str)}", flush=True)
+    except TypeError:
+        print(f"[duffel] {event}: {payload}", flush=True)
 
 
 def _ssl_context() -> ssl.SSLContext:
@@ -42,18 +51,34 @@ def _read_env_file(path: Path, key: str) -> Optional[str]:
     return None
 
 
+def _looks_like_placeholder_secret(value: str) -> bool:
+    normalized = str(value or "").strip().upper()
+    return not normalized or normalized.startswith("PASTE_") or normalized.endswith("_HERE")
+
+
 def get_duffel_api_key() -> Optional[str]:
     """Load Duffel API key from environment, backend/.env, or root .env."""
     env_key = os.environ.get("DUFFEL_API_KEY", "").strip()
-    if env_key:
+    if env_key and not _looks_like_placeholder_secret(env_key):
         return env_key
 
     repo_root = Path(__file__).resolve().parents[2]
     for env_path in (repo_root / "backend" / ".env", repo_root / ".env"):
         file_key = _read_env_file(env_path, "DUFFEL_API_KEY")
-        if file_key:
+        if file_key and not _looks_like_placeholder_secret(file_key):
             return file_key
     return None
+
+
+def _redacted_headers(api_key: str) -> Dict[str, Any]:
+    return {
+        "Authorization": "Bearer <redacted>" if api_key else None,
+        "Authorization_present": bool(api_key),
+        "Authorization_token_length": len(api_key or ""),
+        "Duffel-Version": DUFFEL_VERSION,
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+    }
 
 
 def _format_money(amount: Any, currency: str) -> str:
@@ -108,6 +133,7 @@ def _normalize_offer(offer: Dict[str, Any]) -> Dict[str, Any]:
     return {
         "id": offer.get("id"),
         "source": "duffel",
+        "provider": "Duffel",
         "airline": airline,
         "flight_number": flight_number,
         "origin": first_summary.get("origin"),
@@ -133,15 +159,22 @@ def _normalize_offer(offer: Dict[str, Any]) -> Dict[str, Any]:
 def _is_sandbox_offer(offer: Dict[str, Any]) -> bool:
     owner = offer.get("owner") or {}
     owner_name = str(owner.get("name") or "").strip().lower()
+    owner_iata = str(owner.get("iata_code") or "").strip().upper()
     if owner_name in SANDBOX_AIRLINES:
+        return True
+    if owner_iata in SANDBOX_OWNER_IATA_CODES:
         return True
     for flight_slice in offer.get("slices") or []:
         for segment in flight_slice.get("segments") or []:
             marketing_carrier = segment.get("marketing_carrier") or {}
             operating_carrier = segment.get("operating_carrier") or {}
+            marketing_name = str(marketing_carrier.get("name") or "").strip()
+            operating_name = str(operating_carrier.get("name") or "").strip()
+            if not marketing_name and not operating_name:
+                return True
             carrier_names = {
-                str(marketing_carrier.get("name") or "").strip().lower(),
-                str(operating_carrier.get("name") or "").strip().lower(),
+                marketing_name.lower(),
+                operating_name.lower(),
             }
             if carrier_names & SANDBOX_AIRLINES:
                 return True
@@ -164,10 +197,23 @@ def search_flight_offers(
     """
     api_key = get_duffel_api_key()
     if not api_key:
+        debug = {
+            "duffel_key_loaded": False,
+            "request_payload": None,
+            "request_headers": _redacted_headers(""),
+            "response_status_code": None,
+            "response_body": None,
+            "raw_offer_count": 0,
+            "filtered_offer_count": 0,
+            "normalized_offer_count": 0,
+            "filtered_sandbox_count": 0,
+        }
+        _debug_log("not_configured", debug)
         return {
             "status": "not_configured",
             "source": "duffel",
             "message": "DUFFEL_API_KEY is not configured.",
+            "debug": debug,
             "offers": [],
         }
 
@@ -202,6 +248,19 @@ def search_flight_offers(
         "Content-Type": "application/json",
         "Accept": "application/json",
     }
+    debug = {
+        "duffel_key_loaded": True,
+        "request_payload": payload,
+        "request_headers": _redacted_headers(api_key),
+        "response_status_code": None,
+        "response_body": None,
+        "raw_offer_count": 0,
+        "filtered_offer_count": 0,
+        "normalized_offer_count": 0,
+        "filtered_sandbox_count": 0,
+        "parse_error": None,
+    }
+    _debug_log("request", debug)
 
     try:
         request = Request(
@@ -211,44 +270,72 @@ def search_flight_offers(
             method="POST",
         )
         with urlopen(request, timeout=30, context=_ssl_context()) as response:
+            debug["response_status_code"] = response.status
             body = response.read().decode("utf-8")
-        data = json.loads(body).get("data") or {}
-        offers = [offer for offer in (data.get("offers") or []) if not _is_sandbox_offer(offer)]
+        debug["response_body"] = body
+        parsed = json.loads(body)
+        data = parsed.get("data") or {}
+        raw_offers = data.get("offers") or []
+        offers = [offer for offer in raw_offers if not _is_sandbox_offer(offer)]
+        debug["raw_offer_count"] = len(raw_offers)
+        debug["filtered_offer_count"] = len(offers)
+        debug["filtered_sandbox_count"] = len(raw_offers) - len(offers)
         normalized = [_normalize_offer(offer) for offer in offers[: max(1, int(max_results))]]
+        debug["normalized_offer_count"] = len(normalized)
+        _debug_log("response", debug)
+        message = None
+        if not raw_offers:
+            message = "Duffel sandbox returned no fares for this route."
+        elif not offers:
+            message = "Duffel sandbox returned only filtered test-carrier fares for this route."
         return {
             "status": "ok",
             "source": "duffel",
+            "message": message,
             "origin": origin.upper(),
             "destination": destination.upper(),
             "departure_date": departure,
             "return_date": slices[1]["departure_date"] if len(slices) > 1 else None,
             "offer_request_id": data.get("id"),
             "offer_count": len(offers),
+            "raw_offer_count": len(raw_offers),
+            "filtered_sandbox_count": len(raw_offers) - len(offers),
+            "debug": debug,
             "offers": normalized,
         }
     except HTTPError as exc:
         error_body = exc.read().decode("utf-8", errors="replace")
+        debug["response_status_code"] = exc.code
+        debug["response_body"] = error_body
+        _debug_log("http_error", debug)
         return {
             "status": "error",
             "source": "duffel",
             "message": "Duffel flight search failed.",
             "status_code": exc.code,
             "details": _safe_error_details(error_body),
+            "debug": debug,
             "offers": [],
         }
     except URLError as exc:
+        debug["parse_error"] = str(exc.reason)
+        _debug_log("url_error", debug)
         return {
             "status": "error",
             "source": "duffel",
             "message": "Duffel flight search request failed.",
             "details": str(exc.reason),
+            "debug": debug,
             "offers": [],
         }
-    except ValueError:
+    except ValueError as exc:
+        debug["parse_error"] = str(exc)
+        _debug_log("parse_error", debug)
         return {
             "status": "error",
             "source": "duffel",
             "message": "Duffel returned a non-JSON response.",
+            "debug": debug,
             "offers": [],
         }
 

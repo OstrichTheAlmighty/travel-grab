@@ -488,6 +488,5 @@ function toggleAdd(btn){
 
 
 def render():
-    st.write("ENTRYPOINT TEST: frontend/pages/activities.py")
     html = _HTML.replace("{tabler}", _TABLER)
     components.html(html, height=3200, scrolling=False)

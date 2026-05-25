@@ -363,6 +363,5 @@ document.addEventListener('keydown',function(e){
 
 
 def render():
-    st.write("ENTRYPOINT TEST: frontend/pages/ai_picks.py")
     html = _HTML.replace("{tabler}", _TABLER)
     components.html(html, height=1900, scrolling=False)

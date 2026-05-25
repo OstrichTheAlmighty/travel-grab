@@ -13,5 +13,5 @@ app_path = os.path.join(FRONTEND, "app.py")
 with open(app_path, "r") as app_file:
     exec(
         compile(app_file.read(), app_path, "exec"),
-        {"__file__": app_path, "__name__": "__main__", "_ENTRYPOINT_TEST_LABEL": "app.py"},
+        {"__file__": app_path, "__name__": "__main__"},
     )

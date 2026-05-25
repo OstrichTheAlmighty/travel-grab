@@ -194,12 +194,12 @@ html,body{margin:0;padding:0;background:#07090f;}
                   <div class="ev-edit-btn danger" onclick="removeEvent(this)"><i class="ti ti-trash" aria-hidden="true"></i></div>
                 </div>
                 <div class="ev-top">
-                  <div class="ev-name">JAL 61 departs SFO</div>
-                  <div class="ev-price" style="color:#a5b4fc">$1,240 RT</div>
+                  <div class="ev-name">Selected flight departs SFO</div>
+                  <div class="ev-price" style="color:#a5b4fc">Live fare required</div>
                 </div>
-                <div class="ev-sub">Non-stop to Narita · 11h 40m · Business class · Seat 4A window recommended</div>
+                <div class="ev-sub">Confirm live fare, airport, cabin, and seat details before booking</div>
                 <div class="ev-chips">
-                  <span class="ev-chip chip-luxury">Business class</span>
+                  <span class="ev-chip chip-luxury">Live Duffel fare</span>
                   <span class="ev-chip chip-ai">AI pick</span>
                 </div>
               </div>
@@ -686,6 +686,5 @@ function toggleEditMode(){
 
 
 def render():
-    st.write("ENTRYPOINT TEST: frontend/pages/itinerary.py")
     html = _HTML.replace("{tabler}", _TABLER)
     components.html(html, height=2600, scrolling=False)

@@ -9,8 +9,6 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-st.write(f"ENTRYPOINT TEST: {globals().get('_ENTRYPOINT_TEST_LABEL', 'frontend/app.py')}")
-
 from components.styles import inject_global_styles
 from components.nav import sidebar_nav
 from pages import overview, flights, hotels, activities, itinerary, ai_picks

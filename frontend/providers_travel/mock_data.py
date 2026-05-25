@@ -7,60 +7,7 @@ TRIP = {
     "context_badge": "Oct peak foliage",
 }
 
-FLIGHTS = [
-    {
-        "tier": "Best value",
-        "airline": "JAL",
-        "airline_code": "JAL",
-        "depart": "07:30",
-        "arrive": "13:10+1",
-        "duration": "11h 40m",
-        "stops": "Non-stop",
-        "cabin": "Business",
-        "price_usd": 1240,
-        "selected": True,
-        "color": "#7c3aed",
-    },
-    {
-        "tier": "Cheapest",
-        "airline": "United",
-        "airline_code": "UA",
-        "depart": "09:55",
-        "arrive": "18:15+1",
-        "duration": "14h 20m",
-        "stops": "1 stop · ORD",
-        "cabin": "Economy",
-        "price_usd": 680,
-        "selected": False,
-        "color": "#059669",
-    },
-    {
-        "tier": "Fastest",
-        "airline": "ANA",
-        "airline_code": "ANA",
-        "depart": "11:05",
-        "arrive": "15:10+1",
-        "duration": "11h 05m",
-        "stops": "Non-stop",
-        "cabin": "Prem Eco",
-        "price_usd": 940,
-        "selected": False,
-        "color": "#d97706",
-    },
-    {
-        "tier": "Premium",
-        "airline": "ANA",
-        "airline_code": "ANA",
-        "depart": "11:05",
-        "arrive": "15:10+1",
-        "duration": "11h 05m",
-        "stops": "Non-stop",
-        "cabin": "First class",
-        "price_usd": 4200,
-        "selected": False,
-        "color": "#f59e0b",
-    },
-]
+FLIGHTS = []
 
 HOTELS = [
     {
@@ -181,7 +128,7 @@ AI_PICKS = [
         "type": "Cost optimization",
         "icon": "✈",
         "title": "Flight savings · $560 found",
-        "body": "Fly United Economy via Chicago instead of JAL Business. The 14h 20m one-stop saves $560 per ticket. Reinvest that into two extra nights at a Kyoto ryokan for the same total spend.",
+        "body": "Compare one-stop economy routes against premium cabins before booking. Lower flight spend can free up budget for extra nights or better local experiences.",
         "cta": "Switch flight",
         "accent": "#059669",
     },
@@ -189,7 +136,7 @@ AI_PICKS = [
         "type": "Timing optimization",
         "icon": "📅",
         "title": "Better dates · save 18%",
-        "body": "Shift your trip to Oct 7–17. Golden Week ends Oct 5 and JAL business fares drop sharply that following week. Same weather, same foliage — just cheaper.",
+        "body": "Compare adjacent travel dates before booking. Similar weather and itinerary quality can come with lower fares.",
         "cta": "Adjust dates",
         "accent": "#7c3aed",
     },
@@ -209,7 +156,7 @@ ITINERARY_PREVIEW = [
         "weather": "22°C · Partly cloudy",
         "weather_icon": "🌤",
         "events": [
-            {"time": "07:30", "period": "MORNING", "title": "JAL 61 departs SFO", "detail": "Business · Non-stop · 11h 40m", "color": "#1e1b4b"},
+            {"time": "07:30", "period": "MORNING", "title": "Selected flight departs SFO", "detail": "Confirm live fare, cabin, and routing before booking", "color": "#1e1b4b"},
             {"time": "14:10", "period": "AFTERNOON", "title": "Narita Express → Shinjuku", "detail": "90 min · ¥3,070 · IC Card", "color": "#0c4a6e"},
             {"time": "16:00", "period": "AFTERNOON", "title": "Check in — Andaz Tokyo", "detail": "Toranomon Hills · 52nd floor", "color": "#4c1d95"},
             {"time": "20:00", "period": "EVENING", "title": "Sushi Saito · omakase", "detail": "Michelin 3★ · ¥33,000 pp · confirmed", "color": "#7c2d12", "pinned": True},

@@ -5,9 +5,46 @@ from datetime import date, datetime, timedelta
 import statistics
 import re
 import json
+import os
+from pathlib import Path
 
 from backend.db import init_db, DB_PATH, get_conn
 from backend.coach_afford import build_afford_response, max_safe_spend, simulate_afford
+
+
+def _looks_like_placeholder_secret(value: str) -> bool:
+    normalized = str(value or "").strip().upper()
+    return not normalized or normalized.startswith("PASTE_") or normalized.endswith("_HERE")
+
+
+def _load_env_file(path: Path) -> bool:
+    """Load local KEY=value secrets without printing or overwriting values."""
+    if not path.exists():
+        return False
+    loaded = False
+    try:
+        for line in path.read_text(encoding="utf-8").splitlines():
+            stripped = line.strip()
+            if not stripped or stripped.startswith("#") or "=" not in stripped:
+                continue
+            key, value = stripped.split("=", 1)
+            key = key.strip()
+            value = value.strip().strip('"').strip("'")
+            if not key or _looks_like_placeholder_secret(value):
+                continue
+            current_value = os.environ.get(key, "")
+            if key and (key not in os.environ or _looks_like_placeholder_secret(current_value)):
+                os.environ[key] = value
+                loaded = True
+    except OSError as exc:
+        print(f"[backend] Could not read env file {path}: {exc}", flush=True)
+    return loaded
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+_load_env_file(REPO_ROOT / ".env")
+_load_env_file(REPO_ROOT / "backend" / ".env")
+
 from backend.providers.duffel import get_duffel_api_key, search_flight_offers
 
 app = FastAPI()
@@ -16,6 +53,14 @@ init_db()
 PERIOD = Literal["weekly", "monthly"]
 USER_DEFAULT = "default"
 TRANSACTION_DATASET_EVENTS: Dict[str, Dict[str, object]] = {}
+
+
+@app.on_event("startup")
+def _startup_log() -> None:
+    print(
+        f"[backend] startup: DUFFEL_API_KEY loaded: {bool(get_duffel_api_key())}",
+        flush=True,
+    )
 
 
 def _validate_flight_dates(departure_date: Optional[str], return_date: Optional[str]) -> Optional[str]:
@@ -38,7 +83,7 @@ def _validate_flight_dates(departure_date: Optional[str], return_date: Optional[
 # -----------------------------
 @app.get("/health")
 def health():
-    return {"status": "ok"}
+    return {"status": "ok", "duffel_key_loaded": bool(get_duffel_api_key())}
 
 
 @app.get("/hello")
@@ -74,7 +119,18 @@ def test_sfo_hnd_flight_search(
             "flights": [],
             "duffel_key_loaded": bool(get_duffel_api_key()),
             "test_mode": True,
-            "test_mode_label": "Duffel test mode — prices are API test fares, not final ticketed prices.",
+            "test_mode_label": "Duffel test mode — fares are API test fares, not final ticketed prices.",
+            "debug": {
+                "duffel_key_loaded": bool(get_duffel_api_key()),
+                "request_payload": None,
+                "request_headers": None,
+                "response_status_code": None,
+                "response_body": None,
+                "raw_offer_count": 0,
+                "filtered_offer_count": 0,
+                "normalized_offer_count": 0,
+                "filtered_sandbox_count": 0,
+            },
         }
     result = search_flight_offers(
         origin=origin_code,
@@ -98,6 +154,7 @@ def test_sfo_hnd_flight_search(
             "cabin": offer.get("cabin"),
             "price": offer.get("price"),
             "currency": offer.get("currency"),
+            "provider": "Duffel",
             "source": "duffel",
         }
         for offer in result.get("offers", [])
@@ -108,7 +165,8 @@ def test_sfo_hnd_flight_search(
         "flights": flights,
         "duffel_key_loaded": bool(get_duffel_api_key()),
         "test_mode": True,
-        "test_mode_label": "Duffel test mode — prices are API test fares, not final ticketed prices.",
+        "test_mode_label": "Duffel test mode — fares are API test fares, not final ticketed prices.",
+        "debug": result.get("debug"),
     }
 
 

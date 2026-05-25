@@ -30,7 +30,6 @@ PROVIDER_CACHE_PATH = os.path.join(CURRENT_DIR, "provider_results_cache.json")
 PROVIDER_CACHE_TTL_DAYS = 7
 
 st.set_page_config(page_title="Byable", layout="wide")
-st.write("ENTRYPOINT TEST: frontend/legacy/old_budget_app.py")
 
 SESSION_DEFAULTS = {
     "user_id": "default",

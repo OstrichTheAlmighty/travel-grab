@@ -2,7 +2,6 @@ import streamlit as st
 
 
 def render(title: str, description: str, icon: str = "◈"):
-    st.write("ENTRYPOINT TEST: frontend/pages/placeholder.py")
     st.markdown(f"""
 <div style="padding:80px 48px;text-align:center;">
     <div style="font-size:48px;margin-bottom:20px;">{icon}</div>

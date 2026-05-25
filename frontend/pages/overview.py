@@ -146,14 +146,14 @@ html,body{{margin:0;padding:0;background:#07090f;}}
           <div class="sc-name">Standard</div>
           <div class="sc-price">$8,420 total · $2,807 pp</div>
           <div class="sc-desc">Business flights, 4-star hotels, mix of fine dining and local spots.</div>
-          <div class="sc-check"><i class="ti ti-check" aria-hidden="true"></i> JAL business · Andaz Tokyo</div>
+          <div class="sc-check"><i class="ti ti-check" aria-hidden="true"></i> Premium cabin · Andaz Tokyo</div>
         </div>
         <div class="style-card" id="s-lux" onclick="selectStyle('lux')">
           <div class="sc-icon" style="background:rgba(251,191,36,0.12)"><i class="ti ti-crown" style="color:#fbbf24;font-size:18px" aria-hidden="true"></i></div>
           <div class="sc-name">Luxury</div>
           <div class="sc-price">$14,800 total · $4,933 pp</div>
           <div class="sc-desc">First-class flights, Aman Tokyo, private guides, Michelin omakase every night.</div>
-          <div class="sc-check"><i class="ti ti-check" aria-hidden="true"></i> ANA First Class · Aman Tokyo</div>
+          <div class="sc-check"><i class="ti ti-check" aria-hidden="true"></i> First class cabin · Aman Tokyo</div>
         </div>
       </div>
     </div>
@@ -165,7 +165,7 @@ html,body{{margin:0;padding:0;background:#07090f;}}
           <div class="stat-icon" style="background:rgba(99,102,241,0.12)"><i class="ti ti-plane" style="color:#818cf8" aria-hidden="true"></i></div>
           <div class="stat-label">Flights</div>
           <div class="stat-value">$3,720</div>
-          <div class="stat-note">JAL 61 · Business class · RT</div>
+          <div class="stat-note">Live Duffel selection required</div>
           <div class="stat-bar"><div class="stat-bar-fill" style="width:88%;background:#6366f1"></div></div>
         </div>
         <div class="stat-card">
@@ -212,8 +212,8 @@ html,body{{margin:0;padding:0;background:#07090f;}}
           <div class="ai-item">
             <div class="ai-item-icon" style="background:rgba(99,102,241,0.1)"><i class="ti ti-plane" style="color:#818cf8" aria-hidden="true"></i></div>
             <div class="ai-item-body">
-              <div class="ai-item-title">Fly United Economy via ORD instead of JAL Business</div>
-              <div class="ai-item-desc">14h 20m with one Chicago stop saves $560 per ticket. Use that to upgrade your Kyoto ryokan for two extra nights.</div>
+              <div class="ai-item-title">Compare economy routes before choosing premium cabins</div>
+              <div class="ai-item-desc">One-stop economy routes can be meaningfully cheaper than premium cabins. Use live Duffel results before locking the flight budget.</div>
             </div>
             <div class="ai-item-saving" style="color:#34d399">Save $560</div>
           </div>
@@ -221,7 +221,7 @@ html,body{{margin:0;padding:0;background:#07090f;}}
             <div class="ai-item-icon" style="background:rgba(251,191,36,0.1)"><i class="ti ti-calendar" style="color:#fbbf24" aria-hidden="true"></i></div>
             <div class="ai-item-body">
               <div class="ai-item-title">Shift dates to Oct 7 – 17 — fares drop 18%</div>
-              <div class="ai-item-desc">Golden Week ends Oct 5. Prices on JAL business class fall significantly the following week. Same weather, same itinerary, lower cost.</div>
+              <div class="ai-item-desc">Compare dates around your target window before booking. Similar weather and itinerary quality can come with lower fares.</div>
             </div>
             <div class="ai-item-saving" style="color:#fbbf24">Save $220</div>
           </div>
@@ -248,25 +248,24 @@ function selectStyle(m){{
 
 
 def render():
-    st.write("ENTRYPOINT TEST: frontend/pages/overview.py")
     st.write("TEST OVERVIEW ACTIVE")
     selected_flight = st.session_state.get("selected_flight") or {}
     live_flights = selected_flight.get("source") == "duffel"
-    flight_total = float(selected_flight.get("price_total") or 3720.0)
+    flight_total = float(selected_flight.get("price_total") or 0.0)
     travelers = int(selected_flight.get("adults") or 3)
-    airline = selected_flight.get("airline") or "Demo flight"
-    flight_number = selected_flight.get("flight_number") or "estimate"
+    airline = selected_flight.get("airline") or "No flight selected"
+    flight_number = selected_flight.get("flight_number") or ""
     cabin = selected_flight.get("cabin") or "Standard"
     total_cost = 8420.0 - 3720.0 + flight_total
     per_person = total_cost / max(1, travelers)
     travel_budget = 9000.0
     affordability = min(100, round(total_cost / travel_budget * 100))
     headroom = travel_budget - total_cost
-    live_label = "Duffel test mode" if live_flights else "Demo estimate"
+    live_label = "Duffel test mode" if live_flights else "No live flight selected"
     flight_note = (
         f"{airline} {flight_number} · {cabin} · Duffel test fare"
         if live_flights
-        else "Demo estimate · choose a Duffel flight on the Flights page"
+        else "Choose a Duffel flight on the Flights page"
     )
     html = _HTML.format(tabler=_TABLER)
     html = html.replace("Live pricing", live_label)
@@ -276,7 +275,7 @@ def render():
     html = html.replace("$393 headroom remaining", f"{'$' + format(abs(headroom), ',.0f')} {'headroom remaining' if headroom >= 0 else 'over target'}")
     html = html.replace("width:93%;background:linear-gradient(90deg,#f59e0b,#fbbf24)", f"width:{affordability}%;background:linear-gradient(90deg,#f59e0b,#fbbf24)")
     html = html.replace("$3,720", f"${flight_total:,.0f}")
-    html = html.replace("JAL 61 · Business class · RT", flight_note)
+    html = html.replace("Live Duffel selection required", flight_note)
     html = html.replace("Oct 14 – Oct 24, 2025", "Oct 14 – Oct 24, 2026")
     html = html.replace("3 travelers", f"{travelers} {'traveler' if travelers == 1 else 'travelers'}")
     html = html.replace("Split evenly across 3 travelers", f"Split evenly across {travelers} {'traveler' if travelers == 1 else 'travelers'}")

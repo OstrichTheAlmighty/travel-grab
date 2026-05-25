@@ -104,5 +104,4 @@ html,body{{margin:0;padding:0;background:#07090f;}}
 
 
 def render():
-    st.write("ENTRYPOINT TEST: frontend/pages/hotels.py")
     components.html(_HTML.format(tabler=_TABLER), height=1350, scrolling=False)
