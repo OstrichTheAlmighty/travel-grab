@@ -44,6 +44,15 @@ def _time_from_iso(value):
         return str(value)
 
 
+def _date_time_label(value):
+    if not value:
+        return "Not available"
+    try:
+        return datetime.fromisoformat(str(value).replace("Z", "+00:00")).strftime("%b %-d, %H:%M")
+    except ValueError:
+        return str(value)
+
+
 def _duration_label(value):
     raw = str(value or "")
     if raw.startswith("P"):
@@ -70,6 +79,24 @@ def _duration_minutes(value):
     hours = int(hour_match.group(1)) if hour_match else 0
     minutes = int(minute_match.group(1)) if minute_match else 0
     return hours * 60 + minutes
+
+
+def _duration_between(start, end):
+    try:
+        start_dt = datetime.fromisoformat(str(start).replace("Z", "+00:00"))
+        end_dt = datetime.fromisoformat(str(end).replace("Z", "+00:00"))
+    except (TypeError, ValueError):
+        return "Not available"
+    minutes = max(0, int((end_dt - start_dt).total_seconds() // 60))
+    hours, mins = divmod(minutes, 60)
+    return f"{hours}h {mins}m" if mins else f"{hours}h"
+
+
+def _display_value(value):
+    if value is None:
+        return "Not available"
+    text = str(value).strip()
+    return text if text else "Not available"
 
 
 def _airline_code(airline, flight_number):
@@ -104,10 +131,13 @@ def _normalize_duffel_flight(flight, adults):
         "depart_time": _time_from_iso(flight.get("departure_time")),
         "arrive_time": _time_from_iso(flight.get("arrival_time")),
         "duration": _duration_label(flight.get("duration")),
+        "total_travel_time": _duration_label(flight.get("duration")),
         "stops": stops,
         "stop_label": "Non-stop" if stops == 0 else f"{stops} stop" if stops == 1 else f"{stops} stops",
         "cabin": flight.get("cabin") or "Economy",
         "baggage": flight.get("baggage") or "",
+        "route_details": flight.get("route_details") or [],
+        "fare_conditions": flight.get("fare_conditions") or ["Not available"],
         "price_total": price,
         "price_per_person": price / traveler_count,
         "currency": flight.get("currency") or "USD",
@@ -225,6 +255,109 @@ def _segment_summary(segment):
     }
 
 
+def _airport_label(airport):
+    if not isinstance(airport, dict):
+        return "Not available"
+    code = airport.get("iata_code") or airport.get("id")
+    name = airport.get("name")
+    city = airport.get("city_name")
+    label = code or name or city
+    if label and name and name != label:
+        return f"{label} · {name}"
+    return label or "Not available"
+
+
+def _terminal_label(segment, side):
+    airport = segment.get(side) or {}
+    direct_keys = [f"{side}_terminal", f"{side}_gate"]
+    for key in direct_keys:
+        if segment.get(key):
+            return segment.get(key)
+    for key in ("terminal", "gate"):
+        if airport.get(key):
+            return airport.get(key)
+    return "Not available"
+
+
+def _aircraft_label(segment):
+    aircraft = segment.get("aircraft") or {}
+    return aircraft.get("name") or aircraft.get("iata_code") or segment.get("aircraft_name") or "Not available"
+
+
+def _segment_detail(segment):
+    marketing_carrier = segment.get("marketing_carrier") or {}
+    operating_carrier = segment.get("operating_carrier") or {}
+    flight_number = segment.get("marketing_carrier_flight_number")
+    marketing_code = marketing_carrier.get("iata_code") or ""
+    display_flight = f"{marketing_code} {flight_number}".strip() if flight_number else marketing_code
+    return {
+        "flight_number": display_flight or "Not available",
+        "origin": _airport_label(segment.get("origin") or {}),
+        "destination": _airport_label(segment.get("destination") or {}),
+        "departure": _date_time_label(segment.get("departing_at")),
+        "arrival": _date_time_label(segment.get("arriving_at")),
+        "duration": _duration_label(segment.get("duration")) or "Not available",
+        "aircraft": _aircraft_label(segment),
+        "cabin": _segment_cabin(segment),
+        "operating_carrier": operating_carrier.get("name") or operating_carrier.get("iata_code") or "Not available",
+        "marketing_carrier": marketing_carrier.get("name") or marketing_carrier.get("iata_code") or "Not available",
+        "departure_terminal": _terminal_label(segment, "origin"),
+        "arrival_terminal": _terminal_label(segment, "destination"),
+    }
+
+
+def _layover_details(segments):
+    layovers = []
+    for index in range(max(0, len(segments) - 1)):
+        current_segment = segments[index]
+        next_segment = segments[index + 1]
+        airport = _airport_label(current_segment.get("destination") or {})
+        layovers.append(
+            {
+                "airport": airport,
+                "duration": _duration_between(current_segment.get("arriving_at"), next_segment.get("departing_at")),
+            }
+        )
+    return layovers
+
+
+def _fare_conditions(offer):
+    conditions = offer.get("conditions") or {}
+    if not isinstance(conditions, dict) or not conditions:
+        return ["Not available"]
+    labels = []
+    for key, value in conditions.items():
+        label = str(key).replace("_", " ").title()
+        if isinstance(value, dict):
+            allowed = value.get("allowed")
+            penalty = value.get("penalty_amount")
+            currency = value.get("penalty_currency")
+            detail = "Allowed" if allowed is True else "Not allowed" if allowed is False else "Not available"
+            if penalty and currency:
+                detail = f"{detail} · penalty {penalty} {currency}"
+            labels.append(f"{label}: {detail}")
+        else:
+            labels.append(f"{label}: {_display_value(value)}")
+    return labels or ["Not available"]
+
+
+def _route_details(offer):
+    details = []
+    for index, flight_slice in enumerate(offer.get("slices") or []):
+        segments = flight_slice.get("segments") or []
+        details.append(
+            {
+                "label": "Outbound" if index == 0 else "Return" if index == 1 else f"Slice {index + 1}",
+                "origin": _airport_label(flight_slice.get("origin") or {}),
+                "destination": _airport_label(flight_slice.get("destination") or {}),
+                "duration": _duration_label(flight_slice.get("duration")) or "Not available",
+                "segments": [_segment_detail(segment) for segment in segments],
+                "layovers": _layover_details(segments),
+            }
+        )
+    return details
+
+
 def _segment_cabin(segment):
     passengers = segment.get("passengers") or []
     if passengers:
@@ -289,6 +422,8 @@ def _normalize_duffel_offer(offer):
         "stops": max(0, len(segments) - 1),
         "cabin": _segment_cabin(segments[0]),
         "baggage": _extract_baggage(offer),
+        "route_details": _route_details(offer),
+        "fare_conditions": _fare_conditions(offer),
         "price": offer.get("total_amount"),
         "currency": offer.get("total_currency") or "USD",
         "provider": "Duffel",
@@ -353,28 +488,147 @@ def money_usd(value):
     return f"${float(value or 0):,.0f}"
 
 
+def _unique_summary(values):
+    cleaned = [_display_value(value) for value in values if _display_value(value) != "Not available"]
+    return ", ".join(dict.fromkeys(cleaned)) if cleaned else "Not available"
+
+
+def _render_label_value(label, value):
+    st.caption(label)
+    st.write(_display_value(value))
+
+
+def render_flight_details(offer):
+    route_details = offer.get("route_details") or []
+    fare_conditions = offer.get("fare_conditions") or ["Not available"]
+    baggage = offer.get("baggage") or "Not available"
+    operating_carriers = []
+    aircraft_types = []
+    terminals = []
+    for flight_slice in route_details:
+        for segment in flight_slice.get("segments") or []:
+            operating_carriers.append(segment.get("operating_carrier") or "Not available")
+            aircraft_types.append(segment.get("aircraft") or "Not available")
+            terminals.append(
+                f"{segment.get('origin', 'Not available')}: {segment.get('departure_terminal', 'Not available')} → "
+                f"{segment.get('destination', 'Not available')}: {segment.get('arrival_terminal', 'Not available')}"
+            )
+    operating_summary = _unique_summary(operating_carriers)
+    aircraft_summary = _unique_summary(aircraft_types)
+    terminal_summary = [item for item in terminals if _display_value(item) != "Not available"] or ["Not available"]
+
+    st.markdown("#### Flight details")
+    summary_cols = st.columns(3)
+    with summary_cols[0]:
+        with st.container(border=True):
+            _render_label_value("Total travel time", offer.get("total_travel_time") or offer.get("duration"))
+    with summary_cols[1]:
+        with st.container(border=True):
+            _render_label_value("Baggage", baggage)
+    with summary_cols[2]:
+        with st.container(border=True):
+            _render_label_value("Cabin", offer.get("cabin"))
+
+    summary_cols_b = st.columns(3)
+    with summary_cols_b[0]:
+        with st.container(border=True):
+            _render_label_value("Operating carrier", operating_summary)
+    with summary_cols_b[1]:
+        with st.container(border=True):
+            _render_label_value("Aircraft", aircraft_summary)
+    with summary_cols_b[2]:
+        with st.container(border=True):
+            st.caption("Terminal information")
+            for terminal in terminal_summary:
+                st.write(_display_value(terminal))
+
+    st.divider()
+    st.markdown("#### Route timeline")
+    if not route_details:
+        st.write("Route breakdown not available.")
+        return
+
+    for flight_slice in route_details:
+        layovers = flight_slice.get("layovers") or []
+        st.markdown(f"##### {_display_value(flight_slice.get('label'))}")
+        st.caption(
+            f"{_display_value(flight_slice.get('origin'))} → "
+            f"{_display_value(flight_slice.get('destination'))} · "
+            f"{_display_value(flight_slice.get('duration'))}"
+        )
+        for segment_index, segment in enumerate(flight_slice.get("segments") or []):
+            with st.container(border=True):
+                route_cols = st.columns([1.25, 0.7, 1.25])
+                with route_cols[0]:
+                    st.caption("Depart")
+                    st.markdown(f"**{_display_value(segment.get('origin'))}**")
+                    st.write(_display_value(segment.get("departure")))
+                    st.caption(f"Terminal: {_display_value(segment.get('departure_terminal'))}")
+                with route_cols[1]:
+                    st.caption(_display_value(segment.get("flight_number")))
+                    st.markdown("### →")
+                    st.caption(_display_value(segment.get("duration")))
+                with route_cols[2]:
+                    st.caption("Arrive")
+                    st.markdown(f"**{_display_value(segment.get('destination'))}**")
+                    st.write(_display_value(segment.get("arrival")))
+                    st.caption(f"Terminal: {_display_value(segment.get('arrival_terminal'))}")
+
+                meta_cols = st.columns(3)
+                with meta_cols[0]:
+                    _render_label_value("Aircraft", segment.get("aircraft"))
+                with meta_cols[1]:
+                    _render_label_value("Cabin", segment.get("cabin"))
+                with meta_cols[2]:
+                    _render_label_value("Operating carrier", segment.get("operating_carrier"))
+
+            if segment_index < len(layovers):
+                layover = layovers[segment_index]
+                st.info(
+                    f"Layover at {_display_value(layover.get('airport'))} · "
+                    f"{_display_value(layover.get('duration'))}"
+                )
+
+    st.divider()
+    st.markdown("#### Fare rules")
+    for condition in fare_conditions:
+        st.markdown(f"- {_display_value(condition)}")
+
+
 def render():
     selected_flight = st.session_state.get("selected_flight")
     if isinstance(selected_flight, dict) and selected_flight.get("source") != "duffel":
         st.session_state.pop("selected_flight", None)
 
-    st.write("DEPLOY VERSION: MAY-26-LIVE-DUFFEL-V3")
-
     st.markdown(
         """
         <style>
+        .block-container {
+            padding-top: 1.25rem !important;
+        }
         div[data-testid="stForm"] {
             border: 0.5px solid rgba(255,255,255,0.08);
             background: rgba(255,255,255,0.025);
-            border-radius: 14px;
-            padding: 12px 16px 16px;
+            border-radius: 12px;
+            padding: 8px 12px 10px;
+            margin-bottom: 0.35rem;
+        }
+        div[data-testid="stForm"] label {
+            font-size: 0.78rem;
+        }
+        div[data-testid="stForm"] [data-testid="stVerticalBlock"] {
+            gap: 0.35rem;
+        }
+        div[data-testid="stForm"] [data-testid="column"] {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
         }
         .flight-status-row {
             display: flex;
             align-items: center;
             gap: 10px;
             flex-wrap: wrap;
-            margin: 8px 0 18px;
+            margin: 2px 0 12px;
         }
         .flight-status-pill {
             display: inline-flex;
@@ -587,6 +841,18 @@ def render():
             color: #86efac;
             font-weight: 950;
         }
+        div[data-testid="stExpander"] {
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            background: rgba(255,255,255,0.022);
+            margin: -2px 0 14px;
+            overflow: hidden;
+            transition: border-color 0.18s ease, background 0.18s ease;
+        }
+        div[data-testid="stExpander"]:hover {
+            border-color: rgba(129,140,248,0.22);
+            background: rgba(255,255,255,0.032);
+        }
         @media (max-width: 760px) {
             .flight-card-native {
                 padding: 16px;
@@ -637,7 +903,9 @@ def render():
 
     with st.form("flight_search_form"):
         st.caption("Duffel test mode — fares are API test fares, not final ticketed prices.")
-        col_origin, col_destination, col_departure, col_return = st.columns(4)
+        col_origin, col_destination, col_departure, col_return, col_adults, col_cabin, col_sort, col_submit = st.columns(
+            [0.75, 0.75, 1, 1, 0.75, 1.1, 1.1, 0.9]
+        )
         with col_origin:
             origin = st.text_input("Origin", value=search_state["origin"], max_chars=3).strip().upper()
         with col_destination:
@@ -646,8 +914,6 @@ def render():
             departure_date = st.text_input("Depart", value=search_state["departure_date"], help="Use YYYY-MM-DD.")
         with col_return:
             return_date = st.text_input("Return", value=search_state["return_date"], help="Use YYYY-MM-DD.")
-
-        col_adults, col_cabin, col_sort, col_submit = st.columns([1, 1.5, 1.5, 1])
         with col_adults:
             adults = st.number_input("Travelers", min_value=1, max_value=9, value=int(search_state["adults"]), step=1)
         with col_cabin:
@@ -666,7 +932,7 @@ def render():
         with col_submit:
             submitted = st.form_submit_button("Search flights", type="primary")
 
-        filter_col_a, filter_col_b = st.columns([1, 1])
+        filter_col_a, filter_col_b = st.columns([0.75, 1.25])
         with filter_col_a:
             nonstop_only = st.checkbox("Nonstop only", value=bool(search_state.get("nonstop_only", False)))
         with filter_col_b:
@@ -774,7 +1040,7 @@ def render():
     traveler_label = f"{adults} {'traveler' if adults == 1 else 'travelers'}"
     pill_class = "" if offers else " warn"
 
-    st.markdown("### Flight options")
+    st.markdown("#### Flight options")
     st.markdown(
         f"""
         <div class="flight-status-row">
@@ -861,3 +1127,5 @@ def render():
             """,
             unsafe_allow_html=True,
         )
+        with st.expander(f"View details · {flight_number}", expanded=False):
+            render_flight_details(offer)
