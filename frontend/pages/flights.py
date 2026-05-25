@@ -8,7 +8,6 @@ from pathlib import Path
 import certifi
 import requests
 import streamlit as st
-import streamlit.components.v1 as components
 
 try:
     from dotenv import load_dotenv
@@ -25,7 +24,6 @@ except ImportError:
             os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
         return True
 
-_TABLER = "https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
 ISO_DATE_FORMAT = "%Y-%m-%d"
 DUFFEL_BASE_URL = "https://api.duffel.com"
 DUFFEL_VERSION = "v2"
@@ -108,6 +106,7 @@ def _normalize_duffel_flight(flight, adults):
         "stops": stops,
         "stop_label": "Non-stop" if stops == 0 else f"{stops} stop" if stops == 1 else f"{stops} stops",
         "cabin": flight.get("cabin") or "Economy",
+        "baggage": flight.get("baggage") or "",
         "price_total": price,
         "price_per_person": price / traveler_count,
         "currency": flight.get("currency") or "USD",
@@ -139,11 +138,13 @@ def _validate_iso_date(value, label):
 
 def _api_status(payload, live, offers):
     if live and offers:
-        return "Live Duffel results"
+        return "Live Duffel test fares"
     status = str((payload or {}).get("status") or "").lower()
+    if status == "not_configured":
+        return "Duffel key missing"
     if status == "ok":
         return "No fares found"
-    return "Duffel unavailable"
+    return "Duffel API error"
 
 
 def _apply_flight_filters(offers, nonstop_only=False, max_price=None):
@@ -172,6 +173,20 @@ def _sort_flights(offers, sort_mode):
     if sort_mode == "Best overall":
         return sorted(offers, key=lambda offer: (price(offer) * 0.55) + (duration(offer) * 1.8) + (stops(offer) * 220))
     return sorted(offers, key=lambda offer: (price(offer), duration(offer), stops(offer)))
+
+
+def _flight_key(offer):
+    return "|".join(
+        [
+            str(offer.get("airline") or ""),
+            str(offer.get("flight_number") or ""),
+            str(offer.get("origin") or ""),
+            str(offer.get("destination") or ""),
+            str(offer.get("depart_time") or offer.get("departure_time") or ""),
+            str(offer.get("arrive_time") or offer.get("arrival_time") or ""),
+            str(offer.get("price_total") or offer.get("price") or ""),
+        ]
+    )
 
 
 def _duffel_api_key():
@@ -206,6 +221,21 @@ def _segment_cabin(segment):
         if cabin:
             return str(cabin)
     return "Economy"
+
+
+def _extract_baggage(offer):
+    baggage_labels = []
+    for flight_slice in offer.get("slices") or []:
+        for segment in flight_slice.get("segments") or []:
+            for passenger in segment.get("passengers") or []:
+                for baggage in passenger.get("baggages") or []:
+                    quantity = baggage.get("quantity")
+                    baggage_type = baggage.get("type")
+                    if quantity and baggage_type:
+                        baggage_labels.append(f"{quantity} {str(baggage_type).replace('_', ' ')}")
+    if baggage_labels:
+        return ", ".join(dict.fromkeys(baggage_labels))
+    return ""
 
 
 def _is_sandbox_offer(offer):
@@ -247,6 +277,7 @@ def _normalize_duffel_offer(offer):
         "duration": first_slice.get("duration"),
         "stops": max(0, len(segments) - 1),
         "cabin": _segment_cabin(segments[0]),
+        "baggage": _extract_baggage(offer),
         "price": offer.get("total_amount"),
         "currency": offer.get("total_currency") or "USD",
         "provider": "Duffel",
@@ -311,85 +342,10 @@ def money_usd(value):
     return f"${float(value or 0):,.0f}"
 
 
-def airline_logo_class(code):
-    code = str(code or "").upper()
-    if code == "JL":
-        return "al-jal"
-    if code == "NH":
-        return "al-ana"
-    return "al-ua"
-
-
-def flight_cards_html(offers, live, selected_index, adults):
-    cards = []
-    for index, offer in enumerate(offers[:5]):
-        selected = " selected" if index == selected_index else ""
-        label = "Live fare"
-        label_class = "fc-label-best" if index == 0 else "fc-label-cheap" if index == 1 else "fc-label-fast"
-        confidence = "Duffel test fare"
-        cards.append(
-            f"""
-      <div class="flight-card{selected}" onclick="selectCard(this,'flight')">
-        <div class="fc-top">
-          <span class="fc-label {label_class}">{html.escape(label)}</span>
-          <div class="fc-confidence"><i class="ti ti-shield-check" aria-hidden="true"></i>{html.escape(confidence)}</div>
-        </div>
-        <div class="airline-row">
-          <div class="airline-logo {airline_logo_class(offer.get('airline_code'))}">{html.escape(str(offer.get('airline_code') or 'AIR')[:3])}</div>
-          <div class="airline-info">
-            <div class="airline-name">{html.escape(str(offer.get('airline') or 'Airline'))}</div>
-            <div class="airline-flight">{html.escape(str(offer.get('flight_number') or 'Flight'))}</div>
-          </div>
-        </div>
-        <div class="fc-times">
-          <div class="fc-time-block">
-            <div class="fc-t">{html.escape(str(offer.get('depart_time') or '--:--'))}</div>
-            <div class="fc-ap">{html.escape(str(offer.get('origin') or 'SFO'))}</div>
-          </div>
-          <div class="fc-arrow">
-            <div class="fc-arr-line"></div>
-            <div class="fc-arr-dur">{html.escape(str(offer.get('duration') or ''))}</div>
-            <div class="fc-arr-stop">{html.escape(str(offer.get('stop_label') or ''))}</div>
-          </div>
-          <div class="fc-time-block" style="text-align:right">
-            <div class="fc-t">{html.escape(str(offer.get('arrive_time') or '--:--'))}</div>
-            <div class="fc-ap">{html.escape(str(offer.get('destination') or 'HND'))}</div>
-          </div>
-        </div>
-        <div class="fc-details">
-          <span class="fc-detail detail-chip-prem">{html.escape(str(offer.get('cabin') or 'Economy'))}</span>
-          <span class="fc-detail detail-chip">Round trip</span>
-          <span class="fc-detail detail-chip">{html.escape(str(adults))} {"traveler" if int(adults) == 1 else "travelers"}</span>
-        </div>
-        <div class="fc-bottom">
-          <div>
-            <div class="fc-price-label">per person</div>
-            <div><span class="fc-price" style="color:#a5b4fc">{money_usd(offer.get('price_per_person'))}</span><span class="fc-price-pp">RT</span></div>
-          </div>
-          <div class="fc-select-btn">{"Selected" if index == selected_index else "Select"}</div>
-        </div>
-      </div>
-            """
-        )
-    return "\n".join(cards)
-
-
-def empty_state_html(status_text, message):
-    return f"""
-    <div class="empty-state">
-      <div class="empty-icon"><i class="ti ti-plane-off" aria-hidden="true"></i></div>
-      <div class="empty-title">{html.escape(status_text)}</div>
-      <div class="empty-copy">{html.escape(message)}</div>
-    </div>
-    """
-
-
 def render():
     selected_flight = st.session_state.get("selected_flight")
     if isinstance(selected_flight, dict) and selected_flight.get("source") != "duffel":
         st.session_state.pop("selected_flight", None)
-
-    st.caption(f"DUFFEL_API_KEY loaded: {bool(_duffel_api_key())}")
 
     st.markdown(
         """
@@ -399,6 +355,126 @@ def render():
             background: rgba(255,255,255,0.025);
             border-radius: 14px;
             padding: 12px 16px 16px;
+        }
+        .flight-status-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 8px 0 18px;
+        }
+        .flight-status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(52,211,153,0.10);
+            border: 1px solid rgba(52,211,153,0.24);
+            color: #34d399;
+            font-size: 12px;
+            font-weight: 800;
+        }
+        .flight-status-pill.warn {
+            background: rgba(251,191,36,0.10);
+            border-color: rgba(251,191,36,0.24);
+            color: #fbbf24;
+        }
+        .flight-updated {
+            color: rgba(255,255,255,0.42);
+            font-size: 12px;
+        }
+        .flight-card-native {
+            min-height: 286px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.025);
+            padding: 16px;
+            transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+        }
+        .flight-card-native:hover {
+            border-color: rgba(99,102,241,0.34);
+            background: rgba(99,102,241,0.045);
+            transform: translateY(-1px);
+        }
+        .flight-card-native.selected {
+            border-color: rgba(99,102,241,0.58);
+            background: rgba(99,102,241,0.08);
+        }
+        .flight-card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .flight-airline {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 800;
+            line-height: 1.3;
+        }
+        .flight-number {
+            color: rgba(255,255,255,0.42);
+            font-size: 12px;
+            margin-top: 2px;
+        }
+        .flight-price {
+            color: #a5b4fc;
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            text-align: right;
+        }
+        .flight-price-sub {
+            color: rgba(255,255,255,0.36);
+            font-size: 11px;
+            text-align: right;
+        }
+        .flight-route {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 0;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            margin-bottom: 12px;
+        }
+        .flight-time {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 900;
+        }
+        .flight-airport {
+            color: rgba(255,255,255,0.38);
+            font-size: 12px;
+            margin-top: 2px;
+        }
+        .flight-middle {
+            flex: 1;
+            text-align: center;
+            color: rgba(255,255,255,0.38);
+            font-size: 11px;
+            line-height: 1.5;
+        }
+        .flight-chip-row {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .flight-chip {
+            padding: 4px 8px;
+            border-radius: 7px;
+            background: rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.58);
+            font-size: 11px;
+            font-weight: 650;
+        }
+        .flight-chip.primary {
+            background: rgba(99,102,241,0.13);
+            color: #c7d2fe;
         }
         </style>
         """,
@@ -537,119 +613,98 @@ def render():
     if not offers:
         st.session_state.pop("selected_flight", None)
 
-    api_status = _api_status(debug_payload, live, offers)
-    badge = api_status
-    subtitle = "Duffel test mode — fares are API test fares, not final ticketed prices."
+    selected_key = _flight_key(st.session_state.get("selected_flight") or {})
     if offers:
-        cards = flight_cards_html(offers, live, selected_index, adults)
+        offer_keys = [_flight_key(offer) for offer in offers]
+        if selected_key in offer_keys:
+            selected_index = offer_keys.index(selected_key)
+        else:
+            selected_index = min(selected_index, len(offers) - 1)
+            st.session_state["selected_flight"] = {**offers[selected_index], "adults": adults}
+            st.session_state["selected_flight_index"] = selected_index
     else:
-        empty_message = (debug_payload or {}).get("message") or "No live fares found for these dates."
-        cards = empty_state_html(api_status, empty_message)
+        st.session_state.pop("selected_flight", None)
+
+    api_status = _api_status(debug_payload, live, offers)
     date_label = f"{departure_iso} → {return_iso}"
     traveler_label = f"{adults} {'traveler' if adults == 1 else 'travelers'}"
-    page = f"""<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<link rel="stylesheet" href="{_TABLER}">
-<style>
-html,body{{margin:0;padding:0;background:#07090f;}}
-*{{box-sizing:border-box;margin:0;padding:0}}
-.fs{{background:#07090f;color:#e4e6f0;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter',sans-serif;padding:0 0 60px}}
-.fs-header{{padding:28px 32px 0}}
-.fs-eyebrow{{font-size:11px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:8px}}
-.fs-title{{font-size:28px;font-weight:800;letter-spacing:-0.8px;color:#fff;margin-bottom:6px}}
-.fs-meta{{display:flex;align-items:center;gap:10px;flex-wrap:wrap}}
-.fs-meta-item{{display:flex;align-items:center;gap:5px;font-size:13px;color:rgba(255,255,255,0.4)}}
-.section{{padding:28px 32px 0}}
-.sec-header{{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:16px;flex-wrap:wrap}}
-.sec-title{{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:700}}
-.sec-sub{{font-size:12px;color:rgba(255,255,255,0.35);margin-top:2px;line-height:1.5}}
-.source-badge{{font-size:11px;font-weight:700;padding:5px 11px;border-radius:999px;background:rgba(52,211,153,0.1);border:0.5px solid rgba(52,211,153,0.25);color:#34d399}}
-.source-badge.unavailable{{background:rgba(251,191,36,0.1);border-color:rgba(251,191,36,0.25);color:#fbbf24}}
-.route-vis{{display:flex;align-items:center;gap:0;padding:16px 20px;border-radius:14px;background:rgba(255,255,255,0.02);border:0.5px solid rgba(255,255,255,0.07);margin-bottom:20px}}
-.rv-city{{min-width:0}} .rv-code{{font-size:28px;font-weight:800;letter-spacing:-1px;color:#fff}} .rv-name{{font-size:12px;color:rgba(255,255,255,0.35);margin-top:2px}}
-.rv-mid{{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 16px}} .rv-line{{width:100%;height:1px;background:rgba(255,255,255,0.1);position:relative}} .rv-plane{{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#07090f;padding:0 6px;font-size:14px;color:#818cf8}} .rv-dur{{font-size:11px;color:rgba(255,255,255,0.3);margin-top:10px}}
-.flights-scroll{{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px}}
-.flights-scroll::-webkit-scrollbar{{height:3px}} .flights-scroll::-webkit-scrollbar-track{{background:rgba(255,255,255,0.04);border-radius:2px}} .flights-scroll::-webkit-scrollbar-thumb{{background:rgba(99,102,241,0.4);border-radius:2px}}
-.flight-card{{flex:0 0 300px;border-radius:14px;border:0.5px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.025);padding:16px;cursor:pointer;transition:border-color 0.15s,background 0.15s;position:relative}}
-.flight-card:hover{{border-color:rgba(99,102,241,0.3);background:rgba(99,102,241,0.04)}} .flight-card.selected{{border-color:rgba(99,102,241,0.5);background:rgba(99,102,241,0.07)}}
-.fc-top{{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:8px}} .fc-label{{font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;padding:3px 8px;border-radius:5px;white-space:normal}} .fc-label-cheap{{background:rgba(52,211,153,0.12);color:#34d399}} .fc-label-fast{{background:rgba(56,189,248,0.12);color:#38bdf8}} .fc-label-best{{background:rgba(99,102,241,0.15);color:#a5b4fc}} .fc-confidence{{display:flex;align-items:center;gap:4px;font-size:10px;color:rgba(255,255,255,0.3);white-space:normal}}
-.airline-row{{display:flex;align-items:center;gap:8px;margin-bottom:12px}} .airline-logo{{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;letter-spacing:0.3px;flex-shrink:0}} .al-jal{{background:#8b0000;color:#fca5a5}} .al-ana{{background:#003087;color:#93c5fd}} .al-ua{{background:#162b5c;color:#bfdbfe}} .airline-info{{flex:1;min-width:0}} .airline-name{{font-size:13px;font-weight:600}} .airline-flight{{font-size:11px;color:rgba(255,255,255,0.3)}}
-.fc-times{{display:flex;align-items:center;gap:0;margin-bottom:10px}} .fc-t{{font-size:20px;font-weight:800;letter-spacing:-0.5px;color:#fff}} .fc-ap{{font-size:11px;color:rgba(255,255,255,0.3);margin-top:1px}} .fc-arrow{{flex:1;display:flex;flex-direction:column;align-items:center;padding:0 10px;padding-top:4px}} .fc-arr-line{{width:100%;height:0.5px;background:rgba(255,255,255,0.1)}} .fc-arr-dur{{font-size:10px;color:rgba(255,255,255,0.25);margin-top:3px;white-space:normal}} .fc-arr-stop{{font-size:10px;color:rgba(56,189,248,0.7)}}
-.fc-details{{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}} .fc-detail{{font-size:10px;padding:2px 7px;border-radius:4px;font-weight:500}} .detail-chip{{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45)}} .detail-chip-prem{{background:rgba(99,102,241,0.1);color:#c7d2fe}}
-.fc-bottom{{display:flex;align-items:flex-end;justify-content:space-between;border-top:0.5px solid rgba(255,255,255,0.06);padding-top:10px}} .fc-price-label{{font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:2px}} .fc-price{{font-size:22px;font-weight:800;letter-spacing:-0.5px}} .fc-price-pp{{font-size:11px;color:rgba(255,255,255,0.3);margin-left:2px}} .fc-select-btn{{font-size:11px;font-weight:600;padding:7px 14px;border-radius:8px;cursor:pointer;border:0.5px solid rgba(99,102,241,0.4);background:rgba(99,102,241,0.12);color:#a5b4fc}}
-.empty-state{{width:100%;border-radius:16px;border:0.5px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.025);padding:34px 24px;text-align:center}}
-.empty-icon{{width:42px;height:42px;margin:0 auto 12px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:rgba(251,191,36,0.1);color:#fbbf24;font-size:20px}}
-.empty-title{{font-size:16px;font-weight:800;color:#fff;margin-bottom:6px}}
-.empty-copy{{font-size:13px;line-height:1.5;color:rgba(255,255,255,0.42);max-width:420px;margin:0 auto}}
-@media(max-width:720px){{.route-vis{{flex-direction:column;align-items:flex-start;gap:12px}}.rv-mid{{width:100%;padding:0}}.flight-card{{flex-basis:86vw}}}}
-</style>
-</head>
-<body>
-<div class="fs">
-  <div class="fs-header">
-    <div class="fs-eyebrow">Flights</div>
-    <div class="fs-title">Flight options</div>
-    <div class="fs-meta">
-      <div class="fs-meta-item"><i class="ti ti-calendar" aria-hidden="true"></i>{html.escape(date_label)}</div>
-      <span style="color:rgba(255,255,255,0.12)">·</span>
-      <div class="fs-meta-item"><i class="ti ti-users" aria-hidden="true"></i>{html.escape(traveler_label)}</div>
-      <span style="color:rgba(255,255,255,0.12)">·</span>
-      <div class="fs-meta-item"><i class="ti ti-map-pin" aria-hidden="true"></i>{html.escape(origin)} → {html.escape(destination)}</div>
-    </div>
-  </div>
-  <div class="section">
-    <div class="sec-header">
-      <div>
-        <div class="sec-title" style="color:#fff"><i class="ti ti-plane" style="color:#818cf8" aria-hidden="true"></i>Round-trip flight search</div>
-        <div class="sec-sub">{html.escape(subtitle)}</div>
-      </div>
-      <span class="source-badge {'unavailable' if not offers else ''}">{html.escape(badge)}</span>
-    </div>
-    <div class="route-vis">
-      <div class="rv-city"><div class="rv-code">{html.escape(origin)}</div><div class="rv-name">Origin</div></div>
-      <div class="rv-mid"><div class="rv-line"><div class="rv-plane"><i class="ti ti-plane" aria-hidden="true"></i></div></div><div class="rv-dur">Round-trip · {html.escape(traveler_label)}</div></div>
-      <div class="rv-city" style="text-align:right"><div class="rv-code">{html.escape(destination)}</div><div class="rv-name">Destination</div></div>
-    </div>
-    <div class="flights-scroll">{cards}</div>
-  </div>
-</div>
-<script>
-function selectCard(card, group){{
-  var cards=card.closest('.flights-scroll').querySelectorAll('.flight-card');
-  cards.forEach(function(c){{
-    c.classList.remove('selected');
-    var btn=c.querySelector('.fc-select-btn');
-    if(btn) btn.textContent='Select';
-  }});
-  card.classList.add('selected');
-  var selBtn=card.querySelector('.fc-select-btn');
-  if(selBtn) selBtn.textContent='Selected';
-}}
-</script>
-</body>
-</html>"""
-    components.html(page, height=980, scrolling=False)
+    pill_class = "" if offers else " warn"
 
-    if offers:
-        options = [
-            f"{offer.get('airline')} {offer.get('flight_number')} · {offer.get('depart_time')} → {offer.get('arrive_time')} · {money_usd(offer.get('price_total'))} total"
-            for offer in offers
+    st.markdown("### Flight options")
+    st.markdown(
+        f"""
+        <div class="flight-status-row">
+            <span class="flight-status-pill{pill_class}">{html.escape(api_status)}</span>
+            <span class="flight-updated">Updated just now</span>
+            <span class="flight-updated">{html.escape(origin)} → {html.escape(destination)} · {html.escape(date_label)} · {html.escape(traveler_label)}</span>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    if not offers:
+        status = str((debug_payload or {}).get("status") or "").lower()
+        if status == "not_configured":
+            empty_title = "Duffel key missing"
+            empty_message = "Duffel API key not configured."
+        elif status == "ok":
+            empty_title = "No fares found"
+            empty_message = "No live fares found for these dates."
+        else:
+            empty_title = "Duffel API error"
+            empty_message = (debug_payload or {}).get("message") or "Duffel is unavailable right now."
+        st.info(f"{empty_title}: {empty_message}")
+        return
+
+    for index, offer in enumerate(offers[:5]):
+        is_selected = index == selected_index
+        card_class = "flight-card-native selected" if is_selected else "flight-card-native"
+        detail_chips = [
+            html.escape(str(offer.get("stop_label") or "")),
+            html.escape(str(offer.get("duration") or "")),
+            html.escape(str(offer.get("cabin") or "Economy")),
+            html.escape(str(offer.get("currency") or "USD")),
         ]
-        selected_option = st.radio(
-            "Use this flight in Overview",
-            options=list(range(len(options))),
-            index=selected_index,
-            format_func=lambda idx: options[idx],
-            horizontal=False,
+        if offer.get("baggage"):
+            detail_chips.append(f"Baggage: {html.escape(str(offer.get('baggage')))}")
+        chips_html = "".join(
+            f'<span class="flight-chip{" primary" if chip == detail_chips[2] else ""}">{chip}</span>'
+            for chip in detail_chips
+            if chip
         )
-        if selected_option != selected_index:
-            st.session_state["selected_flight_index"] = int(selected_option)
-            selected_index = int(selected_option)
-        selected_flight = {**offers[selected_index], "adults": adults}
-        st.session_state["selected_flight"] = selected_flight
-        st.success(
-            f"Overview flight cost updated to {money_usd(selected_flight.get('price_total'))} "
-            f"for {selected_flight.get('airline')} {selected_flight.get('flight_number')}."
+        st.markdown(
+            f"""
+            <div class="{card_class}">
+                <div class="flight-card-top">
+                    <div>
+                        <div class="flight-airline">{html.escape(str(offer.get('airline') or 'Airline'))}</div>
+                        <div class="flight-number">{html.escape(str(offer.get('flight_number') or 'Flight'))} · Provider: Duffel</div>
+                    </div>
+                    <div>
+                        <div class="flight-price">{money_usd(offer.get('price_total'))}</div>
+                        <div class="flight-price-sub">total · {html.escape(str(offer.get('currency') or 'USD'))}</div>
+                    </div>
+                </div>
+                <div class="flight-route">
+                    <div>
+                        <div class="flight-time">{html.escape(str(offer.get('depart_time') or '--:--'))}</div>
+                        <div class="flight-airport">{html.escape(str(offer.get('origin') or origin))}</div>
+                    </div>
+                    <div class="flight-middle">
+                        <div>{html.escape(str(offer.get('duration') or ''))}</div>
+                        <div>{html.escape(str(offer.get('stop_label') or ''))}</div>
+                    </div>
+                    <div style="text-align:right">
+                        <div class="flight-time">{html.escape(str(offer.get('arrive_time') or '--:--'))}</div>
+                        <div class="flight-airport">{html.escape(str(offer.get('destination') or destination))}</div>
+                    </div>
+                </div>
+                <div class="flight-chip-row">{chips_html}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
+        if st.button("Selected" if is_selected else "Select", key=f"select_flight_{index}_{_flight_key(offer)}", type="primary" if is_selected else "secondary"):
+            st.session_state["selected_flight_index"] = index
+            st.session_state["selected_flight"] = {**offer, "adults": adults}
+            st.rerun()
