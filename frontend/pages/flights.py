@@ -4,6 +4,7 @@ import os
 import re
 from datetime import date, datetime
 from pathlib import Path
+from urllib.parse import quote
 
 import certifi
 import requests
@@ -189,6 +190,16 @@ def _flight_key(offer):
     )
 
 
+def _display_flight_number(offer):
+    raw_number = str(offer.get("flight_number") or "").strip().upper()
+    airline_code = str(offer.get("airline_code") or "").strip().upper()
+    if not raw_number:
+        return airline_code or "Flight"
+    if any(char.isalpha() for char in raw_number):
+        return " ".join(raw_number.split())
+    return f"{airline_code} {raw_number}".strip()
+
+
 def _duffel_api_key():
     try:
         secret_key = st.secrets.get("DUFFEL_API_KEY", "")
@@ -347,6 +358,8 @@ def render():
     if isinstance(selected_flight, dict) and selected_flight.get("source") != "duffel":
         st.session_state.pop("selected_flight", None)
 
+    st.write("DEPLOY VERSION: MAY-26-LIVE-DUFFEL-V3")
+
     st.markdown(
         """
         <style>
@@ -385,28 +398,57 @@ def render():
             font-size: 12px;
         }
         .flight-card-native {
-            min-height: 286px;
-            border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.08);
-            background: rgba(255,255,255,0.025);
-            padding: 16px;
-            transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+            width: 100%;
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.09);
+            background:
+                linear-gradient(145deg, rgba(255,255,255,0.055), rgba(255,255,255,0.018)),
+                rgba(7,9,15,0.92);
+            padding: 16px 18px;
+            margin: 0 0 10px;
+            box-shadow: 0 14px 36px rgba(0,0,0,0.14);
+            transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
         }
         .flight-card-native:hover {
             border-color: rgba(99,102,241,0.34);
             background: rgba(99,102,241,0.045);
             transform: translateY(-1px);
+            box-shadow: 0 22px 54px rgba(0,0,0,0.22);
         }
         .flight-card-native.selected {
-            border-color: rgba(99,102,241,0.58);
-            background: rgba(99,102,241,0.08);
+            border-color: rgba(129,140,248,0.72);
+            background:
+                radial-gradient(circle at top right, rgba(99,102,241,0.18), transparent 34%),
+                linear-gradient(145deg, rgba(99,102,241,0.12), rgba(255,255,255,0.024));
+            box-shadow: 0 0 0 1px rgba(129,140,248,0.18), 0 24px 60px rgba(49,46,129,0.26);
         }
         .flight-card-top {
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 14px;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        .flight-airline-wrap {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            min-width: 0;
+        }
+        .flight-logo {
+            width: 38px;
+            height: 38px;
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: linear-gradient(145deg, rgba(129,140,248,0.22), rgba(56,189,248,0.09));
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #e0e7ff;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 0.6px;
         }
         .flight-airline {
             color: #fff;
@@ -421,60 +463,155 @@ def render():
         }
         .flight-price {
             color: #a5b4fc;
-            font-size: 24px;
+            font-size: 27px;
             font-weight: 900;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.8px;
             text-align: right;
+            line-height: 1;
         }
         .flight-price-sub {
             color: rgba(255,255,255,0.36);
             font-size: 11px;
             text-align: right;
+            margin-top: 5px;
         }
         .flight-route {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
+            gap: 16px;
             padding: 12px 0;
             border-top: 1px solid rgba(255,255,255,0.06);
             border-bottom: 1px solid rgba(255,255,255,0.06);
-            margin-bottom: 12px;
+            margin-bottom: 11px;
         }
         .flight-time {
             color: #fff;
-            font-size: 20px;
+            font-size: 32px;
             font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1;
         }
         .flight-airport {
-            color: rgba(255,255,255,0.38);
-            font-size: 12px;
-            margin-top: 2px;
+            color: rgba(255,255,255,0.48);
+            font-size: 13px;
+            font-weight: 700;
+            margin-top: 6px;
         }
         .flight-middle {
             flex: 1;
             text-align: center;
-            color: rgba(255,255,255,0.38);
-            font-size: 11px;
+            color: rgba(255,255,255,0.42);
+            font-size: 12px;
             line-height: 1.5;
+            min-width: 120px;
+        }
+        .flight-duration {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: rgba(255,255,255,0.7);
+            font-size: 12px;
+            font-weight: 800;
+        }
+        .flight-duration-line {
+            width: 100%;
+            height: 1px;
+            margin: 6px 0 5px;
+            background: linear-gradient(90deg, transparent, rgba(129,140,248,0.52), transparent);
+        }
+        .flight-stop-status {
+            display: inline-flex;
+            padding: 4px 9px;
+            border-radius: 999px;
+            background: rgba(52,211,153,0.1);
+            border: 1px solid rgba(52,211,153,0.2);
+            color: #6ee7b7;
+            font-size: 11px;
+            font-weight: 800;
         }
         .flight-chip-row {
             display: flex;
-            gap: 7px;
+            gap: 8px;
             flex-wrap: wrap;
-            margin-bottom: 12px;
         }
         .flight-chip {
-            padding: 4px 8px;
-            border-radius: 7px;
+            padding: 5px 9px;
+            border-radius: 999px;
             background: rgba(255,255,255,0.06);
             color: rgba(255,255,255,0.58);
-            font-size: 11px;
-            font-weight: 650;
+            font-size: 12px;
+            font-weight: 700;
         }
         .flight-chip.primary {
             background: rgba(99,102,241,0.13);
             color: #c7d2fe;
+        }
+        .flight-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-top: 12px;
+        }
+        .flight-select-btn,
+        .flight-selected-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 92px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 850;
+            text-decoration: none !important;
+            white-space: nowrap;
+        }
+        .flight-select-btn {
+            color: #c7d2fe !important;
+            background: rgba(99,102,241,0.12);
+            border: 1px solid rgba(129,140,248,0.38);
+        }
+        .flight-select-btn:hover {
+            background: rgba(129,140,248,0.2);
+            border-color: rgba(165,180,252,0.52);
+        }
+        .flight-selected-pill {
+            color: #e0e7ff;
+            background: rgba(99,102,241,0.25);
+            border: 1px solid rgba(165,180,252,0.54);
+        }
+        .flight-selected-pill::before {
+            content: "✓";
+            margin-right: 7px;
+            color: #86efac;
+            font-weight: 950;
+        }
+        @media (max-width: 760px) {
+            .flight-card-native {
+                padding: 16px;
+            }
+            .flight-card-top {
+                align-items: stretch;
+                flex-direction: column;
+            }
+            .flight-price,
+            .flight-price-sub {
+                text-align: left;
+            }
+            .flight-route {
+                gap: 10px;
+            }
+            .flight-time {
+                font-size: 28px;
+            }
+            .flight-middle {
+                min-width: 92px;
+            }
+            .flight-card-footer {
+                align-items: flex-start;
+                flex-direction: column;
+            }
         }
         </style>
         """,
@@ -616,7 +753,14 @@ def render():
     selected_key = _flight_key(st.session_state.get("selected_flight") or {})
     if offers:
         offer_keys = [_flight_key(offer) for offer in offers]
-        if selected_key in offer_keys:
+        query_key = st.query_params.get("flight_key", "")
+        if isinstance(query_key, list):
+            query_key = query_key[0] if query_key else ""
+        if query_key in offer_keys:
+            selected_index = offer_keys.index(query_key)
+            st.session_state["selected_flight"] = {**offers[selected_index], "adults": adults}
+            st.session_state["selected_flight_index"] = selected_index
+        elif selected_key in offer_keys:
             selected_index = offer_keys.index(selected_key)
         else:
             selected_index = min(selected_index, len(offers) - 1)
@@ -659,26 +803,35 @@ def render():
     for index, offer in enumerate(offers[:5]):
         is_selected = index == selected_index
         card_class = "flight-card-native selected" if is_selected else "flight-card-native"
+        airline_code = html.escape(str(offer.get("airline_code") or "AIR")[:3].upper())
+        flight_number = html.escape(_display_flight_number(offer))
         detail_chips = [
-            html.escape(str(offer.get("stop_label") or "")),
-            html.escape(str(offer.get("duration") or "")),
+            "Round trip",
             html.escape(str(offer.get("cabin") or "Economy")),
             html.escape(str(offer.get("currency") or "USD")),
         ]
         if offer.get("baggage"):
             detail_chips.append(f"Baggage: {html.escape(str(offer.get('baggage')))}")
         chips_html = "".join(
-            f'<span class="flight-chip{" primary" if chip == detail_chips[2] else ""}">{chip}</span>'
+            f'<span class="flight-chip{" primary" if chip == detail_chips[1] else ""}">{chip}</span>'
             for chip in detail_chips
             if chip
+        )
+        action_html = (
+            '<span class="flight-selected-pill">Selected</span>'
+            if is_selected
+            else f'<a class="flight-select-btn" href="?flight_key={quote(_flight_key(offer), safe="")}">Select</a>'
         )
         st.markdown(
             f"""
             <div class="{card_class}">
                 <div class="flight-card-top">
-                    <div>
-                        <div class="flight-airline">{html.escape(str(offer.get('airline') or 'Airline'))}</div>
-                        <div class="flight-number">{html.escape(str(offer.get('flight_number') or 'Flight'))} · Provider: Duffel</div>
+                    <div class="flight-airline-wrap">
+                        <div class="flight-logo">{airline_code}</div>
+                        <div>
+                            <div class="flight-airline">{html.escape(str(offer.get('airline') or 'Airline'))}</div>
+                            <div class="flight-number">{flight_number} · Duffel test fare</div>
+                        </div>
                     </div>
                     <div>
                         <div class="flight-price">{money_usd(offer.get('price_total'))}</div>
@@ -691,20 +844,20 @@ def render():
                         <div class="flight-airport">{html.escape(str(offer.get('origin') or origin))}</div>
                     </div>
                     <div class="flight-middle">
-                        <div>{html.escape(str(offer.get('duration') or ''))}</div>
-                        <div>{html.escape(str(offer.get('stop_label') or ''))}</div>
+                        <div class="flight-duration">{html.escape(str(offer.get('duration') or ''))}</div>
+                        <div class="flight-duration-line"></div>
+                        <div class="flight-stop-status">{html.escape(str(offer.get('stop_label') or ''))}</div>
                     </div>
                     <div style="text-align:right">
                         <div class="flight-time">{html.escape(str(offer.get('arrive_time') or '--:--'))}</div>
                         <div class="flight-airport">{html.escape(str(offer.get('destination') or destination))}</div>
                     </div>
                 </div>
-                <div class="flight-chip-row">{chips_html}</div>
+                <div class="flight-card-footer">
+                    <div class="flight-chip-row">{chips_html}</div>
+                    {action_html}
+                </div>
             </div>
             """,
             unsafe_allow_html=True,
         )
-        if st.button("Selected" if is_selected else "Select", key=f"select_flight_{index}_{_flight_key(offer)}", type="primary" if is_selected else "secondary"):
-            st.session_state["selected_flight_index"] = index
-            st.session_state["selected_flight"] = {**offer, "adults": adults}
-            st.rerun()
