@@ -498,6 +498,55 @@ def _render_label_value(label, value):
     st.write(_display_value(value))
 
 
+def _render_compact_segment(segment):
+    route_cols = st.columns([1.3, 0.45, 1.3])
+    with route_cols[0]:
+        st.caption("Depart")
+        st.markdown(f"**{_display_value(segment.get('origin'))}**")
+        st.caption(_display_value(segment.get("departure")))
+        st.caption(f"Terminal: {_display_value(segment.get('departure_terminal'))}")
+    with route_cols[1]:
+        st.caption(_display_value(segment.get("flight_number")))
+        st.markdown("**→**")
+        st.caption(_display_value(segment.get("duration")))
+    with route_cols[2]:
+        st.caption("Arrive")
+        st.markdown(f"**{_display_value(segment.get('destination'))}**")
+        st.caption(_display_value(segment.get("arrival")))
+        st.caption(f"Terminal: {_display_value(segment.get('arrival_terminal'))}")
+
+    st.caption(
+        " · ".join(
+            [
+                f"Aircraft: {_display_value(segment.get('aircraft'))}",
+                f"Cabin: {_display_value(segment.get('cabin'))}",
+                f"Carrier: {_display_value(segment.get('operating_carrier'))}",
+            ]
+        )
+    )
+
+
+def _render_route_card(flight_slice):
+    layovers = flight_slice.get("layovers") or []
+    with st.container(border=True):
+        st.markdown(f"##### {_display_value(flight_slice.get('label'))}")
+        st.caption(
+            f"{_display_value(flight_slice.get('origin'))} → "
+            f"{_display_value(flight_slice.get('destination'))} · "
+            f"{_display_value(flight_slice.get('duration'))}"
+        )
+        for segment_index, segment in enumerate(flight_slice.get("segments") or []):
+            _render_compact_segment(segment)
+            if segment_index < len(layovers):
+                layover = layovers[segment_index]
+                st.caption(
+                    f"Layover: {_display_value(layover.get('airport'))} · "
+                    f"{_display_value(layover.get('duration'))}"
+                )
+            if segment_index < len((flight_slice.get("segments") or [])) - 1:
+                st.divider()
+
+
 def render_flight_details(offer):
     route_details = offer.get("route_details") or []
     fare_conditions = offer.get("fare_conditions") or ["Not available"]
@@ -517,7 +566,7 @@ def render_flight_details(offer):
     aircraft_summary = _unique_summary(aircraft_types)
     terminal_summary = [item for item in terminals if _display_value(item) != "Not available"] or ["Not available"]
 
-    st.markdown("#### Flight details")
+    st.markdown("##### Flight details")
     summary_cols = st.columns(3)
     with summary_cols[0]:
         with st.container(border=True):
@@ -542,57 +591,25 @@ def render_flight_details(offer):
             for terminal in terminal_summary:
                 st.write(_display_value(terminal))
 
-    st.divider()
-    st.markdown("#### Route timeline")
+    st.markdown("##### Route timeline")
     if not route_details:
         st.write("Route breakdown not available.")
         return
 
-    for flight_slice in route_details:
-        layovers = flight_slice.get("layovers") or []
-        st.markdown(f"##### {_display_value(flight_slice.get('label'))}")
-        st.caption(
-            f"{_display_value(flight_slice.get('origin'))} → "
-            f"{_display_value(flight_slice.get('destination'))} · "
-            f"{_display_value(flight_slice.get('duration'))}"
-        )
-        for segment_index, segment in enumerate(flight_slice.get("segments") or []):
-            with st.container(border=True):
-                route_cols = st.columns([1.25, 0.7, 1.25])
-                with route_cols[0]:
-                    st.caption("Depart")
-                    st.markdown(f"**{_display_value(segment.get('origin'))}**")
-                    st.write(_display_value(segment.get("departure")))
-                    st.caption(f"Terminal: {_display_value(segment.get('departure_terminal'))}")
-                with route_cols[1]:
-                    st.caption(_display_value(segment.get("flight_number")))
-                    st.markdown("### →")
-                    st.caption(_display_value(segment.get("duration")))
-                with route_cols[2]:
-                    st.caption("Arrive")
-                    st.markdown(f"**{_display_value(segment.get('destination'))}**")
-                    st.write(_display_value(segment.get("arrival")))
-                    st.caption(f"Terminal: {_display_value(segment.get('arrival_terminal'))}")
+    if len(route_details) >= 2:
+        route_cols = st.columns(2)
+        for col, flight_slice in zip(route_cols, route_details[:2]):
+            with col:
+                _render_route_card(flight_slice)
+        for flight_slice in route_details[2:]:
+            _render_route_card(flight_slice)
+    else:
+        _render_route_card(route_details[0])
 
-                meta_cols = st.columns(3)
-                with meta_cols[0]:
-                    _render_label_value("Aircraft", segment.get("aircraft"))
-                with meta_cols[1]:
-                    _render_label_value("Cabin", segment.get("cabin"))
-                with meta_cols[2]:
-                    _render_label_value("Operating carrier", segment.get("operating_carrier"))
-
-            if segment_index < len(layovers):
-                layover = layovers[segment_index]
-                st.info(
-                    f"Layover at {_display_value(layover.get('airport'))} · "
-                    f"{_display_value(layover.get('duration'))}"
-                )
-
-    st.divider()
-    st.markdown("#### Fare rules")
-    for condition in fare_conditions:
-        st.markdown(f"- {_display_value(condition)}")
+    with st.container(border=True):
+        st.markdown("##### Fare rules")
+        for condition in fare_conditions:
+            st.caption(f"- {_display_value(condition)}")
 
 
 def render():
