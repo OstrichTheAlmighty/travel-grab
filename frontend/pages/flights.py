@@ -31,6 +31,18 @@ DUFFEL_VERSION = "v2"
 SANDBOX_AIRLINES = {"duffel airways"}
 SANDBOX_OWNER_IATA_CODES = {"ZZ"}
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+TRAVELER_PRIORITIES = [
+    "Lowest price",
+    "Nonstop only",
+    "Best arrival time",
+    "Flexible changes",
+    "Refundable fare",
+    "More baggage included",
+    "Shortest travel time",
+    "Better airline",
+    "Least airport stress",
+]
+DEFAULT_PRIORITIES = ["Lowest price", "Least airport stress"]
 
 load_dotenv(dotenv_path=PROJECT_ROOT / ".env")
 
@@ -79,6 +91,24 @@ def _duration_minutes(value):
     hours = int(hour_match.group(1)) if hour_match else 0
     minutes = int(minute_match.group(1)) if minute_match else 0
     return hours * 60 + minutes
+
+
+def _clock_minutes(value):
+    try:
+        parsed = datetime.strptime(str(value or ""), "%H:%M")
+        return parsed.hour * 60 + parsed.minute
+    except ValueError:
+        return 12 * 60
+
+
+def _median(values):
+    cleaned = sorted(float(value) for value in values if value is not None)
+    if not cleaned:
+        return 0
+    midpoint = len(cleaned) // 2
+    if len(cleaned) % 2:
+        return cleaned[midpoint]
+    return (cleaned[midpoint - 1] + cleaned[midpoint]) / 2
 
 
 def _duration_between(start, end):
@@ -204,6 +234,206 @@ def _sort_flights(offers, sort_mode):
     if sort_mode == "Best overall":
         return sorted(offers, key=lambda offer: (price(offer) * 0.55) + (duration(offer) * 1.8) + (stops(offer) * 220))
     return sorted(offers, key=lambda offer: (price(offer), duration(offer), stops(offer)))
+
+
+def _fare_flexibility_score(offer):
+    conditions = " ".join(str(item).lower() for item in offer.get("fare_conditions") or [])
+    score = 7
+    if any(token in conditions for token in ("change: allowed", "refund: allowed", "allowed · penalty")):
+        score += 4
+    if "not allowed" in conditions:
+        score -= 3
+    if "not available" in conditions or not conditions.strip():
+        score -= 1
+    return max(0, min(10, score))
+
+
+def _has_baggage(offer):
+    return bool(str(offer.get("baggage") or "").strip())
+
+
+def _preference_weights(priorities):
+    selected = set(priorities or DEFAULT_PRIORITIES)
+    weights = {
+        "price": 1.0,
+        "duration": 1.0,
+        "nonstop": 1.0,
+        "baggage": 1.0,
+        "arrival": 1.0,
+        "flexibility": 1.0,
+    }
+    if "Lowest price" in selected:
+        weights["price"] += 3.5
+    if "Nonstop only" in selected:
+        weights["nonstop"] += 4.0
+    if "Best arrival time" in selected:
+        weights["arrival"] += 3.5
+    if "Flexible changes" in selected:
+        weights["flexibility"] += 3.0
+    if "Refundable fare" in selected:
+        weights["flexibility"] += 4.0
+    if "More baggage included" in selected:
+        weights["baggage"] += 4.0
+    if "Shortest travel time" in selected:
+        weights["duration"] += 4.0
+    if "Better airline" in selected:
+        weights["baggage"] += 1.5
+        weights["arrival"] += 1.0
+        weights["flexibility"] += 1.0
+    if "Least airport stress" in selected:
+        weights["nonstop"] += 3.0
+        weights["arrival"] += 1.5
+    total = sum(weights.values()) or 1
+    return {key: value / total for key, value in weights.items()}
+
+
+def _score_components(offer, min_price, max_price, min_duration, max_duration):
+    price = float(offer.get("price_total") or 0)
+    duration = _duration_minutes(offer.get("duration")) or 0
+    price_span = max(max_price - min_price, 1)
+    duration_span = max(max_duration - min_duration, 1)
+    return {
+        "price": max(0, min(1, 1 - ((price - min_price) / price_span))),
+        "duration": max(0, min(1, 1 - ((duration - min_duration) / duration_span))),
+        "nonstop": 1 if int(offer.get("stops") or 0) == 0 else max(0, 0.5 - int(offer.get("stops") or 0) * 0.2),
+        "baggage": 1 if _has_baggage(offer) else 0.35,
+        "arrival": 1 if 10 * 60 <= _clock_minutes(offer.get("arrive_time")) <= 21 * 60 else 0.35,
+        "flexibility": _fare_flexibility_score(offer) / 10,
+    }
+
+
+def _score_breakdown(components):
+    convenience = (components["duration"] * 0.45) + (components["nonstop"] * 0.35) + (components["baggage"] * 0.20)
+    return {
+        "Price": round(components["price"] * 10, 1),
+        "Convenience": round(convenience * 10, 1),
+        "Flexibility": round(components["flexibility"] * 10, 1),
+        "Arrival timing": round(components["arrival"] * 10, 1),
+    }
+
+
+def _ai_score_map(offers, priorities):
+    if not offers:
+        return {}
+
+    def price(offer):
+        return float(offer.get("price_total") or 0)
+
+    def duration(offer):
+        return _duration_minutes(offer.get("duration")) or 0
+
+    prices = [price(offer) for offer in offers if price(offer) > 0] or [1]
+    durations = [duration(offer) for offer in offers if duration(offer) > 0] or [1]
+    min_price, max_price = min(prices), max(prices)
+    min_duration, max_duration = min(durations), max(durations)
+    weights = _preference_weights(priorities)
+    scores = {}
+    for offer in offers:
+        components = _score_components(offer, min_price, max_price, min_duration, max_duration)
+        weighted = sum(components[key] * weights[key] for key in weights)
+        score = round(max(45, min(99, 50 + weighted * 49)))
+        scores[_flight_key(offer)] = {
+            "score": score,
+            "breakdown": _score_breakdown(components),
+        }
+    return scores
+
+
+def _recommendation_map(offers, priorities):
+    if not offers:
+        return {}
+
+    def price(offer):
+        return float(offer.get("price_total") or 0)
+
+    def duration(offer):
+        return _duration_minutes(offer.get("duration")) or 99999
+
+    def stops(offer):
+        return int(offer.get("stops") or 0)
+
+    prices = [price(offer) for offer in offers]
+    durations = [duration(offer) for offer in offers]
+    median_price = _median(prices)
+    median_duration = _median(durations)
+    score_data = _ai_score_map(offers, priorities)
+    cheapest = min(offers, key=lambda offer: (price(offer), duration(offer), stops(offer)))
+    fastest = min(offers, key=lambda offer: (duration(offer), price(offer), stops(offer)))
+    earliest_good_arrival = min(offers, key=lambda offer: (abs(_clock_minutes(offer.get("arrive_time")) - 15 * 60), price(offer)))
+    flexible = max(offers, key=lambda offer: (_fare_flexibility_score(offer), -price(offer)))
+    baggage_options = [offer for offer in offers if _has_baggage(offer)]
+    baggage = min(baggage_options, key=lambda offer: (price(offer), duration(offer))) if baggage_options else None
+    nonstop_options = [offer for offer in offers if stops(offer) == 0]
+    cheapest_nonstop = min(nonstop_options, key=lambda offer: (price(offer), duration(offer))) if nonstop_options else None
+    best_overall = max(offers, key=lambda offer: score_data.get(_flight_key(offer), {}).get("score", 0))
+
+    recommendations = {}
+    for offer in offers:
+        key = _flight_key(offer)
+        label = "Best value"
+        why = "This balances price, routing, timing, and flexibility better than most options."
+        if cheapest_nonstop and key == _flight_key(cheapest_nonstop):
+            label = "Cheapest nonstop"
+            why = "This keeps the trip nonstop while staying closest to the lowest fare."
+        elif key == _flight_key(fastest):
+            label = "Fastest arrival"
+            why = f"This has the strongest timing profile with a total travel time of {_display_value(offer.get('duration'))}."
+        elif key == _flight_key(flexible):
+            label = "Most flexible"
+            why = "This is the better fit if change or refund flexibility matters."
+        elif baggage and key == _flight_key(baggage):
+            label = "Best baggage"
+            why = "This stands out because baggage information is clearer than many alternatives."
+        elif key == _flight_key(best_overall):
+            label = "Best overall"
+            why = "This is recommended because it best matches your selected priorities."
+        elif key == _flight_key(cheapest):
+            label = "Best value"
+            why = f"This keeps the fare near the lowest live result at {money_usd(price(offer))}."
+        elif key == _flight_key(earliest_good_arrival):
+            label = "Fastest arrival"
+            why = "This has one of the cleaner arrival times for the route."
+
+        if price(offer) <= median_price and duration(offer) <= median_duration:
+            why = f"{why} It also stays efficient on both price and travel time."
+        recommendations[key] = {
+            **score_data.get(key, {"score": 75, "breakdown": {}}),
+            "label": label,
+            "why": why,
+        }
+    return recommendations
+
+
+def _why_over_others(best_offer, offers, recommendations):
+    others = [offer for offer in offers if _flight_key(offer) != _flight_key(best_offer)]
+    if not others:
+        return ["This is the only returned live fare for these search parameters."]
+
+    bullets = []
+    best_price = float(best_offer.get("price_total") or 0)
+    fastest = min(offers, key=lambda offer: (_duration_minutes(offer.get("duration")) or 99999, float(offer.get("price_total") or 0)))
+    fastest_price = float(fastest.get("price_total") or 0)
+    if fastest_price > best_price:
+        bullets.append(f"Saves {money_usd(fastest_price - best_price)} compared with the fastest option.")
+
+    if int(best_offer.get("stops") or 0) == 0:
+        bullets.append("Keeps the trip nonstop while avoiding connection risk.")
+
+    best_arrival = _clock_minutes(best_offer.get("arrive_time"))
+    if any(abs(_clock_minutes(offer.get("arrive_time")) - 15 * 60) > abs(best_arrival - 15 * 60) for offer in others):
+        bullets.append("Has stronger timing than later or less convenient arrivals.")
+
+    if _fare_flexibility_score(best_offer) >= max(_fare_flexibility_score(offer) for offer in others):
+        bullets.append("Offers stronger or clearer flexibility than the other returned fares.")
+
+    if _has_baggage(best_offer) and any(not _has_baggage(offer) for offer in others):
+        bullets.append("Shows better baggage clarity than options with unclear baggage details.")
+
+    score = recommendations.get(_flight_key(best_offer), {}).get("score")
+    if score:
+        bullets.append(f"Ranks highest for your selected priorities with an AI Score of {score}.")
+
+    return bullets[:3] or ["Best fit because it balances your selected priorities better than the alternatives."]
 
 
 def _flight_key(offer):
@@ -547,7 +777,7 @@ def _render_route_card(flight_slice):
                 st.divider()
 
 
-def render_flight_details(offer):
+def render_flight_details(offer, recommendation=None):
     route_details = offer.get("route_details") or []
     fare_conditions = offer.get("fare_conditions") or ["Not available"]
     baggage = offer.get("baggage") or "Not available"
@@ -565,6 +795,22 @@ def render_flight_details(offer):
     operating_summary = _unique_summary(operating_carriers)
     aircraft_summary = _unique_summary(aircraft_types)
     terminal_summary = [item for item in terminals if _display_value(item) != "Not available"] or ["Not available"]
+
+    recommendation = recommendation or {}
+    if recommendation.get("why"):
+        with st.container(border=True):
+            st.markdown("##### Why this flight")
+            st.write(recommendation["why"])
+
+    breakdown = recommendation.get("breakdown") or {}
+    if breakdown:
+        with st.container(border=True):
+            st.caption("AI reasoning breakdown")
+            score_cols = st.columns(4)
+            for col, (label, value) in zip(score_cols, breakdown.items()):
+                with col:
+                    st.caption(label)
+                    st.markdown(f"**{value:.1f}**")
 
     st.markdown("##### Flight details")
     summary_cols = st.columns(3)
@@ -668,6 +914,40 @@ def render():
             color: rgba(255,255,255,0.42);
             font-size: 12px;
         }
+        .flight-summary-box,
+        .flight-advisor-bullets {
+            border: 1px solid rgba(129,140,248,0.18);
+            border-radius: 18px;
+            background:
+                radial-gradient(circle at top left, rgba(99,102,241,0.14), transparent 34%),
+                rgba(255,255,255,0.035);
+            padding: 16px 18px;
+            margin: 10px 0 12px;
+        }
+        .flight-summary-title,
+        .flight-advisor-title {
+            color: rgba(255,255,255,0.62);
+            font-size: 12px;
+            font-weight: 850;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 7px;
+        }
+        .flight-summary-copy {
+            color: rgba(255,255,255,0.88);
+            font-size: 15px;
+            line-height: 1.55;
+        }
+        .flight-advisor-bullets ul {
+            margin: 0;
+            padding-left: 1.1rem;
+            color: rgba(255,255,255,0.76);
+            font-size: 14px;
+            line-height: 1.55;
+        }
+        .flight-advisor-bullets li {
+            margin: 4px 0;
+        }
         .flight-card-native {
             width: 100%;
             border-radius: 18px;
@@ -692,6 +972,10 @@ def render():
                 radial-gradient(circle at top right, rgba(99,102,241,0.18), transparent 34%),
                 linear-gradient(145deg, rgba(99,102,241,0.12), rgba(255,255,255,0.024));
             box-shadow: 0 0 0 1px rgba(129,140,248,0.18), 0 24px 60px rgba(49,46,129,0.26);
+        }
+        .flight-card-native.recommended {
+            border-color: rgba(165,180,252,0.36);
+            box-shadow: 0 18px 54px rgba(49,46,129,0.18);
         }
         .flight-card-top {
             display: flex;
@@ -731,6 +1015,30 @@ def render():
             color: rgba(255,255,255,0.42);
             font-size: 12px;
             margin-top: 2px;
+        }
+        .flight-rec-badge,
+        .flight-score-pill {
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 850;
+            margin-top: 7px;
+        }
+        .flight-rec-badge {
+            padding: 4px 9px;
+            color: #dbeafe;
+            background: linear-gradient(135deg, rgba(99,102,241,0.28), rgba(14,165,233,0.13));
+            border: 1px solid rgba(165,180,252,0.22);
+        }
+        .flight-score-pill {
+            justify-content: flex-end;
+            margin-left: auto;
+            padding: 4px 8px;
+            color: #c7d2fe;
+            background: rgba(129,140,248,0.12);
+            border: 1px solid rgba(129,140,248,0.20);
         }
         .flight-price {
             color: #a5b4fc;
@@ -1083,11 +1391,62 @@ def render():
         st.info(f"{empty_title}: {empty_message}")
         return
 
-    for index, offer in enumerate(offers[:5]):
+    priority_selection = st.multiselect(
+        "What matters most?",
+        TRAVELER_PRIORITIES,
+        default=st.session_state.get("flight_priorities", DEFAULT_PRIORITIES),
+        help="Choose up to 3. These priorities influence deterministic scores and recommendations.",
+    )
+    if len(priority_selection) > 3:
+        st.warning("Choose up to 3 priorities. Byable will use the first three selected.")
+    priorities = (priority_selection or DEFAULT_PRIORITIES)[:3]
+    st.session_state["flight_priorities"] = priorities
+
+    visible_offers = offers[:5]
+    recommendations = _recommendation_map(visible_offers, priorities)
+    best_offer = max(visible_offers, key=lambda offer: recommendations.get(_flight_key(offer), {}).get("score", 0))
+    best_rec = recommendations.get(_flight_key(best_offer), {})
+    priority_text = ", ".join(priority.lower() for priority in priorities)
+    st.markdown(
+        f"""
+        <div class="flight-summary-box">
+            <div class="flight-summary-title">Recommended flight</div>
+            <div class="flight-summary-copy">
+                {html.escape(str(best_offer.get('airline') or 'This flight'))} is recommended because it best matches your priorities:
+                {html.escape(priority_text)}. AI Score: {html.escape(str(best_rec.get('score', 'N/A')))}.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    advisor_bullets = "".join(
+        f"<li>{html.escape(bullet)}</li>"
+        for bullet in _why_over_others(best_offer, visible_offers, recommendations)
+    )
+    st.markdown(
+        f"""
+        <div class="flight-advisor-bullets">
+            <div class="flight-advisor-title">Why this over other options</div>
+            <ul>{advisor_bullets}</ul>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    for index, offer in enumerate(visible_offers):
         is_selected = index == selected_index
-        card_class = "flight-card-native selected" if is_selected else "flight-card-native"
+        is_recommended = _flight_key(offer) == _flight_key(best_offer)
+        card_class = "flight-card-native"
+        if is_selected:
+            card_class += " selected"
+        if is_recommended:
+            card_class += " recommended"
         airline_code = html.escape(str(offer.get("airline_code") or "AIR")[:3].upper())
         flight_number = html.escape(_display_flight_number(offer))
+        recommendation = recommendations.get(_flight_key(offer), {"label": "Best value", "score": 75, "why": "This balances price, routing, timing, and flexibility."})
+        rec_label = html.escape(str(recommendation.get("label") or "Best value"))
+        score = html.escape(str(recommendation.get("score") or 75))
         detail_chips = [
             "Round trip",
             html.escape(str(offer.get("cabin") or "Economy")),
@@ -1114,11 +1473,13 @@ def render():
                         <div>
                             <div class="flight-airline">{html.escape(str(offer.get('airline') or 'Airline'))}</div>
                             <div class="flight-number">{flight_number} · Duffel test fare</div>
+                            <div class="flight-rec-badge">{rec_label}</div>
                         </div>
                     </div>
                     <div>
                         <div class="flight-price">{money_usd(offer.get('price_total'))}</div>
                         <div class="flight-price-sub">total · {html.escape(str(offer.get('currency') or 'USD'))}</div>
+                        <div class="flight-score-pill">AI Score: {score}</div>
                     </div>
                 </div>
                 <div class="flight-route">
@@ -1145,4 +1506,4 @@ def render():
             unsafe_allow_html=True,
         )
         with st.expander(f"View details · {flight_number}", expanded=False):
-            render_flight_details(offer)
+            render_flight_details(offer, recommendation)
