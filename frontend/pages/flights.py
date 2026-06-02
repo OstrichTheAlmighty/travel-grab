@@ -572,6 +572,107 @@ def _search_params_key(search_state, return_origin_city):
     }
 
 
+def _arrival_quality(offer):
+    arrival = _clock_minutes(offer.get("arrive_time"))
+    if 11 * 60 <= arrival < 17 * 60:
+        return "Excellent"
+    if 6 * 60 <= arrival < 11 * 60:
+        return "Good"
+    if 17 * 60 <= arrival < 22 * 60:
+        return "Fair"
+    return "Poor"
+
+
+def _time_zone_delta_estimate(offer):
+    origin = str(offer.get("origin") or "").upper()
+    destination = str(offer.get("destination") or "").upper()
+    zone_offsets = {
+        "SFO": -8, "OAK": -8, "SJC": -8, "LAX": -8, "BUR": -8, "SNA": -8, "ONT": -8, "LGB": -8,
+        "JFK": -5, "LGA": -5, "EWR": -5, "ORD": -6, "MDW": -6, "DCA": -5, "IAD": -5, "BWI": -5,
+        "HND": 9, "NRT": 9, "KIX": 9, "ITM": 9, "ICN": 9, "GMP": 9,
+        "LHR": 0, "LGW": 0, "LCY": 0, "STN": 0, "LTN": 0, "CDG": 1, "ORY": 1,
+        "BKK": 7, "DMK": 7, "SIN": 8, "SYD": 10,
+    }
+    if origin not in zone_offsets or destination not in zone_offsets:
+        return 0
+    return abs(zone_offsets[destination] - zone_offsets[origin])
+
+
+def _jet_lag_impact(offer):
+    zones_crossed = _time_zone_delta_estimate(offer)
+    arrival_quality = _arrival_quality(offer)
+    if zones_crossed >= 8 or arrival_quality == "Poor":
+        return "High"
+    if zones_crossed >= 4 or arrival_quality == "Fair":
+        return "Moderate"
+    return "Low"
+
+
+def _vacation_time_lost(offer):
+    arrival = _clock_minutes(offer.get("arrive_time"))
+    departure = _clock_minutes(offer.get("depart_time"))
+    duration = _duration_minutes(offer.get("duration")) or 0
+    lost = 0.5
+    if arrival >= 17 * 60:
+        lost += 0.5
+    if arrival >= 22 * 60:
+        lost += 0.5
+    if departure < 8 * 60:
+        lost += 0.5
+    if duration >= 14 * 60:
+        lost += 0.5
+    return min(2.0, max(0.5, lost))
+
+
+def _airport_convenience_level(airport_code):
+    levels = {
+        "HND": "High", "NRT": "Medium", "LGA": "High", "EWR": "Medium", "JFK": "Medium",
+        "SFO": "High", "OAK": "Medium", "SJC": "Medium", "KIX": "Medium", "ITM": "High",
+        "LHR": "High", "LGW": "Medium", "LCY": "High", "CDG": "Medium", "ORY": "Medium",
+    }
+    return levels.get(str(airport_code or "").upper())
+
+
+def _trip_impact(offer):
+    arrival_quality = _arrival_quality(offer)
+    jet_lag = _jet_lag_impact(offer)
+    vacation_lost = _vacation_time_lost(offer)
+    destination = str(offer.get("destination") or "").upper()
+    airport_convenience = _airport_convenience_level(destination)
+    reasons = []
+    arrival = _clock_minutes(offer.get("arrive_time"))
+    if 11 * 60 <= arrival < 17 * 60:
+        reasons.append("Arrives mid-afternoon")
+    elif 6 * 60 <= arrival < 11 * 60:
+        reasons.append("Arrives in the morning")
+    elif 17 * 60 <= arrival < 22 * 60:
+        reasons.append("Arrives in the evening")
+    else:
+        reasons.append("Arrives late at night")
+    if int(offer.get("stops") or 0) == 0:
+        reasons.append("Nonstop route")
+    else:
+        reasons.append(f"{int(offer.get('stops') or 0)} stop route")
+    airport_notes = {
+        "HND": "Haneda is close to central Tokyo",
+        "NRT": "Narita often needs a longer transfer into Tokyo",
+        "LGA": "LaGuardia is convenient for many New York trips",
+        "EWR": "Newark can work well depending on where you stay",
+        "SFO": "SFO is strong for Bay Area international routes",
+        "KIX": "Kansai is the main international gateway for Osaka and Kyoto",
+        "ITM": "Itami is convenient for Osaka and Kyoto domestic connections",
+    }
+    if destination in airport_notes:
+        reasons.append(airport_notes[destination])
+    return {
+        "arrival_quality": arrival_quality,
+        "jet_lag": jet_lag,
+        "vacation_lost": f"{vacation_lost:.1f} days",
+        "airport_convenience": airport_convenience,
+        "reasons": reasons[:3],
+    }
+
+
 def _recommendation_summary(best_offer, recommendation, priorities):
     if not best_offer:
         return ""
@@ -1647,11 +1748,28 @@ def render():
             text-transform: uppercase;
             margin-bottom: 5px;
         }
+        .flight-card-rec-kicker.why {
+            margin-top: 8px;
+        }
         .flight-card-rec-copy {
             color: rgba(255,255,255,0.86);
             font-size: 13px;
             line-height: 1.45;
             margin-bottom: 5px;
+        }
+        .flight-card-impact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 7px 12px;
+            color: rgba(255,255,255,0.72);
+            font-size: 12px;
+            line-height: 1.35;
+        }
+        .flight-card-impact-grid span {
+            color: rgba(255,255,255,0.48);
+        }
+        .flight-card-impact-grid strong {
+            color: rgba(255,255,255,0.90);
         }
         .flight-card-rec-list {
             color: rgba(255,255,255,0.66);
@@ -1736,6 +1854,9 @@ def render():
             .flight-card-footer {
                 align-items: flex-start;
                 flex-direction: column;
+            }
+            .flight-card-impact-grid {
+                grid-template-columns: 1fr;
             }
         }
         </style>
@@ -2126,15 +2247,28 @@ def render():
         )
         recommended_html = ""
         if is_recommended:
+            impact = _trip_impact(offer)
+            impact_rows = [
+                ("Arrival Quality", impact["arrival_quality"]),
+                ("Jet Lag Impact", impact["jet_lag"]),
+                ("Vacation Time Lost", impact["vacation_lost"]),
+            ]
+            if impact.get("airport_convenience"):
+                impact_rows.append(("Airport Convenience", impact["airport_convenience"]))
+            impact_html = "".join(
+                f'<div><span>{html.escape(label)}:</span> <strong>{html.escape(value)}</strong></div>'
+                for label, value in impact_rows
+            )
             bullet_html = "".join(
                 f"<li>{html.escape(bullet)}</li>"
-                for bullet in advisor_bullets[:3]
+                for bullet in impact["reasons"]
             )
             recommended_html = "".join(
                 [
                     '<div class="flight-card-recommendation">',
-                    '<div class="flight-card-rec-kicker">Recommended flight</div>',
-                    f'<div class="flight-card-rec-copy">{html.escape(recommendation_summary)}</div>',
+                    '<div class="flight-card-rec-kicker">Trip Impact</div>',
+                    f'<div class="flight-card-impact-grid">{impact_html}</div>',
+                    '<div class="flight-card-rec-kicker why">Why?</div>',
                     f'<ul class="flight-card-rec-list">{bullet_html}</ul>',
                     "</div>",
                 ]
