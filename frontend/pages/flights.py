@@ -170,6 +170,34 @@ def _airport_combo_label(city_label, airports):
     return f"{city_label} ({airport_text})"
 
 
+def _airport_search_combinations(origin_airports, destination_airports, return_origin_airports, max_attempts=4):
+    combinations = []
+    for origin_index, origin_airport in enumerate(origin_airports):
+        for destination_index, destination_airport in enumerate(destination_airports):
+            if origin_airport == destination_airport:
+                continue
+            for return_index, return_origin_airport in enumerate(return_origin_airports):
+                if return_origin_airport == origin_airport:
+                    continue
+                same_destination_return = return_origin_airport == destination_airport
+                combinations.append(
+                    (
+                        (
+                            origin_index + destination_index + return_index,
+                            0 if same_destination_return else 1,
+                            origin_index,
+                            destination_index,
+                            return_index,
+                        ),
+                        origin_airport,
+                        destination_airport,
+                        return_origin_airport,
+                    )
+                )
+    combinations.sort(key=lambda item: item[0])
+    return [(origin, destination, return_origin) for _rank, origin, destination, return_origin in combinations[:max_attempts]]
+
+
 def _airline_code(airline, flight_number):
     flight = str(flight_number or "").strip()
     if flight:
@@ -541,8 +569,22 @@ def _search_params_key(search_state, return_origin_city):
         "return_date": str(search_state.get("return_date") or ""),
         "adults": int(search_state.get("adults") or 1),
         "cabin_class": str(search_state.get("cabin_class") or "economy"),
-        "nonstop_only": bool(search_state.get("nonstop_only", False)),
     }
+
+
+def _recommendation_summary(best_offer, recommendation, priorities):
+    if not best_offer:
+        return ""
+    airline = str(best_offer.get("airline") or "This flight")
+    selected = [str(priority).lower() for priority in (priorities or DEFAULT_PRIORITIES)[:3]]
+    priority_text = ", ".join(selected) if selected else "your selected priorities"
+    score = (recommendation or {}).get("score", "N/A")
+    label = str((recommendation or {}).get("label") or "Best value")
+    stop_context = "nonstop routing" if int(best_offer.get("stops") or 0) == 0 else "a manageable routing"
+    return (
+        f"{airline} is the {label.lower()} because it best matches your priorities: "
+        f"{priority_text}. It combines {stop_context}, timing, and fare quality with an AI Score of {score}."
+    )
 
 
 def _rank_flight_results(offers, priorities):
@@ -556,13 +598,17 @@ def _rank_flight_results(offers, priorities):
     )
     best_offer = ranked[0] if ranked else None
     why_over_options = _why_over_others(best_offer, ranked[:5], recommendations) if best_offer else []
-    print(f"[Byable Flights] ranking_time={time.perf_counter() - start:.3f}s offers={len(filtered_offers)}")
+    best_recommendation = recommendations.get(_flight_key(best_offer), {}) if best_offer else {}
+    ranking_time = time.perf_counter() - start
+    print(f"[Byable Flights] ranking_time={ranking_time:.3f}s offers={len(filtered_offers)}")
     return {
         "ranked_flights": ranked,
         "recommendations": recommendations,
         "recommended_flight_id": _flight_key(best_offer) if best_offer else "",
+        "recommendation_summary": _recommendation_summary(best_offer, best_recommendation, priorities),
         "why_over_options": why_over_options,
         "selected_priorities": list(priorities or DEFAULT_PRIORITIES),
+        "timing": {"rank": ranking_time},
     }
 
 
@@ -654,6 +700,8 @@ def _flight_key(offer):
             str(offer.get("depart_time") or offer.get("departure_time") or ""),
             str(offer.get("arrive_time") or offer.get("arrival_time") or ""),
             str(offer.get("price_total") or offer.get("price") or ""),
+            str(offer.get("airport_pair") or ""),
+            str(offer.get("return_airport_pair") or ""),
         ]
     )
 
@@ -893,6 +941,7 @@ def load_flight_offers(origin, destination, departure_date, return_date, adults,
     }
 
     try:
+        request_start = time.perf_counter()
         response = requests.post(
             f"{DUFFEL_BASE_URL}/air/offer_requests",
             json=payload,
@@ -900,76 +949,129 @@ def load_flight_offers(origin, destination, departure_date, return_date, adults,
             timeout=30,
             verify=certifi.where(),
         )
+        request_time = time.perf_counter() - request_start
         response.raise_for_status()
         data = response.json().get("data") or {}
         raw_offers = data.get("offers") or []
+        normalize_start = time.perf_counter()
         offers = [offer for offer in raw_offers if not _is_sandbox_offer(offer)]
         flights = [_normalize_duffel_offer(offer) for offer in offers[: max(1, int(max_results))]]
+        normalization_time = time.perf_counter() - normalize_start
+        print(
+            "[Byable Flights] "
+            f"duffel_request_time={request_time:.3f}s "
+            f"normalization_time={normalization_time:.3f}s "
+            f"raw_offers={len(raw_offers)} usable_offers={len(offers)}"
+        )
         if flights:
             normalized = [_normalize_duffel_flight(flight, adults) for flight in flights if flight]
-            return [flight for flight in normalized if flight], True, {"status": "ok", "message": None, "offer_count": len(offers)}
-        return [], False, {"status": "ok", "message": "No live fares found for these dates."}
+            return [flight for flight in normalized if flight], True, {
+                "status": "ok",
+                "message": None,
+                "offer_count": len(offers),
+                "timing": {"duffel": request_time, "normalize": normalization_time},
+            }
+        return [], False, {
+            "status": "ok",
+            "message": "No live fares found for these dates.",
+            "timing": {"duffel": request_time, "normalize": normalization_time},
+        }
     except requests.HTTPError as exc:
         try:
             error_payload = exc.response.json() if exc.response is not None else {}
             error_message = error_payload.get("errors", [{}])[0].get("message") or f"Duffel API error ({exc.response.status_code})."
         except (ValueError, json.JSONDecodeError, AttributeError):
             error_message = str(exc)
-        return [], False, {"status": "error", "message": error_message}
+        return [], False, {"status": "error", "message": error_message, "timing": {"duffel": 0.0, "normalize": 0.0}}
     except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
         return [], False, {
             "status": "error",
             "message": str(exc),
+            "timing": {"duffel": 0.0, "normalize": 0.0},
         }
 
 
 def load_city_flight_offers(origin_city, destination_city, departure_date, return_date, adults, cabin_class, max_results=20, return_origin_city=None):
+    city_search_start = time.perf_counter()
     origin_label, origin_airports = _resolve_city_airports(origin_city)
     destination_label, destination_airports = _resolve_city_airports(destination_city)
     return_origin_label, return_origin_airports = _resolve_city_airports(return_origin_city or destination_city)
+    if not _duffel_api_key():
+        print(
+            "[Byable Flights] "
+            f"city_search_time={time.perf_counter() - city_search_start:.3f}s "
+            "combined_offers=0 key_missing=True"
+        )
+        return [], False, {
+            "status": "not_configured",
+            "message": "Duffel API key not configured.",
+            "searched_origin_airports": origin_airports,
+            "searched_destination_airports": destination_airports,
+            "searched_return_origin_airports": return_origin_airports,
+            "origin_label": origin_label,
+            "destination_label": destination_label,
+            "return_origin_label": return_origin_label,
+            "messages": [],
+        }
     combined = []
     messages = []
     live_any = False
     seen = set()
+    timing = {"duffel": 0.0, "normalize": 0.0}
+    combinations = _airport_search_combinations(origin_airports, destination_airports, return_origin_airports, max_attempts=4)
 
-    for origin_airport in origin_airports:
-        for destination_airport in destination_airports:
-            if origin_airport == destination_airport:
-                continue
-            for return_origin_airport in return_origin_airports:
-                if return_origin_airport == origin_airport:
-                    continue
-                offers, live, payload = load_flight_offers(
-                    origin_airport,
-                    destination_airport,
-                    departure_date,
-                    return_date,
-                    adults,
-                    cabin_class,
-                    max_results=5,
-                    return_origin=return_origin_airport,
-                )
-                live_any = live_any or live
-                if payload.get("message"):
-                    messages.append(f"{origin_airport}->{destination_airport}/{return_origin_airport}->{origin_airport}: {payload.get('message')}")
-                for offer in offers:
-                    offer["origin_city"] = origin_label
-                    offer["destination_city"] = destination_label
-                    offer["return_origin_city"] = return_origin_label
-                    offer["airport_pair"] = f"{origin_airport} → {destination_airport}"
-                    offer["return_airport_pair"] = f"{return_origin_airport} → {origin_airport}"
-                    key = _flight_key(offer)
-                    if key not in seen:
-                        seen.add(key)
-                        combined.append(offer)
+    for origin_airport, destination_airport, return_origin_airport in combinations:
+        offers, live, payload = load_flight_offers(
+            origin_airport,
+            destination_airport,
+            departure_date,
+            return_date,
+            adults,
+            cabin_class,
+            max_results=5,
+            return_origin=return_origin_airport,
+        )
+        payload_timing = payload.get("timing") or {}
+        timing["duffel"] += float(payload_timing.get("duffel") or 0)
+        timing["normalize"] += float(payload_timing.get("normalize") or 0)
+        live_any = live_any or live
+        if payload.get("message"):
+            messages.append(f"{origin_airport}->{destination_airport}/{return_origin_airport}->{origin_airport}: {payload.get('message')}")
+        for offer in offers:
+            offer["origin_city"] = origin_label
+            offer["destination_city"] = destination_label
+            offer["return_origin_city"] = return_origin_label
+            offer["airport_pair"] = f"{origin_airport} → {destination_airport}"
+            offer["return_airport_pair"] = f"{return_origin_airport} → {origin_airport}"
+            key = _flight_key(offer)
+            if key not in seen:
+                seen.add(key)
+                combined.append(offer)
+        if len(combined) >= max_results:
+            break
 
     status = "ok" if combined or live_any else "not_configured" if not _duffel_api_key() else "ok"
     message = None if combined else "No live fares found for these dates."
     if not _duffel_api_key():
         message = "Duffel API key not configured."
+    print(
+        "[Byable Flights] "
+        f"city_search_time={time.perf_counter() - city_search_start:.3f}s "
+        f"combined_offers={len(combined)} "
+        f"origin_airports={len(origin_airports)} "
+        f"destination_airports={len(destination_airports)} "
+        f"return_airports={len(return_origin_airports)} "
+        f"attempts={len(combinations)}"
+    )
     return combined[:max_results], bool(combined and live_any), {
         "status": status,
         "message": message,
+        "timing": {
+            "duffel": timing["duffel"],
+            "normalize": timing["normalize"],
+            "city_search": time.perf_counter() - city_search_start,
+            "attempts": len(combinations),
+        },
         "searched_origin_airports": origin_airports,
         "searched_destination_airports": destination_airports,
         "searched_return_origin_airports": return_origin_airports,
@@ -1192,6 +1294,75 @@ def render_flight_details(offer, recommendation=None, return_mode="Same as desti
                 st.caption(f"- {condition}")
 
 
+def _modal_route_line(flight_slice):
+    segments = flight_slice.get("segments") or []
+    if not segments:
+        return f"{_display_value(flight_slice.get('label'))}: route details not available"
+    first_segment = segments[0]
+    last_segment = segments[-1]
+    stops = max(0, len(segments) - 1)
+    stop_label = "Nonstop" if stops == 0 else f"{stops} stop" if stops == 1 else f"{stops} stops"
+    return (
+        f"{_display_value(flight_slice.get('label'))}: "
+        f"{_display_value(first_segment.get('origin'))} → {_display_value(last_segment.get('destination'))} · "
+        f"{_display_value(first_segment.get('departure'))} → {_display_value(last_segment.get('arrival'))} · "
+        f"{_display_value(flight_slice.get('duration'))} · {stop_label}"
+    )
+
+
+def render_flight_details_modal(offer, recommendation=None, return_mode="Same as destination", origin_label="", destination_label="", return_origin_label=""):
+    recommendation = recommendation or {}
+    route_details = offer.get("route_details") or []
+    fare_conditions = offer.get("fare_conditions") or ["Not available"]
+    operating_carriers = []
+    aircraft_types = []
+    for flight_slice in route_details:
+        for segment in flight_slice.get("segments") or []:
+            operating_carriers.append(segment.get("operating_carrier") or "Not available")
+            aircraft_types.append(segment.get("aircraft") or "Not available")
+
+    st.markdown("#### Advisor summary")
+    st.write(_trip_impact_summary(offer, recommendation))
+
+    fact_line = " · ".join(
+        [
+            f"Duration: {_display_value(offer.get('total_travel_time') or offer.get('duration'))}",
+            f"Baggage: {_display_value(offer.get('baggage') or 'Not available')}",
+            f"Cabin: {_display_value(offer.get('cabin'))}",
+            f"Carrier: {_unique_summary(operating_carriers)}",
+            f"Flexibility: {_fare_flexibility_label(fare_conditions)}",
+        ]
+    )
+    st.caption(fact_line)
+
+    st.markdown("#### Route")
+    if return_mode == "Different city":
+        st.caption(f"Open-jaw return · {return_origin_label} → {origin_label}")
+    else:
+        st.caption(f"Return route · {destination_label} → {origin_label}")
+    if route_details:
+        for flight_slice in route_details[:2]:
+            st.markdown(f"**{_modal_route_line(flight_slice)}**")
+    else:
+        st.caption("Route details not available for this test fare.")
+
+    aircraft_summary = _unique_summary(aircraft_types)
+    if aircraft_summary != "Not available":
+        st.caption(f"Aircraft: {aircraft_summary}")
+
+    st.markdown("#### Fare rules")
+    available_conditions = [
+        _display_value(condition)
+        for condition in fare_conditions
+        if _display_value(condition) != "Not available"
+    ]
+    if available_conditions:
+        for condition in available_conditions[:4]:
+            st.caption(f"- {condition}")
+    else:
+        st.caption("Fare rules not available for this test fare.")
+
+
 def render():
     render_start = time.perf_counter()
     selected_flight = st.session_state.get("selected_flight")
@@ -1268,40 +1439,6 @@ def render():
         .flight-updated {
             color: rgba(255,255,255,0.42);
             font-size: 12px;
-        }
-        .flight-summary-box,
-        .flight-advisor-bullets {
-            border: 1px solid rgba(129,140,248,0.18);
-            border-radius: 18px;
-            background:
-                radial-gradient(circle at top left, rgba(99,102,241,0.14), transparent 34%),
-                rgba(255,255,255,0.035);
-            padding: 16px 18px;
-            margin: 10px 0 12px;
-        }
-        .flight-summary-title,
-        .flight-advisor-title {
-            color: rgba(255,255,255,0.62);
-            font-size: 12px;
-            font-weight: 850;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            margin-bottom: 7px;
-        }
-        .flight-summary-copy {
-            color: rgba(255,255,255,0.88);
-            font-size: 15px;
-            line-height: 1.55;
-        }
-        .flight-advisor-bullets ul {
-            margin: 0;
-            padding-left: 1.1rem;
-            color: rgba(255,255,255,0.76);
-            font-size: 14px;
-            line-height: 1.55;
-        }
-        .flight-advisor-bullets li {
-            margin: 4px 0;
         }
         .flight-card-native {
             width: 100%;
@@ -1494,6 +1631,41 @@ def render():
             justify-content: space-between;
             gap: 14px;
             margin-top: 12px;
+        }
+        .flight-card-recommendation {
+            border: 1px solid rgba(129,140,248,0.18);
+            border-radius: 14px;
+            background: rgba(99,102,241,0.075);
+            padding: 11px 13px;
+            margin: 0 0 10px;
+        }
+        .flight-card-rec-kicker {
+            color: #c7d2fe;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        .flight-card-rec-copy {
+            color: rgba(255,255,255,0.86);
+            font-size: 13px;
+            line-height: 1.45;
+            margin-bottom: 5px;
+        }
+        .flight-card-rec-list {
+            color: rgba(255,255,255,0.66);
+            font-size: 12px;
+            line-height: 1.45;
+            margin: 0;
+            padding-left: 1rem;
+        }
+        .flight-card-actions {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
         .flight-select-btn,
         .flight-selected-pill {
@@ -1712,6 +1884,8 @@ def render():
     active_search_params = _search_params_key(search_state, return_origin_city)
     cache = st.session_state.get("flight_results_cache") or {}
     cached_search_params = cache.get("search_params")
+    perf_timings = {"duffel": 0.0, "normalize": 0.0, "rank": 0.0, "recommendation": 0.0, "details": 0.0}
+    search_to_results_start = time.perf_counter() if submitted else None
     if departure_error or return_error:
         debug_payload = {
             "status": "validation_error",
@@ -1748,12 +1922,17 @@ def render():
                 return_origin_city=return_origin_city,
             )
             print(f"[Byable Flights] duffel_search_time={time.perf_counter() - search_start:.3f}s offers={len(offers)}")
+            debug_timing = debug_payload.get("timing") or {}
+            perf_timings["duffel"] = float(debug_timing.get("duffel") or 0)
+            perf_timings["normalize"] = float(debug_timing.get("normalize") or 0)
         st.session_state["flight_results_cache"] = {
             "search_params": active_search_params,
             "raw_offers": list(offers),
+            "normalized_flights": list(offers),
             "live": bool(live),
             "debug_payload": debug_payload,
             "search_timestamp": datetime.now().isoformat(timespec="seconds"),
+            "perf_timings": dict(perf_timings),
         }
     st.session_state["flight_debug"] = debug_payload
     filtered_offers = _apply_flight_filters(offers, nonstop_only=nonstop_only)
@@ -1768,6 +1947,7 @@ def render():
         ranking_output = ranking_cache.get("ranking_output") or {}
     else:
         ranking_output = _rank_flight_results(filtered_offers, priorities)
+        perf_timings["rank"] = float((ranking_output.get("timing") or {}).get("rank") or 0)
         st.session_state["flight_ranking_cache"] = {
             "ranking_params": ranking_params,
             "ranking_output": ranking_output,
@@ -1777,6 +1957,7 @@ def render():
         st.session_state["flight_results_cache"]["ranked_flights"] = list(offers)
         st.session_state["flight_results_cache"]["selected_priorities"] = list(priorities)
         st.session_state["flight_results_cache"]["recommended_flight_id"] = ranking_output.get("recommended_flight_id", "")
+        st.session_state["flight_results_cache"]["recommendation_summary"] = ranking_output.get("recommendation_summary", "")
         st.session_state["flight_results_cache"]["why_over_options"] = list(ranking_output.get("why_over_options") or [])
         st.session_state["flight_results_cache"]["ranking_output"] = ranking_output
 
@@ -1841,6 +2022,17 @@ def render():
             empty_title = "Duffel API error"
             empty_message = (debug_payload or {}).get("message") or "Duffel is unavailable right now."
         st.info(f"{empty_title}: {empty_message}")
+        total_time = time.perf_counter() - search_to_results_start if search_to_results_start else 0
+        cached_perf = (st.session_state.get("flight_results_cache") or {}).get("perf_timings") or {}
+        print(
+            "BYABLE PERF:\n"
+            f"Duffel search: {float(cached_perf.get('duffel') or perf_timings['duffel']):.2f}s\n"
+            f"Normalize: {float(cached_perf.get('normalize') or perf_timings['normalize']):.2f}s\n"
+            f"Rank: {perf_timings['rank']:.2f}s\n"
+            f"Recommendation: 0.00s\n"
+            f"Details: 0.00s\n"
+            f"Total: {total_time:.2f}s"
+        )
         return
 
     priority_selection = st.multiselect(
@@ -1857,6 +2049,7 @@ def render():
         priorities = selected_priorities
         filtered_offers = _apply_flight_filters(list((st.session_state.get("flight_results_cache") or {}).get("raw_offers") or []), nonstop_only=nonstop_only)
         ranking_output = _rank_flight_results(filtered_offers, priorities)
+        perf_timings["rank"] = float((ranking_output.get("timing") or {}).get("rank") or 0)
         st.session_state["flight_ranking_cache"] = {
             "ranking_params": {
                 "search_params": active_search_params,
@@ -1871,42 +2064,24 @@ def render():
             st.session_state["flight_results_cache"]["ranked_flights"] = list(offers)
             st.session_state["flight_results_cache"]["selected_priorities"] = list(priorities)
             st.session_state["flight_results_cache"]["recommended_flight_id"] = ranking_output.get("recommended_flight_id", "")
+            st.session_state["flight_results_cache"]["recommendation_summary"] = ranking_output.get("recommendation_summary", "")
             st.session_state["flight_results_cache"]["why_over_options"] = list(ranking_output.get("why_over_options") or [])
             st.session_state["flight_results_cache"]["ranking_output"] = ranking_output
     st.session_state["flight_priorities"] = priorities
     search_state["priorities"] = priorities
 
     visible_offers = offers[:5]
+    recommendation_start = time.perf_counter()
     recommendations = ranking_output.get("recommendations") or _recommendation_map(visible_offers, priorities)
     best_offer = max(visible_offers, key=lambda offer: recommendations.get(_flight_key(offer), {}).get("score", 0))
     best_rec = recommendations.get(_flight_key(best_offer), {})
-    priority_text = ", ".join(priority.lower() for priority in priorities)
-    st.markdown(
-        f"""
-        <div class="flight-summary-box">
-            <div class="flight-summary-title">Recommended flight</div>
-            <div class="flight-summary-copy">
-                {html.escape(str(best_offer.get('airline') or 'This flight'))} is recommended because it best matches your priorities:
-                {html.escape(priority_text)}. AI Score: {html.escape(str(best_rec.get('score', 'N/A')))}.
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
+    recommendation_summary = (
+        ranking_output.get("recommendation_summary")
+        or _recommendation_summary(best_offer, best_rec, priorities)
     )
-
-    advisor_bullets = "".join(
-        f"<li>{html.escape(bullet)}</li>"
-        for bullet in (ranking_output.get("why_over_options") or _why_over_others(best_offer, visible_offers, recommendations))
-    )
-    st.markdown(
-        f"""
-        <div class="flight-advisor-bullets">
-            <div class="flight-advisor-title">Why this over other options</div>
-            <ul>{advisor_bullets}</ul>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    perf_timings["recommendation"] = time.perf_counter() - recommendation_start
+    advisor_bullets = ranking_output.get("why_over_options") or _why_over_others(best_offer, visible_offers, recommendations)
+    detail_modal_key = st.session_state.get("selected_flight_for_details", "")
 
     for index, offer in enumerate(visible_offers):
         is_selected = index == selected_index
@@ -1933,69 +2108,127 @@ def render():
             )
         else:
             airport_context = f"{origin_label} → {destination_label}"
+        cabin_chip = html.escape(str(offer.get("cabin") or "Economy"))
         detail_chips = [
             "Round trip",
             html.escape(airport_context),
-            html.escape(str(offer.get("cabin") or "Economy")),
+            cabin_chip,
             html.escape(str(offer.get("currency") or "USD")),
         ]
+        if return_mode == "Different city":
+            detail_chips.insert(1, "Open-jaw return")
         if offer.get("baggage"):
             detail_chips.append(f"Baggage: {html.escape(str(offer.get('baggage')))}")
         chips_html = "".join(
-            f'<span class="flight-chip{" primary" if chip == detail_chips[2] else ""}">{chip}</span>'
+            f'<span class="flight-chip{" primary" if chip == cabin_chip else ""}">{chip}</span>'
             for chip in detail_chips
             if chip
         )
+        recommended_html = ""
+        if is_recommended:
+            bullet_html = "".join(
+                f"<li>{html.escape(bullet)}</li>"
+                for bullet in advisor_bullets[:3]
+            )
+            recommended_html = "".join(
+                [
+                    '<div class="flight-card-recommendation">',
+                    '<div class="flight-card-rec-kicker">Recommended flight</div>',
+                    f'<div class="flight-card-rec-copy">{html.escape(recommendation_summary)}</div>',
+                    f'<ul class="flight-card-rec-list">{bullet_html}</ul>',
+                    "</div>",
+                ]
+            )
         action_html = (
             '<span class="flight-selected-pill">Selected</span>'
             if is_selected
             else f'<a class="flight-select-btn" href="?flight_key={quote(_flight_key(offer), safe="")}">Select</a>'
         )
-        st.markdown(
-            f"""
-            <div class="{card_class}">
-                <div class="flight-card-top">
-                    <div class="flight-airline-wrap">
-                        <div class="flight-logo">{airline_code}</div>
-                        <div>
-                            <div class="flight-airline">{html.escape(str(offer.get('airline') or 'Airline'))}</div>
-                            <div class="flight-number">{flight_number} · Duffel test fare</div>
-                            <div class="flight-rec-row">{badge_html}</div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flight-price">{money_usd(offer.get('price_total'))}</div>
-                        <div class="flight-price-sub">total · {html.escape(str(offer.get('currency') or 'USD'))}</div>
-                        <div class="flight-score-pill">AI Score: {score}</div>
-                    </div>
-                </div>
-                <div class="flight-route">
-                    <div>
-                        <div class="flight-time">{html.escape(str(offer.get('depart_time') or '--:--'))}</div>
-                        <div class="flight-airport">{html.escape(str(offer.get('origin') or origin_airports[0]))}</div>
-                    </div>
-                    <div class="flight-middle">
-                        <div class="flight-duration">{html.escape(str(offer.get('duration') or ''))}</div>
-                        <div class="flight-duration-line"></div>
-                        <div class="flight-stop-status">{html.escape(str(offer.get('stop_label') or ''))}</div>
-                    </div>
-                    <div style="text-align:right">
-                        <div class="flight-time">{html.escape(str(offer.get('arrive_time') or '--:--'))}</div>
-                        <div class="flight-airport">{html.escape(str(offer.get('destination') or destination_airports[0]))}</div>
-                    </div>
-                </div>
-                <div class="flight-card-footer">
-                    <div class="flight-chip-row">{chips_html}</div>
-                    {action_html}
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
+        card_html = "".join(
+            [
+                f'<div class="{card_class}">',
+                '<div class="flight-card-top">',
+                '<div class="flight-airline-wrap">',
+                f'<div class="flight-logo">{airline_code}</div>',
+                "<div>",
+                f'<div class="flight-airline">{html.escape(str(offer.get("airline") or "Airline"))}</div>',
+                f'<div class="flight-number">{flight_number} · Duffel test fare</div>',
+                f'<div class="flight-rec-row">{badge_html}</div>',
+                "</div>",
+                "</div>",
+                "<div>",
+                f'<div class="flight-price">{money_usd(offer.get("price_total"))}</div>',
+                f'<div class="flight-price-sub">total · {html.escape(str(offer.get("currency") or "USD"))}</div>',
+                f'<div class="flight-score-pill">AI Score: {score}</div>',
+                "</div>",
+                "</div>",
+                '<div class="flight-route">',
+                "<div>",
+                f'<div class="flight-time">{html.escape(str(offer.get("depart_time") or "--:--"))}</div>',
+                f'<div class="flight-airport">{html.escape(str(offer.get("origin") or origin_airports[0]))}</div>',
+                "</div>",
+                '<div class="flight-middle">',
+                f'<div class="flight-duration">{html.escape(str(offer.get("duration") or ""))}</div>',
+                '<div class="flight-duration-line"></div>',
+                f'<div class="flight-stop-status">{html.escape(str(offer.get("stop_label") or ""))}</div>',
+                "</div>",
+                '<div style="text-align:right">',
+                f'<div class="flight-time">{html.escape(str(offer.get("arrive_time") or "--:--"))}</div>',
+                f'<div class="flight-airport">{html.escape(str(offer.get("destination") or destination_airports[0]))}</div>',
+                "</div>",
+                "</div>",
+                recommended_html,
+                '<div class="flight-card-footer">',
+                f'<div class="flight-chip-row">{chips_html}</div>',
+                f'<div class="flight-card-actions">{action_html}</div>',
+                "</div>",
+                "</div>",
+            ]
         )
-        with st.expander(f"View details · {flight_number}", expanded=False):
-            if is_selected:
-                render_flight_details(offer, recommendation, return_mode, origin_label, destination_label, return_origin_label)
-            else:
-                st.caption("Select this flight to load the full advisor details.")
+        st.markdown(card_html, unsafe_allow_html=True)
+        detail_button_cols = st.columns([1, 0.18])
+        with detail_button_cols[1]:
+            if st.button("View details", key=f"details_{index}_{_flight_key(offer)}"):
+                st.session_state["selected_flight_for_details"] = _flight_key(offer)
+                st.rerun()
 
+    detail_offer = None
+    if detail_modal_key:
+        for offer in visible_offers:
+            if _flight_key(offer) == detail_modal_key:
+                detail_offer = offer
+                break
+    if detail_offer:
+        detail_rec = recommendations.get(_flight_key(detail_offer), {})
+
+        def _show_detail_content():
+            details_start = time.perf_counter()
+            render_flight_details_modal(detail_offer, detail_rec, return_mode, origin_label, destination_label, return_origin_label)
+            if st.button("Close details", key="close_flight_details"):
+                st.session_state.pop("selected_flight_for_details", None)
+                st.rerun()
+            perf_timings["details"] += time.perf_counter() - details_start
+
+        if hasattr(st, "dialog"):
+            @st.dialog(f"{_display_flight_number(detail_offer)} details")
+            def _flight_detail_dialog():
+                _show_detail_content()
+
+            _flight_detail_dialog()
+        else:
+            with st.container(border=True):
+                st.markdown(f"### {_display_flight_number(detail_offer)} details")
+                _show_detail_content()
+
+    cached_perf = (st.session_state.get("flight_results_cache") or {}).get("perf_timings") or {}
+    total_time = time.perf_counter() - search_to_results_start if search_to_results_start else time.perf_counter() - render_start
+    print(
+        "BYABLE PERF:\n"
+        f"Duffel search: {float(cached_perf.get('duffel') or perf_timings['duffel']):.2f}s\n"
+        f"Normalize: {float(cached_perf.get('normalize') or perf_timings['normalize']):.2f}s\n"
+        f"Rank: {perf_timings['rank']:.2f}s\n"
+        f"Recommendation: {perf_timings['recommendation']:.2f}s\n"
+        f"Details: {perf_timings['details']:.2f}s\n"
+        f"Total: {total_time:.2f}s"
+    )
     print(f"[Byable Flights] render_time={time.perf_counter() - render_start:.3f}s")
