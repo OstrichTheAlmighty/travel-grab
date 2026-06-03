@@ -10,12 +10,12 @@ st.set_page_config(
 )
 
 from components.styles import inject_global_styles
-from components.nav import sidebar_nav
+from components.nav import sidebar_nav, top_mobile_nav
 from pages import overview, flights, hotels, activities, itinerary, ai_picks
 
 inject_global_styles()
 
-st.session_state.setdefault("page", "overview")
+st.session_state.setdefault("page", "flights")
 
 try:
     if "flight_key" in st.query_params:
@@ -25,8 +25,9 @@ except Exception:
     pass
 
 sidebar_nav()
+top_mobile_nav()
 
-page = st.session_state.get("page", "overview")
+page = st.session_state.get("page", "flights")
 
 if page == "overview":
     overview.render()

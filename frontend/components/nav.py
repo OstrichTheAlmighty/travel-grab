@@ -89,7 +89,7 @@ def sidebar_nav():
 
         labels = [label for label, _ in NAV_ITEMS]
         keys = [key for _, key in NAV_ITEMS]
-        current = st.session_state.get("page", "overview")
+        current = st.session_state.get("page", "flights")
         current_idx = keys.index(current) if current in keys else 0
 
         choice = st.radio(
@@ -123,3 +123,31 @@ def sidebar_nav():
 }
 </style>
 """, unsafe_allow_html=True)
+
+
+def top_mobile_nav():
+    """Top page switcher for narrow/mobile layouts."""
+    current = st.session_state.get("page", "flights")
+    st.markdown(
+        """
+<div class="byable-mobile-nav-heading">
+    <span>Byable</span>
+    <span class="byable-mobile-beta">BETA</span>
+</div>
+""",
+        unsafe_allow_html=True,
+    )
+    rows = [NAV_ITEMS[:3], NAV_ITEMS[3:]]
+    for row_index, row in enumerate(rows):
+        cols = st.columns(len(row))
+        for col, (label, key) in zip(cols, row):
+            with col:
+                button_type = "primary" if key == current else "secondary"
+                if st.button(
+                    label,
+                    key=f"top_mobile_nav_{row_index}_{key}",
+                    type=button_type,
+                    use_container_width=True,
+                ):
+                    st.session_state["page"] = key
+                    st.rerun()

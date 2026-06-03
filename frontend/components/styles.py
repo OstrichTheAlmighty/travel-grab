@@ -13,6 +13,7 @@ html, body, [data-testid="stAppViewContainer"] {
     background: #08090d !important;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     color: #e8e9f0;
+    overflow-x: hidden !important;
 }
 
 /* Hide Streamlit chrome */
@@ -39,6 +40,35 @@ nav[data-testid="stSidebarNav"] {
 .block-container {
     padding: 0 2.5rem 2rem !important;
     max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+/* Mobile top nav is rendered with Streamlit buttons so it can change page state. */
+.byable-mobile-nav-heading,
+[class*="st-key-top_mobile_nav_"] {
+    display: none !important;
+}
+
+.byable-mobile-nav-heading {
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 10px 0 8px;
+    color: #f0f1ff;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.byable-mobile-beta {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #a89cf7;
+    background: rgba(124,110,247,0.14);
+    border: 1px solid rgba(124,110,247,0.28);
+    padding: 2px 7px;
+    border-radius: 999px;
 }
 
 /* ── Typography tokens ── */
@@ -183,5 +213,58 @@ nav[data-testid="stSidebarNav"] {
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #1e2035; border-radius: 4px; }
+
+@media (max-width: 768px) {
+    html,
+    body,
+    [data-testid="stAppViewContainer"],
+    [data-testid="stAppViewContainer"] > section,
+    .block-container {
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+    }
+
+    [data-testid="stSidebar"] {
+        display: none !important;
+        width: 0 !important;
+        min-width: 0 !important;
+    }
+
+    .block-container {
+        padding: 0 0.85rem 1.25rem !important;
+    }
+
+    .byable-mobile-nav-heading {
+        display: flex !important;
+    }
+
+    [class*="st-key-top_mobile_nav_"] {
+        display: block !important;
+    }
+
+    [class*="st-key-top_mobile_nav_"] button {
+        min-height: 46px !important;
+        border-radius: 13px !important;
+        padding: 8px 6px !important;
+        font-size: 12px !important;
+        font-weight: 750 !important;
+        white-space: normal !important;
+        line-height: 1.12 !important;
+        border: 1px solid rgba(255,255,255,0.11) !important;
+        box-shadow: none !important;
+    }
+
+    [class*="st-key-top_mobile_nav_"] button[kind="primary"],
+    [class*="st-key-top_mobile_nav_"] button[data-testid="baseButton-primary"] {
+        background: linear-gradient(135deg, #7c3aed, #4f46e5) !important;
+        color: #ffffff !important;
+        border-color: rgba(168,156,247,0.48) !important;
+        box-shadow: 0 10px 28px rgba(124,58,237,0.22) !important;
+    }
+
+    [data-testid="stHorizontalBlock"] {
+        gap: 0.35rem !important;
+    }
+}
 </style>
 """, unsafe_allow_html=True)
