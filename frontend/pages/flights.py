@@ -985,6 +985,36 @@ def _clean_watch_out_items(items, offer, offers=None):
     return cleaned[:2] or _watch_out_copy(offer, offers)
 
 
+def _watch_out_chip_text(offer, offers=None):
+    stops = int(offer.get("stops") or 0)
+    if stops > 0:
+        return f"{stops} stop{'s' if stops != 1 else ''}"
+
+    duration = _duration_minutes(offer.get("duration")) or 0
+    durations = [_duration_minutes(item.get("duration")) for item in (offers or [])]
+    durations = [item for item in durations if item and item > 0]
+    if durations and duration and duration > min(durations) + 180:
+        return f"{_duration_label(offer.get('duration'))} travel time"
+
+    aircraft_comfort, _aircraft_name, _aircraft_note = _aircraft_comfort_details(offer)
+    if aircraft_comfort == "Unknown":
+        return "aircraft unknown"
+
+    arrival_timing = _arrival_timing_label(offer)
+    if arrival_timing == "Bad":
+        return "late-night arrival"
+
+    price = float(offer.get("price_total") or 0)
+    prices = [float(item.get("price_total") or 0) for item in (offers or []) if float(item.get("price_total") or 0) > 0]
+    if prices and price and price > min(prices) * 1.25:
+        return "higher price"
+
+    if not _has_baggage(offer):
+        return "baggage unclear"
+
+    return ""
+
+
 def _ai_advisor_cache_key(flight, selected_priorities, comparison_context):
     payload = {
         "flight_id": _flight_key(flight),
@@ -1175,7 +1205,7 @@ def generate_ai_advisor_copy(flight, trip_impact, selected_priorities, compariso
             ],
             response_format={"type": "json_object"},
             temperature=0.25,
-            timeout=8,
+            timeout=6,
         )
         raw_text = ""
         if getattr(response, "choices", None):
@@ -1200,7 +1230,15 @@ def generate_ai_advisor_copy(flight, trip_impact, selected_priorities, compariso
         cache[cache_key] = ai_copy
         _log_ai_success(flight_id, time.perf_counter() - started)
         return ai_copy
+    except TimeoutError:
+        print("BYABLE AI TIMEOUT - using fallback")
+        cache[cache_key] = None
+        return None
     except Exception as exc:
+        if "timeout" in str(exc).lower() or "timed out" in str(exc).lower():
+            print("BYABLE AI TIMEOUT - using fallback")
+            cache[cache_key] = None
+            return None
         _log_ai_failed(str(exc))
         cache[cache_key] = None
         return None
@@ -2600,6 +2638,11 @@ def render():
             background: rgba(99,102,241,0.13);
             color: #c7d2fe;
         }
+        .flight-chip.warning {
+            background: rgba(251,191,36,0.09);
+            border: 1px solid rgba(251,191,36,0.16);
+            color: rgba(253,230,138,0.86);
+        }
         .flight-card-footer {
             display: flex;
             align-items: center;
@@ -2743,6 +2786,8 @@ def render():
             .flight-card-footer {
                 align-items: flex-start;
                 flex-direction: column;
+                padding-right: 0;
+                min-height: 0;
             }
             .flight-card-impact-grid {
                 grid-template-columns: 1fr;
@@ -2834,6 +2879,25 @@ def render():
             return_origin_city = destination_city
 
         nonstop_only = st.checkbox("Nonstop only", value=bool(search_state.get("nonstop_only", False)))
+        priority_selection = st.multiselect(
+            "What matters most?",
+            TRAVELER_PRIORITIES,
+            default=[
+                priority
+                for priority in (
+                    st.session_state.get("flight_priority_selector")
+                    or search_state.get("priorities")
+                    or st.session_state.get("flight_priorities")
+                    or DEFAULT_PRIORITIES
+                )
+                if priority in TRAVELER_PRIORITIES
+            ][:3],
+            key="flight_priority_selector",
+            help="Choose up to 3. These priorities rank results and shape recommendations.",
+        )
+        if len(priority_selection) > 3:
+            st.warning("Choose up to 3 priorities. Byable will use the first three selected.")
+        selected_priorities_from_form = (priority_selection or DEFAULT_PRIORITIES)[:3]
 
     if submitted:
         _print_ai_status()
@@ -2857,7 +2921,7 @@ def render():
             st.error("Return date must be on or after the departure date.")
             departure_iso = search_state["departure_date"]
             return_iso = search_state["return_date"]
-        selected_priorities = (search_state.get("priorities") or st.session_state.get("flight_priorities", DEFAULT_PRIORITIES))[:3]
+        selected_priorities = selected_priorities_from_form
         st.session_state["flight_search"] = {
             "origin_city": origin_city.strip() or "San Francisco",
             "destination_city": destination_city.strip() or "Tokyo",
@@ -3102,15 +3166,7 @@ def render():
         )
         return
 
-    priority_selection = st.multiselect(
-        "What matters most?",
-        TRAVELER_PRIORITIES,
-        default=[priority for priority in priorities if priority in TRAVELER_PRIORITIES][:3],
-        key="flight_priority_selector",
-        help="Choose up to 3. These priorities rank results and shape recommendations.",
-    )
-    if len(priority_selection) > 3:
-        st.warning("Choose up to 3 priorities. Byable will use the first three selected.")
+    priority_selection = st.session_state.get("flight_priority_selector") or priorities
     selected_priorities = (priority_selection or DEFAULT_PRIORITIES)[:3]
     if selected_priorities != priorities:
         priorities = selected_priorities
@@ -3233,6 +3289,10 @@ def render():
             for chip in detail_chips
             if chip
         )
+        if not is_recommended:
+            warning_chip = _watch_out_chip_text(offer, visible_offers)
+            if warning_chip:
+                chips_html += f'<span class="flight-chip warning">Watch out: {html.escape(warning_chip)}</span>'
         impact = _trip_impact(offer, visible_offers)
         impact_rows = [
             ("Arrival Timing", impact["arrival_timing"]),
@@ -3298,14 +3358,16 @@ def render():
             f"<li>{html.escape(item)}</li>"
             for item in watch_out_source[:2]
         )
-        watch_out_html = "".join(
-            [
-                '<div class="flight-card-recommendation compact">',
-                '<div class="flight-card-rec-kicker">Watch out</div>',
-                f'<ul class="flight-card-rec-list">{watch_out_items}</ul>',
-                "</div>",
-            ]
-        )
+        watch_out_html = ""
+        if is_recommended:
+            watch_out_html = "".join(
+                [
+                    '<div class="flight-card-recommendation compact">',
+                    '<div class="flight-card-rec-kicker">Watch out</div>',
+                    f'<ul class="flight-card-rec-list">{watch_out_items}</ul>',
+                    "</div>",
+                ]
+            )
         recommendation_html = ""
         if is_recommended:
             bullet_html = "".join(
@@ -3322,7 +3384,6 @@ def render():
                     "</div>",
                 ]
             )
-        action_html = '<span class="flight-selected-pill">Selected</span>' if is_selected else ""
         card_html = "".join(
             [
                 f'<div class="{card_class}">',
@@ -3361,7 +3422,7 @@ def render():
                 watch_out_html,
                 '<div class="flight-card-footer">',
                 f'<div class="flight-chip-row">{chips_html}</div>',
-                f'<div class="flight-card-actions">{action_html}</div>',
+                '<div class="flight-card-actions"></div>',
                 "</div>",
                 "</div>",
             ]
@@ -3371,12 +3432,13 @@ def render():
         with action_button_cols[1]:
             flight_id = _flight_key(offer)
             if st.button(f"AI Score: {score}", key=f"score_breakdown_{index}_{flight_id}"):
-                current_score_flight = st.session_state.get("expanded_ai_score_flight_id")
-                st.session_state["expanded_ai_score_flight_id"] = "" if current_score_flight == flight_id else flight_id
+                st.session_state["selected_flight_for_score_breakdown"] = flight_id
                 st.rerun()
         with action_button_cols[2]:
             flight_id = _flight_key(offer)
-            if not is_selected:
+            if is_selected:
+                st.button("Selected", key=f"selected_{index}_{flight_id}", disabled=True)
+            else:
                 st.button(
                     "Select",
                     key=f"select_{index}_{flight_id}",
@@ -3387,8 +3449,17 @@ def render():
             if st.button("View details", key=f"details_{index}_{_flight_key(offer)}"):
                 st.session_state["selected_flight_for_details"] = _flight_key(offer)
                 st.rerun()
-        if st.session_state.get("expanded_ai_score_flight_id") == _flight_key(offer):
-            breakdown_rows = _ai_score_detail_breakdown(offer, visible_offers)
+
+    score_detail_offer = None
+    score_modal_key = st.session_state.get("selected_flight_for_score_breakdown", "")
+    if score_modal_key:
+        for offer in offers:
+            if _flight_key(offer) == score_modal_key:
+                score_detail_offer = offer
+                break
+    if score_detail_offer:
+        def _show_score_breakdown_content():
+            breakdown_rows = _ai_score_detail_breakdown(score_detail_offer, offers)
             breakdown_html = "".join(
                 _safe_html_parts(
                     [
@@ -3416,6 +3487,20 @@ def render():
                 ),
                 unsafe_allow_html=True,
             )
+            if st.button("Close AI Score", key="close_ai_score_breakdown"):
+                st.session_state.pop("selected_flight_for_score_breakdown", None)
+                st.rerun()
+
+        if hasattr(st, "dialog"):
+            @st.dialog(f"{_display_flight_number(score_detail_offer)} AI Score")
+            def _flight_score_dialog():
+                _show_score_breakdown_content()
+
+            _flight_score_dialog()
+        else:
+            with st.container(border=True):
+                st.markdown(f"### {_display_flight_number(score_detail_offer)} AI Score")
+                _show_score_breakdown_content()
 
     detail_offer = None
     if detail_modal_key:
