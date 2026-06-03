@@ -470,6 +470,129 @@ def _score_breakdown(components):
     }
 
 
+def _ai_score_detail_breakdown(offer, offers):
+    visible = list(offers or [])
+
+    def price(item):
+        return float(item.get("price_total") or 0)
+
+    def duration(item):
+        return _duration_minutes(item.get("duration")) or 0
+
+    prices = [price(item) for item in visible if price(item) > 0] or [price(offer) or 1]
+    durations = [duration(item) for item in visible if duration(item) > 0] or [duration(offer) or 1]
+    min_price, max_price = min(prices), max(prices)
+    min_duration, max_duration = min(durations), max(durations)
+    components = _score_components(offer, min_price, max_price, min_duration, max_duration)
+    offer_price = price(offer)
+    offer_duration = duration(offer)
+    stops = int(offer.get("stops") or 0)
+
+    price_delta = offer_price - min_price
+    if price_delta <= 0:
+        price_explanation = "Lowest visible fare in the current results."
+    else:
+        price_explanation = f"{money_usd(price_delta)} above the lowest visible fare."
+
+    comfort_label, aircraft_name, aircraft_note = _aircraft_comfort_details(offer)
+    comfort_scores = {"Excellent": 9.2, "Good": 7.6, "Fair": 5.7, "Basic": 4.2, "Unknown": 3.0}
+    comfort_explanation = aircraft_note
+    if aircraft_name:
+        comfort_explanation = f"{comfort_explanation}"
+
+    arrival_label = _arrival_timing_label(offer)
+    arrival_scores = {"Great": 9.0, "Good": 7.6, "Okay": 5.5, "Bad": 3.0}
+    arrival_explanations = {
+        "Great": "Afternoon arrival is easier for starting the trip.",
+        "Good": "Morning arrival gives more usable arrival-day time.",
+        "Okay": "Evening arrival leaves less useful time on arrival day.",
+        "Bad": "Late-night arrival can make the first day harder.",
+    }
+
+    destination = str(offer.get("destination") or "").upper()
+    city_access = _city_access_level(destination)
+    access_scores = {"Easy": 9.0, "Moderate": 6.6, "Hard": 3.8, "Unknown": 4.5}
+    if city_access == "Unknown":
+        access_explanation = "City access data is limited for this arrival airport."
+    else:
+        access_explanation = f"{destination} is rated {city_access.lower()} for typical city access."
+
+    duration_delta = offer_duration - min_duration
+    if duration_delta <= 0:
+        duration_explanation = "Fastest visible travel time in the current results."
+    else:
+        hours, minutes = divmod(int(duration_delta), 60)
+        delta_label = f"{hours}h {minutes}m" if hours and minutes else f"{hours}h" if hours else f"{minutes}m"
+        duration_explanation = f"{delta_label} longer than the fastest visible option."
+
+    connection_score = 10.0 if stops == 0 else max(2.0, 7.0 - stops * 2.0)
+    connection_explanation = (
+        "Nonstop routing has the lowest connection risk."
+        if stops == 0
+        else f"{stops} connection{'s' if stops != 1 else ''} add timing and misconnect risk."
+    )
+
+    return [
+        ("Price Value", round(components["price"] * 10, 1), price_explanation),
+        ("Comfort", round(comfort_scores.get(comfort_label, 3.0), 1), comfort_explanation),
+        ("Arrival Time", round(arrival_scores.get(arrival_label, 4.5), 1), arrival_explanations.get(arrival_label, "Arrival timing data is limited.")),
+        ("Airport Access", round(access_scores.get(city_access, 4.5), 1), access_explanation),
+        ("Travel Time", round(components["duration"] * 10, 1), duration_explanation),
+        ("Connection Risk", round(connection_score, 1), connection_explanation),
+    ]
+
+
+def _safe_score_breakdown_row(row):
+    def text_value(value):
+        if isinstance(value, dict):
+            return " ".join(str(item) for item in value.values() if item is not None)
+        if isinstance(value, (list, tuple, set)):
+            return " ".join(str(item) for item in value if item is not None)
+        return str(value or "")
+
+    if isinstance(row, dict):
+        name = text_value(row.get("label") or row.get("name") or row.get("category") or "Score")
+        raw_score = row.get("score") if row.get("score") is not None else row.get("value")
+        explanation = row.get("explanation") or row.get("note") or row.get("details") or ""
+    elif isinstance(row, (list, tuple)):
+        parts = list(row)
+        name = text_value(parts[0] if len(parts) > 0 else "Score")
+        raw_score = parts[1] if len(parts) > 1 else 0
+        explanation = parts[2] if len(parts) > 2 else ""
+    else:
+        name = "Score"
+        raw_score = 0
+        explanation = row
+
+    try:
+        score_value = float(raw_score)
+    except (TypeError, ValueError):
+        score_value = 0.0
+
+    if isinstance(explanation, (list, tuple, set)):
+        explanation_html = "<ul>" + "".join(f"<li>{html.escape(text_value(item))}</li>" for item in explanation if text_value(item)) + "</ul>"
+    elif isinstance(explanation, dict):
+        explanation_html = html.escape(text_value(explanation))
+    else:
+        explanation_html = html.escape(text_value(explanation))
+
+    return name or "Score", max(0.0, min(10.0, score_value)), explanation_html
+
+
+def _safe_html_parts(parts):
+    output = []
+    for part in parts:
+        if part is None:
+            continue
+        if isinstance(part, (list, tuple, set)):
+            output.extend(_safe_html_parts(part))
+        elif isinstance(part, dict):
+            output.append(" ".join(str(value) for value in part.values() if value is not None))
+        else:
+            output.append(str(part))
+    return output
+
+
 def _ai_score_map(offers, priorities):
     if not offers:
         return {}
@@ -2090,6 +2213,62 @@ def render():
             font-weight: 750;
             backdrop-filter: blur(10px);
         }
+        .flight-destination-hero.no-image::after {
+            content: "";
+            position: absolute;
+            right: 28px;
+            top: 34px;
+            width: min(34vw, 360px);
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(196,181,253,0.60), transparent);
+            opacity: 0.78;
+        }
+        .flight-destination-route-graphic {
+            display: none;
+        }
+        .flight-destination-hero.no-image .flight-destination-route-graphic {
+            position: absolute;
+            right: 28px;
+            top: 42px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(224,231,255,0.78);
+            font-size: 12px;
+            font-weight: 850;
+            letter-spacing: 0.02em;
+        }
+        .flight-destination-plane {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 999px;
+            border: 1px solid rgba(196,181,253,0.30);
+            background: rgba(15,23,42,0.46);
+            box-shadow: 0 16px 36px rgba(0,0,0,0.22), 0 0 24px rgba(129,140,248,0.20);
+            backdrop-filter: blur(10px);
+        }
+        .flight-destination-insights {
+            display: none;
+        }
+        .flight-destination-hero.no-image .flight-destination-insights {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .flight-destination-insights span {
+            border-radius: 999px;
+            border: 1px solid rgba(196,181,253,0.18);
+            background: rgba(255,255,255,0.055);
+            color: rgba(255,255,255,0.70);
+            padding: 6px 10px;
+            font-size: 11px;
+            font-weight: 780;
+            backdrop-filter: blur(10px);
+        }
         div[data-testid="stVerticalBlockBorderWrapper"] {
             border: 1px solid rgba(129,140,248,0.16) !important;
             background:
@@ -2281,6 +2460,59 @@ def render():
             color: #c7d2fe;
             background: rgba(129,140,248,0.12);
             border: 1px solid rgba(129,140,248,0.20);
+        }
+        .flight-score-breakdown-panel {
+            border: 1px solid rgba(129,140,248,0.16);
+            border-radius: 16px;
+            background:
+                radial-gradient(circle at top left, rgba(99,102,241,0.10), transparent 34%),
+                linear-gradient(145deg, rgba(255,255,255,0.045), rgba(255,255,255,0.016)),
+                rgba(7,9,15,0.90);
+            padding: 13px 14px;
+            margin: -2px 0 14px;
+            box-shadow: 0 16px 42px rgba(0,0,0,0.14);
+        }
+        .flight-score-breakdown-title {
+            color: rgba(224,231,255,0.92);
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 9px;
+        }
+        .flight-score-breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 9px;
+        }
+        .flight-score-breakdown-row {
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 13px;
+            background: rgba(255,255,255,0.035);
+            padding: 10px 11px;
+        }
+        .flight-score-breakdown-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+        .flight-score-breakdown-name {
+            color: rgba(255,255,255,0.84);
+            font-size: 12px;
+            font-weight: 850;
+        }
+        .flight-score-breakdown-score {
+            color: #a5b4fc;
+            font-size: 12px;
+            font-weight: 950;
+            white-space: nowrap;
+        }
+        .flight-score-breakdown-note {
+            color: rgba(255,255,255,0.52);
+            font-size: 11px;
+            line-height: 1.35;
         }
         .flight-price {
             color: #a5b4fc;
@@ -2484,6 +2716,10 @@ def render():
             .flight-destination-hero-content {
                 padding: 22px;
             }
+            .flight-destination-hero.no-image::after,
+            .flight-destination-hero.no-image .flight-destination-route-graphic {
+                display: none;
+            }
             .flight-card-native {
                 padding: 16px;
             }
@@ -2509,6 +2745,9 @@ def render():
                 flex-direction: column;
             }
             .flight-card-impact-grid {
+                grid-template-columns: 1fr;
+            }
+            .flight-score-breakdown-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -2770,6 +3009,7 @@ def render():
     if has_searched_for_current_route:
         display_route = f"{origin_label} → {destination_label}"
         hero_image = _destination_hero_image(destination_label)
+        hero_class = "flight-destination-hero" if hero_image else "flight-destination-hero no-image"
         hero_style = (
             f"background-image: url('{html.escape(hero_image)}');"
             if hero_image
@@ -2778,8 +3018,13 @@ def render():
         cabin_label = cabin_class.replace("_", " ").title()
         st.markdown(
             f"""
-            <section class="flight-destination-hero" style="{hero_style}">
+            <section class="{hero_class}" style="{hero_style}">
                 <div class="flight-destination-hero-content">
+                    <div class="flight-destination-route-graphic">
+                        <span>{html.escape(origin_label)}</span>
+                        <span class="flight-destination-plane">✈</span>
+                        <span>{html.escape(destination_label)}</span>
+                    </div>
                     <div class="flight-destination-kicker">Your trip starts here</div>
                     <div class="flight-destination-title">{html.escape(destination_label)}</div>
                     <div class="flight-destination-route">{html.escape(display_route)}</div>
@@ -2787,6 +3032,11 @@ def render():
                         <span>{html.escape(departure_iso)} → {html.escape(return_iso)}</span>
                         <span>{html.escape(traveler_label)}</span>
                         <span>{html.escape(cabin_label)}</span>
+                    </div>
+                    <div class="flight-destination-insights">
+                        <span>City-based search</span>
+                        <span>AI-ranked flights</span>
+                        <span>Comfort + airport insights</span>
                     </div>
                 </div>
             </section>
@@ -3117,8 +3367,14 @@ def render():
             ]
         )
         st.markdown(card_html, unsafe_allow_html=True)
-        action_button_cols = st.columns([1, 0.16, 0.20])
+        action_button_cols = st.columns([1, 0.18, 0.16, 0.20])
         with action_button_cols[1]:
+            flight_id = _flight_key(offer)
+            if st.button(f"AI Score: {score}", key=f"score_breakdown_{index}_{flight_id}"):
+                current_score_flight = st.session_state.get("expanded_ai_score_flight_id")
+                st.session_state["expanded_ai_score_flight_id"] = "" if current_score_flight == flight_id else flight_id
+                st.rerun()
+        with action_button_cols[2]:
             flight_id = _flight_key(offer)
             if not is_selected:
                 st.button(
@@ -3127,10 +3383,39 @@ def render():
                     on_click=_set_selected_flight,
                     args=(flight_id, offer, adults, index),
                 )
-        with action_button_cols[2]:
+        with action_button_cols[3]:
             if st.button("View details", key=f"details_{index}_{_flight_key(offer)}"):
                 st.session_state["selected_flight_for_details"] = _flight_key(offer)
                 st.rerun()
+        if st.session_state.get("expanded_ai_score_flight_id") == _flight_key(offer):
+            breakdown_rows = _ai_score_detail_breakdown(offer, visible_offers)
+            breakdown_html = "".join(
+                _safe_html_parts(
+                    [
+                        [
+                            '<div class="flight-score-breakdown-row">',
+                            '<div class="flight-score-breakdown-top">',
+                            f'<span class="flight-score-breakdown-name">{html.escape(name)}</span>',
+                            f'<span class="flight-score-breakdown-score">{score_value:.1f}/10</span>',
+                            "</div>",
+                            f'<div class="flight-score-breakdown-note">{explanation_html}</div>',
+                            "</div>",
+                        ]
+                        for name, score_value, explanation_html in (_safe_score_breakdown_row(row) for row in breakdown_rows)
+                    ]
+                )
+            )
+            st.markdown(
+                "".join(
+                    [
+                        '<div class="flight-score-breakdown-panel">',
+                        '<div class="flight-score-breakdown-title">AI Score breakdown</div>',
+                        f'<div class="flight-score-breakdown-grid">{breakdown_html}</div>',
+                        "</div>",
+                    ]
+                ),
+                unsafe_allow_html=True,
+            )
 
     detail_offer = None
     if detail_modal_key:
