@@ -700,21 +700,21 @@ def _aircraft_values(offer):
 def _aircraft_comfort_details(offer):
     aircraft_values = _aircraft_values(offer)
     if not aircraft_values:
-        return "Unknown", "", "Aircraft comfort estimate is unknown because aircraft type is unavailable."
+        return "Unknown", "", "Aircraft type is unavailable, so comfort is harder to estimate."
     aircraft_text = " ".join(aircraft_values).upper()
     if any(code in aircraft_text for code in ("A350", "B787", "787", "A380")):
         matched = next((value for value in aircraft_values if any(code in value.upper() for code in ("A350", "B787", "787", "A380"))), aircraft_values[0])
-        return "Excellent", matched, f"Comfort estimate is based on aircraft type: {matched}."
+        return "Excellent", matched, f"{matched} is a modern widebody aircraft; comfort is estimated from aircraft type only."
     if any(code in aircraft_text for code in ("A330", "B777", "777", "B767", "767")):
         matched = next((value for value in aircraft_values if any(code in value.upper() for code in ("A330", "B777", "777", "B767", "767"))), aircraft_values[0])
-        return "Good", matched, f"Comfort estimate is based on aircraft type: {matched}."
+        return "Good", matched, f"{matched} is a widebody aircraft generally considered comfortable for long-haul routes; comfort is estimated from aircraft type only."
     if any(code in aircraft_text for code in ("A321", "A320", "B737", "737")):
         matched = next((value for value in aircraft_values if any(code in value.upper() for code in ("A321", "A320", "B737", "737"))), aircraft_values[0])
-        return "Fair", matched, f"Comfort estimate is based on aircraft type: {matched}."
+        return "Fair", matched, f"{matched} is a narrowbody aircraft, which can feel more cramped on longer flights; comfort is estimated from aircraft type only."
     if any(code in aircraft_text for code in ("E17", "E19", "CRJ", "ERJ", "RJ")):
         matched = next((value for value in aircraft_values if any(code in value.upper() for code in ("E17", "E19", "CRJ", "ERJ", "RJ"))), aircraft_values[0])
-        return "Basic", matched, f"Comfort estimate is based on aircraft type: {matched}."
-    return "Basic", aircraft_values[0], f"Comfort estimate is based on aircraft type: {aircraft_values[0]}."
+        return "Basic", matched, f"{matched} is a regional aircraft; comfort is estimated from aircraft type only."
+    return "Basic", aircraft_values[0], f"Aircraft comfort is estimated from aircraft type only: {aircraft_values[0]}."
 
 
 def _is_lowest_priced(offer, offers):
@@ -770,7 +770,7 @@ def _trip_impact(offer, offers=None):
     if aircraft_comfort in {"Excellent", "Good", "Fair"}:
         reasons.append(aircraft_note)
     elif aircraft_comfort == "Unknown":
-        reasons.append("Aircraft comfort is unknown for this test fare")
+        reasons.append("Aircraft type is unknown, so comfort is harder to judge")
     if jet_lag in {"Moderate", "High"}:
         if zones_crossed >= 8:
             reasons.append("High jet lag impact because this route crosses many time zones")
@@ -871,6 +871,63 @@ def _ai_flight_summary(offer, recommendations=None):
     }
 
 
+def _ai_comparison_deltas(recommended, alternatives):
+    rows = []
+    rec_price = float((recommended or {}).get("price") or 0)
+    rec_duration = _duration_minutes((recommended or {}).get("duration")) or 0
+    rec_stops = int((recommended or {}).get("stops") or 0)
+    rec_arrival = _clock_minutes((recommended or {}).get("arrival_time"))
+    rec_baggage = str((recommended or {}).get("baggage") or "").strip() or "Not available"
+
+    for alternative in alternatives or []:
+        alt_price = float((alternative or {}).get("price") or 0)
+        alt_duration = _duration_minutes((alternative or {}).get("duration")) or 0
+        alt_stops = int((alternative or {}).get("stops") or 0)
+        alt_arrival = _clock_minutes((alternative or {}).get("arrival_time"))
+        alt_baggage = str((alternative or {}).get("baggage") or "").strip() or "Not available"
+        rows.append(
+            {
+                "alternative": {
+                    "airline": alternative.get("airline"),
+                    "flight_number": alternative.get("flight_number"),
+                    "price": alternative.get("price"),
+                    "duration": alternative.get("duration"),
+                    "stops": alternative.get("stops"),
+                    "arrival_time": alternative.get("arrival_time"),
+                    "baggage": alternative.get("baggage"),
+                    "destination_airport": alternative.get("destination_airport"),
+                    "ai_score": alternative.get("ai_score"),
+                },
+                "price_difference_vs_recommended": (
+                    f"recommended is ${abs(rec_price - alt_price):.0f} {'cheaper' if rec_price < alt_price else 'more expensive'}"
+                    if rec_price and alt_price and rec_price != alt_price
+                    else "same or unavailable"
+                ),
+                "duration_difference_vs_recommended": (
+                    f"recommended is {abs(rec_duration - alt_duration)} minutes {'shorter' if rec_duration < alt_duration else 'longer'}"
+                    if rec_duration and alt_duration and rec_duration != alt_duration
+                    else "same or unavailable"
+                ),
+                "stop_difference_vs_recommended": (
+                    f"recommended has {abs(rec_stops - alt_stops)} fewer stop(s)"
+                    if rec_stops < alt_stops
+                    else f"recommended has {abs(rec_stops - alt_stops)} more stop(s)"
+                    if rec_stops > alt_stops
+                    else "same stops"
+                ),
+                "arrival_difference_vs_recommended": (
+                    f"recommended arrives {abs(rec_arrival - alt_arrival)} minutes {'earlier' if rec_arrival < alt_arrival else 'later'}"
+                    if rec_arrival and alt_arrival and rec_arrival != alt_arrival
+                    else "same or unavailable"
+                ),
+                "baggage_difference_vs_recommended": (
+                    "same or unavailable" if rec_baggage == alt_baggage else f"recommended baggage: {rec_baggage}; alternative baggage: {alt_baggage}"
+                ),
+            }
+        )
+    return rows
+
+
 def generate_ai_advisor_copy(flight, trip_impact, selected_priorities, comparison_context):
     status = _ai_status()
     if not status["advisor_copy_enabled"]:
@@ -885,6 +942,9 @@ def generate_ai_advisor_copy(flight, trip_impact, selected_priorities, compariso
         return cache[cache_key]
 
     model = "gpt-4o-mini"
+    top_ranked_flights = list((comparison_context or {}).get("top_ranked_flights") or [])
+    recommended_summary_payload = (comparison_context or {}).get("recommended_flight")
+    comparison_deltas = _ai_comparison_deltas(recommended_summary_payload, top_ranked_flights[1:4])
     prompt_payload = {
         "airline": flight.get("airline"),
         "price": flight.get("price_total"),
@@ -914,7 +974,8 @@ def generate_ai_advisor_copy(flight, trip_impact, selected_priorities, compariso
         "fourth_best_alternative": (comparison_context or {}).get("fourth_best_alternative"),
         "cheapest_flight": (comparison_context or {}).get("cheapest_flight"),
         "fastest_flight": (comparison_context or {}).get("fastest_flight"),
-        "top_ranked_flights": list((comparison_context or {}).get("top_ranked_flights") or []),
+        "top_ranked_flights": top_ranked_flights,
+        "comparison_deltas_vs_top_alternatives": comparison_deltas,
     }
     _log_ai_attempt(flight_id, model, prompt_payload.keys())
     print(
@@ -934,13 +995,19 @@ def generate_ai_advisor_copy(flight, trip_impact, selected_priorities, compariso
             "Use 'cheapest nonstop' or 'best value among nonstop options' when that is more accurate."
         )
         user = (
-            "Do NOT describe the selected flight. Compare the recommended flight against the alternatives "
-            "and explain why it was selected. Focus on price differences, duration differences, "
-            "stops/connections, airport differences, arrival timing differences, and baggage differences. "
-            "Highlight meaningful tradeoffs. If two flights are nearly identical, explicitly say so and "
-            "explain why the winner still ranks higher. Use the user's selected priorities to explain the decision. "
-            "Also provide a short watch_out downside for the recommended flight. If there is no major downside, "
-            "say: No major downside compared with similar options. "
+            "Do NOT describe the selected flight in isolation. Compare the recommended flight against the top "
+            "alternative flights and explain why it was selected. You must explicitly reference concrete "
+            "differences when they exist: price differences, duration differences, stop differences, baggage "
+            "differences, and arrival timing differences. Use exact dollar differences and duration differences "
+            "from comparison_deltas_vs_top_alternatives when available. If an alternative is cheaper, faster, "
+            "has fewer stops, has better baggage, or has better arrival timing, say that plainly and explain why "
+            "the recommended flight still wins or whether the tradeoff is small. If two flights are nearly "
+            "identical, explicitly say so and explain the specific tiebreaker. Avoid restating facts already "
+            "visible on the card unless you are comparing them to another flight. Avoid generic phrases like "
+            "'convenient' or 'good value' unless the same sentence includes a concrete price, duration, stop, "
+            "baggage, airport, or arrival-time comparison. Use the user's selected priorities to explain the "
+            "decision. Also provide a short watch_out downside for the recommended flight. If there is no major "
+            "downside, say: No major downside compared with similar options. "
             "Return exactly this JSON shape: "
             '{"recommended_summary":"...","why_this":["...","...","..."],'
             '"trip_impact_why":["...","..."],"watch_out":["..."],"modal_summary":"..."}\n\n'
@@ -2718,7 +2785,24 @@ def render():
             (recommendation.get("ai_advisor_copy") or {}).get("trip_impact_why")
             if is_recommended
             else None
-        ) or impact["reasons"][:3]
+        )
+        comfort_reason = next(
+            (
+                reason
+                for reason in impact["reasons"]
+                if any(term in reason.lower() for term in ("comfort", "widebody", "narrowbody", "aircraft type"))
+            ),
+            "",
+        )
+        fallback_reasons = impact["reasons"]
+        if comfort_reason:
+            fallback_reasons = [comfort_reason] + [reason for reason in impact["reasons"] if reason != comfort_reason]
+            if impact_reason_source and not any(
+                any(term in reason.lower() for term in ("comfort", "widebody", "narrowbody", "aircraft type"))
+                for reason in impact_reason_source
+            ):
+                impact_reason_source = [comfort_reason] + list(impact_reason_source)
+        impact_reason_source = impact_reason_source or fallback_reasons
         impact_reason_limit = 3 if is_recommended else 2
         impact_bullets = "".join(
             f"<li>{html.escape(bullet)}</li>"
