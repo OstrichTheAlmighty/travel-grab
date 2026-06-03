@@ -6,14 +6,35 @@ def inject_global_styles():
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
+:root {
+    color-scheme: dark !important;
+    --byable-bg: #08090d;
+    --byable-panel: #10121a;
+    --byable-border: #1e2035;
+    --byable-text: #e8e9f0;
+    --byable-muted: #8b8fa8;
+    --byable-purple: #a89cf7;
+}
+
 /* ── Reset & base ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+html {
+    color-scheme: dark !important;
+}
+
 html, body, [data-testid="stAppViewContainer"] {
-    background: #08090d !important;
+    background: var(--byable-bg) !important;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    color: #e8e9f0;
+    color: var(--byable-text) !important;
     overflow-x: hidden !important;
+}
+
+[data-testid="stApp"],
+[data-testid="stMain"],
+[data-testid="stAppViewContainer"] > section {
+    background: var(--byable-bg) !important;
+    color: var(--byable-text) !important;
 }
 
 /* Hide Streamlit chrome */
@@ -33,6 +54,24 @@ nav[data-testid="stSidebarNav"] {
     overflow: hidden !important;
 }
 
+[data-testid="stSidebar"] {
+    background: #0c0d14 !important;
+    color: var(--byable-text) !important;
+}
+
+[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] span {
+    color: var(--byable-muted) !important;
+    -webkit-text-fill-color: var(--byable-muted) !important;
+}
+
+[data-testid="stSidebar"] .stRadio [data-baseweb="radio"]:has(input:checked) label,
+[data-testid="stSidebar"] .stRadio [data-baseweb="radio"]:has(input:checked) span {
+    color: var(--byable-purple) !important;
+    -webkit-text-fill-color: var(--byable-purple) !important;
+}
+
 /* Content padding — hero breaks out via negative margin */
 [data-testid="stAppViewContainer"] > section > div:first-child {
     padding-top: 0 !important;
@@ -41,6 +80,49 @@ nav[data-testid="stSidebarNav"] {
     padding: 0 2.5rem 2rem !important;
     max-width: 100% !important;
     overflow-x: hidden !important;
+}
+
+/* Keep Streamlit controls readable in browser/system light mode. */
+div[data-testid="stButton"] > button,
+button[data-testid^="baseButton"],
+[data-testid="baseButton-secondary"],
+[data-testid="baseButton-primary"] {
+    background: rgba(255,255,255,0.045) !important;
+    color: var(--byable-text) !important;
+    border: 1px solid rgba(255,255,255,0.13) !important;
+    box-shadow: none !important;
+    -webkit-text-fill-color: var(--byable-text) !important;
+}
+
+div[data-testid="stButton"] > button p,
+button[data-testid^="baseButton"] p,
+[data-testid="baseButton-secondary"] p,
+[data-testid="baseButton-primary"] p {
+    color: inherit !important;
+    -webkit-text-fill-color: inherit !important;
+}
+
+div[data-testid="stButton"] > button:hover,
+div[data-testid="stButton"] > button:focus {
+    background: rgba(255,255,255,0.075) !important;
+    color: #ffffff !important;
+    border-color: rgba(168,156,247,0.36) !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+div[data-testid="stButton"] > button:disabled,
+button[data-testid^="baseButton"]:disabled {
+    background: rgba(124,110,247,0.16) !important;
+    color: #ffffff !important;
+    border-color: rgba(168,156,247,0.34) !important;
+    opacity: 1 !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+div[data-testid="stButton"] > button:disabled p,
+button[data-testid^="baseButton"]:disabled p {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
 }
 
 /* Mobile top nav is rendered with Streamlit buttons so it can change page state. */
@@ -313,6 +395,75 @@ nav[data-testid="stSidebarNav"] {
         height: 31px !important;
         padding: 3px 4px !important;
         font-size: 10px !important;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    html,
+    body,
+    [data-testid="stApp"],
+    [data-testid="stMain"],
+    [data-testid="stAppViewContainer"],
+    [data-testid="stAppViewContainer"] > section,
+    .block-container {
+        background: var(--byable-bg) !important;
+        color: var(--byable-text) !important;
+    }
+
+    [data-testid="stSidebar"] {
+        background: #0c0d14 !important;
+        color: var(--byable-text) !important;
+    }
+
+    [data-testid="stSidebar"] label,
+    [data-testid="stSidebar"] p,
+    [data-testid="stSidebar"] span {
+        color: var(--byable-muted) !important;
+        -webkit-text-fill-color: var(--byable-muted) !important;
+    }
+
+    [data-testid="stSidebar"] .stRadio [data-baseweb="radio"]:has(input:checked) label,
+    [data-testid="stSidebar"] .stRadio [data-baseweb="radio"]:has(input:checked) span {
+        color: var(--byable-purple) !important;
+        -webkit-text-fill-color: var(--byable-purple) !important;
+    }
+
+    div[data-testid="stButton"] > button,
+    button[data-testid^="baseButton"],
+    [data-testid="baseButton-secondary"],
+    [data-testid="baseButton-primary"] {
+        background: rgba(255,255,255,0.045) !important;
+        color: var(--byable-text) !important;
+        border-color: rgba(255,255,255,0.13) !important;
+        -webkit-text-fill-color: var(--byable-text) !important;
+    }
+
+    div[data-testid="stButton"] > button p,
+    button[data-testid^="baseButton"] p {
+        color: inherit !important;
+        -webkit-text-fill-color: inherit !important;
+    }
+
+    div[data-testid="stButton"] > button:disabled,
+    button[data-testid^="baseButton"]:disabled {
+        background: rgba(124,110,247,0.16) !important;
+        color: #ffffff !important;
+        border-color: rgba(168,156,247,0.34) !important;
+        -webkit-text-fill-color: #ffffff !important;
+    }
+
+    [class*="st-key-top_mobile_nav_"] button {
+        background: rgba(255,255,255,0.045) !important;
+        color: rgba(232,233,240,0.78) !important;
+        border-color: rgba(255,255,255,0.12) !important;
+        -webkit-text-fill-color: rgba(232,233,240,0.78) !important;
+    }
+
+    [class*="st-key-top_mobile_nav_"] button[kind="primary"],
+    [class*="st-key-top_mobile_nav_"] button[data-testid="baseButton-primary"] {
+        background: linear-gradient(135deg, rgba(124,58,237,0.92), rgba(79,70,229,0.88)) !important;
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
     }
 }
 </style>

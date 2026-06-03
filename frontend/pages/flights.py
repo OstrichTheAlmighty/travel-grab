@@ -2177,6 +2177,45 @@ def render():
             transform: translateY(0);
             filter: brightness(0.98) !important;
         }
+        div[data-testid="stButton"] > button:not([kind="primary"]),
+        div[data-testid="stButton"] > button[data-testid="baseButton-secondary"] {
+            background: rgba(255,255,255,0.045) !important;
+            color: rgba(248,250,252,0.92) !important;
+            border: 1px solid rgba(255,255,255,0.13) !important;
+            -webkit-text-fill-color: rgba(248,250,252,0.92) !important;
+        }
+        div[data-testid="stButton"] > button:not([kind="primary"]) p,
+        div[data-testid="stButton"] > button[data-testid="baseButton-secondary"] p {
+            color: inherit !important;
+            -webkit-text-fill-color: inherit !important;
+        }
+        div[data-testid="stButton"] > button:disabled {
+            background: rgba(124,110,247,0.16) !important;
+            color: #ffffff !important;
+            border-color: rgba(168,156,247,0.34) !important;
+            opacity: 1 !important;
+            -webkit-text-fill-color: #ffffff !important;
+        }
+        @media (prefers-color-scheme: light) {
+            div[data-testid="stButton"] > button,
+            div[data-testid="stButton"] > button:not([kind="primary"]),
+            div[data-testid="stButton"] > button[data-testid="baseButton-secondary"] {
+                background: rgba(255,255,255,0.045) !important;
+                color: rgba(248,250,252,0.92) !important;
+                border-color: rgba(255,255,255,0.13) !important;
+                -webkit-text-fill-color: rgba(248,250,252,0.92) !important;
+            }
+            div[data-testid="stButton"] > button p {
+                color: inherit !important;
+                -webkit-text-fill-color: inherit !important;
+            }
+            div[data-testid="stButton"] > button:disabled {
+                background: rgba(124,110,247,0.16) !important;
+                color: #ffffff !important;
+                border-color: rgba(168,156,247,0.34) !important;
+                -webkit-text-fill-color: #ffffff !important;
+            }
+        }
         div[data-testid="stForm"] label {
             font-size: 0.78rem;
             color: rgba(255,255,255,0.68) !important;
