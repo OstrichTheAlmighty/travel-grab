@@ -836,6 +836,20 @@ def _watch_out_copy(offer, offers=None):
     return concerns[:2] or ["No major downside compared with similar options."]
 
 
+def _clean_watch_out_items(items, offer, offers=None):
+    cleaned = []
+    generic_terms = ("jet lag", "time zone", "time zones", "crosses many")
+    for item in items or []:
+        text = str(item or "").strip()
+        if not text:
+            continue
+        lower = text.lower()
+        if any(term in lower for term in generic_terms):
+            continue
+        cleaned.append(text)
+    return cleaned[:2] or _watch_out_copy(offer, offers)
+
+
 def _ai_advisor_cache_key(flight, selected_priorities, comparison_context):
     payload = {
         "flight_id": _flight_key(flight),
@@ -1006,8 +1020,11 @@ def generate_ai_advisor_copy(flight, trip_impact, selected_priorities, compariso
             "visible on the card unless you are comparing them to another flight. Avoid generic phrases like "
             "'convenient' or 'good value' unless the same sentence includes a concrete price, duration, stop, "
             "baggage, airport, or arrival-time comparison. Use the user's selected priorities to explain the "
-            "decision. Also provide a short watch_out downside for the recommended flight. If there is no major "
-            "downside, say: No major downside compared with similar options. "
+            "decision. Also provide a short watch_out downside for the recommended flight. Watch_out must be a "
+            "specific tradeoff compared with visible alternatives, such as a connection, longer duration, weaker "
+            "baggage, unavailable aircraft type, late-night arrival, or higher price than similar options. Do not "
+            "include generic long-haul warnings about time zones or jet lag. If there is no major downside, say: "
+            "No major downside compared with similar options. "
             "Return exactly this JSON shape: "
             '{"recommended_summary":"...","why_this":["...","...","..."],'
             '"trip_impact_why":["...","..."],"watch_out":["..."],"modal_summary":"..."}\n\n'
@@ -1934,22 +1951,42 @@ def render():
             line-height: 1.45;
             margin-bottom: 12px;
         }
-        .flight-route-preview-pill {
-            display: inline-flex;
-            align-items: center;
-            width: fit-content;
-            max-width: 100%;
-            padding: 6px 11px;
-            border-radius: 999px;
-            background: rgba(255,255,255,0.055);
-            border: 1px solid rgba(255,255,255,0.10);
-            color: rgba(255,255,255,0.58);
-            font-size: 12px;
-            font-weight: 750;
-            margin-top: 7px;
+        .flight-search-submit-spacer {
+            height: 1.48rem;
         }
         .flight-return-toggle [role="radiogroup"] {
             opacity: 0.86;
+        }
+        div[data-testid="stButton"] > button[kind="primary"],
+        div[data-testid="stButton"] > button[data-testid="baseButton-primary"] {
+            border: 1px solid rgba(196,181,253,0.46) !important;
+            border-radius: 13px !important;
+            background:
+                radial-gradient(circle at top left, rgba(255,255,255,0.20), transparent 32%),
+                linear-gradient(135deg, #8b5cf6 0%, #6366f1 52%, #4f46e5 100%) !important;
+            color: #ffffff !important;
+            box-shadow: 0 12px 30px rgba(99,102,241,0.32), 0 0 0 1px rgba(255,255,255,0.06) inset !important;
+            font-weight: 850 !important;
+            letter-spacing: -0.01em !important;
+            transition: transform 0.14s ease, box-shadow 0.14s ease, filter 0.14s ease !important;
+        }
+        div[data-testid="stButton"] > button[kind="primary"]::before,
+        div[data-testid="stButton"] > button[data-testid="baseButton-primary"]::before {
+            content: "⌕";
+            margin-right: 7px;
+            font-weight: 900;
+            color: rgba(255,255,255,0.92);
+        }
+        div[data-testid="stButton"] > button[kind="primary"]:hover,
+        div[data-testid="stButton"] > button[data-testid="baseButton-primary"]:hover {
+            filter: brightness(1.08) saturate(1.05) !important;
+            transform: translateY(-1px);
+            box-shadow: 0 16px 38px rgba(99,102,241,0.42), 0 0 0 1px rgba(255,255,255,0.10) inset !important;
+        }
+        div[data-testid="stButton"] > button[kind="primary"]:active,
+        div[data-testid="stButton"] > button[data-testid="baseButton-primary"]:active {
+            transform: translateY(0);
+            filter: brightness(0.98) !important;
         }
         div[data-testid="stForm"] label {
             font-size: 0.78rem;
@@ -2004,6 +2041,62 @@ def render():
         .flight-updated {
             color: rgba(255,255,255,0.42);
             font-size: 12px;
+        }
+        .flight-presearch-card {
+            border-radius: 20px;
+            border: 1px solid rgba(165,180,252,0.22);
+            background:
+                radial-gradient(circle at top left, rgba(99,102,241,0.15), transparent 34%),
+                linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.018)),
+                rgba(7,9,15,0.92);
+            padding: 22px;
+            margin: 4px 0 12px;
+            box-shadow: 0 18px 52px rgba(0,0,0,0.18);
+        }
+        .flight-presearch-kicker {
+            color: rgba(199,210,254,0.82);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .flight-presearch-title {
+            color: rgba(255,255,255,0.96);
+            font-size: 1.18rem;
+            font-weight: 850;
+            margin-bottom: 6px;
+        }
+        .flight-presearch-subtitle {
+            color: rgba(255,255,255,0.62);
+            font-size: 0.94rem;
+            line-height: 1.55;
+            max-width: 680px;
+            margin-bottom: 16px;
+        }
+        .flight-presearch-benefits {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .flight-presearch-benefit {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.10);
+            background: rgba(255,255,255,0.045);
+            color: rgba(255,255,255,0.78);
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 750;
+        }
+        .flight-presearch-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #a5b4fc, #34d399);
+            box-shadow: 0 0 16px rgba(129,140,248,0.42);
         }
         .flight-card-native {
             width: 100%;
@@ -2389,6 +2482,7 @@ def render():
                 format_func=lambda value: value.replace("_", " ").title(),
             )
         with col_submit:
+            st.markdown('<div class="flight-search-submit-spacer"></div>', unsafe_allow_html=True)
             submitted = st.button("Search flights", type="primary")
 
         st.markdown('<div class="flight-return-toggle">', unsafe_allow_html=True)
@@ -2409,18 +2503,6 @@ def render():
             return_origin_city = destination_city
 
         nonstop_only = st.checkbox("Nonstop only", value=bool(search_state.get("nonstop_only", False)))
-
-        origin_preview_label, origin_preview_airports = _resolve_city_airports(origin_city)
-        destination_preview_label, destination_preview_airports = _resolve_city_airports(destination_city)
-        return_preview_label, _return_preview_airports = _resolve_city_airports(return_origin_city)
-        if return_mode == "Different city":
-            search_preview = f"Searching {origin_preview_label} → {destination_preview_label} · {return_preview_label} → {origin_preview_label}"
-        else:
-            search_preview = f"Searching {origin_preview_label} → {destination_preview_label} → {origin_preview_label}"
-        st.markdown(
-            f'<div class="flight-route-preview-pill">Searching: {html.escape(search_preview.replace("Searching ", ""))}</div>',
-            unsafe_allow_html=True,
-        )
 
     if submitted:
         _print_ai_status()
@@ -2611,15 +2693,33 @@ def render():
             empty_title = "Duffel key missing"
             empty_message = "Duffel API key not configured."
         elif status == "idle":
-            empty_title = "Ready when you are"
-            empty_message = "Search flights to see live fares."
+            st.markdown(
+                """
+                <div class="flight-presearch-card">
+                    <div class="flight-presearch-kicker">Before you search</div>
+                    <div class="flight-presearch-title">Ready to find smarter flights</div>
+                    <div class="flight-presearch-subtitle">
+                        Search live fares and Byable will explain the tradeoffs, not just list options.
+                    </div>
+                    <div class="flight-presearch-benefits">
+                        <span class="flight-presearch-benefit"><span class="flight-presearch-dot"></span>Real-time fares</span>
+                        <span class="flight-presearch-benefit"><span class="flight-presearch-dot"></span>AI flight reasoning</span>
+                        <span class="flight-presearch-benefit"><span class="flight-presearch-dot"></span>Airport + comfort insights</span>
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+            empty_title = ""
+            empty_message = ""
         elif status == "ok":
             empty_title = "No fares found"
             empty_message = "No live fares found for these dates."
         else:
             empty_title = "Duffel API error"
             empty_message = (debug_payload or {}).get("message") or "Duffel is unavailable right now."
-        st.info(f"{empty_title}: {empty_message}")
+        if empty_title:
+            st.info(f"{empty_title}: {empty_message}")
         total_time = time.perf_counter() - search_to_results_start if search_to_results_start else 0
         cached_perf = (st.session_state.get("flight_results_cache") or {}).get("perf_timings") or {}
         print(
@@ -2824,6 +2924,7 @@ def render():
             if is_recommended
             else None
         ) or _watch_out_copy(offer, visible_offers)
+        watch_out_source = _clean_watch_out_items(watch_out_source, offer, visible_offers)
         watch_out_items = "".join(
             f"<li>{html.escape(item)}</li>"
             for item in watch_out_source[:2]
