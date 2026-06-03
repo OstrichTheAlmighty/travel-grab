@@ -231,39 +231,88 @@ nav[data-testid="stSidebarNav"] {
     }
 
     .block-container {
-        padding: 0 0.85rem 1.25rem !important;
+        padding: 0 0.72rem 1rem !important;
     }
 
     .byable-mobile-nav-heading {
         display: flex !important;
+        margin: 7px 0 5px !important;
     }
 
     [class*="st-key-top_mobile_nav_"] {
         display: block !important;
     }
 
+    [class*="st-key-top_mobile_nav_"] div[data-testid="stButton"] {
+        margin: 0 !important;
+    }
+
     [class*="st-key-top_mobile_nav_"] button {
-        min-height: 46px !important;
-        border-radius: 13px !important;
-        padding: 8px 6px !important;
-        font-size: 12px !important;
-        font-weight: 750 !important;
+        min-height: 34px !important;
+        height: 34px !important;
+        border-radius: 999px !important;
+        padding: 4px 6px !important;
+        font-size: 11px !important;
+        font-weight: 800 !important;
         white-space: normal !important;
         line-height: 1.12 !important;
-        border: 1px solid rgba(255,255,255,0.11) !important;
+        background: rgba(255,255,255,0.045) !important;
+        color: rgba(232,233,240,0.72) !important;
+        border: 1px solid rgba(255,255,255,0.10) !important;
         box-shadow: none !important;
+        -webkit-appearance: none !important;
+        appearance: none !important;
     }
 
     [class*="st-key-top_mobile_nav_"] button[kind="primary"],
     [class*="st-key-top_mobile_nav_"] button[data-testid="baseButton-primary"] {
-        background: linear-gradient(135deg, #7c3aed, #4f46e5) !important;
+        background: linear-gradient(135deg, rgba(124,58,237,0.92), rgba(79,70,229,0.88)) !important;
         color: #ffffff !important;
         border-color: rgba(168,156,247,0.48) !important;
-        box-shadow: 0 10px 28px rgba(124,58,237,0.22) !important;
+        box-shadow: 0 7px 18px rgba(124,58,237,0.20) !important;
+    }
+
+    [class*="st-key-top_mobile_nav_"] button:hover,
+    [class*="st-key-top_mobile_nav_"] button:focus,
+    [class*="st-key-top_mobile_nav_"] button:active {
+        color: #ffffff !important;
+        border-color: rgba(168,156,247,0.36) !important;
+        background: rgba(255,255,255,0.075) !important;
     }
 
     [data-testid="stHorizontalBlock"] {
-        gap: 0.35rem !important;
+        gap: 0.22rem !important;
+        margin-bottom: 0.22rem !important;
+    }
+
+    [data-testid="stBottomBlockContainer"],
+    [data-testid="stStatusWidget"],
+    [data-testid="stToolbar"],
+    [data-testid="stDecoration"] {
+        display: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .block-container {
+        padding-left: 0.55rem !important;
+        padding-right: 0.55rem !important;
+    }
+
+    .byable-mobile-nav-heading {
+        font-size: 13px !important;
+    }
+
+    .byable-mobile-beta {
+        font-size: 8px !important;
+        padding: 1px 6px !important;
+    }
+
+    [class*="st-key-top_mobile_nav_"] button {
+        min-height: 31px !important;
+        height: 31px !important;
+        padding: 3px 4px !important;
+        font-size: 10px !important;
     }
 }
 </style>

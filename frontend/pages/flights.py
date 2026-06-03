@@ -2859,13 +2859,126 @@ def render():
             border-color: rgba(129,140,248,0.22);
             background: rgba(255,255,255,0.032);
         }
-        @media (max-width: 760px) {
+        @media (max-width: 768px) {
+            html,
+            body,
+            [data-testid="stAppViewContainer"],
+            .block-container {
+                overflow-x: hidden !important;
+                max-width: 100vw !important;
+            }
+            .block-container {
+                padding-top: 0.4rem !important;
+            }
+            div[data-testid="stVerticalBlock"] {
+                gap: 0.45rem !important;
+            }
+            div[data-testid="stForm"],
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] {
+                border-radius: 15px !important;
+                padding: 11px 12px 10px !important;
+                margin-bottom: 0.45rem !important;
+            }
+            .flight-search-shell {
+                margin-bottom: 4px !important;
+                padding-bottom: 0 !important;
+            }
+            .flight-search-title {
+                font-size: 15px !important;
+                margin-bottom: 0 !important;
+            }
+            .flight-search-subtitle {
+                font-size: 11.5px !important;
+                line-height: 1.3 !important;
+                margin-bottom: 7px !important;
+            }
+            .flight-search-submit-spacer {
+                display: none !important;
+                height: 0 !important;
+            }
+            div[data-testid="stForm"] [data-testid="stHorizontalBlock"],
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stHorizontalBlock"] {
+                display: block !important;
+            }
+            div[data-testid="stForm"] [data-testid="column"],
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="column"] {
+                width: 100% !important;
+                min-width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin-bottom: 7px !important;
+            }
+            div[data-testid="stForm"] label,
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] label {
+                font-size: 11px !important;
+                line-height: 1.15 !important;
+                margin-bottom: 3px !important;
+            }
+            div[data-testid="stForm"] input,
+            div[data-testid="stForm"] textarea,
+            div[data-testid="stForm"] [data-baseweb="input"] input,
+            div[data-testid="stForm"] [data-baseweb="select"] > div,
+            div[data-testid="stForm"] [data-baseweb="base-input"],
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] input,
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-baseweb="select"] > div {
+                min-height: 36px !important;
+                height: 36px !important;
+                font-size: 13px !important;
+                border-radius: 10px !important;
+            }
+            div[data-testid="stNumberInput"] button {
+                min-height: 32px !important;
+                height: 32px !important;
+            }
+            div[data-testid="stForm"] div[data-testid="stButton"] > button,
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stButton"] > button {
+                min-height: 40px !important;
+                height: 40px !important;
+                width: 100% !important;
+                border-radius: 12px !important;
+                font-size: 13px !important;
+            }
+            .flight-return-toggle {
+                margin-top: 0 !important;
+            }
+            .flight-return-toggle [role="radiogroup"] {
+                gap: 4px !important;
+                flex-wrap: wrap !important;
+            }
+            .flight-return-toggle label {
+                font-size: 11px !important;
+            }
+            div[data-testid="stCheckbox"] label,
+            div[data-testid="stMultiSelect"] label {
+                font-size: 11px !important;
+            }
+            div[data-testid="stMultiSelect"] [data-baseweb="select"] {
+                min-height: 36px !important;
+                font-size: 12px !important;
+            }
+            .flight-status-row {
+                gap: 6px !important;
+                margin-bottom: 8px !important;
+            }
+            .flight-status-pill,
+            .flight-updated {
+                font-size: 10.5px !important;
+                line-height: 1.25 !important;
+            }
+            h4,
+            div[data-testid="stMarkdownContainer"] h4 {
+                margin-top: 0.45rem !important;
+                margin-bottom: 0.35rem !important;
+            }
             .flight-destination-hero,
             .flight-destination-hero-content {
-                min-height: 235px;
+                min-height: 190px;
             }
             .flight-destination-hero-content {
-                padding: 22px;
+                padding: 16px;
+            }
+            .flight-destination-hero {
+                margin: 8px 0 10px;
             }
             .flight-destination-hero.no-image::after,
             .flight-destination-hero.no-image .flight-destination-route-graphic {
@@ -2902,6 +3015,37 @@ def render():
             }
             .flight-score-breakdown-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 480px) {
+            div[data-testid="stForm"],
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] {
+                padding: 10px !important;
+                border-radius: 14px !important;
+            }
+            .flight-search-title {
+                font-size: 14px !important;
+            }
+            .flight-search-subtitle {
+                font-size: 11px !important;
+            }
+            div[data-testid="stForm"] input,
+            div[data-testid="stForm"] [data-baseweb="select"] > div,
+            div[data-testid="stForm"] [data-baseweb="base-input"],
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] input,
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-baseweb="select"] > div {
+                min-height: 34px !important;
+                height: 34px !important;
+                font-size: 12px !important;
+            }
+            div[data-testid="stForm"] div[data-testid="stButton"] > button,
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stButton"] > button {
+                min-height: 38px !important;
+                height: 38px !important;
+            }
+            .flight-destination-hero,
+            .flight-destination-hero-content {
+                min-height: 170px;
             }
         }
         </style>
