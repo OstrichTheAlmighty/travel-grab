@@ -687,7 +687,20 @@ def _city_access_level(airport_code):
     return levels.get(str(airport_code or "").upper(), "Unknown")
 
 
-def _trip_impact(offer):
+def _is_lowest_priced(offer, offers):
+    prices = [float(item.get("price_total") or 0) for item in (offers or []) if float(item.get("price_total") or 0) > 0]
+    offer_price = float(offer.get("price_total") or 0)
+    return bool(prices and offer_price > 0 and offer_price == min(prices))
+
+
+def _is_among_fastest(offer, offers):
+    durations = [_duration_minutes(item.get("duration")) for item in (offers or [])]
+    durations = [duration for duration in durations if duration and duration > 0]
+    offer_duration = _duration_minutes(offer.get("duration")) or 0
+    return bool(durations and offer_duration > 0 and offer_duration <= min(durations) + 30)
+
+
+def _trip_impact(offer, offers=None):
     arrival_timing = _arrival_timing_label(offer)
     jet_lag = _jet_lag_impact(offer)
     zones_crossed = _time_zone_delta_estimate(offer)
@@ -703,10 +716,26 @@ def _trip_impact(offer):
         reasons.append("Arrives in the evening, so arrival day is mostly travel")
     else:
         reasons.append("Arrives late at night, which can make the first day harder")
-    if int(offer.get("stops") or 0) == 0:
+    stops = int(offer.get("stops") or 0)
+    if stops == 0:
         reasons.append("Nonstop route")
     else:
-        reasons.append(f"{int(offer.get('stops') or 0)} stop route")
+        reasons.append(f"{stops} stop route")
+    if _is_among_fastest(offer, offers):
+        reasons.append(f"Among the fastest visible options at {_display_value(offer.get('duration'))}")
+    elif offers:
+        reasons.append(f"Longer travel time than the fastest visible option")
+    if _is_lowest_priced(offer, offers):
+        reasons.append(f"Lowest fare in the current results at {money_usd(offer.get('price_total'))}")
+    elif stops == 0:
+        nonstop_offers = [item for item in (offers or []) if int(item.get("stops") or 0) == 0]
+        if nonstop_offers:
+            nonstop_prices = [float(item.get("price_total") or 0) for item in nonstop_offers if float(item.get("price_total") or 0) > 0]
+            offer_price = float(offer.get("price_total") or 0)
+            if nonstop_prices and offer_price > 0 and offer_price <= min(nonstop_prices) * 1.05:
+                reasons.append("Best value among nonstop options")
+    if _has_baggage(offer):
+        reasons.append("Baggage details are available for this fare")
     if jet_lag in {"Moderate", "High"}:
         if zones_crossed >= 8:
             reasons.append("High jet lag impact because this route crosses many time zones")
@@ -727,11 +756,15 @@ def _trip_impact(offer):
     }
     if destination in airport_notes:
         reasons.append(airport_notes[destination])
+    deduped = []
+    for reason in reasons:
+        if reason and reason not in deduped:
+            deduped.append(reason)
     return {
         "arrival_timing": arrival_timing,
         "jet_lag": jet_lag,
         "city_access": city_access,
-        "reasons": reasons[:3],
+        "reasons": deduped,
     }
 
 
@@ -742,6 +775,30 @@ def _ai_advisor_cache_key(flight, selected_priorities, comparison_context):
         "search_params": (comparison_context or {}).get("search_params") or {},
     }
     return json.dumps(payload, sort_keys=True, default=str)
+
+
+def _ai_flight_summary(offer, recommendations=None):
+    recommendation = (recommendations or {}).get(_flight_key(offer), {})
+    impact = _trip_impact(offer)
+    return {
+        "flight_id": _flight_key(offer),
+        "airline": offer.get("airline"),
+        "flight_number": _display_flight_number(offer),
+        "price": offer.get("price_total"),
+        "currency": offer.get("currency"),
+        "duration": offer.get("duration"),
+        "stops": offer.get("stops"),
+        "origin_airport": offer.get("origin"),
+        "destination_airport": offer.get("destination"),
+        "departure_time": offer.get("depart_time"),
+        "arrival_time": offer.get("arrive_time"),
+        "baggage": offer.get("baggage"),
+        "ai_score": recommendation.get("score"),
+        "recommendation_label": recommendation.get("label"),
+        "arrival_timing_label": impact.get("arrival_timing"),
+        "jet_lag_label": impact.get("jet_lag"),
+        "city_access_label": impact.get("city_access"),
+    }
 
 
 def generate_ai_advisor_copy(flight, trip_impact, selected_priorities, comparison_context):
@@ -779,25 +836,43 @@ def generate_ai_advisor_copy(flight, trip_impact, selected_priorities, compariso
         "is_recommended": True,
         "deterministic_why": list((trip_impact or {}).get("reasons") or []),
         "advisor_comparison_bullets": list((comparison_context or {}).get("why_over_options") or [])[:3],
+        "recommended_flight": (comparison_context or {}).get("recommended_flight"),
+        "next_best_alternative": (comparison_context or {}).get("next_best_alternative"),
+        "third_best_alternative": (comparison_context or {}).get("third_best_alternative"),
+        "fourth_best_alternative": (comparison_context or {}).get("fourth_best_alternative"),
+        "cheapest_flight": (comparison_context or {}).get("cheapest_flight"),
+        "fastest_flight": (comparison_context or {}).get("fastest_flight"),
+        "top_ranked_flights": list((comparison_context or {}).get("top_ranked_flights") or []),
     }
     _log_ai_attempt(flight_id, model, prompt_payload.keys())
+    print(
+        "BYABLE AI ALTERNATIVE FLIGHT DATA:\n"
+        f"{json.dumps({'recommended_flight': prompt_payload.get('recommended_flight'), 'alternatives': prompt_payload.get('top_ranked_flights', [])[1:4]}, indent=2, default=str)}"
+    )
     started = time.perf_counter()
     try:
         from openai import OpenAI
 
         system = (
-            "You write concise flight advisor copy for Byable. Return valid JSON only. "
+            "You are a travel advisor. Return valid JSON only. "
             "Use only the provided facts. Do not invent amenities, policies, airport transfer times, "
             "seat quality, delay data, prices, flight times, baggage, or airport facts. "
-            "Be concise and practical. Do not use percentages. Do not say 'as an AI'."
+            "Be concise and practical. Do not use percentages. Do not say 'as an AI'. "
+            "Avoid generic travel language. Never call a flight the cheapest option unless is_cheapest is true. "
+            "Use 'cheapest nonstop' or 'best value among nonstop options' when that is more accurate."
         )
         user = (
-            "Generate human-readable advisor copy for the top recommended flight. "
+            "Do NOT describe the selected flight. Compare the recommended flight against the alternatives "
+            "and explain why it was selected. Focus on price differences, duration differences, "
+            "stops/connections, airport differences, arrival timing differences, and baggage differences. "
+            "Highlight meaningful tradeoffs. If two flights are nearly identical, explicitly say so and "
+            "explain why the winner still ranks higher. Use the user's selected priorities to explain the decision. "
             "Return exactly this JSON shape: "
             '{"recommended_summary":"...","why_this":["...","...","..."],'
             '"trip_impact_why":["...","..."],"modal_summary":"..."}\n\n'
             f"Facts:\n{json.dumps(prompt_payload, ensure_ascii=True, default=str)}"
         )
+        print(f"BYABLE AI FULL PROMPT:\nSYSTEM:\n{system}\nUSER:\n{user}")
         client = OpenAI(api_key=_openai_api_key())
         response = client.chat.completions.create(
             model=model,
@@ -816,6 +891,7 @@ def generate_ai_advisor_copy(flight, trip_impact, selected_priorities, compariso
             _log_ai_failed("OpenAI returned empty content")
             cache[cache_key] = None
             return None
+        print(f"BYABLE AI RAW RESPONSE:\n{raw_text}")
         parsed = json.loads(raw_text)
         ai_copy = {
             "recommended_summary": str(parsed.get("recommended_summary") or "").strip(),
@@ -1992,10 +2068,13 @@ def render():
             padding: 9px 11px;
         }
         .flight-card-recommendation.compact .flight-card-rec-list {
-            display: none;
+            font-size: 11px;
+            line-height: 1.35;
+            color: rgba(255,255,255,0.56);
         }
         .flight-card-recommendation.compact .flight-card-rec-kicker.why {
-            display: none;
+            margin-top: 6px;
+            color: rgba(255,255,255,0.44);
         }
         .flight-card-rec-kicker {
             color: #c7d2fe;
@@ -2458,22 +2537,38 @@ def render():
     )
     perf_timings["recommendation"] = time.perf_counter() - recommendation_start
     advisor_bullets = ranking_output.get("why_over_options") or _why_over_others(best_offer, visible_offers, recommendations)
-    best_impact = _trip_impact(best_offer)
+    best_impact = _trip_impact(best_offer, visible_offers)
     visible_prices = [float(offer.get("price_total") or 0) for offer in visible_offers if float(offer.get("price_total") or 0) > 0]
     visible_durations = [_duration_minutes(offer.get("duration")) for offer in visible_offers]
     visible_durations = [duration for duration in visible_durations if duration and duration > 0]
     best_price = float(best_offer.get("price_total") or 0)
     best_duration = _duration_minutes(best_offer.get("duration")) or 0
+    cheapest_offer = min(
+        visible_offers,
+        key=lambda offer: (float(offer.get("price_total") or 999999), _duration_minutes(offer.get("duration")) or 999999),
+    )
+    fastest_offer = min(
+        visible_offers,
+        key=lambda offer: (_duration_minutes(offer.get("duration")) or 999999, float(offer.get("price_total") or 999999)),
+    )
+    top_ranked_summaries = [_ai_flight_summary(offer, recommendations) for offer in visible_offers[:4]]
     ai_comparison_context = {
         "search_params": active_search_params,
         "why_over_options": advisor_bullets,
-        "is_cheapest": bool(visible_prices and best_price > 0 and best_price <= min(visible_prices) * 1.05),
+        "is_cheapest": _is_lowest_priced(best_offer, visible_offers),
         "is_fastest": bool(visible_durations and best_duration > 0 and best_duration <= min(visible_durations) + 30),
         "return_route": (
             f"{return_origin_label} -> {origin_label}"
             if return_mode == "Different city"
             else f"{destination_label} -> {origin_label}"
         ),
+        "recommended_flight": _ai_flight_summary(best_offer, recommendations),
+        "next_best_alternative": top_ranked_summaries[1] if len(top_ranked_summaries) > 1 else None,
+        "third_best_alternative": top_ranked_summaries[2] if len(top_ranked_summaries) > 2 else None,
+        "fourth_best_alternative": top_ranked_summaries[3] if len(top_ranked_summaries) > 3 else None,
+        "cheapest_flight": _ai_flight_summary(cheapest_offer, recommendations),
+        "fastest_flight": _ai_flight_summary(fastest_offer, recommendations),
+        "top_ranked_flights": top_ranked_summaries,
     }
     ai_advisor_copy = generate_ai_advisor_copy(best_offer, best_impact, priorities, ai_comparison_context)
     if ai_advisor_copy:
@@ -2527,7 +2622,7 @@ def render():
             for chip in detail_chips
             if chip
         )
-        impact = _trip_impact(offer)
+        impact = _trip_impact(offer, visible_offers)
         impact_rows = [
             ("Arrival Timing", impact["arrival_timing"]),
             ("Jet Lag Impact", impact["jet_lag"]),
@@ -2543,9 +2638,10 @@ def render():
             if is_recommended
             else None
         ) or impact["reasons"][:3]
+        impact_reason_limit = 3 if is_recommended else 2
         impact_bullets = "".join(
             f"<li>{html.escape(bullet)}</li>"
-            for bullet in impact_reason_source[:3]
+            for bullet in impact_reason_source[:impact_reason_limit]
         )
         impact_class = "flight-card-recommendation" if is_recommended else "flight-card-recommendation compact"
         trip_impact_html = "".join(
