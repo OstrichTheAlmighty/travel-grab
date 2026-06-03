@@ -151,6 +151,76 @@ def _display_value(value):
     return text if text else "Not available"
 
 
+def _openai_api_key():
+    try:
+        value = st.secrets.get("OPENAI_API_KEY", "")
+    except Exception:
+        value = ""
+    return str(value or os.getenv("OPENAI_API_KEY", "") or "").strip()
+
+
+def _ai_status():
+    openai_key_loaded = bool(_openai_api_key())
+    try:
+        import openai  # noqa: F401
+        openai_import = True
+    except Exception:
+        openai_import = False
+    reasons = []
+    if not openai_key_loaded:
+        reasons.append("OPENAI_API_KEY missing")
+    if not openai_import:
+        reasons.append("openai package import failed")
+    return {
+        "openai_key_loaded": openai_key_loaded,
+        "openai_import": openai_import,
+        "advisor_copy_enabled": openai_key_loaded and openai_import,
+        "reason": ", ".join(reasons) if reasons else "enabled",
+    }
+
+
+def _print_ai_status():
+    status = _ai_status()
+    print(
+        "BYABLE AI STATUS:\n"
+        f"OPENAI_API_KEY loaded: {str(status['openai_key_loaded']).lower()}\n"
+        f"openai import available: {str(status['openai_import']).lower()}\n"
+        f"AI advisor copy enabled: {str(status['advisor_copy_enabled']).lower()}\n"
+        f"reason: {status['reason']}"
+    )
+
+
+def _run_ai_setup_check_once():
+    if st.session_state.get("byable_ai_status_v2_printed"):
+        return
+    _print_ai_status()
+    st.session_state["byable_ai_status_v2_printed"] = True
+
+
+def _log_ai_attempt(flight_id, model, input_fields):
+    print(
+        "BYABLE AI ATTEMPT:\n"
+        f"flight_id: {flight_id}\n"
+        f"model: {model}\n"
+        f"input fields: {', '.join(str(field) for field in input_fields)}"
+    )
+
+
+def _log_ai_success(flight_id, seconds):
+    print(
+        "BYABLE AI SUCCESS:\n"
+        f"flight_id: {flight_id}\n"
+        f"seconds: {seconds:.2f}"
+    )
+
+
+def _log_ai_failed(reason):
+    print(
+        "BYABLE AI FAILED:\n"
+        f"reason: {reason}"
+    )
+
+
 def _resolve_city_airports(value):
     raw = str(value or "").strip()
     normalized = re.sub(r"\s+", " ", raw.lower())
@@ -608,13 +678,13 @@ def _jet_lag_impact(offer):
     return "Low"
 
 
-def _airport_convenience_level(airport_code):
+def _city_access_level(airport_code):
     levels = {
-        "HND": "High", "NRT": "Medium", "LGA": "High", "EWR": "Medium", "JFK": "Medium",
-        "SFO": "High", "OAK": "Medium", "SJC": "Medium", "KIX": "Medium", "ITM": "High",
-        "LHR": "High", "LGW": "Medium", "LCY": "High", "CDG": "Medium", "ORY": "Medium",
+        "HND": "Easy", "NRT": "Moderate", "LGA": "Easy", "EWR": "Moderate", "JFK": "Moderate",
+        "SFO": "Easy", "OAK": "Moderate", "SJC": "Moderate", "KIX": "Moderate", "ITM": "Easy",
+        "LHR": "Easy", "LGW": "Moderate", "LCY": "Easy", "CDG": "Moderate", "ORY": "Moderate",
     }
-    return levels.get(str(airport_code or "").upper())
+    return levels.get(str(airport_code or "").upper(), "Unknown")
 
 
 def _trip_impact(offer):
@@ -622,7 +692,7 @@ def _trip_impact(offer):
     jet_lag = _jet_lag_impact(offer)
     zones_crossed = _time_zone_delta_estimate(offer)
     destination = str(offer.get("destination") or "").upper()
-    airport_convenience = _airport_convenience_level(destination)
+    city_access = _city_access_level(destination)
     reasons = []
     arrival = _clock_minutes(offer.get("arrive_time"))
     if 11 * 60 <= arrival < 17 * 60:
@@ -660,9 +730,110 @@ def _trip_impact(offer):
     return {
         "arrival_timing": arrival_timing,
         "jet_lag": jet_lag,
-        "airport_convenience": airport_convenience,
+        "city_access": city_access,
         "reasons": reasons[:3],
     }
+
+
+def _ai_advisor_cache_key(flight, selected_priorities, comparison_context):
+    payload = {
+        "flight_id": _flight_key(flight),
+        "priorities": list(selected_priorities or []),
+        "search_params": (comparison_context or {}).get("search_params") or {},
+    }
+    return json.dumps(payload, sort_keys=True, default=str)
+
+
+def generate_ai_advisor_copy(flight, trip_impact, selected_priorities, comparison_context):
+    status = _ai_status()
+    if not status["advisor_copy_enabled"]:
+        _log_ai_failed(status["reason"])
+        return None
+
+    cache = st.session_state.setdefault("flight_ai_advisor_copy_cache", {})
+    cache_key = _ai_advisor_cache_key(flight, selected_priorities, comparison_context)
+    flight_id = _flight_key(flight)
+    if cache_key in cache:
+        print(f"[Byable Flights] AI advisor copy cache hit for {flight_id}")
+        return cache[cache_key]
+
+    model = "gpt-4o-mini"
+    prompt_payload = {
+        "airline": flight.get("airline"),
+        "price": flight.get("price_total"),
+        "currency": flight.get("currency"),
+        "duration": flight.get("duration"),
+        "stops": flight.get("stops"),
+        "origin_airport": flight.get("origin"),
+        "destination_airport": flight.get("destination"),
+        "arrival_time": flight.get("arrive_time"),
+        "return_route": (comparison_context or {}).get("return_route"),
+        "baggage": flight.get("baggage"),
+        "arrival_timing_label": (trip_impact or {}).get("arrival_timing"),
+        "jet_lag_label": (trip_impact or {}).get("jet_lag"),
+        "city_access_label": (trip_impact or {}).get("city_access"),
+        "selected_priorities": list(selected_priorities or []),
+        "is_cheapest": bool((comparison_context or {}).get("is_cheapest")),
+        "is_fastest": bool((comparison_context or {}).get("is_fastest")),
+        "is_nonstop": int(flight.get("stops") or 0) == 0,
+        "is_recommended": True,
+        "deterministic_why": list((trip_impact or {}).get("reasons") or []),
+        "advisor_comparison_bullets": list((comparison_context or {}).get("why_over_options") or [])[:3],
+    }
+    _log_ai_attempt(flight_id, model, prompt_payload.keys())
+    started = time.perf_counter()
+    try:
+        from openai import OpenAI
+
+        system = (
+            "You write concise flight advisor copy for Byable. Return valid JSON only. "
+            "Use only the provided facts. Do not invent amenities, policies, airport transfer times, "
+            "seat quality, delay data, prices, flight times, baggage, or airport facts. "
+            "Be concise and practical. Do not use percentages. Do not say 'as an AI'."
+        )
+        user = (
+            "Generate human-readable advisor copy for the top recommended flight. "
+            "Return exactly this JSON shape: "
+            '{"recommended_summary":"...","why_this":["...","...","..."],'
+            '"trip_impact_why":["...","..."],"modal_summary":"..."}\n\n'
+            f"Facts:\n{json.dumps(prompt_payload, ensure_ascii=True, default=str)}"
+        )
+        client = OpenAI(api_key=_openai_api_key())
+        response = client.chat.completions.create(
+            model=model,
+            messages=[
+                {"role": "system", "content": system},
+                {"role": "user", "content": user},
+            ],
+            response_format={"type": "json_object"},
+            temperature=0.25,
+            timeout=8,
+        )
+        raw_text = ""
+        if getattr(response, "choices", None):
+            raw_text = str(getattr(response.choices[0].message, "content", "") or "").strip()
+        if not raw_text:
+            _log_ai_failed("OpenAI returned empty content")
+            cache[cache_key] = None
+            return None
+        parsed = json.loads(raw_text)
+        ai_copy = {
+            "recommended_summary": str(parsed.get("recommended_summary") or "").strip(),
+            "why_this": [str(item).strip() for item in (parsed.get("why_this") or []) if str(item).strip()][:3],
+            "trip_impact_why": [str(item).strip() for item in (parsed.get("trip_impact_why") or []) if str(item).strip()][:2],
+            "modal_summary": str(parsed.get("modal_summary") or "").strip(),
+        }
+        if not ai_copy["recommended_summary"] or not ai_copy["modal_summary"]:
+            _log_ai_failed("OpenAI returned incomplete JSON")
+            cache[cache_key] = None
+            return None
+        cache[cache_key] = ai_copy
+        _log_ai_success(flight_id, time.perf_counter() - started)
+        return ai_copy
+    except Exception as exc:
+        _log_ai_failed(str(exc))
+        cache[cache_key] = None
+        return None
 
 
 def _recommendation_summary(best_offer, recommendation, priorities):
@@ -727,7 +898,7 @@ def _trip_impact_summary(offer, recommendation):
     return f"This is a strong option if you care about {strength}. {downside}"
 
 
-def _airport_convenience_note(offer):
+def _city_access_note(offer):
     destination = str(offer.get("destination") or "").upper()
     origin = str(offer.get("origin") or "").upper()
     airport_notes = {
@@ -747,7 +918,7 @@ def _airport_convenience_note(offer):
         "CDG": "Charles de Gaulle has the broadest international coverage for Paris.",
         "ORY": "Orly can be convenient for some Paris trips, especially intra-Europe routes.",
     }
-    return airport_notes.get(destination) or airport_notes.get(origin) or "Airport convenience data is limited for this route."
+    return airport_notes.get(destination) or airport_notes.get(origin) or "City access data is limited for this route."
 
 
 def _return_route_text(offer, return_mode, origin_label, destination_label, return_origin_label):
@@ -1117,9 +1288,17 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
     live_any = False
     seen = set()
     timing = {"duffel": 0.0, "normalize": 0.0}
-    combinations = _airport_search_combinations(origin_airports, destination_airports, return_origin_airports, max_attempts=4)
+    primary_combination = [(origin_airports[0], destination_airports[0], return_origin_airports[0])]
+    nearby_combinations = [
+        combination
+        for combination in _airport_search_combinations(origin_airports, destination_airports, return_origin_airports, max_attempts=4)
+        if combination != primary_combination[0]
+    ]
+    combinations = primary_combination
+    attempts = 0
 
     for origin_airport, destination_airport, return_origin_airport in combinations:
+        attempts += 1
         offers, live, payload = load_flight_offers(
             origin_airport,
             destination_airport,
@@ -1149,6 +1328,39 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
         if len(combined) >= max_results:
             break
 
+    if not combined and nearby_combinations:
+        print("[Byable Flights] primary airport search returned 0 offers; trying nearby airport fallback")
+        for origin_airport, destination_airport, return_origin_airport in nearby_combinations:
+            attempts += 1
+            offers, live, payload = load_flight_offers(
+                origin_airport,
+                destination_airport,
+                departure_date,
+                return_date,
+                adults,
+                cabin_class,
+                max_results=5,
+                return_origin=return_origin_airport,
+            )
+            payload_timing = payload.get("timing") or {}
+            timing["duffel"] += float(payload_timing.get("duffel") or 0)
+            timing["normalize"] += float(payload_timing.get("normalize") or 0)
+            live_any = live_any or live
+            if payload.get("message"):
+                messages.append(f"{origin_airport}->{destination_airport}/{return_origin_airport}->{origin_airport}: {payload.get('message')}")
+            for offer in offers:
+                offer["origin_city"] = origin_label
+                offer["destination_city"] = destination_label
+                offer["return_origin_city"] = return_origin_label
+                offer["airport_pair"] = f"{origin_airport} → {destination_airport}"
+                offer["return_airport_pair"] = f"{return_origin_airport} → {origin_airport}"
+                key = _flight_key(offer)
+                if key not in seen:
+                    seen.add(key)
+                    combined.append(offer)
+            if len(combined) >= max_results:
+                break
+
     status = "ok" if combined or live_any else "not_configured" if not _duffel_api_key() else "ok"
     message = None if combined else "No live fares found for these dates."
     if not _duffel_api_key():
@@ -1160,7 +1372,7 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
         f"origin_airports={len(origin_airports)} "
         f"destination_airports={len(destination_airports)} "
         f"return_airports={len(return_origin_airports)} "
-        f"attempts={len(combinations)}"
+        f"attempts={attempts}"
     )
     return combined[:max_results], bool(combined and live_any), {
         "status": status,
@@ -1169,7 +1381,7 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
             "duffel": timing["duffel"],
             "normalize": timing["normalize"],
             "city_search": time.perf_counter() - city_search_start,
-            "attempts": len(combinations),
+            "attempts": attempts,
         },
         "searched_origin_airports": origin_airports,
         "searched_destination_airports": destination_airports,
@@ -1337,7 +1549,7 @@ def render_flight_details(offer, recommendation=None, return_mode="Same as desti
     note_cols = st.columns(2)
     with note_cols[0]:
         st.caption("Airport notes")
-        st.markdown(f"**{_airport_convenience_note(offer)}**")
+        st.markdown(f"**{_city_access_note(offer)}**")
     with note_cols[1]:
         st.caption("Return logic")
         st.markdown(f"**{_return_route_text(offer, return_mode, origin_label, destination_label, return_origin_label)}**")
@@ -1411,6 +1623,7 @@ def _modal_route_line(flight_slice):
 
 def render_flight_details_modal(offer, recommendation=None, return_mode="Same as destination", origin_label="", destination_label="", return_origin_label=""):
     recommendation = recommendation or {}
+    ai_copy = recommendation.get("ai_advisor_copy") or {}
     route_details = offer.get("route_details") or []
     fare_conditions = offer.get("fare_conditions") or ["Not available"]
     operating_carriers = []
@@ -1421,7 +1634,7 @@ def render_flight_details_modal(offer, recommendation=None, return_mode="Same as
             aircraft_types.append(segment.get("aircraft") or "Not available")
 
     st.markdown("#### Advisor summary")
-    st.write(_trip_impact_summary(offer, recommendation))
+    st.write(ai_copy.get("modal_summary") or _trip_impact_summary(offer, recommendation))
 
     fact_line = " · ".join(
         [
@@ -1464,6 +1677,7 @@ def render_flight_details_modal(offer, recommendation=None, return_mode="Same as
 
 def render():
     render_start = time.perf_counter()
+    _run_ai_setup_check_once()
     selected_flight = st.session_state.get("selected_flight")
     if isinstance(selected_flight, dict) and selected_flight.get("source") != "duffel":
         st.session_state.pop("selected_flight", None)
@@ -1988,6 +2202,7 @@ def render():
         )
 
     if submitted:
+        _print_ai_status()
         departure_iso, departure_error = _validate_iso_date(departure_date, "Depart")
         return_iso, return_error = _validate_iso_date(return_date, "Return")
         if departure_error or return_error:
@@ -2243,6 +2458,32 @@ def render():
     )
     perf_timings["recommendation"] = time.perf_counter() - recommendation_start
     advisor_bullets = ranking_output.get("why_over_options") or _why_over_others(best_offer, visible_offers, recommendations)
+    best_impact = _trip_impact(best_offer)
+    visible_prices = [float(offer.get("price_total") or 0) for offer in visible_offers if float(offer.get("price_total") or 0) > 0]
+    visible_durations = [_duration_minutes(offer.get("duration")) for offer in visible_offers]
+    visible_durations = [duration for duration in visible_durations if duration and duration > 0]
+    best_price = float(best_offer.get("price_total") or 0)
+    best_duration = _duration_minutes(best_offer.get("duration")) or 0
+    ai_comparison_context = {
+        "search_params": active_search_params,
+        "why_over_options": advisor_bullets,
+        "is_cheapest": bool(visible_prices and best_price > 0 and best_price <= min(visible_prices) * 1.05),
+        "is_fastest": bool(visible_durations and best_duration > 0 and best_duration <= min(visible_durations) + 30),
+        "return_route": (
+            f"{return_origin_label} -> {origin_label}"
+            if return_mode == "Different city"
+            else f"{destination_label} -> {origin_label}"
+        ),
+    }
+    ai_advisor_copy = generate_ai_advisor_copy(best_offer, best_impact, priorities, ai_comparison_context)
+    if ai_advisor_copy:
+        recommendation_summary = ai_advisor_copy.get("recommended_summary") or recommendation_summary
+        advisor_bullets = ai_advisor_copy.get("why_this") or advisor_bullets
+        if _flight_key(best_offer) in recommendations:
+            recommendations[_flight_key(best_offer)] = {
+                **recommendations[_flight_key(best_offer)],
+                "ai_advisor_copy": ai_advisor_copy,
+            }
     detail_modal_key = st.session_state.get("selected_flight_for_details", "")
 
     for index, offer in enumerate(visible_offers):
@@ -2291,15 +2532,20 @@ def render():
             ("Arrival Timing", impact["arrival_timing"]),
             ("Jet Lag Impact", impact["jet_lag"]),
         ]
-        if impact.get("airport_convenience"):
-            impact_rows.append(("Airport Convenience", impact["airport_convenience"]))
+        if impact.get("city_access"):
+            impact_rows.append(("City Access", impact["city_access"]))
         impact_html = "".join(
             f'<div><span>{html.escape(label)}:</span> <strong>{html.escape(value)}</strong></div>'
             for label, value in impact_rows
         )
+        impact_reason_source = (
+            (recommendation.get("ai_advisor_copy") or {}).get("trip_impact_why")
+            if is_recommended
+            else None
+        ) or impact["reasons"][:3]
         impact_bullets = "".join(
             f"<li>{html.escape(bullet)}</li>"
-            for bullet in impact["reasons"][:3]
+            for bullet in impact_reason_source[:3]
         )
         impact_class = "flight-card-recommendation" if is_recommended else "flight-card-recommendation compact"
         trip_impact_html = "".join(
