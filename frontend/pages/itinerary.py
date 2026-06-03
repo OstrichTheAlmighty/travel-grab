@@ -119,6 +119,12 @@ html,body{margin:0;padding:0;background:#07090f;}
 .dot-blue{background:#38bdf8}
 .dot-pink{background:#f472b6}
 .dot-red{background:#f87171}
+@media(max-width:768px){
+html,body,.it{height:auto!important;min-height:100dvh!important;max-height:none!important;overflow-y:visible!important;-webkit-overflow-scrolling:touch}
+.it{padding-bottom:220px!important}
+.timeline{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important}
+.day-card,.day-body,.period,.items{height:auto!important;max-height:none!important;overflow:visible!important}
+}
 </style>
 </head>
 <body>
