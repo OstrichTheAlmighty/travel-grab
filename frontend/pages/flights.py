@@ -65,6 +65,13 @@ CITY_AIRPORTS = {
     "singapore": {"label": "Singapore", "airports": ["SIN"]},
     "sydney": {"label": "Sydney", "airports": ["SYD"]},
 }
+DESTINATION_HERO_IMAGES = {
+    "tokyo": "https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=1800&q=80",
+    "paris": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1800&q=80",
+    "london": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1800&q=80",
+    "new york": "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1800&q=80",
+    "nyc": "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1800&q=80",
+}
 
 load_dotenv(dotenv_path=PROJECT_ROOT / ".env")
 
@@ -233,6 +240,11 @@ def _resolve_city_airports(value):
     label = raw.title() if raw else "San Francisco"
     fallback_code = raw.upper()[:3] if raw else "SFO"
     return label, [fallback_code]
+
+
+def _destination_hero_image(city):
+    normalized = re.sub(r"\s+", " ", str(city or "").strip().lower())
+    return DESTINATION_HERO_IMAGES.get(normalized)
 
 
 def _airport_combo_label(city_label, airports):
@@ -2005,6 +2017,79 @@ def render():
             color: rgba(255,255,255,0.48);
             font-size: 12px;
         }
+        .flight-destination-hero {
+            position: relative;
+            min-height: 255px;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(165,180,252,0.18);
+            background-position: center;
+            background-size: cover;
+            margin: 14px 0 18px;
+            box-shadow: 0 28px 70px rgba(0,0,0,0.30);
+        }
+        .flight-destination-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(129,140,248,0.30), transparent 32%),
+                linear-gradient(90deg, rgba(5,7,13,0.88) 0%, rgba(5,7,13,0.58) 46%, rgba(5,7,13,0.28) 100%),
+                linear-gradient(0deg, rgba(5,7,13,0.55), rgba(5,7,13,0.10));
+        }
+        .flight-destination-hero-content {
+            position: relative;
+            z-index: 1;
+            min-height: 255px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 28px;
+        }
+        .flight-destination-kicker {
+            width: fit-content;
+            border: 1px solid rgba(196,181,253,0.28);
+            background: rgba(99,102,241,0.16);
+            color: rgba(224,231,255,0.92);
+            border-radius: 999px;
+            padding: 7px 11px;
+            font-size: 11px;
+            font-weight: 850;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            backdrop-filter: blur(10px);
+        }
+        .flight-destination-title {
+            color: #fff;
+            font-size: clamp(2rem, 4vw, 3.8rem);
+            font-weight: 950;
+            letter-spacing: -0.055em;
+            line-height: 0.95;
+            margin-bottom: 12px;
+            text-shadow: 0 18px 42px rgba(0,0,0,0.36);
+        }
+        .flight-destination-route {
+            color: rgba(255,255,255,0.84);
+            font-size: 1rem;
+            font-weight: 780;
+            margin-bottom: 14px;
+        }
+        .flight-destination-meta {
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap;
+        }
+        .flight-destination-meta span {
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.13);
+            background: rgba(7,9,15,0.44);
+            color: rgba(255,255,255,0.76);
+            padding: 7px 11px;
+            font-size: 12px;
+            font-weight: 750;
+            backdrop-filter: blur(10px);
+        }
         div[data-testid="stVerticalBlockBorderWrapper"] {
             border: 1px solid rgba(129,140,248,0.16) !important;
             background:
@@ -2392,6 +2477,13 @@ def render():
             background: rgba(255,255,255,0.032);
         }
         @media (max-width: 760px) {
+            .flight-destination-hero,
+            .flight-destination-hero-content {
+                min-height: 235px;
+            }
+            .flight-destination-hero-content {
+                padding: 22px;
+            }
             .flight-card-native {
                 padding: 16px;
             }
@@ -2674,6 +2766,33 @@ def render():
         route_label = f"{origin_label} → {destination_label} · {return_origin_label} → {origin_label}"
     else:
         route_label = f"{origin_label} → {destination_label} → {origin_label}"
+    has_searched_for_current_route = submitted or cached_search_params == active_search_params
+    if has_searched_for_current_route:
+        display_route = f"{origin_label} → {destination_label}"
+        hero_image = _destination_hero_image(destination_label)
+        hero_style = (
+            f"background-image: url('{html.escape(hero_image)}');"
+            if hero_image
+            else "background-image: radial-gradient(circle at top left, rgba(129,140,248,0.30), transparent 36%), linear-gradient(135deg, rgba(15,23,42,0.96), rgba(49,46,129,0.55));"
+        )
+        cabin_label = cabin_class.replace("_", " ").title()
+        st.markdown(
+            f"""
+            <section class="flight-destination-hero" style="{hero_style}">
+                <div class="flight-destination-hero-content">
+                    <div class="flight-destination-kicker">Your trip starts here</div>
+                    <div class="flight-destination-title">{html.escape(destination_label)}</div>
+                    <div class="flight-destination-route">{html.escape(display_route)}</div>
+                    <div class="flight-destination-meta">
+                        <span>{html.escape(departure_iso)} → {html.escape(return_iso)}</span>
+                        <span>{html.escape(traveler_label)}</span>
+                        <span>{html.escape(cabin_label)}</span>
+                    </div>
+                </div>
+            </section>
+            """,
+            unsafe_allow_html=True,
+        )
 
     st.markdown("#### Flight options")
     st.markdown(
