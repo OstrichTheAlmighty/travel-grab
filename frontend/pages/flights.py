@@ -687,6 +687,36 @@ def _city_access_level(airport_code):
     return levels.get(str(airport_code or "").upper(), "Unknown")
 
 
+def _aircraft_values(offer):
+    values = []
+    for flight_slice in offer.get("route_details") or []:
+        for segment in flight_slice.get("segments") or []:
+            aircraft = _display_value(segment.get("aircraft"))
+            if aircraft != "Not available":
+                values.append(aircraft)
+    return list(dict.fromkeys(values))
+
+
+def _aircraft_comfort_details(offer):
+    aircraft_values = _aircraft_values(offer)
+    if not aircraft_values:
+        return "Unknown", "", "Aircraft comfort estimate is unknown because aircraft type is unavailable."
+    aircraft_text = " ".join(aircraft_values).upper()
+    if any(code in aircraft_text for code in ("A350", "B787", "787", "A380")):
+        matched = next((value for value in aircraft_values if any(code in value.upper() for code in ("A350", "B787", "787", "A380"))), aircraft_values[0])
+        return "Excellent", matched, f"Comfort estimate is based on aircraft type: {matched}."
+    if any(code in aircraft_text for code in ("A330", "B777", "777", "B767", "767")):
+        matched = next((value for value in aircraft_values if any(code in value.upper() for code in ("A330", "B777", "777", "B767", "767"))), aircraft_values[0])
+        return "Good", matched, f"Comfort estimate is based on aircraft type: {matched}."
+    if any(code in aircraft_text for code in ("A321", "A320", "B737", "737")):
+        matched = next((value for value in aircraft_values if any(code in value.upper() for code in ("A321", "A320", "B737", "737"))), aircraft_values[0])
+        return "Fair", matched, f"Comfort estimate is based on aircraft type: {matched}."
+    if any(code in aircraft_text for code in ("E17", "E19", "CRJ", "ERJ", "RJ")):
+        matched = next((value for value in aircraft_values if any(code in value.upper() for code in ("E17", "E19", "CRJ", "ERJ", "RJ"))), aircraft_values[0])
+        return "Basic", matched, f"Comfort estimate is based on aircraft type: {matched}."
+    return "Basic", aircraft_values[0], f"Comfort estimate is based on aircraft type: {aircraft_values[0]}."
+
+
 def _is_lowest_priced(offer, offers):
     prices = [float(item.get("price_total") or 0) for item in (offers or []) if float(item.get("price_total") or 0) > 0]
     offer_price = float(offer.get("price_total") or 0)
@@ -706,6 +736,7 @@ def _trip_impact(offer, offers=None):
     zones_crossed = _time_zone_delta_estimate(offer)
     destination = str(offer.get("destination") or "").upper()
     city_access = _city_access_level(destination)
+    aircraft_comfort, aircraft_name, aircraft_note = _aircraft_comfort_details(offer)
     reasons = []
     arrival = _clock_minutes(offer.get("arrive_time"))
     if 11 * 60 <= arrival < 17 * 60:
@@ -736,6 +767,10 @@ def _trip_impact(offer, offers=None):
                 reasons.append("Best value among nonstop options")
     if _has_baggage(offer):
         reasons.append("Baggage details are available for this fare")
+    if aircraft_comfort in {"Excellent", "Good", "Fair"}:
+        reasons.append(aircraft_note)
+    elif aircraft_comfort == "Unknown":
+        reasons.append("Aircraft comfort is unknown for this test fare")
     if jet_lag in {"Moderate", "High"}:
         if zones_crossed >= 8:
             reasons.append("High jet lag impact because this route crosses many time zones")
@@ -764,6 +799,8 @@ def _trip_impact(offer, offers=None):
         "arrival_timing": arrival_timing,
         "jet_lag": jet_lag,
         "city_access": city_access,
+        "aircraft_comfort": aircraft_comfort,
+        "aircraft_type": aircraft_name,
         "reasons": deduped,
     }
 
@@ -790,6 +827,11 @@ def _watch_out_copy(offer, offers=None):
         concerns.append("Higher price with limited benefit over cheaper visible options.")
     if not _has_baggage(offer):
         concerns.append("Baggage details are not clear in this test fare.")
+    aircraft_comfort, _aircraft_name, _aircraft_note = _aircraft_comfort_details(offer)
+    if aircraft_comfort == "Unknown":
+        concerns.append("Aircraft type is unavailable, so comfort is harder to judge.")
+    elif aircraft_comfort in {"Basic", "Fair"} and duration >= 8 * 60:
+        concerns.append("Narrowbody or basic aircraft may feel less comfortable on a long flight.")
 
     return concerns[:2] or ["No major downside compared with similar options."]
 
@@ -824,6 +866,8 @@ def _ai_flight_summary(offer, recommendations=None):
         "arrival_timing_label": impact.get("arrival_timing"),
         "jet_lag_label": impact.get("jet_lag"),
         "city_access_label": impact.get("city_access"),
+        "aircraft_comfort_label": impact.get("aircraft_comfort"),
+        "aircraft_type": impact.get("aircraft_type"),
     }
 
 
@@ -855,6 +899,8 @@ def generate_ai_advisor_copy(flight, trip_impact, selected_priorities, compariso
         "arrival_timing_label": (trip_impact or {}).get("arrival_timing"),
         "jet_lag_label": (trip_impact or {}).get("jet_lag"),
         "city_access_label": (trip_impact or {}).get("city_access"),
+        "aircraft_comfort_label": (trip_impact or {}).get("aircraft_comfort"),
+        "aircraft_type": (trip_impact or {}).get("aircraft_type"),
         "selected_priorities": list(selected_priorities or []),
         "is_cheapest": bool((comparison_context or {}).get("is_cheapest")),
         "is_fastest": bool((comparison_context or {}).get("is_fastest")),
@@ -2124,7 +2170,7 @@ def render():
         }
         .flight-card-impact-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 7px 12px;
             color: rgba(255,255,255,0.72);
             font-size: 12px;
@@ -2658,8 +2704,14 @@ def render():
         ]
         if impact.get("city_access"):
             impact_rows.append(("City Access", impact["city_access"]))
+        if impact.get("aircraft_comfort"):
+            aircraft_type = impact.get("aircraft_type")
+            aircraft_value = impact["aircraft_comfort"]
+            if aircraft_type:
+                aircraft_value = f'{aircraft_value}<br><span>({html.escape(str(aircraft_type))})</span>'
+            impact_rows.append(("Aircraft Comfort Estimate", aircraft_value))
         impact_html = "".join(
-            f'<div><span>{html.escape(label)}:</span> <strong>{html.escape(value)}</strong></div>'
+            f'<div><span>{html.escape(label)}:</span> <strong>{value if label == "Aircraft Comfort Estimate" else html.escape(value)}</strong></div>'
             for label, value in impact_rows
         )
         impact_reason_source = (
