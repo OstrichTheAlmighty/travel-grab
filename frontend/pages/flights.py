@@ -768,6 +768,32 @@ def _trip_impact(offer, offers=None):
     }
 
 
+def _watch_out_copy(offer, offers=None):
+    stops = int(offer.get("stops") or 0)
+    duration = _duration_minutes(offer.get("duration")) or 0
+    durations = [_duration_minutes(item.get("duration")) for item in (offers or [])]
+    durations = [item for item in durations if item and item > 0]
+    price = float(offer.get("price_total") or 0)
+    prices = [float(item.get("price_total") or 0) for item in (offers or []) if float(item.get("price_total") or 0) > 0]
+    arrival_timing = _arrival_timing_label(offer)
+    concerns = []
+
+    if durations and duration and duration > min(durations) + 180:
+        concerns.append(f"Long {_display_value(offer.get('duration'))} travel time makes this harder than faster options.")
+    if stops > 0:
+        concerns.append("A connection adds more timing risk and travel fatigue.")
+    if arrival_timing == "Bad":
+        concerns.append("Arrives late at night, which could make the first day harder.")
+    elif arrival_timing == "Okay":
+        concerns.append("Evening arrival leaves less useful time on arrival day.")
+    if prices and price and price > min(prices) * 1.25:
+        concerns.append("Higher price with limited benefit over cheaper visible options.")
+    if not _has_baggage(offer):
+        concerns.append("Baggage details are not clear in this test fare.")
+
+    return concerns[:2] or ["No major downside compared with similar options."]
+
+
 def _ai_advisor_cache_key(flight, selected_priorities, comparison_context):
     payload = {
         "flight_id": _flight_key(flight),
@@ -867,9 +893,11 @@ def generate_ai_advisor_copy(flight, trip_impact, selected_priorities, compariso
             "stops/connections, airport differences, arrival timing differences, and baggage differences. "
             "Highlight meaningful tradeoffs. If two flights are nearly identical, explicitly say so and "
             "explain why the winner still ranks higher. Use the user's selected priorities to explain the decision. "
+            "Also provide a short watch_out downside for the recommended flight. If there is no major downside, "
+            "say: No major downside compared with similar options. "
             "Return exactly this JSON shape: "
             '{"recommended_summary":"...","why_this":["...","...","..."],'
-            '"trip_impact_why":["...","..."],"modal_summary":"..."}\n\n'
+            '"trip_impact_why":["...","..."],"watch_out":["..."],"modal_summary":"..."}\n\n'
             f"Facts:\n{json.dumps(prompt_payload, ensure_ascii=True, default=str)}"
         )
         print(f"BYABLE AI FULL PROMPT:\nSYSTEM:\n{system}\nUSER:\n{user}")
@@ -897,6 +925,7 @@ def generate_ai_advisor_copy(flight, trip_impact, selected_priorities, compariso
             "recommended_summary": str(parsed.get("recommended_summary") or "").strip(),
             "why_this": [str(item).strip() for item in (parsed.get("why_this") or []) if str(item).strip()][:3],
             "trip_impact_why": [str(item).strip() for item in (parsed.get("trip_impact_why") or []) if str(item).strip()][:2],
+            "watch_out": [str(item).strip() for item in (parsed.get("watch_out") or []) if str(item).strip()][:2],
             "modal_summary": str(parsed.get("modal_summary") or "").strip(),
         }
         if not ai_copy["recommended_summary"] or not ai_copy["modal_summary"]:
@@ -2654,6 +2683,23 @@ def render():
                 "</div>",
             ]
         )
+        watch_out_source = (
+            (recommendation.get("ai_advisor_copy") or {}).get("watch_out")
+            if is_recommended
+            else None
+        ) or _watch_out_copy(offer, visible_offers)
+        watch_out_items = "".join(
+            f"<li>{html.escape(item)}</li>"
+            for item in watch_out_source[:2]
+        )
+        watch_out_html = "".join(
+            [
+                '<div class="flight-card-recommendation compact">',
+                '<div class="flight-card-rec-kicker">Watch out</div>',
+                f'<ul class="flight-card-rec-list">{watch_out_items}</ul>',
+                "</div>",
+            ]
+        )
         recommendation_html = ""
         if is_recommended:
             bullet_html = "".join(
@@ -2706,6 +2752,7 @@ def render():
                 "</div>",
                 recommendation_html,
                 trip_impact_html,
+                watch_out_html,
                 '<div class="flight-card-footer">',
                 f'<div class="flight-chip-row">{chips_html}</div>',
                 f'<div class="flight-card-actions">{action_html}</div>',
