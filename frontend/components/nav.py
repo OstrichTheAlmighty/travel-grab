@@ -91,6 +91,20 @@ def sidebar_nav():
         keys = [key for _, key in NAV_ITEMS]
         current = st.session_state.get("page", "flights")
         current_idx = keys.index(current) if current in keys else 0
+        current_label = labels[current_idx]
+        incoming_sidebar_choice = st.session_state.get("_sidebar_nav")
+        previous_sidebar_choice = st.session_state.get("_sidebar_nav_last_choice")
+
+        # Keep the hidden mobile sidebar from overwriting top-nav clicks.
+        # If the radio value changed since the last run, it was a real sidebar click.
+        # Otherwise sync it to the active page before rendering.
+        sidebar_clicked = (
+            incoming_sidebar_choice in labels
+            and previous_sidebar_choice in labels
+            and incoming_sidebar_choice != previous_sidebar_choice
+        )
+        if not sidebar_clicked and incoming_sidebar_choice != current_label:
+            st.session_state["_sidebar_nav"] = current_label
 
         choice = st.radio(
             "Navigation",
@@ -102,6 +116,7 @@ def sidebar_nav():
         selected_key = keys[labels.index(choice)]
         if selected_key != st.session_state.get("page"):
             st.session_state["page"] = selected_key
+        st.session_state["_sidebar_nav_last_choice"] = choice
 
         st.markdown("""
 <style>

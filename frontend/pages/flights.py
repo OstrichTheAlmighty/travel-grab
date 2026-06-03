@@ -2215,12 +2215,113 @@ def render():
                 border-color: rgba(168,156,247,0.34) !important;
                 -webkit-text-fill-color: #ffffff !important;
             }
+            div[data-testid="stForm"] input,
+            div[data-testid="stForm"] textarea,
+            div[data-testid="stForm"] [data-baseweb="input"],
+            div[data-testid="stForm"] [data-baseweb="base-input"],
+            div[data-testid="stForm"] [data-baseweb="select"],
+            div[data-testid="stForm"] [data-baseweb="select"] > div,
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] input,
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-baseweb="input"],
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-baseweb="base-input"],
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-baseweb="select"],
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-baseweb="select"] > div {
+                background: rgba(7,9,15,0.88) !important;
+                color: rgba(248,250,252,0.94) !important;
+                border-color: rgba(255,255,255,0.13) !important;
+                -webkit-text-fill-color: rgba(248,250,252,0.94) !important;
+            }
+            div[data-testid="stForm"] label,
+            div[data-testid="stForm"] [role="radiogroup"] label,
+            div[data-testid="stForm"] div[data-testid="stCheckbox"] label,
+            div[data-testid="stForm"] div[data-testid="stRadio"] label,
+            div[data-testid="stForm"] div[data-testid="stMultiSelect"] label,
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] label {
+                color: rgba(226,232,240,0.72) !important;
+                -webkit-text-fill-color: rgba(226,232,240,0.72) !important;
+            }
         }
         div[data-testid="stForm"] label {
             font-size: 0.78rem;
             color: rgba(255,255,255,0.68) !important;
+            -webkit-text-fill-color: rgba(255,255,255,0.68) !important;
             font-weight: 800;
             letter-spacing: 0.01em;
+        }
+        div[data-testid="stForm"] input,
+        div[data-testid="stForm"] textarea,
+        div[data-testid="stForm"] [data-baseweb="input"],
+        div[data-testid="stForm"] [data-baseweb="base-input"],
+        div[data-testid="stForm"] [data-baseweb="select"],
+        div[data-testid="stForm"] [data-baseweb="select"] > div,
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] input,
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] textarea,
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-baseweb="input"],
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-baseweb="base-input"],
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-baseweb="select"],
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-baseweb="select"] > div {
+            background: rgba(7,9,15,0.88) !important;
+            color: rgba(248,250,252,0.94) !important;
+            border-color: rgba(255,255,255,0.13) !important;
+            -webkit-text-fill-color: rgba(248,250,252,0.94) !important;
+        }
+        div[data-testid="stForm"] input::placeholder,
+        div[data-testid="stForm"] textarea::placeholder,
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] input::placeholder,
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] textarea::placeholder {
+            color: rgba(226,232,240,0.44) !important;
+            -webkit-text-fill-color: rgba(226,232,240,0.44) !important;
+            opacity: 1 !important;
+        }
+        div[data-testid="stForm"] [data-baseweb="select"] span,
+        div[data-testid="stForm"] [data-baseweb="select"] div,
+        div[data-testid="stForm"] [data-baseweb="tag"] span,
+        div[data-testid="stForm"] [data-baseweb="tag"] div,
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-baseweb="select"] span,
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-baseweb="select"] div,
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-baseweb="tag"] span,
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-baseweb="tag"] div {
+            color: rgba(248,250,252,0.92) !important;
+            -webkit-text-fill-color: rgba(248,250,252,0.92) !important;
+        }
+        div[data-testid="stForm"] [data-baseweb="tag"],
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-baseweb="tag"] {
+            background: rgba(124,58,237,0.22) !important;
+            border: 1px solid rgba(168,156,247,0.30) !important;
+        }
+        div[data-testid="stForm"] [data-baseweb="select"] svg,
+        div[data-testid="stForm"] [data-baseweb="tag"] svg,
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-baseweb="select"] svg,
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-baseweb="tag"] svg {
+            color: rgba(248,250,252,0.82) !important;
+            fill: rgba(248,250,252,0.82) !important;
+        }
+        div[data-testid="stForm"] [role="radiogroup"] label,
+        div[data-testid="stForm"] div[data-testid="stCheckbox"] label,
+        div[data-testid="stForm"] div[data-testid="stRadio"] label,
+        div[data-testid="stForm"] div[data-testid="stMultiSelect"] label,
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [role="radiogroup"] label,
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stCheckbox"] label,
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stRadio"] label,
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stMultiSelect"] label {
+            color: rgba(226,232,240,0.72) !important;
+            -webkit-text-fill-color: rgba(226,232,240,0.72) !important;
+        }
+        div[data-testid="stForm"] [role="radiogroup"] label span,
+        div[data-testid="stForm"] div[data-testid="stCheckbox"] label span,
+        div[data-testid="stForm"] div[data-testid="stRadio"] label span,
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [role="radiogroup"] label span,
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stCheckbox"] label span,
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stRadio"] label span {
+            color: rgba(226,232,240,0.72) !important;
+            -webkit-text-fill-color: rgba(226,232,240,0.72) !important;
+        }
+        div[data-baseweb="popover"],
+        div[data-baseweb="popover"] ul,
+        div[data-baseweb="popover"] li {
+            background: #0b0f17 !important;
+            color: rgba(248,250,252,0.94) !important;
+            -webkit-text-fill-color: rgba(248,250,252,0.94) !important;
         }
         div[data-testid="stForm"] [data-testid="stVerticalBlock"] {
             gap: 0.55rem;
