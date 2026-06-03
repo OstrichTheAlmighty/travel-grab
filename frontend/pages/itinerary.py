@@ -687,4 +687,4 @@ function toggleEditMode(){
 
 def render():
     html = _HTML.replace("{tabler}", _TABLER)
-    components.html(html, height=2600, scrolling=False)
+    components.html(html, height=2600, scrolling=True)

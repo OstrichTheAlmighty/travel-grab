@@ -2236,9 +2236,20 @@ def render():
             div[data-testid="stForm"] div[data-testid="stCheckbox"] label,
             div[data-testid="stForm"] div[data-testid="stRadio"] label,
             div[data-testid="stForm"] div[data-testid="stMultiSelect"] label,
-            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] label {
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] label,
+            div[data-testid="stForm"] [data-testid="stWidgetLabel"],
+            div[data-testid="stForm"] [data-testid="stWidgetLabel"] span,
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stWidgetLabel"],
+            div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stWidgetLabel"] span {
                 color: rgba(226,232,240,0.72) !important;
                 -webkit-text-fill-color: rgba(226,232,240,0.72) !important;
+            }
+            .flight-status-row,
+            .flight-status-row span,
+            .flight-updated,
+            .flight-search-subtitle {
+                color: rgba(226,232,240,0.66) !important;
+                -webkit-text-fill-color: rgba(226,232,240,0.66) !important;
             }
         }
         div[data-testid="stForm"] label {
@@ -2247,6 +2258,13 @@ def render():
             -webkit-text-fill-color: rgba(255,255,255,0.68) !important;
             font-weight: 800;
             letter-spacing: 0.01em;
+        }
+        div[data-testid="stForm"] [data-testid="stWidgetLabel"],
+        div[data-testid="stForm"] [data-testid="stWidgetLabel"] span,
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stWidgetLabel"],
+        div[data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stWidgetLabel"] span {
+            color: rgba(226,232,240,0.74) !important;
+            -webkit-text-fill-color: rgba(226,232,240,0.74) !important;
         }
         div[data-testid="stForm"] input,
         div[data-testid="stForm"] textarea,
@@ -2322,6 +2340,12 @@ def render():
             background: #0b0f17 !important;
             color: rgba(248,250,252,0.94) !important;
             -webkit-text-fill-color: rgba(248,250,252,0.94) !important;
+        }
+        .flight-status-row,
+        .flight-status-row span,
+        .flight-updated {
+            color: rgba(226,232,240,0.66) !important;
+            -webkit-text-fill-color: rgba(226,232,240,0.66) !important;
         }
         div[data-testid="stForm"] [data-testid="stVerticalBlock"] {
             gap: 0.55rem;

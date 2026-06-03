@@ -364,4 +364,4 @@ document.addEventListener('keydown',function(e){
 
 def render():
     html = _HTML.replace("{tabler}", _TABLER)
-    components.html(html, height=1900, scrolling=False)
+    components.html(html, height=1900, scrolling=True)

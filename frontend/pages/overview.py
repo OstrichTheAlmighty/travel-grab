@@ -279,4 +279,4 @@ def render():
     html = html.replace("Oct 14 – Oct 24, 2025", "Oct 14 – Oct 24, 2026")
     html = html.replace("3 travelers", f"{travelers} {'traveler' if travelers == 1 else 'travelers'}")
     html = html.replace("Split evenly across 3 travelers", f"Split evenly across {travelers} {'traveler' if travelers == 1 else 'travelers'}")
-    components.html(html, height=1700, scrolling=False)
+    components.html(html, height=1700, scrolling=True)

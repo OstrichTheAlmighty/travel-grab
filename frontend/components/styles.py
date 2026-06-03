@@ -298,12 +298,42 @@ button[data-testid^="baseButton"]:disabled p {
 
 @media (max-width: 768px) {
     html,
+    body {
+        height: auto !important;
+        min-height: 100% !important;
+        max-height: none !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    html,
     body,
+    [data-testid="stApp"],
+    [data-testid="stMain"],
     [data-testid="stAppViewContainer"],
     [data-testid="stAppViewContainer"] > section,
     .block-container {
         max-width: 100vw !important;
         overflow-x: hidden !important;
+        max-height: none !important;
+    }
+
+    [data-testid="stApp"],
+    [data-testid="stMain"],
+    [data-testid="stAppViewContainer"],
+    [data-testid="stAppViewContainer"] > section {
+        height: auto !important;
+        min-height: 100dvh !important;
+        overflow-y: visible !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    [data-testid="stVerticalBlock"],
+    [data-testid="stElementContainer"],
+    [data-testid="stIFrame"] {
+        max-height: none !important;
+        overflow: visible !important;
     }
 
     [data-testid="stSidebar"] {
@@ -313,7 +343,10 @@ button[data-testid^="baseButton"]:disabled p {
     }
 
     .block-container {
-        padding: 0 0.72rem 1rem !important;
+        height: auto !important;
+        min-height: auto !important;
+        overflow-y: visible !important;
+        padding: 0 0.72rem calc(7rem + env(safe-area-inset-bottom, 0px)) !important;
     }
 
     .byable-mobile-nav-heading {
@@ -426,6 +459,28 @@ button[data-testid^="baseButton"]:disabled p {
     [data-testid="stSidebar"] .stRadio [data-baseweb="radio"]:has(input:checked) span {
         color: var(--byable-purple) !important;
         -webkit-text-fill-color: var(--byable-purple) !important;
+    }
+
+    [data-testid="stAppViewContainer"] label,
+    [data-testid="stAppViewContainer"] label span,
+    [data-testid="stAppViewContainer"] [data-testid="stWidgetLabel"],
+    [data-testid="stAppViewContainer"] [data-testid="stWidgetLabel"] span,
+    [data-testid="stAppViewContainer"] [data-testid="stMarkdownContainer"],
+    [data-testid="stAppViewContainer"] [data-testid="stMarkdownContainer"] p,
+    [data-testid="stAppViewContainer"] [data-testid="stCaptionContainer"],
+    [data-testid="stAppViewContainer"] [data-testid="stCaptionContainer"] p {
+        color: rgba(226,232,240,0.74) !important;
+        -webkit-text-fill-color: rgba(226,232,240,0.74) !important;
+    }
+
+    [data-testid="stAppViewContainer"] h1,
+    [data-testid="stAppViewContainer"] h2,
+    [data-testid="stAppViewContainer"] h3,
+    [data-testid="stAppViewContainer"] h4,
+    [data-testid="stAppViewContainer"] h5,
+    [data-testid="stAppViewContainer"] strong {
+        color: #f8fafc !important;
+        -webkit-text-fill-color: #f8fafc !important;
     }
 
     div[data-testid="stButton"] > button,

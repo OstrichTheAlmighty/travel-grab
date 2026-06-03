@@ -489,4 +489,4 @@ function toggleAdd(btn){
 
 def render():
     html = _HTML.replace("{tabler}", _TABLER)
-    components.html(html, height=3200, scrolling=False)
+    components.html(html, height=3200, scrolling=True)
