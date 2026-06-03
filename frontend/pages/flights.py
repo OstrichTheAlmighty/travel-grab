@@ -1714,7 +1714,7 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
             return_date,
             adults,
             cabin_class,
-            max_results=5,
+            max_results=max_results,
             return_origin=return_origin_airport,
         )
         payload_timing = payload.get("timing") or {}
@@ -1747,7 +1747,7 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
                 return_date,
                 adults,
                 cabin_class,
-                max_results=5,
+                max_results=max_results,
                 return_origin=return_origin_airport,
             )
             payload_timing = payload.get("timing") or {}
@@ -2400,6 +2400,53 @@ def render():
             background: linear-gradient(135deg, #a5b4fc, #34d399);
             box-shadow: 0 0 16px rgba(129,140,248,0.42);
         }
+        .flight-loading-card {
+            border-radius: 18px;
+            border: 1px solid rgba(165,180,252,0.18);
+            background:
+                radial-gradient(circle at top left, rgba(99,102,241,0.16), transparent 34%),
+                linear-gradient(145deg, rgba(255,255,255,0.055), rgba(255,255,255,0.018)),
+                rgba(7,9,15,0.92);
+            padding: 18px 20px;
+            margin: 8px 0 16px;
+            box-shadow: 0 18px 48px rgba(0,0,0,0.18);
+        }
+        .flight-loading-title {
+            color: rgba(255,255,255,0.94);
+            font-size: 1rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+        .flight-loading-steps {
+            display: grid;
+            gap: 8px;
+        }
+        .flight-loading-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255,255,255,0.68);
+            font-size: 13px;
+            font-weight: 720;
+        }
+        .flight-loading-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #a5b4fc;
+            box-shadow: 0 0 18px rgba(129,140,248,0.48);
+            animation: byablePulse 1.35s ease-in-out infinite;
+        }
+        .flight-loading-step:nth-child(2) .flight-loading-dot {
+            animation-delay: 0.18s;
+        }
+        .flight-loading-step:nth-child(3) .flight-loading-dot {
+            animation-delay: 0.36s;
+        }
+        @keyframes byablePulse {
+            0%, 100% { opacity: 0.42; transform: scale(0.88); }
+            50% { opacity: 1; transform: scale(1.18); }
+        }
         .flight-card-native {
             width: 100%;
             border-radius: 18px;
@@ -2428,6 +2475,37 @@ def render():
         .flight-card-native.recommended {
             border-color: rgba(165,180,252,0.36);
             box-shadow: 0 18px 54px rgba(49,46,129,0.18);
+        }
+        .flight-card-native.compact {
+            padding: 12px 14px;
+        }
+        .flight-card-native.compact .flight-card-top {
+            margin-bottom: 8px;
+        }
+        .flight-card-native.compact .flight-route {
+            margin-bottom: 8px;
+        }
+        .flight-card-native.compact .flight-card-footer {
+            margin-top: 8px;
+        }
+        .flight-impact-inline {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 8px 0;
+            color: rgba(255,255,255,0.62);
+            font-size: 12px;
+            line-height: 1.3;
+        }
+        .flight-impact-inline span {
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.035);
+            border-radius: 999px;
+            padding: 5px 8px;
+            white-space: nowrap;
+        }
+        .flight-impact-inline strong {
+            color: rgba(255,255,255,0.88);
         }
         .flight-card-top {
             display: flex;
@@ -2483,6 +2561,20 @@ def render():
             gap: 6px;
             flex-wrap: wrap;
             margin-top: 7px;
+        }
+        .flight-byable-recommended-label {
+            display: inline-flex;
+            width: fit-content;
+            border-radius: 999px;
+            border: 1px solid rgba(196,181,253,0.32);
+            background: linear-gradient(135deg, rgba(139,92,246,0.28), rgba(99,102,241,0.12));
+            color: rgba(238,242,255,0.94);
+            padding: 4px 9px;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
         }
         .flight-rec-badge {
             padding: 4px 9px;
@@ -2935,6 +3027,7 @@ def render():
             "priorities": selected_priorities,
         }
         st.session_state["selected_flight_index"] = 0
+        st.session_state["show_more_flights"] = False
         search_state = st.session_state["flight_search"]
 
     origin_city = str(search_state.get("origin_city") or "San Francisco")
@@ -2987,22 +3080,37 @@ def render():
             offers, live = [], False
             debug_payload = {"status": "idle", "message": "Search flights to see live fares."}
     else:
-        with st.spinner("Searching nearby airports..."):
-            search_start = time.perf_counter()
-            offers, live, debug_payload = load_city_flight_offers(
-                origin_city,
-                destination_city,
-                departure_iso,
-                return_iso,
-                adults,
-                cabin_class,
-                20,
-                return_origin_city=return_origin_city,
-            )
-            print(f"[Byable Flights] duffel_search_time={time.perf_counter() - search_start:.3f}s offers={len(offers)}")
-            debug_timing = debug_payload.get("timing") or {}
-            perf_timings["duffel"] = float(debug_timing.get("duffel") or 0)
-            perf_timings["normalize"] = float(debug_timing.get("normalize") or 0)
+        loading_placeholder = st.empty()
+        loading_placeholder.markdown(
+            """
+            <h4 style="margin-bottom: 10px;">Flight options</h4>
+            <div class="flight-loading-card">
+                <div class="flight-loading-title">Searching live fares</div>
+                <div class="flight-loading-steps">
+                    <div class="flight-loading-step"><span class="flight-loading-dot"></span>Searching live fares</div>
+                    <div class="flight-loading-step"><span class="flight-loading-dot"></span>Ranking flights against your priorities</div>
+                    <div class="flight-loading-step"><span class="flight-loading-dot"></span>Building Byable recommendation</div>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        search_start = time.perf_counter()
+        offers, live, debug_payload = load_city_flight_offers(
+            origin_city,
+            destination_city,
+            departure_iso,
+            return_iso,
+            adults,
+            cabin_class,
+            20,
+            return_origin_city=return_origin_city,
+        )
+        print(f"[Byable Flights] duffel_search_time={time.perf_counter() - search_start:.3f}s offers={len(offers)}")
+        debug_timing = debug_payload.get("timing") or {}
+        perf_timings["duffel"] = float(debug_timing.get("duffel") or 0)
+        perf_timings["normalize"] = float(debug_timing.get("normalize") or 0)
+        loading_placeholder.empty()
         st.session_state["flight_results_cache"] = {
             "search_params": active_search_params,
             "raw_offers": list(offers),
@@ -3193,7 +3301,8 @@ def render():
     st.session_state["flight_priorities"] = priorities
     search_state["priorities"] = priorities
 
-    visible_offers = offers[:5]
+    show_more_flights = bool(st.session_state.get("show_more_flights"))
+    visible_offers = offers if show_more_flights else offers[:8]
     recommendation_start = time.perf_counter()
     recommendations = ranking_output.get("recommendations") or _recommendation_map(visible_offers, priorities)
     best_offer = max(visible_offers, key=lambda offer: recommendations.get(_flight_key(offer), {}).get("score", 0))
@@ -3256,6 +3365,8 @@ def render():
             card_class += " selected"
         if is_recommended:
             card_class += " recommended"
+        else:
+            card_class += " compact"
         airline_code = html.escape(str(offer.get("airline_code") or "AIR")[:3].upper())
         flight_number = html.escape(_display_flight_number(offer))
         recommendation = recommendations.get(_flight_key(offer), {"label": "Best value", "score": 75, "why": "This balances price, routing, timing, and flexibility."})
@@ -3265,6 +3376,11 @@ def render():
         )
         if not badge_html:
             badge_html = f'<span class="flight-rec-badge">{html.escape(str(recommendation.get("label") or "Best value"))}</span>'
+        byable_recommended_label = (
+            '<div class="flight-byable-recommended-label">Recommended by Byable</div>'
+            if is_recommended
+            else ""
+        )
         score = html.escape(str(recommendation.get("score") or 75))
         if return_mode == "Different city":
             airport_context = (
@@ -3310,6 +3426,17 @@ def render():
             f'<div><span>{html.escape(label)}:</span> <strong>{value if label == "Aircraft Comfort Estimate" else html.escape(value)}</strong></div>'
             for label, value in impact_rows
         )
+        aircraft_inline = impact.get("aircraft_comfort") or "Unknown"
+        impact_inline_html = "".join(
+            [
+                '<div class="flight-impact-inline">',
+                f'<span>Arrival: <strong>{html.escape(str(impact["arrival_timing"]))}</strong></span>',
+                f'<span>Jet lag: <strong>{html.escape(str(impact["jet_lag"]))}</strong></span>',
+                f'<span>City access: <strong>{html.escape(str(impact.get("city_access") or "Unknown"))}</strong></span>',
+                f'<span>Comfort: <strong>{html.escape(str(aircraft_inline))}</strong></span>',
+                "</div>",
+            ]
+        )
         impact_reason_source = (
             (recommendation.get("ai_advisor_copy") or {}).get("trip_impact_why")
             if is_recommended
@@ -3338,16 +3465,19 @@ def render():
             for bullet in impact_reason_source[:impact_reason_limit]
         )
         impact_class = "flight-card-recommendation" if is_recommended else "flight-card-recommendation compact"
-        trip_impact_html = "".join(
-            [
-                f'<div class="{impact_class}">',
-                '<div class="flight-card-rec-kicker">Trip Impact</div>',
-                f'<div class="flight-card-impact-grid">{impact_html}</div>',
-                '<div class="flight-card-rec-kicker why">Why?</div>',
-                f'<ul class="flight-card-rec-list">{impact_bullets}</ul>',
-                "</div>",
-            ]
-        )
+        if is_recommended:
+            trip_impact_html = "".join(
+                [
+                    f'<div class="{impact_class}">',
+                    '<div class="flight-card-rec-kicker">Trip Impact</div>',
+                    f'<div class="flight-card-impact-grid">{impact_html}</div>',
+                    '<div class="flight-card-rec-kicker why">Why?</div>',
+                    f'<ul class="flight-card-rec-list">{impact_bullets}</ul>',
+                    "</div>",
+                ]
+            )
+        else:
+            trip_impact_html = impact_inline_html
         watch_out_source = (
             (recommendation.get("ai_advisor_copy") or {}).get("watch_out")
             if is_recommended
@@ -3391,6 +3521,7 @@ def render():
                 '<div class="flight-airline-wrap">',
                 f'<div class="flight-logo">{airline_code}</div>',
                 "<div>",
+                byable_recommended_label,
                 f'<div class="flight-airline">{html.escape(str(offer.get("airline") or "Airline"))}</div>',
                 f'<div class="flight-number">{flight_number} · Duffel test fare</div>',
                 f'<div class="flight-rec-row">{badge_html}</div>',
@@ -3449,6 +3580,12 @@ def render():
             if st.button("View details", key=f"details_{index}_{_flight_key(offer)}"):
                 st.session_state["selected_flight_for_details"] = _flight_key(offer)
                 st.rerun()
+
+    if len(offers) > 8 and not show_more_flights:
+        more_count = len(offers) - 8
+        if st.button(f"Show more flights ({more_count})", key="show_more_flights_button"):
+            st.session_state["show_more_flights"] = True
+            st.rerun()
 
     score_detail_offer = None
     score_modal_key = st.session_state.get("selected_flight_for_score_breakdown", "")
