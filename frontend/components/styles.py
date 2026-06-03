@@ -22,6 +22,16 @@ html, body, [data-testid="stAppViewContainer"] {
 footer,
 #MainMenu { display: none !important; }
 
+/* Hide Streamlit's automatic multipage nav; Byable uses its own sidebar nav. */
+[data-testid="stSidebarNav"],
+[data-testid="stSidebarNavItems"],
+section[data-testid="stSidebarNav"],
+nav[data-testid="stSidebarNav"] {
+    display: none !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+
 /* Content padding — hero breaks out via negative margin */
 [data-testid="stAppViewContainer"] > section > div:first-child {
     padding-top: 0 !important;

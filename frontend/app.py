@@ -17,6 +17,13 @@ inject_global_styles()
 
 st.session_state.setdefault("page", "overview")
 
+try:
+    if "flight_key" in st.query_params:
+        st.session_state["page"] = "flights"
+        del st.query_params["flight_key"]
+except Exception:
+    pass
+
 sidebar_nav()
 
 page = st.session_state.get("page", "overview")

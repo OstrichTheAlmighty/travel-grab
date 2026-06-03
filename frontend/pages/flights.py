@@ -572,15 +572,15 @@ def _search_params_key(search_state, return_origin_city):
     }
 
 
-def _arrival_quality(offer):
+def _arrival_timing_label(offer):
     arrival = _clock_minutes(offer.get("arrive_time"))
     if 11 * 60 <= arrival < 17 * 60:
-        return "Excellent"
+        return "Great"
     if 6 * 60 <= arrival < 11 * 60:
         return "Good"
     if 17 * 60 <= arrival < 22 * 60:
-        return "Fair"
-    return "Poor"
+        return "Okay"
+    return "Bad"
 
 
 def _time_zone_delta_estimate(offer):
@@ -600,28 +600,12 @@ def _time_zone_delta_estimate(offer):
 
 def _jet_lag_impact(offer):
     zones_crossed = _time_zone_delta_estimate(offer)
-    arrival_quality = _arrival_quality(offer)
-    if zones_crossed >= 8 or arrival_quality == "Poor":
+    arrival_timing = _arrival_timing_label(offer)
+    if zones_crossed >= 8 or arrival_timing == "Bad":
         return "High"
-    if zones_crossed >= 4 or arrival_quality == "Fair":
+    if zones_crossed >= 4 or arrival_timing == "Okay":
         return "Moderate"
     return "Low"
-
-
-def _vacation_time_lost(offer):
-    arrival = _clock_minutes(offer.get("arrive_time"))
-    departure = _clock_minutes(offer.get("depart_time"))
-    duration = _duration_minutes(offer.get("duration")) or 0
-    lost = 0.5
-    if arrival >= 17 * 60:
-        lost += 0.5
-    if arrival >= 22 * 60:
-        lost += 0.5
-    if departure < 8 * 60:
-        lost += 0.5
-    if duration >= 14 * 60:
-        lost += 0.5
-    return min(2.0, max(0.5, lost))
 
 
 def _airport_convenience_level(airport_code):
@@ -634,25 +618,34 @@ def _airport_convenience_level(airport_code):
 
 
 def _trip_impact(offer):
-    arrival_quality = _arrival_quality(offer)
+    arrival_timing = _arrival_timing_label(offer)
     jet_lag = _jet_lag_impact(offer)
-    vacation_lost = _vacation_time_lost(offer)
+    zones_crossed = _time_zone_delta_estimate(offer)
     destination = str(offer.get("destination") or "").upper()
     airport_convenience = _airport_convenience_level(destination)
     reasons = []
     arrival = _clock_minutes(offer.get("arrive_time"))
     if 11 * 60 <= arrival < 17 * 60:
-        reasons.append("Arrives mid-afternoon")
+        reasons.append("Arrives in the afternoon, which is easier for starting the trip")
     elif 6 * 60 <= arrival < 11 * 60:
-        reasons.append("Arrives in the morning")
+        reasons.append("Arrives in the morning, giving you more usable time on arrival day")
     elif 17 * 60 <= arrival < 22 * 60:
-        reasons.append("Arrives in the evening")
+        reasons.append("Arrives in the evening, so arrival day is mostly travel")
     else:
-        reasons.append("Arrives late at night")
+        reasons.append("Arrives late at night, which can make the first day harder")
     if int(offer.get("stops") or 0) == 0:
         reasons.append("Nonstop route")
     else:
         reasons.append(f"{int(offer.get('stops') or 0)} stop route")
+    if jet_lag in {"Moderate", "High"}:
+        if zones_crossed >= 8:
+            reasons.append("High jet lag impact because this route crosses many time zones")
+        elif arrival_timing == "Bad":
+            reasons.append("Late arrival may make jet lag harder to manage")
+        elif arrival_timing == "Great":
+            reasons.append("Afternoon arrival helps reduce jet lag disruption")
+        else:
+            reasons.append("Moderate jet lag impact from the time change and arrival timing")
     airport_notes = {
         "HND": "Haneda is close to central Tokyo",
         "NRT": "Narita often needs a longer transfer into Tokyo",
@@ -665,9 +658,8 @@ def _trip_impact(offer):
     if destination in airport_notes:
         reasons.append(airport_notes[destination])
     return {
-        "arrival_quality": arrival_quality,
+        "arrival_timing": arrival_timing,
         "jet_lag": jet_lag,
-        "vacation_lost": f"{vacation_lost:.1f} days",
         "airport_convenience": airport_convenience,
         "reasons": reasons[:3],
     }
@@ -815,6 +807,12 @@ def _display_flight_number(offer):
     if any(char.isalpha() for char in raw_number):
         return " ".join(raw_number.split())
     return f"{airline_code} {raw_number}".strip()
+
+
+def _set_selected_flight(flight_id, offer, adults, index):
+    st.session_state["selected_flight_id"] = flight_id
+    st.session_state["selected_flight"] = {**offer, "adults": adults}
+    st.session_state["selected_flight_index"] = index
 
 
 def _duffel_api_key():
@@ -1487,6 +1485,40 @@ def render():
             margin-bottom: 0.75rem;
             box-shadow: 0 18px 48px rgba(0,0,0,0.16);
         }
+        .flight-search-shell {
+            padding: 0 0 4px;
+            margin-bottom: 8px;
+        }
+        .flight-search-title {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: -0.2px;
+            margin-bottom: 2px;
+        }
+        .flight-search-subtitle {
+            color: rgba(255,255,255,0.52);
+            font-size: 13px;
+            line-height: 1.45;
+            margin-bottom: 12px;
+        }
+        .flight-route-preview-pill {
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            max-width: 100%;
+            padding: 6px 11px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.055);
+            border: 1px solid rgba(255,255,255,0.10);
+            color: rgba(255,255,255,0.58);
+            font-size: 12px;
+            font-weight: 750;
+            margin-top: 7px;
+        }
+        .flight-return-toggle [role="radiogroup"] {
+            opacity: 0.86;
+        }
         div[data-testid="stForm"] label {
             font-size: 0.78rem;
             color: rgba(255,255,255,0.68) !important;
@@ -1740,6 +1772,17 @@ def render():
             padding: 11px 13px;
             margin: 0 0 10px;
         }
+        .flight-card-recommendation.compact {
+            background: rgba(255,255,255,0.032);
+            border-color: rgba(255,255,255,0.08);
+            padding: 9px 11px;
+        }
+        .flight-card-recommendation.compact .flight-card-rec-list {
+            display: none;
+        }
+        .flight-card-recommendation.compact .flight-card-rec-kicker.why {
+            display: none;
+        }
         .flight-card-rec-kicker {
             color: #c7d2fe;
             font-size: 11px;
@@ -1785,7 +1828,6 @@ def render():
             flex-wrap: wrap;
             justify-content: flex-end;
         }
-        .flight-select-btn,
         .flight-selected-pill {
             display: inline-flex;
             align-items: center;
@@ -1797,15 +1839,6 @@ def render():
             font-weight: 850;
             text-decoration: none !important;
             white-space: nowrap;
-        }
-        .flight-select-btn {
-            color: #c7d2fe !important;
-            background: rgba(99,102,241,0.12);
-            border: 1px solid rgba(129,140,248,0.38);
-        }
-        .flight-select-btn:hover {
-            background: rgba(129,140,248,0.2);
-            border-color: rgba(165,180,252,0.52);
         }
         .flight-selected-pill {
             color: #e0e7ff;
@@ -1891,7 +1924,15 @@ def render():
     search_state["return_date"] = _as_iso_date(search_state.get("return_date") or "2026-10-24")
 
     with st.container(border=True):
-        st.caption("Search by city. Byable checks nearby airports automatically.")
+        st.markdown(
+            """
+            <div class="flight-search-shell">
+                <div class="flight-search-title">Find your flight</div>
+                <div class="flight-search-subtitle">Search by city. Byable checks nearby airports automatically.</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
         col_origin, col_destination, col_departure, col_return, col_adults, col_cabin, col_submit = st.columns(
             [1.25, 1.25, 1, 1, 0.8, 1.05, 0.95]
         )
@@ -1915,12 +1956,14 @@ def render():
         with col_submit:
             submitted = st.button("Search flights", type="primary")
 
+        st.markdown('<div class="flight-return-toggle">', unsafe_allow_html=True)
         return_mode = st.radio(
             "Returning from a different city?",
             ["Same as destination", "Different city"],
             index=0 if search_state.get("return_mode", "Same as destination") == "Same as destination" else 1,
             horizontal=True,
         )
+        st.markdown("</div>", unsafe_allow_html=True)
         if return_mode == "Different city":
             return_origin_city = st.text_input(
                 "Return from city",
@@ -1939,8 +1982,9 @@ def render():
             search_preview = f"Searching {origin_preview_label} → {destination_preview_label} · {return_preview_label} → {origin_preview_label}"
         else:
             search_preview = f"Searching {origin_preview_label} → {destination_preview_label} → {origin_preview_label}"
-        st.caption(
-            search_preview
+        st.markdown(
+            f'<div class="flight-route-preview-pill">Searching: {html.escape(search_preview.replace("Searching ", ""))}</div>',
+            unsafe_allow_html=True,
         )
 
     if submitted:
@@ -2088,22 +2132,19 @@ def render():
     if not offers:
         st.session_state.pop("selected_flight", None)
 
-    selected_key = _flight_key(st.session_state.get("selected_flight") or {})
+    selected_key = st.session_state.get("selected_flight_id") or _flight_key(st.session_state.get("selected_flight") or {})
     if offers:
         offer_keys = [_flight_key(offer) for offer in offers]
-        query_key = st.query_params.get("flight_key", "")
-        if isinstance(query_key, list):
-            query_key = query_key[0] if query_key else ""
-        if query_key in offer_keys:
-            selected_index = offer_keys.index(query_key)
+        if selected_key in offer_keys:
+            selected_index = offer_keys.index(selected_key)
             st.session_state["selected_flight"] = {**offers[selected_index], "adults": adults}
             st.session_state["selected_flight_index"] = selected_index
-        elif selected_key in offer_keys:
-            selected_index = offer_keys.index(selected_key)
+            st.session_state["selected_flight_id"] = selected_key
         else:
             selected_index = min(selected_index, len(offers) - 1)
             st.session_state["selected_flight"] = {**offers[selected_index], "adults": adults}
             st.session_state["selected_flight_index"] = selected_index
+            st.session_state["selected_flight_id"] = _flight_key(offers[selected_index])
     else:
         st.session_state.pop("selected_flight", None)
 
@@ -2245,39 +2286,49 @@ def render():
             for chip in detail_chips
             if chip
         )
-        recommended_html = ""
-        if is_recommended:
-            impact = _trip_impact(offer)
-            impact_rows = [
-                ("Arrival Quality", impact["arrival_quality"]),
-                ("Jet Lag Impact", impact["jet_lag"]),
-                ("Vacation Time Lost", impact["vacation_lost"]),
+        impact = _trip_impact(offer)
+        impact_rows = [
+            ("Arrival Timing", impact["arrival_timing"]),
+            ("Jet Lag Impact", impact["jet_lag"]),
+        ]
+        if impact.get("airport_convenience"):
+            impact_rows.append(("Airport Convenience", impact["airport_convenience"]))
+        impact_html = "".join(
+            f'<div><span>{html.escape(label)}:</span> <strong>{html.escape(value)}</strong></div>'
+            for label, value in impact_rows
+        )
+        impact_bullets = "".join(
+            f"<li>{html.escape(bullet)}</li>"
+            for bullet in impact["reasons"][:3]
+        )
+        impact_class = "flight-card-recommendation" if is_recommended else "flight-card-recommendation compact"
+        trip_impact_html = "".join(
+            [
+                f'<div class="{impact_class}">',
+                '<div class="flight-card-rec-kicker">Trip Impact</div>',
+                f'<div class="flight-card-impact-grid">{impact_html}</div>',
+                '<div class="flight-card-rec-kicker why">Why?</div>',
+                f'<ul class="flight-card-rec-list">{impact_bullets}</ul>',
+                "</div>",
             ]
-            if impact.get("airport_convenience"):
-                impact_rows.append(("Airport Convenience", impact["airport_convenience"]))
-            impact_html = "".join(
-                f'<div><span>{html.escape(label)}:</span> <strong>{html.escape(value)}</strong></div>'
-                for label, value in impact_rows
-            )
+        )
+        recommendation_html = ""
+        if is_recommended:
             bullet_html = "".join(
                 f"<li>{html.escape(bullet)}</li>"
-                for bullet in impact["reasons"]
+                for bullet in advisor_bullets[:3]
             )
-            recommended_html = "".join(
+            recommendation_html = "".join(
                 [
                     '<div class="flight-card-recommendation">',
-                    '<div class="flight-card-rec-kicker">Trip Impact</div>',
-                    f'<div class="flight-card-impact-grid">{impact_html}</div>',
-                    '<div class="flight-card-rec-kicker why">Why?</div>',
+                    '<div class="flight-card-rec-kicker">Recommended flight</div>',
+                    f'<div class="flight-card-rec-copy">{html.escape(recommendation_summary)}</div>',
+                    '<div class="flight-card-rec-kicker why">Why this</div>',
                     f'<ul class="flight-card-rec-list">{bullet_html}</ul>',
                     "</div>",
                 ]
             )
-        action_html = (
-            '<span class="flight-selected-pill">Selected</span>'
-            if is_selected
-            else f'<a class="flight-select-btn" href="?flight_key={quote(_flight_key(offer), safe="")}">Select</a>'
-        )
+        action_html = '<span class="flight-selected-pill">Selected</span>' if is_selected else ""
         card_html = "".join(
             [
                 f'<div class="{card_class}">',
@@ -2311,7 +2362,8 @@ def render():
                 f'<div class="flight-airport">{html.escape(str(offer.get("destination") or destination_airports[0]))}</div>',
                 "</div>",
                 "</div>",
-                recommended_html,
+                recommendation_html,
+                trip_impact_html,
                 '<div class="flight-card-footer">',
                 f'<div class="flight-chip-row">{chips_html}</div>',
                 f'<div class="flight-card-actions">{action_html}</div>',
@@ -2320,8 +2372,17 @@ def render():
             ]
         )
         st.markdown(card_html, unsafe_allow_html=True)
-        detail_button_cols = st.columns([1, 0.18])
-        with detail_button_cols[1]:
+        action_button_cols = st.columns([1, 0.16, 0.20])
+        with action_button_cols[1]:
+            flight_id = _flight_key(offer)
+            if not is_selected:
+                st.button(
+                    "Select",
+                    key=f"select_{index}_{flight_id}",
+                    on_click=_set_selected_flight,
+                    args=(flight_id, offer, adults, index),
+                )
+        with action_button_cols[2]:
             if st.button("View details", key=f"details_{index}_{_flight_key(offer)}"):
                 st.session_state["selected_flight_for_details"] = _flight_key(offer)
                 st.rerun()
