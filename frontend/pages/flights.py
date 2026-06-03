@@ -29,6 +29,8 @@ except ImportError:
 ISO_DATE_FORMAT = "%Y-%m-%d"
 DUFFEL_BASE_URL = "https://api.duffel.com"
 DUFFEL_VERSION = "v2"
+MAX_CITY_SEARCH_SECONDS = 12.0
+FALLBACK_SEARCH_SECONDS = 4.0
 SANDBOX_AIRLINES = {"duffel airways"}
 SANDBOX_OWNER_IATA_CODES = {"ZZ"}
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -1595,7 +1597,7 @@ def _normalize_duffel_offer(offer):
     }
 
 
-def load_flight_offers(origin, destination, departure_date, return_date, adults, cabin_class, max_results=5, return_origin=None):
+def load_flight_offers(origin, destination, departure_date, return_date, adults, cabin_class, max_results=5, return_origin=None, request_timeout=12.0):
     api_key = _duffel_api_key()
     if not api_key:
         return [], False, {"status": "not_configured", "message": "Duffel API key not configured."}
@@ -1624,7 +1626,7 @@ def load_flight_offers(origin, destination, departure_date, return_date, adults,
             f"{DUFFEL_BASE_URL}/air/offer_requests",
             json=payload,
             headers=headers,
-            timeout=30,
+            timeout=max(1.0, float(request_timeout)),
             verify=certifi.where(),
         )
         request_time = time.perf_counter() - request_start
@@ -1701,11 +1703,19 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
         combination
         for combination in _airport_search_combinations(origin_airports, destination_airports, return_origin_airports, max_attempts=4)
         if combination != primary_combination[0]
-    ]
+    ][:1]
     combinations = primary_combination
     attempts = 0
+    deadline = city_search_start + MAX_CITY_SEARCH_SECONDS
+
+    def remaining_search_seconds():
+        return max(0.0, deadline - time.perf_counter())
 
     for origin_airport, destination_airport, return_origin_airport in combinations:
+        remaining = remaining_search_seconds()
+        if remaining <= 1.0:
+            messages.append("Flight search stopped after the 12 second search limit.")
+            break
         attempts += 1
         offers, live, payload = load_flight_offers(
             origin_airport,
@@ -1716,6 +1726,7 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
             cabin_class,
             max_results=max_results,
             return_origin=return_origin_airport,
+            request_timeout=min(remaining, MAX_CITY_SEARCH_SECONDS),
         )
         payload_timing = payload.get("timing") or {}
         timing["duffel"] += float(payload_timing.get("duffel") or 0)
@@ -1739,6 +1750,10 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
     if not combined and nearby_combinations:
         print("[Byable Flights] primary airport search returned 0 offers; trying nearby airport fallback")
         for origin_airport, destination_airport, return_origin_airport in nearby_combinations:
+            remaining = min(remaining_search_seconds(), FALLBACK_SEARCH_SECONDS)
+            if remaining <= 1.0:
+                messages.append("Nearby airport fallback skipped after the 12 second search limit.")
+                break
             attempts += 1
             offers, live, payload = load_flight_offers(
                 origin_airport,
@@ -1749,6 +1764,7 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
                 cabin_class,
                 max_results=max_results,
                 return_origin=return_origin_airport,
+                request_timeout=remaining,
             )
             payload_timing = payload.get("timing") or {}
             timing["duffel"] += float(payload_timing.get("duffel") or 0)
@@ -1770,7 +1786,7 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
                 break
 
     status = "ok" if combined or live_any else "not_configured" if not _duffel_api_key() else "ok"
-    message = None if combined else "No live fares found for these dates."
+    message = None if combined else "No live fares found for these dates. Try changing the date, destination airport, or cabin."
     if not _duffel_api_key():
         message = "Duffel API key not configured."
     print(
@@ -3178,7 +3194,7 @@ def render():
     else:
         route_label = f"{origin_label} → {destination_label} → {origin_label}"
     has_searched_for_current_route = submitted or cached_search_params == active_search_params
-    if has_searched_for_current_route:
+    if has_searched_for_current_route and offers:
         display_route = f"{origin_label} → {destination_label}"
         hero_image = _destination_hero_image(destination_label)
         hero_class = "flight-destination-hero" if hero_image else "flight-destination-hero no-image"
@@ -3255,7 +3271,7 @@ def render():
             empty_message = ""
         elif status == "ok":
             empty_title = "No fares found"
-            empty_message = "No live fares found for these dates."
+            empty_message = "No live fares found for these dates. Try changing the date, destination airport, or cabin."
         else:
             empty_title = "Duffel API error"
             empty_message = (debug_payload or {}).get("message") or "Duffel is unavailable right now."
