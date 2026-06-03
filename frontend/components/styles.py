@@ -309,33 +309,22 @@ button[data-testid^="baseButton"]:disabled p {
 
     html,
     body,
-    .stApp,
-    .main,
-    section.main,
     [data-testid="stApp"],
     [data-testid="stMain"],
     [data-testid="stAppViewContainer"],
     [data-testid="stAppViewContainer"] > section,
-    [data-testid="stVerticalBlock"],
     .block-container {
         max-width: 100vw !important;
         overflow-x: hidden !important;
         max-height: none !important;
     }
 
-    html,
-    body,
-    [data-testid="stAppViewContainer"],
-    .stApp,
-    .main,
-    section.main,
     [data-testid="stApp"],
     [data-testid="stMain"],
-    [data-testid="stAppViewContainer"] > section,
-    [data-testid="stVerticalBlock"] {
+    [data-testid="stAppViewContainer"],
+    [data-testid="stAppViewContainer"] > section {
         height: auto !important;
         min-height: 100dvh !important;
-        max-height: none !important;
         overflow-y: visible !important;
         -webkit-overflow-scrolling: touch !important;
     }
@@ -357,7 +346,7 @@ button[data-testid^="baseButton"]:disabled p {
         height: auto !important;
         min-height: auto !important;
         overflow-y: visible !important;
-        padding: 0 0.72rem calc(220px + env(safe-area-inset-bottom, 0px)) !important;
+        padding: 0 0.72rem calc(7rem + env(safe-area-inset-bottom, 0px)) !important;
     }
 
     .byable-mobile-nav-heading {
