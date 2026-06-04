@@ -11,6 +11,8 @@ import certifi
 import requests
 import streamlit as st
 
+from analytics import track_event, track_once
+
 try:
     from dotenv import load_dotenv
 except ImportError:
@@ -1394,6 +1396,18 @@ def _set_selected_flight(flight_id, offer, adults, index):
     st.session_state["selected_flight_id"] = flight_id
     st.session_state["selected_flight"] = {**offer, "adults": adults}
     st.session_state["selected_flight_index"] = index
+    track_event(
+        "flight_selected",
+        {
+            "flight_id": flight_id,
+            "airline": offer.get("airline"),
+            "flight_number": offer.get("flight_number"),
+            "price": offer.get("price_total"),
+            "currency": offer.get("currency"),
+            "stops": offer.get("stops"),
+            "provider": offer.get("provider") or offer.get("source"),
+        },
+    )
 
 
 def _duffel_api_key():
@@ -3353,6 +3367,21 @@ def render():
         st.session_state["selected_flight_index"] = 0
         st.session_state["show_more_flights"] = False
         search_state = st.session_state["flight_search"]
+        track_event(
+            "flight_search_started",
+            {
+                "origin_city": search_state["origin_city"],
+                "destination_city": search_state["destination_city"],
+                "return_origin_city": search_state["return_origin_city"],
+                "return_mode": search_state["return_mode"],
+                "departure_date": search_state["departure_date"],
+                "return_date": search_state["return_date"],
+                "adults": search_state["adults"],
+                "cabin_class": search_state["cabin_class"],
+                "nonstop_only": search_state["nonstop_only"],
+                "priorities": search_state["priorities"],
+            },
+        )
 
     origin_city = str(search_state.get("origin_city") or "San Francisco")
     destination_city = str(search_state.get("destination_city") or "Tokyo")
@@ -3434,6 +3463,32 @@ def render():
         debug_timing = debug_payload.get("timing") or {}
         perf_timings["duffel"] = float(debug_timing.get("duffel") or 0)
         perf_timings["normalize"] = float(debug_timing.get("normalize") or 0)
+        if offers:
+            track_event(
+                "flight_search_completed",
+                {
+                    "origin_city": origin_city,
+                    "destination_city": destination_city,
+                    "return_origin_city": return_origin_city,
+                    "offer_count": len(offers),
+                    "live": bool(live),
+                    "duffel_seconds": perf_timings["duffel"],
+                    "normalize_seconds": perf_timings["normalize"],
+                    "attempts": (debug_payload.get("timing") or {}).get("attempts"),
+                },
+            )
+        else:
+            track_event(
+                "flight_search_no_fares",
+                {
+                    "origin_city": origin_city,
+                    "destination_city": destination_city,
+                    "return_origin_city": return_origin_city,
+                    "status": (debug_payload or {}).get("status"),
+                    "message": (debug_payload or {}).get("message"),
+                    "attempts": (debug_payload.get("timing") or {}).get("attempts"),
+                },
+            )
         loading_placeholder.empty()
         st.session_state["flight_results_cache"] = {
             "search_params": active_search_params,
@@ -3679,6 +3734,18 @@ def render():
                 **recommendations[_flight_key(best_offer)],
                 "ai_advisor_copy": ai_advisor_copy,
             }
+    track_once(
+        "ai_recommendation_loaded",
+        key=f"ai_recommendation_loaded_{active_search_params}_{_flight_key(best_offer)}",
+        properties={
+            "flight_id": _flight_key(best_offer),
+            "airline": best_offer.get("airline"),
+            "flight_number": best_offer.get("flight_number"),
+            "score": best_rec.get("score"),
+            "ai_copy_used": bool(ai_advisor_copy),
+            "offer_count": len(visible_offers),
+        },
+    )
     detail_modal_key = st.session_state.get("selected_flight_for_details", "")
 
     for index, offer in enumerate(visible_offers):
@@ -3902,7 +3969,18 @@ def render():
                 )
         with action_button_cols[3]:
             if st.button("View details", key=f"details_{index}_{_flight_key(offer)}"):
-                st.session_state["selected_flight_for_details"] = _flight_key(offer)
+                detail_flight_id = _flight_key(offer)
+                st.session_state["selected_flight_for_details"] = detail_flight_id
+                track_event(
+                    "view_details_clicked",
+                    {
+                        "flight_id": detail_flight_id,
+                        "airline": offer.get("airline"),
+                        "flight_number": offer.get("flight_number"),
+                        "price": offer.get("price_total"),
+                        "currency": offer.get("currency"),
+                    },
+                )
                 st.rerun()
 
     if len(offers) > 8 and not show_more_flights:

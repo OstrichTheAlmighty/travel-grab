@@ -11,11 +11,13 @@ st.set_page_config(
 
 from components.styles import inject_global_styles
 from components.nav import sidebar_nav, top_mobile_nav
+from analytics import track_once
 from pages import overview, flights, hotels, activities, itinerary, ai_picks
 
 inject_global_styles()
 
 st.session_state.setdefault("page", "flights")
+track_once("streamlit_app_loaded")
 
 try:
     if "flight_key" in st.query_params:

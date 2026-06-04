@@ -472,7 +472,7 @@
               Describe your trip style, budget, dates, and interests. Byable builds a personalized travel plan with flights, stays, restaurants, activities, and AI-powered upgrades.
             </p>
             <div class="actions">
-              <a class="primary" href="https://byable-demo.streamlit.app">
+              <a class="primary" href="https://byable-demo.streamlit.app" data-analytics-event="demo_button_clicked">
                 Try the demo
               </a>
               <span class="note">Curated routes, stays, food, and experiences in one flow.</span>
@@ -527,5 +527,44 @@
 
       <footer>© 2026 Byable. AI-native travel planning for your next trip.</footer>
     </div>
+    <script>
+      (function () {
+        var key =
+          window.POSTHOG_API_KEY ||
+          (document.querySelector('meta[name="posthog-api-key"]') || {}).content ||
+          "";
+        if (!key) return;
+
+        var host = (window.POSTHOG_HOST || "https://us.i.posthog.com").replace(/\/$/, "");
+        var distinctKey = "byable_posthog_distinct_id";
+        var distinctId = localStorage.getItem(distinctKey);
+        if (!distinctId) {
+          distinctId = crypto && crypto.randomUUID ? crypto.randomUUID() : String(Date.now());
+          localStorage.setItem(distinctKey, distinctId);
+        }
+
+        function track(event, properties) {
+          try {
+            fetch(host + "/capture/", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              keepalive: true,
+              body: JSON.stringify({
+                api_key: key,
+                event: event,
+                distinct_id: distinctId,
+                properties: Object.assign({ app: "byable", source: "landing_page" }, properties || {}),
+              }),
+            }).catch(function () {});
+          } catch (_) {}
+        }
+
+        track("landing_page_view", { path: location.pathname });
+        document.addEventListener("click", function (event) {
+          var target = event.target.closest("[data-analytics-event]");
+          if (target) track(target.getAttribute("data-analytics-event"), { href: target.href || "" });
+        });
+      })();
+    </script>
   </body>
 </html>
