@@ -53,6 +53,7 @@ init_db()
 PERIOD = Literal["weekly", "monthly"]
 USER_DEFAULT = "default"
 TRANSACTION_DATASET_EVENTS: Dict[str, Dict[str, object]] = {}
+ALLOWED_FLIGHT_CABINS = {"economy", "premium_economy", "business", "first"}
 
 
 @app.on_event("startup")
@@ -109,6 +110,27 @@ def test_sfo_hnd_flight_search(
 ):
     origin_code = origin.upper()
     destination_code = destination.upper()
+    # Public endpoint hardening: only accept IATA-style airport codes and known cabins.
+    if not re.fullmatch(r"[A-Z]{3}", origin_code) or not re.fullmatch(r"[A-Z]{3}", destination_code):
+        return {
+            "status": "error",
+            "source": "duffel",
+            "message": "origin and destination must be 3-letter airport codes.",
+            "route": f"{origin_code}-{destination_code}",
+            "flights": [],
+            "duffel_key_loaded": bool(get_duffel_api_key()),
+            "test_mode": True,
+        }
+    if cabin_class not in ALLOWED_FLIGHT_CABINS:
+        return {
+            "status": "error",
+            "source": "duffel",
+            "message": "cabin_class must be economy, premium_economy, business, or first.",
+            "route": f"{origin_code}-{destination_code}",
+            "flights": [],
+            "duffel_key_loaded": bool(get_duffel_api_key()),
+            "test_mode": True,
+        }
     date_error = _validate_flight_dates(departure_date, return_date)
     if date_error:
         return {

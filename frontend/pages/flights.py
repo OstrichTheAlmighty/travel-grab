@@ -33,9 +33,15 @@ DUFFEL_BASE_URL = "https://api.duffel.com"
 DUFFEL_VERSION = "v2"
 MAX_CITY_SEARCH_SECONDS = 12.0
 FALLBACK_SEARCH_SECONDS = 4.0
+FLIGHT_SEARCH_RATE_LIMIT_SECONDS = 8.0
+AI_ADVISOR_RATE_LIMIT_SECONDS = 6.0
+MAX_CITY_INPUT_LENGTH = 64
+MAX_TRAVELERS = 9
 SANDBOX_AIRLINES = {"duffel airways"}
 SANDBOX_OWNER_IATA_CODES = {"ZZ"}
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+ALLOWED_CABIN_CLASSES = ("economy", "premium_economy", "business", "first")
+CITY_INPUT_PATTERN = re.compile(r"^[A-Za-z][A-Za-z .,'-]{0,63}$")
 TRAVELER_PRIORITIES = [
     "Lowest price",
     "Nonstop only",
@@ -244,6 +250,65 @@ def _resolve_city_airports(value):
     label = raw.title() if raw else "San Francisco"
     fallback_code = raw.upper()[:3] if raw else "SFO"
     return label, [fallback_code]
+
+
+def _clean_city_input(value):
+    """Normalize public city input before using it in search payloads or logs."""
+    text = re.sub(r"\s+", " ", str(value or "").strip())
+    return text[:MAX_CITY_INPUT_LENGTH]
+
+
+def _validate_city_input(value, label):
+    """Allow common city names and IATA codes while rejecting unexpected input."""
+    text = _clean_city_input(value)
+    if not text:
+        return None, f"{label} is required."
+    if len(str(value or "").strip()) > MAX_CITY_INPUT_LENGTH:
+        return None, f"{label} must be {MAX_CITY_INPUT_LENGTH} characters or fewer."
+    if re.fullmatch(r"[A-Za-z]{3}", text):
+        return text.upper(), None
+    if not CITY_INPUT_PATTERN.fullmatch(text):
+        return None, f"{label} can only include letters, spaces, apostrophes, hyphens, periods, and commas."
+    return text, None
+
+
+def _validate_traveler_count(value):
+    """Keep traveler count in Duffel's expected public-search range."""
+    try:
+        count = int(value)
+    except (TypeError, ValueError):
+        return None, "Travelers must be a whole number."
+    if count < 1 or count > MAX_TRAVELERS:
+        return None, f"Travelers must be between 1 and {MAX_TRAVELERS}."
+    return count, None
+
+
+def _validate_cabin_class(value):
+    """Reject stale or tampered cabin values before calling Duffel."""
+    cabin = str(value or "").strip().lower()
+    if cabin not in ALLOWED_CABIN_CLASSES:
+        return None, "Cabin must be Economy, Premium Economy, Business, or First."
+    return cabin, None
+
+
+def _validate_priorities(values):
+    """Accept only known plain-language priority labels and cap selection size."""
+    allowed = []
+    for value in values or []:
+        if value in TRAVELER_PRIORITIES and value not in allowed:
+            allowed.append(value)
+    return (allowed or list(DEFAULT_PRIORITIES))[:3]
+
+
+def _rate_limit_action(state_key, interval_seconds):
+    """Lightweight per-session rate limiting for expensive external calls."""
+    now = time.monotonic()
+    last_called = float(st.session_state.get(state_key) or 0)
+    remaining = interval_seconds - (now - last_called)
+    if remaining > 0:
+        return False, remaining
+    st.session_state[state_key] = now
+    return True, 0.0
 
 
 def _destination_hero_image(city):
@@ -1124,6 +1189,12 @@ def generate_ai_advisor_copy(flight, trip_impact, selected_priorities, compariso
         print(f"[Byable Flights] AI advisor copy cache hit for {flight_id}")
         return cache[cache_key]
 
+    # Security/cost guard: rate-limit uncached AI advisor requests per session.
+    ai_allowed, ai_wait = _rate_limit_action("flight_ai_advisor_rate_limit", AI_ADVISOR_RATE_LIMIT_SECONDS)
+    if not ai_allowed:
+        _log_ai_failed(f"AI advisor rate limited; retry in {ai_wait:.1f}s")
+        return None
+
     model = "gpt-4o-mini"
     top_ranked_flights = list((comparison_context or {}).get("top_ranked_flights") or [])
     recommended_summary_payload = (comparison_context or {}).get("recommended_flight")
@@ -1392,6 +1463,17 @@ def _display_flight_number(offer):
     return f"{airline_code} {raw_number}".strip()
 
 
+def _offer_ai_score(offer):
+    """Read the latest deterministic AI score for an offer from ranking cache."""
+    flight_id = _flight_key(offer)
+    ranking_output = (st.session_state.get("flight_ranking_cache") or {}).get("ranking_output") or {}
+    recommendations = ranking_output.get("recommendations") or {}
+    score = (recommendations.get(flight_id) or {}).get("score")
+    if score is not None:
+        return score
+    return offer.get("ai_score")
+
+
 def _set_selected_flight(flight_id, offer, adults, index):
     st.session_state["selected_flight_id"] = flight_id
     st.session_state["selected_flight"] = {**offer, "adults": adults}
@@ -1402,12 +1484,57 @@ def _set_selected_flight(flight_id, offer, adults, index):
             "flight_id": flight_id,
             "airline": offer.get("airline"),
             "flight_number": offer.get("flight_number"),
+            "ai_score": _offer_ai_score(offer),
             "price": offer.get("price_total"),
             "currency": offer.get("currency"),
+            "duration": offer.get("duration"),
             "stops": offer.get("stops"),
             "provider": offer.get("provider") or offer.get("source"),
         },
     )
+
+
+def _render_recommendation_feedback_form(offer, recommendation, origin_city, destination_city, priorities):
+    """Collect optional recommendation feedback without affecting flight search or ranking."""
+    flight_id = _flight_key(offer)
+    thanks_key = f"recommendation_feedback_thanks_{flight_id}"
+    st.markdown("##### What would make this recommendation more useful?")
+    with st.form(f"recommendation_feedback_{flight_id}", clear_on_submit=True):
+        confidence = st.selectbox(
+            "Confidence",
+            ["Not confident", "Somewhat confident", "Very confident"],
+            index=1,
+            key=f"recommendation_feedback_confidence_{flight_id}",
+        )
+        feedback_text = st.text_area(
+            "Feedback",
+            placeholder="Tell us what felt confusing, missing, or untrustworthy…",
+            max_chars=1200,
+            key=f"recommendation_feedback_text_{flight_id}",
+        )
+        submitted = st.form_submit_button("Send feedback")
+    if submitted:
+        sent = track_event(
+            "recommendation_feedback_submitted",
+            {
+                "confidence": confidence,
+                "feedback_text": str(feedback_text or "").strip(),
+                "origin_city": origin_city,
+                "destination_city": destination_city,
+                "selected_priorities": list(priorities or []),
+                "recommended_airline": offer.get("airline"),
+                "recommended_price": offer.get("price_total"),
+                "recommended_ai_score": (recommendation or {}).get("score"),
+                "recommended_duration": offer.get("duration"),
+                "recommended_stops": offer.get("stops"),
+                "flight_id": flight_id,
+            },
+        )
+        if not sent:
+            print("POSTHOG EVENT FAILED: recommendation_feedback_submitted local fallback logged", flush=True)
+        st.session_state[thanks_key] = True
+    if st.session_state.get(thanks_key):
+        st.success("Thanks — this helps us improve Byable.")
 
 
 def _duffel_api_key():
@@ -3256,6 +3383,10 @@ def render():
         search_state["return_origin_city"] = search_state.get("destination_city", "Tokyo")
     search_state["departure_date"] = _as_iso_date(search_state.get("departure_date") or "2026-10-14")
     search_state["return_date"] = _as_iso_date(search_state.get("return_date") or "2026-10-24")
+    safe_adults_default, _adult_default_error = _validate_traveler_count(search_state.get("adults", 1))
+    safe_cabin_default, _cabin_default_error = _validate_cabin_class(search_state.get("cabin_class", "economy"))
+    safe_adults_default = safe_adults_default or 1
+    safe_cabin_default = safe_cabin_default or "economy"
 
     with st.container(border=True):
         st.markdown(
@@ -3279,12 +3410,12 @@ def render():
         with col_return:
             return_date = st.text_input("Return date", value=search_state["return_date"], help="Use YYYY-MM-DD.")
         with col_adults:
-            adults = st.number_input("Travelers", min_value=1, max_value=9, value=int(search_state["adults"]), step=1)
+            adults = st.number_input("Travelers", min_value=1, max_value=MAX_TRAVELERS, value=safe_adults_default, step=1)
         with col_cabin:
             cabin_class = st.selectbox(
                 "Cabin",
-                ["economy", "premium_economy", "business", "first"],
-                index=["economy", "premium_economy", "business", "first"].index(search_state["cabin_class"]),
+                list(ALLOWED_CABIN_CLASSES),
+                index=list(ALLOWED_CABIN_CLASSES).index(safe_cabin_default),
                 format_func=lambda value: value.replace("_", " ").title(),
             )
         with col_submit:
@@ -3327,66 +3458,93 @@ def render():
         )
         if len(priority_selection) > 3:
             st.warning("Choose up to 3 priorities. Byable will use the first three selected.")
-        selected_priorities_from_form = (priority_selection or DEFAULT_PRIORITIES)[:3]
+        selected_priorities_from_form = _validate_priorities(priority_selection or DEFAULT_PRIORITIES)
+        priority_key = tuple(selected_priorities_from_form)
+        if st.session_state.get("_last_tracked_flight_priorities") != priority_key:
+            track_event("priority_selected", {"priorities": list(selected_priorities_from_form)})
+            st.session_state["_last_tracked_flight_priorities"] = priority_key
 
     if submitted:
         _print_ai_status()
+        validation_errors = []
+        origin_city_clean, origin_error = _validate_city_input(origin_city, "From city")
+        destination_city_clean, destination_error = _validate_city_input(destination_city, "To city")
+        if return_mode == "Same as destination":
+            return_origin_city_clean = destination_city_clean
+            return_error_city = None
+        else:
+            return_origin_city_clean, return_error_city = _validate_city_input(return_origin_city, "Return from city")
+        adults_clean, adults_error = _validate_traveler_count(adults)
+        cabin_class_clean, cabin_error = _validate_cabin_class(cabin_class)
         departure_iso, departure_error = _validate_iso_date(departure_date, "Depart")
         return_iso, return_error = _validate_iso_date(return_date, "Return")
-        if departure_error or return_error:
-            st.session_state["flight_debug"] = {
-                "status": "validation_error",
-                "message": departure_error or return_error,
-                "duffel_key_loaded": None,
-            }
-            st.error(departure_error or return_error)
-            departure_iso = search_state["departure_date"]
-            return_iso = search_state["return_date"]
-        elif datetime.strptime(return_iso, ISO_DATE_FORMAT).date() < datetime.strptime(departure_iso, ISO_DATE_FORMAT).date():
-            st.session_state["flight_debug"] = {
-                "status": "validation_error",
-                "message": "Return date must be on or after the departure date.",
-                "duffel_key_loaded": None,
-            }
-            st.error("Return date must be on or after the departure date.")
-            departure_iso = search_state["departure_date"]
-            return_iso = search_state["return_date"]
-        selected_priorities = selected_priorities_from_form
-        st.session_state["flight_search"] = {
-            "origin_city": origin_city.strip() or "San Francisco",
-            "destination_city": destination_city.strip() or "Tokyo",
-            "departure_date": departure_iso,
-            "return_date": return_iso,
-            "adults": int(adults),
-            "cabin_class": cabin_class,
-            "nonstop_only": bool(nonstop_only),
-            "return_mode": return_mode,
-            "return_origin_city": return_origin_city.strip() or destination_city.strip() or "Tokyo",
-            "priorities": selected_priorities,
-        }
-        st.session_state["selected_flight_index"] = 0
-        st.session_state["show_more_flights"] = False
-        search_state = st.session_state["flight_search"]
-        track_event(
-            "flight_search_started",
-            {
-                "origin_city": search_state["origin_city"],
-                "destination_city": search_state["destination_city"],
-                "return_origin_city": search_state["return_origin_city"],
-                "return_mode": search_state["return_mode"],
-                "departure_date": search_state["departure_date"],
-                "return_date": search_state["return_date"],
-                "adults": search_state["adults"],
-                "cabin_class": search_state["cabin_class"],
-                "nonstop_only": search_state["nonstop_only"],
-                "priorities": search_state["priorities"],
-            },
+        validation_errors.extend(
+            error
+            for error in (
+                origin_error,
+                destination_error,
+                return_error_city,
+                adults_error,
+                cabin_error,
+                departure_error,
+                return_error,
+            )
+            if error
         )
+        if not validation_errors and datetime.strptime(return_iso, ISO_DATE_FORMAT).date() < datetime.strptime(departure_iso, ISO_DATE_FORMAT).date():
+            validation_errors.append("Return date must be on or after the departure date.")
+        if not validation_errors:
+            search_allowed, search_wait = _rate_limit_action("flight_search_rate_limit", FLIGHT_SEARCH_RATE_LIMIT_SECONDS)
+            if not search_allowed:
+                validation_errors.append(f"Please wait {search_wait:.0f}s before searching again.")
+        if validation_errors:
+            message = validation_errors[0]
+            st.session_state["flight_debug"] = {
+                "status": "validation_error",
+                "message": message,
+                "duffel_key_loaded": None,
+            }
+            st.error(message)
+            submitted = False
+        else:
+            selected_priorities = selected_priorities_from_form
+            st.session_state["flight_search"] = {
+                "origin_city": origin_city_clean,
+                "destination_city": destination_city_clean,
+                "departure_date": departure_iso,
+                "return_date": return_iso,
+                "adults": adults_clean,
+                "cabin_class": cabin_class_clean,
+                "nonstop_only": bool(nonstop_only),
+                "return_mode": return_mode,
+                "return_origin_city": return_origin_city_clean or destination_city_clean,
+                "priorities": selected_priorities,
+            }
+            st.session_state["selected_flight_index"] = 0
+            st.session_state["show_more_flights"] = False
+            search_state = st.session_state["flight_search"]
+            track_event(
+                "flight_search_started",
+                {
+                    "origin_city": search_state["origin_city"],
+                    "destination_city": search_state["destination_city"],
+                    "return_origin_city": search_state["return_origin_city"],
+                    "return_mode": search_state["return_mode"],
+                    "departure_date": search_state["departure_date"],
+                    "return_date": search_state["return_date"],
+                    "adults": search_state["adults"],
+                    "cabin_class": search_state["cabin_class"],
+                    "nonstop_only": search_state["nonstop_only"],
+                    "priorities": search_state["priorities"],
+                },
+            )
 
-    origin_city = str(search_state.get("origin_city") or "San Francisco")
-    destination_city = str(search_state.get("destination_city") or "Tokyo")
+    origin_city = _clean_city_input(search_state.get("origin_city") or "San Francisco") or "San Francisco"
+    destination_city = _clean_city_input(search_state.get("destination_city") or "Tokyo") or "Tokyo"
     return_mode = str(search_state.get("return_mode") or "Same as destination")
-    return_origin_city = str(search_state.get("return_origin_city") or destination_city)
+    if return_mode not in ("Same as destination", "Different city"):
+        return_mode = "Same as destination"
+    return_origin_city = _clean_city_input(search_state.get("return_origin_city") or destination_city) or destination_city
     if return_mode == "Same as destination":
         return_origin_city = destination_city
     origin_label, origin_airports = _resolve_city_airports(origin_city)
@@ -3394,14 +3552,16 @@ def render():
     return_origin_label, return_origin_airports = _resolve_city_airports(return_origin_city)
     departure_iso = _as_iso_date(search_state["departure_date"])
     return_iso = _as_iso_date(search_state["return_date"])
-    adults = int(search_state["adults"])
-    cabin_class = str(search_state["cabin_class"])
-    priorities = (
+    adults, _adults_error = _validate_traveler_count(search_state.get("adults", 1))
+    adults = adults or 1
+    cabin_class, _cabin_error = _validate_cabin_class(search_state.get("cabin_class", "economy"))
+    cabin_class = cabin_class or "economy"
+    priorities = _validate_priorities(
         st.session_state.get("flight_priority_selector")
         or search_state.get("priorities")
         or st.session_state.get("flight_priorities")
         or DEFAULT_PRIORITIES
-    )[:3]
+    )
     nonstop_only = bool(search_state.get("nonstop_only", False))
     departure_iso, departure_error = _validate_iso_date(departure_iso, "Depart")
     return_iso, return_error = _validate_iso_date(return_iso, "Return")
@@ -3487,6 +3647,15 @@ def render():
                     "status": (debug_payload or {}).get("status"),
                     "message": (debug_payload or {}).get("message"),
                     "attempts": (debug_payload.get("timing") or {}).get("attempts"),
+                },
+            )
+            track_event(
+                "no_fares_found",
+                {
+                    "origin": origin_city,
+                    "destination": destination_city,
+                    "return_origin_city": return_origin_city,
+                    "status": (debug_payload or {}).get("status"),
                 },
             )
         loading_placeholder.empty()
@@ -3654,7 +3823,7 @@ def render():
         return
 
     priority_selection = st.session_state.get("flight_priority_selector") or priorities
-    selected_priorities = (priority_selection or DEFAULT_PRIORITIES)[:3]
+    selected_priorities = _validate_priorities(priority_selection or DEFAULT_PRIORITIES)
     if selected_priorities != priorities:
         priorities = selected_priorities
         filtered_offers = _apply_flight_filters(list((st.session_state.get("flight_results_cache") or {}).get("raw_offers") or []), nonstop_only=nonstop_only)
@@ -3950,11 +4119,28 @@ def render():
             ]
         )
         st.markdown(card_html, unsafe_allow_html=True)
+        if is_recommended:
+            _render_recommendation_feedback_form(
+                offer,
+                recommendation,
+                origin_city,
+                destination_city,
+                priorities,
+            )
         action_button_cols = st.columns([1, 0.18, 0.16, 0.20])
         with action_button_cols[1]:
             flight_id = _flight_key(offer)
             if st.button(f"AI Score: {score}", key=f"score_breakdown_{index}_{flight_id}"):
                 st.session_state["selected_flight_for_score_breakdown"] = flight_id
+                track_event(
+                    "ai_score_clicked",
+                    {
+                        "flight_id": flight_id,
+                        "airline": offer.get("airline"),
+                        "flight_number": offer.get("flight_number"),
+                        "ai_score": recommendation.get("score"),
+                    },
+                )
                 st.rerun()
         with action_button_cols[2]:
             flight_id = _flight_key(offer)
@@ -3977,6 +4163,7 @@ def render():
                         "flight_id": detail_flight_id,
                         "airline": offer.get("airline"),
                         "flight_number": offer.get("flight_number"),
+                        "ai_score": recommendation.get("score"),
                         "price": offer.get("price_total"),
                         "currency": offer.get("currency"),
                     },

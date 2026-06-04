@@ -1,6 +1,8 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
+from analytics import posthog_client_script
+
 
 _TABLER = "https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
 
@@ -104,4 +106,23 @@ html,body{{margin:0;padding:0;background:#07090f;}}
 
 
 def render():
-    components.html(_HTML.format(tabler=_TABLER), height=1350, scrolling=True)
+    html = _HTML.format(tabler=_TABLER)
+    html = html.replace(
+        "</body>",
+        posthog_client_script("hotels")
+        + """
+<script>
+document.addEventListener('click', function(event) {
+  var button = event.target.closest('.btn');
+  if (!button) return;
+  var card = button.closest('.card');
+  byableTrack('hotel_selected', {
+    hotel: card && card.querySelector('.name') ? card.querySelector('.name').textContent.trim() : 'Unknown hotel',
+    price: card && card.querySelector('.amount') ? card.querySelector('.amount').textContent.trim() : null,
+    page_name: 'hotels'
+  });
+});
+</script>
+</body>""",
+    )
+    components.html(html, height=1350, scrolling=True)

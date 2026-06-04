@@ -1,6 +1,8 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
+from analytics import posthog_client_script
+
 _TABLER = "https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
 
 _HTML = r"""<!DOCTYPE html>
@@ -687,4 +689,24 @@ function toggleEditMode(){
 
 def render():
     html = _HTML.replace("{tabler}", _TABLER)
+    html = html.replace(
+        "</body>",
+        posthog_client_script("itinerary")
+        + """
+<script>
+document.addEventListener('click', function(event) {
+  var action = null;
+  if (event.target.closest('.add-event-btn')) action = 'add_activity';
+  if (event.target.closest('.ev-save-btn')) action = 'save_activity';
+  if (event.target.closest('.ev-edit-btn.danger')) action = 'remove_activity';
+  if (event.target.closest('#done-btn')) action = 'toggle_edit_mode';
+  if (!action) return;
+  byableTrack('itinerary_modified', {
+    action: action,
+    page_name: 'itinerary'
+  });
+});
+</script>
+</body>""",
+    )
     components.html(html, height=2600, scrolling=True)

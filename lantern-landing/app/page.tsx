@@ -4,6 +4,9 @@ import { FormEvent, useState } from "react";
 
 const demoUrl =
   process.env.NEXT_PUBLIC_DEMO_URL || "https://byable-demo.streamlit.app";
+const waitlistEmailMaxLength = 254;
+const waitlistCooldownMs = 5000;
+const waitlistEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 const steps = [
   {
@@ -38,12 +41,28 @@ const signals = [
 export default function Page() {
   const [waitlistEmail, setWaitlistEmail] = useState("");
   const [waitlistSubmitted, setWaitlistSubmitted] = useState(false);
+  const [waitlistError, setWaitlistError] = useState("");
+  const [waitlistSubmittedAt, setWaitlistSubmittedAt] = useState(0);
 
   function joinWaitlist(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!waitlistEmail.trim()) {
+    const normalizedEmail = waitlistEmail.trim().toLowerCase();
+    const now = Date.now();
+    if (now - waitlistSubmittedAt < waitlistCooldownMs) {
+      setWaitlistError("Please wait a few seconds before trying again.");
       return;
     }
+    if (
+      !normalizedEmail ||
+      normalizedEmail.length > waitlistEmailMaxLength ||
+      !waitlistEmailPattern.test(normalizedEmail)
+    ) {
+      setWaitlistError("Enter a valid email address.");
+      return;
+    }
+    // Basic client-side guard only; never log or expose submitted email values.
+    setWaitlistError("");
+    setWaitlistSubmittedAt(now);
     setWaitlistSubmitted(true);
   }
 
@@ -175,10 +194,12 @@ export default function Page() {
               id="waitlist-email"
               type="email"
               required
+              maxLength={waitlistEmailMaxLength}
               value={waitlistEmail}
               onChange={(event) => {
                 setWaitlistEmail(event.target.value);
                 setWaitlistSubmitted(false);
+                setWaitlistError("");
               }}
               placeholder="you@example.com"
               className="min-h-14 flex-1 rounded-full border border-line bg-white/[0.05] px-5 text-white outline-none transition placeholder:text-white/36 focus:border-lantern-mint"
@@ -192,6 +213,11 @@ export default function Page() {
             {waitlistSubmitted ? (
               <p className="self-center text-sm font-medium text-lantern-mint">
                 You're on the waitlist.
+              </p>
+            ) : null}
+            {waitlistError ? (
+              <p className="self-center text-sm font-medium text-red-300">
+                {waitlistError}
               </p>
             ) : null}
           </form>

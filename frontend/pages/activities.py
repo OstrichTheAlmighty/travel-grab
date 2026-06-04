@@ -1,6 +1,8 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
+from analytics import posthog_client_script
+
 _TABLER = "https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
 
 _HTML = r"""<!DOCTYPE html>
@@ -489,4 +491,22 @@ function toggleAdd(btn){
 
 def render():
     html = _HTML.replace("{tabler}", _TABLER)
+    html = html.replace(
+        "</body>",
+        posthog_client_script("activities")
+        + """
+<script>
+document.addEventListener('click', function(event) {
+  var button = event.target.closest('.ac-add-btn');
+  if (!button) return;
+  var card = button.closest('.acard');
+  byableTrack('activity_selected', {
+    activity: card && card.querySelector('.ac-name') ? card.querySelector('.ac-name').textContent.trim() : 'Unknown activity',
+    price: card && card.querySelector('.ac-price') ? card.querySelector('.ac-price').textContent.trim() : null,
+    page_name: 'activities'
+  });
+});
+</script>
+</body>""",
+    )
     components.html(html, height=3200, scrolling=True)

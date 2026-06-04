@@ -11,7 +11,7 @@ st.set_page_config(
 
 from components.styles import inject_global_styles
 from components.nav import sidebar_nav, top_mobile_nav
-from analytics import track_once
+from analytics import track_event, track_once
 from pages import overview, flights, hotels, activities, itinerary, ai_picks
 
 inject_global_styles()
@@ -30,6 +30,9 @@ sidebar_nav()
 top_mobile_nav()
 
 page = st.session_state.get("page", "flights")
+if st.session_state.get("_last_page_viewed") != page:
+    track_event("page_viewed", {"page_name": page})
+    st.session_state["_last_page_viewed"] = page
 
 if page == "overview":
     overview.render()
