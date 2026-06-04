@@ -611,6 +611,40 @@ def _ai_score_detail_breakdown(offer, offers):
     ]
 
 
+def _score_not_perfect_reasons(offer, offers):
+    visible = list(offers or [])
+    reasons = []
+
+    offer_price = float(offer.get("price_total") or 0)
+    visible_prices = [float(item.get("price_total") or 0) for item in visible if float(item.get("price_total") or 0) > 0]
+    if visible_prices and offer_price > min(visible_prices):
+        reasons.append(f"{money_usd(offer_price - min(visible_prices))} above the cheapest visible fare.")
+
+    if int(offer.get("stops") or 0) > 0:
+        reasons.append("Connection risk from at least one stop.")
+
+    arrival_label = _arrival_timing_label(offer)
+    if arrival_label in ("Okay", "Bad"):
+        reasons.append(f"{arrival_label.lower()} arrival at {offer.get('arrive_time') or 'the listed arrival time'}.")
+
+    comfort_label, aircraft_name, _aircraft_note = _aircraft_comfort_details(offer)
+    if comfort_label == "Unknown":
+        reasons.append("Aircraft type unavailable.")
+    elif comfort_label in ("Fair", "Basic"):
+        reasons.append(f"Aircraft comfort estimate is {comfort_label.lower()} based on {aircraft_name or 'aircraft type'}.")
+
+    offer_duration = _duration_minutes(offer.get("duration")) or 0
+    visible_durations = [_duration_minutes(item.get("duration")) or 0 for item in visible]
+    visible_durations = [duration for duration in visible_durations if duration > 0]
+    if visible_durations and offer_duration > min(visible_durations):
+        duration_delta = offer_duration - min(visible_durations)
+        hours, minutes = divmod(int(duration_delta), 60)
+        delta_label = f"{hours}h {minutes}m" if hours and minutes else f"{hours}h" if hours else f"{minutes}m"
+        reasons.append(f"{delta_label} longer than the fastest visible option.")
+
+    return reasons[:2]
+
+
 def _safe_score_breakdown_row(row):
     def text_value(value):
         if isinstance(value, dict):
@@ -761,29 +795,64 @@ def _why_over_others(best_offer, offers, recommendations):
 
     bullets = []
     best_price = float(best_offer.get("price_total") or 0)
+    cheapest = min(offers, key=lambda offer: (float(offer.get("price_total") or 999999), _duration_minutes(offer.get("duration")) or 999999))
+    cheapest_price = float(cheapest.get("price_total") or 0)
+    if cheapest_price and best_price and _flight_key(cheapest) != _flight_key(best_offer):
+        bullets.append(f"{money_usd(best_price - cheapest_price)} more than the cheapest visible fare.")
+    elif cheapest_price and best_price:
+        bullets.append(f"{money_usd(best_price)} matches the lowest visible fare.")
+
     fastest = min(offers, key=lambda offer: (_duration_minutes(offer.get("duration")) or 99999, float(offer.get("price_total") or 0)))
     fastest_price = float(fastest.get("price_total") or 0)
     if fastest_price > best_price:
         bullets.append(f"Saves {money_usd(fastest_price - best_price)} compared with the fastest option.")
 
+    best_duration = _duration_minutes(best_offer.get("duration")) or 0
+    fastest_duration = _duration_minutes(fastest.get("duration")) or 0
+    if fastest_duration and best_duration and _flight_key(fastest) != _flight_key(best_offer):
+        duration_delta = best_duration - fastest_duration
+        if duration_delta > 0:
+            hours, minutes = divmod(int(duration_delta), 60)
+            delta_label = f"{hours}h {minutes}m" if hours and minutes else f"{hours}h" if hours else f"{minutes}m"
+            bullets.append(f"{delta_label} longer than the fastest visible option.")
+
     if int(best_offer.get("stops") or 0) == 0:
-        bullets.append("Keeps the trip nonstop while avoiding connection risk.")
+        connecting_options = [offer for offer in others if int(offer.get("stops") or 0) > 0]
+        if connecting_options:
+            bullets.append(f"Nonstop while {len(connecting_options)} visible option{'s' if len(connecting_options) != 1 else ''} require a connection.")
 
     best_arrival = _clock_minutes(best_offer.get("arrive_time"))
-    if any(abs(_clock_minutes(offer.get("arrive_time")) - 15 * 60) > abs(best_arrival - 15 * 60) for offer in others):
-        bullets.append("Has stronger timing than later or less convenient arrivals.")
+    weaker_arrivals = [
+        offer for offer in others
+        if abs(_clock_minutes(offer.get("arrive_time")) - 15 * 60) > abs(best_arrival - 15 * 60)
+    ]
+    if weaker_arrivals:
+        comparison = weaker_arrivals[0]
+        arrival_delta = abs(_clock_minutes(comparison.get("arrive_time")) - best_arrival)
+        hours, minutes = divmod(int(arrival_delta), 60)
+        delta_label = f"{hours}h {minutes}m" if hours and minutes else f"{hours}h" if hours else f"{minutes}m"
+        bullets.append(f"Arrival time is {delta_label} apart from {comparison.get('airline') or 'another option'} at {comparison.get('arrive_time') or 'an alternate time'}.")
 
-    if _fare_flexibility_score(best_offer) >= max(_fare_flexibility_score(offer) for offer in others):
-        bullets.append("Offers stronger or clearer flexibility than the other returned fares.")
+    best_baggage = str(best_offer.get("baggage") or "").strip()
+    weaker_baggage_options = [offer for offer in others if best_baggage and not str(offer.get("baggage") or "").strip()]
+    if weaker_baggage_options:
+        bullets.append(f"Baggage is listed as {best_baggage}; {len(weaker_baggage_options)} visible option{'s' if len(weaker_baggage_options) != 1 else ''} do not show baggage details.")
 
-    if _has_baggage(best_offer) and any(not _has_baggage(offer) for offer in others):
-        bullets.append("Shows better baggage clarity than options with unclear baggage details.")
+    best_destination = str(best_offer.get("destination") or "").upper()
+    best_access = _city_access_level(best_destination)
+    if best_access in ("Easy", "Moderate"):
+        harder_access_options = [
+            offer for offer in others
+            if _city_access_level(str(offer.get("destination") or "").upper()) not in (best_access, "Unknown")
+        ]
+        if harder_access_options:
+            bullets.append(f"{best_destination} city access is rated {best_access}; at least one alternative arrives at a harder-access airport.")
 
     score = recommendations.get(_flight_key(best_offer), {}).get("score")
     if score:
         bullets.append(f"Ranks highest for your selected priorities with an AI Score of {score}.")
 
-    return bullets[:3] or ["Best fit because it balances your selected priorities better than the alternatives."]
+    return bullets[:3] or ["Only returned option with enough fare, route, and timing data to compare."]
 
 
 def _card_badges(offer, offers, recommendations):
@@ -1367,13 +1436,13 @@ def _trip_impact_summary(offer, recommendation):
     if stops == 0:
         parts.append("nonstop travel")
     if label in {"Fastest arrival", "Best overall"}:
-        parts.append("predictable timing")
+        parts.append(f"{offer.get('arrive_time') or 'the listed'} arrival")
     if label in {"Most flexible", "Best overall"}:
-        parts.append("clearer flexibility")
+        parts.append("listed fare-rule data")
     if label == "Best baggage":
-        parts.append("baggage clarity")
-    strength = " and ".join(parts[:2]) if parts else "a balanced route"
-    downside = "The main tradeoff is that it may not be the absolute cheapest fare returned."
+        parts.append(str(offer.get("baggage") or "listed baggage details"))
+    strength = " and ".join(parts[:2]) if parts else f"{money_usd(price)} fare and {_display_value(offer.get('duration'))} travel time"
+    downside = "The main tradeoff is comparing this fare against the cheapest returned option."
     if label in {"Cheapest", "Cheapest nonstop", "Best value"}:
         downside = "The main tradeoff is checking whether the timing works for your trip rhythm."
     if price <= 0:
@@ -4254,6 +4323,19 @@ def render():
     if score_detail_offer:
         def _show_score_breakdown_content():
             breakdown_rows = _ai_score_detail_breakdown(score_detail_offer, offers)
+            score_data = (recommendations.get(_flight_key(score_detail_offer)) or {})
+            score_value = float(score_data.get("score") or score_detail_offer.get("ai_score") or 0)
+            not_perfect_reasons = _score_not_perfect_reasons(score_detail_offer, offers) if score_value < 100 else []
+            not_perfect_html = ""
+            if not_perfect_reasons:
+                not_perfect_html = "".join(
+                    [
+                        '<div class="flight-card-rec-kicker why">Why this is not a perfect score</div>',
+                        '<ul class="flight-card-rec-list">',
+                        "".join(f"<li>{html.escape(reason)}</li>" for reason in not_perfect_reasons),
+                        "</ul>",
+                    ]
+                )
             breakdown_html = "".join(
                 _safe_html_parts(
                     [
@@ -4275,6 +4357,7 @@ def render():
                     [
                         '<div class="flight-score-breakdown-panel">',
                         '<div class="flight-score-breakdown-title">AI Score breakdown</div>',
+                        not_perfect_html,
                         f'<div class="flight-score-breakdown-grid">{breakdown_html}</div>',
                         "</div>",
                     ]
