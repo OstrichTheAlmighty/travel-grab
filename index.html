@@ -543,6 +543,27 @@
           localStorage.setItem(distinctKey, distinctId);
         }
 
+        function environment() {
+          var hostName = location.hostname.toLowerCase();
+          if (hostName === "localhost" || hostName === "127.0.0.1") return "local";
+          if (hostName === "byable-demo.streamlit.app") return "streamlit_cloud";
+          if (hostName === "byable.app" || hostName.endsWith(".byable.app")) return "production_landing";
+          return "production_landing";
+        }
+
+        function baseProperties() {
+          return {
+            app: "byable",
+            source: "landing_page",
+            timestamp: Date.now() / 1000,
+            session_id: distinctId,
+            page: "landing",
+            current_page: "landing",
+            app_url: location.href,
+            environment: environment(),
+          };
+        }
+
         function track(event, properties) {
           try {
             fetch(host + "/capture/", {
@@ -553,7 +574,7 @@
                 api_key: key,
                 event: event,
                 distinct_id: distinctId,
-                properties: Object.assign({ app: "byable", source: "landing_page" }, properties || {}),
+                properties: Object.assign(baseProperties(), properties || {}),
               }),
             }).catch(function () {});
           } catch (_) {}

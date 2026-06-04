@@ -1494,44 +1494,52 @@ def _set_selected_flight(flight_id, offer, adults, index):
     )
 
 
-def _render_recommendation_feedback_form(offer, recommendation, origin_city, destination_city, priorities):
-    """Collect optional recommendation feedback without affecting flight search or ranking."""
-    flight_id = _flight_key(offer)
-    thanks_key = f"recommendation_feedback_thanks_{flight_id}"
-    st.markdown("##### What would make this recommendation more useful?")
-    with st.form(f"recommendation_feedback_{flight_id}", clear_on_submit=True):
-        confidence = st.selectbox(
-            "Confidence",
-            ["Not confident", "Somewhat confident", "Very confident"],
+def _render_byable_feedback_form(offer, recommendation, origin_city, destination_city, priorities, has_flight_results):
+    """Collect optional page-level feedback without affecting search, AI, or ranking."""
+    flight_id = _flight_key(offer or {}) or "no_flight"
+    thanks_key = "byable_feedback_thanks"
+    st.markdown("##### Help improve Byable")
+    st.caption("What felt confusing, missing, or untrustworthy?")
+    with st.form("byable_feedback_form", clear_on_submit=True):
+        usefulness_rating = st.selectbox(
+            "How useful is Byable so far?",
+            ["Not useful yet", "Somewhat useful", "Very useful"],
             index=1,
-            key=f"recommendation_feedback_confidence_{flight_id}",
+            key="byable_feedback_usefulness_rating",
         )
         feedback_text = st.text_area(
             "Feedback",
             placeholder="Tell us what felt confusing, missing, or untrustworthy…",
             max_chars=1200,
-            key=f"recommendation_feedback_text_{flight_id}",
+            key="byable_feedback_text",
         )
         submitted = st.form_submit_button("Send feedback")
     if submitted:
+        event_name = "byable_feedback_submitted"
+        print("BYABLE FEEDBACK SUBMIT CLICKED", flush=True)
         sent = track_event(
-            "recommendation_feedback_submitted",
+            event_name,
             {
-                "confidence": confidence,
+                "usefulness_rating": usefulness_rating,
                 "feedback_text": str(feedback_text or "").strip(),
+                "current_page": str(st.session_state.get("page") or "flights"),
                 "origin_city": origin_city,
                 "destination_city": destination_city,
                 "selected_priorities": list(priorities or []),
-                "recommended_airline": offer.get("airline"),
-                "recommended_price": offer.get("price_total"),
+                "has_flight_results": bool(has_flight_results),
+                "recommended_airline": (offer or {}).get("airline"),
+                "recommended_price": (offer or {}).get("price_total"),
                 "recommended_ai_score": (recommendation or {}).get("score"),
-                "recommended_duration": offer.get("duration"),
-                "recommended_stops": offer.get("stops"),
+                "recommended_duration": (offer or {}).get("duration"),
+                "recommended_stops": (offer or {}).get("stops"),
                 "flight_id": flight_id,
             },
         )
-        if not sent:
-            print("POSTHOG EVENT FAILED: recommendation_feedback_submitted local fallback logged", flush=True)
+        print("BYABLE FEEDBACK SUBMITTED", flush=True)
+        if sent:
+            print(f"POSTHOG EVENT SENT: {event_name}", flush=True)
+        else:
+            print(f"POSTHOG EVENT FAILED: {event_name}", flush=True)
         st.session_state[thanks_key] = True
     if st.session_state.get(thanks_key):
         st.success("Thanks — this helps us improve Byable.")
@@ -3466,7 +3474,18 @@ def render():
 
     if submitted:
         _print_ai_status()
+        click_props = {
+            "origin_city": str(origin_city or "").strip(),
+            "destination_city": str(destination_city or "").strip(),
+            "depart_date": str(departure_date or "").strip(),
+            "return_date": str(return_date or "").strip(),
+            "travelers": int(adults or 0),
+            "cabin": str(cabin_class or "").strip(),
+            "selected_priorities": list(selected_priorities_from_form),
+        }
+        track_event("flight_search_clicked", click_props)
         validation_errors = []
+        rate_limit_error = None
         origin_city_clean, origin_error = _validate_city_input(origin_city, "From city")
         destination_city_clean, destination_error = _validate_city_input(destination_city, "To city")
         if return_mode == "Same as destination":
@@ -3496,9 +3515,36 @@ def render():
         if not validation_errors:
             search_allowed, search_wait = _rate_limit_action("flight_search_rate_limit", FLIGHT_SEARCH_RATE_LIMIT_SECONDS)
             if not search_allowed:
-                validation_errors.append(f"Please wait {search_wait:.0f}s before searching again.")
-        if validation_errors:
-            message = validation_errors[0]
+                rate_limit_error = f"Please wait {search_wait:.0f}s before searching again."
+        if validation_errors or rate_limit_error:
+            message = validation_errors[0] if validation_errors else rate_limit_error
+            if validation_errors:
+                track_event(
+                    "flight_search_validation_failed",
+                    {
+                        "validation_error": message,
+                        "origin_city": click_props["origin_city"],
+                        "destination_city": click_props["destination_city"],
+                        "depart_date": click_props["depart_date"],
+                        "return_date": click_props["return_date"],
+                        "travelers": click_props["travelers"],
+                        "cabin": click_props["cabin"],
+                    },
+                )
+            else:
+                track_event(
+                    "flight_search_rate_limited",
+                    {
+                        "origin_city": click_props["origin_city"],
+                        "destination_city": click_props["destination_city"],
+                        "depart_date": click_props["depart_date"],
+                        "return_date": click_props["return_date"],
+                        "travelers": click_props["travelers"],
+                        "cabin": click_props["cabin"],
+                        "selected_priorities": click_props["selected_priorities"],
+                        "rate_limit_seconds": FLIGHT_SEARCH_RATE_LIMIT_SECONDS,
+                    },
+                )
             st.session_state["flight_debug"] = {
                 "status": "validation_error",
                 "message": message,
@@ -3725,6 +3771,21 @@ def render():
         route_label = f"{origin_label} → {destination_label} · {return_origin_label} → {origin_label}"
     else:
         route_label = f"{origin_label} → {destination_label} → {origin_label}"
+    feedback_recommendations = ranking_output.get("recommendations") or {}
+    feedback_offer = offers[0] if offers else None
+    feedback_recommendation = (
+        feedback_recommendations.get(_flight_key(feedback_offer), {})
+        if feedback_offer
+        else {}
+    )
+    _render_byable_feedback_form(
+        feedback_offer,
+        feedback_recommendation,
+        origin_city,
+        destination_city,
+        priorities,
+        bool(offers),
+    )
     has_searched_for_current_route = submitted or cached_search_params == active_search_params
     if has_searched_for_current_route and offers:
         display_route = f"{origin_label} → {destination_label}"
@@ -4119,14 +4180,6 @@ def render():
             ]
         )
         st.markdown(card_html, unsafe_allow_html=True)
-        if is_recommended:
-            _render_recommendation_feedback_form(
-                offer,
-                recommendation,
-                origin_city,
-                destination_city,
-                priorities,
-            )
         action_button_cols = st.columns([1, 0.18, 0.16, 0.20])
         with action_button_cols[1]:
             flight_id = _flight_key(offer)

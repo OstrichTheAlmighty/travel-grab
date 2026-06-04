@@ -62,14 +62,53 @@ def _current_page():
         return "unknown"
 
 
+def _app_url():
+    if st is None:
+        return os.getenv("BYABLE_APP_URL") or ""
+    try:
+        context = getattr(st, "context", None)
+        for attr in ("url", "page_url"):
+            value = getattr(context, attr, "") if context is not None else ""
+            if value:
+                return str(value)
+        headers = getattr(context, "headers", {}) if context is not None else {}
+        host = ""
+        if isinstance(headers, dict):
+            host = headers.get("Host") or headers.get("host") or ""
+        if host:
+            scheme = "http" if host.startswith(("localhost", "127.0.0.1")) else "https"
+            return f"{scheme}://{host}"
+    except Exception:
+        pass
+    return os.getenv("BYABLE_APP_URL") or ""
+
+
+def _environment_from_url(app_url):
+    host = str(app_url or os.getenv("BYABLE_APP_URL") or "").lower()
+    if "localhost" in host or "127.0.0.1" in host:
+        return "local"
+    if "byable-demo.streamlit.app" in host:
+        return "streamlit_cloud"
+    if "byable.app" in host:
+        return "production_landing"
+    if os.getenv("STREAMLIT_CLOUD") or os.getenv("STREAMLIT_SHARING_MODE"):
+        return "streamlit_cloud"
+    return os.getenv("BYABLE_ENVIRONMENT") or "local"
+
+
 def _event_properties(properties=None):
     session_id = _distinct_id()
+    current_page = _current_page()
+    app_url = _app_url()
     return {
         "app": "byable",
         "source": "streamlit",
         "timestamp": time.time(),
         "session_id": session_id,
-        "page": _current_page(),
+        "page": current_page,
+        "current_page": current_page,
+        "app_url": app_url,
+        "environment": _environment_from_url(app_url),
         **(properties or {}),
     }
 
@@ -78,6 +117,8 @@ def posthog_client_script(page_name):
     """Return no-UI JS tracking for HTML components that cannot call Python callbacks."""
     config = init_posthog()
     session_id = _distinct_id()
+    app_url = _app_url()
+    environment = _environment_from_url(app_url)
     if not config:
         return """
 <script>
@@ -100,7 +141,10 @@ window.byableTrack = function(eventName, properties) {{
           source: "streamlit_component",
           timestamp: Date.now() / 1000,
           session_id: {json.dumps(session_id)},
-          page: {json.dumps(page_name)}
+          page: {json.dumps(page_name)},
+          current_page: {json.dumps(page_name)},
+          app_url: {json.dumps(app_url)},
+          environment: {json.dumps(environment)}
         }}, properties || {{}})
       }})
     }}).then(function(response) {{
