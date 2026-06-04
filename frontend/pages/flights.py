@@ -3075,8 +3075,8 @@ def render():
             border: 1px solid rgba(129,140,248,0.18);
             border-radius: 14px;
             background: rgba(99,102,241,0.075);
-            padding: 11px 13px;
-            margin: 0 0 10px;
+            padding: 9px 12px;
+            margin: 0 0 8px;
         }
         .flight-card-recommendation.compact {
             background: rgba(255,255,255,0.032);
@@ -3094,28 +3094,29 @@ def render():
         }
         .flight-card-rec-kicker {
             color: #c7d2fe;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 900;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
         .flight-card-rec-kicker.why {
-            margin-top: 8px;
+            margin-top: 6px;
         }
         .flight-card-rec-copy {
             color: rgba(255,255,255,0.86);
-            font-size: 13px;
-            line-height: 1.45;
-            margin-bottom: 5px;
+            font-size: 12px;
+            line-height: 1.35;
+            margin-bottom: 4px;
         }
         .flight-card-impact-grid {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 7px 12px;
+            gap: 5px 10px;
             color: rgba(255,255,255,0.72);
-            font-size: 12px;
-            line-height: 1.35;
+            font-size: 11px;
+            line-height: 1.25;
+            margin-top: 7px;
         }
         .flight-card-impact-grid span {
             color: rgba(255,255,255,0.48);
@@ -3125,8 +3126,8 @@ def render():
         }
         .flight-card-rec-list {
             color: rgba(255,255,255,0.66);
-            font-size: 12px;
-            line-height: 1.45;
+            font-size: 11px;
+            line-height: 1.35;
             margin: 0;
             padding-left: 1rem;
         }
@@ -4094,18 +4095,8 @@ def render():
             f"<li>{html.escape(bullet)}</li>"
             for bullet in impact_reason_source[:impact_reason_limit]
         )
-        impact_class = "flight-card-recommendation" if is_recommended else "flight-card-recommendation compact"
         if is_recommended:
-            trip_impact_html = "".join(
-                [
-                    f'<div class="{impact_class}">',
-                    '<div class="flight-card-rec-kicker">Trip Impact</div>',
-                    f'<div class="flight-card-impact-grid">{impact_html}</div>',
-                    '<div class="flight-card-rec-kicker why">Why?</div>',
-                    f'<ul class="flight-card-rec-list">{impact_bullets}</ul>',
-                    "</div>",
-                ]
-            )
+            trip_impact_html = ""
         else:
             trip_impact_html = impact_inline_html
         watch_out_source = (
@@ -4119,7 +4110,15 @@ def render():
             for item in watch_out_source[:2]
         )
         watch_out_html = ""
-        if is_recommended:
+        meaningful_watch_out = [
+            item for item in watch_out_source[:2]
+            if "no major downside" not in str(item).lower()
+        ]
+        if is_recommended and meaningful_watch_out:
+            watch_out_items = "".join(
+                f"<li>{html.escape(item)}</li>"
+                for item in meaningful_watch_out
+            )
             watch_out_html = "".join(
                 [
                     '<div class="flight-card-recommendation compact">',
@@ -4134,6 +4133,11 @@ def render():
                 f"<li>{html.escape(bullet)}</li>"
                 for bullet in advisor_bullets[:3]
             )
+            trip_impact_bullet_html = "".join(
+                f"<li>{html.escape(bullet)}</li>"
+                for bullet in impact_reason_source[:1]
+                if bullet
+            )
             recommendation_html = "".join(
                 [
                     '<div class="flight-card-recommendation">',
@@ -4141,6 +4145,8 @@ def render():
                     f'<div class="flight-card-rec-copy">{html.escape(recommendation_summary)}</div>',
                     '<div class="flight-card-rec-kicker why">Why this</div>',
                     f'<ul class="flight-card-rec-list">{bullet_html}</ul>',
+                    f'<div class="flight-card-impact-grid">{impact_html}</div>',
+                    f'<ul class="flight-card-rec-list">{trip_impact_bullet_html}</ul>' if trip_impact_bullet_html else "",
                     "</div>",
                 ]
             )
