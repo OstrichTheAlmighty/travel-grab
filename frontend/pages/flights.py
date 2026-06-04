@@ -3395,6 +3395,30 @@ def render():
     safe_cabin_default, _cabin_default_error = _validate_cabin_class(search_state.get("cabin_class", "economy"))
     safe_adults_default = safe_adults_default or 1
     safe_cabin_default = safe_cabin_default or "economy"
+    feedback_cache = st.session_state.get("flight_results_cache") or {}
+    feedback_offers = list(feedback_cache.get("ranked_flights") or feedback_cache.get("raw_offers") or [])
+    feedback_offer = feedback_offers[0] if feedback_offers else None
+    feedback_ranking = feedback_cache.get("ranking_output") or {}
+    feedback_recommendations = feedback_ranking.get("recommendations") or {}
+    feedback_recommendation = (
+        feedback_recommendations.get(_flight_key(feedback_offer), {})
+        if feedback_offer
+        else {}
+    )
+    feedback_priorities = _validate_priorities(
+        st.session_state.get("flight_priority_selector")
+        or search_state.get("priorities")
+        or st.session_state.get("flight_priorities")
+        or DEFAULT_PRIORITIES
+    )
+    _render_byable_feedback_form(
+        feedback_offer,
+        feedback_recommendation,
+        _clean_city_input(search_state.get("origin_city") or "San Francisco") or "San Francisco",
+        _clean_city_input(search_state.get("destination_city") or "Tokyo") or "Tokyo",
+        feedback_priorities,
+        bool(feedback_offers),
+    )
 
     with st.container(border=True):
         st.markdown(
@@ -3771,21 +3795,6 @@ def render():
         route_label = f"{origin_label} → {destination_label} · {return_origin_label} → {origin_label}"
     else:
         route_label = f"{origin_label} → {destination_label} → {origin_label}"
-    feedback_recommendations = ranking_output.get("recommendations") or {}
-    feedback_offer = offers[0] if offers else None
-    feedback_recommendation = (
-        feedback_recommendations.get(_flight_key(feedback_offer), {})
-        if feedback_offer
-        else {}
-    )
-    _render_byable_feedback_form(
-        feedback_offer,
-        feedback_recommendation,
-        origin_city,
-        destination_city,
-        priorities,
-        bool(offers),
-    )
     has_searched_for_current_route = submitted or cached_search_params == active_search_params
     if has_searched_for_current_route and offers:
         display_route = f"{origin_label} → {destination_label}"
