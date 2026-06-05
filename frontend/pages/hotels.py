@@ -61,7 +61,7 @@ MOCK_RECOMMENDATIONS = {
             "type": "Recommended hotel",
             "price": 268,
             "score": 89,
-            "why": "Byable recommends this mock stay because it puts food, shopping, and walkability first without jumping to ultra-luxury pricing.",
+            "why": "Byable recommends this stay because it puts food, shopping, and walkability first without jumping to ultra-luxury pricing.",
             "tags": ["Food access", "Shopping", "Walkable"],
             "scores": {
                 "Location Match": (9.2, "Strong fit for food, shopping, and walkable Tokyo days."),
@@ -94,12 +94,12 @@ MOCK_RECOMMENDATIONS = {
             "type": "Recommended hotel",
             "price": 286,
             "score": 87,
-            "why": "Byable recommends this mock stay for nightlife-focused trips because it keeps late-night food and rail access close.",
+            "why": "Byable recommends this stay for nightlife-focused trips because it keeps late-night food and rail access close.",
             "tags": ["Nightlife", "Station access", "Central"],
             "scores": {
                 "Location Match": (9.1, "Strong fit for nightlife and late dining."),
                 "Transit Access": (9.0, "Shinjuku Station gives broad local and regional access."),
-                "Value": (7.6, "Convenience raises the mock nightly rate."),
+                "Value": (7.6, "Convenience raises the estimated nightly rate."),
                 "Room Quality": (8.1, "Mock profile assumes a reliable modern city hotel."),
                 "Safety": (8.0, "Central and active, though busier late at night."),
             },
@@ -127,12 +127,12 @@ MOCK_RECOMMENDATIONS = {
             "type": "Recommended hotel",
             "price": 172,
             "score": 86,
-            "why": "Byable recommends this mock stay because it prioritizes culture and value near Ueno museums and transit.",
+            "why": "Byable recommends this stay because it prioritizes culture and value near Ueno museums and transit.",
             "tags": ["Culture", "Value", "Museums"],
             "scores": {
                 "Location Match": (8.8, "Strong match for museums, parks, and older Tokyo sightseeing."),
                 "Transit Access": (8.4, "Ueno gives useful JR and subway access."),
-                "Value": (9.0, "Lower mock nightly rate than Ginza, Shinjuku, or Toranomon."),
+                "Value": (9.0, "Lower estimated nightly rate than Ginza, Shinjuku, or Toranomon."),
                 "Room Quality": (8.0, "Mock profile assumes design-forward upper-midscale rooms."),
                 "Safety": (8.5, "Established sightseeing district with predictable transport."),
             },
@@ -150,7 +150,7 @@ MOCK_RECOMMENDATIONS = {
                 "Feels elevated without leaving central Tokyo.",
             ],
             "cons": [
-                "Highest nightly rates in this mock set.",
+                "Highest nightly rates in this recommended set.",
                 "Less neighborhood texture than Ueno or Asakusa.",
             ],
         },
@@ -160,12 +160,12 @@ MOCK_RECOMMENDATIONS = {
             "type": "Recommended hotel",
             "price": 620,
             "score": 88,
-            "why": "Byable recommends this mock stay for luxury-focused trips where the hotel experience matters as much as the neighborhood.",
+            "why": "Byable recommends this stay for luxury-focused trips where the hotel experience matters as much as the neighborhood.",
             "tags": ["Luxury", "Design", "Skyline"],
             "scores": {
                 "Location Match": (8.8, "Strong fit for premium dining, design hotels, and central access."),
                 "Transit Access": (8.2, "Good central access, though not as frictionless as Shinjuku for rail-heavy days."),
-                "Value": (6.8, "High mock nightly rate lowers value despite strong quality."),
+                "Value": (6.8, "High estimated nightly rate lowers value despite strong quality."),
                 "Room Quality": (9.2, "Mock profile assumes the strongest room and design quality in this set."),
                 "Safety": (9.1, "Polished central district with predictable business-area access."),
             },
@@ -178,7 +178,7 @@ MOCK_RECOMMENDATIONS = {
             "score": 87,
             "why": "Recommended because it matches your selected preferences.",
             "pros": [
-                "Lowest mock hotel pricing among the recommended areas.",
+                "Lowest hotel pricing among the recommended areas.",
                 "Good cultural access without premium-neighborhood rates.",
                 "Useful rail connections from Ueno.",
             ],
@@ -193,12 +193,12 @@ MOCK_RECOMMENDATIONS = {
             "type": "Recommended hotel",
             "price": 172,
             "score": 87,
-            "why": "Byable recommends this mock stay because it keeps the nightly estimate low while preserving transit and neighborhood character.",
+            "why": "Byable recommends this stay because it keeps the nightly estimate low while preserving transit and neighborhood character.",
             "tags": ["Lowest price", "Culture", "Transit"],
             "scores": {
                 "Location Match": (8.3, "Good fit if value and culture matter more than premium shopping."),
                 "Transit Access": (8.4, "Ueno gives useful JR and subway connections."),
-                "Value": (9.3, "Lowest recommended mock nightly rate in this prototype."),
+                "Value": (9.3, "Lowest recommended estimated nightly rate in this recommendation set."),
                 "Room Quality": (8.0, "Mock profile assumes solid design-hotel quality."),
                 "Safety": (8.5, "Established visitor area with predictable transport access."),
             },
@@ -226,12 +226,12 @@ MOCK_RECOMMENDATIONS = {
             "type": "Recommended hotel",
             "price": 238,
             "score": 88,
-            "why": "Byable recommends this mock stay because it gives a calmer Tokyo base while keeping useful transit access.",
+            "why": "Byable recommends this stay because it gives a calmer Tokyo base while keeping useful transit access.",
             "tags": ["Relaxation", "Quiet base", "Transit access"],
             "scores": {
                 "Location Match": (8.6, "Strong fit for a quieter Tokyo base with park access nearby."),
                 "Transit Access": (8.9, "Daimon and Hamamatsucho help with Haneda access and Yamanote routing."),
-                "Value": (8.4, "Moderate mock rate for a calmer, polished hotel profile."),
+                "Value": (8.4, "Moderate estimated rate for a calmer, polished hotel profile."),
                 "Room Quality": (8.4, "Mock profile assumes comfortable upper-midscale rooms."),
                 "Safety": (9.0, "Calm business district profile with predictable late-evening access."),
             },
@@ -256,7 +256,7 @@ ALTERNATIVE_HOTELS = [
         "area": "Ueno · culture and transit",
         "price": 172,
         "score": 84,
-        "why": "Lower mock rate with strong neighborhood character and good museum access, but less polished than the recommended pick.",
+        "why": "Lower estimated rate with strong neighborhood character and good museum access, but less polished than the recommended pick.",
         "tags": ["Value", "Local feel", "Museums"],
     },
     {
@@ -294,7 +294,7 @@ NEIGHBORHOOD_PROFILES = [
         "value": 7.4,
         "tradeoff": "Busier streets and stations can feel less relaxing.",
         "good_fit": [
-            "Best mock area for nightlife and late food.",
+            "Best area for nightlife and late food.",
             "Very strong rail access for cross-city sightseeing.",
         ],
     },
@@ -307,7 +307,7 @@ NEIGHBORHOOD_PROFILES = [
         "value": 9.2,
         "tradeoff": "Less central for west-side nightlife, luxury, and shopping.",
         "good_fit": [
-            "Strongest mock fit for culture and lower hotel costs.",
+            "Strongest fit for culture and lower hotel costs.",
             "Good access to museums, parks, temples, and older Tokyo.",
         ],
     },
@@ -735,39 +735,39 @@ HOTEL_FACTOR_PROFILES = {
         "Location Match": (9.3, "Strong fit for Ginza food, shopping, and walkable first-trip days."),
         "Transit Access": (8.7, "Useful Ginza/Shimbashi/Tokyo Station access without needing a car."),
         "Value": (7.8, "Pricier than Ueno, but less expensive than luxury Ginza/Toranomon hotels."),
-        "Room Quality": (8.4, "Upper-midscale mock profile with polished rooms and skyline-oriented positioning."),
+        "Room Quality": (8.4, "Upper-midscale profile with polished rooms and skyline-oriented positioning."),
         "Safety": (9.1, "Central, well-lit shopping and business district profile."),
         "preference_tags": {"Food", "Shopping", "Walkability"},
     },
     "JR Kyushu Hotel Blossom Shinjuku": {
         "Location Match": (8.8, "Best fit for nightlife, late dining, and west-side Tokyo energy."),
-        "Transit Access": (9.3, "Shinjuku Station gives the strongest rail access in this mock set."),
+        "Transit Access": (9.3, "Shinjuku Station gives the strongest rail access in this recommended set."),
         "Value": (7.5, "Convenience raises the nightly rate versus Ueno or Asakusa."),
-        "Room Quality": (8.2, "Reliable modern city-hotel mock profile."),
+        "Room Quality": (8.2, "Reliable modern city-hotel profile."),
         "Safety": (8.0, "Central and active, though the area can feel busier late at night."),
         "preference_tags": {"Nightlife", "Walkability"},
     },
     "Nohga Hotel Ueno Tokyo": {
         "Location Match": (8.4, "Strong fit for museums, parks, older Tokyo, and slower cultural days."),
         "Transit Access": (8.5, "Ueno gives useful JR and subway connections across Tokyo."),
-        "Value": (9.3, "Lowest mock nightly rate among the core Byable options."),
-        "Room Quality": (8.1, "Solid design-hotel mock profile without luxury pricing."),
+        "Value": (9.3, "Lowest estimated nightly rate among the core Byable options."),
+        "Room Quality": (8.1, "Solid design-hotel profile without luxury pricing."),
         "Safety": (8.5, "Established visitor area with predictable transport access."),
         "preference_tags": {"Culture", "Lowest Price", "Walkability"},
     },
     "The Tokyo Edition, Toranomon": {
         "Location Match": (8.7, "Strong fit for premium dining, design hotels, and polished central Tokyo."),
         "Transit Access": (8.1, "Central, but less frictionless than Shinjuku for rail-heavy sightseeing."),
-        "Value": (6.5, "Highest mock nightly rate lowers value despite strong quality."),
-        "Room Quality": (9.5, "Strongest luxury and room-quality mock profile in this set."),
+        "Value": (6.5, "Highest estimated nightly rate lowers value despite strong quality."),
+        "Room Quality": (9.5, "Strongest luxury and room-quality profile in this set."),
         "Safety": (9.2, "Polished central business district with predictable access."),
         "preference_tags": {"Luxury", "Food", "Relaxation"},
     },
     "Hotel The Celestine Tokyo Shiba": {
         "Location Match": (8.2, "Best for a calmer base near parks and Haneda-side routing."),
         "Transit Access": (8.8, "Daimon and Hamamatsucho support useful airport and Yamanote access."),
-        "Value": (8.4, "Moderate mock rate for a quieter, polished hotel profile."),
-        "Room Quality": (8.5, "Comfortable upper-midscale mock profile."),
+        "Value": (8.4, "Moderate estimated rate for a quieter, polished hotel profile."),
+        "Room Quality": (8.5, "Comfortable upper-midscale profile."),
         "Safety": (9.0, "Calm business district profile with predictable late-evening access."),
         "preference_tags": {"Relaxation", "Family Friendly"},
     },
@@ -810,7 +810,7 @@ def _trip_fit_factor(hotel_name, preferences):
 def _score_mock_hotel(hotel, preferences):
     profile = HOTEL_FACTOR_PROFILES.get(hotel["name"], {})
     scores = {
-        key: profile.get(key, (7.5, "Mock score based on Byable prototype assumptions."))
+        key: profile.get(key, (7.5, "Byable score based on current stay assumptions."))
         for key in ("Location Match", "Transit Access", "Value", "Room Quality", "Safety")
     }
     scores["Trip Fit"] = _trip_fit_factor(hotel["name"], preferences)
@@ -1011,8 +1011,12 @@ def _inject_hotel_styles():
             box-shadow: 0 18px 48px rgba(0,0,0,0.16);
         }
         .hotel-card.recommended {
-            border-color: rgba(196,181,253,0.28);
-            box-shadow: 0 18px 62px rgba(99,102,241,0.12);
+            border-color: rgba(196,181,253,0.44);
+            background:
+                radial-gradient(circle at top left, rgba(139,92,246,0.22), transparent 36%),
+                linear-gradient(145deg, rgba(255,255,255,0.075), rgba(255,255,255,0.02)),
+                rgba(8,10,18,0.96);
+            box-shadow: 0 22px 74px rgba(99,102,241,0.20);
         }
         .hotel-card.alt {
             padding: 14px 15px;
@@ -1127,6 +1131,20 @@ def _inject_hotel_styles():
             background: linear-gradient(135deg, rgba(99,102,241,0.25), rgba(14,165,233,0.11));
             border-color: rgba(165,180,252,0.20);
         }
+        .hotel-recommended-label {
+            display: inline-flex;
+            width: fit-content;
+            border-radius: 999px;
+            border: 1px solid rgba(196,181,253,0.32);
+            background: linear-gradient(135deg, rgba(139,92,246,0.28), rgba(99,102,241,0.12));
+            color: rgba(238,242,255,0.94);
+            padding: 4px 9px;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
         div[data-testid="stMultiSelect"] [data-baseweb="select"] > div {
             border: 1px solid rgba(129,140,248,0.18) !important;
             background: rgba(15,23,42,0.86) !important;
@@ -1186,8 +1204,8 @@ def _inject_hotel_styles():
     )
 
 
-def _score_badge(score):
-    return f'<span class="hotel-score">AI Score: {int(score)}</span>'
+def _score_badge(score, label="Stay Score"):
+    return f'<span class="hotel-score">{html.escape(label)}: {int(score)}</span>'
 
 
 def _chips(tags, primary_first=False):
@@ -1204,7 +1222,7 @@ def _render_preferences():
             """
             <div class="hotel-kicker">Hotel preferences</div>
             <div class="hotel-name">What's most important for this trip?</div>
-            <div class="hotel-area">Pick the signals Byable should use to rank the mock Tokyo hotel set.</div>
+            <div class="hotel-area">Pick the signals Byable should use to rank the Tokyo hotel set.</div>
             """,
             unsafe_allow_html=True,
         )
@@ -1229,9 +1247,9 @@ def _render_neighborhood_card(recommendation, preferences, scored_neighborhood, 
                 <div>
                     <div class="hotel-kicker">Recommended neighborhood</div>
                     <div class="hotel-name">{html.escape(neighborhood["name"])}</div>
-                    <div class="hotel-area">Byable-selected area · mock Tokyo prototype</div>
+                    <div class="hotel-area">Selected for this trip</div>
                 </div>
-                {_score_badge(scored_neighborhood["score"])}
+                {_score_badge(scored_neighborhood["score"], "Match")}
             </div>
             <div class="hotel-copy">{html.escape(neighborhood["why"])}</div>
             <div class="hotel-chip-row">{_chips([f'Matches: {preference_text}', 'Neighborhood Match score'], primary_first=True)}</div>
@@ -1260,7 +1278,7 @@ def _render_neighborhood_alt_card(neighborhood):
                     <div class="hotel-name">{html.escape(neighborhood["name"])}</div>
                     <div class="hotel-area">Best for: {html.escape(neighborhood["best_for"])}</div>
                 </div>
-                {_score_badge(neighborhood["score"])}
+                {_score_badge(neighborhood["score"], "Match")}
             </div>
             <div class="hotel-chip-row">{_chips([f'Convenience {neighborhood["convenience"]:.1f}', f'Value {neighborhood["value"]:.1f}'], primary_first=True)}</div>
         </div>
@@ -1271,23 +1289,25 @@ def _render_neighborhood_alt_card(neighborhood):
 
 def _render_hotel_card(hotel, recommended=False):
     card_class = "hotel-card recommended" if recommended else "hotel-card alt"
-    price_sub = "per night · rates not connected" if hotel.get("price") is None else "per night"
+    price_sub = "estimated nightly rate"
     stay_score_html = ""
     if recommended and hotel.get("overall_stay_score") is not None:
         stay_score_html = "".join(
             [
                 '<div class="hotel-factor-strip">',
                 f'<span>Neighborhood Match <strong>{int(hotel.get("neighborhood_match_score") or 0)}</strong></span>',
-                f'<span>Hotel AI Score <strong>{int(hotel.get("score") or 0)}</strong></span>',
-                f'<span>Overall Stay Score <strong>{int(hotel.get("overall_stay_score") or 0)}</strong></span>',
+                f'<span>Stay Score <strong>{int(hotel.get("score") or 0)}</strong></span>',
+                f'<span>Overall Match <strong>{int(hotel.get("overall_stay_score") or 0)}</strong></span>',
                 "</div>",
             ]
         )
+    recommended_label = '<div class="hotel-recommended-label">Recommended by Byable</div>' if recommended else ""
     card_html = "".join(
         [
             f'<div class="{card_class}">',
             '<div class="hotel-card-top">',
             "<div>",
+            recommended_label,
             f'<div class="hotel-kicker">{html.escape(hotel["type"] if recommended else hotel["label"])}</div>',
             f'<div class="hotel-name">{html.escape(hotel["name"])}</div>',
             f'<div class="hotel-area">{html.escape(hotel["area"])}</div>',
@@ -1310,7 +1330,7 @@ def _render_hotel_card(hotel, recommended=False):
 
 def _render_score_modal(hotel):
     def _content():
-        st.markdown("#### Hotel AI Score breakdown")
+        st.markdown("#### Stay Score breakdown")
         st.caption(hotel["name"])
         for label, (score, note) in hotel["scores"].items():
             with st.container(border=True):
@@ -1320,12 +1340,12 @@ def _render_score_modal(hotel):
                 with row_cols[1]:
                     st.markdown(f"**{float(score):.1f}/10**")
                 st.caption(note)
-        if st.button("Close AI Score", key="close_hotel_score"):
+        if st.button("Close Stay Score", key="close_hotel_score"):
             st.session_state.pop("hotel_score_modal_open", None)
             st.rerun()
 
     if hasattr(st, "dialog"):
-        @st.dialog("Hotel AI Score")
+        @st.dialog("Stay Score")
         def _dialog():
             _content()
 
@@ -1399,8 +1419,7 @@ def render():
             <div class="hotel-kicker">Hotels</div>
             <div class="hotel-title">Where to stay in {html.escape(destination_city)}</div>
             <div class="hotel-subtitle">
-                Mock Tokyo hotel recommendations ranked by location, transit, value, room quality, safety, and trip fit.
-                No hotel APIs or booking links are connected in this v1 prototype.
+                Byable ranks stays by neighborhood fit, transit access, value, room quality, safety, and trip fit.
             </div>
         </div>
         """,
@@ -1465,7 +1484,7 @@ def render():
     _render_hotel_card(recommended_hotel, recommended=True)
     action_cols = st.columns([1, 0.24])
     with action_cols[1]:
-        if st.button("AI Score", key="recommended_hotel_score"):
+        if st.button("Stay Score", key="recommended_hotel_score"):
             st.session_state["hotel_score_modal_open"] = recommended_hotel["name"]
             track_event(
                 "hotel_ai_score_clicked",
@@ -1486,7 +1505,7 @@ def render():
         _render_hotel_card(hotel)
         action_cols = st.columns([1, 0.18, 0.18])
         with action_cols[1]:
-            if st.button("AI Score", key=f"hotel_score_{hotel['name']}"):
+            if st.button("Stay Score", key=f"hotel_score_{hotel['name']}"):
                 st.session_state["hotel_score_modal_open"] = hotel["name"]
                 track_event(
                     "hotel_ai_score_clicked",
