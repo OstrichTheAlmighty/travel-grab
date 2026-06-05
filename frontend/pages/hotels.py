@@ -29,6 +29,13 @@ GOOGLE_PLACES_FIELD_MASK = (
     "places.rating,places.userRatingCount"
 )
 HOTEL_SEARCH_LIMIT = 8
+NEIGHBORHOOD_TO_RECOMMENDATION = {
+    "Ginza / Yurakucho": "ginza",
+    "Shinjuku / Shibuya": "nightlife",
+    "Ueno / Asakusa": "price",
+    "Ginza / Toranomon": "luxury",
+    "Tokyo Bay / Shiba": "relaxation",
+}
 
 
 MOCK_RECOMMENDATIONS = {
@@ -260,6 +267,75 @@ ALTERNATIVE_HOTELS = [
         "score": 85,
         "why": "Very convenient for train-heavy sightseeing, but the area can feel busier and less calm at night.",
         "tags": ["Station access", "Central", "Efficient"],
+    },
+]
+
+
+NEIGHBORHOOD_PROFILES = [
+    {
+        "name": "Ginza / Yurakucho",
+        "best_for": "Food, shopping, polished first-trip convenience",
+        "preference_tags": {"Food", "Shopping", "Walkability", "Luxury"},
+        "base_score": 8.7,
+        "convenience": 9.0,
+        "value": 7.1,
+        "tradeoff": "More expensive and calmer at night than Shinjuku or Shibuya.",
+        "good_fit": [
+            "Excellent density for restaurants, shopping, and polished streets.",
+            "Easy access to Tokyo Station, Ginza, and Shimbashi routes.",
+        ],
+    },
+    {
+        "name": "Shinjuku / Shibuya",
+        "best_for": "Nightlife, energy, late dining, station access",
+        "preference_tags": {"Nightlife", "Food", "Shopping", "Walkability"},
+        "base_score": 8.5,
+        "convenience": 9.3,
+        "value": 7.4,
+        "tradeoff": "Busier streets and stations can feel less relaxing.",
+        "good_fit": [
+            "Best mock area for nightlife and late food.",
+            "Very strong rail access for cross-city sightseeing.",
+        ],
+    },
+    {
+        "name": "Ueno / Asakusa",
+        "best_for": "Culture, museums, temples, lower nightly rates",
+        "preference_tags": {"Culture", "Lowest Price", "Family Friendly"},
+        "base_score": 8.2,
+        "convenience": 8.2,
+        "value": 9.2,
+        "tradeoff": "Less central for west-side nightlife, luxury, and shopping.",
+        "good_fit": [
+            "Strongest mock fit for culture and lower hotel costs.",
+            "Good access to museums, parks, temples, and older Tokyo.",
+        ],
+    },
+    {
+        "name": "Ginza / Toranomon",
+        "best_for": "Luxury, design hotels, premium dining",
+        "preference_tags": {"Luxury", "Food", "Relaxation"},
+        "base_score": 8.4,
+        "convenience": 8.3,
+        "value": 6.6,
+        "tradeoff": "Highest rates and less neighborhood texture than Ueno or Asakusa.",
+        "good_fit": [
+            "Strong fit when the stay itself should feel premium.",
+            "Good central base for design hotels and polished dining.",
+        ],
+    },
+    {
+        "name": "Tokyo Bay / Shiba",
+        "best_for": "Relaxation, family pacing, quieter evenings",
+        "preference_tags": {"Relaxation", "Family Friendly"},
+        "base_score": 7.9,
+        "convenience": 8.1,
+        "value": 8.0,
+        "tradeoff": "Less dense for nightlife, food hopping, and shopping.",
+        "good_fit": [
+            "Calmer base for slower mornings and family-friendly pacing.",
+            "Useful access for Haneda-side routing and quieter evenings.",
+        ],
     },
 ]
 
@@ -654,6 +730,247 @@ def _generate_hotel_ai_explanation(hotel, alternatives, recommendation, preferen
         return fallback
 
 
+HOTEL_FACTOR_PROFILES = {
+    "Mitsui Garden Hotel Ginza Premier": {
+        "Location Match": (9.3, "Strong fit for Ginza food, shopping, and walkable first-trip days."),
+        "Transit Access": (8.7, "Useful Ginza/Shimbashi/Tokyo Station access without needing a car."),
+        "Value": (7.8, "Pricier than Ueno, but less expensive than luxury Ginza/Toranomon hotels."),
+        "Room Quality": (8.4, "Upper-midscale mock profile with polished rooms and skyline-oriented positioning."),
+        "Safety": (9.1, "Central, well-lit shopping and business district profile."),
+        "preference_tags": {"Food", "Shopping", "Walkability"},
+    },
+    "JR Kyushu Hotel Blossom Shinjuku": {
+        "Location Match": (8.8, "Best fit for nightlife, late dining, and west-side Tokyo energy."),
+        "Transit Access": (9.3, "Shinjuku Station gives the strongest rail access in this mock set."),
+        "Value": (7.5, "Convenience raises the nightly rate versus Ueno or Asakusa."),
+        "Room Quality": (8.2, "Reliable modern city-hotel mock profile."),
+        "Safety": (8.0, "Central and active, though the area can feel busier late at night."),
+        "preference_tags": {"Nightlife", "Walkability"},
+    },
+    "Nohga Hotel Ueno Tokyo": {
+        "Location Match": (8.4, "Strong fit for museums, parks, older Tokyo, and slower cultural days."),
+        "Transit Access": (8.5, "Ueno gives useful JR and subway connections across Tokyo."),
+        "Value": (9.3, "Lowest mock nightly rate among the core Byable options."),
+        "Room Quality": (8.1, "Solid design-hotel mock profile without luxury pricing."),
+        "Safety": (8.5, "Established visitor area with predictable transport access."),
+        "preference_tags": {"Culture", "Lowest Price", "Walkability"},
+    },
+    "The Tokyo Edition, Toranomon": {
+        "Location Match": (8.7, "Strong fit for premium dining, design hotels, and polished central Tokyo."),
+        "Transit Access": (8.1, "Central, but less frictionless than Shinjuku for rail-heavy sightseeing."),
+        "Value": (6.5, "Highest mock nightly rate lowers value despite strong quality."),
+        "Room Quality": (9.5, "Strongest luxury and room-quality mock profile in this set."),
+        "Safety": (9.2, "Polished central business district with predictable access."),
+        "preference_tags": {"Luxury", "Food", "Relaxation"},
+    },
+    "Hotel The Celestine Tokyo Shiba": {
+        "Location Match": (8.2, "Best for a calmer base near parks and Haneda-side routing."),
+        "Transit Access": (8.8, "Daimon and Hamamatsucho support useful airport and Yamanote access."),
+        "Value": (8.4, "Moderate mock rate for a quieter, polished hotel profile."),
+        "Room Quality": (8.5, "Comfortable upper-midscale mock profile."),
+        "Safety": (9.0, "Calm business district profile with predictable late-evening access."),
+        "preference_tags": {"Relaxation", "Family Friendly"},
+    },
+}
+
+
+def _base_mock_hotels():
+    hotels = []
+    seen = set()
+    for recommendation in MOCK_RECOMMENDATIONS.values():
+        hotel = dict(recommendation["hotel"])
+        if hotel["name"] not in seen:
+            hotels.append(hotel)
+            seen.add(hotel["name"])
+    for hotel in ALTERNATIVE_HOTELS:
+        if hotel["name"] not in seen:
+            item = dict(hotel)
+            item.setdefault("type", item.get("label", "Alternative hotel"))
+            hotels.append(item)
+            seen.add(item["name"])
+    return hotels
+
+
+def _trip_fit_factor(hotel_name, preferences):
+    profile = HOTEL_FACTOR_PROFILES.get(hotel_name, {})
+    tags = set(profile.get("preference_tags") or [])
+    selected = set(preferences or DEFAULT_HOTEL_PREFERENCES)
+    if not selected:
+        return 7.2, "Neutral fit because no hotel preferences were selected."
+    matches = sorted(tags & selected)
+    ratio = len(matches) / max(1, min(len(selected), 3))
+    score = round(max(6.2, min(9.7, 6.4 + ratio * 3.0)), 1)
+    if matches:
+        note = f"Matches selected priorities: {', '.join(matches[:3])}."
+    else:
+        note = "Less directly aligned with the selected hotel priorities."
+    return score, note
+
+
+def _score_mock_hotel(hotel, preferences):
+    profile = HOTEL_FACTOR_PROFILES.get(hotel["name"], {})
+    scores = {
+        key: profile.get(key, (7.5, "Mock score based on Byable prototype assumptions."))
+        for key in ("Location Match", "Transit Access", "Value", "Room Quality", "Safety")
+    }
+    scores["Trip Fit"] = _trip_fit_factor(hotel["name"], preferences)
+    weighted = (
+        scores["Location Match"][0] * 0.22
+        + scores["Transit Access"][0] * 0.15
+        + scores["Value"][0] * 0.17
+        + scores["Room Quality"][0] * 0.17
+        + scores["Safety"][0] * 0.11
+        + scores["Trip Fit"][0] * 0.18
+    )
+    scored = dict(hotel)
+    scored["scores"] = scores
+    scored["score"] = int(round(weighted * 10))
+    scored["trip_fit"] = scores["Trip Fit"][0]
+    scored["type"] = scored.get("type") or "Recommended hotel"
+    scored["tags"] = scored.get("tags") or sorted(profile.get("preference_tags") or [])[:3]
+    return scored
+
+
+def _rank_mock_hotels(preferences):
+    ranked = [_score_mock_hotel(hotel, preferences) for hotel in _base_mock_hotels()]
+    return sorted(ranked, key=lambda hotel: hotel["score"], reverse=True)
+
+
+def _hotel_recommendation_copy(hotel, preferences):
+    scores = hotel.get("scores") or {}
+    top_factors = sorted(scores.items(), key=lambda item: item[1][0], reverse=True)[:2]
+    preference_text = ", ".join((preferences or DEFAULT_HOTEL_PREFERENCES)[:3])
+    factor_text = " and ".join(factor for factor, _data in top_factors)
+    return (
+        f"Byable recommends this stay because it best matches {preference_text} while scoring strongest on "
+        f"{factor_text.lower()}."
+    )
+
+
+def _label_hotel_alternatives(alternatives):
+    labels = ["Luxury alternative", "Best value alternative", "Best location alternative"]
+    output = []
+    for label, hotel in zip(labels, alternatives):
+        item = dict(hotel)
+        item["label"] = label
+        item["type"] = label
+        output.append(item)
+    return output
+
+
+def _hotel_why_not_lists(hotel, recommended_hotel):
+    advantages = []
+    drawbacks = []
+    hotel_scores = hotel.get("scores") or {}
+    rec_scores = recommended_hotel.get("scores") or {}
+    if float(hotel.get("price") or 0) and float(recommended_hotel.get("price") or 0):
+        price_delta = float(hotel["price"]) - float(recommended_hotel["price"])
+        if price_delta < -20:
+            advantages.append(f"{_money(abs(price_delta))} cheaper per night than the recommended hotel.")
+        elif price_delta > 20:
+            drawbacks.append(f"{_money(price_delta)} more per night than the recommended hotel.")
+    for factor in ("Location Match", "Transit Access", "Value", "Room Quality", "Safety", "Trip Fit"):
+        hotel_score = float(hotel_scores.get(factor, (0, ""))[0])
+        rec_score = float(rec_scores.get(factor, (0, ""))[0])
+        delta = round(hotel_score - rec_score, 1)
+        if delta >= 0.5:
+            advantages.append(f"Higher {factor}: {hotel_score:.1f} vs {rec_score:.1f}.")
+        elif delta <= -0.5:
+            drawbacks.append(f"Lower {factor}: {hotel_score:.1f} vs {rec_score:.1f}.")
+    if not advantages:
+        advantages.append("Still a credible option on the main Byable hotel factors.")
+    if not drawbacks:
+        best_rec_factor = max(rec_scores.items(), key=lambda item: item[1][0])[0]
+        drawbacks.append(f"Byable ranked the recommended hotel higher because it has a stronger {best_rec_factor} profile.")
+    return {"advantages": advantages[:2], "drawbacks": drawbacks[:2]}
+
+
+def _score_neighborhood(profile, preferences):
+    selected = set(preferences or DEFAULT_HOTEL_PREFERENCES)
+    tags = set(profile.get("preference_tags") or [])
+    matches = sorted(selected & tags)
+    match_ratio = len(matches) / max(1, min(len(selected), 3))
+    preference_score = 6.2 + match_ratio * 3.1
+    score_10 = (
+        profile["base_score"] * 0.32
+        + preference_score * 0.34
+        + profile["convenience"] * 0.20
+        + profile["value"] * 0.14
+    )
+    score = int(round(max(72, min(96, score_10 * 10))))
+    return {
+        **profile,
+        "score": score,
+        "matched_preferences": matches,
+    }
+
+
+def _rank_neighborhoods(preferences):
+    ranked = [_score_neighborhood(profile, preferences) for profile in NEIGHBORHOOD_PROFILES]
+    return sorted(ranked, key=lambda item: item["score"], reverse=True)
+
+
+def _recommendation_for_neighborhood(scored_neighborhood):
+    key = NEIGHBORHOOD_TO_RECOMMENDATION.get(scored_neighborhood["name"], "ginza")
+    return MOCK_RECOMMENDATIONS[key]
+
+
+def _neighborhood_pick_bullets(scored_neighborhood, alternatives, preferences):
+    preference_text = ", ".join(scored_neighborhood.get("matched_preferences") or (preferences or DEFAULT_HOTEL_PREFERENCES)[:2])
+    bullets = [
+        f"Matches your selected priorities: {preference_text}.",
+        f"Convenience score is {float(scored_neighborhood['convenience']):.1f}/10 for transit and walkable trip days.",
+    ]
+    if alternatives:
+        strongest_alternative = alternatives[0]
+        bullets.append(
+            f"Tradeoff: {strongest_alternative['name']} is better for {strongest_alternative['best_for'].lower()}, but {scored_neighborhood['name']} fits your current priorities better."
+        )
+    else:
+        bullets.append(f"Tradeoff: {scored_neighborhood['tradeoff']}")
+    return bullets[:3]
+
+
+def _neighborhood_why_not_lists(neighborhood, recommended_neighborhood):
+    advantages = list(neighborhood.get("good_fit") or [])[:2]
+    drawbacks = []
+    score_delta = int(recommended_neighborhood["score"]) - int(neighborhood["score"])
+    if score_delta > 0:
+        drawbacks.append(f"{score_delta} points lower on Neighborhood Match for your selected preferences.")
+    if float(neighborhood.get("convenience") or 0) < float(recommended_neighborhood.get("convenience") or 0):
+        drawbacks.append(
+            f"Lower convenience score: {float(neighborhood['convenience']):.1f} vs {float(recommended_neighborhood['convenience']):.1f}."
+        )
+    if float(neighborhood.get("value") or 0) < float(recommended_neighborhood.get("value") or 0):
+        drawbacks.append(
+            f"Lower value score: {float(neighborhood['value']):.1f} vs {float(recommended_neighborhood['value']):.1f}."
+        )
+    if not drawbacks:
+        drawbacks.append(f"Byable ranked {recommended_neighborhood['name']} higher because it better matches the selected trip priorities.")
+    return {
+        "advantages": advantages[:2] or [f"Good for {neighborhood['best_for'].lower()}."],
+        "drawbacks": drawbacks[:2],
+    }
+
+
+def _select_alternative_neighborhoods(ranked_neighborhoods, recommended_neighborhood):
+    preferred_names = ["Shinjuku / Shibuya", "Ueno / Asakusa", "Ginza / Toranomon"]
+    selected = []
+    used = {recommended_neighborhood["name"]}
+    by_name = {item["name"]: item for item in ranked_neighborhoods}
+    for name in preferred_names:
+        if name in by_name and name not in used:
+            selected.append(by_name[name])
+            used.add(name)
+    for item in ranked_neighborhoods:
+        if len(selected) >= 3:
+            break
+        if item["name"] not in used:
+            selected.append(item)
+            used.add(item["name"])
+    return selected[:3]
+
+
 def _inject_hotel_styles():
     st.markdown(
         """
@@ -753,6 +1070,25 @@ def _inject_hotel_styles():
             font-size: 13px;
             line-height: 1.48;
             margin-bottom: 11px;
+        }
+        .hotel-factor-strip {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: center;
+            border: 1px solid rgba(129,140,248,0.14);
+            border-radius: 13px;
+            background: rgba(99,102,241,0.065);
+            color: rgba(255,255,255,0.66);
+            font-size: 12px;
+            font-weight: 800;
+            padding: 8px 10px;
+            margin: 8px 0 10px;
+        }
+        .hotel-factor-strip strong {
+            color: #c7d2fe;
+            font-size: 13px;
+            font-weight: 950;
         }
         .hotel-section-label {
             color: #c7d2fe;
@@ -868,7 +1204,7 @@ def _render_preferences():
             """
             <div class="hotel-kicker">Hotel preferences</div>
             <div class="hotel-name">What's most important for this trip?</div>
-            <div class="hotel-area">Pick the signals Byable should use to choose the neighborhood and score live hotel results.</div>
+            <div class="hotel-area">Pick the signals Byable should use to rank the mock Tokyo hotel set.</div>
             """,
             unsafe_allow_html=True,
         )
@@ -882,9 +1218,10 @@ def _render_preferences():
     return selected or DEFAULT_HOTEL_PREFERENCES
 
 
-def _render_neighborhood_card(recommendation, preferences):
+def _render_neighborhood_card(recommendation, preferences, scored_neighborhood, alternative_neighborhoods):
     neighborhood = recommendation["neighborhood"]
     preference_text = ", ".join(preferences[:4])
+    pick_bullets = _escape_list(_neighborhood_pick_bullets(scored_neighborhood, alternative_neighborhoods, preferences))
     st.markdown(
         f"""
         <div class="hotel-card recommended">
@@ -892,12 +1229,14 @@ def _render_neighborhood_card(recommendation, preferences):
                 <div>
                     <div class="hotel-kicker">Recommended neighborhood</div>
                     <div class="hotel-name">{html.escape(neighborhood["name"])}</div>
-                    <div class="hotel-area">Byable-selected area · used for live hotel search</div>
+                    <div class="hotel-area">Byable-selected area · mock Tokyo prototype</div>
                 </div>
-                {_score_badge(neighborhood["score"])}
+                {_score_badge(scored_neighborhood["score"])}
             </div>
             <div class="hotel-copy">{html.escape(neighborhood["why"])}</div>
             <div class="hotel-chip-row">{_chips([f'Matches: {preference_text}', 'Neighborhood Match score'], primary_first=True)}</div>
+            <div class="hotel-section-label">Why Byable picked this neighborhood</div>
+            <ul class="hotel-list">{pick_bullets}</ul>
             <div class="hotel-section-label">Pros</div>
             <ul class="hotel-list">{_escape_list(neighborhood["pros"])}</ul>
             <div class="hotel-section-label">Cons</div>
@@ -911,35 +1250,67 @@ def _render_neighborhood_card(recommendation, preferences):
     )
 
 
-def _render_hotel_card(hotel, recommended=False):
-    card_class = "hotel-card recommended" if recommended else "hotel-card alt"
-    price_sub = "per night · rates not connected" if hotel.get("price") is None else "per night"
+def _render_neighborhood_alt_card(neighborhood):
     st.markdown(
         f"""
-        <div class="{card_class}">
+        <div class="hotel-card alt">
             <div class="hotel-card-top">
                 <div>
-                    <div class="hotel-kicker">{html.escape(hotel["type"] if recommended else hotel["label"])}</div>
-                    <div class="hotel-name">{html.escape(hotel["name"])}</div>
-                    <div class="hotel-area">{html.escape(hotel["area"])}</div>
+                    <div class="hotel-kicker">Alternative neighborhood</div>
+                    <div class="hotel-name">{html.escape(neighborhood["name"])}</div>
+                    <div class="hotel-area">Best for: {html.escape(neighborhood["best_for"])}</div>
                 </div>
-                <div>
-                    <div class="hotel-price">{_money(hotel["price"])}</div>
-                    <div class="hotel-price-sub">{price_sub}</div>
-                    {_score_badge(hotel["score"])}
-                </div>
+                {_score_badge(neighborhood["score"])}
             </div>
-            <div class="hotel-copy">{html.escape(hotel["why"])}</div>
-            <div class="hotel-chip-row">{_chips(hotel["tags"], primary_first=True)}</div>
+            <div class="hotel-chip-row">{_chips([f'Convenience {neighborhood["convenience"]:.1f}', f'Value {neighborhood["value"]:.1f}'], primary_first=True)}</div>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
 
+def _render_hotel_card(hotel, recommended=False):
+    card_class = "hotel-card recommended" if recommended else "hotel-card alt"
+    price_sub = "per night · rates not connected" if hotel.get("price") is None else "per night"
+    stay_score_html = ""
+    if recommended and hotel.get("overall_stay_score") is not None:
+        stay_score_html = "".join(
+            [
+                '<div class="hotel-factor-strip">',
+                f'<span>Neighborhood Match <strong>{int(hotel.get("neighborhood_match_score") or 0)}</strong></span>',
+                f'<span>Hotel AI Score <strong>{int(hotel.get("score") or 0)}</strong></span>',
+                f'<span>Overall Stay Score <strong>{int(hotel.get("overall_stay_score") or 0)}</strong></span>',
+                "</div>",
+            ]
+        )
+    card_html = "".join(
+        [
+            f'<div class="{card_class}">',
+            '<div class="hotel-card-top">',
+            "<div>",
+            f'<div class="hotel-kicker">{html.escape(hotel["type"] if recommended else hotel["label"])}</div>',
+            f'<div class="hotel-name">{html.escape(hotel["name"])}</div>',
+            f'<div class="hotel-area">{html.escape(hotel["area"])}</div>',
+            "</div>",
+            "<div>",
+            f'<div class="hotel-price">{_money(hotel["price"])}</div>',
+            f'<div class="hotel-price-sub">{html.escape(price_sub)}</div>',
+            _score_badge(hotel["score"]),
+            "</div>",
+            "</div>",
+            f'<div class="hotel-copy">{html.escape(hotel["why"])}</div>',
+            stay_score_html,
+            f'<div class="hotel-factor-strip"><span>Trip Fit</span><strong>{float(hotel.get("trip_fit") or 0):.1f}/10</strong></div>',
+            f'<div class="hotel-chip-row">{_chips(hotel["tags"], primary_first=True)}</div>',
+            "</div>",
+        ]
+    )
+    st.markdown(card_html, unsafe_allow_html=True)
+
+
 def _render_score_modal(hotel):
     def _content():
-        st.markdown("#### Hotel AI Score")
+        st.markdown("#### Hotel AI Score breakdown")
         st.caption(hotel["name"])
         for label, (score, note) in hotel["scores"].items():
             with st.container(border=True):
@@ -964,6 +1335,60 @@ def _render_score_modal(hotel):
             _content()
 
 
+def _render_why_not_modal(hotel, recommended_hotel):
+    comparison = _hotel_why_not_lists(hotel, recommended_hotel)
+
+    def _content():
+        st.markdown("#### Why this was not picked")
+        st.caption(f"{hotel['name']} vs {recommended_hotel['name']}")
+        st.markdown("**Why it could be good:**")
+        for advantage in comparison["advantages"][:2]:
+            st.markdown(f"✓ {advantage}")
+        st.markdown("**Why Byable ranked it lower:**")
+        for drawback in comparison["drawbacks"][:2]:
+            st.markdown(f"• {drawback}")
+        if st.button("Close", key="close_hotel_why_not"):
+            st.session_state.pop("hotel_why_not_modal_open", None)
+            st.rerun()
+
+    if hasattr(st, "dialog"):
+        @st.dialog("Why this was not picked")
+        def _dialog():
+            _content()
+
+        _dialog()
+    else:
+        with st.container(border=True):
+            _content()
+
+
+def _render_neighborhood_why_not_modal(neighborhood, recommended_neighborhood):
+    comparison = _neighborhood_why_not_lists(neighborhood, recommended_neighborhood)
+
+    def _content():
+        st.markdown("#### Why this neighborhood was not picked")
+        st.caption(f"{neighborhood['name']} vs {recommended_neighborhood['name']}")
+        st.markdown("**Good fit for:**")
+        for advantage in comparison["advantages"][:2]:
+            st.markdown(f"✓ {advantage}")
+        st.markdown("**Ranked lower because:**")
+        for drawback in comparison["drawbacks"][:2]:
+            st.markdown(f"• {drawback}")
+        if st.button("Close", key="close_neighborhood_why_not"):
+            st.session_state.pop("neighborhood_why_not_modal_open", None)
+            st.rerun()
+
+    if hasattr(st, "dialog"):
+        @st.dialog("Why this neighborhood was not picked")
+        def _dialog():
+            _content()
+
+        _dialog()
+    else:
+        with st.container(border=True):
+            _content()
+
+
 def render():
     track_once("page_viewed", key="hotels_page_viewed", properties={"page_name": "hotels"})
     _inject_hotel_styles()
@@ -974,8 +1399,8 @@ def render():
             <div class="hotel-kicker">Hotels</div>
             <div class="hotel-title">Where to stay in {html.escape(destination_city)}</div>
             <div class="hotel-subtitle">
-                Live hotel discovery using Google Places when configured. Byable scores location fit, review signals,
-                and neighborhood strategy; booking links and nightly rate APIs are not connected yet.
+                Mock Tokyo hotel recommendations ranked by location, transit, value, room quality, safety, and trip fit.
+                No hotel APIs or booking links are connected in this v1 prototype.
             </div>
         </div>
         """,
@@ -983,46 +1408,67 @@ def render():
     )
 
     selected_preferences = _render_preferences()
-    recommendation = _select_mock_recommendation(selected_preferences)
-    google_key = _google_places_api_key()
-    places_status = {"places": [], "error": "", "seconds": 0}
-    if google_key:
-        places_status = _search_google_places_hotels(
-            google_key,
-            destination_city,
-            recommendation["neighborhood"]["name"],
+    preference_signature = tuple(selected_preferences)
+    previous_preference_signature = st.session_state.get("hotel_preferences_last_tracked")
+    if previous_preference_signature is None:
+        st.session_state["hotel_preferences_last_tracked"] = preference_signature
+    elif tuple(previous_preference_signature) != preference_signature:
+        track_event(
+            "hotel_preferences_changed",
+            {
+                "preferences": list(selected_preferences),
+                "preference_count": len(selected_preferences),
+            },
         )
-    if places_status.get("places"):
-        hotel_places = places_status["places"]
-        data_note = f"Live Google Places results · {len(hotel_places)} hotels found"
-    else:
-        hotel_places = _fallback_places_from_mock(recommendation)
-        data_note = (
-            "Google Places key not configured; showing prototype fallback hotels"
-            if not google_key
-            else "Google Places returned no usable hotels; showing prototype fallback hotels"
-        )
-    ranked_hotels = _rank_hotels(hotel_places, recommendation, selected_preferences)
-    recommended_hotel = ranked_hotels[0]
-    alternative_hotels = _pick_alternative_hotels(ranked_hotels)
-    recommended_hotel["why"] = _generate_hotel_ai_explanation(
-        recommended_hotel,
-        alternative_hotels,
-        recommendation,
-        selected_preferences,
-        destination_city,
-    )
+        st.session_state["hotel_preferences_last_tracked"] = preference_signature
 
-    st.caption(data_note)
-    _render_neighborhood_card(recommendation, selected_preferences)
+    ranked_neighborhoods = _rank_neighborhoods(selected_preferences)
+    recommended_neighborhood = ranked_neighborhoods[0]
+    alternative_neighborhoods = _select_alternative_neighborhoods(ranked_neighborhoods, recommended_neighborhood)
+    recommendation = _recommendation_for_neighborhood(recommended_neighborhood)
+    ranked_hotels = _rank_mock_hotels(selected_preferences)
+    recommended_hotel = ranked_hotels[0]
+    alternative_hotels = _label_hotel_alternatives(ranked_hotels[1:4])
+    recommended_hotel["why"] = _hotel_recommendation_copy(recommended_hotel, selected_preferences)
+    recommended_hotel["neighborhood_match_score"] = recommended_neighborhood["score"]
+    recommended_hotel["overall_stay_score"] = round(recommended_neighborhood["score"] * 0.60 + recommended_hotel["score"] * 0.40)
+    hotels_by_name = {hotel["name"]: hotel for hotel in [recommended_hotel, *alternative_hotels]}
+    neighborhoods_by_name = {
+        neighborhood["name"]: neighborhood
+        for neighborhood in [recommended_neighborhood, *alternative_neighborhoods]
+    }
+
+    _render_neighborhood_card(recommendation, selected_preferences, recommended_neighborhood, alternative_neighborhoods)
+
+    st.markdown(
+        '<div class="hotel-kicker" style="margin-top:18px">Alternative neighborhoods</div>',
+        unsafe_allow_html=True,
+    )
+    for neighborhood in alternative_neighborhoods:
+        _render_neighborhood_alt_card(neighborhood)
+        action_cols = st.columns([1, 0.18])
+        with action_cols[1]:
+            if st.button("Why not?", key=f"neighborhood_why_not_{neighborhood['name']}"):
+                st.session_state["neighborhood_why_not_modal_open"] = neighborhood["name"]
+                track_event(
+                    "hotel_neighborhood_why_not_clicked",
+                    {
+                        "neighborhood": neighborhood["name"],
+                        "recommended_neighborhood": recommended_neighborhood["name"],
+                        "match_score": neighborhood["score"],
+                        "recommended_match_score": recommended_neighborhood["score"],
+                        "preferences": list(selected_preferences),
+                    },
+                )
+                st.rerun()
 
     _render_hotel_card(recommended_hotel, recommended=True)
     action_cols = st.columns([1, 0.24])
     with action_cols[1]:
         if st.button("AI Score", key="recommended_hotel_score"):
-            st.session_state["hotel_score_modal_open"] = True
+            st.session_state["hotel_score_modal_open"] = recommended_hotel["name"]
             track_event(
-                "hotel_selected",
+                "hotel_ai_score_clicked",
                 {
                     "hotel": recommended_hotel["name"],
                     "price": recommended_hotel["price"],
@@ -1038,6 +1484,33 @@ def render():
     )
     for hotel in alternative_hotels:
         _render_hotel_card(hotel)
+        action_cols = st.columns([1, 0.18, 0.18])
+        with action_cols[1]:
+            if st.button("AI Score", key=f"hotel_score_{hotel['name']}"):
+                st.session_state["hotel_score_modal_open"] = hotel["name"]
+                track_event(
+                    "hotel_ai_score_clicked",
+                    {
+                        "hotel": hotel["name"],
+                        "price": hotel["price"],
+                        "ai_score": hotel["score"],
+                        "interaction": "score_opened",
+                    },
+                )
+                st.rerun()
+        with action_cols[2]:
+            if st.button("Why not?", key=f"hotel_why_not_{hotel['name']}"):
+                st.session_state["hotel_why_not_modal_open"] = hotel["name"]
+                st.rerun()
 
-    if st.session_state.get("hotel_score_modal_open"):
-        _render_score_modal(recommended_hotel)
+    score_hotel_name = st.session_state.get("hotel_score_modal_open")
+    if score_hotel_name and score_hotel_name in hotels_by_name:
+        _render_score_modal(hotels_by_name[score_hotel_name])
+
+    why_not_hotel_name = st.session_state.get("hotel_why_not_modal_open")
+    if why_not_hotel_name and why_not_hotel_name in hotels_by_name:
+        _render_why_not_modal(hotels_by_name[why_not_hotel_name], recommended_hotel)
+
+    why_not_neighborhood_name = st.session_state.get("neighborhood_why_not_modal_open")
+    if why_not_neighborhood_name and why_not_neighborhood_name in neighborhoods_by_name:
+        _render_neighborhood_why_not_modal(neighborhoods_by_name[why_not_neighborhood_name], recommended_neighborhood)

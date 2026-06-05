@@ -855,6 +855,192 @@ def _why_over_others(best_offer, offers, recommendations):
     return bullets[:3] or ["Only returned option with enough fare, route, and timing data to compare."]
 
 
+def _minutes_delta_label(minutes):
+    minutes = int(abs(minutes or 0))
+    hours, mins = divmod(minutes, 60)
+    if hours and mins:
+        return f"{hours}h {mins}m"
+    if hours:
+        return f"{hours}h"
+    return f"{mins}m"
+
+
+def _price_delta_text(selected, recommended):
+    selected_price = float(selected.get("price_total") or 0)
+    recommended_price = float(recommended.get("price_total") or 0)
+    if not selected_price or not recommended_price:
+        return ""
+    delta = selected_price - recommended_price
+    if abs(delta) < 1:
+        return "Same listed fare as #1."
+    if delta < 0:
+        return f"{money_usd(abs(delta))} cheaper than #1."
+    return f"{money_usd(delta)} more than #1."
+
+
+def _duration_delta_text(selected, recommended):
+    selected_duration = _duration_minutes(selected.get("duration")) or 0
+    recommended_duration = _duration_minutes(recommended.get("duration")) or 0
+    if not selected_duration or not recommended_duration:
+        return ""
+    delta = selected_duration - recommended_duration
+    if abs(delta) < 10:
+        return "Nearly the same travel time as #1."
+    if delta < 0:
+        return f"{_minutes_delta_label(delta)} faster than #1."
+    return f"{_minutes_delta_label(delta)} longer than #1."
+
+
+def _arrival_delta_text(selected, recommended):
+    selected_arrival = _clock_minutes(selected.get("arrive_time"))
+    recommended_arrival = _clock_minutes(recommended.get("arrive_time"))
+    delta = selected_arrival - recommended_arrival
+    if abs(delta) < 15:
+        return "Nearly the same arrival time as #1."
+    direction = "later" if delta > 0 else "earlier"
+    return f"Arrives {_minutes_delta_label(delta)} {direction} than #1."
+
+
+def _baggage_comparison_text(selected, recommended):
+    selected_baggage = str(selected.get("baggage") or "").strip()
+    recommended_baggage = str(recommended.get("baggage") or "").strip()
+    if selected_baggage and not recommended_baggage:
+        return "Shows baggage details while #1 does not."
+    if recommended_baggage and not selected_baggage:
+        return "#1 shows baggage details while this fare does not."
+    if selected_baggage and recommended_baggage and selected_baggage != recommended_baggage:
+        return f"Baggage differs: this shows {selected_baggage}; #1 shows {recommended_baggage}."
+    return ""
+
+
+def _comparison_lists(selected, recommended, offers=None):
+    selected_price = float(selected.get("price_total") or 0)
+    recommended_price = float(recommended.get("price_total") or 0)
+    selected_duration = _duration_minutes(selected.get("duration")) or 0
+    recommended_duration = _duration_minutes(recommended.get("duration")) or 0
+    selected_stops = int(selected.get("stops") or 0)
+    recommended_stops = int(recommended.get("stops") or 0)
+    selected_impact = _trip_impact(selected, offers)
+    recommended_impact = _trip_impact(recommended, offers)
+
+    advantages = []
+    lower_reasons = []
+    if selected_price and recommended_price:
+        delta = selected_price - recommended_price
+        if delta < -1:
+            advantages.append(f"{money_usd(abs(delta))} cheaper than #1.")
+        elif delta > 1:
+            lower_reasons.append(f"{money_usd(delta)} higher fare than the top pick.")
+    if selected_duration and recommended_duration:
+        duration_delta = selected_duration - recommended_duration
+        if duration_delta < -10:
+            advantages.append(f"{_minutes_delta_label(duration_delta)} faster than #1.")
+        elif duration_delta > 10:
+            lower_reasons.append(f"{_minutes_delta_label(duration_delta)} longer travel time than the top pick.")
+    if selected_stops < recommended_stops:
+        advantages.append(f"{recommended_stops - selected_stops} fewer stop{'s' if recommended_stops - selected_stops != 1 else ''} than #1.")
+    elif selected_stops > recommended_stops:
+        lower_reasons.append(f"{selected_stops - recommended_stops} more stop{'s' if selected_stops - recommended_stops != 1 else ''} than the top pick.")
+    if selected_impact.get("city_access") == "Easy" and recommended_impact.get("city_access") != "Easy":
+        advantages.append("Easier city access airport than #1.")
+    elif recommended_impact.get("city_access") == "Easy" and selected_impact.get("city_access") != "Easy":
+        lower_reasons.append("Weaker city access airport than the top pick.")
+    selected_comfort = selected_impact.get("aircraft_comfort")
+    recommended_comfort = recommended_impact.get("aircraft_comfort")
+    comfort_rank = {"Unknown": 0, "Basic": 1, "Fair": 2, "Good": 3, "Excellent": 4}
+    if comfort_rank.get(selected_comfort, 0) > comfort_rank.get(recommended_comfort, 0):
+        advantages.append(f"Stronger aircraft comfort estimate: {selected_comfort} vs {recommended_comfort}.")
+    elif comfort_rank.get(selected_comfort, 0) < comfort_rank.get(recommended_comfort, 0):
+        lower_reasons.append(f"Lower aircraft comfort estimate: {selected_comfort} vs {recommended_comfort}.")
+    baggage_text = _baggage_comparison_text(selected, recommended)
+    if baggage_text:
+        if baggage_text.startswith("#1"):
+            lower_reasons.append("Weaker baggage visibility than the top pick.")
+        else:
+            advantages.append(baggage_text)
+    arrival_text = _arrival_delta_text(selected, recommended)
+    if selected_impact.get("arrival_timing") in {"Great", "Good"} and recommended_impact.get("arrival_timing") in {"Okay", "Bad"}:
+        advantages.append(f"Better arrival timing: {selected_impact['arrival_timing']} vs {recommended_impact['arrival_timing']}.")
+    elif selected_impact.get("arrival_timing") in {"Okay", "Bad"} and recommended_impact.get("arrival_timing") in {"Great", "Good"}:
+        lower_reasons.append(f"Worse arrival timing: {selected_impact['arrival_timing']} vs {recommended_impact['arrival_timing']}.")
+    elif arrival_text and "same" not in arrival_text.lower():
+        if "later" in arrival_text.lower():
+            lower_reasons.append(arrival_text.replace("#1", "the top pick"))
+        else:
+            advantages.append(arrival_text)
+
+    selected_fatigue = selected_impact.get("travel_fatigue")
+    recommended_fatigue = recommended_impact.get("travel_fatigue")
+    fatigue_rank = {"Low": 1, "Moderate": 2, "High": 3, "Very High": 4}
+    if fatigue_rank.get(selected_fatigue, 0) > fatigue_rank.get(recommended_fatigue, 0):
+        lower_reasons.append(f"Higher trip difficulty: fatigue is {selected_fatigue} vs {recommended_fatigue}.")
+    elif fatigue_rank.get(selected_fatigue, 0) < fatigue_rank.get(recommended_fatigue, 0):
+        advantages.append(f"Lower travel fatigue: {selected_fatigue} vs {recommended_fatigue}.")
+
+    dedup_advantages = []
+    for item in advantages:
+        if item and item not in dedup_advantages:
+            dedup_advantages.append(item)
+    dedup_lower_reasons = []
+    for item in lower_reasons:
+        if item and item not in dedup_lower_reasons:
+            dedup_lower_reasons.append(item)
+    if not dedup_lower_reasons:
+        fallback_reason = _first_rank_tiebreaker(selected, recommended, offers)
+        dedup_lower_reasons.append(
+            f"This is also a strong option. Byable ranked the other flight slightly higher because {fallback_reason}."
+        )
+    return {
+        "advantages": dedup_advantages[:2] or ["Comparable on the main visible flight data."],
+        "lower_reasons": dedup_lower_reasons[:2],
+    }
+
+
+def _first_rank_tiebreaker(selected, recommended, offers=None):
+    recommended_impact = _trip_impact(recommended, offers)
+    selected_impact = _trip_impact(selected, offers)
+    if int(recommended.get("stops") or 0) < int(selected.get("stops") or 0):
+        return "it has fewer stops"
+    if (_duration_minutes(recommended.get("duration")) or 0) < (_duration_minutes(selected.get("duration")) or 0):
+        return "it has shorter travel time"
+    if recommended_impact.get("arrival_timing") in {"Great", "Good"} and selected_impact.get("arrival_timing") in {"Okay", "Bad"}:
+        return "it has cleaner arrival timing"
+    if recommended_impact.get("city_access") == "Easy" and selected_impact.get("city_access") != "Easy":
+        return "it uses an easier city-access airport"
+    if recommended_impact.get("travel_fatigue") in {"Low", "Moderate"} and selected_impact.get("travel_fatigue") in {"High", "Very High"}:
+        return "it has lower overall travel fatigue"
+    return "it has a slightly better overall balance of timing, stops, and trip difficulty"
+
+
+def _why_number_one_lists(recommended, offers, recommendation_bullets=None):
+    positives = []
+    for bullet in recommendation_bullets or []:
+        text = str(bullet or "").strip()
+        if text and text not in positives:
+            positives.append(text)
+    if int(recommended.get("stops") or 0) == 0:
+        positives.append("Nonstop routing avoids connection risk.")
+    if _is_lowest_priced(recommended, offers):
+        positives.append(f"Lowest listed fare in the visible results at {money_usd(recommended.get('price_total'))}.")
+    if _is_among_fastest(recommended, offers):
+        positives.append(f"Among the fastest visible options at {_display_value(recommended.get('duration'))}.")
+    impact = _trip_impact(recommended, offers)
+    if impact.get("city_access") == "Easy":
+        positives.append(f"{recommended.get('destination')} has easier city access than many alternative airports.")
+    if impact.get("aircraft_comfort") in {"Excellent", "Good"}:
+        positives.append(f"{impact.get('aircraft_comfort')} aircraft comfort estimate based on {impact.get('aircraft_type') or 'aircraft type'}.")
+    deduped = []
+    for item in positives:
+        if item and item not in deduped:
+            deduped.append(item)
+    tradeoffs = _watch_out_copy(recommended, offers)
+    meaningful_tradeoff = next(
+        (item for item in tradeoffs if "no major downside" not in str(item).lower()),
+        "No major downside compared with similar options.",
+    )
+    return {"reasons": deduped[:3], "tradeoff": meaningful_tradeoff}
+
+
 def _card_badges(offer, offers, recommendations):
     if not offers:
         return []
@@ -941,14 +1127,123 @@ def _time_zone_delta_estimate(offer):
     return abs(zone_offsets[destination] - zone_offsets[origin])
 
 
+def _timezone_shift_details(offer):
+    origin = str(offer.get("origin") or "").upper()
+    destination = str(offer.get("destination") or "").upper()
+    zone_offsets = {
+        "SFO": -8, "OAK": -8, "SJC": -8, "LAX": -8, "BUR": -8, "SNA": -8, "ONT": -8, "LGB": -8,
+        "JFK": -5, "LGA": -5, "EWR": -5, "ORD": -6, "MDW": -6, "DCA": -5, "IAD": -5, "BWI": -5,
+        "HND": 9, "NRT": 9, "KIX": 9, "ITM": 9, "ICN": 9, "GMP": 9,
+        "LHR": 0, "LGW": 0, "LCY": 0, "STN": 0, "LTN": 0, "CDG": 1, "ORY": 1,
+        "BKK": 7, "DMK": 7, "SIN": 8, "SYD": 10,
+    }
+    if origin not in zone_offsets or destination not in zone_offsets:
+        return {"shift": 0, "adjusted_shift": 0, "direction": "unknown"}
+    raw_delta = zone_offsets[destination] - zone_offsets[origin]
+    absolute_delta = abs(raw_delta)
+    effective_shift = min(absolute_delta, 24 - absolute_delta)
+    if absolute_delta <= 12:
+        direction = "eastbound" if raw_delta > 0 else "westbound"
+    else:
+        direction = "westbound" if raw_delta > 0 else "eastbound"
+    adjustment = 0.75 if direction == "eastbound" else -0.5 if direction == "westbound" else 0
+    adjusted_shift = max(0, effective_shift + adjustment)
+    return {
+        "shift": round(effective_shift, 1),
+        "adjusted_shift": round(adjusted_shift, 1),
+        "direction": direction,
+    }
+
+
 def _jet_lag_impact(offer):
-    zones_crossed = _time_zone_delta_estimate(offer)
-    arrival_timing = _arrival_timing_label(offer)
-    if zones_crossed >= 8 or arrival_timing == "Bad":
+    shift = _timezone_shift_details(offer)["adjusted_shift"]
+    if shift >= 9:
+        return "Very High"
+    if shift >= 6:
         return "High"
-    if zones_crossed >= 4 or arrival_timing == "Okay":
+    if shift >= 3:
         return "Moderate"
     return "Low"
+
+
+def _layover_minutes(offer):
+    total = 0
+    for flight_slice in offer.get("route_details") or []:
+        for layover in flight_slice.get("layovers") or []:
+            total += _duration_minutes(layover.get("duration")) or 0
+    return total
+
+
+def _travel_fatigue_details(offer):
+    duration = _duration_minutes(offer.get("duration")) or 0
+    stops = int(offer.get("stops") or 0)
+    layover_minutes = _layover_minutes(offer)
+    departure = _clock_minutes(offer.get("depart_time"))
+    arrival = _clock_minutes(offer.get("arrive_time"))
+    arrival_timing = _arrival_timing_label(offer)
+    cabin = str(offer.get("cabin") or "").lower()
+    aircraft_comfort, _aircraft_name, _aircraft_note = _aircraft_comfort_details(offer)
+
+    fatigue_score = 0.0
+    if duration >= 20 * 60:
+        fatigue_score += 3.2
+    elif duration >= 14 * 60:
+        fatigue_score += 2.35
+    elif duration >= 9 * 60:
+        fatigue_score += 1.35
+    elif duration >= 5 * 60:
+        fatigue_score += 0.55
+
+    fatigue_score += min(3.0, stops * 1.15)
+    if layover_minutes >= 6 * 60:
+        fatigue_score += 1.4
+    elif layover_minutes >= 3 * 60:
+        fatigue_score += 0.75
+    elif layover_minutes and layover_minutes < 60:
+        fatigue_score += 0.55
+
+    if departure < 6 * 60:
+        fatigue_score += 0.8
+    elif departure >= 22 * 60:
+        fatigue_score += 0.5
+
+    if arrival_timing == "Bad":
+        fatigue_score += 1.35
+    elif arrival_timing == "Okay":
+        fatigue_score += 0.45
+    elif arrival < 8 * 60 and duration >= 9 * 60:
+        fatigue_score += 0.9
+
+    if cabin in {"business", "first"}:
+        fatigue_score -= 0.9
+    elif cabin == "premium_economy":
+        fatigue_score -= 0.35
+    elif cabin == "economy" and duration >= 9 * 60:
+        fatigue_score += 0.45
+
+    if aircraft_comfort == "Excellent":
+        fatigue_score -= 0.35
+    elif aircraft_comfort == "Good":
+        fatigue_score -= 0.15
+    elif aircraft_comfort in {"Fair", "Basic"} and duration >= 8 * 60:
+        fatigue_score += 0.45
+    elif aircraft_comfort == "Unknown":
+        fatigue_score += 0.2
+
+    if fatigue_score >= 5.6:
+        label = "Very High"
+    elif fatigue_score >= 3.5:
+        label = "High"
+    elif fatigue_score >= 1.6:
+        label = "Moderate"
+    else:
+        label = "Low"
+    return {
+        "label": label,
+        "score": round(max(0, fatigue_score), 1),
+        "layover_minutes": layover_minutes,
+        "duration_minutes": duration,
+    }
 
 
 def _city_access_level(airport_code):
@@ -1006,7 +1301,8 @@ def _is_among_fastest(offer, offers):
 def _trip_impact(offer, offers=None):
     arrival_timing = _arrival_timing_label(offer)
     jet_lag = _jet_lag_impact(offer)
-    zones_crossed = _time_zone_delta_estimate(offer)
+    timezone_details = _timezone_shift_details(offer)
+    travel_fatigue = _travel_fatigue_details(offer)
     destination = str(offer.get("destination") or "").upper()
     city_access = _city_access_level(destination)
     aircraft_comfort, aircraft_name, aircraft_note = _aircraft_comfort_details(offer)
@@ -1044,15 +1340,31 @@ def _trip_impact(offer, offers=None):
         reasons.append(aircraft_note)
     elif aircraft_comfort == "Unknown":
         reasons.append("Aircraft type is unknown, so comfort is harder to judge")
-    if jet_lag in {"Moderate", "High"}:
-        if zones_crossed >= 8:
-            reasons.append("High jet lag impact because this route crosses many time zones")
-        elif arrival_timing == "Bad":
-            reasons.append("Late arrival may make jet lag harder to manage")
-        elif arrival_timing == "Great":
-            reasons.append("Afternoon arrival helps reduce jet lag disruption")
-        else:
-            reasons.append("Moderate jet lag impact from the time change and arrival timing")
+    shift = timezone_details.get("shift", 0)
+    direction = timezone_details.get("direction", "unknown")
+    if jet_lag in {"Moderate", "High", "Very High"} and shift:
+        direction_note = f" {direction}" if direction in {"eastbound", "westbound"} else ""
+        reasons.append(f"{jet_lag} jet lag from roughly a {shift:g}-hour{direction_note} body-clock shift")
+    elif shift:
+        reasons.append(f"Low jet lag because the effective timezone shift is about {shift:g} hours")
+
+    fatigue_parts = []
+    duration_label = _display_value(offer.get("duration"))
+    if travel_fatigue["duration_minutes"] >= 9 * 60:
+        fatigue_parts.append(f"{duration_label} travel time")
+    stops = int(offer.get("stops") or 0)
+    if stops:
+        fatigue_parts.append(f"{stops} stop{'s' if stops != 1 else ''}")
+    if travel_fatigue["layover_minutes"]:
+        hours, minutes = divmod(int(travel_fatigue["layover_minutes"]), 60)
+        layover_label = f"{hours}h {minutes}m" if hours and minutes else f"{hours}h" if hours else f"{minutes}m"
+        fatigue_parts.append(f"{layover_label} layover time")
+    if arrival_timing in {"Okay", "Bad"}:
+        fatigue_parts.append(f"{arrival_timing.lower()} arrival timing")
+    if str(offer.get("cabin") or "").lower() == "economy" and travel_fatigue["duration_minutes"] >= 9 * 60:
+        fatigue_parts.append("economy cabin on a long-haul route")
+    if fatigue_parts:
+        reasons.append(f"{travel_fatigue['label']} travel fatigue from " + ", ".join(fatigue_parts[:3]))
     airport_notes = {
         "HND": "Haneda is close to central Tokyo",
         "NRT": "Narita often needs a longer transfer into Tokyo",
@@ -1071,6 +1383,10 @@ def _trip_impact(offer, offers=None):
     return {
         "arrival_timing": arrival_timing,
         "jet_lag": jet_lag,
+        "timezone_shift": timezone_details.get("shift", 0),
+        "timezone_direction": timezone_details.get("direction", "unknown"),
+        "travel_fatigue": travel_fatigue["label"],
+        "travel_fatigue_score": travel_fatigue["score"],
         "city_access": city_access,
         "aircraft_comfort": aircraft_comfort,
         "aircraft_type": aircraft_name,
@@ -1182,6 +1498,9 @@ def _ai_flight_summary(offer, recommendations=None):
         "recommendation_label": recommendation.get("label"),
         "arrival_timing_label": impact.get("arrival_timing"),
         "jet_lag_label": impact.get("jet_lag"),
+        "timezone_shift_hours": impact.get("timezone_shift"),
+        "timezone_direction": impact.get("timezone_direction"),
+        "travel_fatigue_label": impact.get("travel_fatigue"),
         "city_access_label": impact.get("city_access"),
         "aircraft_comfort_label": impact.get("aircraft_comfort"),
         "aircraft_type": impact.get("aircraft_type"),
@@ -1281,6 +1600,9 @@ def generate_ai_advisor_copy(flight, trip_impact, selected_priorities, compariso
         "baggage": flight.get("baggage"),
         "arrival_timing_label": (trip_impact or {}).get("arrival_timing"),
         "jet_lag_label": (trip_impact or {}).get("jet_lag"),
+        "timezone_shift_hours": (trip_impact or {}).get("timezone_shift"),
+        "timezone_direction": (trip_impact or {}).get("timezone_direction"),
+        "travel_fatigue_label": (trip_impact or {}).get("travel_fatigue"),
         "city_access_label": (trip_impact or {}).get("city_access"),
         "aircraft_comfort_label": (trip_impact or {}).get("aircraft_comfort"),
         "aircraft_type": (trip_impact or {}).get("aircraft_type"),
@@ -2317,6 +2639,28 @@ def render_flight_details_modal(offer, recommendation=None, return_mode="Same as
         st.caption("Fare rules not available for this test fare.")
 
 
+def render_flight_comparison_modal(selected_offer, recommended_offer, offers, recommendation_bullets=None):
+    selected_is_recommended = _flight_key(selected_offer) == _flight_key(recommended_offer)
+    if selected_is_recommended:
+        result = _why_number_one_lists(recommended_offer, offers, recommendation_bullets)
+        st.markdown("#### Why Byable picked this")
+        st.caption("Ranked #1 because:")
+        for reason in result["reasons"][:3]:
+            st.markdown(f"✓ {reason}")
+        st.caption("Main tradeoff:")
+        st.markdown(f"• {result['tradeoff']}")
+        return
+
+    comparison = _comparison_lists(selected_offer, recommended_offer, offers)
+    st.markdown("#### Why this was not picked")
+    st.caption("Why it could be good:")
+    for advantage in comparison["advantages"][:2]:
+        st.markdown(f"✓ {advantage}")
+    st.caption("Why Byable ranked it lower:")
+    for reason in comparison["lower_reasons"][:2]:
+        st.markdown(f"• {reason}")
+
+
 def render():
     render_start = time.perf_counter()
     _run_ai_setup_check_once()
@@ -3180,7 +3524,7 @@ def render():
         }
         .flight-card-impact-grid {
             display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
             gap: 5px 10px;
             color: rgba(255,255,255,0.72);
             font-size: 11px;
@@ -4112,7 +4456,8 @@ def render():
         impact = _trip_impact(offer, visible_offers)
         impact_rows = [
             ("Arrival Timing", impact["arrival_timing"]),
-            ("Jet Lag Impact", impact["jet_lag"]),
+            ("Jet lag", impact["jet_lag"]),
+            ("Fatigue", impact["travel_fatigue"]),
         ]
         if impact.get("city_access"):
             impact_rows.append(("City Access", impact["city_access"]))
@@ -4132,6 +4477,7 @@ def render():
                 '<div class="flight-impact-inline">',
                 f'<span>Arrival: <strong>{html.escape(str(impact["arrival_timing"]))}</strong></span>',
                 f'<span>Jet lag: <strong>{html.escape(str(impact["jet_lag"]))}</strong></span>',
+                f'<span>Fatigue: <strong>{html.escape(str(impact["travel_fatigue"]))}</strong></span>',
                 f'<span>City access: <strong>{html.escape(str(impact.get("city_access") or "Unknown"))}</strong></span>',
                 f'<span>Comfort: <strong>{html.escape(str(aircraft_inline))}</strong></span>',
                 "</div>",
@@ -4150,13 +4496,35 @@ def render():
             ),
             "",
         )
-        fallback_reasons = impact["reasons"]
-        if comfort_reason:
-            fallback_reasons = [comfort_reason] + [reason for reason in impact["reasons"] if reason != comfort_reason]
-            if impact_reason_source and not any(
-                any(term in reason.lower() for term in ("comfort", "widebody", "narrowbody", "aircraft type"))
-                for reason in impact_reason_source
-            ):
+        jet_lag_reason = next(
+            (
+                reason
+                for reason in impact["reasons"]
+                if any(term in reason.lower() for term in ("jet lag", "body-clock", "timezone"))
+            ),
+            "",
+        )
+        fatigue_reason = next(
+            (
+                reason
+                for reason in impact["reasons"]
+                if "travel fatigue" in reason.lower()
+            ),
+            "",
+        )
+        priority_reasons = [reason for reason in (jet_lag_reason, fatigue_reason, comfort_reason) if reason]
+        fallback_reasons = priority_reasons + [
+            reason for reason in impact["reasons"] if reason not in priority_reasons
+        ]
+        if impact_reason_source:
+            source_terms = " ".join(str(reason).lower() for reason in impact_reason_source)
+            if jet_lag_reason and not any(term in source_terms for term in ("jet lag", "body-clock", "timezone")):
+                impact_reason_source = [jet_lag_reason] + list(impact_reason_source)
+            source_terms = " ".join(str(reason).lower() for reason in impact_reason_source)
+            if fatigue_reason and "travel fatigue" not in source_terms:
+                impact_reason_source = [fatigue_reason] + list(impact_reason_source)
+            source_terms = " ".join(str(reason).lower() for reason in impact_reason_source)
+            if comfort_reason and not any(term in source_terms for term in ("comfort", "widebody", "narrowbody", "aircraft type")):
                 impact_reason_source = [comfort_reason] + list(impact_reason_source)
         impact_reason_source = impact_reason_source or fallback_reasons
         impact_reason_limit = 3 if is_recommended else 2
@@ -4204,7 +4572,7 @@ def render():
             )
             trip_impact_bullet_html = "".join(
                 f"<li>{html.escape(bullet)}</li>"
-                for bullet in impact_reason_source[:1]
+                for bullet in impact_reason_source[:2]
                 if bullet
             )
             recommendation_html = "".join(
@@ -4264,8 +4632,35 @@ def render():
             ]
         )
         st.markdown(card_html, unsafe_allow_html=True)
-        action_button_cols = st.columns([1, 0.18, 0.16, 0.20])
+        action_button_cols = st.columns([1, 0.16, 0.16, 0.16, 0.20])
         with action_button_cols[1]:
+            flight_id = _flight_key(offer)
+            comparison_label = "Why #1?" if is_recommended else "Why not?"
+            if st.button(comparison_label, key=f"compare_number_one_{index}_{flight_id}"):
+                st.session_state["selected_flight_for_comparison"] = flight_id
+                event_name = "why_number_one_clicked" if is_recommended else "why_not_clicked"
+                duration_difference = (_duration_minutes(offer.get("duration")) or 0) - (_duration_minutes(best_offer.get("duration")) or 0)
+                stops_difference = int(offer.get("stops") or 0) - int(best_offer.get("stops") or 0)
+                track_event(
+                    event_name,
+                    {
+                        "selected_airline": offer.get("airline"),
+                        "selected_flight_number": _display_flight_number(offer),
+                        "selected_price": offer.get("price_total"),
+                        "selected_duration": offer.get("duration"),
+                        "selected_stops": offer.get("stops"),
+                        "recommended_airline": best_offer.get("airline"),
+                        "recommended_flight_number": _display_flight_number(best_offer),
+                        "recommended_price": best_offer.get("price_total"),
+                        "recommended_duration": best_offer.get("duration"),
+                        "recommended_stops": best_offer.get("stops"),
+                        "price_difference": float(offer.get("price_total") or 0) - float(best_offer.get("price_total") or 0),
+                        "duration_difference": duration_difference,
+                        "stops_difference": stops_difference,
+                    },
+                )
+                st.rerun()
+        with action_button_cols[2]:
             flight_id = _flight_key(offer)
             if st.button(f"AI Score: {score}", key=f"score_breakdown_{index}_{flight_id}"):
                 st.session_state["selected_flight_for_score_breakdown"] = flight_id
@@ -4279,7 +4674,7 @@ def render():
                     },
                 )
                 st.rerun()
-        with action_button_cols[2]:
+        with action_button_cols[3]:
             flight_id = _flight_key(offer)
             if is_selected:
                 st.button("Selected", key=f"selected_{index}_{flight_id}", disabled=True)
@@ -4290,7 +4685,7 @@ def render():
                     on_click=_set_selected_flight,
                     args=(flight_id, offer, adults, index),
                 )
-        with action_button_cols[3]:
+        with action_button_cols[4]:
             if st.button("View details", key=f"details_{index}_{_flight_key(offer)}"):
                 detail_flight_id = _flight_key(offer)
                 st.session_state["selected_flight_for_details"] = detail_flight_id
@@ -4378,6 +4773,35 @@ def render():
             with st.container(border=True):
                 st.markdown(f"### {_display_flight_number(score_detail_offer)} AI Score")
                 _show_score_breakdown_content()
+
+    comparison_offer = None
+    comparison_modal_key = st.session_state.get("selected_flight_for_comparison", "")
+    if comparison_modal_key:
+        for offer in offers:
+            if _flight_key(offer) == comparison_modal_key:
+                comparison_offer = offer
+                break
+    if comparison_offer:
+        def _show_comparison_content():
+            render_flight_comparison_modal(comparison_offer, best_offer, visible_offers, advisor_bullets)
+            if st.button("Close", key="close_flight_comparison"):
+                st.session_state.pop("selected_flight_for_comparison", None)
+                st.rerun()
+
+        comparison_title = (
+            "Why Byable picked this"
+            if _flight_key(comparison_offer) == _flight_key(best_offer)
+            else "Why this was not picked"
+        )
+        if hasattr(st, "dialog"):
+            @st.dialog(comparison_title)
+            def _flight_comparison_dialog():
+                _show_comparison_content()
+
+            _flight_comparison_dialog()
+        else:
+            with st.container(border=True):
+                _show_comparison_content()
 
     detail_offer = None
     if detail_modal_key:
