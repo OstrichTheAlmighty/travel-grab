@@ -1,14 +1,8 @@
 import html
-import json
-import os
-import re
-import time
-
-import certifi
-import requests
 import streamlit as st
 
 from analytics import track_event, track_once
+from places_hotels import google_places_key_configured, search_hotels_with_google_places
 
 
 HOTEL_PREFERENCES = [
@@ -23,12 +17,6 @@ HOTEL_PREFERENCES = [
     "Relaxation",
 ]
 DEFAULT_HOTEL_PREFERENCES = ["Food", "Shopping", "Walkability"]
-GOOGLE_PLACES_TEXT_SEARCH_URL = "https://places.googleapis.com/v1/places:searchText"
-GOOGLE_PLACES_FIELD_MASK = (
-    "places.displayName,places.formattedAddress,places.location,"
-    "places.rating,places.userRatingCount"
-)
-HOTEL_SEARCH_LIMIT = 8
 NEIGHBORHOOD_TO_RECOMMENDATION = {
     "Ginza / Yurakucho": "ginza",
     "Shinjuku / Shibuya": "nightlife",
@@ -375,359 +363,10 @@ def _select_mock_recommendation(preferences):
     return MOCK_RECOMMENDATIONS["ginza"]
 
 
-def _google_places_api_key():
-    try:
-        value = st.secrets.get("GOOGLE_PLACES_API_KEY", "")
-    except Exception:
-        value = ""
-    return str(value or os.getenv("GOOGLE_PLACES_API_KEY", "") or "").strip()
-
-
-def _hotel_openai_api_key():
-    try:
-        value = st.secrets.get("OPENAI_API_KEY", "")
-    except Exception:
-        value = ""
-    return str(value or os.getenv("OPENAI_API_KEY", "") or "").strip()
-
-
 def _destination_city():
     search_params = st.session_state.get("flight_search_params") or st.session_state.get("last_flight_search") or {}
     city = str(search_params.get("destination_city") or search_params.get("to_city") or "Tokyo").strip()
     return city or "Tokyo"
-
-
-def _clean_neighborhood_for_query(neighborhood_name):
-    cleaned = re.sub(r"\s*/\s*", " ", str(neighborhood_name or "")).strip()
-    cleaned = re.sub(r"\s+", " ", cleaned)
-    return cleaned or "central"
-
-
-def _normalize_google_place(place):
-    location = place.get("location") or {}
-    display_name = place.get("displayName") or {}
-    return {
-        "name": str(display_name.get("text") or "Unnamed hotel").strip(),
-        "rating": place.get("rating"),
-        "review_count": place.get("userRatingCount"),
-        "lat": location.get("latitude"),
-        "lng": location.get("longitude"),
-        "address": str(place.get("formattedAddress") or "").strip(),
-        "source": "google_places",
-    }
-
-
-@st.cache_data(ttl=60 * 60 * 12, show_spinner=False)
-def _search_google_places_hotels(api_key, destination_city, neighborhood_name):
-    query_neighborhood = _clean_neighborhood_for_query(neighborhood_name)
-    payload = {
-        "textQuery": f"hotels in {query_neighborhood}, {destination_city}",
-        "languageCode": "en",
-        "maxResultCount": HOTEL_SEARCH_LIMIT,
-    }
-    headers = {
-        "Content-Type": "application/json",
-        "X-Goog-Api-Key": api_key,
-        "X-Goog-FieldMask": GOOGLE_PLACES_FIELD_MASK,
-    }
-    started = time.perf_counter()
-    try:
-        response = requests.post(
-            GOOGLE_PLACES_TEXT_SEARCH_URL,
-            headers=headers,
-            json=payload,
-            timeout=8,
-            verify=certifi.where(),
-        )
-        response.raise_for_status()
-        data = response.json()
-        places = [_normalize_google_place(place) for place in data.get("places", [])]
-        places = [place for place in places if place.get("name") and place.get("address")]
-        return {
-            "places": places,
-            "error": "",
-            "seconds": round(time.perf_counter() - started, 3),
-        }
-    except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
-        return {
-            "places": [],
-            "error": str(exc),
-            "seconds": round(time.perf_counter() - started, 3),
-        }
-
-
-def _fallback_places_from_mock(recommendation):
-    hotels = [recommendation["hotel"], *ALTERNATIVE_HOTELS]
-    output = []
-    for hotel in hotels:
-        output.append(
-            {
-                "name": hotel["name"],
-                "rating": 4.4,
-                "review_count": 850,
-                "lat": None,
-                "lng": None,
-                "address": hotel.get("area", "Tokyo"),
-                "source": "prototype_fallback",
-                "mock_price": hotel.get("price"),
-                "mock_tags": hotel.get("tags", []),
-                "mock_why": hotel.get("why", ""),
-            }
-        )
-    return output
-
-
-def _rating_to_score(rating, default=7.4):
-    try:
-        numeric = float(rating)
-    except (TypeError, ValueError):
-        return default
-    return max(5.8, min(9.6, numeric * 2))
-
-
-def _review_confidence_bonus(review_count):
-    try:
-        count = int(review_count or 0)
-    except (TypeError, ValueError):
-        count = 0
-    if count >= 1500:
-        return 0.5
-    if count >= 500:
-        return 0.35
-    if count >= 150:
-        return 0.2
-    return 0
-
-
-def _preference_score_adjustments(preferences):
-    selected = set(preferences or [])
-    return {
-        "location": 0.35 if {"Food", "Shopping", "Nightlife", "Culture", "Walkability"} & selected else 0.1,
-        "transit": 0.25 if {"Walkability", "Culture", "Family Friendly"} & selected else 0.05,
-        "value": 0.65 if "Lowest Price" in selected else 0.1,
-        "room": 0.55 if {"Luxury", "Relaxation"} & selected else 0.1,
-        "safety": 0.35 if {"Family Friendly", "Relaxation"} & selected else 0.15,
-    }
-
-
-def _score_live_hotel(place, recommendation, preferences, index=0):
-    rating_score = _rating_to_score(place.get("rating"))
-    review_bonus = _review_confidence_bonus(place.get("review_count"))
-    adjustments = _preference_score_adjustments(preferences)
-    neighborhood = recommendation["neighborhood"]["name"]
-    is_google = place.get("source") == "google_places"
-
-    location_score = min(9.7, 7.7 + adjustments["location"] + review_bonus + max(0, 0.25 - index * 0.03))
-    transit_score = min(9.3, 7.4 + adjustments["transit"] + max(0, 0.25 - index * 0.04))
-    value_score = min(9.2, 7.0 + adjustments["value"] + (0.3 if index > 1 else 0.05) + review_bonus / 2)
-    room_score = min(9.5, rating_score - 0.2 + adjustments["room"])
-    safety_score = min(9.5, 7.8 + adjustments["safety"] + review_bonus / 2)
-    scores = {
-        "Location Match": (
-            round(location_score, 1),
-            f"Matched to the Byable-selected {neighborhood} area using Google Places address data.",
-        ),
-        "Transit Access": (
-            round(transit_score, 1),
-            "Estimated from neighborhood centrality only; station-level transit data is not connected yet.",
-        ),
-        "Value": (
-            round(value_score, 1),
-            "Estimated from rating and review confidence only; live nightly rates are not connected yet.",
-        ),
-        "Room Quality": (
-            round(room_score, 1),
-            "Estimated from public Google rating signals, not room inventory or amenities.",
-        ),
-        "Safety": (
-            round(safety_score, 1),
-            "Estimated from neighborhood fit and review confidence; safety API data is not connected yet.",
-        ),
-    }
-    overall = round(
-        (
-            scores["Location Match"][0] * 0.28
-            + scores["Transit Access"][0] * 0.18
-            + scores["Value"][0] * 0.18
-            + scores["Room Quality"][0] * 0.22
-            + scores["Safety"][0] * 0.14
-        )
-        * 10
-    )
-    tags = [
-        "Google Places" if is_google else "Prototype fallback",
-        f"{float(place.get('rating')):.1f} rating" if place.get("rating") else "Rating unavailable",
-        f"{int(place.get('review_count')):,} reviews" if place.get("review_count") else "Reviews unavailable",
-    ]
-    return {
-        "label": "",
-        "type": "Recommended hotel",
-        "name": place["name"],
-        "area": place.get("address") or f"{neighborhood} · {recommendation['neighborhood']['name']}",
-        "price": None if is_google else place.get("mock_price"),
-        "score": int(max(70, min(97, overall))),
-        "why": place.get("mock_why") or _deterministic_hotel_explanation(place, [], recommendation, preferences),
-        "tags": tags,
-        "scores": scores,
-        "rating": place.get("rating"),
-        "review_count": place.get("review_count"),
-        "coordinates": {"lat": place.get("lat"), "lng": place.get("lng")},
-        "source": place.get("source"),
-    }
-
-
-def _rank_hotels(places, recommendation, preferences):
-    deduped = []
-    seen_names = set()
-    for place in places:
-        name_key = str(place.get("name") or "").strip().lower()
-        if not name_key or name_key in seen_names:
-            continue
-        seen_names.add(name_key)
-        deduped.append(place)
-    scored = [_score_live_hotel(place, recommendation, preferences, index=index) for index, place in enumerate(deduped)]
-    return sorted(scored, key=lambda hotel: hotel["score"], reverse=True)
-
-
-def _pick_alternative_hotels(ranked_hotels):
-    candidates = list(ranked_hotels[1:])
-    selected = []
-    selected_names = set()
-    selectors = [
-        ("Luxury alternative", "Room Quality"),
-        ("Best value alternative", "Value"),
-        ("Best location alternative", "Location Match"),
-    ]
-    for label, score_key in selectors:
-        remaining = [hotel for hotel in candidates if hotel["name"] not in selected_names]
-        if not remaining:
-            break
-        best = max(remaining, key=lambda hotel: hotel.get("scores", {}).get(score_key, (0, ""))[0])
-        best = dict(best)
-        best["label"] = label
-        best["type"] = label
-        selected.append(best)
-        selected_names.add(best["name"])
-    for hotel in candidates:
-        if len(selected) >= 3:
-            break
-        if hotel["name"] in selected_names:
-            continue
-        fallback = dict(hotel)
-        fallback["label"] = "Alternative hotel"
-        fallback["type"] = "Alternative hotel"
-        selected.append(fallback)
-        selected_names.add(fallback["name"])
-    return selected[:3]
-
-
-def _deterministic_hotel_explanation(hotel_or_place, alternatives, recommendation, preferences):
-    name = hotel_or_place.get("name", "This hotel")
-    neighborhood = recommendation["neighborhood"]["name"]
-    preference_text = ", ".join((preferences or DEFAULT_HOTEL_PREFERENCES)[:3])
-    rating = hotel_or_place.get("rating")
-    review_count = hotel_or_place.get("review_count")
-    rating_part = ""
-    if rating:
-        rating_part = f" It has a {float(rating):.1f} Google rating"
-        if review_count:
-            rating_part += f" across {int(review_count):,} reviews"
-        rating_part += "."
-    tradeoff = "The main tradeoff is that Byable does not have live nightly rates or booking inventory connected yet."
-    if alternatives:
-        tradeoff = f"Compared with alternatives like {alternatives[0]['name']}, it ranks higher on Byable's location and review-confidence signals."
-    return (
-        f"Byable recommends {name} because it fits the {neighborhood} stay strategy and your priorities: "
-        f"{preference_text}.{rating_part} {tradeoff}"
-    )
-
-
-def _hotel_ai_cache_key(hotel, alternatives, recommendation, preferences, destination_city):
-    payload = {
-        "hotel": hotel.get("name"),
-        "alternatives": [alt.get("name") for alt in alternatives[:3]],
-        "neighborhood": recommendation["neighborhood"]["name"],
-        "preferences": list(preferences or []),
-        "destination": destination_city,
-    }
-    return json.dumps(payload, sort_keys=True, default=str)
-
-
-def _generate_hotel_ai_explanation(hotel, alternatives, recommendation, preferences, destination_city):
-    cache = st.session_state.setdefault("hotel_ai_explanation_cache", {})
-    cache_key = _hotel_ai_cache_key(hotel, alternatives, recommendation, preferences, destination_city)
-    if cache_key in cache:
-        return cache[cache_key]
-    api_key = _hotel_openai_api_key()
-    if not api_key:
-        fallback = _deterministic_hotel_explanation(hotel, alternatives, recommendation, preferences)
-        cache[cache_key] = fallback
-        return fallback
-    try:
-        from openai import OpenAI
-
-        alt_payload = [
-            {
-                "name": alt.get("name"),
-                "score": alt.get("score"),
-                "rating": alt.get("rating"),
-                "review_count": alt.get("review_count"),
-                "address": alt.get("area"),
-            }
-            for alt in alternatives[:3]
-        ]
-        payload = {
-            "destination_city": destination_city,
-            "selected_neighborhood": recommendation["neighborhood"]["name"],
-            "selected_preferences": list(preferences or []),
-            "recommended_hotel": {
-                "name": hotel.get("name"),
-                "score": hotel.get("score"),
-                "rating": hotel.get("rating"),
-                "review_count": hotel.get("review_count"),
-                "address": hotel.get("area"),
-                "score_breakdown": hotel.get("scores"),
-                "source": hotel.get("source"),
-            },
-            "alternatives": alt_payload,
-        }
-        client = OpenAI(api_key=api_key)
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {
-                    "role": "system",
-                    "content": (
-                        "You are Byable, a premium travel advisor. Return JSON only. "
-                        "Use only the provided hotel facts. Do not invent prices, booking availability, amenities, "
-                        "room types, safety claims, transit times, or neighborhood facts. Be concise."
-                    ),
-                },
-                {
-                    "role": "user",
-                    "content": (
-                        "Explain why the recommended hotel was selected and the main tradeoff versus alternatives. "
-                        "Mention Google rating/review count when useful. If live nightly rates are unavailable, say so plainly. "
-                        'Return {"why":"..."}.\n\n'
-                        f"Facts:\n{json.dumps(payload, ensure_ascii=True, default=str)}"
-                    ),
-                },
-            ],
-            response_format={"type": "json_object"},
-            temperature=0.25,
-            timeout=6,
-        )
-        raw_text = str(response.choices[0].message.content or "").strip()
-        parsed = json.loads(raw_text)
-        explanation = str(parsed.get("why") or "").strip()
-        if not explanation:
-            explanation = _deterministic_hotel_explanation(hotel, alternatives, recommendation, preferences)
-        cache[cache_key] = explanation
-        return explanation
-    except Exception:
-        fallback = _deterministic_hotel_explanation(hotel, alternatives, recommendation, preferences)
-        cache[cache_key] = fallback
-        return fallback
 
 
 HOTEL_FACTOR_PROFILES = {
@@ -829,6 +468,151 @@ def _score_mock_hotel(hotel, preferences):
     scored["type"] = scored.get("type") or "Recommended hotel"
     scored["tags"] = scored.get("tags") or sorted(profile.get("preference_tags") or [])[:3]
     return scored
+
+
+def _price_level_label(price_level):
+    labels = {
+        "PRICE_LEVEL_FREE": "Free",
+        "PRICE_LEVEL_INEXPENSIVE": "Lower price",
+        "PRICE_LEVEL_MODERATE": "Moderate price",
+        "PRICE_LEVEL_EXPENSIVE": "Higher price",
+        "PRICE_LEVEL_VERY_EXPENSIVE": "Premium price",
+    }
+    return labels.get(str(price_level or ""), "Price level unavailable")
+
+
+def _price_level_value_score(price_level):
+    scores = {
+        "PRICE_LEVEL_FREE": 9.5,
+        "PRICE_LEVEL_INEXPENSIVE": 9.2,
+        "PRICE_LEVEL_MODERATE": 8.1,
+        "PRICE_LEVEL_EXPENSIVE": 6.8,
+        "PRICE_LEVEL_VERY_EXPENSIVE": 5.8,
+    }
+    return scores.get(str(price_level or ""), 7.4)
+
+
+def _review_count_bonus(review_count):
+    try:
+        count = int(review_count or 0)
+    except (TypeError, ValueError):
+        count = 0
+    if count >= 2000:
+        return 0.6
+    if count >= 750:
+        return 0.4
+    if count >= 200:
+        return 0.25
+    return 0
+
+
+def _rating_quality_score(rating, review_count):
+    try:
+        rating_value = float(rating or 0)
+    except (TypeError, ValueError):
+        rating_value = 0
+    if rating_value <= 0:
+        return 7.2
+    return round(max(6.2, min(9.7, rating_value * 2 + _review_count_bonus(review_count))), 1)
+
+
+def _neighborhood_safety_score(scored_neighborhood):
+    safety_scores = {
+        "Ginza / Yurakucho": 9.1,
+        "Shinjuku / Shibuya": 8.0,
+        "Ueno / Asakusa": 8.5,
+        "Ginza / Toranomon": 9.2,
+        "Tokyo Bay / Shiba": 9.0,
+    }
+    return safety_scores.get(scored_neighborhood.get("name"), 8.4)
+
+
+def _live_trip_fit_score(hotel, scored_neighborhood, preferences):
+    selected = set(preferences or DEFAULT_HOTEL_PREFERENCES)
+    neighborhood_tags = set(scored_neighborhood.get("preference_tags") or [])
+    matches = selected & neighborhood_tags
+    score = 6.5 + min(2.4, len(matches) * 0.8)
+    price_level = str(hotel.get("price_level") or "")
+    if "Lowest Price" in selected and price_level in {"PRICE_LEVEL_INEXPENSIVE", "PRICE_LEVEL_MODERATE"}:
+        score += 0.6
+    if "Luxury" in selected and price_level in {"PRICE_LEVEL_EXPENSIVE", "PRICE_LEVEL_VERY_EXPENSIVE"}:
+        score += 0.5
+    if {"Food", "Shopping", "Walkability"} & selected and scored_neighborhood.get("name") in {"Ginza / Yurakucho", "Shinjuku / Shibuya"}:
+        score += 0.35
+    return round(max(6.0, min(9.6, score)), 1)
+
+
+def _score_google_hotel(hotel, preferences, scored_neighborhood):
+    neighborhood_name = scored_neighborhood["name"]
+    neighborhood_match = round(max(6.8, min(9.7, scored_neighborhood["score"] / 10)), 1)
+    transit = round(float(scored_neighborhood.get("convenience") or 8.0), 1)
+    safety = round(_neighborhood_safety_score(scored_neighborhood), 1)
+    value = round(_price_level_value_score(hotel.get("price_level")), 1)
+    room = _rating_quality_score(hotel.get("rating"), hotel.get("review_count"))
+    trip_fit = _live_trip_fit_score(hotel, scored_neighborhood, preferences)
+    scores = {
+        "Location Match": (
+            neighborhood_match,
+            f"Matched to the selected {neighborhood_name} stay area.",
+        ),
+        "Transit Access": (
+            transit,
+            "Based on the selected neighborhood's transit and walkability profile.",
+        ),
+        "Value": (
+            value,
+            f"Based on Google Places price level: {_price_level_label(hotel.get('price_level'))}.",
+        ),
+        "Room Quality": (
+            room,
+            f"Based on Google rating {hotel.get('rating') or 'unavailable'} and {int(hotel.get('review_count') or 0):,} reviews.",
+        ),
+        "Safety": (
+            safety,
+            "Based on the selected neighborhood's current safety profile.",
+        ),
+        "Trip Fit": (
+            trip_fit,
+            "Based on selected hotel preferences and neighborhood alignment.",
+        ),
+    }
+    weighted = (
+        scores["Location Match"][0] * 0.22
+        + scores["Transit Access"][0] * 0.15
+        + scores["Value"][0] * 0.17
+        + scores["Room Quality"][0] * 0.17
+        + scores["Safety"][0] * 0.11
+        + scores["Trip Fit"][0] * 0.18
+    )
+    tags = [
+        f"{float(hotel.get('rating')):.1f} rating" if hotel.get("rating") else "Rating unavailable",
+        f"{int(hotel.get('review_count') or 0):,} reviews" if hotel.get("review_count") else "Reviews unavailable",
+        _price_level_label(hotel.get("price_level")),
+    ]
+    return {
+        "name": hotel["name"],
+        "area": hotel.get("address") or neighborhood_name,
+        "type": "Recommended hotel",
+        "label": "Alternative hotel",
+        "price": None,
+        "price_subtitle": "Google price level",
+        "score": int(round(weighted * 10)),
+        "trip_fit": trip_fit,
+        "why": "",
+        "tags": tags,
+        "scores": scores,
+        "rating": hotel.get("rating"),
+        "review_count": hotel.get("review_count"),
+        "lat": hotel.get("lat"),
+        "lng": hotel.get("lng"),
+        "price_level": hotel.get("price_level"),
+        "source": "google_places",
+    }
+
+
+def _rank_google_hotels(google_hotels, preferences, scored_neighborhood):
+    scored = [_score_google_hotel(hotel, preferences, scored_neighborhood) for hotel in google_hotels]
+    return sorted(scored, key=lambda hotel: hotel["score"], reverse=True)
 
 
 def _rank_mock_hotels(preferences):
@@ -1289,7 +1073,7 @@ def _render_neighborhood_alt_card(neighborhood):
 
 def _render_hotel_card(hotel, recommended=False):
     card_class = "hotel-card recommended" if recommended else "hotel-card alt"
-    price_sub = "estimated nightly rate"
+    price_sub = hotel.get("price_subtitle") or "estimated nightly rate"
     stay_score_html = ""
     if recommended and hotel.get("overall_stay_score") is not None:
         stay_score_html = "".join(
@@ -1445,7 +1229,25 @@ def render():
     recommended_neighborhood = ranked_neighborhoods[0]
     alternative_neighborhoods = _select_alternative_neighborhoods(ranked_neighborhoods, recommended_neighborhood)
     recommendation = _recommendation_for_neighborhood(recommended_neighborhood)
-    ranked_hotels = _rank_mock_hotels(selected_preferences)
+    google_hotels = search_hotels_with_google_places(
+        destination_city,
+        neighborhood=recommended_neighborhood["name"],
+        limit=10,
+    )
+    live_hotel_data_used = bool(google_hotels)
+    print(f"HOTELS DATA SOURCE: {'google_places' if live_hotel_data_used else 'mock_fallback'}")
+    if not live_hotel_data_used:
+        fallback_reason = (
+            "GOOGLE_PLACES_API_KEY not configured"
+            if not google_places_key_configured()
+            else "Google Places returned 0 hotels or request failed"
+        )
+        print(f"HOTELS FALLBACK USED: {fallback_reason}")
+    ranked_hotels = (
+        _rank_google_hotels(google_hotels, selected_preferences, recommended_neighborhood)
+        if live_hotel_data_used
+        else _rank_mock_hotels(selected_preferences)
+    )
     recommended_hotel = ranked_hotels[0]
     alternative_hotels = _label_hotel_alternatives(ranked_hotels[1:4])
     recommended_hotel["why"] = _hotel_recommendation_copy(recommended_hotel, selected_preferences)
@@ -1480,6 +1282,9 @@ def render():
                     },
                 )
                 st.rerun()
+
+    if live_hotel_data_used:
+        st.caption("Live Google Places hotel data")
 
     _render_hotel_card(recommended_hotel, recommended=True)
     action_cols = st.columns([1, 0.24])
