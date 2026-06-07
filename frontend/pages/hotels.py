@@ -269,8 +269,8 @@ NEIGHBORHOOD_PROFILES = [
         "value": 7.1,
         "tradeoff": "More expensive and calmer at night than Shinjuku or Shibuya.",
         "good_fit": [
-            "Excellent density for restaurants, shopping, and polished streets.",
-            "Easy access to Tokyo Station, Ginza, and Shimbashi routes.",
+            "Restaurants, department stores, and polished streets close together.",
+            "Easy Tokyo Station, Ginza, and Shimbashi access for first-time days.",
         ],
     },
     {
@@ -282,8 +282,8 @@ NEIGHBORHOOD_PROFILES = [
         "value": 7.4,
         "tradeoff": "Busier streets and stations can feel less relaxing.",
         "good_fit": [
-            "Best area for nightlife and late food.",
-            "Very strong rail access for cross-city sightseeing.",
+            "Late dining, nightlife, and after-dark energy.",
+            "Major station access for cross-city sightseeing.",
         ],
     },
     {
@@ -295,8 +295,8 @@ NEIGHBORHOOD_PROFILES = [
         "value": 9.2,
         "tradeoff": "Less central for west-side nightlife, luxury, and shopping.",
         "good_fit": [
-            "Strongest fit for culture and lower hotel costs.",
-            "Good access to museums, parks, temples, and older Tokyo.",
+            "Museums, temples, parks, and older Tokyo atmosphere.",
+            "Usually better hotel value than Shinjuku/Shibuya.",
         ],
     },
     {
@@ -308,8 +308,8 @@ NEIGHBORHOOD_PROFILES = [
         "value": 6.6,
         "tradeoff": "Highest rates and less neighborhood texture than Ueno or Asakusa.",
         "good_fit": [
-            "Strong fit when the stay itself should feel premium.",
-            "Good central base for design hotels and polished dining.",
+            "Premium hotels, design-forward stays, and polished dining.",
+            "A calmer luxury base than Shinjuku/Shibuya.",
         ],
     },
     {
@@ -321,8 +321,8 @@ NEIGHBORHOOD_PROFILES = [
         "value": 8.0,
         "tradeoff": "Less dense for nightlife, food hopping, and shopping.",
         "good_fit": [
-            "Calmer base for slower mornings and family-friendly pacing.",
-            "Useful access for Haneda-side routing and quieter evenings.",
+            "Slower mornings, calmer evenings, and family-friendly pacing.",
+            "Useful Haneda-side routing and quieter hotel areas.",
         ],
     },
 ]
@@ -639,61 +639,185 @@ def _rank_mock_hotels(preferences):
 
 
 def _hotel_recommendation_copy(hotel, preferences):
-    scores = hotel.get("scores") or {}
     preference_text = ", ".join((preferences or DEFAULT_HOTEL_PREFERENCES)[:3])
-    location = _hotel_factor_score(hotel, "Location Match")
-    room = _hotel_factor_score(hotel, "Room Quality")
-    trip_fit = _hotel_factor_score(hotel, "Trip Fit")
     rating = _rating_text(hotel)
-    score_parts = []
-    if location is not None:
-        score_parts.append(f"{location:.1f}/10 location match")
-    if room is not None:
-        score_parts.append(f"{room:.1f}/10 room quality")
-    if trip_fit is not None:
-        score_parts.append(f"{trip_fit:.1f}/10 trip fit")
-    signal_text = ", ".join(score_parts[:3]) or "the strongest combined stay score"
-    rating_text = f" Google Places shows {rating} across {_review_count_text(hotel)}." if rating else ""
+    rating_text = " Public Google reviews add confidence in the stay." if rating else ""
     return (
-        f"Byable recommends this stay because it best matches {preference_text} with {signal_text}."
+        f"Byable recommends this stay because it gives you a practical base for {preference_text} without making the hotel decision feel complicated."
         f"{rating_text}"
     )
 
 
 def _hotel_pick_bullets(hotel, recommended_neighborhood, preferences):
-    scores = hotel.get("scores") or {}
     neighborhood_name = recommended_neighborhood.get("name") or "the selected neighborhood"
     preference_text = ", ".join((preferences or DEFAULT_HOTEL_PREFERENCES)[:3])
-    location_score = _hotel_factor_score(hotel, "Location Match")
-    room_score = _hotel_factor_score(hotel, "Room Quality")
-    trip_fit_score = _hotel_factor_score(hotel, "Trip Fit")
     bullets = []
 
-    if location_score is not None:
-        bullets.append(
-            f"Fits the {neighborhood_name} stay strategy with a {location_score:.1f}/10 location match."
+    neighborhood_benefits = {
+        "Ginza / Yurakucho": "Convenient base for restaurants, shopping, Tokyo Station, and polished first-time days.",
+        "Shinjuku / Shibuya": "Convenient base for food, shopping, nightlife, and rail-heavy day trips.",
+        "Ueno / Asakusa": "Good base for museums, temples, parks, and traditional Tokyo atmosphere.",
+        "Ginza / Toranomon": "Upscale base for premium dining, design hotels, and quieter evenings.",
+        "Tokyo Bay / Shiba": "Calmer base for slower mornings, family pacing, and Haneda-side routing.",
+    }
+    bullets.append(
+        neighborhood_benefits.get(
+            neighborhood_name,
+            f"Convenient base in {neighborhood_name} for your planned Tokyo stay.",
         )
-    else:
-        bullets.append(f"Fits the selected {neighborhood_name} neighborhood strategy.")
+    )
 
     rating = _rating_text(hotel)
-    reviews = _review_count_text(hotel)
     if rating:
-        quality_part = f"Google Places shows {rating} across {reviews}"
-        if room_score is not None:
-            quality_part += f", supporting a {room_score:.1f}/10 room quality score"
-        bullets.append(f"{quality_part}.")
-    elif room_score is not None:
-        bullets.append(f"Room quality scores {room_score:.1f}/10 in the current Byable stay model.")
-
-    if trip_fit_score is not None:
-        bullets.append(
-            f"Trip fit is {trip_fit_score:.1f}/10 for your selected priorities: {preference_text}."
-        )
+        bullets.append("Strong public Google review signal for the overall stay experience.")
     else:
-        bullets.append(f"Matches the selected trip priorities: {preference_text}.")
+        bullets.append("Keeps the stay recommendation focused on location and trip needs while live review details are limited.")
 
-    return bullets[:3]
+    if {"Food", "Shopping", "Walkability"} & set(preferences or []):
+        bullets.append("Useful for food, shopping, and walkable days without over-planning transit.")
+    elif "Culture" in set(preferences or []):
+        bullets.append("Helpful base for cultural sightseeing without needing a complicated hotel strategy.")
+    elif "Luxury" in set(preferences or []):
+        bullets.append("Better aligned with a polished, premium stay experience.")
+    elif "Lowest Price" in set(preferences or []):
+        bullets.append("Keeps the hotel choice oriented around value instead of unnecessary upgrades.")
+    else:
+        bullets.append(f"Matches your selected priorities: {preference_text}.")
+
+    address = str(hotel.get("area") or "")
+    if address and neighborhood_name.split(" / ")[0] in address:
+        bullets.append(f"Located in the area Byable selected for this trip: {neighborhood_name}.")
+
+    return bullets[:4]
+
+
+def _hotel_identity_profile(hotel, recommended_hotel=None, recommended=False):
+    name = str(hotel.get("name") or "")
+    name_key = name.lower()
+    area = str(hotel.get("area") or "").lower()
+    tags = {str(tag).lower() for tag in hotel.get("tags") or []}
+    best_for = []
+
+    def add_best(label):
+        if label and label not in best_for:
+            best_for.append(label)
+
+    known_profiles = [
+        (
+            "the knot",
+            [
+                "Stylish design hotel experience",
+                "Trendy social atmosphere",
+                "Younger travelers",
+            ],
+            "Slightly weaker comfort and cleanliness confidence than the recommended pick.",
+        ),
+        (
+            "gracery",
+            [
+                "Central Shinjuku location",
+                "Famous Godzilla attraction",
+                "Easy nightlife access",
+            ],
+            "Smaller average room experience than more comfort-focused options.",
+        ),
+        (
+            "mitsui garden",
+            [
+                "Polished city-hotel experience",
+                "Food and shopping access",
+                "First-time Tokyo convenience",
+            ],
+            "Less nightlife energy than Shinjuku/Shibuya.",
+        ),
+        (
+            "jr kyushu",
+            [
+                "Station access",
+                "Train-heavy sightseeing days",
+                "Efficient Shinjuku base",
+            ],
+            "Busier surroundings than calmer hotel areas.",
+        ),
+        (
+            "nohga",
+            [
+                "Better value",
+                "Culture-focused Tokyo days",
+                "Local neighborhood feel",
+            ],
+            "Less polished and less central for shopping-heavy trips.",
+        ),
+        (
+            "edition",
+            [
+                "Luxury stay experience",
+                "Design-forward rooms",
+                "Premium dining access",
+            ],
+            "Higher price profile than most other options.",
+        ),
+        (
+            "celestine",
+            [
+                "Calmer evenings",
+                "Comfort-focused stay",
+                "Haneda-side routing",
+            ],
+            "Less useful for nightlife and dense shopping days.",
+        ),
+    ]
+    for needle, strengths, tradeoff in known_profiles:
+        if needle in name_key:
+            return {"best_for": strengths[:3], "tradeoff": tradeoff}
+
+    if "shinjuku" in area or "shinjuku" in name_key:
+        add_best("Central Shinjuku location")
+        add_best("Nightlife and late dining access")
+    if "ginza" in area or "ginza" in name_key:
+        add_best("Food and shopping access")
+        add_best("Polished first-time Tokyo base")
+    if "ueno" in area or "asakusa" in area or "ueno" in name_key or "asakusa" in name_key:
+        add_best("Culture-focused sightseeing")
+        add_best("Better value than central luxury areas")
+    if "toranomon" in area or "roppongi" in area or "toranomon" in name_key:
+        add_best("Upscale central Tokyo base")
+        add_best("Premium dining access")
+    if "tokyo bay" in area or "shiba" in area or "shiba" in name_key:
+        add_best("Calmer hotel surroundings")
+        add_best("Family-friendly pacing")
+    if {"lower price", "moderate price", "value"} & tags:
+        add_best("Value-conscious stay")
+    if "premium price" in tags or "higher price" in tags:
+        add_best("Premium stay profile")
+
+    rating = _hotel_numeric_value(hotel, "rating")
+    review_count = _hotel_numeric_value(hotel, "review_count")
+    if rating and rating >= 4.4:
+        add_best("Strong public review signal")
+    if review_count and review_count >= 1000:
+        add_best("Well-reviewed mainstream choice")
+    if not best_for:
+        add_best("Simple hotel base for this Tokyo trip")
+        add_best("Public Google Places visibility")
+
+    tradeoff = "Live rate and room details still need verification before booking."
+    if recommended_hotel and not recommended:
+        rec_rating = _hotel_numeric_value(recommended_hotel, "rating")
+        if rating and rec_rating and rating < rec_rating - 0.2:
+            tradeoff = "Weaker public rating signal than the recommended hotel."
+        elif review_count and _hotel_numeric_value(recommended_hotel, "review_count") and review_count < _hotel_numeric_value(recommended_hotel, "review_count") * 0.5:
+            tradeoff = "Fewer public reviews, so confidence is lower."
+        elif "premium price" in tags or "higher price" in tags:
+            tradeoff = "Likely pricier without enough extra benefit for this trip."
+        elif "shinjuku" in area and "shinjuku" not in str(recommended_hotel.get("area") or "").lower():
+            tradeoff = "Busier surroundings than the recommended hotel area."
+        else:
+            tradeoff = "Less clearly aligned with the recommended neighborhood strategy."
+    elif recommended:
+        tradeoff = "Still verify live nightly rates and room type before booking."
+
+    return {"best_for": best_for[:3], "tradeoff": tradeoff}
 
 
 def _label_hotel_alternatives(alternatives):
@@ -979,25 +1103,38 @@ def _neighborhood_pick_bullets(scored_neighborhood, alternatives, preferences):
     return bullets[:3]
 
 
+def _neighborhood_tradeoff_bullets(neighborhood, recommended_neighborhood):
+    name = neighborhood.get("name", "")
+    recommended_name = recommended_neighborhood.get("name", "")
+    selected = set(st.session_state.get("hotel_preferences") or DEFAULT_HOTEL_PREFERENCES)
+    bullets = []
+    if "Nightlife" in selected and "Nightlife" not in set(neighborhood.get("preference_tags") or []):
+        bullets.append("Less nightlife and late dining.")
+    if {"Food", "Shopping", "Walkability"} & selected and name not in {"Ginza / Yurakucho", "Shinjuku / Shibuya"}:
+        bullets.append("Less ideal for shopping-heavy, first-time Tokyo days.")
+    if "Culture" in selected and "Culture" not in set(neighborhood.get("preference_tags") or []):
+        bullets.append("Fewer temples, museums, and older Tokyo sights nearby.")
+    if "Luxury" in selected and "Luxury" not in set(neighborhood.get("preference_tags") or []):
+        bullets.append("Fewer premium hotels and polished dining clusters.")
+    if "Relaxation" in selected and "Relaxation" not in set(neighborhood.get("preference_tags") or []):
+        bullets.append("Busier evenings and less calm hotel surroundings.")
+    if "Lowest Price" in selected and "Lowest Price" not in set(neighborhood.get("preference_tags") or []):
+        bullets.append("Usually weaker hotel value than Ueno/Asakusa.")
+    if not bullets:
+        bullets.append(neighborhood.get("tradeoff") or f"{recommended_name} fits the current trip profile better.")
+    return bullets[:2]
+
+
 def _neighborhood_why_not_lists(neighborhood, recommended_neighborhood):
     advantages = list(neighborhood.get("good_fit") or [])[:2]
-    drawbacks = []
-    score_delta = int(recommended_neighborhood["score"]) - int(neighborhood["score"])
-    if score_delta > 0:
-        drawbacks.append(f"{score_delta} points lower on Neighborhood Match for your selected preferences.")
-    if float(neighborhood.get("convenience") or 0) < float(recommended_neighborhood.get("convenience") or 0):
-        drawbacks.append(
-            f"Lower convenience score: {float(neighborhood['convenience']):.1f} vs {float(recommended_neighborhood['convenience']):.1f}."
-        )
-    if float(neighborhood.get("value") or 0) < float(recommended_neighborhood.get("value") or 0):
-        drawbacks.append(
-            f"Lower value score: {float(neighborhood['value']):.1f} vs {float(recommended_neighborhood['value']):.1f}."
-        )
-    if not drawbacks:
-        drawbacks.append(f"Byable ranked {recommended_neighborhood['name']} higher because it better matches the selected trip priorities.")
+    drawbacks = _neighborhood_tradeoff_bullets(neighborhood, recommended_neighborhood)
+    selected_preferences = st.session_state.get("hotel_preferences") or DEFAULT_HOTEL_PREFERENCES
+    preference_text = ", ".join(selected_preferences[:3])
+    take = f"Because you selected {preference_text}, {recommended_neighborhood['name']} is a stronger base for this trip."
     return {
         "advantages": advantages[:2] or [f"Good for {neighborhood['best_for'].lower()}."],
         "drawbacks": drawbacks[:2],
+        "take": take,
     }
 
 
@@ -1091,6 +1228,16 @@ def _inject_hotel_styles():
             color: rgba(255,255,255,0.44);
             font-size: 12px;
             margin-top: 4px;
+        }
+        .neighborhood-best-for {
+            color: rgba(255,255,255,0.66);
+            font-size: 12px;
+            line-height: 1.4;
+            margin-top: 5px;
+        }
+        .neighborhood-best-for strong {
+            color: rgba(255,255,255,0.88);
+            font-weight: 900;
         }
         .hotel-score {
             display: inline-flex;
@@ -1293,6 +1440,41 @@ def _chips(tags, primary_first=False):
     return "".join(output)
 
 
+def _neighborhood_tags(neighborhood):
+    best_for = str(neighborhood.get("best_for") or "").lower()
+    preference_tags = set(neighborhood.get("preference_tags") or [])
+    tags = []
+
+    def add(condition, label):
+        if condition and label not in tags:
+            tags.append(label)
+
+    add("Culture" in preference_tags or any(word in best_for for word in ("culture", "museum", "temple")), "🏛 Culture")
+    add("Food" in preference_tags or any(word in best_for for word in ("food", "dining", "restaurant")), "🍜 Food")
+    add("Shopping" in preference_tags or "shopping" in best_for, "🛍 Shopping")
+    add("Nightlife" in preference_tags or any(word in best_for for word in ("nightlife", "late")), "🌃 Nightlife")
+    add("Luxury" in preference_tags or any(word in best_for for word in ("luxury", "premium", "design")), "💎 Luxury")
+    add("Lowest Price" in preference_tags or any(word in best_for for word in ("lower", "value", "budget")), "💰 Value")
+    add(
+        float(neighborhood.get("convenience") or 0) >= 8.5
+        or any(word in best_for for word in ("station", "transit", "access")),
+        "🚇 Transit",
+    )
+    return tags[:3]
+
+
+def _neighborhood_recommendation_line(neighborhood):
+    name = neighborhood.get("name", "")
+    lines = {
+        "Ueno / Asakusa": "Choose this if you want traditional Tokyo and better hotel value over nightlife.",
+        "Ginza / Toranomon": "Choose this if you want an upscale, quieter Tokyo base.",
+        "Ginza / Yurakucho": "Choose this if you want food, shopping, and convenience without the intensity of Shinjuku.",
+        "Shinjuku / Shibuya": "Choose this if you want nightlife, late dining, and the most energetic Tokyo base.",
+        "Tokyo Bay / Shiba": "Choose this if you want calmer evenings, family pacing, and easier Haneda-side routing.",
+    }
+    return lines.get(name, f"Choose this if you want {str(neighborhood.get('best_for') or 'this stay style').lower()}.")
+
+
 def _hotel_card_signal_html(hotel):
     if hotel.get("price") is not None:
         price_sub = hotel.get("price_subtitle") or "estimated nightly rate"
@@ -1345,7 +1527,7 @@ def _render_preferences():
 
 def _render_neighborhood_card(recommendation, preferences, scored_neighborhood, alternative_neighborhoods):
     neighborhood = recommendation["neighborhood"]
-    preference_text = ", ".join(preferences[:4])
+    best_for = scored_neighborhood.get("best_for") or neighborhood.get("best_for") or "This trip"
     pick_bullets = _escape_list(_neighborhood_pick_bullets(scored_neighborhood, alternative_neighborhoods, preferences))
     st.markdown(
         f"""
@@ -1354,12 +1536,13 @@ def _render_neighborhood_card(recommendation, preferences, scored_neighborhood, 
                 <div>
                     <div class="hotel-kicker">Recommended neighborhood</div>
                     <div class="hotel-name">{html.escape(neighborhood["name"])}</div>
-                    <div class="hotel-area">Selected for this trip</div>
+                    <div class="neighborhood-best-for"><strong>Best for:</strong> {html.escape(best_for)}</div>
+                    <div class="hotel-area">{html.escape(_neighborhood_recommendation_line(scored_neighborhood))}</div>
                 </div>
                 {_score_badge(scored_neighborhood["score"], "Match")}
             </div>
             <div class="hotel-copy">{html.escape(neighborhood["why"])}</div>
-            <div class="hotel-chip-row">{_chips([f'Matches: {preference_text}', 'Neighborhood Match score'], primary_first=True)}</div>
+            <div class="hotel-chip-row">{_chips(_neighborhood_tags(scored_neighborhood), primary_first=True)}</div>
             <div class="hotel-section-label">Why Byable picked this neighborhood</div>
             <ul class="hotel-list">{pick_bullets}</ul>
             <div class="hotel-section-label">Pros</div>
@@ -1383,19 +1566,33 @@ def _render_neighborhood_alt_card(neighborhood):
                 <div>
                     <div class="hotel-kicker">Alternative neighborhood</div>
                     <div class="hotel-name">{html.escape(neighborhood["name"])}</div>
-                    <div class="hotel-area">Best for: {html.escape(neighborhood["best_for"])}</div>
+                    <div class="neighborhood-best-for"><strong>Best for:</strong> {html.escape(neighborhood["best_for"])}</div>
+                    <div class="hotel-area">{html.escape(_neighborhood_recommendation_line(neighborhood))}</div>
                 </div>
                 {_score_badge(neighborhood["score"], "Match")}
             </div>
-            <div class="hotel-chip-row">{_chips([f'Convenience {neighborhood["convenience"]:.1f}', f'Value {neighborhood["value"]:.1f}'], primary_first=True)}</div>
+            <div class="hotel-chip-row">{_chips(_neighborhood_tags(neighborhood), primary_first=True)}</div>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
 
-def _render_hotel_card(hotel, recommended=False):
+def _render_hotel_card(hotel, recommended=False, recommended_hotel=None):
     card_class = "hotel-card recommended" if recommended else "hotel-card alt"
+    identity_profile = _hotel_identity_profile(
+        hotel,
+        recommended_hotel=recommended_hotel,
+        recommended=recommended,
+    )
+    identity_html = "".join(
+        [
+            '<div class="hotel-section-label">Best for</div>',
+            f'<ul class="hotel-list">{_escape_list(identity_profile["best_for"][:3])}</ul>',
+            '<div class="hotel-section-label">Tradeoff</div>',
+            f'<ul class="hotel-list">{_escape_list([identity_profile["tradeoff"]])}</ul>',
+        ]
+    )
     stay_score_html = ""
     if recommended and hotel.get("overall_stay_score") is not None:
         stay_score_html = "".join(
@@ -1413,7 +1610,7 @@ def _render_hotel_card(hotel, recommended=False):
         pick_bullets = "".join(
             [
                 '<div class="hotel-section-label">Why Byable picked this hotel</div>',
-                f'<ul class="hotel-list">{_escape_list(hotel["pick_bullets"][:3])}</ul>',
+                f'<ul class="hotel-list">{_escape_list(hotel["pick_bullets"][:4])}</ul>',
             ]
         )
     card_html = "".join(
@@ -1431,9 +1628,9 @@ def _render_hotel_card(hotel, recommended=False):
             "</div>",
             "</div>",
             f'<div class="hotel-copy">{html.escape(hotel["why"])}</div>',
+            identity_html,
             pick_bullets,
             stay_score_html,
-            f'<div class="hotel-factor-strip"><span>Trip Fit</span><strong>{float(hotel.get("trip_fit") or 0):.1f}/10</strong></div>',
             f'<div class="hotel-chip-row">{_chips(hotel["tags"], primary_first=True)}</div>',
             "</div>",
         ]
@@ -1472,40 +1669,19 @@ def _render_why_not_modal(hotel, recommended_hotel):
     comparison = _hotel_why_not_lists(hotel, recommended_hotel)
 
     def _content():
-        st.markdown("#### Why this was not picked")
-        st.caption(f"{hotel['name']} vs {recommended_hotel['name']}")
-        st.markdown(comparison["summary"])
+        st.markdown(f"#### Why not {hotel['name']}?")
+        st.caption(f"Overall: {int(hotel.get('score') or 0)} vs {int(recommended_hotel.get('score') or 0)}")
 
-        st.markdown("**Good fit for:**")
+        st.markdown("**Better at**")
         for advantage in comparison["advantages"][:2]:
             st.markdown(f"✓ {advantage}")
 
-        st.markdown("**Ranked lower because:**")
+        st.markdown("**Worse at**")
         for drawback in comparison["drawbacks"][:2]:
             st.markdown(f"• {drawback}")
 
-        st.markdown("**Score deltas vs recommended hotel**")
-        for row in comparison["rows"]:
-            delta = float(row["delta"])
-            if row["label"] == "Stay score":
-                delta_text = f"{delta:+.0f}"
-            elif row["label"] == "Review count":
-                delta_text = f"{delta:+,.0f}"
-            else:
-                delta_text = f"{delta:+.1f}"
-            with st.container(border=True):
-                row_cols = st.columns([0.40, 0.24, 0.24, 0.12])
-                with row_cols[0]:
-                    st.markdown(f"**{row['label']}**")
-                with row_cols[1]:
-                    st.caption("This hotel")
-                    st.markdown(f"**{row['value'](row['selected'])}**")
-                with row_cols[2]:
-                    st.caption("Recommended")
-                    st.markdown(f"**{row['value'](row['recommended'])}**")
-                with row_cols[3]:
-                    st.caption("Delta")
-                    st.markdown(f"**{delta_text}**")
+        st.markdown("**Byable's take**")
+        st.caption(comparison["summary"])
 
         if st.button("Close", key=f"close_hotel_why_not_{hotel.get('_hotel_key', 'active')}"):
             _clear_hotel_active_modal()
@@ -1526,20 +1702,20 @@ def _render_neighborhood_why_not_modal(neighborhood, recommended_neighborhood):
     comparison = _neighborhood_why_not_lists(neighborhood, recommended_neighborhood)
 
     def _content():
-        st.markdown("#### Why this neighborhood was not picked")
-        st.caption(f"{neighborhood['name']} vs {recommended_neighborhood['name']}")
-        st.markdown("**Good fit for:**")
+        st.markdown("**Good if you want**")
         for advantage in comparison["advantages"][:2]:
             st.markdown(f"✓ {advantage}")
-        st.markdown("**Ranked lower because:**")
+        st.markdown("**Tradeoffs**")
         for drawback in comparison["drawbacks"][:2]:
             st.markdown(f"• {drawback}")
+        st.markdown("**Byable's take**")
+        st.caption(comparison["take"])
         if st.button("Close", key="close_neighborhood_why_not"):
             st.session_state.pop("neighborhood_why_not_modal_open", None)
             st.rerun()
 
     if hasattr(st, "dialog"):
-        @st.dialog("Why this neighborhood was not picked")
+        @st.dialog(f"Why not {neighborhood['name']}?")
         def _dialog():
             _content()
 
@@ -1650,7 +1826,11 @@ def render():
     if live_hotel_data_used:
         st.caption("Live Google Places hotel data")
 
-    _render_hotel_card(recommended_hotel, recommended=True)
+    _render_hotel_card(
+        recommended_hotel,
+        recommended=True,
+        recommended_hotel=recommended_hotel,
+    )
     action_cols = st.columns([1, 0.24])
     with action_cols[1]:
         if st.button("Stay Score", key=f"hotel_stay_score_{recommended_hotel['_hotel_key']}"):
@@ -1671,7 +1851,7 @@ def render():
         unsafe_allow_html=True,
     )
     for hotel in alternative_hotels:
-        _render_hotel_card(hotel)
+        _render_hotel_card(hotel, recommended_hotel=recommended_hotel)
         action_cols = st.columns([1, 0.18, 0.18])
         with action_cols[1]:
             if st.button("Stay Score", key=f"hotel_stay_score_{hotel['_hotel_key']}"):
