@@ -913,6 +913,7 @@ def _hotel_identity_profile(hotel, recommended_hotel=None, recommended=False, pr
 
 def _label_hotel_alternatives(alternatives):
     candidates = [dict(hotel) for hotel in alternatives[:3]]
+    extra = [dict(hotel) for hotel in alternatives[3:]]
     label_rules = [
         (
             "Luxury alternative",
@@ -956,6 +957,11 @@ def _label_hotel_alternatives(alternatives):
     for index, hotel in enumerate(candidates):
         if index in used_ids:
             continue
+        item = dict(hotel)
+        item["label"] = "Alternative hotel"
+        item["type"] = "Alternative hotel"
+        output.append(item)
+    for hotel in extra:
         item = dict(hotel)
         item["label"] = "Alternative hotel"
         item["type"] = "Alternative hotel"
@@ -1995,6 +2001,26 @@ def _inject_hotel_styles():
             color: rgba(255,255,255,0.30);
             font-weight: 700;
         }
+        .hotel-compact-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .hotel-compact-main {
+            flex: 1;
+            min-width: 0;
+        }
+        .hotel-compact-signal {
+            flex-shrink: 0;
+            text-align: right;
+        }
+        .hotel-compact-reason {
+            color: rgba(255,255,255,0.62);
+            font-size: 12px;
+            line-height: 1.45;
+            margin-top: 3px;
+        }
         </style>
         """,
         unsafe_allow_html=True,
@@ -2285,20 +2311,6 @@ def _render_hotel_card(hotel, recommended=False, recommended_hotel=None):
     choose_sentence = _hotel_choose_sentence(hotel, recommended=recommended)
     card_summary = _hotel_card_summary(hotel, recommended=recommended)
     selected_label = '<span class="hotel-selected-label">Selected hotel</span>' if is_selected else ""
-    review_html = _review_summary_html(hotel)
-    identity_profile = _hotel_identity_profile(
-        hotel,
-        recommended_hotel=recommended_hotel,
-        recommended=recommended,
-    )
-    identity_html = "".join(
-        [
-            '<div class="hotel-section-label">Best for</div>',
-            f'<ul class="hotel-list">{_escape_list(identity_profile["best_for"][:3])}</ul>',
-            '<div class="hotel-section-label">Tradeoff</div>',
-            f'<ul class="hotel-list">{_escape_list([identity_profile["tradeoff"]])}</ul>',
-        ]
-    )
     recommended_label = '<div class="hotel-recommended-label">Recommended by Byable</div>' if recommended else ""
     pick_bullets = ""
     if recommended and hotel.get("pick_bullets"):
@@ -2325,9 +2337,7 @@ def _render_hotel_card(hotel, recommended=False, recommended_hotel=None):
             "</div>",
             "</div>",
             f'<div class="hotel-copy">{html.escape(card_summary)}</div>',
-            identity_html,
             pick_bullets,
-            review_html,
             f'<div class="hotel-chip-row">{_chips(hotel["tags"], primary_first=True)}</div>',
             "</div>",
         ]
@@ -2364,27 +2374,63 @@ def _render_hotel_win_section(recommended_hotel, alternative_hotels, preferences
     )
 
 
+def _render_hotel_compact_card(hotel):
+    is_selected = hotel.get("_hotel_key") == _selected_hotel_key()
+    card_class = "hotel-card alt compact"
+    if is_selected:
+        card_class += " selected"
+    label = hotel.get("label") or hotel.get("type") or "Alternative hotel"
+    card_summary = _hotel_card_summary(hotel)
+    selected_label = '<span class="hotel-selected-label">Selected hotel</span>' if is_selected else ""
+    tags = hotel.get("tags") or []
+    card_html = "".join(
+        [
+            f'<div class="{card_class}">',
+            '<div class="hotel-compact-row">',
+            '<div class="hotel-compact-main">',
+            f'<div class="hotel-kicker">{html.escape(label)}</div>',
+            f'<div class="hotel-name">{html.escape(hotel["name"])}{selected_label}</div>',
+            f'<div class="hotel-area">{html.escape(hotel.get("area") or "")}</div>',
+            f'<div class="hotel-compact-reason">{html.escape(card_summary)}</div>',
+            "</div>",
+            f'<div class="hotel-compact-signal">{_hotel_card_signal_html(hotel)}</div>',
+            "</div>",
+            f'<div class="hotel-chip-row" style="margin-top:6px">{_chips(tags[:3], primary_first=True)}</div>',
+            "</div>",
+        ]
+    )
+    st.markdown(card_html, unsafe_allow_html=True)
+
+
 def _render_score_modal(hotel):
     expectations = _hotel_stay_expectations(hotel)
+    review = _review_summary(hotel)
 
     def _content():
-        st.markdown("#### What to expect from this stay")
         st.caption(hotel["name"])
 
         st.markdown("**Strengths**")
         for strength in expectations["strengths"]:
             st.markdown(f"✓ {strength}")
 
+        st.markdown("**Best for**")
+        st.markdown(expectations["best_for"])
+
         st.markdown("**Tradeoffs**")
         for tradeoff in expectations["tradeoffs"]:
             st.markdown(f"• {tradeoff}")
 
-        st.markdown("**Best for**")
-        st.markdown(expectations["best_for"])
+        if review["positives"] or review["negatives"]:
+            st.markdown("**Review signals**")
+            for pos in review["positives"][:3]:
+                st.markdown(f"✓ {pos}")
+            for neg in review["negatives"][:2]:
+                st.markdown(f"• {neg}")
+            st.caption(f"Review count: {review['review_count']}")
 
         st.markdown(f"**Stay Score: {int(hotel.get('score') or 0)}/100**")
 
-        if st.button("Close Stay Score", key=f"close_hotel_score_{hotel.get('_hotel_key', 'active')}"):
+        if st.button("Close", key=f"close_hotel_score_{hotel.get('_hotel_key', 'active')}"):
             _clear_hotel_active_modal()
             st.rerun()
 
@@ -2512,7 +2558,7 @@ def render():
     google_hotels = search_hotels_with_google_places(
         destination_city,
         neighborhood=selected_neighborhood["name"],
-        limit=10,
+        limit=12,
     )
     live_hotel_data_used = bool(google_hotels)
     print(f"HOTELS DATA SOURCE: {'google_places' if live_hotel_data_used else 'mock_fallback'}")
@@ -2536,7 +2582,7 @@ def render():
             ),
         )
     recommended_hotel = ranked_hotels[0]
-    alternative_hotels = _label_hotel_alternatives(ranked_hotels[1:4])
+    alternative_hotels = _label_hotel_alternatives(ranked_hotels[1:])
     recommended_hotel["why"] = _hotel_recommendation_copy(
         recommended_hotel,
         selected_preferences,
@@ -2673,7 +2719,7 @@ def render():
         unsafe_allow_html=True,
     )
     for hotel in alternative_hotels:
-        _render_hotel_card(hotel, recommended_hotel=recommended_hotel)
+        _render_hotel_compact_card(hotel)
         action_cols = st.columns([1, 0.18, 0.18, 0.18])
         with action_cols[1]:
             if st.button(
@@ -2693,7 +2739,7 @@ def render():
                 )
                 st.rerun()
         with action_cols[2]:
-            if st.button("Stay Score", key=f"hotel_stay_score_{hotel['_hotel_key']}"):
+            if st.button("Details", key=f"hotel_stay_score_{hotel['_hotel_key']}"):
                 _set_hotel_active_modal("stay_score", hotel["_hotel_key"])
                 track_event(
                     "hotel_ai_score_clicked",
