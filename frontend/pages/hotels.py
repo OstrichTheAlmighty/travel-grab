@@ -2,7 +2,11 @@ import html
 import streamlit as st
 
 from analytics import track_event, track_once
-from places_hotels import google_places_key_configured, search_hotels_with_google_places
+from places_hotels import (
+    get_google_place_photo_data_uri,
+    google_places_key_configured,
+    search_hotels_with_google_places,
+)
 
 
 HOTEL_PREFERENCES = [
@@ -988,6 +992,32 @@ def _assign_hotel_identifiers(hotels):
     return hotels
 
 
+def _set_selected_hotel(hotel, neighborhood_name):
+    selected = {
+        "hotel_key": hotel.get("_hotel_key"),
+        "name": hotel.get("name"),
+        "area": hotel.get("area"),
+        "address": hotel.get("address"),
+        "rating": hotel.get("rating"),
+        "review_count": hotel.get("review_count"),
+        "price": hotel.get("price"),
+        "neighborhood": neighborhood_name,
+        "lat": hotel.get("lat"),
+        "lng": hotel.get("lng"),
+        "source": hotel.get("source") or "mock",
+    }
+    st.session_state["selected_hotel"] = selected
+    st.session_state["active_hotel"] = selected
+    st.session_state["trip_hotel"] = selected
+    st.session_state["selected_hotel_key"] = hotel.get("_hotel_key")
+
+
+def _selected_hotel_key():
+    return st.session_state.get("selected_hotel_key") or (
+        st.session_state.get("selected_hotel") or {}
+    ).get("hotel_key")
+
+
 def _set_hotel_active_modal(modal_type, hotel_key):
     st.session_state["hotel_active_modal"] = {
         "type": modal_type,
@@ -1549,6 +1579,10 @@ def _inject_hotel_styles():
                 rgba(8,10,18,0.96);
             box-shadow: 0 22px 74px rgba(99,102,241,0.20);
         }
+        .hotel-card.selected {
+            border-color: rgba(52,211,153,0.54);
+            box-shadow: 0 20px 64px rgba(16,185,129,0.15);
+        }
         .hotel-card.alt {
             padding: 14px 15px;
             margin-bottom: 11px;
@@ -1562,6 +1596,29 @@ def _inject_hotel_styles():
             align-items: flex-start;
             gap: 16px;
             margin-bottom: 12px;
+        }
+        .hotel-hero-image,
+        .hotel-hero-placeholder {
+            width: 100%;
+            min-height: 145px;
+            border-radius: 14px;
+            margin-bottom: 13px;
+            background-size: cover;
+            background-position: center;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .hotel-hero-placeholder {
+            display: flex;
+            align-items: flex-end;
+            padding: 13px;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(129,140,248,0.20), transparent 38%),
+                linear-gradient(135deg, rgba(15,23,42,0.92), rgba(3,7,18,0.96));
+        }
+        .hotel-hero-placeholder span {
+            color: rgba(255,255,255,0.70);
+            font-size: 12px;
+            font-weight: 850;
         }
         .hotel-name {
             color: #fff;
@@ -1643,6 +1700,53 @@ def _inject_hotel_styles():
             line-height: 1.48;
             margin-bottom: 11px;
         }
+        .hotel-win-card {
+            border: 1px solid rgba(129,140,248,0.18);
+            border-radius: 16px;
+            background:
+                linear-gradient(145deg, rgba(255,255,255,0.045), rgba(255,255,255,0.016)),
+                rgba(7,9,15,0.88);
+            padding: 11px 14px;
+            margin: -4px 0 13px;
+        }
+        .hotel-win-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.9fr);
+            gap: 14px;
+        }
+        .hotel-win-list {
+            color: rgba(255,255,255,0.65);
+            font-size: 12px;
+            line-height: 1.38;
+            margin: 0;
+            padding-left: 1rem;
+        }
+        .hotel-win-list li {
+            margin-bottom: 2px;
+        }
+        .hotel-review-box {
+            border: 1px solid rgba(129,140,248,0.12);
+            border-radius: 13px;
+            background: rgba(255,255,255,0.030);
+            padding: 9px 10px;
+            margin: 10px 0;
+        }
+        .hotel-review-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .hotel-review-heading {
+            color: rgba(255,255,255,0.78);
+            font-size: 11px;
+            font-weight: 850;
+            margin-bottom: 4px;
+        }
+        .hotel-review-count {
+            color: rgba(255,255,255,0.46);
+            font-size: 11px;
+            margin-top: 6px;
+        }
         .hotel-factor-strip {
             display: flex;
             justify-content: space-between;
@@ -1713,6 +1817,20 @@ def _inject_hotel_styles():
             text-transform: uppercase;
             margin-bottom: 6px;
         }
+        .hotel-selected-label {
+            display: inline-flex;
+            width: fit-content;
+            border-radius: 999px;
+            border: 1px solid rgba(52,211,153,0.34);
+            background: rgba(16,185,129,0.14);
+            color: rgba(209,250,229,0.96);
+            padding: 4px 9px;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin: 0 0 6px 6px;
+        }
         .hotel-advisor-badge {
             display: inline-flex;
             width: fit-content;
@@ -1781,6 +1899,12 @@ def _inject_hotel_styles():
         @media (max-width: 760px) {
             .hotel-card-top {
                 flex-direction: column;
+            }
+            .hotel-win-grid {
+                grid-template-columns: 1fr;
+            }
+            .hotel-review-grid {
+                grid-template-columns: 1fr;
             }
             .hotel-price,
             .hotel-price-sub,
@@ -1869,6 +1993,75 @@ def _hotel_card_signal_html(hotel):
     )
 
 
+def _hotel_photo_html(hotel):
+    image_uri = get_google_place_photo_data_uri(hotel.get("photo_name")) if hotel.get("photo_name") else ""
+    if image_uri:
+        return f'<div class="hotel-hero-image" style="background-image: linear-gradient(180deg, rgba(2,6,23,0.05), rgba(2,6,23,0.48)), url({html.escape(image_uri)});"></div>'
+    area = html.escape(str(hotel.get("area") or "Tokyo stay"))
+    return f'<div class="hotel-hero-placeholder"><span>{area}</span></div>'
+
+
+def _review_summary(hotel):
+    texts = [str(item).lower() for item in hotel.get("review_texts") or [] if item]
+    joined = " ".join(texts)
+    positive_checks = [
+        (("location", "station", "walk", "near", "convenient"), "Convenient location and easy access"),
+        (("clean", "cleanliness", "spotless"), "Clean, well-kept rooms"),
+        (("staff", "service", "helpful", "friendly"), "Helpful service"),
+        (("view", "skyline", "tower"), "Memorable views"),
+        (("breakfast", "restaurant", "food"), "Food and breakfast convenience"),
+        (("quiet", "calm", "peaceful"), "Quieter stay atmosphere"),
+    ]
+    negative_checks = [
+        (("small", "tiny", "compact"), "Compact rooms"),
+        (("noise", "noisy", "loud"), "Noise or busier surroundings"),
+        (("expensive", "price", "cost"), "Higher nightly cost"),
+        (("far", "transfer", "walk"), "Some transit or walking friction"),
+        (("dated", "old"), "Less polished room feel"),
+    ]
+
+    positives = [
+        label
+        for keywords, label in positive_checks
+        if any(keyword in joined for keyword in keywords)
+    ]
+    negatives = [
+        label
+        for keywords, label in negative_checks
+        if any(keyword in joined for keyword in keywords)
+    ]
+
+    if not positives:
+        identity = _hotel_identity_profile(hotel)
+        positives = list(identity.get("best_for") or [])[:2]
+    if not negatives:
+        negatives = [str(_hotel_identity_profile(hotel).get("tradeoff") or "Live room details still need verification.")]
+
+    return {
+        "positives": positives[:3],
+        "negatives": negatives[:2],
+        "review_count": _review_count_text(hotel),
+    }
+
+
+def _review_summary_html(hotel):
+    summary = _review_summary(hotel)
+    return "".join(
+        [
+            '<div class="hotel-review-box">',
+            '<div class="hotel-section-label">Review summary</div>',
+            '<div class="hotel-review-grid">',
+            '<div><div class="hotel-review-heading">Most mentioned positives</div>',
+            f'<ul class="hotel-list">{_escape_list(summary["positives"])}</ul></div>',
+            '<div><div class="hotel-review-heading">Most mentioned negatives</div>',
+            f'<ul class="hotel-list">{_escape_list(summary["negatives"])}</ul></div>',
+            "</div>",
+            f'<div class="hotel-review-count">Review count: {html.escape(summary["review_count"])}</div>',
+            "</div>",
+        ]
+    )
+
+
 def _render_preferences():
     with st.container(border=True):
         st.markdown(
@@ -1889,17 +2082,19 @@ def _render_preferences():
     return selected or DEFAULT_HOTEL_PREFERENCES
 
 
-def _render_neighborhood_card(recommendation, preferences, scored_neighborhood, alternative_neighborhoods):
+def _render_neighborhood_card(recommendation, preferences, scored_neighborhood, alternative_neighborhoods, selected_neighborhood_name, kicker="Recommended neighborhood"):
     neighborhood = recommendation["neighborhood"]
     best_for = scored_neighborhood.get("best_for") or neighborhood.get("best_for") or "This trip"
     pick_bullets = _escape_list(_neighborhood_pick_bullets(scored_neighborhood, alternative_neighborhoods, preferences))
+    selected_class = " selected" if scored_neighborhood["name"] == selected_neighborhood_name else ""
+    selected_label = '<span class="hotel-selected-label">Selected</span>' if selected_class else ""
     st.markdown(
         f"""
-        <div class="hotel-card recommended">
+        <div class="hotel-card recommended{selected_class}">
             <div class="hotel-card-top">
                 <div>
-                    <div class="hotel-kicker">Recommended neighborhood</div>
-                    <div class="hotel-name">{html.escape(neighborhood["name"])}</div>
+                    <div class="hotel-kicker">{html.escape(kicker)}</div>
+                    <div class="hotel-name">{html.escape(neighborhood["name"])}{selected_label}</div>
                     <div class="neighborhood-best-for"><strong>Best for:</strong> {html.escape(best_for)}</div>
                     <div class="hotel-area">{html.escape(_neighborhood_recommendation_line(scored_neighborhood))}</div>
                 </div>
@@ -1922,20 +2117,29 @@ def _render_neighborhood_card(recommendation, preferences, scored_neighborhood, 
     )
 
 
-def _render_neighborhood_alt_card(neighborhood):
+def _render_neighborhood_alt_card(neighborhood, selected_neighborhood_name):
+    selected_class = " selected" if neighborhood["name"] == selected_neighborhood_name else ""
+    selected_label = '<span class="hotel-selected-label">Selected</span>' if selected_class else ""
+    good_fit = list(neighborhood.get("good_fit") or [])[:2]
+    tradeoff = str(neighborhood.get("tradeoff") or "")
+    why_html = _escape_list(good_fit) if good_fit else ""
+    tradeoff_html = _escape_list([tradeoff]) if tradeoff else ""
     st.markdown(
         f"""
-        <div class="hotel-card alt">
+        <div class="hotel-card alt{selected_class}">
             <div class="hotel-card-top">
                 <div>
                     <div class="hotel-kicker">Alternative neighborhood</div>
-                    <div class="hotel-name">{html.escape(neighborhood["name"])}</div>
+                    <div class="hotel-name">{html.escape(neighborhood["name"])}{selected_label}</div>
                     <div class="neighborhood-best-for"><strong>Best for:</strong> {html.escape(neighborhood["best_for"])}</div>
-                    <div class="hotel-area">{html.escape(_neighborhood_recommendation_line(neighborhood))}</div>
                 </div>
                 {_score_badge(neighborhood["score"], "Match")}
             </div>
-            <div class="hotel-chip-row">{_chips(_neighborhood_tags(neighborhood), primary_first=True)}</div>
+            <div class="hotel-chip-row" style="margin-bottom:10px">{_chips(_neighborhood_tags(neighborhood), primary_first=True)}</div>
+            <div class="hotel-section-label">Why choose it</div>
+            <ul class="hotel-list">{why_html}</ul>
+            <div class="hotel-section-label" style="margin-top:8px">Tradeoff</div>
+            <ul class="hotel-list">{tradeoff_html}</ul>
         </div>
         """,
         unsafe_allow_html=True,
@@ -1943,10 +2147,15 @@ def _render_neighborhood_alt_card(neighborhood):
 
 
 def _render_hotel_card(hotel, recommended=False, recommended_hotel=None):
+    is_selected = hotel.get("_hotel_key") == _selected_hotel_key()
     card_class = "hotel-card recommended" if recommended else "hotel-card alt"
+    if is_selected:
+        card_class += " selected"
     advisor_badge = _hotel_advisor_badge(hotel, recommended=recommended)
     choose_sentence = _hotel_choose_sentence(hotel, recommended=recommended)
     card_summary = _hotel_card_summary(hotel, recommended=recommended)
+    selected_label = '<span class="hotel-selected-label">Selected hotel</span>' if is_selected else ""
+    review_html = _review_summary_html(hotel)
     identity_profile = _hotel_identity_profile(
         hotel,
         recommended_hotel=recommended_hotel,
@@ -1976,7 +2185,7 @@ def _render_hotel_card(hotel, recommended=False, recommended_hotel=None):
             "<div>",
             recommended_label,
             f'<div class="hotel-kicker">{html.escape(hotel["type"] if recommended else hotel["label"])}</div>',
-            f'<div class="hotel-name">{html.escape(hotel["name"])}</div>',
+            f'<div class="hotel-name">{html.escape(hotel["name"])}{selected_label}</div>',
             f'<div class="hotel-choice-line">{html.escape(choose_sentence)}</div>',
             f'<div class="hotel-advisor-badge">{html.escape(advisor_badge)}</div>',
             f'<div class="hotel-area">{html.escape(hotel["area"])}</div>',
@@ -1988,11 +2197,41 @@ def _render_hotel_card(hotel, recommended=False, recommended_hotel=None):
             f'<div class="hotel-copy">{html.escape(card_summary)}</div>',
             identity_html,
             pick_bullets,
+            review_html,
             f'<div class="hotel-chip-row">{_chips(hotel["tags"], primary_first=True)}</div>',
             "</div>",
         ]
     )
     st.markdown(card_html, unsafe_allow_html=True)
+
+
+def _render_hotel_win_section(recommended_hotel, alternative_hotels, preferences, recommended_neighborhood):
+    preference_text = _priority_phrase(preferences, limit=3, joiner=",")
+    neighborhood_name = recommended_neighborhood.get("name") or "the selected neighborhood"
+    win_bullets = [
+        f"Keeps the trip centered around the {neighborhood_name} area selected for this itinerary.",
+        "Makes it easier to combine dining, shopping, and sightseeing without extra transit time.",
+        f"Delivers the strongest overall fit across {preference_text}.",
+    ]
+    tradeoff = "Another hotel may be better for nightlife, luxury, or value depending on what you want to emphasize."
+    st.markdown(
+        f"""
+        <div class="hotel-win-card">
+            <div class="hotel-section-label">Why Byable Picked This Hotel</div>
+            <div class="hotel-win-grid">
+                <div>
+                    <div class="hotel-copy">Evaluated against multiple strong alternatives.</div>
+                    <ul class="hotel-win-list">{_escape_list(win_bullets[:3])}</ul>
+                </div>
+                <div>
+                    <div class="hotel-section-label">Tradeoff</div>
+                    <ul class="hotel-win-list">{_escape_list([tradeoff])}</ul>
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 def _render_score_modal(hotel):
@@ -2124,11 +2363,25 @@ def render():
     ranked_neighborhoods = _rank_neighborhoods(selected_preferences)
     recommended_neighborhood = ranked_neighborhoods[0]
     st.session_state["hotel_recommended_neighborhood_name"] = recommended_neighborhood["name"]
-    alternative_neighborhoods = _select_alternative_neighborhoods(ranked_neighborhoods, recommended_neighborhood)
-    recommendation = _recommendation_for_neighborhood(recommended_neighborhood)
+    available_neighborhood_names = {neighborhood["name"] for neighborhood in ranked_neighborhoods}
+    selected_neighborhood_name = st.session_state.get("selected_neighborhood_name")
+    if selected_neighborhood_name not in available_neighborhood_names:
+        selected_neighborhood_name = recommended_neighborhood["name"]
+        st.session_state["selected_neighborhood_name"] = selected_neighborhood_name
+    selected_neighborhood = next(
+        neighborhood
+        for neighborhood in ranked_neighborhoods
+        if neighborhood["name"] == selected_neighborhood_name
+    )
+    alternative_neighborhoods = [
+        neighborhood
+        for neighborhood in ranked_neighborhoods
+        if neighborhood["name"] != recommended_neighborhood["name"]
+    ]
+    recommendation = _recommendation_for_neighborhood(selected_neighborhood)
     google_hotels = search_hotels_with_google_places(
         destination_city,
-        neighborhood=recommended_neighborhood["name"],
+        neighborhood=selected_neighborhood["name"],
         limit=10,
     )
     live_hotel_data_used = bool(google_hotels)
@@ -2140,47 +2393,90 @@ def render():
             else "Google Places returned 0 hotels or request failed"
         )
         print(f"HOTELS FALLBACK USED: {fallback_reason}")
-    ranked_hotels = (
-        _rank_google_hotels(google_hotels, selected_preferences, recommended_neighborhood)
-        if live_hotel_data_used
-        else _rank_mock_hotels(selected_preferences)
-    )
+    if live_hotel_data_used:
+        ranked_hotels = _rank_google_hotels(google_hotels, selected_preferences, selected_neighborhood)
+    else:
+        ranked_hotels = _rank_mock_hotels(selected_preferences)
+        selected_mock_name = _recommendation_for_neighborhood(selected_neighborhood)["hotel"]["name"]
+        ranked_hotels = sorted(
+            ranked_hotels,
+            key=lambda hotel: (
+                hotel.get("name") != selected_mock_name,
+                -int(hotel.get("score") or 0),
+            ),
+        )
     recommended_hotel = ranked_hotels[0]
     alternative_hotels = _label_hotel_alternatives(ranked_hotels[1:4])
     recommended_hotel["why"] = _hotel_recommendation_copy(
         recommended_hotel,
         selected_preferences,
-        neighborhood=recommended_neighborhood["name"],
+        neighborhood=selected_neighborhood["name"],
     )
     recommended_hotel["pick_bullets"] = _hotel_pick_bullets(
         recommended_hotel,
-        recommended_neighborhood,
+        selected_neighborhood,
         selected_preferences,
     )
-    recommended_hotel["neighborhood_match_score"] = recommended_neighborhood["score"]
-    recommended_hotel["overall_stay_score"] = round(recommended_neighborhood["score"] * 0.60 + recommended_hotel["score"] * 0.40)
+    recommended_hotel["neighborhood_match_score"] = selected_neighborhood["score"]
+    recommended_hotel["overall_stay_score"] = round(selected_neighborhood["score"] * 0.60 + recommended_hotel["score"] * 0.40)
     all_hotels = _assign_hotel_identifiers([recommended_hotel, *alternative_hotels])
     for hotel in all_hotels:
         hotel["_selected_preferences"] = list(selected_preferences)
-        hotel["_recommended_neighborhood_name"] = recommended_neighborhood["name"]
+        hotel["_recommended_neighborhood_name"] = selected_neighborhood["name"]
+        hotel["_selected_neighborhood_name"] = selected_neighborhood["name"]
     recommended_hotel = all_hotels[0]
     alternative_hotels = all_hotels[1:]
     hotels_by_key = {hotel["_hotel_key"]: hotel for hotel in all_hotels}
+    current_selected_neighborhood = (st.session_state.get("selected_hotel") or {}).get("neighborhood")
+    if (
+        _selected_hotel_key() not in hotels_by_key
+        or current_selected_neighborhood != selected_neighborhood["name"]
+    ):
+        _set_selected_hotel(recommended_hotel, selected_neighborhood["name"])
     neighborhoods_by_name = {
         neighborhood["name"]: neighborhood
         for neighborhood in [recommended_neighborhood, *alternative_neighborhoods]
     }
 
-    _render_neighborhood_card(recommendation, selected_preferences, recommended_neighborhood, alternative_neighborhoods)
+    neighborhood_kicker = (
+        "Recommended neighborhood"
+        if selected_neighborhood_name == recommended_neighborhood["name"]
+        else "Selected neighborhood"
+    )
+    _render_neighborhood_card(
+        recommendation,
+        selected_preferences,
+        selected_neighborhood,
+        alternative_neighborhoods,
+        selected_neighborhood_name,
+        kicker=neighborhood_kicker,
+    )
+    select_cols = st.columns([1, 0.24])
+    with select_cols[1]:
+        if st.button(
+            "Selected" if selected_neighborhood_name == recommended_neighborhood["name"] else "Select neighborhood",
+            key=f"select_neighborhood_{recommended_neighborhood['name']}",
+            disabled=selected_neighborhood_name == recommended_neighborhood["name"],
+        ):
+            st.session_state["selected_neighborhood_name"] = recommended_neighborhood["name"]
+            st.rerun()
 
     st.markdown(
-        '<div class="hotel-kicker" style="margin-top:18px">Alternative neighborhoods</div>',
+        '<div class="hotel-kicker" style="margin-top:18px">Neighborhood options</div>',
         unsafe_allow_html=True,
     )
     for neighborhood in alternative_neighborhoods:
-        _render_neighborhood_alt_card(neighborhood)
-        action_cols = st.columns([1, 0.18])
+        _render_neighborhood_alt_card(neighborhood, selected_neighborhood_name)
+        action_cols = st.columns([1, 0.18, 0.18])
         with action_cols[1]:
+            if st.button(
+                "Selected" if selected_neighborhood_name == neighborhood["name"] else "Select",
+                key=f"select_neighborhood_{neighborhood['name']}",
+                disabled=selected_neighborhood_name == neighborhood["name"],
+            ):
+                st.session_state["selected_neighborhood_name"] = neighborhood["name"]
+                st.rerun()
+        with action_cols[2]:
             if st.button("Why not?", key=f"neighborhood_why_not_{neighborhood['name']}"):
                 st.session_state["neighborhood_why_not_modal_open"] = neighborhood["name"]
                 track_event(
@@ -2203,8 +2499,25 @@ def render():
         recommended=True,
         recommended_hotel=recommended_hotel,
     )
-    action_cols = st.columns([1, 0.24])
+    action_cols = st.columns([1, 0.20, 0.20])
     with action_cols[1]:
+        if st.button(
+            "Selected Hotel" if recommended_hotel["_hotel_key"] == _selected_hotel_key() else "Select Hotel",
+            key=f"select_hotel_{recommended_hotel['_hotel_key']}",
+            disabled=recommended_hotel["_hotel_key"] == _selected_hotel_key(),
+        ):
+            _set_selected_hotel(recommended_hotel, selected_neighborhood["name"])
+            track_event(
+                "hotel_selected",
+                {
+                    "hotel": recommended_hotel["name"],
+                    "neighborhood": selected_neighborhood["name"],
+                    "recommended": True,
+                    "source": recommended_hotel.get("source") or "mock",
+                },
+            )
+            st.rerun()
+    with action_cols[2]:
         if st.button("Stay Score", key=f"hotel_stay_score_{recommended_hotel['_hotel_key']}"):
             _set_hotel_active_modal("stay_score", recommended_hotel["_hotel_key"])
             track_event(
@@ -2218,14 +2531,38 @@ def render():
             )
             st.rerun()
 
+    _render_hotel_win_section(
+        recommended_hotel,
+        alternative_hotels,
+        selected_preferences,
+        selected_neighborhood,
+    )
+
     st.markdown(
         '<div class="hotel-kicker" style="margin-top:18px">Alternative hotels</div>',
         unsafe_allow_html=True,
     )
     for hotel in alternative_hotels:
         _render_hotel_card(hotel, recommended_hotel=recommended_hotel)
-        action_cols = st.columns([1, 0.18, 0.18])
+        action_cols = st.columns([1, 0.18, 0.18, 0.18])
         with action_cols[1]:
+            if st.button(
+                "Selected" if hotel["_hotel_key"] == _selected_hotel_key() else "Select Hotel",
+                key=f"select_hotel_{hotel['_hotel_key']}",
+                disabled=hotel["_hotel_key"] == _selected_hotel_key(),
+            ):
+                _set_selected_hotel(hotel, selected_neighborhood["name"])
+                track_event(
+                    "hotel_selected",
+                    {
+                        "hotel": hotel["name"],
+                        "neighborhood": selected_neighborhood["name"],
+                        "recommended": False,
+                        "source": hotel.get("source") or "mock",
+                    },
+                )
+                st.rerun()
+        with action_cols[2]:
             if st.button("Stay Score", key=f"hotel_stay_score_{hotel['_hotel_key']}"):
                 _set_hotel_active_modal("stay_score", hotel["_hotel_key"])
                 track_event(
@@ -2238,7 +2575,7 @@ def render():
                     },
                 )
                 st.rerun()
-        with action_cols[2]:
+        with action_cols[3]:
             if st.button("Why not?", key=f"hotel_why_not_{hotel['_hotel_key']}"):
                 _set_hotel_active_modal("why_not", hotel["_hotel_key"])
                 st.rerun()

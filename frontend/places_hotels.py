@@ -1,4 +1,5 @@
 import os
+import base64
 from pathlib import Path
 
 import certifi
@@ -15,6 +16,8 @@ GOOGLE_PLACES_FIELD_MASK = ",".join(
         "places.userRatingCount",
         "places.location",
         "places.priceLevel",
+        "places.photos",
+        "places.reviews.text",
     ]
 )
 
@@ -34,6 +37,14 @@ def google_places_key_configured():
 def _normalize_place(place):
     display_name = place.get("displayName") or {}
     location = place.get("location") or {}
+    photos = place.get("photos") or []
+    reviews = place.get("reviews") or []
+    review_texts = []
+    for review in reviews[:5]:
+        text = review.get("text") or {}
+        review_text = str(text.get("text") or "").strip()
+        if review_text:
+            review_texts.append(review_text)
     return {
         "name": str(display_name.get("text") or "").strip(),
         "address": str(place.get("formattedAddress") or "").strip(),
@@ -42,8 +53,36 @@ def _normalize_place(place):
         "lat": location.get("latitude"),
         "lng": location.get("longitude"),
         "price_level": place.get("priceLevel"),
+        "photo_name": str((photos[0] or {}).get("name") or "").strip() if photos else "",
+        "review_texts": review_texts,
         "source": "google_places",
     }
+
+
+@st.cache_data(ttl=60 * 60 * 6, show_spinner=False)
+def get_google_place_photo_data_uri(photo_name, max_width_px=900):
+    api_key = _google_places_api_key()
+    clean_photo_name = str(photo_name or "").strip()
+    if not api_key or not clean_photo_name:
+        return ""
+
+    url = f"https://places.googleapis.com/v1/{clean_photo_name}/media"
+    try:
+        response = requests.get(
+            url,
+            params={"key": api_key, "maxWidthPx": int(max_width_px or 900)},
+            timeout=8,
+            verify=certifi.where(),
+        )
+        response.raise_for_status()
+    except requests.RequestException:
+        return ""
+
+    content_type = response.headers.get("Content-Type", "image/jpeg")
+    if not str(content_type).startswith("image/"):
+        return ""
+    encoded = base64.b64encode(response.content).decode("ascii")
+    return f"data:{content_type};base64,{encoded}"
 
 
 @st.cache_data(ttl=60 * 60 * 6, show_spinner=False)
