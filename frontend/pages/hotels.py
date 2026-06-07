@@ -695,6 +695,7 @@ def _hotel_identity_profile(hotel, recommended_hotel=None, recommended=False):
     name = str(hotel.get("name") or "")
     name_key = name.lower()
     area = str(hotel.get("area") or "").lower()
+    label = str(hotel.get("label") or hotel.get("type") or "").lower()
     tags = {str(tag).lower() for tag in hotel.get("tags") or []}
     best_for = []
 
@@ -724,45 +725,45 @@ def _hotel_identity_profile(hotel, recommended_hotel=None, recommended=False):
         (
             "mitsui garden",
             [
-                "Polished city-hotel experience",
-                "Food and shopping access",
-                "First-time Tokyo convenience",
+                "Polished high-floor city hotel feel",
+                "Food and shopping access around Ginza",
+                "First-time Tokyo travelers who want an easy base",
             ],
             "Less nightlife energy than Shinjuku/Shibuya.",
         ),
         (
             "jr kyushu",
             [
-                "Station access",
+                "Short-hop access to Shinjuku Station",
                 "Train-heavy sightseeing days",
-                "Efficient Shinjuku base",
+                "Travelers who want nightlife nearby but a hotel that stays practical",
             ],
             "Busier surroundings than calmer hotel areas.",
         ),
         (
             "nohga",
             [
-                "Better value",
-                "Culture-focused Tokyo days",
-                "Local neighborhood feel",
+                "Museums, parks, and older Tokyo streets",
+                "Better hotel value than Ginza or Toranomon",
+                "Travelers who prefer a quieter local feel",
             ],
             "Less polished and less central for shopping-heavy trips.",
         ),
         (
             "edition",
             [
-                "Luxury stay experience",
-                "Design-forward rooms",
-                "Premium dining access",
+                "Luxury hotel atmosphere",
+                "Design-forward stay experience",
+                "Premium dining and quieter evenings",
             ],
             "Higher price profile than most other options.",
         ),
         (
             "celestine",
             [
-                "Calmer evenings",
-                "Comfort-focused stay",
-                "Haneda-side routing",
+                "Calmer evenings away from the busiest districts",
+                "Travelers prioritizing hotel atmosphere",
+                "Haneda-side routing and slower mornings",
             ],
             "Less useful for nightlife and dense shopping days.",
         ),
@@ -787,19 +788,26 @@ def _hotel_identity_profile(hotel, recommended_hotel=None, recommended=False):
         add_best("Calmer hotel surroundings")
         add_best("Family-friendly pacing")
     if {"lower price", "moderate price", "value"} & tags:
-        add_best("Value-conscious stay")
+        add_best("Travelers trying to keep nightly cost controlled")
     if "premium price" in tags or "higher price" in tags:
-        add_best("Premium stay profile")
+        add_best("Travelers who want the hotel to feel like part of the trip")
 
     rating = _hotel_numeric_value(hotel, "rating")
     review_count = _hotel_numeric_value(hotel, "review_count")
-    if rating and rating >= 4.4:
-        add_best("Strong public review signal")
-    if review_count and review_count >= 1000:
-        add_best("Well-reviewed mainstream choice")
+    if "luxury" in label:
+        add_best("Travelers prioritizing amenities and atmosphere")
+    elif "value" in label:
+        add_best("Travelers who want a practical stay without overpaying")
+    elif "location" in label:
+        add_best("Travelers who want to minimize transit friction")
+    elif rating and rating >= 4.4:
+        add_best("Travelers who rely heavily on guest review confidence")
+    elif review_count and review_count >= 1000:
+        add_best("Travelers who prefer a widely reviewed hotel")
     if not best_for:
-        add_best("Simple hotel base for this Tokyo trip")
-        add_best("Public Google Places visibility")
+        area_label = str(hotel.get("area") or "Tokyo").split("·")[0].strip() or "Tokyo"
+        add_best(f"Travelers looking specifically around {area_label}")
+        add_best("People who want a hotel with public Google review visibility")
 
     tradeoff = "Live rate and room details still need verification before booking."
     if recommended_hotel and not recommended:
@@ -821,12 +829,53 @@ def _hotel_identity_profile(hotel, recommended_hotel=None, recommended=False):
 
 
 def _label_hotel_alternatives(alternatives):
-    labels = ["Luxury alternative", "Best value alternative", "Best location alternative"]
+    candidates = [dict(hotel) for hotel in alternatives[:3]]
+    label_rules = [
+        (
+            "Luxury alternative",
+            lambda hotel: (
+                (_hotel_factor_score(hotel, "Room Quality") or 0) * 1.2
+                + (_hotel_numeric_value(hotel, "price_level") or 0) * 0.6
+            ),
+        ),
+        (
+            "Best value alternative",
+            lambda hotel: (
+                (_hotel_factor_score(hotel, "Value") or 0) * 1.4
+                + (0.4 if (_hotel_numeric_value(hotel, "price_level") or 0) <= 2 else 0)
+            ),
+        ),
+        (
+            "Best location alternative",
+            lambda hotel: (
+                (_hotel_factor_score(hotel, "Location Match") or 0)
+                + (_hotel_factor_score(hotel, "Transit Access") or 0)
+            ),
+        ),
+    ]
     output = []
-    for label, hotel in zip(labels, alternatives):
+    used_ids = set()
+    for label, scorer in label_rules:
+        remaining = [
+            (index, hotel)
+            for index, hotel in enumerate(candidates)
+            if index not in used_ids
+        ]
+        if not remaining:
+            break
+        selected_index, selected_hotel = max(remaining, key=lambda item: scorer(item[1]))
+        used_ids.add(selected_index)
+        hotel = dict(selected_hotel)
         item = dict(hotel)
         item["label"] = label
         item["type"] = label
+        output.append(item)
+    for index, hotel in enumerate(candidates):
+        if index in used_ids:
+            continue
+        item = dict(hotel)
+        item["label"] = "Alternative hotel"
+        item["type"] = "Alternative hotel"
         output.append(item)
     return output
 
@@ -973,87 +1022,102 @@ def _comparison_row_by_label(rows, label):
 
 
 def _hotel_why_not_lists(hotel, recommended_hotel):
-    rows = _hotel_comparison_rows(hotel, recommended_hotel)
-    advantages = []
+    name_key = str(hotel.get("name") or "").lower()
+    area = str(hotel.get("area") or "").lower()
+    label = str(hotel.get("label") or hotel.get("type") or "").lower()
+    identity = _hotel_identity_profile(hotel, recommended_hotel=recommended_hotel)
+    advantages = list(identity.get("best_for") or [])[:3]
     drawbacks = []
-    if float(hotel.get("price") or 0) and float(recommended_hotel.get("price") or 0):
-        price_delta = float(hotel["price"]) - float(recommended_hotel["price"])
-        if price_delta < -20:
-            advantages.append(f"{_money(abs(price_delta))} cheaper per night than the recommended hotel.")
-        elif price_delta > 20:
-            drawbacks.append(f"{_money(price_delta)} more per night than the recommended hotel.")
 
-    for row in rows:
-        delta = float(row["delta"])
-        threshold = float(row["meaningful_delta"])
-        selected_text = row["value"](row["selected"])
-        recommended_text = row["value"](row["recommended"])
-        if delta >= threshold:
-            advantages.append(f"Stronger {row['label'].lower()}: {selected_text} vs {recommended_text}.")
-        elif delta <= -threshold:
-            drawbacks.append(f"Lower {row['label'].lower()}: {selected_text} vs {recommended_text}.")
-
-    if not advantages:
-        advantages.append("Still a credible option on the main Byable hotel factors.")
-    if not drawbacks:
-        drawbacks.append("Byable ranked the recommended hotel slightly higher on the combined stay factors.")
-
-    strongest_drawbacks = [
-        row
-        for row in rows
-        if float(row["delta"]) <= -float(row["meaningful_delta"])
-    ]
-    strongest_drawbacks.sort(key=lambda row: abs(float(row["delta"])), reverse=True)
-    strongest_advantages = [
-        row
-        for row in rows
-        if float(row["delta"]) >= float(row["meaningful_delta"])
-    ]
-    strongest_advantages.sort(key=lambda row: abs(float(row["delta"])), reverse=True)
-
-    stay_row = _comparison_row_by_label(rows, "Stay score")
-    rating_row = _comparison_row_by_label(rows, "Google rating")
-    review_row = _comparison_row_by_label(rows, "Review count")
-    trip_fit_row = _comparison_row_by_label(rows, "Trip Fit")
-    room_row = _comparison_row_by_label(rows, "Room quality score")
-    stay_delta = abs(float(stay_row["delta"])) if stay_row else None
-
-    if stay_delta is not None and stay_delta <= 1:
-        summary = (
-            f"{hotel['name']} is also a strong option. Byable ranked {recommended_hotel['name']} slightly higher "
-            "because its combined stay factors fit this trip a bit better."
-        )
-    elif (
-        (rating_row and float(rating_row["delta"]) >= float(rating_row["meaningful_delta"]))
-        or (review_row and float(review_row["delta"]) >= float(review_row["meaningful_delta"]))
-    ) and trip_fit_row and float(trip_fit_row["delta"]) < 0:
-        summary = (
-            f"{hotel['name']} has stronger public rating or review signals, but it ranked lower because "
-            f"its trip fit is {abs(float(trip_fit_row['delta'])):.1f} points lower for this trip."
-        )
-    elif strongest_drawbacks:
-        reason_parts = [_hotel_delta_phrase(row, lower=True) for row in strongest_drawbacks[:2]]
-        summary = f"{hotel['name']} was ranked lower because it scored {' and '.join(reason_parts)}"
-        if strongest_advantages:
-            summary += f", although it provides {_hotel_delta_phrase(strongest_advantages[0], lower=False)}."
-        else:
-            summary += "."
-    elif room_row and float(room_row["delta"]) > 0:
-        summary = (
-            f"{hotel['name']} has a stronger room quality signal, but {recommended_hotel['name']} ranked higher "
-            "on the combined neighborhood, value, and trip-fit model."
-        )
+    if "gracery" in name_key:
+        advantages = [
+            "To stay in the heart of Kabukicho nightlife",
+            "Easy access to restaurants and entertainment",
+            "The iconic Godzilla-themed location",
+        ]
+        drawbacks = [
+            "Busier and noisier surroundings",
+            "Less comfort-focused than the recommended pick",
+        ]
+        take = "Choose this if nightlife and being in the middle of the action matter more than a quieter hotel experience."
+    elif "the knot" in name_key:
+        advantages = [
+            "Modern design-forward hotel",
+            "Trendier social atmosphere",
+            "Popular with younger travelers",
+        ]
+        drawbacks = [
+            "Slightly weaker comfort and cleanliness signal",
+            "Less polished overall stay experience",
+        ]
+        take = "Choose this if style and atmosphere matter more than maximizing comfort."
+    elif "edition" in name_key or "luxury" in label or "toranomon" in area:
+        advantages = [
+            "A more premium hotel atmosphere",
+            "Design-forward stay experience",
+            "Quieter upscale evenings than Shinjuku",
+        ]
+        drawbacks = [
+            "Higher nightly-rate profile",
+            "Less useful if nightlife and fast rail movement matter most",
+        ]
+        take = "Choose this if the hotel experience itself matters more than value or late-night convenience."
+    elif "nohga" in name_key or "ueno" in area or "asakusa" in area or "value" in label:
+        advantages = [
+            "Museums, parks, and older Tokyo atmosphere",
+            "Usually better hotel value than Ginza or Toranomon",
+            "A quieter local-feeling base",
+        ]
+        drawbacks = [
+            "Less convenient for nightlife and shopping-heavy days",
+            "Less polished than a premium central hotel",
+        ]
+        take = "Choose this if culture and value matter more than shopping access or a polished first-trip base."
+    elif "jr kyushu" in name_key or "shinjuku" in area or "location" in label:
+        advantages = [
+            "Quick access to Shinjuku Station",
+            "Easy restaurants and late-night food nearby",
+            "Practical base for train-heavy sightseeing",
+        ]
+        drawbacks = [
+            "Busier station-area surroundings",
+            "Less calm than quieter hotel neighborhoods",
+        ]
+        take = "Choose this if transit access and being close to Shinjuku energy matter more than a calmer stay."
+    elif "celestine" in name_key or "shiba" in area or "tokyo bay" in area:
+        advantages = [
+            "Calmer evenings away from the busiest districts",
+            "A more hotel-focused atmosphere",
+            "Useful Haneda-side routing",
+        ]
+        drawbacks = [
+            "Less ideal for nightlife or shopping-heavy days",
+            "Farther from the densest west-side food and entertainment areas",
+        ]
+        take = "Choose this if slower mornings and a quieter base matter more than being near Tokyo's busiest districts."
     else:
-        summary = (
-            f"{hotel['name']} is also a strong option, but {recommended_hotel['name']} ranked higher "
-            "on the combined Byable stay score."
-        )
+        if not advantages:
+            advantages = [
+                "A straightforward Tokyo hotel base",
+                "A familiar option with public listing visibility",
+            ]
+        if "ginza" in area:
+            drawbacks.append("Less nightlife-focused than Shinjuku options")
+            take = "Choose this if food, shopping, and polished streets matter more than nightlife."
+        elif "shinjuku" in area:
+            drawbacks.append("Busier surroundings than calmer hotel districts")
+            take = "Choose this if you want action and convenience more than a quiet hotel atmosphere."
+        elif "ueno" in area or "asakusa" in area:
+            drawbacks.append("Less convenient for shopping-heavy or nightlife-focused days")
+            take = "Choose this if older Tokyo atmosphere and value matter most."
+        else:
+            drawbacks.append("Less distinctive for this trip than the recommended hotel")
+            take = "Choose this if its location or atmosphere fits your personal style better than the recommended pick."
 
     return {
-        "summary": summary,
-        "advantages": advantages[:2],
+        "summary": take,
+        "advantages": advantages[:3],
         "drawbacks": drawbacks[:2],
-        "rows": rows,
     }
 
 
@@ -1669,32 +1733,30 @@ def _render_why_not_modal(hotel, recommended_hotel):
     comparison = _hotel_why_not_lists(hotel, recommended_hotel)
 
     def _content():
-        st.markdown(f"#### Why not {hotel['name']}?")
-        st.caption(f"Overall: {int(hotel.get('score') or 0)} vs {int(recommended_hotel.get('score') or 0)}")
-
-        st.markdown("**Better at**")
-        for advantage in comparison["advantages"][:2]:
+        st.markdown("**Good if you want**")
+        for advantage in comparison["advantages"][:3]:
             st.markdown(f"✓ {advantage}")
 
-        st.markdown("**Worse at**")
+        st.markdown("**Tradeoffs**")
         for drawback in comparison["drawbacks"][:2]:
             st.markdown(f"• {drawback}")
 
         st.markdown("**Byable's take**")
-        st.caption(comparison["summary"])
+        st.markdown(comparison["summary"])
 
         if st.button("Close", key=f"close_hotel_why_not_{hotel.get('_hotel_key', 'active')}"):
             _clear_hotel_active_modal()
             st.rerun()
 
     if hasattr(st, "dialog"):
-        @st.dialog("Why this was not picked")
+        @st.dialog(f"Why not {hotel['name']}?")
         def _dialog():
             _content()
 
         _dialog()
     else:
         with st.container(border=True):
+            st.markdown(f"#### Why not {hotel['name']}?")
             _content()
 
 
