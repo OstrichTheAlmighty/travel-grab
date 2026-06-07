@@ -342,6 +342,22 @@ def _money(value):
     return f"${float(value):,.0f}"
 
 
+def _rating_text(hotel):
+    rating = hotel.get("rating")
+    try:
+        return f"{float(rating):.1f} ★" if rating else ""
+    except (TypeError, ValueError):
+        return ""
+
+
+def _review_count_text(hotel):
+    try:
+        count = int(hotel.get("review_count") or 0)
+    except (TypeError, ValueError):
+        count = 0
+    return f"{count:,} reviews" if count else "Reviews unavailable"
+
+
 def _escape_list(items):
     return "".join(f"<li>{html.escape(str(item))}</li>" for item in items)
 
@@ -478,7 +494,7 @@ def _price_level_label(price_level):
         "PRICE_LEVEL_EXPENSIVE": "Higher price",
         "PRICE_LEVEL_VERY_EXPENSIVE": "Premium price",
     }
-    return labels.get(str(price_level or ""), "Price level unavailable")
+    return labels.get(str(price_level or ""), "Price unavailable")
 
 
 def _price_level_value_score(price_level):
@@ -489,7 +505,7 @@ def _price_level_value_score(price_level):
         "PRICE_LEVEL_EXPENSIVE": 6.8,
         "PRICE_LEVEL_VERY_EXPENSIVE": 5.8,
     }
-    return scores.get(str(price_level or ""), 7.4)
+    return scores.get(str(price_level or ""), 7.7)
 
 
 def _review_count_bonus(review_count):
@@ -587,8 +603,10 @@ def _score_google_hotel(hotel, preferences, scored_neighborhood):
     tags = [
         f"{float(hotel.get('rating')):.1f} rating" if hotel.get("rating") else "Rating unavailable",
         f"{int(hotel.get('review_count') or 0):,} reviews" if hotel.get("review_count") else "Reviews unavailable",
-        _price_level_label(hotel.get("price_level")),
     ]
+    price_label = _price_level_label(hotel.get("price_level"))
+    if price_label != "Price unavailable":
+        tags.append(price_label)
     return {
         "name": hotel["name"],
         "area": hotel.get("address") or neighborhood_name,
@@ -622,13 +640,60 @@ def _rank_mock_hotels(preferences):
 
 def _hotel_recommendation_copy(hotel, preferences):
     scores = hotel.get("scores") or {}
-    top_factors = sorted(scores.items(), key=lambda item: item[1][0], reverse=True)[:2]
     preference_text = ", ".join((preferences or DEFAULT_HOTEL_PREFERENCES)[:3])
-    factor_text = " and ".join(factor for factor, _data in top_factors)
+    location = _hotel_factor_score(hotel, "Location Match")
+    room = _hotel_factor_score(hotel, "Room Quality")
+    trip_fit = _hotel_factor_score(hotel, "Trip Fit")
+    rating = _rating_text(hotel)
+    score_parts = []
+    if location is not None:
+        score_parts.append(f"{location:.1f}/10 location match")
+    if room is not None:
+        score_parts.append(f"{room:.1f}/10 room quality")
+    if trip_fit is not None:
+        score_parts.append(f"{trip_fit:.1f}/10 trip fit")
+    signal_text = ", ".join(score_parts[:3]) or "the strongest combined stay score"
+    rating_text = f" Google Places shows {rating} across {_review_count_text(hotel)}." if rating else ""
     return (
-        f"Byable recommends this stay because it best matches {preference_text} while scoring strongest on "
-        f"{factor_text.lower()}."
+        f"Byable recommends this stay because it best matches {preference_text} with {signal_text}."
+        f"{rating_text}"
     )
+
+
+def _hotel_pick_bullets(hotel, recommended_neighborhood, preferences):
+    scores = hotel.get("scores") or {}
+    neighborhood_name = recommended_neighborhood.get("name") or "the selected neighborhood"
+    preference_text = ", ".join((preferences or DEFAULT_HOTEL_PREFERENCES)[:3])
+    location_score = _hotel_factor_score(hotel, "Location Match")
+    room_score = _hotel_factor_score(hotel, "Room Quality")
+    trip_fit_score = _hotel_factor_score(hotel, "Trip Fit")
+    bullets = []
+
+    if location_score is not None:
+        bullets.append(
+            f"Fits the {neighborhood_name} stay strategy with a {location_score:.1f}/10 location match."
+        )
+    else:
+        bullets.append(f"Fits the selected {neighborhood_name} neighborhood strategy.")
+
+    rating = _rating_text(hotel)
+    reviews = _review_count_text(hotel)
+    if rating:
+        quality_part = f"Google Places shows {rating} across {reviews}"
+        if room_score is not None:
+            quality_part += f", supporting a {room_score:.1f}/10 room quality score"
+        bullets.append(f"{quality_part}.")
+    elif room_score is not None:
+        bullets.append(f"Room quality scores {room_score:.1f}/10 in the current Byable stay model.")
+
+    if trip_fit_score is not None:
+        bullets.append(
+            f"Trip fit is {trip_fit_score:.1f}/10 for your selected priorities: {preference_text}."
+        )
+    else:
+        bullets.append(f"Matches the selected trip priorities: {preference_text}.")
+
+    return bullets[:3]
 
 
 def _label_hotel_alternatives(alternatives):
@@ -642,31 +707,230 @@ def _label_hotel_alternatives(alternatives):
     return output
 
 
+def _normalize_key_fragment(value):
+    raw = str(value or "").strip().lower()
+    output = []
+    previous_dash = False
+    for char in raw:
+        if char.isalnum():
+            output.append(char)
+            previous_dash = False
+        elif not previous_dash:
+            output.append("-")
+            previous_dash = True
+    return "".join(output).strip("-")[:72]
+
+
+def _stable_hotel_identifier(hotel, index):
+    google_id = hotel.get("google_place_id") or hotel.get("place_id") or hotel.get("id")
+    if google_id:
+        key_base = f"google-{google_id}"
+    else:
+        key_base = f"{hotel.get('name') or 'hotel'}-{index}"
+    return _normalize_key_fragment(key_base) or f"hotel-{index}"
+
+
+def _assign_hotel_identifiers(hotels):
+    for index, hotel in enumerate(hotels):
+        hotel["_hotel_key"] = _stable_hotel_identifier(hotel, index)
+    return hotels
+
+
+def _set_hotel_active_modal(modal_type, hotel_key):
+    st.session_state["hotel_active_modal"] = {
+        "type": modal_type,
+        "hotel_key": hotel_key,
+    }
+
+
+def _clear_hotel_active_modal():
+    st.session_state.pop("hotel_active_modal", None)
+
+
+def _hotel_factor_score(hotel, factor):
+    scores = hotel.get("scores") or {}
+    try:
+        return float(scores.get(factor, (0, ""))[0])
+    except (TypeError, ValueError, IndexError):
+        return None
+
+
+def _hotel_numeric_value(hotel, key):
+    try:
+        value = hotel.get(key)
+        if value is None or value == "":
+            return None
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _hotel_comparison_rows(hotel, recommended_hotel):
+    rows = []
+
+    def add_row(label, selected, recommended, value_format, meaningful_delta):
+        if selected is None or recommended is None:
+            return
+        delta = round(float(selected) - float(recommended), 1)
+        rows.append(
+            {
+                "label": label,
+                "selected": selected,
+                "recommended": recommended,
+                "delta": delta,
+                "value": value_format,
+                "meaningful_delta": meaningful_delta,
+            }
+        )
+
+    add_row(
+        "Google rating",
+        _hotel_numeric_value(hotel, "rating"),
+        _hotel_numeric_value(recommended_hotel, "rating"),
+        lambda value: f"{float(value):.1f}/5",
+        0.2,
+    )
+    add_row(
+        "Review count",
+        _hotel_numeric_value(hotel, "review_count"),
+        _hotel_numeric_value(recommended_hotel, "review_count"),
+        lambda value: f"{int(value):,}",
+        150,
+    )
+    add_row(
+        "Neighborhood score",
+        _hotel_factor_score(hotel, "Location Match"),
+        _hotel_factor_score(recommended_hotel, "Location Match"),
+        lambda value: f"{float(value):.1f}/10",
+        0.3,
+    )
+    add_row(
+        "Stay score",
+        _hotel_numeric_value(hotel, "score"),
+        _hotel_numeric_value(recommended_hotel, "score"),
+        lambda value: f"{int(round(float(value)))}",
+        3,
+    )
+    for label, factor in (
+        ("Room quality score", "Room Quality"),
+        ("Transit score", "Transit Access"),
+        ("Value score", "Value"),
+        ("Safety score", "Safety"),
+        ("Trip Fit", "Trip Fit"),
+    ):
+        add_row(
+            label,
+            _hotel_factor_score(hotel, factor),
+            _hotel_factor_score(recommended_hotel, factor),
+            lambda value: f"{float(value):.1f}/10",
+            0.3,
+        )
+    return rows
+
+
+def _hotel_delta_phrase(row, lower=True):
+    delta = abs(float(row["delta"]))
+    label = row["label"].lower()
+    if row["label"] == "Stay score":
+        amount = f"{int(round(delta))} points"
+    elif row["label"] == "Review count":
+        amount = f"{int(round(delta)):,} reviews"
+    else:
+        amount = f"{delta:.1f} points"
+    direction = "lower" if lower else "higher"
+    return f"{amount} {direction} on {label}"
+
+
+def _comparison_row_by_label(rows, label):
+    for row in rows:
+        if row["label"] == label:
+            return row
+    return None
+
+
 def _hotel_why_not_lists(hotel, recommended_hotel):
+    rows = _hotel_comparison_rows(hotel, recommended_hotel)
     advantages = []
     drawbacks = []
-    hotel_scores = hotel.get("scores") or {}
-    rec_scores = recommended_hotel.get("scores") or {}
     if float(hotel.get("price") or 0) and float(recommended_hotel.get("price") or 0):
         price_delta = float(hotel["price"]) - float(recommended_hotel["price"])
         if price_delta < -20:
             advantages.append(f"{_money(abs(price_delta))} cheaper per night than the recommended hotel.")
         elif price_delta > 20:
             drawbacks.append(f"{_money(price_delta)} more per night than the recommended hotel.")
-    for factor in ("Location Match", "Transit Access", "Value", "Room Quality", "Safety", "Trip Fit"):
-        hotel_score = float(hotel_scores.get(factor, (0, ""))[0])
-        rec_score = float(rec_scores.get(factor, (0, ""))[0])
-        delta = round(hotel_score - rec_score, 1)
-        if delta >= 0.5:
-            advantages.append(f"Higher {factor}: {hotel_score:.1f} vs {rec_score:.1f}.")
-        elif delta <= -0.5:
-            drawbacks.append(f"Lower {factor}: {hotel_score:.1f} vs {rec_score:.1f}.")
+
+    for row in rows:
+        delta = float(row["delta"])
+        threshold = float(row["meaningful_delta"])
+        selected_text = row["value"](row["selected"])
+        recommended_text = row["value"](row["recommended"])
+        if delta >= threshold:
+            advantages.append(f"Stronger {row['label'].lower()}: {selected_text} vs {recommended_text}.")
+        elif delta <= -threshold:
+            drawbacks.append(f"Lower {row['label'].lower()}: {selected_text} vs {recommended_text}.")
+
     if not advantages:
         advantages.append("Still a credible option on the main Byable hotel factors.")
     if not drawbacks:
-        best_rec_factor = max(rec_scores.items(), key=lambda item: item[1][0])[0]
-        drawbacks.append(f"Byable ranked the recommended hotel higher because it has a stronger {best_rec_factor} profile.")
-    return {"advantages": advantages[:2], "drawbacks": drawbacks[:2]}
+        drawbacks.append("Byable ranked the recommended hotel slightly higher on the combined stay factors.")
+
+    strongest_drawbacks = [
+        row
+        for row in rows
+        if float(row["delta"]) <= -float(row["meaningful_delta"])
+    ]
+    strongest_drawbacks.sort(key=lambda row: abs(float(row["delta"])), reverse=True)
+    strongest_advantages = [
+        row
+        for row in rows
+        if float(row["delta"]) >= float(row["meaningful_delta"])
+    ]
+    strongest_advantages.sort(key=lambda row: abs(float(row["delta"])), reverse=True)
+
+    stay_row = _comparison_row_by_label(rows, "Stay score")
+    rating_row = _comparison_row_by_label(rows, "Google rating")
+    review_row = _comparison_row_by_label(rows, "Review count")
+    trip_fit_row = _comparison_row_by_label(rows, "Trip Fit")
+    room_row = _comparison_row_by_label(rows, "Room quality score")
+    stay_delta = abs(float(stay_row["delta"])) if stay_row else None
+
+    if stay_delta is not None and stay_delta <= 1:
+        summary = (
+            f"{hotel['name']} is also a strong option. Byable ranked {recommended_hotel['name']} slightly higher "
+            "because its combined stay factors fit this trip a bit better."
+        )
+    elif (
+        (rating_row and float(rating_row["delta"]) >= float(rating_row["meaningful_delta"]))
+        or (review_row and float(review_row["delta"]) >= float(review_row["meaningful_delta"]))
+    ) and trip_fit_row and float(trip_fit_row["delta"]) < 0:
+        summary = (
+            f"{hotel['name']} has stronger public rating or review signals, but it ranked lower because "
+            f"its trip fit is {abs(float(trip_fit_row['delta'])):.1f} points lower for this trip."
+        )
+    elif strongest_drawbacks:
+        reason_parts = [_hotel_delta_phrase(row, lower=True) for row in strongest_drawbacks[:2]]
+        summary = f"{hotel['name']} was ranked lower because it scored {' and '.join(reason_parts)}"
+        if strongest_advantages:
+            summary += f", although it provides {_hotel_delta_phrase(strongest_advantages[0], lower=False)}."
+        else:
+            summary += "."
+    elif room_row and float(room_row["delta"]) > 0:
+        summary = (
+            f"{hotel['name']} has a stronger room quality signal, but {recommended_hotel['name']} ranked higher "
+            "on the combined neighborhood, value, and trip-fit model."
+        )
+    else:
+        summary = (
+            f"{hotel['name']} is also a strong option, but {recommended_hotel['name']} ranked higher "
+            "on the combined Byable stay score."
+        )
+
+    return {
+        "summary": summary,
+        "advantages": advantages[:2],
+        "drawbacks": drawbacks[:2],
+        "rows": rows,
+    }
 
 
 def _score_neighborhood(profile, preferences):
@@ -853,6 +1117,33 @@ def _inject_hotel_styles():
             font-size: 11px;
             text-align: right;
         }
+        .hotel-rating-signal {
+            color: #fff;
+            font-size: 25px;
+            font-weight: 950;
+            letter-spacing: -0.5px;
+            text-align: right;
+        }
+        .hotel-review-signal {
+            color: rgba(255,255,255,0.48);
+            font-size: 11px;
+            font-weight: 750;
+            text-align: right;
+            margin-bottom: 6px;
+        }
+        .hotel-price-chip {
+            display: inline-flex;
+            justify-content: center;
+            white-space: nowrap;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.10);
+            background: rgba(255,255,255,0.045);
+            color: rgba(255,255,255,0.62);
+            padding: 4px 8px;
+            font-size: 10px;
+            font-weight: 850;
+            margin-bottom: 7px;
+        }
         .hotel-copy {
             color: rgba(255,255,255,0.72);
             font-size: 13px;
@@ -978,7 +1269,9 @@ def _inject_hotel_styles():
                 flex-direction: column;
             }
             .hotel-price,
-            .hotel-price-sub {
+            .hotel-price-sub,
+            .hotel-rating-signal,
+            .hotel-review-signal {
                 text-align: left;
             }
         }
@@ -998,6 +1291,36 @@ def _chips(tags, primary_first=False):
         css = "hotel-chip primary" if primary_first and index == 0 else "hotel-chip"
         output.append(f'<span class="{css}">{html.escape(str(tag))}</span>')
     return "".join(output)
+
+
+def _hotel_card_signal_html(hotel):
+    if hotel.get("price") is not None:
+        price_sub = hotel.get("price_subtitle") or "estimated nightly rate"
+        return "".join(
+            [
+                f'<div class="hotel-price">{_money(hotel["price"])}</div>',
+                f'<div class="hotel-price-sub">{html.escape(price_sub)}</div>',
+                _score_badge(hotel["score"]),
+            ]
+        )
+
+    rating = _rating_text(hotel)
+    if rating:
+        return "".join(
+            [
+                f'<div class="hotel-rating-signal">{html.escape(rating)}</div>',
+                f'<div class="hotel-review-signal">{html.escape(_review_count_text(hotel))}</div>',
+                '<div class="hotel-price-chip">Price unavailable</div>',
+                _score_badge(hotel["score"]),
+            ]
+        )
+
+    return "".join(
+        [
+            '<div class="hotel-price-chip">Price unavailable</div>',
+            _score_badge(hotel["score"]),
+        ]
+    )
 
 
 def _render_preferences():
@@ -1073,7 +1396,6 @@ def _render_neighborhood_alt_card(neighborhood):
 
 def _render_hotel_card(hotel, recommended=False):
     card_class = "hotel-card recommended" if recommended else "hotel-card alt"
-    price_sub = hotel.get("price_subtitle") or "estimated nightly rate"
     stay_score_html = ""
     if recommended and hotel.get("overall_stay_score") is not None:
         stay_score_html = "".join(
@@ -1086,6 +1408,14 @@ def _render_hotel_card(hotel, recommended=False):
             ]
         )
     recommended_label = '<div class="hotel-recommended-label">Recommended by Byable</div>' if recommended else ""
+    pick_bullets = ""
+    if recommended and hotel.get("pick_bullets"):
+        pick_bullets = "".join(
+            [
+                '<div class="hotel-section-label">Why Byable picked this hotel</div>',
+                f'<ul class="hotel-list">{_escape_list(hotel["pick_bullets"][:3])}</ul>',
+            ]
+        )
     card_html = "".join(
         [
             f'<div class="{card_class}">',
@@ -1097,12 +1427,11 @@ def _render_hotel_card(hotel, recommended=False):
             f'<div class="hotel-area">{html.escape(hotel["area"])}</div>',
             "</div>",
             "<div>",
-            f'<div class="hotel-price">{_money(hotel["price"])}</div>',
-            f'<div class="hotel-price-sub">{html.escape(price_sub)}</div>',
-            _score_badge(hotel["score"]),
+            _hotel_card_signal_html(hotel),
             "</div>",
             "</div>",
             f'<div class="hotel-copy">{html.escape(hotel["why"])}</div>',
+            pick_bullets,
             stay_score_html,
             f'<div class="hotel-factor-strip"><span>Trip Fit</span><strong>{float(hotel.get("trip_fit") or 0):.1f}/10</strong></div>',
             f'<div class="hotel-chip-row">{_chips(hotel["tags"], primary_first=True)}</div>',
@@ -1124,8 +1453,8 @@ def _render_score_modal(hotel):
                 with row_cols[1]:
                     st.markdown(f"**{float(score):.1f}/10**")
                 st.caption(note)
-        if st.button("Close Stay Score", key="close_hotel_score"):
-            st.session_state.pop("hotel_score_modal_open", None)
+        if st.button("Close Stay Score", key=f"close_hotel_score_{hotel.get('_hotel_key', 'active')}"):
+            _clear_hotel_active_modal()
             st.rerun()
 
     if hasattr(st, "dialog"):
@@ -1145,14 +1474,41 @@ def _render_why_not_modal(hotel, recommended_hotel):
     def _content():
         st.markdown("#### Why this was not picked")
         st.caption(f"{hotel['name']} vs {recommended_hotel['name']}")
-        st.markdown("**Why it could be good:**")
+        st.markdown(comparison["summary"])
+
+        st.markdown("**Good fit for:**")
         for advantage in comparison["advantages"][:2]:
             st.markdown(f"✓ {advantage}")
-        st.markdown("**Why Byable ranked it lower:**")
+
+        st.markdown("**Ranked lower because:**")
         for drawback in comparison["drawbacks"][:2]:
             st.markdown(f"• {drawback}")
-        if st.button("Close", key="close_hotel_why_not"):
-            st.session_state.pop("hotel_why_not_modal_open", None)
+
+        st.markdown("**Score deltas vs recommended hotel**")
+        for row in comparison["rows"]:
+            delta = float(row["delta"])
+            if row["label"] == "Stay score":
+                delta_text = f"{delta:+.0f}"
+            elif row["label"] == "Review count":
+                delta_text = f"{delta:+,.0f}"
+            else:
+                delta_text = f"{delta:+.1f}"
+            with st.container(border=True):
+                row_cols = st.columns([0.40, 0.24, 0.24, 0.12])
+                with row_cols[0]:
+                    st.markdown(f"**{row['label']}**")
+                with row_cols[1]:
+                    st.caption("This hotel")
+                    st.markdown(f"**{row['value'](row['selected'])}**")
+                with row_cols[2]:
+                    st.caption("Recommended")
+                    st.markdown(f"**{row['value'](row['recommended'])}**")
+                with row_cols[3]:
+                    st.caption("Delta")
+                    st.markdown(f"**{delta_text}**")
+
+        if st.button("Close", key=f"close_hotel_why_not_{hotel.get('_hotel_key', 'active')}"):
+            _clear_hotel_active_modal()
             st.rerun()
 
     if hasattr(st, "dialog"):
@@ -1251,9 +1607,17 @@ def render():
     recommended_hotel = ranked_hotels[0]
     alternative_hotels = _label_hotel_alternatives(ranked_hotels[1:4])
     recommended_hotel["why"] = _hotel_recommendation_copy(recommended_hotel, selected_preferences)
+    recommended_hotel["pick_bullets"] = _hotel_pick_bullets(
+        recommended_hotel,
+        recommended_neighborhood,
+        selected_preferences,
+    )
     recommended_hotel["neighborhood_match_score"] = recommended_neighborhood["score"]
     recommended_hotel["overall_stay_score"] = round(recommended_neighborhood["score"] * 0.60 + recommended_hotel["score"] * 0.40)
-    hotels_by_name = {hotel["name"]: hotel for hotel in [recommended_hotel, *alternative_hotels]}
+    all_hotels = _assign_hotel_identifiers([recommended_hotel, *alternative_hotels])
+    recommended_hotel = all_hotels[0]
+    alternative_hotels = all_hotels[1:]
+    hotels_by_key = {hotel["_hotel_key"]: hotel for hotel in all_hotels}
     neighborhoods_by_name = {
         neighborhood["name"]: neighborhood
         for neighborhood in [recommended_neighborhood, *alternative_neighborhoods]
@@ -1289,8 +1653,8 @@ def render():
     _render_hotel_card(recommended_hotel, recommended=True)
     action_cols = st.columns([1, 0.24])
     with action_cols[1]:
-        if st.button("Stay Score", key="recommended_hotel_score"):
-            st.session_state["hotel_score_modal_open"] = recommended_hotel["name"]
+        if st.button("Stay Score", key=f"hotel_stay_score_{recommended_hotel['_hotel_key']}"):
+            _set_hotel_active_modal("stay_score", recommended_hotel["_hotel_key"])
             track_event(
                 "hotel_ai_score_clicked",
                 {
@@ -1310,8 +1674,8 @@ def render():
         _render_hotel_card(hotel)
         action_cols = st.columns([1, 0.18, 0.18])
         with action_cols[1]:
-            if st.button("Stay Score", key=f"hotel_score_{hotel['name']}"):
-                st.session_state["hotel_score_modal_open"] = hotel["name"]
+            if st.button("Stay Score", key=f"hotel_stay_score_{hotel['_hotel_key']}"):
+                _set_hotel_active_modal("stay_score", hotel["_hotel_key"])
                 track_event(
                     "hotel_ai_score_clicked",
                     {
@@ -1323,17 +1687,18 @@ def render():
                 )
                 st.rerun()
         with action_cols[2]:
-            if st.button("Why not?", key=f"hotel_why_not_{hotel['name']}"):
-                st.session_state["hotel_why_not_modal_open"] = hotel["name"]
+            if st.button("Why not?", key=f"hotel_why_not_{hotel['_hotel_key']}"):
+                _set_hotel_active_modal("why_not", hotel["_hotel_key"])
                 st.rerun()
 
-    score_hotel_name = st.session_state.get("hotel_score_modal_open")
-    if score_hotel_name and score_hotel_name in hotels_by_name:
-        _render_score_modal(hotels_by_name[score_hotel_name])
-
-    why_not_hotel_name = st.session_state.get("hotel_why_not_modal_open")
-    if why_not_hotel_name and why_not_hotel_name in hotels_by_name:
-        _render_why_not_modal(hotels_by_name[why_not_hotel_name], recommended_hotel)
+    active_modal = st.session_state.get("hotel_active_modal") or {}
+    active_modal_type = active_modal.get("type")
+    active_hotel_key = active_modal.get("hotel_key")
+    active_hotel = hotels_by_key.get(active_hotel_key)
+    if active_hotel and active_modal_type == "stay_score":
+        _render_score_modal(active_hotel)
+    elif active_hotel and active_modal_type == "why_not":
+        _render_why_not_modal(active_hotel, recommended_hotel)
 
     why_not_neighborhood_name = st.session_state.get("neighborhood_why_not_modal_open")
     if why_not_neighborhood_name and why_not_neighborhood_name in neighborhoods_by_name:
