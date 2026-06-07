@@ -1019,14 +1019,25 @@ def _selected_hotel_key():
 
 
 def _set_hotel_active_modal(modal_type, hotel_key):
-    st.session_state["hotel_active_modal"] = {
+    st.session_state.pop("neighborhood_why_not_modal_open", None)
+    st.session_state["hotels_active_modal"] = {
         "type": modal_type,
         "hotel_key": hotel_key,
     }
 
 
-def _clear_hotel_active_modal():
+def _set_neighborhood_active_modal(neighborhood_name):
     st.session_state.pop("hotel_active_modal", None)
+    st.session_state["hotels_active_modal"] = {
+        "type": "neighborhood_why_not",
+        "item": neighborhood_name,
+    }
+
+
+def _clear_hotel_active_modal():
+    st.session_state.pop("hotels_active_modal", None)
+    st.session_state.pop("hotel_active_modal", None)
+    st.session_state.pop("neighborhood_why_not_modal_open", None)
 
 
 def _hotel_factor_score(hotel, factor):
@@ -1913,6 +1924,77 @@ def _inject_hotel_styles():
                 text-align: left;
             }
         }
+        .nbh-breakdown {
+            margin-top: 7px;
+            text-align: right;
+        }
+        .nbh-breakdown > summary {
+            color: rgba(199,210,254,0.60);
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            cursor: pointer;
+            list-style: none;
+            outline: none;
+            user-select: none;
+        }
+        .nbh-breakdown > summary::-webkit-details-marker { display: none; }
+        .nbh-breakdown > summary::marker { display: none; }
+        .nbh-breakdown[open] > summary {
+            color: rgba(199,210,254,0.90);
+            margin-bottom: 8px;
+        }
+        .nbh-bd-grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 3px 10px;
+            font-size: 11px;
+            text-align: left;
+            margin-top: 6px;
+        }
+        .nbh-bd-label {
+            color: rgba(255,255,255,0.55);
+            font-weight: 700;
+        }
+        .nbh-bd-val {
+            color: #c7d2fe;
+            font-weight: 850;
+            text-align: right;
+            white-space: nowrap;
+        }
+        .nbh-bd-divider {
+            grid-column: 1 / -1;
+            border-top: 1px solid rgba(255,255,255,0.07);
+            margin: 3px 0;
+        }
+        .nbh-bd-total-label {
+            color: rgba(255,255,255,0.88);
+            font-size: 11px;
+            font-weight: 900;
+        }
+        .nbh-bd-total-val {
+            color: #c7d2fe;
+            font-size: 12px;
+            font-weight: 950;
+            text-align: right;
+        }
+        .nbh-bd-priorities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px 8px;
+            margin-top: 7px;
+            font-size: 10px;
+            text-align: left;
+        }
+        .nbh-bd-match {
+            color: rgba(110,231,183,0.88);
+            font-weight: 850;
+        }
+        .nbh-bd-miss {
+            color: rgba(255,255,255,0.30);
+            font-weight: 700;
+        }
         </style>
         """,
         unsafe_allow_html=True,
@@ -1921,6 +2003,46 @@ def _inject_hotel_styles():
 
 def _score_badge(score, label="Stay Score"):
     return f'<span class="hotel-score">{html.escape(label)}: {int(score)}</span>'
+
+
+def _neighborhood_score_breakdown_html(neighborhood, preferences):
+    selected = list(preferences or DEFAULT_HOTEL_PREFERENCES)
+    selected_set = set(selected)
+    tags = set(neighborhood.get("preference_tags") or [])
+    matches = sorted(selected_set & tags)
+    misses = sorted(selected_set - tags)
+    match_ratio = len(matches) / max(1, min(len(selected_set), 3))
+    preference_score = round(6.2 + match_ratio * 3.1, 1)
+
+    factors = [
+        ("Priority fit", preference_score),
+        ("Quality", round(float(neighborhood.get("base_score") or 8.0), 1)),
+        ("Transit", round(float(neighborhood.get("convenience") or 8.0), 1)),
+        ("Value", round(float(neighborhood.get("value") or 7.5), 1)),
+    ]
+    rows_html = "".join(
+        f'<div class="nbh-bd-label">{html.escape(label)}</div>'
+        f'<div class="nbh-bd-val">{value:.1f}</div>'
+        for label, value in factors
+    )
+    priority_html = "".join(
+        f'<span class="nbh-bd-match">✓ {html.escape(p)}</span>' for p in matches
+    ) + "".join(
+        f'<span class="nbh-bd-miss">– {html.escape(p)}</span>' for p in misses
+    )
+    priority_row = f'<div class="nbh-bd-priorities">{priority_html}</div>' if priority_html else ""
+    return (
+        f'<details class="nbh-breakdown">'
+        f'<summary>Score breakdown</summary>'
+        f'<div class="nbh-bd-grid">'
+        f'{rows_html}'
+        f'<div class="nbh-bd-divider"></div><div></div>'
+        f'<div class="nbh-bd-total-label">Overall match</div>'
+        f'<div class="nbh-bd-total-val">{int(neighborhood["score"])}</div>'
+        f'</div>'
+        f'{priority_row}'
+        f'</details>'
+    )
 
 
 def _chips(tags, primary_first=False):
@@ -2088,6 +2210,7 @@ def _render_neighborhood_card(recommendation, preferences, scored_neighborhood, 
     pick_bullets = _escape_list(_neighborhood_pick_bullets(scored_neighborhood, alternative_neighborhoods, preferences))
     selected_class = " selected" if scored_neighborhood["name"] == selected_neighborhood_name else ""
     selected_label = '<span class="hotel-selected-label">Selected</span>' if selected_class else ""
+    breakdown_html = _neighborhood_score_breakdown_html(scored_neighborhood, preferences)
     st.markdown(
         f"""
         <div class="hotel-card recommended{selected_class}">
@@ -2098,7 +2221,10 @@ def _render_neighborhood_card(recommendation, preferences, scored_neighborhood, 
                     <div class="neighborhood-best-for"><strong>Best for:</strong> {html.escape(best_for)}</div>
                     <div class="hotel-area">{html.escape(_neighborhood_recommendation_line(scored_neighborhood))}</div>
                 </div>
-                {_score_badge(scored_neighborhood["score"], "Match")}
+                <div>
+                    {_score_badge(scored_neighborhood["score"], "Match")}
+                    {breakdown_html}
+                </div>
             </div>
             <div class="hotel-copy">{html.escape(neighborhood["why"])}</div>
             <div class="hotel-chip-row">{_chips(_neighborhood_tags(scored_neighborhood), primary_first=True)}</div>
@@ -2117,13 +2243,14 @@ def _render_neighborhood_card(recommendation, preferences, scored_neighborhood, 
     )
 
 
-def _render_neighborhood_alt_card(neighborhood, selected_neighborhood_name):
+def _render_neighborhood_alt_card(neighborhood, selected_neighborhood_name, preferences=None):
     selected_class = " selected" if neighborhood["name"] == selected_neighborhood_name else ""
     selected_label = '<span class="hotel-selected-label">Selected</span>' if selected_class else ""
     good_fit = list(neighborhood.get("good_fit") or [])[:2]
     tradeoff = str(neighborhood.get("tradeoff") or "")
     why_html = _escape_list(good_fit) if good_fit else ""
     tradeoff_html = _escape_list([tradeoff]) if tradeoff else ""
+    breakdown_html = _neighborhood_score_breakdown_html(neighborhood, preferences or DEFAULT_HOTEL_PREFERENCES)
     st.markdown(
         f"""
         <div class="hotel-card alt{selected_class}">
@@ -2133,7 +2260,10 @@ def _render_neighborhood_alt_card(neighborhood, selected_neighborhood_name):
                     <div class="hotel-name">{html.escape(neighborhood["name"])}{selected_label}</div>
                     <div class="neighborhood-best-for"><strong>Best for:</strong> {html.escape(neighborhood["best_for"])}</div>
                 </div>
-                {_score_badge(neighborhood["score"], "Match")}
+                <div>
+                    {_score_badge(neighborhood["score"], "Match")}
+                    {breakdown_html}
+                </div>
             </div>
             <div class="hotel-chip-row" style="margin-bottom:10px">{_chips(_neighborhood_tags(neighborhood), primary_first=True)}</div>
             <div class="hotel-section-label">Why choose it</div>
@@ -2314,7 +2444,7 @@ def _render_neighborhood_why_not_modal(neighborhood, recommended_neighborhood):
         st.markdown("**Byable's take**")
         st.caption(comparison["take"])
         if st.button("Close", key="close_neighborhood_why_not"):
-            st.session_state.pop("neighborhood_why_not_modal_open", None)
+            _clear_hotel_active_modal()
             st.rerun()
 
     if hasattr(st, "dialog"):
@@ -2466,7 +2596,7 @@ def render():
         unsafe_allow_html=True,
     )
     for neighborhood in alternative_neighborhoods:
-        _render_neighborhood_alt_card(neighborhood, selected_neighborhood_name)
+        _render_neighborhood_alt_card(neighborhood, selected_neighborhood_name, preferences=selected_preferences)
         action_cols = st.columns([1, 0.18, 0.18])
         with action_cols[1]:
             if st.button(
@@ -2478,7 +2608,7 @@ def render():
                 st.rerun()
         with action_cols[2]:
             if st.button("Why not?", key=f"neighborhood_why_not_{neighborhood['name']}"):
-                st.session_state["neighborhood_why_not_modal_open"] = neighborhood["name"]
+                _set_neighborhood_active_modal(neighborhood["name"])
                 track_event(
                     "hotel_neighborhood_why_not_clicked",
                     {
@@ -2580,15 +2710,17 @@ def render():
                 _set_hotel_active_modal("why_not", hotel["_hotel_key"])
                 st.rerun()
 
-    active_modal = st.session_state.get("hotel_active_modal") or {}
+    active_modal = st.session_state.get("hotels_active_modal") or {}
     active_modal_type = active_modal.get("type")
-    active_hotel_key = active_modal.get("hotel_key")
-    active_hotel = hotels_by_key.get(active_hotel_key)
-    if active_hotel and active_modal_type == "stay_score":
-        _render_score_modal(active_hotel)
-    elif active_hotel and active_modal_type == "why_not":
-        _render_why_not_modal(active_hotel, recommended_hotel)
-
-    why_not_neighborhood_name = st.session_state.get("neighborhood_why_not_modal_open")
-    if why_not_neighborhood_name and why_not_neighborhood_name in neighborhoods_by_name:
-        _render_neighborhood_why_not_modal(neighborhoods_by_name[why_not_neighborhood_name], recommended_neighborhood)
+    if active_modal_type == "stay_score":
+        active_hotel = hotels_by_key.get(active_modal.get("hotel_key"))
+        if active_hotel:
+            _render_score_modal(active_hotel)
+    elif active_modal_type == "why_not":
+        active_hotel = hotels_by_key.get(active_modal.get("hotel_key"))
+        if active_hotel:
+            _render_why_not_modal(active_hotel, recommended_hotel)
+    elif active_modal_type == "neighborhood_why_not":
+        neighborhood_name = active_modal.get("item")
+        if neighborhood_name and neighborhood_name in neighborhoods_by_name:
+            _render_neighborhood_why_not_modal(neighborhoods_by_name[neighborhood_name], recommended_neighborhood)
