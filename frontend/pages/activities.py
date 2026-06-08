@@ -1,10 +1,66 @@
 import html as _html
+import os
+import base64
+
+import certifi
+import requests
 import streamlit as st
 
 from analytics import track_event, track_once
 
 
 CATEGORIES = ["All", "Food", "Nightlife", "Culture", "Adventure", "Nature", "Luxury", "Hidden gems", "Free"]
+GOOGLE_PLACES_TEXT_SEARCH_URL = "https://places.googleapis.com/v1/places:searchText"
+GOOGLE_PLACES_ACTIVITY_FIELD_MASK = ",".join(
+    [
+        "places.id",
+        "places.displayName",
+        "places.formattedAddress",
+        "places.rating",
+        "places.userRatingCount",
+        "places.location",
+        "places.priceLevel",
+        "places.types",
+        "places.currentOpeningHours.openNow",
+        "places.photos",
+    ]
+)
+GOOGLE_PLACE_DETAILS_FIELD_MASK = ",".join(
+    [
+        "id",
+        "displayName",
+        "formattedAddress",
+        "rating",
+        "userRatingCount",
+        "regularOpeningHours.weekdayDescriptions",
+        "currentOpeningHours.openNow",
+        "websiteUri",
+        "googleMapsUri",
+        "photos",
+        "editorialSummary",
+        "reviews",
+    ]
+)
+
+GOOGLE_ACTIVITY_SEARCHES = [
+    ("tourist attractions", "Culture", ["Popular", "Sightseeing", "Landmarks"]),
+    ("museums", "Culture", ["Museums", "History", "Indoor"]),
+    ("parks", "Nature", ["Parks", "Outdoors", "Scenic"]),
+    ("outdoor activities", "Adventure", ["Active", "Outdoors", "Explore"]),
+    ("viewpoints", "Adventure", ["Viewpoints", "Scenic", "Explore"]),
+    ("bike tours", "Adventure", ["Active", "Tours", "Outdoors"]),
+    ("shopping", "Shopping", ["Shopping", "Browse", "City walk"]),
+    ("nightlife", "Nightlife", ["After dark", "Bars", "Music"]),
+    ("restaurants", "Food", ["Dining", "Local flavor", "Restaurants"]),
+    ("landmarks", "Culture", ["Landmarks", "Architecture", "First visit"]),
+    ("free things to do", "Free", ["Free", "Walking", "Budget-friendly"]),
+    ("public squares viewpoints markets free museums", "Free", ["Free", "Public spaces", "Budget-friendly"]),
+    ("hidden gems local favorites less touristy", "Hidden gems", ["Local", "Less crowded", "Side streets"]),
+]
+
+GOOGLE_TO_BYABLE_CATEGORY = {
+    "Shopping": "Luxury",
+}
 
 
 def _destination_city():
@@ -15,6 +71,482 @@ def _destination_city():
     city = str(search_params.get("destination_city") or "Tokyo").strip()
     st.session_state["trip_destination"] = city or "Tokyo"
     return city or "Tokyo"
+
+
+def _google_places_api_key():
+    try:
+        secret_key = st.secrets.get("GOOGLE_PLACES_API_KEY", "")
+    except Exception:
+        secret_key = ""
+    return str(secret_key or os.environ.get("GOOGLE_PLACES_API_KEY", "") or "").strip()
+
+
+def _tripadvisor_api_key():
+    try:
+        secret_key = st.secrets.get("TRIPADVISOR_API_KEY", "")
+    except Exception:
+        secret_key = ""
+    return str(secret_key or os.environ.get("TRIPADVISOR_API_KEY", "") or "").strip()
+
+
+def _google_price_label(price_level):
+    value = str(price_level or "").strip()
+    labels = {
+        "PRICE_LEVEL_FREE": "Free",
+        "PRICE_LEVEL_INEXPENSIVE": "Budget",
+        "PRICE_LEVEL_MODERATE": "Moderate",
+        "PRICE_LEVEL_EXPENSIVE": "Pricey",
+        "PRICE_LEVEL_VERY_EXPENSIVE": "Splurge",
+    }
+    return labels.get(value, "Check locally")
+
+
+def _activity_duration_for_google(category, types):
+    type_text = " ".join(str(item).lower() for item in (types or []))
+    if category == "Food":
+        return "1 – 2 hrs"
+    if category == "Nightlife":
+        return "2 – 3 hrs"
+    if "museum" in type_text:
+        return "1.5 – 2.5 hrs"
+    if category == "Nature":
+        return "1 – 2 hrs"
+    return "1 – 2 hrs"
+
+
+def _google_activity_badge(category, price):
+    if price == "Free":
+        return "free"
+    if category == "Free":
+        return "free"
+    if category == "Nightlife":
+        return "night"
+    if category == "Nature":
+        return "gem"
+    if category == "Luxury":
+        return "splurge"
+    if category == "Culture":
+        return "first_day"
+    if category == "Food":
+        return "popular"
+    return "gem"
+
+
+def _infer_google_activity_category(search_label, types):
+    text = f"{search_label} {' '.join(str(item) for item in (types or []))}".lower()
+    checks = [
+        ("Food", ("restaurant", "food", "coffee", "cafe", "bakery", "market", "dining", "meal")),
+        ("Nightlife", ("nightlife", "bar", "jazz", "club", "music", "cocktail", "pub")),
+        ("Adventure", ("adventure", "outdoor", "viewpoint", "hiking", "bike", "bicycle", "kayak", "tour", "trail")),
+        ("Nature", ("park", "garden", "nature", "botanical", "waterfront")),
+        ("Free", ("free", "church", "public square", "plaza", "viewpoint", "market")),
+        ("Hidden gems", ("hidden", "local", "less touristy", "neighborhood")),
+        ("Luxury", ("shopping", "spa", "luxury", "boutique", "designer", "mall")),
+        ("Culture", ("museum", "landmark", "tourist_attraction", "art", "gallery", "historic", "monument", "church")),
+    ]
+    for category, keywords in checks:
+        if any(keyword in text for keyword in keywords):
+            return category
+    return GOOGLE_TO_BYABLE_CATEGORY.get(search_label.title(), "Hidden gems")
+
+
+def _opening_status(place):
+    hours = place.get("currentOpeningHours") or {}
+    if "openNow" not in hours:
+        return ""
+    return "Open now" if hours.get("openNow") else "Closed now"
+
+
+def _activity_why_go(search_label, destination):
+    label = str(search_label or "activity").lower()
+    if any(term in label for term in ("museum", "landmark", "tourist attraction")):
+        return f"A useful anchor stop for understanding {destination}'s culture, history, or city layout."
+    if any(term in label for term in ("restaurant", "food", "coffee")):
+        return f"A food-focused stop that helps you sample the local scene in {destination}."
+    if any(term in label for term in ("nightlife", "jazz", "bar", "music")):
+        return "Best when you want the evening to have a clear destination instead of wandering randomly."
+    if any(term in label for term in ("park", "viewpoint", "outdoor", "bike")):
+        return f"A good way to add fresh air, views, or movement to a {destination} day."
+    if any(term in label for term in ("shopping", "luxury")):
+        return "Useful when you want browsing, design, or polished city time between bigger sights."
+    if any(term in label for term in ("hidden", "local", "less touristy")):
+        return "Adds a more local-feeling stop beyond the obvious headline attractions."
+    if "free" in label:
+        return "Keeps the day flexible without adding ticket pressure."
+    return f"A specific place to consider while planning activities in {destination}."
+
+
+def _activity_place_description(name, destination, search_label, rating_text, opening_status):
+    parts = [_activity_why_go(search_label, destination)]
+    if rating_text:
+        parts.append(rating_text)
+    if opening_status:
+        parts.append(opening_status)
+    return " ".join(parts).strip()
+
+
+def _normalize_google_activity(place, destination, search_label, category, default_tags):
+    display_name = place.get("displayName") or {}
+    location = place.get("location") or {}
+    photos = place.get("photos") or []
+    place_id = str(place.get("id") or "").strip()
+    name = str(display_name.get("text") or "").strip()
+    address = str(place.get("formattedAddress") or "").strip()
+    if not name:
+        return None
+
+    types = place.get("types") or []
+    byable_category = _infer_google_activity_category(search_label, types) if category == "Search" else GOOGLE_TO_BYABLE_CATEGORY.get(category, category)
+    if byable_category not in CATEGORIES:
+        byable_category = "Hidden gems"
+    price = _google_price_label(place.get("priceLevel"))
+    if byable_category == "Free" and price == "Check locally":
+        price = "Free"
+    rating = place.get("rating")
+    review_count = place.get("userRatingCount")
+    opening_status = _opening_status(place)
+    rating_text = ""
+    if rating:
+        rating_text = f"{float(rating):.1f} ★"
+        if review_count:
+            rating_text += f" · {int(review_count):,} reviews"
+    tags = list(dict.fromkeys([*default_tags, search_label.title(), opening_status]))[:5]
+    neighborhood = address.split(",")[0].strip() if address else destination
+    activity_id = f"google_{place_id or _slug(destination)}_{_slug(name)}_{_slug(address)}"
+    description = _activity_place_description(name, destination, search_label, rating_text, opening_status)
+    photo_names = [
+        str(photo.get("name") or "").strip()
+        for photo in photos[:5]
+        if str(photo.get("name") or "").strip()
+    ]
+
+    return {
+        "id": activity_id,
+        "title": name,
+        "category": byable_category if byable_category in CATEGORIES else "Hidden gems",
+        "subcategory": search_label.title(),
+        "neighborhood": neighborhood,
+        "description": description,
+        "duration": _activity_duration_for_google(byable_category, types),
+        "price": price,
+        "price_usd": rating_text,
+        "tags": tags,
+        "badge": _google_activity_badge(byable_category, price),
+        "rating": rating,
+        "review_count": review_count,
+        "place_id": place_id,
+        "address": address,
+        "opening_status": opening_status,
+        "photo_names": photo_names,
+        "lat": location.get("latitude"),
+        "lng": location.get("longitude"),
+        "source": "google_places",
+        "details": {
+            "strengths": [
+                _activity_why_go(search_label, destination),
+                rating_text or "Check current reviews before adding it to the day.",
+                f"Located around {neighborhood}.",
+            ],
+            "tradeoffs": [
+                "Opening hours, ticket requirements, and crowd levels can change.",
+                "Verify ticket rules or reservation requirements before going.",
+            ],
+            "best_time": opening_status or "Check current hours before adding this to a specific day.",
+            "booking_notes": "Book separately if tickets or reservations are required.",
+            "nearby": [address or f"Other stops in {destination}", f"More {search_label} nearby"],
+        },
+    }
+
+
+def _google_activity_dedupe_key(activity):
+    place_id = str(activity.get("place_id") or "").strip()
+    if place_id:
+        return ("place_id", place_id)
+    return (
+        "name_address",
+        _slug(activity.get("title")),
+        _slug(activity.get("address") or activity.get("neighborhood")),
+    )
+
+
+def _merge_activity_lists(*activity_lists, limit=120):
+    merged = {}
+    for activity_list in activity_lists:
+        for activity in activity_list or []:
+            key = _google_activity_dedupe_key(activity)
+            if key in merged:
+                existing_tags = merged[key].get("tags") or []
+                merged[key]["tags"] = list(dict.fromkeys([*existing_tags, *activity.get("tags", [])]))[:6]
+                continue
+            merged[key] = activity
+    return list(merged.values())[:limit]
+
+
+@st.cache_data(ttl=60 * 60 * 6, show_spinner=False)
+def _search_google_places_activity_query(destination, query, search_label, category, tags, limit=10):
+    api_key = _google_places_api_key()
+    clean_destination = str(destination or "").strip()
+    clean_query = str(query or "").strip()
+    if not api_key or not clean_destination or not clean_query:
+        return []
+
+    headers = {
+        "Content-Type": "application/json",
+        "X-Goog-Api-Key": api_key,
+        "X-Goog-FieldMask": GOOGLE_PLACES_ACTIVITY_FIELD_MASK,
+    }
+    max_results = max(1, min(int(limit or 10), 20))
+    payload = {
+        "textQuery": clean_query,
+        "languageCode": "en",
+        "maxResultCount": max_results,
+    }
+    try:
+        response = requests.post(
+            GOOGLE_PLACES_TEXT_SEARCH_URL,
+            headers=headers,
+            json=payload,
+            timeout=8,
+            verify=certifi.where(),
+        )
+        response.raise_for_status()
+        places = response.json().get("places") or []
+    except (requests.RequestException, ValueError) as exc:
+        print(f"ACTIVITIES GOOGLE PLACES FAILED: {clean_query} - {exc}")
+        return []
+
+    activities = []
+    for place in places:
+        activity = _normalize_google_activity(place, clean_destination, search_label, category, tags)
+        if activity:
+            activities.append(activity)
+    print(f"ACTIVITIES GOOGLE PLACES QUERY: {clean_query} RESULTS: {len(activities)}")
+    return activities
+
+
+@st.cache_data(ttl=60 * 60 * 6, show_spinner=False)
+def _search_google_places_activities(destination, per_query_limit=12):
+    clean_destination = str(destination or "").strip()
+    if not clean_destination:
+        return []
+
+    batches = []
+    for search_label, category, tags in GOOGLE_ACTIVITY_SEARCHES:
+        query = f"{search_label} in {clean_destination}"
+        batches.append(
+            _search_google_places_activity_query(
+                clean_destination,
+                query,
+                search_label,
+                category,
+                tags,
+                limit=per_query_limit,
+            )
+        )
+    return _merge_activity_lists(*batches, limit=120)
+
+
+def _search_google_places_for_user_query(destination, query, limit=20):
+    clean_destination = str(destination or "").strip()
+    clean_query = str(query or "").strip()
+    if len(clean_query) < 2:
+        return []
+    return _search_google_places_activity_query(
+        clean_destination,
+        f"{clean_query} in {clean_destination}",
+        clean_query,
+        "Search",
+        ["Search result"],
+        limit=limit,
+    )
+
+
+@st.cache_data(ttl=60 * 60 * 6, show_spinner=False)
+def _google_place_photo_data_uri(photo_name, max_width_px=700):
+    api_key = _google_places_api_key()
+    clean_photo_name = str(photo_name or "").strip()
+    if not api_key or not clean_photo_name:
+        return ""
+    try:
+        response = requests.get(
+            f"https://places.googleapis.com/v1/{clean_photo_name}/media",
+            params={"key": api_key, "maxWidthPx": int(max_width_px or 700)},
+            timeout=8,
+            verify=certifi.where(),
+        )
+        response.raise_for_status()
+    except requests.RequestException:
+        return ""
+    content_type = response.headers.get("Content-Type", "image/jpeg")
+    if not str(content_type).startswith("image/"):
+        return ""
+    encoded = base64.b64encode(response.content).decode("ascii")
+    return f"data:{content_type};base64,{encoded}"
+
+
+def _normalize_google_review(review):
+    text = review.get("text") or {}
+    original_text = review.get("originalText") or {}
+    review_text = str(text.get("text") or original_text.get("text") or "").strip()
+    if not review_text:
+        return None
+    return {
+        "text": review_text,
+        "rating": review.get("rating"),
+        "author": str((review.get("authorAttribution") or {}).get("displayName") or "").strip(),
+    }
+
+
+def _normalize_place_details(payload):
+    display_name = payload.get("displayName") or {}
+    photos = payload.get("photos") or []
+    reviews = [
+        normalized
+        for normalized in (_normalize_google_review(review) for review in (payload.get("reviews") or [])[:5])
+        if normalized
+    ]
+    regular_hours = payload.get("regularOpeningHours") or {}
+    editorial_summary = payload.get("editorialSummary") or {}
+    return {
+        "place_id": str(payload.get("id") or "").strip(),
+        "title": str(display_name.get("text") or "").strip(),
+        "address": str(payload.get("formattedAddress") or "").strip(),
+        "rating": payload.get("rating"),
+        "review_count": payload.get("userRatingCount"),
+        "opening_status": _opening_status(payload),
+        "hours_summary": list(regular_hours.get("weekdayDescriptions") or [])[:3],
+        "website_uri": str(payload.get("websiteUri") or "").strip(),
+        "google_maps_uri": str(payload.get("googleMapsUri") or "").strip(),
+        "editorial_summary": str(editorial_summary.get("text") or "").strip(),
+        "photo_names": [
+            str(photo.get("name") or "").strip()
+            for photo in photos[:8]
+            if str(photo.get("name") or "").strip()
+        ],
+        "google_reviews": reviews,
+    }
+
+
+@st.cache_data(ttl=60 * 60 * 6, show_spinner=False)
+def _get_google_place_details(place_id):
+    api_key = _google_places_api_key()
+    clean_place_id = str(place_id or "").strip()
+    if not api_key or not clean_place_id:
+        return {}
+    try:
+        response = requests.get(
+            f"https://places.googleapis.com/v1/places/{clean_place_id}",
+            headers={
+                "X-Goog-Api-Key": api_key,
+                "X-Goog-FieldMask": GOOGLE_PLACE_DETAILS_FIELD_MASK,
+            },
+            timeout=8,
+            verify=certifi.where(),
+        )
+        response.raise_for_status()
+        payload = response.json()
+    except (requests.RequestException, ValueError) as exc:
+        print(f"ACTIVITIES PLACE DETAILS FAILED: {clean_place_id} - {exc}")
+        return {}
+    return _normalize_place_details(payload)
+
+
+@st.cache_data(ttl=60 * 60 * 6, show_spinner=False)
+def _tripadvisor_search_activity(activity_name, destination):
+    api_key = _tripadvisor_api_key()
+    clean_name = str(activity_name or "").strip()
+    clean_destination = str(destination or "").strip()
+    if not api_key or not clean_name or not clean_destination:
+        return {}
+    headers = {"accept": "application/json"}
+    params = {
+        "key": api_key,
+        "searchQuery": f"{clean_name} {clean_destination}",
+        "category": "attractions",
+        "language": "en",
+    }
+    try:
+        response = requests.get(
+            "https://api.content.tripadvisor.com/api/v1/location/search",
+            params=params,
+            headers=headers,
+            timeout=6,
+            verify=certifi.where(),
+        )
+        response.raise_for_status()
+        data = response.json().get("data") or []
+    except (requests.RequestException, ValueError) as exc:
+        print(f"ACTIVITIES TRIPADVISOR SEARCH FAILED: {clean_name} - {exc}")
+        return {}
+    if not data:
+        return {}
+    first = data[0]
+    result_name = str(first.get("name") or "").strip()
+    if _slug(clean_name) and _slug(result_name) and _slug(clean_name) not in _slug(result_name) and _slug(result_name) not in _slug(clean_name):
+        return {}
+    return {
+        "location_id": str(first.get("location_id") or "").strip(),
+        "name": result_name,
+    }
+
+
+@st.cache_data(ttl=60 * 60 * 6, show_spinner=False)
+def _tripadvisor_activity_details(location_id):
+    api_key = _tripadvisor_api_key()
+    clean_location_id = str(location_id or "").strip()
+    if not api_key or not clean_location_id:
+        return {}
+    headers = {"accept": "application/json"}
+    common_params = {"key": api_key, "language": "en", "currency": "USD"}
+    try:
+        details_response = requests.get(
+            f"https://api.content.tripadvisor.com/api/v1/location/{clean_location_id}/details",
+            params=common_params,
+            headers=headers,
+            timeout=6,
+            verify=certifi.where(),
+        )
+        details_response.raise_for_status()
+        details = details_response.json()
+    except (requests.RequestException, ValueError) as exc:
+        print(f"ACTIVITIES TRIPADVISOR DETAILS FAILED: {clean_location_id} - {exc}")
+        return {}
+
+    reviews = []
+    try:
+        reviews_response = requests.get(
+            f"https://api.content.tripadvisor.com/api/v1/location/{clean_location_id}/reviews",
+            params={"key": api_key, "language": "en"},
+            headers=headers,
+            timeout=6,
+            verify=certifi.where(),
+        )
+        reviews_response.raise_for_status()
+        review_data = reviews_response.json().get("data") or []
+        for review in review_data[:3]:
+            text = str(review.get("text") or review.get("title") or "").strip()
+            if text:
+                reviews.append(text)
+    except (requests.RequestException, ValueError) as exc:
+        print(f"ACTIVITIES TRIPADVISOR REVIEWS FAILED: {clean_location_id} - {exc}")
+
+    return {
+        "rating": details.get("rating"),
+        "review_count": details.get("num_reviews"),
+        "web_url": str(details.get("web_url") or "").strip(),
+        "reviews": reviews,
+    }
+
+
+def _tripadvisor_enrichment(activity, destination):
+    match = _tripadvisor_search_activity(activity.get("title"), destination)
+    if not match.get("location_id"):
+        return {}
+    details = _tripadvisor_activity_details(match["location_id"])
+    if not details:
+        return {}
+    details["name"] = match.get("name") or activity.get("title")
+    return details
 
 _CAT_COLORS = {
     "Food":         ("#fdba74", "rgba(251,146,60,.12)",  "rgba(251,146,60,.35)"),
@@ -319,7 +851,7 @@ def _activity_details(destination, category, location, title):
     }
 
 
-def get_activities_for_destination(destination: str):
+def _demo_activities_for_destination(destination: str):
     destination = str(destination or "Tokyo").strip() or "Tokyo"
     profile = _profile_for_destination(destination)
     display_destination = (profile or {}).get("display", destination)
@@ -356,6 +888,44 @@ def get_activities_for_destination(destination: str):
     return activities
 
 
+def get_activities_for_destination(destination: str):
+    destination = str(destination or "Tokyo").strip() or "Tokyo"
+    cache_key = _slug(destination)
+    cached_payload = st.session_state.get("activities_results_cache") or {}
+    cached = cached_payload.get(cache_key)
+    if cached and not (cached.get("source") == "demo_fallback" and _google_places_api_key()):
+        st.session_state["activities_data_source"] = cached.get("source", "demo_fallback")
+        activities = cached.get("activities") or _demo_activities_for_destination(destination)
+        st.session_state["activities_results"] = activities
+        return activities
+
+    google_activities = _search_google_places_activities(destination, per_query_limit=15)
+    if google_activities:
+        payload = {
+            "source": "google_places",
+            "activities": google_activities,
+        }
+        cached_payload[cache_key] = payload
+        st.session_state["activities_results_cache"] = cached_payload
+        st.session_state["activities_data_source"] = "google_places"
+        st.session_state["activities_last_destination"] = destination
+        st.session_state["activities_results"] = google_activities
+        return google_activities
+
+    fallback = _demo_activities_for_destination(destination)
+    payload = {
+        "source": "demo_fallback",
+        "activities": fallback,
+    }
+    cached_payload[cache_key] = payload
+    st.session_state["activities_results_cache"] = cached_payload
+    st.session_state["activities_data_source"] = "demo_fallback"
+    st.session_state["activities_last_destination"] = destination
+    st.session_state["activities_results"] = fallback
+    print(f"ACTIVITIES FALLBACK USED: no Google Places results for {destination}")
+    return fallback
+
+
 def _inject_styles():
     st.markdown(
         """
@@ -380,6 +950,14 @@ def _inject_styles():
                         rgba(7,9,15,.92);
             padding: 13px 15px 11px;
             margin-bottom: 4px;
+            overflow: hidden;
+        }
+        .ac-card-photo {
+            height: 128px;
+            margin: -13px -15px 12px;
+            background-size: cover;
+            background-position: center;
+            border-bottom: 1px solid rgba(255,255,255,.08);
         }
         .ac-card.ac-saved {
             border-color: rgba(52,211,153,.30);
@@ -454,35 +1032,97 @@ def _inject_styles():
             padding: 5px 0;
             border-bottom: 1px solid rgba(255,255,255,.06);
         }
+        .ac-photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+            margin: 8px 0 12px;
+        }
+        .ac-photo-thumb {
+            height: 86px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 1px solid rgba(255,255,255,.08);
+        }
+        .ac-link-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .ac-inline-link {
+            color: #c4b5fd !important;
+            font-size: 13px;
+            text-decoration: none;
+            border: 1px solid rgba(196,181,253,.24);
+            border-radius: 8px;
+            padding: 5px 8px;
+            background: rgba(139,92,246,.08);
+        }
         </style>
         """,
         unsafe_allow_html=True,
     )
 
 
+def _activity_search_text(activity):
+    return " ".join(
+        [
+            str(activity.get("title") or ""),
+            str(activity.get("category") or ""),
+            str(activity.get("subcategory") or ""),
+            str(activity.get("neighborhood") or ""),
+            str(activity.get("description") or ""),
+            str(activity.get("address") or ""),
+            " ".join(str(tag) for tag in activity.get("tags") or []),
+        ]
+    ).lower()
+
+
+def _activity_matches_category(activity, category):
+    if not category or category == "All":
+        return True
+    text = _activity_search_text(activity)
+    if category == "Free":
+        free_terms = ("free", "park", "church", "viewpoint", "public square", "plaza", "market", "garden")
+        return str(activity.get("price", "")).lower() == "free" or any(term in text for term in free_terms)
+    if category == "Adventure":
+        adventure_terms = ("adventure", "outdoor", "viewpoint", "tour", "bike", "bicycle", "hiking", "kayak", "trail", "active")
+        return activity.get("category") == "Adventure" or any(term in text for term in adventure_terms)
+    if category == "Hidden gems":
+        hidden_terms = ("hidden", "local", "less touristy", "neighborhood", "side street", "favorite", "gem")
+        return activity.get("category") == "Hidden gems" or any(term in text for term in hidden_terms)
+    return activity.get("category") == category
+
+
 def _filter_activities(activities, query, category):
     result = activities
     if category and category != "All":
-        if category == "Free":
-            result = [
-                a for a in result
-                if str(a.get("price", "")).lower() == "free"
-                or any("free" in t.lower() for t in a.get("tags", []))
-            ]
-        else:
-            result = [a for a in result if a.get("category") == category]
+        result = [a for a in result if _activity_matches_category(a, category)]
     if query:
         q = query.lower()
         result = [
             a for a in result
-            if q in a["title"].lower()
-            or q in a.get("category", "").lower()
-            or q in a.get("subcategory", "").lower()
-            or q in a.get("neighborhood", "").lower()
-            or q in a.get("description", "").lower()
-            or any(q in t.lower() for t in a.get("tags", []))
+            if q in _activity_search_text(a)
         ]
     return result
+
+
+def _suggested_searches_for_empty(destination, category):
+    destination = str(destination or "your destination").strip() or "your destination"
+    suggestions = {
+        "Adventure": ["viewpoints", "bike tours", "outdoor activities", "walking tours"],
+        "Hidden gems": ["hidden gems", "local favorites", "less touristy places", "neighborhood cafés"],
+        "Free": ["free things to do", "parks", "churches", "public squares", "viewpoints"],
+        "Food": ["coffee", "food markets", "restaurants", "dessert"],
+        "Nightlife": ["jazz", "cocktail bars", "live music", "nightlife"],
+        "Culture": ["museums", "landmarks", "galleries", "historic sites"],
+        "Nature": ["parks", "gardens", "waterfront walks", "scenic viewpoints"],
+        "Luxury": ["shopping", "spa", "fine dining", "design district"],
+    }
+    terms = suggestions.get(category or "All", ["museums", "restaurants", "parks", "landmarks"])
+    return [f"{term} in {destination}" for term in terms[:4]]
 
 
 def _badge_html(badge_key):
@@ -517,9 +1157,19 @@ def _render_activity_card(activity, is_saved):
         f'<div class="ac-price-sub">{_html.escape(price_usd)}</div>' if price_usd else ""
     )
     saved_class = " ac-saved" if is_saved else ""
+    photo_uri = ""
+    photo_names = activity.get("photo_names") or []
+    if photo_names:
+        photo_uri = _google_place_photo_data_uri(photo_names[0], max_width_px=560)
+    photo_html = (
+        f'<div class="ac-card-photo" style="background-image:linear-gradient(180deg,rgba(3,7,18,.04),rgba(3,7,18,.42)),url({_html.escape(photo_uri)})"></div>'
+        if photo_uri
+        else ""
+    )
 
     card_html = "".join([
         f'<div class="ac-card{saved_class}">',
+        photo_html,
         '<div class="ac-card-top">',
         '<div class="ac-card-left">',
         '<div class="ac-cat-badge-row">',
@@ -544,29 +1194,153 @@ def _render_activity_card(activity, is_saved):
     st.markdown(card_html, unsafe_allow_html=True)
 
 
+def _activity_with_details(activity):
+    enriched = dict(activity or {})
+    place_details = _get_google_place_details(enriched.get("place_id"))
+    if place_details:
+        for key, value in place_details.items():
+            if value not in ("", None, [], {}):
+                if key == "title" and enriched.get("title"):
+                    continue
+                if key == "photo_names":
+                    enriched[key] = list(dict.fromkeys([*(value or []), *(enriched.get("photo_names") or [])]))
+                else:
+                    enriched[key] = value
+    destination = _destination_city()
+    tripadvisor = _tripadvisor_enrichment(enriched, destination)
+    if tripadvisor:
+        enriched["tripadvisor"] = tripadvisor
+    return enriched
+
+
+def _rating_line(activity):
+    pieces = []
+    if activity.get("rating"):
+        pieces.append(f"{float(activity['rating']):.1f} ★")
+    if activity.get("review_count"):
+        pieces.append(f"{int(activity['review_count']):,} Google reviews")
+    tripadvisor = activity.get("tripadvisor") or {}
+    if tripadvisor.get("rating"):
+        ta_piece = f"{tripadvisor['rating']} Tripadvisor"
+        if tripadvisor.get("review_count"):
+            ta_piece += f" · {tripadvisor['review_count']} reviews"
+        pieces.append(ta_piece)
+    return " · ".join(str(piece) for piece in pieces if piece)
+
+
+def _activity_review_snippets(activity):
+    snippets = []
+    for review in (activity.get("google_reviews") or [])[:3]:
+        text = str(review.get("text") or "").strip()
+        if text:
+            snippets.append(text)
+    tripadvisor = activity.get("tripadvisor") or {}
+    for text in (tripadvisor.get("reviews") or [])[:3]:
+        clean = str(text or "").strip()
+        if clean:
+            snippets.append(clean)
+    output = []
+    seen = set()
+    for snippet in snippets:
+        normalized = _slug(snippet[:80])
+        if not normalized or normalized in seen:
+            continue
+        seen.add(normalized)
+        output.append(snippet)
+        if len(output) >= 3:
+            break
+    return output
+
+
+def _activity_hours_summary(activity):
+    if activity.get("opening_status"):
+        return activity["opening_status"]
+    hours = activity.get("hours_summary") or []
+    if hours:
+        return " · ".join(str(item) for item in hours[:2])
+    return "Hours not available in Google Places."
+
+
+def _activity_links_html(activity):
+    links = []
+    if activity.get("google_maps_uri"):
+        links.append(("Google Maps", activity["google_maps_uri"]))
+    if activity.get("website_uri"):
+        links.append(("Website", activity["website_uri"]))
+    tripadvisor = activity.get("tripadvisor") or {}
+    if tripadvisor.get("web_url"):
+        links.append(("Tripadvisor", tripadvisor["web_url"]))
+    if not links:
+        return ""
+    return "".join(
+        [
+            '<div class="ac-link-row">',
+            *[
+                f'<a class="ac-inline-link" href="{_html.escape(url)}" target="_blank" rel="noopener noreferrer">{_html.escape(label)}</a>'
+                for label, url in links
+                if str(url).startswith("http")
+            ],
+            "</div>",
+        ]
+    )
+
+
+def _render_activity_photos(photo_names, hero=False):
+    clean_names = [name for name in (photo_names or []) if name][:4]
+    if not clean_names:
+        return
+    uris = []
+    for index, photo_name in enumerate(clean_names):
+        uri = _google_place_photo_data_uri(photo_name, max_width_px=900 if index == 0 else 420)
+        if uri:
+            uris.append(uri)
+    if not uris:
+        return
+    if hero:
+        st.image(uris[0], use_container_width=True)
+        uris = uris[1:]
+    if uris:
+        thumbs = "".join(
+            f'<div class="ac-photo-thumb" style="background-image:url({_html.escape(uri)})"></div>'
+            for uri in uris[:3]
+        )
+        st.markdown(f'<div class="ac-photo-grid">{thumbs}</div>', unsafe_allow_html=True)
+
+
 def _render_details_modal(activity):
+    activity = _activity_with_details(activity)
     details = activity.get("details") or {}
 
     def _content():
-        # one-line summary: category · neighborhood · duration · price
+        _render_activity_photos(activity.get("photo_names"), hero=True)
+
+        st.markdown(f"**{_html.escape(activity.get('title') or 'Activity')}**")
+        rating_line = _rating_line(activity)
+        if rating_line:
+            st.caption(rating_line)
+
         price = activity.get("price", "")
-        price_usd = activity.get("price_usd", "")
-        price_display = f"{price} {price_usd}".strip() if price else ""
         meta_parts = [
             activity.get("category", ""),
             activity.get("neighborhood", ""),
             activity.get("duration", ""),
         ]
-        if price_display:
-            meta_parts.append(price_display)
+        if price:
+            meta_parts.append(price)
         st.caption(" · ".join(p for p in meta_parts if p))
 
-        # description as the one-line summary
-        desc = activity.get("description", "")
-        if desc:
-            st.markdown(desc)
+        if activity.get("address"):
+            st.markdown(f"**Address:** {_html.escape(activity['address'])}")
+        st.markdown(f"**Hours:** {_html.escape(_activity_hours_summary(activity))}")
 
-        # Good for (strengths, capped at 3)
+        why_go = activity.get("editorial_summary") or activity.get("description") or _activity_why_go(
+            activity.get("subcategory") or activity.get("category"),
+            _destination_city(),
+        )
+        if why_go:
+            st.markdown("**Why go**")
+            st.markdown(_html.escape(str(why_go)))
+
         good_for = (details.get("strengths") or [])[:3]
         if good_for:
             items_html = "".join(f"<li>{_html.escape(s)}</li>" for s in good_for)
@@ -578,9 +1352,8 @@ def _render_details_modal(activity):
                 unsafe_allow_html=True,
             )
 
-        # Know before you go: best_time + first tradeoff, capped at 2
         know = []
-        best_time = details.get("best_time")
+        best_time = _activity_hours_summary(activity)
         if best_time:
             know.append(best_time)
         tradeoffs = details.get("tradeoffs") or []
@@ -597,17 +1370,20 @@ def _render_details_modal(activity):
                 unsafe_allow_html=True,
             )
 
-        # Pair with (nearby, capped at 2)
-        nearby = (details.get("nearby") or [])[:2]
-        if nearby:
-            items_html = "".join(f"<li>{_html.escape(n)}</li>" for n in nearby)
-            st.markdown(
-                f'<p style="font-size:12px;font-weight:700;color:rgba(255,255,255,.55);'
-                f'text-transform:uppercase;letter-spacing:.06em;margin:10px 0 4px">Pair with</p>'
-                f'<ul style="margin:0 0 2px;padding-left:1.2rem;color:rgba(255,255,255,.72);'
-                f'font-size:13px;line-height:1.5">{items_html}</ul>',
-                unsafe_allow_html=True,
-            )
+        reviews = _activity_review_snippets(activity)
+        review_items = reviews or ["Recent review snippets are not available for this place yet."]
+        items_html = "".join(f"<li>{_html.escape(snippet[:260])}</li>" for snippet in review_items)
+        st.markdown(
+            f'<p style="font-size:12px;font-weight:700;color:rgba(255,255,255,.55);'
+            f'text-transform:uppercase;letter-spacing:.06em;margin:10px 0 4px">Reviews</p>'
+            f'<ul style="margin:0 0 2px;padding-left:1.2rem;color:rgba(255,255,255,.72);'
+            f'font-size:13px;line-height:1.5">{items_html}</ul>',
+            unsafe_allow_html=True,
+        )
+
+        links_html = _activity_links_html(activity)
+        if links_html:
+            st.markdown(links_html, unsafe_allow_html=True)
 
         if st.button("Close", key=f"close_activity_details_{activity['id']}"):
             st.session_state.pop("activities_active_modal", None)
@@ -674,6 +1450,13 @@ def render():
     # --- filter ---
     saved_ids = set(st.session_state.get("activities_saved") or [])
     activities = get_activities_for_destination(destination_city)
+    live_query_results = []
+    if str(search_query or "").strip():
+        live_query_results = _search_google_places_for_user_query(destination_city, search_query, limit=20)
+        if live_query_results:
+            st.session_state["activities_live_search_results"] = live_query_results
+            activities = _merge_activity_lists(live_query_results, activities, limit=140)
+            st.session_state["activities_results"] = activities
     visible = _filter_activities(activities, search_query, active_category)
     activities_by_id = {a["id"]: a for a in activities}
 
@@ -685,7 +1468,12 @@ def render():
     st.markdown(f'<div class="ac-result-count">{_html.escape(count_label)}</div>', unsafe_allow_html=True)
 
     if not visible:
-        st.info("No activities match that filter. Try a different search or category.")
+        suggestions = _suggested_searches_for_empty(destination_city, active_category)
+        st.info(
+            "No activities match that filter yet. Try one of these searches: "
+            + ", ".join(suggestions)
+            + "."
+        )
 
     # --- activity cards ---
     for activity in visible:
