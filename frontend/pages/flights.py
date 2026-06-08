@@ -1984,6 +1984,49 @@ def _duffel_api_key():
     return str(secret_key or os.getenv("DUFFEL_API_KEY", "")).strip()
 
 
+def _duffel_response_summary(data):
+    offers = data.get("offers") or []
+    sample_offers = []
+    for offer in offers[:3]:
+        owner = offer.get("owner") or {}
+        slices = []
+        for flight_slice in offer.get("slices") or []:
+            segments = flight_slice.get("segments") or []
+            route = []
+            for segment in segments:
+                origin = (segment.get("origin") or {}).get("iata_code") or (segment.get("origin") or {}).get("id")
+                destination = (segment.get("destination") or {}).get("iata_code") or (segment.get("destination") or {}).get("id")
+                carrier = (segment.get("marketing_carrier") or {}).get("iata_code") or (segment.get("marketing_carrier") or {}).get("name")
+                flight_number = segment.get("marketing_carrier_flight_number")
+                route.append(
+                    {
+                        "origin": origin,
+                        "destination": destination,
+                        "carrier": carrier,
+                        "flight_number": flight_number,
+                    }
+                )
+            slices.append(route)
+        sample_offers.append(
+            {
+                "id": offer.get("id"),
+                "owner": {
+                    "name": owner.get("name"),
+                    "iata_code": owner.get("iata_code"),
+                },
+                "total_amount": offer.get("total_amount"),
+                "total_currency": offer.get("total_currency"),
+                "slices": slices,
+                "sandbox_filtered": _is_sandbox_offer(offer),
+            }
+        )
+    return {
+        "offer_request_id": data.get("id"),
+        "raw_offer_count": len(offers),
+        "sample_offers": sample_offers,
+    }
+
+
 def _segment_summary(segment):
     origin = segment.get("origin") or {}
     destination = segment.get("destination") or {}
@@ -2199,6 +2242,11 @@ def load_flight_offers(origin, destination, departure_date, return_date, adults,
         "Content-Type": "application/json",
         "Accept": "application/json",
     }
+    print(
+        "BYABLE DUFFEL REQUEST PAYLOAD:\n"
+        f"{json.dumps(payload, indent=2, sort_keys=True)}",
+        flush=True,
+    )
 
     try:
         request_start = time.perf_counter()
@@ -2213,27 +2261,52 @@ def load_flight_offers(origin, destination, departure_date, return_date, adults,
         response.raise_for_status()
         data = response.json().get("data") or {}
         raw_offers = data.get("offers") or []
+        response_summary = _duffel_response_summary(data)
+        print(
+            "BYABLE DUFFEL RESPONSE SUMMARY:\n"
+            f"{json.dumps(response_summary, indent=2, default=str)}",
+            flush=True,
+        )
         normalize_start = time.perf_counter()
         offers = [offer for offer in raw_offers if not _is_sandbox_offer(offer)]
         flights = [_normalize_duffel_offer(offer) for offer in offers[: max(1, int(max_results))]]
+        normalized_candidates = [flight for flight in flights if flight]
         normalization_time = time.perf_counter() - normalize_start
         print(
             "[Byable Flights] "
             f"duffel_request_time={request_time:.3f}s "
             f"normalization_time={normalization_time:.3f}s "
-            f"raw_offers={len(raw_offers)} usable_offers={len(offers)}"
+            f"raw_offers={len(raw_offers)} "
+            f"after_sandbox_filter={len(offers)} "
+            f"normalized_candidates={len(normalized_candidates)}"
         )
-        if flights:
-            normalized = [_normalize_duffel_flight(flight, adults) for flight in flights if flight]
-            return [flight for flight in normalized if flight], True, {
+        if normalized_candidates:
+            normalized = [_normalize_duffel_flight(flight, adults) for flight in normalized_candidates]
+            normalized_final = [flight for flight in normalized if flight]
+            print(
+                "BYABLE DUFFEL NORMALIZED COUNTS: "
+                f"pre_final={len(normalized)} final={len(normalized_final)}",
+                flush=True,
+            )
+            return normalized_final, True, {
                 "status": "ok",
                 "message": None,
                 "offer_count": len(offers),
+                "raw_offer_count": len(raw_offers),
+                "after_sandbox_filter_count": len(offers),
+                "normalized_count": len(normalized_final),
+                "request_payload": payload,
+                "response_summary": response_summary,
                 "timing": {"duffel": request_time, "normalize": normalization_time},
             }
         return [], False, {
             "status": "ok",
             "message": "No live fares found for these dates.",
+            "raw_offer_count": len(raw_offers),
+            "after_sandbox_filter_count": len(offers),
+            "normalized_count": 0,
+            "request_payload": payload,
+            "response_summary": response_summary,
             "timing": {"duffel": request_time, "normalize": normalization_time},
         }
     except requests.HTTPError as exc:
@@ -2358,6 +2431,14 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
     origin_label, origin_airports, origin_source = _resolve_city_airports_with_duffel(origin_city)
     destination_label, destination_airports, destination_source = _resolve_city_airports_with_duffel(destination_city)
     return_origin_label, return_origin_airports, return_origin_source = _resolve_city_airports_with_duffel(return_origin_city or destination_city)
+    print(
+        "BYABLE FLIGHT AIRPORT MAPPING:\n"
+        f"origin_city={origin_city!r} label={origin_label!r} airports={origin_airports} source={origin_source}\n"
+        f"destination_city={destination_city!r} label={destination_label!r} airports={destination_airports} source={destination_source}\n"
+        f"return_origin_city={(return_origin_city or destination_city)!r} label={return_origin_label!r} airports={return_origin_airports} source={return_origin_source}\n"
+        f"cabin_class={cabin_class!r}",
+        flush=True,
+    )
     resolution_known = {
         "origin": origin_source != "fallback",
         "destination": destination_source != "fallback",
@@ -2400,6 +2481,7 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
     live_any = False
     seen = set()
     timing = {"duffel": 0.0, "normalize": 0.0}
+    stage_counts = []
     combinations = _airport_search_combinations(origin_airports, destination_airports, return_origin_airports)
     attempts = 0
     deadline = city_search_start + MAX_CITY_SEARCH_SECONDS
@@ -2434,6 +2516,7 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
         timing["duffel"] += float(payload_timing.get("duffel") or 0)
         timing["normalize"] += float(payload_timing.get("normalize") or 0)
         live_any = live_any or live
+        before_dedupe = len(combined)
         if payload.get("message"):
             messages.append(f"{origin_airport}->{destination_airport}/{return_origin_airport}->{origin_airport}: {payload.get('message')}")
         for offer in offers:
@@ -2446,6 +2529,25 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
             if key not in seen:
                 seen.add(key)
                 combined.append(offer)
+        pair_counts = {
+            "origin": origin_airport,
+            "destination": destination_airport,
+            "return_origin": return_origin_airport,
+            "raw_offer_count": payload.get("raw_offer_count"),
+            "after_sandbox_filter_count": payload.get("after_sandbox_filter_count"),
+            "normalized_count": payload.get("normalized_count"),
+            "returned_to_city_search": len(offers),
+            "added_after_dedupe": len(combined) - before_dedupe,
+            "combined_total": len(combined),
+            "status": payload.get("status"),
+            "message": payload.get("message"),
+        }
+        stage_counts.append(pair_counts)
+        print(
+            "BYABLE FLIGHT PAIR COUNTS:\n"
+            f"{json.dumps(pair_counts, indent=2, default=str)}",
+            flush=True,
+        )
         if len(combined) >= max_results:
             break
 
@@ -2500,6 +2602,7 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
         "destination_label": destination_label,
         "return_origin_label": return_origin_label,
         "messages": messages[:5],
+        "stage_counts": stage_counts,
     }
 
 
@@ -4301,6 +4404,13 @@ def render():
         }
     st.session_state["flight_debug"] = debug_payload
     filtered_offers = _apply_flight_filters(offers, nonstop_only=nonstop_only)
+    print(
+        "BYABLE FLIGHT PIPELINE COUNTS:\n"
+        f"raw_normalized_offers={len(offers)}\n"
+        f"after_ui_filters={len(filtered_offers)}\n"
+        f"nonstop_only={bool(nonstop_only)}",
+        flush=True,
+    )
     ranking_cache = st.session_state.get("flight_ranking_cache") or {}
     ranking_params = {
         "search_params": active_search_params,
@@ -4318,6 +4428,13 @@ def render():
             "ranking_output": ranking_output,
         }
     offers = list(ranking_output.get("ranked_flights") or [])
+    print(
+        "BYABLE FLIGHT RANKING COUNTS:\n"
+        f"input_to_rank={len(filtered_offers)}\n"
+        f"after_ranking={len(offers)}\n"
+        f"recommended_flight_id={ranking_output.get('recommended_flight_id', '')!r}",
+        flush=True,
+    )
     if "flight_results_cache" in st.session_state:
         st.session_state["flight_results_cache"]["ranked_flights"] = list(offers)
         st.session_state["flight_results_cache"]["selected_priorities"] = list(priorities)

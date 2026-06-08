@@ -1,6 +1,7 @@
 import html as _html
 import os
 import base64
+import time
 
 import certifi
 import requests
@@ -41,6 +42,10 @@ GOOGLE_PLACE_DETAILS_FIELD_MASK = ",".join(
         "reviews",
     ]
 )
+ACTIVITY_DETAILS_MAX_SECONDS = 4.5
+ACTIVITY_PLACE_DETAILS_TIMEOUT = 3.0
+ACTIVITY_PHOTO_TIMEOUT = 1.6
+ACTIVITY_TRIPADVISOR_TIMEOUT = 1.2
 
 GOOGLE_ACTIVITY_SEARCHES = [
     ("tourist attractions", "Culture", ["Popular", "Sightseeing", "Landmarks"]),
@@ -367,16 +372,19 @@ def _google_place_photo_data_uri(photo_name, max_width_px=700):
     clean_photo_name = str(photo_name or "").strip()
     if not api_key or not clean_photo_name:
         return ""
+    start = time.perf_counter()
     try:
         response = requests.get(
             f"https://places.googleapis.com/v1/{clean_photo_name}/media",
             params={"key": api_key, "maxWidthPx": int(max_width_px or 700)},
-            timeout=8,
+            timeout=ACTIVITY_PHOTO_TIMEOUT,
             verify=certifi.where(),
         )
         response.raise_for_status()
-    except requests.RequestException:
+    except requests.RequestException as exc:
+        print(f"ACTIVITIES PHOTO API FAILED: seconds={time.perf_counter() - start:.3f} reason={exc}", flush=True)
         return ""
+    print(f"ACTIVITIES PHOTO API: seconds={time.perf_counter() - start:.3f}", flush=True)
     content_type = response.headers.get("Content-Type", "image/jpeg")
     if not str(content_type).startswith("image/"):
         return ""
@@ -433,6 +441,7 @@ def _get_google_place_details(place_id):
     clean_place_id = str(place_id or "").strip()
     if not api_key or not clean_place_id:
         return {}
+    start = time.perf_counter()
     try:
         response = requests.get(
             f"https://places.googleapis.com/v1/places/{clean_place_id}",
@@ -440,14 +449,15 @@ def _get_google_place_details(place_id):
                 "X-Goog-Api-Key": api_key,
                 "X-Goog-FieldMask": GOOGLE_PLACE_DETAILS_FIELD_MASK,
             },
-            timeout=8,
+            timeout=ACTIVITY_PLACE_DETAILS_TIMEOUT,
             verify=certifi.where(),
         )
         response.raise_for_status()
         payload = response.json()
     except (requests.RequestException, ValueError) as exc:
-        print(f"ACTIVITIES PLACE DETAILS FAILED: {clean_place_id} - {exc}")
+        print(f"ACTIVITIES PLACE DETAILS FAILED: place_id={clean_place_id} seconds={time.perf_counter() - start:.3f} reason={exc}", flush=True)
         return {}
+    print(f"ACTIVITIES PLACE DETAILS API: place_id={clean_place_id} seconds={time.perf_counter() - start:.3f}", flush=True)
     return _normalize_place_details(payload)
 
 
@@ -470,7 +480,7 @@ def _tripadvisor_search_activity(activity_name, destination):
             "https://api.content.tripadvisor.com/api/v1/location/search",
             params=params,
             headers=headers,
-            timeout=6,
+            timeout=ACTIVITY_TRIPADVISOR_TIMEOUT,
             verify=certifi.where(),
         )
         response.raise_for_status()
@@ -503,7 +513,7 @@ def _tripadvisor_activity_details(location_id):
             f"https://api.content.tripadvisor.com/api/v1/location/{clean_location_id}/details",
             params=common_params,
             headers=headers,
-            timeout=6,
+            timeout=ACTIVITY_TRIPADVISOR_TIMEOUT,
             verify=certifi.where(),
         )
         details_response.raise_for_status()
@@ -518,7 +528,7 @@ def _tripadvisor_activity_details(location_id):
             f"https://api.content.tripadvisor.com/api/v1/location/{clean_location_id}/reviews",
             params={"key": api_key, "language": "en"},
             headers=headers,
-            timeout=6,
+            timeout=ACTIVITY_TRIPADVISOR_TIMEOUT,
             verify=certifi.where(),
         )
         reviews_response.raise_for_status()
@@ -547,6 +557,77 @@ def _tripadvisor_enrichment(activity, destination):
         return {}
     details["name"] = match.get("name") or activity.get("title")
     return details
+
+
+def _activity_cache_get(cache_name, key):
+    start = time.perf_counter()
+    cache = st.session_state.setdefault(cache_name, {})
+    value = cache.get(str(key))
+    print(
+        f"ACTIVITIES CACHE READ: cache={cache_name} key_present={bool(value)} seconds={time.perf_counter() - start:.4f}",
+        flush=True,
+    )
+    return value
+
+
+def _activity_cache_set(cache_name, key, value):
+    start = time.perf_counter()
+    cache = st.session_state.setdefault(cache_name, {})
+    cache[str(key)] = value
+    print(
+        f"ACTIVITIES CACHE WRITE: cache={cache_name} seconds={time.perf_counter() - start:.4f}",
+        flush=True,
+    )
+    return value
+
+
+def _place_details_cached(place_id):
+    clean_place_id = str(place_id or "").strip()
+    if not clean_place_id:
+        return {}
+    cached = _activity_cache_get("activities_place_details_cache", clean_place_id)
+    if cached is not None:
+        return cached
+    details = _get_google_place_details(clean_place_id)
+    return _activity_cache_set("activities_place_details_cache", clean_place_id, details)
+
+
+def _photo_uri_cached(photo_name, max_width_px=700, fetch_if_missing=True, deadline=None):
+    clean_photo_name = str(photo_name or "").strip()
+    if not clean_photo_name:
+        return ""
+    cache_key = f"{clean_photo_name}:{int(max_width_px or 700)}"
+    cached = _activity_cache_get("activities_photo_cache", cache_key)
+    if cached:
+        return cached
+    generic_cached = _activity_cache_get("activities_photo_cache", clean_photo_name)
+    if generic_cached:
+        return generic_cached
+    if not fetch_if_missing:
+        print("ACTIVITIES PHOTO SKIPPED: cache_miss list_render", flush=True)
+        return ""
+    if deadline is not None and time.perf_counter() + 0.4 > deadline:
+        print("ACTIVITIES PHOTO SKIPPED: deadline", flush=True)
+        return ""
+    uri = _google_place_photo_data_uri(clean_photo_name, max_width_px=max_width_px)
+    if uri:
+        _activity_cache_set("activities_photo_cache", cache_key, uri)
+        _activity_cache_set("activities_photo_cache", clean_photo_name, uri)
+    return uri
+
+
+def _tripadvisor_enrichment_cached(activity, destination, deadline=None):
+    cache_key = f"{_slug(destination)}:{_slug(activity.get('title'))}"
+    cached = _activity_cache_get("activities_tripadvisor_cache", cache_key)
+    if cached is not None:
+        return cached
+    if deadline is not None:
+        print("ACTIVITIES TRIPADVISOR SKIPPED: cold_cache_details_budget", flush=True)
+        return {}
+    start = time.perf_counter()
+    enrichment = _tripadvisor_enrichment(activity, destination)
+    print(f"ACTIVITIES TRIPADVISOR ENRICHMENT: seconds={time.perf_counter() - start:.3f}", flush=True)
+    return _activity_cache_set("activities_tripadvisor_cache", cache_key, enrichment)
 
 _CAT_COLORS = {
     "Food":         ("#fdba74", "rgba(251,146,60,.12)",  "rgba(251,146,60,.35)"),
@@ -953,7 +1034,8 @@ def _inject_styles():
             overflow: hidden;
         }
         .ac-card-photo {
-            height: 128px;
+            height: clamp(140px, 18vw, 176px);
+            max-height: 176px;
             margin: -13px -15px 12px;
             background-size: cover;
             background-position: center;
@@ -1038,8 +1120,17 @@ def _inject_styles():
             gap: 8px;
             margin: 8px 0 12px;
         }
+        .ac-modal-hero {
+            height: 260px;
+            max-height: 260px;
+            border-radius: 14px;
+            background-size: cover;
+            background-position: center;
+            border: 1px solid rgba(255,255,255,.08);
+            margin-bottom: 8px;
+        }
         .ac-photo-thumb {
-            height: 86px;
+            height: 72px;
             border-radius: 10px;
             background-size: cover;
             background-position: center;
@@ -1160,7 +1251,7 @@ def _render_activity_card(activity, is_saved):
     photo_uri = ""
     photo_names = activity.get("photo_names") or []
     if photo_names:
-        photo_uri = _google_place_photo_data_uri(photo_names[0], max_width_px=560)
+        photo_uri = _photo_uri_cached(photo_names[0], max_width_px=560, fetch_if_missing=False)
     photo_html = (
         f'<div class="ac-card-photo" style="background-image:linear-gradient(180deg,rgba(3,7,18,.04),rgba(3,7,18,.42)),url({_html.escape(photo_uri)})"></div>'
         if photo_uri
@@ -1194,9 +1285,10 @@ def _render_activity_card(activity, is_saved):
     st.markdown(card_html, unsafe_allow_html=True)
 
 
-def _activity_with_details(activity):
+def _activity_with_details(activity, deadline=None):
+    start = time.perf_counter()
     enriched = dict(activity or {})
-    place_details = _get_google_place_details(enriched.get("place_id"))
+    place_details = _place_details_cached(enriched.get("place_id"))
     if place_details:
         for key, value in place_details.items():
             if value not in ("", None, [], {}):
@@ -1207,7 +1299,8 @@ def _activity_with_details(activity):
                 else:
                     enriched[key] = value
     destination = _destination_city()
-    tripadvisor = _tripadvisor_enrichment(enriched, destination)
+    print(f"ACTIVITIES DETAILS MERGE: seconds={time.perf_counter() - start:.3f}", flush=True)
+    tripadvisor = _tripadvisor_enrichment_cached(enriched, destination, deadline=deadline)
     if tripadvisor:
         enriched["tripadvisor"] = tripadvisor
     return enriched
@@ -1252,6 +1345,85 @@ def _activity_review_snippets(activity):
     return output
 
 
+def _compact_unique_items(items, limit=2):
+    output = []
+    seen = set()
+    blocked = (
+        "star",
+        "rating",
+        "review",
+        "located around",
+        "google places",
+        "opening hours",
+        "ticket requirements",
+        "crowd levels can change",
+        "book separately",
+        "live availability",
+    )
+    for item in items or []:
+        text = str(item or "").strip()
+        if not text:
+            continue
+        lower = text.lower()
+        if any(phrase in lower for phrase in blocked):
+            continue
+        key = _slug(lower[:90])
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        output.append(text.rstrip(".") + ".")
+        if len(output) >= limit:
+            break
+    return output
+
+
+def _activity_why_go_items(activity):
+    destination = _destination_city()
+    category = activity.get("category") or activity.get("subcategory") or "activity"
+    summary = str(activity.get("editorial_summary") or "").strip()
+    items = []
+    if summary:
+        items.append(summary)
+    items.append(_activity_why_go(activity.get("subcategory") or category, destination))
+    if activity.get("rating") and activity.get("review_count"):
+        items.append(f"Well-reviewed enough to compare confidently: {float(activity['rating']):.1f} ★ from {int(activity['review_count']):,} Google reviews.")
+    return _compact_unique_items(items, 2)
+
+
+def _activity_know_items(activity):
+    details = activity.get("details") or {}
+    items = []
+    hours = _activity_hours_summary(activity)
+    if hours and "not available" not in hours.lower():
+        items.append(hours)
+    items.extend(details.get("tradeoffs") or [])
+    if activity.get("website_uri") or activity.get("google_maps_uri"):
+        items.append("Check current hours, ticket rules, or reservation requirements before going.")
+    return _compact_unique_items(items, 2) or ["Check current hours before building this into a specific day."]
+
+
+def _activity_pair_items(activity):
+    details = activity.get("details") or {}
+    nearby = []
+    for item in details.get("nearby") or []:
+        text = str(item or "").strip()
+        if text and text != activity.get("address"):
+            nearby.append(text)
+    neighborhood = activity.get("neighborhood")
+    category = activity.get("category")
+    if neighborhood:
+        nearby.append(f"Another stop near {neighborhood}.")
+    if category == "Food":
+        nearby.append("Pair with a nearby market, café, or evening walk.")
+    elif category == "Culture":
+        nearby.append("Pair with a slower neighborhood walk afterward.")
+    elif category in {"Nature", "Adventure"}:
+        nearby.append("Pair with a café or casual meal nearby.")
+    else:
+        nearby.append("Pair with another nearby saved activity.")
+    return _compact_unique_items(nearby, 2)
+
+
 def _activity_hours_summary(activity):
     if activity.get("opening_status"):
         return activity["opening_status"]
@@ -1285,19 +1457,27 @@ def _activity_links_html(activity):
     )
 
 
-def _render_activity_photos(photo_names, hero=False):
+def _render_activity_photos(photo_names, hero=False, deadline=None):
     clean_names = [name for name in (photo_names or []) if name][:4]
     if not clean_names:
         return
     uris = []
     for index, photo_name in enumerate(clean_names):
-        uri = _google_place_photo_data_uri(photo_name, max_width_px=900 if index == 0 else 420)
+        uri = _photo_uri_cached(
+            photo_name,
+            max_width_px=900 if index == 0 else 420,
+            fetch_if_missing=bool(hero and index == 0),
+            deadline=deadline,
+        )
         if uri:
             uris.append(uri)
     if not uris:
         return
     if hero:
-        st.image(uris[0], use_container_width=True)
+        st.markdown(
+            f'<div class="ac-modal-hero" style="background-image:linear-gradient(180deg,rgba(3,7,18,.02),rgba(3,7,18,.26)),url({_html.escape(uris[0])})"></div>',
+            unsafe_allow_html=True,
+        )
         uris = uris[1:]
     if uris:
         thumbs = "".join(
@@ -1308,11 +1488,16 @@ def _render_activity_photos(photo_names, hero=False):
 
 
 def _render_details_modal(activity):
-    activity = _activity_with_details(activity)
-    details = activity.get("details") or {}
+    details_start = time.perf_counter()
+    deadline = details_start + ACTIVITY_DETAILS_MAX_SECONDS
+    activity = _activity_with_details(activity, deadline=deadline)
+    print(
+        f"ACTIVITIES DETAILS PREP: activity_id={activity.get('id')} seconds={time.perf_counter() - details_start:.3f}",
+        flush=True,
+    )
 
     def _content():
-        _render_activity_photos(activity.get("photo_names"), hero=True)
+        _render_activity_photos(activity.get("photo_names"), hero=True, deadline=deadline)
 
         st.markdown(f"**{_html.escape(activity.get('title') or 'Activity')}**")
         rating_line = _rating_line(activity)
@@ -1333,33 +1518,17 @@ def _render_details_modal(activity):
             st.markdown(f"**Address:** {_html.escape(activity['address'])}")
         st.markdown(f"**Hours:** {_html.escape(_activity_hours_summary(activity))}")
 
-        why_go = activity.get("editorial_summary") or activity.get("description") or _activity_why_go(
-            activity.get("subcategory") or activity.get("category"),
-            _destination_city(),
-        )
-        if why_go:
+        why_go_items = _activity_why_go_items(activity)
+        if why_go_items:
             st.markdown("**Why go**")
-            st.markdown(_html.escape(str(why_go)))
-
-        good_for = (details.get("strengths") or [])[:3]
-        if good_for:
-            items_html = "".join(f"<li>{_html.escape(s)}</li>" for s in good_for)
+            items_html = "".join(f"<li>{_html.escape(item)}</li>" for item in why_go_items[:2])
             st.markdown(
-                f'<p style="font-size:12px;font-weight:700;color:rgba(255,255,255,.55);'
-                f'text-transform:uppercase;letter-spacing:.06em;margin:10px 0 4px">Good for</p>'
                 f'<ul style="margin:0 0 2px;padding-left:1.2rem;color:rgba(255,255,255,.72);'
                 f'font-size:13px;line-height:1.5">{items_html}</ul>',
                 unsafe_allow_html=True,
             )
 
-        know = []
-        best_time = _activity_hours_summary(activity)
-        if best_time:
-            know.append(best_time)
-        tradeoffs = details.get("tradeoffs") or []
-        if tradeoffs:
-            know.append(tradeoffs[0])
-        know = know[:2]
+        know = _activity_know_items(activity)[:2]
         if know:
             items_html = "".join(f"<li>{_html.escape(k)}</li>" for k in know)
             st.markdown(
@@ -1370,16 +1539,27 @@ def _render_details_modal(activity):
                 unsafe_allow_html=True,
             )
 
+        pair_items = _activity_pair_items(activity)[:2]
+        if pair_items:
+            items_html = "".join(f"<li>{_html.escape(item)}</li>" for item in pair_items)
+            st.markdown(
+                f'<p style="font-size:12px;font-weight:700;color:rgba(255,255,255,.55);'
+                f'text-transform:uppercase;letter-spacing:.06em;margin:10px 0 4px">Pair with</p>'
+                f'<ul style="margin:0 0 2px;padding-left:1.2rem;color:rgba(255,255,255,.72);'
+                f'font-size:13px;line-height:1.5">{items_html}</ul>',
+                unsafe_allow_html=True,
+            )
+
         reviews = _activity_review_snippets(activity)
-        review_items = reviews or ["Recent review snippets are not available for this place yet."]
-        items_html = "".join(f"<li>{_html.escape(snippet[:260])}</li>" for snippet in review_items)
-        st.markdown(
-            f'<p style="font-size:12px;font-weight:700;color:rgba(255,255,255,.55);'
-            f'text-transform:uppercase;letter-spacing:.06em;margin:10px 0 4px">Reviews</p>'
-            f'<ul style="margin:0 0 2px;padding-left:1.2rem;color:rgba(255,255,255,.72);'
-            f'font-size:13px;line-height:1.5">{items_html}</ul>',
-            unsafe_allow_html=True,
-        )
+        if reviews:
+            items_html = "".join(f"<li>{_html.escape(snippet[:220])}</li>" for snippet in reviews[:3])
+            st.markdown(
+                f'<p style="font-size:12px;font-weight:700;color:rgba(255,255,255,.55);'
+                f'text-transform:uppercase;letter-spacing:.06em;margin:10px 0 4px">Reviews</p>'
+                f'<ul style="margin:0 0 2px;padding-left:1.2rem;color:rgba(255,255,255,.72);'
+                f'font-size:13px;line-height:1.5">{items_html}</ul>',
+                unsafe_allow_html=True,
+            )
 
         links_html = _activity_links_html(activity)
         if links_html:
