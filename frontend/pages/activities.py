@@ -46,6 +46,10 @@ ACTIVITY_DETAILS_MAX_SECONDS = 4.5
 ACTIVITY_PLACE_DETAILS_TIMEOUT = 3.0
 ACTIVITY_PHOTO_TIMEOUT = 1.6
 ACTIVITY_TRIPADVISOR_TIMEOUT = 1.2
+ACTIVITIES_PAGE_SIZE = 24
+ACTIVITY_CARD_PHOTO_WIDTH = 1000
+ACTIVITY_MODAL_HERO_PHOTO_WIDTH = 1400
+ACTIVITY_MODAL_THUMB_PHOTO_WIDTH = 520
 
 GOOGLE_ACTIVITY_SEARCHES = [
     ("tourist attractions", "Culture", ["Popular", "Sightseeing", "Landmarks"]),
@@ -164,25 +168,36 @@ def _opening_status(place):
 
 def _activity_why_go(search_label, destination):
     label = str(search_label or "activity").lower()
-    if any(term in label for term in ("museum", "landmark", "tourist attraction")):
-        return f"A useful anchor stop for understanding {destination}'s culture, history, or city layout."
+    if "london eye" in label:
+        return "Classic skyline view over the Thames; best around sunset."
+    if "tower of london" in label:
+        return "Historic fortress, Crown Jewels, and one of London's strongest first-day sights."
+    if "eiffel tower" in label:
+        return "The classic Paris viewpoint; strongest at sunset or after dark when the lights come on."
+    if "louvre" in label:
+        return "Major art landmark with headline works and enough depth for a focused half-day visit."
+    if any(term in label for term in ("museum", "gallery")):
+        return f"Good indoor culture stop for seeing {destination}'s art, history, or design scene."
+    if any(term in label for term in ("landmark", "tourist attraction", "monument")):
+        return f"Classic {destination} sight that helps anchor a first visit."
     if any(term in label for term in ("restaurant", "food", "coffee")):
-        return f"A food-focused stop that helps you sample the local scene in {destination}."
+        return f"Good food stop for sampling the local scene without overplanning the day."
     if any(term in label for term in ("nightlife", "jazz", "bar", "music")):
-        return "Best when you want the evening to have a clear destination instead of wandering randomly."
+        return "Good evening option when you want music, drinks, or late-night atmosphere."
     if any(term in label for term in ("park", "viewpoint", "outdoor", "bike")):
-        return f"A good way to add fresh air, views, or movement to a {destination} day."
+        return f"Adds fresh air, views, or movement between denser {destination} sightseeing blocks."
     if any(term in label for term in ("shopping", "luxury")):
-        return "Useful when you want browsing, design, or polished city time between bigger sights."
+        return "Good for browsing, design, or polished city time between bigger sights."
     if any(term in label for term in ("hidden", "local", "less touristy")):
         return "Adds a more local-feeling stop beyond the obvious headline attractions."
     if "free" in label:
         return "Keeps the day flexible without adding ticket pressure."
-    return f"A specific place to consider while planning activities in {destination}."
+    return f"Specific {destination} stop worth comparing against the rest of your saved activities."
 
 
 def _activity_place_description(name, destination, search_label, rating_text, opening_status):
-    parts = [_activity_why_go(search_label, destination)]
+    place_text = f"{name} {search_label}"
+    parts = [_activity_why_go(place_text, destination)]
     if rating_text:
         parts.append(rating_text)
     if opening_status:
@@ -388,6 +403,12 @@ def _google_place_photo_data_uri(photo_name, max_width_px=700):
     content_type = response.headers.get("Content-Type", "image/jpeg")
     if not str(content_type).startswith("image/"):
         return ""
+    if len(response.content or b"") < 12_000:
+        print(
+            f"ACTIVITIES PHOTO LOW QUALITY SKIPPED: bytes={len(response.content or b'')} width={max_width_px}",
+            flush=True,
+        )
+        return ""
     encoded = base64.b64encode(response.content).decode("ascii")
     return f"data:{content_type};base64,{encoded}"
 
@@ -592,17 +613,20 @@ def _place_details_cached(place_id):
     return _activity_cache_set("activities_place_details_cache", clean_place_id, details)
 
 
-def _photo_uri_cached(photo_name, max_width_px=700, fetch_if_missing=True, deadline=None):
+def _photo_uri_cached(photo_name, max_width_px=700, fetch_if_missing=True, deadline=None, place_id=""):
     clean_photo_name = str(photo_name or "").strip()
     if not clean_photo_name:
         return ""
-    cache_key = f"{clean_photo_name}:{int(max_width_px or 700)}"
+    cache_key = "|".join(
+        [
+            str(place_id or "unknown_place").strip(),
+            clean_photo_name,
+            str(int(max_width_px or 700)),
+        ]
+    )
     cached = _activity_cache_get("activities_photo_cache", cache_key)
     if cached:
         return cached
-    generic_cached = _activity_cache_get("activities_photo_cache", clean_photo_name)
-    if generic_cached:
-        return generic_cached
     if not fetch_if_missing:
         print("ACTIVITIES PHOTO SKIPPED: cache_miss list_render", flush=True)
         return ""
@@ -612,7 +636,6 @@ def _photo_uri_cached(photo_name, max_width_px=700, fetch_if_missing=True, deadl
     uri = _google_place_photo_data_uri(clean_photo_name, max_width_px=max_width_px)
     if uri:
         _activity_cache_set("activities_photo_cache", cache_key, uri)
-        _activity_cache_set("activities_photo_cache", clean_photo_name, uri)
     return uri
 
 
@@ -1030,16 +1053,33 @@ def _inject_styles():
             background: linear-gradient(145deg, rgba(255,255,255,.04), rgba(255,255,255,.015)),
                         rgba(7,9,15,.92);
             padding: 13px 15px 11px;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
             overflow: hidden;
+            min-height: 342px;
         }
         .ac-card-photo {
-            height: clamp(140px, 18vw, 176px);
-            max-height: 176px;
+            height: 150px;
+            min-height: 150px;
+            max-height: 150px;
             margin: -13px -15px 12px;
+            border-bottom: 1px solid rgba(255,255,255,.08);
             background-size: cover;
             background-position: center;
-            border-bottom: 1px solid rgba(255,255,255,.08);
+            overflow: hidden;
+        }
+        .ac-card-photo img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        .ac-card-photo.placeholder {
+            background:
+                radial-gradient(circle at 22% 18%, rgba(139,92,246,.24), transparent 32%),
+                radial-gradient(circle at 76% 28%, rgba(52,211,153,.12), transparent 34%),
+                linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.012)),
+                rgba(9,12,20,.96);
         }
         .ac-card.ac-saved {
             border-color: rgba(52,211,153,.30);
@@ -1074,6 +1114,10 @@ def _inject_styles():
         .ac-desc {
             font-size: 12px; color: rgba(255,255,255,.48);
             line-height: 1.45;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
         .ac-price-main {
             font-size: 14px; font-weight: 700;
@@ -1092,6 +1136,25 @@ def _inject_styles():
         .ac-tags-row { display: flex; gap: 5px; flex-wrap: wrap; }
         .ac-tag {
             font-size: 10px; padding: 2px 7px; border-radius: 4px; font-weight: 500;
+        }
+        .ac-card-footer {
+            margin: 10px -3px -1px;
+            padding-top: 9px;
+            border-top: 1px solid rgba(255,255,255,.07);
+        }
+        .ac-card-footer div[data-testid="stButton"] > button {
+            min-height: 34px !important;
+            height: 34px !important;
+            border-radius: 9px !important;
+            background: rgba(255,255,255,.045) !important;
+            border: 1px solid rgba(255,255,255,.10) !important;
+            color: rgba(255,255,255,.86) !important;
+            font-size: 12px !important;
+            font-weight: 700 !important;
+        }
+        .ac-card-footer div[data-testid="stButton"] > button:hover {
+            background: rgba(139,92,246,.16) !important;
+            border-color: rgba(196,181,253,.34) !important;
         }
         .ac-result-count {
             font-size: 12px; color: rgba(255,255,255,.3); margin-bottom: 10px;
@@ -1150,6 +1213,29 @@ def _inject_styles():
             border-radius: 8px;
             padding: 5px 8px;
             background: rgba(139,92,246,.08);
+        }
+        @media (max-width: 768px) {
+            .ac-card {
+                min-height: 0;
+            }
+            .ac-card-photo {
+                height: 148px;
+                min-height: 148px;
+                max-height: 148px;
+            }
+        }
+        div[data-testid="stDialog"] > div,
+        div[role="dialog"] {
+            max-height: 85vh !important;
+            overflow-y: auto !important;
+            margin-top: 4vh !important;
+            margin-bottom: 4vh !important;
+        }
+        div[data-testid="stDialog"] div[data-testid="stButton"]:has(button[kind="secondary"]),
+        div[role="dialog"] div[data-testid="stButton"] {
+            position: sticky;
+            bottom: 0;
+            z-index: 5;
         }
         </style>
         """,
@@ -1226,7 +1312,7 @@ def _badge_html(badge_key):
     )
 
 
-def _render_activity_card(activity, is_saved):
+def _render_activity_card(activity, is_saved, photo_deadline=None):
     cat = activity.get("category", "")
     cat_color, cat_bg, _ = _CAT_COLORS.get(cat, ("#a5b4fc", "rgba(99,102,241,.1)", ""))
     badge_html = _badge_html(activity.get("badge"))
@@ -1251,11 +1337,17 @@ def _render_activity_card(activity, is_saved):
     photo_uri = ""
     photo_names = activity.get("photo_names") or []
     if photo_names:
-        photo_uri = _photo_uri_cached(photo_names[0], max_width_px=560, fetch_if_missing=False)
+        photo_uri = _photo_uri_cached(
+            photo_names[0],
+            max_width_px=ACTIVITY_CARD_PHOTO_WIDTH,
+            fetch_if_missing=True,
+            deadline=photo_deadline,
+            place_id=activity.get("place_id") or activity.get("id"),
+        )
     photo_html = (
-        f'<div class="ac-card-photo" style="background-image:linear-gradient(180deg,rgba(3,7,18,.04),rgba(3,7,18,.42)),url({_html.escape(photo_uri)})"></div>'
+        f'<div class="ac-card-photo"><img loading="lazy" decoding="async" src="{_html.escape(photo_uri)}" alt="{_html.escape(activity.get("title") or "Activity photo")}"></div>'
         if photo_uri
-        else ""
+        else '<div class="ac-card-photo placeholder"></div>'
     )
 
     card_html = "".join([
@@ -1280,9 +1372,13 @@ def _render_activity_card(activity, is_saved):
         f'<span class="ac-meta-item">\U0001f4cd {_html.escape(activity.get("neighborhood", ""))}</span>',
         '</div>',
         f'<div class="ac-tags-row">{tags_html}</div>',
-        '</div>',
+        '<div class="ac-card-footer">',
     ])
     st.markdown(card_html, unsafe_allow_html=True)
+
+
+def _close_activity_card():
+    st.markdown("</div></div>", unsafe_allow_html=True)
 
 
 def _activity_with_details(activity, deadline=None):
@@ -1457,7 +1553,7 @@ def _activity_links_html(activity):
     )
 
 
-def _render_activity_photos(photo_names, hero=False, deadline=None):
+def _render_activity_photos(photo_names, hero=False, deadline=None, place_id=""):
     clean_names = [name for name in (photo_names or []) if name][:4]
     if not clean_names:
         return
@@ -1465,9 +1561,10 @@ def _render_activity_photos(photo_names, hero=False, deadline=None):
     for index, photo_name in enumerate(clean_names):
         uri = _photo_uri_cached(
             photo_name,
-            max_width_px=900 if index == 0 else 420,
+            max_width_px=ACTIVITY_MODAL_HERO_PHOTO_WIDTH if index == 0 else ACTIVITY_MODAL_THUMB_PHOTO_WIDTH,
             fetch_if_missing=bool(hero and index == 0),
             deadline=deadline,
+            place_id=place_id,
         )
         if uri:
             uris.append(uri)
@@ -1497,7 +1594,12 @@ def _render_details_modal(activity):
     )
 
     def _content():
-        _render_activity_photos(activity.get("photo_names"), hero=True, deadline=deadline)
+        _render_activity_photos(
+            activity.get("photo_names"),
+            hero=True,
+            deadline=deadline,
+            place_id=activity.get("place_id") or activity.get("id"),
+        )
 
         st.markdown(f"**{_html.escape(activity.get('title') or 'Activity')}**")
         rating_line = _rating_line(activity)
@@ -1640,6 +1742,20 @@ def render():
     visible = _filter_activities(activities, search_query, active_category)
     activities_by_id = {a["id"]: a for a in activities}
 
+    filter_key = "|".join(
+        [
+            str(destination_city or "").strip().lower(),
+            str(search_query or "").strip().lower(),
+            str(active_category or "All"),
+        ]
+    )
+    if st.session_state.get("activities_visible_filter_key") != filter_key:
+        st.session_state["activities_visible_filter_key"] = filter_key
+        st.session_state["activities_visible_limit"] = ACTIVITIES_PAGE_SIZE
+    visible_limit = int(st.session_state.get("activities_visible_limit") or ACTIVITIES_PAGE_SIZE)
+    visible_limit = max(ACTIVITIES_PAGE_SIZE, min(visible_limit, max(len(visible), ACTIVITIES_PAGE_SIZE)))
+    visible_page = visible[:visible_limit]
+
     count_label = f"{len(visible)} activit{'y' if len(visible) == 1 else 'ies'}"
     if search_query:
         count_label += f' matching "{search_query}"'
@@ -1656,35 +1772,51 @@ def render():
         )
 
     # --- activity cards ---
-    for activity in visible:
-        activity_id = activity["id"]
-        is_saved = activity_id in saved_ids
+    photo_deadline = time.perf_counter() + 2.8
+    for row_start in range(0, len(visible_page), 2):
+        row_cols = st.columns(2, gap="medium")
+        for col_index, activity in enumerate(visible_page[row_start:row_start + 2]):
+            activity_id = activity["id"]
+            is_saved = activity_id in saved_ids
 
-        _render_activity_card(activity, is_saved)
+            with row_cols[col_index]:
+                _render_activity_card(activity, is_saved, photo_deadline=photo_deadline)
 
-        action_cols = st.columns([1, 0.18, 0.22, 0.18])
-        with action_cols[1]:
-            save_label = "Saved" if is_saved else "Save"
-            if st.button(save_label, key=f"ac_save_{activity_id}"):
-                if is_saved:
-                    saved_ids.discard(activity_id)
-                    track_event("activity_unsaved", {"activity": activity["title"]})
-                else:
-                    saved_ids.add(activity_id)
-                    track_event("activity_saved", {"activity": activity["title"]})
-                st.session_state["activities_saved"] = list(saved_ids)
-                st.rerun()
-        with action_cols[2]:
-            add_label = "In itinerary" if is_saved else "Add to day"
-            if st.button(add_label, key=f"ac_add_{activity_id}", disabled=is_saved):
-                saved_ids.add(activity_id)
-                st.session_state["activities_saved"] = list(saved_ids)
-                track_event("activity_added_to_day", {"activity": activity["title"]})
-                st.rerun()
-        with action_cols[3]:
-            if st.button("Details", key=f"ac_details_{activity_id}"):
-                st.session_state["activities_active_modal"] = activity_id
-                st.rerun()
+                action_cols = st.columns([0.9, 1.15, 0.95])
+                with action_cols[0]:
+                    save_label = "Saved" if is_saved else "Save"
+                    if st.button(save_label, key=f"ac_save_{activity_id}", use_container_width=True):
+                        if is_saved:
+                            saved_ids.discard(activity_id)
+                            track_event("activity_unsaved", {"activity": activity["title"]})
+                        else:
+                            saved_ids.add(activity_id)
+                            track_event("activity_saved", {"activity": activity["title"]})
+                        st.session_state["activities_saved"] = list(saved_ids)
+                        st.rerun()
+                with action_cols[1]:
+                    add_label = "In itinerary" if is_saved else "Add to day"
+                    if st.button(add_label, key=f"ac_add_{activity_id}", disabled=is_saved, use_container_width=True):
+                        saved_ids.add(activity_id)
+                        st.session_state["activities_saved"] = list(saved_ids)
+                        track_event("activity_added_to_day", {"activity": activity["title"]})
+                        st.rerun()
+                with action_cols[2]:
+                    if st.button("Details", key=f"ac_details_{activity_id}", use_container_width=True):
+                        st.session_state["activities_active_modal"] = activity_id
+                        st.rerun()
+                _close_activity_card()
+
+    if len(visible) > len(visible_page):
+        remaining = len(visible) - len(visible_page)
+        load_count = min(ACTIVITIES_PAGE_SIZE, remaining)
+        if st.button(
+            f"Load {load_count} more",
+            key="activities_load_more",
+            use_container_width=True,
+        ):
+            st.session_state["activities_visible_limit"] = visible_limit + ACTIVITIES_PAGE_SIZE
+            st.rerun()
 
     # --- details modal (exactly one dialog per run) ---
     active_modal_id = st.session_state.get("activities_active_modal")
