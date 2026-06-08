@@ -6,6 +6,16 @@ from analytics import track_event, track_once
 
 CATEGORIES = ["All", "Food", "Nightlife", "Culture", "Adventure", "Nature", "Luxury", "Hidden gems", "Free"]
 
+
+def _destination_city():
+    explicit = st.session_state.get("trip_destination")
+    if explicit:
+        return str(explicit).strip() or "Tokyo"
+    search_params = st.session_state.get("flight_search") or {}
+    city = str(search_params.get("destination_city") or "Tokyo").strip()
+    st.session_state["trip_destination"] = city or "Tokyo"
+    return city or "Tokyo"
+
 _CAT_COLORS = {
     "Food":         ("#fdba74", "rgba(251,146,60,.12)",  "rgba(251,146,60,.35)"),
     "Nightlife":    ("#c4b5fd", "rgba(139,92,246,.12)",  "rgba(139,92,246,.35)"),
@@ -28,332 +38,322 @@ _BADGE_META = {
     "near_hotel":("Near hotel",          "rgba(52,211,153,.12)",  "#6ee7b7", "rgba(52,211,153,.22)"),
 }
 
-ACTIVITIES = [
-    {
-        "id": "teamlab_planets",
-        "title": "TeamLab Planets",
-        "category": "Culture",
-        "subcategory": "Immersive art",
-        "neighborhood": "Toyosu",
-        "description": "Walk through rooms of infinite light and digital art that reacts to your movement. Wading pools, mirror gardens.",
-        "duration": "2 – 2.5 hrs",
-        "price": "¥3,200",
-        "price_usd": "~$22",
-        "tags": ["Immersive art", "Premium", "Photography"],
-        "badge": "booking",
-        "details": {
-            "strengths": [
-                "Most visually striking experience in Tokyo.",
-                "Water room and crystalline universe installations are uniquely photogenic.",
-                "Ticket includes access to the full permanent collection.",
-            ],
-            "tradeoffs": [
-                "Sells out weeks in advance — book before the trip.",
-                "Removing shoes and wading through water is required.",
-            ],
-            "best_time": "First entry slot at 9am. Far fewer people than midday.",
-            "booking_notes": "Book at teamlab.art. Tickets non-refundable. Allow 30 min travel from central Tokyo.",
-            "nearby": ["Toyosu Market (15 min walk)", "teamLab Borderless in Azabudai Hills"],
+_DESTINATION_ACTIVITY_PROFILES = {
+    "paris": {
+        "display": "Paris",
+        "locations": {
+            "Food": ["Le Marais", "Saint-Germain", "Rue Cler"],
+            "Nightlife": ["Oberkampf", "Pigalle", "Canal Saint-Martin"],
+            "Culture": ["Louvre / Tuileries", "Île de la Cité", "Montmartre"],
+            "Adventure": ["Seine riverfront", "Bois de Boulogne", "Latin Quarter"],
+            "Nature": ["Luxembourg Gardens", "Buttes-Chaumont", "Tuileries Garden"],
+            "Luxury": ["Place Vendôme", "Avenue Montaigne", "Saint-Honoré"],
+            "Hidden gems": ["Passage des Panoramas", "Canal Saint-Martin", "Belleville"],
+            "Free": ["Montmartre", "Seine riverbanks", "Père Lachaise"],
+        },
+        "specific": {
+            "Food": ["Le Marais food walk", "Saint-Germain pastry crawl", "Rue Cler market tasting"],
+            "Nightlife": ["Oberkampf cocktail crawl", "Pigalle jazz night", "Canal Saint-Martin wine bars"],
+            "Culture": ["Louvre highlights route", "Sainte-Chapelle and Île de la Cité", "Montmartre artists walk"],
+            "Adventure": ["Seine bike ride", "Latin Quarter treasure walk", "Bois de Boulogne rowboat afternoon"],
+            "Nature": ["Luxembourg Gardens picnic", "Buttes-Chaumont sunset walk", "Tuileries slow morning"],
+            "Luxury": ["Place Vendôme window-shopping", "Avenue Montaigne fashion loop", "Saint-Honoré perfume atelier"],
+            "Hidden gems": ["Covered passages wander", "Belleville street art route", "Canal Saint-Martin side streets"],
+            "Free": ["Montmartre sunrise viewpoint", "Seine riverbank stroll", "Père Lachaise cemetery walk"],
         },
     },
-    {
-        "id": "tsukiji_market",
-        "title": "Tsukiji Outer Market",
-        "category": "Food",
-        "subcategory": "Market",
-        "neighborhood": "Tsukiji",
-        "description": "Tuna breakfast, fresh uni on rice, tamagoyaki sticks. Arrive before 7am for the best stalls.",
-        "duration": "1.5 hrs",
-        "price": "~¥3,000",
-        "price_usd": "~$20",
-        "tags": ["Seafood", "Early morning", "Street food"],
-        "badge": "popular",
-        "details": {
-            "strengths": [
-                "Where Tokyo chefs actually shop — not a tourist market.",
-                "Outer market stays lively year-round regardless of the inner market.",
-                "Dense concentration of exceptional seafood stalls.",
-            ],
-            "tradeoffs": [
-                "Stalls start closing by 10am — early start required.",
-                "Can be crowded even early in peak season.",
-            ],
-            "best_time": "Before 7am. The atmosphere shifts entirely from 8am onward.",
-            "booking_notes": "No booking needed. Cash preferred at most stalls.",
-            "nearby": ["Hamarikyu Gardens (10 min walk)", "Hongan-ji temple across the street"],
+    "seoul": {
+        "display": "Seoul",
+        "locations": {
+            "Food": ["Gwangjang Market", "Mangwon Market", "Myeongdong"],
+            "Nightlife": ["Hongdae", "Itaewon", "Euljiro"],
+            "Culture": ["Gyeongbokgung", "Bukchon Hanok Village", "Insadong"],
+            "Adventure": ["Bukhansan", "Han River", "Seongsu"],
+            "Nature": ["Namsan", "Seoul Forest", "Hangang Park"],
+            "Luxury": ["Cheongdam", "Apgujeong", "Lotte World Tower"],
+            "Hidden gems": ["Ikseon-dong", "Seochon", "Euljiro alleys"],
+            "Free": ["Cheonggyecheon", "Namsan trail", "Bukchon viewpoints"],
+        },
+        "specific": {
+            "Food": ["Gwangjang Market tasting route", "Mangwon Market snack crawl", "Myeongdong street food loop"],
+            "Nightlife": ["Hongdae live music night", "Itaewon cocktail crawl", "Euljiro hidden bar route"],
+            "Culture": ["Gyeongbokgung palace morning", "Bukchon hanok village walk", "Insadong craft street loop"],
+            "Adventure": ["Bukhansan half-day hike", "Han River bike ride", "Seongsu design district crawl"],
+            "Nature": ["Namsan sunset walk", "Seoul Forest picnic", "Hangang Park evening stroll"],
+            "Luxury": ["Cheongdam boutique afternoon", "Apgujeong beauty and café route", "Lotte World Tower observatory"],
+            "Hidden gems": ["Ikseon-dong alley cafés", "Seochon local shops", "Euljiro printing alley walk"],
+            "Free": ["Cheonggyecheon stream walk", "Namsan city-view trail", "Bukchon photo viewpoints"],
         },
     },
-    {
-        "id": "meiji_shrine",
-        "title": "Meiji Shrine at sunrise",
-        "category": "Nature",
-        "subcategory": "Shrine",
-        "neighborhood": "Harajuku",
-        "description": "Ancient cedar forest path, completely empty before 7am. A different experience from the crowded midday visit.",
-        "duration": "1 – 2 hrs",
-        "price": "Free",
-        "price_usd": "",
-        "tags": ["Free entry", "Shrine", "Forest walk"],
-        "badge": "gem",
-        "details": {
-            "strengths": [
-                "Forested path feels remote despite being in central Tokyo.",
-                "Morning light through the cedar canopy is exceptional.",
-                "Adjacent Yoyogi Park extends the walk naturally.",
-            ],
-            "tradeoffs": [
-                "Inner shrine opens at sunrise — check seasonal times.",
-                "Some facilities closed before 9am.",
-            ],
-            "best_time": "Before 7am. Most visitors arrive from 10am onward.",
-            "booking_notes": "No booking needed. Free entry to outer grounds.",
-            "nearby": ["Yoyogi Park", "Omotesando for breakfast after 8am"],
+    "tokyo": {
+        "display": "Tokyo",
+        "locations": {
+            "Food": ["Tsukiji", "Shinjuku", "Ginza"],
+            "Nightlife": ["Golden Gai", "Shibuya", "Ebisu"],
+            "Culture": ["Asakusa", "Ueno", "Roppongi"],
+            "Adventure": ["Akihabara", "Odaiba", "Kichijoji"],
+            "Nature": ["Meiji Shrine", "Shinjuku Gyoen", "Yoyogi Park"],
+            "Luxury": ["Ginza", "Aoyama", "Azabudai Hills"],
+            "Hidden gems": ["Yanaka", "Kagurazaka", "Nakameguro"],
+            "Free": ["Imperial Palace", "Harajuku", "Sumida River"],
+        },
+        "specific": {
+            "Food": ["Tsukiji outer market breakfast", "Shinjuku ramen crawl", "Ginza depachika tasting"],
+            "Nightlife": ["Golden Gai tiny bars", "Shibuya listening bars", "Ebisu izakaya night"],
+            "Culture": ["Senso-ji and Asakusa lanes", "Ueno museum morning", "Roppongi art triangle"],
+            "Adventure": ["Akihabara electronics walk", "Odaiba bayfront loop", "Kichijoji side-street crawl"],
+            "Nature": ["Meiji Shrine sunrise walk", "Shinjuku Gyoen garden break", "Yoyogi Park picnic"],
+            "Luxury": ["Ginza design and dining loop", "Aoyama architecture walk", "Azabudai Hills art afternoon"],
+            "Hidden gems": ["Yanaka old Tokyo walk", "Kagurazaka backstreets", "Nakameguro canal cafés"],
+            "Free": ["Imperial Palace outer gardens", "Harajuku people-watching loop", "Sumida River evening walk"],
         },
     },
-    {
-        "id": "golden_gai",
-        "title": "Golden Gai bar crawl",
-        "category": "Nightlife",
-        "subcategory": "Bar crawl",
-        "neighborhood": "Shinjuku",
-        "description": "200+ tiny bars packed into six alleyways, each with its own theme and owner. Bar Benfiddich is the crown jewel.",
-        "duration": "2 – 4 hrs",
-        "price": "~¥3,500",
-        "price_usd": "per drink",
-        "tags": ["Bar crawl", "Cash only", "Locals"],
-        "badge": "night",
-        "details": {
-            "strengths": [
-                "Most authentic nightlife experience in Tokyo — zero tourist-trap energy.",
-                "Each bar seats 5–8 people, creating a genuinely intimate atmosphere.",
-                "Bar Benfiddich's bartender grows his own herbs on the roof.",
-            ],
-            "tradeoffs": [
-                "Cash only at most bars.",
-                "Entrance fees (¥500–1,000) at the best bars are normal — budget accordingly.",
-            ],
-            "best_time": "After 9pm. Bars are quietest on weeknights before midnight.",
-            "booking_notes": "No reservations. If a bar has an entrance fee on the door, it's usually the best one on that alley.",
-            "nearby": ["Kabukicho (5 min walk)", "Shinjuku Gyoen for the next morning"],
-        },
-    },
-    {
-        "id": "shibuya_sky",
-        "title": "Shibuya Sky observation deck",
-        "category": "Culture",
-        "subcategory": "Views",
-        "neighborhood": "Shibuya",
-        "description": "360° rooftop above the Shibuya Scramble crossing. Golden hour is the best time to go.",
-        "duration": "1 hr",
-        "price": "¥2,000",
-        "price_usd": "~$14",
-        "tags": ["Views", "Rooftop", "Golden hour"],
-        "badge": "popular",
-        "details": {
-            "strengths": [
-                "Best aerial view of the Shibuya Scramble crossing.",
-                "Rooftop section is fully open-air in good weather.",
-                "Works well combined with the crossing at street level first.",
-            ],
-            "tradeoffs": [
-                "Capacity limits can create waits at peak hours.",
-                "Closed during heavy rain or strong winds.",
-            ],
-            "best_time": "Golden hour (sunset). Book the 4–5pm slot if visiting in autumn.",
-            "booking_notes": "Buy tickets at shibuyasky.jp in advance to avoid queues.",
-            "nearby": ["Shibuya Scramble Crossing (below)", "Shibuya Stream for dinner after"],
-        },
-    },
-    {
-        "id": "hakone_onsen",
-        "title": "Hakone onsen day trip",
-        "category": "Luxury",
-        "subcategory": "Onsen",
-        "neighborhood": "Hakone",
-        "description": "Ryokan day-use hot springs with Mt. Fuji views. Takes a full day — worth planning a dedicated trip day.",
-        "duration": "Full day",
-        "price": "¥8,800",
-        "price_usd": "~$60",
-        "tags": ["Onsen", "Mt. Fuji", "Day trip"],
-        "badge": "splurge",
-        "details": {
-            "strengths": [
-                "Highest-rated single-day excursion from Tokyo.",
-                "Mt. Fuji views from the baths on clear mornings.",
-                "Ryokan day-use typically includes a traditional meal and bathrobe.",
-            ],
-            "tradeoffs": [
-                "90 min from Shinjuku — needs a full day commitment.",
-                "Mt. Fuji views depend on clear weather; October–January is best.",
-            ],
-            "best_time": "Weekdays. October–January for the clearest Fuji views.",
-            "booking_notes": "Book the Hakone Free Pass from Odakyu. Reserve the ryokan day-use package in advance.",
-            "nearby": ["Hakone Open Air Museum (same pass)", "Owakudani volcanic valley"],
-        },
-    },
-    {
-        "id": "arashiyama_bamboo",
-        "title": "Arashiyama Bamboo Grove",
-        "category": "Nature",
-        "subcategory": "Bamboo forest",
-        "neighborhood": "Arashiyama · Kyoto",
-        "description": "Towering bamboo stalks filter morning light. The path to Okochi Sanso villa beyond the main grove gets truly quiet.",
-        "duration": "2 – 3 hrs",
-        "price": "Free",
-        "price_usd": "",
-        "tags": ["Free path", "Bamboo", "Kyoto day trip"],
-        "badge": "gem",
-        "details": {
-            "strengths": [
-                "Main path crowds disappear completely before 7:30am.",
-                "Morning light through the canopy is exceptional.",
-                "Okochi Sanso villa beyond the grove adds real seclusion.",
-            ],
-            "tradeoffs": [
-                "Main path is heavily crowded by 9am.",
-                "Requires an early train from Tokyo if doing as a day trip.",
-            ],
-            "best_time": "Before 7:30am. The bamboo creaks audibly in wind — only noticeable before the crowds.",
-            "booking_notes": "No booking needed. Adjacent Tenryu-ji garden costs ¥500 and is worth adding.",
-            "nearby": ["Tenryu-ji garden (next door)", "Togetsukyo Bridge", "Monkey Park Iwatayama"],
-        },
-    },
-    {
-        "id": "tsukiji_cooking_class",
-        "title": "Tsukiji cooking class",
-        "category": "Food",
-        "subcategory": "Cooking class",
-        "neighborhood": "Tsukiji",
-        "description": "Shop at the outer market, then make sushi and ramen in a small-group class. About 3 hours total.",
-        "duration": "3 hrs",
-        "price": "¥9,500",
-        "price_usd": "~$65",
-        "tags": ["Hands-on", "Small group", "Sushi"],
-        "badge": "booking",
-        "details": {
-            "strengths": [
-                "Combines market browsing and hands-on cooking in one session.",
-                "Small group format (max 8) feels personal and unhurried.",
-                "Recipe cards included to recreate at home.",
-            ],
-            "tradeoffs": [
-                "More expensive than browsing the market alone.",
-                "Requires a morning commitment starting at 7am.",
-            ],
-            "best_time": "Morning class starting at 7am — pairs well with early market arrival.",
-            "booking_notes": "Book via Airbnb Experiences or Cookly. 48-hour cancellation policy.",
-            "nearby": ["Tsukiji Outer Market (start here)", "Hamarikyu Gardens after the class"],
-        },
-    },
-    {
-        "id": "senso_ji",
-        "title": "Senso-ji Temple",
-        "category": "Culture",
-        "subcategory": "Temple",
-        "neighborhood": "Asakusa",
-        "description": "Tokyo's oldest temple. Nakamise shopping street leads up to the main hall. Lantern-lit at dusk.",
-        "duration": "1 – 2 hrs",
-        "price": "Free",
-        "price_usd": "",
-        "tags": ["Temple", "Free entry", "Historic"],
-        "badge": "first_day",
-        "details": {
-            "strengths": [
-                "Most iconic and photogenic temple in Tokyo.",
-                "Nakamise shopping street is great for authentic souvenirs.",
-                "Beautiful at both sunrise and dusk with the lanterns lit.",
-            ],
-            "tradeoffs": [
-                "Very crowded at midday, especially on weekends.",
-                "The inner temple area can feel rushed during peak hours.",
-            ],
-            "best_time": "Early morning or at dusk when the lanterns are lit. Midday is the worst time.",
-            "booking_notes": "No booking needed. Fortune stickers (omikuji) are a popular ritual — ¥100.",
-            "nearby": ["Kappabashi Kitchen Street (10 min walk)", "Sumida River cruise nearby"],
-        },
-    },
-    {
-        "id": "shinjuku_gyoen",
-        "title": "Shinjuku Gyoen Garden",
-        "category": "Nature",
-        "subcategory": "Garden",
-        "neighborhood": "Shinjuku",
-        "description": "Three distinct garden styles — French formal, English landscape, Japanese traditional. Calm oasis in the middle of the city.",
-        "duration": "1.5 – 2 hrs",
-        "price": "¥500",
-        "price_usd": "~$4",
-        "tags": ["Garden", "Picnic", "Walking"],
-        "badge": "near_hotel",
-        "details": {
-            "strengths": [
-                "Rare quiet green space near Shinjuku Station.",
-                "French, English, and Japanese garden sections within walking distance of each other.",
-                "Cherry blossoms in April are exceptional.",
-            ],
-            "tradeoffs": [
-                "Alcohol prohibited inside the garden.",
-                "Some sections may be closed for maintenance.",
-            ],
-            "best_time": "Weekday mornings for the calmest experience. Spring for cherry blossoms.",
-            "booking_notes": "No booking needed. Entry ¥500. Closes at 4:30pm (last entry 4pm).",
-            "nearby": ["Golden Gai (15 min walk for evening)", "Omoide Yokocho 'Memory Lane'"],
-        },
-    },
-    {
-        "id": "akihabara",
-        "title": "Akihabara electronics walk",
-        "category": "Adventure",
-        "subcategory": "Shopping",
-        "neighborhood": "Akihabara",
-        "description": "Seven-story electronics stores, retro game shops, and maid cafés. The most dense tech and anime shopping in the world.",
-        "duration": "2 – 3 hrs",
-        "price": "Varies",
-        "price_usd": "",
-        "tags": ["Electronics", "Anime", "Retro games"],
-        "badge": "popular",
-        "details": {
-            "strengths": [
-                "Unmatched density of electronics, components, and gadgets.",
-                "Retro game shops have items unavailable anywhere else.",
-                "Maid café experience is uniquely and specifically Tokyo.",
-            ],
-            "tradeoffs": [
-                "Can feel overwhelming — hard to know where to start.",
-                "Prices not always cheaper than buying online.",
-            ],
-            "best_time": "Afternoon. Most shops open around 10am–11am.",
-            "booking_notes": "No booking needed. For maid cafés, walk-ins are usually accepted.",
-            "nearby": ["Kanda Shrine (10 min walk)", "Ochanomizu for music instruments"],
-        },
-    },
-    {
-        "id": "yanaka_walk",
-        "title": "Yanaka neighborhood walk",
-        "category": "Culture",
-        "subcategory": "Neighborhood",
-        "neighborhood": "Yanaka",
-        "description": "Old Tokyo that survived the war. Narrow lanes, local shops, wooden houses, and one of the city's best cemeteries.",
-        "duration": "2 hrs",
-        "price": "Free",
-        "price_usd": "",
-        "tags": ["Free", "Old Tokyo", "Slow travel"],
-        "badge": "gem",
-        "details": {
-            "strengths": [
-                "One of the few areas in Tokyo that feels unchanged from the 1950s.",
-                "Yanaka Cemetery is atmospheric and quiet — not morbid.",
-                "Great independent food shops, cafés, and craft stores.",
-            ],
-            "tradeoffs": [
-                "Less structured than a formal sightseeing spot.",
-                "Shops close early — better as a morning or early afternoon activity.",
-            ],
-            "best_time": "Weekend mornings when local market stalls along Yanaka Ginza are active.",
-            "booking_notes": "No booking needed. Free to wander.",
-            "nearby": ["Ueno Park (20 min walk)", "Nezu Shrine (10 min walk)"],
-        },
-    },
-]
+}
+
+
+_GENERIC_LOCATIONS = {
+    "Food": ["central market", "old town", "restaurant district"],
+    "Nightlife": ["downtown", "music district", "late-night quarter"],
+    "Culture": ["historic center", "museum district", "old quarter"],
+    "Adventure": ["riverfront", "hillside district", "bike route"],
+    "Nature": ["city park", "waterfront", "botanical garden"],
+    "Luxury": ["design district", "premium shopping street", "hotel quarter"],
+    "Hidden gems": ["local neighborhood", "side-street district", "creative quarter"],
+    "Free": ["public square", "viewpoint route", "waterfront walk"],
+}
+
+
+_CATEGORY_TAGS = {
+    "Food": ["Dining", "Local flavor", "Markets"],
+    "Nightlife": ["After dark", "Bars", "Music"],
+    "Culture": ["Museums", "History", "Architecture"],
+    "Adventure": ["Active", "Outdoors", "Explore"],
+    "Nature": ["Parks", "Slow travel", "Scenic"],
+    "Luxury": ["Premium", "Design", "Splurge"],
+    "Hidden gems": ["Local", "Less crowded", "Side streets"],
+    "Free": ["Free", "Walking", "Budget-friendly"],
+}
+
+
+_CATEGORY_BADGES = {
+    "Food": "popular",
+    "Nightlife": "night",
+    "Culture": "first_day",
+    "Adventure": "popular",
+    "Nature": "gem",
+    "Luxury": "splurge",
+    "Hidden gems": "gem",
+    "Free": "free",
+}
+
+
+_CATEGORY_DURATIONS = {
+    "Food": ["1.5 hrs", "2 hrs", "2.5 hrs"],
+    "Nightlife": ["2 hrs", "3 hrs", "2 – 4 hrs"],
+    "Culture": ["1.5 hrs", "2 hrs", "Half day"],
+    "Adventure": ["2 hrs", "3 hrs", "Half day"],
+    "Nature": ["1 hr", "1.5 hrs", "2 hrs"],
+    "Luxury": ["1.5 hrs", "2 hrs", "Half day"],
+    "Hidden gems": ["1.5 hrs", "2 hrs", "2.5 hrs"],
+    "Free": ["1 hr", "1.5 hrs", "2 hrs"],
+}
+
+
+def _slug(text):
+    cleaned = "".join(ch.lower() if ch.isalnum() else "_" for ch in str(text))
+    return "_".join(part for part in cleaned.split("_") if part)
+
+
+def _profile_for_destination(destination):
+    key = str(destination or "").strip().lower()
+    return _DESTINATION_ACTIVITY_PROFILES.get(key)
+
+
+def _activity_title(destination, category, index, location):
+    profile = _profile_for_destination(destination)
+    specific = (profile or {}).get("specific", {}).get(category, [])
+    if index < len(specific):
+        return specific[index]
+
+    destination = str(destination or "your destination").strip() or "your destination"
+    generic_titles = {
+        "Food": [
+            f"{destination} food walk",
+            f"{location.title()} market tasting",
+            f"{destination} café and dessert crawl",
+        ],
+        "Nightlife": [
+            f"{destination} cocktail crawl",
+            f"{location.title()} live music night",
+            f"{destination} late-night bites route",
+        ],
+        "Culture": [
+            f"{destination} museum highlights",
+            f"{location.title()} history walk",
+            f"{destination} architecture loop",
+        ],
+        "Adventure": [
+            f"{destination} bike route",
+            f"{location.title()} active afternoon",
+            f"{destination} viewpoint walk",
+        ],
+        "Nature": [
+            f"{destination} garden break",
+            f"{location.title()} scenic walk",
+            f"{destination} sunset outdoors",
+        ],
+        "Luxury": [
+            f"{destination} design district afternoon",
+            f"{location.title()} premium shopping loop",
+            f"{destination} polished dining night",
+        ],
+        "Hidden gems": [
+            f"{destination} local side streets",
+            f"{location.title()} hidden cafés",
+            f"{destination} creative neighborhood walk",
+        ],
+        "Free": [
+            f"{destination} free viewpoint walk",
+            f"{location.title()} public-space route",
+            f"{destination} no-ticket highlights",
+        ],
+    }
+    return generic_titles[category][index % 3]
+
+
+def _activity_description(destination, category, location):
+    destination = str(destination or "your destination").strip() or "your destination"
+    descriptions = {
+        "Food": f"Sample the food scene around {location} with a flexible route built for browsing, snacking, and easy detours.",
+        "Nightlife": f"An evening route through {location} for bars, music, late dining, and people-watching without overplanning the night.",
+        "Culture": f"A focused culture stop in {location} that works well as a first-pass introduction to {destination}.",
+        "Adventure": f"An active way to explore {location}, built around movement, views, and a stronger sense of the city layout.",
+        "Nature": f"A calmer outdoor break in {location} when you want fresh air and a lower-effort reset between bigger sights.",
+        "Luxury": f"A polished {destination} experience around {location}, with premium shopping, dining, or design-led stops.",
+        "Hidden gems": f"A less obvious pocket of {location} that gives the day more local texture than the headline sights.",
+        "Free": f"A no-ticket activity around {location} that keeps the day flexible while still feeling specific to {destination}.",
+    }
+    return descriptions[category]
+
+
+def _activity_details(destination, category, location, title):
+    destination = str(destination or "your destination").strip() or "your destination"
+    strengths = {
+        "Food": [
+            f"Good way to understand {destination} through everyday eating.",
+            f"Works well before or after another stop near {location}.",
+            "Easy to scale up or down depending on appetite and timing.",
+        ],
+        "Nightlife": [
+            "Best when you want atmosphere rather than a fixed reservation.",
+            f"Keeps the evening concentrated around {location}.",
+            "Easy to stop early or extend if the area is working for you.",
+        ],
+        "Culture": [
+            f"Useful anchor activity for understanding {destination}.",
+            "Pairs well with a slower neighborhood walk afterward.",
+            "Good option when weather makes outdoor plans less reliable.",
+        ],
+        "Adventure": [
+            "Adds momentum to the day without becoming a full excursion.",
+            f"Helps you see more of {location} than a single attraction would.",
+            "Better for travelers who want the city to feel active.",
+        ],
+        "Nature": [
+            "Good reset between denser sightseeing blocks.",
+            "Low-pressure option when the itinerary needs breathing room.",
+            f"Shows a quieter side of {destination}.",
+        ],
+        "Luxury": [
+            "Best when you want the day to feel polished and unhurried.",
+            f"Concentrates premium stops around {location}.",
+            "Good fit for a special dinner, shopping, or design-focused afternoon.",
+        ],
+        "Hidden gems": [
+            "Adds a more local-feeling stop to the itinerary.",
+            "Good counterweight to crowded headline attractions.",
+            "Works well for travelers who like wandering with a purpose.",
+        ],
+        "Free": [
+            "Keeps the day flexible and budget-friendly.",
+            "Easy to pair with a nearby café, market, or museum.",
+            f"Still gives you a place-specific sense of {destination}.",
+        ],
+    }
+    tradeoffs = {
+        "Food": ["Peak meal times can mean waits.", "Some stops may be cash-preferred or walk-up only."],
+        "Nightlife": ["Best after dark, so it may not suit early starts.", "Noise and crowds vary by night."],
+        "Culture": ["Popular sites can feel crowded midday.", "May need advance tickets for major museums."],
+        "Adventure": ["Weather can change the experience.", "Requires more walking or transit than a single-site visit."],
+        "Nature": ["Less compelling in bad weather.", "Seasonality can affect how scenic it feels."],
+        "Luxury": ["Costs can rise quickly.", "Reservations may be needed for the best version."],
+        "Hidden gems": ["Less structured than a landmark visit.", "Some shops or cafés may have limited hours."],
+        "Free": ["Can feel lighter than a booked experience.", "Best with a nearby backup plan."],
+    }
+    best_time = {
+        "Food": "Late morning or early evening, depending on whether you want markets or dinner energy.",
+        "Nightlife": "After 8pm, when the area starts to feel alive.",
+        "Culture": "Morning for fewer crowds, especially at headline museums or historic sites.",
+        "Adventure": "Morning or late afternoon, when light and temperatures are easier.",
+        "Nature": "Morning for quieter paths, late afternoon for softer light.",
+        "Luxury": "Late afternoon into dinner, when shopping and dining pair naturally.",
+        "Hidden gems": "Late morning, when independent shops and cafés are more likely to be open.",
+        "Free": "Anytime, but golden hour usually makes the route feel stronger.",
+    }
+    booking_notes = {
+        "Food": "Book only if this becomes a formal tour. Otherwise keep it flexible.",
+        "Nightlife": "No booking needed for most casual stops; reserve for cocktail bars or live music.",
+        "Culture": "Check ticket rules before going; major museums may require timed entry.",
+        "Adventure": "Check weather and transit before committing.",
+        "Nature": "No booking needed unless pairing with a guided walk.",
+        "Luxury": "Reserve restaurants, workshops, or spa-style stops in advance.",
+        "Hidden gems": "Check opening days because smaller places often keep irregular hours.",
+        "Free": "No booking needed.",
+    }
+    return {
+        "strengths": strengths[category],
+        "tradeoffs": tradeoffs[category],
+        "best_time": best_time[category],
+        "booking_notes": booking_notes[category],
+        "nearby": [f"Other stops around {location}", f"Easy add-on elsewhere in {destination}"],
+    }
+
+
+def get_activities_for_destination(destination: str):
+    destination = str(destination or "Tokyo").strip() or "Tokyo"
+    profile = _profile_for_destination(destination)
+    display_destination = (profile or {}).get("display", destination)
+    locations_by_category = (profile or {}).get("locations", _GENERIC_LOCATIONS)
+    activities = []
+
+    for category in CATEGORIES:
+        if category == "All":
+            continue
+        locations = locations_by_category.get(category) or _GENERIC_LOCATIONS[category]
+        for index in range(3):
+            location = locations[index % len(locations)]
+            title = _activity_title(display_destination, category, index, location)
+            price = "Free" if category == "Free" else ("Varies" if category in {"Food", "Nightlife", "Luxury"} else "Check locally")
+            price_usd = "" if price in {"Free", "Check locally"} else "estimate"
+            activity_id = f"{_slug(display_destination)}_{_slug(category)}_{index + 1}_{_slug(title)}"
+            activities.append(
+                {
+                    "id": activity_id,
+                    "title": title,
+                    "category": category,
+                    "subcategory": category,
+                    "neighborhood": location,
+                    "description": _activity_description(display_destination, category, location),
+                    "duration": _CATEGORY_DURATIONS[category][index % 3],
+                    "price": price,
+                    "price_usd": price_usd,
+                    "tags": _CATEGORY_TAGS[category],
+                    "badge": _CATEGORY_BADGES[category],
+                    "details": _activity_details(display_destination, category, location, title),
+                }
+            )
+
+    return activities
 
 
 def _inject_styles():
@@ -463,9 +463,7 @@ def _inject_styles():
 def _filter_activities(activities, query, category):
     result = activities
     if category and category != "All":
-        if category == "Hidden gems":
-            result = [a for a in result if a.get("badge") == "gem"]
-        elif category == "Free":
+        if category == "Free":
             result = [
                 a for a in result
                 if str(a.get("price", "")).lower() == "free"
@@ -550,42 +548,66 @@ def _render_details_modal(activity):
     details = activity.get("details") or {}
 
     def _content():
-        st.caption(
-            f"{activity.get('category', '')} · {activity.get('neighborhood', '')} · {activity.get('duration', '')}"
-        )
+        # one-line summary: category · neighborhood · duration · price
         price = activity.get("price", "")
         price_usd = activity.get("price_usd", "")
-        if price:
-            price_display = f"{price} {price_usd}".strip()
-            st.caption(f"Price: {price_display}")
+        price_display = f"{price} {price_usd}".strip() if price else ""
+        meta_parts = [
+            activity.get("category", ""),
+            activity.get("neighborhood", ""),
+            activity.get("duration", ""),
+        ]
+        if price_display:
+            meta_parts.append(price_display)
+        st.caption(" · ".join(p for p in meta_parts if p))
 
-        strengths = details.get("strengths") or []
-        if strengths:
-            st.markdown("**Strengths**")
-            for s in strengths:
-                st.markdown(f"✓ {s}")
+        # description as the one-line summary
+        desc = activity.get("description", "")
+        if desc:
+            st.markdown(desc)
 
-        tradeoffs = details.get("tradeoffs") or []
-        if tradeoffs:
-            st.markdown("**Tradeoffs**")
-            for t in tradeoffs:
-                st.markdown(f"• {t}")
+        # Good for (strengths, capped at 3)
+        good_for = (details.get("strengths") or [])[:3]
+        if good_for:
+            items_html = "".join(f"<li>{_html.escape(s)}</li>" for s in good_for)
+            st.markdown(
+                f'<p style="font-size:12px;font-weight:700;color:rgba(255,255,255,.55);'
+                f'text-transform:uppercase;letter-spacing:.06em;margin:10px 0 4px">Good for</p>'
+                f'<ul style="margin:0 0 2px;padding-left:1.2rem;color:rgba(255,255,255,.72);'
+                f'font-size:13px;line-height:1.5">{items_html}</ul>',
+                unsafe_allow_html=True,
+            )
 
+        # Know before you go: best_time + first tradeoff, capped at 2
+        know = []
         best_time = details.get("best_time")
         if best_time:
-            st.markdown("**Best time to go**")
-            st.markdown(best_time)
+            know.append(best_time)
+        tradeoffs = details.get("tradeoffs") or []
+        if tradeoffs:
+            know.append(tradeoffs[0])
+        know = know[:2]
+        if know:
+            items_html = "".join(f"<li>{_html.escape(k)}</li>" for k in know)
+            st.markdown(
+                f'<p style="font-size:12px;font-weight:700;color:rgba(255,255,255,.55);'
+                f'text-transform:uppercase;letter-spacing:.06em;margin:10px 0 4px">Know before you go</p>'
+                f'<ul style="margin:0 0 2px;padding-left:1.2rem;color:rgba(255,255,255,.72);'
+                f'font-size:13px;line-height:1.5">{items_html}</ul>',
+                unsafe_allow_html=True,
+            )
 
-        booking = details.get("booking_notes")
-        if booking:
-            st.markdown("**Booking notes**")
-            st.markdown(booking)
-
-        nearby = details.get("nearby") or []
+        # Pair with (nearby, capped at 2)
+        nearby = (details.get("nearby") or [])[:2]
         if nearby:
-            st.markdown("**Nearby pairings**")
-            for item in nearby:
-                st.markdown(f"• {item}")
+            items_html = "".join(f"<li>{_html.escape(n)}</li>" for n in nearby)
+            st.markdown(
+                f'<p style="font-size:12px;font-weight:700;color:rgba(255,255,255,.55);'
+                f'text-transform:uppercase;letter-spacing:.06em;margin:10px 0 4px">Pair with</p>'
+                f'<ul style="margin:0 0 2px;padding-left:1.2rem;color:rgba(255,255,255,.72);'
+                f'font-size:13px;line-height:1.5">{items_html}</ul>',
+                unsafe_allow_html=True,
+            )
 
         if st.button("Close", key=f"close_activity_details_{activity['id']}"):
             st.session_state.pop("activities_active_modal", None)
@@ -598,7 +620,7 @@ def _render_details_modal(activity):
         _dialog()
     else:
         with st.container(border=True):
-            st.markdown(f"#### {_html.escape(activity['title'])}")
+            st.markdown(f"**{activity['title']}**")
             _content()
 
 
@@ -606,9 +628,10 @@ def render():
     track_once("page_viewed", key="activities_page_viewed", properties={"page_name": "activities"})
     _inject_styles()
 
+    destination_city = _destination_city()
     st.markdown(
         '<div class="ac-kicker">Activities</div>'
-        '<div class="ac-page-title">Things to do in Tokyo</div>'
+        f'<div class="ac-page-title">Things to do in {_html.escape(destination_city)}</div>'
         '<div class="ac-page-sub">Browse, save, and build your own itinerary. Use search or category chips to filter.</div>',
         unsafe_allow_html=True,
     )
@@ -650,8 +673,9 @@ def render():
 
     # --- filter ---
     saved_ids = set(st.session_state.get("activities_saved") or [])
-    visible = _filter_activities(ACTIVITIES, search_query, active_category)
-    activities_by_id = {a["id"]: a for a in ACTIVITIES}
+    activities = get_activities_for_destination(destination_city)
+    visible = _filter_activities(activities, search_query, active_category)
+    activities_by_id = {a["id"]: a for a in activities}
 
     count_label = f"{len(visible)} activit{'y' if len(visible) == 1 else 'ies'}"
     if search_query:

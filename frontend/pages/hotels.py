@@ -2247,7 +2247,7 @@ def _hotel_stay_expectations(hotel):
             else:
                 add_strength(f"Useful as a placeholder option while live listings for {neighborhood_name} are limited")
             add_tradeoff(f"Less specifically matched to {focus_text} than the strongest {neighborhood_name} pick")
-            best_for = f"Best for travelers who already prefer this location over {neighborhood_name}."
+            best_for = f"Best for travelers who want a straightforward stay around {neighborhood_name} while comparing available hotel options."
 
         add_tradeoff(identity.get("tradeoff"))
         strengths = strengths[:5]
@@ -3092,6 +3092,214 @@ def _review_summary(hotel):
     }
 
 
+def _clean_modal_sentence(text):
+    value = str(text or "").strip()
+    if value.startswith("Best for travelers who "):
+        value = "Travelers who " + value[23:]
+    elif value.startswith("Best for "):
+        value = value[9:]
+    return value.rstrip(".") + "." if value else ""
+
+
+def _dedupe_modal_items(items, limit):
+    output = []
+    seen = set()
+    for item in items:
+        text = _clean_modal_sentence(item)
+        if not text:
+            continue
+        key = " ".join(
+            "".join(char.lower() if char.isalnum() else " " for char in text).split()
+        )
+        if not key or key in seen:
+            continue
+        if any(key in existing or existing in key for existing in seen):
+            continue
+        seen.add(key)
+        output.append(text)
+        if len(output) >= limit:
+            break
+    return output
+
+
+def _modal_safe_sentence(text):
+    value = _clean_modal_sentence(text)
+    blocked = (
+        "useful when review confidence matters",
+        "practical base",
+        "strongest pick",
+        "selected hotel",
+        "recommended because",
+        "ranking",
+        "algorithm",
+        "score",
+        "trip fit",
+        "location match",
+        "already prefer",
+    )
+    if any(phrase in value.lower() for phrase in blocked):
+        return ""
+    return value
+
+
+def _hotel_modal_best_for(hotel):
+    _, neighborhood_name = _hotel_context(hotel)
+    name_key = str(hotel.get("name") or "").lower()
+    area_key = str(hotel.get("area") or "").lower()
+    label_key = str(hotel.get("label") or hotel.get("type") or "").lower()
+
+    if any(term in name_key or term in area_key for term in ("kabukicho", "gracery", "hongdae", "nightlife")):
+        return "Travelers who want restaurants, bars, and late-night energy close to the hotel."
+    if any(term in name_key or term in area_key for term in ("ueno", "asakusa", "jongno", "insadong", "castle", "gornji", "kaptol", "culture")):
+        return "Travelers who want museums, historic streets, and slower sightseeing days nearby."
+    if any(term in name_key or term in area_key or term in label_key for term in ("edition", "toranomon", "ginza", "luxury", "premium", "andrassy", "andrássy", "gangnam")):
+        return "Travelers who want a polished stay with dining, shopping, and comfort prioritized."
+    if any(term in name_key or term in area_key for term in ("shiba", "bay", "jarun", "maksimir", "ujlipotvaros", "újlipótváros", "quiet")):
+        return "Travelers who want calmer evenings and less intensity around the hotel."
+    if any(term in name_key or term in area_key for term in ("shinjuku", "shibuya", "myeongdong", "belváros", "belvaros", "central")):
+        return "Travelers who want an easy city base with restaurants, transit, and sightseeing close by."
+    return f"Travelers who want a straightforward stay around {neighborhood_name}."
+
+
+def _hotel_modal_nearby(hotel):
+    _, neighborhood_name = _hotel_context(hotel)
+    area_key = f"{hotel.get('area') or ''} {neighborhood_name}".lower()
+    nearby_sets = [
+        (("shinjuku", "shibuya"), [
+            "Major train connections for crossing Tokyo",
+            "Dense restaurant, shopping, and late-night dining areas",
+            "Easy access to day-trip and sightseeing routes",
+        ]),
+        (("ginza", "yurakucho", "toranomon"), [
+            "Department stores, polished dining, and central Tokyo streets",
+            "Convenient rail links to Tokyo Station and major shopping areas",
+            "Quieter upscale blocks compared with Shinjuku nightlife zones",
+        ]),
+        (("ueno", "asakusa"), [
+            "Museums, parks, temples, and older Tokyo atmosphere",
+            "Better-value hotel pockets than many premium central districts",
+            "Direct access to classic sightseeing areas in northeast Tokyo",
+        ]),
+        (("shiba", "tokyo bay"), [
+            "Calmer streets and easier pacing outside the busiest nightlife areas",
+            "Tokyo Tower, waterfront routes, and Haneda-side access",
+            "Good fit for slower mornings and quieter evenings",
+        ]),
+        (("belváros", "belvaros", "lipótváros", "lipotvaros"), [
+            "Danube-side walks, Parliament, and central Pest landmarks",
+            "Restaurants, cafés, and shopping streets close together",
+            "Easy access to metro and tram routes across Budapest",
+        ]),
+        (("erzsébetváros", "erzsebetvaros", "jewish quarter"), [
+            "Ruin bars, nightlife, casual dining, and cafés",
+            "Walkable access to central Pest and the Great Synagogue area",
+            "Livelier evenings than quieter residential districts",
+        ]),
+        (("várkerület", "varkerulet", "castle"), [
+            "Castle Hill, Matthias Church, and historic viewpoints",
+            "Quieter streets with a more atmospheric old-city feel",
+            "Short rides back to central Pest for dining and nightlife",
+        ]),
+        (("myeongdong", "euljiro"), [
+            "Shopping streets, street food, and central Seoul transit",
+            "Easy access to palaces, markets, and popular first-visit sights",
+            "Plenty of restaurants within a short walk",
+        ]),
+        (("hongdae", "yeonnam"), [
+            "Cafés, music venues, casual restaurants, and nightlife",
+            "Youthful street energy and independent shops",
+            "Good access to western Seoul and airport rail connections",
+        ]),
+        (("gangnam", "sinsa"), [
+            "Upscale dining, boutiques, beauty clinics, and nightlife",
+            "Polished hotel surroundings south of the Han River",
+            "Good base if your plans cluster around Gangnam",
+        ]),
+        (("donji grad", "lower town"), [
+            "Zagreb museums, parks, squares, and tram connections",
+            "Walkable access to cafés, restaurants, and central sights",
+            "A practical center for first-time city exploration",
+        ]),
+        (("gornji grad", "upper town", "kaptol"), [
+            "Historic streets, viewpoints, the cathedral, and old Zagreb landmarks",
+            "Cafés and cultural sights within a compact walking area",
+            "More atmosphere than newer business districts",
+        ]),
+    ]
+    for keywords, bullets in nearby_sets:
+        if any(keyword in area_key for keyword in keywords):
+            return bullets[:3]
+    return [
+        f"The surrounding {neighborhood_name} area for restaurants and local streets",
+        "Transit and taxi access to the main sightseeing areas",
+        "Nearby cafés or convenience stops for easy mornings",
+    ]
+
+
+def _hotel_modal_why_stay(hotel):
+    _, neighborhood_name = _hotel_context(hotel)
+    bullets = []
+    rating = _rating_text(hotel)
+    review_count = _review_count_text(hotel)
+    if rating and review_count != "Reviews unavailable":
+        bullets.append(f"{rating} across {review_count} makes recent guest sentiment easier to sanity-check.")
+    elif rating:
+        bullets.append(f"{rating} guest rating gives a quick read on the stay experience.")
+
+    price = hotel.get("price")
+    if price is not None:
+        bullets.append(f"Estimated nightly rate is around {_money(price)}, which helps compare it quickly.")
+
+    area_key = f"{hotel.get('area') or ''} {neighborhood_name}".lower()
+    if any(term in area_key for term in ("station", "shinjuku", "myeongdong", "central", "belváros", "belvaros", "donji grad")):
+        bullets.append("Keeps restaurants, transit, and sightseeing logistics close together.")
+    elif any(term in area_key for term in ("ginza", "shopping", "gangnam", "sinsa")):
+        bullets.append("Puts dining and shopping within easier reach than quieter outer areas.")
+    elif any(term in area_key for term in ("ueno", "asakusa", "culture", "castle", "jongno", "insadong", "gornji", "kaptol")):
+        bullets.append("Works well for culture-heavy days with historic sights nearby.")
+    elif any(term in area_key for term in ("bay", "shiba", "maksimir", "jarun", "quiet")):
+        bullets.append("Better suited to travelers who want quieter evenings after sightseeing.")
+    else:
+        bullets.append(f"Keeps the stay centered around {neighborhood_name}.")
+
+    if hotel.get("source") != "google_places":
+        bullets.append("Use it as a shortlist option until live room details are verified.")
+
+    return _dedupe_modal_items(bullets, 3)
+
+
+def _hotel_modal_tradeoffs(hotel):
+    expectations = _hotel_stay_expectations(hotel)
+    review = _review_summary(hotel)
+    candidates = [
+        *(_hotel_identity_profile(hotel).get("tradeoff") and [_hotel_identity_profile(hotel).get("tradeoff")] or []),
+        *(expectations.get("tradeoffs") or []),
+        *(review.get("negatives") or []),
+    ]
+    tradeoffs = []
+    for item in candidates:
+        text = _modal_safe_sentence(item)
+        if text:
+            tradeoffs.append(text)
+
+    if hotel.get("price") is None:
+        tradeoffs.append("Live nightly rate is not available yet.")
+    if not _rating_text(hotel):
+        tradeoffs.append("Live guest-rating data is limited, so verify recent reviews before booking.")
+    if hotel.get("source") != "google_places":
+        tradeoffs.append("Confirm the exact hotel, room type, and cancellation terms before booking.")
+
+    clean = _dedupe_modal_items(tradeoffs, 2)
+    if len(clean) < 2:
+        clean.extend(
+            _dedupe_modal_items(
+                ["Room size, noise, and cancellation terms should be checked before booking."],
+                1,
+            )
+        )
+    return clean[:2]
+
+
 def _review_summary_html(hotel):
     summary = _review_summary(hotel)
     return "".join(
@@ -3303,32 +3511,33 @@ def _render_hotel_compact_card(hotel):
 
 
 def _render_score_modal(hotel):
-    expectations = _hotel_stay_expectations(hotel)
-    review = _review_summary(hotel)
-
     def _content():
-        st.caption(hotel["name"])
+        rating = _rating_text(hotel)
+        review_count = _review_count_text(hotel)
+        meta_parts = [part for part in (rating, review_count) if part and part != "Reviews unavailable"]
+        st.markdown(f"**{hotel['name']}**")
+        st.caption(" · ".join(meta_parts) if meta_parts else "Rating and review count unavailable")
 
-        st.markdown("**Strengths**")
-        for strength in expectations["strengths"]:
-            st.markdown(f"✓ {strength}")
+        st.markdown("**Who this is best for**")
+        st.markdown(_hotel_modal_best_for(hotel))
 
-        st.markdown("**Best for**")
-        st.markdown(expectations["best_for"])
+        nearby_items = _hotel_modal_nearby(hotel)[:3]
+        if nearby_items:
+            st.markdown("**What is nearby**")
+            for item in nearby_items:
+                st.markdown(f"• {_modal_safe_sentence(item) or _clean_modal_sentence(item)}")
 
-        st.markdown("**Tradeoffs**")
-        for tradeoff in expectations["tradeoffs"]:
-            st.markdown(f"• {tradeoff}")
+        why_items = _hotel_modal_why_stay(hotel)[:3]
+        if why_items:
+            st.markdown("**Why stay here**")
+            for item in why_items:
+                st.markdown(f"✓ {item}")
 
-        if review["positives"] or review["negatives"]:
-            st.markdown("**Review signals**")
-            for pos in review["positives"][:3]:
-                st.markdown(f"✓ {pos}")
-            for neg in review["negatives"][:2]:
-                st.markdown(f"• {neg}")
-            st.caption(f"Review count: {review['review_count']}")
-
-        st.markdown(f"**Stay Score: {int(hotel.get('score') or 0)}/100**")
+        tradeoffs = _hotel_modal_tradeoffs(hotel)[:2]
+        if tradeoffs:
+            st.markdown("**Real tradeoffs**")
+            for item in tradeoffs:
+                st.markdown(f"• {item}")
 
         if st.button("Close", key=f"close_hotel_score_{hotel.get('_hotel_key', 'active')}"):
             _clear_hotel_active_modal()

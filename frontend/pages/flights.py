@@ -32,7 +32,6 @@ ISO_DATE_FORMAT = "%Y-%m-%d"
 DUFFEL_BASE_URL = "https://api.duffel.com"
 DUFFEL_VERSION = "v2"
 MAX_CITY_SEARCH_SECONDS = 12.0
-FALLBACK_SEARCH_SECONDS = 4.0
 FLIGHT_SEARCH_RATE_LIMIT_SECONDS = 8.0
 AI_ADVISOR_RATE_LIMIT_SECONDS = 6.0
 MAX_CITY_INPUT_LENGTH = 64
@@ -55,8 +54,8 @@ TRAVELER_PRIORITIES = [
 ]
 DEFAULT_PRIORITIES = ["Lowest price", "Least airport stress"]
 CITY_AIRPORTS = {
-    "san francisco": {"label": "San Francisco", "airports": ["SFO", "OAK", "SJC"]},
-    "sf": {"label": "San Francisco", "airports": ["SFO", "OAK", "SJC"]},
+    "san francisco": {"label": "San Francisco", "airports": ["SFO"]},
+    "sf": {"label": "San Francisco", "airports": ["SFO"]},
     "bay area": {"label": "San Francisco", "airports": ["SFO", "OAK", "SJC"]},
     "tokyo": {"label": "Tokyo", "airports": ["HND", "NRT"]},
     "new york": {"label": "New York", "airports": ["JFK", "LGA", "EWR"]},
@@ -64,6 +63,8 @@ CITY_AIRPORTS = {
     "london": {"label": "London", "airports": ["LHR", "LGW", "LCY", "STN", "LTN"]},
     "los angeles": {"label": "Los Angeles", "airports": ["LAX", "BUR", "SNA", "ONT", "LGB"]},
     "la": {"label": "Los Angeles", "airports": ["LAX", "BUR", "SNA", "ONT", "LGB"]},
+    "beijing": {"label": "Beijing", "airports": ["PEK", "PKX"]},
+    "peking": {"label": "Beijing", "airports": ["PEK", "PKX"]},
     "chicago": {"label": "Chicago", "airports": ["ORD", "MDW"]},
     "washington dc": {"label": "Washington, DC", "airports": ["DCA", "IAD", "BWI"]},
     "dc": {"label": "Washington, DC", "airports": ["DCA", "IAD", "BWI"]},
@@ -71,10 +72,29 @@ CITY_AIRPORTS = {
     "seoul": {"label": "Seoul", "airports": ["ICN", "GMP"]},
     "osaka": {"label": "Osaka", "airports": ["KIX", "ITM"]},
     "kyoto": {"label": "Kyoto", "airports": ["KIX", "ITM"]},
+    "shanghai": {"label": "Shanghai", "airports": ["PVG", "SHA"]},
+    "hong kong": {"label": "Hong Kong", "airports": ["HKG"]},
+    "taipei": {"label": "Taipei", "airports": ["TPE", "TSA"]},
     "bangkok": {"label": "Bangkok", "airports": ["BKK", "DMK"]},
     "singapore": {"label": "Singapore", "airports": ["SIN"]},
     "sydney": {"label": "Sydney", "airports": ["SYD"]},
+    "melbourne": {"label": "Melbourne", "airports": ["MEL"]},
+    "toronto": {"label": "Toronto", "airports": ["YYZ", "YTZ"]},
+    "vancouver": {"label": "Vancouver", "airports": ["YVR"]},
+    "mexico city": {"label": "Mexico City", "airports": ["MEX", "NLU"]},
+    "madrid": {"label": "Madrid", "airports": ["MAD"]},
+    "rome": {"label": "Rome", "airports": ["FCO", "CIA"]},
+    "amsterdam": {"label": "Amsterdam", "airports": ["AMS"]},
+    "frankfurt": {"label": "Frankfurt", "airports": ["FRA"]},
+    "dubai": {"label": "Dubai", "airports": ["DXB", "DWC"]},
+    "doha": {"label": "Doha", "airports": ["DOH"]},
+    "istanbul": {"label": "Istanbul", "airports": ["IST", "SAW"]},
+    "mumbai": {"label": "Mumbai", "airports": ["BOM"]},
+    "delhi": {"label": "Delhi", "airports": ["DEL"]},
 }
+# Process-level cache for Duffel place resolutions so repeated renders don't
+# re-call the API for the same city during the same server session.
+_DUFFEL_PLACE_CACHE: dict = {}
 DESTINATION_HERO_IMAGES = {
     "tokyo": "https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?auto=format&fit=crop&w=1800&q=80",
     "paris": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1800&q=80",
@@ -252,6 +272,23 @@ def _resolve_city_airports(value):
     return label, [fallback_code]
 
 
+def _city_resolution_known(value):
+    raw = str(value or "").strip()
+    normalized = re.sub(r"\s+", " ", raw.lower())
+    return normalized in CITY_AIRPORTS or bool(re.fullmatch(r"[A-Za-z]{3}", raw))
+
+
+def _airport_codes_text(airports):
+    return "/".join(str(code).upper() for code in airports if code)
+
+
+def _airport_resolution_label(origin_airports, destination_airports, return_origin_airports=None, open_jaw=False):
+    outbound = f"{_airport_codes_text(origin_airports)} → {_airport_codes_text(destination_airports)}"
+    if not open_jaw:
+        return outbound
+    return f"{outbound} · {_airport_codes_text(return_origin_airports or destination_airports)} → {_airport_codes_text(origin_airports)}"
+
+
 def _clean_city_input(value):
     """Normalize public city input before using it in search payloads or logs."""
     text = re.sub(r"\s+", " ", str(value or "").strip())
@@ -321,7 +358,7 @@ def _airport_combo_label(city_label, airports):
     return f"{city_label} ({airport_text})"
 
 
-def _airport_search_combinations(origin_airports, destination_airports, return_origin_airports, max_attempts=4):
+def _airport_search_combinations(origin_airports, destination_airports, return_origin_airports, max_attempts=None):
     combinations = []
     for origin_index, origin_airport in enumerate(origin_airports):
         for destination_index, destination_airport in enumerate(destination_airports):
@@ -346,7 +383,10 @@ def _airport_search_combinations(origin_airports, destination_airports, return_o
                     )
                 )
     combinations.sort(key=lambda item: item[0])
-    return [(origin, destination, return_origin) for _rank, origin, destination, return_origin in combinations[:max_attempts]]
+    resolved = [(origin, destination, return_origin) for _rank, origin, destination, return_origin in combinations]
+    if max_attempts is None:
+        return resolved
+    return resolved[:max_attempts]
 
 
 def _airline_code(airline, flight_number):
@@ -2211,16 +2251,135 @@ def load_flight_offers(origin, destination, departure_date, return_date, adults,
         }
 
 
+def _duffel_place_suggestions(query: str) -> list:
+    """Call GET /places/suggestions?query=... and return the raw data list."""
+    api_key = _duffel_api_key()
+    if not api_key:
+        return []
+    try:
+        response = requests.get(
+            f"{DUFFEL_BASE_URL}/places/suggestions",
+            params={"query": query},
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Duffel-Version": DUFFEL_VERSION,
+                "Accept": "application/json",
+            },
+            timeout=5.0,
+            verify=certifi.where(),
+        )
+        response.raise_for_status()
+        return response.json().get("data") or []
+    except Exception as exc:
+        print(f"[Byable] Duffel places error for {query!r}: {exc}", flush=True)
+        return []
+
+
+def _best_place_result(suggestions: list):
+    """
+    Extract (label, [iata_codes]) from Duffel place suggestions.
+    City results are preferred; airport results are the fallback.
+    Returns None when nothing usable is found.
+    """
+    for item in suggestions:
+        if item.get("type") == "city":
+            label = str(item.get("name") or "").strip()
+            city_code = str(item.get("iata_city_code") or "").strip().upper()
+            if label and city_code:
+                return label, [city_code]
+            # iata_city_code missing — pull individual airport codes
+            codes = [
+                str(a.get("iata_code") or "").upper()
+                for a in (item.get("airports") or [])
+                if a.get("iata_code")
+            ]
+            if label and codes:
+                return label, codes
+    for item in suggestions:
+        if item.get("type") == "airport":
+            label = str(item.get("city_name") or item.get("name") or "").strip()
+            code = str(item.get("iata_code") or "").strip().upper()
+            if label and code:
+                return label, [code]
+    return None
+
+
+def _duffel_resolve_city(query: str):
+    """
+    Resolve a free-text city name via Duffel Places Suggestions.
+    Returns (label, [iata_codes]) or None.  Results are cached process-wide.
+    """
+    normalized = re.sub(r"\s+", " ", str(query or "").strip().lower())
+    if not normalized:
+        return None
+    if normalized in _DUFFEL_PLACE_CACHE:
+        return _DUFFEL_PLACE_CACHE[normalized]
+    suggestions = _duffel_place_suggestions(query.strip())
+    result = _best_place_result(suggestions) if suggestions else None
+    _DUFFEL_PLACE_CACHE[normalized] = result
+    if result:
+        print(f"[Byable] Duffel resolved {query!r} → {result[1]} ({result[0]})", flush=True)
+    else:
+        print(f"[Byable] Duffel could not resolve {query!r}", flush=True)
+    return result
+
+
+def _resolve_city_airports_with_duffel(value: str):
+    """
+    Full city resolution for search: IATA code → local map → Duffel API → fallback.
+    Returns (label, [iata_codes], source) where source is one of:
+      "iata_code", "map", "duffel", "fallback".
+    Only "fallback" means the result is unreliable.
+    """
+    raw = str(value or "").strip()
+    normalized = re.sub(r"\s+", " ", raw.lower())
+    # 1. Direct 3-letter IATA code — use as-is
+    if re.fullmatch(r"[A-Za-z]{3}", raw):
+        code = raw.upper()
+        return code, [code], "iata_code"
+    # 2. Local map (instant, no API)
+    if normalized in CITY_AIRPORTS:
+        entry = CITY_AIRPORTS[normalized]
+        return entry["label"], list(entry["airports"]), "map"
+    # 3. Duffel Places Suggestions API
+    duffel_result = _duffel_resolve_city(raw)
+    if duffel_result:
+        label, codes = duffel_result
+        return label, codes, "duffel"
+    # 4. Last-resort fallback — raw[:3] — explicitly marked unreliable
+    label = raw.title() if raw else "Unknown"
+    fallback_code = raw.upper()[:3] if raw else "UNK"
+    print(f"[Byable] Resolution fallback used: {raw!r} → {fallback_code!r}", flush=True)
+    return label, [fallback_code], "fallback"
+
+
 def load_city_flight_offers(origin_city, destination_city, departure_date, return_date, adults, cabin_class, max_results=20, return_origin_city=None):
     city_search_start = time.perf_counter()
-    origin_label, origin_airports = _resolve_city_airports(origin_city)
-    destination_label, destination_airports = _resolve_city_airports(destination_city)
-    return_origin_label, return_origin_airports = _resolve_city_airports(return_origin_city or destination_city)
+    origin_label, origin_airports, origin_source = _resolve_city_airports_with_duffel(origin_city)
+    destination_label, destination_airports, destination_source = _resolve_city_airports_with_duffel(destination_city)
+    return_origin_label, return_origin_airports, return_origin_source = _resolve_city_airports_with_duffel(return_origin_city or destination_city)
+    resolution_known = {
+        "origin": origin_source != "fallback",
+        "destination": destination_source != "fallback",
+        "return_origin": return_origin_source != "fallback",
+    }
+    resolution_source = {
+        "origin": origin_source,
+        "destination": destination_source,
+        "return_origin": return_origin_source,
+    }
+    searched_airport_label = _airport_resolution_label(
+        origin_airports,
+        destination_airports,
+        return_origin_airports,
+        open_jaw=bool(return_origin_city and str(return_origin_city).strip().lower() != str(destination_city).strip().lower()),
+    )
     if not _duffel_api_key():
         print(
             "[Byable Flights] "
             f"city_search_time={time.perf_counter() - city_search_start:.3f}s "
-            "combined_offers=0 key_missing=True"
+            "combined_offers=0 key_missing=True "
+            f"searched_airports={searched_airport_label}"
         )
         return [], False, {
             "status": "not_configured",
@@ -2228,6 +2387,9 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
             "searched_origin_airports": origin_airports,
             "searched_destination_airports": destination_airports,
             "searched_return_origin_airports": return_origin_airports,
+            "searched_airport_label": searched_airport_label,
+            "resolution_known": resolution_known,
+            "resolution_source": resolution_source,
             "origin_label": origin_label,
             "destination_label": destination_label,
             "return_origin_label": return_origin_label,
@@ -2238,13 +2400,7 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
     live_any = False
     seen = set()
     timing = {"duffel": 0.0, "normalize": 0.0}
-    primary_combination = [(origin_airports[0], destination_airports[0], return_origin_airports[0])]
-    nearby_combinations = [
-        combination
-        for combination in _airport_search_combinations(origin_airports, destination_airports, return_origin_airports, max_attempts=4)
-        if combination != primary_combination[0]
-    ][:1]
-    combinations = primary_combination
+    combinations = _airport_search_combinations(origin_airports, destination_airports, return_origin_airports)
     attempts = 0
     deadline = city_search_start + MAX_CITY_SEARCH_SECONDS
 
@@ -2257,6 +2413,12 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
             messages.append("Flight search stopped after the 12 second search limit.")
             break
         attempts += 1
+        print(
+            "[Byable Flights] "
+            f"duffel_airport_search origin={origin_airport} "
+            f"destination={destination_airport} "
+            f"return_origin={return_origin_airport}"
+        )
         offers, live, payload = load_flight_offers(
             origin_airport,
             destination_airport,
@@ -2287,46 +2449,25 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
         if len(combined) >= max_results:
             break
 
-    if not combined and nearby_combinations:
-        print("[Byable Flights] primary airport search returned 0 offers; trying nearby airport fallback")
-        for origin_airport, destination_airport, return_origin_airport in nearby_combinations:
-            remaining = min(remaining_search_seconds(), FALLBACK_SEARCH_SECONDS)
-            if remaining <= 1.0:
-                messages.append("Nearby airport fallback skipped after the 12 second search limit.")
-                break
-            attempts += 1
-            offers, live, payload = load_flight_offers(
-                origin_airport,
-                destination_airport,
-                departure_date,
-                return_date,
-                adults,
-                cabin_class,
-                max_results=max_results,
-                return_origin=return_origin_airport,
-                request_timeout=remaining,
-            )
-            payload_timing = payload.get("timing") or {}
-            timing["duffel"] += float(payload_timing.get("duffel") or 0)
-            timing["normalize"] += float(payload_timing.get("normalize") or 0)
-            live_any = live_any or live
-            if payload.get("message"):
-                messages.append(f"{origin_airport}->{destination_airport}/{return_origin_airport}->{origin_airport}: {payload.get('message')}")
-            for offer in offers:
-                offer["origin_city"] = origin_label
-                offer["destination_city"] = destination_label
-                offer["return_origin_city"] = return_origin_label
-                offer["airport_pair"] = f"{origin_airport} → {destination_airport}"
-                offer["return_airport_pair"] = f"{return_origin_airport} → {origin_airport}"
-                key = _flight_key(offer)
-                if key not in seen:
-                    seen.add(key)
-                    combined.append(offer)
-            if len(combined) >= max_results:
-                break
-
     status = "ok" if combined or live_any else "not_configured" if not _duffel_api_key() else "ok"
-    message = None if combined else "No live fares found for these dates. Try changing the date, destination airport, or cabin."
+    fallback_used = not all(resolution_known.values())
+    if combined:
+        message = None
+    elif not fallback_used:
+        message = (
+            "No live fares found for these dates. "
+            f"Searched: {searched_airport_label}. "
+            "Try changing the date, destination airport, or cabin."
+        )
+    else:
+        # Duffel could not resolve at least one city — raw[:3] fallback was used
+        failed = [k for k, v in resolution_known.items() if not v]
+        message = (
+            "No live fares found. "
+            f"Byable could not resolve {', '.join(failed)} to a known airport code "
+            f"and searched a best-guess code instead: {searched_airport_label}. "
+            "Try entering a known city name or a 3-letter IATA code."
+        )
     if not _duffel_api_key():
         message = "Duffel API key not configured."
     print(
@@ -2336,7 +2477,9 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
         f"origin_airports={len(origin_airports)} "
         f"destination_airports={len(destination_airports)} "
         f"return_airports={len(return_origin_airports)} "
-        f"attempts={attempts}"
+        f"attempts={attempts} "
+        f"searched_airports={searched_airport_label} "
+        f"resolution_sources={resolution_source}"
     )
     return combined[:max_results], bool(combined and live_any), {
         "status": status,
@@ -2350,6 +2493,9 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
         "searched_origin_airports": origin_airports,
         "searched_destination_airports": destination_airports,
         "searched_return_origin_airports": return_origin_airports,
+        "searched_airport_label": searched_airport_label,
+        "resolution_known": resolution_known,
+        "resolution_source": resolution_source,
         "origin_label": origin_label,
         "destination_label": destination_label,
         "return_origin_label": return_origin_label,
@@ -4004,6 +4150,7 @@ def render():
                 "return_origin_city": return_origin_city_clean or destination_city_clean,
                 "priorities": selected_priorities,
             }
+            st.session_state["trip_destination"] = destination_city_clean
             st.session_state["selected_flight_index"] = 0
             st.session_state["show_more_flights"] = False
             search_state = st.session_state["flight_search"]
@@ -4209,6 +4356,15 @@ def render():
         route_label = f"{origin_label} → {destination_label} · {return_origin_label} → {origin_label}"
     else:
         route_label = f"{origin_label} → {destination_label} → {origin_label}"
+    airport_resolution_label = (
+        (debug_payload or {}).get("searched_airport_label")
+        or _airport_resolution_label(
+            origin_airports,
+            destination_airports,
+            return_origin_airports,
+            open_jaw=return_mode == "Different city",
+        )
+    )
     has_searched_for_current_route = submitted or cached_search_params == active_search_params
     if has_searched_for_current_route and offers:
         display_route = f"{origin_label} → {destination_label}"
@@ -4254,7 +4410,7 @@ def render():
         <div class="flight-status-row">
             <span class="flight-status-pill{pill_class}">{html.escape(api_status)}</span>
             <span class="flight-updated">Updated just now</span>
-            <span class="flight-updated">{html.escape(route_label)} · {html.escape(date_label)} · {html.escape(traveler_label)}</span>
+            <span class="flight-updated">{html.escape(route_label)} · Searched airports/cities: {html.escape(airport_resolution_label)} · {html.escape(date_label)} · {html.escape(traveler_label)}</span>
         </div>
         """,
         unsafe_allow_html=True,
@@ -4287,7 +4443,10 @@ def render():
             empty_message = ""
         elif status == "ok":
             empty_title = "No fares found"
-            empty_message = "No live fares found for these dates. Try changing the date, destination airport, or cabin."
+            empty_message = (
+                (debug_payload or {}).get("message")
+                or "No live fares found for these dates. Try changing the date, destination airport, or cabin."
+            )
         else:
             empty_title = "Duffel API error"
             empty_message = (debug_payload or {}).get("message") or "Duffel is unavailable right now."
