@@ -44,10 +44,10 @@ GOOGLE_PLACE_DETAILS_FIELD_MASK = ",".join(
 )
 ACTIVITY_DETAILS_MAX_SECONDS = 4.5
 ACTIVITY_PLACE_DETAILS_TIMEOUT = 3.0
-ACTIVITY_PHOTO_TIMEOUT = 1.6
+ACTIVITY_PHOTO_TIMEOUT = 2.5
 ACTIVITY_TRIPADVISOR_TIMEOUT = 1.2
 ACTIVITIES_PAGE_SIZE = 24
-ACTIVITY_CARD_PHOTO_WIDTH = 1000
+ACTIVITY_CARD_PHOTO_WIDTH = 900
 ACTIVITY_MODAL_HERO_PHOTO_WIDTH = 1400
 ACTIVITY_MODAL_THUMB_PHOTO_WIDTH = 520
 
@@ -613,30 +613,122 @@ def _place_details_cached(place_id):
     return _activity_cache_set("activities_place_details_cache", clean_place_id, details)
 
 
-def _photo_uri_cached(photo_name, max_width_px=700, fetch_if_missing=True, deadline=None, place_id=""):
+def _photo_cache_key(photo_name, max_width_px=700, place_id=""):
     clean_photo_name = str(photo_name or "").strip()
     if not clean_photo_name:
         return ""
-    cache_key = "|".join(
+    return "|".join(
         [
             str(place_id or "unknown_place").strip(),
             clean_photo_name,
             str(int(max_width_px or 700)),
         ]
     )
+
+
+def _photo_uri_cached(photo_name, max_width_px=700, fetch_if_missing=True, deadline=None, place_id=""):
+    clean_photo_name = str(photo_name or "").strip()
+    if not clean_photo_name:
+        return ""
+    cache_key = _photo_cache_key(clean_photo_name, max_width_px=max_width_px, place_id=place_id)
     cached = _activity_cache_get("activities_photo_cache", cache_key)
     if cached:
         return cached
+    failed_cache = st.session_state.setdefault("activities_photo_failed_cache", {})
+    if cache_key in failed_cache:
+        print("ACTIVITIES PHOTO SKIPPED: prior_failure", flush=True)
+        return ""
     if not fetch_if_missing:
         print("ACTIVITIES PHOTO SKIPPED: cache_miss list_render", flush=True)
         return ""
     if deadline is not None and time.perf_counter() + 0.4 > deadline:
         print("ACTIVITIES PHOTO SKIPPED: deadline", flush=True)
         return ""
+    st.session_state["activities_photo_attempts_this_run"] = (
+        int(st.session_state.get("activities_photo_attempts_this_run") or 0) + 1
+    )
     uri = _google_place_photo_data_uri(clean_photo_name, max_width_px=max_width_px)
     if uri:
         _activity_cache_set("activities_photo_cache", cache_key, uri)
+    else:
+        failed_cache[cache_key] = True
     return uri
+
+
+def _activity_photo_cache_count():
+    return len(st.session_state.get("activities_photo_cache") or {})
+
+
+def _visible_photo_stats(activities):
+    photo_cache = st.session_state.get("activities_photo_cache") or {}
+    failed_cache = st.session_state.get("activities_photo_failed_cache") or {}
+    refs_found = 0
+    cached = 0
+    failures = 0
+    pending = 0
+    for activity in activities:
+        photo_names = activity.get("photo_names") or []
+        if not photo_names:
+            continue
+        refs_found += 1
+        cache_key = _photo_cache_key(
+            photo_names[0],
+            max_width_px=ACTIVITY_CARD_PHOTO_WIDTH,
+            place_id=activity.get("place_id") or activity.get("id"),
+        )
+        if not cache_key:
+            continue
+        if cache_key in photo_cache:
+            cached += 1
+        elif cache_key in failed_cache:
+            failures += 1
+        else:
+            pending += 1
+    return {
+        "refs_found": refs_found,
+        "cached": cached,
+        "failures": failures,
+        "pending": pending,
+    }
+
+
+def _warm_visible_activity_photos(activities, max_requests=24, budget_seconds=6.0):
+    start = time.perf_counter()
+    warmed = 0
+    for activity in activities:
+        if warmed >= max_requests:
+            break
+        if time.perf_counter() - start > budget_seconds:
+            break
+        photo_names = activity.get("photo_names") or []
+        if not photo_names:
+            continue
+        place_id = activity.get("place_id") or activity.get("id")
+        cache_key = _photo_cache_key(
+            photo_names[0],
+            max_width_px=ACTIVITY_CARD_PHOTO_WIDTH,
+            place_id=place_id,
+        )
+        if not cache_key:
+            continue
+        if cache_key in (st.session_state.get("activities_photo_cache") or {}):
+            continue
+        if cache_key in st.session_state.setdefault("activities_photo_failed_cache", {}):
+            continue
+        attempts_before = int(st.session_state.get("activities_photo_attempts_this_run") or 0)
+        _photo_uri_cached(
+            photo_names[0],
+            max_width_px=ACTIVITY_CARD_PHOTO_WIDTH,
+            fetch_if_missing=True,
+            deadline=start + budget_seconds,
+            place_id=place_id,
+        )
+        photo_cache = st.session_state.get("activities_photo_cache") or {}
+        failed_cache = st.session_state.get("activities_photo_failed_cache") or {}
+        attempts_after = int(st.session_state.get("activities_photo_attempts_this_run") or 0)
+        if attempts_after > attempts_before or cache_key in photo_cache or cache_key in failed_cache:
+            warmed += 1
+    return warmed
 
 
 def _tripadvisor_enrichment_cached(activity, destination, deadline=None):
@@ -1302,6 +1394,49 @@ def _suggested_searches_for_empty(destination, category):
     return [f"{term} in {destination}" for term in terms[:4]]
 
 
+def _itinerary_day_options():
+    return [f"Day {day}" for day in range(1, 8)]
+
+
+def _activity_in_itinerary(activity_id):
+    itinerary_days = st.session_state.get("itinerary_days") or {}
+    for items in itinerary_days.values():
+        if any(str(item.get("id")) == str(activity_id) for item in (items or [])):
+            return True
+    return False
+
+
+def _activity_to_itinerary_item(activity):
+    return {
+        "id": activity.get("id"),
+        "name": activity.get("title") or "Activity",
+        "duration": activity.get("duration") or "",
+        "neighborhood": activity.get("neighborhood") or "",
+        "address": activity.get("address") or "",
+        "category": activity.get("category") or "",
+        "estimated_cost": activity.get("price") or "",
+        "rating": activity.get("rating"),
+        "review_count": activity.get("review_count"),
+        "opening_status": activity.get("opening_status") or "",
+        "hours_summary": activity.get("hours_summary") or [],
+        "lat": activity.get("lat"),
+        "lng": activity.get("lng"),
+        "source": activity.get("source") or "",
+    }
+
+
+def _add_activity_to_itinerary(activity, day_label):
+    clean_day = str(day_label or "Day 1").strip() or "Day 1"
+    itinerary_days = st.session_state.setdefault("itinerary_days", {})
+    day_items = itinerary_days.setdefault(clean_day, [])
+    activity_id = str(activity.get("id") or "")
+    if any(str(item.get("id")) == activity_id for item in day_items):
+        return False
+    day_items.append(_activity_to_itinerary_item(activity))
+    st.session_state["itinerary_days"] = itinerary_days
+    return True
+
+
 def _badge_html(badge_key):
     if not badge_key or badge_key not in _BADGE_META:
         return ""
@@ -1340,7 +1475,7 @@ def _render_activity_card(activity, is_saved, photo_deadline=None):
         photo_uri = _photo_uri_cached(
             photo_names[0],
             max_width_px=ACTIVITY_CARD_PHOTO_WIDTH,
-            fetch_if_missing=True,
+            fetch_if_missing=False,
             deadline=photo_deadline,
             place_id=activity.get("place_id") or activity.get("id"),
         )
@@ -1594,13 +1729,6 @@ def _render_details_modal(activity):
     )
 
     def _content():
-        _render_activity_photos(
-            activity.get("photo_names"),
-            hero=True,
-            deadline=deadline,
-            place_id=activity.get("place_id") or activity.get("id"),
-        )
-
         st.markdown(f"**{_html.escape(activity.get('title') or 'Activity')}**")
         rating_line = _rating_line(activity)
         if rating_line:
@@ -1619,6 +1747,13 @@ def _render_details_modal(activity):
         if activity.get("address"):
             st.markdown(f"**Address:** {_html.escape(activity['address'])}")
         st.markdown(f"**Hours:** {_html.escape(_activity_hours_summary(activity))}")
+
+        _render_activity_photos(
+            activity.get("photo_names"),
+            hero=True,
+            deadline=deadline,
+            place_id=activity.get("place_id") or activity.get("id"),
+        )
 
         why_go_items = _activity_why_go_items(activity)
         if why_go_items:
@@ -1685,6 +1820,7 @@ def _render_details_modal(activity):
 def render():
     track_once("page_viewed", key="activities_page_viewed", properties={"page_name": "activities"})
     _inject_styles()
+    st.session_state["activities_photo_attempts_this_run"] = 0
 
     destination_city = _destination_city()
     st.markdown(
@@ -1755,6 +1891,16 @@ def render():
     visible_limit = int(st.session_state.get("activities_visible_limit") or ACTIVITIES_PAGE_SIZE)
     visible_limit = max(ACTIVITIES_PAGE_SIZE, min(visible_limit, max(len(visible), ACTIVITIES_PAGE_SIZE)))
     visible_page = visible[:visible_limit]
+    photo_stats = _visible_photo_stats(visible_page)
+    print(
+        "ACTIVITIES RENDER: "
+        f"shown={len(visible_page)} total_visible={len(visible)} "
+        f"photo_refs_found={photo_stats['refs_found']} "
+        f"photo_urls_cached={photo_stats['cached']} "
+        f"photo_failures={photo_stats['failures']} "
+        f"photo_pending={photo_stats['pending']}",
+        flush=True,
+    )
 
     count_label = f"{len(visible)} activit{'y' if len(visible) == 1 else 'ies'}"
     if search_query:
@@ -1778,11 +1924,12 @@ def render():
         for col_index, activity in enumerate(visible_page[row_start:row_start + 2]):
             activity_id = activity["id"]
             is_saved = activity_id in saved_ids
+            is_in_itinerary = _activity_in_itinerary(activity_id)
 
             with row_cols[col_index]:
                 _render_activity_card(activity, is_saved, photo_deadline=photo_deadline)
 
-                action_cols = st.columns([0.9, 1.15, 0.95])
+                action_cols = st.columns([0.78, 0.9, 1.1, 0.82])
                 with action_cols[0]:
                     save_label = "Saved" if is_saved else "Save"
                     if st.button(save_label, key=f"ac_save_{activity_id}", use_container_width=True):
@@ -1795,13 +1942,28 @@ def render():
                         st.session_state["activities_saved"] = list(saved_ids)
                         st.rerun()
                 with action_cols[1]:
-                    add_label = "In itinerary" if is_saved else "Add to day"
-                    if st.button(add_label, key=f"ac_add_{activity_id}", disabled=is_saved, use_container_width=True):
+                    selected_day = st.selectbox(
+                        "Day",
+                        _itinerary_day_options(),
+                        key=f"ac_day_{activity_id}",
+                        label_visibility="collapsed",
+                    )
+                with action_cols[2]:
+                    add_label = "In itinerary" if is_in_itinerary else "Add to day"
+                    if st.button(add_label, key=f"ac_add_{activity_id}", disabled=is_in_itinerary, use_container_width=True):
                         saved_ids.add(activity_id)
                         st.session_state["activities_saved"] = list(saved_ids)
-                        track_event("activity_added_to_day", {"activity": activity["title"]})
+                        added = _add_activity_to_itinerary(activity, selected_day)
+                        track_event(
+                            "activity_added_to_day",
+                            {
+                                "activity": activity["title"],
+                                "day": selected_day,
+                                "added": added,
+                            },
+                        )
                         st.rerun()
-                with action_cols[2]:
+                with action_cols[3]:
                     if st.button("Details", key=f"ac_details_{activity_id}", use_container_width=True):
                         st.session_state["activities_active_modal"] = activity_id
                         st.rerun()
@@ -1820,6 +1982,34 @@ def render():
 
     # --- details modal (exactly one dialog per run) ---
     active_modal_id = st.session_state.get("activities_active_modal")
+    warmed = 0
+    if not active_modal_id and visible_page:
+        if photo_stats["pending"] > 0:
+            warmed = _warm_visible_activity_photos(visible_page)
+        if warmed:
+            photo_stats = _visible_photo_stats(visible_page)
+            print(
+                "ACTIVITIES PHOTO DEBUG: "
+                f"visible_count={len(visible_page)} "
+                f"photo_refs_found={photo_stats['refs_found']} "
+                f"photo_urls_cached={photo_stats['cached']} "
+                f"photo_failures={photo_stats['failures']} "
+                f"attempted_this_run={st.session_state.get('activities_photo_attempts_this_run', 0)} "
+                f"warmed={warmed}",
+                flush=True,
+            )
+            st.rerun()
+    photo_stats = _visible_photo_stats(visible_page)
+    print(
+        "ACTIVITIES PHOTO DEBUG: "
+        f"visible_count={len(visible_page)} "
+        f"photo_refs_found={photo_stats['refs_found']} "
+        f"photo_urls_cached={photo_stats['cached']} "
+        f"photo_failures={photo_stats['failures']} "
+        f"attempted_this_run={st.session_state.get('activities_photo_attempts_this_run', 0)} "
+        f"warmed={warmed}",
+        flush=True,
+    )
     if active_modal_id and active_modal_id in activities_by_id:
         _render_details_modal(activities_by_id[active_modal_id])
 
