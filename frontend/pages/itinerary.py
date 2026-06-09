@@ -1499,6 +1499,23 @@ def _day_sightseeing_load_minutes(items):
     return total
 
 
+def _scheduler_item_name(item):
+    return str((item or {}).get("name") or (item or {}).get("title") or "Activity")
+
+
+def _scheduler_log(action, item=None, day=None, reason="", extra=None):
+    parts = ["BYABLE ITINERARY SCHEDULER", str(action)]
+    if item is not None:
+        parts.append(f"item={_scheduler_item_name(item)}")
+    if day:
+        parts.append(f"day={day}")
+    if reason:
+        parts.append(f"reason={reason}")
+    if extra:
+        parts.append(str(extra))
+    print(" | ".join(parts))
+
+
 def _day_activity_count(items):
     return len([item for item in items or [] if isinstance(item, dict) and not _meal_slot(item)])
 
@@ -1507,15 +1524,13 @@ def _day_activity_target(day, base_days=None):
     base_days = base_days or _available_trip_days()
     if len(base_days) > 1 and day in {base_days[0], base_days[-1]}:
         return {"min": 0, "max": 1, "ideal": 1}
-    return {"min": 2, "max": 4, "ideal": 3}
+    return {"min": 3, "max": 4, "ideal": 3}
 
 
 def _missing_required_schedule_data(item):
     if not isinstance(item, dict):
         return True
     if not (item.get("name") or item.get("title")):
-        return True
-    if not (item.get("address") or item.get("neighborhood") or (item.get("lat") is not None and item.get("lng") is not None)):
         return True
     return False
 
@@ -1538,8 +1553,14 @@ def _add_couldnt_fit_items(items, reason):
 
 def _retry_no_open_slot_items():
     couldnt_fit = list(st.session_state.get("itinerary_couldnt_fit") or [])
-    retry = [item for item in couldnt_fit if item.get("unscheduled_reason") == "No open slot"]
-    keep = [item for item in couldnt_fit if item.get("unscheduled_reason") != "No open slot"]
+    retry_reasons = {
+        "No open slot",
+        "No open meal slot",
+        "No reasonable open-time slot found",
+        "Closed during available times",
+    }
+    retry = [item for item in couldnt_fit if item.get("unscheduled_reason") in retry_reasons]
+    keep = [item for item in couldnt_fit if item.get("unscheduled_reason") not in retry_reasons]
     if retry:
         st.session_state["itinerary_unscheduled_activities"] = _append_without_place_id_duplicate(
             st.session_state.get("itinerary_unscheduled_activities") or [],
@@ -1557,6 +1578,8 @@ def _day_candidate_score(days_data, day, group, context, base_days, exclude_day=
         return None
     candidate_items = current_items + group_items
     if _day_sightseeing_load_minutes(candidate_items) > _day_capacity_minutes(day, context, base_days):
+        return None
+    if not _candidate_day_keeps_group_in_reasonable_windows(day, candidate_items, group_items, context):
         return None
 
     current_count = _day_activity_count(current_items)
@@ -1588,6 +1611,63 @@ def _best_target_day_for_group(days_data, group, context, base_days, exclude_day
         return None
     scored.sort(key=lambda item: item[0])
     return scored[0][1]
+
+
+def _candidate_day_keeps_group_in_reasonable_windows(day, candidate_items, group_items, context):
+    group_keys = {_itinerary_item_key(item) for item in group_items or [] if isinstance(item, dict)}
+    if not group_keys:
+        return True
+    scheduled_items = _scheduled_day_items(
+        day,
+        list(candidate_items or []),
+        _day_items_for_schedule(day, candidate_items, context),
+        context,
+    )
+    checked_keys = set()
+    for scheduled in scheduled_items:
+        item = scheduled["item"]
+        item_key = _itinerary_item_key(item)
+        if item_key not in group_keys:
+            continue
+        checked_keys.add(item_key)
+        check = _hours_check_for_time(item, scheduled["start"], scheduled["end"])
+        if check.get("open") is False:
+            return False
+    return checked_keys == group_keys
+
+
+def _retry_unscheduled_into_open_days(days_data, context):
+    _retry_no_open_slot_items()
+    pending = list(st.session_state.get("itinerary_unscheduled_activities") or [])
+    if not pending:
+        return days_data
+
+    current_city, _needs_city = _split_city_assignment_items(pending, context)
+    sightseeing = _sightseeing_items_only(current_city)
+    output = _ensure_itinerary_shape(days_data)
+    remaining = []
+    changed = False
+    base_days = list(_available_trip_days())
+
+    for item in sightseeing:
+        if _missing_required_schedule_data(item):
+            _add_couldnt_fit_items([item], "Missing required data")
+            _scheduler_log("rejected", item, reason="Missing required data")
+            continue
+        target_day = _best_target_day_for_group(output, [item], context, base_days)
+        if target_day:
+            output[target_day].append(item)
+            changed = True
+            _scheduler_log("placed", item, target_day, "retried open day")
+        else:
+            reason = item.get("unscheduled_reason") or "No open slot"
+            remaining.append(_mark_unscheduled(item, reason))
+            _scheduler_log("rejected", item, reason=reason)
+
+    st.session_state["itinerary_unscheduled_activities"] = remaining
+    if changed:
+        _save_itinerary_days(output)
+    return output
 
 
 def _transit_minutes_for_order(items):
@@ -1695,15 +1775,21 @@ def _assign_activities_to_days(activities):
     for group in groups:
         missing_data = [item for item in group if _missing_required_schedule_data(item)]
         if missing_data:
-            _add_couldnt_fit_items(missing_data, "Missing location")
+            _add_couldnt_fit_items(missing_data, "Missing required data")
+            for item in missing_data:
+                _scheduler_log("rejected", item, reason="Missing required data")
             group = [item for item in group if item not in missing_data]
         if not group:
             continue
         target_day = _best_target_day_for_group(assigned, group, context, base_days)
         if target_day:
             assigned[target_day].extend(group)
+            for item in group:
+                _scheduler_log("placed", item, target_day, "balanced day target")
         else:
             _add_couldnt_fit_items(group, "No open slot")
+            for item in group:
+                _scheduler_log("rejected", item, reason="No open slot")
     return {day: _order_day_activities(items) for day, items in assigned.items()}
 
 
@@ -1796,6 +1882,7 @@ def _rebalance_days_by_capacity(days_data):
                 output[day].append(movable)
                 continue
             output[target_day].append(movable)
+            _scheduler_log("moved", movable, target_day, f"capacity rebalance from {day}")
             moved = True
             changed = True
             break
@@ -1845,6 +1932,7 @@ def _rebalance_days_by_activity_count(days_data):
             output[source_day] = source_items
             break
         output[target_day].append(movable)
+        _scheduler_log("moved", movable, target_day, f"count rebalance from {source_day}")
         changed = True
     return output, changed
 
@@ -1866,13 +1954,16 @@ def _auto_assign_itinerary():
         if pending:
             for item in pending:
                 if _missing_required_schedule_data(item):
-                    _add_couldnt_fit_items([item], "Missing location")
+                    _add_couldnt_fit_items([item], "Missing required data")
+                    _scheduler_log("rejected", item, reason="Missing required data")
                     continue
                 target_day = _best_target_day_for_group(merged, [item], context, list(_available_trip_days()))
                 if target_day:
                     merged[target_day].append(item)
+                    _scheduler_log("placed", item, target_day, "pending item placed")
                 else:
                     _add_couldnt_fit_items([item], "No open slot")
+                    _scheduler_log("rejected", item, reason="No open slot")
         if raw_pending:
             st.session_state["itinerary_unscheduled_activities"] = []
         reduced = _reduce_long_transit(merged)
@@ -2008,6 +2099,31 @@ def _is_full_itinerary_day(day, context):
     return not _fixed_day_blocks(day, context)
 
 
+def _meal_types_for_day(day, context):
+    has_breakfast = any(_meal_slot(item) == "breakfast" for item in _current_city_meal_candidates(context))
+    if _is_full_itinerary_day(day, context):
+        meal_types = ["lunch", "dinner"]
+        if has_breakfast:
+            meal_types.insert(0, "breakfast")
+        return meal_types
+
+    if day == _arrival_day():
+        arrival_minutes = _clock_minutes(context.get("arrival_time"))
+        if arrival_minutes is None or arrival_minutes <= 19 * 60:
+            return ["dinner"]
+        return []
+
+    if day == _departure_day():
+        departure_minutes = _clock_minutes(context.get("departure_time"))
+        if has_breakfast:
+            return ["breakfast"]
+        if departure_minutes is not None and departure_minutes >= 15 * 60:
+            return ["lunch"]
+        return []
+
+    return []
+
+
 def _meal_key(day, meal_type):
     clean_day = "".join(ch.lower() if ch.isalnum() else "_" for ch in str(day)).strip("_")
     return f"{clean_day}_{meal_type}"
@@ -2044,21 +2160,25 @@ def _period_for_item(item, index, total):
         return "Evening"
     if _is_nightlife_activity(item):
         return "Evening"
+    if _outdoor_or_park_item(item):
+        return "Morning" if index % 2 == 0 else "Afternoon"
+    if _culture_or_attraction_item(item):
+        return "Morning" if index % 2 == 0 else "Afternoon"
     if total <= 2:
         return "Morning" if index == 0 else "Afternoon"
-    if index == 0:
+    if index % 2 == 0:
         return "Morning"
-    if index >= total - 1:
-        return "Evening"
     return "Afternoon"
 
 
 def _period_for_activity_on_day(item, day, index, total, context):
+    if _is_nightlife_activity(item):
+        return "Evening"
     if day == _arrival_day() and _fixed_day_blocks(day, context):
         arrival_period = _period_from_clock(context.get("arrival_time"), default="Afternoon")
         if arrival_period == "Morning":
             return "Afternoon" if index == 0 else "Evening"
-        return "Evening"
+        return "Evening" if _is_nightlife_activity(item) else "Afternoon"
     if day == _departure_day() and _fixed_day_blocks(day, context):
         return "Morning"
     return _period_for_item(item, index, total)
@@ -2109,7 +2229,7 @@ def _opening_ranges_for_item(item):
     if "24 hours" in text or "open 24" in text:
         return [(0, 24 * 60)]
     if "closed" in text and not re.search(r"\d{1,2}(?::\d{2})?\s*(?:am|pm)", text):
-        return []
+        return None
     times = [
         _parse_time_to_minutes(match.group(0))
         for match in re.finditer(r"\d{1,2}(?::\d{2})?\s*(?:am|pm)", text)
@@ -2132,10 +2252,10 @@ def _hours_check_for_period(item, period):
         return {"verified": False, "open": True, "label": ""}
     hours_text = _hours_text_for_item(item)
     if not hours_text:
-        return {"verified": False, "open": None, "label": "Hours not verified"}
+        return {"verified": False, "open": None, "label": "Check hours locally"}
     ranges = _opening_ranges_for_item(item)
     if ranges is None:
-        return {"verified": True, "open": True, "label": "Hours checked"}
+        return {"verified": False, "open": None, "label": "Check hours locally"}
     if not ranges:
         return {"verified": True, "open": False, "label": "Closed at planned time"}
     probe = _period_probe_minutes(period)
@@ -2151,17 +2271,26 @@ def _hours_check_for_time(item, start_minutes, end_minutes=None):
     if item.get("fixed") or item.get("meal_block"):
         return {"verified": False, "open": True, "label": ""}
     hours_text = _hours_text_for_item(item)
-    if not hours_text:
-        return {"verified": False, "open": None, "label": "Hours not verified"}
-    ranges = _opening_ranges_for_item(item)
-    if ranges is None:
-        return {"verified": True, "open": True, "label": "Hours checked"}
-    if not ranges:
-        return {"verified": True, "open": False, "label": "Closed at planned time"}
+    default_bounds = _default_schedule_bounds_for_item(item)
     start = int(start_minutes or 0) % (24 * 60)
     end = int(end_minutes if end_minutes is not None else start) % (24 * 60)
     if end < start:
         end += 24 * 60
+    if not hours_text:
+        if default_bounds:
+            bound_start, bound_end = default_bounds
+            if start < bound_start or end > bound_end:
+                return {"verified": False, "open": False, "label": "No reasonable open-time slot found"}
+        return {"verified": False, "open": None, "label": "Check hours locally"}
+    ranges = _opening_ranges_for_item(item)
+    if ranges is None:
+        if default_bounds:
+            bound_start, bound_end = default_bounds
+            if start < bound_start or end > bound_end:
+                return {"verified": False, "open": False, "label": "No reasonable open-time slot found"}
+        return {"verified": False, "open": None, "label": "Check hours locally"}
+    if not ranges:
+        return {"verified": True, "open": False, "label": "Closed at planned time"}
     is_open = any(start >= range_start and end <= range_end for range_start, range_end in ranges)
     return {
         "verified": True,
@@ -2172,7 +2301,16 @@ def _hours_check_for_time(item, start_minutes, end_minutes=None):
 
 def _valid_periods_for_item(item):
     ranges = _opening_ranges_for_item(item)
-    if ranges is None or not ranges:
+    if ranges is None:
+        bounds = _default_schedule_bounds_for_item(item)
+        if not bounds:
+            return []
+        start, end = bounds
+        return [
+            period for period in ("Morning", "Afternoon", "Evening")
+            if start <= _period_probe_minutes(period) <= end
+        ]
+    if not ranges:
         return []
     periods = []
     for period in ("Morning", "Afternoon", "Evening"):
@@ -2366,7 +2504,7 @@ def _period_keeps_item_open(day, activity_items, context, item, period):
         _hours_check_for_time(item, scheduled["start"], scheduled["end"])
         if scheduled else {"open": False}
     )
-    if check.get("open") is True:
+    if check.get("open") is not False:
         return True
     if had_period:
         item["period"] = old_period
@@ -2406,6 +2544,7 @@ def _reschedule_closed_items_by_time(days_data, context):
                 had_period = "period" in item
                 for period in sorted(valid_periods, key=lambda value: 0 if value == current_period else 1):
                     if _period_keeps_item_open(day, activity_items, context, item, period):
+                        _scheduler_log("moved", item, day, f"closed at {current_period}; moved to {period}")
                         moved = True
                         changed = True
                         break
@@ -2436,6 +2575,7 @@ def _reschedule_closed_items_by_time(days_data, context):
                     if _day_sightseeing_load_minutes(target_items) <= _day_capacity_minutes(target_day, context, base_days):
                         for period in valid_periods:
                             if _period_keeps_item_open(target_day, target_items, context, item, period):
+                                _scheduler_log("moved", item, target_day, f"closed on {day}; moved to open {period}")
                                 moved = True
                                 changed = True
                                 break
@@ -2458,6 +2598,55 @@ def _reschedule_closed_items_by_time(days_data, context):
     if changed:
         _save_itinerary_days(output)
     return output
+
+
+def _move_unresolved_closed_items_to_unscheduled(days_data, context):
+    output = _ensure_itinerary_shape(days_data)
+    changed = False
+    for day in list(output.keys()):
+        activity_items = output.get(day, [])
+        scheduled_items = _scheduled_day_items(
+            day,
+            list(activity_items or []),
+            _day_items_for_schedule(day, activity_items, context),
+            context,
+        )
+        remove_keys = set()
+        for scheduled in scheduled_items:
+            item = scheduled["item"]
+            if item.get("fixed") or item.get("meal_block") or item.get("locked"):
+                continue
+            check = _hours_check_for_time(item, scheduled["start"], scheduled["end"])
+            if check.get("open") is not False:
+                continue
+            remove_keys.add(_itinerary_item_key(item))
+            reason = check.get("label") or "Closed during available times"
+            _add_couldnt_fit_items([item], reason)
+            _scheduler_log("rejected", item, day, reason)
+        if remove_keys:
+            output[day] = [item for item in activity_items if _itinerary_item_key(item) not in remove_keys]
+            changed = True
+    if changed:
+        _save_itinerary_days(output)
+    return output
+
+
+def _log_final_schedule(assigned, context):
+    for day, items in (assigned or {}).items():
+        day_items = _day_items_for_schedule(day, list(items or []), context)
+        for scheduled in _scheduled_day_items(day, list(items or []), day_items, context):
+            item = scheduled["item"]
+            if item.get("fixed") or item.get("meal_block"):
+                continue
+            check = _hours_check_for_time(item, scheduled["start"], scheduled["end"])
+            reason = "scheduled open venue" if check.get("open") is not False else "scheduled with unresolved hours issue"
+            _scheduler_log(
+                "scheduled",
+                item,
+                day,
+                reason,
+                f"{_format_minutes_as_time(scheduled['start'])}-{_format_minutes_as_time(scheduled['end'])}",
+            )
 
 
 def _location_text(item):
@@ -2542,7 +2731,9 @@ def _preferred_start_minutes(item, period):
     if item.get("meal_type") == "lunch":
         return 12 * 60 + 30
     if item.get("meal_type") == "dinner":
-        return 18 * 60 + 30
+        return 18 * 60 + 45
+    if _is_nightlife_activity(item):
+        return 20 * 60 + 30
     raw_duration = str(item.get("duration") or "").strip()
     parsed_clock = _clock_minutes(raw_duration)
     if parsed_clock is not None and item.get("fixed"):
@@ -2555,8 +2746,99 @@ def _preferred_start_minutes(item, period):
     if period == "Afternoon":
         return 14 * 60
     if period == "Evening":
+        if _culture_or_attraction_item(item):
+            return 16 * 60
         return 18 * 60
     return 9 * 60
+
+
+def _culture_or_attraction_item(item):
+    category = str((item or {}).get("category") or "").lower()
+    text = _activity_text(item or {})
+    return category in {"culture", "free"} or any(
+        term in text
+        for term in (
+            "museum",
+            "gallery",
+            "landmark",
+            "attraction",
+            "monument",
+            "palace",
+            "castle",
+            "cathedral",
+            "temple",
+            "shrine",
+            "church",
+            "tower",
+            "historic",
+        )
+    )
+
+
+def _outdoor_or_park_item(item):
+    category = str((item or {}).get("category") or "").lower()
+    text = _activity_text(item or {})
+    return category in {"nature", "adventure"} or any(
+        term in text
+        for term in ("park", "garden", "viewpoint", "outdoor", "trail", "waterfront", "scenic")
+    )
+
+
+def _default_schedule_bounds_for_item(item):
+    if item.get("fixed") or item.get("meal_block"):
+        return None
+    if item.get("meal_type") == "breakfast":
+        return (7 * 60, 10 * 60 + 30)
+    if item.get("meal_type") == "lunch":
+        return (11 * 60 + 30, 14 * 60 + 30)
+    if item.get("meal_type") == "dinner":
+        return (17 * 60 + 30, 21 * 60)
+    if _is_food_venue(item):
+        slot = _meal_slot(item)
+        if slot == "breakfast":
+            return (7 * 60, 10 * 60 + 30)
+        if slot == "dinner":
+            return (17 * 60 + 30, 21 * 60)
+        return (11 * 60 + 30, 14 * 60 + 30)
+    if _is_nightlife_activity(item):
+        return (20 * 60, 23 * 60)
+    if _outdoor_or_park_item(item):
+        return (8 * 60, 19 * 60 + 30)
+    if _culture_or_attraction_item(item):
+        return (9 * 60, 18 * 60)
+    return None
+
+
+def _schedule_start_bounds(item):
+    if item.get("meal_type") == "breakfast":
+        return (7 * 60, 10 * 60 + 30)
+    if item.get("meal_type") == "lunch":
+        return (11 * 60 + 30, 14 * 60 + 30)
+    if item.get("meal_type") == "dinner":
+        return (17 * 60 + 30, 21 * 60)
+    if _is_food_venue(item):
+        return _default_schedule_bounds_for_item(item) or (None, None)
+    if _is_nightlife_activity(item):
+        return (20 * 60, 23 * 60)
+    if _opening_ranges_for_item(item) is None:
+        return _default_schedule_bounds_for_item(item) or (None, None)
+    return (None, None)
+
+
+def _schedule_sequence_priority(item, period):
+    if item.get("fixed"):
+        return -2
+    if item.get("meal_type") == "breakfast":
+        return -1
+    if item.get("meal_type") == "lunch":
+        return -1
+    if item.get("meal_type") == "dinner":
+        return 0
+    if _is_nightlife_activity(item):
+        return 3
+    if period == "Evening":
+        return 1
+    return 0
 
 
 def _scheduled_day_items(day, activity_items, day_items, context):
@@ -2589,10 +2871,11 @@ def _scheduled_day_items(day, activity_items, day_items, context):
                 "period": period,
                 "preferred": preferred,
                 "rank": period_rank.get(period, 1),
+                "sequence": _schedule_sequence_priority(item, period),
                 "source_index": idx,
             }
         )
-    rows.sort(key=lambda row: (row["rank"], row["preferred"], row["source_index"]))
+    rows.sort(key=lambda row: (row["rank"], row["sequence"], row["preferred"], row["source_index"]))
 
     scheduled = []
     current_time = None
@@ -2603,6 +2886,16 @@ def _scheduled_day_items(day, activity_items, day_items, context):
         transit_minutes = _minutes_from_transit_label(transit_label)
         earliest = (current_time + transit_minutes) if current_time is not None else row["preferred"]
         start = max(row["preferred"], earliest)
+        min_start, max_start = _schedule_start_bounds(item)
+        if min_start is not None and start < min_start:
+            start = min_start
+        if max_start is not None and start > max_start:
+            _scheduler_log(
+                "rejected",
+                item,
+                day,
+                f"outside reasonable window ending {_format_minutes_as_time(max_start)}",
+            )
         duration = _duration_minutes_for_item(item)
         scheduled.append(
             {
@@ -2657,7 +2950,7 @@ def _restaurant_suggestions_for_day(day, day_items, context, meal_type):
     if meal_candidates:
         candidate_days = [
             candidate_day for candidate_day in _available_trip_days()
-            if _is_full_itinerary_day(candidate_day, context)
+            if meal_type in _meal_types_for_day(candidate_day, context)
             and not _meal_state(candidate_day, meal_type).get("removed")
         ]
         try:
@@ -2697,8 +2990,6 @@ def _restaurant_suggestions_for_day(day, day_items, context, meal_type):
 
 
 def _meal_blocks_for_day(day, activity_items, fixed_blocks, context):
-    if not _is_full_itinerary_day(day, context):
-        return []
     blocks = []
     combined_context_items = list(activity_items or []) + list(fixed_blocks or [])
     definitions = {
@@ -2713,16 +3004,13 @@ def _meal_blocks_for_day(day, activity_items, fixed_blocks, context):
             "period": "Evening",
         },
     }
-    if any(_meal_slot(item) == "breakfast" for item in _current_city_meal_candidates(context)):
-        definitions = {
-            "breakfast": {
-                "name": "Breakfast",
-                "duration": "8:00 AM-9:00 AM",
-                "period": "Morning",
-            },
-            **definitions,
-        }
-    for meal_type, definition in definitions.items():
+    definitions["breakfast"] = {
+        "name": "Breakfast / brunch",
+        "duration": "8:00 AM-9:00 AM",
+        "period": "Morning",
+    }
+    for meal_type in _meal_types_for_day(day, context):
+        definition = definitions[meal_type]
         state = _meal_state(day, meal_type)
         if state.get("removed"):
             continue
@@ -2755,10 +3043,11 @@ def _meal_blocks_for_day(day, activity_items, fixed_blocks, context):
 
 
 def _render_removed_meal_controls(day, context):
-    if not _is_full_itinerary_day(day, context):
+    meal_types = _meal_types_for_day(day, context)
+    if not meal_types:
         return
     removed = [
-        meal_type for meal_type in ("breakfast", "lunch", "dinner")
+        meal_type for meal_type in meal_types
         if _meal_state(day, meal_type).get("removed")
     ]
     if not removed:
@@ -2773,13 +3062,8 @@ def _render_removed_meal_controls(day, context):
 
 def _available_meal_slots_for_render(assigned, context):
     slots = {}
-    has_breakfast = any(_meal_slot(item) == "breakfast" for item in _current_city_meal_candidates(context))
     for day in (assigned or {}):
-        if not _is_full_itinerary_day(day, context):
-            continue
-        meal_types = ["lunch", "dinner"]
-        if has_breakfast:
-            meal_types.insert(0, "breakfast")
+        meal_types = _meal_types_for_day(day, context)
         for meal_type in meal_types:
             if not _meal_state(day, meal_type).get("removed"):
                 slots.setdefault(day, []).append(meal_type)
@@ -2805,12 +3089,14 @@ def _meal_visibility_split(assigned, context):
             candidate = candidates[candidate_index]
             visible.append(candidate)
             used_ids.add(_selection_id_value(candidate))
+            _scheduler_log("placed", candidate, day, f"{meal_type} meal slot")
             candidate_index += 1
     for item in meal_candidates:
         if _selection_id_value(item) in used_ids:
             continue
-        reason = "No open slot" if _meal_slot(item) in {"breakfast", "lunch", "dinner"} else "Missing location"
+        reason = "No open meal slot" if _meal_slot(item) in {"breakfast", "lunch", "dinner"} else "Meal type unavailable"
         unplaced.append(_mark_unscheduled(item, reason))
+        _scheduler_log("rejected", item, reason=reason)
     return visible, unplaced
 
 
@@ -2858,7 +3144,7 @@ def _render_item_bucket(title, items, note):
         category = item.get("category") or "Activity"
         reason = item.get("unscheduled_reason")
         if not reason:
-            reason = "Missing location" if location == "Location to confirm" else "No open slot"
+            reason = "Missing required data" if not (item.get("name") or item.get("title")) else "No open slot"
         st.markdown(
             f"""
             <div class="auto-item">
@@ -2867,6 +3153,43 @@ def _render_item_bucket(title, items, note):
                 <div class="auto-name">{_html.escape(str(name))}</div>
                 <div class="auto-meta">{_html.escape(str(location))}</div>
                 <div class="auto-tags"><span class="auto-tag">{_html.escape(str(category))}</span><span class="auto-tag warn">{_html.escape(str(reason))}</span></div>
+              </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    st.markdown("</div>", unsafe_allow_html=True)
+
+
+def _render_scheduler_debug(visibility):
+    debug_items = []
+    for item in visibility.get("needs_city", []) or []:
+        debug_items.append((item, item.get("unscheduled_reason") or "Wrong city"))
+    for item in visibility.get("unscheduled_items", []) or []:
+        debug_items.append((item, item.get("unscheduled_reason") or "No open slot"))
+    if not debug_items:
+        return
+    st.markdown(
+        """
+        <div class="auto-day">
+          <div class="auto-day-head">
+            <div>
+              <div class="auto-day-title">Scheduler debug</div>
+              <div class="auto-day-note">Why these selected activities could not be placed yet.</div>
+            </div>
+          </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    for item, reason in debug_items:
+        name = item.get("name") or item.get("title") or "Activity"
+        st.markdown(
+            f"""
+            <div class="auto-item">
+              <div class="auto-time"></div>
+              <div class="auto-card">
+                <div class="auto-name">{_html.escape(str(name))}</div>
+                <div class="auto-meta">{_html.escape(str(reason))}</div>
               </div>
             </div>
             """,
@@ -2993,11 +3316,14 @@ def _render_auto_itinerary(assigned):
         _save_itinerary_days(assigned)
     assigned = _apply_schedule_validation(assigned, context)
     assigned = _reschedule_closed_items_by_time(assigned, context)
+    assigned = _move_unresolved_closed_items_to_unscheduled(assigned, context)
+    assigned = _retry_unscheduled_into_open_days(assigned, context)
     assigned = _reduce_long_transit(assigned)
     assigned, count_changed = _rebalance_days_by_activity_count(assigned)
     assigned, capacity_changed = _rebalance_days_by_capacity(assigned)
     if count_changed or capacity_changed:
         _save_itinerary_days(assigned)
+    _log_final_schedule(assigned, context)
     visibility = _itinerary_visibility_state(assigned, context)
     summary_line = (
         f"{visibility['selected']} selected · {visibility['scheduled']} scheduled · "
@@ -3132,6 +3458,7 @@ def _render_auto_itinerary(assigned):
         visibility["unscheduled_items"],
         "These selected activities are preserved here until the planner can place them.",
     )
+    _render_scheduler_debug(visibility)
 
 
 def render():
