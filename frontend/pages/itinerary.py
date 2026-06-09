@@ -1,5 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
+import html as _html
+import math
 
 from analytics import posthog_client_script
 
@@ -13,37 +15,57 @@ _HTML = r"""<!DOCTYPE html>
 <style>
 html,body{margin:0;padding:0;background:#07090f;}
 *{box-sizing:border-box;margin:0;padding:0}
-.it{background:#07090f;color:#e4e6f0;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter',sans-serif;padding:0 0 60px}
-.it-header{padding:28px 32px 0;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.it-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:8px}
-.it-title{font-size:28px;font-weight:800;letter-spacing:-0.8px;color:#fff;margin-bottom:6px}
+.it{min-height:100vh;background:
+  radial-gradient(circle at 12% 0%,rgba(139,92,246,.12),transparent 28%),
+  radial-gradient(circle at 92% 10%,rgba(52,211,153,.08),transparent 26%),
+  linear-gradient(180deg,#080a12 0%,#07090f 38%,#05060a 100%);
+  color:#e4e6f0;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter',sans-serif;padding:0 0 72px}
+.it-shell{max-width:1160px;margin:0 auto;padding:28px 24px 0}
+.it-header{padding:0;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.62fr);gap:18px;align-items:stretch}
+.it-hero{border:1px solid rgba(255,255,255,.09);border-radius:22px;background:
+  linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.018)),
+  rgba(8,11,19,.88);box-shadow:0 24px 70px rgba(0,0,0,.28);padding:22px}
+.it-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.9px;text-transform:uppercase;color:rgba(196,181,253,.72);margin-bottom:8px}
+.it-title{font-size:34px;font-weight:850;letter-spacing:-1.1px;color:#fff;margin-bottom:8px}
 .it-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.it-meta-item{display:flex;align-items:center;gap:5px;font-size:13px;color:rgba(255,255,255,0.4)}
+.it-meta-item{display:flex;align-items:center;gap:5px;font-size:13px;color:rgba(255,255,255,0.52)}
 .it-meta-sep{color:rgba(255,255,255,0.12)}
-.it-header-right{display:flex;gap:8px;flex-shrink:0;margin-top:4px;align-items:center}
-.it-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;border:0.5px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.55)}
+.it-trip-chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}
+.it-trip-chip{font-size:11px;font-weight:650;color:rgba(255,255,255,.66);padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08)}
+.it-side-card{border:1px solid rgba(255,255,255,.08);border-radius:22px;background:rgba(255,255,255,.035);padding:18px;display:flex;flex-direction:column;justify-content:space-between;gap:16px}
+.it-side-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.34);font-weight:700;margin-bottom:8px}
+.it-side-route{font-size:14px;font-weight:750;color:#fff;line-height:1.35}
+.it-side-sub{font-size:12px;color:rgba(255,255,255,.44);line-height:1.45;margin-top:5px}
+.it-summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.it-summary-tile{border:1px solid rgba(255,255,255,.07);border-radius:12px;background:rgba(0,0,0,.14);padding:10px}
+.it-summary-num{font-size:18px;font-weight:800;color:#fff;line-height:1}
+.it-summary-cap{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.34);margin-top:5px}
+.it-header-right{display:flex;gap:8px;flex-shrink:0;align-items:center}
+.it-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 13px;border-radius:10px;font-size:12px;font-weight:650;cursor:pointer;border:0.5px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.65)}
 .it-btn:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.8)}
 .it-btn-ai{background:rgba(99,102,241,0.12);border-color:rgba(99,102,241,0.3);color:#a5b4fc}
-.edit-mode-badge{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600;background:rgba(99,102,241,0.15);border:0.5px solid rgba(99,102,241,0.4);color:#a5b4fc}
+.edit-mode-badge{display:none;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600;background:rgba(99,102,241,0.15);border:0.5px solid rgba(99,102,241,0.4);color:#a5b4fc}
 .edit-dot{width:6px;height:6px;border-radius:50%;background:#6366f1;animation:blink 1.5s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
-.day-nav{display:flex;gap:6px;padding:20px 32px 0;overflow-x:auto}
-.dn-pill{flex-shrink:0;padding:7px 16px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:0.5px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.4)}
+.day-nav{display:flex;gap:7px;margin:20px 0 0;padding:4px;overflow-x:auto;border:1px solid rgba(255,255,255,.07);border-radius:16px;background:rgba(255,255,255,.025)}
+.dn-pill{flex-shrink:0;padding:8px 15px;border-radius:12px;font-size:12px;font-weight:650;cursor:pointer;border:0.5px solid transparent;color:rgba(255,255,255,0.45)}
 .dn-pill.active{background:rgba(99,102,241,0.15);border-color:rgba(99,102,241,0.4);color:#c7d2fe}
-.timeline{padding:24px 32px 0;display:flex;flex-direction:column;gap:16px}
-.day-card{border-radius:16px;border:0.5px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.025);overflow:hidden;transition:border-color 0.15s}
-.day-card.expanded{border-color:rgba(99,102,241,0.2)}
-.day-card-header{display:flex;align-items:center;padding:16px 20px;cursor:pointer;gap:14px}
+.timeline{padding:22px 0 0;display:flex;flex-direction:column;gap:18px}
+.day-card{border-radius:20px;border:1px solid rgba(255,255,255,0.08);background:
+  linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.014)),
+  rgba(8,10,17,.90);overflow:hidden;transition:border-color 0.15s,transform .15s;box-shadow:0 18px 60px rgba(0,0,0,.20)}
+.day-card.expanded{border-color:rgba(196,181,253,0.24)}
+.day-card-header{display:flex;align-items:center;padding:18px 20px;cursor:pointer;gap:14px}
 .day-card-header:hover{background:rgba(255,255,255,0.02)}
-.dcn-badge{display:flex;flex-direction:column;align-items:center;justify-content:center;width:46px;height:46px;border-radius:11px;flex-shrink:0}
+.dcn-badge{display:flex;flex-direction:column;align-items:center;justify-content:center;width:48px;height:48px;border-radius:14px;flex-shrink:0;border:1px solid rgba(255,255,255,.06)}
 .dcn-num{font-size:19px;font-weight:800;line-height:1;color:#fff}
 .dcn-day{font-size:9px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;margin-top:2px;opacity:0.7}
 .day-card-header-info{flex:1;min-width:0}
-.dch-title{font-size:15px;font-weight:700;margin-bottom:3px}
+.dch-title{font-size:16px;font-weight:780;margin-bottom:5px;color:#fff}
 .dch-tags{display:flex;gap:5px;flex-wrap:wrap}
 .dch-tag{font-size:10px;padding:2px 7px;border-radius:4px;font-weight:500}
 .day-card-header-right{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0}
-.dcr-cost{font-size:17px;font-weight:700;letter-spacing:-0.3px}
+.dcr-cost{font-size:19px;font-weight:800;letter-spacing:-0.3px}
 .dcr-label{font-size:10px;color:rgba(255,255,255,0.3)}
 .dcr-chevron{font-size:15px;color:rgba(255,255,255,0.2);margin-top:4px;transition:transform 0.2s}
 .expanded .dcr-chevron{transform:rotate(180deg)}
@@ -51,7 +73,7 @@ html,body{margin:0;padding:0;background:#07090f;}
 .period{margin-top:18px}
 .period-label{display:flex;align-items:center;gap:8px;margin-bottom:10px}
 .period-icon{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
-.period-name{font-size:10px;font-weight:600;letter-spacing:0.6px;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+.period-name{font-size:11px;font-weight:800;letter-spacing:0.7px;text-transform:uppercase;color:rgba(255,255,255,0.44)}
 .period-line{flex:1;height:0.5px;background:rgba(255,255,255,0.06)}
 .items{display:flex;flex-direction:column;gap:6px}
 .event{display:flex;gap:10px;align-items:flex-start}
@@ -60,8 +82,8 @@ html,body{margin:0;padding:0;background:#07090f;}
 .event-dot-col{display:flex;flex-direction:column;align-items:center;padding-top:5px;width:14px;flex-shrink:0}
 .event-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 .event-line{width:1px;flex:1;min-height:18px;background:rgba(255,255,255,0.06);margin-top:4px}
-.event-card{flex:1;min-width:0;border-radius:10px;padding:11px 13px;border:0.5px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02);position:relative}
-.event-card:hover .ev-edit-bar{opacity:1}
+.event-card{flex:1;min-width:0;border-radius:13px;padding:12px 14px;border:0.5px solid rgba(255,255,255,0.075);background:rgba(255,255,255,0.025);position:relative}
+.it.editing .event-card:hover .ev-edit-bar{opacity:1}
 .event-card.highlight{border-color:rgba(99,102,241,0.25);background:rgba(99,102,241,0.05)}
 .event-card.food{border-color:rgba(251,146,60,0.2);background:rgba(251,146,60,0.04)}
 .event-card.transit{border-color:rgba(56,189,248,0.15);background:rgba(56,189,248,0.03)}
@@ -72,8 +94,8 @@ html,body{margin:0;padding:0;background:#07090f;}
 .ev-edit-btn:hover{background:rgba(255,255,255,0.12);color:#fff}
 .ev-edit-btn.danger:hover{background:rgba(239,68,68,0.15);color:#f87171;border-color:rgba(239,68,68,0.3)}
 .ev-edit-btn.drag-handle{cursor:grab;color:rgba(255,255,255,0.2)}
-.ev-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:3px;padding-right:72px}
-.ev-name{font-size:13px;font-weight:600;line-height:1.3;flex:1}
+.ev-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:4px;padding-right:72px}
+.ev-name{font-size:14px;font-weight:740;line-height:1.3;flex:1;color:#fff}
 .ev-price{font-size:12px;font-weight:600;flex-shrink:0}
 .ev-sub{font-size:12px;color:rgba(255,255,255,0.38);line-height:1.5;margin-bottom:5px}
 .ev-chips{display:flex;gap:4px;flex-wrap:wrap}
@@ -85,7 +107,7 @@ html,body{margin:0;padding:0;background:#07090f;}
 .add-event-btn{display:flex;align-items:center;gap:7px;padding:9px 12px;border-radius:9px;border:0.5px dashed rgba(255,255,255,0.1);color:rgba(255,255,255,0.25);font-size:12px;cursor:pointer;margin-top:6px;transition:all 0.15s}
 .add-event-btn:hover{border-color:rgba(99,102,241,0.4);color:#818cf8;background:rgba(99,102,241,0.05)}
 .add-event-btn i{font-size:14px}
-.transit-bar{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;background:rgba(56,189,248,0.06);border:0.5px solid rgba(56,189,248,0.12)}
+.transit-bar{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:10px;background:rgba(56,189,248,0.055);border:0.5px solid rgba(56,189,248,0.14)}
 .tb-icon{font-size:14px;color:#38bdf8}
 .tb-text{font-size:12px;color:rgba(255,255,255,0.5);flex:1}
 .tb-time{font-size:11px;color:#38bdf8;font-weight:500}
@@ -103,6 +125,7 @@ html,body{margin:0;padding:0;background:#07090f;}
 .mp-icon{font-size:15px;color:rgba(255,255,255,0.18)}
 .mp-text{font-size:12px;color:rgba(255,255,255,0.18)}
 .day-card.collapsed .day-body{display:none}
+.it:not(.editing) .ev-edit-bar{display:none}
 .chip-culture{background:rgba(99,102,241,0.12);color:#c7d2fe}
 .chip-food{background:rgba(251,146,60,0.12);color:#fdba74}
 .chip-ai{background:rgba(99,102,241,0.18);color:#a5b4fc}
@@ -121,13 +144,24 @@ html,body{margin:0;padding:0;background:#07090f;}
 .dot-blue{background:#38bdf8}
 .dot-pink{background:#f472b6}
 .dot-red{background:#f87171}
+@media(max-width:780px){
+  .it-shell{padding:18px 12px 0}
+  .it-header{grid-template-columns:1fr}
+  .it-title{font-size:27px}
+  .it-hero,.it-side-card{border-radius:18px;padding:16px}
+  .day-card-header{align-items:flex-start}
+  .day-card-header-right{align-items:flex-start}
+  .event-time-col{width:38px}
+  .ev-top{padding-right:0;flex-direction:column}
+}
 </style>
 </head>
 <body>
-<div class="it">
+<div class="it" id="itineraryRoot">
+<div class="it-shell">
 
   <div class="it-header">
-    <div>
+    <div class="it-hero">
       <div class="it-eyebrow">Itinerary</div>
       <div class="it-title">Tokyo &amp; Kyoto</div>
       <div class="it-meta">
@@ -137,11 +171,27 @@ html,body{margin:0;padding:0;background:#07090f;}
         <span class="it-meta-sep">·</span>
         <div class="it-meta-item"><i class="ti ti-currency-dollar" aria-hidden="true"></i>$8,420 total</div>
       </div>
+      <div class="it-trip-chips">
+        <span class="it-trip-chip">Food-first routing</span>
+        <span class="it-trip-chip">Low backtracking</span>
+        <span class="it-trip-chip">Transit grouped by area</span>
+      </div>
     </div>
-    <div class="it-header-right">
-      <div class="edit-mode-badge"><div class="edit-dot"></div>Editing</div>
-      <div class="it-btn it-btn-ai"><i class="ti ti-sparkles" style="font-size:12px" aria-hidden="true"></i>AI suggestions ↗</div>
-      <div class="it-btn" id="done-btn" onclick="toggleEditMode()"><i class="ti ti-check" style="font-size:12px" aria-hidden="true"></i>Done</div>
+    <div class="it-side-card">
+      <div>
+        <div class="it-side-label">Plan quality</div>
+        <div class="it-side-route">Balanced daily rhythm</div>
+        <div class="it-side-sub">Mornings are lighter, neighborhoods are grouped, and dinner plans stay close to evening areas.</div>
+      </div>
+      <div class="it-summary-grid">
+        <div class="it-summary-tile"><div class="it-summary-num">6</div><div class="it-summary-cap">planned days</div></div>
+        <div class="it-summary-tile"><div class="it-summary-num">$1.1k</div><div class="it-summary-cap">activities</div></div>
+      </div>
+      <div class="it-header-right">
+        <div class="edit-mode-badge"><div class="edit-dot"></div>Editing</div>
+        <div class="it-btn it-btn-ai"><i class="ti ti-sparkles" style="font-size:12px" aria-hidden="true"></i>AI suggestions</div>
+        <div class="it-btn" id="done-btn" onclick="toggleEditMode()"><i class="ti ti-edit" style="font-size:12px" aria-hidden="true"></i>Edit</div>
+      </div>
     </div>
   </div>
 
@@ -597,6 +647,7 @@ html,body{margin:0;padding:0;background:#07090f;}
 
   </div>
 </div>
+</div>
 
 <script>
 function toggleDay(id){
@@ -672,9 +723,11 @@ function addEvent(containerId){
 }
 
 function toggleEditMode(){
+  var root=document.getElementById('itineraryRoot');
   var badge=document.querySelector('.edit-mode-badge');
   var doneBtn=document.getElementById('done-btn');
-  if(badge.style.display==='none'){
+  var isEditing=root && root.classList.toggle('editing');
+  if(isEditing){
     badge.style.display='flex';
     doneBtn.innerHTML='<i class="ti ti-check" style="font-size:12px"></i>Done';
   } else {
@@ -687,7 +740,574 @@ function toggleEditMode(){
 </html>"""
 
 
+def _haversine_km(a, b):
+    try:
+        lat1, lon1 = float(a.get("lat")), float(a.get("lng"))
+        lat2, lon2 = float(b.get("lat")), float(b.get("lng"))
+    except (TypeError, ValueError):
+        return None
+    radius_km = 6371.0
+    d_lat = math.radians(lat2 - lat1)
+    d_lon = math.radians(lon2 - lon1)
+    x = (
+        math.sin(d_lat / 2) ** 2
+        + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(d_lon / 2) ** 2
+    )
+    return radius_km * 2 * math.atan2(math.sqrt(x), math.sqrt(1 - x))
+
+
+def _available_trip_days():
+    # Keep the first version simple and predictable: arrival, full day, departure.
+    return ["Day 1", "Day 2", "Day 3"]
+
+
+def _first_present(*values):
+    for value in values:
+        if value not in (None, ""):
+            return value
+    return None
+
+
+def _clock_minutes(value):
+    if not value:
+        return None
+    text = str(value).strip().lower()
+    try:
+        suffix = None
+        if text.endswith("am") or text.endswith("pm"):
+            suffix = text[-2:]
+            text = text[:-2].strip()
+        if ":" in text:
+            hour_text, minute_text = text.split(":", 1)
+            hour = int(hour_text)
+            minute = int("".join(ch for ch in minute_text if ch.isdigit())[:2] or "0")
+        else:
+            hour = int("".join(ch for ch in text if ch.isdigit()) or "0")
+            minute = 0
+        if suffix == "pm" and hour != 12:
+            hour += 12
+        if suffix == "am" and hour == 12:
+            hour = 0
+        if 0 <= hour <= 23 and 0 <= minute <= 59:
+            return hour * 60 + minute
+    except (TypeError, ValueError):
+        return None
+    return None
+
+
+def _period_from_clock(value, default="Afternoon"):
+    minutes = _clock_minutes(value)
+    if minutes is None:
+        return default
+    if minutes < 12 * 60:
+        return "Morning"
+    if minutes < 17 * 60:
+        return "Afternoon"
+    return "Evening"
+
+
+def _selected_hotel_context():
+    hotel = (
+        st.session_state.get("selected_hotel")
+        or st.session_state.get("trip_hotel")
+        or st.session_state.get("active_hotel")
+        or {}
+    )
+    return hotel if isinstance(hotel, dict) else {}
+
+
+def _selected_flight_context():
+    flight = st.session_state.get("selected_flight") or {}
+    return flight if isinstance(flight, dict) else {}
+
+
+def _travel_context():
+    flight = _selected_flight_context()
+    hotel = _selected_hotel_context()
+    search = st.session_state.get("flight_search") or {}
+    search = search if isinstance(search, dict) else {}
+
+    destination_city = _first_present(
+        search.get("destination_city"),
+        st.session_state.get("trip_destination"),
+        flight.get("destination_city"),
+        "destination",
+    )
+    origin_city = _first_present(search.get("origin_city"), flight.get("origin_city"), "origin")
+    return_origin_city = _first_present(search.get("return_origin_city"), destination_city)
+    hotel_name = _first_present(hotel.get("name"), "Selected hotel")
+    hotel_area = _first_present(hotel.get("neighborhood"), hotel.get("area"), hotel.get("address"), destination_city)
+    arrival_airport = _first_present(flight.get("destination"), search.get("destination_airport"))
+    departure_airport = _first_present(flight.get("destination"), search.get("return_origin_airport"), arrival_airport)
+    return {
+        "has_flight": bool(flight),
+        "has_hotel": bool(hotel),
+        "airline": _first_present(flight.get("airline"), "Selected flight"),
+        "flight_number": _first_present(flight.get("flight_number"), ""),
+        "arrival_airport": arrival_airport,
+        "arrival_time": _first_present(flight.get("arrive_time"), ""),
+        "departure_airport": departure_airport,
+        "departure_time": _first_present(flight.get("return_depart_time"), flight.get("return_departure_time"), ""),
+        "destination_city": destination_city,
+        "origin_city": origin_city,
+        "return_origin_city": return_origin_city,
+        "hotel_name": hotel_name,
+        "hotel_area": hotel_area,
+        "hotel_address": _first_present(hotel.get("address"), hotel_area),
+    }
+
+
+def _has_travel_context(context=None):
+    context = context or _travel_context()
+    return bool(context.get("has_flight") or context.get("has_hotel"))
+
+
+def _transfer_duration_label(airport):
+    code = str(airport or "").upper()
+    if code in {"HND", "LGA", "LCY", "ITM"}:
+        return "~35-55 min"
+    if code in {"NRT", "KIX", "EWR", "STN", "LTN", "PKX"}:
+        return "~60-90 min"
+    return "~45-70 min"
+
+
+def _fixed_day_blocks(day, context=None):
+    context = context or _travel_context()
+    blocks = []
+    hotel_name = context.get("hotel_name") or "Selected hotel"
+    hotel_area = context.get("hotel_area") or context.get("destination_city") or "hotel area"
+    airport = context.get("arrival_airport") or context.get("departure_airport") or "airport"
+    transfer_duration = _transfer_duration_label(airport)
+
+    if day == "Day 1":
+        arrival_period = _period_from_clock(context.get("arrival_time"), default="Afternoon")
+        if context.get("has_flight"):
+            flight_label = " ".join(
+                part for part in (context.get("airline"), context.get("flight_number")) if part
+            )
+            note = f"{flight_label} · {context.get('arrival_time')}" if context.get("arrival_time") else flight_label
+            blocks.append(
+                {
+                    "id": "arrival_airport",
+                    "name": f"Arrive at {airport}",
+                    "duration": context.get("arrival_time") or "Arrival",
+                    "category": "Flight",
+                    "estimated_cost": "",
+                    "neighborhood": airport,
+                    "period": arrival_period,
+                    "fixed": True,
+                    "note": note or "Airport arrival",
+                }
+            )
+            blocks.append(
+                {
+                    "id": "arrival_transfer",
+                    "name": "Transfer from airport to hotel",
+                    "duration": transfer_duration,
+                    "category": "Transit",
+                    "estimated_cost": "",
+                    "neighborhood": hotel_area,
+                    "period": arrival_period,
+                    "fixed": True,
+                    "note": f"{airport} to {hotel_area}",
+                }
+            )
+        if context.get("has_hotel"):
+            checkin_period = "Afternoon" if arrival_period in ("Morning", "Afternoon") else "Evening"
+            blocks.append(
+                {
+                    "id": "hotel_checkin",
+                    "name": f"Check in - {hotel_name}",
+                    "duration": "30-45 min",
+                    "category": "Hotel",
+                    "estimated_cost": "",
+                    "neighborhood": hotel_area,
+                    "period": checkin_period,
+                    "fixed": True,
+                    "note": context.get("hotel_address") or hotel_area,
+                }
+            )
+    elif day == "Day 3":
+        if context.get("has_hotel"):
+            blocks.append(
+                {
+                    "id": "hotel_checkout",
+                    "name": f"Check out - {hotel_name}",
+                    "duration": "30 min",
+                    "category": "Hotel",
+                    "estimated_cost": "",
+                    "neighborhood": hotel_area,
+                    "period": "Morning",
+                    "fixed": True,
+                    "note": context.get("hotel_address") or hotel_area,
+                }
+            )
+        if context.get("has_flight"):
+            departure_period = _period_from_clock(context.get("departure_time"), default="Afternoon")
+            blocks.append(
+                {
+                    "id": "departure_transfer",
+                    "name": "Transfer to airport",
+                    "duration": transfer_duration,
+                    "category": "Transit",
+                    "estimated_cost": "",
+                    "neighborhood": airport,
+                    "period": departure_period,
+                    "fixed": True,
+                    "note": f"{hotel_area} to {airport}",
+                }
+            )
+            blocks.append(
+                {
+                    "id": "airport_buffer",
+                    "name": "Airport buffer before departure",
+                    "duration": "2.5-3 hrs",
+                    "category": "Flight",
+                    "estimated_cost": "",
+                    "neighborhood": airport,
+                    "period": departure_period,
+                    "fixed": True,
+                    "note": "Check bags, security, and boarding time",
+                }
+            )
+    return blocks
+
+
+def _activity_location_key(activity):
+    destination = str(activity.get("destination") or "").strip().lower()
+    neighborhood = str(activity.get("neighborhood") or activity.get("address") or "").strip().lower()
+    return f"{destination}|{neighborhood}"
+
+
+def _group_nearby_activities(activities):
+    remaining = list(activities or [])
+    groups = []
+    while remaining:
+        seed = remaining.pop(0)
+        group = [seed]
+        keep = []
+        for candidate in remaining:
+            same_area = _activity_location_key(candidate) == _activity_location_key(seed)
+            distance = _haversine_km(seed, candidate)
+            if same_area or (distance is not None and distance <= 2.5):
+                group.append(candidate)
+            else:
+                keep.append(candidate)
+        remaining = keep
+        groups.append(group)
+    return groups
+
+
+def _activity_text(activity):
+    parts = [
+        activity.get("name"),
+        activity.get("category"),
+        activity.get("subcategory"),
+        activity.get("neighborhood"),
+        " ".join(str(tag) for tag in activity.get("tags", []) or []),
+    ]
+    return " ".join(str(part or "") for part in parts).lower()
+
+
+def _meal_slot(activity):
+    text = _activity_text(activity)
+    category = str(activity.get("category") or "").lower()
+    if "nightlife" in category or any(word in text for word in ("bar", "jazz", "club", "cocktail", "nightlife", "pub")):
+        return "nightlife"
+    is_food = "food" in category or any(
+        word in text
+        for word in (
+            "restaurant",
+            "food",
+            "coffee",
+            "cafe",
+            "café",
+            "bakery",
+            "market",
+            "ramen",
+            "sushi",
+            "izakaya",
+            "dining",
+            "brunch",
+            "breakfast",
+            "lunch",
+            "dinner",
+        )
+    )
+    if not is_food:
+        return ""
+    if any(word in text for word in ("breakfast", "brunch", "coffee", "cafe", "café", "bakery", "pastry")):
+        return "breakfast"
+    if any(word in text for word in ("dinner", "izakaya", "omakase", "wine", "cocktail", "steak")):
+        return "dinner"
+    if any(word in text for word in ("lunch", "market", "ramen", "sushi", "restaurant", "food")):
+        return "lunch"
+    return "lunch"
+
+
+def _activity_sort_weight(activity):
+    slot = _meal_slot(activity)
+    if slot == "breakfast":
+        return 5
+    if slot == "lunch":
+        return 45
+    if slot == "dinner":
+        return 82
+    if slot == "nightlife":
+        return 95
+    category = str(activity.get("category") or "").lower()
+    if "nature" in category or "adventure" in category:
+        return 20
+    if "culture" in category:
+        return 30
+    if "shopping" in category or "luxury" in category:
+        return 62
+    return 50
+
+
+def _order_day_activities(items):
+    ordered = sorted(items or [], key=lambda item: (_activity_sort_weight(item), item.get("name") or ""))
+    non_meal = [item for item in ordered if not _meal_slot(item)]
+    meals = [item for item in ordered if _meal_slot(item)]
+    if not non_meal:
+        return ordered
+    output = list(non_meal)
+    for meal in meals:
+        slot = _meal_slot(meal)
+        if slot == "breakfast":
+            insert_at = 0
+        elif slot == "lunch":
+            insert_at = max(1, len(output) // 2)
+        elif slot == "dinner":
+            insert_at = len(output)
+        else:
+            insert_at = len(output)
+        best_index = insert_at
+        best_distance = None
+        for idx, candidate in enumerate(output):
+            distance = _haversine_km(meal, candidate)
+            if distance is None:
+                continue
+            if best_distance is None or distance < best_distance:
+                best_distance = distance
+                if slot == "breakfast":
+                    best_index = max(0, idx)
+                elif slot == "lunch":
+                    best_index = min(len(output), idx + 1)
+                else:
+                    best_index = min(len(output), idx + 1)
+        output.insert(best_index, meal)
+    return output
+
+
+def _day_proximity_score(day_items, activity):
+    distances = [
+        _haversine_km(existing, activity)
+        for existing in day_items or []
+    ]
+    distances = [distance for distance in distances if distance is not None]
+    if not distances:
+        return 999
+    return min(distances)
+
+
+def _assign_activities_to_days(activities):
+    days = _available_trip_days()
+    assigned = {day: [] for day in days}
+    groups = _group_nearby_activities(activities)
+    context = _travel_context()
+    if _has_travel_context(context):
+        # Arrival and departure anchors reduce realistic sightseeing capacity.
+        capacities = {"Day 1": 1, "Day 2": 4, "Day 3": 1}
+    else:
+        capacities = {"Day 1": 2, "Day 2": 4, "Day 3": 2}
+
+    for group in groups:
+        group_has_meal = any(_meal_slot(activity) for activity in group)
+        candidate_days = sorted(
+            days,
+            key=lambda day: (
+                _day_proximity_score(assigned[day], group[0]) if group_has_meal else 0,
+                len(assigned[day]) + len(group) > capacities.get(day, 3),
+                len(assigned[day]),
+                0 if day == "Day 2" else 1,
+            ),
+        )
+        assigned[candidate_days[0]].extend(group)
+    return {day: _order_day_activities(items) for day, items in assigned.items()}
+
+
+def _auto_assign_itinerary():
+    unscheduled = list(st.session_state.get("itinerary_unscheduled_activities") or [])
+    if not unscheduled:
+        if _has_travel_context():
+            return {day: [] for day in _available_trip_days()}
+        return {}
+    assigned = _assign_activities_to_days(unscheduled)
+    st.session_state["itinerary_days"] = assigned
+    return assigned
+
+
+def _period_for_item(item, index, total):
+    explicit_period = item.get("period")
+    if explicit_period in {"Morning", "Afternoon", "Evening"}:
+        return explicit_period
+    slot = _meal_slot(item)
+    if slot == "breakfast":
+        return "Morning"
+    if slot == "lunch":
+        return "Afternoon"
+    if slot in ("dinner", "nightlife"):
+        return "Evening"
+    if total <= 2:
+        return "Morning" if index == 0 else "Afternoon"
+    if index == 0:
+        return "Morning"
+    if index >= total - 1:
+        return "Evening"
+    return "Afternoon"
+
+
+def _period_for_activity_on_day(item, day, index, total, context):
+    if day == "Day 1" and _fixed_day_blocks(day, context):
+        arrival_period = _period_from_clock(context.get("arrival_time"), default="Afternoon")
+        if arrival_period == "Morning":
+            return "Afternoon" if index == 0 else "Evening"
+        return "Evening"
+    if day == "Day 3" and _fixed_day_blocks(day, context):
+        return "Morning"
+    return _period_for_item(item, index, total)
+
+
+def _dynamic_itinerary_css():
+    return """
+    <style>
+    .auto-it { color:#e4e6f0; font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter',sans-serif; }
+    .auto-hero {
+        border:1px solid rgba(255,255,255,.09); border-radius:22px;
+        background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.018)),rgba(8,11,19,.9);
+        padding:22px; margin-bottom:18px;
+    }
+    .auto-kicker {font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#c4b5fd;margin-bottom:8px;}
+    .auto-title {font-size:30px;font-weight:850;letter-spacing:-.9px;color:#fff;margin-bottom:6px;}
+    .auto-sub {font-size:13px;color:rgba(255,255,255,.50);line-height:1.5;}
+    .auto-day {
+        border:1px solid rgba(255,255,255,.08); border-radius:18px;
+        background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.014)),rgba(8,10,17,.92);
+        padding:16px; margin-bottom:14px;
+    }
+    .auto-day-head {display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:12px;}
+    .auto-day-title {font-size:18px;font-weight:820;color:#fff;}
+    .auto-day-note {font-size:12px;color:rgba(255,255,255,.43);margin-top:3px;}
+    .auto-pill {font-size:11px;font-weight:750;color:#c4b5fd;background:rgba(139,92,246,.12);border:1px solid rgba(196,181,253,.18);border-radius:999px;padding:6px 9px;white-space:nowrap;}
+    .auto-period {margin-top:14px;}
+    .auto-period-title {display:flex;align-items:center;gap:8px;font-size:11px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:8px;}
+    .auto-period-title:after {content:"";height:1px;background:rgba(255,255,255,.07);flex:1;}
+    .auto-item {display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;}
+    .auto-time {width:58px;flex-shrink:0;color:rgba(255,255,255,.34);font-size:11px;font-weight:700;padding-top:8px;}
+    .auto-card {flex:1;border:1px solid rgba(255,255,255,.075);border-radius:13px;background:rgba(255,255,255,.026);padding:12px 14px;}
+    .auto-card.fixed {border-color:rgba(167,139,250,.20);background:linear-gradient(135deg,rgba(139,92,246,.11),rgba(16,185,129,.045)),rgba(255,255,255,.026);}
+    .auto-name {font-size:14px;font-weight:780;color:#fff;line-height:1.3;margin-bottom:4px;}
+    .auto-meta {font-size:12px;color:rgba(255,255,255,.46);line-height:1.45;}
+    .auto-tags {display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;}
+    .auto-tag {font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#a5b4fc;background:rgba(99,102,241,.13);border-radius:5px;padding:3px 7px;}
+    .auto-tag.fixed {color:#bbf7d0;background:rgba(34,197,94,.12);}
+    .auto-empty {color:rgba(255,255,255,.38);font-size:12px;border:1px dashed rgba(255,255,255,.10);border-radius:12px;padding:12px;}
+    </style>
+    """
+
+
+def _render_auto_itinerary(assigned):
+    st.markdown(_dynamic_itinerary_css(), unsafe_allow_html=True)
+    total = sum(len(items) for items in assigned.values())
+    context = _travel_context()
+    fixed_count = sum(len(_fixed_day_blocks(day, context)) for day in assigned)
+    anchor_copy = " Flight and hotel anchors are reserved first." if fixed_count else ""
+    st.markdown(
+        f"""
+        <div class="auto-it">
+          <div class="auto-hero">
+            <div class="auto-kicker">Itinerary</div>
+            <div class="auto-title">Automatically planned days</div>
+            <div class="auto-sub">Byable assigned {total} activit{'y' if total == 1 else 'ies'} across available trip days by city, neighborhood, and proximity.{anchor_copy} Arrival and departure days stay lighter.</div>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    for day, items in assigned.items():
+        fixed_blocks = _fixed_day_blocks(day, context)
+        day_items = fixed_blocks + list(items or [])
+        day_note = "Arrival / lighter day" if day == "Day 1" else "Departure / lighter day" if day == "Day 3" else "Main exploration day"
+        activity_count = len(items or [])
+        fixed_label = f" + {len(fixed_blocks)} trip event{'s' if len(fixed_blocks) != 1 else ''}" if fixed_blocks else ""
+        st.markdown(
+            f"""
+            <div class="auto-day">
+              <div class="auto-day-head">
+                <div>
+                  <div class="auto-day-title">{_html.escape(day)}</div>
+                  <div class="auto-day-note">{_html.escape(day_note)}</div>
+                </div>
+                <div class="auto-pill">{activity_count} activity{'ies' if activity_count != 1 else ''}{_html.escape(fixed_label)}</div>
+              </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        if not day_items:
+            st.markdown('<div class="auto-empty">No activities assigned yet.</div>', unsafe_allow_html=True)
+            st.markdown("</div>", unsafe_allow_html=True)
+            continue
+        for period in ("Morning", "Afternoon", "Evening"):
+            activity_periods = {
+                id(item): _period_for_activity_on_day(item, day, idx, len(items or []), context)
+                for idx, item in enumerate(items or [])
+            }
+            period_items = [
+                item for idx, item in enumerate(day_items)
+                if (item.get("period") if item.get("fixed") else activity_periods.get(id(item))) == period
+            ]
+            if not period_items:
+                continue
+            st.markdown(f'<div class="auto-period"><div class="auto-period-title">{period}</div>', unsafe_allow_html=True)
+            for index, item in enumerate(period_items):
+                name = item.get("name") or "Activity"
+                duration = item.get("duration") or "Duration flexible"
+                location = item.get("note") or item.get("address") or item.get("neighborhood") or "Location to confirm"
+                category = item.get("category") or "Activity"
+                cost = item.get("estimated_cost") or "Cost varies"
+                meal_slot = _meal_slot(item)
+                slot_label = {
+                    "breakfast": "Breakfast slot",
+                    "lunch": "Lunch slot",
+                    "dinner": "Dinner slot",
+                    "nightlife": "Nightlife slot",
+                }.get(meal_slot, "Fixed trip event" if item.get("fixed") else "Auto assigned")
+                fixed_class = " fixed" if item.get("fixed") else ""
+                cost_text = f" · {_html.escape(str(cost))}" if cost and not item.get("fixed") else ""
+                st.markdown(
+                    f"""
+                    <div class="auto-item">
+                      <div class="auto-time">{_html.escape(duration)}</div>
+                      <div class="auto-card{fixed_class}">
+                        <div class="auto-name">{_html.escape(str(name))}</div>
+                        <div class="auto-meta">{_html.escape(str(location))}{cost_text}</div>
+                        <div class="auto-tags"><span class="auto-tag">{_html.escape(str(category))}</span><span class="auto-tag{fixed_class}">{_html.escape(slot_label)}</span></div>
+                      </div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+            st.markdown("</div>", unsafe_allow_html=True)
+        st.markdown("</div>", unsafe_allow_html=True)
+
+
 def render():
+    assigned = _auto_assign_itinerary()
+    if assigned:
+        _render_auto_itinerary(assigned)
+        return
+
     html = _HTML.replace("{tabler}", _TABLER)
     html = html.replace(
         "</body>",

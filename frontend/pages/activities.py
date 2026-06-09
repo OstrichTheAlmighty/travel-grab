@@ -1302,6 +1302,47 @@ def _suggested_searches_for_empty(destination, category):
     return [f"{term} in {destination}" for term in terms[:4]]
 
 
+def _activity_to_itinerary_item(activity):
+    return {
+        "id": activity.get("id"),
+        "name": activity.get("title") or "Activity",
+        "duration": activity.get("duration") or "",
+        "neighborhood": activity.get("neighborhood") or "",
+        "address": activity.get("address") or "",
+        "category": activity.get("category") or "",
+        "subcategory": activity.get("subcategory") or "",
+        "tags": activity.get("tags") or [],
+        "estimated_cost": activity.get("price") or "",
+        "lat": activity.get("lat"),
+        "lng": activity.get("lng"),
+        "destination": _destination_city(),
+    }
+
+
+def _activity_in_itinerary(activity_id):
+    activity_id = str(activity_id or "")
+    for item in st.session_state.get("itinerary_unscheduled_activities", []) or []:
+        if str(item.get("id")) == activity_id:
+            return True
+    for items in (st.session_state.get("itinerary_days") or {}).values():
+        if any(str(item.get("id")) == activity_id for item in (items or [])):
+            return True
+    return False
+
+
+def _add_activity_to_unscheduled_itinerary(activity):
+    item = _activity_to_itinerary_item(activity)
+    activity_id = str(item.get("id") or "")
+    unscheduled = list(st.session_state.get("itinerary_unscheduled_activities") or [])
+    if any(str(existing.get("id")) == activity_id for existing in unscheduled):
+        return False
+    unscheduled.append(item)
+    st.session_state["itinerary_unscheduled_activities"] = unscheduled
+    # Force itinerary redistribution next time the Itinerary page renders.
+    st.session_state.pop("itinerary_days", None)
+    return True
+
+
 def _badge_html(badge_key):
     if not badge_key or badge_key not in _BADGE_META:
         return ""
@@ -1778,6 +1819,7 @@ def render():
         for col_index, activity in enumerate(visible_page[row_start:row_start + 2]):
             activity_id = activity["id"]
             is_saved = activity_id in saved_ids
+            is_in_itinerary = _activity_in_itinerary(activity_id)
 
             with row_cols[col_index]:
                 _render_activity_card(activity, is_saved, photo_deadline=photo_deadline)
@@ -1795,11 +1837,19 @@ def render():
                         st.session_state["activities_saved"] = list(saved_ids)
                         st.rerun()
                 with action_cols[1]:
-                    add_label = "In itinerary" if is_saved else "Add to day"
-                    if st.button(add_label, key=f"ac_add_{activity_id}", disabled=is_saved, use_container_width=True):
+                    add_label = "In itinerary" if is_in_itinerary else "Add to itinerary"
+                    if st.button(add_label, key=f"ac_add_{activity_id}", disabled=is_in_itinerary, use_container_width=True):
                         saved_ids.add(activity_id)
                         st.session_state["activities_saved"] = list(saved_ids)
-                        track_event("activity_added_to_day", {"activity": activity["title"]})
+                        added = _add_activity_to_unscheduled_itinerary(activity)
+                        track_event(
+                            "activity_added_to_day",
+                            {
+                                "activity": activity["title"],
+                                "assignment": "automatic",
+                                "added": added,
+                            },
+                        )
                         st.rerun()
                 with action_cols[2]:
                     if st.button("Details", key=f"ac_details_{activity_id}", use_container_width=True):
