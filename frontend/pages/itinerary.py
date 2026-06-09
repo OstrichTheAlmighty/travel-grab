@@ -1192,8 +1192,6 @@ _FOOD_VENUE_TERMS = (
     "coffee shop",
     "bakery",
     "bakeries",
-    "bar",
-    "pub",
     "izakaya",
     "ramen",
     "sushi",
@@ -1208,7 +1206,6 @@ _FOOD_VENUE_TERMS = (
     "pastry",
     "food hall",
     "food court",
-    "market",
     "food market",
     "night market",
     "dining",
@@ -1217,9 +1214,6 @@ _FOOD_VENUE_TERMS = (
     "pizzeria",
     "steakhouse",
     "omakase",
-    "wine bar",
-    "cocktail",
-    "brewery",
     "tea house",
     "teahouse",
 )
@@ -1235,8 +1229,30 @@ _FOOD_EXPERIENCE_TERMS = (
     "dessert crawl",
     "cafe crawl",
     "café crawl",
-    "cocktail crawl",
     "dining experience",
+)
+
+
+_NIGHTLIFE_TERMS = (
+    "bar",
+    "bars",
+    "pub",
+    "pubs",
+    "nightclub",
+    "night club",
+    "club",
+    "clubs",
+    "lounge",
+    "lounges",
+    "cocktail",
+    "cocktail club",
+    "music venue",
+    "live music",
+    "jazz",
+    "dj",
+    "nightlife",
+    "brewery",
+    "wine bar",
 )
 
 
@@ -1270,6 +1286,8 @@ def _is_food_venue(activity):
     category = str(activity.get("category") or "").strip().lower()
     subcategory = str(activity.get("subcategory") or "").strip().lower()
     text = _activity_text(activity)
+    if category == "nightlife" or any(term in text for term in _NIGHTLIFE_TERMS):
+        return False
     if any(term in text for term in _FOOD_EXPERIENCE_TERMS):
         return True
     if any(term in text for term in _NON_MEAL_ATTRACTION_TERMS) and not any(
@@ -1283,6 +1301,11 @@ def _is_food_venue(activity):
     ):
         return False
     return any(term in text for term in _FOOD_VENUE_TERMS) or "food" in subcategory
+
+
+def _is_nightlife_activity(activity):
+    category = str((activity or {}).get("category") or "").strip().lower()
+    return category == "nightlife" or any(term in _activity_text(activity) for term in _NIGHTLIFE_TERMS)
 
 
 def _remember_meal_candidates(items):
@@ -1329,8 +1352,11 @@ def _remove_city_mismatch_items_from_days(days_data, context):
 def _current_city_meal_candidates(context):
     current_city = []
     needs_city = []
+    non_food_items = []
     for item in list(st.session_state.get("itinerary_meal_candidates") or []):
-        if _activity_matches_itinerary_city(item, context):
+        if not _is_food_venue(item):
+            non_food_items.append(item)
+        elif _activity_matches_itinerary_city(item, context):
             current_city.append(item)
         else:
             needs_city.append(item)
@@ -1339,6 +1365,12 @@ def _current_city_meal_candidates(context):
             st.session_state.get("itinerary_needs_city_assignment") or [],
             needs_city,
         )
+    if non_food_items:
+        st.session_state["itinerary_unscheduled_activities"] = _append_without_place_id_duplicate(
+            st.session_state.get("itinerary_unscheduled_activities") or [],
+            non_food_items,
+        )
+    if needs_city or non_food_items:
         st.session_state["itinerary_meal_candidates"] = current_city
     return current_city
 
@@ -1349,9 +1381,9 @@ def _meal_slot(activity):
     text = _activity_text(activity)
     if any(word in text for word in ("breakfast", "brunch", "coffee", "cafe", "café", "bakery", "pastry")):
         return "breakfast"
-    if any(word in text for word in ("dinner", "izakaya", "omakase", "wine", "cocktail", "steak", "bar", "pub", "brewery")):
+    if any(word in text for word in ("dinner", "izakaya", "omakase", "steak")):
         return "dinner"
-    if any(word in text for word in ("lunch", "market", "ramen", "sushi", "restaurant", "food")):
+    if any(word in text for word in ("lunch", "food market", "night market", "ramen", "sushi", "restaurant", "food")):
         return "lunch"
     return "lunch"
 
@@ -1365,6 +1397,8 @@ def _activity_sort_weight(activity):
     if slot == "dinner":
         return 82
     if slot == "nightlife":
+        return 95
+    if _is_nightlife_activity(activity):
         return 95
     category = str(activity.get("category") or "").lower()
     if "nature" in category or "adventure" in category:
@@ -1647,6 +1681,7 @@ def _rebalance_days_by_capacity(days_data):
 
 def _auto_assign_itinerary():
     context = _travel_context()
+    _current_city_meal_candidates(context)
     existing = st.session_state.get("itinerary_days")
     if existing:
         existing, removed_city = _remove_city_mismatch_items_from_days(existing, context)
@@ -1678,7 +1713,12 @@ def _auto_assign_itinerary():
         unscheduled = sightseeing
     if not unscheduled:
         st.session_state["itinerary_unscheduled_activities"] = []
-        if _has_travel_context():
+        has_visible_selection_bucket = bool(
+            st.session_state.get("itinerary_meal_candidates")
+            or st.session_state.get("itinerary_needs_city_assignment")
+            or st.session_state.get("itinerary_couldnt_fit")
+        )
+        if _has_travel_context() or has_visible_selection_bucket:
             return {day: [] for day in _available_trip_days()}
         return {}
     assigned = _reduce_long_transit(_assign_activities_to_days(unscheduled))
@@ -1808,6 +1848,8 @@ def _period_for_item(item, index, total):
     if slot == "lunch":
         return "Afternoon"
     if slot in ("dinner", "nightlife"):
+        return "Evening"
+    if _is_nightlife_activity(item):
         return "Evening"
     if total <= 2:
         return "Morning" if index == 0 else "Afternoon"
@@ -2418,7 +2460,9 @@ def _restaurant_suggestions_for_day(day, day_items, context, meal_type):
         if isinstance(activity, dict) and _is_restaurant_like(activity)
     ]
 
-    selected_names = [_display_name(item) for item in meal_candidates]
+    selected_name = ""
+    if meal_candidates:
+        selected_name = _display_name(meal_candidates[0])
 
     scored = []
     for candidate in candidates:
@@ -2429,25 +2473,24 @@ def _restaurant_suggestions_for_day(day, day_items, context, meal_type):
         scored.append((score, _display_name(candidate)))
     scored.sort(key=lambda item: (item[0], item[1]))
 
-    names = list(selected_names)
+    names = [selected_name] if selected_name else []
     for _score, name in scored:
-        names.append(name)
-        if len(names) >= max(6, len(selected_names)):
+        if not names:
+            names.append(name)
+        if len(names) >= 1:
             break
 
     if not names:
-        meal_label = "lunch" if meal_type == "lunch" else "dinner"
-        names = [
-            f"{meal_label.title()} near {fallback_area}",
-            f"Local restaurant around {fallback_area}",
-            f"Easy walk-in option in {fallback_area}",
-        ]
+        names = ["Meal open — add a restaurant"]
 
     variant = int(_meal_state(day, meal_type).get("variant") or 0)
-    if names and not selected_names:
+    if names and not selected_name and names != ["Meal open — add a restaurant"]:
         shift = variant % len(names)
         names = names[shift:] + names[:shift]
-    return names[: max(3, len(selected_names))]
+    return {
+        "selected": [selected_name] if selected_name else [],
+        "suggestions": names[:1],
+    }
 
 
 def _meal_blocks_for_day(day, activity_items, fixed_blocks, context):
@@ -2480,7 +2523,14 @@ def _meal_blocks_for_day(day, activity_items, fixed_blocks, context):
         state = _meal_state(day, meal_type)
         if state.get("removed"):
             continue
-        suggestions = _restaurant_suggestions_for_day(day, combined_context_items, context, meal_type)
+        meal_options = _restaurant_suggestions_for_day(day, combined_context_items, context, meal_type)
+        selected_names = meal_options.get("selected") or []
+        suggestions = meal_options.get("suggestions") or []
+        if selected_names:
+            note = "Selected: " + selected_names[0]
+        else:
+            choice = suggestions[0] if suggestions else "Meal open — add a restaurant"
+            note = choice if choice == "Meal open — add a restaurant" else "Try: " + choice
         anchor = (_day_anchor_items(combined_context_items) or [{}])[0]
         blocks.append(
             {
@@ -2495,7 +2545,7 @@ def _meal_blocks_for_day(day, activity_items, fixed_blocks, context):
                 "period": definition["period"],
                 "meal_block": True,
                 "meal_type": meal_type,
-                "note": "Try: " + ", ".join(suggestions),
+                "note": note,
             }
         )
     return blocks
@@ -2518,19 +2568,60 @@ def _render_removed_meal_controls(day, context):
                 _safe_rerun()
 
 
-def _itinerary_visibility_counts(assigned, context):
+def _available_meal_slots_for_render(assigned, context):
+    slots = set()
+    has_breakfast = any(_meal_slot(item) == "breakfast" for item in _current_city_meal_candidates(context))
+    for day in (assigned or {}):
+        if not _is_full_itinerary_day(day, context):
+            continue
+        meal_types = ["lunch", "dinner"]
+        if has_breakfast:
+            meal_types.insert(0, "breakfast")
+        for meal_type in meal_types:
+            if not _meal_state(day, meal_type).get("removed"):
+                slots.add(meal_type)
+    return slots
+
+
+def _meal_visibility_split(assigned, context):
+    visible_slots = _available_meal_slots_for_render(assigned, context)
+    visible = []
+    unplaced = []
+    meal_candidates = list(_current_city_meal_candidates(context))
+    for meal_type in ("breakfast", "lunch", "dinner"):
+        candidates = [item for item in meal_candidates if _meal_slot(item) == meal_type]
+        if not candidates:
+            continue
+        if meal_type in visible_slots:
+            visible.append(candidates[0])
+            unplaced.extend(candidates[1:])
+        else:
+            unplaced.extend(candidates)
+    for item in meal_candidates:
+        if _meal_slot(item) not in {"breakfast", "lunch", "dinner"}:
+            unplaced.append(item)
+    return visible, unplaced
+
+
+def _itinerary_visibility_state(assigned, context):
+    visible_meals, unplaced_meals = _meal_visibility_split(assigned, context)
     scheduled = sum(len(items or []) for items in (assigned or {}).values())
-    meals = len(_current_city_meal_candidates(context))
-    needs_city = len(st.session_state.get("itinerary_needs_city_assignment") or [])
-    couldnt_fit = len(st.session_state.get("itinerary_couldnt_fit") or [])
-    pending = len(st.session_state.get("itinerary_unscheduled_activities") or [])
-    unscheduled = needs_city + couldnt_fit + pending
+    needs_city = list(st.session_state.get("itinerary_needs_city_assignment") or [])
+    couldnt_fit = list(st.session_state.get("itinerary_couldnt_fit") or [])
+    pending = list(st.session_state.get("itinerary_unscheduled_activities") or [])
+    unscheduled_items = unplaced_meals + couldnt_fit + pending
+    unscheduled = len(needs_city) + len(unscheduled_items)
+    meals = len(visible_meals)
     selected = scheduled + meals + unscheduled
     return {
         "selected": selected,
         "scheduled": scheduled,
         "meals": meals,
         "unscheduled": unscheduled,
+        "visible_meals": visible_meals,
+        "unplaced_meals": unplaced_meals,
+        "needs_city": needs_city,
+        "unscheduled_items": unscheduled_items,
     }
 
 
@@ -2691,7 +2782,7 @@ def _render_auto_itinerary(assigned):
     assigned, capacity_changed = _rebalance_days_by_capacity(assigned)
     if capacity_changed:
         _save_itinerary_days(assigned)
-    visibility = _itinerary_visibility_counts(assigned, context)
+    visibility = _itinerary_visibility_state(assigned, context)
     summary_line = (
         f"{visibility['selected']} selected · {visibility['scheduled']} scheduled · "
         f"{visibility['meals']} meals · {visibility['unscheduled']} unscheduled"
@@ -2815,17 +2906,14 @@ def _render_auto_itinerary(assigned):
         st.markdown("</div>", unsafe_allow_html=True)
         st.markdown("</div>", unsafe_allow_html=True)
 
-    needs_city = list(st.session_state.get("itinerary_needs_city_assignment") or [])
-    pending = list(st.session_state.get("itinerary_unscheduled_activities") or [])
-    couldnt_fit = list(st.session_state.get("itinerary_couldnt_fit") or [])
     _render_item_bucket(
         "Needs city assignment",
-        needs_city,
+        visibility["needs_city"],
         "These selected activities belong to a different destination and were not dropped.",
     )
     _render_item_bucket(
         "Unscheduled / Couldn't fit",
-        couldnt_fit + pending,
+        visibility["unscheduled_items"],
         "These selected activities are preserved here until the planner can place them.",
     )
 
