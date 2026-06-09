@@ -3,6 +3,7 @@ import streamlit.components.v1 as components
 import html as _html
 import math
 import re
+from datetime import date, datetime, timedelta
 
 from analytics import posthog_client_script
 
@@ -758,8 +759,40 @@ def _haversine_km(a, b):
 
 
 def _available_trip_days():
-    # Keep the first version simple and predictable: arrival, full day, departure.
-    return ["Day 1", "Day 2", "Day 3"]
+    start, end, _arrival_dt, _departure_dt = _trip_date_range()
+    total_days = max(1, (end - start).days + 1)
+    return [f"Day {index + 1}" for index in range(total_days)]
+
+
+def _day_date(day):
+    try:
+        index = int(str(day).replace("Day", "").strip()) - 1
+    except ValueError:
+        return None
+    start, _end, _arrival_dt, _departure_dt = _trip_date_range()
+    return start + timedelta(days=max(0, index))
+
+
+def _day_date_label(day):
+    value = _day_date(day)
+    if not value:
+        return ""
+    return value.strftime("%a, %b %-d")
+
+
+def _day_sort_key(day):
+    match = re.search(r"\d+", str(day or ""))
+    return int(match.group(0)) if match else 999
+
+
+def _arrival_day():
+    days = _available_trip_days()
+    return days[0] if days else "Day 1"
+
+
+def _departure_day():
+    days = _available_trip_days()
+    return days[-1] if days else "Day 1"
 
 
 def _first_present(*values):
@@ -807,6 +840,85 @@ def _period_from_clock(value, default="Afternoon"):
     return "Evening"
 
 
+def _parse_iso_date(value):
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(str(value).replace("Z", "+00:00")).date()
+    except ValueError:
+        try:
+            return date.fromisoformat(str(value)[:10])
+        except ValueError:
+            return None
+
+
+def _parse_route_datetime(value, fallback_year):
+    text = str(value or "").strip()
+    if not text or text.lower() == "not available":
+        return None
+    try:
+        return datetime.fromisoformat(text.replace("Z", "+00:00"))
+    except ValueError:
+        pass
+    for fmt in ("%b %d, %H:%M", "%b %-d, %H:%M"):
+        try:
+            parsed = datetime.strptime(text, fmt)
+            return parsed.replace(year=fallback_year)
+        except ValueError:
+            continue
+    return None
+
+
+def _route_segment_datetime(flight, slice_index, segment_position, field, fallback_year):
+    try:
+        route = (flight.get("route_details") or [])[slice_index]
+        segments = route.get("segments") or []
+        segment = segments[segment_position]
+    except (IndexError, AttributeError, TypeError):
+        return None
+    return _parse_route_datetime(segment.get(field), fallback_year)
+
+
+def _trip_date_range():
+    flight = _selected_flight_context()
+    search = st.session_state.get("flight_search") or {}
+    search = search if isinstance(search, dict) else {}
+    depart_date = _parse_iso_date(search.get("departure_date"))
+    return_date = _parse_iso_date(search.get("return_date"))
+    arrival_year = (depart_date or return_date or date.today()).year
+    departure_year = (return_date or depart_date or date.today()).year
+
+    arrival_dt = _route_segment_datetime(flight, 0, -1, "arrival", arrival_year)
+    if arrival_dt is not None and depart_date and arrival_dt.date() < depart_date:
+        try:
+            arrival_dt = arrival_dt.replace(year=arrival_dt.year + 1)
+        except ValueError:
+            arrival_dt = arrival_dt + timedelta(days=365)
+    if arrival_dt is None and depart_date:
+        arrival_dt = datetime.combine(depart_date, datetime.min.time())
+        arrival_minutes = _clock_minutes(_first_present(flight.get("arrive_time"), flight.get("arrival_time")))
+        if arrival_minutes is not None:
+            arrival_dt += timedelta(minutes=arrival_minutes)
+
+    departure_dt = _route_segment_datetime(flight, 1, 0, "departure", departure_year)
+    if departure_dt is not None and return_date and departure_dt.date() != return_date:
+        departure_dt = datetime.combine(return_date, departure_dt.time())
+    if departure_dt is None and return_date:
+        departure_dt = datetime.combine(return_date, datetime.min.time())
+        departure_minutes = _clock_minutes(_first_present(flight.get("return_depart_time"), flight.get("return_departure_time"), ""))
+        if departure_minutes is not None:
+            departure_dt += timedelta(minutes=departure_minutes)
+
+    start = (arrival_dt.date() if arrival_dt else depart_date) or date.today()
+    end = (departure_dt.date() if departure_dt else return_date) or start + timedelta(days=2)
+    if end < start:
+        end = start
+    max_days = 30
+    if (end - start).days > max_days:
+        end = start + timedelta(days=max_days)
+    return start, end, arrival_dt, departure_dt
+
+
 def _selected_hotel_context():
     hotel = (
         st.session_state.get("selected_hotel")
@@ -827,6 +939,7 @@ def _travel_context():
     hotel = _selected_hotel_context()
     search = st.session_state.get("flight_search") or {}
     search = search if isinstance(search, dict) else {}
+    start_date, end_date, arrival_dt, departure_dt = _trip_date_range()
 
     destination_city = _first_present(
         search.get("destination_city"),
@@ -846,9 +959,13 @@ def _travel_context():
         "airline": _first_present(flight.get("airline"), "Selected flight"),
         "flight_number": _first_present(flight.get("flight_number"), ""),
         "arrival_airport": arrival_airport,
-        "arrival_time": _first_present(flight.get("arrive_time"), ""),
+        "arrival_time": _first_present(arrival_dt.strftime("%H:%M") if arrival_dt else None, flight.get("arrive_time"), ""),
+        "arrival_date": start_date,
+        "arrival_datetime": arrival_dt,
         "departure_airport": departure_airport,
-        "departure_time": _first_present(flight.get("return_depart_time"), flight.get("return_departure_time"), ""),
+        "departure_time": _first_present(departure_dt.strftime("%H:%M") if departure_dt else None, flight.get("return_depart_time"), flight.get("return_departure_time"), ""),
+        "departure_date": end_date,
+        "departure_datetime": departure_dt,
         "destination_city": destination_city,
         "origin_city": origin_city,
         "return_origin_city": return_origin_city,
@@ -882,7 +999,7 @@ def _fixed_day_blocks(day, context=None):
     airport = context.get("arrival_airport") or context.get("departure_airport") or "airport"
     transfer_duration = _transfer_duration_label(airport)
 
-    if day == "Day 1":
+    if day == _arrival_day():
         arrival_period = _period_from_clock(context.get("arrival_time"), default="Afternoon")
         if context.get("has_flight"):
             flight_label = " ".join(
@@ -932,7 +1049,7 @@ def _fixed_day_blocks(day, context=None):
                     "note": context.get("hotel_address") or hotel_area,
                 }
             )
-    elif day == "Day 3":
+    if day == _departure_day():
         if context.get("has_hotel"):
             blocks.append(
                 {
@@ -946,6 +1063,7 @@ def _fixed_day_blocks(day, context=None):
                     "lng": context.get("hotel_lng"),
                     "period": "Morning",
                     "fixed": True,
+                    "schedule_anchor": "hotel_checkout",
                     "note": context.get("hotel_address") or hotel_area,
                 }
             )
@@ -961,6 +1079,7 @@ def _fixed_day_blocks(day, context=None):
                     "neighborhood": airport,
                     "period": departure_period,
                     "fixed": True,
+                    "schedule_anchor": "before_departure_buffer",
                     "note": f"{hotel_area} to {airport}",
                 }
             )
@@ -974,6 +1093,7 @@ def _fixed_day_blocks(day, context=None):
                     "neighborhood": airport,
                     "period": departure_period,
                     "fixed": True,
+                    "schedule_anchor": "airport_buffer",
                     "note": "Check bags, security, and boarding time",
                 }
             )
@@ -1118,29 +1238,78 @@ def _day_proximity_score(day_items, activity):
     return min(distances)
 
 
+def _day_capacity_minutes(day, context, base_days=None):
+    base_days = base_days or _available_trip_days()
+    arrival_day = base_days[0] if base_days else "Day 1"
+    departure_day = base_days[-1] if base_days else arrival_day
+    if len(base_days) > 1 and day == arrival_day:
+        return 6 * 60
+    if len(base_days) > 1 and day == departure_day:
+        return 5 * 60
+    return 10 * 60
+
+
+def _day_sightseeing_load_minutes(items):
+    ordered = _order_day_activities(items or [])
+    total = 0
+    previous = None
+    for item in ordered:
+        total += _duration_minutes_for_item(item)
+        if previous:
+            total += _minutes_from_transit_label(_transit_estimate_between(previous, item))
+        previous = item
+    return total
+
+
+def _next_itinerary_day_label(days):
+    highest = max((_day_sort_key(day) for day in days), default=0)
+    return f"Day {highest + 1}"
+
+
 def _assign_activities_to_days(activities):
-    days = _available_trip_days()
+    days = list(_available_trip_days())
     assigned = {day: [] for day in days}
-    groups = _group_nearby_activities(activities)
     context = _travel_context()
-    if _has_travel_context(context):
-        # Arrival and departure anchors reduce realistic sightseeing capacity.
-        capacities = {"Day 1": 1, "Day 2": 4, "Day 3": 1}
-    else:
-        capacities = {"Day 1": 2, "Day 2": 4, "Day 3": 2}
+    base_days = list(days)
+    groups = []
+    for group in _group_nearby_activities(activities):
+        if len(group) > 1 and _day_sightseeing_load_minutes(group) > 10 * 60:
+            groups.extend([[activity] for activity in group])
+        else:
+            groups.append(group)
 
     for group in groups:
         group_has_meal = any(_meal_slot(activity) for activity in group)
+        group_load = _day_sightseeing_load_minutes(group)
+
+        def day_overflow_minutes(day):
+            candidate_items = assigned.get(day, []) + list(group)
+            return max(
+                0,
+                _day_sightseeing_load_minutes(candidate_items)
+                - _day_capacity_minutes(day, context, base_days),
+            )
+
         candidate_days = sorted(
             days,
             key=lambda day: (
+                day_overflow_minutes(day),
                 _day_proximity_score(assigned[day], group[0]) if group_has_meal else 0,
-                len(assigned[day]) + len(group) > capacities.get(day, 3),
-                len(assigned[day]),
-                0 if day == "Day 2" else 1,
+                _day_sightseeing_load_minutes(assigned[day]),
+                _day_sort_key(day),
             ),
         )
-        assigned[candidate_days[0]].extend(group)
+        target_day = candidate_days[0] if candidate_days else _next_itinerary_day_label(days)
+        if (
+            candidate_days
+            and assigned[target_day]
+            and day_overflow_minutes(target_day) > 0
+            and group_load <= _day_capacity_minutes(target_day, context, base_days)
+        ):
+            target_day = _next_itinerary_day_label(days)
+            days.append(target_day)
+            assigned[target_day] = []
+        assigned[target_day].extend(group)
     return {day: _order_day_activities(items) for day, items in assigned.items()}
 
 
@@ -1150,7 +1319,13 @@ def _itinerary_item_key(item):
 
 
 def _ensure_itinerary_shape(days_data):
-    days = _available_trip_days()
+    days = list(_available_trip_days())
+    if isinstance(days_data, dict):
+        extras = [
+            day for day in days_data
+            if str(day).startswith("Day ") and day not in days
+        ]
+        days.extend(sorted(extras, key=_day_sort_key))
     output = {day: [] for day in days}
     if isinstance(days_data, dict):
         for day in days:
@@ -1162,10 +1337,55 @@ def _save_itinerary_days(days_data):
     st.session_state["itinerary_days"] = _ensure_itinerary_shape(days_data)
 
 
+def _find_capacity_target_day(days_data, item, after_day, context, base_days):
+    days = list(days_data.keys())
+    try:
+        start_index = days.index(after_day) + 1
+    except ValueError:
+        start_index = 0
+    for target_day in days[start_index:]:
+        candidate_items = days_data.get(target_day, []) + [item]
+        if _day_sightseeing_load_minutes(candidate_items) <= _day_capacity_minutes(target_day, context, base_days):
+            return target_day
+    return _next_itinerary_day_label(days)
+
+
+def _rebalance_days_by_capacity(days_data):
+    context = _travel_context()
+    base_days = list(_available_trip_days())
+    output = _ensure_itinerary_shape(days_data)
+    changed = False
+    for _attempt in range(100):
+        moved = False
+        for day in list(output.keys()):
+            items = output.get(day, [])
+            capacity = _day_capacity_minutes(day, context, base_days)
+            if _day_sightseeing_load_minutes(items) <= capacity or len(items) <= 1:
+                continue
+            ordered = _order_day_activities(items)
+            movable = next((item for item in reversed(ordered) if not item.get("locked")), None)
+            if not movable:
+                continue
+            output[day] = [item for item in items if item is not movable]
+            target_day = _find_capacity_target_day(output, movable, day, context, base_days)
+            if target_day not in output:
+                output[target_day] = []
+            output[target_day].append(movable)
+            moved = True
+            changed = True
+            break
+        if not moved:
+            break
+    return output, changed
+
+
 def _auto_assign_itinerary():
     existing = st.session_state.get("itinerary_days")
     if existing:
-        return _ensure_itinerary_shape(existing)
+        balanced, changed = _rebalance_days_by_capacity(existing)
+        if changed:
+            _save_itinerary_days(balanced)
+        return _ensure_itinerary_shape(balanced)
 
     unscheduled = list(st.session_state.get("itinerary_unscheduled_activities") or [])
     if not unscheduled:
@@ -1308,12 +1528,12 @@ def _period_for_item(item, index, total):
 
 
 def _period_for_activity_on_day(item, day, index, total, context):
-    if day == "Day 1" and _fixed_day_blocks(day, context):
+    if day == _arrival_day() and _fixed_day_blocks(day, context):
         arrival_period = _period_from_clock(context.get("arrival_time"), default="Afternoon")
         if arrival_period == "Morning":
             return "Afternoon" if index == 0 else "Evening"
         return "Evening"
-    if day == "Day 3" and _fixed_day_blocks(day, context):
+    if day == _departure_day() and _fixed_day_blocks(day, context):
         return "Morning"
     return _period_for_item(item, index, total)
 
@@ -1394,6 +1614,29 @@ def _hours_check_for_period(item, period):
         return {"verified": True, "open": False, "label": "Closed at planned time"}
     probe = _period_probe_minutes(period)
     is_open = any(start <= probe <= end for start, end in ranges)
+    return {
+        "verified": True,
+        "open": is_open,
+        "label": "Hours checked" if is_open else "Closed at planned time",
+    }
+
+
+def _hours_check_for_time(item, start_minutes, end_minutes=None):
+    if item.get("fixed") or item.get("meal_block"):
+        return {"verified": False, "open": True, "label": ""}
+    hours_text = _hours_text_for_item(item)
+    if not hours_text:
+        return {"verified": False, "open": None, "label": "Hours not verified"}
+    ranges = _opening_ranges_for_item(item)
+    if ranges is None:
+        return {"verified": True, "open": True, "label": "Hours checked"}
+    if not ranges:
+        return {"verified": True, "open": False, "label": "Closed at planned time"}
+    start = int(start_minutes or 0) % (24 * 60)
+    end = int(end_minutes if end_minutes is not None else start) % (24 * 60)
+    if end < start:
+        end += 24 * 60
+    is_open = any(start >= range_start and end <= range_end for range_start, range_end in ranges)
     return {
         "verified": True,
         "open": is_open,
@@ -1573,6 +1816,124 @@ def _apply_schedule_validation(assigned, context):
     return days_data
 
 
+def _day_items_for_schedule(day, activity_items, context):
+    fixed_blocks = _fixed_day_blocks(day, context)
+    meal_blocks = _meal_blocks_for_day(day, list(activity_items or []), fixed_blocks, context)
+    return fixed_blocks + meal_blocks + list(activity_items or [])
+
+
+def _scheduled_entry_for_item(day, activity_items, context, item):
+    item_key = _itinerary_item_key(item)
+    day_items = _day_items_for_schedule(day, activity_items, context)
+    for scheduled in _scheduled_day_items(day, list(activity_items or []), day_items, context):
+        if scheduled["item"] is item or _itinerary_item_key(scheduled["item"]) == item_key:
+            return scheduled
+    return None
+
+
+def _period_keeps_item_open(day, activity_items, context, item, period):
+    old_period = item.get("period")
+    had_period = "period" in item
+    item["period"] = period
+    scheduled = _scheduled_entry_for_item(day, activity_items, context, item)
+    check = (
+        _hours_check_for_time(item, scheduled["start"], scheduled["end"])
+        if scheduled else {"open": False}
+    )
+    if check.get("open") is True:
+        return True
+    if had_period:
+        item["period"] = old_period
+    else:
+        item.pop("period", None)
+    return False
+
+
+def _reschedule_closed_items_by_time(days_data, context):
+    output = _ensure_itinerary_shape(days_data)
+    base_days = list(_available_trip_days())
+    changed = False
+    for _attempt in range(100):
+        moved = False
+        for day in list(output.keys()):
+            activity_items = output.get(day, [])
+            scheduled_items = _scheduled_day_items(
+                day,
+                list(activity_items or []),
+                _day_items_for_schedule(day, activity_items, context),
+                context,
+            )
+            for scheduled in scheduled_items:
+                item = scheduled["item"]
+                if item.get("fixed") or item.get("meal_block") or item.get("locked"):
+                    continue
+                check = _hours_check_for_time(item, scheduled["start"], scheduled["end"])
+                if check.get("open") is not False:
+                    continue
+
+                valid_periods = _valid_periods_for_item(item)
+                if not valid_periods:
+                    continue
+
+                current_period = scheduled.get("period")
+                old_period = item.get("period")
+                had_period = "period" in item
+                for period in sorted(valid_periods, key=lambda value: 0 if value == current_period else 1):
+                    if _period_keeps_item_open(day, activity_items, context, item, period):
+                        moved = True
+                        changed = True
+                        break
+                if moved:
+                    break
+
+                if had_period:
+                    item["period"] = old_period
+                else:
+                    item.pop("period", None)
+
+                target_days = list(output.keys())
+                extra_day = _next_itinerary_day_label(target_days)
+                if extra_day not in output:
+                    target_days.append(extra_day)
+                for target_day in target_days:
+                    if target_day == day:
+                        continue
+                    created_target = target_day not in output
+                    if created_target:
+                        output[target_day] = []
+                    source_items = output.get(day, [])
+                    target_items = output.get(target_day, [])
+                    if item not in source_items:
+                        continue
+                    source_items.remove(item)
+                    target_items.append(item)
+                    if _day_sightseeing_load_minutes(target_items) <= _day_capacity_minutes(target_day, context, base_days):
+                        for period in valid_periods:
+                            if _period_keeps_item_open(target_day, target_items, context, item, period):
+                                moved = True
+                                changed = True
+                                break
+                    if moved:
+                        break
+                    target_items.remove(item)
+                    source_items.append(item)
+                    if created_target and not output.get(target_day):
+                        output.pop(target_day, None)
+                    if had_period:
+                        item["period"] = old_period
+                    else:
+                        item.pop("period", None)
+                if moved:
+                    break
+            if moved:
+                break
+        if not moved:
+            break
+    if changed:
+        _save_itinerary_days(output)
+    return output
+
+
 def _location_text(item):
     return str(item.get("address") or item.get("neighborhood") or item.get("note") or "").strip().lower()
 
@@ -1607,6 +1968,129 @@ def _transit_estimate_between(previous_item, next_item):
         return f"{minutes} min by subway"
     minutes = max(28, round(distance / 28 * 60) + 10)
     return f"{minutes} min by taxi"
+
+
+def _minutes_from_transit_label(label):
+    match = re.search(r"(\d+)", str(label or ""))
+    return int(match.group(1)) if match else 0
+
+
+def _format_minutes_as_time(total_minutes):
+    minutes = max(0, int(total_minutes)) % (24 * 60)
+    hour = minutes // 60
+    minute = minutes % 60
+    suffix = "AM" if hour < 12 else "PM"
+    display_hour = hour % 12 or 12
+    return f"{display_hour}:{minute:02d} {suffix}"
+
+
+def _duration_minutes_for_item(item):
+    if item.get("meal_block"):
+        return 60 if item.get("meal_type") == "lunch" else 90
+    raw = str(item.get("duration") or "").strip().lower()
+    if not raw:
+        return 90
+    time_range = re.search(
+        r"(\d{1,2})(?::(\d{2}))?\s*(am|pm)?\s*-\s*(\d{1,2})(?::(\d{2}))?\s*(am|pm)?",
+        raw,
+    )
+    if time_range and (time_range.group(3) or time_range.group(6)):
+        start_suffix = time_range.group(3) or time_range.group(6)
+        end_suffix = time_range.group(6) or start_suffix
+        start = _parse_time_to_minutes(f"{time_range.group(1)}:{time_range.group(2) or '00'} {start_suffix}")
+        end = _parse_time_to_minutes(f"{time_range.group(4)}:{time_range.group(5) or '00'} {end_suffix}")
+        if start is not None and end is not None:
+            if end <= start:
+                end += 24 * 60
+            return max(30, min(240, end - start))
+    numbers = [float(value) for value in re.findall(r"\d+(?:\.\d+)?", raw)]
+    if not numbers:
+        return 90
+    value = sum(numbers[:2]) / min(2, len(numbers))
+    if "hr" in raw or "hour" in raw or re.search(r"\d\s*h", raw):
+        return int(max(30, min(300, value * 60)))
+    return int(max(20, min(240, value)))
+
+
+def _preferred_start_minutes(item, period):
+    if item.get("meal_type") == "lunch":
+        return 12 * 60 + 30
+    if item.get("meal_type") == "dinner":
+        return 18 * 60 + 30
+    raw_duration = str(item.get("duration") or "").strip()
+    parsed_clock = _clock_minutes(raw_duration)
+    if parsed_clock is not None and item.get("fixed"):
+        return parsed_clock
+    parsed_time = _parse_time_to_minutes(raw_duration)
+    if parsed_time is not None and (item.get("fixed") or item.get("meal_block")):
+        return parsed_time
+    if period == "Morning":
+        return 9 * 60
+    if period == "Afternoon":
+        return 14 * 60
+    if period == "Evening":
+        return 18 * 60
+    return 9 * 60
+
+
+def _scheduled_day_items(day, activity_items, day_items, context):
+    activity_periods = {
+        id(item): _period_for_activity_on_day(item, day, idx, len(activity_items or []), context)
+        for idx, item in enumerate(activity_items or [])
+    }
+    rows = []
+    period_rank = {"Morning": 0, "Afternoon": 1, "Evening": 2}
+    departure_time = _clock_minutes(context.get("departure_time"))
+    checkout_item = next((item for item in day_items or [] if item.get("schedule_anchor") == "hotel_checkout"), None)
+    transfer_item = next((item for item in day_items or [] if item.get("schedule_anchor") == "before_departure_buffer"), None)
+    buffer_item = next((item for item in day_items or [] if item.get("schedule_anchor") == "airport_buffer"), None)
+    checkout_minutes = _duration_minutes_for_item(checkout_item) if checkout_item and departure_time is not None else 0
+    transfer_minutes = _duration_minutes_for_item(transfer_item) if transfer_item and departure_time is not None else 0
+    buffer_minutes = _duration_minutes_for_item(buffer_item) if buffer_item and departure_time is not None else 0
+    for idx, item in enumerate(day_items or []):
+        period = item.get("period") or activity_periods.get(id(item)) or _period_for_item(item, idx, len(day_items or []))
+        preferred = _preferred_start_minutes(item, period)
+        if departure_time is not None and day == _departure_day():
+            if item.get("schedule_anchor") == "airport_buffer":
+                preferred = max(0, departure_time - buffer_minutes)
+            elif item.get("schedule_anchor") == "before_departure_buffer":
+                preferred = max(0, departure_time - buffer_minutes - transfer_minutes)
+            elif item.get("schedule_anchor") == "hotel_checkout":
+                preferred = max(0, departure_time - buffer_minutes - transfer_minutes - checkout_minutes)
+        rows.append(
+            {
+                "item": item,
+                "period": period,
+                "preferred": preferred,
+                "rank": period_rank.get(period, 1),
+                "source_index": idx,
+            }
+        )
+    rows.sort(key=lambda row: (row["rank"], row["preferred"], row["source_index"]))
+
+    scheduled = []
+    current_time = None
+    previous_item = None
+    for row in rows:
+        item = row["item"]
+        transit_label = _transit_estimate_between(previous_item, item)
+        transit_minutes = _minutes_from_transit_label(transit_label)
+        earliest = (current_time + transit_minutes) if current_time is not None else row["preferred"]
+        start = max(row["preferred"], earliest)
+        duration = _duration_minutes_for_item(item)
+        scheduled.append(
+            {
+                "item": item,
+                "period": row["period"],
+                "start": start,
+                "end": start + duration,
+                "transit_label": transit_label,
+                "transit_minutes": transit_minutes,
+            }
+        )
+        current_time = start + duration
+        previous_item = item
+    return scheduled
 
 
 def _is_restaurant_like(item):
@@ -1770,7 +2254,7 @@ def _render_activity_edit_controls(item, day, current_period):
     lock_label = "Unlock activity" if item.get("locked") else "Lock activity"
     lock_help = "Locked activities stay fixed when regenerating this day."
     with st.expander(f"Edit {item.get('name') or 'activity'}", expanded=False):
-        day_options = _available_trip_days()
+        day_options = list(_ensure_itinerary_shape(st.session_state.get("itinerary_days")).keys())
         period_options = ["Morning", "Afternoon", "Evening"]
         col_day, col_period = st.columns(2)
         with col_day:
@@ -1826,11 +2310,9 @@ def _dynamic_itinerary_css():
     .auto-day-title {font-size:18px;font-weight:820;color:#fff;}
     .auto-day-note {font-size:12px;color:rgba(255,255,255,.43);margin-top:3px;}
     .auto-pill {font-size:11px;font-weight:750;color:#c4b5fd;background:rgba(139,92,246,.12);border:1px solid rgba(196,181,253,.18);border-radius:999px;padding:6px 9px;white-space:nowrap;}
-    .auto-period {margin-top:14px;}
-    .auto-period-title {display:flex;align-items:center;gap:8px;font-size:11px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:8px;}
-    .auto-period-title:after {content:"";height:1px;background:rgba(255,255,255,.07);flex:1;}
+    .auto-timeline {margin-top:14px;}
     .auto-item {display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;}
-    .auto-time {width:58px;flex-shrink:0;color:rgba(255,255,255,.34);font-size:11px;font-weight:700;padding-top:8px;}
+    .auto-time {width:76px;flex-shrink:0;color:rgba(255,255,255,.56);font-size:11px;font-weight:800;padding-top:8px;text-align:right;}
     .auto-card {flex:1;border:1px solid rgba(255,255,255,.075);border-radius:13px;background:rgba(255,255,255,.026);padding:12px 14px;}
     .auto-card.fixed {border-color:rgba(167,139,250,.20);background:linear-gradient(135deg,rgba(139,92,246,.11),rgba(16,185,129,.045)),rgba(255,255,255,.026);}
     .auto-card.meal {border-color:rgba(251,146,60,.18);background:linear-gradient(135deg,rgba(251,146,60,.10),rgba(255,255,255,.018)),rgba(255,255,255,.026);}
@@ -1842,7 +2324,7 @@ def _dynamic_itinerary_css():
     .auto-tag.warn {color:#fde68a;background:rgba(245,158,11,.13);}
     .auto-tag.danger {color:#fecaca;background:rgba(239,68,68,.13);}
     .auto-transit {display:flex;gap:10px;align-items:center;margin:-2px 0 6px;}
-    .auto-transit-spacer {width:58px;flex-shrink:0;}
+    .auto-transit-spacer {width:76px;flex-shrink:0;color:rgba(255,255,255,.25);font-size:10px;font-weight:700;text-align:right;}
     .auto-transit-line {flex:1;display:flex;align-items:center;gap:8px;color:rgba(125,211,252,.72);font-size:11px;font-weight:700;}
     .auto-transit-line:before {content:"";width:18px;height:1px;background:rgba(125,211,252,.28);}
     .auto-transit-line:after {content:"";height:1px;background:rgba(125,211,252,.12);flex:1;}
@@ -1855,16 +2337,19 @@ def _render_auto_itinerary(assigned):
     st.markdown(_dynamic_itinerary_css(), unsafe_allow_html=True)
     context = _travel_context()
     assigned = _apply_schedule_validation(assigned, context)
+    assigned = _reschedule_closed_items_by_time(assigned, context)
     total = sum(len(items) for items in assigned.values())
     fixed_count = sum(len(_fixed_day_blocks(day, context)) for day in assigned)
     anchor_copy = " Flight and hotel anchors are reserved first." if fixed_count else ""
+    start_date, end_date, _arrival_dt, _departure_dt = _trip_date_range()
+    date_range = f"{start_date.strftime('%b %-d')} - {end_date.strftime('%b %-d, %Y')}"
     st.markdown(
         f"""
         <div class="auto-it">
           <div class="auto-hero">
             <div class="auto-kicker">Itinerary</div>
             <div class="auto-title">Automatically planned days</div>
-            <div class="auto-sub">Byable assigned {total} activit{'y' if total == 1 else 'ies'} across available trip days by city, neighborhood, and proximity.{anchor_copy} Arrival and departure days stay lighter.</div>
+            <div class="auto-sub">{_html.escape(date_range)} · Byable assigned {total} activit{'y' if total == 1 else 'ies'} across {len(assigned)} trip day{'s' if len(assigned) != 1 else ''} by city, neighborhood, and proximity.{anchor_copy} Arrival and departure days stay lighter.</div>
           </div>
         </div>
         """,
@@ -1874,7 +2359,9 @@ def _render_auto_itinerary(assigned):
         fixed_blocks = _fixed_day_blocks(day, context)
         meal_blocks = _meal_blocks_for_day(day, list(items or []), fixed_blocks, context)
         day_items = fixed_blocks + meal_blocks + list(items or [])
-        day_note = "Arrival / lighter day" if day == "Day 1" else "Departure / lighter day" if day == "Day 3" else "Main exploration day"
+        date_label = _day_date_label(day)
+        day_note_base = "Arrival / lighter day" if day == _arrival_day() else "Departure / lighter day" if day == _departure_day() else "Main exploration day"
+        day_note = day_note_base
         activity_count = len(items or [])
         fixed_label = f" + {len(fixed_blocks)} trip event{'s' if len(fixed_blocks) != 1 else ''}" if fixed_blocks else ""
         st.markdown(
@@ -1882,7 +2369,7 @@ def _render_auto_itinerary(assigned):
             <div class="auto-day">
               <div class="auto-day-head">
                 <div>
-                  <div class="auto-day-title">{_html.escape(day)}</div>
+                  <div class="auto-day-title">{_html.escape(day)}{_html.escape(' · ' + date_label if date_label else '')}</div>
                   <div class="auto-day-note">{_html.escape(day_note)}</div>
                 </div>
                 <div class="auto-pill">{activity_count} activity{'ies' if activity_count != 1 else ''}{_html.escape(fixed_label)}</div>
@@ -1898,83 +2385,75 @@ def _render_auto_itinerary(assigned):
             st.markdown('<div class="auto-empty">No activities assigned yet.</div>', unsafe_allow_html=True)
             st.markdown("</div>", unsafe_allow_html=True)
             continue
-        previous_visible_item = None
-        for period in ("Morning", "Afternoon", "Evening"):
-            activity_periods = {
-                id(item): _period_for_activity_on_day(item, day, idx, len(items or []), context)
-                for idx, item in enumerate(items or [])
-            }
-            period_items = [
-                item for idx, item in enumerate(day_items)
-                if (item.get("period") or activity_periods.get(id(item))) == period
-            ]
-            if not period_items:
-                continue
-            st.markdown(f'<div class="auto-period"><div class="auto-period-title">{period}</div>', unsafe_allow_html=True)
-            for item in period_items:
-                transit_label = _transit_estimate_between(previous_visible_item, item)
-                if transit_label:
-                    st.markdown(
-                        f"""
-                        <div class="auto-transit">
-                          <div class="auto-transit-spacer"></div>
-                          <div class="auto-transit-line">{_html.escape(transit_label)}</div>
-                        </div>
-                        """,
-                        unsafe_allow_html=True,
-                    )
-                name = item.get("name") or "Activity"
-                duration = item.get("duration") or "Duration flexible"
-                location = item.get("note") or item.get("address") or item.get("neighborhood") or "Location to confirm"
-                category = item.get("category") or "Activity"
-                cost = item.get("estimated_cost") or "Cost varies"
-                meal_slot = _meal_slot(item)
-                slot_label = {
-                    "breakfast": "Breakfast slot",
-                    "lunch": "Lunch slot",
-                    "dinner": "Dinner slot",
-                    "nightlife": "Nightlife slot",
-                }.get(meal_slot, "Meal window" if item.get("meal_block") else "Fixed trip event" if item.get("fixed") else "Auto assigned")
-                fixed_class = " fixed" if item.get("fixed") else ""
-                meal_class = " meal" if item.get("meal_block") else ""
-                card_class = f"{fixed_class}{meal_class}"
-                cost_text = f" · {_html.escape(str(cost))}" if cost and not item.get("fixed") else ""
-                locked_tag = '<span class="auto-tag fixed">Locked</span>' if item.get("locked") else ""
-                hours_check = _hours_check_for_period(item, period)
-                hours_label = hours_check.get("label") or ""
-                hours_class = (
-                    "danger"
-                    if hours_check.get("open") is False
-                    else "warn"
-                    if not hours_check.get("verified") and hours_label
-                    else "fixed"
-                )
-                hours_tag = (
-                    f'<span class="auto-tag {hours_class}">{_html.escape(str(hours_label))}</span>'
-                    if hours_label else ""
-                )
-                crowd_level = _crowd_level_for_period(item, period)
-                crowd_class = "danger" if crowd_level == "High" else "warn" if crowd_level == "Medium" else "fixed"
-                crowd_tag = (
-                    f'<span class="auto-tag {crowd_class}">Crowd level: {_html.escape(str(crowd_level))}</span>'
-                    if crowd_level else ""
-                )
+        st.markdown('<div class="auto-timeline">', unsafe_allow_html=True)
+        for scheduled in _scheduled_day_items(day, list(items or []), day_items, context):
+            item = scheduled["item"]
+            period = scheduled["period"]
+            if scheduled.get("transit_label"):
+                transit_start = scheduled["start"] - int(scheduled.get("transit_minutes") or 0)
                 st.markdown(
                     f"""
-                    <div class="auto-item">
-                      <div class="auto-time">{_html.escape(duration)}</div>
-                      <div class="auto-card{card_class}">
-                        <div class="auto-name">{_html.escape(str(name))}</div>
-                        <div class="auto-meta">{_html.escape(str(location))}{cost_text}</div>
-                        <div class="auto-tags"><span class="auto-tag">{_html.escape(str(category))}</span><span class="auto-tag{fixed_class}">{_html.escape(slot_label)}</span>{hours_tag}{crowd_tag}{locked_tag}</div>
-                      </div>
+                    <div class="auto-transit">
+                      <div class="auto-transit-spacer">{_html.escape(_format_minutes_as_time(transit_start))}</div>
+                      <div class="auto-transit-line">{_html.escape(scheduled["transit_label"])}</div>
                     </div>
                     """,
                     unsafe_allow_html=True,
                 )
-                _render_activity_edit_controls(item, day, period)
-                previous_visible_item = item
-            st.markdown("</div>", unsafe_allow_html=True)
+            name = item.get("name") or "Activity"
+            duration = item.get("duration") or "Duration flexible"
+            location = item.get("note") or item.get("address") or item.get("neighborhood") or "Location to confirm"
+            category = item.get("category") or "Activity"
+            cost = item.get("estimated_cost") or "Cost varies"
+            meal_slot = _meal_slot(item)
+            slot_label = {
+                "breakfast": "Breakfast slot",
+                "lunch": "Lunch slot",
+                "dinner": "Dinner slot",
+                "nightlife": "Nightlife slot",
+            }.get(meal_slot, "Meal window" if item.get("meal_block") else "Fixed trip event" if item.get("fixed") else "Scheduled")
+            fixed_class = " fixed" if item.get("fixed") else ""
+            meal_class = " meal" if item.get("meal_block") else ""
+            card_class = f"{fixed_class}{meal_class}"
+            cost_text = f" · {_html.escape(str(cost))}" if cost and not item.get("fixed") else ""
+            locked_tag = '<span class="auto-tag fixed">Locked</span>' if item.get("locked") else ""
+            hours_check = _hours_check_for_time(item, scheduled["start"], scheduled["end"])
+            hours_label = hours_check.get("label") or ""
+            hours_class = (
+                "danger"
+                if hours_check.get("open") is False
+                else "warn"
+                if not hours_check.get("verified") and hours_label
+                else "fixed"
+            )
+            hours_tag = (
+                f'<span class="auto-tag {hours_class}">{_html.escape(str(hours_label))}</span>'
+                if hours_label else ""
+            )
+            crowd_level = _crowd_level_for_period(item, period)
+            crowd_class = "danger" if crowd_level == "High" else "warn" if crowd_level == "Medium" else "fixed"
+            crowd_tag = (
+                f'<span class="auto-tag {crowd_class}">Crowd level: {_html.escape(str(crowd_level))}</span>'
+                if crowd_level else ""
+            )
+            scheduled_range = (
+                f"{_format_minutes_as_time(scheduled['start'])}-{_format_minutes_as_time(scheduled['end'])}"
+            )
+            st.markdown(
+                f"""
+                <div class="auto-item">
+                  <div class="auto-time">{_html.escape(_format_minutes_as_time(scheduled["start"]))}</div>
+                  <div class="auto-card{card_class}">
+                    <div class="auto-name">{_html.escape(str(name))}</div>
+                    <div class="auto-meta">{_html.escape(scheduled_range)} · {_html.escape(str(location))}{cost_text}</div>
+                    <div class="auto-tags"><span class="auto-tag">{_html.escape(str(category))}</span><span class="auto-tag{fixed_class}">{_html.escape(slot_label)}</span>{hours_tag}{crowd_tag}{locked_tag}</div>
+                  </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+            _render_activity_edit_controls(item, day, period)
+        st.markdown("</div>", unsafe_allow_html=True)
         st.markdown("</div>", unsafe_allow_html=True)
 
 
