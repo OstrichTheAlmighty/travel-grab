@@ -1136,36 +1136,220 @@ def _activity_text(activity):
     return " ".join(str(part or "") for part in parts).lower()
 
 
-def _meal_slot(activity):
-    text = _activity_text(activity)
-    category = str(activity.get("category") or "").lower()
-    if "nightlife" in category or any(word in text for word in ("bar", "jazz", "club", "cocktail", "nightlife", "pub")):
-        return "nightlife"
-    is_food = "food" in category or any(
-        word in text
-        for word in (
-            "restaurant",
-            "food",
-            "coffee",
-            "cafe",
-            "café",
-            "bakery",
-            "market",
-            "ramen",
-            "sushi",
-            "izakaya",
-            "dining",
-            "brunch",
-            "breakfast",
-            "lunch",
-            "dinner",
+def _place_id_value(item):
+    return str((item or {}).get("place_id") or "").strip()
+
+
+def _append_without_place_id_duplicate(existing_items, new_items):
+    output = list(existing_items or [])
+    existing_place_ids = {_place_id_value(item) for item in output if _place_id_value(item)}
+    for item in new_items or []:
+        if not isinstance(item, dict):
+            continue
+        place_id = _place_id_value(item)
+        if place_id and place_id in existing_place_ids:
+            continue
+        output.append(item)
+        if place_id:
+            existing_place_ids.add(place_id)
+    return output
+
+
+def _normalize_city_name(value):
+    return re.sub(r"[^a-z0-9]+", "", str(value or "").strip().lower())
+
+
+def _activity_matches_itinerary_city(item, context):
+    activity_city = _normalize_city_name((item or {}).get("destination"))
+    itinerary_city = _normalize_city_name(context.get("destination_city") or st.session_state.get("trip_destination"))
+    if not activity_city or not itinerary_city:
+        return True
+    return activity_city == itinerary_city
+
+
+def _split_city_assignment_items(items, context):
+    current_city = []
+    needs_city = []
+    for item in items or []:
+        if isinstance(item, dict) and not _activity_matches_itinerary_city(item, context):
+            needs_city.append(item)
+        else:
+            current_city.append(item)
+    if needs_city:
+        st.session_state["itinerary_needs_city_assignment"] = _append_without_place_id_duplicate(
+            st.session_state.get("itinerary_needs_city_assignment") or [],
+            needs_city,
         )
-    )
-    if not is_food:
+    return current_city, needs_city
+
+
+_FOOD_VENUE_TERMS = (
+    "restaurant",
+    "restaurants",
+    "cafe",
+    "café",
+    "coffee",
+    "coffee shop",
+    "bakery",
+    "bakeries",
+    "bar",
+    "pub",
+    "izakaya",
+    "ramen",
+    "sushi",
+    "bistro",
+    "brasserie",
+    "trattoria",
+    "taverna",
+    "diner",
+    "dessert",
+    "gelato",
+    "ice cream",
+    "pastry",
+    "food hall",
+    "food court",
+    "market",
+    "food market",
+    "night market",
+    "dining",
+    "eatery",
+    "taqueria",
+    "pizzeria",
+    "steakhouse",
+    "omakase",
+    "wine bar",
+    "cocktail",
+    "brewery",
+    "tea house",
+    "teahouse",
+)
+
+
+_FOOD_EXPERIENCE_TERMS = (
+    "food tour",
+    "food walk",
+    "tasting",
+    "cooking class",
+    "culinary",
+    "street food",
+    "dessert crawl",
+    "cafe crawl",
+    "café crawl",
+    "cocktail crawl",
+    "dining experience",
+)
+
+
+_NON_MEAL_ATTRACTION_TERMS = (
+    "museum",
+    "gallery",
+    "monument",
+    "landmark",
+    "palace",
+    "castle",
+    "cathedral",
+    "temple",
+    "shrine",
+    "church",
+    "park",
+    "garden",
+    "viewpoint",
+    "tower",
+    "aquarium",
+    "zoo",
+    "fortress",
+    "walking tour",
+    "history walk",
+    "architecture walk",
+    "bike route",
+    "tourist attraction",
+)
+
+
+def _is_food_venue(activity):
+    category = str(activity.get("category") or "").strip().lower()
+    subcategory = str(activity.get("subcategory") or "").strip().lower()
+    text = _activity_text(activity)
+    if any(term in text for term in _FOOD_EXPERIENCE_TERMS):
+        return True
+    if any(term in text for term in _NON_MEAL_ATTRACTION_TERMS) and not any(
+        term in text for term in _FOOD_VENUE_TERMS
+    ):
+        return False
+    if category == "food":
+        return True
+    if category in {"culture", "adventure", "nature", "hidden gems", "free", "luxury"} and any(
+        term in text for term in _NON_MEAL_ATTRACTION_TERMS
+    ):
+        return False
+    return any(term in text for term in _FOOD_VENUE_TERMS) or "food" in subcategory
+
+
+def _remember_meal_candidates(items):
+    candidates = list(st.session_state.get("itinerary_meal_candidates") or [])
+    food_items = [item for item in items or [] if isinstance(item, dict) and _is_food_venue(item)]
+    st.session_state["itinerary_meal_candidates"] = _append_without_place_id_duplicate(candidates, food_items)
+
+
+def _sightseeing_items_only(items):
+    sightseeing = []
+    meal_candidates = []
+    for item in items or []:
+        if isinstance(item, dict) and _is_food_venue(item):
+            meal_candidates.append(item)
+        else:
+            sightseeing.append(item)
+    if meal_candidates:
+        _remember_meal_candidates(meal_candidates)
+    return sightseeing
+
+
+def _remove_meal_items_from_days(days_data):
+    output = _ensure_itinerary_shape(days_data)
+    changed = False
+    for day, items in output.items():
+        filtered = _sightseeing_items_only(items)
+        if len(filtered) != len(items or []):
+            output[day] = filtered
+            changed = True
+    return output, changed
+
+
+def _remove_city_mismatch_items_from_days(days_data, context):
+    output = _ensure_itinerary_shape(days_data)
+    changed = False
+    for day, items in output.items():
+        current_city, needs_city = _split_city_assignment_items(items, context)
+        if needs_city:
+            output[day] = current_city
+            changed = True
+    return output, changed
+
+
+def _current_city_meal_candidates(context):
+    current_city = []
+    needs_city = []
+    for item in list(st.session_state.get("itinerary_meal_candidates") or []):
+        if _activity_matches_itinerary_city(item, context):
+            current_city.append(item)
+        else:
+            needs_city.append(item)
+    if needs_city:
+        st.session_state["itinerary_needs_city_assignment"] = _append_without_place_id_duplicate(
+            st.session_state.get("itinerary_needs_city_assignment") or [],
+            needs_city,
+        )
+        st.session_state["itinerary_meal_candidates"] = current_city
+    return current_city
+
+
+def _meal_slot(activity):
+    if not _is_food_venue(activity):
         return ""
+    text = _activity_text(activity)
     if any(word in text for word in ("breakfast", "brunch", "coffee", "cafe", "café", "bakery", "pastry")):
         return "breakfast"
-    if any(word in text for word in ("dinner", "izakaya", "omakase", "wine", "cocktail", "steak")):
+    if any(word in text for word in ("dinner", "izakaya", "omakase", "wine", "cocktail", "steak", "bar", "pub", "brewery")):
         return "dinner"
     if any(word in text for word in ("lunch", "market", "ramen", "sushi", "restaurant", "food")):
         return "lunch"
@@ -1261,6 +1445,86 @@ def _day_sightseeing_load_minutes(items):
     return total
 
 
+def _transit_minutes_for_order(items):
+    ordered = list(items or [])
+    total = 0
+    previous = None
+    for item in ordered:
+        if previous:
+            total += _minutes_from_transit_label(_transit_estimate_between(previous, item))
+        previous = item
+    return total
+
+
+def _day_transit_minutes(items):
+    return _transit_minutes_for_order(_order_day_activities(items or []))
+
+
+def _longest_transit_for_order(items):
+    ordered = list(items or [])
+    longest = 0
+    previous = None
+    for item in ordered:
+        if previous:
+            longest = max(longest, _minutes_from_transit_label(_transit_estimate_between(previous, item)))
+        previous = item
+    return longest
+
+
+def _longest_day_transit_minutes(items):
+    return _longest_transit_for_order(_order_day_activities(items or []))
+
+
+def _proximity_sort_value(a, b):
+    distance = _haversine_km(a, b)
+    if distance is not None:
+        return distance
+    a_location = _location_text(a)
+    b_location = _location_text(b)
+    if a_location and b_location and a_location == b_location:
+        return 0
+    return 999
+
+
+def _nearest_neighbor_activity_order(items):
+    remaining = list(items or [])
+    if len(remaining) <= 2:
+        return _order_day_activities(remaining)
+    ordered = [min(remaining, key=lambda item: (_activity_sort_weight(item), item.get("name") or ""))]
+    remaining.remove(ordered[0])
+    while remaining:
+        previous = ordered[-1]
+        next_item = min(
+            remaining,
+            key=lambda item: (
+                _proximity_sort_value(previous, item),
+                _activity_sort_weight(item),
+                item.get("name") or "",
+            ),
+        )
+        ordered.append(next_item)
+        remaining.remove(next_item)
+    return ordered
+
+
+def _reduce_long_transit(days_data):
+    output = _ensure_itinerary_shape(days_data)
+    changed = False
+    for day, items in output.items():
+        if len(items or []) <= 2 or any(item.get("locked") for item in items or []):
+            continue
+        if _longest_day_transit_minutes(items) <= 45:
+            continue
+        current_order = _order_day_activities(items)
+        candidate = _nearest_neighbor_activity_order(items)
+        if _transit_minutes_for_order(candidate) < _transit_minutes_for_order(current_order):
+            output[day] = candidate
+            changed = True
+    if changed:
+        _save_itinerary_days(output)
+    return output
+
+
 def _next_itinerary_day_label(days):
     highest = max((_day_sort_key(day) for day in days), default=0)
     return f"Day {highest + 1}"
@@ -1272,6 +1536,8 @@ def _assign_activities_to_days(activities):
     context = _travel_context()
     base_days = list(days)
     groups = []
+    activities, _needs_city = _split_city_assignment_items(activities, context)
+    activities = _sightseeing_items_only(activities)
     for group in _group_nearby_activities(activities):
         if len(group) > 1 and _day_sightseeing_load_minutes(group) > 10 * 60:
             groups.extend([[activity] for activity in group])
@@ -1380,20 +1646,45 @@ def _rebalance_days_by_capacity(days_data):
 
 
 def _auto_assign_itinerary():
+    context = _travel_context()
     existing = st.session_state.get("itinerary_days")
     if existing:
-        balanced, changed = _rebalance_days_by_capacity(existing)
-        if changed:
+        existing, removed_city = _remove_city_mismatch_items_from_days(existing, context)
+        existing, removed_meals = _remove_meal_items_from_days(existing)
+        raw_pending = list(st.session_state.get("itinerary_unscheduled_activities") or [])
+        pending = list(raw_pending)
+        pending, _needs_city = _split_city_assignment_items(pending, context)
+        pending = _sightseeing_items_only(pending)
+        merged = _ensure_itinerary_shape(existing)
+        if pending:
+            for item in pending:
+                target_day = _find_capacity_target_day(merged, item, _arrival_day(), context, list(_available_trip_days()))
+                if target_day not in merged:
+                    merged[target_day] = []
+                merged[target_day].append(item)
+        if raw_pending:
+            st.session_state["itinerary_unscheduled_activities"] = []
+        reduced = _reduce_long_transit(merged)
+        balanced, changed = _rebalance_days_by_capacity(reduced)
+        if changed or removed_meals or removed_city or pending:
             _save_itinerary_days(balanced)
         return _ensure_itinerary_shape(balanced)
 
     unscheduled = list(st.session_state.get("itinerary_unscheduled_activities") or [])
+    unscheduled, _needs_city = _split_city_assignment_items(unscheduled, context)
+    sightseeing = _sightseeing_items_only(unscheduled)
+    if len(sightseeing) != len(unscheduled):
+        st.session_state["itinerary_unscheduled_activities"] = sightseeing
+        unscheduled = sightseeing
     if not unscheduled:
+        st.session_state["itinerary_unscheduled_activities"] = []
         if _has_travel_context():
             return {day: [] for day in _available_trip_days()}
         return {}
-    assigned = _assign_activities_to_days(unscheduled)
+    assigned = _reduce_long_transit(_assign_activities_to_days(unscheduled))
+    assigned, _changed = _rebalance_days_by_capacity(assigned)
     _save_itinerary_days(assigned)
+    st.session_state["itinerary_unscheduled_activities"] = []
     return assigned
 
 
@@ -2094,25 +2385,7 @@ def _scheduled_day_items(day, activity_items, day_items, context):
 
 
 def _is_restaurant_like(item):
-    text = _activity_text(item)
-    category = str(item.get("category") or "").lower()
-    return "food" in category or any(
-        word in text
-        for word in (
-            "restaurant",
-            "ramen",
-            "sushi",
-            "izakaya",
-            "bistro",
-            "cafe",
-            "café",
-            "coffee",
-            "bakery",
-            "dining",
-            "market",
-            "food",
-        )
-    )
+    return _is_food_venue(item)
 
 
 def _display_name(item):
@@ -2136,7 +2409,16 @@ def _restaurant_suggestions_for_day(day, day_items, context, meal_type):
         "this area",
     )
     activities = list(st.session_state.get("activities_results") or [])
-    candidates = [activity for activity in activities if _is_restaurant_like(activity)]
+    meal_candidates = [
+        item for item in _current_city_meal_candidates(context)
+        if _meal_slot(item) == meal_type
+    ]
+    candidates = [
+        activity for activity in activities
+        if isinstance(activity, dict) and _is_restaurant_like(activity)
+    ]
+
+    selected_names = [_display_name(item) for item in meal_candidates]
 
     scored = []
     for candidate in candidates:
@@ -2147,11 +2429,10 @@ def _restaurant_suggestions_for_day(day, day_items, context, meal_type):
         scored.append((score, _display_name(candidate)))
     scored.sort(key=lambda item: (item[0], item[1]))
 
-    names = []
+    names = list(selected_names)
     for _score, name in scored:
-        if name not in names:
-            names.append(name)
-        if len(names) >= 6:
+        names.append(name)
+        if len(names) >= max(6, len(selected_names)):
             break
 
     if not names:
@@ -2163,10 +2444,10 @@ def _restaurant_suggestions_for_day(day, day_items, context, meal_type):
         ]
 
     variant = int(_meal_state(day, meal_type).get("variant") or 0)
-    if names:
+    if names and not selected_names:
         shift = variant % len(names)
         names = names[shift:] + names[:shift]
-    return names[:3]
+    return names[: max(3, len(selected_names))]
 
 
 def _meal_blocks_for_day(day, activity_items, fixed_blocks, context):
@@ -2186,6 +2467,15 @@ def _meal_blocks_for_day(day, activity_items, fixed_blocks, context):
             "period": "Evening",
         },
     }
+    if any(_meal_slot(item) == "breakfast" for item in _current_city_meal_candidates(context)):
+        definitions = {
+            "breakfast": {
+                "name": "Breakfast",
+                "duration": "8:00 AM-9:00 AM",
+                "period": "Morning",
+            },
+            **definitions,
+        }
     for meal_type, definition in definitions.items():
         state = _meal_state(day, meal_type)
         if state.get("removed"):
@@ -2214,7 +2504,10 @@ def _meal_blocks_for_day(day, activity_items, fixed_blocks, context):
 def _render_removed_meal_controls(day, context):
     if not _is_full_itinerary_day(day, context):
         return
-    removed = [meal_type for meal_type in ("lunch", "dinner") if _meal_state(day, meal_type).get("removed")]
+    removed = [
+        meal_type for meal_type in ("breakfast", "lunch", "dinner")
+        if _meal_state(day, meal_type).get("removed")
+    ]
     if not removed:
         return
     cols = st.columns(len(removed))
@@ -2223,6 +2516,58 @@ def _render_removed_meal_controls(day, context):
             if st.button(f"Restore {meal_type}", key=f"it_restore_{_meal_key(day, meal_type)}", use_container_width=True):
                 _restore_meal_block(day, meal_type)
                 _safe_rerun()
+
+
+def _itinerary_visibility_counts(assigned, context):
+    scheduled = sum(len(items or []) for items in (assigned or {}).values())
+    meals = len(_current_city_meal_candidates(context))
+    needs_city = len(st.session_state.get("itinerary_needs_city_assignment") or [])
+    couldnt_fit = len(st.session_state.get("itinerary_couldnt_fit") or [])
+    pending = len(st.session_state.get("itinerary_unscheduled_activities") or [])
+    unscheduled = needs_city + couldnt_fit + pending
+    selected = scheduled + meals + unscheduled
+    return {
+        "selected": selected,
+        "scheduled": scheduled,
+        "meals": meals,
+        "unscheduled": unscheduled,
+    }
+
+
+def _render_item_bucket(title, items, note):
+    if not items:
+        return
+    st.markdown(
+        f"""
+        <div class="auto-day">
+          <div class="auto-day-head">
+            <div>
+              <div class="auto-day-title">{_html.escape(title)}</div>
+              <div class="auto-day-note">{_html.escape(note)}</div>
+            </div>
+            <div class="auto-pill">{len(items)} item{'s' if len(items) != 1 else ''}</div>
+          </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    for item in items:
+        name = item.get("name") or item.get("title") or "Activity"
+        location = item.get("address") or item.get("neighborhood") or item.get("destination") or "Location to confirm"
+        category = item.get("category") or "Activity"
+        st.markdown(
+            f"""
+            <div class="auto-item">
+              <div class="auto-time"></div>
+              <div class="auto-card">
+                <div class="auto-name">{_html.escape(str(name))}</div>
+                <div class="auto-meta">{_html.escape(str(location))}</div>
+                <div class="auto-tags"><span class="auto-tag">{_html.escape(str(category))}</span><span class="auto-tag warn">Not scheduled</span></div>
+              </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    st.markdown("</div>", unsafe_allow_html=True)
 
 
 def _safe_rerun():
@@ -2336,8 +2681,21 @@ def _dynamic_itinerary_css():
 def _render_auto_itinerary(assigned):
     st.markdown(_dynamic_itinerary_css(), unsafe_allow_html=True)
     context = _travel_context()
+    assigned = _reduce_long_transit(assigned)
+    assigned, capacity_changed = _rebalance_days_by_capacity(assigned)
+    if capacity_changed:
+        _save_itinerary_days(assigned)
     assigned = _apply_schedule_validation(assigned, context)
     assigned = _reschedule_closed_items_by_time(assigned, context)
+    assigned = _reduce_long_transit(assigned)
+    assigned, capacity_changed = _rebalance_days_by_capacity(assigned)
+    if capacity_changed:
+        _save_itinerary_days(assigned)
+    visibility = _itinerary_visibility_counts(assigned, context)
+    summary_line = (
+        f"{visibility['selected']} selected · {visibility['scheduled']} scheduled · "
+        f"{visibility['meals']} meals · {visibility['unscheduled']} unscheduled"
+    )
     total = sum(len(items) for items in assigned.values())
     fixed_count = sum(len(_fixed_day_blocks(day, context)) for day in assigned)
     anchor_copy = " Flight and hotel anchors are reserved first." if fixed_count else ""
@@ -2349,6 +2707,7 @@ def _render_auto_itinerary(assigned):
           <div class="auto-hero">
             <div class="auto-kicker">Itinerary</div>
             <div class="auto-title">Automatically planned days</div>
+            <div class="auto-sub">{_html.escape(summary_line)}</div>
             <div class="auto-sub">{_html.escape(date_range)} · Byable assigned {total} activit{'y' if total == 1 else 'ies'} across {len(assigned)} trip day{'s' if len(assigned) != 1 else ''} by city, neighborhood, and proximity.{anchor_copy} Arrival and departure days stay lighter.</div>
           </div>
         </div>
@@ -2455,6 +2814,20 @@ def _render_auto_itinerary(assigned):
             _render_activity_edit_controls(item, day, period)
         st.markdown("</div>", unsafe_allow_html=True)
         st.markdown("</div>", unsafe_allow_html=True)
+
+    needs_city = list(st.session_state.get("itinerary_needs_city_assignment") or [])
+    pending = list(st.session_state.get("itinerary_unscheduled_activities") or [])
+    couldnt_fit = list(st.session_state.get("itinerary_couldnt_fit") or [])
+    _render_item_bucket(
+        "Needs city assignment",
+        needs_city,
+        "These selected activities belong to a different destination and were not dropped.",
+    )
+    _render_item_bucket(
+        "Unscheduled / Couldn't fit",
+        couldnt_fit + pending,
+        "These selected activities are preserved here until the planner can place them.",
+    )
 
 
 def render():
