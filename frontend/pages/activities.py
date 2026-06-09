@@ -1316,6 +1316,10 @@ def _activity_to_itinerary_item(activity):
         "lat": activity.get("lat"),
         "lng": activity.get("lng"),
         "destination": _destination_city(),
+        "opening_status": activity.get("opening_status"),
+        "hours_summary": activity.get("hours_summary") or [],
+        "busy_hours": activity.get("busy_hours") or activity.get("popular_times") or {},
+        "crowd_level": activity.get("crowd_level"),
     }
 
 
