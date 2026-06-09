@@ -1191,6 +1191,7 @@ def _split_city_assignment_items(items, context):
     needs_city = []
     for item in items or []:
         if isinstance(item, dict) and not _activity_matches_itinerary_city(item, context):
+            item["unscheduled_reason"] = "Wrong city"
             needs_city.append(item)
         else:
             current_city.append(item)
@@ -1498,6 +1499,97 @@ def _day_sightseeing_load_minutes(items):
     return total
 
 
+def _day_activity_count(items):
+    return len([item for item in items or [] if isinstance(item, dict) and not _meal_slot(item)])
+
+
+def _day_activity_target(day, base_days=None):
+    base_days = base_days or _available_trip_days()
+    if len(base_days) > 1 and day in {base_days[0], base_days[-1]}:
+        return {"min": 0, "max": 1, "ideal": 1}
+    return {"min": 2, "max": 4, "ideal": 3}
+
+
+def _missing_required_schedule_data(item):
+    if not isinstance(item, dict):
+        return True
+    if not (item.get("name") or item.get("title")):
+        return True
+    if not (item.get("address") or item.get("neighborhood") or (item.get("lat") is not None and item.get("lng") is not None)):
+        return True
+    return False
+
+
+def _mark_unscheduled(item, reason):
+    output = dict(item or {})
+    output["unscheduled_reason"] = reason
+    return output
+
+
+def _add_couldnt_fit_items(items, reason):
+    marked = [_mark_unscheduled(item, reason) for item in items or [] if isinstance(item, dict)]
+    if not marked:
+        return
+    st.session_state["itinerary_couldnt_fit"] = _append_without_place_id_duplicate(
+        st.session_state.get("itinerary_couldnt_fit") or [],
+        marked,
+    )
+
+
+def _retry_no_open_slot_items():
+    couldnt_fit = list(st.session_state.get("itinerary_couldnt_fit") or [])
+    retry = [item for item in couldnt_fit if item.get("unscheduled_reason") == "No open slot"]
+    keep = [item for item in couldnt_fit if item.get("unscheduled_reason") != "No open slot"]
+    if retry:
+        st.session_state["itinerary_unscheduled_activities"] = _append_without_place_id_duplicate(
+            st.session_state.get("itinerary_unscheduled_activities") or [],
+            retry,
+        )
+        st.session_state["itinerary_couldnt_fit"] = keep
+
+
+def _day_candidate_score(days_data, day, group, context, base_days, exclude_day=None):
+    if day == exclude_day:
+        return None
+    current_items = list(days_data.get(day) or [])
+    group_items = list(group or [])
+    if any(_missing_required_schedule_data(item) for item in group_items):
+        return None
+    candidate_items = current_items + group_items
+    if _day_sightseeing_load_minutes(candidate_items) > _day_capacity_minutes(day, context, base_days):
+        return None
+
+    current_count = _day_activity_count(current_items)
+    added_count = _day_activity_count(group_items)
+    target = _day_activity_target(day, base_days)
+    resulting_count = current_count + added_count
+    is_edge_day = len(base_days) > 1 and day in {base_days[0], base_days[-1]}
+    target_overage = max(0, resulting_count - target["max"])
+    underfilled_priority = 0 if resulting_count <= target["min"] else 1 if resulting_count <= target["max"] else 2
+    proximity = _day_proximity_score(current_items, group_items[0]) if current_items and group_items else 999
+    return (
+        target_overage,
+        underfilled_priority,
+        1 if is_edge_day and resulting_count > target["max"] else 0,
+        current_count,
+        proximity,
+        _day_sightseeing_load_minutes(candidate_items),
+        _day_sort_key(day),
+    )
+
+
+def _best_target_day_for_group(days_data, group, context, base_days, exclude_day=None):
+    scored = []
+    for day in days_data:
+        score = _day_candidate_score(days_data, day, group, context, base_days, exclude_day=exclude_day)
+        if score is not None:
+            scored.append((score, day))
+    if not scored:
+        return None
+    scored.sort(key=lambda item: item[0])
+    return scored[0][1]
+
+
 def _transit_minutes_for_order(items):
     ordered = list(items or [])
     total = 0
@@ -1592,43 +1684,26 @@ def _assign_activities_to_days(activities):
     activities, _needs_city = _split_city_assignment_items(activities, context)
     activities = _sightseeing_items_only(activities)
     for group in _group_nearby_activities(activities):
+        if len(group) > 2:
+            groups.extend([group[index:index + 2] for index in range(0, len(group), 2)])
+            continue
         if len(group) > 1 and _day_sightseeing_load_minutes(group) > 10 * 60:
             groups.extend([[activity] for activity in group])
         else:
             groups.append(group)
 
     for group in groups:
-        group_has_meal = any(_meal_slot(activity) for activity in group)
-        group_load = _day_sightseeing_load_minutes(group)
-
-        def day_overflow_minutes(day):
-            candidate_items = assigned.get(day, []) + list(group)
-            return max(
-                0,
-                _day_sightseeing_load_minutes(candidate_items)
-                - _day_capacity_minutes(day, context, base_days),
-            )
-
-        candidate_days = sorted(
-            days,
-            key=lambda day: (
-                day_overflow_minutes(day),
-                _day_proximity_score(assigned[day], group[0]) if group_has_meal else 0,
-                _day_sightseeing_load_minutes(assigned[day]),
-                _day_sort_key(day),
-            ),
-        )
-        target_day = candidate_days[0] if candidate_days else _next_itinerary_day_label(days)
-        if (
-            candidate_days
-            and assigned[target_day]
-            and day_overflow_minutes(target_day) > 0
-            and group_load <= _day_capacity_minutes(target_day, context, base_days)
-        ):
-            target_day = _next_itinerary_day_label(days)
-            days.append(target_day)
-            assigned[target_day] = []
-        assigned[target_day].extend(group)
+        missing_data = [item for item in group if _missing_required_schedule_data(item)]
+        if missing_data:
+            _add_couldnt_fit_items(missing_data, "Missing location")
+            group = [item for item in group if item not in missing_data]
+        if not group:
+            continue
+        target_day = _best_target_day_for_group(assigned, group, context, base_days)
+        if target_day:
+            assigned[target_day].extend(group)
+        else:
+            _add_couldnt_fit_items(group, "No open slot")
     return {day: _order_day_activities(items) for day, items in assigned.items()}
 
 
@@ -1696,16 +1771,7 @@ def _sync_selected_activity_store_into_itinerary():
 
 
 def _find_capacity_target_day(days_data, item, after_day, context, base_days):
-    days = list(days_data.keys())
-    try:
-        start_index = days.index(after_day) + 1
-    except ValueError:
-        start_index = 0
-    for target_day in days[start_index:]:
-        candidate_items = days_data.get(target_day, []) + [item]
-        if _day_sightseeing_load_minutes(candidate_items) <= _day_capacity_minutes(target_day, context, base_days):
-            return target_day
-    return _next_itinerary_day_label(days)
+    return _best_target_day_for_group(days_data, [item], context, base_days, exclude_day=after_day)
 
 
 def _rebalance_days_by_capacity(days_data):
@@ -1726,8 +1792,9 @@ def _rebalance_days_by_capacity(days_data):
                 continue
             output[day] = [item for item in items if item is not movable]
             target_day = _find_capacity_target_day(output, movable, day, context, base_days)
-            if target_day not in output:
-                output[target_day] = []
+            if not target_day:
+                output[day].append(movable)
+                continue
             output[target_day].append(movable)
             moved = True
             changed = True
@@ -1737,9 +1804,55 @@ def _rebalance_days_by_capacity(days_data):
     return output, changed
 
 
+def _rebalance_days_by_activity_count(days_data):
+    context = _travel_context()
+    base_days = list(_available_trip_days())
+    output = _ensure_itinerary_shape(days_data)
+    changed = False
+    for _attempt in range(100):
+        candidates = []
+        underfilled_days = [
+            day for day, items in output.items()
+            if _day_activity_count(items) < _day_activity_target(day, base_days)["min"]
+        ]
+        for day, items in output.items():
+            movable_items = [
+                item for item in _order_day_activities(items or [])
+                if not item.get("locked") and not item.get("fixed") and not _meal_slot(item)
+            ]
+            if not movable_items:
+                continue
+            count = _day_activity_count(items)
+            target = _day_activity_target(day, base_days)
+            should_move = count > target["max"] or (
+                underfilled_days
+                and count > target["min"]
+                and any(_day_activity_count(output.get(other_day, [])) + 1 < count for other_day in underfilled_days)
+            )
+            if should_move:
+                candidates.append((count, _day_sort_key(day), day, movable_items[-1]))
+        if not candidates:
+            break
+        candidates.sort(key=lambda item: (-item[0], item[1]))
+        _count, _sort_key, source_day, movable = candidates[0]
+        source_items = list(output.get(source_day) or [])
+        output[source_day] = [item for item in source_items if item is not movable]
+        target_day = _best_target_day_for_group(output, [movable], context, base_days, exclude_day=source_day)
+        if not target_day:
+            output[source_day] = source_items
+            break
+        if _day_activity_count(output.get(target_day, [])) >= _day_activity_count(source_items):
+            output[source_day] = source_items
+            break
+        output[target_day].append(movable)
+        changed = True
+    return output, changed
+
+
 def _auto_assign_itinerary():
     context = _travel_context()
     _sync_selected_activity_store_into_itinerary()
+    _retry_no_open_slot_items()
     _current_city_meal_candidates(context)
     existing = st.session_state.get("itinerary_days")
     if existing:
@@ -1752,15 +1865,20 @@ def _auto_assign_itinerary():
         merged = _ensure_itinerary_shape(existing)
         if pending:
             for item in pending:
-                target_day = _find_capacity_target_day(merged, item, _arrival_day(), context, list(_available_trip_days()))
-                if target_day not in merged:
-                    merged[target_day] = []
-                merged[target_day].append(item)
+                if _missing_required_schedule_data(item):
+                    _add_couldnt_fit_items([item], "Missing location")
+                    continue
+                target_day = _best_target_day_for_group(merged, [item], context, list(_available_trip_days()))
+                if target_day:
+                    merged[target_day].append(item)
+                else:
+                    _add_couldnt_fit_items([item], "No open slot")
         if raw_pending:
             st.session_state["itinerary_unscheduled_activities"] = []
         reduced = _reduce_long_transit(merged)
-        balanced, changed = _rebalance_days_by_capacity(reduced)
-        if changed or removed_meals or removed_city or pending:
+        balanced, count_changed = _rebalance_days_by_activity_count(reduced)
+        balanced, capacity_changed = _rebalance_days_by_capacity(balanced)
+        if count_changed or capacity_changed or removed_meals or removed_city or pending:
             _save_itinerary_days(balanced)
         return _ensure_itinerary_shape(balanced)
 
@@ -1781,7 +1899,8 @@ def _auto_assign_itinerary():
             return {day: [] for day in _available_trip_days()}
         return {}
     assigned = _reduce_long_transit(_assign_activities_to_days(unscheduled))
-    assigned, _changed = _rebalance_days_by_capacity(assigned)
+    assigned, _count_changed = _rebalance_days_by_activity_count(assigned)
+    assigned, _capacity_changed = _rebalance_days_by_capacity(assigned)
     _save_itinerary_days(assigned)
     st.session_state["itinerary_unscheduled_activities"] = []
     return assigned
@@ -2536,7 +2655,17 @@ def _restaurant_suggestions_for_day(day, day_items, context, meal_type):
 
     selected_name = ""
     if meal_candidates:
-        selected_name = _display_name(meal_candidates[0])
+        candidate_days = [
+            candidate_day for candidate_day in _available_trip_days()
+            if _is_full_itinerary_day(candidate_day, context)
+            and not _meal_state(candidate_day, meal_type).get("removed")
+        ]
+        try:
+            candidate_index = candidate_days.index(day)
+        except ValueError:
+            candidate_index = 0
+        if candidate_index < len(meal_candidates):
+            selected_name = _display_name(meal_candidates[candidate_index])
 
     scored = []
     for candidate in candidates:
@@ -2643,7 +2772,7 @@ def _render_removed_meal_controls(day, context):
 
 
 def _available_meal_slots_for_render(assigned, context):
-    slots = set()
+    slots = {}
     has_breakfast = any(_meal_slot(item) == "breakfast" for item in _current_city_meal_candidates(context))
     for day in (assigned or {}):
         if not _is_full_itinerary_day(day, context):
@@ -2653,7 +2782,7 @@ def _available_meal_slots_for_render(assigned, context):
             meal_types.insert(0, "breakfast")
         for meal_type in meal_types:
             if not _meal_state(day, meal_type).get("removed"):
-                slots.add(meal_type)
+                slots.setdefault(day, []).append(meal_type)
     return slots
 
 
@@ -2662,18 +2791,26 @@ def _meal_visibility_split(assigned, context):
     visible = []
     unplaced = []
     meal_candidates = list(_current_city_meal_candidates(context))
+    used_ids = set()
     for meal_type in ("breakfast", "lunch", "dinner"):
         candidates = [item for item in meal_candidates if _meal_slot(item) == meal_type]
         if not candidates:
             continue
-        if meal_type in visible_slots:
-            visible.append(candidates[0])
-            unplaced.extend(candidates[1:])
-        else:
-            unplaced.extend(candidates)
+        candidate_index = 0
+        for day in sorted(visible_slots, key=_day_sort_key):
+            if meal_type not in visible_slots.get(day, []):
+                continue
+            if candidate_index >= len(candidates):
+                break
+            candidate = candidates[candidate_index]
+            visible.append(candidate)
+            used_ids.add(_selection_id_value(candidate))
+            candidate_index += 1
     for item in meal_candidates:
-        if _meal_slot(item) not in {"breakfast", "lunch", "dinner"}:
-            unplaced.append(item)
+        if _selection_id_value(item) in used_ids:
+            continue
+        reason = "No open slot" if _meal_slot(item) in {"breakfast", "lunch", "dinner"} else "Missing location"
+        unplaced.append(_mark_unscheduled(item, reason))
     return visible, unplaced
 
 
@@ -2719,6 +2856,9 @@ def _render_item_bucket(title, items, note):
         name = item.get("name") or item.get("title") or "Activity"
         location = item.get("address") or item.get("neighborhood") or item.get("destination") or "Location to confirm"
         category = item.get("category") or "Activity"
+        reason = item.get("unscheduled_reason")
+        if not reason:
+            reason = "Missing location" if location == "Location to confirm" else "No open slot"
         st.markdown(
             f"""
             <div class="auto-item">
@@ -2726,7 +2866,7 @@ def _render_item_bucket(title, items, note):
               <div class="auto-card">
                 <div class="auto-name">{_html.escape(str(name))}</div>
                 <div class="auto-meta">{_html.escape(str(location))}</div>
-                <div class="auto-tags"><span class="auto-tag">{_html.escape(str(category))}</span><span class="auto-tag warn">Not scheduled</span></div>
+                <div class="auto-tags"><span class="auto-tag">{_html.escape(str(category))}</span><span class="auto-tag warn">{_html.escape(str(reason))}</span></div>
               </div>
             </div>
             """,
@@ -2847,14 +2987,16 @@ def _render_auto_itinerary(assigned):
     st.markdown(_dynamic_itinerary_css(), unsafe_allow_html=True)
     context = _travel_context()
     assigned = _reduce_long_transit(assigned)
+    assigned, count_changed = _rebalance_days_by_activity_count(assigned)
     assigned, capacity_changed = _rebalance_days_by_capacity(assigned)
-    if capacity_changed:
+    if count_changed or capacity_changed:
         _save_itinerary_days(assigned)
     assigned = _apply_schedule_validation(assigned, context)
     assigned = _reschedule_closed_items_by_time(assigned, context)
     assigned = _reduce_long_transit(assigned)
+    assigned, count_changed = _rebalance_days_by_activity_count(assigned)
     assigned, capacity_changed = _rebalance_days_by_capacity(assigned)
-    if capacity_changed:
+    if count_changed or capacity_changed:
         _save_itinerary_days(assigned)
     visibility = _itinerary_visibility_state(assigned, context)
     summary_line = (
