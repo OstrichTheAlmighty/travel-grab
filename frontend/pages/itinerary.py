@@ -1140,18 +1140,37 @@ def _place_id_value(item):
     return str((item or {}).get("place_id") or "").strip()
 
 
+def _selection_id_value(item):
+    explicit = str((item or {}).get("selection_id") or "").strip()
+    if explicit:
+        return explicit
+    place_id = _place_id_value(item)
+    if place_id:
+        return f"place:{place_id}"
+    destination = _normalize_city_name((item or {}).get("destination"))
+    name = re.sub(r"[^a-z0-9]+", "_", str((item or {}).get("name") or (item or {}).get("title") or "activity").lower()).strip("_")
+    address = re.sub(r"[^a-z0-9]+", "_", str((item or {}).get("address") or (item or {}).get("neighborhood") or "").lower()).strip("_")
+    return f"fallback:{destination}:{name}:{address}"
+
+
 def _append_without_place_id_duplicate(existing_items, new_items):
     output = list(existing_items or [])
     existing_place_ids = {_place_id_value(item) for item in output if _place_id_value(item)}
+    existing_selection_ids = {_selection_id_value(item) for item in output if _selection_id_value(item)}
     for item in new_items or []:
         if not isinstance(item, dict):
             continue
         place_id = _place_id_value(item)
+        selection_id = _selection_id_value(item)
         if place_id and place_id in existing_place_ids:
+            continue
+        if not place_id and selection_id and selection_id in existing_selection_ids:
             continue
         output.append(item)
         if place_id:
             existing_place_ids.add(place_id)
+        if selection_id:
+            existing_selection_ids.add(selection_id)
     return output
 
 
@@ -1614,7 +1633,7 @@ def _assign_activities_to_days(activities):
 
 
 def _itinerary_item_key(item):
-    raw_key = _first_present(item.get("id"), item.get("place_id"), item.get("name"), "activity")
+    raw_key = _first_present(item.get("selection_id"), item.get("place_id"), item.get("id"), item.get("name"), "activity")
     return "".join(ch.lower() if ch.isalnum() else "_" for ch in str(raw_key)).strip("_")[:80] or "activity"
 
 
@@ -1635,6 +1654,45 @@ def _ensure_itinerary_shape(days_data):
 
 def _save_itinerary_days(days_data):
     st.session_state["itinerary_days"] = _ensure_itinerary_shape(days_data)
+
+
+def _all_itinerary_selection_ids(days_data=None):
+    ids = set()
+    for items in (_ensure_itinerary_shape(days_data or st.session_state.get("itinerary_days"))).values():
+        ids.update(_selection_id_value(item) for item in items or [] if isinstance(item, dict))
+    for bucket_name in (
+        "itinerary_unscheduled_activities",
+        "itinerary_meal_candidates",
+        "itinerary_needs_city_assignment",
+        "itinerary_couldnt_fit",
+    ):
+        ids.update(
+            _selection_id_value(item)
+            for item in (st.session_state.get(bucket_name) or [])
+            if isinstance(item, dict)
+        )
+    return {value for value in ids if value}
+
+
+def _sync_selected_activity_store_into_itinerary():
+    selected_ids = set(str(value) for value in (st.session_state.get("selected_activity_ids") or []) if value)
+    selected_items = st.session_state.get("selected_activity_items") or {}
+    if not selected_ids or not isinstance(selected_items, dict):
+        return
+    known_ids = _all_itinerary_selection_ids()
+    missing_items = []
+    for selection_id in sorted(selected_ids):
+        if selection_id in known_ids:
+            continue
+        item = selected_items.get(selection_id)
+        if isinstance(item, dict):
+            item["selection_id"] = item.get("selection_id") or selection_id
+            missing_items.append(item)
+    if missing_items:
+        st.session_state["itinerary_unscheduled_activities"] = _append_without_place_id_duplicate(
+            st.session_state.get("itinerary_unscheduled_activities") or [],
+            missing_items,
+        )
 
 
 def _find_capacity_target_day(days_data, item, after_day, context, base_days):
@@ -1681,6 +1739,7 @@ def _rebalance_days_by_capacity(days_data):
 
 def _auto_assign_itinerary():
     context = _travel_context()
+    _sync_selected_activity_store_into_itinerary()
     _current_city_meal_candidates(context)
     existing = st.session_state.get("itinerary_days")
     if existing:
@@ -1771,7 +1830,13 @@ def _move_activity_to_period(item_key, target_period):
 def _delete_activity(item_key):
     days_data = _ensure_itinerary_shape(st.session_state.get("itinerary_days"))
     changed = False
+    removed_selection_ids = set()
     for day, items in days_data.items():
+        removed_selection_ids.update(
+            _selection_id_value(item)
+            for item in items
+            if _itinerary_item_key(item) == item_key
+        )
         filtered = [item for item in items if _itinerary_item_key(item) != item_key]
         if len(filtered) != len(items):
             changed = True
@@ -1783,6 +1848,15 @@ def _delete_activity(item_key):
         for item in list(st.session_state.get("itinerary_unscheduled_activities") or [])
         if _itinerary_item_key(item) != item_key
     ]
+    if removed_selection_ids:
+        selected_ids = set(str(value) for value in (st.session_state.get("selected_activity_ids") or []) if value)
+        selected_ids.difference_update(removed_selection_ids)
+        st.session_state["selected_activity_ids"] = sorted(selected_ids)
+        selected_items = st.session_state.get("selected_activity_items") or {}
+        if isinstance(selected_items, dict):
+            for selection_id in removed_selection_ids:
+                selected_items.pop(selection_id, None)
+            st.session_state["selected_activity_items"] = selected_items
 
 
 def _toggle_activity_lock(item_key, current_period=None):

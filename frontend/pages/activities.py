@@ -289,6 +289,51 @@ def _google_activity_dedupe_key(activity):
     )
 
 
+def _stable_activity_id(activity):
+    place_id = str((activity or {}).get("place_id") or "").strip()
+    if place_id:
+        return f"place:{place_id}"
+    destination = _slug((activity or {}).get("destination") or _destination_city())
+    name = _slug((activity or {}).get("title") or (activity or {}).get("name") or "activity")
+    address = _slug((activity or {}).get("address") or (activity or {}).get("neighborhood") or "")
+    return f"fallback:{destination}:{name}:{address}"
+
+
+def _selected_activity_ids():
+    ids = st.session_state.setdefault("selected_activity_ids", [])
+    return set(str(value) for value in ids if value)
+
+
+def _selected_activity_items():
+    items = st.session_state.setdefault("selected_activity_items", {})
+    if isinstance(items, dict):
+        return items
+    st.session_state["selected_activity_items"] = {}
+    return st.session_state["selected_activity_items"]
+
+
+def _persist_selected_activity(activity):
+    stable_id = _stable_activity_id(activity)
+    selected_ids = _selected_activity_ids()
+    selected_ids.add(stable_id)
+    st.session_state["selected_activity_ids"] = sorted(selected_ids)
+    selected_items = _selected_activity_items()
+    selected_items[stable_id] = _activity_to_itinerary_item(activity)
+    st.session_state["selected_activity_items"] = selected_items
+    return stable_id
+
+
+def _remove_selected_activity(activity):
+    stable_id = _stable_activity_id(activity)
+    selected_ids = _selected_activity_ids()
+    selected_ids.discard(stable_id)
+    st.session_state["selected_activity_ids"] = sorted(selected_ids)
+    selected_items = _selected_activity_items()
+    selected_items.pop(stable_id, None)
+    st.session_state["selected_activity_items"] = selected_items
+    return stable_id
+
+
 def _merge_activity_lists(*activity_lists, limit=120):
     merged = {}
     for activity_list in activity_lists:
@@ -1305,6 +1350,8 @@ def _suggested_searches_for_empty(destination, category):
 def _activity_to_itinerary_item(activity):
     return {
         "id": activity.get("id"),
+        "selection_id": _stable_activity_id(activity),
+        "place_id": activity.get("place_id"),
         "name": activity.get("title") or "Activity",
         "duration": activity.get("duration") or "",
         "neighborhood": activity.get("neighborhood") or "",
@@ -1323,22 +1370,34 @@ def _activity_to_itinerary_item(activity):
     }
 
 
-def _activity_in_itinerary(activity_id):
-    activity_id = str(activity_id or "")
+def _itinerary_item_matches_activity(item, stable_id, activity_id):
+    if str((item or {}).get("selection_id") or "") == stable_id:
+        return True
+    place_id = str((item or {}).get("place_id") or "")
+    if stable_id.startswith("place:") and place_id and stable_id == f"place:{place_id}":
+        return True
+    return str((item or {}).get("id") or "") == str(activity_id or "")
+
+
+def _activity_in_itinerary(activity):
+    stable_id = _stable_activity_id(activity)
+    activity_id = str((activity or {}).get("id") or "")
+    if stable_id in _selected_activity_ids():
+        return True
     for item in st.session_state.get("itinerary_unscheduled_activities", []) or []:
-        if str(item.get("id")) == activity_id:
+        if _itinerary_item_matches_activity(item, stable_id, activity_id):
             return True
     for items in (st.session_state.get("itinerary_days") or {}).values():
-        if any(str(item.get("id")) == activity_id for item in (items or [])):
+        if any(_itinerary_item_matches_activity(item, stable_id, activity_id) for item in (items or [])):
             return True
     return False
 
 
 def _add_activity_to_unscheduled_itinerary(activity):
     item = _activity_to_itinerary_item(activity)
-    activity_id = str(item.get("id") or "")
+    stable_id = _persist_selected_activity(activity)
     unscheduled = list(st.session_state.get("itinerary_unscheduled_activities") or [])
-    if any(str(existing.get("id")) == activity_id for existing in unscheduled):
+    if any(_itinerary_item_matches_activity(existing, stable_id, item.get("id")) for existing in unscheduled):
         return False
     unscheduled.append(item)
     st.session_state["itinerary_unscheduled_activities"] = unscheduled
@@ -1775,7 +1834,7 @@ def render():
             active_category = selected_category
 
     # --- filter ---
-    saved_ids = set(st.session_state.get("activities_saved") or [])
+    saved_ids = set(str(value) for value in (st.session_state.get("activities_saved") or []) if value)
     activities = get_activities_for_destination(destination_city)
     live_query_results = []
     if str(search_query or "").strip():
@@ -1786,6 +1845,18 @@ def render():
             st.session_state["activities_results"] = activities
     visible = _filter_activities(activities, search_query, active_category)
     activities_by_id = {a["id"]: a for a in activities}
+    activities_by_stable_id = {_stable_activity_id(a): a for a in activities}
+    migrated_saved_ids = set(saved_ids)
+    for activity in activities:
+        legacy_id = str(activity.get("id") or "")
+        stable_id = _stable_activity_id(activity)
+        if legacy_id and legacy_id in migrated_saved_ids:
+            migrated_saved_ids.discard(legacy_id)
+            migrated_saved_ids.add(stable_id)
+            _persist_selected_activity(activity)
+    if migrated_saved_ids != saved_ids:
+        saved_ids = migrated_saved_ids
+        st.session_state["activities_saved"] = list(saved_ids)
 
     filter_key = "|".join(
         [
@@ -1822,8 +1893,9 @@ def render():
         row_cols = st.columns(2, gap="medium")
         for col_index, activity in enumerate(visible_page[row_start:row_start + 2]):
             activity_id = activity["id"]
-            is_saved = activity_id in saved_ids
-            is_in_itinerary = _activity_in_itinerary(activity_id)
+            stable_id = _stable_activity_id(activity)
+            is_saved = stable_id in saved_ids
+            is_in_itinerary = _activity_in_itinerary(activity)
 
             with row_cols[col_index]:
                 _render_activity_card(activity, is_saved, photo_deadline=photo_deadline)
@@ -1833,17 +1905,19 @@ def render():
                     save_label = "Saved" if is_saved else "Save"
                     if st.button(save_label, key=f"ac_save_{activity_id}", use_container_width=True):
                         if is_saved:
-                            saved_ids.discard(activity_id)
+                            saved_ids.discard(stable_id)
+                            _remove_selected_activity(activity)
                             track_event("activity_unsaved", {"activity": activity["title"]})
                         else:
-                            saved_ids.add(activity_id)
+                            saved_ids.add(stable_id)
+                            _persist_selected_activity(activity)
                             track_event("activity_saved", {"activity": activity["title"]})
                         st.session_state["activities_saved"] = list(saved_ids)
                         st.rerun()
                 with action_cols[1]:
                     add_label = "In itinerary" if is_in_itinerary else "Add to itinerary"
                     if st.button(add_label, key=f"ac_add_{activity_id}", disabled=is_in_itinerary, use_container_width=True):
-                        saved_ids.add(activity_id)
+                        saved_ids.add(stable_id)
                         st.session_state["activities_saved"] = list(saved_ids)
                         added = _add_activity_to_unscheduled_itinerary(activity)
                         track_event(
@@ -1878,7 +1952,25 @@ def render():
         _render_details_modal(activities_by_id[active_modal_id])
 
     # --- saved activities panel ---
-    saved_activities = [activities_by_id[aid] for aid in saved_ids if aid in activities_by_id]
+    selected_items = _selected_activity_items()
+    saved_activities = []
+    for stable_id in saved_ids:
+        if stable_id in activities_by_stable_id:
+            saved_activities.append(activities_by_stable_id[stable_id])
+        elif stable_id in selected_items:
+            item = selected_items[stable_id]
+            saved_activities.append(
+                {
+                    "id": item.get("id") or stable_id,
+                    "place_id": item.get("place_id"),
+                    "title": item.get("name") or "Activity",
+                    "category": item.get("category") or "Activity",
+                    "duration": item.get("duration") or "",
+                    "address": item.get("address") or "",
+                    "neighborhood": item.get("neighborhood") or "",
+                    "destination": item.get("destination") or destination_city,
+                }
+            )
     if saved_activities:
         st.markdown("---")
         st.markdown(
@@ -1906,7 +1998,8 @@ def render():
                 )
             with remove_cols[1]:
                 if st.button("Remove", key=f"ac_remove_{activity['id']}"):
-                    saved_ids.discard(activity["id"])
+                    saved_ids.discard(_stable_activity_id(activity))
+                    _remove_selected_activity(activity)
                     st.session_state["activities_saved"] = list(saved_ids)
                     track_event("activity_removed_from_saved", {"activity": activity["title"]})
                     st.rerun()
