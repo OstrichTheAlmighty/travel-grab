@@ -1028,7 +1028,7 @@ def _comparison_lists(selected, recommended, offers=None):
     if not dedup_lower_reasons:
         fallback_reason = _first_rank_tiebreaker(selected, recommended, offers)
         dedup_lower_reasons.append(
-            f"This is also a strong option. Byable ranked the other flight slightly higher because {fallback_reason}."
+            f"This is also a strong option. TravelGrab ranked the other flight slightly higher because {fallback_reason}."
         )
     return {
         "advantages": dedup_advantages[:2] or ["Comparable on the main visible flight data."],
@@ -1929,7 +1929,7 @@ def _render_byable_feedback_form(offer, recommendation, origin_city, destination
     """Collect optional page-level feedback without affecting search, AI, or ranking."""
     flight_id = _flight_key(offer or {}) or "no_flight"
     thanks_key = "byable_feedback_thanks"
-    st.markdown("##### Help improve Byable")
+    st.markdown("##### Help improve TravelGrab")
     st.caption("What felt confusing, missing, or untrustworthy?")
     with st.form("byable_feedback_form", clear_on_submit=True):
         usefulness_rating = st.selectbox(
@@ -2566,7 +2566,7 @@ def load_city_flight_offers(origin_city, destination_city, departure_date, retur
         failed = [k for k, v in resolution_known.items() if not v]
         message = (
             "No live fares found. "
-            f"Byable could not resolve {', '.join(failed)} to a known airport code "
+            f"TravelGrab could not resolve {', '.join(failed)} to a known airport code "
             f"and searched a best-guess code instead: {searched_airport_label}. "
             "Try entering a known city name or a 3-letter IATA code."
         )
@@ -2892,7 +2892,7 @@ def render_flight_comparison_modal(selected_offer, recommended_offer, offers, re
     selected_is_recommended = _flight_key(selected_offer) == _flight_key(recommended_offer)
     if selected_is_recommended:
         result = _why_number_one_lists(recommended_offer, offers, recommendation_bullets)
-        st.markdown("#### Why Byable picked this")
+        st.markdown("#### Why TravelGrab picked this")
         st.caption("Ranked #1 because:")
         for reason in result["reasons"][:3]:
             st.markdown(f"✓ {reason}")
@@ -2905,7 +2905,7 @@ def render_flight_comparison_modal(selected_offer, recommended_offer, offers, re
     st.caption("Why it could be good:")
     for advantage in comparison["advantages"][:2]:
         st.markdown(f"✓ {advantage}")
-    st.caption("Why Byable ranked it lower:")
+    st.caption("Why TravelGrab ranked it lower:")
     for reason in comparison["lower_reasons"][:2]:
         st.markdown(f"• {reason}")
 
@@ -4058,37 +4058,12 @@ def render():
     safe_cabin_default, _cabin_default_error = _validate_cabin_class(search_state.get("cabin_class", "economy"))
     safe_adults_default = safe_adults_default or 1
     safe_cabin_default = safe_cabin_default or "economy"
-    feedback_cache = st.session_state.get("flight_results_cache") or {}
-    feedback_offers = list(feedback_cache.get("ranked_flights") or feedback_cache.get("raw_offers") or [])
-    feedback_offer = feedback_offers[0] if feedback_offers else None
-    feedback_ranking = feedback_cache.get("ranking_output") or {}
-    feedback_recommendations = feedback_ranking.get("recommendations") or {}
-    feedback_recommendation = (
-        feedback_recommendations.get(_flight_key(feedback_offer), {})
-        if feedback_offer
-        else {}
-    )
-    feedback_priorities = _validate_priorities(
-        st.session_state.get("flight_priority_selector")
-        or search_state.get("priorities")
-        or st.session_state.get("flight_priorities")
-        or DEFAULT_PRIORITIES
-    )
-    _render_byable_feedback_form(
-        feedback_offer,
-        feedback_recommendation,
-        _clean_city_input(search_state.get("origin_city") or "San Francisco") or "San Francisco",
-        _clean_city_input(search_state.get("destination_city") or "Tokyo") or "Tokyo",
-        feedback_priorities,
-        bool(feedback_offers),
-    )
-
     with st.container(border=True):
         st.markdown(
             """
             <div class="flight-search-shell">
                 <div class="flight-search-title">Find your flight</div>
-                <div class="flight-search-subtitle">Search by city. Byable checks nearby airports automatically.</div>
+                <div class="flight-search-subtitle">Search by city. TravelGrab checks nearby airports automatically.</div>
             </div>
             """,
             unsafe_allow_html=True,

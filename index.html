@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Byable — Find the best flight, not just the cheapest one</title>
-  <meta name="description" content="Byable compares price, layovers, timing, airlines, airports, and comfort to explain which flight is actually worth booking." />
-  <meta property="og:title" content="Byable — AI Flight Search" />
+  <title>TravelGrab — Find the best flight, not just the cheapest one</title>
+  <meta name="description" content="TravelGrab compares price, layovers, timing, airlines, airports, and comfort to explain which flight is actually worth booking." />
+  <meta property="og:title" content="TravelGrab — AI Flight Search" />
   <meta property="og:description" content="Find the best flight — not just the cheapest one." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -485,10 +485,10 @@
     <div class="nav-inner">
       <a href="/" class="brand">
         <div class="brand-mark" aria-hidden="true">B</div>
-        Byable
+        TravelGrab
       </a>
       <div class="nav-links" aria-label="Site navigation">
-        <a href="#why">Why Byable</a>
+        <a href="#why">Why TravelGrab</a>
         <a href="#features">Features</a>
         <a href="#waitlist">Waitlist</a>
       </div>
@@ -511,7 +511,7 @@
     </div>
     <h1>Find the <em>best</em> flight&nbsp;—<br>not just the cheapest one.</h1>
     <p class="subheadline">
-      Byable compares price, layovers, timing, airlines, airports, and comfort
+      TravelGrab compares price, layovers, timing, airlines, airports, and comfort
       to explain which flight is actually worth booking.
     </p>
     <div class="actions">
@@ -589,12 +589,12 @@
   <div class="container">
     <div class="why-grid">
       <div class="why-copy">
-        <div class="section-label">Why Byable</div>
+        <div class="section-label">Why TravelGrab</div>
         <h2 class="section-title">Cheapest is not<br>always best.</h2>
         <p class="section-sub">
           Sorting by price is a starting point, not a strategy. Every cheap fare hides
           tradeoffs — layover risk, red-eye arrivals, distant airports, cramped aircraft,
-          unreliable carriers. Byable surfaces those tradeoffs and explains them in plain
+          unreliable carriers. TravelGrab surfaces those tradeoffs and explains them in plain
           English before you book.
         </p>
       </div>
@@ -630,7 +630,7 @@
     <div class="features-hd">
       <div class="section-label">Features</div>
       <h2 class="section-title">Everything you need<br>to book smart</h2>
-      <p class="section-sub">Stop comparing tabs. Byable reads the tradeoffs and tells you exactly what you're paying for.</p>
+      <p class="section-sub">Stop comparing tabs. TravelGrab reads the tradeoffs and tells you exactly what you're paying for.</p>
     </div>
     <div class="features-grid">
       <div class="feature-card">
@@ -641,12 +641,12 @@
       <div class="feature-card">
         <div class="feature-icon" aria-hidden="true">↔️</div>
         <div class="feature-title">Open-jaw trips</div>
-        <p class="feature-desc">Fly into one city, home from another. Byable handles multi-city routing without the manual fare hacking.</p>
+        <p class="feature-desc">Fly into one city, home from another. TravelGrab handles multi-city routing without the manual fare hacking.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon" aria-hidden="true">🏙️</div>
         <div class="feature-title">Airport tradeoff analysis</div>
-        <p class="feature-desc">JFK, EWR, or LGA? Byable weighs the price gap against transfer time, terminal quality, and transit access.</p>
+        <p class="feature-desc">JFK, EWR, or LGA? TravelGrab weighs the price gap against transfer time, terminal quality, and transit access.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon" aria-hidden="true">💺</div>
@@ -671,7 +671,7 @@
       <div class="step" role="listitem">
         <div class="step-num" aria-hidden="true">1</div>
         <div class="step-title">Enter your route</div>
-        <p class="step-desc">Pick your origin, destination, and travel dates. Byable handles one-way, round-trip, and open-jaw.</p>
+        <p class="step-desc">Pick your origin, destination, and travel dates. TravelGrab handles one-way, round-trip, and open-jaw.</p>
       </div>
       <div class="step" role="listitem">
         <div class="step-num" aria-hidden="true">2</div>
@@ -701,7 +701,7 @@
         <div class="waitlist-title">Join the waitlist</div>
         <p class="waitlist-sub">Be first to know when AI itinerary planning goes live. No spam, unsubscribe any time.</p>
         <form class="waitlist-form" id="waitlist-form" action="https://formspree.io/f/mqeoypvz" method="POST" novalidate>
-          <input type="hidden" name="source" value="byable.app landing page" />
+          <input type="hidden" name="source" value="travelgrab landing page" />
           <input
             class="waitlist-input"
             type="email"
@@ -719,7 +719,7 @@
           <div class="waitlist-success-title">You're on the list!</div>
           <div class="waitlist-success-note">We'll reach out when itinerary planning is ready.</div>
         </div>
-        <p class="waitlist-note">We use your email only to notify you about Byable updates.</p>
+        <p class="waitlist-note">We use your email only to notify you about TravelGrab updates.</p>
       </div>
     </div>
   </div>
@@ -729,7 +729,7 @@
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <div class="footer-note">© 2026 Byable. Built for travelers who want more than the cheapest fare.</div>
+      <div class="footer-note">© 2026 TravelGrab. Built for travelers who want more than the cheapest fare.</div>
       <nav class="footer-links" aria-label="Footer navigation">
         <a href="https://byable-flights.streamlit.app" target="_blank" rel="noopener noreferrer">Flight Search</a>
         <a href="#features">Features</a>
@@ -768,7 +768,7 @@
       fetch('https://formspree.io/f/mqeoypvz', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ email: email, source: 'byable.app landing page' })
+        body: JSON.stringify({ email: email, source: 'travelgrab landing page' })
       })
         .then(function (res) { return res.ok ? res : Promise.reject(res); })
         .then(function () {
