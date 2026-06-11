@@ -71,6 +71,13 @@ GOOGLE_TO_BYABLE_CATEGORY = {
     "Shopping": "Luxury",
 }
 
+# Trailing words stripped when normalizing place names for dedup comparison.
+_ACTIVITY_NAME_STOP_WORDS = frozenset({
+    "official", "main", "deck", "top", "tickets", "ticket",
+    "entrance", "observatory", "observation", "visit", "tour",
+    "admission", "experience", "access",
+})
+
 
 def _destination_city():
     explicit = st.session_state.get("trip_destination")
@@ -345,6 +352,31 @@ def _merge_activity_lists(*activity_lists, limit=120):
                 continue
             merged[key] = activity
     return list(merged.values())[:limit]
+
+
+def _activity_norm_name(name):
+    """Lowercase, strip punctuation, remove trailing stop words for fuzzy dedup."""
+    cleaned = "".join(ch.lower() if ch.isalnum() else " " for ch in str(name or ""))
+    words = cleaned.split()
+    while words and words[-1] in _ACTIVITY_NAME_STOP_WORDS:
+        words.pop()
+    return " ".join(words)
+
+
+def _activity_richness_score(activity):
+    """Higher score = more data fields present; used to pick the richer duplicate."""
+    score = 0
+    if activity.get("photo_names") or activity.get("photo_uri"):
+        score += 4
+    if activity.get("rating"):
+        score += 3
+    if activity.get("review_count"):
+        score += 2
+    if activity.get("address"):
+        score += 1
+    if activity.get("opening_status"):
+        score += 1
+    return score
 
 
 @st.cache_data(ttl=60 * 60 * 6, show_spinner=False)
@@ -1370,6 +1402,106 @@ def _activity_to_itinerary_item(activity):
     }
 
 
+def _deduplicate_activities(activities):
+    """
+    Deduplicate activity cards before rendering.
+
+    Primary key  : place_id (exact Google place ID match).
+    Secondary key: normalized name + destination (strips suffix stop words, catches
+                   variants like "Tokyo Tower" vs "Tokyo Tower Main Deck").
+
+    For each duplicate group the richest record (most data fields) is kept.
+    Tags are merged across the group.
+    If a loser's stable_id was selected/saved, the winner's stable_id is substituted
+    so the card still appears as selected.
+    """
+    if not activities:
+        return []
+
+    dest_default = _destination_city()
+
+    # ── Group by place_id ────────────────────────────────────────────────
+    place_id_groups = {}   # place_id -> [activity, ...]
+    no_place_id = []
+    for a in activities:
+        pid = str(a.get("place_id") or "").strip()
+        if pid:
+            place_id_groups.setdefault(pid, []).append(a)
+        else:
+            no_place_id.append(a)
+
+    # ── Cross-dedup between place_id groups via normalized name ──────────
+    # E.g. "Tokyo Tower" (place A) and "Tokyo Tower Main Deck" (place B) →
+    # normalize both to "tokyo tower" → merge into the richer group.
+    norm_to_canonical_pid = {}   # (norm_name, dest) -> first place_id seen
+    merged_pids = set()
+    for pid in list(place_id_groups):
+        if pid in merged_pids:
+            continue
+        best = max(place_id_groups[pid], key=_activity_richness_score)
+        nk = (
+            _activity_norm_name(best.get("title") or best.get("name") or ""),
+            _slug(best.get("destination") or dest_default),
+        )
+        if nk in norm_to_canonical_pid:
+            canonical = norm_to_canonical_pid[nk]
+            place_id_groups[canonical].extend(place_id_groups.pop(pid))
+            merged_pids.add(pid)
+        else:
+            norm_to_canonical_pid[nk] = pid
+
+    # ── Group no-place_id records by normalized name ─────────────────────
+    name_groups = {}
+    for a in no_place_id:
+        nk = (
+            _activity_norm_name(a.get("title") or a.get("name") or ""),
+            _slug(a.get("destination") or dest_default),
+        )
+        name_groups.setdefault(nk, []).append(a)
+
+    # Merge name_groups into matching place_id groups (if any)
+    for pid, group in place_id_groups.items():
+        best = max(group, key=_activity_richness_score)
+        nk = (
+            _activity_norm_name(best.get("title") or best.get("name") or ""),
+            _slug(best.get("destination") or dest_default),
+        )
+        if nk in name_groups:
+            group.extend(name_groups.pop(nk))
+
+    # ── Pick winner per group, migrate selected state ────────────────────
+    selected_ids = _selected_activity_ids()
+    selected_items = _selected_activity_items()
+    selection_changed = False
+
+    def _resolve_group(group):
+        nonlocal selection_changed
+        winner = dict(max(group, key=_activity_richness_score))
+        all_tags = []
+        for a in group:
+            all_tags.extend(a.get("tags") or [])
+        winner["tags"] = list(dict.fromkeys(all_tags))[:6]
+        winner_sid = _stable_activity_id(winner)
+        for a in group:
+            loser_sid = _stable_activity_id(a)
+            if loser_sid != winner_sid and loser_sid in selected_ids:
+                selected_ids.add(winner_sid)
+                selected_ids.discard(loser_sid)
+                selected_items[winner_sid] = _activity_to_itinerary_item(winner)
+                selected_items.pop(loser_sid, None)
+                selection_changed = True
+        return winner
+
+    result = [_resolve_group(g) for g in place_id_groups.values()]
+    result += [_resolve_group(g) for g in name_groups.values()]
+
+    if selection_changed:
+        st.session_state["selected_activity_ids"] = sorted(selected_ids)
+        st.session_state["selected_activity_items"] = selected_items
+
+    return result
+
+
 def _itinerary_item_matches_activity(item, stable_id, activity_id):
     if str((item or {}).get("selection_id") or "") == stable_id:
         return True
@@ -1843,6 +1975,7 @@ def render():
             st.session_state["activities_live_search_results"] = live_query_results
             activities = _merge_activity_lists(live_query_results, activities, limit=140)
             st.session_state["activities_results"] = activities
+    activities = _deduplicate_activities(activities)
     visible = _filter_activities(activities, search_query, active_category)
     activities_by_id = {a["id"]: a for a in activities}
     activities_by_stable_id = {_stable_activity_id(a): a for a in activities}

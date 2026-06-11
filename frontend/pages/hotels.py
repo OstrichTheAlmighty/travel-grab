@@ -2,7 +2,6 @@ import html
 import streamlit as st
 
 from analytics import track_event, track_once
-from data.neighborhoods import CURATED_NEIGHBORHOODS
 from places_hotels import (
     get_google_place_photo_data_uri,
     google_places_key_configured,
@@ -872,7 +871,7 @@ _GENERIC_NEIGHBORHOOD_TEMPLATES = [
     },
     {
         "key": "historic",
-        "name_template": "Historic Center",
+        "name_template": "Old Town / Historic District",
         "best_for": "Culture, history, architecture, and local atmosphere",
         "preference_tags": {"Culture", "Food", "Walkability"},
         "base_score": 8.3,
@@ -884,7 +883,7 @@ _GENERIC_NEIGHBORHOOD_TEMPLATES = [
             "Strong pedestrian atmosphere and local café culture.",
         ],
         "hotel_name_template": "{city} Heritage Hotel",
-        "hotel_area_template": "Historic Center · central heritage area",
+        "hotel_area_template": "Old Town / Historic District · heritage quarter",
         "hotel_price": 220,
         "hotel_scores": {
             "Location Match": (8.7, "Historic district location near cultural sights and walking routes."),
@@ -898,7 +897,7 @@ _GENERIC_NEIGHBORHOOD_TEMPLATES = [
     },
     {
         "key": "shopping",
-        "name_template": "Main Shopping Area",
+        "name_template": "Shopping & Dining Quarter",
         "best_for": "Shopping, food markets, and walkable city energy",
         "preference_tags": {"Shopping", "Walkability", "Food", "Nightlife"},
         "base_score": 8.2,
@@ -910,7 +909,7 @@ _GENERIC_NEIGHBORHOOD_TEMPLATES = [
             "Good transit access and pedestrian-friendly streets.",
         ],
         "hotel_name_template": "{city} Market Hotel",
-        "hotel_area_template": "Main Shopping Area · retail and dining area",
+        "hotel_area_template": "Shopping & Dining Quarter · retail district",
         "hotel_price": 195,
         "hotel_scores": {
             "Location Match": (8.6, "Keeps shopping, markets, and restaurants within easy reach."),
@@ -924,8 +923,8 @@ _GENERIC_NEIGHBORHOOD_TEMPLATES = [
     },
     {
         "key": "nightlife",
-        "name_template": "Restaurant District",
-        "best_for": "Restaurants, late dining, cafés, and evening energy",
+        "name_template": "Nightlife & Entertainment District",
+        "best_for": "Nightlife, late dining, and evening energy",
         "preference_tags": {"Nightlife", "Food", "Walkability"},
         "base_score": 8.0,
         "convenience": 8.5,
@@ -935,8 +934,8 @@ _GENERIC_NEIGHBORHOOD_TEMPLATES = [
             "Late dining, bars, and evening entertainment close by.",
             "Active nighttime atmosphere with dense local dining options.",
         ],
-        "hotel_name_template": "{city} Dining Hotel",
-        "hotel_area_template": "Restaurant District · dining area",
+        "hotel_name_template": "{city} Nights Hotel",
+        "hotel_area_template": "Nightlife & Entertainment District · evening quarter",
         "hotel_price": 185,
         "hotel_scores": {
             "Location Match": (8.4, "Entertainment district keeps nightlife and late dining within walking distance."),
@@ -976,8 +975,8 @@ _GENERIC_NEIGHBORHOOD_TEMPLATES = [
     },
     {
         "key": "luxury",
-        "name_template": "Best Hotel District",
-        "best_for": "Polished hotels, dining, comfort, and a smoother stay",
+        "name_template": "Upscale / Luxury Quarter",
+        "best_for": "Luxury hotels, fine dining, and polished stays",
         "preference_tags": {"Luxury", "Relaxation", "Food"},
         "base_score": 8.1,
         "convenience": 8.2,
@@ -987,8 +986,8 @@ _GENERIC_NEIGHBORHOOD_TEMPLATES = [
             "High-end hotels, fine dining, and a refined city atmosphere.",
             "Quieter and more polished than busy commercial districts.",
         ],
-        "hotel_name_template": "{city} Premier Hotel",
-        "hotel_area_template": "Best Hotel District · polished stay area",
+        "hotel_name_template": "The {city} Palace",
+        "hotel_area_template": "Upscale / Luxury Quarter · premium district",
         "hotel_price": 520,
         "hotel_scores": {
             "Location Match": (8.5, "Premium district with upscale dining, hotels, and polished streets."),
@@ -1002,98 +1001,20 @@ _GENERIC_NEIGHBORHOOD_TEMPLATES = [
     },
 ]
 
-_KNOWN_DESTINATION_NEIGHBORHOODS = CURATED_NEIGHBORHOODS
-
-
 _TEMPLATE_CITY_DATA_CACHE: dict = {}
-
-
-def _known_destination_key(city: str):
-    normalized = str(city or "").strip().lower()
-    for key in _KNOWN_DESTINATION_NEIGHBORHOODS:
-        if key in normalized:
-            return key
-    return None
-
-
-def _template_from_known_neighborhood(city, spec):
-    neighborhood = spec["name"]
-    prefix = spec.get("hotel_prefix") or neighborhood.split("/")[0].strip()
-    return {
-        "key": spec["key"],
-        "name_template": neighborhood,
-        "best_for": spec["best_for"],
-        "preference_tags": set(spec["preference_tags"]),
-        "base_score": spec["base_score"],
-        "convenience": spec["convenience"],
-        "value": spec["value"],
-        "tradeoff": spec["tradeoff"],
-        "good_fit": list(spec["good_fit"]),
-        "hotel_name_template": f"{prefix} Hotel {{city}}",
-        "hotel_area_template": f"{neighborhood} · selected stay area",
-        "hotel_price": spec["hotel_price"],
-        "hotel_scores": {
-            "Location Match": (round(spec["base_score"] + 0.2, 1), f"Selected for the {neighborhood} stay area."),
-            "Transit Access": (round(spec["convenience"], 1), f"Based on the {neighborhood} transit and walkability profile."),
-            "Value": (round(spec["value"], 1), f"Estimated value for hotels around {neighborhood}."),
-            "Room Quality": (8.0, "Placeholder hotel quality estimate; live reviews are not attached to this listing."),
-            "Safety": (8.5, f"General neighborhood safety profile for {neighborhood}."),
-        },
-        "hotel_why_template": f"Byable recommends this stay because {neighborhood} fits the selected trip priorities in {{city}}.",
-        "hotel_tags": list(spec["hotel_tags"]),
-    }
-
-
-def _city_neighborhood_templates(city):
-    known_key = _known_destination_key(city)
-    if known_key:
-        return [
-            _template_from_known_neighborhood(city, spec)
-            for spec in _KNOWN_DESTINATION_NEIGHBORHOODS[known_key]
-        ], "curated_neighborhoods"
-
-    city_label = str(city or "this city").strip() or "this city"
-    city_templates = []
-    for tmpl in _GENERIC_NEIGHBORHOOD_TEMPLATES:
-        item = dict(tmpl)
-        if item["key"] == "historic":
-            item["name_template"] = "Historic Center"
-            item["hotel_area_template"] = "Historic Center · central heritage area"
-            item["hotel_name_template"] = "{city} Heritage Hotel"
-        elif item["key"] == "shopping":
-            item["name_template"] = "Main Shopping Area"
-            item["hotel_area_template"] = "Main Shopping Area · retail and dining area"
-            item["hotel_name_template"] = "{city} Market Hotel"
-        elif item["key"] == "nightlife":
-            item["name_template"] = "Restaurant District"
-            item["best_for"] = "Restaurants, late dining, cafés, and evening energy"
-            item["hotel_area_template"] = "Restaurant District · dining area"
-            item["hotel_name_template"] = "{city} Dining Hotel"
-        elif item["key"] == "residential":
-            item["name_template"] = "Quiet Residential Area"
-            item["hotel_area_template"] = "Quiet Residential Area · calmer local stay area"
-            item["hotel_name_template"] = "{city} Garden Hotel"
-        elif item["key"] == "luxury":
-            item["name_template"] = "Best Hotel District"
-            item["best_for"] = "Polished hotels, dining, comfort, and a smoother stay"
-            item["hotel_area_template"] = "Best Hotel District · polished stay area"
-            item["hotel_name_template"] = "{city} Premier Hotel"
-        city_templates.append(item)
-    return city_templates, "draft_template"
 
 
 def _generate_template_city_data(city: str) -> dict:
     if city in _TEMPLATE_CITY_DATA_CACHE:
         return _TEMPLATE_CITY_DATA_CACHE[city]
 
-    templates, data_source = _city_neighborhood_templates(city)
     neighborhood_profiles = []
     neighborhood_to_recommendation = {}
     mock_recommendations = {}
     hotel_factor_profiles = {}
     safety_scores = {}
 
-    for tmpl in templates:
+    for tmpl in _GENERIC_NEIGHBORHOOD_TEMPLATES:
         nb_name = tmpl["name_template"].format(city=city)
         rec_key = f"generic_{tmpl['key']}"
         hotel_name = tmpl["hotel_name_template"].format(city=city)
@@ -1146,9 +1067,9 @@ def _generate_template_city_data(city: str) -> dict:
         }
         safety_scores[nb_name] = hs["Safety"][0]
 
-    luxury_tmpl = next((t for t in templates if t["key"] == "luxury"), templates[0])
-    residential_tmpl = next((t for t in templates if t["key"] == "residential"), templates[-1])
-    central_tmpl = next((t for t in templates if t["key"] == "central"), templates[0])
+    luxury_tmpl = next(t for t in _GENERIC_NEIGHBORHOOD_TEMPLATES if t["key"] == "luxury")
+    residential_tmpl = next(t for t in _GENERIC_NEIGHBORHOOD_TEMPLATES if t["key"] == "residential")
+    central_tmpl = next(t for t in _GENERIC_NEIGHBORHOOD_TEMPLATES if t["key"] == "central")
 
     alternative_hotels = [
         {
@@ -1182,11 +1103,12 @@ def _generate_template_city_data(city: str) -> dict:
 
     preferred_alt = [
         t["name_template"].format(city=city)
-        for t in templates[:3]
+        for t in _GENERIC_NEIGHBORHOOD_TEMPLATES
+        if t["key"] in ("central", "historic", "shopping")
     ]
 
     result = {
-        "data_source": data_source,
+        "data_source": "template",
         "neighborhood_profiles": neighborhood_profiles,
         "neighborhood_to_recommendation": neighborhood_to_recommendation,
         "mock_recommendations": mock_recommendations,
@@ -1202,20 +1124,15 @@ def _generate_template_city_data(city: str) -> dict:
 def get_hotel_data_for_destination(destination: str) -> dict:
     """Return hotel data bundle for destination.
 
-    Returns curated data for Tokyo/Paris, real neighborhood sets for cities
-    in CURATED_NEIGHBORHOODS, and an unsupported sentinel for all other cities.
-    Never falls back to Tokyo/generic fake neighborhoods for unsupported destinations.
+    Returns curated data for Tokyo/Paris, template-generated estimates for all other cities.
+    Never falls back to Tokyo for non-Tokyo destinations.
     """
     normalized = str(destination or "").strip().lower()
     if "tokyo" in normalized:
         return _TOKYO_CITY_DATA
     if "paris" in normalized:
         return _PARIS_CITY_DATA
-    # Check CURATED_NEIGHBORHOODS (includes London, Rome, Seoul, Budapest, etc.)
-    if _known_destination_key(destination):
-        return _generate_template_city_data(destination)
-    # Unknown destination — do not invent fake neighborhood names
-    return {"data_source": "unsupported", "city": destination}
+    return _generate_template_city_data(destination)
 
 
 def _base_mock_hotels(mock_recommendations=None, alternative_hotels=None):
@@ -1425,95 +1342,6 @@ def _rank_google_hotels(google_hotels, preferences, scored_neighborhood, safety_
     return sorted(scored, key=lambda hotel: hotel["score"], reverse=True)
 
 
-def _placeholder_hotels_for_neighborhood(destination_city, scored_neighborhood, preferences, count=8):
-    neighborhood_name = scored_neighborhood.get("name") or "Central area"
-    destination_label = str(destination_city or "Destination").strip() or "Destination"
-    short_area = neighborhood_name.split("/")[0].strip()
-    selected = set(preferences or DEFAULT_HOTEL_PREFERENCES)
-    base_price = 135
-    if "Luxury" in selected or scored_neighborhood.get("value", 8) < 7:
-        base_price = 220
-    elif "Lowest Price" in selected or scored_neighborhood.get("value", 8) >= 8.6:
-        base_price = 105
-
-    concepts = [
-        ("Best Overall Match", f"{short_area} Central Hotel", ["Central", "Walkable", "Selected area"], 0.4, 0),
-        ("Best Value", f"{short_area} Value Stay", ["Value", "Practical", "Local base"], -0.1, -28),
-        ("Best Location Alternative", f"{short_area} Station Hotel", ["Transit", "Easy access", "Sightseeing"], 0.1, 12),
-        ("Best Quiet Stay", f"{short_area} Garden Hotel", ["Quiet", "Relaxed", "Comfort"], -0.2, -8),
-        ("Best Boutique Option", f"{short_area} Boutique House", ["Boutique", "Neighborhood feel", "Dining"], 0.0, 24),
-        ("Best Nightlife Alternative", f"{short_area} Evening Hotel", ["Nightlife", "Late dining", "Bars"], -0.3, -3),
-        ("Best Comfort Option", f"{short_area} Comfort Hotel", ["Comfort", "Reliable", "Simple logistics"], 0.2, 18),
-        ("Best Local Base", f"{short_area} Local Rooms", ["Local feel", "Walkable", "Lower-key"], -0.4, -18),
-    ]
-    hotels = []
-    for index, (label, name, tags, score_adjustment, price_delta) in enumerate(concepts[:count]):
-        location_match = round(max(6.8, min(9.6, scored_neighborhood.get("score", 82) / 10 + score_adjustment)), 1)
-        transit = round(max(6.8, min(9.4, float(scored_neighborhood.get("convenience") or 8.0) + (0.2 if "Station" in name else 0))), 1)
-        value = round(max(6.5, min(9.3, float(scored_neighborhood.get("value") or 8.0) + (-0.3 if price_delta > 0 else 0.3))), 1)
-        room = round(max(7.2, min(9.0, 8.0 + score_adjustment)), 1)
-        safety = round(max(7.4, min(9.2, _neighborhood_safety_score(scored_neighborhood) - (0.2 if "Nightlife" in tags else 0))), 1)
-        trip_fit = _live_trip_fit_score({"price_level": None}, scored_neighborhood, preferences)
-        scores = {
-            "Location Match": (location_match, f"Estimated fit for staying in {neighborhood_name}."),
-            "Transit Access": (transit, f"Estimated from the {neighborhood_name} neighborhood profile."),
-            "Value": (value, "Estimated placeholder value; live rates are not attached to this listing."),
-            "Room Quality": (room, "Placeholder quality estimate; no live guest rating is attached."),
-            "Safety": (safety, f"Estimated from the {neighborhood_name} neighborhood profile."),
-            "Trip Fit": (trip_fit, "Estimated from selected priorities and neighborhood alignment."),
-        }
-        weighted = (
-            scores["Location Match"][0] * 0.22
-            + scores["Transit Access"][0] * 0.15
-            + scores["Value"][0] * 0.17
-            + scores["Room Quality"][0] * 0.17
-            + scores["Safety"][0] * 0.11
-            + scores["Trip Fit"][0] * 0.18
-        )
-        hotels.append(
-            {
-                "name": f"{name} {destination_label}",
-                "area": f"{neighborhood_name} · placeholder hotel option",
-                "type": "Recommended hotel" if index == 0 else label,
-                "label": label,
-                "price": max(80, base_price + price_delta),
-                "price_subtitle": "estimated nightly rate",
-                "score": int(round(weighted * 10)),
-                "trip_fit": trip_fit,
-                "why": f"This placeholder option keeps the hotel search focused on {neighborhood_name} while live listings are limited.",
-                "tags": tags,
-                "scores": scores,
-                "rating": None,
-                "review_count": None,
-                "source": "placeholder",
-            }
-        )
-    return sorted(hotels, key=lambda hotel: hotel["score"], reverse=True)
-
-
-def _ensure_hotel_option_depth(ranked_hotels, destination_city, selected_neighborhood, preferences, minimum_total=6):
-    output = [dict(hotel) for hotel in ranked_hotels]
-    seen = {str(hotel.get("name") or "").strip().lower() for hotel in output}
-    if len(output) >= minimum_total:
-        return output
-
-    placeholders = _placeholder_hotels_for_neighborhood(
-        destination_city,
-        selected_neighborhood,
-        preferences,
-        count=max(8, minimum_total),
-    )
-    for hotel in placeholders:
-        key = str(hotel.get("name") or "").strip().lower()
-        if key in seen:
-            continue
-        output.append(hotel)
-        seen.add(key)
-        if len(output) >= minimum_total:
-            break
-    return output
-
-
 def _rank_mock_hotels(preferences, city_data=None):
     if city_data is None:
         city_data = _TOKYO_CITY_DATA
@@ -1566,7 +1394,7 @@ def _hotel_pick_bullets(hotel, recommended_neighborhood, preferences):
     if {"Food", "Shopping", "Walkability"} & set(preferences or []):
         bullets.append(f"Keeps restaurants, shopping, and walkable plans close to {neighborhood_name}.")
     elif "Culture" in set(preferences or []):
-        bullets.append(f"Makes {neighborhood_name} the base for museums, historic streets, and cultural sights.")
+        bullets.append(f"Makes {neighborhood_name} the base for museums, temples, or older Tokyo streets.")
     elif "Luxury" in set(preferences or []):
         bullets.append(f"Keeps the stay aligned with a more polished {neighborhood_name} experience.")
     elif "Lowest Price" in set(preferences or []):
@@ -1774,10 +1602,7 @@ def _hotel_identity_profile(hotel, recommended_hotel=None, recommended=False, pr
     if not best_for:
         area_label = str(hotel.get("area") or neighborhood_name).split("·")[0].strip() or neighborhood_name
         add_best(f"Useful if {area_label} is where you want to spend more time")
-        if hotel.get("source") == "google_places":
-            add_best(f"A possible backup to the {neighborhood_name} base with public Google listing visibility")
-        else:
-            add_best(f"A destination-specific placeholder for comparing stays around {neighborhood_name}")
+        add_best(f"A possible backup to the {neighborhood_name} base with public Google listing visibility")
 
     best_for = [_hotel_priority_match_line(hotel, selected_preferences, neighborhood_name), *best_for]
 
@@ -2242,12 +2067,9 @@ def _hotel_stay_expectations(hotel):
             best_for = "Best for travelers who want culture and value over nightlife."
         else:
             add_strength(f"A straightforward hotel base in {neighborhood_name} for {focus_text}")
-            if hotel.get("source") == "google_places":
-                add_strength(f"Public listing visibility helps evaluate it against the {neighborhood_name} recommendation")
-            else:
-                add_strength(f"Useful as a placeholder option while live listings for {neighborhood_name} are limited")
+            add_strength(f"Public listing visibility helps evaluate it against the {neighborhood_name} recommendation")
             add_tradeoff(f"Less specifically matched to {focus_text} than the strongest {neighborhood_name} pick")
-            best_for = f"Best for travelers who want a straightforward stay around {neighborhood_name} while comparing available hotel options."
+            best_for = f"Best for travelers who already prefer this location over {neighborhood_name}."
 
         add_tradeoff(identity.get("tradeoff"))
         strengths = strengths[:5]
@@ -3092,214 +2914,6 @@ def _review_summary(hotel):
     }
 
 
-def _clean_modal_sentence(text):
-    value = str(text or "").strip()
-    if value.startswith("Best for travelers who "):
-        value = "Travelers who " + value[23:]
-    elif value.startswith("Best for "):
-        value = value[9:]
-    return value.rstrip(".") + "." if value else ""
-
-
-def _dedupe_modal_items(items, limit):
-    output = []
-    seen = set()
-    for item in items:
-        text = _clean_modal_sentence(item)
-        if not text:
-            continue
-        key = " ".join(
-            "".join(char.lower() if char.isalnum() else " " for char in text).split()
-        )
-        if not key or key in seen:
-            continue
-        if any(key in existing or existing in key for existing in seen):
-            continue
-        seen.add(key)
-        output.append(text)
-        if len(output) >= limit:
-            break
-    return output
-
-
-def _modal_safe_sentence(text):
-    value = _clean_modal_sentence(text)
-    blocked = (
-        "useful when review confidence matters",
-        "practical base",
-        "strongest pick",
-        "selected hotel",
-        "recommended because",
-        "ranking",
-        "algorithm",
-        "score",
-        "trip fit",
-        "location match",
-        "already prefer",
-    )
-    if any(phrase in value.lower() for phrase in blocked):
-        return ""
-    return value
-
-
-def _hotel_modal_best_for(hotel):
-    _, neighborhood_name = _hotel_context(hotel)
-    name_key = str(hotel.get("name") or "").lower()
-    area_key = str(hotel.get("area") or "").lower()
-    label_key = str(hotel.get("label") or hotel.get("type") or "").lower()
-
-    if any(term in name_key or term in area_key for term in ("kabukicho", "gracery", "hongdae", "nightlife")):
-        return "Travelers who want restaurants, bars, and late-night energy close to the hotel."
-    if any(term in name_key or term in area_key for term in ("ueno", "asakusa", "jongno", "insadong", "castle", "gornji", "kaptol", "culture")):
-        return "Travelers who want museums, historic streets, and slower sightseeing days nearby."
-    if any(term in name_key or term in area_key or term in label_key for term in ("edition", "toranomon", "ginza", "luxury", "premium", "andrassy", "andrássy", "gangnam")):
-        return "Travelers who want a polished stay with dining, shopping, and comfort prioritized."
-    if any(term in name_key or term in area_key for term in ("shiba", "bay", "jarun", "maksimir", "ujlipotvaros", "újlipótváros", "quiet")):
-        return "Travelers who want calmer evenings and less intensity around the hotel."
-    if any(term in name_key or term in area_key for term in ("shinjuku", "shibuya", "myeongdong", "belváros", "belvaros", "central")):
-        return "Travelers who want an easy city base with restaurants, transit, and sightseeing close by."
-    return f"Travelers who want a straightforward stay around {neighborhood_name}."
-
-
-def _hotel_modal_nearby(hotel):
-    _, neighborhood_name = _hotel_context(hotel)
-    area_key = f"{hotel.get('area') or ''} {neighborhood_name}".lower()
-    nearby_sets = [
-        (("shinjuku", "shibuya"), [
-            "Major train connections for crossing Tokyo",
-            "Dense restaurant, shopping, and late-night dining areas",
-            "Easy access to day-trip and sightseeing routes",
-        ]),
-        (("ginza", "yurakucho", "toranomon"), [
-            "Department stores, polished dining, and central Tokyo streets",
-            "Convenient rail links to Tokyo Station and major shopping areas",
-            "Quieter upscale blocks compared with Shinjuku nightlife zones",
-        ]),
-        (("ueno", "asakusa"), [
-            "Museums, parks, temples, and older Tokyo atmosphere",
-            "Better-value hotel pockets than many premium central districts",
-            "Direct access to classic sightseeing areas in northeast Tokyo",
-        ]),
-        (("shiba", "tokyo bay"), [
-            "Calmer streets and easier pacing outside the busiest nightlife areas",
-            "Tokyo Tower, waterfront routes, and Haneda-side access",
-            "Good fit for slower mornings and quieter evenings",
-        ]),
-        (("belváros", "belvaros", "lipótváros", "lipotvaros"), [
-            "Danube-side walks, Parliament, and central Pest landmarks",
-            "Restaurants, cafés, and shopping streets close together",
-            "Easy access to metro and tram routes across Budapest",
-        ]),
-        (("erzsébetváros", "erzsebetvaros", "jewish quarter"), [
-            "Ruin bars, nightlife, casual dining, and cafés",
-            "Walkable access to central Pest and the Great Synagogue area",
-            "Livelier evenings than quieter residential districts",
-        ]),
-        (("várkerület", "varkerulet", "castle"), [
-            "Castle Hill, Matthias Church, and historic viewpoints",
-            "Quieter streets with a more atmospheric old-city feel",
-            "Short rides back to central Pest for dining and nightlife",
-        ]),
-        (("myeongdong", "euljiro"), [
-            "Shopping streets, street food, and central Seoul transit",
-            "Easy access to palaces, markets, and popular first-visit sights",
-            "Plenty of restaurants within a short walk",
-        ]),
-        (("hongdae", "yeonnam"), [
-            "Cafés, music venues, casual restaurants, and nightlife",
-            "Youthful street energy and independent shops",
-            "Good access to western Seoul and airport rail connections",
-        ]),
-        (("gangnam", "sinsa"), [
-            "Upscale dining, boutiques, beauty clinics, and nightlife",
-            "Polished hotel surroundings south of the Han River",
-            "Good base if your plans cluster around Gangnam",
-        ]),
-        (("donji grad", "lower town"), [
-            "Zagreb museums, parks, squares, and tram connections",
-            "Walkable access to cafés, restaurants, and central sights",
-            "A practical center for first-time city exploration",
-        ]),
-        (("gornji grad", "upper town", "kaptol"), [
-            "Historic streets, viewpoints, the cathedral, and old Zagreb landmarks",
-            "Cafés and cultural sights within a compact walking area",
-            "More atmosphere than newer business districts",
-        ]),
-    ]
-    for keywords, bullets in nearby_sets:
-        if any(keyword in area_key for keyword in keywords):
-            return bullets[:3]
-    return [
-        f"The surrounding {neighborhood_name} area for restaurants and local streets",
-        "Transit and taxi access to the main sightseeing areas",
-        "Nearby cafés or convenience stops for easy mornings",
-    ]
-
-
-def _hotel_modal_why_stay(hotel):
-    _, neighborhood_name = _hotel_context(hotel)
-    bullets = []
-    rating = _rating_text(hotel)
-    review_count = _review_count_text(hotel)
-    if rating and review_count != "Reviews unavailable":
-        bullets.append(f"{rating} across {review_count} makes recent guest sentiment easier to sanity-check.")
-    elif rating:
-        bullets.append(f"{rating} guest rating gives a quick read on the stay experience.")
-
-    price = hotel.get("price")
-    if price is not None:
-        bullets.append(f"Estimated nightly rate is around {_money(price)}, which helps compare it quickly.")
-
-    area_key = f"{hotel.get('area') or ''} {neighborhood_name}".lower()
-    if any(term in area_key for term in ("station", "shinjuku", "myeongdong", "central", "belváros", "belvaros", "donji grad")):
-        bullets.append("Keeps restaurants, transit, and sightseeing logistics close together.")
-    elif any(term in area_key for term in ("ginza", "shopping", "gangnam", "sinsa")):
-        bullets.append("Puts dining and shopping within easier reach than quieter outer areas.")
-    elif any(term in area_key for term in ("ueno", "asakusa", "culture", "castle", "jongno", "insadong", "gornji", "kaptol")):
-        bullets.append("Works well for culture-heavy days with historic sights nearby.")
-    elif any(term in area_key for term in ("bay", "shiba", "maksimir", "jarun", "quiet")):
-        bullets.append("Better suited to travelers who want quieter evenings after sightseeing.")
-    else:
-        bullets.append(f"Keeps the stay centered around {neighborhood_name}.")
-
-    if hotel.get("source") != "google_places":
-        bullets.append("Use it as a shortlist option until live room details are verified.")
-
-    return _dedupe_modal_items(bullets, 3)
-
-
-def _hotel_modal_tradeoffs(hotel):
-    expectations = _hotel_stay_expectations(hotel)
-    review = _review_summary(hotel)
-    candidates = [
-        *(_hotel_identity_profile(hotel).get("tradeoff") and [_hotel_identity_profile(hotel).get("tradeoff")] or []),
-        *(expectations.get("tradeoffs") or []),
-        *(review.get("negatives") or []),
-    ]
-    tradeoffs = []
-    for item in candidates:
-        text = _modal_safe_sentence(item)
-        if text:
-            tradeoffs.append(text)
-
-    if hotel.get("price") is None:
-        tradeoffs.append("Live nightly rate is not available yet.")
-    if not _rating_text(hotel):
-        tradeoffs.append("Live guest-rating data is limited, so verify recent reviews before booking.")
-    if hotel.get("source") != "google_places":
-        tradeoffs.append("Confirm the exact hotel, room type, and cancellation terms before booking.")
-
-    clean = _dedupe_modal_items(tradeoffs, 2)
-    if len(clean) < 2:
-        clean.extend(
-            _dedupe_modal_items(
-                ["Room size, noise, and cancellation terms should be checked before booking."],
-                1,
-            )
-        )
-    return clean[:2]
-
-
 def _review_summary_html(hotel):
     summary = _review_summary(hotel)
     return "".join(
@@ -3324,7 +2938,7 @@ def _render_preferences():
             """
             <div class="hotel-kicker">Hotel preferences</div>
             <div class="hotel-name">What's most important for this trip?</div>
-            <div class="hotel-area">Pick the signals Byable should use to rank this hotel set.</div>
+            <div class="hotel-area">Pick the signals Byable should use to rank the Tokyo hotel set.</div>
             """,
             unsafe_allow_html=True,
         )
@@ -3511,33 +3125,32 @@ def _render_hotel_compact_card(hotel):
 
 
 def _render_score_modal(hotel):
+    expectations = _hotel_stay_expectations(hotel)
+    review = _review_summary(hotel)
+
     def _content():
-        rating = _rating_text(hotel)
-        review_count = _review_count_text(hotel)
-        meta_parts = [part for part in (rating, review_count) if part and part != "Reviews unavailable"]
-        st.markdown(f"**{hotel['name']}**")
-        st.caption(" · ".join(meta_parts) if meta_parts else "Rating and review count unavailable")
+        st.caption(hotel["name"])
 
-        st.markdown("**Who this is best for**")
-        st.markdown(_hotel_modal_best_for(hotel))
+        st.markdown("**Strengths**")
+        for strength in expectations["strengths"]:
+            st.markdown(f"✓ {strength}")
 
-        nearby_items = _hotel_modal_nearby(hotel)[:3]
-        if nearby_items:
-            st.markdown("**What is nearby**")
-            for item in nearby_items:
-                st.markdown(f"• {_modal_safe_sentence(item) or _clean_modal_sentence(item)}")
+        st.markdown("**Best for**")
+        st.markdown(expectations["best_for"])
 
-        why_items = _hotel_modal_why_stay(hotel)[:3]
-        if why_items:
-            st.markdown("**Why stay here**")
-            for item in why_items:
-                st.markdown(f"✓ {item}")
+        st.markdown("**Tradeoffs**")
+        for tradeoff in expectations["tradeoffs"]:
+            st.markdown(f"• {tradeoff}")
 
-        tradeoffs = _hotel_modal_tradeoffs(hotel)[:2]
-        if tradeoffs:
-            st.markdown("**Real tradeoffs**")
-            for item in tradeoffs:
-                st.markdown(f"• {item}")
+        if review["positives"] or review["negatives"]:
+            st.markdown("**Review signals**")
+            for pos in review["positives"][:3]:
+                st.markdown(f"✓ {pos}")
+            for neg in review["negatives"][:2]:
+                st.markdown(f"• {neg}")
+            st.caption(f"Review count: {review['review_count']}")
+
+        st.markdown(f"**Stay Score: {int(hotel.get('score') or 0)}/100**")
 
         if st.button("Close", key=f"close_hotel_score_{hotel.get('_hotel_key', 'active')}"):
             _clear_hotel_active_modal()
@@ -3613,47 +3226,6 @@ def _render_neighborhood_why_not_modal(neighborhood, recommended_neighborhood):
             _content()
 
 
-def _render_unsupported_destination(destination_city, selected_preferences):
-    """Render a minimal hotel view for a destination with no curated neighborhood data."""
-    st.info(
-        f"Neighborhood recommendations for **{destination_city}** are not ready yet. "
-        "Byable will show available hotels from Google Places below."
-    )
-    google_hotels = search_hotels_with_google_places(destination_city, neighborhood=None, limit=12)
-    if not google_hotels:
-        st.caption(
-            f"No live hotel results found for {destination_city}. "
-            "Connect Google Places or check back when neighborhood data is added."
-        )
-        return
-    # Use a generic city-level neighborhood proxy so existing scoring functions work
-    city_proxy = {
-        "name": destination_city,
-        "score": 82,
-        "convenience": 8.0,
-        "value": 8.0,
-        "base_score": 8.2,
-        "preference_tags": set(),
-        "good_fit": [],
-        "tradeoff": "",
-        "best_for": "",
-    }
-    ranked = _rank_google_hotels(google_hotels, selected_preferences, city_proxy)
-    ranked = _assign_hotel_identifiers(ranked)
-    for hotel in ranked:
-        hotel["_destination_city"] = destination_city
-        hotel["_selected_preferences"] = list(selected_preferences)
-        hotel["_recommended_neighborhood_name"] = destination_city
-        hotel["_selected_neighborhood_name"] = destination_city
-    st.caption(f"Live Google Places results for hotels in {destination_city}")
-    for hotel in ranked[:6]:
-        _render_hotel_card(hotel, recommended=False, recommended_hotel=ranked[0])
-    track_event(
-        "hotels_unsupported_destination_viewed",
-        {"destination": destination_city, "google_results": len(google_hotels)},
-    )
-
-
 def render():
     track_once("page_viewed", key="hotels_page_viewed", properties={"page_name": "hotels"})
     _inject_hotel_styles()
@@ -3672,6 +3244,11 @@ def render():
     )
 
     city_data = get_hotel_data_for_destination(destination_city)
+    if city_data.get("data_source") == "template":
+        st.caption(
+            f"Showing estimated neighborhood and hotel data for {destination_city}. "
+            "Connect Google Places for live listings."
+        )
 
     # If the destination changed, clear stale neighborhood/hotel selections
     last_destination = st.session_state.get("hotels_last_destination")
@@ -3682,12 +3259,6 @@ def render():
         st.session_state["hotels_last_destination"] = destination_city
 
     selected_preferences = _render_preferences()
-
-    # Unsupported destination: no curated neighborhoods, no fake names
-    if city_data.get("data_source") == "unsupported":
-        _render_unsupported_destination(destination_city, selected_preferences)
-        return
-
     preference_signature = tuple(selected_preferences)
     previous_preference_signature = st.session_state.get("hotel_preferences_last_tracked")
     if previous_preference_signature is None:
@@ -3744,19 +3315,19 @@ def render():
             google_hotels, selected_preferences, selected_neighborhood,
             city_data["neighborhood_safety_scores"],
         )
-        ranked_hotels = _ensure_hotel_option_depth(
-            ranked_hotels,
-            destination_city,
-            selected_neighborhood,
-            selected_preferences,
-            minimum_total=8,
-        )
     else:
-        ranked_hotels = _placeholder_hotels_for_neighborhood(
-            destination_city,
+        ranked_hotels = _rank_mock_hotels(selected_preferences, city_data)
+        selected_mock_name = _recommendation_for_neighborhood(
             selected_neighborhood,
-            selected_preferences,
-            count=8,
+            city_data["neighborhood_to_recommendation"],
+            city_data["mock_recommendations"],
+        )["hotel"]["name"]
+        ranked_hotels = sorted(
+            ranked_hotels,
+            key=lambda hotel: (
+                hotel.get("name") != selected_mock_name,
+                -int(hotel.get("score") or 0),
+            ),
         )
     recommended_hotel = ranked_hotels[0]
     alternative_hotels = _label_hotel_alternatives(ranked_hotels[1:])
@@ -3845,10 +3416,8 @@ def render():
                 )
                 st.rerun()
 
-    if live_hotel_data_used and len(google_hotels) >= 6:
+    if live_hotel_data_used:
         st.caption("Live Google Places hotel data")
-    elif live_hotel_data_used:
-        st.caption("Includes Google Places results plus destination-specific placeholders")
 
     _render_hotel_card(
         recommended_hotel,
