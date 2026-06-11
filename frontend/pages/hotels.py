@@ -53,7 +53,7 @@ MOCK_RECOMMENDATIONS = {
             "type": "Recommended hotel",
             "price": 268,
             "score": 89,
-            "why": "Byable recommends this stay because it puts food, shopping, and walkability first without jumping to ultra-luxury pricing.",
+            "why": "TravelGrab recommends this stay because it puts food, shopping, and walkability first without jumping to ultra-luxury pricing.",
             "tags": ["Food access", "Shopping", "Walkable"],
             "scores": {
                 "Location Match": (9.2, "Strong fit for food, shopping, and walkable Tokyo days."),
@@ -86,7 +86,7 @@ MOCK_RECOMMENDATIONS = {
             "type": "Recommended hotel",
             "price": 286,
             "score": 87,
-            "why": "Byable recommends this stay for nightlife-focused trips because it keeps late-night food and rail access close.",
+            "why": "TravelGrab recommends this stay for nightlife-focused trips because it keeps late-night food and rail access close.",
             "tags": ["Nightlife", "Station access", "Central"],
             "scores": {
                 "Location Match": (9.1, "Strong fit for nightlife and late dining."),
@@ -119,7 +119,7 @@ MOCK_RECOMMENDATIONS = {
             "type": "Recommended hotel",
             "price": 172,
             "score": 86,
-            "why": "Byable recommends this stay because it prioritizes culture and value near Ueno museums and transit.",
+            "why": "TravelGrab recommends this stay because it prioritizes culture and value near Ueno museums and transit.",
             "tags": ["Culture", "Value", "Museums"],
             "scores": {
                 "Location Match": (8.8, "Strong match for museums, parks, and older Tokyo sightseeing."),
@@ -152,7 +152,7 @@ MOCK_RECOMMENDATIONS = {
             "type": "Recommended hotel",
             "price": 620,
             "score": 88,
-            "why": "Byable recommends this stay for luxury-focused trips where the hotel experience matters as much as the neighborhood.",
+            "why": "TravelGrab recommends this stay for luxury-focused trips where the hotel experience matters as much as the neighborhood.",
             "tags": ["Luxury", "Design", "Skyline"],
             "scores": {
                 "Location Match": (8.8, "Strong fit for premium dining, design hotels, and central access."),
@@ -185,7 +185,7 @@ MOCK_RECOMMENDATIONS = {
             "type": "Recommended hotel",
             "price": 172,
             "score": 87,
-            "why": "Byable recommends this stay because it keeps the nightly estimate low while preserving transit and neighborhood character.",
+            "why": "TravelGrab recommends this stay because it keeps the nightly estimate low while preserving transit and neighborhood character.",
             "tags": ["Lowest price", "Culture", "Transit"],
             "scores": {
                 "Location Match": (8.3, "Good fit if value and culture matter more than premium shopping."),
@@ -218,7 +218,7 @@ MOCK_RECOMMENDATIONS = {
             "type": "Recommended hotel",
             "price": 238,
             "score": 88,
-            "why": "Byable recommends this stay because it gives a calmer Tokyo base while keeping useful transit access.",
+            "why": "TravelGrab recommends this stay because it gives a calmer Tokyo base while keeping useful transit access.",
             "tags": ["Relaxation", "Quiet base", "Transit access"],
             "scores": {
                 "Location Match": (8.6, "Strong fit for a quieter Tokyo base with park access nearby."),
@@ -445,7 +445,7 @@ _PARIS_MOCK_RECOMMENDATIONS = {
             "type": "Recommended hotel",
             "price": 380,
             "score": 89,
-            "why": "Byable recommends this stay because it puts shopping, walkability, and food access in the most central Paris base.",
+            "why": "TravelGrab recommends this stay because it puts shopping, walkability, and food access in the most central Paris base.",
             "tags": ["Central", "Walkable", "Sightseeing"],
             "scores": {
                 "Location Match": (9.1, "Steps from the Louvre, Tuileries, and Palais Royal."),
@@ -478,7 +478,7 @@ _PARIS_MOCK_RECOMMENDATIONS = {
             "type": "Recommended hotel",
             "price": 210,
             "score": 87,
-            "why": "Byable recommends this stay for culture and food-focused trips — a boutique Marais hotel steps from Paris's best galleries and restaurants.",
+            "why": "TravelGrab recommends this stay for culture and food-focused trips — a boutique Marais hotel steps from Paris's best galleries and restaurants.",
             "tags": ["Culture", "Boutique", "Le Marais"],
             "scores": {
                 "Location Match": (9.0, "Heart of the Marais, close to Place des Vosges and major galleries."),
@@ -511,7 +511,7 @@ _PARIS_MOCK_RECOMMENDATIONS = {
             "type": "Recommended hotel",
             "price": 350,
             "score": 88,
-            "why": "Byable recommends this stay for luxury and relaxation trips — the most iconic Left Bank boutique hotel in Paris.",
+            "why": "TravelGrab recommends this stay for luxury and relaxation trips — the most iconic Left Bank boutique hotel in Paris.",
             "tags": ["Luxury", "Saint-Germain", "Boutique"],
             "scores": {
                 "Location Match": (9.0, "Heart of Saint-Germain, steps from Café de Flore and Musée d'Orsay."),
@@ -544,7 +544,7 @@ _PARIS_MOCK_RECOMMENDATIONS = {
             "type": "Recommended hotel",
             "price": 148,
             "score": 85,
-            "why": "Byable recommends this stay for culture and value — a charming garden courtyard hotel near the Panthéon and Sorbonne.",
+            "why": "TravelGrab recommends this stay for culture and value — a charming garden courtyard hotel near the Panthéon and Sorbonne.",
             "tags": ["Value", "Culture", "Garden"],
             "scores": {
                 "Location Match": (8.7, "Quiet Latin Quarter location near major cultural sights."),
@@ -577,7 +577,7 @@ _PARIS_MOCK_RECOMMENDATIONS = {
             "type": "Recommended hotel",
             "price": 280,
             "score": 84,
-            "why": "Byable recommends this stay for atmosphere — a secluded Montmartre mansion hotel away from tourist crowds.",
+            "why": "TravelGrab recommends this stay for atmosphere — a secluded Montmartre mansion hotel away from tourist crowds.",
             "tags": ["Atmosphere", "Montmartre", "Boutique"],
             "scores": {
                 "Location Match": (8.5, "Quiet Montmartre side street, away from the Sacré-Cœur crowds."),
@@ -610,7 +610,7 @@ _PARIS_MOCK_RECOMMENDATIONS = {
             "type": "Recommended hotel",
             "price": 890,
             "score": 87,
-            "why": "Byable recommends this stay for luxury-focused Paris trips — the landmark Champs-Élysées hotel where the stay itself is part of the experience.",
+            "why": "TravelGrab recommends this stay for luxury-focused Paris trips — the landmark Champs-Élysées hotel where the stay itself is part of the experience.",
             "tags": ["Luxury", "Flagship", "Champs-Élysées"],
             "scores": {
                 "Location Match": (9.0, "On the Champs-Élysées, adjacent to Arc de Triomphe."),
@@ -797,7 +797,7 @@ HOTEL_FACTOR_PROFILES = {
     "Nohga Hotel Ueno Tokyo": {
         "Location Match": (8.4, "Strong fit for museums, parks, older Tokyo, and slower cultural days."),
         "Transit Access": (8.5, "Ueno gives useful JR and subway connections across Tokyo."),
-        "Value": (9.3, "Lowest estimated nightly rate among the core Byable options."),
+        "Value": (9.3, "Lowest estimated nightly rate among the core TravelGrab options."),
         "Room Quality": (8.1, "Solid design-hotel profile without luxury pricing."),
         "Safety": (8.5, "Established visitor area with predictable transport access."),
         "preference_tags": {"Culture", "Lowest Price", "Walkability"},
@@ -866,7 +866,7 @@ _GENERIC_NEIGHBORHOOD_TEMPLATES = [
             "Room Quality": (8.2, "Solid city-centre hotel profile."),
             "Safety": (8.8, "Well-lit central district with strong pedestrian environment."),
         },
-        "hotel_why_template": "Byable recommends this stay because it gives the most central base for sightseeing and walkable city days in {city}.",
+        "hotel_why_template": "TravelGrab recommends this stay because it gives the most central base for sightseeing and walkable city days in {city}.",
         "hotel_tags": ["Central", "Walkable", "Sightseeing"],
     },
     {
@@ -892,7 +892,7 @@ _GENERIC_NEIGHBORHOOD_TEMPLATES = [
             "Room Quality": (8.3, "Character hotel profile in a historic setting."),
             "Safety": (8.7, "Established tourist area with good daytime foot traffic."),
         },
-        "hotel_why_template": "Byable recommends this stay because it keeps cultural sights, walking routes, and historic atmosphere close in {city}.",
+        "hotel_why_template": "TravelGrab recommends this stay because it keeps cultural sights, walking routes, and historic atmosphere close in {city}.",
         "hotel_tags": ["Culture", "Heritage", "Walkable"],
     },
     {
@@ -918,7 +918,7 @@ _GENERIC_NEIGHBORHOOD_TEMPLATES = [
             "Room Quality": (8.0, "Practical modern hotel profile."),
             "Safety": (8.5, "Active daytime district with good pedestrian presence."),
         },
-        "hotel_why_template": "Byable recommends this stay because it puts shopping, food markets, and walkable streets within easy reach in {city}.",
+        "hotel_why_template": "TravelGrab recommends this stay because it puts shopping, food markets, and walkable streets within easy reach in {city}.",
         "hotel_tags": ["Shopping", "Food", "Central"],
     },
     {
@@ -944,7 +944,7 @@ _GENERIC_NEIGHBORHOOD_TEMPLATES = [
             "Room Quality": (8.0, "Functional city hotel profile for active evenings."),
             "Safety": (7.9, "Busier at night — generally safe but livelier surroundings."),
         },
-        "hotel_why_template": "Byable recommends this stay for nightlife-focused trips because it keeps late dining and entertainment close in {city}.",
+        "hotel_why_template": "TravelGrab recommends this stay for nightlife-focused trips because it keeps late dining and entertainment close in {city}.",
         "hotel_tags": ["Nightlife", "Late dining", "Active"],
     },
     {
@@ -970,7 +970,7 @@ _GENERIC_NEIGHBORHOOD_TEMPLATES = [
             "Room Quality": (8.0, "Comfortable mid-range hotel profile."),
             "Safety": (9.0, "Calm residential district with low foot traffic."),
         },
-        "hotel_why_template": "Byable recommends this stay because it offers the best value while keeping a calm neighbourhood base in {city}.",
+        "hotel_why_template": "TravelGrab recommends this stay because it offers the best value while keeping a calm neighbourhood base in {city}.",
         "hotel_tags": ["Value", "Quiet", "Family-friendly"],
     },
     {
@@ -996,7 +996,7 @@ _GENERIC_NEIGHBORHOOD_TEMPLATES = [
             "Room Quality": (9.2, "Luxury hotel profile with strong amenities."),
             "Safety": (9.3, "Upscale district with strong pedestrian environment."),
         },
-        "hotel_why_template": "Byable recommends this stay for luxury-focused trips where the hotel experience itself matters as much as the location in {city}.",
+        "hotel_why_template": "TravelGrab recommends this stay for luxury-focused trips where the hotel experience itself matters as much as the location in {city}.",
         "hotel_tags": ["Luxury", "Fine dining", "Premium"],
     },
 ]
@@ -1179,7 +1179,7 @@ def _score_mock_hotel(hotel, preferences, hotel_factor_profiles=None):
         hotel_factor_profiles = HOTEL_FACTOR_PROFILES
     profile = hotel_factor_profiles.get(hotel["name"], {})
     scores = {
-        key: profile.get(key, (7.5, "Byable score based on current stay assumptions."))
+        key: profile.get(key, (7.5, "TravelGrab score based on current stay assumptions."))
         for key in ("Location Match", "Transit Access", "Value", "Room Quality", "Safety")
     }
     scores["Trip Fit"] = _trip_fit_factor(hotel["name"], preferences, hotel_factor_profiles)
@@ -1356,7 +1356,7 @@ def _hotel_recommendation_copy(hotel, preferences, neighborhood=None):
     rating = _rating_text(hotel)
     rating_text = " Public Google reviews add confidence in this specific hotel pick." if rating else ""
     return (
-        f"Your main priorities are {preference_text}. Byable recommends this stay because {neighborhood_name} gives those days the easiest base."
+        f"Your main priorities are {preference_text}. TravelGrab recommends this stay because {neighborhood_name} gives those days the easiest base."
         f"{rating_text}"
     )
 
@@ -1404,7 +1404,7 @@ def _hotel_pick_bullets(hotel, recommended_neighborhood, preferences):
 
     address = str(hotel.get("area") or "")
     if address and neighborhood_name.split(" / ")[0] in address:
-        bullets.append(f"Located in the area Byable selected for this trip: {neighborhood_name}.")
+        bullets.append(f"Located in the area TravelGrab selected for this trip: {neighborhood_name}.")
 
     return bullets[:4]
 
@@ -1476,7 +1476,7 @@ def _hotel_priority_match_line(hotel, preferences, neighborhood_name):
         return "Makes the hotel experience feel more polished and intentional."
     if "Lowest Price" in selected and ("ueno" in area or "asakusa" in area):
         return "Leans toward better-value Tokyo hotel areas."
-    return f"Fits naturally with the {neighborhood_name} base Byable selected."
+    return f"Fits naturally with the {neighborhood_name} base TravelGrab selected."
 
 
 def _hotel_identity_profile(hotel, recommended_hotel=None, recommended=False, preferences=None, neighborhood=None):
@@ -1616,9 +1616,9 @@ def _hotel_identity_profile(hotel, recommended_hotel=None, recommended=False, pr
         elif "premium price" in tags or "higher price" in tags:
             tradeoff = f"Likely pricier without enough extra benefit for {focus_text}."
         elif "shinjuku" in area and "shinjuku" not in str(recommended_hotel.get("area") or "").lower():
-            tradeoff = f"Busier surroundings than Byable's {neighborhood_name} neighborhood choice."
+            tradeoff = f"Busier surroundings than TravelGrab's {neighborhood_name} neighborhood choice."
         else:
-            tradeoff = f"Less directly aligned with the {neighborhood_name} base Byable selected."
+            tradeoff = f"Less directly aligned with the {neighborhood_name} base TravelGrab selected."
     elif recommended:
         tradeoff = f"Still verify live nightly rates and room type before booking this {neighborhood_name} stay."
 
@@ -1744,6 +1744,7 @@ def _set_hotel_active_modal(modal_type, hotel_key):
         "type": modal_type,
         "hotel_key": hotel_key,
     }
+    st.session_state["hotels_active_modal_trigger"] = True
 
 
 def _set_neighborhood_active_modal(neighborhood_name):
@@ -1752,12 +1753,14 @@ def _set_neighborhood_active_modal(neighborhood_name):
         "type": "neighborhood_why_not",
         "item": neighborhood_name,
     }
+    st.session_state["hotels_active_modal_trigger"] = True
 
 
 def _clear_hotel_active_modal():
     st.session_state.pop("hotels_active_modal", None)
     st.session_state.pop("hotel_active_modal", None)
     st.session_state.pop("neighborhood_why_not_modal_open", None)
+    st.session_state.pop("hotels_active_modal_trigger", None)
 
 
 def _hotel_factor_score(hotel, factor):
@@ -1879,7 +1882,7 @@ def _hotel_why_not_lists(hotel, recommended_hotel):
         ]
         drawbacks = [
             "Busier and noisier surroundings",
-            f"Less aligned with Byable's {neighborhood_name} neighborhood choice",
+            f"Less aligned with TravelGrab's {neighborhood_name} neighborhood choice",
         ]
         take = f"Choose this if nightlife and being in the middle of the action matter more than the calmer {neighborhood_name} base."
     elif "the knot" in name_key:
@@ -1923,9 +1926,9 @@ def _hotel_why_not_lists(hotel, recommended_hotel):
         ]
         drawbacks = [
             "Busier station-area surroundings",
-            f"Less calm than the {neighborhood_name} choice if Byable picked it for a smoother stay",
+            f"Less calm than the {neighborhood_name} choice if TravelGrab picked it for a smoother stay",
         ]
-        take = f"Choose this if transit access and Shinjuku energy matter more than the {neighborhood_name} fit Byable selected."
+        take = f"Choose this if transit access and Shinjuku energy matter more than the {neighborhood_name} fit TravelGrab selected."
     elif "celestine" in name_key or "shiba" in area or "tokyo bay" in area:
         advantages = [
             f"Creates a calmer hotel base than {neighborhood_name}",
@@ -1941,7 +1944,7 @@ def _hotel_why_not_lists(hotel, recommended_hotel):
         if not advantages:
             advantages = [
                 f"A straightforward base for {focus_text}",
-                f"A possible alternative to Byable's {neighborhood_name} neighborhood choice",
+                f"A possible alternative to TravelGrab's {neighborhood_name} neighborhood choice",
             ]
         if "ginza" in area:
             drawbacks.append("Less nightlife-focused than Shinjuku options")
@@ -1989,7 +1992,7 @@ def _hotel_stay_expectations(hotel):
         ]
         tradeoffs = [
             "Busier surroundings than quieter Tokyo hotel areas",
-            f"Less tied to Byable's {neighborhood_name} neighborhood choice",
+            f"Less tied to TravelGrab's {neighborhood_name} neighborhood choice",
         ]
         best_for = f"Best for travelers who want nightlife at the door more than the calmer {neighborhood_name} base."
     elif "the knot" in name_key:
@@ -2024,7 +2027,7 @@ def _hotel_stay_expectations(hotel):
         ]
         tradeoffs = [
             "Less convenient for nightlife and shopping-heavy days",
-            f"Less aligned with Byable's selected {neighborhood_name} neighborhood",
+            f"Less aligned with TravelGrab's selected {neighborhood_name} neighborhood",
         ]
         best_for = f"Best for travelers who want culture, value, and a calmer Tokyo base."
     elif "jr kyushu" in name_key or "shinjuku" in area or "location" in label:
@@ -2036,7 +2039,7 @@ def _hotel_stay_expectations(hotel):
         ]
         tradeoffs = [
             "Busier area during evenings",
-            f"May feel less calm than the {neighborhood_name} stay Byable selected",
+            f"May feel less calm than the {neighborhood_name} stay TravelGrab selected",
         ]
         best_for = "Best for travelers who want a convenient Tokyo base without spending time optimizing logistics."
     elif "celestine" in name_key or "shiba" in area or "tokyo bay" in area:
@@ -2047,7 +2050,7 @@ def _hotel_stay_expectations(hotel):
         ]
         tradeoffs = [
             "Less convenient for nightlife and shopping-heavy days",
-            f"Farther from the reasons Byable selected {neighborhood_name}",
+            f"Farther from the reasons TravelGrab selected {neighborhood_name}",
         ]
         best_for = "Best for travelers who want a quieter stay and do not need to be in the middle of the action."
     else:
@@ -2116,7 +2119,7 @@ def _hotel_choose_sentence(hotel, recommended=False):
     selected_preferences, neighborhood_name = _hotel_context(hotel)
     priority_text = _priority_phrase(selected_preferences)
     if recommended:
-        return f"Because you picked {priority_text}, this keeps you anchored in Byable's {neighborhood_name} neighborhood choice."
+        return f"Because you picked {priority_text}, this keeps you anchored in TravelGrab's {neighborhood_name} neighborhood choice."
 
     name_key = str(hotel.get("name") or "").lower()
     area = str(hotel.get("area") or "").lower()
@@ -2143,7 +2146,7 @@ def _hotel_card_summary(hotel, recommended=False):
     selected_preferences, neighborhood_name = _hotel_context(hotel)
     focus_text = _traveler_focus_phrase(selected_preferences)
     if recommended:
-        return str(hotel.get("why") or f"Byable recommends this stay because {neighborhood_name} is a strong base for {focus_text}.")
+        return str(hotel.get("why") or f"TravelGrab recommends this stay because {neighborhood_name} is a strong base for {focus_text}.")
 
     name_key = str(hotel.get("name") or "").lower()
     area = str(hotel.get("area") or "").lower()
@@ -2938,7 +2941,7 @@ def _render_preferences():
             """
             <div class="hotel-kicker">Hotel preferences</div>
             <div class="hotel-name">What's most important for this trip?</div>
-            <div class="hotel-area">Pick the signals Byable should use to rank the Tokyo hotel set.</div>
+            <div class="hotel-area">Pick the signals TravelGrab should use to rank the Tokyo hotel set.</div>
             """,
             unsafe_allow_html=True,
         )
@@ -2976,7 +2979,7 @@ def _render_neighborhood_card(recommendation, preferences, scored_neighborhood, 
             </div>
             <div class="hotel-copy">{html.escape(neighborhood["why"])}</div>
             <div class="hotel-chip-row">{_chips(_neighborhood_tags(scored_neighborhood), primary_first=True)}</div>
-            <div class="hotel-section-label">Why Byable picked this neighborhood</div>
+            <div class="hotel-section-label">Why TravelGrab picked this neighborhood</div>
             <ul class="hotel-list">{pick_bullets}</ul>
             <div class="hotel-section-label">Pros</div>
             <ul class="hotel-list">{_escape_list(neighborhood["pros"])}</ul>
@@ -3033,12 +3036,12 @@ def _render_hotel_card(hotel, recommended=False, recommended_hotel=None):
     choose_sentence = _hotel_choose_sentence(hotel, recommended=recommended)
     card_summary = _hotel_card_summary(hotel, recommended=recommended)
     selected_label = '<span class="hotel-selected-label">Selected hotel</span>' if is_selected else ""
-    recommended_label = '<div class="hotel-recommended-label">Recommended by Byable</div>' if recommended else ""
+    recommended_label = '<div class="hotel-recommended-label">Recommended by TravelGrab</div>' if recommended else ""
     pick_bullets = ""
     if recommended and hotel.get("pick_bullets"):
         pick_bullets = "".join(
             [
-                '<div class="hotel-section-label">Why Byable picked this hotel</div>',
+                '<div class="hotel-section-label">Why TravelGrab picked this hotel</div>',
                 f'<ul class="hotel-list">{_escape_list(hotel["pick_bullets"][:4])}</ul>',
             ]
         )
@@ -3079,7 +3082,7 @@ def _render_hotel_win_section(recommended_hotel, alternative_hotels, preferences
     st.markdown(
         f"""
         <div class="hotel-win-card">
-            <div class="hotel-section-label">Why Byable Picked This Hotel</div>
+            <div class="hotel-section-label">Why TravelGrab Picked This Hotel</div>
             <div class="hotel-win-grid">
                 <div>
                     <div class="hotel-copy">Evaluated against multiple strong alternatives.</div>
@@ -3209,7 +3212,7 @@ def _render_neighborhood_why_not_modal(neighborhood, recommended_neighborhood):
         st.markdown("**Tradeoffs**")
         for drawback in comparison["drawbacks"][:2]:
             st.markdown(f"• {drawback}")
-        st.markdown("**Byable's take**")
+        st.markdown("**TravelGrab's take**")
         st.caption(comparison["take"])
         if st.button("Close", key="close_neighborhood_why_not"):
             _clear_hotel_active_modal()
@@ -3236,7 +3239,7 @@ def render():
             <div class="hotel-kicker">Hotels</div>
             <div class="hotel-title">Where to stay in {html.escape(destination_city)}</div>
             <div class="hotel-subtitle">
-                Byable ranks stays by neighborhood fit, transit access, value, room quality, safety, and trip fit.
+                TravelGrab ranks stays by neighborhood fit, transit access, value, room quality, safety, and trip fit.
             </div>
         </div>
         """,
@@ -3507,15 +3510,18 @@ def render():
 
     active_modal = st.session_state.get("hotels_active_modal") or {}
     active_modal_type = active_modal.get("type")
-    if active_modal_type == "stay_score":
-        active_hotel = hotels_by_key.get(active_modal.get("hotel_key"))
-        if active_hotel:
-            _render_score_modal(active_hotel)
-    elif active_modal_type == "why_not":
-        active_hotel = hotels_by_key.get(active_modal.get("hotel_key"))
-        if active_hotel:
-            _render_why_not_modal(active_hotel, recommended_hotel)
-    elif active_modal_type == "neighborhood_why_not":
-        neighborhood_name = active_modal.get("item")
-        if neighborhood_name and neighborhood_name in neighborhoods_by_name:
-            _render_neighborhood_why_not_modal(neighborhoods_by_name[neighborhood_name], recommended_neighborhood)
+    # Trigger consumed here; absent on X-close reruns so dialog is not re-opened.
+    modal_trigger = st.session_state.pop("hotels_active_modal_trigger", False)
+    if modal_trigger:
+        if active_modal_type == "stay_score":
+            active_hotel = hotels_by_key.get(active_modal.get("hotel_key"))
+            if active_hotel:
+                _render_score_modal(active_hotel)
+        elif active_modal_type == "why_not":
+            active_hotel = hotels_by_key.get(active_modal.get("hotel_key"))
+            if active_hotel:
+                _render_why_not_modal(active_hotel, recommended_hotel)
+        elif active_modal_type == "neighborhood_why_not":
+            neighborhood_name = active_modal.get("item")
+            if neighborhood_name and neighborhood_name in neighborhoods_by_name:
+                _render_neighborhood_why_not_modal(neighborhoods_by_name[neighborhood_name], recommended_neighborhood)

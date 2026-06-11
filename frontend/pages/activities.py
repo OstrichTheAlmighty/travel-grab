@@ -2065,6 +2065,7 @@ def render():
                 with action_cols[2]:
                     if st.button("Details", key=f"ac_details_{activity_id}", use_container_width=True):
                         st.session_state["activities_active_modal"] = activity_id
+                        st.session_state["activities_active_modal_trigger"] = True
                         st.rerun()
                 _close_activity_card()
 
@@ -2080,8 +2081,10 @@ def render():
             st.rerun()
 
     # --- details modal (exactly one dialog per run) ---
+    # Trigger is consumed here; absent on X-close reruns so dialog is not re-opened.
     active_modal_id = st.session_state.get("activities_active_modal")
-    if active_modal_id and active_modal_id in activities_by_id:
+    modal_trigger = st.session_state.pop("activities_active_modal_trigger", False)
+    if active_modal_id and active_modal_id in activities_by_id and modal_trigger:
         _render_details_modal(activities_by_id[active_modal_id])
 
     # --- saved activities panel ---

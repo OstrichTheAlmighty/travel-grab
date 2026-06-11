@@ -4672,7 +4672,7 @@ def render():
         if not badge_html:
             badge_html = f'<span class="flight-rec-badge">{html.escape(str(recommendation.get("label") or "Best value"))}</span>'
         byable_recommended_label = (
-            '<div class="flight-byable-recommended-label">Recommended by Byable</div>'
+            '<div class="flight-byable-recommended-label">Recommended by TravelGrab</div>'
             if is_recommended
             else ""
         )
@@ -4889,6 +4889,7 @@ def render():
             comparison_label = "Why #1?" if is_recommended else "Why not?"
             if st.button(comparison_label, key=f"compare_number_one_{index}_{flight_id}"):
                 st.session_state["selected_flight_for_comparison"] = flight_id
+                st.session_state["flight_comparison_modal_trigger"] = True
                 event_name = "why_number_one_clicked" if is_recommended else "why_not_clicked"
                 duration_difference = (_duration_minutes(offer.get("duration")) or 0) - (_duration_minutes(best_offer.get("duration")) or 0)
                 stops_difference = int(offer.get("stops") or 0) - int(best_offer.get("stops") or 0)
@@ -4915,6 +4916,7 @@ def render():
             flight_id = _flight_key(offer)
             if st.button(f"AI Score: {score}", key=f"score_breakdown_{index}_{flight_id}"):
                 st.session_state["selected_flight_for_score_breakdown"] = flight_id
+                st.session_state["flight_score_modal_trigger"] = True
                 track_event(
                     "ai_score_clicked",
                     {
@@ -4940,6 +4942,7 @@ def render():
             if st.button("View details", key=f"details_{index}_{_flight_key(offer)}"):
                 detail_flight_id = _flight_key(offer)
                 st.session_state["selected_flight_for_details"] = detail_flight_id
+                st.session_state["flight_details_modal_trigger"] = True
                 track_event(
                     "view_details_clicked",
                     {
@@ -4961,7 +4964,8 @@ def render():
 
     score_detail_offer = None
     score_modal_key = st.session_state.get("selected_flight_for_score_breakdown", "")
-    if score_modal_key:
+    score_modal_trigger = st.session_state.pop("flight_score_modal_trigger", False)
+    if score_modal_key and score_modal_trigger:
         for offer in offers:
             if _flight_key(offer) == score_modal_key:
                 score_detail_offer = offer
@@ -5027,7 +5031,8 @@ def render():
 
     comparison_offer = None
     comparison_modal_key = st.session_state.get("selected_flight_for_comparison", "")
-    if comparison_modal_key:
+    comparison_modal_trigger = st.session_state.pop("flight_comparison_modal_trigger", False)
+    if comparison_modal_key and comparison_modal_trigger:
         for offer in offers:
             if _flight_key(offer) == comparison_modal_key:
                 comparison_offer = offer
@@ -5040,7 +5045,7 @@ def render():
                 st.rerun()
 
         comparison_title = (
-            "Why Byable picked this"
+            "Why TravelGrab picked this"
             if _flight_key(comparison_offer) == _flight_key(best_offer)
             else "Why this was not picked"
         )
@@ -5055,7 +5060,8 @@ def render():
                 _show_comparison_content()
 
     detail_offer = None
-    if detail_modal_key:
+    detail_modal_trigger = st.session_state.pop("flight_details_modal_trigger", False)
+    if detail_modal_key and detail_modal_trigger:
         for offer in visible_offers:
             if _flight_key(offer) == detail_modal_key:
                 detail_offer = offer
