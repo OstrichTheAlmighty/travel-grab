@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Byable | How can I afford this by this date?",
+  title: "Byable — Find the best flight, not just the cheapest one",
   description:
-    "See the path to what you want. Byable helps you understand how to afford a goal by a target date.",
+    "Byable compares price, layovers, timing, airlines, airports, and comfort to explain which flight is actually worth booking.",
 };
 
 export default function RootLayout({
