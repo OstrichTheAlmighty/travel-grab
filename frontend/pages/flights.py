@@ -3464,8 +3464,47 @@ def render():
             box-shadow: 0 0 0 1px rgba(129,140,248,0.18), 0 24px 60px rgba(49,46,129,0.26);
         }
         .flight-card-native.recommended {
-            border-color: rgba(165,180,252,0.36);
-            box-shadow: 0 18px 54px rgba(49,46,129,0.18);
+            padding: 20px 22px;
+            border-color: rgba(251,191,36,0.32);
+            background:
+                radial-gradient(ellipse at top left, rgba(245,158,11,0.09), transparent 52%),
+                radial-gradient(ellipse at top right, rgba(99,102,241,0.08), transparent 48%),
+                linear-gradient(145deg, rgba(255,255,255,0.065), rgba(255,255,255,0.020)),
+                rgba(7,9,15,0.95);
+            box-shadow:
+                0 0 0 1px rgba(251,191,36,0.12),
+                0 0 52px rgba(245,158,11,0.14),
+                0 28px 72px rgba(0,0,0,0.30);
+        }
+        .flight-card-native.recommended .flight-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: linear-gradient(145deg, rgba(245,158,11,0.24), rgba(251,191,36,0.09));
+            border-color: rgba(251,191,36,0.26);
+        }
+        .flight-rec-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: linear-gradient(135deg, rgba(245,158,11,0.20), rgba(251,191,36,0.09));
+            border: 1px solid rgba(251,191,36,0.40);
+            border-radius: 10px;
+            color: #fcd34d;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+        .flight-airline-summary {
+            color: rgba(253,211,77,0.68);
+            font-size: 12px;
+            font-weight: 500;
+            font-style: italic;
+            margin-top: 3px;
+            line-height: 1.35;
         }
         .flight-card-native.compact {
             padding: 12px 14px;
@@ -4671,8 +4710,13 @@ def render():
         )
         if not badge_html:
             badge_html = f'<span class="flight-rec-badge">{html.escape(str(recommendation.get("label") or "Best value"))}</span>'
-        byable_recommended_label = (
-            '<div class="flight-byable-recommended-label">Recommended by TravelGrab</div>'
+        rec_hero_banner = (
+            '<div class="flight-rec-hero-badge">🏆 TravelGrab Recommended</div>'
+            if is_recommended
+            else ""
+        )
+        airline_summary_html = (
+            '<div class="flight-airline-summary">Best balance of price, convenience, and travel time.</div>'
             if is_recommended
             else ""
         )
@@ -4841,13 +4885,14 @@ def render():
         card_html = "".join(
             [
                 f'<div class="{card_class}">',
+                rec_hero_banner,
                 '<div class="flight-card-top">',
                 '<div class="flight-airline-wrap">',
                 f'<div class="flight-logo">{airline_code}</div>',
                 "<div>",
-                byable_recommended_label,
                 f'<div class="flight-airline">{html.escape(str(offer.get("airline") or "Airline"))}</div>',
                 f'<div class="flight-number">{flight_number} · Duffel test fare</div>',
+                airline_summary_html,
                 f'<div class="flight-rec-row">{badge_html}</div>',
                 "</div>",
                 "</div>",
