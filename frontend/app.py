@@ -2,6 +2,8 @@ import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import streamlit as st
+from contextlib import redirect_stdout
+from io import StringIO
 
 PUBLIC_FLIGHTS_ONLY = os.getenv("PUBLIC_FLIGHTS_ONLY", "").strip().lower() in {"1", "true", "yes", "on"}
 
@@ -42,7 +44,11 @@ if PUBLIC_FLIGHTS_ONLY:
     if st.session_state.get("_last_page_viewed") != "flights":
         track_event("page_viewed", {"page_name": "flights"})
         st.session_state["_last_page_viewed"] = "flights"
-    flights.render()
+    try:
+        with redirect_stdout(StringIO()):
+            flights.render()
+    except Exception:
+        st.error("TravelGrab couldn't load flight search right now. Please refresh and try again.")
     st.stop()
 
 from components.nav import sidebar_nav, top_mobile_nav

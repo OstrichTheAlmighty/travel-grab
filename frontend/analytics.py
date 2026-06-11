@@ -15,8 +15,14 @@ POSTHOG_DEFAULT_HOST = "https://us.i.posthog.com"
 _POSTHOG_STATUS_PRINTED = False
 
 
+def _analytics_debug_enabled():
+    return os.getenv("PUBLIC_FLIGHTS_ONLY", "").strip().lower() not in {"1", "true", "yes", "on"}
+
+
 def _print_posthog_status(api_key_present, initialized):
     global _POSTHOG_STATUS_PRINTED
+    if not _analytics_debug_enabled():
+        return
     if _POSTHOG_STATUS_PRINTED:
         return
     print(
@@ -125,6 +131,12 @@ def posthog_client_script(page_name):
 window.byableTrack = function(){};
 </script>
 """
+    if os.getenv("PUBLIC_FLIGHTS_ONLY", "").strip().lower() in {"1", "true", "yes", "on"}:
+        return """
+<script>
+window.byableTrack = function(){};
+</script>
+"""
     return f"""
 <script>
 window.byableTrack = function(eventName, properties) {{
@@ -168,7 +180,8 @@ def track_event(event_name, properties=None, distinct_id=None):
     """Send a PostHog event. Fails silently when unavailable or misconfigured."""
     config = init_posthog()
     if not config:
-        print(f"POSTHOG EVENT FAILED: {event_name} not sent because POSTHOG_API_KEY is missing", flush=True)
+        if _analytics_debug_enabled():
+            print(f"POSTHOG EVENT FAILED: {event_name} not sent because POSTHOG_API_KEY is missing", flush=True)
         return False
     try:
         payload = {
@@ -179,10 +192,12 @@ def track_event(event_name, properties=None, distinct_id=None):
         }
         response = requests.post(f"{config['host']}/capture/", json=payload, timeout=1.0)
         response.raise_for_status()
-        print(f"POSTHOG EVENT SENT: {event_name}", flush=True)
+        if _analytics_debug_enabled():
+            print(f"POSTHOG EVENT SENT: {event_name}", flush=True)
         return True
     except Exception as exc:
-        print(f"POSTHOG EVENT FAILED: {exc}", flush=True)
+        if _analytics_debug_enabled():
+            print(f"POSTHOG EVENT FAILED: {exc}", flush=True)
         return False
 
 

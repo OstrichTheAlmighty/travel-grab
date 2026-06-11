@@ -1,6 +1,8 @@
 import os
 import re
 import sys
+from contextlib import redirect_stdout
+from io import StringIO
 from pathlib import Path
 
 import streamlit as st
@@ -138,7 +140,11 @@ def main():
     _inject_public_styles()
     track_once("public_flights_app_loaded", key="public_flights_app_loaded")
     _render_public_hero()
-    flights.render()
+    try:
+        with redirect_stdout(StringIO()):
+            flights.render()
+    except Exception:
+        st.error("TravelGrab couldn't load flight search right now. Please refresh and try again.")
 
 
 if __name__ == "__main__":

@@ -33,6 +33,7 @@ DUFFEL_BASE_URL = "https://api.duffel.com"
 DUFFEL_VERSION = "v2"
 MAX_CITY_SEARCH_SECONDS = 12.0
 FLIGHT_SEARCH_RATE_LIMIT_SECONDS = 8.0
+PUBLIC_FLIGHT_SEARCH_MAX_PER_HOUR = 30
 AI_ADVISOR_RATE_LIMIT_SECONDS = 6.0
 MAX_CITY_INPUT_LENGTH = 64
 MAX_TRAVELERS = 9
@@ -104,6 +105,43 @@ DESTINATION_HERO_IMAGES = {
 }
 
 load_dotenv(dotenv_path=PROJECT_ROOT / ".env")
+
+
+def _public_flights_only():
+    return os.getenv("PUBLIC_FLIGHTS_ONLY", "").strip().lower() in {"1", "true", "yes", "on"} or bool(
+        st.session_state.get("public_flights_only")
+    )
+
+
+def _public_search_limit_allowed():
+    if not _public_flights_only():
+        return True, ""
+    now = time.time()
+    window_start = now - 3600
+    timestamps = [
+        float(value)
+        for value in st.session_state.get("public_flight_search_timestamps", [])
+        if float(value) >= window_start
+    ]
+    if len(timestamps) >= PUBLIC_FLIGHT_SEARCH_MAX_PER_HOUR:
+        st.session_state["public_flight_search_timestamps"] = timestamps
+        return False, "Too many searches from this browser. Please wait a bit and try again."
+    timestamps.append(now)
+    st.session_state["public_flight_search_timestamps"] = timestamps
+    return True, ""
+
+
+def _public_flight_error_message(status, message=""):
+    status_text = str(status or "").lower()
+    if status_text == "not_configured":
+        return "Flight search is temporarily unavailable. Please try again later."
+    if status_text == "idle":
+        return str(message or "Search flights to see live fares.")
+    if status_text == "validation_error":
+        return str(message or "Check your search details and try again.")
+    if status_text == "ok":
+        return str(message or "No live fares found for these dates. Try changing the date, destination airport, or cabin.")
+    return "We couldn't complete this flight search right now. Try again in a moment or adjust your dates or cabin."
 
 
 def _time_from_iso(value):
@@ -4217,6 +4255,10 @@ def render():
             search_allowed, search_wait = _rate_limit_action("flight_search_rate_limit", FLIGHT_SEARCH_RATE_LIMIT_SECONDS)
             if not search_allowed:
                 rate_limit_error = f"Please wait {search_wait:.0f}s before searching again."
+        if not validation_errors and not rate_limit_error:
+            public_allowed, public_limit_message = _public_search_limit_allowed()
+            if not public_allowed:
+                rate_limit_error = public_limit_message
         if validation_errors or rate_limit_error:
             message = validation_errors[0] if validation_errors else rate_limit_error
             if validation_errors:
@@ -4549,9 +4591,12 @@ def render():
 
     if not offers:
         status = str((debug_payload or {}).get("status") or "").lower()
-        if status == "not_configured":
-            empty_title = "Duffel key missing"
-            empty_message = "Duffel API key not configured."
+        if _public_flights_only() and status != "idle":
+            empty_title = "Flight search unavailable" if status == "not_configured" else "Search problem"
+            empty_message = _public_flight_error_message(status, (debug_payload or {}).get("message"))
+        elif status == "not_configured":
+            empty_title = "Flight search unavailable"
+            empty_message = "Flight search is temporarily unavailable. Please try again later."
         elif status == "idle":
             st.markdown(
                 """
@@ -4579,8 +4624,8 @@ def render():
                 or "No live fares found for these dates. Try changing the date, destination airport, or cabin."
             )
         else:
-            empty_title = "Duffel API error"
-            empty_message = (debug_payload or {}).get("message") or "Duffel is unavailable right now."
+            empty_title = "Search problem"
+            empty_message = "We couldn't complete this flight search right now. Try again in a moment or adjust your dates or cabin."
         if empty_title:
             st.info(f"{empty_title}: {empty_message}")
         total_time = time.perf_counter() - search_to_results_start if search_to_results_start else 0
