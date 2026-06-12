@@ -10,7 +10,7 @@ Status: 🔴 Draft / Early
 > ⚠️ First draft — needs refinement after idea definition sessions.
 
 **[Working Draft]**
-*"Most travelers spend more time planning their trip than enjoying it. TravelGrab is an AI-powered travel composer that takes your preferences — budget, style, pace, interests — and builds personalized itinerary options you can compare, refine, and book. Not a search engine. Not a generic itinerary. A trip that's actually yours."*
+*"Planning a trip takes the average person 16+ hours of tabs, comparisons, and second-guessing. TravelGrab Gives that time back. TravelGrab is an AI-powered travel composer that takes your preferences — budget, style, pace, interests — and builds personalized itinerary options you can compare, refine, and book. Not a search engine. Not a generic itinerary. A trip that's actually yours."*
 
 ---
 
