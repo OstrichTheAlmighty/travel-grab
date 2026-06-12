@@ -427,6 +427,78 @@ def _airport_search_combinations(origin_airports, destination_airports, return_o
     return resolved[:max_attempts]
 
 
+_AIRLINE_IATA_MAP = {
+    # Longer / more-specific names first — iteration sorts by length descending
+    # so "air canada" is matched before the short key "ana" (which is a substring of "canada")
+    "swiss international air lines": "LX",
+    "china eastern airlines": "MU",
+    "china southern airlines": "CZ",
+    "singapore airlines": "SQ",
+    "malaysia airlines": "MH",
+    "turkish airlines": "TK",
+    "austrian airlines": "OS",
+    "american airlines": "AA",
+    "alaska airlines": "AS",
+    "united airlines": "UA",
+    "qatar airways": "QR",
+    "british airways": "BA",
+    "japan airlines": "JL",
+    "virgin atlantic": "VS",
+    "air new zealand": "NZ",
+    "etihad airways": "EY",
+    "garuda indonesia": "GA",
+    "aegean airlines": "A3",
+    "royal jordanian": "RJ",
+    "tap air portugal": "TP",
+    "thai airways": "TG",
+    "korean air": "KE",
+    "delta air lines": "DL",
+    "all nippon airways": "NH",
+    "jetblue airways": "B6",
+    "southwest airlines": "WN",
+    "air france": "AF",
+    "air canada": "AC",
+    "air china": "CA",
+    "cathay pacific": "CX",
+    "china eastern": "MU",
+    "china southern": "CZ",
+    "aer lingus": "EI",
+    "lufthansa": "LH",
+    "finnair": "AY",
+    "iberia": "IB",
+    "qantas": "QF",
+    "emirates": "EK",
+    "american": "AA",
+    "etihad": "EY",
+    "jetblue": "B6",
+    "southwest": "WN",
+    "singapore": "SQ",
+    "malaysia": "MH",
+    "garuda": "GA",
+    "turkish": "TK",
+    "aegean": "A3",
+    "swiss": "LX",
+    "united": "UA",
+    "alaska": "AS",
+    "delta": "DL",
+    "qatar": "QR",
+    "klm": "KL",
+    "tap": "TP",
+    "thai": "TG",
+    "all nippon": "NH",
+    "el al": "LY",
+    # Short names / ICAO-style abbreviations Duffel occasionally returns
+    "jal": "JL",
+    "ana": "NH",
+    "aal": "AA",
+    "ual": "UA",
+    "dal": "DL",
+}
+# Pre-sort by key length descending so longer (more specific) patterns win
+# over short substrings that could false-match (e.g. "ana" inside "air canada")
+_AIRLINE_IATA_SORTED = sorted(_AIRLINE_IATA_MAP.items(), key=lambda x: -len(x[0]))
+
+
 def _airline_code(airline, flight_number):
     flight = str(flight_number or "").strip()
     if flight:
@@ -434,37 +506,32 @@ def _airline_code(airline, flight_number):
         if code:
             return code
     airline_l = str(airline or "").lower()
-    known_codes = {
-        "american": "AA",
-        "british airways": "BA",
-        "japan airlines": "JL",
-        "all nippon": "NH",
-        "ana": "NH",
-        "united": "UA",
-        "delta": "DL",
-        "alaska": "AS",
-        "jetblue": "B6",
-        "southwest": "WN",
-        "air canada": "AC",
-        "lufthansa": "LH",
-        "air france": "AF",
-        "klm": "KL",
-        "emirates": "EK",
-        "qatar": "QR",
-        "singapore": "SQ",
-        "korean air": "KE",
-    }
-    for name, code in known_codes.items():
+    for name, code in _AIRLINE_IATA_SORTED:
         if name in airline_l:
             return code
-    if "japan" in airline_l:
-        return "JL"
-    if "ana" in airline_l or "all nippon" in airline_l:
-        return "NH"
-    if "united" in airline_l:
-        return "UA"
     initials = "".join(word[0] for word in re.findall(r"[A-Za-z]+", str(airline or ""))[:2]).upper()
     return initials or "AIR"
+
+
+def _airline_logo_html(airline_name, iata_code, fallback_initials):
+    """Returns .flight-logo div HTML: real logo from gstatic CDN with initials fallback.
+
+    Logs airline → code → URL so mismatches are visible in Streamlit server output.
+    On onerror the <img> is removed from the DOM, revealing the fallback span.
+    """
+    url = f"https://www.gstatic.com/flights/airline_logos/70px/{iata_code}.png"
+    print(
+        f"[TravelGrab] airline_logo: airline={airline_name!r} "
+        f"iata_code={iata_code!r} url={url}",
+        flush=True,
+    )
+    return (
+        f'<div class="flight-logo">'
+        f'<img src="{url}" class="flight-logo-img" loading="lazy" alt=""'
+        f' onerror="this.remove()" />'
+        f'<span class="flight-logo-fallback">{html.escape(fallback_initials)}</span>'
+        f'</div>'
+    )
 
 
 def _normalize_duffel_flight(flight, adults):
@@ -3607,12 +3674,20 @@ def render():
         }
         .flight-logo-img {
             position: absolute;
-            inset: 3px;
-            width: calc(100% - 6px);
-            height: calc(100% - 6px);
+            inset: 0;
+            width: 100%;
+            height: 100%;
             object-fit: contain;
-            border-radius: 9px;
-            transition: opacity 0.15s;
+            padding: 5px;
+            border-radius: inherit;
+            /* Opaque background ensures the img covers the fallback initials
+               even for transparent-PNG airline logos */
+            background: linear-gradient(145deg, rgba(129,140,248,0.22), rgba(56,189,248,0.09));
+        }
+        .flight-logo-fallback {
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 0.6px;
         }
         .flight-airline {
             color: #fff;
@@ -4944,14 +5019,10 @@ def render():
                 rec_hero_banner,
                 '<div class="flight-card-top">',
                 '<div class="flight-airline-wrap">',
-                (
-                    f'<div class="flight-logo">'
-                    f'<img src="https://www.gstatic.com/flights/airline_logos/70px/{airline_code}.png"'
-                    f' class="flight-logo-img" loading="lazy"'
-                    f' onload="this.nextElementSibling.style.display=\'none\'"'
-                    f' onerror="this.style.display=\'none\'" />'
-                    f'<span>{airline_code}</span>'
-                    f'</div>'
+                _airline_logo_html(
+                    str(offer.get("airline") or ""),
+                    airline_code,
+                    airline_code,
                 ),
                 "<div>",
                 f'<div class="flight-airline">{html.escape(str(offer.get("airline") or "Airline"))}</div>',
