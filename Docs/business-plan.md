@@ -7,7 +7,7 @@ Status: 🔴 Skeleton / Not Started
 
 ## 1. Overview
 
-*One paragraph summary of the business — link to pitch.md for narrative.*
+TravelGrab is an AI-powered travel planning platform that helps travelers search real flights, get preference-scored recommendations, and build a day-by-day itinerary — cutting the average trip planning time from 16+ hours down to _(target time-to-plan to be defined based on user testing)_. The platform is built for _(primary customer segment to be confirmed)_ who want a personalized recommendation layer on top of live flight and activity data, without the noise of a generic search engine. Revenue will come from _(revenue model to be decided — see Section 2)_, with an initial go-to-market focused on _(beachhead channel and audience to be defined — see Section 3)_. The long-term moat is a preference model that improves with every trip planned, compounding into a data advantage that _(scale threshold and competitive defensibility to be defined)_ OTAs will find hard to replicate.
 
 ---
 
