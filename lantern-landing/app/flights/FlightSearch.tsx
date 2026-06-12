@@ -2,7 +2,6 @@
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import type { FlightOffer } from "@/app/api/flights/search/route";
 
 // ── Airport data ──────────────────────────────────────────────────────────────
 
@@ -90,6 +89,35 @@ type Airport = (typeof AIRPORTS)[0];
 type TripType = "roundtrip" | "oneway";
 type CabinClass = "economy" | "premium_economy" | "business" | "first";
 type SearchState = "idle" | "loading" | "results" | "error";
+
+interface FlightOffer {
+  airline: string;
+  airline_code: string;
+  flight_number: string;
+  origin: string;
+  destination: string;
+  depart_time: string;
+  arrive_time: string;
+  duration: string;
+  stops: number;
+  stop_label: string;
+  cabin: string;
+  baggage: string;
+  price_total: number;
+  price_per_person: number;
+  currency: string;
+  ai_score: number;
+  score_breakdown: Record<string, number>;
+  recommendation_label: string;
+  recommendation_why: string;
+  recommendation_bullets: string[];
+  is_recommended: boolean;
+  arrival_timing: string;
+  jet_lag: string;
+  travel_fatigue: string;
+  city_access: string;
+  aircraft_comfort: string;
+}
 
 interface SearchMeta {
   origin: string;
@@ -364,13 +392,15 @@ function FlightCard({ offer }: { offer: FlightOffer }) {
 
       {/* Indicators */}
       <div className="flex flex-wrap gap-x-4 gap-y-1.5 mb-4">
-        {[
-          ["Arrival", offer.arrival_timing],
-          ["Jet lag", offer.jet_lag],
-          ["Fatigue", offer.travel_fatigue],
-          ["City access", offer.city_access],
-          ["Comfort", offer.aircraft_comfort],
-        ].filter(([, v]) => v).map(([label, val]) => (
+        {(
+          [
+            ["Arrival", offer.arrival_timing],
+            ["Jet lag", offer.jet_lag],
+            ["Fatigue", offer.travel_fatigue],
+            ["City access", offer.city_access],
+            ["Comfort", offer.aircraft_comfort],
+          ] as [string, string][]
+        ).filter(([, v]) => v).map(([label, val]) => (
           <div key={label} className="flex items-center gap-1.5">
             <span className="text-xs text-white/35">{label}</span>
             <span className={`text-xs font-semibold ${indicatorColor(val)}`}>{val}</span>
