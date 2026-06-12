@@ -1,8 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-
-const CTA_URL = "https://byable-flights.streamlit.app";
+import { BRAND_NAME, PUBLIC_FLIGHTS_URL } from "@/lib/brand";
 
 const features = [
   {
@@ -18,7 +17,7 @@ const features = [
   {
     icon: "🏙️",
     title: "Airport tradeoff analysis",
-    desc: "JFK, EWR, or LGA? Byable weighs the price gap against transfer time, transit access, and terminal quality.",
+    desc: `JFK, EWR, or LGA? ${BRAND_NAME} weighs the price gap against transfer time, transit access, and terminal quality.`,
   },
   {
     icon: "💺",
@@ -85,21 +84,19 @@ export default function Page() {
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 sm:px-8 lg:px-12">
           <a href="/" className="flex items-center gap-3">
             <div className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-xl bg-gradient-to-br from-lantern-mint to-lantern-blue shadow-[0_0_28px_rgba(119,167,255,0.28)]">
-              <span className="text-sm font-black text-ink">B</span>
+              <span className="text-sm font-black text-ink">{BRAND_NAME.charAt(0)}</span>
             </div>
-            <span className="text-sm font-bold tracking-tight text-white">Byable</span>
+            <span className="text-sm font-bold tracking-tight text-white">{BRAND_NAME}</span>
           </a>
 
           <nav className="hidden items-center gap-8 text-sm text-white/60 md:flex">
-            <a href="#why" className="transition hover:text-white">Why Byable</a>
+            <a href="#why" className="transition hover:text-white">Why {BRAND_NAME}</a>
             <a href="#features" className="transition hover:text-white">Features</a>
             <a href="#waitlist" className="transition hover:text-white">Waitlist</a>
           </nav>
 
           <a
-            href={CTA_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={PUBLIC_FLIGHTS_URL}
             className="rounded-full bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-lantern-mint"
           >
             Try Flight Search
@@ -139,16 +136,14 @@ export default function Page() {
           </h1>
 
           <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-white/62 sm:text-xl">
-            Byable compares price, layovers, timing, airlines, airports, and comfort
+            {BRAND_NAME} compares price, layovers, timing, airlines, airports, and comfort
             to explain which flight is actually worth booking.
           </p>
 
           {/* CTAs */}
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <a
-              href={CTA_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={PUBLIC_FLIGHTS_URL}
               className="inline-flex h-14 items-center gap-2 rounded-full bg-gradient-to-r from-lantern-mint to-lantern-blue px-8 text-sm font-bold text-ink shadow-glow transition hover:scale-[1.02] hover:opacity-90 active:scale-[0.98]"
             >
               <svg
@@ -263,7 +258,7 @@ export default function Page() {
             {/* left: copy */}
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-lantern-blue">
-                Why Byable
+                Why {BRAND_NAME}
               </p>
               <h2 className="mt-4 text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl">
                 Cheapest is not<br className="hidden sm:block" /> always best.
@@ -271,7 +266,7 @@ export default function Page() {
               <p className="mt-6 text-lg leading-relaxed text-white/60">
                 Sorting by price is a starting point, not a strategy.
                 Every cheap fare has hidden costs — layover risk, red-eye arrivals,
-                distant airports, cramped aircraft, or unreliable airlines. Byable
+                distant airports, cramped aircraft, or unreliable airlines. {BRAND_NAME}{" "}
                 surfaces those tradeoffs and explains them in plain English before
                 you book.
               </p>
@@ -303,7 +298,7 @@ export default function Page() {
             Everything you need<br /> to book smart.
           </h2>
           <p className="mt-5 max-w-lg text-lg text-white/56">
-            Stop comparing tabs. Byable reads the tradeoffs and tells you exactly
+            Stop comparing tabs. {BRAND_NAME} reads the tradeoffs and tells you exactly
             what you&apos;re paying for.
           </p>
 
@@ -330,9 +325,7 @@ export default function Page() {
                 No account. No credit card. Just search.
               </p>
               <a
-                href={CTA_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={PUBLIC_FLIGHTS_URL}
                 className="mt-6 inline-flex h-10 items-center rounded-full bg-white px-5 text-sm font-bold text-ink transition hover:bg-lantern-mint"
               >
                 Try Flight Search →
@@ -415,7 +408,7 @@ export default function Page() {
                     Join the waitlist
                   </button>
                   <p className="text-center text-xs text-white/30">
-                    We use your email only to notify you about Byable updates.
+                    We use your email only to notify you about {BRAND_NAME} updates.
                   </p>
                 </form>
               )}
@@ -429,15 +422,15 @@ export default function Page() {
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6">
           <div className="flex items-center gap-3">
             <div className="grid h-7 w-7 place-items-center rounded-lg bg-gradient-to-br from-lantern-mint to-lantern-blue">
-              <span className="text-xs font-black text-ink">B</span>
+              <span className="text-xs font-black text-ink">{BRAND_NAME.charAt(0)}</span>
             </div>
-            <span className="text-sm font-semibold text-white/70">Byable</span>
+            <span className="text-sm font-semibold text-white/70">{BRAND_NAME}</span>
           </div>
           <p className="text-sm text-white/36">
-            © {new Date().getFullYear()} Byable. Built for travelers who want more than the cheapest fare.
+            © {new Date().getFullYear()} {BRAND_NAME}. Built for travelers who want more than the cheapest fare.
           </p>
           <nav className="flex gap-6 text-sm text-white/44" aria-label="Footer">
-            <a href={CTA_URL} target="_blank" rel="noopener noreferrer" className="transition hover:text-white">
+            <a href={PUBLIC_FLIGHTS_URL} className="transition hover:text-white">
               Flight Search
             </a>
             <a href="#features" className="transition hover:text-white">Features</a>
