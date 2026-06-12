@@ -1,16 +1,14 @@
 # The Pitch
 
-Last updated: 2026-06-03
+Last updated: 2026-06-11
 Status: 🔴 Draft / Early
 
 ---
 
 ## Elevator Pitch
 
-> ⚠️ First draft — needs refinement after idea definition sessions.
-
 **[Working Draft]**
-*"Planning a trip takes the average person 16+ hours of tabs, comparisons, and second-guessing. TravelGrab Gives that time back. TravelGrab is an AI-powered travel composer that takes your preferences — budget, style, pace, interests — and builds personalized itinerary options you can compare, refine, and book. Not a search engine. Not a generic itinerary. A trip that's actually yours."*
+*"Planning a trip takes the average person 16+ hours of tabs, comparisons, and second-guessing. TravelGrab gives that time back. Tell us your priorities — nonstop vs. price, cabin comfort, arrival time, what you want to do — and TravelGrab searches real flights, scores every option against your preferences, and builds a day-by-day itinerary you can edit and hand off to booking. Not just a search engine. A recommendation layer that actually knows what matters to you."*
 
 ---
 
@@ -18,25 +16,24 @@ Status: 🔴 Draft / Early
 
 - Planning a trip is time-consuming, fragmented, and generic.
 - OTAs optimise for inventory sell-through, not traveler fit.
-- AI tools exist but lack deep personalization + actionable booking outputs.
-- Group travel coordination is a known pain point with no good solution.
+- Search tools return results — they don't make recommendations. Travelers still do all the deciding.
 
 ---
 
 ## Solution
 
 An AI-powered platform where travelers:
-1. Express their preferences (budget, travel style, experience type, dates, constraints)
-2. Get one or more AI-composed itinerary variations — each a curated, coherent trip rather than a generic search list
-3. Review and compare the variations, then add new criteria to refine further — iterating until one fits
-4. Book the aligned itinerary directly or hand it off to an agent
+1. Set their priorities — price, nonstop routing, cabin class, arrival time, activity type, trip style
+2. Search real flights and get AI-scored recommendations (0–99) with a breakdown by price value, convenience, flexibility, and arrival timing
+3. Browse curated hotel neighborhoods and activity options pulled from live data
+4. Get a auto-scheduled day-by-day itinerary they can edit, then hand off to booking
 
 ---
 
 ## Why Now
 
 - LLMs have crossed the quality threshold for nuanced preference matching
-- Travel API ecosystem (Amadeus, Viator, Booking.com) now accessible to startups
+- Travel API ecosystem (Duffel, Google Places) now accessible to startups at low cost
 - Post-pandemic travel demand is sustained and experience-hungry
 - Consumer trust in AI recommendations is rising (Spotify, Netflix playbook)
 
@@ -45,7 +42,7 @@ An AI-powered platform where travelers:
 ## Target User
 
 *Primary:* Experience-seeking travelers, 18+, who want great trips without hours of planning.
-*Secondary:* Group trip organizers; travel agencies wanting an AI-powered front-end.
+*Secondary:* Travel agencies wanting an AI-powered recommendation front-end.
 
 ---
 
@@ -78,10 +75,26 @@ Options under consideration:
 
 ---
 
+## What's Built vs. What's Next
+
+**Built:**
+- Real flight search via Duffel API with AI preference scoring (0–99)
+- Trip fatigue and jet lag analysis per flight option
+- Hotel neighborhood browsing (curated: Tokyo, Paris; template-based: all other cities)
+- Activity search via Google Places with category filtering
+- Auto-scheduled day-by-day itinerary planner with meal placement and proximity ordering
+
+**Next milestones:**
+- Direct booking / checkout integration
+- Expanded curated city coverage beyond Tokyo and Paris
+- Group trip coordination
+
+---
+
 ## One-Liner Variants
 
 Track short-form options here as they're developed:
 
 1. *"Your AI travel agent that actually knows you."*
-2. *"Stop searching. Start composing."*
+2. *"Stop searching. Start deciding."*
 3. *"Tell us how you travel. We'll build the trip."*
