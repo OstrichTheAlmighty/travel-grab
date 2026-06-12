@@ -2939,7 +2939,7 @@ def _modal_route_line(flight_slice):
     )
 
 
-def render_flight_details_modal(offer, recommendation=None, return_mode="Same as destination", origin_label="", destination_label="", return_origin_label=""):
+def render_flight_details_modal(offer, recommendation=None, return_mode="Same as destination", origin_label="", destination_label="", return_origin_label="", watch_out_items=None):
     recommendation = recommendation or {}
     ai_copy = recommendation.get("ai_advisor_copy") or {}
     route_details = offer.get("route_details") or []
@@ -2979,6 +2979,15 @@ def render_flight_details_modal(offer, recommendation=None, return_mode="Same as
     aircraft_summary = _unique_summary(aircraft_types)
     if aircraft_summary != "Not available":
         st.caption(f"Aircraft: {aircraft_summary}")
+
+    meaningful_watch_outs = [
+        item for item in (watch_out_items or [])
+        if item and "no major downside" not in str(item).lower()
+    ]
+    if meaningful_watch_outs:
+        st.markdown("#### Watch out")
+        for item in meaningful_watch_outs[:3]:
+            st.caption(f"- {item}")
 
     st.markdown("#### Fare rules")
     available_conditions = [
@@ -3543,6 +3552,38 @@ def render():
             0%, 100% { opacity: 0.42; transform: scale(0.88); }
             50% { opacity: 1; transform: scale(1.18); }
         }
+        .flight-trip-summary {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 4px 10px;
+            padding: 8px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.07);
+            background: rgba(255,255,255,0.028);
+            color: rgba(255,255,255,0.52);
+            font-size: 12px;
+            margin: 0 0 10px;
+        }
+        .flight-trip-summary .fts-label {
+            color: rgba(255,255,255,0.30);
+            text-transform: uppercase;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            margin-right: 3px;
+        }
+        .flight-trip-summary .fts-val {
+            color: rgba(255,255,255,0.72);
+            font-weight: 700;
+        }
+        .flight-trip-summary .fts-sep {
+            color: rgba(255,255,255,0.18);
+        }
+        .flight-trip-summary .fts-note {
+            color: rgba(255,255,255,0.32);
+            font-style: italic;
+        }
         .flight-card-native {
             width: 100%;
             border-radius: 18px;
@@ -3550,8 +3591,8 @@ def render():
             background:
                 linear-gradient(145deg, rgba(255,255,255,0.055), rgba(255,255,255,0.018)),
                 rgba(7,9,15,0.92);
-            padding: 16px 18px;
-            margin: 0 0 10px;
+            padding: 10px 14px;
+            margin: 0 0 8px;
             box-shadow: 0 14px 36px rgba(0,0,0,0.14);
             transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
         }
@@ -3569,7 +3610,7 @@ def render():
             box-shadow: 0 0 0 1px rgba(129,140,248,0.18), 0 24px 60px rgba(49,46,129,0.26);
         }
         .flight-card-native.recommended {
-            padding: 20px 22px;
+            padding: 12px 16px;
             border-color: rgba(251,191,36,0.32);
             background:
                 radial-gradient(ellipse at top left, rgba(245,158,11,0.09), transparent 52%),
@@ -3588,66 +3629,46 @@ def render():
             background: linear-gradient(145deg, rgba(245,158,11,0.24), rgba(251,191,36,0.09));
             border-color: rgba(251,191,36,0.26);
         }
-        .flight-rec-hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            background: linear-gradient(135deg, rgba(245,158,11,0.20), rgba(251,191,36,0.09));
-            border: 1px solid rgba(251,191,36,0.40);
-            border-radius: 10px;
-            color: #fcd34d;
-            padding: 8px 14px;
-            font-size: 12px;
-            font-weight: 900;
-            letter-spacing: 0.07em;
-            text-transform: uppercase;
-            margin-bottom: 14px;
-        }
-        .flight-airline-summary {
-            color: rgba(253,211,77,0.68);
-            font-size: 12px;
-            font-weight: 500;
-            font-style: italic;
-            margin-top: 3px;
-            line-height: 1.35;
-        }
         .flight-card-native.compact {
-            padding: 12px 14px;
-        }
-        .flight-card-native.compact .flight-card-top {
-            margin-bottom: 8px;
-        }
-        .flight-card-native.compact .flight-route {
-            margin-bottom: 8px;
-        }
-        .flight-card-native.compact .flight-card-footer {
-            margin-top: 8px;
+            padding: 10px 14px;
         }
         .flight-impact-inline {
             display: flex;
-            gap: 8px;
+            gap: 5px;
             flex-wrap: wrap;
-            margin: 8px 0;
-            color: rgba(255,255,255,0.62);
-            font-size: 12px;
-            line-height: 1.3;
+            margin: 6px 0 0;
+            color: rgba(255,255,255,0.52);
+            font-size: 11px;
+            line-height: 1.25;
         }
         .flight-impact-inline span {
-            border: 1px solid rgba(255,255,255,0.08);
-            background: rgba(255,255,255,0.035);
+            border: 1px solid rgba(255,255,255,0.07);
+            background: rgba(255,255,255,0.028);
             border-radius: 999px;
-            padding: 5px 8px;
+            padding: 3px 7px;
             white-space: nowrap;
         }
         .flight-impact-inline strong {
-            color: rgba(255,255,255,0.88);
+            color: rgba(255,255,255,0.82);
+        }
+        .flight-rec-badge.rec-top-pick {
+            background: linear-gradient(135deg, rgba(245,158,11,0.20), rgba(251,191,36,0.08));
+            border: 1px solid rgba(251,191,36,0.36);
+            color: #fcd34d;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+        }
+        .flight-rec-badge.warn-badge {
+            background: rgba(251,191,36,0.07);
+            border: 1px solid rgba(251,191,36,0.14);
+            color: rgba(253,230,138,0.80);
         }
         .flight-card-top {
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            gap: 16px;
-            margin-bottom: 12px;
+            gap: 14px;
+            margin-bottom: 8px;
         }
         .flight-airline-wrap {
             display: flex;
@@ -4822,6 +4843,31 @@ def render():
     )
     detail_modal_key = st.session_state.get("selected_flight_for_details", "")
 
+    # ── Shared trip summary bar ────────────────────────────────────────────────
+    _first = visible_offers[0]
+    _trip_type = "Open-jaw" if return_mode == "Different city" else "Round trip"
+    if return_mode == "Different city":
+        _route_text = f"{origin_label} ↔ {destination_label} / {return_origin_label}"
+    else:
+        _route_text = f"{origin_label} ↔ {destination_label}"
+    _cabin_text = html.escape(str(_first.get("cabin") or "Economy"))
+    _currency_text = html.escape(str(_first.get("currency") or "USD"))
+    st.markdown(
+        f'<div class="flight-trip-summary">'
+        f'<span><span class="fts-label">Route</span><span class="fts-val">{html.escape(_route_text)}</span></span>'
+        f'<span class="fts-sep">·</span>'
+        f'<span><span class="fts-label">Type</span><span class="fts-val">{_trip_type}</span></span>'
+        f'<span class="fts-sep">·</span>'
+        f'<span><span class="fts-label">Cabin</span><span class="fts-val">{_cabin_text}</span></span>'
+        f'<span class="fts-sep">·</span>'
+        f'<span><span class="fts-label">Currency</span><span class="fts-val">{_currency_text}</span></span>'
+        f'<span class="fts-sep">·</span>'
+        f'<span class="fts-note">Baggage varies — see flight details</span>'
+        f'</div>',
+        unsafe_allow_html=True,
+    )
+    # ── End trip summary bar ───────────────────────────────────────────────────
+
     for index, offer in enumerate(visible_offers):
         is_selected = index == selected_index
         is_recommended = _flight_key(offer) == _flight_key(best_offer)
@@ -4841,182 +4887,40 @@ def render():
         )
         if not badge_html:
             badge_html = f'<span class="flight-rec-badge">{html.escape(str(recommendation.get("label") or "Best value"))}</span>'
-        rec_hero_banner = (
-            '<div class="flight-rec-hero-badge">🏆 TravelGrab Recommended</div>'
-            if is_recommended
-            else ""
-        )
-        airline_summary_html = (
-            '<div class="flight-airline-summary">Best balance of price, convenience, and travel time.</div>'
-            if is_recommended
-            else ""
-        )
+        # Recommended top-pick badge — injected into badge_html row, not a separate block
         score = html.escape(str(recommendation.get("score") or 75))
-        if return_mode == "Different city":
-            airport_context = (
-                f"Outbound: {origin_label} → {destination_label} · "
-                f"Return: {return_origin_label} → {origin_label}"
-            )
+        # Recommended top-pick badge + warning badge go into the badge row
+        if is_recommended:
+            badge_html = '<span class="flight-rec-badge rec-top-pick">🏆 #1 Pick</span>' + badge_html
         else:
-            airport_context = f"{origin_label} → {destination_label}"
-        cabin_chip = html.escape(str(offer.get("cabin") or "Economy"))
-        detail_chips = [
-            "Round trip",
-            html.escape(airport_context),
-            cabin_chip,
-            html.escape(str(offer.get("currency") or "USD")),
-        ]
-        if return_mode == "Different city":
-            detail_chips.insert(1, "Open-jaw return")
-        if offer.get("baggage"):
-            detail_chips.append(f"Baggage: {html.escape(str(offer.get('baggage')))}")
-        chips_html = "".join(
-            f'<span class="flight-chip{" primary" if chip == cabin_chip else ""}">{chip}</span>'
-            for chip in detail_chips
-            if chip
-        )
-        if not is_recommended:
-            warning_chip = _watch_out_chip_text(offer, visible_offers)
-            if warning_chip:
-                chips_html += f'<span class="flight-chip warning">Watch out: {html.escape(warning_chip)}</span>'
+            warning_text = _watch_out_chip_text(offer, visible_offers)
+            if warning_text:
+                badge_html += f'<span class="flight-rec-badge warn-badge">⚠ {html.escape(warning_text)}</span>'
+
+        # 4-indicator impact row shown on all cards; Comfort moved to detail modal
         impact = _trip_impact(offer, visible_offers)
-        impact_rows = [
-            ("Arrival Timing", impact["arrival_timing"]),
-            ("Jet lag", impact["jet_lag"]),
-            ("Fatigue", impact["travel_fatigue"]),
-        ]
-        if impact.get("city_access"):
-            impact_rows.append(("City Access", impact["city_access"]))
-        if impact.get("aircraft_comfort"):
-            aircraft_type = impact.get("aircraft_type")
-            aircraft_value = impact["aircraft_comfort"]
-            if aircraft_type:
-                aircraft_value = f'{aircraft_value}<br><span>({html.escape(str(aircraft_type))})</span>'
-            impact_rows.append(("Aircraft Comfort Estimate", aircraft_value))
-        impact_html = "".join(
-            f'<div><span>{html.escape(label)}:</span> <strong>{value if label == "Aircraft Comfort Estimate" else html.escape(value)}</strong></div>'
-            for label, value in impact_rows
-        )
-        aircraft_inline = impact.get("aircraft_comfort") or "Unknown"
         impact_inline_html = "".join(
             [
                 '<div class="flight-impact-inline">',
                 f'<span>Arrival: <strong>{html.escape(str(impact["arrival_timing"]))}</strong></span>',
                 f'<span>Jet lag: <strong>{html.escape(str(impact["jet_lag"]))}</strong></span>',
                 f'<span>Fatigue: <strong>{html.escape(str(impact["travel_fatigue"]))}</strong></span>',
-                f'<span>City access: <strong>{html.escape(str(impact.get("city_access") or "Unknown"))}</strong></span>',
-                f'<span>Comfort: <strong>{html.escape(str(aircraft_inline))}</strong></span>',
+                f'<span>City access: <strong>{html.escape(str(impact.get("city_access") or "—"))}</strong></span>',
                 "</div>",
             ]
         )
-        impact_reason_source = (
-            (recommendation.get("ai_advisor_copy") or {}).get("trip_impact_why")
-            if is_recommended
-            else None
-        )
-        comfort_reason = next(
-            (
-                reason
-                for reason in impact["reasons"]
-                if any(term in reason.lower() for term in ("comfort", "widebody", "narrowbody", "aircraft type"))
-            ),
-            "",
-        )
-        jet_lag_reason = next(
-            (
-                reason
-                for reason in impact["reasons"]
-                if any(term in reason.lower() for term in ("jet lag", "body-clock", "timezone"))
-            ),
-            "",
-        )
-        fatigue_reason = next(
-            (
-                reason
-                for reason in impact["reasons"]
-                if "travel fatigue" in reason.lower()
-            ),
-            "",
-        )
-        priority_reasons = [reason for reason in (jet_lag_reason, fatigue_reason, comfort_reason) if reason]
-        fallback_reasons = priority_reasons + [
-            reason for reason in impact["reasons"] if reason not in priority_reasons
-        ]
-        if impact_reason_source:
-            source_terms = " ".join(str(reason).lower() for reason in impact_reason_source)
-            if jet_lag_reason and not any(term in source_terms for term in ("jet lag", "body-clock", "timezone")):
-                impact_reason_source = [jet_lag_reason] + list(impact_reason_source)
-            source_terms = " ".join(str(reason).lower() for reason in impact_reason_source)
-            if fatigue_reason and "travel fatigue" not in source_terms:
-                impact_reason_source = [fatigue_reason] + list(impact_reason_source)
-            source_terms = " ".join(str(reason).lower() for reason in impact_reason_source)
-            if comfort_reason and not any(term in source_terms for term in ("comfort", "widebody", "narrowbody", "aircraft type")):
-                impact_reason_source = [comfort_reason] + list(impact_reason_source)
-        impact_reason_source = impact_reason_source or fallback_reasons
-        impact_reason_limit = 3 if is_recommended else 2
-        impact_bullets = "".join(
-            f"<li>{html.escape(bullet)}</li>"
-            for bullet in impact_reason_source[:impact_reason_limit]
-        )
-        if is_recommended:
-            trip_impact_html = ""
-        else:
-            trip_impact_html = impact_inline_html
+
+        # Store computed watch-out list keyed by flight so detail modal can read it
         watch_out_source = (
             (recommendation.get("ai_advisor_copy") or {}).get("watch_out")
-            if is_recommended
-            else None
-        ) or _watch_out_copy(offer, visible_offers)
-        watch_out_source = _clean_watch_out_items(watch_out_source, offer, visible_offers)
-        watch_out_items = "".join(
-            f"<li>{html.escape(item)}</li>"
-            for item in watch_out_source[:2]
+            or _watch_out_copy(offer, visible_offers)
         )
-        watch_out_html = ""
-        meaningful_watch_out = [
-            item for item in watch_out_source[:2]
-            if "no major downside" not in str(item).lower()
-        ]
-        if is_recommended and meaningful_watch_out:
-            watch_out_items = "".join(
-                f"<li>{html.escape(item)}</li>"
-                for item in meaningful_watch_out
-            )
-            watch_out_html = "".join(
-                [
-                    '<div class="flight-card-recommendation compact">',
-                    '<div class="flight-card-rec-kicker">Watch out</div>',
-                    f'<ul class="flight-card-rec-list">{watch_out_items}</ul>',
-                    "</div>",
-                ]
-            )
-        recommendation_html = ""
-        if is_recommended:
-            bullet_html = "".join(
-                f"<li>{html.escape(bullet)}</li>"
-                for bullet in advisor_bullets[:3]
-            )
-            trip_impact_bullet_html = "".join(
-                f"<li>{html.escape(bullet)}</li>"
-                for bullet in impact_reason_source[:2]
-                if bullet
-            )
-            recommendation_html = "".join(
-                [
-                    '<div class="flight-card-recommendation">',
-                    '<div class="flight-card-rec-kicker">Recommended flight</div>',
-                    f'<div class="flight-card-rec-copy">{html.escape(recommendation_summary)}</div>',
-                    '<div class="flight-card-rec-kicker why">Why this</div>',
-                    f'<ul class="flight-card-rec-list">{bullet_html}</ul>',
-                    f'<div class="flight-card-impact-grid">{impact_html}</div>',
-                    f'<ul class="flight-card-rec-list">{trip_impact_bullet_html}</ul>' if trip_impact_bullet_html else "",
-                    "</div>",
-                ]
-            )
+        watch_out_source = _clean_watch_out_items(watch_out_source, offer, visible_offers)
+        st.session_state[f"_watch_out_{_flight_key(offer)}"] = watch_out_source
+
         card_html = "".join(
             [
                 f'<div class="{card_class}">',
-                rec_hero_banner,
                 '<div class="flight-card-top">',
                 '<div class="flight-airline-wrap">',
                 _airline_logo_html(
@@ -5027,7 +4931,6 @@ def render():
                 "<div>",
                 f'<div class="flight-airline">{html.escape(str(offer.get("airline") or "Airline"))}</div>',
                 f'<div class="flight-number">{flight_number} · Duffel test fare</div>',
-                airline_summary_html,
                 f'<div class="flight-rec-row">{badge_html}</div>',
                 "</div>",
                 "</div>",
@@ -5052,13 +4955,7 @@ def render():
                 f'<div class="flight-airport">{html.escape(str(offer.get("destination") or destination_airports[0]))}</div>',
                 "</div>",
                 "</div>",
-                recommendation_html,
-                trip_impact_html,
-                watch_out_html,
-                '<div class="flight-card-footer">',
-                f'<div class="flight-chip-row">{chips_html}</div>',
-                '<div class="flight-card-actions"></div>',
-                "</div>",
+                impact_inline_html,
                 "</div>",
             ]
         )
@@ -5251,7 +5148,8 @@ def render():
 
         def _show_detail_content():
             details_start = time.perf_counter()
-            render_flight_details_modal(detail_offer, detail_rec, return_mode, origin_label, destination_label, return_origin_label)
+            _detail_watch_out = st.session_state.get(f"_watch_out_{_flight_key(detail_offer)}", [])
+            render_flight_details_modal(detail_offer, detail_rec, return_mode, origin_label, destination_label, return_origin_label, watch_out_items=_detail_watch_out)
             if st.button("Close details", key="close_flight_details"):
                 st.session_state.pop("selected_flight_for_details", None)
                 st.rerun()
