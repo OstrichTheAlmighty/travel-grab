@@ -3596,12 +3596,23 @@ def render():
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
             background: linear-gradient(145deg, rgba(129,140,248,0.22), rgba(56,189,248,0.09));
             border: 1px solid rgba(255,255,255,0.12);
             color: #e0e7ff;
             font-size: 12px;
             font-weight: 900;
             letter-spacing: 0.6px;
+        }
+        .flight-logo-img {
+            position: absolute;
+            inset: 3px;
+            width: calc(100% - 6px);
+            height: calc(100% - 6px);
+            object-fit: contain;
+            border-radius: 9px;
+            transition: opacity 0.15s;
         }
         .flight-airline {
             color: #fff;
@@ -4933,7 +4944,15 @@ def render():
                 rec_hero_banner,
                 '<div class="flight-card-top">',
                 '<div class="flight-airline-wrap">',
-                f'<div class="flight-logo">{airline_code}</div>',
+                (
+                    f'<div class="flight-logo">'
+                    f'<img src="https://www.gstatic.com/flights/airline_logos/70px/{airline_code}.png"'
+                    f' class="flight-logo-img" loading="lazy"'
+                    f' onload="this.nextElementSibling.style.display=\'none\'"'
+                    f' onerror="this.style.display=\'none\'" />'
+                    f'<span>{airline_code}</span>'
+                    f'</div>'
+                ),
                 "<div>",
                 f'<div class="flight-airline">{html.escape(str(offer.get("airline") or "Airline"))}</div>',
                 f'<div class="flight-number">{flight_number} · Duffel test fare</div>',
