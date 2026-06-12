@@ -226,6 +226,17 @@
     .search-submit-btn:hover { opacity: .92; transform: translateY(-1px); }
     .search-submit-btn:active { transform: translateY(0); opacity: 1; }
     .search-submit-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+    .demo-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+      height: 52px; padding: 0 22px; border-radius: 14px;
+      border: 1px solid rgba(143,240,199,.32); color: var(--mint);
+      font-size: .96rem; font-weight: 700; font-family: inherit;
+      background: rgba(143,240,199,.07); cursor: pointer; text-decoration: none;
+      transition: background 150ms, border-color 150ms, transform 150ms;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .demo-btn:hover { background: rgba(143,240,199,.14); border-color: rgba(143,240,199,.55); transform: translateY(-1px); }
+    .demo-btn:active { transform: translateY(0); }
     .search-error {
       margin-top: 10px; padding: 12px 16px; border-radius: 12px;
       background: rgba(239,68,68,.10); border: 1px solid rgba(239,68,68,.24);
@@ -537,12 +548,20 @@
         </div>
       </div>
 
-      <button class="search-submit-btn" id="search-btn" type="button">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
-          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-        </svg>
-        Search Flights
-      </button>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+        <button class="search-submit-btn" id="search-btn" type="button" style="flex:1;min-width:180px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          Search Flights
+        </button>
+        <a href="https://byable-flights.streamlit.app" target="_blank" rel="noopener noreferrer" class="demo-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          Open working demo
+        </a>
+      </div>
     </div><!-- /search-panel -->
 
     <div class="search-error" id="search-error" hidden role="alert" aria-live="assertive"></div>
@@ -587,6 +606,12 @@
       <div class="section-label">How TravelGrab thinks</div>
       <h2 class="how-title">More than just the lowest fare</h2>
       <p class="how-body">Enter your trip above and TravelGrab ranks every live option, then explains which flight is actually worth booking.</p>
+      <a href="https://byable-flights.streamlit.app" target="_blank" rel="noopener noreferrer" class="demo-btn" style="margin-top:20px;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+        </svg>
+        Open working demo
+      </a>
     </div>
     <div class="how-grid" role="list">
       <div class="how-card" role="listitem">
