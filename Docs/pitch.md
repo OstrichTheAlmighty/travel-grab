@@ -1,13 +1,13 @@
 # The Pitch
 
 Last updated: 2026-06-11
-Status: 🔴 Draft / Early
+Status: 🟡 Draft / Early
 
 ---
 
 ## Elevator Pitch
 
-**[Working Draft]**
+**[Almost Complete]**
 *"Planning a trip takes the average person 16+ hours of tabs, comparisons, and second-guessing. TravelGrab gives that time back. Tell us your priorities — nonstop vs. price, cabin comfort, arrival time, what you want to do — and TravelGrab searches real flights, scores every option against your preferences, and builds a day-by-day itinerary you can edit and hand off to booking. Not just a search engine. A recommendation layer that actually knows what matters to you."*
 
 ---
