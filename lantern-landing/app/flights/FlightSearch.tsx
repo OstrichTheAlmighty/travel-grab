@@ -10,9 +10,18 @@ const AIRPORTS = [
   { code: "LGA", city: "New York", name: "LaGuardia", country: "US" },
   { code: "EWR", city: "Newark", name: "Newark Liberty Intl", country: "US" },
   { code: "LAX", city: "Los Angeles", name: "Los Angeles Intl", country: "US" },
+  { code: "BUR", city: "Burbank", name: "Hollywood Burbank Airport", country: "US" },
+  { code: "LGB", city: "Long Beach", name: "Long Beach Airport", country: "US" },
+  { code: "SNA", city: "Santa Ana", name: "John Wayne Airport", country: "US" },
+  { code: "ONT", city: "Ontario", name: "Ontario Intl", country: "US" },
   { code: "SFO", city: "San Francisco", name: "San Francisco Intl", country: "US" },
+  { code: "OAK", city: "Oakland", name: "Oakland Intl", country: "US" },
+  { code: "SJC", city: "San Jose", name: "San Jose Intl", country: "US" },
   { code: "ORD", city: "Chicago", name: "O'Hare Intl", country: "US" },
   { code: "MDW", city: "Chicago", name: "Midway Intl", country: "US" },
+  { code: "DCA", city: "Washington", name: "Ronald Reagan National", country: "US" },
+  { code: "IAD", city: "Washington", name: "Dulles Intl", country: "US" },
+  { code: "BWI", city: "Baltimore", name: "Baltimore/Washington Intl", country: "US" },
   { code: "MIA", city: "Miami", name: "Miami Intl", country: "US" },
   { code: "BOS", city: "Boston", name: "Logan Intl", country: "US" },
   { code: "SEA", city: "Seattle", name: "Seattle-Tacoma Intl", country: "US" },
@@ -32,6 +41,8 @@ const AIRPORTS = [
   { code: "LHR", city: "London", name: "Heathrow", country: "GB" },
   { code: "LGW", city: "London", name: "Gatwick", country: "GB" },
   { code: "STN", city: "London", name: "Stansted", country: "GB" },
+  { code: "LCY", city: "London", name: "London City", country: "GB" },
+  { code: "LTN", city: "London", name: "Luton Airport", country: "GB" },
   { code: "CDG", city: "Paris", name: "Charles de Gaulle", country: "FR" },
   { code: "ORY", city: "Paris", name: "Orly", country: "FR" },
   { code: "AMS", city: "Amsterdam", name: "Schiphol", country: "NL" },
@@ -85,7 +96,54 @@ const AIRPORTS = [
   { code: "DEL", city: "Delhi", name: "Indira Gandhi Intl", country: "IN" },
 ];
 
+// ── Metro groups ──────────────────────────────────────────────────────────────
+
+interface MetroGroup {
+  kind: "metro";
+  id: string;
+  label: string;
+  codes: string[];
+  searchTerms: string[];
+}
+
+const METRO_GROUPS: MetroGroup[] = [
+  {
+    kind: "metro", id: "NYC", label: "New York City Area", codes: ["JFK", "LGA", "EWR"],
+    searchTerms: ["new york", "nyc", "jfk", "lga", "ewr", "newark"],
+  },
+  {
+    kind: "metro", id: "LAX_METRO", label: "Los Angeles Area", codes: ["LAX", "BUR", "LGB", "SNA", "ONT"],
+    searchTerms: ["los angeles", "la", "lax", "bur", "lgb", "sna", "ont", "burbank", "long beach", "orange county"],
+  },
+  {
+    kind: "metro", id: "SFO_METRO", label: "San Francisco Bay Area", codes: ["SFO", "OAK", "SJC"],
+    searchTerms: ["san francisco", "sf", "bay area", "sfo", "oak", "sjc", "oakland", "san jose"],
+  },
+  {
+    kind: "metro", id: "TYO", label: "Tokyo Area", codes: ["HND", "NRT"],
+    searchTerms: ["tokyo", "hnd", "nrt", "haneda", "narita"],
+  },
+  {
+    kind: "metro", id: "LON", label: "London Area", codes: ["LHR", "LGW", "STN", "LCY", "LTN"],
+    searchTerms: ["london", "lhr", "lgw", "stn", "lcy", "ltn", "heathrow", "gatwick", "stansted"],
+  },
+  {
+    kind: "metro", id: "PAR", label: "Paris Area", codes: ["CDG", "ORY"],
+    searchTerms: ["paris", "cdg", "ory", "de gaulle", "orly"],
+  },
+  {
+    kind: "metro", id: "CHI", label: "Chicago Area", codes: ["ORD", "MDW"],
+    searchTerms: ["chicago", "ord", "mdw", "ohare", "midway"],
+  },
+  {
+    kind: "metro", id: "WAS", label: "Washington DC Area", codes: ["DCA", "IAD", "BWI"],
+    searchTerms: ["washington", "dc", "dca", "iad", "bwi", "reagan", "dulles", "baltimore"],
+  },
+];
+
 type Airport = (typeof AIRPORTS)[0];
+type AirportEntry = Airport & { kind: "airport" };
+type Selection = MetroGroup | AirportEntry;
 type TripType = "roundtrip" | "oneway";
 type CabinClass = "economy" | "premium_economy" | "business" | "first";
 type SearchState = "idle" | "loading" | "results" | "error";
@@ -135,15 +193,24 @@ const CABIN_LABELS: Record<CabinClass, string> = {
   first: "First Class",
 };
 
-function searchAirports(query: string): Airport[] {
-  if (!query.trim()) return AIRPORTS.slice(0, 8);
+function selectionLabel(s: Selection): string {
+  if (s.kind === "metro") return `${s.label} · ${s.codes.join(", ")}`;
+  return `${s.code} — ${s.city}`;
+}
+
+function searchLocations(query: string): Selection[] {
+  if (!query.trim()) return METRO_GROUPS;
   const q = query.toLowerCase();
-  return AIRPORTS.filter(
+  const metroMatches = METRO_GROUPS.filter(
+    (m) => m.label.toLowerCase().includes(q) || m.searchTerms.some((t) => t.includes(q))
+  );
+  const airportMatches = AIRPORTS.filter(
     (a) =>
       a.code.toLowerCase().includes(q) ||
       a.city.toLowerCase().includes(q) ||
       a.name.toLowerCase().includes(q)
-  ).slice(0, 8);
+  ).map((a) => ({ ...a, kind: "airport" as const }));
+  return [...metroMatches, ...airportMatches].slice(0, 10);
 }
 
 // ── Score / indicator helpers ─────────────────────────────────────────────────
@@ -176,22 +243,22 @@ function AirportCombobox({
 }: {
   label: string;
   placeholder: string;
-  value: Airport | null;
-  onChange: (airport: Airport | null) => void;
+  value: Selection | null;
+  onChange: (selection: Selection | null) => void;
 }) {
-  const [inputValue, setInputValue] = useState(value ? `${value.code} — ${value.city}` : "");
-  const [suggestions, setSuggestions] = useState<Airport[]>([]);
+  const [inputValue, setInputValue] = useState(value ? selectionLabel(value) : "");
+  const [suggestions, setSuggestions] = useState<Selection[]>([]);
   const [open, setOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (!open) setInputValue(value ? `${value.code} — ${value.city}` : "");
+    if (!open) setInputValue(value ? selectionLabel(value) : "");
   }, [value, open]);
 
   const handleFocus = () => {
     setInputValue("");
-    setSuggestions(searchAirports(""));
+    setSuggestions(searchLocations(""));
     setOpen(true);
     setHighlightedIndex(-1);
   };
@@ -200,22 +267,22 @@ function AirportCombobox({
     setTimeout(() => {
       setOpen(false);
       setSuggestions([]);
-      setInputValue(value ? `${value.code} — ${value.city}` : "");
+      setInputValue(value ? selectionLabel(value) : "");
     }, 150);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const q = e.target.value;
     setInputValue(q);
-    setSuggestions(searchAirports(q));
+    setSuggestions(searchLocations(q));
     setOpen(true);
     setHighlightedIndex(-1);
   };
 
-  const selectAirport = useCallback(
-    (airport: Airport) => {
-      onChange(airport);
-      setInputValue(`${airport.code} — ${airport.city}`);
+  const selectItem = useCallback(
+    (item: Selection) => {
+      onChange(item);
+      setInputValue(selectionLabel(item));
       setOpen(false);
       setSuggestions([]);
     },
@@ -232,7 +299,7 @@ function AirportCombobox({
       setHighlightedIndex((i) => Math.max(i - 1, 0));
     } else if (e.key === "Enter" && highlightedIndex >= 0) {
       e.preventDefault();
-      selectAirport(suggestions[highlightedIndex]);
+      selectItem(suggestions[highlightedIndex]);
     } else if (e.key === "Escape") {
       setOpen(false);
     }
@@ -273,22 +340,39 @@ function AirportCombobox({
       </div>
       {open && suggestions.length > 0 && (
         <ul className="absolute z-50 mt-1.5 w-full rounded-xl border border-white/10 bg-[#0e1422] shadow-card overflow-hidden">
-          {suggestions.map((airport, i) => (
+          {suggestions.map((item, i) => (
             <li
-              key={airport.code}
-              onMouseDown={() => selectAirport(airport)}
+              key={item.kind === "metro" ? item.id : item.code}
+              onMouseDown={() => selectItem(item)}
               className={`flex items-center gap-3 px-4 py-2.5 cursor-pointer transition-colors ${
                 i === highlightedIndex ? "bg-lantern-violet/20" : "hover:bg-white/[0.06]"
               }`}
             >
-              <span className="text-xs font-bold font-mono text-lantern-blue w-8 flex-shrink-0">
-                {airport.code}
-              </span>
-              <div className="min-w-0">
-                <div className="text-sm text-white truncate">{airport.city}</div>
-                <div className="text-xs text-white/40 truncate">{airport.name}</div>
-              </div>
-              <span className="ml-auto text-xs text-white/25 flex-shrink-0">{airport.country}</span>
+              {item.kind === "metro" ? (
+                <>
+                  <span className="text-[10px] font-bold font-mono text-lantern-gold bg-lantern-gold/10 border border-lantern-gold/20 rounded px-1.5 py-0.5 flex-shrink-0 leading-tight">
+                    ALL
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-sm text-white truncate">{item.label}</div>
+                    <div className="text-xs text-white/40 truncate">All airports: {item.codes.join(", ")}</div>
+                  </div>
+                  <span className="ml-auto text-[10px] font-semibold uppercase tracking-wider text-lantern-gold/50 flex-shrink-0">
+                    metro
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="text-xs font-bold font-mono text-lantern-blue w-8 flex-shrink-0">
+                    {item.code}
+                  </span>
+                  <div className="min-w-0">
+                    <div className="text-sm text-white truncate">{item.city}</div>
+                    <div className="text-xs text-white/40 truncate">{item.name}</div>
+                  </div>
+                  <span className="ml-auto text-xs text-white/25 flex-shrink-0">{item.country}</span>
+                </>
+              )}
             </li>
           ))}
         </ul>
@@ -442,12 +526,16 @@ function FeatureCard({ icon, title, body }: { icon: React.ReactNode; title: stri
 
 // ── Main component ────────────────────────────────────────────────────────────
 
+function getAirportCodes(s: Selection): string[] {
+  return s.kind === "metro" ? s.codes : [s.code];
+}
+
 export default function FlightSearch() {
   const today = new Date().toISOString().split("T")[0];
   const resultsRef = useRef<HTMLDivElement>(null);
 
-  const [origin, setOrigin] = useState<Airport | null>(null);
-  const [destination, setDestination] = useState<Airport | null>(null);
+  const [origin, setOrigin] = useState<Selection | null>(null);
+  const [destination, setDestination] = useState<Selection | null>(null);
   const [tripType, setTripType] = useState<TripType>("roundtrip");
   const [departureDate, setDepartureDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
@@ -463,8 +551,8 @@ export default function FlightSearch() {
 
   const handleSearch = async () => {
     const errs: string[] = [];
-    if (!origin) errs.push("Please select an origin airport.");
-    if (!destination) errs.push("Please select a destination airport.");
+    if (!origin) errs.push("Please select an origin.");
+    if (!destination) errs.push("Please select a destination.");
     if (!departureDate) errs.push("Please select a departure date.");
     if (tripType === "roundtrip" && !returnDate) errs.push("Please select a return date.");
     if (tripType === "roundtrip" && departureDate && returnDate && returnDate < departureDate) {
@@ -475,13 +563,18 @@ export default function FlightSearch() {
 
     setSearchState("loading");
 
+    const originCodes = getAirportCodes(origin!);
+    const destCodes = getAirportCodes(destination!);
+
     try {
       const res = await fetch("/api/flights/search", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          origin: origin!.code,
-          destination: destination!.code,
+          origin: originCodes[0],
+          destination: destCodes[0],
+          ...(origin!.kind === "metro" && { origin_airports: originCodes }),
+          ...(destination!.kind === "metro" && { destination_airports: destCodes }),
           departure_date: departureDate,
           return_date: tripType === "roundtrip" ? returnDate : null,
           adults: travelers,
@@ -582,7 +675,7 @@ export default function FlightSearch() {
 
           {/* Origin / Destination */}
           <div className="flex flex-col sm:flex-row gap-3 mb-4">
-            <AirportCombobox label="From" placeholder="City or airport" value={origin} onChange={setOrigin} />
+            <AirportCombobox label="From" placeholder="City, metro, or airport" value={origin} onChange={setOrigin} />
             <button
               onClick={() => { const tmp = origin; setOrigin(destination); setDestination(tmp); }}
               className="self-end mb-0.5 sm:self-center mt-auto sm:mt-6 p-2.5 rounded-xl border border-white/10 bg-white/[0.04] text-white/40 hover:text-white/80 hover:border-white/25 hover:bg-white/[0.08] transition-all flex-shrink-0"
@@ -593,7 +686,7 @@ export default function FlightSearch() {
                 <path d="M17 8v12m0 0 4-4m-4 4-4-4" />
               </svg>
             </button>
-            <AirportCombobox label="To" placeholder="City or airport" value={destination} onChange={setDestination} />
+            <AirportCombobox label="To" placeholder="City, metro, or airport" value={destination} onChange={setDestination} />
           </div>
 
           {/* Dates + Travelers + Cabin */}
