@@ -65,15 +65,38 @@ export default function Page() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
-  function handleWaitlist(e: FormEvent<HTMLFormElement>) {
+  async function handleWaitlist(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const clean = email.trim().toLowerCase();
     if (!clean || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(clean)) {
       setError("Enter a valid email address.");
       return;
     }
+
     setError("");
-    setSubmitted(true);
+
+    try {
+      const response = await fetch("https://formspree.io/f/mqeoypvz", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: clean,
+          source: "travelgrab-landing",
+        }),
+      });
+
+      if (!response.ok) {
+        setError("Something went wrong. Please try again.");
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    }
   }
 
   return (
