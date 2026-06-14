@@ -352,22 +352,54 @@ function rerankOffers(
 ): FlightOffer[] {
   if (!rawOffers.length) return rawOffers;
 
-  console.log(`[rerank] priorities=${JSON.stringify(priorities)} weights=`, weights);
+  // Result-set bounds for min-max normalization
+  const prices = rawOffers.map((o) => o.price_total);
+  const durs   = rawOffers.map((o) => parseMins(o.duration) || 999);
+  const minP = Math.min(...prices), maxP = Math.max(...prices);
+  const minD = Math.min(...durs),   maxD = Math.max(...durs);
+  const priceRange = maxP - minP;
+  const durRange   = maxD - minD;
+
+  console.log(`[rerank] BEFORE: ${rawOffers.map((o) => `${o.airline}(${o.flight_number})=${o.ai_score}`).join(", ")}`);
+  console.log(`[rerank] priorities=${JSON.stringify(priorities)}`);
+  console.log(`[rerank] price $${Math.round(minP)}–$${Math.round(maxP)}  dur ${Math.round(minD)}–${Math.round(maxD)} min`);
+
+  // Compute per-metric normalized scores [0, 100] for a single offer.
+  // Uses result-set min/max for price and duration; fixed scales for everything else.
+  const computeNorms = (o: FlightOffer): Record<string, number> => ({
+    price:       priceRange > 1 ? 100 * (maxP - o.price_total)                  / priceRange : 50,
+    duration:    durRange   > 1 ? 100 * (maxD - (parseMins(o.duration) || 0))   / durRange   : 50,
+    stops:       stopsScore(o.stops),
+    timing:      arrivalTimingScore(o.arrive_time),
+    cabin:       cabinScore(o.cabin),
+    baggage:     o.baggage.trim() ? 65 : 35,
+    // Server signals are in [-1, 1]; convert to [0, 100]
+    jet_lag:     ((o.score_breakdown.jet_lag     ?? 0) + 1) / 2 * 100,
+    fatigue:     ((o.score_breakdown.fatigue     ?? 0) + 1) / 2 * 100,
+    city_access: ((o.score_breakdown.city_access ?? 0) + 1) / 2 * 100,
+  });
 
   const rescored = rawOffers.map((o) => {
-    const bd = o.score_breakdown;
-    const weighted = Object.entries(weights).reduce((sum, [k, wt]) => sum + (bd[k] ?? 0) * wt, 0);
-    return { ...o, ai_score: Math.round(Math.max(45, Math.min(99, 50 + weighted * 49))) };
+    const norms   = computeNorms(o);
+    // Weighted average — norms are [0,100] and weights sum to 1 → result is naturally [0,100]
+    const weighted = Object.entries(weights).reduce(
+      (sum, [k, wt]) => sum + (norms[k] ?? 50) * wt,
+      0
+    );
+    const score = Math.round(Math.max(10, Math.min(99, weighted)));
+    // Replace score_breakdown with new [0,100] normalized values for the breakdown modal
+    return { ...o, ai_score: score, score_breakdown: norms };
   });
 
   rescored.sort((a, b) => b.ai_score - a.ai_score);
 
-  console.log(`[rerank] top 5:`);
+  console.log(`[rerank] AFTER:  ${rescored.map((o) => `${o.airline}(${o.flight_number})=${o.ai_score}`).join(", ")}`);
+  console.log(`[rerank] detail:`);
   rescored.slice(0, 5).forEach((o, i) => {
-    const contrib = Object.entries(weights)
-      .map(([k, wt]) => `${k}:${((o.score_breakdown[k] ?? 0) * wt).toFixed(2)}`)
-      .join(" ");
-    console.log(`  #${i + 1} ${o.airline} ${o.flight_number} score=${o.ai_score} | ${contrib}`);
+    const parts = Object.entries(weights)
+      .map(([k, wt]) => `${k}=${Math.round(o.score_breakdown[k] ?? 0)}×${Math.round(wt * 100)}%→${((o.score_breakdown[k] ?? 0) * wt).toFixed(1)}`)
+      .join("  ");
+    console.log(`  #${i + 1} ${o.airline} $${Math.round(o.price_total)} ${o.duration} score=${o.ai_score} | ${parts}`);
   });
 
   const topLabel =
@@ -548,7 +580,7 @@ const BREAKDOWN_LABELS: Record<string, string> = {
 
 
 function toDisplayScore(v: number): number {
-  return Math.round(((v + 1) / 2) * 100);
+  return Math.round(v);
 }
 
 function breakdownColor(ds: number): string {
@@ -697,6 +729,35 @@ function parseMins(dur: string): number {
   const h = dur.match(/(\d+)h/);
   const m = dur.match(/(\d+)m/);
   return (h ? parseInt(h[1]) * 60 : 0) + (m ? parseInt(m[1]) : 0);
+}
+
+function clockMins(time: string): number {
+  const parts = time.split(":");
+  return parseInt(parts[0] ?? "12") * 60 + parseInt(parts[1] ?? "0");
+}
+
+// Per-metric scores in [0, 100]; larger = better for that dimension
+function stopsScore(stops: number): number {
+  if (stops === 0) return 100;
+  if (stops === 1) return 55;
+  if (stops === 2) return 20;
+  return 5;
+}
+
+function arrivalTimingScore(arriveTime: string): number {
+  const h = Math.floor(clockMins(arriveTime) / 60);
+  if (h >= 8 && h < 21) return 100;                          // 8 am – 8:59 pm: great
+  if ((h >= 6 && h < 8) || (h >= 21 && h < 23)) return 60;  // early morning / late evening
+  if ((h >= 4 && h < 6) || h === 23) return 25;              // very early / midnight
+  return 5;                                                   // 0–3 am
+}
+
+function cabinScore(cabin: string): number {
+  const c = cabin.toLowerCase();
+  if (c.includes("first"))    return 100;
+  if (c.includes("business")) return 80;
+  if (c.includes("premium"))  return 55;
+  return 40;
 }
 
 function CompareTable({ offers }: { offers: FlightOffer[] }) {
@@ -1143,7 +1204,7 @@ function FlightCard({ offer, cardRef, priorityWeights }: {
             </div>
 
             <p className="text-[10px] text-white/30 leading-relaxed mb-3">
-              Higher score means stronger balance of price, timing, nonstop routing, comfort, and airport convenience.
+              Each factor is normalized against this result set (0 = worst, 100 = best), then weighted by your priorities.
             </p>
 
             {breakdownRows.length > 0 ? (
