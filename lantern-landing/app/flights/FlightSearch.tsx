@@ -538,9 +538,117 @@ function buildWhyNot(
   return out.slice(0, 3);
 }
 
+// ── RecommendationPanel ───────────────────────────────────────────────────────
+
+function RecommendationPanel({
+  offers,
+  topPickRef,
+}: {
+  offers: FlightOffer[];
+  topPickRef: React.RefObject<HTMLDivElement | null>;
+}) {
+  const pick = offers.find((o) => o.is_recommended) ?? offers[0];
+  if (!pick) return null;
+
+  const cheapestPrice = Math.min(...offers.map((o) => o.price_total));
+  const fastestDurMins = Math.min(...offers.map((o) => parseDurMins(o.duration)));
+  const pickDurMins = parseDurMins(pick.duration);
+
+  const reasons: string[] =
+    pick.recommendation_bullets.length > 0
+      ? pick.recommendation_bullets.slice(0, 3)
+      : (() => {
+          const out: string[] = [];
+          if (pick.stops === 0) out.push("Nonstop — no connections required.");
+          if (cheapestPrice > 0 && pick.price_total <= cheapestPrice * 1.02) {
+            out.push("Matches or ties the lowest visible fare.");
+          } else if (cheapestPrice > 0 && pick.price_total < cheapestPrice * 1.12) {
+            out.push(`Within ${Math.round((pick.price_total / cheapestPrice - 1) * 100)}% of the cheapest available fare.`);
+          }
+          if (fastestDurMins > 0 && pickDurMins <= fastestDurMins + 15) {
+            out.push("One of the fastest options for this route.");
+          }
+          if (pick.travel_fatigue === "Low") out.push("Low travel fatigue expected on this route.");
+          if (pick.jet_lag === "Low") out.push("Minimal jet lag risk.");
+          if (["Excellent", "Good"].includes(pick.aircraft_comfort)) {
+            out.push(`${pick.aircraft_comfort} aircraft comfort rating.`);
+          }
+          return out.slice(0, 3);
+        })();
+
+  return (
+    <div className="mb-4 max-w-3xl mx-auto rounded-xl border border-lantern-violet/40 bg-lantern-violet/[0.07] px-4 sm:px-5 py-4 shadow-[0_0_24px_rgba(139,92,246,0.10)]">
+      {/* Header row */}
+      <div className="flex items-start justify-between gap-3 mb-2.5">
+        <div className="flex items-center gap-2 min-w-0">
+          <svg className="w-3.5 h-3.5 text-lantern-violet flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+          </svg>
+          <span className="text-[10px] font-black uppercase tracking-widest text-lantern-violet">
+            TravelGrab Recommendation
+          </span>
+        </div>
+        <span className="text-lg font-black text-white tabular-nums leading-none flex-shrink-0">
+          ${Math.round(pick.price_total).toLocaleString()}
+        </span>
+      </div>
+
+      {/* Airline + route summary */}
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 mb-2 text-xs">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`https://www.gstatic.com/flights/airline_logos/70px/${pick.airline_code}.png`}
+          alt={pick.airline}
+          width={16}
+          height={16}
+          className="rounded object-contain flex-shrink-0"
+          onError={(e) => { e.currentTarget.style.display = "none"; }}
+        />
+        <span className="font-bold text-white">{pick.airline}</span>
+        <span className="text-white/25">·</span>
+        <span className="font-mono font-semibold text-white/60">{pick.origin}</span>
+        <span className="text-white/30">→</span>
+        <span className="font-mono font-semibold text-white/60">{pick.destination}</span>
+        <span className="text-white/25">·</span>
+        <span className="text-white/50">{pick.duration}</span>
+        <span className="text-white/25">·</span>
+        <span className="text-white/50">{pick.stop_label}</span>
+      </div>
+
+      {/* Advisor sentence */}
+      {pick.recommendation_why && (
+        <p className="text-[11px] text-white/60 leading-relaxed mb-2.5">{pick.recommendation_why}</p>
+      )}
+
+      {/* Reason bullets */}
+      {reasons.length > 0 && (
+        <ul className="space-y-1 mb-3">
+          {reasons.map((r, i) => (
+            <li key={i} className="flex gap-1.5 text-[11px] text-white/60 leading-relaxed">
+              <span className="text-lantern-violet mt-0.5 flex-shrink-0">›</span>
+              {r}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {/* CTA */}
+      <button
+        onClick={() => topPickRef.current?.scrollIntoView({ behavior: "smooth", block: "center" })}
+        className="inline-flex items-center gap-1.5 text-[11px] font-bold text-lantern-violet border border-lantern-violet/40 bg-lantern-violet/10 hover:bg-lantern-violet/20 rounded-lg px-3.5 py-1.5 transition-colors"
+      >
+        View top pick
+        <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </button>
+    </div>
+  );
+}
+
 // ── FlightCard ────────────────────────────────────────────────────────────────
 
-function FlightCard({ offer, allOffers }: { offer: FlightOffer; allOffers: FlightOffer[] }) {
+function FlightCard({ offer, allOffers, cardRef }: { offer: FlightOffer; allOffers: FlightOffer[]; cardRef?: React.RefObject<HTMLDivElement | null> }) {
   const rec = offer.is_recommended;
   const [scoreOpen, setScoreOpen] = useState(false);
   const [analysisOpen, setAnalysisOpen] = useState(rec);
@@ -586,6 +694,7 @@ function FlightCard({ offer, allOffers }: { offer: FlightOffer; allOffers: Fligh
 
   return (
     <div
+      ref={cardRef}
       className={`rounded-xl border transition-all ${
         rec
           ? "border-lantern-violet/40 bg-lantern-violet/[0.04] shadow-[0_0_32px_rgba(167,139,250,0.07)]"
@@ -924,6 +1033,7 @@ function getAirportCodes(s: Selection): string[] {
 export default function FlightSearch() {
   const today = new Date().toISOString().split("T")[0];
   const resultsRef = useRef<HTMLDivElement>(null);
+  const topPickRef = useRef<HTMLDivElement>(null);
 
   const [origin, setOrigin] = useState<Selection | null>(null);
   const [destination, setDestination] = useState<Selection | null>(null);
@@ -1178,10 +1288,15 @@ export default function FlightSearch() {
                 <span className="text-xs text-white/25">{offers.length} fares — ranked by AI</span>
               </div>
             )}
+            <RecommendationPanel offers={offers} topPickRef={topPickRef} />
             <div className="space-y-3 max-w-3xl mx-auto">
-              {offers.map((offer, i) => (
-                <FlightCard key={i} offer={offer} allOffers={offers} />
-              ))}
+              {offers.map((offer, i) => {
+                const recIdx = offers.findIndex((o) => o.is_recommended);
+                const pickIdx = recIdx >= 0 ? recIdx : 0;
+                return (
+                  <FlightCard key={i} offer={offer} allOffers={offers} cardRef={i === pickIdx ? topPickRef : undefined} />
+                );
+              })}
             </div>
           </div>
         )}
