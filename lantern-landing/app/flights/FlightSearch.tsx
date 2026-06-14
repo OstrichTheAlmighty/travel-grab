@@ -254,34 +254,52 @@ type Priority =
   | "comfort"
   | "airport";
 
+// Selectable chips — "best_overall" is the implicit fallback when none are selected
 const PRIORITY_CHIPS: { id: Priority; label: string }[] = [
-  { id: "best_overall", label: "Best overall" },
-  { id: "cheapest",     label: "Cheapest" },
-  { id: "fastest",      label: "Fastest" },
-  { id: "nonstop",      label: "Fewer stops" },
-  { id: "arrival",      label: "Best arrival" },
-  { id: "jet_lag",      label: "Low jet lag" },
-  { id: "fatigue",      label: "Less fatigue" },
-  { id: "comfort",      label: "Best comfort" },
-  { id: "airport",      label: "Best airport" },
+  { id: "cheapest", label: "Cheapest" },
+  { id: "fastest",  label: "Fastest" },
+  { id: "nonstop",  label: "Fewer stops" },
+  { id: "arrival",  label: "Best arrival" },
+  { id: "jet_lag",  label: "Low jet lag" },
+  { id: "fatigue",  label: "Less fatigue" },
+  { id: "comfort",  label: "Best comfort" },
+  { id: "airport",  label: "Best airport" },
 ];
 
-// Weights sum to 1.0; keys match score_breakdown fields returned by scoreComponents in route.ts
-const PRIORITY_WEIGHTS: Record<Priority, Record<string, number>> = {
-  best_overall: { price: 0.35, duration: 0.20, stops: 0.20, timing: 0.10, cabin: 0.10, baggage: 0.05 },
-  cheapest:     { price: 0.60, stops: 0.15, duration: 0.10, timing: 0.05, cabin: 0.05, baggage: 0.05 },
-  fastest:      { duration: 0.55, stops: 0.20, price: 0.10, timing: 0.10, cabin: 0.03, baggage: 0.02 },
-  nonstop:      { stops: 0.60, duration: 0.15, price: 0.10, timing: 0.10, cabin: 0.03, baggage: 0.02 },
-  arrival:      { timing: 0.55, duration: 0.15, stops: 0.15, price: 0.10, cabin: 0.03, baggage: 0.02 },
-  // jet_lag, fatigue, city_access are dedicated score signals computed server-side in scoreComponents
-  jet_lag:      { jet_lag: 0.60, duration: 0.20, stops: 0.10, price: 0.05, timing: 0.05 },
-  fatigue:      { fatigue: 0.60, duration: 0.20, stops: 0.10, timing: 0.05, price: 0.05 },
-  comfort:      { stops: 0.40, duration: 0.25, timing: 0.15, cabin: 0.10, price: 0.05, baggage: 0.05 },
-  airport:      { city_access: 0.50, timing: 0.20, stops: 0.15, duration: 0.10, price: 0.05 },
+// Base weights (sum = 100); keys match score_breakdown fields from scoreComponents in route.ts
+const BASE_WEIGHTS: Record<string, number> = {
+  price: 35, duration: 20, stops: 20, timing: 10, cabin: 10, baggage: 5,
 };
 
+// Additive boosts applied on top of base weights when a priority is selected
+const PRIORITY_BOOSTS: Partial<Record<Priority, Record<string, number>>> = {
+  cheapest: { price: 35 },
+  fastest:  { duration: 35 },
+  nonstop:  { stops: 35 },
+  arrival:  { timing: 35 },
+  jet_lag:  { timing: 20, duration: 10, stops: 10 },
+  fatigue:  { duration: 20, stops: 20, cabin: 10 },
+  comfort:  { cabin: 40, duration: 10 },
+  airport:  { timing: 15, stops: 15, price: 10 },
+};
+
+function buildCompoundWeights(priorities: Priority[]): Record<string, number> {
+  const raw: Record<string, number> = { ...BASE_WEIGHTS };
+  for (const p of priorities) {
+    for (const [k, v] of Object.entries(PRIORITY_BOOSTS[p] ?? {})) {
+      raw[k] = (raw[k] ?? 0) + v;
+    }
+  }
+  const total = Object.values(raw).reduce((s, v) => s + v, 0);
+  const out: Record<string, number> = {};
+  for (const [k, v] of Object.entries(raw)) {
+    out[k] = Math.round((v / total) * 1000) / 1000;
+  }
+  return out;
+}
+
 const PRIORITY_TOP_LABEL: Record<Priority, string> = {
-  best_overall: "Best overall",
+  best_overall: "AI Pick",
   cheapest:     "Cheapest",
   fastest:      "Fastest",
   nonstop:      "Best routing",
@@ -292,57 +310,77 @@ const PRIORITY_TOP_LABEL: Record<Priority, string> = {
   airport:      "Best airport",
 };
 
-function buildPriorityNote(o: FlightOffer, priority: Priority): string {
+function buildPriorityNote(o: FlightOffer, priorities: Priority[]): string {
+  if (!priorities.length) return "";
   const tradeoff = o.tradeoffs[0] ? `, even though ${o.tradeoffs[0].toLowerCase()}` : "";
-  switch (priority) {
-    case "best_overall": return "";
-    case "cheapest":
-      return `Because you prioritized cheapest, this option wins on lowest total fare ($${Math.round(o.price_total).toLocaleString()})${tradeoff}.`;
-    case "fastest":
-      return `Because you prioritized fastest, this option wins on shortest travel time (${o.duration})${tradeoff}.`;
-    case "nonstop":
-      return o.stops === 0
-        ? `Because you prioritized fewer stops, this nonstop option ranks highest${tradeoff}.`
-        : `No nonstop available — this has the fewest connections (${o.stop_label}).`;
-    case "arrival":
-      return `Because you prioritized arrival timing, this ${o.arrival_timing.toLowerCase()} arrival ranks highest${tradeoff}.`;
-    case "jet_lag":
-      return `Because you prioritized lower jet lag, this option has ${o.jet_lag.toLowerCase()} jet lag risk${tradeoff}.`;
-    case "fatigue":
-      return `Because you prioritized less fatigue, this option has ${o.travel_fatigue.toLowerCase()} travel fatigue${tradeoff}.`;
-    case "comfort":
-      return `Because you prioritized aircraft comfort, this option has ${o.aircraft_comfort.toLowerCase()} comfort${tradeoff}.`;
-    case "airport":
-      return `Because you prioritized airport convenience, this option has ${o.city_access.toLowerCase()} city access${tradeoff}.`;
+  if (priorities.length === 1) {
+    switch (priorities[0]) {
+      case "cheapest":
+        return `Because you prioritized cheapest, this option wins on lowest total fare ($${Math.round(o.price_total).toLocaleString()})${tradeoff}.`;
+      case "fastest":
+        return `Because you prioritized fastest, this option wins on shortest travel time (${o.duration})${tradeoff}.`;
+      case "nonstop":
+        return o.stops === 0
+          ? `Because you prioritized fewer stops, this nonstop option ranks highest${tradeoff}.`
+          : `No nonstop available — this has the fewest connections (${o.stop_label}).`;
+      case "arrival":
+        return `Because you prioritized arrival timing, this ${o.arrival_timing.toLowerCase()} arrival ranks highest${tradeoff}.`;
+      case "jet_lag":
+        return `Because you prioritized lower jet lag, this option has ${o.jet_lag.toLowerCase()} jet lag risk${tradeoff}.`;
+      case "fatigue":
+        return `Because you prioritized less fatigue, this option has ${o.travel_fatigue.toLowerCase()} travel fatigue${tradeoff}.`;
+      case "comfort":
+        return `Because you prioritized aircraft comfort, this option has ${o.aircraft_comfort.toLowerCase()} comfort${tradeoff}.`;
+      case "airport":
+        return `Because you prioritized airport convenience, this option has ${o.city_access.toLowerCase()} city access${tradeoff}.`;
+      default:
+        return "";
+    }
   }
+  const labels = priorities.map((p) => PRIORITY_CHIPS.find((c) => c.id === p)?.label ?? p);
+  const joined =
+    labels.length === 2
+      ? `${labels[0]} and ${labels[1]}`
+      : `${labels.slice(0, -1).join(", ")} and ${labels[labels.length - 1]}`;
+  return `Because you prioritized ${joined}, this option ranks highest among the results${tradeoff}.`;
 }
 
-function rerankOffers(rawOffers: FlightOffer[], priority: Priority): FlightOffer[] {
+function rerankOffers(
+  rawOffers: FlightOffer[],
+  weights: Record<string, number>,
+  priorities: Priority[]
+): FlightOffer[] {
   if (!rawOffers.length) return rawOffers;
-  const w = PRIORITY_WEIGHTS[priority];
 
-  console.log(`[rerank] priority="${priority}" weights=`, w);
+  console.log(`[rerank] priorities=${JSON.stringify(priorities)} weights=`, weights);
 
   const rescored = rawOffers.map((o) => {
     const bd = o.score_breakdown;
-    const weighted = Object.entries(w).reduce((sum, [k, wt]) => sum + (bd[k] ?? 0) * wt, 0);
+    const weighted = Object.entries(weights).reduce((sum, [k, wt]) => sum + (bd[k] ?? 0) * wt, 0);
     return { ...o, ai_score: Math.round(Math.max(45, Math.min(99, 50 + weighted * 49))) };
   });
 
   rescored.sort((a, b) => b.ai_score - a.ai_score);
 
-  console.log(`[rerank] top 5 after "${priority}":`);
+  console.log(`[rerank] top 5:`);
   rescored.slice(0, 5).forEach((o, i) => {
-    const contrib = Object.entries(w)
+    const contrib = Object.entries(weights)
       .map(([k, wt]) => `${k}:${((o.score_breakdown[k] ?? 0) * wt).toFixed(2)}`)
       .join(" ");
     console.log(`  #${i + 1} ${o.airline} ${o.flight_number} score=${o.ai_score} | ${contrib}`);
   });
 
+  const topLabel =
+    priorities.length === 0
+      ? "AI Pick"
+      : priorities.length === 1
+      ? (PRIORITY_TOP_LABEL[priorities[0]] ?? "Best Match")
+      : "Best Match";
+
   return rescored.map((o, i) => ({
     ...o,
     is_recommended: i === 0,
-    recommendation_label: i === 0 ? PRIORITY_TOP_LABEL[priority] : o.recommendation_label,
+    recommendation_label: i === 0 ? topLabel : o.recommendation_label,
   }));
 }
 
@@ -566,17 +604,17 @@ const COMFORT_DESC: Record<string, string> = {
 function RecommendationPanel({
   offers,
   topPickRef,
-  priority,
+  priorities,
 }: {
   offers: FlightOffer[];
   topPickRef: React.RefObject<HTMLDivElement | null>;
-  priority: Priority;
+  priorities: Priority[];
 }) {
   const pick = offers.find((o) => o.is_recommended) ?? offers[0];
   if (!pick) return null;
 
   const reasons = (pick.wins_on.length > 0 ? pick.wins_on : pick.recommendation_bullets).slice(0, 3);
-  const priorityNote = buildPriorityNote(pick, priority);
+  const priorityNote = buildPriorityNote(pick, priorities);
 
   return (
     <div className="mb-4 max-w-3xl mx-auto rounded-xl border border-lantern-violet/40 bg-lantern-violet/[0.07] px-4 sm:px-5 py-4 shadow-[0_0_24px_rgba(139,92,246,0.10)]">
@@ -1184,13 +1222,15 @@ export default function FlightSearch() {
   const [searchState, setSearchState] = useState<SearchState>("idle");
   const [offers, setOffers] = useState<FlightOffer[]>([]);
   const [searchMeta, setSearchMeta] = useState<SearchMeta | null>(null);
-  const [priority, setPriority] = useState<Priority>("best_overall");
+  const [priorities, setPriorities] = useState<Priority[]>([]);
+
+  const activeWeights = useMemo(() => buildCompoundWeights(priorities), [priorities]);
 
   const displayOffers = useMemo(() => {
-    const result = offers.length > 0 ? rerankOffers(offers, priority) : offers;
+    const result = offers.length > 0 ? rerankOffers(offers, activeWeights, priorities) : offers;
     console.log(`[pipeline] 8_offers_rendered_as_cards=${result.length}`);
     return result;
-  }, [offers, priority]);
+  }, [offers, activeWeights, priorities]);
   const [errorTitle, setErrorTitle] = useState("");
   const [errorBody, setErrorBody] = useState("");
   const [searchedParams, setSearchedParams] = useState<{
@@ -1386,23 +1426,68 @@ export default function FlightSearch() {
 
           {/* What matters most? */}
           <div className="mb-5 pt-3 border-t border-white/[0.06]">
-            <div className="text-[10px] font-semibold text-white/30 uppercase tracking-wider mb-2">
-              What matters most?
+            <div className="flex items-center justify-between mb-2">
+              <div className="text-[10px] font-semibold text-white/30 uppercase tracking-wider">
+                What matters most?
+              </div>
+              {priorities.length > 0 && (
+                <button
+                  onClick={() => setPriorities([])}
+                  className="text-[10px] text-white/25 hover:text-white/55 transition-colors"
+                >
+                  Clear
+                </button>
+              )}
             </div>
             <div className="flex flex-wrap gap-1.5">
-              {PRIORITY_CHIPS.map(({ id, label }) => (
-                <button
-                  key={id}
-                  onClick={() => setPriority(id)}
-                  className={`px-3 py-1 rounded-full text-[11px] font-semibold border transition-all ${
-                    priority === id
-                      ? "bg-lantern-violet/25 text-lantern-violet border-lantern-violet/40"
-                      : "bg-white/[0.03] text-white/40 border-white/[0.08] hover:border-white/20 hover:text-white/65"
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
+              {PRIORITY_CHIPS.map(({ id, label }) => {
+                const selected = priorities.includes(id);
+                const maxed = !selected && priorities.length >= 3;
+                return (
+                  <button
+                    key={id}
+                    onClick={() =>
+                      setPriorities((prev) =>
+                        prev.includes(id)
+                          ? prev.filter((p) => p !== id)
+                          : prev.length >= 3
+                          ? prev
+                          : [...prev, id]
+                      )
+                    }
+                    disabled={maxed}
+                    className={`px-3 py-1 rounded-full text-[11px] font-semibold border transition-all ${
+                      selected
+                        ? "bg-lantern-violet/25 text-lantern-violet border-lantern-violet/40"
+                        : maxed
+                        ? "bg-white/[0.02] text-white/20 border-white/[0.05] cursor-not-allowed"
+                        : "bg-white/[0.03] text-white/40 border-white/[0.08] hover:border-white/20 hover:text-white/65"
+                    }`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="mt-1.5 flex items-center gap-1 text-[10px] text-white/25">
+              <span>Ranking by:</span>
+              {priorities.length === 0 ? (
+                <span>Best Overall</span>
+              ) : (
+                priorities.map((p, i) => (
+                  <span key={p} className="flex items-center gap-1">
+                    {i > 0 && <span className="text-white/15">+</span>}
+                    <span className="text-lantern-violet/70">
+                      {PRIORITY_CHIPS.find((c) => c.id === p)?.label}
+                    </span>
+                  </span>
+                ))
+              )}
+              {priorities.length > 0 && priorities.length < 3 && (
+                <span className="text-white/15 ml-1">
+                  · {3 - priorities.length} more available
+                </span>
+              )}
             </div>
           </div>
 
@@ -1460,7 +1545,7 @@ export default function FlightSearch() {
                 </span>
               </div>
             )}
-            <RecommendationPanel offers={displayOffers} topPickRef={topPickRef} priority={priority} />
+            <RecommendationPanel offers={displayOffers} topPickRef={topPickRef} priorities={priorities} />
             <CompareTable offers={displayOffers} />
             <div className="space-y-3 max-w-3xl mx-auto">
               {displayOffers.map((offer, i) => (
@@ -1468,7 +1553,7 @@ export default function FlightSearch() {
                   key={i}
                   offer={offer}
                   cardRef={i === 0 ? topPickRef : undefined}
-                  priorityWeights={PRIORITY_WEIGHTS[priority]}
+                  priorityWeights={activeWeights}
                 />
               ))}
             </div>
