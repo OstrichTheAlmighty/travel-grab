@@ -330,6 +330,11 @@ function deduplicateOffers(offers: FlightOffer[]): FlightOffer[] {
     groups.set(k, g);
   }
 
+  console.log(`[dedupe] unique_keys=${groups.size}`);
+  groups.forEach((group, key) => {
+    console.log(`  key="${key}" count=${group.length} airlines=[${group.map((o) => `${o.airline}(${o.airline_code})`).join(", ")}]`);
+  });
+
   const result: FlightOffer[] = [];
   let dupeCount = 0;
 
@@ -350,10 +355,15 @@ function deduplicateOffers(offers: FlightOffer[]): FlightOffer[] {
       return o.price_total < best.price_total ? o : best;
     });
 
+    const removed = group.filter((o) => flightKey(o) !== flightKey(winner));
+    removed.forEach((o) => {
+      console.log(`  [dedupe-removed] key="${itinKey(o)}" airline="${o.airline}" flight="${o.flight_number}" price=${o.price_total} (winner="${winner.airline}" price=${winner.price_total})`);
+    });
+
     result.push({ ...winner, dedupe_group_size: group.length });
   }
 
-  console.log(`[dedupe] raw=${offers.length} deduped=${result.length} duplicates_removed=${dupeCount}`);
+  console.log(`[pipeline] 5_after_dedupe=${result.length} duplicates_removed=${dupeCount}`);
   return result;
 }
 
@@ -802,9 +812,15 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
 
   const body = await resp.json() as { data?: { offers?: DuffelRecord[] } };
   const rawOffers = body?.data?.offers ?? [];
-  // Take up to 25 raw offers so dedup has enough material to produce 8+ unique itineraries
-  const normedRaw = rawOffers.slice(0, 25).map(normalizeDuffelOffer).filter(Boolean) as DuffelRecord[];
+  console.log(`[pipeline] 1_raw_duffel=${rawOffers.length}`);
+
+  const normedRaw = rawOffers.map(normalizeDuffelOffer).filter(Boolean) as DuffelRecord[];
+  console.log(`[pipeline] 2_after_normalizeDuffelOffer=${normedRaw.length} (filtered_nulls=${rawOffers.length - normedRaw.length})`);
+
   const normedAll = normedRaw.map((r) => normalizeFlight(r, params.adults)).filter(Boolean) as FlightOffer[];
+  console.log(`[pipeline] 3_after_normalizeFlight=${normedAll.length} (filtered_nulls=${normedRaw.length - normedAll.length})`);
+  console.log(`[pipeline] 4_before_dedupe=${normedAll.length}`);
+
   const normed = deduplicateOffers(normedAll);
 
   if (!normed.length) {
@@ -876,6 +892,11 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
   });
 
   enriched.sort((a, b) => (a.is_recommended ? -1 : b.is_recommended ? 1 : 0) || (b.ai_score - a.ai_score));
+
+  console.log(`[pipeline] 6_returned_to_frontend=${enriched.length}`);
+  enriched.forEach((o, i) => {
+    console.log(`  #${i + 1} ${o.airline} ${o.flight_number} ${o.depart_time}->${o.arrive_time} stops=${o.stops} conn="${o.connection_airports}" $${o.price_total} score=${o.ai_score} label="${o.recommendation_label}"`);
+  });
 
   return {
     offers: enriched,

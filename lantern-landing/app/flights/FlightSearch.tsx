@@ -1186,10 +1186,11 @@ export default function FlightSearch() {
   const [searchMeta, setSearchMeta] = useState<SearchMeta | null>(null);
   const [priority, setPriority] = useState<Priority>("best_overall");
 
-  const displayOffers = useMemo(
-    () => (offers.length > 0 ? rerankOffers(offers, priority) : offers),
-    [offers, priority]
-  );
+  const displayOffers = useMemo(() => {
+    const result = offers.length > 0 ? rerankOffers(offers, priority) : offers;
+    console.log(`[pipeline] 8_offers_rendered_as_cards=${result.length}`);
+    return result;
+  }, [offers, priority]);
   const [errorTitle, setErrorTitle] = useState("");
   const [errorBody, setErrorBody] = useState("");
   const [searchedParams, setSearchedParams] = useState<{
@@ -1257,6 +1258,10 @@ export default function FlightSearch() {
         return;
       }
 
+      console.log(`[pipeline] 7_offers_received_by_frontend=${data.offers!.length}`);
+      data.offers!.forEach((o, i) => {
+        console.log(`  #${i + 1} ${o.airline} ${o.flight_number} ${o.depart_time}->${o.arrive_time} stops=${o.stops} conn="${o.connection_airports}" $${o.price_total}`);
+      });
       setOffers(data.offers!);
       setSearchMeta(data.meta ?? null);
       setSearchState("results");
