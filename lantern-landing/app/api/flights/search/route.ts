@@ -539,11 +539,15 @@ function buildWinsOn(o: FlightOffer, ctx: OfferContext, all: FlightOffer[]): str
   if (o.stops === 0) {
     const withStops = all.filter((x) => x.stops > 0).length;
     if (withStops > 0)
-      wins.push(`Nonstop while ${withStops} other${withStops !== 1 ? "s" : ""} require a connection`);
+      wins.push(`Nonstop — ${withStops} alternative${withStops !== 1 ? "s" : ""} require a connection`);
   }
 
-  if (timeSavedVsCheapest > 30 && priceDiff > 0)
-    wins.push(`Saves ${minuteLabel(timeSavedVsCheapest)} vs the cheapest option`);
+  if (timeSavedVsCheapest > 30 && priceDiff > 0) {
+    const tLabel = timeSavedVsCheapest < 60
+      ? `${timeSavedVsCheapest} minutes`
+      : minuteLabel(timeSavedVsCheapest);
+    wins.push(`${tLabel} faster than the cheapest option`);
+  }
 
   if (fatigueRank === ctx.bestFatigueRank) {
     const count = all.filter((x) => (FATIGUE_RANK[x.travel_fatigue] ?? 2) > fatigueRank).length;
@@ -568,7 +572,7 @@ function buildWinsOn(o: FlightOffer, ctx: OfferContext, all: FlightOffer[]): str
   return wins.slice(0, 4);
 }
 
-function buildTradeoffsFor(o: FlightOffer, ctx: OfferContext, all: FlightOffer[]): string[] {
+function buildTradeoffsFor(o: FlightOffer, ctx: OfferContext, _all: FlightOffer[]): string[] {
   const durMins = durationMinutes(o.duration) || 99999;
   const priceDiff = o.price_total - ctx.cheapestPrice;
   const durDiff = durMins - ctx.fastestDurMins;
@@ -581,14 +585,8 @@ function buildTradeoffsFor(o: FlightOffer, ctx: OfferContext, all: FlightOffer[]
   if (priceDiff > ctx.cheapestPrice * 0.04)
     tradeoffs.push(`${moneyUsd(Math.round(priceDiff))} more than the cheapest option`);
 
-  if (durDiff > 45) {
-    const fastestOffer = all.find((x) => (durationMinutes(x.duration) || 99999) === ctx.fastestDurMins);
-    tradeoffs.push(
-      fastestOffer
-        ? `${minuteLabel(durDiff)} slower than the fastest option (${fastestOffer.duration})`
-        : `${minuteLabel(durDiff)} slower than the fastest option`
-    );
-  }
+  if (durDiff > 45)
+    tradeoffs.push(`${minuteLabel(durDiff)} slower than the fastest option`);
 
   if (o.stops > 0 && ctx.nonstopExists)
     tradeoffs.push(o.stops === 1 ? "Requires a connection — nonstop options exist" : `Requires ${o.stops} connections`);
@@ -601,10 +599,8 @@ function buildTradeoffsFor(o: FlightOffer, ctx: OfferContext, all: FlightOffer[]
   if (timingRank < ctx.bestTimingRank && timingRank <= 2)
     tradeoffs.push(`${o.arrival_timing} arrival — better-timed options available`);
 
-  if (comfortRank < ctx.bestComfortRank && comfortRank <= 1) {
-    const bestLabel = Object.entries(COMFORT_RANK).find(([, v]) => v === ctx.bestComfortRank)?.[0] ?? "Good";
-    tradeoffs.push(`${o.aircraft_comfort} comfort vs ${bestLabel.toLowerCase()} on better options`);
-  }
+  if (comfortRank < ctx.bestComfortRank && comfortRank <= 1)
+    tradeoffs.push(`${o.aircraft_comfort} aircraft comfort`);
 
   if (jetLagRank > ctx.bestJetLagRank && jetLagRank >= 3)
     tradeoffs.push(`${o.jet_lag} jet lag risk on this route`);

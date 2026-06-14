@@ -316,23 +316,23 @@ function buildPriorityNote(o: FlightOffer, priorities: Priority[]): string {
   if (priorities.length === 1) {
     switch (priorities[0]) {
       case "cheapest":
-        return `Because you prioritized cheapest, this option wins on lowest total fare ($${Math.round(o.price_total).toLocaleString()})${tradeoff}.`;
+        return `Because you prioritized cheapest, this flight wins on lowest total fare ($${Math.round(o.price_total).toLocaleString()})${tradeoff}.`;
       case "fastest":
-        return `Because you prioritized fastest, this option wins on shortest travel time (${o.duration})${tradeoff}.`;
+        return `Because you prioritized fastest, this flight wins on shortest travel time (${o.duration})${tradeoff}.`;
       case "nonstop":
         return o.stops === 0
-          ? `Because you prioritized fewer stops, this nonstop option ranks highest${tradeoff}.`
+          ? `Because you prioritized fewer stops, this nonstop flight ranks highest${tradeoff}.`
           : `No nonstop available — this has the fewest connections (${o.stop_label}).`;
       case "arrival":
         return `Because you prioritized arrival timing, this ${o.arrival_timing.toLowerCase()} arrival ranks highest${tradeoff}.`;
       case "jet_lag":
-        return `Because you prioritized lower jet lag, this option has ${o.jet_lag.toLowerCase()} jet lag risk${tradeoff}.`;
+        return `Because you prioritized lower jet lag, this flight has ${o.jet_lag.toLowerCase()} jet lag risk${tradeoff}.`;
       case "fatigue":
-        return `Because you prioritized less fatigue, this option has ${o.travel_fatigue.toLowerCase()} travel fatigue${tradeoff}.`;
+        return `Because you prioritized less fatigue, this flight has ${o.travel_fatigue.toLowerCase()} travel fatigue${tradeoff}.`;
       case "comfort":
-        return `Because you prioritized aircraft comfort, this option has ${o.aircraft_comfort.toLowerCase()} comfort${tradeoff}.`;
+        return `Because you prioritized aircraft comfort, this flight has ${o.aircraft_comfort.toLowerCase()} comfort${tradeoff}.`;
       case "airport":
-        return `Because you prioritized airport convenience, this option has ${o.city_access.toLowerCase()} city access${tradeoff}.`;
+        return `Because you prioritized airport convenience, this flight has ${o.city_access.toLowerCase()} city access${tradeoff}.`;
       default:
         return "";
     }
@@ -342,7 +342,9 @@ function buildPriorityNote(o: FlightOffer, priorities: Priority[]): string {
     labels.length === 2
       ? `${labels[0]} and ${labels[1]}`
       : `${labels.slice(0, -1).join(", ")} and ${labels[labels.length - 1]}`;
-  return `Because you prioritized ${joined}, this option ranks highest among the results${tradeoff}.`;
+  const firstWin = o.wins_on[0];
+  const because = firstWin ? ` — ${firstWin.toLowerCase()}` : "";
+  return `Because you prioritized ${joined}, this flight ranks highest${because}.`;
 }
 
 function rerankOffers(
@@ -890,10 +892,11 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
 
 // ── FlightCard ────────────────────────────────────────────────────────────────
 
-function FlightCard({ offer, cardRef, priorityWeights }: {
+function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
   offer: FlightOffer;
   cardRef?: React.RefObject<HTMLDivElement | null>;
   priorityWeights: Record<string, number>;
+  priorities: Priority[];
 }) {
   const rec = offer.is_recommended;
   const [scoreOpen, setScoreOpen] = useState(false);
@@ -1203,8 +1206,16 @@ function FlightCard({ offer, cardRef, priorityWeights }: {
               </div>
             </div>
 
-            <p className="text-[10px] text-white/30 leading-relaxed mb-3">
-              Each factor is normalized against this result set (0 = worst, 100 = best), then weighted by your priorities.
+            {priorities.length > 0 && (
+              <div className="flex items-center gap-1.5 mb-2 text-[10px]">
+                <span className="text-white/30">Weighted for:</span>
+                <span className="text-lantern-violet/80 font-semibold">
+                  {priorities.map((p) => PRIORITY_CHIPS.find((c) => c.id === p)?.label ?? p).join(" + ")}
+                </span>
+              </div>
+            )}
+            <p className="text-[10px] text-white/25 leading-relaxed mb-3">
+              Each metric scored 0–100 relative to this result set, then combined using your priority weights.
             </p>
 
             {breakdownRows.length > 0 ? (
@@ -1517,14 +1528,19 @@ export default function FlightSearch() {
                       )
                     }
                     disabled={maxed}
-                    className={`px-3 py-1 rounded-full text-[11px] font-semibold border transition-all ${
+                    className={`flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-semibold border transition-all ${
                       selected
-                        ? "bg-lantern-violet/25 text-lantern-violet border-lantern-violet/40"
+                        ? "bg-lantern-violet/30 text-lantern-violet border-lantern-violet/70 shadow-[0_0_0_1px_rgba(139,92,246,0.3)]"
                         : maxed
-                        ? "bg-white/[0.02] text-white/20 border-white/[0.05] cursor-not-allowed"
-                        : "bg-white/[0.03] text-white/40 border-white/[0.08] hover:border-white/20 hover:text-white/65"
+                        ? "bg-transparent text-white/15 border-white/[0.04] cursor-not-allowed"
+                        : "bg-transparent text-white/30 border-white/[0.09] hover:border-white/[0.18] hover:text-white/55"
                     }`}
                   >
+                    {selected && (
+                      <svg className="w-2.5 h-2.5 flex-shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M1 6l3.5 3.5L11 2" />
+                      </svg>
+                    )}
                     {label}
                   </button>
                 );
@@ -1615,6 +1631,7 @@ export default function FlightSearch() {
                   offer={offer}
                   cardRef={i === 0 ? topPickRef : undefined}
                   priorityWeights={activeWeights}
+                  priorities={priorities}
                 />
               ))}
             </div>
