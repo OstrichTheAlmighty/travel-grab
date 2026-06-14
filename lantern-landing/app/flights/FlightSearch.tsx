@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback, useMemo } from "react";
 import Link from "next/link";
 
 // ── Airport data ──────────────────────────────────────────────────────────────
@@ -240,6 +240,106 @@ function indicatorColor(label: string): string {
   return "text-red-400"; // High, Very High, Limited, Late Night
 }
 
+// ── Priority / reranking ──────────────────────────────────────────────────────
+
+type Priority =
+  | "best_overall"
+  | "cheapest"
+  | "fastest"
+  | "nonstop"
+  | "arrival"
+  | "jet_lag"
+  | "fatigue"
+  | "comfort"
+  | "airport";
+
+const PRIORITY_CHIPS: { id: Priority; label: string }[] = [
+  { id: "best_overall", label: "Best overall" },
+  { id: "cheapest",     label: "Cheapest" },
+  { id: "fastest",      label: "Fastest" },
+  { id: "nonstop",      label: "Fewer stops" },
+  { id: "arrival",      label: "Best arrival" },
+  { id: "jet_lag",      label: "Low jet lag" },
+  { id: "fatigue",      label: "Less fatigue" },
+  { id: "comfort",      label: "Best comfort" },
+  { id: "airport",      label: "Best airport" },
+];
+
+// Weights sum to 1.0; keys match score_breakdown fields: price/duration/stops/timing/cabin/baggage
+const PRIORITY_WEIGHTS: Record<Priority, Record<string, number>> = {
+  best_overall: { price: 0.35, duration: 0.20, stops: 0.20, timing: 0.10, cabin: 0.10, baggage: 0.05 },
+  cheapest:     { price: 0.60, stops: 0.15, duration: 0.10, timing: 0.05, cabin: 0.05, baggage: 0.05 },
+  fastest:      { duration: 0.55, stops: 0.20, price: 0.10, timing: 0.10, cabin: 0.03, baggage: 0.02 },
+  nonstop:      { stops: 0.60, duration: 0.15, price: 0.10, timing: 0.10, cabin: 0.03, baggage: 0.02 },
+  arrival:      { timing: 0.55, duration: 0.15, stops: 0.15, price: 0.10, cabin: 0.03, baggage: 0.02 },
+  jet_lag:      { timing: 0.30, duration: 0.25, stops: 0.20, price: 0.10, cabin: 0.10, baggage: 0.05 },
+  fatigue:      { duration: 0.30, stops: 0.30, timing: 0.15, cabin: 0.15, price: 0.05, baggage: 0.05 },
+  comfort:      { cabin: 0.50, duration: 0.15, stops: 0.15, price: 0.10, timing: 0.05, baggage: 0.05 },
+  airport:      { timing: 0.25, stops: 0.25, duration: 0.20, price: 0.15, cabin: 0.10, baggage: 0.05 },
+};
+
+const PRIORITY_TOP_LABEL: Record<Priority, string> = {
+  best_overall: "Best overall",
+  cheapest:     "Cheapest",
+  fastest:      "Fastest",
+  nonstop:      "Best routing",
+  arrival:      "Best arrival",
+  jet_lag:      "Lowest jet lag",
+  fatigue:      "Least fatigue",
+  comfort:      "Best comfort",
+  airport:      "Best airport",
+};
+
+function buildPriorityNote(o: FlightOffer, priority: Priority): string {
+  const tradeoff = o.tradeoffs[0] ? `, even though ${o.tradeoffs[0].toLowerCase()}` : "";
+  switch (priority) {
+    case "best_overall": return "";
+    case "cheapest":
+      return `Because you prioritized cheapest, this option wins on lowest total fare ($${Math.round(o.price_total).toLocaleString()})${tradeoff}.`;
+    case "fastest":
+      return `Because you prioritized fastest, this option wins on shortest travel time (${o.duration})${tradeoff}.`;
+    case "nonstop":
+      return o.stops === 0
+        ? `Because you prioritized fewer stops, this nonstop option ranks highest${tradeoff}.`
+        : `No nonstop available — this has the fewest connections (${o.stop_label}).`;
+    case "arrival":
+      return `Because you prioritized arrival timing, this ${o.arrival_timing.toLowerCase()} arrival ranks highest${tradeoff}.`;
+    case "jet_lag":
+      return `Because you prioritized lower jet lag, this option has ${o.jet_lag.toLowerCase()} jet lag risk${tradeoff}.`;
+    case "fatigue":
+      return `Because you prioritized less fatigue, this option has ${o.travel_fatigue.toLowerCase()} travel fatigue${tradeoff}.`;
+    case "comfort":
+      return `Because you prioritized aircraft comfort, this option has ${o.aircraft_comfort.toLowerCase()} comfort${tradeoff}.`;
+    case "airport":
+      return `Because you prioritized airport convenience, this option has ${o.city_access.toLowerCase()} city access${tradeoff}.`;
+  }
+}
+
+function rerankOffers(rawOffers: FlightOffer[], priority: Priority): FlightOffer[] {
+  if (!rawOffers.length) return rawOffers;
+  const w = PRIORITY_WEIGHTS[priority];
+
+  const rescored = rawOffers.map((o) => {
+    const bd = o.score_breakdown;
+    const weighted =
+      (bd.price    ?? 0) * (w.price    ?? 0) +
+      (bd.duration ?? 0) * (w.duration ?? 0) +
+      (bd.stops    ?? 0) * (w.stops    ?? 0) +
+      (bd.timing   ?? 0) * (w.timing   ?? 0) +
+      (bd.cabin    ?? 0) * (w.cabin    ?? 0) +
+      (bd.baggage  ?? 0) * (w.baggage  ?? 0);
+    return { ...o, ai_score: Math.round(Math.max(45, Math.min(99, 50 + weighted * 49))) };
+  });
+
+  rescored.sort((a, b) => b.ai_score - a.ai_score);
+
+  return rescored.map((o, i) => ({
+    ...o,
+    is_recommended: i === 0,
+    recommendation_label: i === 0 ? PRIORITY_TOP_LABEL[priority] : o.recommendation_label,
+  }));
+}
+
 // ── AirportCombobox ───────────────────────────────────────────────────────────
 
 function AirportCombobox({
@@ -399,9 +499,6 @@ const BREAKDOWN_LABELS: Record<string, string> = {
   baggage: "Baggage",
 };
 
-const BREAKDOWN_WEIGHTS: Record<string, number> = {
-  price: 35, duration: 20, stops: 20, timing: 10, cabin: 10, baggage: 5,
-};
 
 function toDisplayScore(v: number): number {
   return Math.round(((v + 1) / 2) * 100);
@@ -460,14 +557,17 @@ const COMFORT_DESC: Record<string, string> = {
 function RecommendationPanel({
   offers,
   topPickRef,
+  priority,
 }: {
   offers: FlightOffer[];
   topPickRef: React.RefObject<HTMLDivElement | null>;
+  priority: Priority;
 }) {
   const pick = offers.find((o) => o.is_recommended) ?? offers[0];
   if (!pick) return null;
 
   const reasons = (pick.wins_on.length > 0 ? pick.wins_on : pick.recommendation_bullets).slice(0, 3);
+  const priorityNote = buildPriorityNote(pick, priority);
 
   return (
     <div className="mb-4 max-w-3xl mx-auto rounded-xl border border-lantern-violet/40 bg-lantern-violet/[0.07] px-4 sm:px-5 py-4 shadow-[0_0_24px_rgba(139,92,246,0.10)]">
@@ -507,6 +607,11 @@ function RecommendationPanel({
         <span className="text-white/25">·</span>
         <span className="text-white/50">{pick.stop_label}</span>
       </div>
+
+      {/* Priority note (shown when a non-default priority is active) */}
+      {priorityNote && (
+        <p className="text-[11px] text-lantern-violet/80 leading-relaxed mb-1.5">{priorityNote}</p>
+      )}
 
       {/* Advisor sentence */}
       {pick.recommendation_why && (
@@ -659,7 +764,11 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
 
 // ── FlightCard ────────────────────────────────────────────────────────────────
 
-function FlightCard({ offer, cardRef }: { offer: FlightOffer; cardRef?: React.RefObject<HTMLDivElement | null> }) {
+function FlightCard({ offer, cardRef, priorityWeights }: {
+  offer: FlightOffer;
+  cardRef?: React.RefObject<HTMLDivElement | null>;
+  priorityWeights: Record<string, number>;
+}) {
   const rec = offer.is_recommended;
   const [scoreOpen, setScoreOpen] = useState(false);
   const [analysisOpen, setAnalysisOpen] = useState(rec);
@@ -680,7 +789,7 @@ function FlightCard({ offer, cardRef }: { offer: FlightOffer; cardRef?: React.Re
       key: k,
       label: BREAKDOWN_LABELS[k] ?? k,
       displayScore: toDisplayScore(v),
-      weight: BREAKDOWN_WEIGHTS[k] ?? 0,
+      weight: Math.round((priorityWeights[k] ?? 0) * 100),
     }))
     .sort((a, b) => b.displayScore - a.displayScore);
 
@@ -1047,6 +1156,12 @@ export default function FlightSearch() {
   const [searchState, setSearchState] = useState<SearchState>("idle");
   const [offers, setOffers] = useState<FlightOffer[]>([]);
   const [searchMeta, setSearchMeta] = useState<SearchMeta | null>(null);
+  const [priority, setPriority] = useState<Priority>("best_overall");
+
+  const displayOffers = useMemo(
+    () => (offers.length > 0 ? rerankOffers(offers, priority) : offers),
+    [offers, priority]
+  );
   const [errorTitle, setErrorTitle] = useState("");
   const [errorBody, setErrorBody] = useState("");
   const [searchedParams, setSearchedParams] = useState<{
@@ -1191,7 +1306,7 @@ export default function FlightSearch() {
           </div>
 
           {/* Dates + Travelers + Cabin */}
-          <div className="flex flex-col sm:flex-row gap-2.5 mb-5">
+          <div className="flex flex-col sm:flex-row gap-2.5 mb-3">
             <div className="flex-1 min-w-0">
               <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-1.5 px-0.5">Departure</label>
               <input
@@ -1233,6 +1348,28 @@ export default function FlightSearch() {
                   <option key={val} value={val}>{lbl}</option>
                 ))}
               </select>
+            </div>
+          </div>
+
+          {/* What matters most? */}
+          <div className="mb-5 pt-3 border-t border-white/[0.06]">
+            <div className="text-[10px] font-semibold text-white/30 uppercase tracking-wider mb-2">
+              What matters most?
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {PRIORITY_CHIPS.map(({ id, label }) => (
+                <button
+                  key={id}
+                  onClick={() => setPriority(id)}
+                  className={`px-3 py-1 rounded-full text-[11px] font-semibold border transition-all ${
+                    priority === id
+                      ? "bg-lantern-violet/25 text-lantern-violet border-lantern-violet/40"
+                      : "bg-white/[0.03] text-white/40 border-white/[0.08] hover:border-white/20 hover:text-white/65"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
             </div>
           </div>
 
