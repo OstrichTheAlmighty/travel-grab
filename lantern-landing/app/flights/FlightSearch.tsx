@@ -1185,7 +1185,6 @@ export default function FlightSearch() {
   const [offers, setOffers] = useState<FlightOffer[]>([]);
   const [searchMeta, setSearchMeta] = useState<SearchMeta | null>(null);
   const [priority, setPriority] = useState<Priority>("best_overall");
-  const [visibleCount, setVisibleCount] = useState(8);
 
   const displayOffers = useMemo(
     () => (offers.length > 0 ? rerankOffers(offers, priority) : offers),
@@ -1260,7 +1259,6 @@ export default function FlightSearch() {
 
       setOffers(data.offers!);
       setSearchMeta(data.meta ?? null);
-      setVisibleCount(8);
       setSearchState("results");
       setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
     } catch {
@@ -1453,14 +1451,14 @@ export default function FlightSearch() {
                   <span className="text-white/55">{searchedParams.travelers} traveler{searchedParams.travelers !== 1 ? "s" : ""}</span>
                 </div>
                 <span className="text-xs text-white/25">
-                  Showing {Math.min(visibleCount, displayOffers.length)} of {displayOffers.length} unique itinerar{displayOffers.length !== 1 ? "ies" : "y"}
+                  Showing {displayOffers.length} unique itinerar{displayOffers.length !== 1 ? "ies" : "y"} — ranked by AI
                 </span>
               </div>
             )}
             <RecommendationPanel offers={displayOffers} topPickRef={topPickRef} priority={priority} />
             <CompareTable offers={displayOffers} />
             <div className="space-y-3 max-w-3xl mx-auto">
-              {displayOffers.slice(0, visibleCount).map((offer, i) => (
+              {displayOffers.map((offer, i) => (
                 <FlightCard
                   key={i}
                   offer={offer}
@@ -1469,16 +1467,6 @@ export default function FlightSearch() {
                 />
               ))}
             </div>
-            {visibleCount < displayOffers.length && (
-              <div className="max-w-3xl mx-auto mt-3">
-                <button
-                  onClick={() => setVisibleCount((n) => n + 8)}
-                  className="w-full py-2.5 rounded-xl text-[12px] font-semibold text-white/45 border border-white/[0.08] hover:text-white/70 hover:border-white/20 transition-colors"
-                >
-                  Load more — {displayOffers.length - visibleCount} remaining
-                </button>
-              </div>
-            )}
           </div>
         )}
 
