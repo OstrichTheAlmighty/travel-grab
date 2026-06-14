@@ -385,12 +385,78 @@ function AirportCombobox({
   );
 }
 
+// ── Score breakdown helpers ───────────────────────────────────────────────────
+
+const BREAKDOWN_LABELS: Record<string, string> = {
+  price: "Price",
+  duration: "Duration",
+  stops: "Routing / Stops",
+  timing: "Arrival Timing",
+  cabin: "Cabin Class",
+  baggage: "Baggage",
+};
+
+const BREAKDOWN_WEIGHTS: Record<string, number> = {
+  price: 35, duration: 20, stops: 20, timing: 10, cabin: 10, baggage: 5,
+};
+
+function parseDurMins(d: string): number {
+  const h = d.match(/(\d+)h/)?.[1];
+  const m = d.match(/(\d+)m/)?.[1];
+  return (h ? parseInt(h) * 60 : 0) + (m ? parseInt(m) : 0);
+}
+
+// Convert raw [-1, 1] component score to 0–100 display score
+function toDisplayScore(v: number): number {
+  return Math.round(((v + 1) / 2) * 100);
+}
+
+function breakdownColor(ds: number): string {
+  if (ds >= 60) return "text-lantern-mint";
+  if (ds >= 40) return "text-white/50";
+  return "text-lantern-gold";
+}
+
+function breakdownBarColor(ds: number): string {
+  if (ds >= 60) return "bg-lantern-mint";
+  if (ds >= 40) return "bg-white/20";
+  return "bg-lantern-gold/70";
+}
+
 // ── FlightCard ────────────────────────────────────────────────────────────────
 
-function FlightCard({ offer }: { offer: FlightOffer }) {
+function FlightCard({ offer, cheapestPrice }: { offer: FlightOffer; cheapestPrice: number }) {
   const rec = offer.is_recommended;
-  const [whyOpen, setWhyOpen] = useState(false);
-  const hasBullets = offer.recommendation_bullets.length > 0;
+  const [scoreOpen, setScoreOpen] = useState(false);
+  const [detailsOpen, setDetailsOpen] = useState(rec); // open by default on recommended
+
+  useEffect(() => {
+    if (!scoreOpen) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setScoreOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [scoreOpen]);
+
+  // Deterministic watchouts — shown on ALL cards
+  const durMins = parseDurMins(offer.duration);
+  const watchOuts: string[] = [];
+  if (offer.aircraft_comfort === "Basic" && durMins >= 300) watchOuts.push("Basic comfort");
+  if (offer.city_access === "Limited") watchOuts.push("Limited city access");
+  if (["Moderate", "High", "Very High"].includes(offer.jet_lag)) watchOuts.push(`${offer.jet_lag} jet lag`);
+  if (offer.stops > 0) watchOuts.push(offer.stops === 1 ? "1 connection" : `${offer.stops} connections`);
+  if (!rec && cheapestPrice > 0 && offer.price_total > cheapestPrice * 1.2) {
+    watchOuts.push(`+$${Math.round(offer.price_total - cheapestPrice).toLocaleString()} vs cheapest`);
+  }
+
+  // Score breakdown sorted highest → lowest
+  const breakdownRows = Object.entries(offer.score_breakdown)
+    .map(([k, v]) => ({
+      key: k,
+      label: BREAKDOWN_LABELS[k] ?? k,
+      displayScore: toDisplayScore(v),
+      weight: BREAKDOWN_WEIGHTS[k] ?? 0,
+    }))
+    .sort((a, b) => b.displayScore - a.displayScore);
 
   return (
     <div
@@ -401,8 +467,8 @@ function FlightCard({ offer }: { offer: FlightOffer }) {
       }`}
     >
       <div className="p-4 sm:p-5">
-        {/* Header row: airline + badges */}
-        <div className="flex items-center justify-between gap-3 mb-3">
+        {/* Airline + badges */}
+        <div className="flex items-center justify-between gap-3 mb-2">
           <div className="flex items-center gap-2.5 min-w-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -438,6 +504,13 @@ function FlightCard({ offer }: { offer: FlightOffer }) {
           </div>
         </div>
 
+        {/* recommendation_why — prose summary for every card */}
+        {offer.recommendation_why && (
+          <p className="text-[11px] text-white/40 mb-3 pl-[34px] leading-relaxed">
+            {offer.recommendation_why}
+          </p>
+        )}
+
         {/* Route bar + price */}
         <div className="flex items-center gap-2 mb-3">
           <div className="text-center flex-shrink-0 w-14">
@@ -469,73 +542,171 @@ function FlightCard({ offer }: { offer: FlightOffer }) {
 
         {/* AI Score bar */}
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-[11px] text-white/35 font-medium flex-shrink-0">AI Score</span>
+          <span className="text-[11px] text-white/30 flex-shrink-0">AI Score</span>
           <div className="flex-1 h-1 rounded-full bg-white/[0.06] overflow-hidden">
             <div
               className={`h-full rounded-full ${offer.ai_score >= 85 ? "bg-lantern-mint" : offer.ai_score >= 70 ? "bg-lantern-blue" : "bg-lantern-gold"}`}
               style={{ width: `${offer.ai_score}%` }}
             />
           </div>
-          <span className={`text-[11px] font-bold tabular-nums flex-shrink-0 ${scoreColor(offer.ai_score)}`}>{offer.ai_score}</span>
+          <span className={`text-[11px] font-bold tabular-nums flex-shrink-0 ${scoreColor(offer.ai_score)}`}>
+            {offer.ai_score}
+          </span>
         </div>
 
-        {/* Indicators */}
-        <div className="flex flex-wrap gap-x-3 gap-y-1">
-          {(
-            [
-              ["Arrival", offer.arrival_timing],
-              ["Jet lag", offer.jet_lag],
-              ["Fatigue", offer.travel_fatigue],
-              ["City access", offer.city_access],
-              ["Comfort", offer.aircraft_comfort],
-            ] as [string, string][]
-          ).filter(([, v]) => v).map(([lbl, val]) => (
-            <div key={lbl} className="flex items-center gap-1">
-              <span className="text-[11px] text-white/30">{lbl}</span>
-              <span className={`text-[11px] font-semibold ${indicatorColor(val)}`}>{val}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Why this flight — always expanded on recommended, collapsible on others */}
-      {hasBullets && rec && (
-        <div className="mx-4 mb-4 sm:mx-5 sm:mb-5 rounded-lg bg-lantern-violet/[0.07] border border-lantern-violet/15 px-3.5 py-2.5">
-          <div className="text-[11px] font-bold text-lantern-violet uppercase tracking-wider mb-1.5">Why this flight</div>
-          <ul className="space-y-1">
-            {offer.recommendation_bullets.map((b, i) => (
-              <li key={i} className="flex gap-1.5 text-[11px] text-white/60 leading-relaxed">
-                <span className="text-lantern-violet mt-0.5 flex-shrink-0">›</span>
-                {b}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      {hasBullets && !rec && (
-        <div className="px-4 pb-3.5 sm:px-5 sm:pb-4">
-          <button
-            onClick={() => setWhyOpen((o) => !o)}
-            className="flex items-center gap-1.5 text-[11px] text-white/30 hover:text-white/50 transition-colors"
-          >
-            <svg
-              className={`w-3 h-3 transition-transform ${whyOpen ? "rotate-180" : ""}`}
-              viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}
-            >
-              <path d="m6 9 6 6 6-6" />
-            </svg>
-            Why this option
-          </button>
-          {whyOpen && (
-            <ul className="mt-2 space-y-1">
+        {/* Why this flight — recommended card, always expanded */}
+        {rec && offer.recommendation_bullets.length > 0 && (
+          <div className="mb-3 rounded-lg bg-lantern-violet/[0.07] border border-lantern-violet/15 px-3.5 py-2.5">
+            <div className="text-[10px] font-bold text-lantern-violet uppercase tracking-wider mb-1.5">Why this flight</div>
+            <ul className="space-y-1">
               {offer.recommendation_bullets.map((b, i) => (
-                <li key={i} className="flex gap-1.5 text-[11px] text-white/45 leading-relaxed">
-                  <span className="text-white/25 mt-0.5 flex-shrink-0">›</span>
+                <li key={i} className="flex gap-1.5 text-[11px] text-white/60 leading-relaxed">
+                  <span className="text-lantern-violet mt-0.5 flex-shrink-0">›</span>
                   {b}
                 </li>
               ))}
             </ul>
-          )}
+          </div>
+        )}
+
+        {/* Why not — shown on ALL cards */}
+        {watchOuts.length > 0 && (
+          <div className="mb-3">
+            <div className="text-[10px] font-bold text-lantern-gold/60 uppercase tracking-wider mb-1.5">Why not</div>
+            <ul className="space-y-1">
+              {watchOuts.map((w) => (
+                <li key={w} className="flex gap-1.5 text-[11px] text-white/45 leading-relaxed">
+                  <svg className="w-3 h-3 text-lantern-gold/50 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+                    <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                    <line x1={12} y1={9} x2={12} y2={13} /><line x1={12} y1={17} x2="12.01" y2={17} />
+                  </svg>
+                  {w}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Collapsible details: indicator chips */}
+        {detailsOpen && (
+          <div className="flex flex-wrap gap-x-3 gap-y-1 mb-3">
+            {(
+              [
+                ["Arrival", offer.arrival_timing],
+                ["Jet lag", offer.jet_lag],
+                ["Fatigue", offer.travel_fatigue],
+                ["City access", offer.city_access],
+                ["Comfort", offer.aircraft_comfort],
+              ] as [string, string][]
+            ).filter(([, v]) => v).map(([lbl, val]) => (
+              <div key={lbl} className="flex items-center gap-1">
+                <span className="text-[11px] text-white/25">{lbl}</span>
+                <span className={`text-[11px] font-semibold ${indicatorColor(val)}`}>{val}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Action buttons */}
+        <div className="flex items-center gap-2 pt-3 border-t border-white/[0.05]">
+          <button
+            onClick={() => setScoreOpen(true)}
+            className="flex items-center gap-1.5 text-[11px] font-medium text-white/40 hover:text-white/70 border border-white/[0.08] hover:border-white/20 rounded-lg px-3 py-1.5 transition-colors"
+          >
+            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+              <path d="M3 3v18h18" /><path d="m19 9-5 5-4-4-3 3" />
+            </svg>
+            View score breakdown
+          </button>
+          <button
+            onClick={() => setDetailsOpen((o) => !o)}
+            className="flex items-center gap-1.5 text-[11px] font-medium text-white/40 hover:text-white/70 border border-white/[0.08] hover:border-white/20 rounded-lg px-3 py-1.5 transition-colors"
+          >
+            <svg
+              className={`w-3 h-3 transition-transform ${detailsOpen ? "rotate-180" : ""}`}
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+            {detailsOpen ? "Hide details" : "View details"}
+          </button>
+        </div>
+      </div>
+
+      {/* AI Score breakdown modal */}
+      {scoreOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+          onClick={() => setScoreOpen(false)}
+        >
+          <div
+            className="w-full max-w-xs rounded-2xl border border-white/10 bg-[#0d1220] p-5 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-start justify-between mb-4">
+              <div>
+                <div className="text-sm font-bold text-white">Score Breakdown</div>
+                <div className="text-[11px] text-white/35 mt-0.5">{offer.airline} · {offer.flight_number}</div>
+              </div>
+              <button
+                onClick={() => setScoreOpen(false)}
+                className="p-1 -mr-1 -mt-0.5 text-white/30 hover:text-white transition-colors rounded-lg hover:bg-white/[0.06]"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                  <path d="M18 6 6 18M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Overall */}
+            <div className="flex items-start gap-3 mb-4 pb-4 border-b border-white/[0.07]">
+              <div className={`text-4xl font-black tabular-nums leading-none flex-shrink-0 ${scoreColor(offer.ai_score)}`}>
+                {offer.ai_score}
+              </div>
+              <div className="min-w-0">
+                <span className={`inline-block text-[10px] font-bold uppercase tracking-widest border rounded-full px-2 py-0.5 mb-1 ${scoreBg(offer.ai_score)}`}>
+                  {offer.recommendation_label}
+                </span>
+                {offer.recommendation_why && (
+                  <p className="text-[11px] text-white/40 leading-relaxed">{offer.recommendation_why}</p>
+                )}
+              </div>
+            </div>
+
+            {/* Per-factor rows */}
+            {breakdownRows.length > 0 ? (
+              <div className="space-y-2.5">
+                {breakdownRows.map(({ key, label, displayScore, weight }) => (
+                  <div key={key}>
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="text-[11px] text-white/65">{label}</span>
+                        <span className="text-[10px] text-white/25">{weight}%</span>
+                      </div>
+                      <span className={`text-[11px] font-bold tabular-nums ${breakdownColor(displayScore)}`}>
+                        {displayScore}
+                      </span>
+                    </div>
+                    <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
+                      <div
+                        className={`h-full rounded-full ${breakdownBarColor(displayScore)}`}
+                        style={{ width: `${displayScore}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-[11px] text-white/30 text-center py-2">Breakdown unavailable.</p>
+            )}
+
+            <button
+              onClick={() => setScoreOpen(false)}
+              className="mt-4 w-full py-2 rounded-xl text-[11px] font-semibold text-white/40 border border-white/[0.08] hover:text-white/70 hover:border-white/20 transition-colors"
+            >
+              Close
+            </button>
+          </div>
         </div>
       )}
     </div>
@@ -820,7 +991,12 @@ export default function FlightSearch() {
               </div>
             )}
             <div className="space-y-3 max-w-3xl mx-auto">
-              {offers.map((offer, i) => <FlightCard key={i} offer={offer} />)}
+              {(() => {
+                const cheapestPrice = offers.length ? Math.min(...offers.map((o) => o.price_total)) : 0;
+                return offers.map((offer, i) => (
+                  <FlightCard key={i} offer={offer} cheapestPrice={cheapestPrice} />
+                ));
+              })()}
             </div>
           </div>
         )}

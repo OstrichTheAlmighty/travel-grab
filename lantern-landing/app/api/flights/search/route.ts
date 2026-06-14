@@ -387,31 +387,88 @@ function travelFatigueLabel(o: FlightOffer): string {
 function whyOverOthers(
   best: FlightOffer,
   offers: FlightOffer[],
-  recs: Map<string, { score: number }>
+  _recs: Map<string, { score: number }>
 ): string[] {
   const others = offers.filter((o) => flightKey(o) !== flightKey(best));
-  if (!others.length) return ["Only returned live fare for these parameters."];
+  if (!others.length) return ["Only live fare returned for these parameters."];
+
+  const bestKey = flightKey(best);
   const bullets: string[] = [];
-  const cheapest = offers.reduce((a, b) => a.price_total <= b.price_total ? a : b);
-  if (flightKey(cheapest) !== flightKey(best)) {
-    bullets.push(`${moneyUsd(best.price_total - cheapest.price_total)} more than the cheapest visible fare.`);
-  } else {
-    bullets.push(`${moneyUsd(best.price_total)} matches the lowest visible fare.`);
-  }
+
+  const cheapest = offers.reduce((a, b) => (a.price_total <= b.price_total ? a : b));
   const fastest = offers.reduce((a, b) =>
     (durationMinutes(a.duration) || 99999) <= (durationMinutes(b.duration) || 99999) ? a : b
   );
-  if (fastest.price_total > best.price_total) {
-    bullets.push(`Saves ${moneyUsd(fastest.price_total - best.price_total)} compared with the fastest option.`);
-  }
+
+  const FATIGUE_RANK: Record<string, number> = { Low: 1, Moderate: 2, High: 3, "Very High": 4 };
+  const JET_LAG_RANK: Record<string, number> = { Low: 1, Moderate: 2, High: 3, "Very High": 4 };
+  const cabinRank = (o: FlightOffer) => {
+    const c = o.cabin.toLowerCase();
+    if (c.includes("first")) return 4;
+    if (c.includes("business")) return 3;
+    if (c.includes("premium")) return 2;
+    return 1;
+  };
+
+  // Nonstop while others require connections
   if (best.stops === 0) {
-    const conn = others.filter((o) => o.stops > 0).length;
-    if (conn) bullets.push(`Nonstop while ${conn} visible option${conn !== 1 ? "s" : ""} require a connection.`);
+    const withConn = others.filter((o) => o.stops > 0).length;
+    if (withConn > 0) {
+      bullets.push(`Nonstop while ${withConn} alternative${withConn !== 1 ? "s" : ""} require a connection.`);
+    }
   }
-  const rec = recs.get(flightKey(best));
-  if (rec?.score) bullets.push(`Ranks highest for selected priorities with an AI Score of ${rec.score}.`);
-  const top = bullets.slice(0, 3);
-  return top.length ? top : ["Best balance of price, routing, and timing from live results."];
+
+  // Lowest travel fatigue among all results
+  const bestFatigueRank = FATIGUE_RANK[travelFatigueLabel(best)] ?? 2;
+  const minFatigueRank = Math.min(...offers.map((o) => FATIGUE_RANK[travelFatigueLabel(o)] ?? 2));
+  if (bestFatigueRank === minFatigueRank) {
+    const higherCount = others.filter((o) => (FATIGUE_RANK[travelFatigueLabel(o)] ?? 2) > bestFatigueRank).length;
+    if (higherCount > 0) bullets.push("Lowest fatigue score among visible results.");
+  }
+
+  // Saves money vs fastest option
+  if (flightKey(fastest) !== bestKey && fastest.price_total > best.price_total) {
+    bullets.push(`Saves ${moneyUsd(fastest.price_total - best.price_total)} vs the fastest option.`);
+  }
+
+  // Saves money vs most comfortable option (higher cabin class)
+  const bestCabinRank = cabinRank(best);
+  const betterCabinOptions = others.filter((o) => cabinRank(o) > bestCabinRank);
+  if (betterCabinOptions.length > 0) {
+    const priciest = betterCabinOptions.reduce((a, b) => (a.price_total >= b.price_total ? a : b));
+    if (priciest.price_total > best.price_total) {
+      bullets.push(`Saves ${moneyUsd(priciest.price_total - best.price_total)} vs the most comfortable option.`);
+    }
+  }
+
+  // Arrives meaningfully earlier in the day than cheapest option
+  if (flightKey(cheapest) !== bestKey) {
+    const diffMin = clockMinutes(cheapest.arrive_time) - clockMinutes(best.arrive_time);
+    if (diffMin >= 90 && diffMin <= 720) {
+      const h = Math.round(diffMin / 60);
+      bullets.push(`Arrives ~${h}h earlier in the day than the cheapest option.`);
+    }
+  }
+
+  // Matches lowest fare
+  if (flightKey(cheapest) === bestKey) {
+    bullets.push(`Matches the lowest visible fare at ${moneyUsd(best.price_total)}.`);
+  }
+
+  // Low jet lag vs alternatives
+  const bestJetLag = jetLagLabel(best);
+  const bestJetLagRank = JET_LAG_RANK[bestJetLag] ?? 2;
+  const minJetLagRank = Math.min(...offers.map((o) => JET_LAG_RANK[jetLagLabel(o)] ?? 2));
+  if (bestJetLagRank === minJetLagRank && bestJetLagRank <= 2) {
+    const higherJetLagCount = others.filter((o) => (JET_LAG_RANK[jetLagLabel(o)] ?? 2) > bestJetLagRank).length;
+    if (higherJetLagCount > 0) {
+      bullets.push(
+        `${bestJetLag === "Low" ? "Low" : "Lower"} jet lag vs ${higherJetLagCount} alternative${higherJetLagCount !== 1 ? "s" : ""}.`
+      );
+    }
+  }
+
+  return bullets.slice(0, 3).length ? bullets.slice(0, 3) : ["Best balance of price, routing, and timing from visible results."];
 }
 
 function buildRecommendationMap(offers: FlightOffer[], scoreMap: Map<string, { score: number; breakdown: Record<string, number> }>): Map<string, { score: number; breakdown: Record<string, number>; label: string; why: string }> {
