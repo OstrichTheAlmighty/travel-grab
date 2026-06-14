@@ -1425,16 +1425,17 @@ export default function FlightSearch() {
                 <span className="text-xs text-white/25">{offers.length} fares — ranked by AI</span>
               </div>
             )}
-            <RecommendationPanel offers={offers} topPickRef={topPickRef} />
-            <CompareTable offers={offers} />
+            <RecommendationPanel offers={displayOffers} topPickRef={topPickRef} priority={priority} />
+            <CompareTable offers={displayOffers} />
             <div className="space-y-3 max-w-3xl mx-auto">
-              {offers.map((offer, i) => {
-                const recIdx = offers.findIndex((o) => o.is_recommended);
-                const pickIdx = recIdx >= 0 ? recIdx : 0;
-                return (
-                  <FlightCard key={i} offer={offer} cardRef={i === pickIdx ? topPickRef : undefined} />
-                );
-              })}
+              {displayOffers.map((offer, i) => (
+                <FlightCard
+                  key={i}
+                  offer={offer}
+                  cardRef={i === 0 ? topPickRef : undefined}
+                  priorityWeights={PRIORITY_WEIGHTS[priority]}
+                />
+              ))}
             </div>
           </div>
         )}
