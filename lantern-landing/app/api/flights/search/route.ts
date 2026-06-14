@@ -793,25 +793,39 @@ async function generateOpenAIExplanation(
 
   const priceDiffVsCheapest = Math.round(pick.price_total - cheapest.price_total);
 
-  const prompt = `You are a concise travel advisor. A deterministic scoring system already ranked these flights — do NOT re-rank or change scores. Your only job: write human, specific explanations for the top pick.
+  const prompt = `You are a sharp, no-nonsense travel advisor. A scoring system already chose the top pick — accept that result and write honest, specific explanations only. Do NOT re-rank, question the scores, or introduce new opinions.
 
-TOP PICK (ai_score is the source of truth, do not question it):
+TOP PICK:
 ${JSON.stringify(fmt(pick), null, 2)}
 
-ALTERNATIVES (context only):
+ALTERNATIVES:
 ${JSON.stringify(alternatives, null, 2)}
 
-Context:
-- Cheapest overall: ${cheapest.airline} $${Math.round(cheapest.price_total)}
-- Fastest overall: ${fastest.airline} ${fastest.duration}
-- Top pick costs $${priceDiffVsCheapest} ${priceDiffVsCheapest >= 0 ? "more than" : "less than"} cheapest
+Key facts:
+- Cheapest: ${cheapest.airline} $${Math.round(cheapest.price_total)}
+- Fastest: ${fastest.airline} ${fastest.duration}
+- Top pick vs cheapest: ${priceDiffVsCheapest >= 0 ? `$${priceDiffVsCheapest} more` : `$${Math.abs(priceDiffVsCheapest)} cheaper`}
 
-Respond with ONLY a JSON object (no markdown):
+Write a JSON object with exactly these four keys. Follow every rule below.
+
+RULES:
+- Use exact numbers from the data (dollars, hours, minutes, times). Never say "significantly", "ideal", "unbeatable", "best choice", or "great option".
+- advisor_summary: 1-2 sentences. State the clearest reason this flight wins, then one honest tradeoff if relevant. If it is cheap and fast, say so plainly. Do not explain short or obvious flights at length.
+- why_this: 2-3 short bullets. Each must cite a specific number or fact. No filler.
+- tradeoffs: 1-2 short bullets. Be honest. Use exact price or time differences. Omit if there are no real tradeoffs.
+- comparison_note: 1 sentence. Compare top pick to the closest alternative using actual numbers (price gap, time gap, stops difference).
+
+Example advisor_summary style: "This is the cheapest nonstop at $312, and it arrives at 14:30 — a reasonable time with low fatigue. The next option is $180 more for a similar flight time."
+
+Example why_this style: ["Nonstop — saves ~1h 20m vs the cheapest connecting option", "$180 cheaper than the next nonstop", "Arrives at 14:30, avoiding late-night fatigue"]
+
+Example tradeoffs style: ["Business class not available — economy only", "Slight layover risk on the return leg"]
+
 {
-  "advisor_summary": "<2 sentences max. Explain why this is the best balanced pick, referencing specific price/time/comfort numbers from the data.>",
-  "why_this": ["<specific win using real numbers>", "<specific win>", "<optional 3rd specific win>"],
-  "tradeoffs": ["<honest tradeoff with real numbers>", "<optional 2nd tradeoff>"],
-  "comparison_note": "<1 sentence comparing top pick to the next best alternative using real data>"
+  "advisor_summary": "...",
+  "why_this": ["...", "..."],
+  "tradeoffs": ["..."],
+  "comparison_note": "..."
 }`;
 
   try {
