@@ -232,9 +232,9 @@ function scoreBg(score: number): string {
 }
 
 function indicatorColor(label: string): string {
-  if (["Great", "Good", "Low", "Excellent"].includes(label)) return "text-lantern-mint";
-  if (["Okay", "Moderate", "Basic"].includes(label)) return "text-lantern-gold";
-  return "text-red-400";
+  if (["Great", "Good", "Low", "Excellent", "Morning", "Afternoon"].includes(label)) return "text-lantern-mint";
+  if (["Okay", "Moderate", "Basic", "Evening", "Early Morning"].includes(label)) return "text-lantern-gold";
+  return "text-red-400"; // High, Very High, Limited, Late Night
 }
 
 // ── AirportCombobox ───────────────────────────────────────────────────────────
@@ -385,7 +385,7 @@ function AirportCombobox({
   );
 }
 
-// ── Score breakdown helpers ───────────────────────────────────────────────────
+// ── Score / breakdown helpers ─────────────────────────────────────────────────
 
 const BREAKDOWN_LABELS: Record<string, string> = {
   price: "Price",
@@ -406,7 +406,6 @@ function parseDurMins(d: string): number {
   return (h ? parseInt(h) * 60 : 0) + (m ? parseInt(m) : 0);
 }
 
-// Convert raw [-1, 1] component score to 0–100 display score
 function toDisplayScore(v: number): number {
   return Math.round(((v + 1) / 2) * 100);
 }
@@ -423,12 +422,129 @@ function breakdownBarColor(ds: number): string {
   return "bg-lantern-gold/70";
 }
 
+// ── Trip impact descriptions ──────────────────────────────────────────────────
+
+const ARRIVAL_TIMING_DESC: Record<string, string> = {
+  "Early Morning": "Very early arrival — plan for limited transit options.",
+  "Morning": "Morning arrival, giving you the full day at your destination.",
+  "Afternoon": "Afternoon arrival, good timing for most itineraries.",
+  "Evening": "Evening arrival — limited daytime hours on arrival day.",
+  "Late Night": "Late night arrival — plan ahead for transport and rest.",
+};
+
+const JET_LAG_DESC: Record<string, string> = {
+  "Low": "Minimal time zone shift, easy to adjust.",
+  "Moderate": "Moderate time zone change, expect mild adjustment.",
+  "High": "Significant time zone shift — plan for jet lag recovery.",
+  "Very High": "Major time zone difference — budget extra recovery days.",
+};
+
+const FATIGUE_DESC: Record<string, string> = {
+  "Low": "Short or comfortable journey with minimal fatigue expected.",
+  "Moderate": "Moderate journey length or a short connecting itinerary.",
+  "High": "Long flight or multiple connections — expect fatigue.",
+  "Very High": "Very long or heavily connected journey — high fatigue risk.",
+};
+
+const CITY_ACCESS_DESC: Record<string, string> = {
+  "Good": "Well-connected airport with convenient city transit.",
+  "Moderate": "Standard airport access, may need a transfer.",
+  "Limited": "Secondary or remote airport — allow extra time to reach the city.",
+};
+
+const COMFORT_DESC: Record<string, string> = {
+  "Excellent": "Modern wide-body aircraft with premium comfort signals.",
+  "Good": "Modern aircraft with solid amenity and comfort ratings.",
+  "Basic": "Standard economy with limited comfort signals.",
+};
+
+// ── Deterministic bullet builders ─────────────────────────────────────────────
+
+const cabinRankLocal = (cabin: string) => {
+  const c = cabin.toLowerCase();
+  if (c.includes("first")) return 4;
+  if (c.includes("business")) return 3;
+  if (c.includes("premium")) return 2;
+  return 1;
+};
+
+function buildWhyThis(offer: FlightOffer, cheapestPrice: number, fastestDurMins: number): string[] {
+  const durMins = parseDurMins(offer.duration);
+  const bullets: string[] = [];
+
+  if (cheapestPrice > 0 && offer.price_total <= cheapestPrice * 1.02) {
+    bullets.push("Matches or ties the lowest visible fare.");
+  } else if (cheapestPrice > 0 && offer.price_total <= cheapestPrice * 1.12) {
+    bullets.push(`Within ${Math.round((offer.price_total / cheapestPrice - 1) * 100)}% of the cheapest available fare.`);
+  }
+
+  if (offer.stops === 0) bullets.push("Nonstop — no connections required.");
+
+  if (fastestDurMins > 0 && durMins <= fastestDurMins + 15) {
+    bullets.push("One of the fastest options for this route.");
+  }
+
+  if (offer.arrival_timing === "Morning") bullets.push("Morning arrival — full day at destination.");
+  else if (offer.arrival_timing === "Afternoon") bullets.push("Afternoon arrival, good timing for most trips.");
+
+  if (offer.travel_fatigue === "Low") bullets.push("Low travel fatigue expected on this route.");
+
+  if (["Excellent", "Good"].includes(offer.aircraft_comfort)) {
+    bullets.push(`${offer.aircraft_comfort} aircraft comfort rating.`);
+  }
+
+  return bullets.slice(0, 3);
+}
+
+function buildWhyNot(
+  offer: FlightOffer,
+  cheapestPrice: number,
+  fastestDurMins: number,
+  betterComfortExists: boolean
+): string[] {
+  const durMins = parseDurMins(offer.duration);
+  const out: string[] = [];
+
+  if (cheapestPrice > 0 && offer.price_total > cheapestPrice + 50) {
+    out.push(`$${Math.round(offer.price_total - cheapestPrice).toLocaleString()} more than the cheapest visible fare.`);
+  }
+
+  if (offer.aircraft_comfort === "Basic" && betterComfortExists) {
+    out.push("Basic comfort compared with more comfortable options in these results.");
+  } else if (offer.aircraft_comfort === "Basic" && durMins >= 300) {
+    out.push("Basic comfort cabin for a long-haul flight.");
+  }
+
+  if (fastestDurMins > 0 && durMins > fastestDurMins + 45) {
+    const extra = durMins - fastestDurMins;
+    const h = Math.floor(extra / 60);
+    const m = extra % 60;
+    const label = h > 0 ? (m > 0 ? `${h}h ${m}m` : `${h}h`) : `${m}m`;
+    out.push(`Not the fastest option — ${label} longer than quickest.`);
+  }
+
+  if (offer.arrival_timing === "Late Night") out.push("Late night arrival — plan ahead for transport.");
+  else if (offer.arrival_timing === "Early Morning") out.push("Very early arrival — limited transit options.");
+
+  if (offer.stops > 0) {
+    out.push(offer.stops === 1 ? "Requires a connection." : `Requires ${offer.stops} connections.`);
+  }
+
+  if (offer.city_access === "Limited") out.push("Remote destination airport — allow extra travel time to the city.");
+
+  if (offer.jet_lag === "Very High") out.push("Very high jet lag risk on this route.");
+  else if (offer.jet_lag === "High") out.push("High jet lag risk — plan for adjustment days.");
+
+  return out.slice(0, 3);
+}
+
 // ── FlightCard ────────────────────────────────────────────────────────────────
 
-function FlightCard({ offer, cheapestPrice }: { offer: FlightOffer; cheapestPrice: number }) {
+function FlightCard({ offer, allOffers }: { offer: FlightOffer; allOffers: FlightOffer[] }) {
   const rec = offer.is_recommended;
   const [scoreOpen, setScoreOpen] = useState(false);
-  const [detailsOpen, setDetailsOpen] = useState(rec); // open by default on recommended
+  const [analysisOpen, setAnalysisOpen] = useState(rec);
+  const [detailsOpen, setDetailsOpen] = useState(false);
 
   useEffect(() => {
     if (!scoreOpen) return;
@@ -437,18 +553,20 @@ function FlightCard({ offer, cheapestPrice }: { offer: FlightOffer; cheapestPric
     return () => window.removeEventListener("keydown", onKey);
   }, [scoreOpen]);
 
-  // Deterministic watchouts — shown on ALL cards
-  const durMins = parseDurMins(offer.duration);
-  const watchOuts: string[] = [];
-  if (offer.aircraft_comfort === "Basic" && durMins >= 300) watchOuts.push("Basic comfort");
-  if (offer.city_access === "Limited") watchOuts.push("Limited city access");
-  if (["Moderate", "High", "Very High"].includes(offer.jet_lag)) watchOuts.push(`${offer.jet_lag} jet lag`);
-  if (offer.stops > 0) watchOuts.push(offer.stops === 1 ? "1 connection" : `${offer.stops} connections`);
-  if (!rec && cheapestPrice > 0 && offer.price_total > cheapestPrice * 1.2) {
-    watchOuts.push(`+$${Math.round(offer.price_total - cheapestPrice).toLocaleString()} vs cheapest`);
-  }
+  const offerKey = (o: FlightOffer) => `${o.airline_code}${o.flight_number}`;
+  const cheapestPrice = Math.min(...allOffers.map((o) => o.price_total));
+  const fastestDurMins = Math.min(...allOffers.map((o) => parseDurMins(o.duration)));
+  const betterComfortExists = allOffers.some(
+    (o) => offerKey(o) !== offerKey(offer) && cabinRankLocal(o.cabin) > cabinRankLocal(offer.cabin)
+  );
 
-  // Score breakdown sorted highest → lowest
+  const whyBullets =
+    offer.recommendation_bullets.length > 0
+      ? offer.recommendation_bullets
+      : buildWhyThis(offer, cheapestPrice, fastestDurMins);
+
+  const whyNot = buildWhyNot(offer, cheapestPrice, fastestDurMins, betterComfortExists);
+
   const breakdownRows = Object.entries(offer.score_breakdown)
     .map(([k, v]) => ({
       key: k,
@@ -457,6 +575,14 @@ function FlightCard({ offer, cheapestPrice }: { offer: FlightOffer; cheapestPric
       weight: BREAKDOWN_WEIGHTS[k] ?? 0,
     }))
     .sort((a, b) => b.displayScore - a.displayScore);
+
+  const tripImpact = [
+    { key: "timing", label: "Arrival Timing", value: offer.arrival_timing, desc: ARRIVAL_TIMING_DESC[offer.arrival_timing] },
+    { key: "jetlag", label: "Jet Lag", value: offer.jet_lag, desc: JET_LAG_DESC[offer.jet_lag] },
+    { key: "fatigue", label: "Travel Fatigue", value: offer.travel_fatigue, desc: FATIGUE_DESC[offer.travel_fatigue] },
+    { key: "access", label: "City Access", value: offer.city_access, desc: CITY_ACCESS_DESC[offer.city_access] },
+    { key: "comfort", label: "Aircraft Comfort", value: offer.aircraft_comfort, desc: COMFORT_DESC[offer.aircraft_comfort] },
+  ].filter((b) => b.value);
 
   return (
     <div
@@ -467,58 +593,64 @@ function FlightCard({ offer, cheapestPrice }: { offer: FlightOffer; cheapestPric
       }`}
     >
       <div className="p-4 sm:p-5">
-        {/* Airline + badges */}
-        <div className="flex items-center justify-between gap-3 mb-2">
-          <div className="flex items-center gap-2.5 min-w-0">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={`https://www.gstatic.com/flights/airline_logos/70px/${offer.airline_code}.png`}
-              alt={offer.airline}
-              width={24}
-              height={24}
-              className="rounded flex-shrink-0 object-contain"
-              onError={(e) => {
-                const el = e.currentTarget;
-                el.style.display = "none";
-                const sib = el.nextElementSibling as HTMLElement | null;
-                if (sib) sib.style.display = "flex";
-              }}
-            />
-            <div className="w-6 h-6 rounded bg-white/[0.08] items-center justify-center text-[10px] font-bold text-white/60 flex-shrink-0 hidden">
-              {offer.airline_code.slice(0, 2)}
+
+        {/* ── Header: airline + advisor sentence + price ── */}
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <div className="flex items-start gap-2.5 min-w-0 flex-1">
+            <div className="flex-shrink-0 mt-0.5">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`https://www.gstatic.com/flights/airline_logos/70px/${offer.airline_code}.png`}
+                alt={offer.airline}
+                width={22}
+                height={22}
+                className="rounded object-contain"
+                onError={(e) => {
+                  const el = e.currentTarget;
+                  el.style.display = "none";
+                  const sib = el.nextElementSibling as HTMLElement | null;
+                  if (sib) sib.style.display = "flex";
+                }}
+              />
+              <div className="w-[22px] h-[22px] rounded bg-white/[0.08] items-center justify-center text-[9px] font-bold text-white/60 hidden">
+                {offer.airline_code.slice(0, 2)}
+              </div>
             </div>
-            <div className="min-w-0">
-              <div className="text-sm font-bold text-white truncate">{offer.airline}</div>
-              <div className="text-[11px] text-white/40 font-mono">{offer.flight_number}</div>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-1.5 flex-wrap mb-1">
+                <span className="text-sm font-bold text-white leading-tight">{offer.airline}</span>
+                {rec && (
+                  <span className="text-[10px] font-black uppercase tracking-widest text-lantern-violet border border-lantern-violet/50 bg-lantern-violet/15 rounded-full px-2 py-0.5 leading-none">
+                    AI Pick
+                  </span>
+                )}
+                <span className={`text-[10px] font-bold uppercase tracking-widest border rounded-full px-2 py-0.5 leading-none ${scoreBg(offer.ai_score)}`}>
+                  {offer.recommendation_label}
+                </span>
+              </div>
+              {offer.recommendation_why && (
+                <p className={`text-[11px] leading-relaxed ${rec ? "text-white/60" : "text-white/40"}`}>
+                  {offer.recommendation_why}
+                </p>
+              )}
             </div>
           </div>
-          <div className="flex items-center gap-1.5 flex-shrink-0">
-            {rec && (
-              <span className="text-[10px] font-black uppercase tracking-widest text-lantern-violet border border-lantern-violet/50 bg-lantern-violet/15 rounded-full px-2.5 py-0.5">
-                AI Pick
-              </span>
-            )}
-            <span className={`text-[10px] font-bold uppercase tracking-widest border rounded-full px-2.5 py-0.5 ${scoreBg(offer.ai_score)}`}>
-              {offer.recommendation_label}
-            </span>
+          <div className="text-right flex-shrink-0">
+            <div className={`text-2xl font-black tabular-nums leading-none ${scoreColor(offer.ai_score)}`}>
+              ${Math.round(offer.price_total).toLocaleString()}
+            </div>
+            <div className="text-[11px] text-white/35 mt-0.5">{offer.cabin}</div>
           </div>
         </div>
 
-        {/* recommendation_why — prose summary for every card */}
-        {offer.recommendation_why && (
-          <p className="text-[11px] text-white/40 mb-3 pl-[34px] leading-relaxed">
-            {offer.recommendation_why}
-          </p>
-        )}
-
-        {/* Route bar + price */}
-        <div className="flex items-center gap-2 mb-3">
-          <div className="text-center flex-shrink-0 w-14">
-            <div className="text-lg font-black text-white tabular-nums leading-tight">{offer.depart_time}</div>
-            <div className="text-[11px] font-mono font-bold text-white/45">{offer.origin}</div>
+        {/* ── Route bar ── */}
+        <div className="flex items-center gap-2 mb-3 py-2 px-3 rounded-lg bg-white/[0.025] border border-white/[0.05]">
+          <div className="text-center flex-shrink-0 min-w-[3rem]">
+            <div className="text-base font-black text-white tabular-nums leading-tight">{offer.depart_time}</div>
+            <div className="text-[10px] font-mono font-bold text-white/40">{offer.origin}</div>
           </div>
           <div className="flex-1 flex flex-col items-center gap-0.5 min-w-0 px-1">
-            <div className="text-[10px] text-white/35 font-medium">{offer.duration}</div>
+            <div className="text-[10px] text-white/30 font-medium">{offer.duration}</div>
             <div className="w-full flex items-center gap-1">
               <div className="flex-1 h-px bg-white/10" />
               <svg className="w-3 h-3 text-white/20 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -526,24 +658,18 @@ function FlightCard({ offer, cheapestPrice }: { offer: FlightOffer; cheapestPric
               </svg>
               <div className="flex-1 h-px bg-white/10" />
             </div>
-            <div className="text-[10px] text-white/35 font-medium">{offer.stop_label}</div>
+            <div className="text-[10px] text-white/30 font-medium">{offer.stop_label}</div>
           </div>
-          <div className="text-center flex-shrink-0 w-14">
-            <div className="text-lg font-black text-white tabular-nums leading-tight">{offer.arrive_time}</div>
-            <div className="text-[11px] font-mono font-bold text-white/45">{offer.destination}</div>
-          </div>
-          <div className="ml-auto pl-3 text-right flex-shrink-0">
-            <div className={`text-3xl font-black tabular-nums leading-none ${scoreColor(offer.ai_score)}`}>
-              ${Math.round(offer.price_total).toLocaleString()}
-            </div>
-            <div className="text-[11px] text-white/35 mt-0.5">{offer.cabin}</div>
+          <div className="text-center flex-shrink-0 min-w-[3rem]">
+            <div className="text-base font-black text-white tabular-nums leading-tight">{offer.arrive_time}</div>
+            <div className="text-[10px] font-mono font-bold text-white/40">{offer.destination}</div>
           </div>
         </div>
 
-        {/* AI Score bar */}
+        {/* ── AI Score bar ── */}
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-[11px] text-white/30 flex-shrink-0">AI Score</span>
-          <div className="flex-1 h-1 rounded-full bg-white/[0.06] overflow-hidden">
+          <span className="text-[11px] text-white/25 flex-shrink-0 w-14">AI Score</span>
+          <div className="flex-1 h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
             <div
               className={`h-full rounded-full ${offer.ai_score >= 85 ? "bg-lantern-mint" : offer.ai_score >= 70 ? "bg-lantern-blue" : "bg-lantern-gold"}`}
               style={{ width: `${offer.ai_score}%` }}
@@ -554,61 +680,97 @@ function FlightCard({ offer, cheapestPrice }: { offer: FlightOffer; cheapestPric
           </span>
         </div>
 
-        {/* Why this flight — recommended card, always expanded */}
-        {rec && offer.recommendation_bullets.length > 0 && (
-          <div className="mb-3 rounded-lg bg-lantern-violet/[0.07] border border-lantern-violet/15 px-3.5 py-2.5">
-            <div className="text-[10px] font-bold text-lantern-violet uppercase tracking-wider mb-1.5">Why this flight</div>
-            <ul className="space-y-1">
-              {offer.recommendation_bullets.map((b, i) => (
-                <li key={i} className="flex gap-1.5 text-[11px] text-white/60 leading-relaxed">
-                  <span className="text-lantern-violet mt-0.5 flex-shrink-0">›</span>
-                  {b}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {/* ── Analysis section: expanded on rec, toggleable on others ── */}
+        {analysisOpen && (
+          <div className="space-y-3 mt-1">
 
-        {/* Why not — shown on ALL cards */}
-        {watchOuts.length > 0 && (
-          <div className="mb-3">
-            <div className="text-[10px] font-bold text-lantern-gold/60 uppercase tracking-wider mb-1.5">Why not</div>
-            <ul className="space-y-1">
-              {watchOuts.map((w) => (
-                <li key={w} className="flex gap-1.5 text-[11px] text-white/45 leading-relaxed">
-                  <svg className="w-3 h-3 text-lantern-gold/50 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
-                    <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
-                    <line x1={12} y1={9} x2={12} y2={13} /><line x1={12} y1={17} x2="12.01" y2={17} />
-                  </svg>
-                  {w}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {/* Collapsible details: indicator chips */}
-        {detailsOpen && (
-          <div className="flex flex-wrap gap-x-3 gap-y-1 mb-3">
-            {(
-              [
-                ["Arrival", offer.arrival_timing],
-                ["Jet lag", offer.jet_lag],
-                ["Fatigue", offer.travel_fatigue],
-                ["City access", offer.city_access],
-                ["Comfort", offer.aircraft_comfort],
-              ] as [string, string][]
-            ).filter(([, v]) => v).map(([lbl, val]) => (
-              <div key={lbl} className="flex items-center gap-1">
-                <span className="text-[11px] text-white/25">{lbl}</span>
-                <span className={`text-[11px] font-semibold ${indicatorColor(val)}`}>{val}</span>
+            {/* Why this flight */}
+            {whyBullets.length > 0 && (
+              <div className={`rounded-lg px-3.5 py-2.5 ${rec ? "bg-lantern-violet/[0.08] border border-lantern-violet/20" : "bg-white/[0.03] border border-white/[0.06]"}`}>
+                <div className={`text-[10px] font-bold uppercase tracking-wider mb-1.5 ${rec ? "text-lantern-violet" : "text-white/30"}`}>
+                  Why this flight
+                </div>
+                <ul className="space-y-1">
+                  {whyBullets.map((b, i) => (
+                    <li key={i} className="flex gap-1.5 text-[11px] text-white/55 leading-relaxed">
+                      <span className={`mt-0.5 flex-shrink-0 ${rec ? "text-lantern-violet" : "text-white/30"}`}>›</span>
+                      {b}
+                    </li>
+                  ))}
+                </ul>
               </div>
-            ))}
+            )}
+
+            {/* Why not */}
+            {whyNot.length > 0 && (
+              <div>
+                <div className="text-[10px] font-bold text-lantern-gold/60 uppercase tracking-wider mb-1.5">Why not</div>
+                <ul className="space-y-1">
+                  {whyNot.map((w, i) => (
+                    <li key={i} className="flex gap-1.5 text-[11px] text-white/45 leading-relaxed">
+                      <svg className="w-3 h-3 text-lantern-gold/50 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                        <line x1={12} y1={9} x2={12} y2={13} /><line x1={12} y1={17} x2="12.01" y2={17} />
+                      </svg>
+                      {w}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Trip impact blocks */}
+            {tripImpact.length > 0 && (
+              <div>
+                <div className="text-[10px] font-bold text-white/20 uppercase tracking-wider mb-2">Trip impact</div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+                  {tripImpact.map(({ key, label, value, desc }) => (
+                    <div key={key} className="rounded-lg bg-white/[0.025] border border-white/[0.06] px-2.5 py-2">
+                      <div className="text-[10px] text-white/25 font-medium mb-0.5">{label}</div>
+                      <div className={`text-[11px] font-bold mb-0.5 ${indicatorColor(value)}`}>{value}</div>
+                      {desc && <div className="text-[10px] text-white/25 leading-snug">{desc}</div>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
           </div>
         )}
 
-        {/* Action buttons */}
-        <div className="flex items-center gap-2 pt-3 border-t border-white/[0.05]">
+        {/* ── Flight details ── */}
+        {detailsOpen && (
+          <div className="mt-3 rounded-lg bg-white/[0.02] border border-white/[0.05] px-3.5 py-3">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
+              {(
+                [
+                  ["Airline", offer.airline],
+                  ["Flight", offer.flight_number],
+                  ["From", offer.origin],
+                  ["To", offer.destination],
+                  ["Departs", offer.depart_time],
+                  ["Arrives", offer.arrive_time],
+                  ["Duration", offer.duration],
+                  ["Stops", offer.stop_label],
+                  ["Cabin", offer.cabin],
+                  ["Baggage", offer.baggage],
+                  ["Total", `$${Math.round(offer.price_total).toLocaleString()}`],
+                  ...(offer.price_per_person !== offer.price_total
+                    ? [["Per person", `$${Math.round(offer.price_per_person).toLocaleString()}`] as [string, string]]
+                    : []),
+                ] as [string, string][]
+              ).map(([label, val]) => (
+                <div key={label} className="flex items-baseline gap-1.5">
+                  <span className="text-[10px] text-white/25 w-14 flex-shrink-0">{label}</span>
+                  <span className="text-[11px] text-white/60 font-medium">{val}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ── Action row ── */}
+        <div className="flex items-center gap-2 pt-3 mt-3 border-t border-white/[0.05]">
           <button
             onClick={() => setScoreOpen(true)}
             className="flex items-center gap-1.5 text-[11px] font-medium text-white/40 hover:text-white/70 border border-white/[0.08] hover:border-white/20 rounded-lg px-3 py-1.5 transition-colors"
@@ -616,24 +778,48 @@ function FlightCard({ offer, cheapestPrice }: { offer: FlightOffer; cheapestPric
             <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
               <path d="M3 3v18h18" /><path d="m19 9-5 5-4-4-3 3" />
             </svg>
-            View score breakdown
+            Score
           </button>
+          {!rec && (
+            <button
+              onClick={() => setAnalysisOpen((o) => !o)}
+              className={`flex items-center gap-1.5 text-[11px] font-medium border rounded-lg px-3 py-1.5 transition-colors ${
+                analysisOpen
+                  ? "text-white/60 border-white/15 bg-white/[0.04]"
+                  : "text-white/40 hover:text-white/70 border-white/[0.08] hover:border-white/20"
+              }`}
+            >
+              <svg
+                className={`w-3 h-3 transition-transform ${analysisOpen ? "rotate-180" : ""}`}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+              {analysisOpen ? "Hide analysis" : "Analysis"}
+            </button>
+          )}
           <button
             onClick={() => setDetailsOpen((o) => !o)}
-            className="flex items-center gap-1.5 text-[11px] font-medium text-white/40 hover:text-white/70 border border-white/[0.08] hover:border-white/20 rounded-lg px-3 py-1.5 transition-colors"
+            className="ml-auto flex items-center gap-1.5 text-[11px] font-medium text-white/40 hover:text-white/70 border border-white/[0.08] hover:border-white/20 rounded-lg px-3 py-1.5 transition-colors"
           >
             <svg
               className={`w-3 h-3 transition-transform ${detailsOpen ? "rotate-180" : ""}`}
-              viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
             >
               <path d="m6 9 6 6 6-6" />
             </svg>
-            {detailsOpen ? "Hide details" : "View details"}
+            {detailsOpen ? "Hide details" : "Details"}
           </button>
         </div>
       </div>
 
-      {/* AI Score breakdown modal */}
+      {/* ── AI Score breakdown modal ── */}
       {scoreOpen && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
@@ -658,8 +844,7 @@ function FlightCard({ offer, cheapestPrice }: { offer: FlightOffer; cheapestPric
               </button>
             </div>
 
-            {/* Overall */}
-            <div className="flex items-start gap-3 mb-4 pb-4 border-b border-white/[0.07]">
+            <div className="flex items-start gap-3 mb-3 pb-3 border-b border-white/[0.07]">
               <div className={`text-4xl font-black tabular-nums leading-none flex-shrink-0 ${scoreColor(offer.ai_score)}`}>
                 {offer.ai_score}
               </div>
@@ -673,7 +858,10 @@ function FlightCard({ offer, cheapestPrice }: { offer: FlightOffer; cheapestPric
               </div>
             </div>
 
-            {/* Per-factor rows */}
+            <p className="text-[10px] text-white/30 leading-relaxed mb-3">
+              Higher score means stronger balance of price, timing, nonstop routing, comfort, and airport convenience.
+            </p>
+
             {breakdownRows.length > 0 ? (
               <div className="space-y-2.5">
                 {breakdownRows.map(({ key, label, displayScore, weight }) => (
@@ -991,12 +1179,9 @@ export default function FlightSearch() {
               </div>
             )}
             <div className="space-y-3 max-w-3xl mx-auto">
-              {(() => {
-                const cheapestPrice = offers.length ? Math.min(...offers.map((o) => o.price_total)) : 0;
-                return offers.map((offer, i) => (
-                  <FlightCard key={i} offer={offer} cheapestPrice={cheapestPrice} />
-                ));
-              })()}
+              {offers.map((offer, i) => (
+                <FlightCard key={i} offer={offer} allOffers={offers} />
+              ))}
             </div>
           </div>
         )}
