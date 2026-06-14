@@ -301,6 +301,20 @@ function normalizeFlight(raw: DuffelRecord, adults: number): FlightOffer | null 
   };
 }
 
+// ── Deduplication ────────────────────────────────────────────────────────────
+
+function deduplicateOffers(offers: FlightOffer[]): FlightOffer[] {
+  const best = new Map<string, FlightOffer>();
+  for (const o of offers) {
+    const key = [o.airline, o.flight_number, o.origin, o.destination, o.depart_time, o.arrive_time, o.duration, o.stops].join("|");
+    const existing = best.get(key);
+    if (!existing || o.price_total < existing.price_total) {
+      best.set(key, o);
+    }
+  }
+  return Array.from(best.values());
+}
+
 // ── Scoring ──────────────────────────────────────────────────────────────────
 
 function scoreComponents(o: FlightOffer, medP: number, medD: number): Record<string, number> {
@@ -692,7 +706,10 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
   const rawOffers = body?.data?.offers ?? [];
   // Keep all offers including test/sandbox so search works with a Duffel test key
   const normedRaw = rawOffers.slice(0, 10).map(normalizeDuffelOffer).filter(Boolean) as DuffelRecord[];
-  const normed = normedRaw.map((r) => normalizeFlight(r, params.adults)).filter(Boolean) as FlightOffer[];
+  const normedAll = normedRaw.map((r) => normalizeFlight(r, params.adults)).filter(Boolean) as FlightOffer[];
+  console.log(`[dedupe] offers before: ${normedAll.length}`);
+  const normed = deduplicateOffers(normedAll);
+  console.log(`[dedupe] offers after: ${normed.length}`);
 
   if (!normed.length) {
     return {
