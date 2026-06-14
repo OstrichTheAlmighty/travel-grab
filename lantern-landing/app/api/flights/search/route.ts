@@ -645,29 +645,59 @@ function buildRecommendationMap(
   offers: FlightOffer[],
   scoreMap: Map<string, { score: number; breakdown: Record<string, number> }>
 ): Map<string, { score: number; breakdown: Record<string, number>; label: string }> {
-  const cheapest = offers.reduce((a, b) => a.price_total <= b.price_total ? a : b);
-  const fastest = offers.reduce((a, b) =>
-    (durationMinutes(a.duration) || 99999) <= (durationMinutes(b.duration) || 99999) ? a : b
-  );
-  const bestOverall = offers.reduce((a, b) =>
-    (scoreMap.get(flightKey(a))?.score ?? 0) >= (scoreMap.get(flightKey(b))?.score ?? 0) ? a : b
-  );
-  const nonstops = offers.filter((o) => o.stops === 0);
-  const cheapestNonstop = nonstops.length ? nonstops.reduce((a, b) => a.price_total <= b.price_total ? a : b) : null;
-  const baggageOpts = offers.filter((o) => o.baggage.trim());
-  const baggageBest = baggageOpts.length ? baggageOpts.reduce((a, b) => a.price_total <= b.price_total ? a : b) : null;
+  const sc = (o: FlightOffer) => scoreMap.get(flightKey(o))?.score ?? 0;
 
+  const COMFORT_RANK: Record<string, number> = { Excellent: 4, Good: 3, Moderate: 2, Basic: 1 };
+  const TIMING_RANK:  Record<string, number> = { Great: 4, Good: 3, Okay: 2, Bad: 1 };
+  const FATIGUE_RANK: Record<string, number> = { Low: 4, Moderate: 3, High: 2, "Very High": 1 };
+
+  const pick = (cmp: (a: FlightOffer, b: FlightOffer) => FlightOffer) => offers.reduce(cmp);
+
+  const aiPick      = pick((a, b) => sc(a) >= sc(b) ? a : b);
+  const cheapestOff = pick((a, b) => a.price_total <= b.price_total ? a : b);
+  const fastestOff  = pick((a, b) =>
+    (durationMinutes(a.duration) || 99999) <= (durationMinutes(b.duration) || 99999) ? a : b);
+  const comfortOff  = pick((a, b) => {
+    const d = (COMFORT_RANK[aircraftComfort(a)] ?? 1) - (COMFORT_RANK[aircraftComfort(b)] ?? 1);
+    return d !== 0 ? (d > 0 ? a : b) : (sc(a) >= sc(b) ? a : b);
+  });
+  const arrivalOff  = pick((a, b) => {
+    const d = (TIMING_RANK[arrivalTimingLabel(a)] ?? 1) - (TIMING_RANK[arrivalTimingLabel(b)] ?? 1);
+    return d !== 0 ? (d > 0 ? a : b) : (sc(a) >= sc(b) ? a : b);
+  });
+  const fatigueOff  = pick((a, b) => {
+    const d = (FATIGUE_RANK[travelFatigueLabel(a)] ?? 1) - (FATIGUE_RANK[travelFatigueLabel(b)] ?? 1);
+    return d !== 0 ? (d > 0 ? a : b) : (sc(a) >= sc(b) ? a : b);
+  });
+
+  // Claim badges in priority order. Each offer gets at most one badge; each badge is assigned to
+  // at most one offer. If the natural winner already holds a higher-priority badge, that badge
+  // type goes unassigned rather than cascading to the runner-up (which would be misleading).
+  const assignments = new Map<string, string>();
+  const claim = (o: FlightOffer, label: string) => {
+    const k = flightKey(o);
+    if (!assignments.has(k)) assignments.set(k, label);
+  };
+
+  claim(aiPick,      "AI Pick");
+  claim(cheapestOff, "Cheapest");
+  claim(fastestOff,  "Fastest");
+  claim(comfortOff,  "Best Comfort");
+  claim(arrivalOff,  "Best Arrival");
+  claim(fatigueOff,  "Least Fatigue");
+
+  // "Best Value": the highest-scored offer not yet claimed by any other badge
+  const bestValue = [...offers]
+    .sort((a, b) => sc(b) - sc(a))
+    .find((o) => !assignments.has(flightKey(o)));
+  if (bestValue) claim(bestValue, "Best Value");
+
+  // Build result map; any offer without a badge gets "Alternative"
   const result = new Map<string, { score: number; breakdown: Record<string, number>; label: string }>();
   for (const o of offers) {
     const key = flightKey(o);
     const sd = scoreMap.get(key) ?? { score: 75, breakdown: {} };
-    let label = "Best value";
-    if (cheapestNonstop && key === flightKey(cheapestNonstop)) label = "Cheapest nonstop";
-    else if (key === flightKey(fastest)) label = "Fastest";
-    else if (baggageBest && key === flightKey(baggageBest)) label = "Best baggage";
-    else if (key === flightKey(bestOverall)) label = "Best overall";
-    else if (key === flightKey(cheapest)) label = "Lowest fare";
-    result.set(key, { ...sd, label });
+    result.set(key, { ...sd, label: assignments.get(key) ?? "Alternative" });
   }
   return result;
 }
