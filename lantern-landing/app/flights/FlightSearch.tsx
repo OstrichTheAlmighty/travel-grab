@@ -172,6 +172,7 @@ interface FlightOffer {
   wins_on: string[];
   tradeoffs: string[];
   comparison_summary: string;
+  ranking_why?: Array<{ positive: boolean; text: string }>;
   is_recommended: boolean;
   arrival_timing: string;
   jet_lag: string;
@@ -424,13 +425,52 @@ function rerankOffers(
       ? (PRIORITY_TOP_LABEL[priorities[0]] ?? "Best Match")
       : "Best Match";
 
-  // Per-dimension badge assignment against the visible result set.
-  // Position 0 always gets topLabel; positions 1+ get the first matching dimension badge.
+  // Per-dimension badge assignment and ranking explanation against the visible result set.
   const minPrice   = Math.min(...rescored.map((o) => o.price_total));
   const minDur     = Math.min(...rescored.map((o) => parseMins(o.duration) || 999));
   const maxTiming  = Math.max(...rescored.map((o) => o.score_breakdown.timing  ?? 0));
   const maxFatigue = Math.max(...rescored.map((o) => o.score_breakdown.fatigue ?? 0));
   const maxCabin   = Math.max(...rescored.map((o) => o.score_breakdown.cabin   ?? 0));
+  const hasNonstop    = rescored.some((o) => o.stops === 0);
+  const hasConnecting = rescored.some((o) => o.stops > 0);
+
+  const buildRankingWhy = (o: FlightOffer): Array<{ positive: boolean; text: string }> => {
+    const pos: Array<{ positive: boolean; text: string }> = [];
+    const neg: Array<{ positive: boolean; text: string }> = [];
+    const bd = o.score_breakdown;
+    const priceDiff = Math.round(o.price_total - minPrice);
+    const durMins   = parseMins(o.duration) || 0;
+    const durDiff   = durMins - minDur;
+
+    // Positive bullets
+    if (priceDiff === 0)        pos.push({ positive: true,  text: "Cheapest in this result set" });
+    else if (priceDiff <= 30)   pos.push({ positive: true,  text: `Only $${priceDiff} more than cheapest` });
+
+    if (durDiff === 0)          pos.push({ positive: true,  text: "Fastest flight in this set" });
+
+    if (o.stops === 0 && hasConnecting) pos.push({ positive: true, text: "Only nonstop option" });
+    else if (o.stops === 0)             pos.push({ positive: true, text: "Nonstop flight" });
+
+    if ((bd.timing  ?? 0) === maxTiming  && maxTiming  > 0)  pos.push({ positive: true,  text: "Best arrival timing in set" });
+    if ((bd.fatigue ?? 0) === maxFatigue && maxFatigue > 0)  pos.push({ positive: true,  text: "Lowest travel fatigue score" });
+    if ((bd.cabin   ?? 0) === maxCabin   && maxCabin   > 0)  pos.push({ positive: true,  text: "Best comfort in this set" });
+
+    // Negative bullets
+    if (priceDiff > 50) neg.push({ positive: false, text: `$${priceDiff} more than cheapest` });
+
+    if (durDiff > 30) {
+      const h = Math.floor(durDiff / 60);
+      const m = durDiff % 60;
+      const label = h > 0 ? `${h}h${m > 0 ? ` ${m}m` : ""}` : `${m}m`;
+      neg.push({ positive: false, text: `${label} slower than fastest` });
+    }
+
+    if (o.stops > 0 && hasNonstop) {
+      neg.push({ positive: false, text: o.stops === 1 ? "Requires a connection" : `Requires ${o.stops} connections` });
+    }
+
+    return [...pos, ...neg].slice(0, 3);
+  };
 
   const usedLabels = new Set<string>();
   const claimLabel = (label: string): string => {
@@ -456,7 +496,7 @@ function rerankOffers(
     } else {
       label = "";
     }
-    return { ...o, is_recommended: i === 0, recommendation_label: label };
+    return { ...o, is_recommended: i === 0, recommendation_label: label, ranking_why: buildRankingWhy(o) };
   });
 }
 
@@ -1263,6 +1303,26 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
                 })()}
               </div>
             </div>
+
+            {(offer.ranking_why ?? []).length > 0 && (
+              <div className="mb-3">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-white/25 mb-1.5">
+                  Why this ranked here
+                </div>
+                <ul className="space-y-1">
+                  {(offer.ranking_why ?? []).map((b, i) => (
+                    <li key={i} className="flex items-start gap-1.5">
+                      <span className={`text-[11px] flex-shrink-0 leading-tight mt-px ${b.positive ? "text-lantern-mint" : "text-lantern-gold"}`}>
+                        {b.positive ? "✓" : "✗"}
+                      </span>
+                      <span className={`text-[11px] leading-snug ${b.positive ? "text-white/65" : "text-white/45"}`}>
+                        {b.text}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {priorities.length > 0 && (
               <div className="flex items-center gap-1.5 mb-2 text-[10px]">
