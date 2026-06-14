@@ -198,6 +198,10 @@ function selectionLabel(s: Selection): string {
   return `${s.code} — ${s.city}`;
 }
 
+function selectionCodes(s: Selection): string {
+  return s.kind === "metro" ? s.codes.join("/") : s.code;
+}
+
 function searchLocations(query: string): Selection[] {
   if (!query.trim()) return METRO_GROUPS;
   const q = query.toLowerCase();
@@ -316,7 +320,7 @@ function AirportCombobox({
         }`}
       >
         <svg
-          className="absolute left-3.5 w-4 h-4 text-white/30 pointer-events-none flex-shrink-0"
+          className="absolute left-3 w-4 h-4 text-white/30 pointer-events-none flex-shrink-0"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -330,7 +334,7 @@ function AirportCombobox({
           type="text"
           value={inputValue}
           placeholder={placeholder}
-          className="w-full bg-transparent pl-10 pr-4 py-3.5 text-sm text-white placeholder-white/30 outline-none"
+          className="w-full bg-transparent pl-9 pr-3.5 py-3 text-sm text-white placeholder-white/30 outline-none"
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={handleChange}
@@ -344,7 +348,7 @@ function AirportCombobox({
             <li
               key={item.kind === "metro" ? item.id : item.code}
               onMouseDown={() => selectItem(item)}
-              className={`flex items-center gap-3 px-4 py-2.5 cursor-pointer transition-colors ${
+              className={`flex items-center gap-3 px-3.5 py-2 cursor-pointer transition-colors ${
                 i === highlightedIndex ? "bg-lantern-violet/20" : "hover:bg-white/[0.06]"
               }`}
             >
@@ -385,125 +389,153 @@ function AirportCombobox({
 
 function FlightCard({ offer }: { offer: FlightOffer }) {
   const rec = offer.is_recommended;
+  const [whyOpen, setWhyOpen] = useState(false);
+  const hasBullets = offer.recommendation_bullets.length > 0;
+
   return (
     <div
-      className={`rounded-2xl border p-5 sm:p-6 transition-all ${
+      className={`rounded-xl border transition-all ${
         rec
-          ? "border-lantern-violet/40 bg-lantern-violet/[0.04] shadow-[0_0_40px_rgba(167,139,250,0.08)]"
-          : "border-white/[0.08] bg-white/[0.025]"
+          ? "border-lantern-violet/40 bg-lantern-violet/[0.04] shadow-[0_0_32px_rgba(167,139,250,0.07)]"
+          : "border-white/[0.07] bg-white/[0.02]"
       }`}
     >
-      {/* Header row */}
-      <div className="flex items-start justify-between gap-3 mb-4">
-        <div className="flex items-center gap-3 min-w-0">
-          {/* Airline logo */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={`https://www.gstatic.com/flights/airline_logos/70px/${offer.airline_code}.png`}
-            alt={offer.airline}
-            width={28}
-            height={28}
-            className="rounded-md flex-shrink-0 object-contain"
-            onError={(e) => {
-              const el = e.currentTarget;
-              el.style.display = "none";
-              const sibling = el.nextElementSibling as HTMLElement | null;
-              if (sibling) sibling.style.display = "flex";
-            }}
-          />
-          <div
-            className="w-7 h-7 rounded-md bg-white/[0.08] items-center justify-center text-xs font-bold text-white/60 flex-shrink-0 hidden"
-          >
-            {offer.airline_code.slice(0, 2)}
+      <div className="p-4 sm:p-5">
+        {/* Header row: airline + badges */}
+        <div className="flex items-center justify-between gap-3 mb-3">
+          <div className="flex items-center gap-2.5 min-w-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`https://www.gstatic.com/flights/airline_logos/70px/${offer.airline_code}.png`}
+              alt={offer.airline}
+              width={24}
+              height={24}
+              className="rounded flex-shrink-0 object-contain"
+              onError={(e) => {
+                const el = e.currentTarget;
+                el.style.display = "none";
+                const sib = el.nextElementSibling as HTMLElement | null;
+                if (sib) sib.style.display = "flex";
+              }}
+            />
+            <div className="w-6 h-6 rounded bg-white/[0.08] items-center justify-center text-[10px] font-bold text-white/60 flex-shrink-0 hidden">
+              {offer.airline_code.slice(0, 2)}
+            </div>
+            <div className="min-w-0">
+              <div className="text-sm font-bold text-white truncate">{offer.airline}</div>
+              <div className="text-[11px] text-white/40 font-mono">{offer.flight_number}</div>
+            </div>
           </div>
-          <div className="min-w-0">
-            <div className="text-sm font-semibold text-white truncate">{offer.airline}</div>
-            <div className="text-xs text-white/40">{offer.flight_number}</div>
-          </div>
-        </div>
-        <div className="flex items-center gap-2 flex-shrink-0">
-          {rec && (
-            <span className="text-[10px] font-bold uppercase tracking-widest text-lantern-violet border border-lantern-violet/40 bg-lantern-violet/10 rounded-full px-2.5 py-0.5">
-              AI Pick
+          <div className="flex items-center gap-1.5 flex-shrink-0">
+            {rec && (
+              <span className="text-[10px] font-black uppercase tracking-widest text-lantern-violet border border-lantern-violet/50 bg-lantern-violet/15 rounded-full px-2.5 py-0.5">
+                AI Pick
+              </span>
+            )}
+            <span className={`text-[10px] font-bold uppercase tracking-widest border rounded-full px-2.5 py-0.5 ${scoreBg(offer.ai_score)}`}>
+              {offer.recommendation_label}
             </span>
-          )}
-          <span className={`text-[10px] font-bold uppercase tracking-widest border rounded-full px-2.5 py-0.5 ${scoreBg(offer.ai_score)}`}>
-            {offer.recommendation_label}
-          </span>
-        </div>
-      </div>
-
-      {/* Route bar */}
-      <div className="flex items-center gap-2 mb-4">
-        <div className="text-center flex-shrink-0">
-          <div className="text-xl font-black text-white tabular-nums">{offer.depart_time}</div>
-          <div className="text-xs font-mono font-bold text-white/50">{offer.origin}</div>
-        </div>
-        <div className="flex-1 flex flex-col items-center gap-1 min-w-0 px-1">
-          <div className="text-[10px] text-white/35 font-medium">{offer.duration}</div>
-          <div className="w-full flex items-center gap-1">
-            <div className="flex-1 h-px bg-white/15" />
-            <svg className="w-3 h-3 text-white/25 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
-            </svg>
-            <div className="flex-1 h-px bg-white/15" />
           </div>
-          <div className="text-[10px] text-white/35 font-medium">{offer.stop_label}</div>
         </div>
-        <div className="text-center flex-shrink-0">
-          <div className="text-xl font-black text-white tabular-nums">{offer.arrive_time}</div>
-          <div className="text-xs font-mono font-bold text-white/50">{offer.destination}</div>
-        </div>
-        <div className="ml-auto pl-3 text-right flex-shrink-0">
-          <div className={`text-2xl font-black tabular-nums ${scoreColor(offer.ai_score)}`}>
-            ${Math.round(offer.price_total).toLocaleString()}
+
+        {/* Route bar + price */}
+        <div className="flex items-center gap-2 mb-3">
+          <div className="text-center flex-shrink-0 w-14">
+            <div className="text-lg font-black text-white tabular-nums leading-tight">{offer.depart_time}</div>
+            <div className="text-[11px] font-mono font-bold text-white/45">{offer.origin}</div>
           </div>
-          <div className="text-xs text-white/35">{offer.cabin}</div>
-        </div>
-      </div>
-
-      {/* AI Score bar */}
-      <div className="flex items-center gap-2 mb-4">
-        <span className="text-xs text-white/40 font-medium">AI Score</span>
-        <div className="flex-1 h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
-          <div
-            className={`h-full rounded-full transition-all ${offer.ai_score >= 85 ? "bg-lantern-mint" : offer.ai_score >= 70 ? "bg-lantern-blue" : "bg-lantern-gold"}`}
-            style={{ width: `${offer.ai_score}%` }}
-          />
-        </div>
-        <span className={`text-xs font-bold tabular-nums ${scoreColor(offer.ai_score)}`}>{offer.ai_score}</span>
-      </div>
-
-      {/* Indicators */}
-      <div className="flex flex-wrap gap-x-4 gap-y-1.5 mb-4">
-        {(
-          [
-            ["Arrival", offer.arrival_timing],
-            ["Jet lag", offer.jet_lag],
-            ["Fatigue", offer.travel_fatigue],
-            ["City access", offer.city_access],
-            ["Comfort", offer.aircraft_comfort],
-          ] as [string, string][]
-        ).filter(([, v]) => v).map(([label, val]) => (
-          <div key={label} className="flex items-center gap-1.5">
-            <span className="text-xs text-white/35">{label}</span>
-            <span className={`text-xs font-semibold ${indicatorColor(val)}`}>{val}</span>
+          <div className="flex-1 flex flex-col items-center gap-0.5 min-w-0 px-1">
+            <div className="text-[10px] text-white/35 font-medium">{offer.duration}</div>
+            <div className="w-full flex items-center gap-1">
+              <div className="flex-1 h-px bg-white/10" />
+              <svg className="w-3 h-3 text-white/20 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
+              </svg>
+              <div className="flex-1 h-px bg-white/10" />
+            </div>
+            <div className="text-[10px] text-white/35 font-medium">{offer.stop_label}</div>
           </div>
-        ))}
+          <div className="text-center flex-shrink-0 w-14">
+            <div className="text-lg font-black text-white tabular-nums leading-tight">{offer.arrive_time}</div>
+            <div className="text-[11px] font-mono font-bold text-white/45">{offer.destination}</div>
+          </div>
+          <div className="ml-auto pl-3 text-right flex-shrink-0">
+            <div className={`text-3xl font-black tabular-nums leading-none ${scoreColor(offer.ai_score)}`}>
+              ${Math.round(offer.price_total).toLocaleString()}
+            </div>
+            <div className="text-[11px] text-white/35 mt-0.5">{offer.cabin}</div>
+          </div>
+        </div>
+
+        {/* AI Score bar */}
+        <div className="flex items-center gap-2 mb-3">
+          <span className="text-[11px] text-white/35 font-medium flex-shrink-0">AI Score</span>
+          <div className="flex-1 h-1 rounded-full bg-white/[0.06] overflow-hidden">
+            <div
+              className={`h-full rounded-full ${offer.ai_score >= 85 ? "bg-lantern-mint" : offer.ai_score >= 70 ? "bg-lantern-blue" : "bg-lantern-gold"}`}
+              style={{ width: `${offer.ai_score}%` }}
+            />
+          </div>
+          <span className={`text-[11px] font-bold tabular-nums flex-shrink-0 ${scoreColor(offer.ai_score)}`}>{offer.ai_score}</span>
+        </div>
+
+        {/* Indicators */}
+        <div className="flex flex-wrap gap-x-3 gap-y-1">
+          {(
+            [
+              ["Arrival", offer.arrival_timing],
+              ["Jet lag", offer.jet_lag],
+              ["Fatigue", offer.travel_fatigue],
+              ["City access", offer.city_access],
+              ["Comfort", offer.aircraft_comfort],
+            ] as [string, string][]
+          ).filter(([, v]) => v).map(([lbl, val]) => (
+            <div key={lbl} className="flex items-center gap-1">
+              <span className="text-[11px] text-white/30">{lbl}</span>
+              <span className={`text-[11px] font-semibold ${indicatorColor(val)}`}>{val}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Why bullets (recommended only) */}
-      {rec && offer.recommendation_bullets.length > 0 && (
-        <div className="rounded-xl bg-lantern-violet/[0.07] border border-lantern-violet/20 px-4 py-3 mt-2">
-          <div className="text-xs font-bold text-lantern-violet uppercase tracking-wider mb-2">Why this flight</div>
-          <ul className="space-y-1.5">
+      {/* Why this flight — always expanded on recommended, collapsible on others */}
+      {hasBullets && rec && (
+        <div className="mx-4 mb-4 sm:mx-5 sm:mb-5 rounded-lg bg-lantern-violet/[0.07] border border-lantern-violet/15 px-3.5 py-2.5">
+          <div className="text-[11px] font-bold text-lantern-violet uppercase tracking-wider mb-1.5">Why this flight</div>
+          <ul className="space-y-1">
             {offer.recommendation_bullets.map((b, i) => (
-              <li key={i} className="flex gap-2 text-xs text-white/65 leading-relaxed">
+              <li key={i} className="flex gap-1.5 text-[11px] text-white/60 leading-relaxed">
                 <span className="text-lantern-violet mt-0.5 flex-shrink-0">›</span>
                 {b}
               </li>
             ))}
           </ul>
+        </div>
+      )}
+      {hasBullets && !rec && (
+        <div className="px-4 pb-3.5 sm:px-5 sm:pb-4">
+          <button
+            onClick={() => setWhyOpen((o) => !o)}
+            className="flex items-center gap-1.5 text-[11px] text-white/30 hover:text-white/50 transition-colors"
+          >
+            <svg
+              className={`w-3 h-3 transition-transform ${whyOpen ? "rotate-180" : ""}`}
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+            Why this option
+          </button>
+          {whyOpen && (
+            <ul className="mt-2 space-y-1">
+              {offer.recommendation_bullets.map((b, i) => (
+                <li key={i} className="flex gap-1.5 text-[11px] text-white/45 leading-relaxed">
+                  <span className="text-white/25 mt-0.5 flex-shrink-0">›</span>
+                  {b}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       )}
     </div>
@@ -514,12 +546,12 @@ function FlightCard({ offer }: { offer: FlightOffer }) {
 
 function FeatureCard({ icon, title, body }: { icon: React.ReactNode; title: string; body: string }) {
   return (
-    <div className="rounded-2xl border border-white/[0.08] bg-white/[0.025] p-6">
-      <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-lantern-violet/15 text-lantern-violet">
+    <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-5">
+      <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-lantern-violet/15 text-lantern-violet">
         {icon}
       </div>
-      <div className="mb-1.5 text-sm font-semibold text-white">{title}</div>
-      <div className="text-sm text-white/50 leading-relaxed">{body}</div>
+      <div className="mb-1 text-sm font-semibold text-white">{title}</div>
+      <div className="text-xs text-white/45 leading-relaxed">{body}</div>
     </div>
   );
 }
@@ -548,6 +580,9 @@ export default function FlightSearch() {
   const [searchMeta, setSearchMeta] = useState<SearchMeta | null>(null);
   const [errorTitle, setErrorTitle] = useState("");
   const [errorBody, setErrorBody] = useState("");
+  const [searchedParams, setSearchedParams] = useState<{
+    origin: Selection; destination: Selection; tripType: TripType; cabin: CabinClass; travelers: number;
+  } | null>(null);
 
   const handleSearch = async () => {
     const errs: string[] = [];
@@ -562,6 +597,7 @@ export default function FlightSearch() {
     if (errs.length > 0) return;
 
     setSearchState("loading");
+    setSearchedParams({ origin: origin!, destination: destination!, tripType, cabin, travelers });
 
     const originCodes = getAirportCodes(origin!);
     const destCodes = getAirportCodes(destination!);
@@ -620,7 +656,8 @@ export default function FlightSearch() {
     }
   };
 
-  const cabinLabel = CABIN_LABELS[cabin];
+  // searchMeta is kept for potential future use but summary pill uses searchedParams
+  void searchMeta;
 
   return (
     <div className="min-h-screen bg-ink text-white">
@@ -638,26 +675,21 @@ export default function FlightSearch() {
         </div>
       </nav>
 
-      <main className="mx-auto max-w-5xl px-4 sm:px-6 py-10 sm:py-14">
+      <main className="mx-auto max-w-5xl px-4 sm:px-6 py-8 sm:py-12">
         {/* Hero */}
-        <div className="mb-10">
-          <div className="mb-2 text-xs font-extrabold uppercase tracking-widest text-lantern-violet">
-            AI Flight Search
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight text-white mb-3">
-            Find the best flight,
-            <br />
-            <span className="text-lantern-blue">not just the cheapest one.</span>
+        <div className="mb-7 text-center">
+          <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white mb-2">
+            Find your flight
           </h1>
-          <p className="text-base text-white/55 max-w-xl leading-relaxed">
-            AI weighs price, layovers, timing, airlines, airports, and comfort — then explains which flight is actually worth booking.
+          <p className="text-sm text-white/50 max-w-md mx-auto leading-relaxed">
+            TravelGrab checks nearby airports automatically and ranks flights by comfort, timing, and value.
           </p>
         </div>
 
         {/* Search panel */}
-        <div className="rounded-2xl border border-white/[0.09] bg-white/[0.03] p-6 sm:p-8 mb-4 shadow-card">
+        <div className="max-w-3xl mx-auto rounded-2xl border border-white/[0.09] bg-white/[0.03] p-5 sm:p-6 mb-4 shadow-card">
           {/* Trip type toggle */}
-          <div className="flex gap-1 mb-6 bg-white/[0.04] border border-white/[0.07] rounded-xl p-1 w-fit">
+          <div className="flex gap-1 mb-4 bg-white/[0.04] border border-white/[0.07] rounded-xl p-1 w-fit">
             {(["roundtrip", "oneway"] as TripType[]).map((t) => (
               <button
                 key={t}
@@ -674,11 +706,11 @@ export default function FlightSearch() {
           </div>
 
           {/* Origin / Destination */}
-          <div className="flex flex-col sm:flex-row gap-3 mb-4">
+          <div className="flex flex-col sm:flex-row gap-2.5 mb-3">
             <AirportCombobox label="From" placeholder="City, metro, or airport" value={origin} onChange={setOrigin} />
             <button
               onClick={() => { const tmp = origin; setOrigin(destination); setDestination(tmp); }}
-              className="self-end mb-0.5 sm:self-center mt-auto sm:mt-6 p-2.5 rounded-xl border border-white/10 bg-white/[0.04] text-white/40 hover:text-white/80 hover:border-white/25 hover:bg-white/[0.08] transition-all flex-shrink-0"
+              className="self-end mb-0.5 sm:self-center mt-auto sm:mt-6 p-2 rounded-xl border border-white/10 bg-white/[0.04] text-white/40 hover:text-white/80 hover:border-white/25 hover:bg-white/[0.08] transition-all flex-shrink-0"
               title="Swap airports"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2}>
@@ -690,7 +722,7 @@ export default function FlightSearch() {
           </div>
 
           {/* Dates + Travelers + Cabin */}
-          <div className="flex flex-col sm:flex-row gap-3 mb-6">
+          <div className="flex flex-col sm:flex-row gap-2.5 mb-5">
             <div className="flex-1 min-w-0">
               <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-1.5 px-0.5">Departure</label>
               <input
@@ -698,7 +730,7 @@ export default function FlightSearch() {
                 min={today}
                 value={departureDate}
                 onChange={(e) => setDepartureDate(e.target.value)}
-                className="w-full rounded-xl border border-white/10 bg-white/[0.04] hover:border-white/20 focus:border-lantern-violet/60 focus:bg-panel px-4 py-3.5 text-sm text-white outline-none transition-colors [color-scheme:dark]"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.04] hover:border-white/20 focus:border-lantern-violet/60 focus:bg-panel px-3.5 py-3 text-sm text-white outline-none transition-colors [color-scheme:dark]"
               />
             </div>
             {tripType === "roundtrip" && (
@@ -709,16 +741,16 @@ export default function FlightSearch() {
                   min={departureDate || today}
                   value={returnDate}
                   onChange={(e) => setReturnDate(e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.04] hover:border-white/20 focus:border-lantern-violet/60 focus:bg-panel px-4 py-3.5 text-sm text-white outline-none transition-colors [color-scheme:dark]"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.04] hover:border-white/20 focus:border-lantern-violet/60 focus:bg-panel px-3.5 py-3 text-sm text-white outline-none transition-colors [color-scheme:dark]"
                 />
               </div>
             )}
-            <div className="w-full sm:w-36 flex-shrink-0">
+            <div className="w-full sm:w-32 flex-shrink-0">
               <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-1.5 px-0.5">Travelers</label>
               <div className="flex items-center rounded-xl border border-white/10 bg-white/[0.04] overflow-hidden">
-                <button onClick={() => setTravelers((n) => Math.max(1, n - 1))} className="px-3.5 py-3.5 text-white/50 hover:text-white hover:bg-white/[0.06] transition-colors text-lg leading-none">−</button>
+                <button onClick={() => setTravelers((n) => Math.max(1, n - 1))} className="px-3 py-3 text-white/50 hover:text-white hover:bg-white/[0.06] transition-colors text-lg leading-none">−</button>
                 <span className="flex-1 text-center text-sm font-semibold text-white">{travelers}</span>
-                <button onClick={() => setTravelers((n) => Math.min(9, n + 1))} className="px-3.5 py-3.5 text-white/50 hover:text-white hover:bg-white/[0.06] transition-colors text-lg leading-none">+</button>
+                <button onClick={() => setTravelers((n) => Math.min(9, n + 1))} className="px-3 py-3 text-white/50 hover:text-white hover:bg-white/[0.06] transition-colors text-lg leading-none">+</button>
               </div>
             </div>
             <div className="flex-1 min-w-0">
@@ -726,7 +758,7 @@ export default function FlightSearch() {
               <select
                 value={cabin}
                 onChange={(e) => setCabin(e.target.value as CabinClass)}
-                className="w-full rounded-xl border border-white/10 bg-white/[0.04] hover:border-white/20 focus:border-lantern-violet/60 focus:bg-panel px-4 py-3.5 text-sm text-white outline-none transition-colors appearance-none [color-scheme:dark]"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.04] hover:border-white/20 focus:border-lantern-violet/60 focus:bg-panel px-3.5 py-3 text-sm text-white outline-none transition-colors appearance-none [color-scheme:dark]"
               >
                 {(Object.entries(CABIN_LABELS) as [CabinClass, string][]).map(([val, lbl]) => (
                   <option key={val} value={val}>{lbl}</option>
@@ -745,7 +777,7 @@ export default function FlightSearch() {
           <button
             onClick={() => { void handleSearch(); }}
             disabled={searchState === "loading"}
-            className="w-full sm:w-auto px-10 py-3.5 rounded-xl font-bold text-sm text-white bg-gradient-to-br from-lantern-violet to-[#6366f1] hover:from-[#8B5CF6] hover:to-[#4F46E5] shadow-glow/30 transition-all active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full py-3.5 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-lantern-violet via-[#7c3aed] to-[#6366f1] hover:from-[#8B5CF6] hover:via-[#7c3aed] hover:to-[#4F46E5] shadow-[0_0_24px_rgba(139,92,246,0.25)] hover:shadow-[0_0_36px_rgba(139,92,246,0.45)] transition-all active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {searchState === "loading" ? "Searching…" : "Search Flights"}
           </button>
@@ -753,15 +785,15 @@ export default function FlightSearch() {
 
         {/* Loading state */}
         {searchState === "loading" && (
-          <div className="mt-10 flex flex-col items-center gap-4 py-16 text-center">
-            <div className="w-10 h-10 rounded-full border-2 border-lantern-violet/30 border-t-lantern-violet animate-spin" />
-            <div className="text-sm text-white/50">Searching live fares — this usually takes 5–15 seconds</div>
+          <div className="mt-8 flex flex-col items-center gap-3 py-14 text-center">
+            <div className="w-9 h-9 rounded-full border-2 border-lantern-violet/30 border-t-lantern-violet animate-spin" />
+            <div className="text-sm text-white/50">Searching live fares and ranking options…</div>
           </div>
         )}
 
         {/* Error state */}
         {searchState === "error" && (
-          <div className="mt-6 rounded-2xl border border-red-500/20 bg-red-500/[0.06] p-6">
+          <div className="mt-5 max-w-3xl mx-auto rounded-xl border border-red-500/20 bg-red-500/[0.06] px-5 py-4">
             <div className="text-sm font-semibold text-red-300 mb-1">{errorTitle}</div>
             <div className="text-sm text-white/50">{errorBody}</div>
           </div>
@@ -769,21 +801,25 @@ export default function FlightSearch() {
 
         {/* Results */}
         {searchState === "results" && (
-          <div ref={resultsRef} className="mt-8">
-            {/* Trip summary */}
-            {searchMeta && (
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 mb-5 px-1 text-sm text-white/50">
-                <span className="font-semibold text-white">{searchMeta.origin} → {searchMeta.destination}</span>
-                <span>·</span>
-                <span>{searchMeta.trip_type === "roundtrip" ? "Round trip" : "One way"}</span>
-                <span>·</span>
-                <span>{cabinLabel}</span>
-                <span>·</span>
-                <span>{travelers} traveler{travelers !== 1 ? "s" : ""}</span>
-                <span className="ml-auto text-xs text-white/30">{offers.length} fares — ranked by AI</span>
+          <div ref={resultsRef} className="mt-6">
+            {/* Search summary pill */}
+            {searchedParams && (
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-4 max-w-3xl mx-auto">
+                <div className="inline-flex items-center gap-2 flex-wrap rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-xs">
+                  <span className="font-mono font-semibold text-white">{selectionCodes(searchedParams.origin)}</span>
+                  <span className="text-white/30">→</span>
+                  <span className="font-mono font-semibold text-white">{selectionCodes(searchedParams.destination)}</span>
+                  <span className="text-white/15">·</span>
+                  <span className="text-white/55">{searchedParams.tripType === "roundtrip" ? "Round trip" : "One way"}</span>
+                  <span className="text-white/15">·</span>
+                  <span className="text-white/55">{CABIN_LABELS[searchedParams.cabin]}</span>
+                  <span className="text-white/15">·</span>
+                  <span className="text-white/55">{searchedParams.travelers} traveler{searchedParams.travelers !== 1 ? "s" : ""}</span>
+                </div>
+                <span className="text-xs text-white/25">{offers.length} fares — ranked by AI</span>
               </div>
             )}
-            <div className="space-y-4">
+            <div className="space-y-3 max-w-3xl mx-auto">
               {offers.map((offer, i) => <FlightCard key={i} offer={offer} />)}
             </div>
           </div>
@@ -791,29 +827,29 @@ export default function FlightSearch() {
 
         {/* Empty state (only shown before first search) */}
         {searchState === "idle" && (
-          <div className="mt-14">
-            <div className="text-center mb-8">
-              <div className="text-xs font-extrabold uppercase tracking-widest text-white/30 mb-3">How TravelGrab thinks</div>
-              <h2 className="text-xl sm:text-2xl font-bold text-white/80 mb-2">More than just the lowest fare</h2>
-              <p className="text-sm text-white/40 max-w-md mx-auto leading-relaxed">
-                Enter your trip above and TravelGrab's AI will evaluate every option and explain which flight is actually worth booking.
+          <div className="mt-10 max-w-3xl mx-auto">
+            <div className="text-center mb-6">
+              <div className="text-xs font-extrabold uppercase tracking-widest text-white/25 mb-2">How TravelGrab thinks</div>
+              <h2 className="text-lg sm:text-xl font-bold text-white/70 mb-1.5">More than just the lowest fare</h2>
+              <p className="text-sm text-white/35 max-w-sm mx-auto leading-relaxed">
+                TravelGrab's AI evaluates every option and explains which flight is actually worth booking.
               </p>
             </div>
-            <div className="grid gap-4 sm:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-3">
               <FeatureCard
-                icon={<svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg>}
+                icon={<svg className="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg>}
                 title="Multi-factor scoring"
-                body="Each flight is scored across price, layovers, departure and arrival timing, airline quality, airports, and total travel fatigue."
+                body="Each flight is scored across price, layovers, timing, airline quality, airports, and travel fatigue."
               />
               <FeatureCard
-                icon={<svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}><path d="M9 12l2 2 4-4" /><path d="M21 12c0 4.97-4.03 9-9 9S3 16.97 3 12 7.03 3 12 3s9 4.03 9 9z" /></svg>}
+                icon={<svg className="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}><path d="M9 12l2 2 4-4" /><path d="M21 12c0 4.97-4.03 9-9 9S3 16.97 3 12 7.03 3 12 3s9 4.03 9 9z" /></svg>}
                 title="Plain-language explanation"
-                body="Your #1 pick comes with an advisor-style summary of why it beats the alternatives — not just a score, but actual reasoning."
+                body="Your #1 pick comes with an advisor-style summary of why it beats the alternatives."
               />
               <FeatureCard
-                icon={<svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /><line x1={12} y1={9} x2={12} y2={13} /><line x1={12} y1={17} x2="12.01" y2={17} /></svg>}
+                icon={<svg className="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /><line x1={12} y1={9} x2={12} y2={13} /><line x1={12} y1={17} x2="12.01" y2={17} /></svg>}
                 title="Watch-outs surfaced"
-                body="Hidden catches like tight connections, redeye arrivals, or inconvenient airports are flagged before you book."
+                body="Tight connections, redeye arrivals, or inconvenient airports are flagged before you book."
               />
             </div>
           </div>
