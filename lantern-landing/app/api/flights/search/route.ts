@@ -44,6 +44,7 @@ export interface FlightOffer {
   travel_fatigue: string;
   city_access: string;
   aircraft_comfort: string;
+  connection_airports: string;  // comma-separated IATA codes of intermediate airports (empty if nonstop)
   dedupe_group_size?: number;   // dev debug: how many codeshares collapsed into this offer
 }
 
@@ -246,6 +247,12 @@ function normalizeDuffelOffer(offer: DuffelRecord): DuffelRecord | null {
   const airline = (mc.name as string) ?? (owner.name as string) ?? (owner.iata_code as string) ?? "";
   const mcCode = (mc.iata_code as string) ?? "";
   const fn = (firstSeg.marketing_carrier_flight_number as string) ?? "";
+  const connectionAirports = segments
+    .slice(0, -1)
+    .map((seg) => airportIata((seg.destination as DuffelRecord | undefined)))
+    .filter(Boolean)
+    .join(",");
+
   return {
     airline,
     flight_number: `${mcCode} ${fn}`.trim(),
@@ -259,6 +266,7 @@ function normalizeDuffelOffer(offer: DuffelRecord): DuffelRecord | null {
     baggage: extractBaggage(offer),
     price: (offer.total_amount as string) ?? "0",
     currency: (offer.total_currency as string) ?? "USD",
+    connection_airports: connectionAirports,
   };
 }
 
@@ -299,15 +307,16 @@ function normalizeFlight(raw: DuffelRecord, adults: number): FlightOffer | null 
     travel_fatigue: "",
     city_access: "",
     aircraft_comfort: "",
+    connection_airports: String(raw.connection_airports ?? ""),
   };
 }
 
 // ── Deduplication ────────────────────────────────────────────────────────────
 
 function deduplicateOffers(offers: FlightOffer[]): FlightOffer[] {
-  // Key on itinerary only — no airline/flight_number so codeshares collapse
+  // Key on itinerary + connection airports — collapses true codeshares but keeps distinct routings
   const itinKey = (o: FlightOffer) =>
-    [o.origin, o.destination, o.depart_time, o.arrive_time, o.duration, o.stops].join("|");
+    [o.origin, o.destination, o.depart_time, o.arrive_time, o.duration, o.stops, o.connection_airports].join("|");
 
   // Prefer real carriers; Duffel test keys return synthetic "Duffel Airways" / code ZZ offers
   const isReal = (o: FlightOffer) =>
@@ -793,8 +802,8 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
 
   const body = await resp.json() as { data?: { offers?: DuffelRecord[] } };
   const rawOffers = body?.data?.offers ?? [];
-  // Keep all offers including test/sandbox so search works with a Duffel test key
-  const normedRaw = rawOffers.slice(0, 10).map(normalizeDuffelOffer).filter(Boolean) as DuffelRecord[];
+  // Take up to 25 raw offers so dedup has enough material to produce 8+ unique itineraries
+  const normedRaw = rawOffers.slice(0, 25).map(normalizeDuffelOffer).filter(Boolean) as DuffelRecord[];
   const normedAll = normedRaw.map((r) => normalizeFlight(r, params.adults)).filter(Boolean) as FlightOffer[];
   const normed = deduplicateOffers(normedAll);
 
