@@ -654,8 +654,26 @@ function RecommendationPanel({
 
 // ── CompareTable ─────────────────────────────────────────────────────────────
 
+function parseMins(dur: string): number {
+  const h = dur.match(/(\d+)h/);
+  const m = dur.match(/(\d+)m/);
+  return (h ? parseInt(h[1]) * 60 : 0) + (m ? parseInt(m[1]) : 0);
+}
+
 function CompareTable({ offers }: { offers: FlightOffer[] }) {
-  const top = offers.slice(0, Math.min(3, offers.length));
+  // Keep up to 3 rows that are meaningfully distinct (differ in price, duration, or stop count)
+  const distinct: FlightOffer[] = [];
+  for (const o of offers) {
+    if (distinct.length >= 3) break;
+    const tooSimilar = distinct.some(
+      (prev) =>
+        Math.abs(o.price_total - prev.price_total) < 15 &&
+        Math.abs(parseMins(o.duration) - parseMins(prev.duration)) < 20 &&
+        o.stops === prev.stops
+    );
+    if (!tooSimilar) distinct.push(o);
+  }
+  const top = distinct;
   if (top.length < 2) return null;
 
   const thCls =
@@ -799,6 +817,7 @@ function FlightCard({ offer, cardRef, priorityWeights }: {
       displayScore: toDisplayScore(v),
       weight: Math.round((priorityWeights[k] ?? 0) * 100),
     }))
+    .filter((row) => row.weight > 0)
     .sort((a, b) => b.displayScore - a.displayScore);
 
   const tripImpact = [
@@ -1430,7 +1449,9 @@ export default function FlightSearch() {
                   <span className="text-white/15">·</span>
                   <span className="text-white/55">{searchedParams.travelers} traveler{searchedParams.travelers !== 1 ? "s" : ""}</span>
                 </div>
-                <span className="text-xs text-white/25">{offers.length} fares — ranked by AI</span>
+                <span className="text-xs text-white/25">
+                  Showing {displayOffers.length} unique itinerar{displayOffers.length !== 1 ? "ies" : "y"} — ranked by AI
+                </span>
               </div>
             )}
             <RecommendationPanel offers={displayOffers} topPickRef={topPickRef} priority={priority} />

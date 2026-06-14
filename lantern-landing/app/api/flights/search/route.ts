@@ -612,7 +612,11 @@ function buildComparisonSummary(
   const isNonstop = o.stops === 0;
 
   const qualityWins = wins.filter(
-    (w) => !w.startsWith("Lowest fare") && !w.startsWith("Fastest option") && !w.startsWith("Saves ")
+    (w) =>
+      !w.startsWith("Lowest fare") &&
+      !w.startsWith("Fastest option") &&
+      !w.startsWith("Saves ") &&
+      !w.startsWith("Nonstop while") // already stated in context; avoids "Nonstop with nonstop while..."
   );
 
   // Pattern A: nonstop + cheapest overall → best overall
@@ -665,10 +669,12 @@ function buildComparisonSummary(
   if (priceDiff > 0 && qualityWins.length === 1)
     return `${moneyUsd(priceDiff)} more than cheapest, but ${qualityWins[0].toLowerCase()}.`;
 
-  // Pattern G: nothing standout — state the key facts
-  if (tradeoffs.length > 0)
-    return `${moneyUsd(priceDiff)} more than cheapest — ${tradeoffs[0].toLowerCase()}.`;
-
+  // Pattern G: nothing standout — pick a tradeoff that doesn't repeat the price amount
+  const nonPriceTradeoff = tradeoffs.find((t) => !t.toLowerCase().includes("more than the cheapest"));
+  if (nonPriceTradeoff)
+    return `${moneyUsd(priceDiff)} more than cheapest — ${nonPriceTradeoff.toLowerCase()}.`;
+  if (priceDiff > 0)
+    return `${moneyUsd(priceDiff)} more than cheapest with no standout advantages.`;
   return `Mid-range option at ${moneyUsd(o.price_total)}.`;
 }
 
@@ -842,12 +848,20 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
     const wins = buildWinsOn(o, ctx, pass1);
     const trofs = buildTradeoffsFor(o, ctx, pass1);
     const summary = buildComparisonSummary(o, wins, trofs, ctx, pass1);
+    let why = summary;
+    if (o.recommendation_label === "Alternative") {
+      const priceDiff = Math.round(o.price_total - ctx.cheapestPrice);
+      const pricePct = ctx.cheapestPrice > 0 ? priceDiff / ctx.cheapestPrice : 0;
+      why = pricePct > 0.04
+        ? `Alternative option — ${moneyUsd(priceDiff)} more than the cheapest fare${trofs.length > 0 ? `, with ${trofs[0].toLowerCase()}` : ""}.`
+        : "Alternative option with a similar schedule and fare. Shown for comparison.";
+    }
     return {
       ...o,
       wins_on: wins,
       tradeoffs: trofs,
       comparison_summary: summary,
-      recommendation_why: summary,
+      recommendation_why: why,
       recommendation_bullets: wins,
     };
   });
