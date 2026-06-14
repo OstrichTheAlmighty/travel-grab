@@ -539,6 +539,124 @@ function RecommendationPanel({
   );
 }
 
+// ── CompareTable ─────────────────────────────────────────────────────────────
+
+function CompareTable({ offers }: { offers: FlightOffer[] }) {
+  const top = offers.slice(0, Math.min(3, offers.length));
+  if (top.length < 2) return null;
+
+  const thCls =
+    "text-[9px] font-bold uppercase tracking-widest text-white/25 px-3 py-2.5 text-left whitespace-nowrap";
+  const tdCls = "px-3 py-2.5 align-top";
+
+  return (
+    <div className="mb-4 max-w-3xl mx-auto">
+      <div className="mb-2.5">
+        <span className="text-[10px] font-black uppercase tracking-widest text-white/35">
+          Compare top picks
+        </span>
+        <p className="text-[11px] text-white/25 mt-0.5">
+          See why TravelGrab ranked these options differently.
+        </p>
+      </div>
+      <div className="overflow-x-auto rounded-xl border border-white/[0.07]">
+        <table className="w-full min-w-[600px] border-collapse">
+          <thead>
+            <tr className="border-b border-white/[0.07] bg-white/[0.025]">
+              {["Flight", "Score", "Price", "Duration", "Stops", "Best for", "Tradeoff"].map((c) => (
+                <th key={c} className={thCls}>{c}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {top.map((o, i) => (
+              <tr
+                key={i}
+                className={`border-b border-white/[0.04] last:border-0 ${
+                  o.is_recommended ? "bg-lantern-violet/[0.05]" : "bg-transparent"
+                }`}
+              >
+                {/* Flight */}
+                <td className={tdCls}>
+                  <div className="flex items-start gap-1.5 min-w-0">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`https://www.gstatic.com/flights/airline_logos/70px/${o.airline_code}.png`}
+                      alt=""
+                      width={14}
+                      height={14}
+                      className="rounded object-contain mt-0.5 flex-shrink-0"
+                      onError={(e) => { e.currentTarget.style.display = "none"; }}
+                    />
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1 flex-wrap">
+                        <span className="text-[11px] font-semibold text-white leading-tight">{o.airline}</span>
+                        {o.is_recommended && (
+                          <span className="text-[8px] font-black uppercase tracking-widest text-lantern-violet border border-lantern-violet/40 bg-lantern-violet/10 rounded-full px-1.5 py-px leading-none">
+                            #1
+                          </span>
+                        )}
+                      </div>
+                      <div className="text-[9px] font-mono text-white/30 mt-px">{o.flight_number}</div>
+                    </div>
+                  </div>
+                </td>
+
+                {/* Score */}
+                <td className={tdCls}>
+                  <span className={`text-sm font-black tabular-nums leading-none ${scoreColor(o.ai_score)}`}>
+                    {o.ai_score}
+                  </span>
+                </td>
+
+                {/* Price */}
+                <td className={tdCls}>
+                  <span className="text-[12px] font-bold text-white tabular-nums whitespace-nowrap">
+                    ${Math.round(o.price_total).toLocaleString()}
+                  </span>
+                </td>
+
+                {/* Duration */}
+                <td className={tdCls}>
+                  <span className="text-[11px] text-white/65 whitespace-nowrap">{o.duration}</span>
+                </td>
+
+                {/* Stops */}
+                <td className={tdCls}>
+                  <span className={`text-[11px] font-medium whitespace-nowrap ${
+                    o.stops === 0 ? "text-lantern-mint" : "text-white/50"
+                  }`}>
+                    {o.stop_label}
+                  </span>
+                </td>
+
+                {/* Best for */}
+                <td className={tdCls}>
+                  <span className={`inline-block text-[9px] font-bold uppercase tracking-wider border rounded-full px-2 py-0.5 leading-none mb-1 ${scoreBg(o.ai_score)}`}>
+                    {o.recommendation_label}
+                  </span>
+                  {o.wins_on[0] && (
+                    <p className="text-[10px] text-white/40 leading-snug max-w-[130px]">{o.wins_on[0]}</p>
+                  )}
+                </td>
+
+                {/* Tradeoff */}
+                <td className={tdCls}>
+                  {o.tradeoffs[0] ? (
+                    <p className="text-[10px] text-white/40 leading-snug max-w-[130px]">{o.tradeoffs[0]}</p>
+                  ) : (
+                    <span className="text-[10px] text-white/20">—</span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
 // ── FlightCard ────────────────────────────────────────────────────────────────
 
 function FlightCard({ offer, cardRef }: { offer: FlightOffer; cardRef?: React.RefObject<HTMLDivElement | null> }) {
@@ -1171,6 +1289,7 @@ export default function FlightSearch() {
               </div>
             )}
             <RecommendationPanel offers={offers} topPickRef={topPickRef} />
+            <CompareTable offers={offers} />
             <div className="space-y-3 max-w-3xl mx-auto">
               {offers.map((offer, i) => {
                 const recIdx = offers.findIndex((o) => o.is_recommended);
