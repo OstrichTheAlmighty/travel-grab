@@ -182,6 +182,18 @@ interface FlightOffer {
   connection_airports?: string;
 }
 
+interface BookingIntent {
+  airline: string;
+  flight_number: string;
+  origin: string;
+  destination: string;
+  depart_time: string;
+  arrive_time: string;
+  price: number;
+  score: number;
+  priorities: string[];
+}
+
 interface SearchMeta {
   origin: string;
   destination: string;
@@ -991,6 +1003,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
   const [scoreOpen, setScoreOpen] = useState(false);
   const [analysisOpen, setAnalysisOpen] = useState(rec);
   const [detailsOpen, setDetailsOpen] = useState(false);
+  const [bookOpen, setBookOpen] = useState(false);
 
   useEffect(() => {
     if (!scoreOpen) return;
@@ -998,6 +1011,29 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [scoreOpen]);
+
+  useEffect(() => {
+    if (!bookOpen) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setBookOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [bookOpen]);
+
+  const handleBookClick = () => {
+    const intent: BookingIntent = {
+      airline:       offer.airline,
+      flight_number: offer.flight_number,
+      origin:        offer.origin,
+      destination:   offer.destination,
+      depart_time:   offer.depart_time,
+      arrive_time:   offer.arrive_time,
+      price:         Math.round(offer.price_total),
+      score:         offer.ai_score,
+      priorities,
+    };
+    console.log("[booking-intent]", intent);
+    setBookOpen(true);
+  };
 
   const whyBullets: string[] = offer.wins_on.length > 0 ? offer.wins_on : offer.recommendation_bullets;
   const whyNot: string[] = offer.tradeoffs;
@@ -1079,6 +1115,14 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
               ${Math.round(offer.price_total).toLocaleString()}
             </div>
             <div className="text-[11px] text-white/35 mt-0.5">{offer.cabin}</div>
+            {analysisOpen && (
+              <button
+                onClick={handleBookClick}
+                className="mt-2 text-[11px] font-bold text-white bg-lantern-violet hover:bg-lantern-violet/80 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
+              >
+                Book this flight
+              </button>
+            )}
           </div>
         </div>
 
@@ -1240,6 +1284,14 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
               {analysisOpen ? "Hide analysis" : "Analysis"}
             </button>
           )}
+          {!analysisOpen && (
+            <button
+              onClick={handleBookClick}
+              className="text-[11px] font-bold text-lantern-violet border border-lantern-violet/40 hover:bg-lantern-violet/10 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
+            >
+              Book
+            </button>
+          )}
           <button
             onClick={() => setDetailsOpen((o) => !o)}
             className="ml-auto flex items-center gap-1.5 text-[11px] font-medium text-white/40 hover:text-white/70 border border-white/[0.08] hover:border-white/20 rounded-lg px-3 py-1.5 transition-colors"
@@ -1367,6 +1419,58 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
               className="mt-4 w-full py-2 rounded-xl text-[11px] font-semibold text-white/40 border border-white/[0.08] hover:text-white/70 hover:border-white/20 transition-colors"
             >
               Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ── Booking intent modal ── */}
+      {bookOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+          onClick={() => setBookOpen(false)}
+        >
+          <div
+            className="w-full max-w-xs rounded-2xl border border-white/10 bg-[#0d1220] p-5 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-9 h-9 rounded-full bg-lantern-violet/20 flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 text-lantern-violet" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
+                  <path d="M12 19V5M5 12l7-7 7 7" />
+                </svg>
+              </div>
+              <div>
+                <div className="text-sm font-bold text-white">Booking not live yet</div>
+                <div className="text-[11px] text-white/35 mt-0.5">{offer.airline} · {offer.flight_number}</div>
+              </div>
+            </div>
+
+            <p className="text-[12px] text-white/55 leading-relaxed mb-4">
+              This is a test flight result, but we saved this as a booking-intent click.
+            </p>
+
+            <div className="rounded-xl bg-white/[0.03] border border-white/[0.07] px-3.5 py-3 mb-4 space-y-1.5">
+              {[
+                ["Route",    `${offer.origin} → ${offer.destination}`],
+                ["Flight",   offer.flight_number],
+                ["Departs",  offer.depart_time],
+                ["Arrives",  offer.arrive_time],
+                ["Price",    `$${Math.round(offer.price_total).toLocaleString()}`],
+                ["Score",    String(offer.ai_score)],
+              ].map(([label, val]) => (
+                <div key={label} className="flex items-baseline justify-between gap-2">
+                  <span className="text-[10px] text-white/30">{label}</span>
+                  <span className="text-[11px] text-white/65 font-medium tabular-nums">{val}</span>
+                </div>
+              ))}
+            </div>
+
+            <button
+              onClick={() => setBookOpen(false)}
+              className="w-full py-2 rounded-xl text-[12px] font-semibold text-white/50 border border-white/[0.10] hover:text-white/80 hover:border-white/25 transition-colors"
+            >
+              Got it
             </button>
           </div>
         </div>
