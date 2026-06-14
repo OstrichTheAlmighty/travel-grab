@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export const maxDuration = 30;
+export const maxDuration = 55;
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -755,6 +755,118 @@ function buildRecommendationMap(
   return result;
 }
 
+// ── OpenAI explanation enrichment ─────────────────────────────────────────────
+
+async function generateOpenAIExplanation(
+  pick: FlightOffer,
+  all: FlightOffer[]
+): Promise<{ advisor_summary: string; why_this: string[]; tradeoffs: string[]; comparison_note: string } | null> {
+  const apiKey = (process.env.OPENAI_API_KEY ?? "").trim();
+  if (!apiKey) return null;
+
+  const cheapest = all.reduce((a, b) => a.price_total <= b.price_total ? a : b);
+  const fastest  = all.reduce((a, b) =>
+    (durationMinutes(a.duration) || 9999) <= (durationMinutes(b.duration) || 9999) ? a : b);
+
+  const fmt = (o: FlightOffer) => ({
+    airline:                 o.airline,
+    flight:                  o.flight_number,
+    price_usd:               Math.round(o.price_total),
+    duration:                o.duration,
+    stops:                   o.stops,
+    cabin:                   o.cabin,
+    arrive_time:             o.arrive_time,
+    arrival_timing:          o.arrival_timing,
+    jet_lag:                 o.jet_lag,
+    travel_fatigue:          o.travel_fatigue,
+    aircraft_comfort:        o.aircraft_comfort,
+    city_access:             o.city_access,
+    ai_score:                o.ai_score,
+    deterministic_wins:      o.wins_on,
+    deterministic_tradeoffs: o.tradeoffs,
+  });
+
+  const alternatives = all
+    .filter((o) => flightKey(o) !== flightKey(pick))
+    .slice(0, 3)
+    .map(fmt);
+
+  const priceDiffVsCheapest = Math.round(pick.price_total - cheapest.price_total);
+
+  const prompt = `You are a concise travel advisor. A deterministic scoring system already ranked these flights — do NOT re-rank or change scores. Your only job: write human, specific explanations for the top pick.
+
+TOP PICK (ai_score is the source of truth, do not question it):
+${JSON.stringify(fmt(pick), null, 2)}
+
+ALTERNATIVES (context only):
+${JSON.stringify(alternatives, null, 2)}
+
+Context:
+- Cheapest overall: ${cheapest.airline} $${Math.round(cheapest.price_total)}
+- Fastest overall: ${fastest.airline} ${fastest.duration}
+- Top pick costs $${priceDiffVsCheapest} ${priceDiffVsCheapest >= 0 ? "more than" : "less than"} cheapest
+
+Respond with ONLY a JSON object (no markdown):
+{
+  "advisor_summary": "<2 sentences max. Explain why this is the best balanced pick, referencing specific price/time/comfort numbers from the data.>",
+  "why_this": ["<specific win using real numbers>", "<specific win>", "<optional 3rd specific win>"],
+  "tradeoffs": ["<honest tradeoff with real numbers>", "<optional 2nd tradeoff>"],
+  "comparison_note": "<1 sentence comparing top pick to the next best alternative using real data>"
+}`;
+
+  try {
+    const controller = new AbortController();
+    const tid = setTimeout(() => controller.abort(), 8000);
+
+    const resp = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      signal: controller.signal,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        temperature: 0.25,
+        max_tokens: 450,
+        response_format: { type: "json_object" },
+        messages: [{ role: "user", content: prompt }],
+      }),
+    });
+
+    clearTimeout(tid);
+
+    if (!resp.ok) {
+      console.error(`[openai] HTTP ${resp.status}: ${await resp.text().catch(() => "")}`);
+      return null;
+    }
+
+    const data = await resp.json() as { choices?: Array<{ message?: { content?: string } }> };
+    const raw = (data.choices?.[0]?.message?.content ?? "").trim();
+    const parsed = JSON.parse(raw) as Record<string, unknown>;
+
+    if (
+      typeof parsed.advisor_summary !== "string" ||
+      !Array.isArray(parsed.why_this) ||
+      !Array.isArray(parsed.tradeoffs) ||
+      typeof parsed.comparison_note !== "string"
+    ) {
+      console.error("[openai] unexpected shape");
+      return null;
+    }
+
+    return {
+      advisor_summary: parsed.advisor_summary.trim(),
+      why_this:        (parsed.why_this as unknown[]).filter((x): x is string => typeof x === "string").slice(0, 3),
+      tradeoffs:       (parsed.tradeoffs as unknown[]).filter((x): x is string => typeof x === "string").slice(0, 2),
+      comparison_note: parsed.comparison_note.trim(),
+    };
+  } catch (err) {
+    console.error("[openai] error:", err instanceof Error ? err.message : String(err));
+    return null;
+  }
+}
+
 // ── Duffel API call ───────────────────────────────────────────────────────────
 
 async function loadFlightOffers(params: ValidatedParams): Promise<{
@@ -887,6 +999,22 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
   });
 
   enriched.sort((a, b) => (a.is_recommended ? -1 : b.is_recommended ? 1 : 0) || (b.ai_score - a.ai_score));
+
+  // Augment top pick with OpenAI-generated human explanations (falls back to deterministic if unavailable)
+  const topPick = enriched.find((o) => o.is_recommended);
+  if (topPick && enriched.length >= 2) {
+    const aiText = await generateOpenAIExplanation(topPick, enriched);
+    if (aiText) {
+      console.log("[openai] enriched top pick with AI explanations");
+      topPick.recommendation_why     = aiText.advisor_summary;
+      topPick.wins_on                = aiText.why_this;
+      topPick.recommendation_bullets = aiText.why_this;
+      topPick.tradeoffs              = aiText.tradeoffs;
+      topPick.comparison_summary     = aiText.comparison_note;
+    } else {
+      console.log("[openai] using deterministic fallback");
+    }
+  }
 
   console.log(`[pipeline] 6_returned_to_frontend=${enriched.length}`);
   enriched.forEach((o, i) => {

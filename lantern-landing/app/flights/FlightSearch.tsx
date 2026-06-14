@@ -738,7 +738,12 @@ function RecommendationPanel({
 
       {/* Advisor sentence */}
       {pick.recommendation_why && (
-        <p className="text-[11px] text-white/60 leading-relaxed mb-2.5">{pick.recommendation_why}</p>
+        <p className="text-[11px] text-white/60 leading-relaxed mb-2">{pick.recommendation_why}</p>
+      )}
+
+      {/* vs others note */}
+      {pick.comparison_summary && (
+        <p className="text-[11px] text-white/35 leading-relaxed mb-2.5">{pick.comparison_summary}</p>
       )}
 
       {/* Reason bullets */}
