@@ -265,17 +265,18 @@ const PRIORITY_CHIPS: { id: Priority; label: string }[] = [
   { id: "airport",      label: "Best airport" },
 ];
 
-// Weights sum to 1.0; keys match score_breakdown fields: price/duration/stops/timing/cabin/baggage
+// Weights sum to 1.0; keys match score_breakdown fields returned by scoreComponents in route.ts
 const PRIORITY_WEIGHTS: Record<Priority, Record<string, number>> = {
   best_overall: { price: 0.35, duration: 0.20, stops: 0.20, timing: 0.10, cabin: 0.10, baggage: 0.05 },
   cheapest:     { price: 0.60, stops: 0.15, duration: 0.10, timing: 0.05, cabin: 0.05, baggage: 0.05 },
   fastest:      { duration: 0.55, stops: 0.20, price: 0.10, timing: 0.10, cabin: 0.03, baggage: 0.02 },
   nonstop:      { stops: 0.60, duration: 0.15, price: 0.10, timing: 0.10, cabin: 0.03, baggage: 0.02 },
   arrival:      { timing: 0.55, duration: 0.15, stops: 0.15, price: 0.10, cabin: 0.03, baggage: 0.02 },
-  jet_lag:      { timing: 0.30, duration: 0.25, stops: 0.20, price: 0.10, cabin: 0.10, baggage: 0.05 },
-  fatigue:      { duration: 0.30, stops: 0.30, timing: 0.15, cabin: 0.15, price: 0.05, baggage: 0.05 },
-  comfort:      { cabin: 0.50, duration: 0.15, stops: 0.15, price: 0.10, timing: 0.05, baggage: 0.05 },
-  airport:      { timing: 0.25, stops: 0.25, duration: 0.20, price: 0.15, cabin: 0.10, baggage: 0.05 },
+  // jet_lag, fatigue, city_access are dedicated score signals computed server-side in scoreComponents
+  jet_lag:      { jet_lag: 0.60, duration: 0.20, stops: 0.10, price: 0.05, timing: 0.05 },
+  fatigue:      { fatigue: 0.60, duration: 0.20, stops: 0.10, timing: 0.05, price: 0.05 },
+  comfort:      { stops: 0.40, duration: 0.25, timing: 0.15, cabin: 0.10, price: 0.05, baggage: 0.05 },
+  airport:      { city_access: 0.50, timing: 0.20, stops: 0.15, duration: 0.10, price: 0.05 },
 };
 
 const PRIORITY_TOP_LABEL: Record<Priority, string> = {
@@ -319,19 +320,23 @@ function rerankOffers(rawOffers: FlightOffer[], priority: Priority): FlightOffer
   if (!rawOffers.length) return rawOffers;
   const w = PRIORITY_WEIGHTS[priority];
 
+  console.log(`[rerank] priority="${priority}" weights=`, w);
+
   const rescored = rawOffers.map((o) => {
     const bd = o.score_breakdown;
-    const weighted =
-      (bd.price    ?? 0) * (w.price    ?? 0) +
-      (bd.duration ?? 0) * (w.duration ?? 0) +
-      (bd.stops    ?? 0) * (w.stops    ?? 0) +
-      (bd.timing   ?? 0) * (w.timing   ?? 0) +
-      (bd.cabin    ?? 0) * (w.cabin    ?? 0) +
-      (bd.baggage  ?? 0) * (w.baggage  ?? 0);
+    const weighted = Object.entries(w).reduce((sum, [k, wt]) => sum + (bd[k] ?? 0) * wt, 0);
     return { ...o, ai_score: Math.round(Math.max(45, Math.min(99, 50 + weighted * 49))) };
   });
 
   rescored.sort((a, b) => b.ai_score - a.ai_score);
+
+  console.log(`[rerank] top 5 after "${priority}":`);
+  rescored.slice(0, 5).forEach((o, i) => {
+    const contrib = Object.entries(w)
+      .map(([k, wt]) => `${k}:${((o.score_breakdown[k] ?? 0) * wt).toFixed(2)}`)
+      .join(" ");
+    console.log(`  #${i + 1} ${o.airline} ${o.flight_number} score=${o.ai_score} | ${contrib}`);
+  });
 
   return rescored.map((o, i) => ({
     ...o,
@@ -491,12 +496,15 @@ function AirportCombobox({
 // ── Score / breakdown helpers ─────────────────────────────────────────────────
 
 const BREAKDOWN_LABELS: Record<string, string> = {
-  price: "Price",
-  duration: "Duration",
-  stops: "Routing / Stops",
-  timing: "Arrival Timing",
-  cabin: "Cabin Class",
-  baggage: "Baggage",
+  price:       "Price",
+  duration:    "Duration",
+  stops:       "Routing / Stops",
+  timing:      "Arrival Timing",
+  cabin:       "Cabin Class",
+  baggage:     "Baggage",
+  jet_lag:     "Jet Lag",
+  fatigue:     "Travel Fatigue",
+  city_access: "City Access",
 };
 
 

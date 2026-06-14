@@ -331,13 +331,33 @@ function scoreComponents(o: FlightOffer, medP: number, medD: number): Record<str
   const cab = o.cabin.toLowerCase();
   const cabinSc = cab.includes("first") ? 0.5 : cab.includes("business") ? 0.3 : cab.includes("premium") ? 0.1 : 0;
   const baggageSc = o.baggage.trim() ? 0.2 : 0;
+
+  // Jet lag score: shorter flights and fewer stops = less jet lag = higher score (-1 to 1)
+  const jetLagRaw = (durMin >= 20 * 60 ? 3.5 : durMin >= 14 * 60 ? 2.5 : durMin >= 9 * 60 ? 1.5 : durMin >= 5 * 60 ? 0.7 : 0)
+    + Math.min(1.5, o.stops * 0.5);
+  const jetLagSc = Math.max(-1, Math.min(1, (2.5 - jetLagRaw) / 2.5));
+
+  // Fatigue score: shorter flights, fewer stops, and good arrival timing = less fatigue = higher score (-1 to 1)
+  const fatigueBase = durMin >= 20 * 60 ? 3.2 : durMin >= 14 * 60 ? 2.35 : durMin >= 9 * 60 ? 1.35 : durMin >= 5 * 60 ? 0.55 : 0;
+  const fatiguePenalty = timingSc < 0 ? 1.35 : timingSc < 0.3 ? 0.45 : 0;
+  const fatigueRaw = fatigueBase + Math.min(3.0, o.stops * 1.15) + fatiguePenalty;
+  const fatigueSc = Math.max(-1, Math.min(1, (3.0 - fatigueRaw) / 3.0));
+
+  // City access score: quality of ground transport from destination airport (-1 to 1)
+  const cityGood = new Set(["LHR", "CDG", "AMS", "NRT", "HND", "SIN", "HKG", "DXB", "JFK", "LAX", "ORD", "LGA", "EWR"]);
+  const cityLimited = new Set(["MXP", "BER", "IST", "YYZ", "YVR", "SYD", "ICN", "PEK", "PVG"]);
+  const cityAccessSc = cityGood.has(o.destination) ? 1 : cityLimited.has(o.destination) ? -1 : 0;
+
   return {
-    price: Math.round(priceSc * 100) / 100,
-    duration: Math.round(durSc * 100) / 100,
-    stops: stopsSc,
-    timing: Math.round(timingSc * 100) / 100,
-    cabin: cabinSc,
-    baggage: baggageSc,
+    price:       Math.round(priceSc * 100) / 100,
+    duration:    Math.round(durSc * 100) / 100,
+    stops:       stopsSc,
+    timing:      Math.round(timingSc * 100) / 100,
+    cabin:       cabinSc,
+    baggage:     baggageSc,
+    jet_lag:     Math.round(jetLagSc * 100) / 100,
+    fatigue:     Math.round(fatigueSc * 100) / 100,
+    city_access: cityAccessSc,
   };
 }
 
