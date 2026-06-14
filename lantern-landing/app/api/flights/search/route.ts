@@ -631,7 +631,7 @@ function buildComparisonSummary(
       !w.startsWith("Lowest fare") &&
       !w.startsWith("Fastest option") &&
       !w.startsWith("Saves ") &&
-      !w.startsWith("Nonstop while") // already stated in context; avoids "Nonstop with nonstop while..."
+      !w.startsWith("Nonstop —")
   );
 
   // Pattern A: nonstop + cheapest overall → best overall
@@ -676,13 +676,13 @@ function buildComparisonSummary(
 
   // Pattern E: fastest (connecting) but costs more
   if (isFastest && priceDiff > 0)
-    return `Fastest option at ${o.duration}, though ${moneyUsd(priceDiff)} more than the cheapest fare.`;
+    return `Fastest option at ${o.duration}, but costs ${moneyUsd(priceDiff)} more than the cheapest fare.`;
 
   // Pattern F: higher price, wins on quality metrics
   if (priceDiff > 0 && qualityWins.length >= 2)
-    return `Higher price, but ${qualityWins[0].toLowerCase()} and ${qualityWins[1].toLowerCase()}.`;
+    return `This flight costs ${moneyUsd(priceDiff)} more than the cheapest option, but ${qualityWins[0].toLowerCase()} and ${qualityWins[1].toLowerCase()}.`;
   if (priceDiff > 0 && qualityWins.length === 1)
-    return `${moneyUsd(priceDiff)} more than cheapest, but ${qualityWins[0].toLowerCase()}.`;
+    return `This flight costs ${moneyUsd(priceDiff)} more than the cheapest option, but ${qualityWins[0].toLowerCase()}.`;
 
   // Pattern G: nothing standout — pick a tradeoff that doesn't repeat the price amount
   const nonPriceTradeoff = tradeoffs.find((t) => !t.toLowerCase().includes("more than the cheapest"));
@@ -723,6 +723,10 @@ function buildRecommendationMap(
     const d = (FATIGUE_RANK[travelFatigueLabel(a)] ?? 1) - (FATIGUE_RANK[travelFatigueLabel(b)] ?? 1);
     return d !== 0 ? (d > 0 ? a : b) : (sc(a) >= sc(b) ? a : b);
   });
+  const nonstops = offers.filter((o) => o.stops === 0);
+  const nonstopOff = nonstops.length > 0
+    ? nonstops.reduce((a, b) => sc(a) >= sc(b) ? a : b)
+    : null;
 
   // Claim badges in priority order. Each offer gets at most one badge; each badge is assigned to
   // at most one offer. If the natural winner already holds a higher-priority badge, that badge
@@ -736,22 +740,17 @@ function buildRecommendationMap(
   claim(aiPick,      "AI Pick");
   claim(cheapestOff, "Cheapest");
   claim(fastestOff,  "Fastest");
-  claim(comfortOff,  "Best Comfort");
+  if (nonstopOff) claim(nonstopOff, "Nonstop Pick");
+  claim(comfortOff,  "Most Comfortable");
   claim(arrivalOff,  "Best Arrival");
-  claim(fatigueOff,  "Least Fatigue");
+  claim(fatigueOff,  "Lowest Fatigue");
 
-  // "Best Value": the highest-scored offer not yet claimed by any other badge
-  const bestValue = [...offers]
-    .sort((a, b) => sc(b) - sc(a))
-    .find((o) => !assignments.has(flightKey(o)));
-  if (bestValue) claim(bestValue, "Best Value");
-
-  // Build result map; any offer without a badge gets "Alternative"
+  // Build result map; unclaimed offers carry no badge
   const result = new Map<string, { score: number; breakdown: Record<string, number>; label: string }>();
   for (const o of offers) {
     const key = flightKey(o);
     const sd = scoreMap.get(key) ?? { score: 75, breakdown: {} };
-    result.set(key, { ...sd, label: assignments.get(key) ?? "Alternative" });
+    result.set(key, { ...sd, label: assignments.get(key) ?? "" });
   }
   return result;
 }

@@ -302,12 +302,12 @@ const PRIORITY_TOP_LABEL: Record<Priority, string> = {
   best_overall: "AI Pick",
   cheapest:     "Cheapest",
   fastest:      "Fastest",
-  nonstop:      "Best routing",
-  arrival:      "Best arrival",
-  jet_lag:      "Lowest jet lag",
-  fatigue:      "Least fatigue",
-  comfort:      "Best comfort",
-  airport:      "Best airport",
+  nonstop:      "Nonstop Pick",
+  arrival:      "Best Arrival",
+  jet_lag:      "Lowest Fatigue",
+  fatigue:      "Lowest Fatigue",
+  comfort:      "Most Comfortable",
+  airport:      "AI Pick",
 };
 
 function buildPriorityNote(o: FlightOffer, priorities: Priority[]): string {
@@ -345,6 +345,19 @@ function buildPriorityNote(o: FlightOffer, priorities: Priority[]): string {
   const firstWin = o.wins_on[0];
   const because = firstWin ? ` — ${firstWin.toLowerCase()}` : "";
   return `Because you prioritized ${joined}, this flight ranks highest${because}.`;
+}
+
+function labelSummary(label: string): string {
+  switch (label) {
+    case "AI Pick":          return "Highest overall score in this result set.";
+    case "Cheapest":         return "Lowest visible fare.";
+    case "Fastest":          return "Fastest itinerary available.";
+    case "Best Arrival":     return "Best arrival timing among visible results.";
+    case "Lowest Fatigue":   return "Lowest fatigue among visible results.";
+    case "Most Comfortable": return "Most comfortable option available.";
+    case "Nonstop Pick":     return "Best nonstop option available.";
+    default:                 return "";
+  }
 }
 
 function rerankOffers(
@@ -865,9 +878,11 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
 
                 {/* Best for */}
                 <td className={tdCls}>
-                  <span className={`inline-block text-[9px] font-bold uppercase tracking-wider border rounded-full px-2 py-0.5 leading-none mb-1 ${scoreBg(o.ai_score)}`}>
-                    {o.recommendation_label}
-                  </span>
+                  {o.recommendation_label && (
+                    <span className={`inline-block text-[9px] font-bold uppercase tracking-wider border rounded-full px-2 py-0.5 leading-none mb-1 ${scoreBg(o.ai_score)}`}>
+                      {o.recommendation_label}
+                    </span>
+                  )}
                   {o.wins_on[0] && (
                     <p className="text-[10px] text-white/40 leading-snug max-w-[130px]">{o.wins_on[0]}</p>
                   )}
@@ -972,9 +987,11 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
                     AI Pick
                   </span>
                 )}
-                <span className={`text-[10px] font-bold uppercase tracking-widest border rounded-full px-2 py-0.5 leading-none ${scoreBg(offer.ai_score)}`}>
-                  {offer.recommendation_label}
-                </span>
+                {offer.recommendation_label && (
+                  <span className={`text-[10px] font-bold uppercase tracking-widest border rounded-full px-2 py-0.5 leading-none ${scoreBg(offer.ai_score)}`}>
+                    {offer.recommendation_label}
+                  </span>
+                )}
               </div>
               {offer.recommendation_why && (
                 <p className={`text-[11px] leading-relaxed ${rec ? "text-white/60" : "text-white/40"}`}>
@@ -1197,12 +1214,19 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
                 {offer.ai_score}
               </div>
               <div className="min-w-0">
-                <span className={`inline-block text-[10px] font-bold uppercase tracking-widest border rounded-full px-2 py-0.5 mb-1 ${scoreBg(offer.ai_score)}`}>
-                  {offer.recommendation_label}
-                </span>
-                {offer.recommendation_why && (
-                  <p className="text-[11px] text-white/40 leading-relaxed">{offer.recommendation_why}</p>
+                {offer.recommendation_label && (
+                  <span className={`inline-block text-[10px] font-bold uppercase tracking-widest border rounded-full px-2 py-0.5 mb-1 ${scoreBg(offer.ai_score)}`}>
+                    {offer.recommendation_label}
+                  </span>
                 )}
+                {(() => {
+                  const summary = labelSummary(offer.recommendation_label);
+                  return summary ? (
+                    <p className="text-[11px] text-white/40 leading-relaxed">{summary}</p>
+                  ) : offer.recommendation_why ? (
+                    <p className="text-[11px] text-white/40 leading-relaxed">{offer.recommendation_why}</p>
+                  ) : null;
+                })()}
               </div>
             </div>
 
