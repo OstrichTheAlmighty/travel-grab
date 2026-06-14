@@ -424,11 +424,40 @@ function rerankOffers(
       ? (PRIORITY_TOP_LABEL[priorities[0]] ?? "Best Match")
       : "Best Match";
 
-  return rescored.map((o, i) => ({
-    ...o,
-    is_recommended: i === 0,
-    recommendation_label: i === 0 ? topLabel : o.recommendation_label,
-  }));
+  // Per-dimension badge assignment against the visible result set.
+  // Position 0 always gets topLabel; positions 1+ get the first matching dimension badge.
+  const minPrice   = Math.min(...rescored.map((o) => o.price_total));
+  const minDur     = Math.min(...rescored.map((o) => parseMins(o.duration) || 999));
+  const maxTiming  = Math.max(...rescored.map((o) => o.score_breakdown.timing  ?? 0));
+  const maxFatigue = Math.max(...rescored.map((o) => o.score_breakdown.fatigue ?? 0));
+  const maxCabin   = Math.max(...rescored.map((o) => o.score_breakdown.cabin   ?? 0));
+
+  const usedLabels = new Set<string>();
+  const claimLabel = (label: string): string => {
+    if (usedLabels.has(label)) return "";
+    usedLabels.add(label);
+    return label;
+  };
+
+  return rescored.map((o, i) => {
+    let label: string;
+    if (i === 0) {
+      label = topLabel;
+    } else if (o.price_total === minPrice) {
+      label = claimLabel("Cheapest");
+    } else if ((parseMins(o.duration) || 999) === minDur) {
+      label = claimLabel("Fastest");
+    } else if ((o.score_breakdown.timing  ?? 0) === maxTiming) {
+      label = claimLabel("Best Arrival");
+    } else if ((o.score_breakdown.fatigue ?? 0) === maxFatigue) {
+      label = claimLabel("Lowest Fatigue");
+    } else if ((o.score_breakdown.cabin   ?? 0) === maxCabin) {
+      label = claimLabel("Most Comfortable");
+    } else {
+      label = "";
+    }
+    return { ...o, is_recommended: i === 0, recommendation_label: label };
+  });
 }
 
 // ── AirportCombobox ───────────────────────────────────────────────────────────
@@ -987,7 +1016,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
                     AI Pick
                   </span>
                 )}
-                {offer.recommendation_label && (
+                {!rec && offer.recommendation_label && (
                   <span className={`text-[10px] font-bold uppercase tracking-widest border rounded-full px-2 py-0.5 leading-none ${scoreBg(offer.ai_score)}`}>
                     {offer.recommendation_label}
                   </span>
