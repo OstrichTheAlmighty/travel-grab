@@ -169,6 +169,9 @@ interface FlightOffer {
   recommendation_label: string;
   recommendation_why: string;
   recommendation_bullets: string[];
+  wins_on: string[];
+  tradeoffs: string[];
+  comparison_summary: string;
   is_recommended: boolean;
   arrival_timing: string;
   jet_lag: string;
@@ -400,12 +403,6 @@ const BREAKDOWN_WEIGHTS: Record<string, number> = {
   price: 35, duration: 20, stops: 20, timing: 10, cabin: 10, baggage: 5,
 };
 
-function parseDurMins(d: string): number {
-  const h = d.match(/(\d+)h/)?.[1];
-  const m = d.match(/(\d+)m/)?.[1];
-  return (h ? parseInt(h) * 60 : 0) + (m ? parseInt(m) : 0);
-}
-
 function toDisplayScore(v: number): number {
   return Math.round(((v + 1) / 2) * 100);
 }
@@ -458,86 +455,6 @@ const COMFORT_DESC: Record<string, string> = {
   "Basic": "Standard economy with limited comfort signals.",
 };
 
-// ── Deterministic bullet builders ─────────────────────────────────────────────
-
-const cabinRankLocal = (cabin: string) => {
-  const c = cabin.toLowerCase();
-  if (c.includes("first")) return 4;
-  if (c.includes("business")) return 3;
-  if (c.includes("premium")) return 2;
-  return 1;
-};
-
-function buildWhyThis(offer: FlightOffer, cheapestPrice: number, fastestDurMins: number): string[] {
-  const durMins = parseDurMins(offer.duration);
-  const bullets: string[] = [];
-
-  if (cheapestPrice > 0 && offer.price_total <= cheapestPrice * 1.02) {
-    bullets.push("Matches or ties the lowest visible fare.");
-  } else if (cheapestPrice > 0 && offer.price_total <= cheapestPrice * 1.12) {
-    bullets.push(`Within ${Math.round((offer.price_total / cheapestPrice - 1) * 100)}% of the cheapest available fare.`);
-  }
-
-  if (offer.stops === 0) bullets.push("Nonstop — no connections required.");
-
-  if (fastestDurMins > 0 && durMins <= fastestDurMins + 15) {
-    bullets.push("One of the fastest options for this route.");
-  }
-
-  if (offer.arrival_timing === "Morning") bullets.push("Morning arrival — full day at destination.");
-  else if (offer.arrival_timing === "Afternoon") bullets.push("Afternoon arrival, good timing for most trips.");
-
-  if (offer.travel_fatigue === "Low") bullets.push("Low travel fatigue expected on this route.");
-
-  if (["Excellent", "Good"].includes(offer.aircraft_comfort)) {
-    bullets.push(`${offer.aircraft_comfort} aircraft comfort rating.`);
-  }
-
-  return bullets.slice(0, 3);
-}
-
-function buildWhyNot(
-  offer: FlightOffer,
-  cheapestPrice: number,
-  fastestDurMins: number,
-  betterComfortExists: boolean
-): string[] {
-  const durMins = parseDurMins(offer.duration);
-  const out: string[] = [];
-
-  if (cheapestPrice > 0 && offer.price_total > cheapestPrice + 50) {
-    out.push(`$${Math.round(offer.price_total - cheapestPrice).toLocaleString()} more than the cheapest visible fare.`);
-  }
-
-  if (offer.aircraft_comfort === "Basic" && betterComfortExists) {
-    out.push("Basic comfort compared with more comfortable options in these results.");
-  } else if (offer.aircraft_comfort === "Basic" && durMins >= 300) {
-    out.push("Basic comfort cabin for a long-haul flight.");
-  }
-
-  if (fastestDurMins > 0 && durMins > fastestDurMins + 45) {
-    const extra = durMins - fastestDurMins;
-    const h = Math.floor(extra / 60);
-    const m = extra % 60;
-    const label = h > 0 ? (m > 0 ? `${h}h ${m}m` : `${h}h`) : `${m}m`;
-    out.push(`Not the fastest option — ${label} longer than quickest.`);
-  }
-
-  if (offer.arrival_timing === "Late Night") out.push("Late night arrival — plan ahead for transport.");
-  else if (offer.arrival_timing === "Early Morning") out.push("Very early arrival — limited transit options.");
-
-  if (offer.stops > 0) {
-    out.push(offer.stops === 1 ? "Requires a connection." : `Requires ${offer.stops} connections.`);
-  }
-
-  if (offer.city_access === "Limited") out.push("Remote destination airport — allow extra travel time to the city.");
-
-  if (offer.jet_lag === "Very High") out.push("Very high jet lag risk on this route.");
-  else if (offer.jet_lag === "High") out.push("High jet lag risk — plan for adjustment days.");
-
-  return out.slice(0, 3);
-}
-
 // ── RecommendationPanel ───────────────────────────────────────────────────────
 
 function RecommendationPanel({
@@ -550,31 +467,7 @@ function RecommendationPanel({
   const pick = offers.find((o) => o.is_recommended) ?? offers[0];
   if (!pick) return null;
 
-  const cheapestPrice = Math.min(...offers.map((o) => o.price_total));
-  const fastestDurMins = Math.min(...offers.map((o) => parseDurMins(o.duration)));
-  const pickDurMins = parseDurMins(pick.duration);
-
-  const reasons: string[] =
-    pick.recommendation_bullets.length > 0
-      ? pick.recommendation_bullets.slice(0, 3)
-      : (() => {
-          const out: string[] = [];
-          if (pick.stops === 0) out.push("Nonstop — no connections required.");
-          if (cheapestPrice > 0 && pick.price_total <= cheapestPrice * 1.02) {
-            out.push("Matches or ties the lowest visible fare.");
-          } else if (cheapestPrice > 0 && pick.price_total < cheapestPrice * 1.12) {
-            out.push(`Within ${Math.round((pick.price_total / cheapestPrice - 1) * 100)}% of the cheapest available fare.`);
-          }
-          if (fastestDurMins > 0 && pickDurMins <= fastestDurMins + 15) {
-            out.push("One of the fastest options for this route.");
-          }
-          if (pick.travel_fatigue === "Low") out.push("Low travel fatigue expected on this route.");
-          if (pick.jet_lag === "Low") out.push("Minimal jet lag risk.");
-          if (["Excellent", "Good"].includes(pick.aircraft_comfort)) {
-            out.push(`${pick.aircraft_comfort} aircraft comfort rating.`);
-          }
-          return out.slice(0, 3);
-        })();
+  const reasons = (pick.wins_on.length > 0 ? pick.wins_on : pick.recommendation_bullets).slice(0, 3);
 
   return (
     <div className="mb-4 max-w-3xl mx-auto rounded-xl border border-lantern-violet/40 bg-lantern-violet/[0.07] px-4 sm:px-5 py-4 shadow-[0_0_24px_rgba(139,92,246,0.10)]">
@@ -648,7 +541,7 @@ function RecommendationPanel({
 
 // ── FlightCard ────────────────────────────────────────────────────────────────
 
-function FlightCard({ offer, allOffers, cardRef }: { offer: FlightOffer; allOffers: FlightOffer[]; cardRef?: React.RefObject<HTMLDivElement | null> }) {
+function FlightCard({ offer, cardRef }: { offer: FlightOffer; cardRef?: React.RefObject<HTMLDivElement | null> }) {
   const rec = offer.is_recommended;
   const [scoreOpen, setScoreOpen] = useState(false);
   const [analysisOpen, setAnalysisOpen] = useState(rec);
@@ -661,19 +554,8 @@ function FlightCard({ offer, allOffers, cardRef }: { offer: FlightOffer; allOffe
     return () => window.removeEventListener("keydown", onKey);
   }, [scoreOpen]);
 
-  const offerKey = (o: FlightOffer) => `${o.airline_code}${o.flight_number}`;
-  const cheapestPrice = Math.min(...allOffers.map((o) => o.price_total));
-  const fastestDurMins = Math.min(...allOffers.map((o) => parseDurMins(o.duration)));
-  const betterComfortExists = allOffers.some(
-    (o) => offerKey(o) !== offerKey(offer) && cabinRankLocal(o.cabin) > cabinRankLocal(offer.cabin)
-  );
-
-  const whyBullets =
-    offer.recommendation_bullets.length > 0
-      ? offer.recommendation_bullets
-      : buildWhyThis(offer, cheapestPrice, fastestDurMins);
-
-  const whyNot = buildWhyNot(offer, cheapestPrice, fastestDurMins, betterComfortExists);
+  const whyBullets: string[] = offer.wins_on.length > 0 ? offer.wins_on : offer.recommendation_bullets;
+  const whyNot: string[] = offer.tradeoffs;
 
   const breakdownRows = Object.entries(offer.score_breakdown)
     .map(([k, v]) => ({
@@ -1294,7 +1176,7 @@ export default function FlightSearch() {
                 const recIdx = offers.findIndex((o) => o.is_recommended);
                 const pickIdx = recIdx >= 0 ? recIdx : 0;
                 return (
-                  <FlightCard key={i} offer={offer} allOffers={offers} cardRef={i === pickIdx ? topPickRef : undefined} />
+                  <FlightCard key={i} offer={offer} cardRef={i === pickIdx ? topPickRef : undefined} />
                 );
               })}
             </div>
