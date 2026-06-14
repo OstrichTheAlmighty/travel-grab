@@ -44,6 +44,7 @@ export interface FlightOffer {
   travel_fatigue: string;
   city_access: string;
   aircraft_comfort: string;
+  dedupe_group_size?: number;   // dev debug: how many codeshares collapsed into this offer
 }
 
 // ── Airline IATA lookup ──────────────────────────────────────────────────────
@@ -304,15 +305,47 @@ function normalizeFlight(raw: DuffelRecord, adults: number): FlightOffer | null 
 // ── Deduplication ────────────────────────────────────────────────────────────
 
 function deduplicateOffers(offers: FlightOffer[]): FlightOffer[] {
-  const best = new Map<string, FlightOffer>();
+  // Key on itinerary only — no airline/flight_number so codeshares collapse
+  const itinKey = (o: FlightOffer) =>
+    [o.origin, o.destination, o.depart_time, o.arrive_time, o.duration, o.stops].join("|");
+
+  // Prefer real carriers; Duffel test keys return synthetic "Duffel Airways" / code ZZ offers
+  const isReal = (o: FlightOffer) =>
+    !o.airline.toLowerCase().includes("duffel") && o.airline_code !== "ZZ";
+
+  const groups = new Map<string, FlightOffer[]>();
   for (const o of offers) {
-    const key = [o.airline, o.flight_number, o.origin, o.destination, o.depart_time, o.arrive_time, o.duration, o.stops].join("|");
-    const existing = best.get(key);
-    if (!existing || o.price_total < existing.price_total) {
-      best.set(key, o);
-    }
+    const k = itinKey(o);
+    const g = groups.get(k) ?? [];
+    g.push(o);
+    groups.set(k, g);
   }
-  return Array.from(best.values());
+
+  const result: FlightOffer[] = [];
+  let dupeCount = 0;
+
+  for (const group of groups.values()) {
+    if (group.length === 1) {
+      result.push({ ...group[0], dedupe_group_size: 1 });
+      continue;
+    }
+    dupeCount += group.length - 1;
+
+    const winner = group.reduce((best, o) => {
+      const diff = Math.abs(o.price_total - best.price_total);
+      if (diff <= 10) {
+        // Within $10 — prefer a real airline over a synthetic one
+        if (isReal(o) && !isReal(best)) return o;
+        if (!isReal(o) && isReal(best)) return best;
+      }
+      return o.price_total < best.price_total ? o : best;
+    });
+
+    result.push({ ...winner, dedupe_group_size: group.length });
+  }
+
+  console.log(`[dedupe] raw=${offers.length} deduped=${result.length} duplicates_removed=${dupeCount}`);
+  return result;
 }
 
 // ── Scoring ──────────────────────────────────────────────────────────────────
@@ -757,9 +790,7 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
   // Keep all offers including test/sandbox so search works with a Duffel test key
   const normedRaw = rawOffers.slice(0, 10).map(normalizeDuffelOffer).filter(Boolean) as DuffelRecord[];
   const normedAll = normedRaw.map((r) => normalizeFlight(r, params.adults)).filter(Boolean) as FlightOffer[];
-  console.log(`[dedupe] offers before: ${normedAll.length}`);
   const normed = deduplicateOffers(normedAll);
-  console.log(`[dedupe] offers after: ${normed.length}`);
 
   if (!normed.length) {
     return {
