@@ -46,7 +46,10 @@ The hybrid approach reduces early conversion friction — users start free, expe
 ## 3. Go-to-Market Strategy
 
 ### Beachhead Market
-**Group coordinators** — the person in a friend group or family who ends up organizing the trip. This segment has a disproportionately high pain point (aligning multiple people is 2–3× harder than solo planning), high booking value per transaction (group bookings are larger), and strong word-of-mouth potential (one coordinator brings 3–8 travelers per trip). Secondary beachhead: individual experience-seeking travelers who are likely to eventually travel in groups.
+**Group coordinators and solo travelers** — two complementary entry points:
+
+- **Group coordinators** — the person in a friend group or family who ends up organizing the trip. Disproportionately high pain point (aligning multiple people is 2–3× harder than solo planning), high booking value per transaction, and strong word-of-mouth potential (one coordinator brings 3–8 travelers per trip).
+- **Solo travelers** — individual experience-seekers who want personalized recommendations without hours of research. Lower booking value per transaction but higher volume, faster to acquire, and a natural funnel into group trips as they invite others.
 
 ### Channels
 - [ ] SEO / content (travel intent keywords)
