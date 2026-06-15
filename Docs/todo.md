@@ -31,7 +31,6 @@ Format: `- [ ] [Priority] [Added: YYYY-MM-DD] [By: HU|Claude] Task description`
 - [ ] [P2] [Added: 2026-06-14] [By: HU] Fill in target time-to-plan in overview once user testing data is available
 
 ### Docs Maintenance
-- [ ] [P2] [Added: 2026-06-14] [By: Claude] Update `abbreviations-and-terms.md` with new terms from recent sessions (commission, subscription tiers, group coordinator, beachhead, CAC, MRR, ARPU, etc.)
 
 ---
 
@@ -64,6 +63,7 @@ Format: `- [ ] [Priority] [Added: YYYY-MM-DD] [By: HU|Claude] Task description`
 - 2026-06-14 — AI layer defined: preference scoring engine + LLM hybrid
 - 2026-06-14 — Differentiation angles defined: group travel, preference model, travel DNA / data moat
 - 2026-06-14 — Cost model and unit economics drafted (`business-plan.md` § 5)
+- 2026-06-14 — `abbreviations-and-terms.md` updated with 15 new terms from recent sessions
 - 2026-06-03 17:00 PT — Project initialized, seven-file structure created
 - 2026-06-03 17:00 PT — Chat instructions v2 and v3 finalized
 - 2026-06-03 17:00 PT — `session-log.md` and `sources.md` created; `market-research.md` split from sources

@@ -4,7 +4,7 @@ A shared glossary for this project. Add new terms as they emerge. Keeps everyone
 
 Format: **Term / Abbreviation** — Definition. *(Context or usage note if needed.)*
 
-Last updated: 2026-06-03
+Last updated: 2026-06-14
 
 ---
 
@@ -19,6 +19,16 @@ Last updated: 2026-06-03
 **GTM** — Go-to-Market. Strategy for how the product reaches its target customers.
 
 **ACV** — Annual Contract Value. The average annualized revenue per customer contract. Common in B2B SaaS.
+
+**ARPU** — Average Revenue Per User. Total revenue divided by number of active users. Used to compare revenue efficiency across subscription tiers.
+
+**Beachhead Market** — The specific, narrow customer segment targeted first before expanding. TravelGrab's beachhead: group coordinators and solo travelers.
+
+**Commission** — Revenue earned as a percentage of a booking transaction completed through our platform via affiliate API partners. One of our two confirmed revenue streams.
+
+**Freemium** — A pricing model where the core product is free and advanced features require a paid subscription. TravelGrab's model: Free tier → Pro → Team.
+
+**Subscription** — Recurring monthly or annual fee for premium access. TravelGrab's second confirmed revenue stream alongside commission.
 
 **LTV** — Lifetime Value. Total revenue expected from a single customer over their relationship with the product.
 
@@ -50,7 +60,13 @@ Last updated: 2026-06-03
 
 **Travel Package** — In this context: a coherent, ready-to-book (or ready-to-hand-off) bundle of travel components — which may include flights, accommodation, experiences/activities, and transfers. Exact scope TBD.
 
-**Preference Graph / Travel DNA** — Hypothesized internal model of a user's travel tastes, built from their inputs and refined over time. May become a proprietary data asset.
+**Preference Graph / Travel DNA** — Hypothesized internal model of a user's travel tastes, built from their inputs and refined over time. May become a proprietary data asset and long-term competitive moat.
+
+**Preference Scoring** — The 0–99 score TravelGrab assigns to each flight (and other travel components) based on how well it matches the user's stated preferences across dimensions like price, convenience, flexibility, and arrival timing. Core built feature.
+
+**Group Scoring** — Extension of preference scoring for group travel: aggregating individual preference scores across multiple travelers to surface options that work best for the whole group.
+
+**Data Moat** — Competitive advantage built from accumulated user preference data. The more trips planned on TravelGrab, the better the preference model becomes — making it increasingly hard for competitors to replicate.
 
 **LLM** — Large Language Model. AI models like GPT-4, Claude, Gemini that understand and generate natural language. Core technology candidate for the AI composer.
 
@@ -80,6 +96,12 @@ Last updated: 2026-06-03
 
 **FIT** — Fully Independent Traveler. A traveler who plans and books independently rather than through a package or group tour. Often our primary persona.
 
+**Group Coordinator** — TravelGrab's primary target persona (Persona A). The person in a friend group or family who ends up organizing the trip. Key pain point: aligning preferences across multiple people with no good tool to help.
+
+**Group Travel** — Trips planned and taken by 2+ people with distinct preferences. A core use case for TravelGrab and identified primary consumer segment.
+
+**Solo Traveler** — TravelGrab's secondary primary persona (Persona B). An individual planning their own trip. Lower booking value per transaction than group travel but higher acquisition volume.
+
 **Yield Management** — Pricing strategy used by airlines and hotels to maximize revenue by dynamically adjusting prices based on demand.
 
 **Rate Parity** — The requirement by OTAs that hotels offer the same price across all booking channels. Relevant to our affiliate/commission model.
@@ -89,6 +111,8 @@ Last updated: 2026-06-03
 ## Metrics & Research
 
 **DAU / MAU** — Daily / Monthly Active Users.
+
+**WTP** — Willingness to Pay. How much a customer is willing to pay for a product or feature. Used in persona validation research.
 
 **NPS** — Net Promoter Score. A measure of user satisfaction and likelihood to recommend.
 
@@ -102,7 +126,13 @@ Last updated: 2026-06-03
 
 **The Composer** — Internal shorthand for the AI engine at the core of our platform.
 
-**Proposal** — The AI-generated output: a structured travel package presented to the user for review, refinement, or booking.
+**Proposal** — The AI-generated output: a structured travel package presented to the user for review, refinement, or booking. Free users get 2/month; Pro and Team tiers get unlimited.
+
+**Pro Tier** — TravelGrab's mid-level subscription ($10–12/mo). Unlocks unlimited proposals, full preference model, itinerary export, and price alerts.
+
+**Team Tier** — TravelGrab's top subscription tier ($28–35/mo). Designed for group travel — multi-user profiles, group preference alignment, shared itinerary views. Primary driver of subscription revenue given group travel is a core segment.
+
+**Viral Loop** — The growth mechanic where one user's action naturally brings in more users. TravelGrab's built-in loop: one group coordinator brings 3–8 travelers per trip, each of whom may become their own future coordinator.
 
 **Preference Capture** — The UX step where the user inputs their travel preferences (budget, style, dates, interests, constraints).
 
