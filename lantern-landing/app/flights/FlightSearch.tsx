@@ -349,6 +349,7 @@ interface MetroGroup {
 }
 
 const METRO_GROUPS: MetroGroup[] = [
+  // ── United States ──
   {
     kind: "metro", id: "NYC", label: "New York City Area", codes: ["JFK", "LGA", "EWR"],
     searchTerms: ["new york", "nyc", "jfk", "lga", "ewr", "newark"],
@@ -362,9 +363,18 @@ const METRO_GROUPS: MetroGroup[] = [
     searchTerms: ["san francisco", "sf", "bay area", "sfo", "oak", "sjc", "oakland", "san jose"],
   },
   {
-    kind: "metro", id: "TYO", label: "Tokyo Area", codes: ["HND", "NRT"],
-    searchTerms: ["tokyo", "hnd", "nrt", "haneda", "narita"],
+    kind: "metro", id: "CHI", label: "Chicago Area", codes: ["ORD", "MDW"],
+    searchTerms: ["chicago", "ord", "mdw", "ohare", "midway"],
   },
+  {
+    kind: "metro", id: "WAS", label: "Washington DC Area", codes: ["DCA", "IAD", "BWI"],
+    searchTerms: ["washington", "dc", "dca", "iad", "bwi", "reagan", "dulles", "baltimore"],
+  },
+  {
+    kind: "metro", id: "HOU_METRO", label: "Houston Area", codes: ["IAH", "HOU"],
+    searchTerms: ["houston", "iah", "hou", "bush", "hobby"],
+  },
+  // ── Europe ──
   {
     kind: "metro", id: "LON", label: "London Area", codes: ["LHR", "LGW", "STN", "LCY", "LTN"],
     searchTerms: ["london", "lhr", "lgw", "stn", "lcy", "ltn", "heathrow", "gatwick", "stansted"],
@@ -374,12 +384,53 @@ const METRO_GROUPS: MetroGroup[] = [
     searchTerms: ["paris", "cdg", "ory", "de gaulle", "orly"],
   },
   {
-    kind: "metro", id: "CHI", label: "Chicago Area", codes: ["ORD", "MDW"],
-    searchTerms: ["chicago", "ord", "mdw", "ohare", "midway"],
+    kind: "metro", id: "BRU_METRO", label: "Brussels Area", codes: ["BRU", "CRL"],
+    searchTerms: ["brussels", "bru", "crl", "charleroi", "belgium"],
   },
   {
-    kind: "metro", id: "WAS", label: "Washington DC Area", codes: ["DCA", "IAD", "BWI"],
-    searchTerms: ["washington", "dc", "dca", "iad", "bwi", "reagan", "dulles", "baltimore"],
+    kind: "metro", id: "MIL", label: "Milan Area", codes: ["MXP", "LIN", "BGY"],
+    searchTerms: ["milan", "mil", "mxp", "lin", "bgy", "malpensa", "linate", "bergamo"],
+  },
+  {
+    kind: "metro", id: "ROM", label: "Rome Area", codes: ["FCO", "CIA"],
+    searchTerms: ["rome", "rom", "fco", "cia", "fiumicino", "ciampino"],
+  },
+  {
+    kind: "metro", id: "IST_METRO", label: "Istanbul Area", codes: ["IST", "SAW"],
+    searchTerms: ["istanbul", "ist", "saw", "sabiha", "gokcen"],
+  },
+  {
+    kind: "metro", id: "WAW_METRO", label: "Warsaw Area", codes: ["WAW", "WMI"],
+    searchTerms: ["warsaw", "waw", "wmi", "chopin", "modlin"],
+  },
+  // ── Asia ──
+  {
+    kind: "metro", id: "TYO", label: "Tokyo Area", codes: ["HND", "NRT"],
+    searchTerms: ["tokyo", "hnd", "nrt", "haneda", "narita"],
+  },
+  {
+    kind: "metro", id: "OSA", label: "Osaka Area", codes: ["KIX", "ITM"],
+    searchTerms: ["osaka", "osa", "kix", "itm", "kansai", "itami"],
+  },
+  {
+    kind: "metro", id: "SEL", label: "Seoul Area", codes: ["ICN", "GMP"],
+    searchTerms: ["seoul", "sel", "icn", "gmp", "incheon", "gimpo"],
+  },
+  {
+    kind: "metro", id: "BJS", label: "Beijing Area", codes: ["PEK", "PKX"],
+    searchTerms: ["beijing", "bjs", "pek", "pkx", "capital", "daxing"],
+  },
+  {
+    kind: "metro", id: "SHA_METRO", label: "Shanghai Area", codes: ["PVG", "SHA"],
+    searchTerms: ["shanghai", "sha", "pvg", "pudong", "hongqiao"],
+  },
+  {
+    kind: "metro", id: "BKK_METRO", label: "Bangkok Area", codes: ["BKK", "DMK"],
+    searchTerms: ["bangkok", "bkk", "dmk", "suvarnabhumi", "don mueang"],
+  },
+  {
+    kind: "metro", id: "TPE_METRO", label: "Taipei Area", codes: ["TPE", "TSA"],
+    searchTerms: ["taipei", "tpe", "tsa", "taoyuan", "songshan", "taiwan"],
   },
 ];
 
@@ -461,8 +512,13 @@ function selectionCodes(s: Selection): string {
   return s.kind === "metro" ? s.codes.join("/") : s.code;
 }
 
+// Shown before the user has typed anything — most commonly searched metro areas
+const DEFAULT_SUGGESTIONS = METRO_GROUPS.filter((m) =>
+  ["NYC", "LON", "PAR", "TYO", "OSA", "LAX_METRO", "SFO_METRO", "CHI", "WAS"].includes(m.id)
+);
+
 function searchLocations(query: string): Selection[] {
-  if (!query.trim()) return METRO_GROUPS;
+  if (!query.trim()) return DEFAULT_SUGGESTIONS;
   const q = query.toLowerCase().trim();
 
   // 3=exact, 2=prefix, 1=substring, 0=no match
