@@ -1068,6 +1068,19 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
     slices.push({ origin: params.destination, destination: params.origin, departure_date: params.return_date });
   }
 
+  const duffelPayload = {
+    data: {
+      slices,
+      passengers: Array.from({ length: params.adults }, () => ({ type: "adult" })),
+      cabin_class: params.cabin_class,
+    },
+  };
+
+  // Log the EXACT payload sent to Duffel so we can rule out a bad request
+  console.log(`\nDUFFEL_REQUEST_PAYLOAD=${JSON.stringify(duffelPayload)}`);
+  console.log(`ORIGIN_AIRPORTS=${params.origin}`);
+  console.log(`DESTINATION_AIRPORTS=${params.destination}`);
+
   const t0 = Date.now();
   let resp: Response;
   try {
@@ -1079,13 +1092,7 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify({
-        data: {
-          slices,
-          passengers: Array.from({ length: params.adults }, () => ({ type: "adult" })),
-          cabin_class: params.cabin_class,
-        },
-      }),
+      body: JSON.stringify(duffelPayload),
     });
   } catch (err) {
     return { offers: [], meta: { status: "error", message: `Network error reaching Duffel: ${String(err).slice(0, 120)}` } };
@@ -1105,81 +1112,59 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
   const body = await resp.json() as { data?: { offers?: DuffelRecord[] } };
   const rawOffers = body?.data?.offers ?? [];
 
-  // ══════════════════════════════════════════════════════════════════════════════
-  // === DUFFEL RAW RESULTS ===
-  // Before any TravelGrab filtering, deduplication, ranking, or AI scoring.
-  // ══════════════════════════════════════════════════════════════════════════════
-  console.log(`\n=== DUFFEL RAW RESULTS ===`);
-  console.log(`Request: ${params.origin}→${params.destination} ${params.departure_date}${params.return_date ? `→${params.return_date}` : ""} cabin=${params.cabin_class} adults=${params.adults} trip=${params.trip_type} (${elapsed}ms)`);
-  console.log(`Total raw offers: ${rawOffers.length}`);
-
-  // Build a compact summary for every raw offer (for aggregate stats + per-offer table)
+  // ── Build compact summary of every raw offer (used for all subsequent logging) ──
   const rawSummaries = rawOffers.map((o) => {
-    const owner  = (o.owner  as DuffelRecord | undefined) ?? {};
-    const sl0    = ((o.slices as DuffelRecord[] | undefined) ?? [])[0];
-    const segs0  = (sl0?.segments  as DuffelRecord[] | undefined) ?? [];
-    const first  = segs0[0];
-    const last   = segs0[segs0.length - 1];
-    const mc     = (first?.marketing_carrier as DuffelRecord | undefined) ?? {};
-    const pax0   = (((first?.passengers as DuffelRecord[] | undefined) ?? [])[0]);
+    const owner = (o.owner as DuffelRecord | undefined) ?? {};
+    const sl0   = ((o.slices as DuffelRecord[] | undefined) ?? [])[0];
+    const segs0 = (sl0?.segments as DuffelRecord[] | undefined) ?? [];
+    const first = segs0[0];
+    const last  = segs0[segs0.length - 1];
+    const mc    = (first?.marketing_carrier as DuffelRecord | undefined) ?? {};
+    const pax0  = ((first?.passengers as DuffelRecord[] | undefined) ?? [])[0];
     return {
-      offerId:    (o.id            as string) ?? "",
-      code:       (mc.iata_code   as string) ?? "??",
-      airline:    (mc.name        as string) ?? (owner.name as string) ?? "?",
-      flightNum:  (first?.marketing_carrier_flight_number as string) ?? "?",
-      price:      parseFloat((o.total_amount as string) ?? "0") || 0,
-      stops:      Math.max(0, segs0.length - 1),
-      origin:     ((first?.origin      as DuffelRecord | undefined)?.iata_code as string) ?? "?",
-      destination:((last?.destination  as DuffelRecord | undefined)?.iata_code as string) ?? "?",
-      cabin:      ((pax0?.cabin_class_marketing_name as string | undefined) ?? (pax0?.cabin_class as string | undefined) ?? "Economy").replace(/_/g, " "),
-      fareBrand:  (sl0?.fare_brand_name as string | undefined) ?? (pax0?.fare_brand_name as string | undefined) ?? "",
-      sliceDur:   (sl0?.duration as string) ?? "null",
+      offerId:     (o.id as string) ?? "",
+      code:        (mc.iata_code as string) ?? "??",
+      airline:     (mc.name as string) ?? (owner.name as string) ?? "?",
+      flightNum:   (first?.marketing_carrier_flight_number as string) ?? "?",
+      price:       parseFloat((o.total_amount as string) ?? "0") || 0,
+      stops:       Math.max(0, segs0.length - 1),
+      origin:      ((first?.origin      as DuffelRecord | undefined)?.iata_code as string) ?? "?",
+      destination: ((last?.destination  as DuffelRecord | undefined)?.iata_code as string) ?? "?",
+      cabin:       ((pax0?.cabin_class_marketing_name as string | undefined) ?? (pax0?.cabin_class as string | undefined) ?? "Economy").replace(/_/g, " "),
+      fareBrand:   (sl0?.fare_brand_name as string | undefined) ?? (pax0?.fare_brand_name as string | undefined) ?? "",
+      sliceDur:    (sl0?.duration as string) ?? "null",
     };
   });
 
-  // Aggregate stats
-  const rawPrices    = rawSummaries.map((r) => r.price).filter((p) => p > 0);
-  const nonstopPrices = rawSummaries.filter((r) => r.stops === 0).map((r) => r.price);
-  const oneStopPrices = rawSummaries.filter((r) => r.stops === 1).map((r) => r.price);
-  console.log(`Cheapest raw offer: ${rawPrices.length   ? `$${Math.min(...rawPrices).toFixed(0)}`    : "n/a"}`);
-  console.log(`Cheapest nonstop:   ${nonstopPrices.length ? `$${Math.min(...nonstopPrices).toFixed(0)}` : "none"}`);
-  console.log(`Cheapest 1-stop:    ${oneStopPrices.length ? `$${Math.min(...oneStopPrices).toFixed(0)}` : "none"}`);
-
-  // Airline breakdown sorted by offer count desc
-  const airlineMap = new Map<string, { name: string; count: number; min: number; max: number }>();
+  const rawPrices     = rawSummaries.map((r) => r.price).filter((p) => p > 0);
+  const cheapestRaw   = rawPrices.length ? Math.min(...rawPrices) : 0;
+  const airlineCounts = new Map<string, { name: string; count: number }>();
   for (const r of rawSummaries) {
-    const key = r.code;
-    const e = airlineMap.get(key);
-    if (!e) airlineMap.set(key, { name: r.airline, count: 1, min: r.price, max: r.price });
-    else { e.count++; e.min = Math.min(e.min, r.price); e.max = Math.max(e.max, r.price); }
+    const e = airlineCounts.get(r.code);
+    if (!e) airlineCounts.set(r.code, { name: r.airline, count: 1 });
+    else e.count++;
   }
-  console.log(`\nAirlines returned:`);
-  [...airlineMap.entries()]
+  const uniqueAirlines = [...airlineCounts.entries()]
     .sort((a, b) => b[1].count - a[1].count)
-    .forEach(([code, e]) =>
-      console.log(`  ${code.padEnd(3)} ${e.name.padEnd(30)} ${e.count} offers  ($${e.min.toFixed(0)}–$${e.max.toFixed(0)})`)
-    );
+    .map(([code, e]) => `${code}(${e.count})`)
+    .join(", ");
 
-  // 20 cheapest raw offers (pre-filtering)
-  const cheapest20 = [...rawSummaries].sort((a, b) => a.price - b.price).slice(0, 20);
-  console.log(`\n20 cheapest raw offers:`);
-  cheapest20.forEach((r, i) =>
+  console.log(`\nRAW_DUFFEL_OFFERS=${rawOffers.length}`);
+  console.log(`CHEAPEST_RAW=${cheapestRaw > 0 ? `$${cheapestRaw.toFixed(0)}` : "n/a"}`);
+  console.log(`UNIQUE_AIRLINES=${uniqueAirlines || "none"}`);
+
+  // Print all raw offers so we can see exactly what Duffel returned
+  rawSummaries.forEach((r, i) =>
     console.log(
-      `  #${String(i + 1).padStart(2)}  ${r.code} ${r.flightNum.padEnd(7)} ` +
-      `$${r.price.toFixed(0).padStart(6)}  ` +
-      `${(r.stops === 0 ? "nonstop" : `${r.stops}-stop`).padEnd(7)}  ` +
-      `${r.cabin.padEnd(20)}  ${r.fareBrand.padEnd(20) || "(no fare brand)      "}  ` +
-      `${r.origin}→${r.destination}  id=${r.offerId}`
+      `  RAW[${i + 1}] ${r.code} ${r.flightNum} $${r.price.toFixed(0)} ` +
+      `${r.stops === 0 ? "nonstop" : `${r.stops}-stop`} ` +
+      `${r.origin}→${r.destination} slice_dur=${r.sliceDur} ` +
+      `cabin="${r.cabin}" fare_brand="${r.fareBrand}" id=${r.offerId}`
     )
   );
 
-  // ══════════════════════════════════════════════════════════════════════════════
-  // === FILTERING ===
-  // normalizeDuffelOffer + normalizeFlight; each rejected offer logs [filter_removed]
-  // ══════════════════════════════════════════════════════════════════════════════
-  console.log(`\n=== FILTERING ===`);
-  console.log(`Offers before filtering: ${rawOffers.length}`);
-
+  // ── FILTERING  (route.ts → normalizeDuffelOffer + normalizeFlight) ─────────────
+  // Each dropped offer logs [filter_removed] with offer ID and reason.
   const normedRaw = rawOffers
     .map((o) => normalizeDuffelOffer(o, params.origin, params.destination))
     .filter(Boolean) as DuffelRecord[];
@@ -1188,56 +1173,15 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
     .map((r) => normalizeFlight(r, params.adults))
     .filter(Boolean) as FlightOffer[];
 
-  console.log(`Offers after filtering: ${normedFlights.length}`);
-  console.log(`  (normalizeDuffelOffer dropped: ${rawOffers.length - normedRaw.length}, normalizeFlight dropped: ${normedRaw.length - normedFlights.length})`);
+  console.log(`\nAFTER_FILTERING=${normedFlights.length}`);
+  console.log(`  normalizeDuffelOffer dropped: ${rawOffers.length - normedRaw.length}  (route.ts:normalizeDuffelOffer)`);
+  console.log(`  normalizeFlight dropped:      ${normedRaw.length - normedFlights.length}  (route.ts:normalizeFlight)`);
 
-  // No server-side city/metro aggregation — each search call is for a single IATA code pair.
-  console.log(`[after_city_aggregation_count] ${normedFlights.length} (no-op: city grouping is client-only)`);
-
-  // ── Inventory sanity check ────────────────────────────────────────────────────
-  // Known high-frequency domestic routes where thin coverage indicates an API issue.
-  // Bidirectional pairs — only one direction stored; checked symmetrically below.
-  const MAJOR_DOMESTIC_ROUTES = new Set([
-    "SFO-LAX", "LAX-SFO", "SFO-LAS", "LAS-SFO", "SFO-SEA", "SEA-SFO", "SFO-DEN", "DEN-SFO",
-    "LAX-LAS", "LAS-LAX", "LAX-SEA", "SEA-LAX", "LAX-DEN", "DEN-LAX", "LAX-PHX", "PHX-LAX",
-    "JFK-LAX", "LAX-JFK", "JFK-SFO", "SFO-JFK", "JFK-BOS", "BOS-JFK", "JFK-ORD", "ORD-JFK",
-    "JFK-DCA", "DCA-JFK", "JFK-MIA", "MIA-JFK", "JFK-ATL", "ATL-JFK",
-    "ORD-LAX", "LAX-ORD", "ORD-DFW", "DFW-ORD", "ORD-ATL", "ATL-ORD", "ORD-MIA", "MIA-ORD",
-    "DFW-LAX", "LAX-DFW", "DFW-ATL", "ATL-DFW", "DFW-MIA", "MIA-DFW",
-    "ATL-LAX", "LAX-ATL", "ATL-MIA", "MIA-ATL", "ATL-BOS", "BOS-ATL",
-    "BOS-DCA", "DCA-BOS", "BOS-ORD", "ORD-BOS", "BOS-LAX", "LAX-BOS",
-    "DEN-LAX", "LAX-DEN", "DEN-ORD", "ORD-DEN",
-  ]);
-
-  const routeKey = `${params.origin}-${params.destination}`;
-  const isMajorDomestic = MAJOR_DOMESTIC_ROUTES.has(routeKey);
-  const cheapestFare = normedFlights.length > 0
-    ? Math.min(...normedFlights.map((o) => o.price_total))
-    : 0;
-  const nonstopCount = normedFlights.filter((o) => o.stops === 0).length;
-  const carriers = [...new Set(normedFlights.map((o) => o.airline))].sort().join(", ");
-
-  console.log(
-    `[inventory_check] route=${routeKey} major_domestic=${isMajorDomestic} ` +
-    `raw_duffel=${rawOffers.length} normalized=${normedFlights.length} ` +
-    `nonstops=${nonstopCount} cheapest=$${cheapestFare.toFixed(0)} ` +
-    `carriers=[${carriers || "none"}]`
-  );
-
-  if (isMajorDomestic) {
-    const warnings: string[] = [];
-    if (rawOffers.length < 20)   warnings.push(`only ${rawOffers.length} raw offers from Duffel (expected 20+)`);
-    if (nonstopCount < 5)        warnings.push(`only ${nonstopCount} nonstop options after normalization (expected 5+)`);
-    if (cheapestFare > 500 && cheapestFare > 0)
-      warnings.push(`cheapest fare $${cheapestFare.toFixed(0)} is unusually high for a major domestic route`);
-    if (warnings.length > 0) {
-      console.warn(`[inventory_warning] possible limited API coverage on ${routeKey}: ${warnings.join("; ")}`);
-    }
-  }
-
-  // ── Step 4: deduplicate ───────────────────────────────────────────────────────
+  // ── DEDUPLICATION  (route.ts:deduplicateOffers) ───────────────────────────────
+  // Each dropped offer logs [dedupe_removed] with offer ID and reason.
   const normed = deduplicateOffers(normedFlights);
-  console.log(`[after_dedupe_count] ${normed.length} (dropped=${normedFlights.length - normed.length} duplicates)`);
+  console.log(`\nAFTER_DEDUPLICATION=${normed.length}`);
+  console.log(`  deduplicateOffers dropped: ${normedFlights.length - normed.length}  (route.ts:deduplicateOffers)`);
 
   if (!normed.length) {
     return {
@@ -1251,10 +1195,10 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
     };
   }
 
-  // ── Step 5: score ─────────────────────────────────────────────────────────────
+  // ── SCORING  (does not drop offers, only assigns scores) ─────────────────────
   const scoreMap = buildScoreMap(normed);
   const recs = buildRecommendationMap(normed, scoreMap);
-  console.log(`[after_scoring_count] ${normed.length}`);
+  console.log(`\nAFTER_RANKING=${normed.length}  (scoring reorders but never drops offers)`);
 
   let bestKey = "";
   let bestScore = -1;
@@ -1326,20 +1270,10 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
     return a.flight_number.localeCompare(b.flight_number);
   });
 
-  // ══════════════════════════════════════════════════════════════════════════════
-  // === RANKING ===
-  // ══════════════════════════════════════════════════════════════════════════════
-  const cheapestEntering = normed.length > 0
+  const cheapestAfterDedupe = normed.length > 0
     ? normed.reduce((a, b) => a.price_total <= b.price_total ? a : b)
     : null;
-  const cheapestDisplayed = enriched.length > 0
-    ? enriched.reduce((a, b) => a.price_total <= b.price_total ? a : b)
-    : null;
-  console.log(`\n=== RANKING ===`);
-  console.log(`Cheapest offer entering ranking: ${cheapestEntering ? `$${cheapestEntering.price_total.toFixed(0)} (${cheapestEntering.airline} ${cheapestEntering.flight_number} id=${cheapestEntering.offer_id ?? "?"})` : "n/a"}`);
-  console.log(`Cheapest offer displayed:        ${cheapestDisplayed ? `$${cheapestDisplayed.price_total.toFixed(0)} (${cheapestDisplayed.airline} ${cheapestDisplayed.flight_number} id=${cheapestDisplayed.offer_id ?? "?"})` : "n/a"}`);
-  console.log(`Top card displayed (AI pick):    ${enriched[0] ? `$${enriched[0].price_total.toFixed(0)} ${enriched[0].airline} ${enriched[0].flight_number} score=${enriched[0].ai_score} label="${enriched[0].recommendation_label}"` : "none"}`);
-  console.log(`Total offers returned to UI: ${enriched.length}`);
+  console.log(`\nCHEAPEST_AFTER_DEDUP=${cheapestAfterDedupe ? `$${cheapestAfterDedupe.price_total.toFixed(0)} (${cheapestAfterDedupe.airline} ${cheapestAfterDedupe.flight_number} id=${cheapestAfterDedupe.offer_id ?? "?"})` : "n/a"}`);
 
   // Augment top pick with OpenAI-generated human explanations (falls back to deterministic if unavailable)
   const topPick = enriched.find((o) => o.is_recommended);
@@ -1357,14 +1291,19 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
     }
   }
 
-  console.log(`[returned_to_frontend_count] ${enriched.length}`);
-  enriched.forEach((o, i) => {
+  const cheapestRendered = enriched.length > 0
+    ? enriched.reduce((a, b) => a.price_total <= b.price_total ? a : b).price_total
+    : 0;
+  console.log(`\nRENDERED_OFFERS=${enriched.length}`);
+  console.log(`CHEAPEST_RENDERED=${cheapestRendered > 0 ? `$${cheapestRendered.toFixed(0)}` : "n/a"}`);
+  enriched.forEach((o, i) =>
     console.log(
-      `  [final-${i + 1}] "${o.airline}" ${o.flight_number} ` +
-      `${o.depart_time}→${o.arrive_time} dur="${o.duration}" stops=${o.stops} ` +
-      `conn="${o.connection_airports}" $${o.price_total} score=${o.ai_score} label="${o.recommendation_label}"`
-    );
-  });
+      `  FINAL[${i + 1}] ${o.airline_code} ${o.flight_number} $${o.price_total.toFixed(0)} ` +
+      `${o.stops === 0 ? "nonstop" : `${o.stops}-stop`} ` +
+      `${o.depart_time}→${o.arrive_time} dur="${o.duration}" ` +
+      `score=${o.ai_score} label="${o.recommendation_label}" id=${o.offer_id ?? "?"}`
+    )
+  );
 
   return {
     offers: enriched,
