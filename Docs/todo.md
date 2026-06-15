@@ -1,6 +1,6 @@
 # Todo
 
-Last updated: 2026-06-03 17:00 PT
+Last updated: 2026-06-14
 Format: `- [ ] [Priority] [Added: YYYY-MM-DD] [By: HU|Claude] Task description`
 
 ---
@@ -17,28 +17,21 @@ Format: `- [ ] [Priority] [Added: YYYY-MM-DD] [By: HU|Claude] Task description`
 - [ ] [P2] [Added: 2026-06-03] [By: Claude] Validate user personas with real research (surveys, interviews, or cited studies)
 - [ ] [P2] [Added: 2026-06-03] [By: Claude] Research willingness-to-pay signals in adjacent markets (travel agents, concierge apps)
 - [ ] [P2] [Added: 2026-06-14] [By: Claude] Research group travel coordination tools (Splitwise, GroupMe, group booking on OTAs) to understand existing workarounds
-- [ ] [P3] [Added: 2026-06-03] [By: Claude] Verify and expand API partner landscape (Amadeus, Skyscanner, Viator, GetYourGuide)
 
 ### Idea Definition & Refinement
-- [ ] [P1] [Added: 2026-06-03] [By: Claude] Write first draft elevator pitch (≤1 paragraph) — requires HU input
-- [ ] [P1] [Added: 2026-06-03] [By: Claude] Define core user flow: input → preference capture → AI composition → output package
-- [ ] [P1] [Added: 2026-06-03] [By: HU] Decide: consumer app (B2C), B2B (white-label), or hybrid?
-- [ ] [P2] [Added: 2026-06-03] [By: Claude] Define scope of "travel package" — flights + hotel only? + experiences? + insurance?
-- [ ] [P2] [Added: 2026-06-03] [By: Claude] Define AI layer: rule-based + LLM hybrid, pure LLM, or agentic?
-- [ ] [P2] [Added: 2026-06-03] [By: Claude] Explore differentiation angles (mood-based, values-based, "travel DNA")
+- [ ] [P2] [Added: 2026-06-14] [By: Claude] Define group travel UX flow — how do participants join, set preferences, and view the shared itinerary?
+- [ ] [P3] [Added: 2026-06-03] [By: Claude] Verify and expand API partner landscape (Amadeus, Skyscanner, Viator, GetYourGuide)
 - [ ] [P3] [Added: 2026-06-03] [By: Claude] Sketch initial wireframe concepts for preference input UX
 
 ### Business Plan
-- [x] [Added: 2026-06-03] [By: Claude] Explore revenue models: commission, subscription, B2B SaaS, freemium — Done 2026-06-14: commission + subscription selected
-- [ ] [P1] [Added: 2026-06-14] [By: HU] Confirm beachhead GTM approach — group coordinators as primary; define first acquisition channel
-- [ ] [P2] [Added: 2026-06-03] [By: Claude] Draft high-level go-to-market strategy — beachhead now defined as group coordinators, flesh out channel tactics
-- [ ] [P2] [Added: 2026-06-14] [By: Claude] Define group travel UX flow — how do participants join, set preferences, and view shared itinerary?
-- [ ] [P3] [Added: 2026-06-03] [By: Claude] Rough cost model: AI inference, API data costs, engineering
+- [ ] [P1] [Added: 2026-06-14] [By: HU] Decide GTM channel priorities — which of SEO, social, influencer, B2B to lead with for group coordinators and solo travelers
+- [ ] [P1] [Added: 2026-06-14] [By: HU] Define funding strategy — bootstrapped vs. seeking investment; set milestone targets for Section 8
+- [ ] [P1] [Added: 2026-06-14] [By: HU] Confirm beachhead GTM approach — beachhead audience defined, first acquisition channel still TBD
+- [ ] [P2] [Added: 2026-06-03] [By: Claude] Draft high-level go-to-market strategy — flesh out channel tactics once channel priorities decided
+- [ ] [P2] [Added: 2026-06-14] [By: HU] Fill in target time-to-plan in overview once user testing data is available
 
-### Setup
-- [x] [P1] [Added: 2026-06-03] [By: HU] Create project file structure and chat instructions — Done 2026-06-03
-- [x] [P1] [Added: 2026-06-03] [By: HU] Align on working product name / codename — Done 2026-06-03: TravelGrab
-- [ ] [P2] [Added: 2026-06-03] [By: Claude] Set session cadence (frequency, duration, target output per session)
+### Docs Maintenance
+- [ ] [P2] [Added: 2026-06-14] [By: Claude] Update `abbreviations-and-terms.md` with new terms from recent sessions (commission, subscription tiers, group coordinator, beachhead, CAC, MRR, ARPU, etc.)
 
 ---
 
@@ -46,7 +39,7 @@ Format: `- [ ] [Priority] [Added: YYYY-MM-DD] [By: HU|Claude] Task description`
 
 *Tasks that haven't moved in 2+ sessions. Review before archiving.*
 
-*(None yet)*
+- [ ] [P3] [Added: 2026-06-03] [By: Claude] Set session cadence (frequency, duration, target output per session) — low urgency, park until team is larger
 
 ---
 
@@ -62,6 +55,15 @@ Format: `- [ ] [Priority] [Added: YYYY-MM-DD] [By: HU|Claude] Task description`
 
 ## Done
 
+- 2026-06-14 — Revenue model confirmed: commission + subscription hybrid
+- 2026-06-14 — Group travel identified as primary consumer segment; beachhead market defined
+- 2026-06-14 — Business plan substantially filled: unit economics, moat, team, overview placeholders
+- 2026-06-14 — Elevator pitch written and refined with group travel angle (`pitch.md`)
+- 2026-06-14 — B2C vs B2B decided: B2C primary (group coordinators + solo travelers); B2B is V3
+- 2026-06-14 — Travel package scope confirmed: flights + hotels + activities
+- 2026-06-14 — AI layer defined: preference scoring engine + LLM hybrid
+- 2026-06-14 — Differentiation angles defined: group travel, preference model, travel DNA / data moat
+- 2026-06-14 — Cost model and unit economics drafted (`business-plan.md` § 5)
 - 2026-06-03 17:00 PT — Project initialized, seven-file structure created
 - 2026-06-03 17:00 PT — Chat instructions v2 and v3 finalized
 - 2026-06-03 17:00 PT — `session-log.md` and `sources.md` created; `market-research.md` split from sources
