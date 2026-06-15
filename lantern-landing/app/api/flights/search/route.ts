@@ -1112,6 +1112,9 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
   const body = await resp.json() as { data?: { offers?: DuffelRecord[] } };
   const rawOffers = body?.data?.offers ?? [];
 
+  // Detect test vs live key from prefix — does not expose key value
+  const apiKeyMode = apiKey.startsWith("duffel_live_") ? "LIVE" : apiKey.startsWith("duffel_test_") ? "TEST (sandbox)" : "UNKNOWN";
+
   // ── Build compact summary of every raw offer (used for all subsequent logging) ──
   const rawSummaries = rawOffers.map((o) => {
     const owner = (o.owner as DuffelRecord | undefined) ?? {};
@@ -1133,20 +1136,30 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
       cabin:       ((pax0?.cabin_class_marketing_name as string | undefined) ?? (pax0?.cabin_class as string | undefined) ?? "Economy").replace(/_/g, " "),
       fareBrand:   (sl0?.fare_brand_name as string | undefined) ?? (pax0?.fare_brand_name as string | undefined) ?? "",
       sliceDur:    (sl0?.duration as string) ?? "null",
+      ownerCode:   (owner.iata_code as string | undefined) ?? (owner.name as string | undefined) ?? "?",
+      ownerName:   (owner.name as string | undefined) ?? "?",
     };
   });
 
   const rawPrices     = rawSummaries.map((r) => r.price).filter((p) => p > 0);
   const cheapestRaw   = rawPrices.length ? Math.min(...rawPrices) : 0;
   const airlineCounts = new Map<string, { name: string; count: number }>();
+  const ownerCounts   = new Map<string, { name: string; count: number }>();
   for (const r of rawSummaries) {
     const e = airlineCounts.get(r.code);
     if (!e) airlineCounts.set(r.code, { name: r.airline, count: 1 });
     else e.count++;
+    const oe = ownerCounts.get(r.ownerCode);
+    if (!oe) ownerCounts.set(r.ownerCode, { name: r.ownerName, count: 1 });
+    else oe.count++;
   }
   const uniqueAirlines = [...airlineCounts.entries()]
     .sort((a, b) => b[1].count - a[1].count)
     .map(([code, e]) => `${code}(${e.count})`)
+    .join(", ");
+  const uniqueOwnerIds = [...ownerCounts.entries()]
+    .sort((a, b) => b[1].count - a[1].count)
+    .map(([code, e]) => `${code}/${e.name}(${e.count})`)
     .join(", ");
 
   console.log(`\nRAW_DUFFEL_OFFERS=${rawOffers.length}`);
@@ -1330,6 +1343,17 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
         unique_airlines: uniqueAirlines || "none",
         cheapest_raw: cheapestRaw > 0 ? `$${cheapestRaw.toFixed(0)}` : "n/a",
         cheapest_rendered: cheapestRendered > 0 ? `$${cheapestRendered.toFixed(0)}` : "n/a",
+        owner_ids: uniqueOwnerIds || "none",
+        api_key_mode: apiKeyMode,
+        request_filters: "none — no carrier/owner/connection/content-source filters applied",
+        raw_offer_rows: rawSummaries.map((r) => ({
+          airline: r.airline,
+          airline_code: r.code,
+          owner: r.ownerCode,
+          price: r.price > 0 ? `$${r.price.toFixed(0)}` : "?",
+          stops: r.stops,
+          offer_id: r.offerId,
+        })),
       },
     },
   };

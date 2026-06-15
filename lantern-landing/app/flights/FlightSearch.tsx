@@ -474,6 +474,7 @@ interface FlightOffer {
   aircraft_comfort: string;
   connection_airports?: string;
   duration_minutes?: number;
+  offer_id?: string;
 }
 
 interface BookingIntent {
@@ -486,6 +487,15 @@ interface BookingIntent {
   price: number;
   score: number;
   priorities: string[];
+}
+
+interface RawOfferRow {
+  airline: string;
+  airline_code: string;
+  owner: string;
+  price: string;
+  stops: number;
+  offer_id: string;
 }
 
 interface DebugStats {
@@ -502,6 +512,10 @@ interface DebugStats {
   unique_airlines: string;
   cheapest_raw: string;
   cheapest_rendered: string;
+  owner_ids?: string;
+  api_key_mode?: string;
+  request_filters?: string;
+  raw_offer_rows?: RawOfferRow[];
 }
 
 interface SearchMeta {
@@ -2223,19 +2237,37 @@ export default function FlightSearch() {
                 </span>
               </div>
             )}
-            <pre style={{ fontFamily: "monospace", fontSize: 12, background: "#050f05", color: "#4ade80", padding: "12px 16px", borderRadius: 8, border: "1px solid #166534", margin: "0 auto 16px", maxWidth: 760, lineHeight: 1.7, overflowX: "auto" }}>
-              <span style={{ color: "#86efac", fontWeight: "bold" }}>[TRAVELGRAB DEBUG — remove before launch]</span>{"\n"}
-{`RAW_DUFFEL_OFFERS:      ${debugStats?.raw_duffel_offers ?? "—"}
-AFTER_FILTERING:        ${debugStats?.after_filtering ?? "—"}  (normalizeDuffelOffer dropped ${debugStats?.normalize_duffel_offer_dropped ?? "?"}, normalizeFlight dropped ${debugStats?.normalize_flight_dropped ?? "?"})
-AFTER_DEDUPLICATION:    ${debugStats?.after_deduplication ?? "—"}  (dedup dropped ${debugStats?.dedup_dropped ?? "?"})
+            <div style={{ fontFamily: "monospace", fontSize: 12, background: "#050f05", color: "#4ade80", padding: "12px 16px", borderRadius: 8, border: "1px solid #166534", margin: "0 auto 16px", maxWidth: 760, lineHeight: 1.7, overflowX: "auto" }}>
+              <div style={{ color: "#86efac", fontWeight: "bold", marginBottom: 6 }}>[TRAVELGRAB DEBUG — remove before launch]</div>
+              <pre style={{ margin: 0, fontFamily: "inherit", fontSize: "inherit", color: "inherit", background: "none", padding: 0 }}>
+{`── DUFFEL REQUEST ─────────────────────────────
+API_KEY_MODE:           ${debugStats?.api_key_mode ?? "—"}
+REQUEST_FILTERS:        ${debugStats?.request_filters ?? "—"}
+
+── RAW DUFFEL RESPONSE ────────────────────────
+TOTAL_OFFERS:           ${debugStats?.raw_duffel_offers ?? "—"}
+AIRLINES_RETURNED:      ${debugStats?.unique_airlines ?? ([...new Set(offers.map(o => o.airline_code))].join(", ") || "—")}
+OWNER_IDS:              ${debugStats?.owner_ids ?? "—"}
+PARTICIPATING_AIRLINES: ${debugStats?.unique_airlines ?? "—"}
+CHEAPEST_RAW:           ${debugStats?.cheapest_raw ?? "—"}
+
+── PER OFFER ──────────────────────────────────`}
+              </pre>
+              {(debugStats?.raw_offer_rows ?? offers.map(o => ({ airline: o.airline, airline_code: o.airline_code, owner: "—", price: "$" + o.price_total.toFixed(0), stops: o.stops, offer_id: o.offer_id ?? "—" }))).map((row, i) => (
+                <pre key={i} style={{ margin: 0, fontFamily: "inherit", fontSize: "inherit", color: "inherit", background: "none", padding: 0 }}>
+                  {`  [${i + 1}] ${(row.airline ?? "").padEnd(28)} ${String(row.price).padStart(6)}  ${row.stops === 0 ? "nonstop" : `${row.stops}-stop`}  owner=${row.owner}  id=${row.offer_id}`}
+                </pre>
+              ))}
+              <pre style={{ margin: 0, fontFamily: "inherit", fontSize: "inherit", color: "inherit", background: "none", padding: 0 }}>
+{`
+── PIPELINE ───────────────────────────────────
+AFTER_FILTERING:        ${debugStats?.after_filtering ?? "—"}  (normalizeDuffelOffer -${debugStats?.normalize_duffel_offer_dropped ?? "?"}, normalizeFlight -${debugStats?.normalize_flight_dropped ?? "?"})
+AFTER_DEDUPLICATION:    ${debugStats?.after_deduplication ?? "—"}  (dedup -${debugStats?.dedup_dropped ?? "?"})
 AFTER_RANKING:          ${debugStats?.after_ranking ?? "—"}
 RENDERED_OFFERS:        ${debugStats?.rendered_offers ?? offers.length}
-ORIGIN_AIRPORTS:        ${debugStats?.origin_airports ?? (searchedParams ? selectionCodes(searchedParams.origin) : "—")}
-DESTINATION_AIRPORTS:   ${debugStats?.destination_airports ?? (searchedParams ? selectionCodes(searchedParams.destination) : "—")}
-UNIQUE_AIRLINES:        ${debugStats?.unique_airlines ?? ([...new Set(offers.map(o => o.airline_code))].join(", ") || "—")}
-CHEAPEST_RAW:           ${debugStats?.cheapest_raw ?? "—"}
 CHEAPEST_RENDERED:      ${debugStats?.cheapest_rendered ?? (offers.length ? "$" + Math.min(...offers.map(o => o.price_total)).toFixed(0) : "—")}`}
-            </pre>
+              </pre>
+            </div>
             <RecommendationPanel offers={displayOffers} topPickRef={topPickRef} priorities={priorities} />
             <CompareTable offers={displayOffers} />
             <div className="space-y-3 max-w-3xl mx-auto">
