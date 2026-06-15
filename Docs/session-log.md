@@ -18,7 +18,7 @@ Timezone: Pacific (PT) — all timestamps in ISO 24hr format: `YYYY-MM-DD HH:MM 
 ## Last Session
 
 **Date:** 2026-06-14
-**Worked on:** Revenue model decision, business plan expansion, strategic repositioning around group travel
+**Worked on:** Business plan completion pass — filling in remaining placeholders, team status, moat, beachhead
 **Decided:**
 1. **Revenue model confirmed: commission + subscription hybrid**
    - Commission: affiliate % on flights, hotels, activities via API partners
@@ -26,16 +26,31 @@ Timezone: Pacific (PT) — all timestamps in ISO 24hr format: `YYYY-MM-DD HH:MM 
    - Full unit economics added to `business-plan.md` § Cost Model
 2. **Group travel identified as primary consumer segment**
    - Group Coordinator elevated to Persona A (co-primary) in `market-research.md`
-   - Beachhead market defined as group coordinators in `business-plan.md`
+   - Beachhead market: group coordinators + solo travelers (both confirmed)
    - Group trip coordination moved from V2 to V1.5 in the product roadmap
    - Team subscription tier now modeled as a stronger revenue driver (7% of users vs. 2% initial estimate)
    - Pitch updated throughout to lead with group travel angle
-3. **Docs updated:** `business-plan.md`, `pitch.md`, `market-research.md`, `todo.md`, `lessons-learned.md`
+3. **Team & Gaps updated**
+   - Engineering (AI/backend): ✅ Handled
+   - Engineering (frontend/mobile): 🟡 Partial
+   - Growth / Marketing: ✅ Handled in-house
+4. **Competitive moat section filled**
+   - Proprietary preference model ✅ — core to product, improves with every proposal
+   - Network effects ✅ — group travel viral loop
+   - Data moat ✅ — compounds with scale
+   - Supply-side relationships still 🔴 (not yet earned)
+5. **Overview placeholders cleared** — beachhead audience and moat defensibility lines rewritten with concrete language
+6. **Docs updated:** `business-plan.md`, `pitch.md`, `market-research.md`, `todo.md`, `lessons-learned.md`, `session-log.md`
+
+**Still open in business plan:**
+- GTM channels (Section 3) — which channels to prioritize; needs HU decision
+- Funding & Milestones (Section 8) — bootstrapped vs. investment? Milestone targets?
+- Target time-to-plan in overview — needs user testing data
 
 **Next session should start with:**
-- Define beachhead GTM channel for group coordinators (how do we reach and acquire them?)
+- Define beachhead GTM channel for group coordinators and solo travelers
 - Validate Group Coordinator persona with real interviews — confirm pain point and WTP
-- Consider whether to size the group travel market specifically before locking GTM
+- Funding & milestones conversation
 
 **Product name decided:** TravelGrab (2026-06-03)
 
@@ -51,7 +66,7 @@ Timezone: Pacific (PT) — all timestamps in ISO 24hr format: `YYYY-MM-DD HH:MM 
 | `market-research.md` | 🟡 Partial — personas updated, research still pending | 2026-06-14 |
 | `sources.md` | 🔴 Skeleton | 2026-06-03 |
 | `pitch.md` | 🟡 Draft — group travel angle added | 2026-06-14 |
-| `business-plan.md` | 🟡 Substantive — revenue model + unit economics filled | 2026-06-14 |
+| `business-plan.md` | 🟡 Substantive — most sections filled; channels + funding still open | 2026-06-14 |
 | `lessons-learned.md` | 🟡 Active log | 2026-06-14 |
 | `abbreviations-and-terms.md` | ✅ Active | 2026-06-03 |
 
