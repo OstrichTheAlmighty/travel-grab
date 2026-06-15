@@ -98,6 +98,7 @@ export interface FlightOffer {
   city_access: string;
   aircraft_comfort: string;
   connection_airports: string;  // comma-separated IATA codes of intermediate airports (empty if nonstop)
+  duration_minutes: number;     // total outbound itinerary minutes computed from timestamps (canonical duration)
   dedupe_group_size?: number;   // dev debug: how many codeshares collapsed into this offer
 }
 
@@ -212,16 +213,14 @@ function durationLabel(value: string | null | undefined): string {
   }
 }
 
-function durationMinutes(value: string | null | undefined): number {
-  if (!value) return 0;
-  try {
-    const raw = String(value).toUpperCase().replace(/^P/, "");
-    const h = raw.match(/(\d+)H/) ? parseInt(raw.match(/(\d+)H/)![1]) : 0;
-    const m = raw.match(/(\d+)M/) ? parseInt(raw.match(/(\d+)M/)![1]) : 0;
-    return h * 60 + m;
-  } catch {
-    return 0;
-  }
+// Convert integer minutes to a human-readable label ("10h 45m").
+// Used to derive the display duration directly from timestamp-computed minutes.
+function minutesToDurationLabel(mins: number): string {
+  if (mins <= 0) return "";
+  const h = Math.floor(mins / 60);
+  const m = mins % 60;
+  if (h > 0 && m > 0) return `${h}h ${String(m).padStart(2, "0")}m`;
+  return h > 0 ? `${h}h` : `${m}m`;
 }
 
 function clockMinutes(time: string): number {
@@ -342,47 +341,39 @@ function normalizeDuffelOffer(offer: DuffelRecord, reqOrigin: string, reqDest: s
   // Compute full outbound duration from timestamps — JS Date handles tz offsets correctly
   const dep = (firstSeg.departing_at as string) ?? "";
   const arr = (lastSeg.arriving_at   as string) ?? "";
+  let diffMinsResult = 0;
   let computedDur = "";
   if (dep && arr) {
     try {
-      const diffMins = Math.round((new Date(arr).getTime() - new Date(dep).getTime()) / 60000);
-      if (diffMins > 0) {
-        const h = Math.floor(diffMins / 60);
-        const m = diffMins % 60;
+      const d = Math.round((new Date(arr).getTime() - new Date(dep).getTime()) / 60000);
+      if (d > 0) {
+        diffMinsResult = d;
+        const h = Math.floor(d / 60);
+        const m = d % 60;
         computedDur = h > 0 && m > 0 ? `PT${h}H${m}M` : h > 0 ? `PT${h}H` : `PT${m}M`;
       }
     } catch { /* ignore */ }
   }
   const rawSliceDur = (slices[0].duration as string) ?? "";
-
-  // Diagnostic: show every slice with its duration + segment count
-  const sliceSummary = slices.map((sl, i) => {
-    const slSegs = (sl.segments as DuffelRecord[] | undefined) ?? [];
-    const ori = airportIata(slSegs[0]?.origin      as DuffelRecord | undefined);
-    const dst = airportIata(slSegs[slSegs.length - 1]?.destination as DuffelRecord | undefined);
-    const segDurs = slSegs.map((s) => String(s.duration ?? "?")).join("+");
-    return `[${i}]${ori}→${dst}(${sl.duration ?? "?"},segs:[${segDurs}])`;
-  }).join(" ");
-  console.log(
-    `[dur] slices=${slices.length} ${sliceSummary} ` +
-    `outbound_segs=${outboundSegs.length} dep="${dep}" arr="${arr}" ` +
-    `computed="${computedDur}" slice[0].dur="${rawSliceDur}" final="${computedDur || rawSliceDur}"`
-  );
+  const segDursStr  = useSegs.map((s) => String(s.duration ?? "?")).join("+");
 
   return {
     airline,
-    flight_number: `${mcCode} ${fn}`.trim(),
-    origin:        airportIata(firstSeg.origin      as DuffelRecord | undefined),
-    destination:   airportIata(lastSeg.destination  as DuffelRecord | undefined),
-    departure_time: dep,
-    arrival_time:   arr,
-    duration:       computedDur || rawSliceDur,
-    stops:          Math.max(0, useSegs.length - 1),
-    cabin:          segmentCabin(firstSeg),
-    baggage:        extractBaggage(offer),
-    price:          (offer.total_amount as string) ?? "0",
-    currency:       (offer.total_currency as string) ?? "USD",
+    flight_number:      `${mcCode} ${fn}`.trim(),
+    origin:             airportIata(firstSeg.origin      as DuffelRecord | undefined),
+    destination:        airportIata(lastSeg.destination  as DuffelRecord | undefined),
+    departure_time:     dep,
+    arrival_time:       arr,
+    duration:           computedDur || rawSliceDur,
+    duration_minutes:   diffMinsResult,
+    stops:              Math.max(0, useSegs.length - 1),
+    cabin:              segmentCabin(firstSeg),
+    baggage:            extractBaggage(offer),
+    price:              (offer.total_amount as string) ?? "0",
+    currency:           (offer.total_currency as string) ?? "USD",
     connection_airports: connectionAirports,
+    _raw_slice_dur:     rawSliceDur,
+    _seg_durs:          segDursStr,
   };
 }
 
@@ -392,6 +383,7 @@ function normalizeFlight(raw: DuffelRecord, adults: number): FlightOffer | null 
   const flightNumber = String(raw.flight_number ?? "").trim();
   if (!airline || !flightNumber || price <= 0) return null;
   const stops = Number(raw.stops ?? 0);
+  const durMins = Number(raw.duration_minutes ?? 0);
   return {
     airline,
     airline_code: airlineCode(airline, flightNumber),
@@ -400,7 +392,10 @@ function normalizeFlight(raw: DuffelRecord, adults: number): FlightOffer | null 
     destination: String(raw.destination ?? ""),
     depart_time: timeFromIso(String(raw.departure_time ?? "")),
     arrive_time: timeFromIso(String(raw.arrival_time ?? "")),
-    duration: durationLabel(String(raw.duration ?? "")),
+    duration: durMins > 0
+      ? minutesToDurationLabel(durMins)
+      : durationLabel(String(raw.duration ?? "")),
+    duration_minutes: durMins,
     stops,
     stop_label: stops === 0 ? "Non-stop" : stops === 1 ? "1 stop" : `${stops} stops`,
     cabin: String(raw.cabin ?? "Economy"),
@@ -486,7 +481,7 @@ function deduplicateOffers(offers: FlightOffer[]): FlightOffer[] {
 // ── Scoring ──────────────────────────────────────────────────────────────────
 
 function scoreComponents(o: FlightOffer, medP: number, medD: number): Record<string, number> {
-  const durMin = durationMinutes(o.duration);
+  const durMin = o.duration_minutes;
   const arrMin = clockMinutes(o.arrive_time);
   const priceSc = medP > 0 ? Math.max(-1, Math.min(1, ((medP - o.price_total) / medP) * 2)) : 0;
   const durSc = medD > 0 && durMin > 0 ? Math.max(-1, Math.min(1, ((medD - durMin) / medD) * 2)) : 0;
@@ -531,7 +526,7 @@ function scoreComponents(o: FlightOffer, medP: number, medD: number): Record<str
 
 function buildScoreMap(offers: FlightOffer[]): Map<string, { score: number; breakdown: Record<string, number> }> {
   const medP = median(offers.map((o) => o.price_total));
-  const medD = median(offers.map((o) => durationMinutes(o.duration) || 99999));
+  const medD = median(offers.map((o) => o.duration_minutes || 99999));
   const out = new Map<string, { score: number; breakdown: Record<string, number> }>();
   for (const o of offers) {
     const bd = scoreComponents(o, medP, medD);
@@ -567,7 +562,7 @@ function aircraftComfort(o: FlightOffer): string {
 }
 
 function jetLagLabel(o: FlightOffer): string {
-  const dur = durationMinutes(o.duration);
+  const dur = o.duration_minutes;
   let score = dur >= 20 * 60 ? 3.5 : dur >= 14 * 60 ? 2.5 : dur >= 9 * 60 ? 1.5 : dur >= 5 * 60 ? 0.7 : 0;
   score += Math.min(1.5, o.stops * 0.5);
   if (score >= 4.5) return "Very High";
@@ -577,7 +572,7 @@ function jetLagLabel(o: FlightOffer): string {
 }
 
 function travelFatigueLabel(o: FlightOffer): string {
-  const dur = durationMinutes(o.duration);
+  const dur = o.duration_minutes;
   let score = dur >= 20 * 60 ? 3.2 : dur >= 14 * 60 ? 2.35 : dur >= 9 * 60 ? 1.35 : dur >= 5 * 60 ? 0.55 : 0;
   score += Math.min(3.0, o.stops * 1.15);
   const timing = arrivalTimingLabel(o);
@@ -622,13 +617,13 @@ interface OfferContext {
 
 function buildOfferContext(offers: FlightOffer[]): OfferContext {
   const cheapestPrice = Math.min(...offers.map((o) => o.price_total));
-  const fastestDurMins = Math.min(...offers.map((o) => durationMinutes(o.duration) || 99999));
+  const fastestDurMins = Math.min(...offers.map((o) => o.duration_minutes || 99999));
   const cheapestOffer = offers.find((o) => o.price_total === cheapestPrice) ?? offers[0];
   const nonstops = offers.filter((o) => o.stops === 0);
   return {
     cheapestPrice,
     fastestDurMins,
-    cheapestDurMins: durationMinutes(cheapestOffer.duration) || 99999,
+    cheapestDurMins: cheapestOffer.duration_minutes || 99999,
     cheapestNonstopPrice: nonstops.length ? Math.min(...nonstops.map((o) => o.price_total)) : null,
     bestFatigueRank: Math.min(...offers.map((o) => FATIGUE_RANK[o.travel_fatigue] ?? 2)),
     bestTimingRank: Math.max(...offers.map((o) => TIMING_RANK[o.arrival_timing] ?? 2)),
@@ -639,7 +634,7 @@ function buildOfferContext(offers: FlightOffer[]): OfferContext {
 }
 
 function buildWinsOn(o: FlightOffer, ctx: OfferContext, all: FlightOffer[]): string[] {
-  const durMins = durationMinutes(o.duration) || 99999;
+  const durMins = o.duration_minutes || 99999;
   const priceDiff = o.price_total - ctx.cheapestPrice;
   const durDiff = durMins - ctx.fastestDurMins;
   const timeSavedVsCheapest = ctx.cheapestDurMins - durMins;
@@ -689,7 +684,7 @@ function buildWinsOn(o: FlightOffer, ctx: OfferContext, all: FlightOffer[]): str
 }
 
 function buildTradeoffsFor(o: FlightOffer, ctx: OfferContext, _all: FlightOffer[]): string[] {
-  const durMins = durationMinutes(o.duration) || 99999;
+  const durMins = o.duration_minutes || 99999;
   const priceDiff = o.price_total - ctx.cheapestPrice;
   const durDiff = durMins - ctx.fastestDurMins;
   const fatigueRank = FATIGUE_RANK[o.travel_fatigue] ?? 2;
@@ -734,7 +729,7 @@ function buildComparisonSummary(
   if (all.length === 1)
     return `Only live fare returned — ${o.stops === 0 ? "nonstop" : "connecting"} at ${moneyUsd(o.price_total)}.`;
 
-  const durMins = durationMinutes(o.duration) || 99999;
+  const durMins = o.duration_minutes || 99999;
   const priceDiff = Math.round(o.price_total - ctx.cheapestPrice);
   const durDiff = durMins - ctx.fastestDurMins;
   const timeSavedVsCheapest = ctx.cheapestDurMins - durMins;
@@ -826,7 +821,7 @@ function buildRecommendationMap(
   const aiPick      = pick((a, b) => sc(a) >= sc(b) ? a : b);
   const cheapestOff = pick((a, b) => a.price_total <= b.price_total ? a : b);
   const fastestOff  = pick((a, b) =>
-    (durationMinutes(a.duration) || 99999) <= (durationMinutes(b.duration) || 99999) ? a : b);
+    (a.duration_minutes || 99999) <= (b.duration_minutes || 99999) ? a : b);
   const comfortOff  = pick((a, b) => {
     const d = (COMFORT_RANK[aircraftComfort(a)] ?? 1) - (COMFORT_RANK[aircraftComfort(b)] ?? 1);
     return d !== 0 ? (d > 0 ? a : b) : (sc(a) >= sc(b) ? a : b);
@@ -882,7 +877,7 @@ async function generateOpenAIExplanation(
 
   const cheapest = all.reduce((a, b) => a.price_total <= b.price_total ? a : b);
   const fastest  = all.reduce((a, b) =>
-    (durationMinutes(a.duration) || 9999) <= (durationMinutes(b.duration) || 9999) ? a : b);
+    (a.duration_minutes || 99999) <= (b.duration_minutes || 99999) ? a : b);
 
   const fmt = (o: FlightOffer) => ({
     airline:                 o.airline,
@@ -1074,6 +1069,19 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
   const normedRaw = rawOffers.map((o) => normalizeDuffelOffer(o, params.origin, params.destination)).filter(Boolean) as DuffelRecord[];
   console.log(`[pipeline] 2_after_normalizeDuffelOffer=${normedRaw.length} (filtered_nulls=${rawOffers.length - normedRaw.length})`);
 
+  // Log first 5 normalized offers: raw Duffel fields vs computed values
+  for (let i = 0; i < Math.min(5, normedRaw.length); i++) {
+    const r = normedRaw[i];
+    const mins = Number(r.duration_minutes ?? 0);
+    console.log(
+      `  [norm-${i + 1}] "${r.airline}" ${r.flight_number} ` +
+      `raw_slice_dur="${r._raw_slice_dur}" ` +
+      `seg_durs=[${r._seg_durs}] ` +
+      `duration_minutes=${mins} ` +
+      `display="${minutesToDurationLabel(mins)}"`
+    );
+  }
+
   const normedAll = normedRaw.map((r) => normalizeFlight(r, params.adults)).filter(Boolean) as FlightOffer[];
   console.log(`[pipeline] 3_after_normalizeFlight=${normedAll.length} (filtered_nulls=${normedRaw.length - normedAll.length})`);
   console.log(`[pipeline] 4_before_dedupe=${normedAll.length}`);
@@ -1148,7 +1156,22 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
     };
   });
 
-  enriched.sort((a, b) => (a.is_recommended ? -1 : b.is_recommended ? 1 : 0) || (b.ai_score - a.ai_score));
+  // Stable 6-key sort: recommended first, then score desc, price asc,
+  // duration_minutes asc, departure time asc, airline asc, flight number asc.
+  // Every key is deterministic so identical searches produce identical order.
+  enriched.sort((a, b) => {
+    if (a.is_recommended !== b.is_recommended) return a.is_recommended ? -1 : 1;
+    if (b.ai_score !== a.ai_score) return b.ai_score - a.ai_score;
+    if (a.price_total !== b.price_total) return a.price_total - b.price_total;
+    const aDur = a.duration_minutes || 99999;
+    const bDur = b.duration_minutes || 99999;
+    if (aDur !== bDur) return aDur - bDur;
+    const aDepart = clockMinutes(a.depart_time);
+    const bDepart = clockMinutes(b.depart_time);
+    if (aDepart !== bDepart) return aDepart - bDepart;
+    if (a.airline !== b.airline) return a.airline.localeCompare(b.airline);
+    return a.flight_number.localeCompare(b.flight_number);
+  });
 
   // Augment top pick with OpenAI-generated human explanations (falls back to deterministic if unavailable)
   const topPick = enriched.find((o) => o.is_recommended);

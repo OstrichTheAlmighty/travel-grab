@@ -473,6 +473,7 @@ interface FlightOffer {
   city_access: string;
   aircraft_comfort: string;
   connection_airports?: string;
+  duration_minutes?: number;
 }
 
 interface BookingIntent {
@@ -719,7 +720,7 @@ function rerankOffers(
 
   // Result-set bounds for min-max normalization
   const prices = rawOffers.map((o) => o.price_total);
-  const durs   = rawOffers.map((o) => parseMins(o.duration) || 999);
+  const durs   = rawOffers.map((o) => o.duration_minutes || parseMins(o.duration) || 999);
   const minP = Math.min(...prices), maxP = Math.max(...prices);
   const minD = Math.min(...durs),   maxD = Math.max(...durs);
   const priceRange = maxP - minP;
@@ -733,7 +734,7 @@ function rerankOffers(
   // Uses result-set min/max for price and duration; fixed scales for everything else.
   const computeNorms = (o: FlightOffer): Record<string, number> => ({
     price:       priceRange > 1 ? 100 * (maxP - o.price_total)                  / priceRange : 50,
-    duration:    durRange   > 1 ? 100 * (maxD - (parseMins(o.duration) || 0))   / durRange   : 50,
+    duration:    durRange   > 1 ? 100 * (maxD - (o.duration_minutes || parseMins(o.duration) || 0)) / durRange : 50,
     stops:       stopsScore(o.stops),
     timing:      arrivalTimingScore(o.arrive_time),
     cabin:       cabinScore(o.cabin),
@@ -778,7 +779,7 @@ function rerankOffers(
 
   // Per-dimension badge assignment and ranking explanation against the visible result set.
   const minPrice   = Math.min(...rescored.map((o) => o.price_total));
-  const minDur     = Math.min(...rescored.map((o) => parseMins(o.duration) || 999));
+  const minDur     = Math.min(...rescored.map((o) => o.duration_minutes || parseMins(o.duration) || 999));
   const maxTiming  = Math.max(...rescored.map((o) => o.score_breakdown.timing  ?? 0));
   const maxFatigue = Math.max(...rescored.map((o) => o.score_breakdown.fatigue ?? 0));
   const maxCabin   = Math.max(...rescored.map((o) => o.score_breakdown.cabin   ?? 0));
@@ -790,7 +791,7 @@ function rerankOffers(
     const neg: Array<{ positive: boolean; text: string }> = [];
     const bd = o.score_breakdown;
     const priceDiff = Math.round(o.price_total - minPrice);
-    const durMins   = parseMins(o.duration) || 0;
+    const durMins   = o.duration_minutes || parseMins(o.duration) || 0;
     const durDiff   = durMins - minDur;
 
     // Positive bullets
@@ -836,7 +837,7 @@ function rerankOffers(
       label = topLabel;
     } else if (o.price_total === minPrice) {
       label = claimLabel("Cheapest");
-    } else if ((parseMins(o.duration) || 999) === minDur) {
+    } else if ((o.duration_minutes || parseMins(o.duration) || 999) === minDur) {
       label = claimLabel("Fastest");
     } else if ((o.score_breakdown.timing  ?? 0) === maxTiming) {
       label = claimLabel("Best Arrival");
