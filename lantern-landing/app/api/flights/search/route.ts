@@ -1316,6 +1316,21 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
       adults: params.adults,
       offer_count: enriched.length,
       duffel_ms: elapsed,
+      debugStats: {
+        raw_duffel_offers: rawOffers.length,
+        after_filtering: normedFlights.length,
+        normalize_duffel_offer_dropped: rawOffers.length - normedRaw.length,
+        normalize_flight_dropped: normedRaw.length - normedFlights.length,
+        after_deduplication: normed.length,
+        dedup_dropped: normedFlights.length - normed.length,
+        after_ranking: normed.length,
+        rendered_offers: enriched.length,
+        origin_airports: params.origin,
+        destination_airports: params.destination,
+        unique_airlines: uniqueAirlines || "none",
+        cheapest_raw: cheapestRaw > 0 ? `$${cheapestRaw.toFixed(0)}` : "n/a",
+        cheapest_rendered: cheapestRendered > 0 ? `$${cheapestRendered.toFixed(0)}` : "n/a",
+      },
     },
   };
 }

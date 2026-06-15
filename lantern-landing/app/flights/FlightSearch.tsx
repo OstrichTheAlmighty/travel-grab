@@ -488,6 +488,22 @@ interface BookingIntent {
   priorities: string[];
 }
 
+interface DebugStats {
+  raw_duffel_offers: number;
+  after_filtering: number;
+  normalize_duffel_offer_dropped: number;
+  normalize_flight_dropped: number;
+  after_deduplication: number;
+  dedup_dropped: number;
+  after_ranking: number;
+  rendered_offers: number;
+  origin_airports: string;
+  destination_airports: string;
+  unique_airlines: string;
+  cheapest_raw: string;
+  cheapest_rendered: string;
+}
+
 interface SearchMeta {
   origin: string;
   destination: string;
@@ -495,6 +511,7 @@ interface SearchMeta {
   cabin_class: string;
   adults: number;
   offer_count?: number;
+  debugStats?: DebugStats;
 }
 
 const CABIN_LABELS: Record<CabinClass, string> = {
@@ -1870,6 +1887,7 @@ export default function FlightSearch() {
   const [searchState, setSearchState] = useState<SearchState>("idle");
   const [offers, setOffers] = useState<FlightOffer[]>([]);
   const [searchMeta, setSearchMeta] = useState<SearchMeta | null>(null);
+  const [debugStats, setDebugStats] = useState<DebugStats | null>(null);
   const [priorities, setPriorities] = useState<Priority[]>([]);
 
   const activeWeights = useMemo(() => buildCompoundWeights(priorities), [priorities]);
@@ -1958,6 +1976,7 @@ export default function FlightSearch() {
       });
       setOffers(data.offers!);
       setSearchMeta(data.meta ?? null);
+      setDebugStats(data.meta?.debugStats ?? null);
       setSearchState("results");
       setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
     } catch {
@@ -2203,6 +2222,20 @@ export default function FlightSearch() {
                   Showing {displayOffers.length} unique itinerar{displayOffers.length !== 1 ? "ies" : "y"} — ranked by AI
                 </span>
               </div>
+            )}
+            {debugStats && (
+              <pre className="max-w-3xl mx-auto mb-4 rounded-lg border border-green-900/60 bg-black/70 px-4 py-3 text-[11px] leading-relaxed text-green-400 font-mono overflow-x-auto">
+{`RAW_DUFFEL_OFFERS=${debugStats.raw_duffel_offers}
+AFTER_FILTERING=${debugStats.after_filtering}  (normalizeDuffelOffer dropped ${debugStats.normalize_duffel_offer_dropped}, normalizeFlight dropped ${debugStats.normalize_flight_dropped})
+AFTER_DEDUPLICATION=${debugStats.after_deduplication}  (dedup dropped ${debugStats.dedup_dropped})
+AFTER_RANKING=${debugStats.after_ranking}
+RENDERED_OFFERS=${debugStats.rendered_offers}
+ORIGIN_AIRPORTS=${debugStats.origin_airports}
+DESTINATION_AIRPORTS=${debugStats.destination_airports}
+UNIQUE_AIRLINES=${debugStats.unique_airlines}
+CHEAPEST_RAW=${debugStats.cheapest_raw}
+CHEAPEST_RENDERED=${debugStats.cheapest_rendered}`}
+              </pre>
             )}
             <RecommendationPanel offers={displayOffers} topPickRef={topPickRef} priorities={priorities} />
             <CompareTable offers={displayOffers} />
