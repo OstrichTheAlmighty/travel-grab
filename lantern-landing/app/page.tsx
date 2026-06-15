@@ -167,7 +167,7 @@ export default function Page() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <a
               href={PUBLIC_FLIGHTS_URL}
-              className="inline-flex h-14 items-center gap-2 rounded-full bg-gradient-to-r from-lantern-mint to-lantern-blue px-8 text-sm font-bold text-ink shadow-glow transition hover:scale-[1.02] hover:opacity-90 active:scale-[0.98]"
+              className="inline-flex h-14 items-center gap-2 rounded-full bg-gradient-to-r from-lantern-violet to-lantern-blue px-8 text-sm font-bold text-white shadow-glow transition hover:scale-[1.02] hover:opacity-90 active:scale-[0.98]"
             >
               <svg
                 aria-hidden="true"
@@ -187,7 +187,7 @@ export default function Page() {
             </a>
             <a
               href="#waitlist"
-              className="inline-flex h-14 items-center rounded-full border border-white/14 bg-white/[0.04] px-8 text-sm font-semibold text-white/80 transition hover:border-white/24 hover:bg-white/[0.08] hover:text-white"
+              className="inline-flex h-14 items-center rounded-full border border-white/30 bg-white/[0.06] px-8 text-sm font-semibold text-white transition hover:border-white/50 hover:bg-white/[0.10] active:scale-[0.98]"
             >
               Join waitlist
             </a>
