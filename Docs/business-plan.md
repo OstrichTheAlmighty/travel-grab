@@ -136,10 +136,10 @@ The hybrid approach reduces early conversion friction — users start free, expe
 | Role | Status |
 |---|---|
 | Product / Strategy | ✅ |
-| Engineering (AI/backend) | 🔴 Gap |
-| Engineering (frontend/mobile) | 🔴 Gap |
+| Engineering (AI/backend) | ✅ Handled |
+| Engineering (frontend/mobile) | 🟡 Partial |
 | Travel industry expertise | 🟡 Partial |
-| Growth / Marketing | 🔴 Gap |
+| Growth / Marketing | ✅ Handled (in-house) |
 
 ---
 
