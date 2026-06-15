@@ -313,7 +313,26 @@ function normalizeDuffelOffer(offer: DuffelRecord): DuffelRecord | null {
     destination: airportIata(lastSeg.destination as DuffelRecord | undefined),
     departure_time: (firstSeg.departing_at as string) ?? "",
     arrival_time: (lastSeg.arriving_at as string) ?? "",
-    duration: (firstSlice.duration as string) ?? "",
+    duration: (() => {
+      // Compute door-to-door duration from timestamps — handles timezone offsets correctly
+      // and is reliable even when Duffel omits or mis-populates slice.duration.
+      const dep = (firstSeg.departing_at as string) ?? "";
+      const arr = (lastSeg.arriving_at as string) ?? "";
+      let ts = "";
+      if (dep && arr) {
+        try {
+          const diffMins = Math.round((new Date(arr).getTime() - new Date(dep).getTime()) / 60000);
+          if (diffMins > 0) {
+            const h = Math.floor(diffMins / 60);
+            const m = diffMins % 60;
+            ts = h > 0 && m > 0 ? `PT${h}H${m}M` : h > 0 ? `PT${h}H` : `PT${m}M`;
+          }
+        } catch { /* ignore */ }
+      }
+      const rawSlice = (firstSlice.duration as string) ?? "";
+      console.log(`[dur] slice.duration="${rawSlice}" seg[0].duration="${firstSeg.duration}" dep="${dep}" arr="${arr}" computed="${ts}"`);
+      return ts || rawSlice;
+    })(),
     stops: Math.max(0, segments.length - 1),
     cabin: segmentCabin(firstSeg),
     baggage: extractBaggage(offer),
