@@ -477,6 +477,17 @@ interface FlightOffer {
   offer_id?: string;
   source?: string;       // "duffel" | "amadeus" — which provider sourced this offer
   is_bookable?: boolean; // false → search-only, shown with "Search only" label
+  outbound_flight_numbers?: string[];
+  return_origin?: string;
+  return_destination?: string;
+  return_depart_time?: string;
+  return_arrive_time?: string;
+  return_duration?: string;
+  return_duration_minutes?: number;
+  return_stops?: number;
+  return_stop_label?: string;
+  return_connection_airports?: string;
+  return_flight_numbers?: string[];
 }
 
 interface BookingIntent {
@@ -1632,27 +1643,62 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
           </div>
         </div>
 
-        {/* ── Route bar ── */}
-        <div className="flex items-center gap-2 mb-3 py-2 px-3 rounded-lg bg-white/[0.025] border border-white/[0.05]">
-          <div className="text-center flex-shrink-0 min-w-[3rem]">
-            <div className="text-base font-black text-white tabular-nums leading-tight">{offer.depart_time}</div>
-            <div className="text-[10px] font-mono font-bold text-white/40">{offer.origin}</div>
-          </div>
-          <div className="flex-1 flex flex-col items-center gap-0.5 min-w-0 px-1">
-            <div className="text-[10px] text-white/30 font-medium">{offer.duration}</div>
-            <div className="w-full flex items-center gap-1">
-              <div className="flex-1 h-px bg-white/10" />
-              <svg className="w-3 h-3 text-white/20 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
-              </svg>
-              <div className="flex-1 h-px bg-white/10" />
+        {/* ── Route bars ── */}
+        <div className="mb-3 space-y-1.5">
+          {offer.return_depart_time && (
+            <div className="text-[9px] text-white/25 font-bold uppercase tracking-wider px-1">Outbound</div>
+          )}
+          <div className="flex items-center gap-2 py-2 px-3 rounded-lg bg-white/[0.025] border border-white/[0.05]">
+            <div className="text-center flex-shrink-0 min-w-[3rem]">
+              <div className="text-base font-black text-white tabular-nums leading-tight">{offer.depart_time}</div>
+              <div className="text-[10px] font-mono font-bold text-white/40">{offer.origin}</div>
             </div>
-            <div className="text-[10px] text-white/30 font-medium">{offer.stop_label}</div>
+            <div className="flex-1 flex flex-col items-center gap-0.5 min-w-0 px-1">
+              <div className="text-[10px] text-white/30 font-medium">{offer.duration}</div>
+              <div className="w-full flex items-center gap-1">
+                <div className="flex-1 h-px bg-white/10" />
+                <svg className="w-3 h-3 text-white/20 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
+                </svg>
+                <div className="flex-1 h-px bg-white/10" />
+              </div>
+              <div className="text-[10px] text-white/30 font-medium">
+                {offer.stop_label}{offer.connection_airports ? ` · ${offer.connection_airports.replace(/,/g, ", ")}` : ""}
+              </div>
+            </div>
+            <div className="text-center flex-shrink-0 min-w-[3rem]">
+              <div className="text-base font-black text-white tabular-nums leading-tight">{offer.arrive_time}</div>
+              <div className="text-[10px] font-mono font-bold text-white/40">{offer.destination}</div>
+            </div>
           </div>
-          <div className="text-center flex-shrink-0 min-w-[3rem]">
-            <div className="text-base font-black text-white tabular-nums leading-tight">{offer.arrive_time}</div>
-            <div className="text-[10px] font-mono font-bold text-white/40">{offer.destination}</div>
-          </div>
+          {offer.return_depart_time && (
+            <>
+              <div className="text-[9px] text-white/25 font-bold uppercase tracking-wider px-1">Return</div>
+              <div className="flex items-center gap-2 py-2 px-3 rounded-lg bg-white/[0.02] border border-white/[0.04]">
+                <div className="text-center flex-shrink-0 min-w-[3rem]">
+                  <div className="text-base font-black text-white/70 tabular-nums leading-tight">{offer.return_depart_time}</div>
+                  <div className="text-[10px] font-mono font-bold text-white/30">{offer.return_origin}</div>
+                </div>
+                <div className="flex-1 flex flex-col items-center gap-0.5 min-w-0 px-1">
+                  <div className="text-[10px] text-white/20 font-medium">{offer.return_duration}</div>
+                  <div className="w-full flex items-center gap-1">
+                    <div className="flex-1 h-px bg-white/[0.07]" />
+                    <svg className="w-3 h-3 text-white/15 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
+                    </svg>
+                    <div className="flex-1 h-px bg-white/[0.07]" />
+                  </div>
+                  <div className="text-[10px] text-white/20 font-medium">
+                    {offer.return_stop_label}{offer.return_connection_airports ? ` · ${offer.return_connection_airports.replace(/,/g, ", ")}` : ""}
+                  </div>
+                </div>
+                <div className="text-center flex-shrink-0 min-w-[3rem]">
+                  <div className="text-base font-black text-white/70 tabular-nums leading-tight">{offer.return_arrive_time}</div>
+                  <div className="text-[10px] font-mono font-bold text-white/30">{offer.return_destination}</div>
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         {/* ── AI Score bar ── */}
@@ -1734,13 +1780,19 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
               {(
                 [
                   ["Airline", offer.airline],
-                  ["Flight", offer.flight_number],
+                  ["Outbound", (offer.outbound_flight_numbers ?? [offer.flight_number]).join(" · ")],
                   ["From", offer.origin],
                   ["To", offer.destination],
                   ["Departs", offer.depart_time],
                   ["Arrives", offer.arrive_time],
                   ["Duration", offer.duration],
-                  ["Stops", offer.stop_label],
+                  ["Stops", `${offer.stop_label}${offer.connection_airports ? ` · ${offer.connection_airports.replace(/,/g, ", ")}` : ""}`],
+                  ...(offer.return_depart_time ? [
+                    ["Return", (offer.return_flight_numbers ?? []).join(" · ")],
+                    ["Ret. departs", offer.return_depart_time],
+                    ["Ret. arrives", offer.return_arrive_time ?? ""],
+                    ["Ret. stops", `${offer.return_stop_label ?? ""}${offer.return_connection_airports ? ` · ${offer.return_connection_airports.replace(/,/g, ", ")}` : ""}`],
+                  ] as [string, string][] : []),
                   ["Cabin", offer.cabin],
                   ["Baggage", offer.baggage],
                   ["Total", `$${Math.round(offer.price_total).toLocaleString()}`],

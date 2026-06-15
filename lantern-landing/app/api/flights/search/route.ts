@@ -106,6 +106,17 @@ export interface FlightOffer {
   fare_brand?: string;          // fare brand name (e.g. "Basic Economy", "Main Cabin")
   source?: string;              // "duffel" | "amadeus" — which provider sourced this offer
   is_bookable?: boolean;        // true → can be booked in TravelGrab; false → search-only
+  outbound_flight_numbers?: string[];   // all outbound segment flight numbers
+  return_origin?: string;
+  return_destination?: string;
+  return_depart_time?: string;
+  return_arrive_time?: string;
+  return_duration?: string;
+  return_duration_minutes?: number;
+  return_stops?: number;
+  return_stop_label?: string;
+  return_connection_airports?: string;
+  return_flight_numbers?: string[];
 }
 
 // ── Airline IATA lookup ──────────────────────────────────────────────────────
@@ -242,7 +253,7 @@ function flightKey(o: Partial<FlightOffer>): string {
 
 // Maps a normalized ProviderOffer into a FlightOffer ready for scoring.
 // All provider-specific parsing has already been done by the provider itself.
-function normalizeFlight(offer: ProviderOffer, adults: number): FlightOffer | null {
+function normalizeFlight(offer: ProviderOffer, adults: number, trip_type: string): FlightOffer | null {
   const { airline, airlineCode: code, flightNumbers, price, source, sourceOfferId, isBookableInTravelGrab } = offer;
   const flightNumber = flightNumbers[0] ?? "";
 
@@ -262,14 +273,40 @@ function normalizeFlight(offer: ProviderOffer, adults: number): FlightOffer | nu
     return null;
   }
 
+  // Reject Duffel round-trip offers missing return leg data — these indicate a parsing failure
+  if (trip_type === "roundtrip" && isBookableInTravelGrab && !offer.returnDepartureTime) {
+    console.log(
+      `[${source}][filter_removed] id=${sourceOfferId} airline="${airline}" ${flightNumber} ` +
+      `price=$${price} reason="round-trip offer missing return leg"`
+    );
+    return null;
+  }
+
   const stops = offer.stops;
   const durMins = offer.durationMinutes;
   const resolvedCode = code || airlineCode(airline, flightNumber);
+
+  // Return leg fields
+  const retStops = offer.returnStops ?? 0;
+  const retStopLabel = retStops === 0 ? "Non-stop" : retStops === 1 ? "1 stop" : `${retStops} stops`;
+  const returnLeg = offer.returnDepartureTime ? {
+    return_origin:             offer.returnOrigin,
+    return_destination:        offer.returnDestination,
+    return_depart_time:        timeFromIso(offer.returnDepartureTime),
+    return_arrive_time:        timeFromIso(offer.returnArrivalTime ?? ""),
+    return_duration:           minutesToDurationLabel(offer.returnDurationMinutes ?? 0),
+    return_duration_minutes:   offer.returnDurationMinutes,
+    return_stops:              retStops,
+    return_stop_label:         retStopLabel,
+    return_connection_airports: offer.returnConnectionAirports,
+    return_flight_numbers:     offer.returnFlightNumbers,
+  } : {};
 
   return {
     airline,
     airline_code: resolvedCode,
     flight_number: flightNumber,
+    outbound_flight_numbers: offer.flightNumbers,
     origin: offer.origin,
     destination: offer.destination,
     depart_time: timeFromIso(offer.departureTime),
@@ -303,6 +340,7 @@ function normalizeFlight(offer: ProviderOffer, adults: number): FlightOffer | nu
     fare_brand: offer.fareBrand ?? "",
     source,
     is_bookable: isBookableInTravelGrab,
+    ...returnLeg,
   };
 }
 
@@ -1018,7 +1056,7 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
 
   // ── 2. Normalize ProviderOffer → FlightOffer ───────────────────────────────
   const normedFlights = allProviderOffers
-    .map((o) => normalizeFlight(o, params.adults))
+    .map((o) => normalizeFlight(o, params.adults, params.trip_type))
     .filter(Boolean) as FlightOffer[];
   const providerDropped = allProviderOffers.length - normedFlights.length;
   console.log(`\nAFTER_FILTERING=${normedFlights.length}  (provider-level dropped ${totalRawOffers - allProviderOffers.length}, normalizeFlight dropped ${providerDropped})`);
@@ -1117,6 +1155,16 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
   console.log(`\nCHEAPEST_AFTER_DEDUP=$${cheapestAfterDedupe.price_total.toFixed(0)} (${cheapestAfterDedupe.airline} ${cheapestAfterDedupe.flight_number})`);
 
   const topPick = enriched.find((o) => o.is_recommended);
+  if (topPick) {
+    console.log(
+      `\nTOP_PRICE_SOURCE=${topPick.source}  TOP_TOTAL_PRICE=$${topPick.price_total.toFixed(0)}`
+    );
+    console.log(`TOP_OUTBOUND_SEGMENTS=${(topPick.outbound_flight_numbers ?? [topPick.flight_number]).join(" · ")}`);
+    console.log(`TOP_RETURN_SEGMENTS=${topPick.return_flight_numbers?.join(" · ") ?? "n/a (one-way or missing)"}`);
+    console.log(
+      `TOP_STOP_AIRPORTS=outbound:${topPick.connection_airports || "none"}  return:${topPick.return_connection_airports || "none"}`
+    );
+  }
   if (topPick && enriched.length >= 2) {
     const aiText = await generateOpenAIExplanation(topPick, enriched);
     if (aiText) {

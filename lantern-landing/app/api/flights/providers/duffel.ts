@@ -175,13 +175,31 @@ export class DuffelProvider implements FlightSearchProvider {
     const destSet   = new Set(reqDest.split(",").map((c) => c.trim().toUpperCase()));
     const outboundSegs: R[] = [];
     let started = false;
-    for (const seg of allSegs) {
+    let outboundEndIdx = -1;
+    for (let i = 0; i < allSegs.length; i++) {
+      const seg = allSegs[i];
       const segOri  = airportIata(seg.origin      as R | undefined).toUpperCase();
       const segDest = airportIata(seg.destination as R | undefined).toUpperCase();
       if (!started && originSet.has(segOri)) started = true;
       if (started) {
         outboundSegs.push(seg);
-        if (destSet.has(segDest)) break;
+        if (destSet.has(segDest)) { outboundEndIdx = i; break; }
+      }
+    }
+
+    // Find return chain after outbound ends: from reqDest back to reqOrigin
+    const returnSegs: R[] = [];
+    if (outboundEndIdx >= 0) {
+      let retStarted = false;
+      for (let i = outboundEndIdx + 1; i < allSegs.length; i++) {
+        const seg = allSegs[i];
+        const segOri  = airportIata(seg.origin      as R | undefined).toUpperCase();
+        const segDest = airportIata(seg.destination as R | undefined).toUpperCase();
+        if (!retStarted && destSet.has(segOri)) retStarted = true;
+        if (retStarted) {
+          returnSegs.push(seg);
+          if (originSet.has(segDest)) break;
+        }
       }
     }
 
@@ -248,6 +266,43 @@ export class DuffelProvider implements FlightSearchProvider {
       (sl0Pax?.fare_brand_name as string | undefined) ??
       "";
 
+    // Extract return leg metadata if return segments were found
+    let returnLegFields: Partial<ProviderOffer> = {};
+    if (returnSegs.length > 0) {
+      const firstRet = returnSegs[0];
+      const lastRet  = returnSegs[returnSegs.length - 1];
+      const retDep = (firstRet.departing_at as string | undefined) ?? "";
+      const retArr = (lastRet.arriving_at   as string | undefined) ?? "";
+      const retFlightNumbers = returnSegs.map((seg) => {
+        const mc_ = (seg.marketing_carrier as R | undefined) ?? {};
+        const code_ = (mc_.iata_code as string | undefined) ?? "";
+        const num_  = (seg.marketing_carrier_flight_number as string | undefined) ?? "";
+        return `${code_} ${num_}`.trim();
+      }).filter(Boolean);
+      const retConnectionAirports = returnSegs.slice(0, -1)
+        .map((seg) => airportIata(seg.destination as R | undefined))
+        .filter(Boolean).join(",");
+      const rawRetSliceDur = (slices[1]?.duration as string | undefined) ?? "";
+      let retDurMins = parseDurationMinutes(rawRetSliceDur);
+      if (!retDurMins && retDep && retArr) {
+        const depMs = new Date(retDep).getTime();
+        const arrMs = new Date(retArr).getTime();
+        if (!isNaN(depMs) && !isNaN(arrMs) && arrMs > depMs) {
+          retDurMins = Math.round((arrMs - depMs) / 60000);
+        }
+      }
+      returnLegFields = {
+        returnOrigin:             airportIata(firstRet.origin      as R | undefined),
+        returnDestination:        airportIata(lastRet.destination  as R | undefined),
+        returnDepartureTime:      retDep,
+        returnArrivalTime:        retArr,
+        returnDurationMinutes:    retDurMins,
+        returnStops:              Math.max(0, returnSegs.length - 1),
+        returnConnectionAirports: retConnectionAirports,
+        returnFlightNumbers:      retFlightNumbers,
+      };
+    }
+
     return {
       source: "duffel",
       sourceOfferId: offerId,
@@ -267,6 +322,7 @@ export class DuffelProvider implements FlightSearchProvider {
       currency: (offer.total_currency as string | undefined) ?? "USD",
       isBookableInTravelGrab: true,
       fareBrand,
+      ...returnLegFields,
     };
   }
 }

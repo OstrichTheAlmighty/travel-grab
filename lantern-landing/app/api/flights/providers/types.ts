@@ -25,6 +25,16 @@ export interface ProviderOffer {
   bookingUrl?: string;            // deep-link for non-bookable offers
   fareBrand?: string;             // e.g. "Basic Economy", "Main Cabin", "Business Flex"
   rawProviderData?: unknown;      // full raw response object for debugging
+  // Return leg — populated by providers that support round-trip data (e.g. Duffel).
+  // Left undefined for one-way searches or providers that only return outbound data.
+  returnOrigin?: string;
+  returnDestination?: string;
+  returnDepartureTime?: string;
+  returnArrivalTime?: string;
+  returnDurationMinutes?: number;
+  returnStops?: number;
+  returnConnectionAirports?: string;
+  returnFlightNumbers?: string[];
 }
 
 // Parameters every provider receives.
