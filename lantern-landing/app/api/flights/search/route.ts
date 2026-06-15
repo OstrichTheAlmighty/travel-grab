@@ -907,10 +907,16 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
   const allProviderOffers: ProviderOffer[] = [];
   const allDebugRows: PerOfferDebugRow[] = [];
   let totalRawOffers = 0;
-  // Primary provider debug fields (first successful result)
+  // Primary (Duffel) debug fields
   let primaryPayloadJson = "{}";
   let primaryHttpStatus: number | undefined;
   let primaryLatencyMs = 0;
+  // SerpAPI / Google Flights debug fields
+  let serpapiRawOffers = 0;
+  const serpapiDebugRows: PerOfferDebugRow[] = [];
+  // Determine SerpAPI status independently of provider list
+  const serpapiEnvKey = (process.env.SERPAPI_API_KEY ?? "").trim();
+  let serpapiStatus = serpapiEnvKey ? "key present — awaiting response" : "missing key";
 
   for (const [i, result] of settled.entries()) {
     const p = providers[i];
@@ -919,16 +925,51 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
       allProviderOffers.push(...offers);
       allDebugRows.push(...debug.perOfferRows);
       totalRawOffers += debug.rawOfferCount;
-      if (i === 0) {
+      if (p.source === "duffel") {
         primaryPayloadJson = debug.requestPayloadJson;
         primaryHttpStatus  = debug.httpStatus;
         primaryLatencyMs   = debug.latencyMs;
       }
+      if (p.source === "google_flights") {
+        serpapiRawOffers += debug.rawOfferCount;
+        serpapiDebugRows.push(...debug.perOfferRows);
+        if (debug.httpStatus && debug.httpStatus >= 400) {
+          serpapiStatus = `error HTTP ${debug.httpStatus}`;
+        } else {
+          serpapiStatus = `ok — ${debug.rawOfferCount} raw offers`;
+        }
+      }
+      if (i === 0 && p.source !== "duffel") {
+        // Fallback: if Duffel is not first provider, still capture primary payload
+        primaryPayloadJson = primaryPayloadJson === "{}" ? debug.requestPayloadJson : primaryPayloadJson;
+        if (!primaryHttpStatus) primaryHttpStatus = debug.httpStatus;
+        if (!primaryLatencyMs) primaryLatencyMs = debug.latencyMs;
+      }
       console.log(`[${p.name.toLowerCase()}] ${debug.rawOfferCount} raw → ${offers.length} normalized  (${debug.latencyMs}ms)`);
     } else {
-      console.error(`[${p.name.toLowerCase()}] failed: ${String(result.reason).slice(0, 120)}`);
+      const errMsg = String(result.reason).slice(0, 120);
+      console.error(`[${p.name.toLowerCase()}] failed: ${errMsg}`);
+      if (p.source === "google_flights") {
+        serpapiStatus = `error: ${errMsg.slice(0, 80)}`;
+      }
     }
   }
+
+  const enabledProviders = providers.map((p) => p.source).join(", ") || "none";
+  console.log(`ENABLED_PROVIDERS=${enabledProviders}  SERPAPI_STATUS=${serpapiStatus}`);
+
+  // SerpAPI aggregate stats for debug panel
+  const serpapiAirlineCounts = new Map<string, number>();
+  for (const r of serpapiDebugRows) {
+    serpapiAirlineCounts.set(r.airlineCode, (serpapiAirlineCounts.get(r.airlineCode) ?? 0) + 1);
+  }
+  const serpapiAirlines = [...serpapiAirlineCounts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([code, n]) => `${code}(${n})`).join(", ");
+  const serpapiPrices = serpapiDebugRows
+    .map((r) => parseFloat(r.price.replace("$", "")) || Infinity)
+    .filter(isFinite);
+  const serpapiCheapest = serpapiPrices.length ? `$${Math.min(...serpapiPrices).toFixed(0)}` : "n/a";
 
   const providersUsed = providers.map((p) => p.name).join(", ");
 
@@ -1089,6 +1130,9 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
       latency_ms: primaryLatencyMs,
       providers: providersUsed,
       debugStats: {
+        // ── Providers ─────────────────────────────────────────
+        enabled_providers: enabledProviders,
+        serpapi_status: serpapiStatus,
         // ── Request ────────────────────────────────────────────
         origin: params.origin,
         destination: params.destination,
@@ -1109,6 +1153,10 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
         unique_airlines: uniqueAirlines || "none",
         owner_ids: uniqueOwnerIds || "none",
         cheapest_raw: cheapestRaw > 0 && isFinite(cheapestRaw) ? `$${cheapestRaw.toFixed(0)}` : "n/a",
+        // ── SerpAPI / Google Flights ───────────────────────────
+        raw_serpapi_offers: serpapiRawOffers,
+        serpapi_airlines: serpapiAirlines || "none",
+        serpapi_cheapest: serpapiCheapest,
         raw_offer_rows: allDebugRows.map((r) => ({
           airline: r.airline,
           airline_code: r.airlineCode,

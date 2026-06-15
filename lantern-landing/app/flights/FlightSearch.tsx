@@ -501,6 +501,9 @@ interface RawOfferRow {
 }
 
 interface DebugStats {
+  // provider status
+  enabled_providers?: string;
+  serpapi_status?: string;
   // request
   origin?: string;
   destination?: string;
@@ -522,6 +525,10 @@ interface DebugStats {
   owner_ids?: string;
   cheapest_raw: string;
   raw_offer_rows?: RawOfferRow[];
+  // google flights / serpapi
+  raw_serpapi_offers?: number;
+  serpapi_airlines?: string;
+  serpapi_cheapest?: string;
   // pipeline
   after_filtering: number;
   normalize_duffel_offer_dropped: number;
@@ -903,14 +910,15 @@ function rerankOffers(
 }
 
 // ── Display diversity selection ───────────────────────────────────────────────
-// Selects a diverse subset of the full ranked offer list for display.
-// All offers remain in the scored inventory; only the visible set is narrowed.
+// Reorders the full ranked list so the most diverse offers surface first.
+// The curated top section is followed by all remaining offers in ranked order.
+// Nothing is removed — all offers are available for pagination.
 
-const DISPLAY_MAX = 10;          // max cards shown
-const DISPLAY_MAX_PER_AIRLINE = 3; // no single airline dominates the display
+const CURATED_TOP = 20;          // how many slots the curated section targets
+const CURATED_PER_AIRLINE = 3;   // per-airline cap within the curated section
 
 function selectDisplayOffers(ranked: FlightOffer[]): FlightOffer[] {
-  if (ranked.length <= DISPLAY_MAX) return ranked;
+  if (ranked.length <= CURATED_TOP) return ranked;
 
   const pinnedIdx = new Set<number>();
   const airlineSlots = new Map<string, number>();
@@ -923,7 +931,7 @@ function selectDisplayOffers(ranked: FlightOffer[]): FlightOffer[] {
     }
   };
 
-  // Guaranteed anchors — always appear regardless of airline count
+  // Guaranteed anchors — always surface near the top regardless of airline count
   const topPick = ranked.find((o) => o.is_recommended);
   if (topPick) pin(topPick);
 
@@ -941,7 +949,7 @@ function selectDisplayOffers(ranked: FlightOffer[]): FlightOffer[] {
   );
   pin(byArrival[0]);
 
-  // Cheapest from each airline — ensures every carrier gets at least one slot
+  // Cheapest from each airline — every carrier gets at least one curated slot
   const cheapestByAirline = new Map<string, FlightOffer>();
   for (const o of ranked) {
     const prev = cheapestByAirline.get(o.airline_code);
@@ -949,18 +957,21 @@ function selectDisplayOffers(ranked: FlightOffer[]): FlightOffer[] {
   }
   for (const o of cheapestByAirline.values()) pin(o);
 
-  // Fill remaining slots: highest-scored first, capped per airline, skip near-duplicates
+  // Fill the rest of the curated section: highest-scored, per-airline capped, no near-dupes
   const getPinned = () => ranked.filter((_, i) => pinnedIdx.has(i));
-  for (let i = 0; i < ranked.length && pinnedIdx.size < DISPLAY_MAX; i++) {
+  for (let i = 0; i < ranked.length && pinnedIdx.size < CURATED_TOP; i++) {
     if (pinnedIdx.has(i)) continue;
     const o = ranked[i];
-    if ((airlineSlots.get(o.airline_code) ?? 0) >= DISPLAY_MAX_PER_AIRLINE) continue;
+    if ((airlineSlots.get(o.airline_code) ?? 0) >= CURATED_PER_AIRLINE) continue;
     if (isTooSimilarToAny(o, getPinned())) continue;
     pinnedIdx.add(i);
     airlineSlots.set(o.airline_code, (airlineSlots.get(o.airline_code) ?? 0) + 1);
   }
 
-  return ranked.filter((_, i) => pinnedIdx.has(i));
+  // Return curated section first, then all remaining in original ranked order
+  const curated   = ranked.filter((_, i) =>  pinnedIdx.has(i));
+  const remaining = ranked.filter((_, i) => !pinnedIdx.has(i));
+  return [...curated, ...remaining];
 }
 
 // Returns true when `o` has the same airline, stop count, similar price (<$20),
@@ -1607,7 +1618,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
                 onClick={handleBookClick}
                 className="mt-2 text-[11px] font-bold text-white bg-lantern-violet hover:bg-lantern-violet/80 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
               >
-                Book this flight
+                {offer.is_bookable === false ? "View booking options" : "Book this flight"}
               </button>
             )}
           </div>
@@ -1776,7 +1787,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
               onClick={handleBookClick}
               className="text-[11px] font-bold text-lantern-violet border border-lantern-violet/40 hover:bg-lantern-violet/10 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
             >
-              Book
+              {offer.is_bookable === false ? "View" : "Book"}
             </button>
           )}
           <button
@@ -2011,9 +2022,13 @@ export default function FlightSearch() {
   const displayOffers = useMemo(() => {
     const reranked = offers.length > 0 ? rerankOffers(offers, activeWeights, priorities) : offers;
     const selected = selectDisplayOffers(reranked);
-    console.log(`[pipeline] 8_offers_rendered_as_cards=${selected.length} (selected from ${reranked.length})`);
+    console.log(`[pipeline] 8_offers_rendered_as_cards=${selected.length} (reranked=${reranked.length})`);
     return selected;
   }, [offers, activeWeights, priorities]);
+
+  const [visibleCount, setVisibleCount] = useState(20);
+  // Reset pagination whenever a new set of offers arrives
+  useEffect(() => { setVisibleCount(20); }, [offers]);
   const [errorTitle, setErrorTitle] = useState("");
   const [errorBody, setErrorBody] = useState("");
   const [searchedParams, setSearchedParams] = useState<{
@@ -2336,12 +2351,13 @@ export default function FlightSearch() {
                   <span className="text-white/55">{searchedParams.travelers} traveler{searchedParams.travelers !== 1 ? "s" : ""}</span>
                 </div>
                 <span className="text-xs text-white/25">
-                  Showing {displayOffers.length} unique itinerar{displayOffers.length !== 1 ? "ies" : "y"} — ranked by AI
+                  Showing {Math.min(visibleCount, displayOffers.length)} of {displayOffers.length} unique itinerar{displayOffers.length !== 1 ? "ies" : "y"} — ranked by AI
                 </span>
               </div>
             )}
             <div style={{ fontFamily: "'Courier New', Courier, monospace", fontSize: 12, background: "#030a03", color: "#4ade80", padding: "14px 18px", borderRadius: 8, border: "1px solid #14532d", margin: "0 auto 16px", maxWidth: 800, lineHeight: 1.75, overflowX: "auto", whiteSpace: "pre" }}>
-              <span style={{ color: "#86efac", fontWeight: "bold" }}>{"▶ TRAVELGRAB DUFFEL REQUEST TRACE [remove before launch]\n"}</span>
+              <span style={{ color: "#86efac", fontWeight: "bold" }}>{"▶ TRAVELGRAB FLIGHT SEARCH TRACE [remove before launch]\n"}</span>
+              {`ENABLED_PROVIDERS:      ${debugStats?.enabled_providers ?? "—"}\n`}
               <span style={{ color: "#6ee7b7" }}>{"━━━ REQUEST "}{"━".repeat(51)}{"\n"}</span>
               {`ORIGIN:                 ${debugStats?.origin ?? (searchedParams ? selectionCodes(searchedParams.origin) : "—")}\n`}
               {`DESTINATION:            ${debugStats?.destination ?? (searchedParams ? selectionCodes(searchedParams.destination) : "—")}\n`}
@@ -2363,6 +2379,12 @@ export default function FlightSearch() {
               {`OWNER_IDS:              ${debugStats?.owner_ids ?? "—"}\n`}
               {`CHEAPEST_RAW:           ${debugStats?.cheapest_raw ?? "—"}\n`}
               {"\n"}
+              <span style={{ color: "#6ee7b7" }}>{"━━━ GOOGLE FLIGHTS (SERPAPI) "}{"━".repeat(34)}{"\n"}</span>
+              {`SERPAPI_STATUS:         ${debugStats?.serpapi_status ?? "—"}\n`}
+              {`RAW_SERPAPI_OFFERS:     ${debugStats?.raw_serpapi_offers ?? (debugStats ? "0" : "—")}\n`}
+              {`SERPAPI_AIRLINES:       ${debugStats?.serpapi_airlines ?? "—"}\n`}
+              {`SERPAPI_CHEAPEST:       ${debugStats?.serpapi_cheapest ?? "—"}\n`}
+              {"\n"}
               {(debugStats?.raw_offer_rows ?? offers.map(o => ({ airline: o.airline, airline_code: o.airline_code, owner: "—", price: "$" + o.price_total.toFixed(0), stops: o.stops, offer_id: o.offer_id ?? "—", source: o.source ?? "?" }))).map((row, i) =>
                 `  [${i + 1}] ${"source" in row ? String((row as {source?:string}).source ?? "?").padEnd(8) : "?       "} ${String(row.airline_code).padEnd(3)} ${String(row.airline).slice(0, 22).padEnd(23)} ${String(row.price).padStart(7)}  ${row.stops === 0 ? "nonstop" : `${row.stops}-stop  `}  owner=${row.owner}  id=${String(row.offer_id).slice(0, 28)}\n`
               )}
@@ -2374,9 +2396,9 @@ export default function FlightSearch() {
               {`CHEAPEST_RENDERED:      ${debugStats?.cheapest_rendered ?? (offers.length ? "$" + Math.min(...offers.map(o => o.price_total)).toFixed(0) : "—")}\n`}
             </div>
             <RecommendationPanel offers={displayOffers} topPickRef={topPickRef} priorities={priorities} />
-            <CompareTable offers={displayOffers} />
+            <CompareTable offers={displayOffers.slice(0, 3)} />
             <div className="space-y-3 max-w-3xl mx-auto">
-              {displayOffers.map((offer, i) => (
+              {displayOffers.slice(0, visibleCount).map((offer, i) => (
                 <FlightCard
                   key={i}
                   offer={offer}
@@ -2386,6 +2408,16 @@ export default function FlightSearch() {
                 />
               ))}
             </div>
+            {visibleCount < displayOffers.length && (
+              <div className="flex justify-center pt-4 pb-8">
+                <button
+                  onClick={() => setVisibleCount((v) => v + 20)}
+                  className="px-6 py-2.5 rounded-full text-sm font-semibold text-white/70 border border-white/10 bg-white/5 hover:bg-white/10 hover:text-white transition-colors"
+                >
+                  Show more flights
+                </button>
+              </div>
+            )}
           </div>
         )}
 

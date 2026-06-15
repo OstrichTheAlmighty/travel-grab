@@ -1,6 +1,6 @@
 // ── Provider abstraction types ────────────────────────────────────────────────
 // Add new provider sources here as they are integrated.
-export type ProviderSource = "duffel" | "amadeus";
+export type ProviderSource = "duffel" | "amadeus" | "google_flights";
 
 // Normalized offer shape every provider must produce.
 // Provider-specific raw data is preserved in rawProviderData for debugging.
