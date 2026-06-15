@@ -22,7 +22,7 @@ TravelGrab is an AI-powered travel planning platform that helps travelers search
 | B2B SaaS | White-label for travel agencies | High ACV, enterprise-grade revenue | Longer sales cycle |
 | Freemium Hybrid | Free basic, paid for full proposals + booking | Best of both worlds | Complex to manage |
 
-**Current lean:** *TBD — to be decided in idea refinement sessions.*
+**Current lean:** Commission and subscription.
 
 ---
 
