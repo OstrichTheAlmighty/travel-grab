@@ -650,39 +650,38 @@ const PRIORITY_TOP_LABEL: Record<Priority, string> = {
 
 function buildPriorityNote(o: FlightOffer, priorities: Priority[]): string {
   if (!priorities.length) return "";
-  const tradeoff = o.tradeoffs[0] ? `, even though ${o.tradeoffs[0].toLowerCase()}` : "";
+  // Single-priority: lead with the specific win. Tradeoffs are shown separately below.
   if (priorities.length === 1) {
     switch (priorities[0]) {
       case "cheapest":
-        return `Because you prioritized cheapest, this flight wins on lowest total fare ($${Math.round(o.price_total).toLocaleString()})${tradeoff}.`;
+        return `Because you prioritized cheapest, this flight wins on lowest total fare ($${Math.round(o.price_total).toLocaleString()}).`;
       case "fastest":
-        return `Because you prioritized fastest, this flight wins on shortest travel time (${o.duration})${tradeoff}.`;
+        return `Because you prioritized fastest, this flight wins on travel time (${o.duration}).`;
       case "nonstop":
         return o.stops === 0
-          ? `Because you prioritized fewer stops, this nonstop flight ranks highest${tradeoff}.`
+          ? `Because you prioritized fewer stops, this nonstop flight ranks highest.`
           : `No nonstop available — this has the fewest connections (${o.stop_label}).`;
       case "arrival":
-        return `Because you prioritized arrival timing, this ${o.arrival_timing.toLowerCase()} arrival ranks highest${tradeoff}.`;
+        return `Because you prioritized arrival timing, this ${o.arrival_timing.toLowerCase()} arrival ranks highest.`;
       case "jet_lag":
-        return `Because you prioritized lower jet lag, this flight has ${o.jet_lag.toLowerCase()} jet lag risk${tradeoff}.`;
+        return `Because you prioritized lower jet lag, this flight has ${o.jet_lag.toLowerCase()} jet lag risk.`;
       case "fatigue":
-        return `Because you prioritized less fatigue, this flight has ${o.travel_fatigue.toLowerCase()} travel fatigue${tradeoff}.`;
+        return `Because you prioritized less fatigue, this flight has ${o.travel_fatigue.toLowerCase()} travel fatigue.`;
       case "comfort":
-        return `Because you prioritized aircraft comfort, this flight has ${o.aircraft_comfort.toLowerCase()} comfort${tradeoff}.`;
+        return `Because you prioritized aircraft comfort, this flight has ${o.aircraft_comfort.toLowerCase()} comfort.`;
       case "airport":
-        return `Because you prioritized airport convenience, this flight has ${o.city_access.toLowerCase()} city access${tradeoff}.`;
+        return `Because you prioritized airport convenience, this flight has ${o.city_access.toLowerCase()} city access.`;
       default:
         return "";
     }
   }
+  // Multi-priority: keep the headline clean; wins details go in the bullets below.
   const labels = priorities.map((p) => PRIORITY_CHIPS.find((c) => c.id === p)?.label ?? p);
   const joined =
     labels.length === 2
       ? `${labels[0]} and ${labels[1]}`
       : `${labels.slice(0, -1).join(", ")} and ${labels[labels.length - 1]}`;
-  const firstWin = o.wins_on[0];
-  const because = firstWin ? ` — ${firstWin.toLowerCase()}` : "";
-  return `Because you prioritized ${joined}, this flight ranks highest${because}.`;
+  return `Because you prioritized ${joined}, this flight ranks highest.`;
 }
 
 function labelSummary(label: string): string {
@@ -1113,19 +1112,19 @@ function RecommendationPanel({
         <p className="text-[11px] text-lantern-violet/80 leading-relaxed mb-1.5">{priorityNote}</p>
       )}
 
-      {/* Advisor sentence */}
-      {pick.recommendation_why && (
+      {/* Advisor sentence — suppressed when priorities are active (priorityNote leads instead) */}
+      {!priorityNote && pick.recommendation_why && (
         <p className="text-[11px] text-white/60 leading-relaxed mb-2">{pick.recommendation_why}</p>
       )}
 
-      {/* vs others note */}
-      {pick.comparison_summary && (
+      {/* vs others note — only shown in default mode when OpenAI populates it */}
+      {!priorityNote && pick.comparison_summary && (
         <p className="text-[11px] text-white/35 leading-relaxed mb-2.5">{pick.comparison_summary}</p>
       )}
 
-      {/* Reason bullets */}
+      {/* Positive reason bullets — always shown */}
       {reasons.length > 0 && (
-        <ul className="space-y-1 mb-3">
+        <ul className="space-y-1 mb-2.5">
           {reasons.map((r, i) => (
             <li key={i} className="flex gap-1.5 text-[11px] text-white/60 leading-relaxed">
               <span className="text-lantern-violet mt-0.5 flex-shrink-0">›</span>
@@ -1133,6 +1132,14 @@ function RecommendationPanel({
             </li>
           ))}
         </ul>
+      )}
+
+      {/* Tradeoff line — shown after the positive bullets when priorities are active */}
+      {priorityNote && pick.tradeoffs.length > 0 && (
+        <p className="text-[11px] text-white/38 leading-relaxed mb-3">
+          <span className="font-semibold text-white/50">Tradeoff:</span>{" "}
+          {pick.tradeoffs[0].charAt(0).toUpperCase() + pick.tradeoffs[0].slice(1)}.
+        </p>
       )}
 
       {/* CTA */}
