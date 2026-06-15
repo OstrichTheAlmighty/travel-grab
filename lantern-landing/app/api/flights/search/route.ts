@@ -197,22 +197,6 @@ function timeFromIso(value: string): string {
   }
 }
 
-function durationLabel(value: string | null | undefined): string {
-  if (!value) return "";
-  try {
-    const raw = String(value).toUpperCase().replace(/^P/, "");
-    const hm = raw.match(/(\d+)H/);
-    const mm = raw.match(/(\d+)M/);
-    const h = hm ? parseInt(hm[1]) : 0;
-    const m = mm ? parseInt(mm[1]) : 0;
-    if (!h && !m) return "";
-    if (h && m) return `${h}h ${String(m).padStart(2, "0")}m`;
-    return h ? `${h}h` : `${m}m`;
-  } catch {
-    return String(value);
-  }
-}
-
 // Convert integer minutes to a human-readable label ("10h 45m").
 // Used to derive the display duration directly from timestamp-computed minutes.
 function minutesToDurationLabel(mins: number): string {
@@ -318,10 +302,11 @@ function normalizeDuffelOffer(offer: DuffelRecord, reqOrigin: string, reqDest: s
     }
   }
 
-  // Fall back to the first slice's segments if outbound detection found nothing
-  const useSegs = outboundSegs.length > 0
-    ? outboundSegs
-    : ((slices[0].segments as DuffelRecord[] | undefined) ?? []);
+  // If outbound detection failed, fall back to ALL segments (not just the first slice).
+  // Slices[0] alone would only cover the first connecting leg (e.g. KIX→ICN) and produce
+  // a short, wrong duration. All segments gives a wrong but detectable result that the
+  // timestamp-comparison filter below can catch and discard.
+  const useSegs = outboundSegs.length > 0 ? outboundSegs : allSegs;
   if (!useSegs.length) return null;
 
   const firstSeg = useSegs[0];
@@ -338,42 +323,58 @@ function normalizeDuffelOffer(offer: DuffelRecord, reqOrigin: string, reqDest: s
     .filter(Boolean)
     .join(",");
 
-  // Compute full outbound duration from timestamps — JS Date handles tz offsets correctly
+  // Duration is computed EXCLUSIVELY from first-segment departing_at → last-segment arriving_at.
+  // new Date() parses ISO 8601 with timezone offsets correctly (UTC milliseconds).
+  // Never fall back to Duffel-provided slice.duration or segment.duration strings.
   const dep = (firstSeg.departing_at as string) ?? "";
   const arr = (lastSeg.arriving_at   as string) ?? "";
-  let diffMinsResult = 0;
-  let computedDur = "";
-  if (dep && arr) {
-    try {
-      const d = Math.round((new Date(arr).getTime() - new Date(dep).getTime()) / 60000);
-      if (d > 0) {
-        diffMinsResult = d;
-        const h = Math.floor(d / 60);
-        const m = d % 60;
-        computedDur = h > 0 && m > 0 ? `PT${h}H${m}M` : h > 0 ? `PT${h}H` : `PT${m}M`;
-      }
-    } catch { /* ignore */ }
+
+  if (!dep || !arr) {
+    console.warn(`[dur-skip] missing timestamps airline="${airline}" flight="${mcCode}${fn}" dep="${dep}" arr="${arr}"`);
+    return null;
   }
-  const rawSliceDur = (slices[0].duration as string) ?? "";
-  const segDursStr  = useSegs.map((s) => String(s.duration ?? "?")).join("+");
+
+  const departMs = new Date(dep).getTime();
+  const arriveMs = new Date(arr).getTime();
+
+  if (isNaN(departMs) || isNaN(arriveMs)) {
+    console.warn(`[dur-skip] unparseable timestamps dep="${dep}" arr="${arr}"`);
+    return null;
+  }
+
+  const durationMinutes = Math.round((arriveMs - departMs) / 60000);
+
+  if (durationMinutes < 60) {
+    console.warn(
+      `[dur-skip] ${durationMinutes}min < 60min airline="${airline}" ${mcCode}${fn} ` +
+      `outbound_segs=${outboundSegs.length} total_segs=${allSegs.length} dep="${dep}" arr="${arr}"`
+    );
+    return null;
+  }
+
+  const h = Math.floor(durationMinutes / 60);
+  const m = durationMinutes % 60;
+  const durationIso = h > 0 && m > 0 ? `PT${h}H${m}M` : h > 0 ? `PT${h}H` : `PT${m}M`;
 
   return {
     airline,
-    flight_number:      `${mcCode} ${fn}`.trim(),
-    origin:             airportIata(firstSeg.origin      as DuffelRecord | undefined),
-    destination:        airportIata(lastSeg.destination  as DuffelRecord | undefined),
-    departure_time:     dep,
-    arrival_time:       arr,
-    duration:           computedDur || rawSliceDur,
-    duration_minutes:   diffMinsResult,
-    stops:              Math.max(0, useSegs.length - 1),
-    cabin:              segmentCabin(firstSeg),
-    baggage:            extractBaggage(offer),
-    price:              (offer.total_amount as string) ?? "0",
-    currency:           (offer.total_currency as string) ?? "USD",
+    flight_number:       `${mcCode} ${fn}`.trim(),
+    origin:              airportIata(firstSeg.origin      as DuffelRecord | undefined),
+    destination:         airportIata(lastSeg.destination  as DuffelRecord | undefined),
+    departure_time:      dep,
+    arrival_time:        arr,
+    duration:            durationIso,
+    duration_minutes:    durationMinutes,
+    stops:               Math.max(0, useSegs.length - 1),
+    cabin:               segmentCabin(firstSeg),
+    baggage:             extractBaggage(offer),
+    price:               (offer.total_amount as string) ?? "0",
+    currency:            (offer.total_currency as string) ?? "USD",
     connection_airports: connectionAirports,
-    _raw_slice_dur:     rawSliceDur,
-    _seg_durs:          segDursStr,
+    // Preserved as debug-only fields for server logs — not used for display or scoring
+    _raw_dep:            dep,
+    _raw_arr:            arr,
+    _outbound_segs:      outboundSegs.length,
   };
 }
 
@@ -384,6 +385,8 @@ function normalizeFlight(raw: DuffelRecord, adults: number): FlightOffer | null 
   if (!airline || !flightNumber || price <= 0) return null;
   const stops = Number(raw.stops ?? 0);
   const durMins = Number(raw.duration_minutes ?? 0);
+  // normalizeDuffelOffer already filters out duration_minutes < 60; this is a safety net.
+  if (durMins <= 0) return null;
   return {
     airline,
     airline_code: airlineCode(airline, flightNumber),
@@ -392,9 +395,7 @@ function normalizeFlight(raw: DuffelRecord, adults: number): FlightOffer | null 
     destination: String(raw.destination ?? ""),
     depart_time: timeFromIso(String(raw.departure_time ?? "")),
     arrive_time: timeFromIso(String(raw.arrival_time ?? "")),
-    duration: durMins > 0
-      ? minutesToDurationLabel(durMins)
-      : durationLabel(String(raw.duration ?? "")),
+    duration: minutesToDurationLabel(durMins),
     duration_minutes: durMins,
     stops,
     stop_label: stops === 0 ? "Non-stop" : stops === 1 ? "1 stop" : `${stops} stops`,
@@ -1069,14 +1070,14 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
   const normedRaw = rawOffers.map((o) => normalizeDuffelOffer(o, params.origin, params.destination)).filter(Boolean) as DuffelRecord[];
   console.log(`[pipeline] 2_after_normalizeDuffelOffer=${normedRaw.length} (filtered_nulls=${rawOffers.length - normedRaw.length})`);
 
-  // Log first 5 normalized offers: raw Duffel fields vs computed values
-  for (let i = 0; i < Math.min(5, normedRaw.length); i++) {
+  // Log first 10 normalized offers: raw ISO timestamps and computed duration
+  for (let i = 0; i < Math.min(10, normedRaw.length); i++) {
     const r = normedRaw[i];
     const mins = Number(r.duration_minutes ?? 0);
     console.log(
       `  [norm-${i + 1}] "${r.airline}" ${r.flight_number} ` +
-      `raw_slice_dur="${r._raw_slice_dur}" ` +
-      `seg_durs=[${r._seg_durs}] ` +
+      `dep="${r._raw_dep}" arr="${r._raw_arr}" ` +
+      `outbound_segs=${r._outbound_segs} ` +
       `duration_minutes=${mins} ` +
       `display="${minutesToDurationLabel(mins)}"`
     );
