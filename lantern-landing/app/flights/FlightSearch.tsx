@@ -475,6 +475,8 @@ interface FlightOffer {
   connection_airports?: string;
   duration_minutes?: number;
   offer_id?: string;
+  source?: string;       // "duffel" | "amadeus" — which provider sourced this offer
+  is_bookable?: boolean; // false → search-only, shown with "Search only" label
 }
 
 interface BookingIntent {
@@ -1504,6 +1506,11 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
                     {offer.recommendation_label}
                   </span>
                 )}
+                {offer.is_bookable === false && (
+                  <span className="text-[10px] font-bold uppercase tracking-widest border border-amber-500/40 bg-amber-500/10 text-amber-400 rounded-full px-2 py-0.5 leading-none">
+                    Search only
+                  </span>
+                )}
               </div>
               {!rec && offer.recommendation_why && (
                 <p className="text-[11px] leading-relaxed text-white/40">
@@ -2277,8 +2284,8 @@ export default function FlightSearch() {
               {`OWNER_IDS:              ${debugStats?.owner_ids ?? "—"}\n`}
               {`CHEAPEST_RAW:           ${debugStats?.cheapest_raw ?? "—"}\n`}
               {"\n"}
-              {(debugStats?.raw_offer_rows ?? offers.map(o => ({ airline: o.airline, airline_code: o.airline_code, owner: "—", price: "$" + o.price_total.toFixed(0), stops: o.stops, offer_id: o.offer_id ?? "—" }))).map((row, i) =>
-                `  [${i + 1}] ${String(row.airline_code).padEnd(3)} ${String(row.airline).slice(0, 24).padEnd(25)} ${String(row.price).padStart(7)}  ${row.stops === 0 ? "nonstop" : `${row.stops}-stop  `}  owner=${row.owner}  id=${String(row.offer_id).slice(0, 30)}\n`
+              {(debugStats?.raw_offer_rows ?? offers.map(o => ({ airline: o.airline, airline_code: o.airline_code, owner: "—", price: "$" + o.price_total.toFixed(0), stops: o.stops, offer_id: o.offer_id ?? "—", source: o.source ?? "?" }))).map((row, i) =>
+                `  [${i + 1}] ${"source" in row ? String((row as {source?:string}).source ?? "?").padEnd(8) : "?       "} ${String(row.airline_code).padEnd(3)} ${String(row.airline).slice(0, 22).padEnd(23)} ${String(row.price).padStart(7)}  ${row.stops === 0 ? "nonstop" : `${row.stops}-stop  `}  owner=${row.owner}  id=${String(row.offer_id).slice(0, 28)}\n`
               )}
               <span style={{ color: "#6ee7b7" }}>{"━━━ PIPELINE "}{"━".repeat(50)}{"\n"}</span>
               {`AFTER_FILTERING:        ${debugStats?.after_filtering ?? "—"}  (normalizeDuffelOffer -${debugStats?.normalize_duffel_offer_dropped ?? "?"}, normalizeFlight -${debugStats?.normalize_flight_dropped ?? "?"})\n`}

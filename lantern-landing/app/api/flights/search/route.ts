@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getEnabledProviders } from "../providers";
+import type { PerOfferDebugRow, ProviderOffer } from "../providers/types";
 
 export const maxDuration = 55;
 
@@ -100,8 +102,10 @@ export interface FlightOffer {
   connection_airports: string;  // comma-separated IATA codes of intermediate airports (empty if nonstop)
   duration_minutes: number;     // total outbound itinerary minutes computed from timestamps (canonical duration)
   dedupe_group_size?: number;   // dev debug: how many codeshares collapsed into this offer
-  offer_id?: string;            // Duffel offer ID for end-to-end debug tracing
-  fare_brand?: string;          // Duffel fare brand name (e.g. "Basic Economy", "Main Cabin")
+  offer_id?: string;            // provider offer ID for end-to-end debug tracing
+  fare_brand?: string;          // fare brand name (e.g. "Basic Economy", "Main Cabin")
+  source?: string;              // "duffel" | "amadeus" — which provider sourced this offer
+  is_bookable?: boolean;        // true → can be booked in TravelGrab; false → search-only
 }
 
 // ── Airline IATA lookup ──────────────────────────────────────────────────────
@@ -199,18 +203,6 @@ function timeFromIso(value: string): string {
   }
 }
 
-// Parse ISO 8601 duration string → total minutes.
-// Handles PT19H35M, PT13H20M, P1DT2H10M, PT90M, etc.
-function parseDurationMinutes(iso: string | null | undefined): number {
-  if (!iso) return 0;
-  const s = String(iso).toUpperCase();
-  const m = s.match(/^P(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?$/);
-  if (!m) return 0;
-  const days  = parseInt(m[1] ?? "0") || 0;
-  const hours = parseInt(m[2] ?? "0") || 0;
-  const mins  = parseInt(m[3] ?? "0") || 0;
-  return days * 24 * 60 + hours * 60 + mins;
-}
 
 // Convert integer minutes to a human-readable label ("10h 45m").
 function minutesToDurationLabel(mins: number): string {
@@ -247,210 +239,50 @@ function flightKey(o: Partial<FlightOffer>): string {
 
 // ── Duffel response parsing ───────────────────────────────────────────────────
 
-type DuffelRecord = Record<string, unknown>;
 
-function segmentCabin(seg: DuffelRecord): string {
-  const passengers = (seg.passengers as DuffelRecord[] | undefined) ?? [];
-  const cabin =
-    (passengers[0]?.cabin_class_marketing_name as string | undefined) ??
-    (passengers[0]?.cabin_class as string | undefined) ??
-    "Economy";
-  return cabin.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-}
-
-function extractBaggage(offer: DuffelRecord): string {
-  try {
-    const conds = (offer.conditions as DuffelRecord | undefined) ?? {};
-    const bags = (conds.baggage as DuffelRecord | undefined) ?? {};
-    if (bags.quantity && Number(bags.quantity) > 0) {
-      return `${bags.quantity} checked bag${Number(bags.quantity) > 1 ? "s" : ""}`;
-    }
-    for (const slice of ((offer.slices as DuffelRecord[]) ?? [])) {
-      for (const seg of ((slice.segments as DuffelRecord[]) ?? [])) {
-        for (const pax of ((seg.passengers as DuffelRecord[]) ?? [])) {
-          for (const b of ((pax.baggages as DuffelRecord[]) ?? [])) {
-            if (b.type === "checked" && Number(b.quantity) > 0) {
-              return `${b.quantity} checked bag${Number(b.quantity) > 1 ? "s" : ""}`;
-            }
-          }
-        }
-      }
-    }
-  } catch { /* ignore */ }
-  return "";
-}
-
-function airportIata(a: DuffelRecord | undefined): string {
-  return (a?.iata_code as string | undefined) ?? (a?.name as string | undefined) ?? "";
-}
-
-// In Duffel v2 each connecting leg is its own slice, so `offer.slices` for a
-// KIX→ICN→LAX round-trip looks like [KIX→ICN, ICN→LAX, LAX→ICN, ICN→KIX].
-// We receive reqOrigin/reqDest to identify which slices form the outbound leg.
-function normalizeDuffelOffer(offer: DuffelRecord, reqOrigin: string, reqDest: string): DuffelRecord | null {
-  const offerId = (offer.id as string) ?? "";
-  const slices = (offer.slices as DuffelRecord[]) ?? [];
-  if (!slices.length) return null;
-
-  // Collect every segment across every slice in offer order
-  const allSegs: DuffelRecord[] = [];
-  for (const sl of slices) {
-    for (const seg of ((sl.segments as DuffelRecord[] | undefined) ?? [])) {
-      allSegs.push(seg);
-    }
-  }
-  if (!allSegs.length) return null;
-
-  // Walk segments to find the outbound chain: start at reqOrigin, stop at reqDest.
-  // Supports comma-separated metro codes ("KIX,ITM").
-  const originSet = new Set(reqOrigin.split(",").map((c) => c.trim().toUpperCase()));
-  const destSet   = new Set(reqDest.split(",").map((c) => c.trim().toUpperCase()));
-  const outboundSegs: DuffelRecord[] = [];
-  let started = false;
-  for (const seg of allSegs) {
-    const segOri  = airportIata(seg.origin      as DuffelRecord | undefined).toUpperCase();
-    const segDest = airportIata(seg.destination as DuffelRecord | undefined).toUpperCase();
-    if (!started && originSet.has(segOri)) started = true;
-    if (started) {
-      outboundSegs.push(seg);
-      if (destSet.has(segDest)) break;
-    }
-  }
-
-  // If outbound detection failed, fall back to ALL segments (not just the first slice).
-  // Slices[0] alone would only cover the first connecting leg (e.g. KIX→ICN) and produce
-  // a short, wrong duration. All segments gives a wrong but detectable result that the
-  // timestamp-comparison filter below can catch and discard.
-  const useSegs = outboundSegs.length > 0 ? outboundSegs : allSegs;
-  if (!useSegs.length) return null;
-
-  const firstSeg = useSegs[0];
-  const lastSeg  = useSegs[useSegs.length - 1];
-  const owner    = (offer.owner as DuffelRecord | undefined) ?? {};
-  const mc       = (firstSeg.marketing_carrier as DuffelRecord | undefined) ?? {};
-  const airline  = (mc.name as string) ?? (owner.name as string) ?? (owner.iata_code as string) ?? "";
-  const mcCode   = (mc.iata_code as string) ?? "";
-  const fn       = (firstSeg.marketing_carrier_flight_number as string) ?? "";
-
-  const connectionAirports = useSegs
-    .slice(0, -1)
-    .map((seg) => airportIata(seg.destination as DuffelRecord | undefined))
-    .filter(Boolean)
-    .join(",");
-
-  const dep = (firstSeg.departing_at as string) ?? "";
-  const arr = (lastSeg.arriving_at   as string) ?? "";
-
-  // Primary: Duffel's own slice.duration (ISO 8601, e.g. "PT19H35M") for the outbound
-  // slice — it is pre-computed server-side and includes all layovers within the slice.
-  // slices[0] is always the outbound direction (for both one-way and round-trip requests).
-  const rawSliceDur = (slices[0].duration as string | undefined) ?? "";
-  let durationMinutes = parseDurationMinutes(rawSliceDur);
-
-  // Fallback: compute from ISO timestamps only when slice.duration is absent.
-  // new Date() correctly handles timezone offsets in ISO 8601 strings.
-  if (!durationMinutes && dep && arr) {
-    const departMs = new Date(dep).getTime();
-    const arriveMs = new Date(arr).getTime();
-    if (!isNaN(departMs) && !isNaN(arriveMs) && arriveMs > departMs) {
-      durationMinutes = Math.round((arriveMs - departMs) / 60000);
-    }
-  }
-
-  if (durationMinutes < 60) {
-    console.log(
-      `[filter_removed] id=${offerId} airline="${airline}" ${mcCode}${fn} ` +
-      `price=$${(offer.total_amount as string) ?? "?"} ` +
-      `reason="duration ${durationMinutes}min < 60min (slice_dur=${rawSliceDur})"`
-    );
-    return null;
-  }
-
-  // Informational only — short durations are valid for domestic short-haul (SFO→LAX ~80min).
-  if (durationMinutes < 180) {
-    console.log(
-      `[dur-short] ${durationMinutes}min id=${offerId} airline="${airline}" ${mcCode}${fn} ` +
-      `slice_dur="${rawSliceDur}"`
-    );
-  }
-
-  const h = Math.floor(durationMinutes / 60);
-  const m = durationMinutes % 60;
-  const durationIso = h > 0 && m > 0 ? `PT${h}H${m}M` : h > 0 ? `PT${h}H` : `PT${m}M`;
-
-  // Extract fare brand: Duffel may surface it on the slice or on the first segment's passenger record
-  const sl0Pax = ((slices[0].segments as DuffelRecord[] | undefined)?.[0]?.passengers as DuffelRecord[] | undefined)?.[0];
-  const fareBrand =
-    (slices[0].fare_brand_name as string | undefined) ??
-    (sl0Pax?.fare_brand_name as string | undefined) ??
-    "";
-
-  return {
-    airline,
-    flight_number:       `${mcCode} ${fn}`.trim(),
-    origin:              airportIata(firstSeg.origin      as DuffelRecord | undefined),
-    destination:         airportIata(lastSeg.destination  as DuffelRecord | undefined),
-    departure_time:      dep,
-    arrival_time:        arr,
-    duration:            durationIso,
-    duration_minutes:    durationMinutes,
-    stops:               Math.max(0, useSegs.length - 1),
-    cabin:               segmentCabin(firstSeg),
-    baggage:             extractBaggage(offer),
-    price:               (offer.total_amount as string) ?? "0",
-    currency:            (offer.total_currency as string) ?? "USD",
-    connection_airports: connectionAirports,
-    // Debug-only fields for server logs and downstream tracing
-    _offer_id:           offerId,
-    _fare_brand:         fareBrand,
-    _raw_slice_dur:      rawSliceDur,
-    _raw_dep:            dep,
-    _raw_arr:            arr,
-    _outbound_segs:      outboundSegs.length,
-  };
-}
-
-function normalizeFlight(raw: DuffelRecord, adults: number): FlightOffer | null {
-  const price = parseFloat(String(raw.price ?? "0"));
-  const airline = String(raw.airline ?? "").trim();
-  const flightNumber = String(raw.flight_number ?? "").trim();
-  const offerId = String(raw._offer_id ?? "");
+// Maps a normalized ProviderOffer into a FlightOffer ready for scoring.
+// All provider-specific parsing has already been done by the provider itself.
+function normalizeFlight(offer: ProviderOffer, adults: number): FlightOffer | null {
+  const { airline, airlineCode: code, flightNumbers, price, source, sourceOfferId, isBookableInTravelGrab } = offer;
+  const flightNumber = flightNumbers[0] ?? "";
 
   if (!airline || !flightNumber || price <= 0) {
     console.log(
-      `[filter_removed] id=${offerId} airline="${airline}" flight="${flightNumber}" ` +
+      `[${source}][filter_removed] id=${sourceOfferId} airline="${airline}" flight="${flightNumber}" ` +
       `price=$${price} reason="missing airline, flight number, or non-positive price"`
     );
     return null;
   }
 
-  const stops = Number(raw.stops ?? 0);
-  const durMins = Number(raw.duration_minutes ?? 0);
-  if (durMins <= 0) {
+  if (offer.durationMinutes <= 0) {
     console.log(
-      `[filter_removed] id=${offerId} airline="${airline}" ${flightNumber} ` +
-      `price=$${price} reason="zero duration_minutes after normalizeDuffelOffer"`
+      `[${source}][filter_removed] id=${sourceOfferId} airline="${airline}" ${flightNumber} ` +
+      `price=$${price} reason="zero durationMinutes"`
     );
     return null;
   }
 
+  const stops = offer.stops;
+  const durMins = offer.durationMinutes;
+  const resolvedCode = code || airlineCode(airline, flightNumber);
+
   return {
     airline,
-    airline_code: airlineCode(airline, flightNumber),
+    airline_code: resolvedCode,
     flight_number: flightNumber,
-    origin: String(raw.origin ?? ""),
-    destination: String(raw.destination ?? ""),
-    depart_time: timeFromIso(String(raw.departure_time ?? "")),
-    arrive_time: timeFromIso(String(raw.arrival_time ?? "")),
+    origin: offer.origin,
+    destination: offer.destination,
+    depart_time: timeFromIso(offer.departureTime),
+    arrive_time: timeFromIso(offer.arrivalTime),
     duration: minutesToDurationLabel(durMins),
     duration_minutes: durMins,
     stops,
     stop_label: stops === 0 ? "Non-stop" : stops === 1 ? "1 stop" : `${stops} stops`,
-    cabin: String(raw.cabin ?? "Economy"),
-    baggage: String(raw.baggage ?? ""),
+    cabin: offer.cabin,
+    baggage: offer.baggage,
     price_total: price,
     price_per_person: Math.round((price / Math.max(1, adults)) * 100) / 100,
-    currency: String(raw.currency ?? "USD"),
+    currency: offer.currency,
     // placeholders — filled in after scoring
     ai_score: 75,
     score_breakdown: {},
@@ -466,9 +298,11 @@ function normalizeFlight(raw: DuffelRecord, adults: number): FlightOffer | null 
     travel_fatigue: "",
     city_access: "",
     aircraft_comfort: "",
-    connection_airports: String(raw.connection_airports ?? ""),
-    offer_id: offerId,
-    fare_brand: String(raw._fare_brand ?? ""),
+    connection_airports: offer.connectionAirports,
+    offer_id: sourceOfferId,
+    fare_brand: offer.fareBrand ?? "",
+    source,
+    is_bookable: isBookableInTravelGrab,
   };
 }
 
@@ -508,7 +342,10 @@ function deduplicateOffers(offers: FlightOffer[]): FlightOffer[] {
     const winner = group.reduce((best, o) => {
       const diff = Math.abs(o.price_total - best.price_total);
       if (diff <= 10) {
-        // Within $10 — prefer a real airline over a synthetic one
+        // Prefer bookable (Duffel) over search-only (future Amadeus) within $10
+        if (o.is_bookable && !best.is_bookable) return o;
+        if (!o.is_bookable && best.is_bookable) return best;
+        // Then prefer real airlines over synthetic (test-mode ZZ offers)
         if (isReal(o) && !isReal(best)) return o;
         if (!isReal(o) && isReal(best)) return best;
       }
@@ -1052,149 +889,85 @@ Example tradeoffs style: ["Business class not available — economy only", "Slig
   }
 }
 
-// ── Duffel API call ───────────────────────────────────────────────────────────
+// ── Multi-provider flight search pipeline ────────────────────────────────────
 
 async function loadFlightOffers(params: ValidatedParams): Promise<{
   offers: FlightOffer[];
   meta: Record<string, unknown>;
 }> {
-  const apiKey = (process.env.DUFFEL_API_KEY ?? "").trim();
-  if (!apiKey) {
+  const providers = getEnabledProviders(process.env);
+
+  if (providers.length === 0) {
     return { offers: [], meta: { status: "not_configured", message: "Flight search is temporarily unavailable." } };
   }
 
-  const slices = [{ origin: params.origin, destination: params.destination, departure_date: params.departure_date }];
-  if (params.trip_type === "roundtrip" && params.return_date) {
-    slices.push({ origin: params.destination, destination: params.origin, departure_date: params.return_date });
+  // ── 1. Call all providers in parallel ─────────────────────────────────────
+  const settled = await Promise.allSettled(providers.map((p) => p.search(params)));
+
+  const allProviderOffers: ProviderOffer[] = [];
+  const allDebugRows: PerOfferDebugRow[] = [];
+  let totalRawOffers = 0;
+  // Primary provider debug fields (first successful result)
+  let primaryPayloadJson = "{}";
+  let primaryHttpStatus: number | undefined;
+  let primaryLatencyMs = 0;
+
+  for (const [i, result] of settled.entries()) {
+    const p = providers[i];
+    if (result.status === "fulfilled") {
+      const { offers, debug } = result.value;
+      allProviderOffers.push(...offers);
+      allDebugRows.push(...debug.perOfferRows);
+      totalRawOffers += debug.rawOfferCount;
+      if (i === 0) {
+        primaryPayloadJson = debug.requestPayloadJson;
+        primaryHttpStatus  = debug.httpStatus;
+        primaryLatencyMs   = debug.latencyMs;
+      }
+      console.log(`[${p.name.toLowerCase()}] ${debug.rawOfferCount} raw → ${offers.length} normalized  (${debug.latencyMs}ms)`);
+    } else {
+      console.error(`[${p.name.toLowerCase()}] failed: ${String(result.reason).slice(0, 120)}`);
+    }
   }
 
-  const duffelPayload = {
-    data: {
-      slices,
-      passengers: Array.from({ length: params.adults }, () => ({ type: "adult" })),
-      cabin_class: params.cabin_class,
-    },
-  };
+  const providersUsed = providers.map((p) => p.name).join(", ");
 
-  // Log the EXACT payload sent to Duffel so we can rule out a bad request
-  console.log(`\nDUFFEL_REQUEST_PAYLOAD=${JSON.stringify(duffelPayload)}`);
-  console.log(`ORIGIN_AIRPORTS=${params.origin}`);
-  console.log(`DESTINATION_AIRPORTS=${params.destination}`);
+  // Detect API key mode for debug (Duffel test vs live)
+  const duffelKey = (process.env.DUFFEL_API_KEY ?? "").trim();
+  const apiKeyMode = duffelKey.startsWith("duffel_live_") ? "LIVE" : duffelKey.startsWith("duffel_test_") ? "TEST (sandbox)" : "UNKNOWN";
 
-  const t0 = Date.now();
-  let resp: Response;
-  try {
-    resp = await fetch(`https://api.duffel.com/air/offer_requests`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Duffel-Version": "v2",
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(duffelPayload),
-    });
-  } catch (err) {
-    return { offers: [], meta: { status: "error", message: `Network error reaching Duffel: ${String(err).slice(0, 120)}` } };
-  }
-
-  const elapsed = Date.now() - t0;
-
-  if (!resp.ok) {
-    let msg = `Duffel API error (${resp.status}).`;
-    try {
-      const e = await resp.json() as { errors?: Array<{ message?: string }> };
-      msg = e?.errors?.[0]?.message ?? msg;
-    } catch { /* ignore */ }
-    return { offers: [], meta: { status: "error", message: msg } };
-  }
-
-  const body = await resp.json() as { data?: { offers?: DuffelRecord[] } };
-  const rawOffers = body?.data?.offers ?? [];
-
-  // Detect test vs live key from prefix — does not expose key value
-  const apiKeyMode = apiKey.startsWith("duffel_live_") ? "LIVE" : apiKey.startsWith("duffel_test_") ? "TEST (sandbox)" : "UNKNOWN";
-
-  // ── Build compact summary of every raw offer (used for all subsequent logging) ──
-  const rawSummaries = rawOffers.map((o) => {
-    const owner = (o.owner as DuffelRecord | undefined) ?? {};
-    const sl0   = ((o.slices as DuffelRecord[] | undefined) ?? [])[0];
-    const segs0 = (sl0?.segments as DuffelRecord[] | undefined) ?? [];
-    const first = segs0[0];
-    const last  = segs0[segs0.length - 1];
-    const mc    = (first?.marketing_carrier as DuffelRecord | undefined) ?? {};
-    const pax0  = ((first?.passengers as DuffelRecord[] | undefined) ?? [])[0];
-    return {
-      offerId:     (o.id as string) ?? "",
-      code:        (mc.iata_code as string) ?? "??",
-      airline:     (mc.name as string) ?? (owner.name as string) ?? "?",
-      flightNum:   (first?.marketing_carrier_flight_number as string) ?? "?",
-      price:       parseFloat((o.total_amount as string) ?? "0") || 0,
-      stops:       Math.max(0, segs0.length - 1),
-      origin:      ((first?.origin      as DuffelRecord | undefined)?.iata_code as string) ?? "?",
-      destination: ((last?.destination  as DuffelRecord | undefined)?.iata_code as string) ?? "?",
-      cabin:       ((pax0?.cabin_class_marketing_name as string | undefined) ?? (pax0?.cabin_class as string | undefined) ?? "Economy").replace(/_/g, " "),
-      fareBrand:   (sl0?.fare_brand_name as string | undefined) ?? (pax0?.fare_brand_name as string | undefined) ?? "",
-      sliceDur:    (sl0?.duration as string) ?? "null",
-      ownerCode:   (owner.iata_code as string | undefined) ?? (owner.name as string | undefined) ?? "?",
-      ownerName:   (owner.name as string | undefined) ?? "?",
-    };
-  });
-
-  const rawPrices     = rawSummaries.map((r) => r.price).filter((p) => p > 0);
-  const cheapestRaw   = rawPrices.length ? Math.min(...rawPrices) : 0;
+  // Build aggregated airline + owner counts for debug
   const airlineCounts = new Map<string, { name: string; count: number }>();
   const ownerCounts   = new Map<string, { name: string; count: number }>();
-  for (const r of rawSummaries) {
-    const e = airlineCounts.get(r.code);
-    if (!e) airlineCounts.set(r.code, { name: r.airline, count: 1 });
-    else e.count++;
-    const oe = ownerCounts.get(r.ownerCode);
-    if (!oe) ownerCounts.set(r.ownerCode, { name: r.ownerName, count: 1 });
-    else oe.count++;
+  for (const r of allDebugRows) {
+    const ae = airlineCounts.get(r.airlineCode);
+    if (!ae) airlineCounts.set(r.airlineCode, { name: r.airline, count: 1 }); else ae.count++;
+    const oe = ownerCounts.get(r.owner);
+    if (!oe) ownerCounts.set(r.owner, { name: r.owner, count: 1 }); else oe.count++;
   }
   const uniqueAirlines = [...airlineCounts.entries()]
     .sort((a, b) => b[1].count - a[1].count)
-    .map(([code, e]) => `${code}(${e.count})`)
-    .join(", ");
+    .map(([code, e]) => `${code}(${e.count})`).join(", ");
   const uniqueOwnerIds = [...ownerCounts.entries()]
     .sort((a, b) => b[1].count - a[1].count)
-    .map(([code, e]) => `${code}/${e.name}(${e.count})`)
-    .join(", ");
+    .map(([code]) => code).join(", ");
+  const cheapestRaw = allDebugRows.length
+    ? Math.min(...allDebugRows.map((r) => parseFloat(r.price.replace("$", "")) || Infinity).filter(isFinite))
+    : 0;
 
-  console.log(`\nRAW_DUFFEL_OFFERS=${rawOffers.length}`);
-  console.log(`CHEAPEST_RAW=${cheapestRaw > 0 ? `$${cheapestRaw.toFixed(0)}` : "n/a"}`);
-  console.log(`UNIQUE_AIRLINES=${uniqueAirlines || "none"}`);
+  console.log(`\nRAW_OFFERS_TOTAL=${totalRawOffers}  providers=${providersUsed}`);
+  console.log(`AIRLINES_IN_RAW=${uniqueAirlines || "none"}`);
 
-  // Print all raw offers so we can see exactly what Duffel returned
-  rawSummaries.forEach((r, i) =>
-    console.log(
-      `  RAW[${i + 1}] ${r.code} ${r.flightNum} $${r.price.toFixed(0)} ` +
-      `${r.stops === 0 ? "nonstop" : `${r.stops}-stop`} ` +
-      `${r.origin}→${r.destination} slice_dur=${r.sliceDur} ` +
-      `cabin="${r.cabin}" fare_brand="${r.fareBrand}" id=${r.offerId}`
-    )
-  );
-
-  // ── FILTERING  (route.ts → normalizeDuffelOffer + normalizeFlight) ─────────────
-  // Each dropped offer logs [filter_removed] with offer ID and reason.
-  const normedRaw = rawOffers
-    .map((o) => normalizeDuffelOffer(o, params.origin, params.destination))
-    .filter(Boolean) as DuffelRecord[];
-
-  const normedFlights = normedRaw
-    .map((r) => normalizeFlight(r, params.adults))
+  // ── 2. Normalize ProviderOffer → FlightOffer ───────────────────────────────
+  const normedFlights = allProviderOffers
+    .map((o) => normalizeFlight(o, params.adults))
     .filter(Boolean) as FlightOffer[];
+  const providerDropped = allProviderOffers.length - normedFlights.length;
+  console.log(`\nAFTER_FILTERING=${normedFlights.length}  (provider-level dropped ${totalRawOffers - allProviderOffers.length}, normalizeFlight dropped ${providerDropped})`);
 
-  console.log(`\nAFTER_FILTERING=${normedFlights.length}`);
-  console.log(`  normalizeDuffelOffer dropped: ${rawOffers.length - normedRaw.length}  (route.ts:normalizeDuffelOffer)`);
-  console.log(`  normalizeFlight dropped:      ${normedRaw.length - normedFlights.length}  (route.ts:normalizeFlight)`);
-
-  // ── DEDUPLICATION  (route.ts:deduplicateOffers) ───────────────────────────────
-  // Each dropped offer logs [dedupe_removed] with offer ID and reason.
+  // ── 3. Deduplicate across providers ───────────────────────────────────────
   const normed = deduplicateOffers(normedFlights);
-  console.log(`\nAFTER_DEDUPLICATION=${normed.length}`);
-  console.log(`  deduplicateOffers dropped: ${normedFlights.length - normed.length}  (route.ts:deduplicateOffers)`);
+  console.log(`\nAFTER_DEDUPLICATION=${normed.length}  (dropped ${normedFlights.length - normed.length})`);
 
   if (!normed.length) {
     return {
@@ -1202,16 +975,16 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
       meta: {
         status: "empty",
         message: "No fares found for these dates. Try different dates or airports.",
-        raw_count: rawOffers.length,
-        duffel_ms: elapsed,
+        raw_count: totalRawOffers,
+        latency_ms: primaryLatencyMs,
       },
     };
   }
 
-  // ── SCORING  (does not drop offers, only assigns scores) ─────────────────────
+  // ── 4. Score ───────────────────────────────────────────────────────────────
   const scoreMap = buildScoreMap(normed);
   const recs = buildRecommendationMap(normed, scoreMap);
-  console.log(`\nAFTER_RANKING=${normed.length}  (scoring reorders but never drops offers)`);
+  console.log(`\nAFTER_RANKING=${normed.length}  (scoring reorders, never drops)`);
 
   let bestKey = "";
   let bestScore = -1;
@@ -1219,7 +992,7 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
     if (v.score > bestScore) { bestScore = v.score; bestKey = k; }
   }
 
-  // Pass 1: per-offer attributes (needed before cross-offer comparison)
+  // Pass 1: per-offer attributes
   const pass1 = normed.map((o) => {
     const key = flightKey(o);
     const rec = recs.get(key) ?? { score: 75, breakdown: {}, label: "Best value" };
@@ -1242,7 +1015,7 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
     };
   });
 
-  // Pass 2: cross-offer comparison data
+  // Pass 2: cross-offer comparison
   const ctx = buildOfferContext(pass1);
   const enriched = pass1.map((o) => {
     const wins = buildWinsOn(o, ctx, pass1);
@@ -1260,15 +1033,13 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
       ...o,
       wins_on: wins,
       tradeoffs: trofs,
-      comparison_summary: "",   // populated only by OpenAI; deterministic path uses recommendation_why
+      comparison_summary: "",
       recommendation_why: why,
       recommendation_bullets: wins,
     };
   });
 
-  // Stable 6-key sort: recommended first, then score desc, price asc,
-  // duration_minutes asc, departure time asc, airline asc, flight number asc.
-  // Every key is deterministic so identical searches produce identical order.
+  // Stable sort: recommended first, then score desc, price asc, duration asc, depart asc, airline asc
   enriched.sort((a, b) => {
     if (a.is_recommended !== b.is_recommended) return a.is_recommended ? -1 : 1;
     if (b.ai_score !== a.ai_score) return b.ai_score - a.ai_score;
@@ -1283,17 +1054,15 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
     return a.flight_number.localeCompare(b.flight_number);
   });
 
-  const cheapestAfterDedupe = normed.length > 0
-    ? normed.reduce((a, b) => a.price_total <= b.price_total ? a : b)
-    : null;
-  console.log(`\nCHEAPEST_AFTER_DEDUP=${cheapestAfterDedupe ? `$${cheapestAfterDedupe.price_total.toFixed(0)} (${cheapestAfterDedupe.airline} ${cheapestAfterDedupe.flight_number} id=${cheapestAfterDedupe.offer_id ?? "?"})` : "n/a"}`);
+  // ── 5. OpenAI enrichment for top pick ─────────────────────────────────────
+  const cheapestAfterDedupe = normed.reduce((a, b) => a.price_total <= b.price_total ? a : b, normed[0]);
+  console.log(`\nCHEAPEST_AFTER_DEDUP=$${cheapestAfterDedupe.price_total.toFixed(0)} (${cheapestAfterDedupe.airline} ${cheapestAfterDedupe.flight_number})`);
 
-  // Augment top pick with OpenAI-generated human explanations (falls back to deterministic if unavailable)
   const topPick = enriched.find((o) => o.is_recommended);
   if (topPick && enriched.length >= 2) {
     const aiText = await generateOpenAIExplanation(topPick, enriched);
     if (aiText) {
-      console.log("[openai] enriched top pick with AI explanations");
+      console.log("[openai] enriched top pick");
       topPick.recommendation_why     = aiText.advisor_summary;
       topPick.wins_on                = aiText.why_this;
       topPick.recommendation_bullets = aiText.why_this;
@@ -1304,19 +1073,8 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
     }
   }
 
-  const cheapestRendered = enriched.length > 0
-    ? enriched.reduce((a, b) => a.price_total <= b.price_total ? a : b).price_total
-    : 0;
-  console.log(`\nRENDERED_OFFERS=${enriched.length}`);
-  console.log(`CHEAPEST_RENDERED=${cheapestRendered > 0 ? `$${cheapestRendered.toFixed(0)}` : "n/a"}`);
-  enriched.forEach((o, i) =>
-    console.log(
-      `  FINAL[${i + 1}] ${o.airline_code} ${o.flight_number} $${o.price_total.toFixed(0)} ` +
-      `${o.stops === 0 ? "nonstop" : `${o.stops}-stop`} ` +
-      `${o.depart_time}→${o.arrive_time} dur="${o.duration}" ` +
-      `score=${o.ai_score} label="${o.recommendation_label}" id=${o.offer_id ?? "?"}`
-    )
-  );
+  const cheapestRendered = enriched.reduce((a, b) => a.price_total <= b.price_total ? a : b, enriched[0]).price_total;
+  console.log(`\nRENDERED_OFFERS=${enriched.length}  CHEAPEST_RENDERED=$${cheapestRendered.toFixed(0)}`);
 
   return {
     offers: enriched,
@@ -1328,7 +1086,8 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
       cabin_class: params.cabin_class,
       adults: params.adults,
       offer_count: enriched.length,
-      duffel_ms: elapsed,
+      latency_ms: primaryLatencyMs,
+      providers: providersUsed,
       debugStats: {
         // ── Request ────────────────────────────────────────────
         origin: params.origin,
@@ -1342,32 +1101,31 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
         carrier_filters: "none",
         content_source_filters: "none",
         limit_params: "none",
-        request_payload_json: JSON.stringify(duffelPayload),
-        // ── Duffel response ────────────────────────────────────
-        duffel_http_status: resp.status,
-        duffel_latency_ms: elapsed,
-        raw_duffel_offers: rawOffers.length,
+        request_payload_json: primaryPayloadJson,
+        // ── Provider response ──────────────────────────────────
+        duffel_http_status: primaryHttpStatus,
+        duffel_latency_ms: primaryLatencyMs,
+        raw_duffel_offers: totalRawOffers,
         unique_airlines: uniqueAirlines || "none",
         owner_ids: uniqueOwnerIds || "none",
-        cheapest_raw: cheapestRaw > 0 ? `$${cheapestRaw.toFixed(0)}` : "n/a",
-        raw_offer_rows: rawSummaries.map((r) => ({
+        cheapest_raw: cheapestRaw > 0 && isFinite(cheapestRaw) ? `$${cheapestRaw.toFixed(0)}` : "n/a",
+        raw_offer_rows: allDebugRows.map((r) => ({
           airline: r.airline,
-          airline_code: r.code,
-          owner: r.ownerCode,
-          price: r.price > 0 ? `$${r.price.toFixed(0)}` : "?",
+          airline_code: r.airlineCode,
+          owner: r.owner,
+          price: r.price,
           stops: r.stops,
           offer_id: r.offerId,
         })),
         // ── Pipeline ───────────────────────────────────────────
         after_filtering: normedFlights.length,
-        normalize_duffel_offer_dropped: rawOffers.length - normedRaw.length,
-        normalize_flight_dropped: normedRaw.length - normedFlights.length,
+        normalize_duffel_offer_dropped: totalRawOffers - allProviderOffers.length,
+        normalize_flight_dropped: providerDropped,
         after_deduplication: normed.length,
         dedup_dropped: normedFlights.length - normed.length,
         after_ranking: normed.length,
         rendered_offers: enriched.length,
         cheapest_rendered: cheapestRendered > 0 ? `$${cheapestRendered.toFixed(0)}` : "n/a",
-        // kept for backward compat with origin_airports / destination_airports field names
         origin_airports: params.origin,
         destination_airports: params.destination,
       },
