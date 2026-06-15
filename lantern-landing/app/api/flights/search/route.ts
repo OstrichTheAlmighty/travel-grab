@@ -1007,6 +1007,22 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
   const rawOffers = body?.data?.offers ?? [];
   console.log(`[pipeline] 1_raw_duffel=${rawOffers.length}`);
 
+  // Debug: inspect the first raw offer to verify duration fields coming from Duffel
+  if (rawOffers.length > 0) {
+    const first = rawOffers[0] as DuffelRecord;
+    const owner = (first.owner as DuffelRecord | undefined) ?? {};
+    const firstSliceRaw = ((first.slices as DuffelRecord[] | undefined)?.[0]) ?? ({} as DuffelRecord);
+    const segsRaw = (firstSliceRaw.segments as DuffelRecord[] | undefined) ?? [];
+    const segDurs = segsRaw.map((s) => s.duration).join(", ");
+    console.log(
+      `[duffel-raw] DUFFEL_MODE=${process.env.DUFFEL_MODE ?? "(not set)"} ` +
+      `raw_count=${rawOffers.length} ` +
+      `first_airline="${(owner.name as string) ?? ""}" ` +
+      `first_slice.duration="${firstSliceRaw.duration}" ` +
+      `first_seg_durations=[${segDurs}]`
+    );
+  }
+
   const normedRaw = rawOffers.map(normalizeDuffelOffer).filter(Boolean) as DuffelRecord[];
   console.log(`[pipeline] 2_after_normalizeDuffelOffer=${normedRaw.length} (filtered_nulls=${rawOffers.length - normedRaw.length})`);
 
