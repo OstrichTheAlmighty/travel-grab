@@ -902,6 +902,84 @@ function rerankOffers(
   });
 }
 
+// ── Display diversity selection ───────────────────────────────────────────────
+// Selects a diverse subset of the full ranked offer list for display.
+// All offers remain in the scored inventory; only the visible set is narrowed.
+
+const DISPLAY_MAX = 10;          // max cards shown
+const DISPLAY_MAX_PER_AIRLINE = 3; // no single airline dominates the display
+
+function selectDisplayOffers(ranked: FlightOffer[]): FlightOffer[] {
+  if (ranked.length <= DISPLAY_MAX) return ranked;
+
+  const pinnedIdx = new Set<number>();
+  const airlineSlots = new Map<string, number>();
+
+  const pin = (o: FlightOffer) => {
+    const idx = ranked.indexOf(o);
+    if (idx !== -1 && !pinnedIdx.has(idx)) {
+      pinnedIdx.add(idx);
+      airlineSlots.set(o.airline_code, (airlineSlots.get(o.airline_code) ?? 0) + 1);
+    }
+  };
+
+  // Guaranteed anchors — always appear regardless of airline count
+  const topPick = ranked.find((o) => o.is_recommended);
+  if (topPick) pin(topPick);
+
+  const byCheap = [...ranked].sort((a, b) => a.price_total - b.price_total);
+  pin(byCheap[0]);
+
+  const byFast = [...ranked].sort(
+    (a, b) => (a.duration_minutes || 99999) - (b.duration_minutes || 99999)
+  );
+  pin(byFast[0]);
+
+  const TIMING_RANK: Record<string, number> = { Great: 4, Good: 3, Okay: 2, Bad: 1 };
+  const byArrival = [...ranked].sort(
+    (a, b) => (TIMING_RANK[b.arrival_timing] ?? 0) - (TIMING_RANK[a.arrival_timing] ?? 0)
+  );
+  pin(byArrival[0]);
+
+  // Cheapest from each airline — ensures every carrier gets at least one slot
+  const cheapestByAirline = new Map<string, FlightOffer>();
+  for (const o of ranked) {
+    const prev = cheapestByAirline.get(o.airline_code);
+    if (!prev || o.price_total < prev.price_total) cheapestByAirline.set(o.airline_code, o);
+  }
+  for (const o of cheapestByAirline.values()) pin(o);
+
+  // Fill remaining slots: highest-scored first, capped per airline, skip near-duplicates
+  const getPinned = () => ranked.filter((_, i) => pinnedIdx.has(i));
+  for (let i = 0; i < ranked.length && pinnedIdx.size < DISPLAY_MAX; i++) {
+    if (pinnedIdx.has(i)) continue;
+    const o = ranked[i];
+    if ((airlineSlots.get(o.airline_code) ?? 0) >= DISPLAY_MAX_PER_AIRLINE) continue;
+    if (isTooSimilarToAny(o, getPinned())) continue;
+    pinnedIdx.add(i);
+    airlineSlots.set(o.airline_code, (airlineSlots.get(o.airline_code) ?? 0) + 1);
+  }
+
+  return ranked.filter((_, i) => pinnedIdx.has(i));
+}
+
+// Returns true when `o` has the same airline, stop count, similar price (<$20),
+// and similar departure time (<90 min) as any already-pinned offer from that airline.
+function isTooSimilarToAny(o: FlightOffer, pinned: FlightOffer[]): boolean {
+  const toMin = (t: string) => {
+    const [h, m] = t.split(":").map(Number);
+    return (h || 0) * 60 + (m || 0);
+  };
+  const oMin = toMin(o.depart_time);
+  return pinned.some((p) => {
+    if (p.airline_code !== o.airline_code || p.stops !== o.stops) return false;
+    return (
+      Math.abs(p.price_total - o.price_total) < 20 &&
+      Math.abs(toMin(p.depart_time) - oMin) < 90
+    );
+  });
+}
+
 // ── AirportCombobox ───────────────────────────────────────────────────────────
 
 function AirportCombobox({
@@ -1931,9 +2009,10 @@ export default function FlightSearch() {
   const activeWeights = useMemo(() => buildCompoundWeights(priorities), [priorities]);
 
   const displayOffers = useMemo(() => {
-    const result = offers.length > 0 ? rerankOffers(offers, activeWeights, priorities) : offers;
-    console.log(`[pipeline] 8_offers_rendered_as_cards=${result.length}`);
-    return result;
+    const reranked = offers.length > 0 ? rerankOffers(offers, activeWeights, priorities) : offers;
+    const selected = selectDisplayOffers(reranked);
+    console.log(`[pipeline] 8_offers_rendered_as_cards=${selected.length} (selected from ${reranked.length})`);
+    return selected;
   }, [offers, activeWeights, priorities]);
   const [errorTitle, setErrorTitle] = useState("");
   const [errorBody, setErrorBody] = useState("");
