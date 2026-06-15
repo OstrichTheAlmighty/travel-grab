@@ -1133,6 +1133,47 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
   // No server-side city/metro aggregation — each search call is for a single IATA code pair.
   console.log(`[after_city_aggregation_count] ${normedFlights.length} (no-op: city grouping is client-only)`);
 
+  // ── Inventory sanity check ────────────────────────────────────────────────────
+  // Known high-frequency domestic routes where thin coverage indicates an API issue.
+  // Bidirectional pairs — only one direction stored; checked symmetrically below.
+  const MAJOR_DOMESTIC_ROUTES = new Set([
+    "SFO-LAX", "LAX-SFO", "SFO-LAS", "LAS-SFO", "SFO-SEA", "SEA-SFO", "SFO-DEN", "DEN-SFO",
+    "LAX-LAS", "LAS-LAX", "LAX-SEA", "SEA-LAX", "LAX-DEN", "DEN-LAX", "LAX-PHX", "PHX-LAX",
+    "JFK-LAX", "LAX-JFK", "JFK-SFO", "SFO-JFK", "JFK-BOS", "BOS-JFK", "JFK-ORD", "ORD-JFK",
+    "JFK-DCA", "DCA-JFK", "JFK-MIA", "MIA-JFK", "JFK-ATL", "ATL-JFK",
+    "ORD-LAX", "LAX-ORD", "ORD-DFW", "DFW-ORD", "ORD-ATL", "ATL-ORD", "ORD-MIA", "MIA-ORD",
+    "DFW-LAX", "LAX-DFW", "DFW-ATL", "ATL-DFW", "DFW-MIA", "MIA-DFW",
+    "ATL-LAX", "LAX-ATL", "ATL-MIA", "MIA-ATL", "ATL-BOS", "BOS-ATL",
+    "BOS-DCA", "DCA-BOS", "BOS-ORD", "ORD-BOS", "BOS-LAX", "LAX-BOS",
+    "DEN-LAX", "LAX-DEN", "DEN-ORD", "ORD-DEN",
+  ]);
+
+  const routeKey = `${params.origin}-${params.destination}`;
+  const isMajorDomestic = MAJOR_DOMESTIC_ROUTES.has(routeKey);
+  const cheapestFare = normedFlights.length > 0
+    ? Math.min(...normedFlights.map((o) => o.price_total))
+    : 0;
+  const nonstopCount = normedFlights.filter((o) => o.stops === 0).length;
+  const carriers = [...new Set(normedFlights.map((o) => o.airline))].sort().join(", ");
+
+  console.log(
+    `[inventory_check] route=${routeKey} major_domestic=${isMajorDomestic} ` +
+    `raw_duffel=${rawOffers.length} normalized=${normedFlights.length} ` +
+    `nonstops=${nonstopCount} cheapest=$${cheapestFare.toFixed(0)} ` +
+    `carriers=[${carriers || "none"}]`
+  );
+
+  if (isMajorDomestic) {
+    const warnings: string[] = [];
+    if (rawOffers.length < 20)   warnings.push(`only ${rawOffers.length} raw offers from Duffel (expected 20+)`);
+    if (nonstopCount < 5)        warnings.push(`only ${nonstopCount} nonstop options after normalization (expected 5+)`);
+    if (cheapestFare > 500 && cheapestFare > 0)
+      warnings.push(`cheapest fare $${cheapestFare.toFixed(0)} is unusually high for a major domestic route`);
+    if (warnings.length > 0) {
+      console.warn(`[inventory_warning] possible limited API coverage on ${routeKey}: ${warnings.join("; ")}`);
+    }
+  }
+
   // ── Step 4: deduplicate ───────────────────────────────────────────────────────
   const normed = deduplicateOffers(normedFlights);
   console.log(`[after_dedupe_count] ${normed.length} (dropped=${normedFlights.length - normed.length} duplicates)`);
