@@ -1059,7 +1059,7 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
       ...o,
       wins_on: wins,
       tradeoffs: trofs,
-      comparison_summary: summary,
+      comparison_summary: "",   // populated only by OpenAI; deterministic path uses recommendation_why
       recommendation_why: why,
       recommendation_bullets: wins,
     };
