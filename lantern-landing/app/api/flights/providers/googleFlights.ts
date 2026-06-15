@@ -93,6 +93,35 @@ export class GoogleFlightsProvider implements FlightSearchProvider {
     const other = (body.other_flights as R[] | undefined) ?? [];
     const allRaw = [...best, ...other];
 
+    // ── Temporary debug: verify full response shape ───────────────────────────
+    const priceInsightsPresent = "price_insights" in body && body.price_insights != null;
+    const uniqueAirlinesRaw = [
+      ...new Set(
+        allRaw.flatMap((r) =>
+          ((r.flights as R[] | undefined) ?? []).map(
+            (s) => (s.airline as string | undefined) ?? "?"
+          )
+        )
+      ),
+    ].join(", ");
+
+    console.log(`\n[google_flights][debug] ─────────────────────────────────────────────`);
+    console.log(`SERPAPI_BEST_FLIGHTS_COUNT:          ${best.length}`);
+    console.log(`SERPAPI_OTHER_FLIGHTS_COUNT:         ${other.length}`);
+    console.log(`SERPAPI_PRICE_INSIGHTS:              ${priceInsightsPresent ? "yes" : "no"}`);
+    console.log(`SERPAPI_UNIQUE_AIRLINES_BEFORE_NORM: ${uniqueAirlinesRaw || "none"}`);
+    console.log(`NORMALIZES_BOTH_BEST_AND_OTHER:      yes — allRaw = [...best, ...other] (${allRaw.length} total)`);
+    console.log(`\nFIRST_3_BEST_FLIGHTS:`);
+    best.slice(0, 3).forEach((r, i) =>
+      console.log(`  [best:${i}] ${JSON.stringify(r).slice(0, 1000)}`)
+    );
+    console.log(`\nFIRST_3_OTHER_FLIGHTS:`);
+    other.slice(0, 3).forEach((r, i) =>
+      console.log(`  [other:${i}] ${JSON.stringify(r).slice(0, 1000)}`)
+    );
+    console.log(`[google_flights][debug] ─────────────────────────────────────────────\n`);
+    // ── End temporary debug ───────────────────────────────────────────────────
+
     const offers: ProviderOffer[] = [];
     const perOfferRows: PerOfferDebugRow[] = [];
 
@@ -125,6 +154,12 @@ export class GoogleFlightsProvider implements FlightSearchProvider {
       rawOfferCount:      allRaw.length,
       requestPayloadJson,
       perOfferRows,
+      extra: {
+        best_count:             best.length,
+        other_count:            other.length,
+        normalized_count:       offers.length,
+        price_insights_present: priceInsightsPresent,
+      },
     };
 
     console.log(`[google_flights] best=${best.length} other=${other.length} normalized=${offers.length}  (${latencyMs}ms)`);
@@ -178,7 +213,17 @@ export class GoogleFlightsProvider implements FlightSearchProvider {
 
     const stops      = Math.max(0, flights.length - 1);
     const cabin      = normalizeCabin((first.travel_class as string | undefined) ?? "Economy");
-    const sourceId   = (raw.departure_token as string | undefined) ?? flightNumbers.join("+");
+    // Build a stable composite ID from actual flight data so two itineraries with
+    // different flight numbers or times never share the same sourceOfferId, even if
+    // SerpAPI gives them the same departure_token.
+    const compositeId = [
+      ...flightNumbers,
+      depTimeRaw.replace(/\D/g, ""),
+      arrTimeRaw.replace(/\D/g, ""),
+    ].join("_");
+    const sourceId = compositeId.length > 4
+      ? compositeId
+      : ((raw.departure_token as string | undefined) ?? flightNumbers.join("+") ?? "gf_unknown");
 
     return {
       source:                 "google_flights",

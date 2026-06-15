@@ -924,6 +924,9 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
   let primaryLatencyMs = 0;
   // SerpAPI / Google Flights debug fields
   let serpapiRawOffers = 0;
+  let serpapiBestCount = 0;
+  let serpapiOtherCount = 0;
+  let serpapiNormalizedCount = 0;
   const serpapiDebugRows: PerOfferDebugRow[] = [];
   // Determine SerpAPI status independently of provider list
   const serpapiEnvKey = (process.env.SERPAPI_API_KEY ?? "").trim();
@@ -942,7 +945,10 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
         primaryLatencyMs   = debug.latencyMs;
       }
       if (p.source === "google_flights") {
-        serpapiRawOffers += debug.rawOfferCount;
+        serpapiRawOffers       += debug.rawOfferCount;
+        serpapiBestCount       += (debug.extra?.best_count       as number | undefined) ?? 0;
+        serpapiOtherCount      += (debug.extra?.other_count      as number | undefined) ?? 0;
+        serpapiNormalizedCount += (debug.extra?.normalized_count as number | undefined) ?? 0;
         serpapiDebugRows.push(...debug.perOfferRows);
         if (debug.httpStatus && debug.httpStatus >= 400) {
           serpapiStatus = `error HTTP ${debug.httpStatus}`;
@@ -1169,9 +1175,12 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
         owner_ids: uniqueOwnerIds || "none",
         cheapest_raw: cheapestRaw > 0 && isFinite(cheapestRaw) ? `$${cheapestRaw.toFixed(0)}` : "n/a",
         // ── SerpAPI / Google Flights ───────────────────────────
-        raw_serpapi_offers: serpapiRawOffers,
-        serpapi_airlines: serpapiAirlines || "none",
-        serpapi_cheapest: serpapiCheapest,
+        serpapi_best_count:    serpapiBestCount,
+        serpapi_other_count:   serpapiOtherCount,
+        serpapi_total_parsed:  serpapiNormalizedCount,
+        raw_serpapi_offers:    serpapiRawOffers,
+        serpapi_airlines:      serpapiAirlines || "none",
+        serpapi_cheapest:      serpapiCheapest,
         raw_offer_rows: allDebugRows.map((r) => ({
           airline: r.airline,
           airline_code: r.airlineCode,

@@ -526,6 +526,9 @@ interface DebugStats {
   cheapest_raw: string;
   raw_offer_rows?: RawOfferRow[];
   // google flights / serpapi
+  serpapi_best_count?: number;
+  serpapi_other_count?: number;
+  serpapi_total_parsed?: number;
   raw_serpapi_offers?: number;
   serpapi_airlines?: string;
   serpapi_cheapest?: string;
@@ -2034,6 +2037,8 @@ export default function FlightSearch() {
   const [visibleCount, setVisibleCount] = useState(20);
   // Reset pagination whenever a new set of offers arrives
   useEffect(() => { setVisibleCount(20); }, [offers]);
+
+  const [debugOpen, setDebugOpen] = useState(false);
   const [errorTitle, setErrorTitle] = useState("");
   const [errorBody, setErrorBody] = useState("");
   const [searchedParams, setSearchedParams] = useState<{
@@ -2360,8 +2365,17 @@ export default function FlightSearch() {
                 </span>
               </div>
             )}
+            <div style={{ maxWidth: 800, margin: "0 auto 4px", textAlign: "right" }}>
+              <button
+                onClick={() => setDebugOpen((o) => !o)}
+                style={{ fontFamily: "monospace", fontSize: 11, color: "#166534", background: "none", border: "none", cursor: "pointer", padding: "2px 6px" }}
+              >
+                {debugOpen ? "▲ hide dev trace" : "▼ dev trace"}
+              </button>
+            </div>
+            {debugOpen && (
             <div style={{ fontFamily: "'Courier New', Courier, monospace", fontSize: 12, background: "#030a03", color: "#4ade80", padding: "14px 18px", borderRadius: 8, border: "1px solid #14532d", margin: "0 auto 16px", maxWidth: 800, lineHeight: 1.75, overflowX: "auto", whiteSpace: "pre" }}>
-              <span style={{ color: "#86efac", fontWeight: "bold" }}>{"▶ TRAVELGRAB FLIGHT SEARCH TRACE [remove before launch]\n"}</span>
+              <span style={{ color: "#86efac", fontWeight: "bold" }}>{"▶ TRAVELGRAB FLIGHT SEARCH TRACE\n"}</span>
               {`ENABLED_PROVIDERS:      ${debugStats?.enabled_providers ?? "—"}\n`}
               <span style={{ color: "#6ee7b7" }}>{"━━━ REQUEST "}{"━".repeat(51)}{"\n"}</span>
               {`ORIGIN:                 ${debugStats?.origin ?? (searchedParams ? selectionCodes(searchedParams.origin) : "—")}\n`}
@@ -2386,16 +2400,16 @@ export default function FlightSearch() {
               {"\n"}
               <span style={{ color: "#6ee7b7" }}>{"━━━ GOOGLE FLIGHTS (SERPAPI) "}{"━".repeat(34)}{"\n"}</span>
               {`SERPAPI_ENV_PRESENT:    ${debugStats?.serpapi_env_present ?? "—"}\n`}
-              {`SERPAPI_ENV_NAME_CHECKED: ${debugStats?.serpapi_env_name_checked ?? "SERPAPI_API_KEY"}\n`}
-              {`VERCEL_ENV:             ${debugStats?.vercel_env ?? "—"}\n`}
-              {`NODE_ENV:               ${debugStats?.node_env ?? "—"}\n`}
               {`SERPAPI_STATUS:         ${debugStats?.serpapi_status ?? "—"}\n`}
+              {`SERPAPI_BEST_FLIGHTS_COUNT:  ${debugStats?.serpapi_best_count ?? "—"}\n`}
+              {`SERPAPI_OTHER_FLIGHTS_COUNT: ${debugStats?.serpapi_other_count ?? "—"}\n`}
+              {`SERPAPI_TOTAL_PARSED:        ${debugStats?.serpapi_total_parsed ?? "—"}\n`}
               {`RAW_SERPAPI_OFFERS:     ${debugStats?.raw_serpapi_offers ?? (debugStats ? "0" : "—")}\n`}
               {`SERPAPI_AIRLINES:       ${debugStats?.serpapi_airlines ?? "—"}\n`}
               {`SERPAPI_CHEAPEST:       ${debugStats?.serpapi_cheapest ?? "—"}\n`}
               {"\n"}
               {(debugStats?.raw_offer_rows ?? offers.map(o => ({ airline: o.airline, airline_code: o.airline_code, owner: "—", price: "$" + o.price_total.toFixed(0), stops: o.stops, offer_id: o.offer_id ?? "—", source: o.source ?? "?" }))).map((row, i) =>
-                `  [${i + 1}] ${"source" in row ? String((row as {source?:string}).source ?? "?").padEnd(8) : "?       "} ${String(row.airline_code).padEnd(3)} ${String(row.airline).slice(0, 22).padEnd(23)} ${String(row.price).padStart(7)}  ${row.stops === 0 ? "nonstop" : `${row.stops}-stop  `}  owner=${row.owner}  id=${String(row.offer_id).slice(0, 28)}\n`
+                `  [${i + 1}] ${"source" in row ? String((row as {source?:string}).source ?? "?").padEnd(14) : "?             "} ${String(row.airline_code).padEnd(3)} ${String(row.airline).slice(0, 22).padEnd(23)} ${String(row.price).padStart(7)}  ${row.stops === 0 ? "nonstop" : `${row.stops}-stop  `}  id=${String(row.offer_id).slice(0, 28)}\n`
               )}
               <span style={{ color: "#6ee7b7" }}>{"━━━ PIPELINE "}{"━".repeat(50)}{"\n"}</span>
               {`AFTER_FILTERING:        ${debugStats?.after_filtering ?? "—"}  (normalizeDuffelOffer -${debugStats?.normalize_duffel_offer_dropped ?? "?"}, normalizeFlight -${debugStats?.normalize_flight_dropped ?? "?"})\n`}
@@ -2404,6 +2418,7 @@ export default function FlightSearch() {
               {`RENDERED_OFFERS:        ${debugStats?.rendered_offers ?? offers.length}\n`}
               {`CHEAPEST_RENDERED:      ${debugStats?.cheapest_rendered ?? (offers.length ? "$" + Math.min(...offers.map(o => o.price_total)).toFixed(0) : "—")}\n`}
             </div>
+            )}
             <RecommendationPanel offers={displayOffers} topPickRef={topPickRef} priorities={priorities} />
             <CompareTable offers={displayOffers.slice(0, 3)} />
             <div className="space-y-3 max-w-3xl mx-auto">

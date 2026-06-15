@@ -56,6 +56,7 @@ export interface ProviderDebugInfo {
   rawOfferCount: number;
   requestPayloadJson: string;
   perOfferRows: PerOfferDebugRow[];
+  extra?: Record<string, unknown>; // provider-specific debug metadata
 }
 
 // What every provider.search() call returns.
