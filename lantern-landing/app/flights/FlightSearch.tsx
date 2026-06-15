@@ -648,6 +648,19 @@ const PRIORITY_TOP_LABEL: Record<Priority, string> = {
   airport:      "AI Pick",
 };
 
+// Short tokens used when combining two priority labels (e.g. "Fastest + Arrival")
+const PRIORITY_MULTI_LABEL: Record<Priority, string> = {
+  best_overall: "Best",
+  cheapest:     "Cheapest",
+  fastest:      "Fastest",
+  nonstop:      "Nonstop",
+  arrival:      "Arrival",
+  jet_lag:      "Low Fatigue",
+  fatigue:      "Low Fatigue",
+  comfort:      "Comfort",
+  airport:      "Airport",
+};
+
 function buildPriorityNote(o: FlightOffer, priorities: Priority[]): string {
   if (!priorities.length) return "";
   // Single-priority: lead with the specific win. Tradeoffs are shown separately below.
@@ -758,8 +771,10 @@ function rerankOffers(
     priorities.length === 0
       ? "AI Pick"
       : priorities.length === 1
-      ? (PRIORITY_TOP_LABEL[priorities[0]] ?? "Best Match")
-      : "Best Match";
+      ? (PRIORITY_TOP_LABEL[priorities[0]] ?? "Priority Match")
+      : priorities.length === 2
+      ? `${PRIORITY_MULTI_LABEL[priorities[0]] ?? priorities[0]} + ${PRIORITY_MULTI_LABEL[priorities[1]] ?? priorities[1]}`
+      : "Priority Match";
 
   // Per-dimension badge assignment and ranking explanation against the visible result set.
   const minPrice   = Math.min(...rescored.map((o) => o.price_total));
