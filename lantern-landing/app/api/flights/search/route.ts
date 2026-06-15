@@ -287,57 +287,101 @@ function airportIata(a: DuffelRecord | undefined): string {
   return (a?.iata_code as string | undefined) ?? (a?.name as string | undefined) ?? "";
 }
 
-function normalizeDuffelOffer(offer: DuffelRecord): DuffelRecord | null {
+// In Duffel v2 each connecting leg is its own slice, so `offer.slices` for a
+// KIX→ICN→LAX round-trip looks like [KIX→ICN, ICN→LAX, LAX→ICN, ICN→KIX].
+// We receive reqOrigin/reqDest to identify which slices form the outbound leg.
+function normalizeDuffelOffer(offer: DuffelRecord, reqOrigin: string, reqDest: string): DuffelRecord | null {
   const slices = (offer.slices as DuffelRecord[]) ?? [];
   if (!slices.length) return null;
-  const firstSlice = slices[0];
-  const segments = (firstSlice.segments as DuffelRecord[]) ?? [];
-  if (!segments.length) return null;
-  const firstSeg = segments[0];
-  const lastSeg = segments[segments.length - 1];
-  const owner = (offer.owner as DuffelRecord | undefined) ?? {};
-  const mc = (firstSeg.marketing_carrier as DuffelRecord | undefined) ?? {};
-  const airline = (mc.name as string) ?? (owner.name as string) ?? (owner.iata_code as string) ?? "";
-  const mcCode = (mc.iata_code as string) ?? "";
-  const fn = (firstSeg.marketing_carrier_flight_number as string) ?? "";
-  const connectionAirports = segments
+
+  // Collect every segment across every slice in offer order
+  const allSegs: DuffelRecord[] = [];
+  for (const sl of slices) {
+    for (const seg of ((sl.segments as DuffelRecord[] | undefined) ?? [])) {
+      allSegs.push(seg);
+    }
+  }
+  if (!allSegs.length) return null;
+
+  // Walk segments to find the outbound chain: start at reqOrigin, stop at reqDest.
+  // Supports comma-separated metro codes ("KIX,ITM").
+  const originSet = new Set(reqOrigin.split(",").map((c) => c.trim().toUpperCase()));
+  const destSet   = new Set(reqDest.split(",").map((c) => c.trim().toUpperCase()));
+  const outboundSegs: DuffelRecord[] = [];
+  let started = false;
+  for (const seg of allSegs) {
+    const segOri  = airportIata(seg.origin      as DuffelRecord | undefined).toUpperCase();
+    const segDest = airportIata(seg.destination as DuffelRecord | undefined).toUpperCase();
+    if (!started && originSet.has(segOri)) started = true;
+    if (started) {
+      outboundSegs.push(seg);
+      if (destSet.has(segDest)) break;
+    }
+  }
+
+  // Fall back to the first slice's segments if outbound detection found nothing
+  const useSegs = outboundSegs.length > 0
+    ? outboundSegs
+    : ((slices[0].segments as DuffelRecord[] | undefined) ?? []);
+  if (!useSegs.length) return null;
+
+  const firstSeg = useSegs[0];
+  const lastSeg  = useSegs[useSegs.length - 1];
+  const owner    = (offer.owner as DuffelRecord | undefined) ?? {};
+  const mc       = (firstSeg.marketing_carrier as DuffelRecord | undefined) ?? {};
+  const airline  = (mc.name as string) ?? (owner.name as string) ?? (owner.iata_code as string) ?? "";
+  const mcCode   = (mc.iata_code as string) ?? "";
+  const fn       = (firstSeg.marketing_carrier_flight_number as string) ?? "";
+
+  const connectionAirports = useSegs
     .slice(0, -1)
-    .map((seg) => airportIata((seg.destination as DuffelRecord | undefined)))
+    .map((seg) => airportIata(seg.destination as DuffelRecord | undefined))
     .filter(Boolean)
     .join(",");
+
+  // Compute full outbound duration from timestamps — JS Date handles tz offsets correctly
+  const dep = (firstSeg.departing_at as string) ?? "";
+  const arr = (lastSeg.arriving_at   as string) ?? "";
+  let computedDur = "";
+  if (dep && arr) {
+    try {
+      const diffMins = Math.round((new Date(arr).getTime() - new Date(dep).getTime()) / 60000);
+      if (diffMins > 0) {
+        const h = Math.floor(diffMins / 60);
+        const m = diffMins % 60;
+        computedDur = h > 0 && m > 0 ? `PT${h}H${m}M` : h > 0 ? `PT${h}H` : `PT${m}M`;
+      }
+    } catch { /* ignore */ }
+  }
+  const rawSliceDur = (slices[0].duration as string) ?? "";
+
+  // Diagnostic: show every slice with its duration + segment count
+  const sliceSummary = slices.map((sl, i) => {
+    const slSegs = (sl.segments as DuffelRecord[] | undefined) ?? [];
+    const ori = airportIata(slSegs[0]?.origin      as DuffelRecord | undefined);
+    const dst = airportIata(slSegs[slSegs.length - 1]?.destination as DuffelRecord | undefined);
+    const segDurs = slSegs.map((s) => String(s.duration ?? "?")).join("+");
+    return `[${i}]${ori}→${dst}(${sl.duration ?? "?"},segs:[${segDurs}])`;
+  }).join(" ");
+  console.log(
+    `[dur] slices=${slices.length} ${sliceSummary} ` +
+    `outbound_segs=${outboundSegs.length} dep="${dep}" arr="${arr}" ` +
+    `computed="${computedDur}" slice[0].dur="${rawSliceDur}" final="${computedDur || rawSliceDur}"`
+  );
 
   return {
     airline,
     flight_number: `${mcCode} ${fn}`.trim(),
-    origin: airportIata(firstSeg.origin as DuffelRecord | undefined),
-    destination: airportIata(lastSeg.destination as DuffelRecord | undefined),
-    departure_time: (firstSeg.departing_at as string) ?? "",
-    arrival_time: (lastSeg.arriving_at as string) ?? "",
-    duration: (() => {
-      // Compute door-to-door duration from timestamps — handles timezone offsets correctly
-      // and is reliable even when Duffel omits or mis-populates slice.duration.
-      const dep = (firstSeg.departing_at as string) ?? "";
-      const arr = (lastSeg.arriving_at as string) ?? "";
-      let ts = "";
-      if (dep && arr) {
-        try {
-          const diffMins = Math.round((new Date(arr).getTime() - new Date(dep).getTime()) / 60000);
-          if (diffMins > 0) {
-            const h = Math.floor(diffMins / 60);
-            const m = diffMins % 60;
-            ts = h > 0 && m > 0 ? `PT${h}H${m}M` : h > 0 ? `PT${h}H` : `PT${m}M`;
-          }
-        } catch { /* ignore */ }
-      }
-      const rawSlice = (firstSlice.duration as string) ?? "";
-      console.log(`[dur] slice.duration="${rawSlice}" seg[0].duration="${firstSeg.duration}" dep="${dep}" arr="${arr}" computed="${ts}"`);
-      return ts || rawSlice;
-    })(),
-    stops: Math.max(0, segments.length - 1),
-    cabin: segmentCabin(firstSeg),
-    baggage: extractBaggage(offer),
-    price: (offer.total_amount as string) ?? "0",
-    currency: (offer.total_currency as string) ?? "USD",
+    origin:        airportIata(firstSeg.origin      as DuffelRecord | undefined),
+    destination:   airportIata(lastSeg.destination  as DuffelRecord | undefined),
+    departure_time: dep,
+    arrival_time:   arr,
+    duration:       computedDur || rawSliceDur,
+    stops:          Math.max(0, useSegs.length - 1),
+    cabin:          segmentCabin(firstSeg),
+    baggage:        extractBaggage(offer),
+    price:          (offer.total_amount as string) ?? "0",
+    currency:       (offer.total_currency as string) ?? "USD",
     connection_airports: connectionAirports,
   };
 }
@@ -1007,23 +1051,27 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
   const rawOffers = body?.data?.offers ?? [];
   console.log(`[pipeline] 1_raw_duffel=${rawOffers.length}`);
 
-  // Debug: inspect the first raw offer to verify duration fields coming from Duffel
+  // Debug: show full slice structure for the first raw offer
   if (rawOffers.length > 0) {
     const first = rawOffers[0] as DuffelRecord;
     const owner = (first.owner as DuffelRecord | undefined) ?? {};
-    const firstSliceRaw = ((first.slices as DuffelRecord[] | undefined)?.[0]) ?? ({} as DuffelRecord);
-    const segsRaw = (firstSliceRaw.segments as DuffelRecord[] | undefined) ?? [];
-    const segDurs = segsRaw.map((s) => s.duration).join(", ");
+    const offerSlices = (first.slices as DuffelRecord[] | undefined) ?? [];
+    const sliceDetail = offerSlices.map((sl, i) => {
+      const segs = (sl.segments as DuffelRecord[] | undefined) ?? [];
+      const ori  = ((segs[0]?.origin as DuffelRecord | undefined)?.iata_code as string) ?? "?";
+      const dst  = ((segs[segs.length - 1]?.destination as DuffelRecord | undefined)?.iata_code as string) ?? "?";
+      const segDurs = segs.map((s) => String(s.duration ?? "null")).join("+");
+      return `slice[${i}]${ori}→${dst} dur=${sl.duration ?? "null"} segs=[${segDurs}]`;
+    }).join(" | ");
     console.log(
       `[duffel-raw] DUFFEL_MODE=${process.env.DUFFEL_MODE ?? "(not set)"} ` +
       `raw_count=${rawOffers.length} ` +
       `first_airline="${(owner.name as string) ?? ""}" ` +
-      `first_slice.duration="${firstSliceRaw.duration}" ` +
-      `first_seg_durations=[${segDurs}]`
+      `slice_count=${offerSlices.length} ${sliceDetail}`
     );
   }
 
-  const normedRaw = rawOffers.map(normalizeDuffelOffer).filter(Boolean) as DuffelRecord[];
+  const normedRaw = rawOffers.map((o) => normalizeDuffelOffer(o, params.origin, params.destination)).filter(Boolean) as DuffelRecord[];
   console.log(`[pipeline] 2_after_normalizeDuffelOffer=${normedRaw.length} (filtered_nulls=${rawOffers.length - normedRaw.length})`);
 
   const normedAll = normedRaw.map((r) => normalizeFlight(r, params.adults)).filter(Boolean) as FlightOffer[];
