@@ -2,6 +2,59 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const maxDuration = 55;
 
+// ── Rate limiting ─────────────────────────────────────────────────────────────
+// In-memory; resets on serverless cold start. Suitable for basic abuse protection.
+
+const RATE_LIMIT_MAX = 15;         // max searches per window
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+
+const rateLimitMap = new Map<string, { count: number; windowStart: number }>();
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  // Evict stale entries if map grows large
+  if (rateLimitMap.size > 10_000) {
+    for (const [k, v] of rateLimitMap) {
+      if (now - v.windowStart > RATE_LIMIT_WINDOW_MS) rateLimitMap.delete(k);
+    }
+  }
+  const entry = rateLimitMap.get(ip);
+  if (!entry || now - entry.windowStart > RATE_LIMIT_WINDOW_MS) {
+    rateLimitMap.set(ip, { count: 1, windowStart: now });
+    return true;
+  }
+  if (entry.count >= RATE_LIMIT_MAX) return false;
+  entry.count++;
+  return true;
+}
+
+// ── Search result cache ───────────────────────────────────────────────────────
+// 15-minute in-memory cache keyed on all search parameters + priorities.
+// Prevents redundant Duffel API calls for identical searches.
+
+const CACHE_TTL_MS = 15 * 60 * 1000; // 15 minutes
+
+interface CacheEntry {
+  offers: FlightOffer[];
+  meta: Record<string, unknown>;
+  cachedAt: number;
+}
+
+const searchCache = new Map<string, CacheEntry>();
+
+function buildCacheKey(params: ValidatedParams, priorities: string[]): string {
+  return JSON.stringify({
+    o:    params.origin,
+    d:    params.destination,
+    dep:  params.departure_date,
+    ret:  params.return_date,
+    cab:  params.cabin_class,
+    pax:  params.adults,
+    type: params.trip_type,
+    pri:  [...priorities].sort(), // sorted for key stability
+  });
+}
+
 // ── Types ────────────────────────────────────────────────────────────────────
 
 interface ValidatedParams {
@@ -1089,8 +1142,22 @@ function validateRequest(body: Record<string, unknown>): [ValidatedParams | null
 }
 
 // ── Route handler ─────────────────────────────────────────────────────────────
+// SECURITY: DUFFEL_API_KEY and OPENAI_API_KEY are read exclusively from
+// server-side environment variables and are never returned to the client.
 
 export async function POST(req: NextRequest) {
+  // Rate limiting — extract IP from Vercel/proxy headers
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+    req.headers.get("x-real-ip") ??
+    "unknown";
+  if (!checkRateLimit(ip)) {
+    return NextResponse.json(
+      { status: "rate_limited", message: "Too many searches. Please wait a few minutes before trying again." },
+      { status: 429 }
+    );
+  }
+
   let body: Record<string, unknown>;
   try {
     body = await req.json() as Record<string, unknown>;
@@ -1103,6 +1170,20 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ status: "validation_error", message: err }, { status: 400 });
   }
 
+  // Priorities are applied client-side and don't affect Duffel results;
+  // included here for cache key stability when the client sends them.
+  const priorities = Array.isArray(body.priorities)
+    ? (body.priorities as unknown[]).filter((s): s is string => typeof s === "string")
+    : [];
+
+  // Cache check
+  const cacheKey = buildCacheKey(params, priorities);
+  const cached = searchCache.get(cacheKey);
+  if (cached && Date.now() - cached.cachedAt < CACHE_TTL_MS) {
+    console.log(`[cache] HIT ${params.origin}->${params.destination} ${params.departure_date}`);
+    return NextResponse.json({ status: "ok", offers: cached.offers, meta: { ...cached.meta, cached: true } }, { status: 200 });
+  }
+
   const { offers, meta } = await loadFlightOffers(params);
 
   if (meta.status === "not_configured") {
@@ -1113,6 +1194,15 @@ export async function POST(req: NextRequest) {
   }
   if (!offers.length) {
     return NextResponse.json({ status: "empty", message: meta.message, offers: [] }, { status: 200 });
+  }
+
+  // Store in cache; evict expired entries if the map has grown
+  searchCache.set(cacheKey, { offers, meta, cachedAt: Date.now() });
+  if (searchCache.size > 500) {
+    const threshold = Date.now() - CACHE_TTL_MS;
+    for (const [k, v] of searchCache) {
+      if (v.cachedAt < threshold) searchCache.delete(k);
+    }
   }
 
   return NextResponse.json({ status: "ok", offers, meta }, { status: 200 });

@@ -1032,6 +1032,12 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
       priorities,
     };
     console.log("[booking-intent]", intent);
+    // Fire-and-forget — non-critical; does not block the UI
+    fetch("/api/booking-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...intent, timestamp: new Date().toISOString() }),
+    }).catch(() => undefined);
     setBookOpen(true);
   };
 
@@ -1447,7 +1453,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
             </div>
 
             <p className="text-[12px] text-white/55 leading-relaxed mb-4">
-              This is a test flight result, but we saved this as a booking-intent click.
+              Booking is coming soon. We saved your interest in this flight.
             </p>
 
             <div className="rounded-xl bg-white/[0.03] border border-white/[0.07] px-3.5 py-3 mb-4 space-y-1.5">
@@ -1573,6 +1579,12 @@ export default function FlightSearch() {
         meta?: SearchMeta;
       };
 
+      if (data.status === "rate_limited") {
+        setErrorTitle("Too many searches");
+        setErrorBody(data.message ?? "Please wait a few minutes before searching again.");
+        setSearchState("error");
+        return;
+      }
       if (data.status === "not_configured") {
         setErrorTitle("Search unavailable");
         setErrorBody(data.message ?? "Flight search is temporarily unavailable. Please try again later.");
