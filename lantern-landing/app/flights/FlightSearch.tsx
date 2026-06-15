@@ -529,6 +529,11 @@ interface DebugStats {
   raw_serpapi_offers?: number;
   serpapi_airlines?: string;
   serpapi_cheapest?: string;
+  // env diagnostics
+  serpapi_env_present?: string;
+  serpapi_env_name_checked?: string;
+  vercel_env?: string;
+  node_env?: string;
   // pipeline
   after_filtering: number;
   normalize_duffel_offer_dropped: number;
@@ -2380,6 +2385,10 @@ export default function FlightSearch() {
               {`CHEAPEST_RAW:           ${debugStats?.cheapest_raw ?? "—"}\n`}
               {"\n"}
               <span style={{ color: "#6ee7b7" }}>{"━━━ GOOGLE FLIGHTS (SERPAPI) "}{"━".repeat(34)}{"\n"}</span>
+              {`SERPAPI_ENV_PRESENT:    ${debugStats?.serpapi_env_present ?? "—"}\n`}
+              {`SERPAPI_ENV_NAME_CHECKED: ${debugStats?.serpapi_env_name_checked ?? "SERPAPI_API_KEY"}\n`}
+              {`VERCEL_ENV:             ${debugStats?.vercel_env ?? "—"}\n`}
+              {`NODE_ENV:               ${debugStats?.node_env ?? "—"}\n`}
               {`SERPAPI_STATUS:         ${debugStats?.serpapi_status ?? "—"}\n`}
               {`RAW_SERPAPI_OFFERS:     ${debugStats?.raw_serpapi_offers ?? (debugStats ? "0" : "—")}\n`}
               {`SERPAPI_AIRLINES:       ${debugStats?.serpapi_airlines ?? "—"}\n`}

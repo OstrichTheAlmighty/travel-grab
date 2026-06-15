@@ -895,6 +895,17 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
   offers: FlightOffer[];
   meta: Record<string, unknown>;
 }> {
+  // ── Environment diagnostics (always log, even on early return) ────────────
+  const diagSerpPresent  = typeof process.env.SERPAPI_API_KEY === "string" && process.env.SERPAPI_API_KEY.trim().length > 0;
+  const diagVercelEnv    = process.env.VERCEL_ENV ?? "(not set)";
+  const diagNodeEnv      = process.env.NODE_ENV   ?? "(not set)";
+  console.log(
+    `[env-diag] SERPAPI_ENV_NAME_CHECKED=SERPAPI_API_KEY` +
+    `  SERPAPI_ENV_PRESENT=${diagSerpPresent}` +
+    `  VERCEL_ENV=${diagVercelEnv}` +
+    `  NODE_ENV=${diagNodeEnv}`
+  );
+
   const providers = getEnabledProviders(process.env);
 
   if (providers.length === 0) {
@@ -1133,6 +1144,10 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
         // ── Providers ─────────────────────────────────────────
         enabled_providers: enabledProviders,
         serpapi_status: serpapiStatus,
+        serpapi_env_present: String(diagSerpPresent),
+        serpapi_env_name_checked: "SERPAPI_API_KEY",
+        vercel_env: diagVercelEnv,
+        node_env: diagNodeEnv,
         // ── Request ────────────────────────────────────────────
         origin: params.origin,
         destination: params.destination,
