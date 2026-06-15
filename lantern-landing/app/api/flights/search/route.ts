@@ -197,8 +197,20 @@ function timeFromIso(value: string): string {
   }
 }
 
+// Parse ISO 8601 duration string → total minutes.
+// Handles PT19H35M, PT13H20M, P1DT2H10M, PT90M, etc.
+function parseDurationMinutes(iso: string | null | undefined): number {
+  if (!iso) return 0;
+  const s = String(iso).toUpperCase();
+  const m = s.match(/^P(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?$/);
+  if (!m) return 0;
+  const days  = parseInt(m[1] ?? "0") || 0;
+  const hours = parseInt(m[2] ?? "0") || 0;
+  const mins  = parseInt(m[3] ?? "0") || 0;
+  return days * 24 * 60 + hours * 60 + mins;
+}
+
 // Convert integer minutes to a human-readable label ("10h 45m").
-// Used to derive the display duration directly from timestamp-computed minutes.
 function minutesToDurationLabel(mins: number): string {
   if (mins <= 0) return "";
   const h = Math.floor(mins / 60);
@@ -323,31 +335,38 @@ function normalizeDuffelOffer(offer: DuffelRecord, reqOrigin: string, reqDest: s
     .filter(Boolean)
     .join(",");
 
-  // Duration is computed EXCLUSIVELY from first-segment departing_at → last-segment arriving_at.
-  // new Date() parses ISO 8601 with timezone offsets correctly (UTC milliseconds).
-  // Never fall back to Duffel-provided slice.duration or segment.duration strings.
   const dep = (firstSeg.departing_at as string) ?? "";
   const arr = (lastSeg.arriving_at   as string) ?? "";
 
-  if (!dep || !arr) {
-    console.warn(`[dur-skip] missing timestamps airline="${airline}" flight="${mcCode}${fn}" dep="${dep}" arr="${arr}"`);
-    return null;
+  // Primary: Duffel's own slice.duration (ISO 8601, e.g. "PT19H35M") for the outbound
+  // slice — it is pre-computed server-side and includes all layovers within the slice.
+  // slices[0] is always the outbound direction (for both one-way and round-trip requests).
+  const rawSliceDur = (slices[0].duration as string | undefined) ?? "";
+  let durationMinutes = parseDurationMinutes(rawSliceDur);
+
+  // Fallback: compute from ISO timestamps only when slice.duration is absent.
+  // new Date() correctly handles timezone offsets in ISO 8601 strings.
+  if (!durationMinutes && dep && arr) {
+    const departMs = new Date(dep).getTime();
+    const arriveMs = new Date(arr).getTime();
+    if (!isNaN(departMs) && !isNaN(arriveMs) && arriveMs > departMs) {
+      durationMinutes = Math.round((arriveMs - departMs) / 60000);
+    }
   }
-
-  const departMs = new Date(dep).getTime();
-  const arriveMs = new Date(arr).getTime();
-
-  if (isNaN(departMs) || isNaN(arriveMs)) {
-    console.warn(`[dur-skip] unparseable timestamps dep="${dep}" arr="${arr}"`);
-    return null;
-  }
-
-  const durationMinutes = Math.round((arriveMs - departMs) / 60000);
 
   if (durationMinutes < 60) {
-    console.warn(
-      `[dur-skip] ${durationMinutes}min < 60min airline="${airline}" ${mcCode}${fn} ` +
-      `outbound_segs=${outboundSegs.length} total_segs=${allSegs.length} dep="${dep}" arr="${arr}"`
+    console.error(
+      `[dur-reject] ${durationMinutes}min < 60min airline="${airline}" ${mcCode}${fn} ` +
+      `slice_dur="${rawSliceDur}" dep="${dep}" arr="${arr}"`
+    );
+    return null;
+  }
+
+  // Log suspiciously short durations for long-haul routes (< 8h is impossible KIX→LAX).
+  if (durationMinutes < 480) {
+    console.error(
+      `[dur-suspect] ${durationMinutes}min < 8h airline="${airline}" ${mcCode}${fn} ` +
+      `slice_dur="${rawSliceDur}" outbound_segs=${outboundSegs.length} dep="${dep}" arr="${arr}"`
     );
     return null;
   }
@@ -371,7 +390,8 @@ function normalizeDuffelOffer(offer: DuffelRecord, reqOrigin: string, reqDest: s
     price:               (offer.total_amount as string) ?? "0",
     currency:            (offer.total_currency as string) ?? "USD",
     connection_airports: connectionAirports,
-    // Preserved as debug-only fields for server logs — not used for display or scoring
+    // Debug-only fields for server logs
+    _raw_slice_dur:      rawSliceDur,
     _raw_dep:            dep,
     _raw_arr:            arr,
     _outbound_segs:      outboundSegs.length,
@@ -1070,15 +1090,16 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
   const normedRaw = rawOffers.map((o) => normalizeDuffelOffer(o, params.origin, params.destination)).filter(Boolean) as DuffelRecord[];
   console.log(`[pipeline] 2_after_normalizeDuffelOffer=${normedRaw.length} (filtered_nulls=${rawOffers.length - normedRaw.length})`);
 
-  // Log first 10 normalized offers: raw ISO timestamps and computed duration
+  // Log first 10 normalized offers: raw slice.duration, parsed minutes, display label
   for (let i = 0; i < Math.min(10, normedRaw.length); i++) {
     const r = normedRaw[i];
     const mins = Number(r.duration_minutes ?? 0);
     console.log(
       `  [norm-${i + 1}] "${r.airline}" ${r.flight_number} ` +
+      `slice_dur="${r._raw_slice_dur}" ` +
       `dep="${r._raw_dep}" arr="${r._raw_arr}" ` +
       `outbound_segs=${r._outbound_segs} ` +
-      `duration_minutes=${mins} ` +
+      `parsed_mins=${mins} ` +
       `display="${minutesToDurationLabel(mins)}"`
     );
   }
