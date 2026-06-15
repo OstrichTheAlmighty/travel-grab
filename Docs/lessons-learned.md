@@ -17,6 +17,16 @@ Affects: [list of files or sections impacted]
 
 ## Log
 
+### 2026-06-14 | Decision | ⭐⭐⭐ | Group travel identified as primary consumer segment
+
+Group coordinators elevated to co-primary target user alongside individual experience-seeking travelers. Rationale: group travel compounds the core pain point (preference alignment across multiple people is 2–3× harder than solo planning), carries higher booking value per transaction, and creates a natural viral loop (each coordinator brings 3–8 travelers per trip). No major AI travel tool currently owns this use case — it represents a clear differentiation angle. Group trip coordination moved from V2 to V1.5 in the product roadmap. Subscription Team tier is now a stronger revenue driver than initially modeled.
+Affects: `pitch.md`, `business-plan.md`, `market-research.md`, `todo.md`
+
+### 2026-06-14 | Decision | ⭐⭐⭐ | Revenue model confirmed: commission + subscription hybrid
+
+Selected commission (affiliate % on bookings) combined with a freemium subscription (Free / Pro at $10–12/mo / Team at $28–35/mo). Commission aligns incentives with traveler success; subscription provides predictable recurring revenue. Group travel strengthens the Team tier value proposition. Full unit economics added to `business-plan.md` § Cost Model.
+Affects: `business-plan.md`, `pitch.md`
+
 ### 2026-06-03 17:00 PT | Decision | ⭐⭐⭐ | Operating instructions v3 finalized
 
 Full governing ruleset established for how Claude runs this project. Key rules:

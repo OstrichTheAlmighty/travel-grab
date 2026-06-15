@@ -7,7 +7,7 @@ Status: 🟡 Just Started
 
 ## 1. Overview
 
-TravelGrab is an AI-powered travel planning platform that helps travelers search real flights, get preference-scored recommendations, and build a day-by-day itinerary — cutting the average trip planning time from 16+ hours down to _(target time-to-plan to be defined based on user testing)_. The platform is built for _(primary customer segment to be confirmed)_ who want a personalized recommendation layer on top of live flight and activity data, without the noise of a generic search engine. Revenue will come from affiliate commissions on bookings and a freemium subscription tier for advanced planning features, with an initial go-to-market focused on _(beachhead channel and audience to be defined — see Section 3)_. The long-term moat is a preference model that improves with every trip planned, compounding into a data advantage that _(scale threshold and competitive defensibility to be defined)_ OTAs will find hard to replicate.
+TravelGrab is an AI-powered travel planning platform that helps travelers search real flights, get preference-scored recommendations, and build a day-by-day itinerary — cutting the average trip planning time from 16+ hours down to _(target time-to-plan to be defined based on user testing)_. The platform is built primarily for group coordinators and experience-seeking individual travelers who want a personalized recommendation layer on top of live flight and activity data, without the noise of a generic search engine. Group travel is a core use case: TravelGrab aligns preferences across multiple travelers automatically, surfacing options that score well for the whole group rather than forcing manual compromise. Revenue will come from affiliate commissions on bookings and a freemium subscription tier for advanced planning features, with an initial go-to-market focused on _(beachhead channel and audience to be defined — see Section 3)_. The long-term moat is a preference model that improves with every trip planned, compounding into a data advantage that _(scale threshold and competitive defensibility to be defined)_ OTAs will find hard to replicate.
 
 ---
 
@@ -46,7 +46,7 @@ The hybrid approach reduces early conversion friction — users start free, expe
 ## 3. Go-to-Market Strategy
 
 ### Beachhead Market
-*To be defined — who is the very first customer?*
+**Group coordinators** — the person in a friend group or family who ends up organizing the trip. This segment has a disproportionately high pain point (aligning multiple people is 2–3× harder than solo planning), high booking value per transaction (group bookings are larger), and strong word-of-mouth potential (one coordinator brings 3–8 travelers per trip). Secondary beachhead: individual experience-seeking travelers who are likely to eventually travel in groups.
 
 ### Channels
 - [ ] SEO / content (travel intent keywords)
@@ -68,7 +68,8 @@ The hybrid approach reduces early conversion friction — users start free, expe
 |---|---|---|
 | MVP | Single-user travel package composer | Preference input → AI proposal → shareable link |
 | V1 | Booking integration | Click-to-book via affiliate APIs |
-| V2 | Group travel | Multi-person preference alignment |
+| V1.5 | Group travel *(elevated — primary segment)* | Multi-person preference alignment, group scoring, shared itinerary view |
+| V2 | Group booking coordination | Unified group checkout, split payment support |
 | V3 | B2B | Agency white-label dashboard |
 
 ---
@@ -90,9 +91,14 @@ The hybrid approach reduces early conversion friction — users start free, expe
 - Target: 500 bookings/month at early scale → ~$48K/month
 
 **Subscription revenue:**
-- Target user mix at 10K active users: 78% free / 20% Pro / 2% Team
-- 2,000 Pro × $11 + 200 Team × $30 = **$28,000 MRR**
-- Combined target MRR (bookings + subscriptions at 10K users): ~$76K/month
+- Target user mix at 10K active users: 75% free / 18% Pro / 7% Team
+- Team tier mix is higher than initial estimate given group travel is a primary segment
+- 1,800 Pro × $11 + 700 Team × $30 = **$40,800 MRR**
+- Combined target MRR (bookings + subscriptions at 10K users): ~$89K/month
+
+**Group travel booking uplift:**
+- Group bookings (3–6 travelers) carry 3–5× the transaction value of solo bookings
+- Even at the same conversion rate, group-heavy user mix significantly raises commission revenue per booking
 
 **AI inference cost per proposal:**
 - Estimated LLM cost (Claude Sonnet / GPT-4o): $0.05–0.15 per full proposal
@@ -115,7 +121,7 @@ The hybrid approach reduces early conversion friction — users start free, expe
 
 - [ ] Proprietary preference model (travel DNA / taste graph)
 - [ ] Supply-side relationships (exclusive rates, curated inventory)
-- [ ] Network effects (group travel, shared packages)
+- [x] Network effects (group travel, shared packages) — group travel as primary segment creates inherent viral loop: one coordinator brings multiple travelers per trip
 - [ ] Data moat (improving with every trip composed)
 
 ---

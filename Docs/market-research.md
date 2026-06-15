@@ -22,7 +22,7 @@ Status: 🔴 Skeleton — research not yet conducted
 
 > One-paragraph snapshot of the market opportunity. Update as research matures.
 
-🔴 [ASSUMPTION] The global travel industry is a multi-trillion dollar market undergoing rapid AI-driven transformation. Travelers increasingly expect personalization at scale, yet existing tools either offer rigid packages (OTAs) or overwhelming choice with no curation. A platform that intelligently composes personalized travel packages from user preferences sits at the intersection of two powerful trends: the growth of AI-native consumer apps and the sustained post-pandemic surge in experiential travel.
+🔴 [ASSUMPTION] The global travel industry is a multi-trillion dollar market undergoing rapid AI-driven transformation. Travelers increasingly expect personalization at scale, yet existing tools either offer rigid packages (OTAs) or overwhelming choice with no curation. A platform that intelligently composes personalized travel packages from user preferences sits at the intersection of two powerful trends: the growth of AI-native consumer apps and the sustained post-pandemic surge in experiential travel. Group travel is identified as a primary consumer segment — group coordinators face compounded planning pain (preference alignment across multiple people, logistics overhead, group-chat decision fatigue) and represent higher booking value per transaction. No major AI travel tool has built a strong group-first experience, creating a clear differentiation angle.
 
 ---
 
@@ -77,20 +77,23 @@ Status: 🔴 Skeleton — research not yet conducted
 > All personas below are hypothesized. None validated with real user research yet.
 > Mark as [ASSUMPTION] until primary research or cited secondary research confirms them.
 
-**Persona A — The Overwhelmed Planner** [ASSUMPTION]
+**Persona A — The Group Coordinator** [ASSUMPTION] ⭐ PRIMARY
+- Age: 25–45, organizes trips for friend groups, families, or couples
+- Context: Ends up as the de-facto planner by default — nobody else steps up
+- Frustration: Aligning preferences across 3–8 people; endless group chats; compromise trips nobody loves; carries the full planning burden while everyone else just shows up
+- Desire: A tool that collects everyone's input and surfaces options the whole group can agree on, without the coordinator having to manually reconcile everything
+- Booking behavior: Higher transaction value (group bookings), high intent, often books flights + accommodation + activities together
+- Viral potential: Each coordinator brings 3–8 users per trip; happy groups become repeat bookings
+
+**Persona B — The Overwhelmed Planner** [ASSUMPTION] ⭐ PRIMARY
 - Age: 28–42, dual income, limited time
 - Frustration: Analysis paralysis, hours lost on research
 - Desire: "Just tell me a great trip within my budget"
 
-**Persona B — The Experience Seeker** [ASSUMPTION]
+**Persona C — The Experience Seeker** [ASSUMPTION]
 - Age: 25–35, values-driven, experience > price
 - Frustration: Generic packages don't reflect their identity
 - Desire: Travel that matches their vibe (slow travel, food-focused, adventure)
-
-**Persona C — The Group Coordinator** [ASSUMPTION]
-- Age: 30–50, organizing trips for family or friends
-- Frustration: Aligning preferences across multiple people
-- Desire: Compromise-finding, logistics made easy
 
 **Persona D — The Frequent Business Traveler** [ASSUMPTION]
 - Age: 30–55, high willingness to pay
@@ -105,6 +108,8 @@ Status: 🔴 Skeleton — research not yet conducted
 
 - **AI-native consumer apps** — users now expect preference-driven UX 🔴
 - **Experience economy** — post-pandemic shift from things to experiences 🔴
+- **Group travel resurgence** — post-pandemic reunion trips, friend-group travel, multi-gen family travel all rising 🔴 *(strategic priority — validates primary persona)*
+- **Group travel coordination gap** — no major AI travel tool has built a strong group-first experience; current tools force coordinators to plan solo then share a link 🔴
 - **Bleisure travel** — blending business and leisure 🔴
 - **Overtourism backlash** — demand for off-the-beaten-path options 🔴
 - **Solo travel** — growing especially among women 25–40 🔴
