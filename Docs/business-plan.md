@@ -7,7 +7,7 @@ Status: 🟡 Just Started
 
 ## 1. Overview
 
-TravelGrab is an AI-powered travel planning platform that helps travelers search real flights, get preference-scored recommendations, and build a day-by-day itinerary — cutting the average trip planning time from 16+ hours down to _(target time-to-plan to be defined based on user testing)_. The platform is built primarily for group coordinators and experience-seeking individual travelers who want a personalized recommendation layer on top of live flight and activity data, without the noise of a generic search engine. Group travel is a core use case: TravelGrab aligns preferences across multiple travelers automatically, surfacing options that score well for the whole group rather than forcing manual compromise. Revenue will come from affiliate commissions on bookings and a freemium subscription tier for advanced planning features, with an initial go-to-market focused on _(beachhead channel and audience to be defined — see Section 3)_. The long-term moat is a preference model that improves with every trip planned, compounding into a data advantage that _(scale threshold and competitive defensibility to be defined)_ OTAs will find hard to replicate.
+TravelGrab is an AI-powered travel planning platform that helps travelers search real flights, get preference-scored recommendations, and build a day-by-day itinerary — cutting the average trip planning time from 16+ hours down to _(target time-to-plan to be defined based on user testing)_. The platform is built primarily for group coordinators and experience-seeking individual travelers who want a personalized recommendation layer on top of live flight and activity data, without the noise of a generic search engine. Group travel is a core use case: TravelGrab aligns preferences across multiple travelers automatically, surfacing options that score well for the whole group rather than forcing manual compromise. Revenue will come from affiliate commissions on bookings and a freemium subscription tier for advanced planning features, with an initial go-to-market focused on group coordinators and solo travelers. The long-term moat is a preference model that improves with every trip planned, compounding into a data advantage that becomes harder to replicate as OTAs would need both the AI layer and years of preference signal to catch up.
 
 ---
 
@@ -120,18 +120,14 @@ The hybrid approach reduces early conversion friction — users start free, expe
 
 ## 6. Competitive Moat
 
-*What will be hard to copy at scale?*
-
-- [ ] Proprietary preference model (travel DNA / taste graph)
+- [x] Proprietary preference model (travel DNA / taste graph) — preference scoring engine is core to the product; gets more accurate with every proposal generated
 - [ ] Supply-side relationships (exclusive rates, curated inventory)
 - [x] Network effects (group travel, shared packages) — group travel as primary segment creates inherent viral loop: one coordinator brings multiple travelers per trip
-- [ ] Data moat (improving with every trip composed)
+- [x] Data moat (improving with every trip composed) — every user interaction (scores, edits, bookings) trains the preference model; advantage compounds with scale
 
 ---
 
 ## 7. Team & Gaps
-
-*To be filled in — who is building this, and what's missing?*
 
 | Role | Status |
 |---|---|
