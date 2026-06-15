@@ -1434,8 +1434,8 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
                   </span>
                 )}
               </div>
-              {offer.recommendation_why && (
-                <p className={`text-[11px] leading-relaxed ${rec ? "text-white/60" : "text-white/40"}`}>
+              {!rec && offer.recommendation_why && (
+                <p className="text-[11px] leading-relaxed text-white/40">
                   {offer.recommendation_why}
                 </p>
               )}
