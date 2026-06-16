@@ -108,6 +108,7 @@ export interface FlightOffer {
   fare_brand?: string;          // fare brand name (e.g. "Basic Economy", "Main Cabin")
   source?: string;              // "duffel" | "amadeus" — which provider sourced this offer
   is_bookable?: boolean;        // true → can be booked in TravelGrab; false → search-only
+  booking_url?: string;         // for search-only offers: link to external booking page
   outbound_flight_numbers?: string[];   // all outbound segment flight numbers
   return_origin?: string;
   return_destination?: string;
@@ -346,6 +347,7 @@ function normalizeFlight(offer: ProviderOffer, adults: number, trip_type: string
     fare_brand: offer.fareBrand ?? "",
     source,
     is_bookable: isBookableInTravelGrab,
+    booking_url: offer.bookingUrl,
     ...returnLeg,
   };
 }

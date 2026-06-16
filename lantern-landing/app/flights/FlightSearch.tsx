@@ -479,6 +479,7 @@ interface FlightOffer {
   offer_id?: string;
   source?: string;       // "duffel" | "amadeus" — which provider sourced this offer
   is_bookable?: boolean; // false → search-only, shown with "Search only" label
+  booking_url?: string; // for search-only offers: direct link to external booking page
   outbound_flight_numbers?: string[];
   return_origin?: string;
   return_destination?: string;
@@ -1563,7 +1564,8 @@ function buildGoogleFlightsUrl(
   const route = returnDate
     ? `${origin}.${destination}.${departureDate}*${destination}.${origin}.${returnDate}`
     : `${origin}.${destination}.${departureDate}`;
-  return `https://www.google.com/travel/flights#flt=${route};c:USD;e:${cc};px:${adults};sd:1`;
+  // google.com/flights (not /travel/flights) correctly handles the #flt= fragment
+  return `https://www.google.com/flights?hl=en#flt=${route};c:USD;e:${cc};px:${adults};sd:1`;
 }
 
 // ── FlightCard ────────────────────────────────────────────────────────────────
@@ -2520,14 +2522,14 @@ export default function FlightSearch() {
                   priorities={priorities}
                   googleFlightsUrl={
                     offer.is_bookable === false && searchedParams
-                      ? buildGoogleFlightsUrl(
+                      ? (offer.booking_url ?? buildGoogleFlightsUrl(
                           offer.origin,
                           offer.destination,
                           searchedParams.departureDate,
                           searchedParams.tripType === "roundtrip" ? searchedParams.returnDate : null,
                           searchedParams.travelers,
                           searchedParams.cabin,
-                        )
+                        ))
                       : undefined
                   }
                 />
