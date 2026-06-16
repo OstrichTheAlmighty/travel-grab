@@ -1500,11 +1500,12 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
 
 // ── FlightCard ────────────────────────────────────────────────────────────────
 
-function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
+function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType }: {
   offer: FlightOffer;
   cardRef?: React.RefObject<HTMLDivElement | null>;
   priorityWeights: Record<string, number>;
   priorities: Priority[];
+  tripType?: string;
 }) {
   const rec = offer.is_recommended;
   const [scoreOpen, setScoreOpen] = useState(false);
@@ -1672,7 +1673,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
               <div className="text-[10px] font-mono font-bold text-white/40">{offer.destination}</div>
             </div>
           </div>
-          {offer.return_depart_time && (
+          {offer.return_depart_time ? (
             <>
               <div className="text-[9px] text-white/25 font-bold uppercase tracking-wider px-1">Return</div>
               <div className="flex items-center gap-2 py-2 px-3 rounded-lg bg-white/[0.02] border border-white/[0.04]">
@@ -1699,7 +1700,27 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
                 </div>
               </div>
             </>
-          )}
+          ) : tripType === "roundtrip" && offer.source === "google_flights" ? (
+            <>
+              <div className="text-[9px] text-white/25 font-bold uppercase tracking-wider px-1">Return</div>
+              <div className="flex items-center gap-2 py-2 px-3 rounded-lg bg-white/[0.02] border border-white/[0.04]">
+                <div className="flex-1 text-center">
+                  {offer.booking_url ? (
+                    <a
+                      href={offer.booking_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[11px] text-white/35 hover:text-white/60 transition-colors underline underline-offset-2 decoration-white/20"
+                    >
+                      Return details available on Google Flights
+                    </a>
+                  ) : (
+                    <span className="text-[11px] text-white/30">Return details available on Google Flights</span>
+                  )}
+                </div>
+              </div>
+            </>
+          ) : null}
         </div>
 
         {/* ── AI Score bar ── */}
@@ -2418,6 +2439,7 @@ export default function FlightSearch() {
                 </span>
               </div>
             )}
+            {process.env.NODE_ENV !== "production" && (
             <div style={{ maxWidth: 800, margin: "0 auto 4px", textAlign: "right" }}>
               <button
                 onClick={() => setDebugOpen((o) => !o)}
@@ -2426,7 +2448,8 @@ export default function FlightSearch() {
                 {debugOpen ? "▲ hide dev trace" : "▼ dev trace"}
               </button>
             </div>
-            {debugOpen && (
+            )}
+            {process.env.NODE_ENV !== "production" && debugOpen && (
             <div style={{ fontFamily: "'Courier New', Courier, monospace", fontSize: 12, background: "#030a03", color: "#4ade80", padding: "14px 18px", borderRadius: 8, border: "1px solid #14532d", margin: "0 auto 16px", maxWidth: 800, lineHeight: 1.75, overflowX: "auto", whiteSpace: "pre" }}>
               <span style={{ color: "#86efac", fontWeight: "bold" }}>{"▶ TRAVELGRAB FLIGHT SEARCH TRACE\n"}</span>
               {`ENABLED_PROVIDERS:      ${debugStats?.enabled_providers ?? "—"}\n`}
@@ -2482,6 +2505,7 @@ export default function FlightSearch() {
                   cardRef={i === 0 ? topPickRef : undefined}
                   priorityWeights={activeWeights}
                   priorities={priorities}
+                  tripType={searchedParams?.tripType}
                 />
               ))}
             </div>
