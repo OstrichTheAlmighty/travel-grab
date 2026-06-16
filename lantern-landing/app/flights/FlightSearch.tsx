@@ -489,6 +489,7 @@ interface FlightOffer {
   return_stop_label?: string;
   return_connection_airports?: string;
   return_flight_numbers?: string[];
+  partial_round_trip?: boolean;
 }
 
 interface BookingIntent {
@@ -875,13 +876,13 @@ function rerankOffers(
     if (priceDiff === 0)        pos.push({ positive: true,  text: "Cheapest in this result set" });
     else if (priceDiff <= 30)   pos.push({ positive: true,  text: `Only $${priceDiff} more than cheapest` });
 
-    if (durDiff === 0)          pos.push({ positive: true,  text: "Fastest flight in this set" });
+    if (durDiff === 0)          pos.push({ positive: true,  text: o.partial_round_trip ? "Fast outbound in this set" : "Fastest flight in this set" });
 
     if (o.stops === 0 && hasConnecting) pos.push({ positive: true, text: "Only nonstop option" });
     else if (o.stops === 0)             pos.push({ positive: true, text: "Nonstop flight" });
 
     if ((bd.timing  ?? 0) === maxTiming  && maxTiming  > 0)  pos.push({ positive: true,  text: "Best arrival timing in set" });
-    if ((bd.fatigue ?? 0) === maxFatigue && maxFatigue > 0)  pos.push({ positive: true,  text: "Lowest travel fatigue score" });
+    if ((bd.fatigue ?? 0) === maxFatigue && maxFatigue > 0)  pos.push({ positive: true,  text: o.partial_round_trip ? "Low outbound fatigue score" : "Lowest travel fatigue score" });
     if ((bd.cabin   ?? 0) === maxCabin   && maxCabin   > 0)  pos.push({ positive: true,  text: "Best comfort in this set" });
 
     // Negative bullets
@@ -1619,6 +1620,11 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType }: {
                 {offer.is_bookable === false && (
                   <span className="text-[10px] font-bold uppercase tracking-widest border border-amber-500/40 bg-amber-500/10 text-amber-400 rounded-full px-2 py-0.5 leading-none">
                     Search only
+                  </span>
+                )}
+                {offer.partial_round_trip && (
+                  <span className="text-[10px] text-white/30 leading-none">
+                    Return details and final price verified on Google Flights.
                   </span>
                 )}
               </div>

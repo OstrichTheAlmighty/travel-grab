@@ -118,6 +118,7 @@ export interface FlightOffer {
   return_stop_label?: string;
   return_connection_airports?: string;
   return_flight_numbers?: string[];
+  partial_round_trip?: boolean; // true when source=google_flights and return leg data is unavailable
 }
 
 // ── Airline IATA lookup ──────────────────────────────────────────────────────
@@ -342,6 +343,7 @@ function normalizeFlight(offer: ProviderOffer, adults: number, trip_type: string
     source,
     is_bookable: isBookableInTravelGrab,
     booking_url: offer.bookingUrl,
+    partial_round_trip: source === "google_flights" && !offer.returnDepartureTime ? true : undefined,
     ...returnLeg,
   };
 }
@@ -581,8 +583,10 @@ function buildWinsOn(o: FlightOffer, ctx: OfferContext, all: FlightOffer[]): str
   const jetLagRank = JET_LAG_RANK[o.jet_lag] ?? 2;
   const wins: string[] = [];
 
+  const partial = !!o.partial_round_trip;
+
   if (priceDiff <= 0) wins.push(`Lowest fare at ${moneyUsd(o.price_total)}`);
-  if (durDiff <= 10) wins.push(`Fastest option at ${o.duration}`);
+  if (durDiff <= 10) wins.push(partial ? `Fast outbound option at ${o.duration}` : `Fastest option at ${o.duration}`);
 
   if (o.stops === 0) {
     const withStops = all.filter((x) => x.stops > 0).length;
@@ -591,15 +595,23 @@ function buildWinsOn(o: FlightOffer, ctx: OfferContext, all: FlightOffer[]): str
   }
 
   if (timeSavedVsCheapest > 30 && priceDiff > 0) {
-    const tLabel = timeSavedVsCheapest < 60
-      ? `${timeSavedVsCheapest} minutes`
-      : minuteLabel(timeSavedVsCheapest);
-    wins.push(`${tLabel} faster than the cheapest option`);
+    wins.push(partial
+      ? "Outbound is faster than comparable visible options"
+      : (() => {
+          const tLabel = timeSavedVsCheapest < 60
+            ? `${timeSavedVsCheapest} minutes`
+            : minuteLabel(timeSavedVsCheapest);
+          return `${tLabel} faster than the cheapest option`;
+        })()
+    );
   }
 
   if (fatigueRank === ctx.bestFatigueRank) {
     const count = all.filter((x) => (FATIGUE_RANK[x.travel_fatigue] ?? 2) > fatigueRank).length;
-    if (count > 0) wins.push(`Lowest travel fatigue (${o.travel_fatigue}) among visible results`);
+    if (count > 0) wins.push(partial
+      ? `Low outbound fatigue (${o.travel_fatigue})`
+      : `Lowest travel fatigue (${o.travel_fatigue}) among visible results`
+    );
   }
 
   if (timingRank === ctx.bestTimingRank && timingRank >= 3) {
@@ -724,7 +736,9 @@ function buildComparisonSummary(
 
   // Pattern E: fastest (connecting) but costs more
   if (isFastest && priceDiff > 0)
-    return `Fastest option at ${o.duration}, but costs ${moneyUsd(priceDiff)} more than the cheapest fare.`;
+    return o.partial_round_trip
+      ? `Fast outbound at ${o.duration}, but costs ${moneyUsd(priceDiff)} more than the cheapest fare.`
+      : `Fastest option at ${o.duration}, but costs ${moneyUsd(priceDiff)} more than the cheapest fare.`;
 
   // Pattern F: higher price, wins on quality metrics
   if (priceDiff > 0 && qualityWins.length >= 2)
