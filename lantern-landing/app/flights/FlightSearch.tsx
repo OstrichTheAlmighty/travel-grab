@@ -1622,11 +1622,6 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType }: {
                     Search only
                   </span>
                 )}
-                {offer.partial_round_trip && (
-                  <span className="text-[10px] text-white/30 leading-none">
-                    Return details and final price verified on Google Flights.
-                  </span>
-                )}
               </div>
               {!rec && offer.recommendation_why && (
                 <p className="text-[11px] leading-relaxed text-white/40">
@@ -1641,12 +1636,19 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType }: {
             </div>
             <div className="text-[11px] text-white/35 mt-0.5">{offer.cabin}</div>
             {analysisOpen && (
-              <button
-                onClick={handleBookClick}
-                className="mt-2 text-[11px] font-bold text-white bg-lantern-violet hover:bg-lantern-violet/80 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
-              >
-                {offer.is_bookable === false ? "View booking options" : "Book this flight"}
-              </button>
+              <>
+                <button
+                  onClick={handleBookClick}
+                  className="mt-2 text-[11px] font-bold text-white bg-lantern-violet hover:bg-lantern-violet/80 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
+                >
+                  {offer.is_bookable === false ? "View booking options" : "Book this flight"}
+                </button>
+                {offer.is_bookable === false && (
+                  <p className="text-[10px] text-white/25 mt-1 leading-snug">
+                    Opens matching Google Flights results. Price may vary.
+                  </p>
+                )}
+              </>
             )}
           </div>
         </div>
@@ -1718,10 +1720,10 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType }: {
                       rel="noopener noreferrer"
                       className="text-[11px] text-white/35 hover:text-white/60 transition-colors underline underline-offset-2 decoration-white/20"
                     >
-                      Return details available on Google Flights
+                      View complete round-trip itinerary on Google Flights
                     </a>
                   ) : (
-                    <span className="text-[11px] text-white/30">Return details available on Google Flights</span>
+                    <span className="text-[11px] text-white/30">View complete round-trip itinerary on Google Flights</span>
                   )}
                 </div>
               </div>

@@ -351,9 +351,22 @@ function normalizeFlight(offer: ProviderOffer, adults: number, trip_type: string
 // ── Deduplication ────────────────────────────────────────────────────────────
 
 function deduplicateOffers(offers: FlightOffer[]): FlightOffer[] {
-  // Key on itinerary + connection airports — collapses true codeshares but keeps distinct routings
+  // Key includes airline, flight numbers, times, stops, connection airports, and price.
+  // Including airline + flight numbers prevents distinct carriers on the same route from collapsing.
+  // Including price keeps Duffel bookable + SerpAPI search-only as separate visible offers when priced differently.
   const itinKey = (o: FlightOffer) =>
-    [o.origin, o.destination, o.depart_time, o.arrive_time, o.duration, o.stops, o.connection_airports].join("|");
+    [
+      o.airline_code,
+      (o.outbound_flight_numbers ?? [o.flight_number]).join("+"),
+      o.origin,
+      o.destination,
+      o.depart_time,
+      o.arrive_time,
+      o.duration,
+      o.stops,
+      o.connection_airports,
+      Math.round(o.price_total),
+    ].join("|");
 
   // Prefer real carriers; Duffel test keys return synthetic "Duffel Airways" / code ZZ offers
   const isReal = (o: FlightOffer) =>
@@ -583,10 +596,11 @@ function buildWinsOn(o: FlightOffer, ctx: OfferContext, all: FlightOffer[]): str
   const jetLagRank = JET_LAG_RANK[o.jet_lag] ?? 2;
   const wins: string[] = [];
 
-  const partial = !!o.partial_round_trip;
+  const partial  = !!o.partial_round_trip;
+  const isFastest = durDiff <= 10;
 
   if (priceDiff <= 0) wins.push(`Lowest fare at ${moneyUsd(o.price_total)}`);
-  if (durDiff <= 10) wins.push(partial ? `Fast outbound option at ${o.duration}` : `Fastest option at ${o.duration}`);
+  if (isFastest) wins.push(partial ? `Fast outbound option at ${o.duration}` : `Fastest option at ${o.duration}`);
 
   if (o.stops === 0) {
     const withStops = all.filter((x) => x.stops > 0).length;
@@ -594,7 +608,9 @@ function buildWinsOn(o: FlightOffer, ctx: OfferContext, all: FlightOffer[]): str
       wins.push(`Nonstop — ${withStops} alternative${withStops !== 1 ? "s" : ""} require a connection`);
   }
 
-  if (timeSavedVsCheapest > 30 && priceDiff > 0) {
+  // Only add "faster than cheapest" when this offer is NOT already labeled the fastest — stacking
+  // both bullets confuses the AI summariser into saying "closest alternative" instead of "cheapest option".
+  if (!isFastest && timeSavedVsCheapest > 30 && priceDiff > 0) {
     wins.push(partial
       ? "Outbound is faster than comparable visible options"
       : (() => {
@@ -875,7 +891,7 @@ RULES:
 - advisor_summary: 1-2 sentences. State the clearest reason this flight wins, then one honest tradeoff if relevant. If it is cheap and fast, say so plainly. Do not explain short or obvious flights at length.
 - why_this: 2-3 short bullets. Each must cite a specific number or fact. No filler.
 - tradeoffs: 1-2 short bullets. Be honest. Use exact price or time differences. Omit if there are no real tradeoffs.
-- comparison_note: 1 sentence. Compare top pick to the closest alternative using actual numbers (price gap, time gap, stops difference).
+- comparison_note: 1 sentence. Compare top pick to the next cheapest alternative or next fastest alternative — be explicit about WHICH you are comparing to. Say "cheapest option" when comparing to cheapest. Say "next fastest" when comparing by time. NEVER use the phrase "closest alternative" — it is ambiguous and forbidden.
 
 Example advisor_summary style: "This is the cheapest nonstop at $312, and it arrives at 14:30 — a reasonable time with low fatigue. The next option is $180 more for a similar flight time."
 
