@@ -728,42 +728,48 @@ function buildComparisonSummary(
     return `Lowest visible fare at ${moneyUsd(o.price_total)} with no major tradeoffs.`;
   }
 
-  // Pattern C: small premium over cheapest, but saves meaningful time
-  if (priceDiff > 0 && priceDiff <= 75 && timeSavedVsCheapest > 30)
-    return `Only ${moneyUsd(priceDiff)} more than the cheapest option but saves ${minuteLabel(timeSavedVsCheapest)}.`;
+  // Pattern C: nonstop + saves time — the gold standard tradeoff sentence
+  if (isNonstop && timeSavedVsCheapest > 30 && priceDiff > 0) {
+    const connectingOffers = all.filter((x) => x.stops > 0);
+    const cheapestConnecting = connectingOffers.length > 0
+      ? connectingOffers.reduce((a, b) => a.price_total <= b.price_total ? a : b)
+      : null;
+    const premium = cheapestConnecting ? Math.round(o.price_total - cheapestConnecting.price_total) : priceDiff;
+    if (premium > 0 && premium <= 200)
+      return `For ${moneyUsd(premium)} more, saves ${minuteLabel(timeSavedVsCheapest)} and avoids a connection.`;
+  }
 
-  // Pattern D: nonstop for modest premium over cheapest connecting option
+  // Pattern D: small premium over cheapest, saves meaningful time (connecting)
+  if (!isNonstop && priceDiff > 0 && priceDiff <= 80 && timeSavedVsCheapest > 30)
+    return `For ${moneyUsd(priceDiff)} more, saves ${minuteLabel(timeSavedVsCheapest)} over the cheapest option.`;
+
+  // Pattern E: nonstop for modest premium, no big time saving
   if (isNonstop) {
     const connectingOffers = all.filter((x) => x.stops > 0);
     if (connectingOffers.length > 0) {
       const cheapestConnecting = connectingOffers.reduce((a, b) => a.price_total <= b.price_total ? a : b);
       const nonstopPremium = Math.round(o.price_total - cheapestConnecting.price_total);
-      if (nonstopPremium > 0 && nonstopPremium <= 120) {
-        const extra = qualityWins.find((w) => !w.includes("Nonstop"));
-        return extra
-          ? `Nonstop for ${moneyUsd(nonstopPremium)} more than the cheapest connecting option, with ${extra.toLowerCase()}.`
-          : `Nonstop for only ${moneyUsd(nonstopPremium)} more than the cheapest connecting option.`;
-      }
+      if (nonstopPremium > 0 && nonstopPremium <= 150)
+        return `For ${moneyUsd(nonstopPremium)} more, avoids the connection — cheapest option requires a stop.`;
     }
-    // Nonstop but expensive
     if (qualityWins.length > 0)
       return `Nonstop with ${qualityWins[0].toLowerCase()}, though ${moneyUsd(priceDiff)} more than the cheapest fare.`;
-    return `Nonstop option — ${moneyUsd(priceDiff)} more than cheapest, but avoids connections entirely.`;
+    return `Nonstop, ${moneyUsd(priceDiff)} more than cheapest — avoids connections entirely.`;
   }
 
-  // Pattern E: fastest (connecting) but costs more
+  // Pattern F: fastest connecting but costs more
   if (isFastest && priceDiff > 0)
     return o.partial_round_trip
-      ? `Fast outbound at ${o.duration}, but costs ${moneyUsd(priceDiff)} more than the cheapest fare.`
-      : `Fastest option at ${o.duration}, but costs ${moneyUsd(priceDiff)} more than the cheapest fare.`;
+      ? `Fast outbound at ${o.duration}, ${moneyUsd(priceDiff)} more than the cheapest option.`
+      : `Fastest at ${o.duration}, ${moneyUsd(priceDiff)} more than the cheapest option.`;
 
-  // Pattern F: higher price, wins on quality metrics
+  // Pattern G: higher price, wins on quality metrics
   if (priceDiff > 0 && qualityWins.length >= 2)
-    return `This flight costs ${moneyUsd(priceDiff)} more than the cheapest option, but ${qualityWins[0].toLowerCase()} and ${qualityWins[1].toLowerCase()}.`;
+    return `For ${moneyUsd(priceDiff)} more: ${qualityWins[0].toLowerCase()} and ${qualityWins[1].toLowerCase()}.`;
   if (priceDiff > 0 && qualityWins.length === 1)
-    return `This flight costs ${moneyUsd(priceDiff)} more than the cheapest option, but ${qualityWins[0].toLowerCase()}.`;
+    return `For ${moneyUsd(priceDiff)} more: ${qualityWins[0].toLowerCase()}.`;
 
-  // Pattern G: nothing standout — pick a tradeoff that doesn't repeat the price amount
+  // Pattern H: nothing standout
   const nonPriceTradeoff = tradeoffs.find((t) => !t.toLowerCase().includes("more than the cheapest"));
   if (nonPriceTradeoff)
     return `${moneyUsd(priceDiff)} more than cheapest — ${nonPriceTradeoff.toLowerCase()}.`;

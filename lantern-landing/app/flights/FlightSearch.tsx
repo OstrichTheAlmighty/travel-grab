@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback, useMemo } from "react";
 import Link from "next/link";
+import { track } from "@/lib/analytics";
 
 // ── Airport data ──────────────────────────────────────────────────────────────
 
@@ -492,17 +493,6 @@ interface FlightOffer {
   partial_round_trip?: boolean;
 }
 
-interface BookingIntent {
-  airline: string;
-  flight_number: string;
-  origin: string;
-  destination: string;
-  depart_time: string;
-  arrive_time: string;
-  price: number;
-  score: number;
-  priorities: string[];
-}
 
 interface RawOfferRow {
   airline: string;
@@ -1529,23 +1519,28 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType }: {
   }, [bookOpen]);
 
   const handleBookClick = () => {
-    const intent: BookingIntent = {
-      airline:       offer.airline,
-      flight_number: offer.flight_number,
-      origin:        offer.origin,
-      destination:   offer.destination,
-      depart_time:   offer.depart_time,
-      arrive_time:   offer.arrive_time,
-      price:         Math.round(offer.price_total),
-      score:         offer.ai_score,
-      priorities,
+    const sharedProps = {
+      airline:      offer.airline,
+      flight:       offer.flight_number,
+      origin:       offer.origin,
+      destination:  offer.destination,
+      price:        Math.round(offer.price_total),
+      score:        offer.ai_score,
     };
-    console.log("[booking-intent]", intent);
-    // Fire-and-forget — non-critical; does not block the UI
+
+    if (offer.is_bookable === false) {
+      track("google_flights_clicked", sharedProps);
+      if (offer.booking_url) {
+        window.open(offer.booking_url, "_blank", "noopener,noreferrer");
+      }
+      return;
+    }
+
+    track("duffel_booking_clicked", sharedProps);
     fetch("/api/booking-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...intent, timestamp: new Date().toISOString() }),
+      body: JSON.stringify({ ...sharedProps, depart_time: offer.depart_time, arrive_time: offer.arrive_time, priorities, timestamp: new Date().toISOString() }),
     }).catch(() => undefined);
     setBookOpen(true);
   };
@@ -1619,7 +1614,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType }: {
                 )}
                 {offer.is_bookable === false && (
                   <span className="text-[10px] font-bold uppercase tracking-widest border border-amber-500/40 bg-amber-500/10 text-amber-400 rounded-full px-2 py-0.5 leading-none">
-                    Search only
+                    View on Google Flights
                   </span>
                 )}
               </div>
@@ -1853,7 +1848,12 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType }: {
           </button>
           {!rec && (
             <button
-              onClick={() => setAnalysisOpen((o) => !o)}
+              onClick={() => {
+                if (!analysisOpen) {
+                  track("flight_result_clicked", { airline: offer.airline, flight: offer.flight_number, price: Math.round(offer.price_total) });
+                }
+                setAnalysisOpen((o) => !o);
+              }}
               className={`flex items-center gap-1.5 text-[11px] font-medium border rounded-lg px-3 py-1.5 transition-colors ${
                 analysisOpen
                   ? "text-white/60 border-white/15 bg-white/[0.04]"
@@ -2138,6 +2138,16 @@ export default function FlightSearch() {
     }
     setErrors(errs);
     if (errs.length > 0) return;
+
+    track("flight_search_submitted", {
+      origin:         origin!.kind === "airport" ? origin!.code : origin!.id,
+      destination:    destination!.kind === "airport" ? destination!.code : destination!.id,
+      trip_type:      tripType,
+      cabin,
+      travelers,
+      departure_date: departureDate,
+      return_date:    returnDate || undefined,
+    });
 
     setSearchState("loading");
     setSearchedParams({ origin: origin!, destination: destination!, tripType, cabin, travelers });
