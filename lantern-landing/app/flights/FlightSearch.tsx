@@ -1498,28 +1498,6 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
   );
 }
 
-<<<<<<< HEAD
-// ── Helpers ───────────────────────────────────────────────────────────────────
-
-function buildGoogleFlightsUrl(
-  origin: string,
-  destination: string,
-  departureDate: string,
-  returnDate: string | null,
-  adults: number,
-  cabin: CabinClass,
-): string {
-  const CABIN_CODES: Record<CabinClass, string> = { economy: "1", premium_economy: "2", business: "3", first: "4" };
-  const cc = CABIN_CODES[cabin] ?? "1";
-  const route = returnDate
-    ? `${origin}.${destination}.${departureDate}*${destination}.${origin}.${returnDate}`
-    : `${origin}.${destination}.${departureDate}`;
-  // google.com/flights (not /travel/flights) correctly handles the #flt= fragment
-  return `https://www.google.com/flights?hl=en#flt=${route};c:USD;e:${cc};px:${adults};sd:1`;
-}
-
-=======
->>>>>>> parent of d26484d (Add Google Flights booking links and improve flight details)
 // ── FlightCard ────────────────────────────────────────────────────────────────
 
 function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
@@ -2504,21 +2482,6 @@ export default function FlightSearch() {
                   cardRef={i === 0 ? topPickRef : undefined}
                   priorityWeights={activeWeights}
                   priorities={priorities}
-<<<<<<< HEAD
-                  googleFlightsUrl={
-                    offer.is_bookable === false && searchedParams
-                      ? (offer.booking_url ?? buildGoogleFlightsUrl(
-                          offer.origin,
-                          offer.destination,
-                          searchedParams.departureDate,
-                          searchedParams.tripType === "roundtrip" ? searchedParams.returnDate : null,
-                          searchedParams.travelers,
-                          searchedParams.cabin,
-                        ))
-                      : undefined
-                  }
-=======
->>>>>>> parent of d26484d (Add Google Flights booking links and improve flight details)
                 />
               ))}
             </div>
