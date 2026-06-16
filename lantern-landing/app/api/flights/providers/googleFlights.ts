@@ -9,6 +9,11 @@ import type {
 
 type R = Record<string, unknown>;
 
+interface NormalizeStats {
+  passedBasicParsing: number;
+  dropReasons: Map<string, number>;
+}
+
 // SerpAPI cabin class codes
 const SERPAPI_CABIN: Record<string, string> = {
   economy: "1",
@@ -97,20 +102,36 @@ export class GoogleFlightsProvider implements FlightSearchProvider {
     const searchMetadata = (body.search_metadata as R | undefined) ?? {};
     const serpApiGoogleUrl = (searchMetadata.google_flights_url as string | undefined) ?? "";
 
-    // ── Debug: response structure ─────────────────────────────────────────────
+    // ── Debug: FIRST_RAW_SERPAPI_RESULT structure ─────────────────────────────
+    console.log(`\n[google_flights][debug] ═══════════════════════════════════════════════`);
+    console.log(`RAW_SERPAPI_OFFERS=${allRaw.length}  (best=${best.length} other=${other.length})`);
     if (allRaw.length > 0) {
-      const firstResult = allRaw[0];
-      const hasReturnFlights = "return_flights" in firstResult;
-      const hasBookingOptions = "booking_options" in firstResult;
-      const retCount = ((firstResult.return_flights as R[] | undefined) ?? []).length;
-      console.log(`\n[google_flights][debug] best=${best.length} other=${other.length} total=${allRaw.length}`);
-      console.log(`[google_flights][debug] first result keys: ${Object.keys(firstResult).join(", ")}`);
-      console.log(`[google_flights][debug] return_flights: ${hasReturnFlights ? `YES (${retCount} segments)` : "NO"}`);
-      console.log(`[google_flights][debug] booking_options: ${hasBookingOptions ? "YES" : "NO"}`);
-      console.log(`[google_flights][debug] search google_flights_url: ${serpApiGoogleUrl || "not found"}\n`);
+      const fr = allRaw[0];
+      const allKeys = Object.keys(fr);
+      const returnKeys = allKeys.filter((k) => /return|back|inbound/i.test(k));
+      console.log(`FIRST_RAW_SERPAPI_RESULT keys: ${allKeys.join(", ")}`);
+      console.log(`FIRST_RAW_SERPAPI_RESULT return-related keys: ${returnKeys.join(", ") || "NONE"}`);
+      console.log(`FIRST_RAW_SERPAPI_RESULT type: ${String(fr.type ?? "(missing)")}`);
+      // Log full flights array so we can see outbound segment shape
+      console.log(`FIRST_RAW_SERPAPI_RESULT flights: ${JSON.stringify(fr.flights ?? [])}`);
+      // Log each candidate return-data field
+      for (const key of ["return_flights", "return_legs", "return_itinerary", "returnFlights"]) {
+        if (key in fr) {
+          console.log(`FIRST_RAW_SERPAPI_RESULT ${key}: ${JSON.stringify(fr[key])}`);
+        }
+      }
+      if (returnKeys.length > 0) {
+        for (const k of returnKeys) {
+          if (!["return_flights", "return_legs", "return_itinerary", "returnFlights"].includes(k)) {
+            console.log(`FIRST_RAW_SERPAPI_RESULT ${k}: ${JSON.stringify(fr[k])}`);
+          }
+        }
+      }
     }
-    // ── End debug ─────────────────────────────────────────────────────────────
+    console.log(`[google_flights][debug] ═══════════════════════════════════════════════\n`);
+    // ── End structure debug ───────────────────────────────────────────────────
 
+    const normalizeStats: NormalizeStats = { passedBasicParsing: 0, dropReasons: new Map() };
     const offers: ProviderOffer[] = [];
     const perOfferRows: PerOfferDebugRow[] = [];
 
@@ -133,11 +154,19 @@ export class GoogleFlightsProvider implements FlightSearchProvider {
         source:      "google_flights",
       });
 
-      const offer = this.normalizeOffer(raw, params.origin, params.destination, params.trip_type, serpApiGoogleUrl);
+      const offer = this.normalizeOffer(raw, params.origin, params.destination, params.trip_type, serpApiGoogleUrl, normalizeStats);
       if (offer) offers.push(offer);
     }
 
-    // ── Debug: top result ─────────────────────────────────────────────────────
+    // ── Debug: pipeline drop summary ──────────────────────────────────────────
+    const droppedMissingReturn = normalizeStats.dropReasons.get("missing_return_data") ?? 0;
+    const reasonSummary = [...normalizeStats.dropReasons.entries()].map(([r, n]) => `${r}:${n}`).join(" ") || "none";
+    console.log(`[google_flights][pipeline] SERPAPI_PARSED_BEFORE_ROUNDTRIP_VALIDATION=${normalizeStats.passedBasicParsing}`);
+    console.log(`[google_flights][pipeline] SERPAPI_DROPPED_MISSING_RETURN=${droppedMissingReturn}`);
+    console.log(`[google_flights][pipeline] SERPAPI_DROPPED_REASON_COUNTS=${reasonSummary}`);
+    // ── End pipeline debug ────────────────────────────────────────────────────
+
+    // ── Debug: top normalized result ──────────────────────────────────────────
     if (offers.length > 0) {
       const top = offers[0];
       const depDate = top.departureTime.slice(0, 10);
@@ -150,7 +179,7 @@ export class GoogleFlightsProvider implements FlightSearchProvider {
       console.log(`[google_flights] GOOGLE_RETURN_SEGMENTS=${top.returnFlightNumbers?.join(" · ") ?? "n/a (one-way or missing)"}`);
       console.log(`[google_flights] GOOGLE_FLIGHTS_LINK=${gLink}`);
     }
-    // ── End debug ─────────────────────────────────────────────────────────────
+    // ── End top result debug ──────────────────────────────────────────────────
 
     const debug: ProviderDebugInfo = {
       httpStatus:         resp.status,
@@ -159,9 +188,11 @@ export class GoogleFlightsProvider implements FlightSearchProvider {
       requestPayloadJson,
       perOfferRows,
       extra: {
-        best_count:       best.length,
-        other_count:      other.length,
-        normalized_count: offers.length,
+        best_count:                best.length,
+        other_count:               other.length,
+        normalized_count:          offers.length,
+        parsed_before_rt_filter:   normalizeStats.passedBasicParsing,
+        dropped_missing_return:    droppedMissingReturn,
       },
     };
 
@@ -176,9 +207,15 @@ export class GoogleFlightsProvider implements FlightSearchProvider {
     reqDest: string,
     tripType: string,
     searchUrl: string,
+    stats: NormalizeStats,
   ): ProviderOffer | null {
+    const dropWith = (reason: string): null => {
+      stats.dropReasons.set(reason, (stats.dropReasons.get(reason) ?? 0) + 1);
+      return null;
+    };
+
     const flights = (raw.flights as R[] | undefined) ?? [];
-    if (!flights.length) return null;
+    if (!flights.length) return dropWith("no_flights_array");
 
     const first = flights[0];
     const last  = flights[flights.length - 1];
@@ -191,7 +228,7 @@ export class GoogleFlightsProvider implements FlightSearchProvider {
 
     const depTimeRaw = (depAirport.time as string | undefined) ?? "";
     const arrTimeRaw = (arrAirport.time as string | undefined) ?? "";
-    if (!depTimeRaw || !arrTimeRaw) return null;
+    if (!depTimeRaw || !arrTimeRaw) return dropWith("missing_dep_arr_time");
 
     const departureTime = serpapiTimeToIso(depTimeRaw);
     const arrivalTime   = serpapiTimeToIso(arrTimeRaw);
@@ -207,16 +244,16 @@ export class GoogleFlightsProvider implements FlightSearchProvider {
     const flightDuration  = flights.reduce((s: number, f: R) => s + (typeof f.duration === "number" ? f.duration : 0), 0);
     const layoverDuration = layovers.reduce((s: number, l: R) => s + (typeof l.duration === "number" ? l.duration : 0), 0);
     const durationMinutes = (flightDuration + layoverDuration) || (typeof raw.total_duration === "number" ? raw.total_duration : 0);
-    if (durationMinutes < 30) return null;
+    if (durationMinutes < 30) return dropWith("duration_under_30min");
 
     const rawPrice = typeof raw.price === "number"
       ? raw.price
       : parseFloat(String(raw.price ?? "0")) || 0;
-    if (rawPrice <= 0) return null;
+    if (rawPrice <= 0) return dropWith("no_price");
 
     const airline   = (first.airline      as string | undefined) ?? "";
     const flightNum = (first.flight_number as string | undefined) ?? "";
-    if (!airline || !flightNum) return null;
+    if (!airline || !flightNum) return dropWith("missing_airline_or_flight_number");
 
     const airlineCode = flightNum.split(" ")[0] ?? "";
 
@@ -237,11 +274,29 @@ export class GoogleFlightsProvider implements FlightSearchProvider {
       ? compositeId
       : ((raw.departure_token as string | undefined) ?? flightNumbers.join("+") ?? "gf_unknown");
 
+    // Passed basic outbound parsing — count before round-trip check
+    stats.passedBasicParsing++;
+
     // ── Return leg (round-trip) ───────────────────────────────────────────────
-    const returnFlights = (raw.return_flights as R[] | undefined) ?? [];
+    // Try every known field name SerpAPI might use for the return leg.
+    const returnFlights =
+      (raw.return_flights   as R[] | undefined) ??
+      (raw.return_legs      as R[] | undefined) ??
+      (raw.returnFlights    as R[] | undefined) ??
+      (raw.return_itinerary as R[] | undefined) ??
+      [];
+
     if (tripType === "roundtrip" && returnFlights.length === 0) {
-      console.log(`[google_flights][filter_removed] ${airline} ${flightNum} reason="round-trip but no return_flights in SerpAPI result"`);
-      return null;
+      // Log the exact top-level keys so we know which field to look for
+      const rawKeys = Object.keys(raw);
+      const returnRelated = rawKeys.filter((k) => /return|back|inbound/i.test(k));
+      console.log(
+        `[google_flights][incomplete] ${airline} ${flightNum}` +
+        ` missing_field="return_flights|return_legs|returnFlights|return_itinerary"` +
+        ` raw_keys="${rawKeys.join(",")}"` +
+        ` return_related_keys="${returnRelated.join(",") || "NONE"}"`
+      );
+      return dropWith("missing_return_data");
     }
 
     let returnLegFields: Partial<ProviderOffer> = {};
