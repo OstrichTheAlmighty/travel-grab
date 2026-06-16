@@ -38,9 +38,27 @@ interface HotelOffer {
     stars:       number;
     walkability: number;
   };
+  neighborhood_fit_score:  number;
+  inferred_neighborhood:   string;
+  neighborhood_fit_label:  string;
 }
 
 type SearchState = "idle" | "loading" | "results" | "error";
+
+// ── Neighborhood preference chips ─────────────────────────────────────────────
+
+const NEIGHBORHOOD_PREFS: { id: string; label: string; icon: string }[] = [
+  { id: "first-time",  label: "First-time visitor", icon: "✦" },
+  { id: "sightseeing", label: "Best sightseeing",   icon: "🏛" },
+  { id: "food",        label: "Food & restaurants", icon: "🍽" },
+  { id: "nightlife",   label: "Nightlife",           icon: "🎵" },
+  { id: "quiet",       label: "Quiet / relaxed",    icon: "🌿" },
+  { id: "luxury",      label: "Luxury",              icon: "✦" },
+  { id: "budget",      label: "Budget-friendly",    icon: "✦" },
+  { id: "family",      label: "Family-friendly",    icon: "✦" },
+  { id: "transit",     label: "Near transit",        icon: "🚇" },
+  { id: "walkable",    label: "Walkable area",       icon: "✦" },
+];
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
@@ -65,6 +83,13 @@ function labelBg(label: string): string {
   return "bg-white/10 text-white/60 border-white/15";
 }
 
+function fitBg(label: string): string {
+  if (label === "Great fit")   return "bg-lantern-mint/15 text-lantern-mint border-lantern-mint/30";
+  if (label === "Good fit")    return "bg-lantern-blue/15 text-lantern-blue border-lantern-blue/25";
+  if (label === "Partial fit") return "bg-lantern-gold/15 text-lantern-gold border-lantern-gold/25";
+  return "";
+}
+
 function StarRating({ count }: { count: number }) {
   return (
     <span className="flex gap-0.5 text-amber-400">
@@ -84,7 +109,15 @@ function formatDate(iso: string): string {
 
 // ── HotelCard ─────────────────────────────────────────────────────────────────
 
-function HotelCard({ offer, isBestOverall }: { offer: HotelOffer; isBestOverall: boolean }) {
+function HotelCard({
+  offer,
+  isBestOverall,
+  prefsActive,
+}: {
+  offer: HotelOffer;
+  isBestOverall: boolean;
+  prefsActive: boolean;
+}) {
   const [breakdownOpen, setBreakdownOpen] = useState(isBestOverall);
 
   const breakdownRows = [
@@ -95,19 +128,23 @@ function HotelCard({ offer, isBestOverall }: { offer: HotelOffer; isBestOverall:
     { key: "walkability", label: "Walkability",      score: offer.score_breakdown.walkability },
   ].sort((a, b) => b.score - a.score);
 
+  if (prefsActive && offer.neighborhood_fit_score > 0) {
+    breakdownRows.push({ key: "nbhd", label: "Neighborhood Fit", score: offer.neighborhood_fit_score });
+  }
+
   function barColor(s: number): string {
     if (s >= 65) return "bg-lantern-mint";
     if (s >= 45) return "bg-white/25";
     return "bg-lantern-gold/70";
   }
-
-  function barTextColor(s: number): string {
+  function barText(s: number): string {
     if (s >= 65) return "text-lantern-mint";
     if (s >= 45) return "text-white/50";
     return "text-lantern-gold";
   }
 
   const visibleAmenities = offer.amenities.slice(0, 5);
+  const showFitBadge = prefsActive && offer.neighborhood_fit_label;
 
   return (
     <div
@@ -140,7 +177,8 @@ function HotelCard({ offer, isBestOverall }: { offer: HotelOffer; isBestOverall:
           {/* Name + meta */}
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between gap-2 mb-1">
-              <div className="min-w-0">
+              <div className="min-w-0 flex-1">
+                {/* Badges row */}
                 <div className="flex items-center gap-1.5 flex-wrap mb-0.5">
                   {isBestOverall && (
                     <span className="text-[10px] font-black uppercase tracking-widest text-lantern-violet border border-lantern-violet/50 bg-lantern-violet/15 rounded-full px-2 py-0.5 leading-none">
@@ -152,12 +190,28 @@ function HotelCard({ offer, isBestOverall }: { offer: HotelOffer; isBestOverall:
                       {offer.recommendation_label}
                     </span>
                   )}
+                  {showFitBadge && (
+                    <span className={`text-[10px] font-bold uppercase tracking-widest border rounded-full px-2 py-0.5 leading-none ${fitBg(offer.neighborhood_fit_label)}`}>
+                      {offer.neighborhood_fit_label}
+                    </span>
+                  )}
                   {offer.eco_certified && (
                     <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-400 border border-emerald-500/30 bg-emerald-500/10 rounded-full px-1.5 py-0.5 leading-none">
                       Eco
                     </span>
                   )}
                 </div>
+
+                {/* Neighborhood tag */}
+                {offer.inferred_neighborhood && (
+                  <div className="text-[10px] text-white/30 font-medium mb-0.5 flex items-center gap-1">
+                    <svg className="w-2.5 h-2.5 text-white/20 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                    </svg>
+                    {offer.inferred_neighborhood}
+                  </div>
+                )}
+
                 <h3 className="text-sm font-bold text-white leading-tight">{offer.name}</h3>
                 {offer.address && (
                   <p className="text-[11px] text-white/35 mt-0.5 leading-tight truncate">{offer.address}</p>
@@ -230,12 +284,14 @@ function HotelCard({ offer, isBestOverall }: { offer: HotelOffer; isBestOverall:
               </span>
             ))}
             {offer.amenities.length > 5 && (
-              <span className="text-[10px] text-white/25 px-1">+{offer.amenities.length - 5} more</span>
+              <span className="text-[10px] text-white/25 px-1">
+                +{offer.amenities.length - 5} more
+              </span>
             )}
           </div>
         )}
 
-        {/* Stay dates + score + CTA */}
+        {/* Footer: dates + score + CTA */}
         <div className="flex items-center justify-between gap-3 pt-3 border-t border-white/[0.05]">
           <div className="flex items-center gap-2 text-[11px] text-white/30">
             <span>{formatDate(offer.check_in)}</span>
@@ -245,7 +301,6 @@ function HotelCard({ offer, isBestOverall }: { offer: HotelOffer; isBestOverall:
           </div>
 
           <div className="flex items-center gap-2">
-            {/* Score badge */}
             <button
               onClick={() => setBreakdownOpen((o) => !o)}
               className={`inline-flex items-center gap-1 border rounded-lg px-2 py-1 text-[10px] font-bold tabular-nums transition-all hover:opacity-80 ${scoreBg(offer.ai_score)}`}
@@ -260,7 +315,6 @@ function HotelCard({ offer, isBestOverall }: { offer: HotelOffer; isBestOverall:
               </svg>
             </button>
 
-            {/* Book CTA */}
             {offer.booking_url && (
               <a
                 href={offer.booking_url}
@@ -282,7 +336,7 @@ function HotelCard({ offer, isBestOverall }: { offer: HotelOffer; isBestOverall:
           </div>
         </div>
 
-        {/* Score breakdown panel */}
+        {/* Score breakdown */}
         {breakdownOpen && (
           <div className="mt-3 pt-3 border-t border-white/[0.05] space-y-2.5">
             <div className="text-[10px] font-bold uppercase tracking-wider text-white/30 mb-2">Score Breakdown</div>
@@ -290,7 +344,7 @@ function HotelCard({ offer, isBestOverall }: { offer: HotelOffer; isBestOverall:
               <div key={key}>
                 <div className="flex items-center justify-between mb-0.5">
                   <span className="text-[11px] text-white/55">{label}</span>
-                  <span className={`text-[11px] font-bold tabular-nums ${barTextColor(score)}`}>{score}</span>
+                  <span className={`text-[11px] font-bold tabular-nums ${barText(score)}`}>{score}</span>
                 </div>
                 <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
                   <div
@@ -301,7 +355,8 @@ function HotelCard({ offer, isBestOverall }: { offer: HotelOffer; isBestOverall:
               </div>
             ))}
             <p className="text-[10px] text-white/20 leading-relaxed pt-1">
-              Each dimension scored 0–100 relative to results returned. Composite score weighted by price, reviews, location, stars, and walkability.
+              Each dimension scored 0–100 relative to results returned.
+              {prefsActive && " Neighborhood Fit weighted at 25% when preferences are selected."}
             </p>
           </div>
         )}
@@ -312,7 +367,13 @@ function HotelCard({ offer, isBestOverall }: { offer: HotelOffer; isBestOverall:
 
 // ── Recommendation panel ──────────────────────────────────────────────────────
 
-function RecommendationPanel({ offers }: { offers: HotelOffer[] }) {
+function RecommendationPanel({
+  offers,
+  prefsActive,
+}: {
+  offers: HotelOffer[];
+  prefsActive: boolean;
+}) {
   const pick = offers.find((o) => o.recommendation_label === "Best Overall") ?? offers[0];
   if (!pick) return null;
 
@@ -328,9 +389,19 @@ function RecommendationPanel({ offers }: { offers: HotelOffer[] }) {
           </span>
         </div>
         <span className="text-lg font-black text-white tabular-nums leading-none flex-shrink-0">
-          ${Math.round(pick.price_per_night).toLocaleString()}<span className="text-sm font-medium text-white/40">/night</span>
+          ${Math.round(pick.price_per_night).toLocaleString()}
+          <span className="text-sm font-medium text-white/40">/night</span>
         </span>
       </div>
+
+      {pick.inferred_neighborhood && (
+        <div className="text-[10px] text-lantern-violet/60 font-medium mb-1 flex items-center gap-1">
+          <svg className="w-2.5 h-2.5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+          </svg>
+          {pick.inferred_neighborhood}
+        </div>
+      )}
 
       <div className="text-sm font-bold text-white mb-1">{pick.name}</div>
       {pick.address && <div className="text-[11px] text-white/40 mb-2">{pick.address}</div>}
@@ -340,11 +411,20 @@ function RecommendationPanel({ offers }: { offers: HotelOffer[] }) {
           {pick.recommendation_why}
         </p>
       )}
+
+      {prefsActive && pick.neighborhood_fit_label && (
+        <div className={`mt-2 inline-flex items-center gap-1 border rounded-full px-2.5 py-1 text-[10px] font-bold ${fitBg(pick.neighborhood_fit_label)}`}>
+          <svg className="w-2.5 h-2.5 flex-shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+            <path d="M1 6l3.5 3.5L11 2" />
+          </svg>
+          {pick.neighborhood_fit_label} for your preferences
+        </div>
+      )}
     </div>
   );
 }
 
-// ── FeatureCard (empty state) ─────────────────────────────────────────────────
+// ── FeatureCard (idle state) ──────────────────────────────────────────────────
 
 function FeatureCard({ icon, title, body }: { icon: React.ReactNode; title: string; body: string }) {
   return (
@@ -363,34 +443,43 @@ function FeatureCard({ icon, title, body }: { icon: React.ReactNode; title: stri
 export default function HotelSearch() {
   const today = new Date().toISOString().split("T")[0];
 
-  const [destination, setDestination] = useState("");
-  const [checkIn, setCheckIn] = useState("");
-  const [checkOut, setCheckOut] = useState("");
-  const [guests, setGuests] = useState(2);
-  const [rooms, setRooms] = useState(1);
+  const [destination,       setDestination]       = useState("");
+  const [checkIn,           setCheckIn]           = useState("");
+  const [checkOut,          setCheckOut]          = useState("");
+  const [guests,            setGuests]            = useState(2);
+  const [rooms,             setRooms]             = useState(1);
+  const [selectedPrefs,     setSelectedPrefs]     = useState<string[]>([]);
 
-  const [searchState, setSearchState] = useState<SearchState>("idle");
-  const [offers, setOffers] = useState<HotelOffer[]>([]);
+  const [searchState,  setSearchState]  = useState<SearchState>("idle");
+  const [offers,       setOffers]       = useState<HotelOffer[]>([]);
   const [searchedDest, setSearchedDest] = useState("");
-  const [errorTitle, setErrorTitle] = useState("");
-  const [errorBody, setErrorBody] = useState("");
-  const [errors, setErrors] = useState<string[]>([]);
+  const [activePrefs,  setActivePrefs]  = useState<string[]>([]);
+  const [errorTitle,   setErrorTitle]   = useState("");
+  const [errorBody,    setErrorBody]    = useState("");
+  const [errors,       setErrors]       = useState<string[]>([]);
+
+  const togglePref = (id: string) => {
+    setSelectedPrefs((prev) =>
+      prev.includes(id) ? prev.filter((p) => p !== id) : [...prev, id]
+    );
+  };
 
   const handleSearch = async () => {
     const errs: string[] = [];
     if (!destination.trim()) errs.push("Please enter a destination.");
-    if (!checkIn) errs.push("Please select a check-in date.");
-    if (!checkOut) errs.push("Please select a check-out date.");
+    if (!checkIn)             errs.push("Please select a check-in date.");
+    if (!checkOut)            errs.push("Please select a check-out date.");
     if (checkIn && checkOut && checkOut <= checkIn) errs.push("Check-out must be after check-in.");
     setErrors(errs);
     if (errs.length > 0) return;
 
     track("hotel_search_submitted", {
-      destination: destination.trim(),
-      check_in:    checkIn,
-      check_out:   checkOut,
+      destination:         destination.trim(),
+      check_in:            checkIn,
+      check_out:           checkOut,
       guests,
       rooms,
+      neighborhood_prefs:  selectedPrefs.join(","),
     });
 
     setSearchState("loading");
@@ -401,18 +490,20 @@ export default function HotelSearch() {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          destination: destination.trim(),
-          check_in:    checkIn,
-          check_out:   checkOut,
+          destination:        destination.trim(),
+          check_in:           checkIn,
+          check_out:          checkOut,
           guests,
           rooms,
+          neighborhood_prefs: selectedPrefs,
         }),
       });
 
       const data = await res.json() as {
-        status: string;
-        message?: string;
-        offers?: HotelOffer[];
+        status:             string;
+        message?:           string;
+        offers?:            HotelOffer[];
+        neighborhood_prefs?: string[];
       };
 
       if (data.status === "not_configured") {
@@ -435,6 +526,7 @@ export default function HotelSearch() {
       }
 
       setOffers(data.offers!);
+      setActivePrefs(data.neighborhood_prefs ?? selectedPrefs);
       setSearchState("results");
     } catch {
       setErrorTitle("Network error");
@@ -444,6 +536,7 @@ export default function HotelSearch() {
   };
 
   const bestOverallId = offers.find((o) => o.recommendation_label === "Best Overall")?.hotel_id;
+  const prefsActive   = activePrefs.length > 0;
 
   return (
     <div className="min-h-screen bg-ink text-white">
@@ -487,7 +580,7 @@ export default function HotelSearch() {
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
               onKeyDown={(e) => { if (e.key === "Enter") handleSearch(); }}
-              placeholder="City name (e.g. New York, Paris, Tokyo)"
+              placeholder="City name (e.g. Paris, Tokyo, New York)"
               className="w-full rounded-xl border border-white/10 bg-white/[0.04] hover:border-white/20 focus:border-lantern-violet/60 focus:bg-panel px-3.5 py-3 text-sm text-white placeholder-white/25 outline-none transition-colors"
             />
           </div>
@@ -521,25 +614,15 @@ export default function HotelSearch() {
           </div>
 
           {/* Guests + Rooms */}
-          <div className="flex gap-2.5 mb-5">
+          <div className="flex gap-2.5 mb-4">
             <div className="flex-1">
               <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-1.5 px-0.5">
                 Guests
               </label>
               <div className="flex items-center rounded-xl border border-white/10 bg-white/[0.04] overflow-hidden">
-                <button
-                  onClick={() => setGuests((n) => Math.max(1, n - 1))}
-                  className="px-3 py-3 text-white/50 hover:text-white hover:bg-white/[0.06] transition-colors text-lg leading-none"
-                >
-                  −
-                </button>
+                <button onClick={() => setGuests((n) => Math.max(1, n - 1))} className="px-3 py-3 text-white/50 hover:text-white hover:bg-white/[0.06] transition-colors text-lg leading-none">−</button>
                 <span className="flex-1 text-center text-sm font-semibold text-white">{guests}</span>
-                <button
-                  onClick={() => setGuests((n) => Math.min(8, n + 1))}
-                  className="px-3 py-3 text-white/50 hover:text-white hover:bg-white/[0.06] transition-colors text-lg leading-none"
-                >
-                  +
-                </button>
+                <button onClick={() => setGuests((n) => Math.min(8, n + 1))} className="px-3 py-3 text-white/50 hover:text-white hover:bg-white/[0.06] transition-colors text-lg leading-none">+</button>
               </div>
             </div>
             <div className="flex-1">
@@ -547,20 +630,56 @@ export default function HotelSearch() {
                 Rooms
               </label>
               <div className="flex items-center rounded-xl border border-white/10 bg-white/[0.04] overflow-hidden">
-                <button
-                  onClick={() => setRooms((n) => Math.max(1, n - 1))}
-                  className="px-3 py-3 text-white/50 hover:text-white hover:bg-white/[0.06] transition-colors text-lg leading-none"
-                >
-                  −
-                </button>
+                <button onClick={() => setRooms((n) => Math.max(1, n - 1))} className="px-3 py-3 text-white/50 hover:text-white hover:bg-white/[0.06] transition-colors text-lg leading-none">−</button>
                 <span className="flex-1 text-center text-sm font-semibold text-white">{rooms}</span>
-                <button
-                  onClick={() => setRooms((n) => Math.min(4, n + 1))}
-                  className="px-3 py-3 text-white/50 hover:text-white hover:bg-white/[0.06] transition-colors text-lg leading-none"
-                >
-                  +
-                </button>
+                <button onClick={() => setRooms((n) => Math.min(4, n + 1))} className="px-3 py-3 text-white/50 hover:text-white hover:bg-white/[0.06] transition-colors text-lg leading-none">+</button>
               </div>
+            </div>
+          </div>
+
+          {/* Neighborhood preferences */}
+          <div className="pt-4 border-t border-white/[0.06] mb-5">
+            <div className="flex items-center justify-between mb-2">
+              <div className="text-[10px] font-semibold text-white/30 uppercase tracking-wider">
+                What kind of area?
+              </div>
+              {selectedPrefs.length > 0 && (
+                <button
+                  onClick={() => setSelectedPrefs([])}
+                  className="text-[10px] text-white/25 hover:text-white/55 transition-colors"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {NEIGHBORHOOD_PREFS.map(({ id, label }) => {
+                const selected = selectedPrefs.includes(id);
+                return (
+                  <button
+                    key={id}
+                    onClick={() => togglePref(id)}
+                    className={`flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-semibold border transition-all ${
+                      selected
+                        ? "bg-lantern-violet/30 text-lantern-violet border-lantern-violet/70 shadow-[0_0_0_1px_rgba(139,92,246,0.3)]"
+                        : "bg-transparent text-white/30 border-white/[0.09] hover:border-white/[0.18] hover:text-white/55"
+                    }`}
+                  >
+                    {selected && (
+                      <svg className="w-2.5 h-2.5 flex-shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M1 6l3.5 3.5L11 2" />
+                      </svg>
+                    )}
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="mt-1.5 text-[10px] text-white/20 leading-relaxed">
+              {selectedPrefs.length === 0
+                ? "Select any that apply — rankings will be adjusted to match your preferences."
+                : `Ranking weighted for: ${selectedPrefs.map((p) => NEIGHBORHOOD_PREFS.find((x) => x.id === p)?.label ?? p).join(", ")}.`
+              }
             </div>
           </div>
 
@@ -581,7 +700,7 @@ export default function HotelSearch() {
           </button>
         </div>
 
-        {/* Loading state */}
+        {/* Loading */}
         {searchState === "loading" && (
           <div className="max-w-3xl mx-auto text-center py-14">
             <div className="inline-flex items-center gap-3 text-white/50 text-sm">
@@ -591,11 +710,13 @@ export default function HotelSearch() {
               </svg>
               Searching hotels in {searchedDest}…
             </div>
-            <p className="text-xs text-white/25 mt-2">Ranking by reviews, location, and value</p>
+            <p className="text-xs text-white/25 mt-2">Ranking by reviews, location
+              {selectedPrefs.length > 0 ? `, and neighborhood fit` : ", and value"}
+            </p>
           </div>
         )}
 
-        {/* Error state */}
+        {/* Error */}
         {searchState === "error" && (
           <div className="max-w-3xl mx-auto rounded-2xl border border-red-500/20 bg-red-500/[0.07] px-5 py-8 text-center">
             <div className="text-sm font-bold text-white mb-1">{errorTitle}</div>
@@ -610,13 +731,24 @@ export default function HotelSearch() {
             <div className="flex items-center justify-between mb-4 px-1">
               <div className="text-xs text-white/40">
                 <span className="font-semibold text-white/70">{offers.length} hotels</span>
-                {" "}found in {searchedDest}
+                {" "}in {searchedDest}
               </div>
-              <div className="text-[11px] text-white/25">Ranked by TravelGrab</div>
+              <div className="flex items-center gap-2">
+                {prefsActive && (
+                  <div className="flex items-center gap-1 flex-wrap justify-end">
+                    {activePrefs.map((p) => (
+                      <span key={p} className="text-[9px] font-bold uppercase tracking-wider text-lantern-violet/70 border border-lantern-violet/25 rounded-full px-1.5 py-0.5 leading-none">
+                        {NEIGHBORHOOD_PREFS.find((x) => x.id === p)?.label ?? p}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                <span className="text-[11px] text-white/25">Ranked by TravelGrab</span>
+              </div>
             </div>
 
             {/* Recommendation panel */}
-            <RecommendationPanel offers={offers} />
+            <RecommendationPanel offers={offers} prefsActive={prefsActive} />
 
             {/* Hotel cards */}
             <div className="space-y-3">
@@ -625,18 +757,18 @@ export default function HotelSearch() {
                   key={offer.hotel_id}
                   offer={offer}
                   isBestOverall={offer.hotel_id === bestOverallId}
+                  prefsActive={prefsActive}
                 />
               ))}
             </div>
 
-            {/* Footer note */}
             <div className="mt-6 text-center text-[11px] text-white/20 leading-relaxed">
               Prices sourced from Google Hotels via SerpAPI. Final prices confirmed at the booking site.
             </div>
           </div>
         )}
 
-        {/* Idle / empty state */}
+        {/* Idle state */}
         {searchState === "idle" && (
           <div className="max-w-3xl mx-auto mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
             <FeatureCard
@@ -650,22 +782,23 @@ export default function HotelSearch() {
             />
             <FeatureCard
               icon={
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 8v4l3 3" />
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                 </svg>
               }
-              title="Walk score matters"
-              body="We look at how close each hotel is to local landmarks and public transit to surface genuinely convenient options."
+              title="Neighborhood-aware"
+              body="Tell us what kind of area you want. We infer neighborhoods from landmarks and hotels' surroundings."
             />
             <FeatureCard
               icon={
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                  <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
+                  <rect x="9" y="3" width="6" height="4" rx="1" />
+                  <path d="M9 12h6M9 16h4" />
                 </svg>
               }
               title="Honest comparisons"
-              body="We explain exactly why a hotel is ranked #1 — not just a score, but a clear tradeoff versus the alternatives."
+              body="We explain exactly why a hotel ranks #1 — not just a score, but a clear comparison versus alternatives."
             />
           </div>
         )}
