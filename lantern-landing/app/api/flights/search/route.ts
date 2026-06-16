@@ -351,9 +351,11 @@ function normalizeFlight(offer: ProviderOffer, adults: number, trip_type: string
 // ── Deduplication ────────────────────────────────────────────────────────────
 
 function deduplicateOffers(offers: FlightOffer[]): FlightOffer[] {
-  // Key includes airline, flight numbers, times, stops, connection airports, and price.
-  // Including airline + flight numbers prevents distinct carriers on the same route from collapsing.
-  // Including price keeps Duffel bookable + SerpAPI search-only as separate visible offers when priced differently.
+  // Key: airline + flight numbers + route + times + stops + connections.
+  // Including airline_code and flight numbers prevents distinct carriers at the same times from collapsing.
+  // Price is intentionally excluded — the winner-selection logic below already keeps the cheapest version
+  // within a group, so price in the key would only cause same-itinerary/different-bucket SerpAPI results
+  // (best_flights vs other_flights returning the same flight at different prices) to show as duplicates.
   const itinKey = (o: FlightOffer) =>
     [
       o.airline_code,
@@ -365,7 +367,6 @@ function deduplicateOffers(offers: FlightOffer[]): FlightOffer[] {
       o.duration,
       o.stops,
       o.connection_airports,
-      Math.round(o.price_total),
     ].join("|");
 
   // Prefer real carriers; Duffel test keys return synthetic "Duffel Airways" / code ZZ offers
