@@ -128,7 +128,7 @@ async function enrichOne(
   }
 
   // ── Nearby Search: transit stations, landmarks, restaurants ─────────────────
-  const transitStations: Array<{ name: string; meters: number }> = [];
+  const transitStations: Array<{ name: string; meters: number; type: "subway" | "train" | "tram" | "transit" }> = [];
   const landmarks:       Array<{ name: string; meters: number }> = [];
   let restaurantCount = 0;
 
@@ -168,7 +168,18 @@ async function enrichOne(
         const meters = haversineMeters(lat, lng, pLat, pLng);
 
         if (types.some((t) => ["subway_station", "train_station", "light_rail_station", "transit_station"].includes(t))) {
-          transitStations.push({ name, meters });
+          const primaryType: "subway" | "train" | "tram" | "transit" =
+            types.includes("subway_station")      ? "subway"
+            : types.includes("train_station")     ? "train"
+            : types.includes("light_rail_station") ? "tram"
+            : "transit";
+
+          // Skip generic transit stops whose names are street intersections
+          // like "Ausiàs Marc - Bailen" — those are bus stops, not metro stations.
+          const isStreetIntersection = primaryType === "transit" && /^[^(]+\s+-\s+[^(]+$/.test(name);
+          if (!isStreetIntersection) {
+            transitStations.push({ name, meters, type: primaryType });
+          }
         } else if (types.some((t) => ["museum", "tourist_attraction"].includes(t))) {
           landmarks.push({ name, meters });
         } else if (types.some((t) => ["restaurant", "cafe", "bar"].includes(t))) {
@@ -214,9 +225,13 @@ async function enrichOne(
   const closest = sorted[0];
 
   if (closest) {
-    const walkMin = metersToWalkMin(closest.meters);
-    if (walkMin <= 5)       traits.push(`metro ${walkMin} min`);
-    else if (walkMin <= 10) traits.push("transit nearby");
+    const walkMin   = metersToWalkMin(closest.meters);
+    const typeLabel = closest.type === "subway" ? "metro"
+      : closest.type === "train" ? "train"
+      : closest.type === "tram"  ? "tram"
+      : "transit";
+    if (walkMin <= 5)       traits.push(`${typeLabel} ${walkMin} min`);
+    else if (walkMin <= 10) traits.push(`${typeLabel} nearby`);
     if (!bestFor.includes("transit")) bestFor.push("transit");
   }
   if (restaurantCount >= 5) {

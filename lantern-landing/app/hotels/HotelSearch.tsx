@@ -92,6 +92,11 @@ function fitBg(label: string) {
   return "";
 }
 
+/** Filter out "Street A - Street B" bus stop names from SerpAPI nearby_places. */
+function isStreetIntersectionName(name: string): boolean {
+  return /^[^(]+\s+-\s+[^(]+$/.test(name);
+}
+
 function StarRating({ count }: { count: number }) {
   return (
     <span className="flex gap-0.5 text-amber-400">
@@ -474,7 +479,7 @@ function HotelCard({
             </svg>
             <span className="text-[11px] text-white/40">{offer.transit_note}</span>
           </div>
-        ) : offer.nearby_walk ? (
+        ) : offer.nearby_walk && !isStreetIntersectionName(offer.nearby_walk.name) ? (
           <div className="flex items-center gap-1.5 mb-2.5">
             <svg className="w-3 h-3 text-white/20 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round">
               <circle cx="12" cy="12" r="10" /><path d="M12 8v4l3 3" />
