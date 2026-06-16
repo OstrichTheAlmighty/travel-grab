@@ -12,6 +12,7 @@ type R = Record<string, unknown>;
 interface NormalizeStats {
   passedBasicParsing: number;
   dropReasons: Map<string, number>;
+  incompleteCount: number;
 }
 
 // SerpAPI cabin class codes
@@ -131,7 +132,7 @@ export class GoogleFlightsProvider implements FlightSearchProvider {
     console.log(`[google_flights][debug] ═══════════════════════════════════════════════\n`);
     // ── End structure debug ───────────────────────────────────────────────────
 
-    const normalizeStats: NormalizeStats = { passedBasicParsing: 0, dropReasons: new Map() };
+    const normalizeStats: NormalizeStats = { passedBasicParsing: 0, dropReasons: new Map(), incompleteCount: 0 };
     const offers: ProviderOffer[] = [];
     const perOfferRows: PerOfferDebugRow[] = [];
 
@@ -159,10 +160,20 @@ export class GoogleFlightsProvider implements FlightSearchProvider {
     }
 
     // ── Debug: pipeline drop summary ──────────────────────────────────────────
-    const droppedMissingReturn = normalizeStats.dropReasons.get("missing_return_data") ?? 0;
+    const droppedMissingReturn    = normalizeStats.dropReasons.get("missing_return_data") ?? 0;
+    const droppedNoPrice          = normalizeStats.dropReasons.get("no_price") ?? 0;
+    const droppedMissingSegments  =
+      (normalizeStats.dropReasons.get("no_flights_array") ?? 0) +
+      (normalizeStats.dropReasons.get("missing_dep_arr_time") ?? 0) +
+      (normalizeStats.dropReasons.get("missing_airline_or_flight_number") ?? 0) +
+      (normalizeStats.dropReasons.get("duration_under_30min") ?? 0);
     const reasonSummary = [...normalizeStats.dropReasons.entries()].map(([r, n]) => `${r}:${n}`).join(" ") || "none";
-    console.log(`[google_flights][pipeline] SERPAPI_PARSED_BEFORE_ROUNDTRIP_VALIDATION=${normalizeStats.passedBasicParsing}`);
+    console.log(`[google_flights][pipeline] SERPAPI_PARSED_OFFERS=${normalizeStats.passedBasicParsing}`);
+    console.log(`[google_flights][pipeline] SERPAPI_INCOMPLETE_MISSING_RETURN=${normalizeStats.incompleteCount}`);
     console.log(`[google_flights][pipeline] SERPAPI_DROPPED_MISSING_RETURN=${droppedMissingReturn}`);
+    console.log(`[google_flights][pipeline] SERPAPI_DROPPED_MISSING_PRICE=${droppedNoPrice}`);
+    console.log(`[google_flights][pipeline] SERPAPI_DROPPED_MISSING_SEGMENTS=${droppedMissingSegments}`);
+    console.log(`[google_flights][pipeline] SERPAPI_SURVIVED_VALIDATION=${offers.length}`);
     console.log(`[google_flights][pipeline] SERPAPI_DROPPED_REASON_COUNTS=${reasonSummary}`);
     // ── End pipeline debug ────────────────────────────────────────────────────
 
@@ -188,11 +199,14 @@ export class GoogleFlightsProvider implements FlightSearchProvider {
       requestPayloadJson,
       perOfferRows,
       extra: {
-        best_count:                best.length,
-        other_count:               other.length,
-        normalized_count:          offers.length,
-        parsed_before_rt_filter:   normalizeStats.passedBasicParsing,
-        dropped_missing_return:    droppedMissingReturn,
+        best_count:                  best.length,
+        other_count:                 other.length,
+        normalized_count:            offers.length,
+        parsed_before_rt_filter:     normalizeStats.passedBasicParsing,
+        dropped_missing_return:      droppedMissingReturn,
+        incomplete_missing_return:   normalizeStats.incompleteCount,
+        dropped_no_price:            droppedNoPrice,
+        dropped_missing_segments:    droppedMissingSegments,
       },
     };
 
@@ -287,16 +301,18 @@ export class GoogleFlightsProvider implements FlightSearchProvider {
       [];
 
     if (tripType === "roundtrip" && returnFlights.length === 0) {
-      // Log the exact top-level keys so we know which field to look for
+      // Log incomplete but do NOT drop — let outbound-only results through so SerpAPI
+      // results are visible even when the return structure hasn't been mapped yet.
+      stats.incompleteCount++;
       const rawKeys = Object.keys(raw);
       const returnRelated = rawKeys.filter((k) => /return|back|inbound/i.test(k));
       console.log(
         `[google_flights][incomplete] ${airline} ${flightNum}` +
         ` missing_field="return_flights|return_legs|returnFlights|return_itinerary"` +
         ` raw_keys="${rawKeys.join(",")}"` +
-        ` return_related_keys="${returnRelated.join(",") || "NONE"}"`
+        ` return_related_keys="${returnRelated.join(",") || "NONE"}"` +
+        ` — passing through outbound-only`
       );
-      return dropWith("missing_return_data");
     }
 
     let returnLegFields: Partial<ProviderOffer> = {};

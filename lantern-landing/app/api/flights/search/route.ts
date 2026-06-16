@@ -967,6 +967,10 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
   let serpapiBestCount = 0;
   let serpapiOtherCount = 0;
   let serpapiNormalizedCount = 0;
+  let serpapiIncompleteMissingReturn = 0;
+  let serpapiDroppedMissingReturn = 0;
+  let serpapiDroppedNoPrice = 0;
+  let serpapiDroppedMissingSegments = 0;
   const serpapiDebugRows: PerOfferDebugRow[] = [];
   // Determine SerpAPI status independently of provider list
   const serpapiEnvKey = (process.env.SERPAPI_API_KEY ?? "").trim();
@@ -985,10 +989,14 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
         primaryLatencyMs   = debug.latencyMs;
       }
       if (p.source === "google_flights") {
-        serpapiRawOffers       += debug.rawOfferCount;
-        serpapiBestCount       += (debug.extra?.best_count       as number | undefined) ?? 0;
-        serpapiOtherCount      += (debug.extra?.other_count      as number | undefined) ?? 0;
-        serpapiNormalizedCount += (debug.extra?.normalized_count as number | undefined) ?? 0;
+        serpapiRawOffers                += debug.rawOfferCount;
+        serpapiBestCount                += (debug.extra?.best_count                as number | undefined) ?? 0;
+        serpapiOtherCount               += (debug.extra?.other_count               as number | undefined) ?? 0;
+        serpapiNormalizedCount          += (debug.extra?.normalized_count          as number | undefined) ?? 0;
+        serpapiIncompleteMissingReturn  += (debug.extra?.incomplete_missing_return as number | undefined) ?? 0;
+        serpapiDroppedMissingReturn     += (debug.extra?.dropped_missing_return    as number | undefined) ?? 0;
+        serpapiDroppedNoPrice           += (debug.extra?.dropped_no_price          as number | undefined) ?? 0;
+        serpapiDroppedMissingSegments   += (debug.extra?.dropped_missing_segments  as number | undefined) ?? 0;
         serpapiDebugRows.push(...debug.perOfferRows);
         if (debug.httpStatus && debug.httpStatus >= 400) {
           serpapiStatus = `error HTTP ${debug.httpStatus}`;
@@ -1013,7 +1021,18 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
   }
 
   const enabledProviders = providers.map((p) => p.source).join(", ") || "none";
-  console.log(`ENABLED_PROVIDERS=${enabledProviders}  SERPAPI_STATUS=${serpapiStatus}`);
+  console.log(`\n═══════════════════ PIPELINE DIAGNOSTICS ═══════════════════`);
+  console.log(`ENABLED_PROVIDERS=${enabledProviders}`);
+  console.log(`SERPAPI_ENV_PRESENT=${diagSerpPresent}`);
+  console.log(`SERPAPI_STATUS=${serpapiStatus}`);
+  console.log(`RAW_SERPAPI_OFFERS=${serpapiRawOffers}  (best=${serpapiBestCount} other=${serpapiOtherCount})`);
+  console.log(`SERPAPI_PARSED_OFFERS=${serpapiNormalizedCount + serpapiDroppedMissingReturn + serpapiDroppedNoPrice + serpapiDroppedMissingSegments + serpapiIncompleteMissingReturn}`);
+  console.log(`SERPAPI_INCOMPLETE_MISSING_RETURN=${serpapiIncompleteMissingReturn}  (passed through outbound-only)`);
+  console.log(`SERPAPI_DROPPED_MISSING_RETURN=${serpapiDroppedMissingReturn}`);
+  console.log(`SERPAPI_DROPPED_MISSING_PRICE=${serpapiDroppedNoPrice}`);
+  console.log(`SERPAPI_DROPPED_MISSING_SEGMENTS=${serpapiDroppedMissingSegments}`);
+  console.log(`SERPAPI_SURVIVED_VALIDATION=${serpapiNormalizedCount}`);
+  console.log(`═════════════════════════════════════════════════════════════\n`);
 
   // SerpAPI aggregate stats for debug panel
   const serpapiAirlineCounts = new Map<string, number>();
@@ -1062,10 +1081,22 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
     .filter(Boolean) as FlightOffer[];
   const providerDropped = allProviderOffers.length - normedFlights.length;
   console.log(`\nAFTER_FILTERING=${normedFlights.length}  (provider-level dropped ${totalRawOffers - allProviderOffers.length}, normalizeFlight dropped ${providerDropped})`);
+  {
+    const bySource = new Map<string, number>();
+    for (const o of normedFlights) bySource.set(o.source ?? "unknown", (bySource.get(o.source ?? "unknown") ?? 0) + 1);
+    const bySourceStr = [...bySource.entries()].map(([s, n]) => `${s}:${n}`).join("  ") || "none";
+    console.log(`OFFERS_BEFORE_DEDUP_BY_SOURCE  ${bySourceStr}`);
+  }
 
   // ── 3. Deduplicate across providers ───────────────────────────────────────
   const normed = deduplicateOffers(normedFlights);
   console.log(`\nAFTER_DEDUPLICATION=${normed.length}  (dropped ${normedFlights.length - normed.length})`);
+  {
+    const bySource = new Map<string, number>();
+    for (const o of normed) bySource.set(o.source ?? "unknown", (bySource.get(o.source ?? "unknown") ?? 0) + 1);
+    const bySourceStr = [...bySource.entries()].map(([s, n]) => `${s}:${n}`).join("  ") || "none";
+    console.log(`OFFERS_AFTER_DEDUP_BY_SOURCE   ${bySourceStr}`);
+  }
 
   if (!normed.length) {
     return {
@@ -1183,6 +1214,12 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
 
   const cheapestRendered = enriched.reduce((a, b) => a.price_total <= b.price_total ? a : b, enriched[0]).price_total;
   console.log(`\nRENDERED_OFFERS=${enriched.length}  CHEAPEST_RENDERED=$${cheapestRendered.toFixed(0)}`);
+  {
+    const bySource = new Map<string, number>();
+    for (const o of enriched) bySource.set(o.source ?? "unknown", (bySource.get(o.source ?? "unknown") ?? 0) + 1);
+    const bySourceStr = [...bySource.entries()].map(([s, n]) => `${s}:${n}`).join("  ") || "none";
+    console.log(`RENDERED_OFFERS_BY_SOURCE      ${bySourceStr}`);
+  }
 
   return {
     offers: enriched,
