@@ -41,6 +41,8 @@ interface HotelOffer {
   neighborhood_fit_score:  number;
   inferred_neighborhood:   string;
   neighborhood_fit_label:  string;
+  location_summary: string;
+  transit_note:     string;
 }
 
 type SearchState = "idle" | "loading" | "results" | "error";
@@ -259,18 +261,27 @@ function HotelCard({
           </p>
         )}
 
-        {/* Nearby walk */}
-        {offer.nearby_walk && (
+        {/* Transit note (Google Places) or nearby landmark fallback */}
+        {offer.transit_note ? (
           <div className="flex items-center gap-1.5 mb-2.5">
-            <svg className="w-3 h-3 text-lantern-mint flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round">
+            <svg className="w-3 h-3 text-lantern-blue flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C8 2 5 5 5 8c0 3 2 5.5 7 12 5-6.5 7-9 7-12 0-3-3-6-7-6zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" />
+              <rect x="9" y="19" width="6" height="1.5" rx="0.75" />
+              <rect x="10.5" y="20.5" width="3" height="1.5" rx="0.75" />
+            </svg>
+            <span className="text-[11px] text-white/40">{offer.transit_note}</span>
+          </div>
+        ) : offer.nearby_walk ? (
+          <div className="flex items-center gap-1.5 mb-2.5">
+            <svg className="w-3 h-3 text-white/25 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round">
               <circle cx="12" cy="12" r="10" />
               <path d="M12 8v4l3 3" />
             </svg>
-            <span className="text-[11px] text-white/40">
+            <span className="text-[11px] text-white/30">
               {offer.nearby_walk.minutes} min walk to {offer.nearby_walk.name}
             </span>
           </div>
-        )}
+        ) : null}
 
         {/* Amenity chips */}
         {visibleAmenities.length > 0 && (

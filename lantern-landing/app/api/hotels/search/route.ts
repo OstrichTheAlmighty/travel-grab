@@ -1,197 +1,86 @@
 import { NextResponse } from "next/server";
 import { searchGoogleHotels } from "../providers/googleHotels";
+import { enrichWithGooglePlaces } from "../providers/googlePlaces";
+import type { PlacesEnrichment } from "../providers/googlePlaces";
 import type { NearbyPlace, ProviderHotel } from "../providers/types";
 
 export const runtime     = "nodejs";
 export const dynamic     = "force-dynamic";
-export const maxDuration = 30;
+export const maxDuration = 45;
 
-// ── Neighborhood preference signals ──────────────────────────────────────────
-// Each preference maps to keyword lists across the hotel data sources.
-// "nearbyTerms" match against SerpAPI nearby_places[].name (strongest signal).
-// "addressTerms" match against hotel.address.
-// "descTerms" match against hotel.description.
-// "amenityTerms" match against hotel.amenities.
+// ── Neighborhood preference → keyword signals (SerpAPI fallback path) ─────────
+// Used when Google Places enrichment is unavailable. Matches against hotel
+// name, address, description, amenities, and SerpAPI nearby_places names.
 
 const PREF_SIGNALS: Record<string, {
-  nearbyTerms: string[];
+  nearbyTerms:  string[];
   addressTerms: string[];
-  descTerms: string[];
+  descTerms:    string[];
   amenityTerms: string[];
 }> = {
   "first-time": {
-    nearbyTerms: [
-      "eiffel", "louvre", "notre dame", "big ben", "colosseum", "sagrada familia",
-      "acropolis", "times square", "central park", "trevi", "vatican", "buckingham",
-      "tower of london", "sacré-cœur", "sacre-coeur", "pantheon", "duomo",
-      "empire state", "golden gate", "coliseum", "kremlin", "alhambra",
-    ],
+    nearbyTerms:  ["eiffel", "louvre", "notre dame", "big ben", "colosseum", "sagrada familia", "acropolis", "times square", "central park", "trevi", "vatican", "buckingham", "tower of london", "sacré-cœur", "sacre-coeur", "pantheon", "duomo", "empire state", "golden gate"],
     addressTerms: ["old town", "historic", "city centre", "city center", "centro", "altstadt"],
-    descTerms: ["iconic", "heart of the city", "center of", "famous", "landmark", "must-see"],
+    descTerms:    ["iconic", "heart of the city", "center of", "famous", "landmark", "must-see"],
     amenityTerms: ["tour desk", "concierge"],
   },
   "sightseeing": {
-    nearbyTerms: [
-      "museum", "gallery", "monument", "cathedral", "basilica", "palace", "castle",
-      "temple", "shrine", "colosseum", "forum", "ruins", "aquarium", "zoo",
-      "national park", "historic site", "art museum", "natural history",
-    ],
+    nearbyTerms:  ["museum", "gallery", "monument", "cathedral", "basilica", "palace", "castle", "temple", "shrine", "colosseum", "forum", "ruins", "aquarium", "zoo", "national park", "historic site"],
     addressTerms: ["museum", "gallery", "palace", "historic", "heritage"],
-    descTerms: ["museum", "gallery", "historic", "cultural", "sightseeing", "landmark", "arts"],
+    descTerms:    ["museum", "gallery", "historic", "cultural", "sightseeing", "landmark", "arts"],
     amenityTerms: ["tour desk", "concierge"],
   },
   "food": {
-    nearbyTerms: [
-      "restaurant", "market", "food hall", "brasserie", "cafe", "bistro",
-      "street food", "farmers market", "covered market", "les halles",
-      "food market", "tavern", "trattoria", "ramen", "sushi",
-    ],
+    nearbyTerms:  ["restaurant", "market", "food hall", "brasserie", "cafe", "bistro", "street food", "farmers market", "covered market", "les halles", "food market", "tavern", "trattoria"],
     addressTerms: ["market", "food street", "restaurant row"],
-    descTerms: ["culinary", "restaurant", "dining", "gastronomic", "chef", "cuisine", "food scene"],
+    descTerms:    ["culinary", "restaurant", "dining", "gastronomic", "chef", "cuisine", "food scene"],
     amenityTerms: ["restaurant", "bar", "breakfast included", "rooftop restaurant"],
   },
   "nightlife": {
-    nearbyTerms: [
-      "bar", "nightclub", "club", "lounge", "pub", "brewery", "wine bar",
-      "cocktail bar", "jazz club", "oberkampf", "soho", "castro",
-    ],
+    nearbyTerms:  ["bar", "nightclub", "club", "lounge", "pub", "brewery", "wine bar", "cocktail bar", "jazz club", "oberkampf", "soho"],
     addressTerms: ["oberkampf", "bastille", "pigalle", "soho", "entertainment"],
-    descTerms: ["vibrant", "lively", "nightlife", "trendy", "hip", "buzzing", "young crowd"],
+    descTerms:    ["vibrant", "lively", "nightlife", "trendy", "hip", "buzzing", "young crowd"],
     amenityTerms: ["bar", "rooftop bar", "nightclub"],
   },
   "quiet": {
-    nearbyTerms: ["park", "garden", "botanical garden", "lake", "riverside", "nature reserve", "forest"],
+    nearbyTerms:  ["park", "garden", "botanical garden", "lake", "riverside", "nature reserve"],
     addressTerms: ["residential", "quiet", "peaceful", "garden district"],
-    descTerms: ["quiet", "peaceful", "serene", "tranquil", "relaxing", "oasis", "residential"],
+    descTerms:    ["quiet", "peaceful", "serene", "tranquil", "relaxing", "oasis", "residential"],
     amenityTerms: ["spa", "garden", "yoga", "meditation", "wellness"],
   },
   "luxury": {
-    nearbyTerms: [
-      "champs-élysées", "champs elysees", "fifth avenue", "rodeo drive",
-      "knightsbridge", "mayfair", "avenue montaigne",
-    ],
+    nearbyTerms:  ["champs-élysées", "champs elysees", "fifth avenue", "rodeo drive", "knightsbridge", "mayfair", "avenue montaigne"],
     addressTerms: ["grand", "plaza", "royal", "palace", "luxury", "prestige"],
-    descTerms: ["luxury", "luxurious", "five-star", "5-star", "prestigious", "exclusive", "elite"],
+    descTerms:    ["luxury", "luxurious", "five-star", "5-star", "prestigious", "exclusive", "elite"],
     amenityTerms: ["spa", "butler service", "valet parking", "fine dining", "pool", "fitness center"],
   },
   "budget": {
-    nearbyTerms: [],
+    nearbyTerms:  [],
     addressTerms: [],
-    descTerms: ["affordable", "budget", "value", "economical", "great deal"],
+    descTerms:    ["affordable", "budget", "value", "economical", "great deal"],
     amenityTerms: ["free wifi", "free breakfast", "kitchenette", "self-catering"],
   },
   "family": {
-    nearbyTerms: [
-      "zoo", "aquarium", "theme park", "playground", "disney", "lego",
-      "children's museum", "science museum", "water park",
-    ],
+    nearbyTerms:  ["zoo", "aquarium", "theme park", "playground", "disney", "lego", "children's museum", "science museum", "water park"],
     addressTerms: [],
-    descTerms: ["family", "children", "kids", "family-friendly", "connecting rooms"],
+    descTerms:    ["family", "children", "kids", "family-friendly", "connecting rooms"],
     amenityTerms: ["pool", "kids club", "family room", "playground", "babysitting", "children's menu"],
   },
   "transit": {
-    nearbyTerms: [
-      "metro", "subway", "train station", "bus station", "tram stop",
-      "rail", "tube", "gare", "bahnhof", "stazione", "station",
-    ],
+    nearbyTerms:  ["metro", "subway", "train station", "bus station", "tram stop", "rail", "tube", "gare", "bahnhof", "stazione", "station"],
     addressTerms: ["station", "metro", "transit hub", "transport hub"],
-    descTerms: ["metro station", "subway", "train station", "bus stop", "well connected", "transport links"],
+    descTerms:    ["metro station", "subway", "train station", "bus stop", "well connected", "transport links"],
     amenityTerms: ["airport shuttle", "free shuttle", "metro pass"],
   },
   "walkable": {
-    nearbyTerms: [
-      "shopping", "mall", "market", "park", "plaza", "square",
-      "promenade", "waterfront", "boardwalk", "high street",
-    ],
+    nearbyTerms:  ["shopping", "mall", "market", "park", "plaza", "square", "promenade", "waterfront", "boardwalk"],
     addressTerms: ["downtown", "central", "city centre", "city center", "midtown", "old town"],
-    descTerms: ["walkable", "walking distance", "central location", "steps from", "heart of", "pedestrian"],
+    descTerms:    ["walkable", "walking distance", "central location", "steps from", "heart of", "pedestrian"],
     amenityTerms: [],
   },
 };
 
-// ── Paris neighborhood inference ──────────────────────────────────────────────
-// Keywords drawn from landmark names SerpAPI returns in nearby_places, plus
-// street names and arrondissement numbers that appear in addresses.
-
-const PARIS_NEIGHBORHOODS: Array<{
-  name: string;
-  keywords: string[];
-  bestFor: string[];
-}> = [
-  {
-    name: "Champs-Élysées / 8th",
-    keywords: ["champs-élysées", "champs elysees", "arc de triomphe", "avenue montaigne", "8e arrondissement", "8th arrondissement", " 8e "],
-    bestFor: ["luxury", "sightseeing", "first-time"],
-  },
-  {
-    name: "Eiffel Tower / 7th",
-    keywords: ["eiffel tower", "champ de mars", "trocadéro", "trocadero", "invalides", "musée d'orsay", "orsay", "7e arrondissement", "7th arrondissement", " 7e "],
-    bestFor: ["sightseeing", "first-time", "quiet", "luxury"],
-  },
-  {
-    name: "Louvre / 1st",
-    keywords: ["louvre", "les halles", "châtelet", "chatelet", "palais royal", "rue de rivoli", "1er arrondissement", "1st arrondissement", " 1er "],
-    bestFor: ["first-time", "sightseeing", "walkable"],
-  },
-  {
-    name: "Le Marais",
-    keywords: ["le marais", "centre pompidou", "pompidou", "place des vosges", "rue de bretagne", "3e arrondissement", "4e arrondissement", "3rd arrondissement", "4th arrondissement", " 3e ", " 4e "],
-    bestFor: ["sightseeing", "food", "walkable", "first-time", "nightlife"],
-  },
-  {
-    name: "Saint-Germain",
-    keywords: ["saint-germain", "st-germain", "odéon", "odeon", "jardin du luxembourg", "luxembourg", "6e arrondissement", "6th arrondissement", " 6e "],
-    bestFor: ["food", "quiet", "walkable", "sightseeing", "luxury"],
-  },
-  {
-    name: "Latin Quarter",
-    keywords: ["latin quarter", "quartier latin", "sorbonne", "panthéon", "pantheon", "5e arrondissement", "5th arrondissement", " 5e "],
-    bestFor: ["food", "walkable", "sightseeing", "budget"],
-  },
-  {
-    name: "Opéra / Grands Boulevards",
-    keywords: ["opéra garnier", "opera garnier", "grands boulevards", "galeries lafayette", "printemps", "9e arrondissement", "9th arrondissement", " 9e "],
-    bestFor: ["first-time", "sightseeing", "walkable"],
-  },
-  {
-    name: "Montmartre",
-    keywords: ["montmartre", "sacré-cœur", "sacre coeur", "18e arrondissement", "18th arrondissement", " 18e "],
-    bestFor: ["sightseeing", "first-time", "budget", "food"],
-  },
-  {
-    name: "Bastille / 11th",
-    keywords: ["bastille", "oberkampf", "place de la bastille", "11e arrondissement", "11th arrondissement", " 11e "],
-    bestFor: ["nightlife", "food", "walkable"],
-  },
-  {
-    name: "Canal Saint-Martin",
-    keywords: ["canal saint-martin", "canal st martin", "gare du nord", "gare de l'est", "10e arrondissement", "10th arrondissement", " 10e "],
-    bestFor: ["food", "nightlife", "budget"],
-  },
-];
-
-// ── Generic neighborhood patterns (any city) ──────────────────────────────────
-
-const GENERIC_NEIGHBORHOOD_PATTERNS: Array<{ pattern: string; name: string }> = [
-  { pattern: "old town",          name: "Old Town" },
-  { pattern: "historic center",   name: "Historic Center" },
-  { pattern: "historic centre",   name: "Historic Centre" },
-  { pattern: "old city",          name: "Old City" },
-  { pattern: "downtown",          name: "Downtown" },
-  { pattern: "city center",       name: "City Center" },
-  { pattern: "city centre",       name: "City Centre" },
-  { pattern: "financial district",name: "Financial District" },
-  { pattern: "waterfront",        name: "Waterfront" },
-  { pattern: "beachfront",        name: "Beachfront" },
-  { pattern: "beach",             name: "Beachside" },
-  { pattern: "midtown",           name: "Midtown" },
-  { pattern: "uptown",            name: "Uptown" },
-  { pattern: "soho",              name: "SoHo" },
-  { pattern: "left bank",         name: "Left Bank" },
-  { pattern: "right bank",        name: "Right Bank" },
-];
-
-// ── Scored hotel shape returned to the client ─────────────────────────────────
+// ── HotelOffer — shape sent to the client ─────────────────────────────────────
 
 export interface HotelOffer {
   hotel_id: string;
@@ -225,13 +114,16 @@ export interface HotelOffer {
     stars:       number;
     walkability: number;
   };
-  // Neighborhood fields (populated when neighborhood_prefs are provided)
+  // Neighborhood fields
   neighborhood_fit_score:  number;   // 0–100; 0 when no prefs
   inferred_neighborhood:   string;   // "" if not determined
   neighborhood_fit_label:  string;   // "Great fit" | "Good fit" | "Partial fit" | ""
+  // Google Places enrichment fields
+  location_summary: string;          // "central, metro nearby, strong dining scene"
+  transit_note:     string;          // "Métro Opéra · 3 min walk"
 }
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
+// ── Base helpers ──────────────────────────────────────────────────────────────
 
 function parseDurationMinutes(duration: string): number {
   const m = duration.match(/(\d+)\s*min/i);
@@ -268,102 +160,131 @@ function walkabilityScore(places: NearbyPlace[]): number {
 
 // ── Neighborhood helpers ──────────────────────────────────────────────────────
 
-function inferNeighborhood(hotel: ProviderHotel, destination: string): string {
-  const dest = destination.toLowerCase().trim();
+function inferNeighborhoodFallback(hotel: ProviderHotel): string {
   const allText = [
     hotel.name, hotel.address, hotel.description,
     ...hotel.nearbyPlaces.map((p) => p.name),
   ].join(" ").toLowerCase();
 
-  if (dest.includes("paris")) {
-    for (const nh of PARIS_NEIGHBORHOODS) {
-      if (nh.keywords.some((k) => allText.includes(k.toLowerCase()))) return nh.name;
-    }
-  }
+  const patterns = [
+    ["le marais", "Le Marais"],
+    ["saint-germain", "Saint-Germain"],
+    ["latin quarter", "Latin Quarter"],
+    ["quartier latin", "Latin Quarter"],
+    ["montmartre", "Montmartre"],
+    ["bastille", "Bastille / 11th"],
+    ["canal saint-martin", "Canal Saint-Martin"],
+    ["champs-élysées", "Champs-Élysées / 8th"],
+    ["champs elysees", "Champs-Élysées / 8th"],
+    ["louvre", "Louvre / 1st"],
+    ["eiffel", "Eiffel Tower / 7th"],
+    ["old town", "Old Town"],
+    ["historic center", "Historic Center"],
+    ["city center", "City Center"],
+    ["city centre", "City Centre"],
+    ["downtown", "Downtown"],
+    ["waterfront", "Waterfront"],
+  ] as const;
 
-  for (const { pattern, name } of GENERIC_NEIGHBORHOOD_PATTERNS) {
-    if (allText.includes(pattern)) return name;
+  for (const [keyword, name] of patterns) {
+    if (allText.includes(keyword)) return name;
   }
-
   return "";
 }
 
-function computeNeighborhoodFit(hotel: ProviderHotel, prefs: string[]): number {
+function computeNeighborhoodFit(
+  hotel: ProviderHotel,
+  prefs: string[],
+  enrichment: PlacesEnrichment | undefined,
+): number {
   if (prefs.length === 0) return 0;
 
-  // Build walk-time map: place name → min walking minutes
-  const walkMinutes = new Map<string, number>();
-  for (const p of hotel.nearbyPlaces) {
-    const mins = p.transportations
-      .filter((t) => t.type.toLowerCase().includes("walk"))
-      .map((t) => parseDurationMinutes(t.duration));
-    if (mins.length > 0) walkMinutes.set(p.name.toLowerCase(), Math.min(...mins));
-  }
-
-  const nearbyNames = hotel.nearbyPlaces.map((p) => p.name.toLowerCase());
-  const addressLower = (hotel.address + " " + hotel.name).toLowerCase();
-  const descLower    = hotel.description.toLowerCase();
-  const amenLower    = hotel.amenities.map((a) => a.toLowerCase());
-
-  let totalScore = 0;
+  let total = 0;
 
   for (const pref of prefs) {
-    const signals = PREF_SIGNALS[pref];
-    if (!signals) { totalScore += 50; continue; }
+    let score = 0;
 
-    let prefScore = 0;
+    if (enrichment) {
+      // Primary: Places-derived bestFor list — these are neighborhood characteristics
+      // confirmed by actual address data, not keyword guessing.
+      if (enrichment.bestFor.includes(pref)) {
+        score += 65;
+      } else {
+        score += 12; // base — area doesn't match but hotel might still fit
+      }
 
-    // Nearby places (strongest signal)
-    outer:
-    for (const term of signals.nearbyTerms) {
-      const tl = term.toLowerCase();
-      for (const nn of nearbyNames) {
-        if (nn.includes(tl)) {
-          const walk = walkMinutes.get(nn) ?? 999;
-          if (walk <= 5)       prefScore += 40;
-          else if (walk <= 10) prefScore += 28;
-          else if (walk <= 20) prefScore += 15;
-          else                 prefScore += 6;
-          break outer;
+      // Transit pref: boost based on walk time in transitNote
+      if (pref === "transit" && enrichment.transitNote) {
+        const m = enrichment.transitNote.match(/(\d+)\s*min/);
+        const mins = m ? parseInt(m[1]) : 10;
+        if (mins <= 3)       score += 28;
+        else if (mins <= 7)  score += 18;
+        else if (mins <= 12) score += 8;
+      }
+
+      // Keyword cross-checks in locationSummary / transitNote
+      const summLower = (enrichment.locationSummary + " " + enrichment.transitNote).toLowerCase();
+      if (pref === "food"      && summLower.includes("dining"))      score += 15;
+      if (pref === "walkable"  && summLower.includes("walkable"))    score += 15;
+      if (pref === "sightseeing" && summLower.includes("sights"))    score += 15;
+      if (pref === "quiet"     && summLower.includes("quiet"))       score += 15;
+      if (pref === "nightlife" && summLower.includes("nightlife"))   score += 15;
+    } else {
+      // Fallback path: keyword matching against SerpAPI text data
+      const signals = PREF_SIGNALS[pref];
+      if (!signals) { total += 50; continue; }
+
+      const walkMinutes = new Map<string, number>();
+      for (const p of hotel.nearbyPlaces) {
+        const mins = p.transportations
+          .filter((t) => t.type.toLowerCase().includes("walk"))
+          .map((t) => parseDurationMinutes(t.duration));
+        if (mins.length > 0) walkMinutes.set(p.name.toLowerCase(), Math.min(...mins));
+      }
+
+      const nearbyNames = hotel.nearbyPlaces.map((p) => p.name.toLowerCase());
+      const addrLower   = (hotel.address + " " + hotel.name).toLowerCase();
+      const descLower   = hotel.description.toLowerCase();
+      const amenLower   = hotel.amenities.map((a) => a.toLowerCase());
+
+      // Nearby places — walk-time weighted
+      outer:
+      for (const term of signals.nearbyTerms) {
+        const tl = term.toLowerCase();
+        for (const nn of nearbyNames) {
+          if (nn.includes(tl)) {
+            const walk = walkMinutes.get(nn) ?? 999;
+            if (walk <= 5)       score += 40;
+            else if (walk <= 10) score += 28;
+            else if (walk <= 20) score += 15;
+            else                 score += 6;
+            break outer;
+          }
         }
       }
+      let addrHits = 0;
+      for (const t of signals.addressTerms) { if (addrLower.includes(t)) addrHits++; }
+      score += Math.min(25, addrHits * 13);
+
+      let descHits = 0;
+      for (const t of signals.descTerms) { if (descLower.includes(t)) descHits++; }
+      score += Math.min(20, descHits * 7);
+
+      let amenHits = 0;
+      for (const t of signals.amenityTerms) { if (amenLower.some((a) => a.includes(t))) amenHits++; }
+      score += Math.min(25, amenHits * 12);
+
+      if (pref === "luxury") {
+        if (hotel.starRating >= 5)      score += 20;
+        else if (hotel.starRating >= 4) score += 10;
+      }
+      if (pref === "budget") score += 12;
     }
 
-    // Address / hotel name
-    let addrHits = 0;
-    for (const term of signals.addressTerms) {
-      if (addressLower.includes(term.toLowerCase())) addrHits++;
-    }
-    prefScore += Math.min(25, addrHits * 13);
-
-    // Description (weaker — marketing copy)
-    let descHits = 0;
-    for (const term of signals.descTerms) {
-      if (descLower.includes(term.toLowerCase())) descHits++;
-    }
-    prefScore += Math.min(20, descHits * 7);
-
-    // Amenities (reliable for feature-based prefs)
-    let amenHits = 0;
-    for (const term of signals.amenityTerms) {
-      if (amenLower.some((a) => a.includes(term.toLowerCase()))) amenHits++;
-    }
-    prefScore += Math.min(25, amenHits * 12);
-
-    // Star-rating adjustments
-    if (pref === "luxury") {
-      if (hotel.starRating >= 5)      prefScore += 20;
-      else if (hotel.starRating >= 4) prefScore += 10;
-    }
-    if (pref === "budget") {
-      // Low-price hotels are implicitly preferred via price score; give small base
-      prefScore += 12;
-    }
-
-    totalScore += Math.min(100, prefScore);
+    total += Math.min(100, score);
   }
 
-  return Math.round(totalScore / prefs.length);
+  return Math.round(total / prefs.length);
 }
 
 function neighborhoodFitLabel(score: number, prefs: string[]): string {
@@ -380,13 +301,16 @@ function scoreHotels(
   hotels: ProviderHotel[],
   prefs: string[],
   destination: string,
+  enrichments: Map<string, PlacesEnrichment>,
 ): HotelOffer[] {
-  const prices    = hotels.map((h) => h.pricePerNight);
-  const minP      = Math.min(...prices);
-  const maxP      = Math.max(...prices);
+  const prices     = hotels.map((h) => h.pricePerNight);
+  const minP       = Math.min(...prices);
+  const maxP       = Math.max(...prices);
   const priceRange = Math.max(1, maxP - minP);
 
   return hotels.map((h) => {
+    const enrichment = enrichments.get(h.sourceHotelId);
+
     const priceScore    = ((maxP - h.pricePerNight) / priceRange) * 100;
     const reviewScore   = Math.min(100, (h.overallRating / 5) * 100);
     const locationScore = h.locationRating > 0 ? Math.min(100, (h.locationRating / 10) * 100) : 50;
@@ -401,45 +325,46 @@ function scoreHotels(
       walkScore     * 0.11
     );
 
-    const neighborhood_fit_score = computeNeighborhoodFit(h, prefs);
-    const inferred_neighborhood  = inferNeighborhood(h, destination);
-    const neighborhood_fit_label = neighborhoodFitLabel(neighborhood_fit_score, prefs);
+    const neighborhood_fit_score = computeNeighborhoodFit(h, prefs, enrichment);
 
-    // Blend neighborhood fit into composite score when preferences are active
-    const ai_score = prefs.length > 0
+    // Blend neighborhood fit at 25% when preferences are active
+    const blendedScore = prefs.length > 0
       ? Math.round(baseScore * 0.75 + neighborhood_fit_score * 0.25)
       : baseScore;
 
-    // For "budget" pref, boost price score and re-blend when it's the only pref
-    const budgetAdj = prefs.includes("budget") && prefs.length === 1
+    // Budget-only mode: shift weights heavily toward price
+    const ai_score = (prefs.length === 1 && prefs[0] === "budget")
       ? Math.round(priceScore * 0.50 + reviewScore * 0.25 + locationScore * 0.10 + starsScore * 0.08 + walkScore * 0.07)
-      : ai_score;
+      : blendedScore;
+
+    const inferred_neighborhood =
+      enrichment?.neighborhood || inferNeighborhoodFallback(h);
 
     return {
-      hotel_id:             h.sourceHotelId,
-      source:               h.source,
-      name:                 h.name,
-      address:              h.address,
-      star_rating:          h.starRating,
-      overall_rating:       h.overallRating,
-      review_count:         h.reviewCount,
-      location_rating:      h.locationRating,
-      price_per_night:      h.pricePerNight,
-      total_price:          h.totalPrice,
-      nights:               0, // filled in POST handler
-      currency:             h.currency,
-      amenities:            h.amenities,
-      image_url:            h.imageUrl,
-      booking_url:          h.bookingUrl,
-      check_in:             h.checkIn,
-      check_out:            h.checkOut,
-      hotel_type:           h.hotelType,
-      eco_certified:        h.ecoCertified,
-      description:          h.description,
-      ai_score:             prefs.includes("budget") && prefs.length === 1 ? budgetAdj : ai_score,
+      hotel_id:            h.sourceHotelId,
+      source:              h.source,
+      name:                h.name,
+      address:             h.address,
+      star_rating:         h.starRating,
+      overall_rating:      h.overallRating,
+      review_count:        h.reviewCount,
+      location_rating:     h.locationRating,
+      price_per_night:     h.pricePerNight,
+      total_price:         h.totalPrice,
+      nights:              0,
+      currency:            h.currency,
+      amenities:           h.amenities,
+      image_url:           h.imageUrl,
+      booking_url:         h.bookingUrl,
+      check_in:            h.checkIn,
+      check_out:           h.checkOut,
+      hotel_type:          h.hotelType,
+      eco_certified:       h.ecoCertified,
+      description:         h.description,
+      ai_score,
       recommendation_label: "",
       recommendation_why:   "",
-      nearby_walk:          nearestWalk(h.nearbyPlaces),
+      nearby_walk:         nearestWalk(h.nearbyPlaces),
       score_breakdown: {
         price:       Math.round(priceScore),
         reviews:     Math.round(reviewScore),
@@ -449,7 +374,9 @@ function scoreHotels(
       },
       neighborhood_fit_score,
       inferred_neighborhood,
-      neighborhood_fit_label,
+      neighborhood_fit_label: neighborhoodFitLabel(neighborhood_fit_score, prefs),
+      location_summary: enrichment?.locationSummary ?? "",
+      transit_note:     enrichment?.transitNote     ?? "",
     };
   });
 }
@@ -458,48 +385,37 @@ function scoreHotels(
 
 function assignLabels(scored: HotelOffer[]): void {
   if (scored.length === 0) return;
+  const claim = (h: HotelOffer, label: string) => { if (!h.recommendation_label) h.recommendation_label = label; };
 
-  const claim = (h: HotelOffer, label: string) => {
-    if (!h.recommendation_label) h.recommendation_label = label;
-  };
+  claim([...scored].sort((a, b) => b.ai_score - a.ai_score)[0], "Best Overall");
 
-  const byScore = [...scored].sort((a, b) => b.ai_score - a.ai_score);
-  claim(byScore[0], "Best Overall");
-
-  const luxCandidates = scored
+  const lux = scored
     .filter((h) => h.star_rating >= 4 && !h.recommendation_label)
-    .sort((a, b) => b.star_rating !== a.star_rating ? b.star_rating - a.star_rating : b.overall_rating - a.overall_rating);
-  if (luxCandidates.length > 0) claim(luxCandidates[0], "Luxury Pick");
+    .sort((a, b) => b.star_rating !== a.star_rating ? b.star_rating - a.star_rating : b.overall_rating - a.overall_rating)[0];
+  if (lux) claim(lux, "Luxury Pick");
 
-  const locCandidates = scored.filter((h) => !h.recommendation_label);
-  if (locCandidates.length > 0) {
-    const loc = locCandidates.sort(
-      (a, b) =>
-        (b.score_breakdown.location + b.score_breakdown.walkability) -
-        (a.score_breakdown.location + a.score_breakdown.walkability)
-    )[0];
-    claim(loc, "Best Location");
-  }
+  const loc = scored
+    .filter((h) => !h.recommendation_label)
+    .sort((a, b) => (b.score_breakdown.location + b.score_breakdown.walkability) - (a.score_breakdown.location + a.score_breakdown.walkability))[0];
+  if (loc) claim(loc, "Best Location");
 
-  const budgetCandidates = scored
+  const budget = scored
     .filter((h) => h.overall_rating >= 3.5 && !h.recommendation_label)
-    .sort((a, b) => a.price_per_night - b.price_per_night);
-  if (budgetCandidates.length > 0) claim(budgetCandidates[0], "Budget Pick");
+    .sort((a, b) => a.price_per_night - b.price_per_night)[0];
+  if (budget) claim(budget, "Budget Pick");
 
-  const valueCandidates = scored.filter((h) => !h.recommendation_label);
-  if (valueCandidates.length > 0) {
-    const val = valueCandidates.sort(
-      (a, b) =>
-        (b.score_breakdown.reviews + b.score_breakdown.location - b.score_breakdown.price * 0.3) -
-        (a.score_breakdown.reviews + a.score_breakdown.location - a.score_breakdown.price * 0.3)
+  const val = scored
+    .filter((h) => !h.recommendation_label)
+    .sort((a, b) =>
+      (b.score_breakdown.reviews + b.score_breakdown.location - b.score_breakdown.price * 0.3) -
+      (a.score_breakdown.reviews + a.score_breakdown.location - a.score_breakdown.price * 0.3)
     )[0];
-    claim(val, "Best Value");
-  }
+  if (val) claim(val, "Best Value");
 }
 
 // ── Recommendation text ───────────────────────────────────────────────────────
 
-const PREF_DISPLAY_NAMES: Record<string, string> = {
+const PREF_DISPLAY: Record<string, string> = {
   "first-time":  "first-time visitors",
   "sightseeing": "sightseeing",
   "food":        "food lovers",
@@ -512,64 +428,69 @@ const PREF_DISPLAY_NAMES: Record<string, string> = {
   "walkable":    "walkability",
 };
 
-function buildWhy(h: HotelOffer, all: HotelOffer[], prefs: string[]): string {
+function buildWhy(
+  h: HotelOffer,
+  all: HotelOffer[],
+  prefs: string[],
+  enrichment: PlacesEnrichment | undefined,
+): string {
   const cheapest  = all.reduce((a, b) => a.price_per_night <= b.price_per_night ? a : b);
   const priceDiff = Math.round(h.price_per_night - cheapest.price_per_night);
   const parts: string[] = [];
 
-  // Neighborhood context
-  if (h.inferred_neighborhood) {
-    if (prefs.length > 0 && h.neighborhood_fit_score >= 45) {
-      const matchedPrefs = prefs.filter((p) => {
-        // Only mention prefs where this hotel actually fits
-        const s = PREF_SIGNALS[p];
-        if (!s) return false;
-        const allText = [h.name, h.address, h.description, ...h.amenities].join(" ").toLowerCase();
-        return (
-          s.addressTerms.some((t) => allText.includes(t)) ||
-          s.descTerms.some((t) => allText.includes(t)) ||
-          s.amenityTerms.some((t) => allText.includes(t)) ||
-          h.neighborhood_fit_score >= 55
-        );
-      });
-      const prefLabel = matchedPrefs.slice(0, 2).map((p) => PREF_DISPLAY_NAMES[p] ?? p).join(" and ");
-      if (prefLabel) {
-        parts.push(`In ${h.inferred_neighborhood} — a great area for ${prefLabel}`);
+  // ── Location context ───────────────────────────────────────────────────────
+  if (enrichment) {
+    // Google Places: rich area description
+    if (h.inferred_neighborhood) {
+      const summaryPart = enrichment.locationSummary
+        ? `${h.inferred_neighborhood} — ${enrichment.locationSummary}`
+        : h.inferred_neighborhood;
+
+      // Add pref-match note when this area genuinely suits selected preferences
+      const matchedPrefs = prefs.filter((p) => enrichment.bestFor.includes(p));
+      if (matchedPrefs.length > 0) {
+        const prefLabel = matchedPrefs.slice(0, 2).map((p) => PREF_DISPLAY[p] ?? p).join(" and ");
+        parts.push(`${summaryPart} — great for ${prefLabel}`);
       } else {
-        parts.push(`In ${h.inferred_neighborhood}`);
+        parts.push(summaryPart);
       }
+    }
+    // Transit note as a separate context item (don't double-count if already in summary)
+    if (enrichment.transitNote && !enrichment.locationSummary.toLowerCase().includes("metro") && !enrichment.locationSummary.toLowerCase().includes("transit")) {
+      parts.push(enrichment.transitNote);
+    }
+  } else if (h.inferred_neighborhood) {
+    // Fallback: basic neighborhood name with optional pref note
+    const matchedPrefs = prefs.filter((p) => {
+      const signals = PREF_SIGNALS[p];
+      if (!signals) return false;
+      const allText = [h.name, h.address, h.description, ...h.amenities].join(" ").toLowerCase();
+      return signals.addressTerms.some((t) => allText.includes(t)) ||
+             signals.descTerms.some((t)    => allText.includes(t)) ||
+             h.neighborhood_fit_score >= 55;
+    });
+    if (matchedPrefs.length > 0) {
+      const pl = matchedPrefs.slice(0, 2).map((p) => PREF_DISPLAY[p] ?? p).join(" and ");
+      parts.push(`In ${h.inferred_neighborhood} — great for ${pl}`);
     } else {
       parts.push(`In ${h.inferred_neighborhood}`);
     }
-  } else if (prefs.length > 0 && h.neighborhood_fit_score >= 65) {
-    const bestPref = prefs.find((p) => PREF_SIGNALS[p] !== undefined);
-    if (bestPref) parts.push(`Strong match for ${PREF_DISPLAY_NAMES[bestPref] ?? bestPref}`);
   }
 
-  // Location / walk
-  if (h.nearby_walk) {
-    const { name, minutes } = h.nearby_walk;
-    if (minutes <= 3)       parts.push(`steps from ${name}`);
-    else if (minutes <= 8)  parts.push(`a ${minutes}-minute walk from ${name}`);
-    else if (minutes <= 15) parts.push(`${minutes} minutes on foot from ${name}`);
-  } else if (h.location_rating >= 9) {
-    parts.push("an excellent location score");
-  }
-
-  // Review quality
+  // ── Review quality ─────────────────────────────────────────────────────────
   if (h.overall_rating >= 4.7)      parts.push("outstanding guest reviews");
   else if (h.overall_rating >= 4.4) parts.push("excellent reviews");
   else if (h.overall_rating >= 4.0) parts.push("very good reviews");
   else if (h.overall_rating >= 3.5) parts.push("solid guest ratings");
 
-  // Standout amenity
+  // ── Standout amenity ───────────────────────────────────────────────────────
   const topAmenities = ["Pool", "Spa", "Free breakfast", "Gym", "Airport shuttle", "Restaurant"];
   const highlight = h.amenities.find((a) =>
     topAmenities.some((ta) => a.toLowerCase().includes(ta.toLowerCase()))
   );
   if (highlight && parts.length < 3) parts.push(`includes ${highlight.toLowerCase()}`);
 
-  // Price comparison
+  // ── Price comparison ───────────────────────────────────────────────────────
   if (priceDiff <= 0) {
     parts.push(`the lowest price in this set at $${Math.round(h.price_per_night)}/night`);
   } else if (priceDiff <= 25) {
@@ -593,17 +514,13 @@ function deduplicateHotels(hotels: ProviderHotel[]): ProviderHotel[] {
   for (const h of hotels) {
     const key = h.name.toLowerCase().replace(/\W+/g, " ").trim();
     const existing = seen.get(key);
-    if (!existing || h.pricePerNight < existing.pricePerNight) {
-      seen.set(key, h);
-    }
+    if (!existing || h.pricePerNight < existing.pricePerNight) seen.set(key, h);
   }
   return [...seen.values()];
 }
 
 function nightsBetween(checkIn: string, checkOut: string): number {
-  const a = new Date(checkIn).getTime();
-  const b = new Date(checkOut).getTime();
-  const n = Math.round((b - a) / 86_400_000);
+  const n = Math.round((new Date(checkOut).getTime() - new Date(checkIn).getTime()) / 86_400_000);
   return n > 0 ? n : 1;
 }
 
@@ -611,57 +528,49 @@ function nightsBetween(checkIn: string, checkOut: string): number {
 
 export async function POST(req: Request) {
   let body: Record<string, unknown>;
-  try {
-    body = await req.json() as Record<string, unknown>;
-  } catch {
-    return NextResponse.json({ status: "error", message: "Invalid JSON." }, { status: 400 });
-  }
+  try { body = await req.json() as Record<string, unknown>; }
+  catch { return NextResponse.json({ status: "error", message: "Invalid JSON." }, { status: 400 }); }
 
-  const destination       = (body.destination        as string | undefined)?.trim() ?? "";
-  const check_in          = (body.check_in            as string | undefined)?.trim() ?? "";
-  const check_out         = (body.check_out           as string | undefined)?.trim() ?? "";
-  const guests            = Math.max(1, Math.min(8, Number(body.guests  ?? 2)));
-  const rooms             = Math.max(1, Math.min(4, Number(body.rooms   ?? 1)));
+  const destination        = (body.destination as string | undefined)?.trim() ?? "";
+  const check_in           = (body.check_in    as string | undefined)?.trim() ?? "";
+  const check_out          = (body.check_out   as string | undefined)?.trim() ?? "";
+  const guests             = Math.max(1, Math.min(8, Number(body.guests ?? 2)));
+  const rooms              = Math.max(1, Math.min(4, Number(body.rooms  ?? 1)));
   const neighborhood_prefs = Array.isArray(body.neighborhood_prefs)
     ? (body.neighborhood_prefs as unknown[]).filter((p): p is string => typeof p === "string" && p in PREF_SIGNALS)
     : [];
 
   if (!destination || !check_in || !check_out) {
-    return NextResponse.json(
-      { status: "error", message: "destination, check_in, and check_out are required." },
-      { status: 400 }
-    );
+    return NextResponse.json({ status: "error", message: "destination, check_in, and check_out are required." }, { status: 400 });
   }
 
-  const apiKey = (process.env.SERPAPI_API_KEY ?? "").trim();
-  if (!apiKey) {
-    return NextResponse.json(
-      { status: "not_configured", message: "Hotel search is temporarily unavailable." },
-      { status: 200 }
-    );
+  const serpApiKey   = (process.env.SERPAPI_API_KEY      ?? "").trim();
+  const placesApiKey = (process.env.GOOGLE_PLACES_API_KEY ?? "").trim();
+
+  if (!serpApiKey) {
+    return NextResponse.json({ status: "not_configured", message: "Hotel search is temporarily unavailable." }, { status: 200 });
   }
 
   const nights = nightsBetween(check_in, check_out);
 
-  const result = await searchGoogleHotels(
-    { destination, check_in, check_out, guests, rooms },
-    apiKey,
-  );
+  // ── Fetch from SerpAPI ─────────────────────────────────────────────────────
+  const serpResult = await searchGoogleHotels({ destination, check_in, check_out, guests, rooms }, serpApiKey);
 
-  if (result.hotels.length === 0) {
-    return NextResponse.json({
-      status: "empty",
-      message: `No hotels found for "${destination}". Try a different city name.`,
-      offers: [],
-    });
+  if (serpResult.hotels.length === 0) {
+    return NextResponse.json({ status: "empty", message: `No hotels found for "${destination}". Try a different city name.`, offers: [] });
   }
 
-  const deduped = deduplicateHotels(result.hotels);
-  console.log(
-    `[hotels] raw=${result.rawCount}  after_dedup=${deduped.length}  prefs=[${neighborhood_prefs.join(",")}]  (${result.latencyMs}ms)`
-  );
+  const deduped = deduplicateHotels(serpResult.hotels);
+  console.log(`[hotels] raw=${serpResult.rawCount}  deduped=${deduped.length}  prefs=[${neighborhood_prefs.join(",")}]  places=${!!placesApiKey}  (serp=${serpResult.latencyMs}ms)`);
 
-  const scored = scoreHotels(deduped, neighborhood_prefs, destination).map((h) => ({ ...h, nights }));
+  // ── Enrich with Google Places (optional) ───────────────────────────────────
+  let enrichments = new Map<string, PlacesEnrichment>();
+  if (placesApiKey) {
+    enrichments = await enrichWithGooglePlaces(deduped, destination, placesApiKey);
+  }
+
+  // ── Score, sort, label ─────────────────────────────────────────────────────
+  const scored = scoreHotels(deduped, neighborhood_prefs, destination, enrichments).map((h) => ({ ...h, nights }));
 
   scored.sort((a, b) =>
     b.ai_score !== a.ai_score ? b.ai_score - a.ai_score : a.price_per_night - b.price_per_night
@@ -670,7 +579,7 @@ export async function POST(req: Request) {
   assignLabels(scored);
 
   for (const h of scored) {
-    h.recommendation_why = buildWhy(h, scored, neighborhood_prefs);
+    h.recommendation_why = buildWhy(h, scored, neighborhood_prefs, enrichments.get(h.hotel_id));
   }
 
   return NextResponse.json({
@@ -682,6 +591,7 @@ export async function POST(req: Request) {
     guests,
     rooms,
     neighborhood_prefs,
+    places_enriched: enrichments.size > 0,
     offer_count: scored.length,
     offers: scored,
   });
