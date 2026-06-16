@@ -327,6 +327,10 @@ function HotelCard({
   const prefsActive = activePrefs.length > 0;
   const showFitBadge = prefsActive && !!offer.neighborhood_fit_label;
   const fitNote = prefsActive ? buildFitNote(offer, activePrefs) : "";
+  const showPoorFitWarning = prefsActive
+    && offer.neighborhood_fit_score > 0
+    && offer.neighborhood_fit_score < 50
+    && (activePrefs.includes("luxury") || activePrefs.includes("quiet") || activePrefs.includes("family"));
 
   const breakdownRows = [
     { key: "reviews",     label: "Guest Reviews",   score: offer.score_breakdown.reviews     },
@@ -387,9 +391,14 @@ function HotelCard({
                       {offer.recommendation_label}
                     </span>
                   )}
-                  {showFitBadge && (
+                  {showFitBadge && !showPoorFitWarning && (
                     <span className={`text-[10px] font-bold uppercase tracking-widest border rounded-full px-2 py-0.5 leading-none ${fitBg(offer.neighborhood_fit_label)}`}>
                       {offer.neighborhood_fit_label}
+                    </span>
+                  )}
+                  {showPoorFitWarning && (
+                    <span className="text-[10px] font-bold uppercase tracking-widest border rounded-full px-2 py-0.5 leading-none bg-red-500/12 text-red-400 border-red-500/30">
+                      {activePrefs.includes("luxury") ? "Poor Luxury Fit" : activePrefs.includes("quiet") ? "Not Quiet" : "Not Family-Friendly"}
                     </span>
                   )}
                   {offer.eco_certified && (

@@ -87,6 +87,120 @@ type PrefScoreMap = Record<string, number>;
 type CityNeighborhoodTable = Record<string, PrefScoreMap>;  // pref → {neighborhood → score}
 
 const NEIGHBORHOOD_FIT_TABLES: Record<string, CityNeighborhoodTable> = {
+  tokyo: {
+    luxury: {
+      "ginza": 95, "chuo city": 95, "chuo-ku": 95, "chūō": 95,
+      "marunouchi": 95, "chiyoda city": 92, "chiyoda-ku": 92,
+      "roppongi": 90, "minato city": 88, "minato-ku": 88, "azabu": 90, "akasaka": 88,
+      "aoyama": 90, "omotesando": 92, "harajuku": 82,
+      "shibuya city": 80, "shibuya-ku": 80, "shibuya": 80, "daikanyama": 82, "ebisu": 80,
+      "shinjuku": 75, "shinjuku city": 75, "shinjuku-ku": 75,
+      "meguro": 70, "meguro city": 70, "meguro-ku": 70,
+      "shinagawa": 68, "shinagawa city": 68, "shinagawa-ku": 68,
+      "sumida city": 35, "sumida-ku": 35, "sumida": 35,
+      "asakusa": 35, "taito city": 35, "taito-ku": 35, "taitō": 35,
+      "ueno": 40,
+      "bunkyo": 55, "bunkyo city": 55, "bunkyo-ku": 55,
+      "edogawa": 20, "edogawa city": 20, "katsushika": 15,
+      "adachi": 18, "nerima": 22, "itabashi": 22, "kita city": 25,
+    },
+    quiet: {
+      "aoyama": 82, "omotesando": 80,
+      "meguro": 87, "meguro city": 87, "meguro-ku": 87,
+      "daikanyama": 87, "ebisu": 77,
+      "ginza": 62, "chuo city": 60, "chuo-ku": 60,
+      "azabu": 78, "minato city": 72, "minato-ku": 72,
+      "harajuku": 65, "shibuya city": 37, "shibuya-ku": 37, "shibuya": 37,
+      "shinjuku": 28, "shinjuku city": 28, "shinjuku-ku": 28,
+      "roppongi": 33,
+      "asakusa": 47, "taito city": 45, "taito-ku": 45,
+      "ueno": 42, "bunkyo": 60, "bunkyo-ku": 60,
+      "sumida": 52, "sumida city": 50,
+    },
+    "first-time": {
+      "shinjuku": 92, "shinjuku city": 92, "shinjuku-ku": 92,
+      "ginza": 87, "chuo city": 85, "chuo-ku": 85,
+      "shibuya": 87, "shibuya city": 87, "shibuya-ku": 87,
+      "marunouchi": 87, "chiyoda city": 85, "chiyoda-ku": 85,
+      "asakusa": 77, "taito city": 75, "taito-ku": 75,
+      "roppongi": 77, "minato city": 75, "minato-ku": 75,
+      "ueno": 72, "harajuku": 80, "omotesando": 78, "aoyama": 75,
+      "meguro": 52, "daikanyama": 55, "ebisu": 60,
+      "sumida": 50, "bunkyo": 58,
+    },
+    food: {
+      "ginza": 95, "chuo city": 92, "chuo-ku": 92,
+      "shinjuku": 92, "shinjuku city": 92, "shinjuku-ku": 92,
+      "shibuya": 90, "shibuya city": 90, "shibuya-ku": 90,
+      "ebisu": 92, "daikanyama": 87,
+      "roppongi": 87, "minato city": 82, "minato-ku": 82,
+      "asakusa": 77, "taito city": 75, "taito-ku": 75,
+      "ueno": 70, "harajuku": 78, "omotesando": 82, "aoyama": 80,
+      "bunkyo": 65, "meguro": 78,
+      "marunouchi": 82, "chiyoda city": 78, "chiyoda-ku": 78,
+    },
+    transit: {
+      "shinjuku": 97, "shinjuku city": 97, "shinjuku-ku": 97,
+      "marunouchi": 97, "chiyoda city": 95, "chiyoda-ku": 95,
+      "ginza": 92, "chuo city": 90, "chuo-ku": 90,
+      "shibuya": 92, "shibuya city": 92, "shibuya-ku": 92,
+      "ueno": 87, "taito city": 77, "taito-ku": 77, "asakusa": 77,
+      "roppongi": 75, "minato city": 78, "minato-ku": 78,
+      "aoyama": 72, "omotesando": 75, "harajuku": 82,
+      "bunkyo": 78, "bunkyo-ku": 78,
+      "meguro": 72, "shinagawa": 80, "shinagawa-ku": 80,
+      "sumida": 75, "sumida-ku": 75,
+    },
+    nightlife: {
+      "shinjuku": 95, "shinjuku city": 95, "shinjuku-ku": 95,
+      "roppongi": 95, "minato city": 88, "minato-ku": 88,
+      "shibuya": 90, "shibuya city": 90, "shibuya-ku": 90,
+      "ginza": 75, "chuo city": 72, "chuo-ku": 72,
+      "harajuku": 72, "aoyama": 65, "ebisu": 75, "daikanyama": 72,
+      "asakusa": 55, "taito city": 52, "taito-ku": 52,
+      "ueno": 58, "meguro": 62,
+      "sumida": 45, "bunkyo": 48,
+    },
+    budget: {
+      "asakusa": 82, "taito city": 82, "taito-ku": 82,
+      "ueno": 78, "bunkyo": 72, "bunkyo-ku": 72,
+      "sumida": 77, "sumida-ku": 77,
+      "katsushika": 88, "edogawa": 87, "adachi": 87, "nerima": 82, "itabashi": 80,
+      "shinjuku": 60, "shinjuku-ku": 60,
+      "shibuya": 42, "ginza": 28, "chuo city": 28, "chuo-ku": 28,
+      "roppongi": 32, "minato city": 30, "minato-ku": 30,
+    },
+    family: {
+      "asakusa": 80, "taito city": 78, "taito-ku": 78,
+      "ueno": 82, "bunkyo": 78, "bunkyo-ku": 78,
+      "shibuya": 70, "shibuya-ku": 70,
+      "shinjuku": 65, "shinjuku-ku": 65,
+      "meguro": 72, "ebisu": 68,
+      "ginza": 62, "chuo city": 60,
+      "roppongi": 45, "minato-ku": 48,
+    },
+    walkable: {
+      "ginza": 88, "chuo city": 85, "chuo-ku": 85,
+      "asakusa": 85, "taito city": 82, "taito-ku": 82,
+      "marunouchi": 82, "chiyoda city": 80, "chiyoda-ku": 80,
+      "shibuya": 82, "shibuya-ku": 82, "omotesando": 87, "harajuku": 85,
+      "shinjuku": 78, "shinjuku-ku": 78,
+      "roppongi": 72, "minato city": 68, "minato-ku": 68,
+      "aoyama": 78, "ebisu": 72, "daikanyama": 75,
+      "ueno": 75, "sumida": 72,
+    },
+    sightseeing: {
+      "asakusa": 92, "taito city": 90, "taito-ku": 90,
+      "ueno": 90, "bunkyo": 82, "bunkyo-ku": 82,
+      "ginza": 82, "chuo city": 80, "chuo-ku": 80,
+      "marunouchi": 82, "chiyoda city": 80, "chiyoda-ku": 80,
+      "shinjuku": 78, "shinjuku-ku": 78,
+      "shibuya": 75, "shibuya-ku": 75, "harajuku": 78,
+      "aoyama": 70, "omotesando": 72,
+      "roppongi": 78, "minato city": 72, "minato-ku": 72,
+      "meguro": 55, "sumida": 82,
+    },
+  },
   barcelona: {
     quiet: {
       "sarrià-sant gervasi": 95, "sant gervasi": 90, "pedralbes": 90,
@@ -172,6 +286,18 @@ const NEIGHBORHOOD_FIT_TABLES: Record<string, CityNeighborhoodTable> = {
 
 // Best neighborhood per preference per city (used in "less X than Y" comparisons)
 const CITY_BEST_NEIGHBORHOOD: Record<string, Record<string, string>> = {
+  tokyo: {
+    quiet:        "Daikanyama / Meguro",
+    luxury:       "Ginza",
+    food:         "Ginza / Shinjuku",
+    sightseeing:  "Asakusa",
+    transit:      "Shinjuku",
+    nightlife:    "Roppongi / Shinjuku",
+    "first-time": "Shinjuku",
+    walkable:     "Ginza",
+    budget:       "Asakusa / Ueno",
+    family:       "Ueno",
+  },
   barcelona: {
     quiet:        "Sarrià-Sant Gervasi",
     luxury:       "Eixample",
@@ -330,12 +456,32 @@ function lookupCityNeighborhoodScore(
 
   let cityKey: string | null = null;
   if (destL.includes("barcelona")) cityKey = "barcelona";
+  if (destL.includes("tokyo") || destL.includes("tōkyō")) cityKey = "tokyo";
   if (!cityKey) return null;
 
   const prefTable = NEIGHBORHOOD_FIT_TABLES[cityKey]?.[pref];
   if (!prefTable) return null;
 
   // Sub-district detection: check address for more-specific areas
+  if (cityKey === "tokyo") {
+    if (addrL.includes("ginza"))         return prefTable["ginza"]        ?? prefTable["chuo city"]    ?? null;
+    if (addrL.includes("asakusa"))       return prefTable["asakusa"]      ?? prefTable["taito city"]   ?? null;
+    if (addrL.includes("roppongi"))      return prefTable["roppongi"]     ?? prefTable["minato city"]  ?? null;
+    if (addrL.includes("azabu"))         return prefTable["azabu"]        ?? prefTable["minato city"]  ?? null;
+    if (addrL.includes("akasaka"))       return prefTable["akasaka"]      ?? prefTable["minato city"]  ?? null;
+    if (addrL.includes("omotesando"))    return prefTable["omotesando"]   ?? prefTable["shibuya city"] ?? null;
+    if (addrL.includes("aoyama"))        return prefTable["aoyama"]       ?? prefTable["shibuya city"] ?? null;
+    if (addrL.includes("harajuku"))      return prefTable["harajuku"]     ?? prefTable["shibuya city"] ?? null;
+    if (addrL.includes("daikanyama"))    return prefTable["daikanyama"]   ?? prefTable["shibuya city"] ?? null;
+    if (addrL.includes("ebisu"))         return prefTable["ebisu"]        ?? prefTable["shibuya city"] ?? null;
+    if (addrL.includes("marunouchi"))    return prefTable["marunouchi"]   ?? prefTable["chiyoda city"] ?? null;
+    if (addrL.includes("ueno"))          return prefTable["ueno"]         ?? prefTable["taito city"]   ?? null;
+    if (addrL.includes("meguro"))        return prefTable["meguro"]       ?? prefTable["meguro city"]  ?? null;
+    if (addrL.includes("shibuya"))       return prefTable["shibuya"]      ?? null;
+    if (addrL.includes("shinjuku"))      return prefTable["shinjuku"]     ?? null;
+    if (addrL.includes("shimokitazawa")) return prefTable["setagaya"] ?? prefTable["shibuya city"] ?? null;
+  }
+
   if (cityKey === "barcelona") {
     if (addrL.includes("passeig de gràcia") || addrL.includes("paseo de gracia"))
       return prefTable["passeig de gràcia"] ?? prefTable["eixample"] ?? null;
@@ -515,15 +661,31 @@ function scoreHotels(
       h, prefs, enrichment, inferred_neighborhood, destination,
     );
 
-    // Blend neighborhood fit at 30% when preferences are active
-    const blendedScore = prefs.length > 0
-      ? Math.round(baseScore * 0.70 + neighborhood_fit_score * 0.30)
-      : baseScore;
-
-    // Budget-only mode: shift weights heavily toward price
-    const ai_score = (prefs.length === 1 && prefs[0] === "budget")
-      ? Math.round(priceScore * 0.50 + reviewScore * 0.25 + locationScore * 0.10 + starsScore * 0.08 + walkScore * 0.07)
-      : blendedScore;
+    let ai_score: number;
+    if (prefs.length === 0) {
+      ai_score = baseScore;
+    } else if (prefs.length === 1 && prefs[0] === "budget") {
+      // Budget mode: price dominates
+      ai_score = Math.round(
+        priceScore    * 0.50 +
+        reviewScore   * 0.25 +
+        locationScore * 0.10 +
+        starsScore    * 0.08 +
+        walkScore     * 0.07
+      );
+    } else {
+      // Preference-aware mode:
+      // NF 35% | Hotel Quality (stars) 25% | Reviews 20% | Price 10% | Walk 10%
+      // This ensures a $60 budget hostel cannot beat a well-located luxury hotel
+      // even if it has perfect price score.
+      ai_score = Math.round(
+        neighborhood_fit_score * 0.35 +
+        starsScore             * 0.25 +
+        reviewScore            * 0.20 +
+        priceScore             * 0.10 +
+        walkScore              * 0.10
+      );
+    }
 
     return {
       hotel_id:            h.sourceHotelId,
@@ -572,13 +734,25 @@ function assignLabels(scored: HotelOffer[], prefs: string[]): void {
   if (scored.length === 0) return;
   const claim = (h: HotelOffer, label: string) => { if (!h.recommendation_label) h.recommendation_label = label; };
 
-  // Best Overall: when prefs are active, only consider hotels with NF >= 60
-  // so the pick reflects the user's stated preferences.
-  const prefAwarePool = prefs.length > 0
-    ? scored.filter((h) => h.neighborhood_fit_score >= 60)
-    : scored;
-  const bestPool    = prefAwarePool.length > 0 ? prefAwarePool : scored;
-  const bestOverall = bestPool.reduce((a, b) => b.ai_score > a.ai_score ? b : a);
+  // Best Overall: when prefs are active, apply fit gates so the pick reflects
+  // what the user actually asked for.
+  let prefAwarePool = scored;
+  if (prefs.length > 0) {
+    const luxurySelected = prefs.includes("luxury");
+    prefAwarePool = scored.filter((h) => {
+      if (h.neighborhood_fit_score < 50) return false;
+      // For luxury: also require meaningful hotel quality (≥ 3.5 stars → score ≥ 70)
+      if (luxurySelected && h.score_breakdown.stars < 70) return false;
+      return true;
+    });
+    // Relax to NF >= 40 if no hotels pass the strict gate
+    if (prefAwarePool.length === 0) {
+      prefAwarePool = scored.filter((h) => h.neighborhood_fit_score >= 40);
+    }
+    // Final fallback: use all hotels
+    if (prefAwarePool.length === 0) prefAwarePool = scored;
+  }
+  const bestOverall = prefAwarePool.reduce((a, b) => b.ai_score > a.ai_score ? b : a);
   claim(bestOverall, "Best Overall");
 
   const lux = scored
@@ -625,6 +799,28 @@ function prefStrengthCopy(pref: string, score: number, neighborhood: string, cit
   const high = score >= 75;
   const nbhdL = neighborhood.toLowerCase();
 
+  if (high && cityKey === "tokyo") {
+    if (pref === "luxury") {
+      if (nbhdL.includes("ginza") || nbhdL.includes("chuo"))
+        return "premium shopping, Michelin-starred restaurants, and upscale hotels";
+      if (nbhdL.includes("roppongi") || nbhdL.includes("azabu") || nbhdL.includes("akasaka"))
+        return "embassy district, high-end dining, and luxury hotels";
+      if (nbhdL.includes("omotesando") || nbhdL.includes("aoyama"))
+        return "luxury flagship boutiques and refined dining";
+      if (nbhdL.includes("shibuya") || nbhdL.includes("daikanyama"))
+        return "upscale shopping district with quality dining options";
+    }
+    if (pref === "quiet") {
+      if (nbhdL.includes("meguro") || nbhdL.includes("daikanyama"))
+        return "quiet, residential streets with a relaxed atmosphere";
+      if (nbhdL.includes("aoyama") || nbhdL.includes("omotesando"))
+        return "calm, leafy boulevards away from tourist crowds";
+    }
+    if (pref === "sightseeing" && (nbhdL.includes("asakusa") || nbhdL.includes("taito") || nbhdL.includes("ueno")))
+      return "traditional temples, Senso-ji, and cultural landmarks";
+    if (pref === "transit" && (nbhdL.includes("shinjuku") || nbhdL.includes("shibuya")))
+      return "one of Tokyo's busiest transport hubs with direct lines everywhere";
+  }
   if (high && cityKey === "barcelona") {
     if (pref === "luxury") {
       if (nbhdL.includes("passeig") || nbhdL.includes("eixample"))
@@ -696,39 +892,60 @@ function buildWhy(
              ?? (enrichment?.bestFor.includes(p) ? 65 : 20),
     }));
 
-    const strongFits = prefScores.filter((ps) => ps.score >= 75);
-    const mediumFits = prefScores.filter((ps) => ps.score >= 50 && ps.score < 75);
-    const weakFits   = prefScores.filter((ps) => ps.score < 50);
+    const avgScore = prefScores.reduce((s, ps) => s + ps.score, 0) / prefScores.length;
 
-    const locationParts: string[] = [];
-
-    if (strongFits.length > 0) {
-      locationParts.push(
-        strongFits.slice(0, 2).map((ps) => prefStrengthCopy(ps.pref, ps.score, nbhd, cityKey)).join(", ")
-      );
-    }
-    if (mediumFits.length > 0) {
-      locationParts.push(
-        mediumFits.slice(0, 1).map((ps) => prefStrengthCopy(ps.pref, ps.score, nbhd, cityKey)).join(", ")
-      );
-    }
-    if (weakFits.length > 0 && cityKey) {
-      const comparisons = weakFits.flatMap((ps) => {
-        const bestNbhd = CITY_BEST_NEIGHBORHOOD[cityKey]?.[ps.pref];
-        if (bestNbhd && bestNbhd.toLowerCase() !== nbhd.toLowerCase()) {
-          return [`less ${prefAdjective(ps.pref)} than ${bestNbhd}`];
-        }
-        return [];
-      });
-      if (comparisons.length > 0) locationParts.push(comparisons[0]);
-    }
-
-    if (locationParts.length > 0) {
-      parts.push(`${nbhd} — ${locationParts.join("; ")}`);
-    } else if (enrichment?.locationSummary) {
-      parts.push(`${nbhd} — ${enrichment.locationSummary}`);
+    // ── Poor fit: lead with mismatch explanation ──────────────────────────
+    if (avgScore < 50) {
+      const weakest = prefScores.reduce((a, b) => b.score < a.score ? b : a);
+      const mismatchMap: Record<string, string> = {
+        luxury:       `Not ideal for Luxury: ${nbhd} suits budget travelers better than premium stays`,
+        quiet:        `Less suited for a quiet stay — ${nbhd} is a busy, lively area`,
+        family:       `Less family-oriented — ${nbhd} is better for solo travelers and nightlife`,
+        sightseeing:  `Peripheral location — ${nbhd} is farther from major attractions`,
+        nightlife:    `Quiet area — ${nbhd} has limited evening entertainment`,
+        food:         `Limited dining — ${nbhd} has fewer restaurants than central districts`,
+        "first-time": `Off the tourist trail — ${nbhd} is better for experienced visitors`,
+        transit:      `Limited transit — ${nbhd} has fewer transport links than central areas`,
+        walkable:     `Less walkable — ${nbhd} requires more transit use`,
+        budget:       `Premium pricing — ${nbhd} is one of the more expensive areas`,
+      };
+      parts.push(mismatchMap[weakest.pref] ?? `Limited ${PREF_DISPLAY[weakest.pref] ?? weakest.pref} fit in ${nbhd}`);
     } else {
-      parts.push(`In ${nbhd}`);
+      // ── Good fit: positive preference-aware copy ──────────────────────
+      const strongFits = prefScores.filter((ps) => ps.score >= 75);
+      const mediumFits = prefScores.filter((ps) => ps.score >= 50 && ps.score < 75);
+      const weakFits   = prefScores.filter((ps) => ps.score < 50);
+
+      const locationParts: string[] = [];
+
+      if (strongFits.length > 0) {
+        locationParts.push(
+          strongFits.slice(0, 2).map((ps) => prefStrengthCopy(ps.pref, ps.score, nbhd, cityKey)).join(", ")
+        );
+      }
+      if (mediumFits.length > 0) {
+        locationParts.push(
+          mediumFits.slice(0, 1).map((ps) => prefStrengthCopy(ps.pref, ps.score, nbhd, cityKey)).join(", ")
+        );
+      }
+      if (weakFits.length > 0 && cityKey) {
+        const comparisons = weakFits.flatMap((ps) => {
+          const bestNbhd = CITY_BEST_NEIGHBORHOOD[cityKey]?.[ps.pref];
+          if (bestNbhd && bestNbhd.toLowerCase() !== nbhd.toLowerCase()) {
+            return [`less ${prefAdjective(ps.pref)} than ${bestNbhd}`];
+          }
+          return [];
+        });
+        if (comparisons.length > 0) locationParts.push(comparisons[0]);
+      }
+
+      if (locationParts.length > 0) {
+        parts.push(`${nbhd} — ${locationParts.join("; ")}`);
+      } else if (enrichment?.locationSummary) {
+        parts.push(`${nbhd} — ${enrichment.locationSummary}`);
+      } else {
+        parts.push(`In ${nbhd}`);
+      }
     }
   } else if (enrichment) {
     if (nbhd) {
