@@ -100,7 +100,9 @@ export interface FlightOffer {
   city_access: string;
   aircraft_comfort: string;
   connection_airports: string;  // comma-separated IATA codes of intermediate airports (empty if nonstop)
-  duration_minutes: number;     // total outbound itinerary minutes computed from timestamps (canonical duration)
+  duration_minutes: number;     // outbound itinerary minutes
+  total_duration_minutes: number; // outbound + return (equals duration_minutes for one-way)
+  total_stops: number;            // outbound stops + return stops (equals stops for one-way)
   dedupe_group_size?: number;   // dev debug: how many codeshares collapsed into this offer
   offer_id?: string;            // provider offer ID for end-to-end debug tracing
   fare_brand?: string;          // fare brand name (e.g. "Basic Economy", "Main Cabin")
@@ -289,6 +291,8 @@ function normalizeFlight(offer: ProviderOffer, adults: number, trip_type: string
   // Return leg fields
   const retStops = offer.returnStops ?? 0;
   const retStopLabel = retStops === 0 ? "Non-stop" : retStops === 1 ? "1 stop" : `${retStops} stops`;
+  const totalDurMins = durMins + (offer.returnDurationMinutes ?? 0);
+  const totalStops = stops + retStops;
   const returnLeg = offer.returnDepartureTime ? {
     return_origin:             offer.returnOrigin,
     return_destination:        offer.returnDestination,
@@ -336,6 +340,8 @@ function normalizeFlight(offer: ProviderOffer, adults: number, trip_type: string
     city_access: "",
     aircraft_comfort: "",
     connection_airports: offer.connectionAirports,
+    total_duration_minutes: totalDurMins,
+    total_stops: totalStops,
     offer_id: sourceOfferId,
     fare_brand: offer.fareBrand ?? "",
     source,
@@ -416,11 +422,11 @@ function deduplicateOffers(offers: FlightOffer[]): FlightOffer[] {
 // ── Scoring ──────────────────────────────────────────────────────────────────
 
 function scoreComponents(o: FlightOffer, medP: number, medD: number): Record<string, number> {
-  const durMin = o.duration_minutes;
+  const durMin = o.total_duration_minutes;   // total across both legs for round trips
   const arrMin = clockMinutes(o.arrive_time);
   const priceSc = medP > 0 ? Math.max(-1, Math.min(1, ((medP - o.price_total) / medP) * 2)) : 0;
   const durSc = medD > 0 && durMin > 0 ? Math.max(-1, Math.min(1, ((medD - durMin) / medD) * 2)) : 0;
-  const stopsSc = o.stops === 0 ? 1 : o.stops === 1 ? 0 : -0.5;
+  const stopsSc = o.total_stops === 0 ? 1 : o.total_stops === 1 ? 0 : -0.5;
   const timingSc =
     arrMin >= 8 * 60 && arrMin <= 21 * 60 ? 1
     : arrMin >= 6 * 60 && arrMin < 8 * 60 ? 0.3
@@ -430,15 +436,15 @@ function scoreComponents(o: FlightOffer, medP: number, medD: number): Record<str
   const cabinSc = cab.includes("first") ? 0.5 : cab.includes("business") ? 0.3 : cab.includes("premium") ? 0.1 : 0;
   const baggageSc = o.baggage.trim() ? 0.2 : 0;
 
-  // Jet lag score: shorter flights and fewer stops = less jet lag = higher score (-1 to 1)
+  // Jet lag score: shorter total flight time and fewer total stops = less jet lag = higher score (-1 to 1)
   const jetLagRaw = (durMin >= 20 * 60 ? 3.5 : durMin >= 14 * 60 ? 2.5 : durMin >= 9 * 60 ? 1.5 : durMin >= 5 * 60 ? 0.7 : 0)
-    + Math.min(1.5, o.stops * 0.5);
+    + Math.min(1.5, o.total_stops * 0.5);
   const jetLagSc = Math.max(-1, Math.min(1, (2.5 - jetLagRaw) / 2.5));
 
-  // Fatigue score: shorter flights, fewer stops, and good arrival timing = less fatigue = higher score (-1 to 1)
+  // Fatigue score: shorter total flight time, fewer total stops, good arrival timing = less fatigue = higher score (-1 to 1)
   const fatigueBase = durMin >= 20 * 60 ? 3.2 : durMin >= 14 * 60 ? 2.35 : durMin >= 9 * 60 ? 1.35 : durMin >= 5 * 60 ? 0.55 : 0;
   const fatiguePenalty = timingSc < 0 ? 1.35 : timingSc < 0.3 ? 0.45 : 0;
-  const fatigueRaw = fatigueBase + Math.min(3.0, o.stops * 1.15) + fatiguePenalty;
+  const fatigueRaw = fatigueBase + Math.min(3.0, o.total_stops * 1.15) + fatiguePenalty;
   const fatigueSc = Math.max(-1, Math.min(1, (3.0 - fatigueRaw) / 3.0));
 
   // City access score: quality of ground transport from destination airport (-1 to 1)
@@ -461,7 +467,7 @@ function scoreComponents(o: FlightOffer, medP: number, medD: number): Record<str
 
 function buildScoreMap(offers: FlightOffer[]): Map<string, { score: number; breakdown: Record<string, number> }> {
   const medP = median(offers.map((o) => o.price_total));
-  const medD = median(offers.map((o) => o.duration_minutes || 99999));
+  const medD = median(offers.map((o) => o.total_duration_minutes || 99999));
   const out = new Map<string, { score: number; breakdown: Record<string, number> }>();
   for (const o of offers) {
     const bd = scoreComponents(o, medP, medD);
@@ -497,9 +503,9 @@ function aircraftComfort(o: FlightOffer): string {
 }
 
 function jetLagLabel(o: FlightOffer): string {
-  const dur = o.duration_minutes;
+  const dur = o.total_duration_minutes;
   let score = dur >= 20 * 60 ? 3.5 : dur >= 14 * 60 ? 2.5 : dur >= 9 * 60 ? 1.5 : dur >= 5 * 60 ? 0.7 : 0;
-  score += Math.min(1.5, o.stops * 0.5);
+  score += Math.min(1.5, o.total_stops * 0.5);
   if (score >= 4.5) return "Very High";
   if (score >= 2.8) return "High";
   if (score >= 1.2) return "Moderate";
@@ -507,9 +513,9 @@ function jetLagLabel(o: FlightOffer): string {
 }
 
 function travelFatigueLabel(o: FlightOffer): string {
-  const dur = o.duration_minutes;
+  const dur = o.total_duration_minutes;
   let score = dur >= 20 * 60 ? 3.2 : dur >= 14 * 60 ? 2.35 : dur >= 9 * 60 ? 1.35 : dur >= 5 * 60 ? 0.55 : 0;
-  score += Math.min(3.0, o.stops * 1.15);
+  score += Math.min(3.0, o.total_stops * 1.15);
   const timing = arrivalTimingLabel(o);
   if (timing === "Bad") score += 1.35;
   else if (timing === "Okay") score += 0.45;
@@ -552,13 +558,13 @@ interface OfferContext {
 
 function buildOfferContext(offers: FlightOffer[]): OfferContext {
   const cheapestPrice = Math.min(...offers.map((o) => o.price_total));
-  const fastestDurMins = Math.min(...offers.map((o) => o.duration_minutes || 99999));
+  const fastestDurMins = Math.min(...offers.map((o) => o.total_duration_minutes || 99999));
   const cheapestOffer = offers.find((o) => o.price_total === cheapestPrice) ?? offers[0];
-  const nonstops = offers.filter((o) => o.stops === 0);
+  const nonstops = offers.filter((o) => o.total_stops === 0);
   return {
     cheapestPrice,
     fastestDurMins,
-    cheapestDurMins: cheapestOffer.duration_minutes || 99999,
+    cheapestDurMins: cheapestOffer.total_duration_minutes || 99999,
     cheapestNonstopPrice: nonstops.length ? Math.min(...nonstops.map((o) => o.price_total)) : null,
     bestFatigueRank: Math.min(...offers.map((o) => FATIGUE_RANK[o.travel_fatigue] ?? 2)),
     bestTimingRank: Math.max(...offers.map((o) => TIMING_RANK[o.arrival_timing] ?? 2)),
@@ -569,7 +575,7 @@ function buildOfferContext(offers: FlightOffer[]): OfferContext {
 }
 
 function buildWinsOn(o: FlightOffer, ctx: OfferContext, all: FlightOffer[]): string[] {
-  const durMins = o.duration_minutes || 99999;
+  const durMins = o.total_duration_minutes || 99999;
   const priceDiff = o.price_total - ctx.cheapestPrice;
   const durDiff = durMins - ctx.fastestDurMins;
   const timeSavedVsCheapest = ctx.cheapestDurMins - durMins;
@@ -582,8 +588,8 @@ function buildWinsOn(o: FlightOffer, ctx: OfferContext, all: FlightOffer[]): str
   if (priceDiff <= 0) wins.push(`Lowest fare at ${moneyUsd(o.price_total)}`);
   if (durDiff <= 10) wins.push(`Fastest option at ${o.duration}`);
 
-  if (o.stops === 0) {
-    const withStops = all.filter((x) => x.stops > 0).length;
+  if (o.total_stops === 0) {
+    const withStops = all.filter((x) => x.total_stops > 0).length;
     if (withStops > 0)
       wins.push(`Nonstop — ${withStops} alternative${withStops !== 1 ? "s" : ""} require a connection`);
   }
@@ -619,7 +625,7 @@ function buildWinsOn(o: FlightOffer, ctx: OfferContext, all: FlightOffer[]): str
 }
 
 function buildTradeoffsFor(o: FlightOffer, ctx: OfferContext, _all: FlightOffer[]): string[] {
-  const durMins = o.duration_minutes || 99999;
+  const durMins = o.total_duration_minutes || 99999;
   const priceDiff = o.price_total - ctx.cheapestPrice;
   const durDiff = durMins - ctx.fastestDurMins;
   const fatigueRank = FATIGUE_RANK[o.travel_fatigue] ?? 2;
@@ -634,8 +640,8 @@ function buildTradeoffsFor(o: FlightOffer, ctx: OfferContext, _all: FlightOffer[
   if (durDiff > 45)
     tradeoffs.push(`${minuteLabel(durDiff)} slower than the fastest option`);
 
-  if (o.stops > 0 && ctx.nonstopExists)
-    tradeoffs.push(o.stops === 1 ? "Requires a connection — nonstop options exist" : `Requires ${o.stops} connections`);
+  if (o.total_stops > 0 && ctx.nonstopExists)
+    tradeoffs.push(o.total_stops === 1 ? "Requires a connection — nonstop options exist" : `Requires ${o.total_stops} total connections`);
 
   if (fatigueRank > ctx.bestFatigueRank && fatigueRank >= 3) {
     const bestLabel = Object.entries(FATIGUE_RANK).find(([, v]) => v === ctx.bestFatigueRank)?.[0] ?? "Low";
@@ -662,15 +668,15 @@ function buildComparisonSummary(
   all: FlightOffer[]
 ): string {
   if (all.length === 1)
-    return `Only live fare returned — ${o.stops === 0 ? "nonstop" : "connecting"} at ${moneyUsd(o.price_total)}.`;
+    return `Only live fare returned — ${o.total_stops === 0 ? "nonstop" : "connecting"} at ${moneyUsd(o.price_total)}.`;
 
-  const durMins = o.duration_minutes || 99999;
+  const durMins = o.total_duration_minutes || 99999;
   const priceDiff = Math.round(o.price_total - ctx.cheapestPrice);
   const durDiff = durMins - ctx.fastestDurMins;
   const timeSavedVsCheapest = ctx.cheapestDurMins - durMins;
   const isCheapest = priceDiff <= 0;
   const isFastest = durDiff <= 10;
-  const isNonstop = o.stops === 0;
+  const isNonstop = o.total_stops === 0;
 
   const qualityWins = wins.filter(
     (w) =>
@@ -703,7 +709,7 @@ function buildComparisonSummary(
 
   // Pattern D: nonstop for modest premium over cheapest connecting option
   if (isNonstop) {
-    const connectingOffers = all.filter((x) => x.stops > 0);
+    const connectingOffers = all.filter((x) => x.total_stops > 0);
     if (connectingOffers.length > 0) {
       const cheapestConnecting = connectingOffers.reduce((a, b) => a.price_total <= b.price_total ? a : b);
       const nonstopPremium = Math.round(o.price_total - cheapestConnecting.price_total);
@@ -769,7 +775,7 @@ function buildRecommendationMap(
     const d = (FATIGUE_RANK[travelFatigueLabel(a)] ?? 1) - (FATIGUE_RANK[travelFatigueLabel(b)] ?? 1);
     return d !== 0 ? (d > 0 ? a : b) : (sc(a) >= sc(b) ? a : b);
   });
-  const nonstops = offers.filter((o) => o.stops === 0);
+  const nonstops = offers.filter((o) => o.total_stops === 0);
   const nonstopOff = nonstops.length > 0
     ? nonstops.reduce((a, b) => sc(a) >= sc(b) ? a : b)
     : null;
@@ -1140,8 +1146,8 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
     if (a.is_recommended !== b.is_recommended) return a.is_recommended ? -1 : 1;
     if (b.ai_score !== a.ai_score) return b.ai_score - a.ai_score;
     if (a.price_total !== b.price_total) return a.price_total - b.price_total;
-    const aDur = a.duration_minutes || 99999;
-    const bDur = b.duration_minutes || 99999;
+    const aDur = a.total_duration_minutes || 99999;
+    const bDur = b.total_duration_minutes || 99999;
     if (aDur !== bDur) return aDur - bDur;
     const aDepart = clockMinutes(a.depart_time);
     const bDepart = clockMinutes(b.depart_time);

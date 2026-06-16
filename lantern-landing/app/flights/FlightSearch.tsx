@@ -474,6 +474,8 @@ interface FlightOffer {
   aircraft_comfort: string;
   connection_airports?: string;
   duration_minutes?: number;
+  total_duration_minutes?: number;
+  total_stops?: number;
   offer_id?: string;
   source?: string;       // "duffel" | "amadeus" — which provider sourced this offer
   is_bookable?: boolean; // false → search-only, shown with "Search only" label
@@ -745,12 +747,21 @@ function buildPriorityNote(o: FlightOffer, priorities: Priority[]): string {
     switch (priorities[0]) {
       case "cheapest":
         return `Because you prioritized cheapest, this flight wins on lowest total fare ($${Math.round(o.price_total).toLocaleString()}).`;
-      case "fastest":
+      case "fastest": {
+        const totalMins = o.total_duration_minutes || o.duration_minutes;
+        if (totalMins) {
+          const h = Math.floor(totalMins / 60), m = totalMins % 60;
+          const totalStr = `${h > 0 ? `${h}h ` : ""}${m > 0 ? `${m}m` : ""}`.trim();
+          return `Because you prioritized fastest, this flight wins on total travel time (${totalStr}).`;
+        }
         return `Because you prioritized fastest, this flight wins on travel time (${o.duration}).`;
-      case "nonstop":
-        return o.stops === 0
-          ? `Because you prioritized fewer stops, this nonstop flight ranks highest.`
+      }
+      case "nonstop": {
+        const ts = o.total_stops ?? o.stops;
+        return ts === 0
+          ? `Because you prioritized fewer stops, this ${o.return_depart_time ? "nonstop round trip" : "nonstop flight"} ranks highest.`
           : `No nonstop available — this has the fewest connections (${o.stop_label}).`;
+      }
       case "arrival":
         return `Because you prioritized arrival timing, this ${o.arrival_timing.toLowerCase()} arrival ranks highest.`;
       case "jet_lag":
@@ -776,13 +787,13 @@ function buildPriorityNote(o: FlightOffer, priorities: Priority[]): string {
 
 function labelSummary(label: string): string {
   switch (label) {
-    case "AI Pick":          return "Highest overall score in this result set.";
-    case "Cheapest":         return "Lowest visible fare.";
-    case "Fastest":          return "Fastest itinerary available.";
-    case "Best Arrival":     return "Best arrival timing among visible results.";
-    case "Lowest Fatigue":   return "Lowest fatigue among visible results.";
-    case "Most Comfortable": return "Most comfortable option available.";
-    case "Nonstop Pick":     return "Best nonstop option available.";
+    case "AI Pick":          return "Highest composite score across price, duration, stops, and timing.";
+    case "Cheapest":         return "Lowest visible fare in this search.";
+    case "Fastest":          return "Shortest total flight time across all results.";
+    case "Best Arrival":     return "Best outbound arrival window (8 am–9 pm is optimal).";
+    case "Lowest Fatigue":   return "Least total flight time and fewest connections in this set.";
+    case "Most Comfortable": return "Highest cabin class available in these results.";
+    case "Nonstop Pick":     return "Best-scored nonstop itinerary in this search.";
     default:                 return "";
   }
 }
@@ -796,7 +807,7 @@ function rerankOffers(
 
   // Result-set bounds for min-max normalization
   const prices = rawOffers.map((o) => o.price_total);
-  const durs   = rawOffers.map((o) => o.duration_minutes || parseMins(o.duration) || 999);
+  const durs   = rawOffers.map((o) => o.total_duration_minutes || o.duration_minutes || parseMins(o.duration) || 999);
   const minP = Math.min(...prices), maxP = Math.max(...prices);
   const minD = Math.min(...durs),   maxD = Math.max(...durs);
   const priceRange = maxP - minP;
@@ -809,9 +820,9 @@ function rerankOffers(
   // Compute per-metric normalized scores [0, 100] for a single offer.
   // Uses result-set min/max for price and duration; fixed scales for everything else.
   const computeNorms = (o: FlightOffer): Record<string, number> => ({
-    price:       priceRange > 1 ? 100 * (maxP - o.price_total)                  / priceRange : 50,
-    duration:    durRange   > 1 ? 100 * (maxD - (o.duration_minutes || parseMins(o.duration) || 0)) / durRange : 50,
-    stops:       stopsScore(o.stops),
+    price:       priceRange > 1 ? 100 * (maxP - o.price_total) / priceRange : 50,
+    duration:    durRange   > 1 ? 100 * (maxD - (o.total_duration_minutes || o.duration_minutes || parseMins(o.duration) || 0)) / durRange : 50,
+    stops:       stopsScore(o.total_stops ?? o.stops),
     timing:      arrivalTimingScore(o.arrive_time),
     cabin:       cabinScore(o.cabin),
     baggage:     o.baggage.trim() ? 65 : 35,
@@ -855,46 +866,63 @@ function rerankOffers(
 
   // Per-dimension badge assignment and ranking explanation against the visible result set.
   const minPrice   = Math.min(...rescored.map((o) => o.price_total));
-  const minDur     = Math.min(...rescored.map((o) => o.duration_minutes || parseMins(o.duration) || 999));
+  const minDur     = Math.min(...rescored.map((o) => o.total_duration_minutes || o.duration_minutes || parseMins(o.duration) || 999));
   const maxTiming  = Math.max(...rescored.map((o) => o.score_breakdown.timing  ?? 0));
   const maxFatigue = Math.max(...rescored.map((o) => o.score_breakdown.fatigue ?? 0));
   const maxCabin   = Math.max(...rescored.map((o) => o.score_breakdown.cabin   ?? 0));
-  const hasNonstop    = rescored.some((o) => o.stops === 0);
-  const hasConnecting = rescored.some((o) => o.stops > 0);
+  const hasNonstop    = rescored.some((o) => (o.total_stops ?? o.stops) === 0);
+  const hasConnecting = rescored.some((o) => (o.total_stops ?? o.stops) > 0);
 
   const buildRankingWhy = (o: FlightOffer): Array<{ positive: boolean; text: string }> => {
     const pos: Array<{ positive: boolean; text: string }> = [];
     const neg: Array<{ positive: boolean; text: string }> = [];
     const bd = o.score_breakdown;
     const priceDiff = Math.round(o.price_total - minPrice);
-    const durMins   = o.duration_minutes || parseMins(o.duration) || 0;
+    const totalStops = o.total_stops ?? o.stops;
+    const durMins   = o.total_duration_minutes || o.duration_minutes || parseMins(o.duration) || 0;
     const durDiff   = durMins - minDur;
 
-    // Positive bullets
-    if (priceDiff === 0)        pos.push({ positive: true,  text: "Cheapest in this result set" });
-    else if (priceDiff <= 30)   pos.push({ positive: true,  text: `Only $${priceDiff} more than cheapest` });
+    // Positive bullets — cite actual numbers, not generic labels
+    if (priceDiff === 0)        pos.push({ positive: true,  text: `Lowest fare at $${Math.round(o.price_total).toLocaleString()}` });
+    else if (priceDiff <= 30)   pos.push({ positive: true,  text: `Only $${priceDiff} more than cheapest ($${Math.round(minPrice).toLocaleString()})` });
 
-    if (durDiff === 0)          pos.push({ positive: true,  text: "Fastest flight in this set" });
+    if (durDiff === 0 && durMins > 0) {
+      const h = Math.floor(durMins / 60), m = durMins % 60;
+      pos.push({ positive: true, text: `Fastest at ${h > 0 ? `${h}h ` : ""}${m > 0 ? `${m}m` : ""}`.trim() });
+    }
 
-    if (o.stops === 0 && hasConnecting) pos.push({ positive: true, text: "Only nonstop option" });
-    else if (o.stops === 0)             pos.push({ positive: true, text: "Nonstop flight" });
+    if (totalStops === 0 && hasConnecting) {
+      pos.push({ positive: true, text: o.return_depart_time ? "Nonstop both ways" : "Only nonstop option" });
+    } else if (totalStops === 0) {
+      pos.push({ positive: true, text: o.return_depart_time ? "Nonstop both ways" : "Nonstop flight" });
+    }
 
-    if ((bd.timing  ?? 0) === maxTiming  && maxTiming  > 0)  pos.push({ positive: true,  text: "Best arrival timing in set" });
-    if ((bd.fatigue ?? 0) === maxFatigue && maxFatigue > 0)  pos.push({ positive: true,  text: "Lowest travel fatigue score" });
-    if ((bd.cabin   ?? 0) === maxCabin   && maxCabin   > 0)  pos.push({ positive: true,  text: "Best comfort in this set" });
+    if ((bd.timing ?? 0) === maxTiming && maxTiming > 0) {
+      pos.push({ positive: true, text: `Arrives at ${o.arrive_time} — ${o.arrival_timing.toLowerCase()} arrival time` });
+    }
+    if ((bd.fatigue ?? 0) === maxFatigue && maxFatigue > 0) {
+      const stopsDesc = totalStops === 0 ? "nonstop" : `${totalStops} total stop${totalStops !== 1 ? "s" : ""}`;
+      const h = Math.floor(durMins / 60), m = durMins % 60;
+      const durStr = `${h > 0 ? `${h}h ` : ""}${m > 0 ? `${m}m` : ""}`.trim();
+      pos.push({ positive: true, text: `Least fatigue: ${stopsDesc}, ${durStr} total` });
+    }
+    if ((bd.cabin ?? 0) === maxCabin && maxCabin > 0) {
+      pos.push({ positive: true, text: `${o.cabin} — best cabin class available here` });
+    }
 
-    // Negative bullets
-    if (priceDiff > 50) neg.push({ positive: false, text: `$${priceDiff} more than cheapest` });
+    // Negative bullets — cite actual numbers
+    if (priceDiff > 50) neg.push({ positive: false, text: `$${priceDiff} more than cheapest ($${Math.round(minPrice).toLocaleString()})` });
 
     if (durDiff > 30) {
       const h = Math.floor(durDiff / 60);
       const m = durDiff % 60;
       const label = h > 0 ? `${h}h${m > 0 ? ` ${m}m` : ""}` : `${m}m`;
-      neg.push({ positive: false, text: `${label} slower than fastest` });
+      neg.push({ positive: false, text: `${label} more total flight time than fastest` });
     }
 
-    if (o.stops > 0 && hasNonstop) {
-      neg.push({ positive: false, text: o.stops === 1 ? "Requires a connection" : `Requires ${o.stops} connections` });
+    if (totalStops > 0 && hasNonstop) {
+      const via = o.connection_airports ? ` via ${o.connection_airports}` : "";
+      neg.push({ positive: false, text: totalStops === 1 ? `1 connection${via} — nonstop options exist` : `${totalStops} total connections — nonstop options exist` });
     }
 
     return [...pos, ...neg].slice(0, 3);
@@ -958,7 +986,7 @@ function selectDisplayOffers(ranked: FlightOffer[]): FlightOffer[] {
   pin(byCheap[0]);
 
   const byFast = [...ranked].sort(
-    (a, b) => (a.duration_minutes || 99999) - (b.duration_minutes || 99999)
+    (a, b) => (a.total_duration_minutes || a.duration_minutes || 99999) - (b.total_duration_minutes || b.duration_minutes || 99999)
   );
   pin(byFast[0]);
 
@@ -1278,7 +1306,20 @@ function RecommendationPanel({
         <span className="text-white/25">·</span>
         <span className="text-white/50">{pick.duration}</span>
         <span className="text-white/25">·</span>
-        <span className="text-white/50">{pick.stop_label}</span>
+        <span className="text-white/50">
+          {pick.stop_label}{pick.connection_airports ? ` via ${pick.connection_airports}` : ""}
+        </span>
+        {pick.return_depart_time && (
+          <>
+            <span className="text-white/15 w-full h-0" />
+            <span className="text-[10px] text-white/30 font-medium">Return</span>
+            <span className="font-mono text-[11px] text-white/45">{pick.return_depart_time} → {pick.return_arrive_time}</span>
+            <span className="text-white/25">·</span>
+            <span className="text-white/45">
+              {pick.return_stop_label}{pick.return_connection_airports ? ` via ${pick.return_connection_airports}` : ""}
+            </span>
+          </>
+        )}
       </div>
 
       {/* Priority note (shown when a non-default priority is active) */}
@@ -1457,15 +1498,25 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
                 {/* Duration */}
                 <td className={tdCls}>
                   <span className="text-[11px] text-white/65 whitespace-nowrap">{o.duration}</span>
+                  {o.return_duration && (
+                    <div className="text-[9px] text-white/30 mt-px">+{o.return_duration} return</div>
+                  )}
                 </td>
 
                 {/* Stops */}
                 <td className={tdCls}>
                   <span className={`text-[11px] font-medium whitespace-nowrap ${
-                    o.stops === 0 ? "text-lantern-mint" : "text-white/50"
+                    (o.total_stops ?? o.stops) === 0 ? "text-lantern-mint" : "text-white/50"
                   }`}>
-                    {o.stop_label}
+                    {o.stop_label}{o.connection_airports ? ` · ${o.connection_airports}` : ""}
                   </span>
+                  {o.return_stop_label && (
+                    <div className={`text-[9px] mt-px whitespace-nowrap ${
+                      (o.return_stops ?? 1) === 0 ? "text-lantern-mint/60" : "text-white/30"
+                    }`}>
+                      {o.return_stop_label}{o.return_connection_airports ? ` · ${o.return_connection_airports}` : ""} return
+                    </div>
+                  )}
                 </td>
 
                 {/* Best for */}
@@ -1497,13 +1548,32 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
   );
 }
 
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+function buildGoogleFlightsUrl(
+  origin: string,
+  destination: string,
+  departureDate: string,
+  returnDate: string | null,
+  adults: number,
+  cabin: CabinClass,
+): string {
+  const CABIN_CODES: Record<CabinClass, string> = { economy: "1", premium_economy: "2", business: "3", first: "4" };
+  const cc = CABIN_CODES[cabin] ?? "1";
+  const route = returnDate
+    ? `${origin}.${destination}.${departureDate}*${destination}.${origin}.${returnDate}`
+    : `${origin}.${destination}.${departureDate}`;
+  return `https://www.google.com/travel/flights#flt=${route};c:USD;e:${cc};px:${adults};sd:1`;
+}
+
 // ── FlightCard ────────────────────────────────────────────────────────────────
 
-function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
+function FlightCard({ offer, cardRef, priorityWeights, priorities, googleFlightsUrl }: {
   offer: FlightOffer;
   cardRef?: React.RefObject<HTMLDivElement | null>;
   priorityWeights: Record<string, number>;
   priorities: Priority[];
+  googleFlightsUrl?: string;
 }) {
   const rec = offer.is_recommended;
   const [scoreOpen, setScoreOpen] = useState(false);
@@ -1632,12 +1702,25 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
               ${Math.round(offer.price_total).toLocaleString()}
             </div>
             <div className="text-[11px] text-white/35 mt-0.5">{offer.cabin}</div>
-            {analysisOpen && (
+            {analysisOpen && googleFlightsUrl && (
+              <div className="mt-2 flex flex-col items-end gap-1">
+                <a
+                  href={googleFlightsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[11px] font-bold text-white bg-lantern-violet hover:bg-lantern-violet/80 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap text-center"
+                >
+                  View booking options
+                </a>
+                <span className="text-[10px] text-white/30">Opens Google Flights. Price may vary.</span>
+              </div>
+            )}
+            {analysisOpen && !googleFlightsUrl && (
               <button
                 onClick={handleBookClick}
                 className="mt-2 text-[11px] font-bold text-white bg-lantern-violet hover:bg-lantern-violet/80 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
               >
-                {offer.is_bookable === false ? "View booking options" : "Book this flight"}
+                Book this flight
               </button>
             )}
           </div>
@@ -1842,12 +1925,22 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities }: {
               {analysisOpen ? "Hide analysis" : "Analysis"}
             </button>
           )}
-          {!analysisOpen && (
+          {!analysisOpen && googleFlightsUrl && (
+            <a
+              href={googleFlightsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] font-bold text-lantern-violet border border-lantern-violet/40 hover:bg-lantern-violet/10 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
+            >
+              View
+            </a>
+          )}
+          {!analysisOpen && !googleFlightsUrl && (
             <button
               onClick={handleBookClick}
               className="text-[11px] font-bold text-lantern-violet border border-lantern-violet/40 hover:bg-lantern-violet/10 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
             >
-              {offer.is_bookable === false ? "View" : "Book"}
+              Book
             </button>
           )}
           <button
@@ -2074,7 +2167,6 @@ export default function FlightSearch() {
   const [searchState, setSearchState] = useState<SearchState>("idle");
   const [offers, setOffers] = useState<FlightOffer[]>([]);
   const [searchMeta, setSearchMeta] = useState<SearchMeta | null>(null);
-  const [debugStats, setDebugStats] = useState<DebugStats | null>(null);
   const [priorities, setPriorities] = useState<Priority[]>([]);
 
   const activeWeights = useMemo(() => buildCompoundWeights(priorities), [priorities]);
@@ -2090,11 +2182,11 @@ export default function FlightSearch() {
   // Reset pagination whenever a new set of offers arrives
   useEffect(() => { setVisibleCount(20); }, [offers]);
 
-  const [debugOpen, setDebugOpen] = useState(false);
   const [errorTitle, setErrorTitle] = useState("");
   const [errorBody, setErrorBody] = useState("");
   const [searchedParams, setSearchedParams] = useState<{
     origin: Selection; destination: Selection; tripType: TripType; cabin: CabinClass; travelers: number;
+    departureDate: string; returnDate: string;
   } | null>(null);
 
   const handleSearch = async () => {
@@ -2110,7 +2202,7 @@ export default function FlightSearch() {
     if (errs.length > 0) return;
 
     setSearchState("loading");
-    setSearchedParams({ origin: origin!, destination: destination!, tripType, cabin, travelers });
+    setSearchedParams({ origin: origin!, destination: destination!, tripType, cabin, travelers, departureDate, returnDate });
 
     const originCodes = getAirportCodes(origin!);
     const destCodes = getAirportCodes(destination!);
@@ -2170,7 +2262,6 @@ export default function FlightSearch() {
       });
       setOffers(data.offers!);
       setSearchMeta(data.meta ?? null);
-      setDebugStats(data.meta?.debugStats ?? null);
       setSearchState("results");
       setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
     } catch {
@@ -2417,60 +2508,6 @@ export default function FlightSearch() {
                 </span>
               </div>
             )}
-            <div style={{ maxWidth: 800, margin: "0 auto 4px", textAlign: "right" }}>
-              <button
-                onClick={() => setDebugOpen((o) => !o)}
-                style={{ fontFamily: "monospace", fontSize: 11, color: "#166534", background: "none", border: "none", cursor: "pointer", padding: "2px 6px" }}
-              >
-                {debugOpen ? "▲ hide dev trace" : "▼ dev trace"}
-              </button>
-            </div>
-            {debugOpen && (
-            <div style={{ fontFamily: "'Courier New', Courier, monospace", fontSize: 12, background: "#030a03", color: "#4ade80", padding: "14px 18px", borderRadius: 8, border: "1px solid #14532d", margin: "0 auto 16px", maxWidth: 800, lineHeight: 1.75, overflowX: "auto", whiteSpace: "pre" }}>
-              <span style={{ color: "#86efac", fontWeight: "bold" }}>{"▶ TRAVELGRAB FLIGHT SEARCH TRACE\n"}</span>
-              {`ENABLED_PROVIDERS:      ${debugStats?.enabled_providers ?? "—"}\n`}
-              <span style={{ color: "#6ee7b7" }}>{"━━━ REQUEST "}{"━".repeat(51)}{"\n"}</span>
-              {`ORIGIN:                 ${debugStats?.origin ?? (searchedParams ? selectionCodes(searchedParams.origin) : "—")}\n`}
-              {`DESTINATION:            ${debugStats?.destination ?? (searchedParams ? selectionCodes(searchedParams.destination) : "—")}\n`}
-              {`DEPARTURE_DATE:         ${debugStats?.departure_date ?? "—"}\n`}
-              {`RETURN_DATE:            ${debugStats?.return_date ?? "—"}\n`}
-              {`TRIP_TYPE:              ${debugStats?.trip_type ?? "—"}\n`}
-              {`PASSENGERS:             ${debugStats?.adults ?? 1} adult(s)\n`}
-              {`CABIN_CLASS:            ${debugStats?.cabin_class ?? "—"}\n`}
-              {`API_KEY_MODE:           ${debugStats?.api_key_mode ?? "—"}\n`}
-              {`CARRIER_FILTERS:        ${debugStats?.carrier_filters ?? "none"}\n`}
-              {`CONTENT_SOURCE_FILTERS: ${debugStats?.content_source_filters ?? "none"}\n`}
-              {`LIMIT_PARAMS:           ${debugStats?.limit_params ?? "none"}\n`}
-              {`\nPAYLOAD_SENT_TO_DUFFEL:\n  ${debugStats?.request_payload_json ?? "—"}\n`}
-              <span style={{ color: "#6ee7b7" }}>{"━━━ DUFFEL RESPONSE "}{"━".repeat(43)}{"\n"}</span>
-              {`HTTP_STATUS:            ${debugStats?.duffel_http_status ?? "—"}\n`}
-              {`LATENCY_MS:             ${debugStats?.duffel_latency_ms ?? "—"}\n`}
-              {`RAW_OFFERS_RETURNED:    ${debugStats?.raw_duffel_offers ?? "—"}\n`}
-              {`AIRLINES_IN_RESPONSE:   ${debugStats?.unique_airlines ?? ([...new Set(offers.map(o => o.airline_code))].join(", ") || "—")}\n`}
-              {`OWNER_IDS:              ${debugStats?.owner_ids ?? "—"}\n`}
-              {`CHEAPEST_RAW:           ${debugStats?.cheapest_raw ?? "—"}\n`}
-              {"\n"}
-              <span style={{ color: "#6ee7b7" }}>{"━━━ GOOGLE FLIGHTS (SERPAPI) "}{"━".repeat(34)}{"\n"}</span>
-              {`SERPAPI_ENV_PRESENT:    ${debugStats?.serpapi_env_present ?? "—"}\n`}
-              {`SERPAPI_STATUS:         ${debugStats?.serpapi_status ?? "—"}\n`}
-              {`SERPAPI_BEST_FLIGHTS_COUNT:  ${debugStats?.serpapi_best_count ?? "—"}\n`}
-              {`SERPAPI_OTHER_FLIGHTS_COUNT: ${debugStats?.serpapi_other_count ?? "—"}\n`}
-              {`SERPAPI_TOTAL_PARSED:        ${debugStats?.serpapi_total_parsed ?? "—"}\n`}
-              {`RAW_SERPAPI_OFFERS:     ${debugStats?.raw_serpapi_offers ?? (debugStats ? "0" : "—")}\n`}
-              {`SERPAPI_AIRLINES:       ${debugStats?.serpapi_airlines ?? "—"}\n`}
-              {`SERPAPI_CHEAPEST:       ${debugStats?.serpapi_cheapest ?? "—"}\n`}
-              {"\n"}
-              {(debugStats?.raw_offer_rows ?? offers.map(o => ({ airline: o.airline, airline_code: o.airline_code, owner: "—", price: "$" + o.price_total.toFixed(0), stops: o.stops, offer_id: o.offer_id ?? "—", source: o.source ?? "?" }))).map((row, i) =>
-                `  [${i + 1}] ${"source" in row ? String((row as {source?:string}).source ?? "?").padEnd(14) : "?             "} ${String(row.airline_code).padEnd(3)} ${String(row.airline).slice(0, 22).padEnd(23)} ${String(row.price).padStart(7)}  ${row.stops === 0 ? "nonstop" : `${row.stops}-stop  `}  id=${String(row.offer_id).slice(0, 28)}\n`
-              )}
-              <span style={{ color: "#6ee7b7" }}>{"━━━ PIPELINE "}{"━".repeat(50)}{"\n"}</span>
-              {`AFTER_FILTERING:        ${debugStats?.after_filtering ?? "—"}  (normalizeDuffelOffer -${debugStats?.normalize_duffel_offer_dropped ?? "?"}, normalizeFlight -${debugStats?.normalize_flight_dropped ?? "?"})\n`}
-              {`AFTER_DEDUPLICATION:    ${debugStats?.after_deduplication ?? "—"}  (dedup -${debugStats?.dedup_dropped ?? "?"})\n`}
-              {`AFTER_RANKING:          ${debugStats?.after_ranking ?? "—"}\n`}
-              {`RENDERED_OFFERS:        ${debugStats?.rendered_offers ?? offers.length}\n`}
-              {`CHEAPEST_RENDERED:      ${debugStats?.cheapest_rendered ?? (offers.length ? "$" + Math.min(...offers.map(o => o.price_total)).toFixed(0) : "—")}\n`}
-            </div>
-            )}
             <RecommendationPanel offers={displayOffers} topPickRef={topPickRef} priorities={priorities} />
             <CompareTable offers={displayOffers.slice(0, 3)} />
             <div className="space-y-3 max-w-3xl mx-auto">
@@ -2481,6 +2518,18 @@ export default function FlightSearch() {
                   cardRef={i === 0 ? topPickRef : undefined}
                   priorityWeights={activeWeights}
                   priorities={priorities}
+                  googleFlightsUrl={
+                    offer.is_bookable === false && searchedParams
+                      ? buildGoogleFlightsUrl(
+                          offer.origin,
+                          offer.destination,
+                          searchedParams.departureDate,
+                          searchedParams.tripType === "roundtrip" ? searchedParams.returnDate : null,
+                          searchedParams.travelers,
+                          searchedParams.cabin,
+                        )
+                      : undefined
+                  }
                 />
               ))}
             </div>
