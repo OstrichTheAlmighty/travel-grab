@@ -2187,10 +2187,11 @@ function MetricInfo({ text }: { text: string }) {
 }
 
 interface VerdictParts {
-  chooseIf: string;
-  tradeoff: string | null;
-  considerAlternativeIf: string | null;
-  isCloseCall: boolean;
+  headline:    string;
+  explanation: string;
+  tradeoff:    string | null;
+  chooseIf:    string | null;
+  confidence:  "high" | "medium" | "close-call";
 }
 
 function buildVerdictParts(hotels: HotelOffer[]): VerdictParts | null {
@@ -2200,66 +2201,101 @@ function buildVerdictParts(hotels: HotelOffer[]): VerdictParts | null {
   const runnerUp = sorted[1];
   const margin   = winner.ai_score - runnerUp.ai_score;
 
-  // What winner does better (positive gap = winner leads)
-  const winnerAdvantages = [
-    { label: "guest reviews",    gap: winner.score_breakdown.reviews      - runnerUp.score_breakdown.reviews      },
-    { label: "walkability",      gap: winner.score_breakdown.walkability  - runnerUp.score_breakdown.walkability  },
-    { label: "hotel quality",    gap: winner.score_breakdown.stars        - runnerUp.score_breakdown.stars        },
+  const winAdv = [
     { label: "location",         gap: winner.score_breakdown.location     - runnerUp.score_breakdown.location     },
+    { label: "walkability",      gap: winner.score_breakdown.walkability  - runnerUp.score_breakdown.walkability  },
+    { label: "guest satisfaction", gap: winner.score_breakdown.reviews   - runnerUp.score_breakdown.reviews      },
+    { label: "hotel quality",    gap: winner.score_breakdown.stars        - runnerUp.score_breakdown.stars        },
+    { label: "value",            gap: winner.score_breakdown.price        - runnerUp.score_breakdown.price        },
     { label: "neighborhood fit", gap: winner.neighborhood_fit_score       - runnerUp.neighborhood_fit_score       },
     { label: "destination fit",  gap: winner.score_breakdown.destination_fit - runnerUp.score_breakdown.destination_fit },
-  ].filter(d => d.gap > 5).sort((a, b) => b.gap - a.gap);
+  ].filter((d) => d.gap > 5).sort((a, b) => b.gap - a.gap);
 
-  // What runner-up does better
-  const ruAdvantages = [
-    { label: "guest reviews",  gap: runnerUp.score_breakdown.reviews     - winner.score_breakdown.reviews     },
-    { label: "walkability",    gap: runnerUp.score_breakdown.walkability - winner.score_breakdown.walkability },
-    { label: "hotel quality",  gap: runnerUp.score_breakdown.stars      - winner.score_breakdown.stars      },
-    { label: "location",       gap: runnerUp.score_breakdown.location   - winner.score_breakdown.location   },
-  ].filter(d => d.gap > 5).sort((a, b) => b.gap - a.gap);
+  const ruAdv = [
+    { label: "hotel quality",    gap: runnerUp.score_breakdown.stars      - winner.score_breakdown.stars      },
+    { label: "guest satisfaction", gap: runnerUp.score_breakdown.reviews - winner.score_breakdown.reviews     },
+    { label: "walkability",      gap: runnerUp.score_breakdown.walkability - winner.score_breakdown.walkability },
+    { label: "location",         gap: runnerUp.score_breakdown.location   - winner.score_breakdown.location   },
+  ].filter((d) => d.gap > 5).sort((a, b) => b.gap - a.gap);
 
   const priceDiff  = winner.price_per_night - runnerUp.price_per_night;
   const ruSavings  = priceDiff > 15;
   const winSavings = priceDiff < -15;
 
+  const winShort = winner.name.split(",")[0].split("–")[0].trim();
+  const ruShort  = runnerUp.name.split(",")[0].split("–")[0].trim();
+
   // ── Close call ────────────────────────────────────────────────────────────
-  if (margin < 3) {
-    const m   = Math.round(margin * 10) / 10;
-    const adv = winnerAdvantages[0]?.label ?? "overall balance";
-    const ruLine = ruSavings
-      ? `${runnerUp.name} saves $${Math.round(priceDiff)}/night`
-      : ruAdvantages[0]
-        ? `${runnerUp.name} has stronger ${ruAdvantages[0].label}`
-        : `${runnerUp.name} is comparable overall`;
+  if (margin <= 1) {
+    const diffNote = winAdv[0]
+      ? `${winShort} has a slight edge on ${winAdv[0].label}.`
+      : ruSavings
+        ? `${ruShort} saves $${Math.round(priceDiff)}/night, which may tip the decision.`
+        : "";
     return {
-      isCloseCall: true,
-      chooseIf: `Close call — scores just ${m} point${m !== 1 ? "s" : ""} apart.`,
-      tradeoff: `${winner.name} edges ahead on ${adv}. ${ruLine}.`,
-      considerAlternativeIf: null,
+      confidence:  "close-call",
+      headline:    "Either option is a reasonable choice.",
+      explanation: `The decision comes down to personal preference.${diffNote ? " " + diffNote : ""}`,
+      tradeoff:    ruSavings ? `${ruShort} saves $${Math.round(priceDiff)}/night.` : null,
+      chooseIf:    null,
     };
   }
 
-  // ── Clear winner ──────────────────────────────────────────────────────────
-  const adv1 = winnerAdvantages[0]?.label ?? "overall balance";
-  const adv2 = winnerAdvantages[1]?.label;
+  // ── Medium confidence (2–4 pts) ───────────────────────────────────────────
+  if (margin < 5) {
+    const advStr = winAdv.slice(0, 2).map((d) => d.label).join(" and ") || "overall balance";
+    let explanation = `${winShort} combines better ${advStr}`;
+    if (ruAdv[0]) explanation += `. ${ruShort} offers stronger ${ruAdv[0].label}`;
+    if (ruSavings) explanation += `${ruAdv[0] ? " and" : ","} saves $${Math.round(priceDiff)}/night`;
+    explanation += ".";
 
-  // "X scores N points higher, driven by stronger reviews and walkability."
-  const chooseIf = `${winner.name} scores ${margin} point${margin !== 1 ? "s" : ""} higher, driven by stronger ${adv1}${adv2 ? ` and ${adv2}` : ""}.`;
+    const chooseIf = ruAdv[0] || ruSavings
+      ? `Choose ${ruShort} if ${ruAdv[0] ? `${ruAdv[0].label} matters most to you` : "budget is the priority"}.`
+      : null;
 
-  // "Y saves $X/night and delivers stronger [dim]." OR "Y has stronger [dim] and [dim2]."
-  let tradeoff: string | null = null;
-  if (ruSavings && ruAdvantages[0]) {
-    tradeoff = `${runnerUp.name} saves $${Math.round(priceDiff)}/night and delivers stronger ${ruAdvantages[0].label}.`;
-  } else if (ruSavings) {
-    tradeoff = `${runnerUp.name} saves $${Math.round(priceDiff)}/night at the cost of ${margin} score points.`;
-  } else if (winSavings) {
-    tradeoff = `${winner.name} is also $${Math.round(-priceDiff)}/night cheaper — a strong all-round choice.`;
-  } else if (ruAdvantages[0]) {
-    const ru2 = ruAdvantages[1];
-    tradeoff = `${runnerUp.name} has stronger ${ruAdvantages[0].label}${ru2 ? ` and ${ru2.label}` : ""} for a similar price.`;
+    return {
+      confidence:  "medium",
+      headline:    `${winShort} is the safer overall choice.`,
+      explanation,
+      tradeoff:    null,
+      chooseIf,
+    };
   }
 
-  return { isCloseCall: false, chooseIf, tradeoff, considerAlternativeIf: null };
+  // ── High confidence (5+ pts) ──────────────────────────────────────────────
+  const advList = winAdv.slice(0, 3).map((d) => d.label);
+  let explanation: string;
+  if (advList.length >= 3)
+    explanation = `${winShort} combines better ${advList[0]}, ${advList[1]}, and ${advList[2]}.`;
+  else if (advList.length === 2)
+    explanation = `${winShort} combines better ${advList[0]} and ${advList[1]}.`;
+  else if (advList.length === 1)
+    explanation = `${winShort} leads on ${advList[0]}.`;
+  else if (winSavings)
+    explanation = `${winShort} is also $${Math.round(-priceDiff)}/night cheaper — a strong all-round choice.`;
+  else
+    explanation = `${winShort} leads across most categories.`;
+
+  let tradeoff: string | null = null;
+  const ru0 = ruAdv[0];
+  const ru1 = ruAdv[1];
+  if (ru0 && ruSavings) {
+    tradeoff = `${ruShort} offers a more premium ${ru0.label} and saves $${Math.round(priceDiff)}/night — worth considering if those factors matter more than overall fit.`;
+  } else if (ru0 && ru1) {
+    tradeoff = `${ruShort} offers stronger ${ru0.label} and ${ru1.label} — consider it if those are your priorities.`;
+  } else if (ru0) {
+    tradeoff = `${ruShort} offers a more premium ${ru0.label} — worth considering if that matters most to you.`;
+  } else if (ruSavings) {
+    tradeoff = `${ruShort} saves $${Math.round(priceDiff)}/night for those where budget is the deciding factor.`;
+  }
+
+  return {
+    confidence:  "high",
+    headline:    `${winShort} is the clear recommendation here.`,
+    explanation,
+    tradeoff,
+    chooseIf:    null,
+  };
 }
 
 type CompareWinner = { id: string; type: "price" | "quality" } | null;
@@ -2506,20 +2542,43 @@ function HotelComparePanel({
 
           {/* Verdict */}
           {verdictParts && (
-            <div className="mb-5 rounded-xl border border-white/[0.08] bg-white/[0.025] px-4 py-4">
-              <div className="text-[9px] font-black uppercase tracking-widest text-lantern-violet mb-3">
-                TravelGrab Verdict
+            <div className={`mb-5 rounded-xl border px-4 py-4 ${
+              verdictParts.confidence === "close-call"
+                ? "border-white/[0.07] bg-white/[0.02]"
+                : "border-lantern-violet/20 bg-lantern-violet/[0.04]"
+            }`}>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[9px] font-black uppercase tracking-widest text-lantern-violet/70">
+                  TravelGrab Verdict
+                </span>
+                <div className="flex items-center gap-1.5">
+                  <span className={`w-1.5 h-1.5 rounded-full ${
+                    verdictParts.confidence === "high"       ? "bg-lantern-mint"
+                    : verdictParts.confidence === "medium"   ? "bg-amber-400"
+                    : "bg-white/25"
+                  }`} />
+                  <span className={`text-[10px] font-bold ${
+                    verdictParts.confidence === "high"       ? "text-lantern-mint"
+                    : verdictParts.confidence === "medium"   ? "text-amber-400"
+                    : "text-white/35"
+                  }`}>
+                    {verdictParts.confidence === "high"       ? "High Confidence"
+                    : verdictParts.confidence === "medium"    ? "Medium Confidence"
+                    : "Close Call"}
+                  </span>
+                </div>
               </div>
               <div className="space-y-2">
-                <p className="text-[12px] text-white/85 font-semibold leading-snug">{verdictParts.chooseIf}</p>
+                <p className="text-[12.5px] text-white/85 font-semibold leading-snug">{verdictParts.headline}</p>
+                <p className="text-[11.5px] text-white/55 leading-relaxed">{verdictParts.explanation}</p>
                 {verdictParts.tradeoff && (
-                  <p className="text-[11px] text-lantern-gold/75 leading-relaxed">
-                    <span className="mr-1 opacity-70">⚠</span>{verdictParts.tradeoff}
+                  <p className="text-[11px] text-amber-300/60 leading-relaxed pt-0.5">
+                    {verdictParts.tradeoff}
                   </p>
                 )}
-                {verdictParts.considerAlternativeIf && (
-                  <p className="text-[11px] text-white/45 leading-relaxed">
-                    <span className="mr-1 opacity-60">→</span>{verdictParts.considerAlternativeIf}
+                {verdictParts.chooseIf && (
+                  <p className="text-[11px] text-white/38 leading-relaxed">
+                    {verdictParts.chooseIf}
                   </p>
                 )}
               </div>
@@ -2851,6 +2910,69 @@ function RecommendedHotels({
           );
         })}
       </div>
+    </div>
+  );
+}
+
+// ── Why #1 beats #2 (inline between cards) ────────────────────────────────────
+
+function WhyTopRanks({ h1, h2 }: { h1: HotelOffer; h2: HotelOffer }) {
+  const dims = [
+    { label: "neighborhood fit",  delta: h1.neighborhood_fit_score       - h2.neighborhood_fit_score       },
+    { label: "destination fit",   delta: h1.score_breakdown.destination_fit - h2.score_breakdown.destination_fit },
+    { label: "guest reviews",     delta: h1.score_breakdown.reviews      - h2.score_breakdown.reviews      },
+    { label: "walkability",       delta: h1.score_breakdown.walkability  - h2.score_breakdown.walkability  },
+    { label: "location",          delta: h1.score_breakdown.location     - h2.score_breakdown.location     },
+    { label: "hotel quality",     delta: h1.score_breakdown.stars        - h2.score_breakdown.stars        },
+    { label: "price / value",     delta: h1.score_breakdown.price        - h2.score_breakdown.price        },
+  ]
+    // Skip dimensions that are 0 for both (unused, e.g. neighborhood_fit when no prefs)
+    .filter((d) => d.delta > 3 && (h1.neighborhood_fit_score > 0 || d.label !== "neighborhood fit"))
+    .sort((a, b) => b.delta - a.delta);
+
+  const tradeoffDim = [
+    { label: "hotel quality",  delta: h2.score_breakdown.stars       - h1.score_breakdown.stars       },
+    { label: "guest reviews",  delta: h2.score_breakdown.reviews     - h1.score_breakdown.reviews     },
+    { label: "walkability",    delta: h2.score_breakdown.walkability - h1.score_breakdown.walkability },
+    { label: "location",       delta: h2.score_breakdown.location   - h1.score_breakdown.location   },
+  ].filter((d) => d.delta > 5).sort((a, b) => b.delta - a.delta)[0];
+
+  const h2PriceSavings = Math.round(h1.price_per_night - h2.price_per_night);
+  const h1Short = h1.name.split(",")[0].split("–")[0].trim();
+  const h2Short = h2.name.split(",")[0].split("–")[0].trim();
+
+  if (dims.length === 0) return null;
+
+  return (
+    <div className="rounded-xl border border-white/[0.04] bg-white/[0.01] px-4 py-3 -mt-1">
+      <span className="text-[9px] font-black uppercase tracking-[0.13em] text-white/20 block mb-2">
+        Why {h1Short} ranks #1
+      </span>
+      <div className="space-y-1.5 mb-0">
+        {dims.slice(0, 3).map((d) => (
+          <div key={d.label} className="flex items-center gap-2">
+            <span className="flex-shrink-0 w-1 h-1 rounded-full bg-lantern-mint/40 mt-px" />
+            <span className="text-[11.5px] text-white/48">
+              Better {d.label}
+              <span className="text-white/20 ml-1 text-[10px]">(+{d.delta})</span>
+            </span>
+          </div>
+        ))}
+      </div>
+      {(tradeoffDim || h2PriceSavings >= 20) && (
+        <div className="mt-2 pt-2 border-t border-white/[0.04] flex items-start gap-2">
+          <span className="text-[9px] font-bold uppercase tracking-wider text-amber-400/40 flex-shrink-0 mt-px">Tradeoff</span>
+          <span className="text-[11px] text-white/28 leading-snug">
+            {h2PriceSavings >= 20 && tradeoffDim
+              ? `${h2Short} saves $${h2PriceSavings}/night and has stronger ${tradeoffDim.label}`
+              : h2PriceSavings >= 20
+                ? `${h2Short} saves $${h2PriceSavings}/night`
+                : tradeoffDim
+                  ? `${h2Short} has stronger ${tradeoffDim.label}`
+                  : null}
+          </span>
+        </div>
+      )}
     </div>
   );
 }
@@ -4049,21 +4171,26 @@ export default function HotelSearch() {
 
               {/* Hotel cards */}
               <div className={`space-y-3 ${compareIds.length > 0 ? "pb-24" : ""}`}>
-                {cardList.slice(0, visibleCount).map((offer) => (
-                  <HotelCard
-                    key={offer.hotel_id}
-                    offer={offer}
-                    isBestOverall={offer.hotel_id === bestOverallId}
-                    isCheapest={offer.hotel_id === cheapestId}
-                    activePrefs={activePrefs}
-                    guests={guests}
-                    isMapSelected={viewMode === "map" && offer.hotel_id === selectedHotelId}
-                    onSelectForMap={viewMode === "map" ? setSelectedHotelId : undefined}
-                    onOpenDetail={() => setDetailHotelId(offer.hotel_id)}
-                    isInCompare={compareIds.includes(offer.hotel_id)}
-                    onToggleCompare={() => toggleCompare(offer.hotel_id)}
-                    compareDisabled={compareIds.length >= 4}
-                  />
+                {cardList.slice(0, visibleCount).map((offer, idx) => (
+                  <div key={offer.hotel_id}>
+                    {/* "Why #1 beats #2" separator — only between the first and second card when sorted by score */}
+                    {idx === 1 && sortOrder === "score" && top3.length >= 2 && (
+                      <WhyTopRanks h1={top3[0]} h2={top3[1]} />
+                    )}
+                    <HotelCard
+                      offer={offer}
+                      isBestOverall={offer.hotel_id === bestOverallId}
+                      isCheapest={offer.hotel_id === cheapestId}
+                      activePrefs={activePrefs}
+                      guests={guests}
+                      isMapSelected={viewMode === "map" && offer.hotel_id === selectedHotelId}
+                      onSelectForMap={viewMode === "map" ? setSelectedHotelId : undefined}
+                      onOpenDetail={() => setDetailHotelId(offer.hotel_id)}
+                      isInCompare={compareIds.includes(offer.hotel_id)}
+                      onToggleCompare={() => toggleCompare(offer.hotel_id)}
+                      compareDisabled={compareIds.length >= 4}
+                    />
+                  </div>
                 ))}
               </div>
 
