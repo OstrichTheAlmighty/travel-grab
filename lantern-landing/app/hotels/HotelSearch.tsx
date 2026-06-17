@@ -438,6 +438,70 @@ function detectCityGuide(destination: string): CityGuide | null {
   return null;
 }
 
+// ── Neighborhood recommendation engine ───────────────────────────────────────
+
+interface NeighborhoodSummary {
+  nbhd:         NeighborhoodCard;
+  hotels:       HotelOffer[];
+  count:        number;
+  avgPrice:     number;
+  avgNfScore:   number;
+  bestHotel:    HotelOffer | null;
+  matchedPrefs: PrefId[];
+}
+
+// Maps PrefId → tags that appear in CITY_GUIDES neighborhood cards
+const PREF_TAG_MAP: Partial<Record<PrefId, string[]>> = {
+  luxury:       ["Luxury", "Fine Dining", "Upscale", "Upscale Local", "Views"],
+  quiet:        ["Quiet", "Residential"],
+  food:         ["Food", "Dining", "Fine Dining", "Street food"],
+  nightlife:    ["Nightlife", "Beach"],
+  sightseeing:  ["Sightseeing", "Museums", "Culture", "History", "Historic"],
+  transit:      ["Transit"],
+  "first-time": ["First-time"],
+  walkable:     ["Walkable"],
+  budget:       ["Budget"],
+  family:       ["Family", "Resort", "Leisure"],
+};
+
+function computeNeighborhoodSummaries(
+  guide: CityGuide,
+  offers: HotelOffer[],
+  activePrefs: readonly PrefId[],
+): NeighborhoodSummary[] {
+  const sums: NeighborhoodSummary[] = guide.neighborhoods.map((nbhd) => {
+    const hotels = offers.filter((o) =>
+      nbhd.matchKeywords.some(
+        (k) =>
+          o.inferred_neighborhood.toLowerCase().includes(k.toLowerCase()) ||
+          o.address.toLowerCase().includes(k.toLowerCase())
+      )
+    );
+    const nfValues = hotels.map((h) =>
+      activePrefs.length > 0 ? h.neighborhood_fit_score : h.score_breakdown.location
+    );
+    const avgNfScore = nfValues.length > 0
+      ? Math.round(nfValues.reduce((s, v) => s + v, 0) / nfValues.length)
+      : 0;
+    const avgPrice = hotels.length > 0
+      ? Math.round(hotels.reduce((s, h) => s + h.price_per_night, 0) / hotels.length)
+      : 0;
+    const bestHotel = hotels.length > 0
+      ? hotels.reduce((a, b) => b.ai_score > a.ai_score ? b : a)
+      : null;
+    const matchedPrefs = (activePrefs as PrefId[]).filter((p) => {
+      const tagKws = PREF_TAG_MAP[p] ?? [p];
+      return nbhd.tags.some((tag) =>
+        tagKws.some((kw) => tag.toLowerCase().includes(kw.toLowerCase()))
+      );
+    });
+    return { nbhd, hotels, count: hotels.length, avgPrice, avgNfScore, bestHotel, matchedPrefs };
+  });
+  return sums.sort((a, b) =>
+    b.avgNfScore !== a.avgNfScore ? b.avgNfScore - a.avgNfScore : b.count - a.count
+  );
+}
+
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
 function scoreColor(n: number) {
@@ -822,19 +886,237 @@ function NeighborhoodChips({
   );
 }
 
+// ── NeighborhoodRecommendation (Phase 1 + 2 + 4) ─────────────────────────────
+
+function NeighborhoodRecommendation({
+  summaries,
+  selectedId,
+  onSelect,
+  activePrefs,
+}: {
+  summaries: NeighborhoodSummary[];
+  selectedId: string | null;
+  onSelect: (id: string | null) => void;
+  activePrefs: readonly PrefId[];
+}) {
+  if (summaries.length === 0) return null;
+  const withHotels = summaries.filter((s) => s.count > 0);
+  if (withHotels.length === 0) return null;
+
+  const recommended   = withHotels[0];
+  const alternatives  = withHotels.slice(1, 4);
+  const selectedSumm  = selectedId ? summaries.find((s) => s.nbhd.id === selectedId) : null;
+  const isNonRecSel   = !!selectedId && selectedId !== recommended.nbhd.id;
+
+  function comparisonCopy(sel: NeighborhoodSummary, rec: NeighborhoodSummary): string {
+    const recPref = rec.matchedPrefs[0];
+    const recLabel = recPref ? (NEIGHBORHOOD_PREFS.find((x) => x.id === recPref)?.label ?? recPref) : "your preferences";
+    const selPrefs = sel.matchedPrefs.slice(0, 2).map((p) => NEIGHBORHOOD_PREFS.find((x) => x.id === p)?.label ?? p).join(" and ");
+    const scoreDiff = rec.avgNfScore - sel.avgNfScore;
+    const priceDiff = rec.avgPrice > 0 && sel.avgPrice > 0 ? rec.avgPrice - sel.avgPrice : 0;
+
+    let copy = `${rec.nbhd.name} scores ${scoreDiff > 0 ? `${scoreDiff} points higher` : "similarly"} for ${recLabel}.`;
+    if (sel.matchedPrefs.length > 0) copy += ` ${sel.nbhd.name} is stronger for ${selPrefs}.`;
+    if (priceDiff > 20) copy += ` Avg price in ${sel.nbhd.name} is $${Math.abs(priceDiff)}/night ${priceDiff > 0 ? "cheaper" : "more"}.`;
+    return copy;
+  }
+
+  const recIsSelected = selectedId === recommended.nbhd.id;
+
+  return (
+    <div className="mb-5">
+      {/* ── Phase 1: Main recommended area panel ─────────────────────────── */}
+      <div className="rounded-2xl border border-lantern-violet/35 bg-lantern-violet/[0.06] p-4 sm:p-5 mb-3 shadow-[0_0_28px_rgba(167,139,250,0.08)]">
+
+        {/* Header */}
+        <div className="flex items-center gap-2 mb-3">
+          <svg className="w-3.5 h-3.5 text-lantern-violet flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+          </svg>
+          <span className="text-[10px] font-black uppercase tracking-widest text-lantern-violet">
+            Recommended Area for Your Preferences
+          </span>
+        </div>
+
+        {/* Name + score badge */}
+        <div className="flex items-start justify-between gap-3 mb-2.5">
+          <div className="min-w-0">
+            <h2 className="text-xl sm:text-2xl font-black text-white leading-tight">{recommended.nbhd.name}</h2>
+            <div className="text-[11px] text-white/35 mt-0.5">
+              {recommended.count} hotel{recommended.count !== 1 ? "s" : ""}
+              {recommended.avgPrice > 0 && <> · avg <span className="text-white/55 font-semibold">${recommended.avgPrice}</span>/night</>}
+            </div>
+          </div>
+          {recommended.avgNfScore > 0 && (
+            <div className={`flex-shrink-0 text-center border rounded-xl px-3 py-1.5 ${scoreBg(recommended.avgNfScore)}`}>
+              <div className="text-xl font-black tabular-nums leading-none">{recommended.avgNfScore}</div>
+              <div className="text-[9px] font-bold uppercase tracking-wider mt-0.5">{scoreLabel(recommended.avgNfScore)}</div>
+            </div>
+          )}
+        </div>
+
+        {/* Matched preference pills */}
+        {recommended.matchedPrefs.length > 0 && (
+          <div className="flex flex-wrap items-center gap-1.5 mb-2.5">
+            <span className="text-[10px] text-white/30">Best for:</span>
+            {recommended.matchedPrefs.map((p) => (
+              <span
+                key={p}
+                className="flex items-center gap-1 text-[10px] font-semibold border rounded-full px-2 py-0.5 bg-lantern-violet/15 text-lantern-violet border-lantern-violet/30"
+              >
+                <svg className="w-2 h-2 flex-shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M1 6l3.5 3.5L11 2" />
+                </svg>
+                {NEIGHBORHOOD_PREFS.find((x) => x.id === p)?.label ?? p}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {/* Description */}
+        <p className="text-xs text-white/55 leading-relaxed mb-3">{recommended.nbhd.description}</p>
+
+        {/* Top hotel in area */}
+        {recommended.bestHotel && (
+          <div className="flex items-center gap-2 mb-3 text-[11px] text-white/35">
+            <svg className="w-3 h-3 text-lantern-mint flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <span>
+              Top hotel: <span className="text-white/60 font-semibold">{recommended.bestHotel.name}</span>
+              {" "}· ${Math.round(recommended.bestHotel.price_per_night)}/night · score {recommended.bestHotel.ai_score}
+            </span>
+          </div>
+        )}
+
+        {/* CTA */}
+        <button
+          onClick={() => onSelect(recIsSelected ? null : recommended.nbhd.id)}
+          className={`w-full py-2.5 rounded-xl text-sm font-bold transition-all ${
+            recIsSelected
+              ? "bg-lantern-violet text-white shadow-[0_0_16px_rgba(139,92,246,0.3)]"
+              : "bg-lantern-violet/15 text-lantern-violet hover:bg-lantern-violet/25 border border-lantern-violet/30"
+          }`}
+        >
+          {recIsSelected
+            ? "✓ Showing hotels in this area — click to clear"
+            : `Show hotels in ${recommended.nbhd.name} →`}
+        </button>
+      </div>
+
+      {/* ── Phase 4: Comparison copy when non-recommended is selected ────── */}
+      {isNonRecSel && selectedSumm && (
+        <div className="mb-3 rounded-xl border border-amber-500/20 bg-amber-500/[0.05] px-4 py-3">
+          <div className="text-[10px] font-bold uppercase tracking-widest text-amber-400/80 mb-1.5">
+            You picked {selectedSumm.nbhd.name} over {recommended.nbhd.name}
+          </div>
+          <p className="text-[11px] text-white/50 leading-relaxed mb-2">
+            {comparisonCopy(selectedSumm, recommended)}
+          </p>
+          <button
+            onClick={() => onSelect(recommended.nbhd.id)}
+            className="text-[11px] text-lantern-violet hover:text-lantern-violet/80 transition-colors"
+          >
+            ← Switch to recommended area
+          </button>
+        </div>
+      )}
+
+      {/* ── Phase 2: Alternative area cards ──────────────────────────────── */}
+      {alternatives.length > 0 && (
+        <div>
+          <div className="text-[10px] font-black uppercase tracking-widest text-white/25 mb-2 px-0.5">
+            Also consider
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            {alternatives.map((s) => {
+              const isSel = selectedId === s.nbhd.id;
+              const altPrefs = s.matchedPrefs.slice(0, 2);
+              const missingPrefs = (activePrefs as PrefId[])
+                .filter((p) => !s.matchedPrefs.includes(p))
+                .slice(0, 1);
+              return (
+                <div
+                  key={s.nbhd.id}
+                  className={`rounded-xl border p-3 flex flex-col transition-all ${
+                    isSel
+                      ? "border-lantern-blue/40 bg-lantern-blue/[0.05]"
+                      : "border-white/[0.07] bg-white/[0.02] hover:border-white/[0.14]"
+                  }`}
+                >
+                  {/* Name + score */}
+                  <div className="flex items-start justify-between gap-2 mb-1">
+                    <div className="font-bold text-sm text-white leading-tight flex-1 min-w-0">{s.nbhd.name}</div>
+                    {s.avgNfScore > 0 && (
+                      <span className={`text-[11px] font-bold tabular-nums flex-shrink-0 ${scoreColor(s.avgNfScore)}`}>
+                        {s.avgNfScore}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Matched pref tags */}
+                  {altPrefs.length > 0 && (
+                    <div className="flex flex-wrap gap-1 mb-1.5">
+                      {altPrefs.map((p) => (
+                        <span key={p} className="text-[9px] text-white/35 border border-white/[0.08] rounded-full px-1.5 py-0.5 leading-none">
+                          {NEIGHBORHOOD_PREFS.find((x) => x.id === p)?.label ?? p}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* First sentence of description as tradeoff */}
+                  <p className="text-[11px] text-white/40 leading-relaxed mb-1.5 flex-1 line-clamp-2">
+                    {s.nbhd.description.split(".")[0]}.
+                    {missingPrefs.length > 0 && (
+                      <span className="text-white/25">
+                        {" "}Less {NEIGHBORHOOD_PREFS.find((x) => x.id === missingPrefs[0])?.label?.toLowerCase() ?? missingPrefs[0]}.
+                      </span>
+                    )}
+                  </p>
+
+                  {/* Stats */}
+                  <div className="text-[10px] text-white/25 mb-2">
+                    {s.count} hotel{s.count !== 1 ? "s" : ""}
+                    {s.avgPrice > 0 && <> · avg ${s.avgPrice}/night</>}
+                  </div>
+
+                  <button
+                    onClick={() => onSelect(isSel ? null : s.nbhd.id)}
+                    className={`w-full text-[11px] font-semibold rounded-lg py-1.5 transition-all ${
+                      isSel
+                        ? "bg-lantern-blue/20 text-lantern-blue border border-lantern-blue/30"
+                        : "bg-white/[0.05] text-white/50 hover:bg-white/[0.1] hover:text-white"
+                    }`}
+                  >
+                    {isSel ? "Showing these hotels" : "Stay here"}
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ── NeighborhoodGuide ─────────────────────────────────────────────────────────
 
+// Phase 3: NeighborhoodGuide now accepts summaries for enriched card data
 function NeighborhoodGuide({
   guide,
   selectedId,
   onSelect,
-  hotelCounts,
+  summaries,
 }: {
   guide: CityGuide;
   selectedId: string | null;
   onSelect: (id: string | null) => void;
-  hotelCounts: Record<string, number>;
+  summaries: NeighborhoodSummary[];
 }) {
+  const summaryById = Object.fromEntries(summaries.map((s) => [s.nbhd.id, s]));
+
   return (
     <div className="mb-5">
       <div className="flex items-center justify-between mb-2.5">
@@ -858,8 +1140,10 @@ function NeighborhoodGuide({
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
         {guide.neighborhoods.map((n) => {
-          const count      = hotelCounts[n.id] ?? 0;
+          const s          = summaryById[n.id];
+          const count      = s?.count ?? 0;
           const isSelected = selectedId === n.id;
+
           return (
             <div
               key={n.id}
@@ -869,11 +1153,30 @@ function NeighborhoodGuide({
                   : "border-white/[0.07] bg-white/[0.02] hover:border-white/[0.14] hover:bg-white/[0.04]"
               }`}
             >
-              <div className="font-bold text-sm text-white mb-1 leading-tight">{n.name}</div>
+              {/* Name + match score */}
+              <div className="flex items-start justify-between gap-1.5 mb-1">
+                <div className="font-bold text-sm text-white leading-tight flex-1 min-w-0">{n.name}</div>
+                {s && s.avgNfScore > 0 && (
+                  <span className={`text-[10px] font-bold tabular-nums flex-shrink-0 ${scoreColor(s.avgNfScore)}`}>
+                    {s.avgNfScore}
+                  </span>
+                )}
+              </div>
+
+              {/* Price + count */}
+              {s && s.count > 0 && (
+                <div className="text-[10px] text-white/30 mb-1.5">
+                  {s.count} hotel{s.count !== 1 ? "s" : ""}
+                  {s.avgPrice > 0 && <> · from ${s.avgPrice}/night</>}
+                </div>
+              )}
+
               <p className="text-[11px] text-white/40 leading-relaxed mb-2 flex-1 line-clamp-2">
                 {n.description}
               </p>
-              <div className="flex flex-wrap gap-1 mb-2.5">
+
+              {/* Tags */}
+              <div className="flex flex-wrap gap-1 mb-1.5">
                 {n.tags.slice(0, 3).map((tag) => (
                   <span
                     key={tag}
@@ -883,9 +1186,17 @@ function NeighborhoodGuide({
                   </span>
                 ))}
               </div>
+
+              {/* Best hotel in area */}
+              {s?.bestHotel && (
+                <div className="text-[10px] text-white/25 mb-2 truncate">
+                  ★ {s.bestHotel.name}
+                </div>
+              )}
+
               <button
                 onClick={() => onSelect(isSelected ? null : n.id)}
-                className={`w-full text-[11px] font-semibold rounded-lg py-1.5 transition-all ${
+                className={`w-full text-[11px] font-semibold rounded-lg py-1.5 transition-all mt-auto ${
                   isSelected
                     ? "bg-lantern-violet text-white"
                     : "bg-white/[0.06] text-white/55 hover:bg-white/[0.11] hover:text-white"
@@ -1206,11 +1517,24 @@ function HotelCard({
 
 // ── Recommendation panel ──────────────────────────────────────────────────────
 
-function RecommendationPanel({ offers, activePrefs }: { offers: HotelOffer[]; activePrefs: readonly PrefId[] }) {
+function RecommendationPanel({
+  offers,
+  activePrefs,
+  recommendedSummary,
+}: {
+  offers: HotelOffer[];
+  activePrefs: readonly PrefId[];
+  recommendedSummary?: NeighborhoodSummary | null;
+}) {
   const pick       = offers.find((o) => o.recommendation_label === "Best Overall") ?? offers[0];
   const budgetPick = offers.find((o) => o.recommendation_label === "Budget Pick");
   const luxuryPick = offers.find((o) => o.recommendation_label === "Luxury Pick");
   if (!pick) return null;
+
+  // Phase 6: is the AI Pick in the recommended neighborhood?
+  const pickInRecNbhd = recommendedSummary
+    ? recommendedSummary.hotels.some((h) => h.hotel_id === pick.hotel_id)
+    : true;
 
   const priceDiff = budgetPick && budgetPick.hotel_id !== pick.hotel_id
     ? Math.round(pick.price_per_night - budgetPick.price_per_night)
@@ -1276,6 +1600,26 @@ function RecommendationPanel({ offers, activePrefs }: { offers: HotelOffer[]; ac
             <path d="M1 6l3.5 3.5L11 2" />
           </svg>
           {pick.neighborhood_fit_label} for your preferences
+        </div>
+      )}
+
+      {/* Phase 6: explain when AI Pick is NOT from the recommended neighborhood */}
+      {activePrefs.length > 0 && !pickInRecNbhd && recommendedSummary && (
+        <div className="mt-3 pt-3 border-t border-white/[0.05]">
+          <p className="text-[10px] text-white/35 leading-relaxed">
+            <span className="text-white/50 font-semibold">Not from the recommended area:</span>{" "}
+            This hotel is in <span className="text-white/50">{pick.inferred_neighborhood || "a different neighborhood"}</span>,
+            not {recommendedSummary.nbhd.name}. It ranked #1 because
+            {pick.overall_rating >= 4.6
+              ? " its outstanding guest reviews outweigh the neighborhood difference."
+              : pick.neighborhood_fit_score >= 70
+                ? " it still has strong preference fit despite being in a different area."
+                : " its combined score (reviews, price, walkability) beat hotels in the recommended area."
+            }
+            {recommendedSummary.count > 0 && (
+              <>{" "}Scroll down to see {recommendedSummary.count} hotel{recommendedSummary.count !== 1 ? "s" : ""} in {recommendedSummary.nbhd.name}.</>
+            )}
+          </p>
         </div>
       )}
     </div>
@@ -1553,19 +1897,13 @@ export default function HotelSearch() {
         {searchState === "results" && offers.length > 0 && (() => {
           const cityGuide = detectCityGuide(searchedDest);
 
-          // Compute how many hotels match each neighborhood card
-          const hotelCounts: Record<string, number> = {};
-          if (cityGuide) {
-            for (const n of cityGuide.neighborhoods) {
-              hotelCounts[n.id] = offers.filter((o) =>
-                n.matchKeywords.some(
-                  (k) =>
-                    o.inferred_neighborhood.toLowerCase().includes(k.toLowerCase()) ||
-                    o.address.toLowerCase().includes(k.toLowerCase())
-                )
-              ).length;
-            }
-          }
+          // Compute neighborhood summaries (drives both recommendation panel and guide cards)
+          const nbhdSummaries: NeighborhoodSummary[] = cityGuide
+            ? computeNeighborhoodSummaries(cityGuide, offers, activePrefs)
+            : [];
+          const recommendedSummary = activePrefs.length > 0 && nbhdSummaries.length > 0 && nbhdSummaries[0].count > 0
+            ? nbhdSummaries[0]
+            : null;
 
           // Filter displayed hotels when a neighborhood is selected
           const selectedCard = cityGuide?.neighborhoods.find((n) => n.id === selectedNeighborhood);
@@ -1719,12 +2057,21 @@ export default function HotelSearch() {
 
               {/* ── LIST VIEW: Neighborhood guide ─────────────────────────── */}
               {viewMode === "list" && cityGuide && (
-                <NeighborhoodGuide
-                  guide={cityGuide}
-                  selectedId={selectedNeighborhood}
-                  onSelect={setSelectedNeighborhood}
-                  hotelCounts={hotelCounts}
-                />
+                activePrefs.length > 0 && nbhdSummaries.length > 0 ? (
+                  <NeighborhoodRecommendation
+                    summaries={nbhdSummaries}
+                    selectedId={selectedNeighborhood}
+                    onSelect={setSelectedNeighborhood}
+                    activePrefs={activePrefs}
+                  />
+                ) : (
+                  <NeighborhoodGuide
+                    guide={cityGuide}
+                    summaries={nbhdSummaries}
+                    selectedId={selectedNeighborhood}
+                    onSelect={setSelectedNeighborhood}
+                  />
+                )
               )}
 
               {/* Preference conflict warning */}
@@ -1772,6 +2119,7 @@ export default function HotelSearch() {
               <RecommendationPanel
                 offers={showAllFallback ? offers : filteredOffers}
                 activePrefs={activePrefs}
+                recommendedSummary={recommendedSummary}
               />
 
               {/* Hotel cards */}
