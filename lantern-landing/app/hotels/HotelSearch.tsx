@@ -2225,9 +2225,8 @@ function RecommendationPanel({
       {/* Header: AI PICK · CONFIDENCE · MARGIN */}
       <div className="flex items-center justify-between gap-2 mb-2.5">
         <div className="flex items-center gap-1.5 flex-wrap">
-          <svg className="w-3 h-3 text-lantern-violet flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-          </svg>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/apple-touch-icon.png" alt="" aria-hidden width={14} height={14} className="h-3.5 w-3.5 flex-shrink-0 rounded-sm object-cover" />
           <span className="text-[10px] font-black uppercase tracking-widest text-lantern-violet">AI Pick</span>
           <span className="text-[10px] text-white/15">·</span>
           <span className={`text-[10px] font-bold uppercase tracking-wider ${confidenceColor}`}>
@@ -2509,10 +2508,15 @@ export default function HotelSearch() {
       {/* Nav */}
       <nav className="border-b border-white/[0.07] bg-ink/80 backdrop-blur-md sticky top-0 z-40">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 flex items-center h-14 gap-6">
-          <Link href="/" className="flex items-center gap-2 group">
-            <svg className="w-5 h-5 text-lantern-violet group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
-            </svg>
+          <Link href="/" className="flex items-center gap-2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/apple-touch-icon.png"
+              alt="TravelGrab"
+              width={28}
+              height={28}
+              className="h-7 w-7 flex-shrink-0 rounded-md object-cover"
+            />
             <span className="text-sm font-bold tracking-tight text-white/90">TravelGrab</span>
           </Link>
           <div className="h-4 w-px bg-white/10" />
@@ -2610,15 +2614,18 @@ export default function HotelSearch() {
 
         {/* Loading */}
         {searchState === "loading" && (
-          <div className="max-w-3xl mx-auto text-center py-14">
-            <div className="inline-flex items-center gap-3 text-white/50 text-sm">
-              <svg className="w-4 h-4 animate-spin text-lantern-violet" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-              </svg>
-              Searching hotels in {searchedDest}…
-            </div>
-            <p className="text-xs text-white/25 mt-2">
+          <div className="max-w-3xl mx-auto text-center py-14 flex flex-col items-center gap-4">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/apple-touch-icon.png"
+              alt=""
+              aria-hidden
+              width={48}
+              height={48}
+              className="h-12 w-12 rounded-xl object-cover animate-pulse"
+            />
+            <div className="text-sm text-white/50">Searching hotels in {searchedDest}…</div>
+            <p className="text-xs text-white/25">
               Ranking by reviews, location{selectedPrefs.length > 0 ? ", and neighborhood fit" : ", and value"}
             </p>
           </div>

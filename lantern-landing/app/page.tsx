@@ -105,10 +105,15 @@ export default function Page() {
       {/* ── Nav ── */}
       <header className="sticky top-0 z-50 border-b border-transparent bg-transparent backdrop-blur-0 transition-all duration-200">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 sm:px-8 lg:px-12">
-          <a href="/" className="flex items-center gap-3">
-            <div className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-xl bg-gradient-to-br from-lantern-mint to-lantern-blue shadow-[0_0_28px_rgba(119,167,255,0.28)]">
-              <span className="text-sm font-black text-ink">{BRAND_NAME.charAt(0)}</span>
-            </div>
+          <a href="/" className="flex items-center gap-2.5">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/apple-touch-icon.png"
+              alt="TravelGrab"
+              width={32}
+              height={32}
+              className="h-8 w-8 flex-shrink-0 rounded-lg object-cover"
+            />
             <span className="text-sm font-bold tracking-tight text-white">{BRAND_NAME}</span>
           </a>
 
@@ -141,6 +146,18 @@ export default function Page() {
         />
 
         <div className="mx-auto max-w-4xl text-center">
+          {/* Logo */}
+          <div className="mb-8 flex justify-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/travelgrablogo-transparent.png"
+              alt="TravelGrab"
+              width={112}
+              height={96}
+              className="h-24 w-auto drop-shadow-[0_4px_24px_rgba(119,167,255,0.25)]"
+            />
+          </div>
+
           {/* eyebrow */}
           <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-lantern-blue/30 bg-lantern-blue/10 px-4 py-2 text-sm font-semibold text-lantern-blue">
             <span
@@ -443,11 +460,18 @@ export default function Page() {
       {/* ── Footer ── */}
       <footer className="border-t border-white/8 px-6 py-10 sm:px-8 lg:px-12">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            <div className="grid h-7 w-7 place-items-center rounded-lg bg-gradient-to-br from-lantern-mint to-lantern-blue">
-              <span className="text-xs font-black text-ink">{BRAND_NAME.charAt(0)}</span>
-            </div>
-            <span className="text-sm font-semibold text-white/70">{BRAND_NAME}</span>
+          <div className="flex flex-col gap-1.5">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/travelgrablogo-transparent.png"
+              alt="TravelGrab"
+              width={100}
+              height={86}
+              className="h-[52px] w-auto"
+            />
+            <p className="text-xs text-white/35 max-w-[200px]">
+              AI travel recommendations that help you decide, not just search.
+            </p>
           </div>
           <p className="text-sm text-white/36">
             © {new Date().getFullYear()} {BRAND_NAME}. Built for travelers who want more than the cheapest fare.

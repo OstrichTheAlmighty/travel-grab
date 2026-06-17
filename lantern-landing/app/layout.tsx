@@ -12,6 +12,14 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: `${BRAND_NAME} — Find the best flight, not just the cheapest one`,
   description: `${BRAND_NAME} compares price, layovers, timing, airlines, airports, and comfort to explain which flight is actually worth booking.`,
+  icons: {
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: { url: "/apple-touch-icon.png", sizes: "512x512", type: "image/png" },
+  },
 };
 
 export default function RootLayout({
