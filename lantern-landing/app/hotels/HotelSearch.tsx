@@ -1747,6 +1747,9 @@ function HotelCard({
   isMapSelected,
   onSelectForMap,
   onOpenDetail,
+  isInCompare,
+  onToggleCompare,
+  compareDisabled,
 }: {
   offer: HotelOffer;
   isBestOverall: boolean;
@@ -1756,6 +1759,9 @@ function HotelCard({
   isMapSelected?: boolean;
   onSelectForMap?: (id: string | null) => void;
   onOpenDetail?: () => void;
+  isInCompare?: boolean;
+  onToggleCompare?: () => void;
+  compareDisabled?: boolean;
 }) {
   const [breakdownOpen, setBreakdownOpen] = useState(isBestOverall);
   const prefsActive = activePrefs.length > 0;
@@ -1996,6 +2002,21 @@ function HotelCard({
             </button>
 
             <div className="flex items-center gap-2">
+              {onToggleCompare && (
+                <button
+                  onClick={(e) => { e.stopPropagation(); onToggleCompare(); }}
+                  disabled={!isInCompare && compareDisabled}
+                  className={`text-[11px] font-semibold rounded-lg px-2.5 py-1.5 transition-all border whitespace-nowrap ${
+                    isInCompare
+                      ? "bg-lantern-blue/20 text-lantern-blue border-lantern-blue/30"
+                      : compareDisabled
+                        ? "text-white/15 border-white/[0.05] cursor-not-allowed"
+                        : "text-white/40 border-white/[0.08] hover:border-white/20 hover:text-white/60"
+                  }`}
+                >
+                  {isInCompare ? "✓ Compare" : "Compare"}
+                </button>
+              )}
               {onOpenDetail && (
                 <button
                   onClick={(e) => { e.stopPropagation(); onOpenDetail(); }}
@@ -2091,6 +2112,397 @@ function computePickDecisionLabel(
     return "Best Overall Balance";
   }
 }
+
+// ── Hotel Comparison helpers ──────────────────────────────────────────────────
+
+function generateVerdict(hotels: HotelOffer[]): string {
+  if (hotels.length < 2) return "";
+  const sorted = [...hotels].sort((a, b) => b.ai_score - a.ai_score);
+  const winner = sorted[0];
+  const runnerUp = sorted[1];
+  const margin = winner.ai_score - runnerUp.ai_score;
+
+  if (margin < 3) {
+    const m = Math.round(margin);
+    const diff = m === 0 ? "equal scores" : `${m} point${m !== 1 ? "s" : ""} apart`;
+    return `This is a close call. ${winner.name} and ${runnerUp.name} are ${diff} — the right choice depends on your priorities.`;
+  }
+
+  const dims = [
+    { label: "guest reviews",  val: winner.score_breakdown.reviews },
+    { label: "location",       val: winner.score_breakdown.location },
+    { label: "walkability",    val: winner.score_breakdown.walkability },
+    { label: "hotel quality",  val: winner.score_breakdown.stars },
+    { label: "price/value",    val: winner.score_breakdown.price },
+  ].sort((a, b) => b.val - a.val);
+
+  let verdict = `${winner.name} ranks highest in this comparison, led by its ${dims[0].label} and ${dims[1].label} scores.`;
+
+  const priceDiff = winner.price_per_night - runnerUp.price_per_night;
+  if (priceDiff > 20) {
+    verdict += ` The tradeoff: $${Math.round(priceDiff)}/night more than ${runnerUp.name}.`;
+  } else if (priceDiff < -20) {
+    verdict += ` It's also $${Math.round(Math.abs(priceDiff))}/night cheaper than ${runnerUp.name}.`;
+  }
+
+  const runnerLeads = [
+    { label: "guest reviews",  gap: runnerUp.score_breakdown.reviews - winner.score_breakdown.reviews },
+    { label: "walkability",    gap: runnerUp.score_breakdown.walkability - winner.score_breakdown.walkability },
+    { label: "hotel quality",  gap: runnerUp.score_breakdown.stars - winner.score_breakdown.stars },
+    { label: "price/value",    gap: runnerUp.score_breakdown.price - winner.score_breakdown.price },
+  ].filter(d => d.gap >= 8).sort((a, b) => b.gap - a.gap);
+  if (runnerLeads.length > 0) {
+    verdict += ` ${runnerUp.name} scores higher on ${runnerLeads[0].label}.`;
+  }
+
+  return verdict;
+}
+
+type CompareWinner = { id: string; type: "price" | "quality" } | null;
+
+function priceWinner(vals: { id: string; val: number }[]): CompareWinner {
+  const valid = vals.filter(v => v.val > 0);
+  if (valid.length < 2) return null;
+  return { id: valid.reduce((a, b) => a.val < b.val ? a : b).id, type: "price" };
+}
+
+function qualityWinner(vals: { id: string; val: number }[]): CompareWinner {
+  const valid = vals.filter(v => v.val > 0);
+  if (valid.length < 2) return null;
+  const winner = valid.reduce((a, b) => a.val > b.val ? a : b);
+  const second = valid.filter(v => v.id !== winner.id).reduce((a, b) => a.val > b.val ? a : b, { id: "", val: 0 });
+  if (winner.val - second.val < 1) return null;
+  return { id: winner.id, type: "quality" };
+}
+
+function CompareSectionRow({ label, colCount }: { label: string; colCount: number }) {
+  return (
+    <tr>
+      <td colSpan={colCount + 1} className="pt-5 pb-1.5 text-[9px] font-black uppercase tracking-widest text-white/25">
+        {label}
+      </td>
+    </tr>
+  );
+}
+
+function CompareScoreRow({
+  label, hotels, vals, winner, format, winnerLabel,
+}: {
+  label: string;
+  hotels: HotelOffer[];
+  vals: { id: string; val: number }[];
+  winner: CompareWinner;
+  format: (v: number) => string;
+  winnerLabel: string;
+}) {
+  return (
+    <tr className="border-b border-white/[0.04]">
+      <td className="py-2.5 pr-4 text-white/40 text-[11px] whitespace-nowrap">{label}</td>
+      {hotels.map(h => {
+        const v = vals.find(x => x.id === h.hotel_id)!;
+        const isW = winner?.id === h.hotel_id;
+        return (
+          <td key={h.hotel_id} className={`py-2.5 px-3 text-[11px] ${isW ? "text-lantern-violet font-bold" : "text-white/55"}`}>
+            {format(v.val)}
+            {isW && <span className="ml-1 text-[9px] text-lantern-violet/55">{winnerLabel}</span>}
+          </td>
+        );
+      })}
+    </tr>
+  );
+}
+
+// ── CompareFloatingTray ───────────────────────────────────────────────────────
+
+function CompareFloatingTray({
+  compareIds,
+  offers,
+  onOpen,
+  onRemove,
+}: {
+  compareIds: string[];
+  offers: HotelOffer[];
+  onOpen: () => void;
+  onRemove: (id: string) => void;
+}) {
+  const selected = compareIds
+    .map(id => offers.find(o => o.hotel_id === id))
+    .filter(Boolean) as HotelOffer[];
+
+  return (
+    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-30 w-full max-w-2xl px-4 pointer-events-none">
+      <div className="pointer-events-auto rounded-2xl border border-lantern-blue/40 bg-[#0d1117]/95 backdrop-blur-md shadow-[0_8px_40px_rgba(0,0,0,0.7)] px-4 py-3 flex items-center gap-3">
+        <div className="flex items-center gap-2 flex-1 min-w-0">
+          {selected.map(h => (
+            <div key={h.hotel_id} className="relative flex-shrink-0">
+              <div className="w-10 h-10 rounded-lg overflow-hidden bg-white/[0.06] border border-white/[0.1]">
+                {h.image_url
+                  // eslint-disable-next-line @next/next/no-img-element
+                  ? <img src={h.image_url} alt={h.name} className="w-full h-full object-cover" />
+                  : <div className="w-full h-full flex items-center justify-center text-white/20 text-base">🏨</div>
+                }
+              </div>
+              <button
+                onClick={() => onRemove(h.hotel_id)}
+                className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-white/25 hover:bg-white/50 flex items-center justify-center transition-colors"
+                aria-label={`Remove ${h.name}`}
+              >
+                <svg className="w-2.5 h-2.5 text-white" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
+                  <path d="M1.5 1.5l7 7M8.5 1.5l-7 7" />
+                </svg>
+              </button>
+            </div>
+          ))}
+          {compareIds.length < 2 && (
+            <div className="w-10 h-10 rounded-lg border border-dashed border-white/15 flex items-center justify-center flex-shrink-0">
+              <span className="text-white/20 text-lg leading-none">+</span>
+            </div>
+          )}
+        </div>
+
+        <div className="flex-shrink-0 flex flex-col items-end gap-1">
+          {compareIds.length < 2
+            ? <p className="text-[11px] text-white/35 whitespace-nowrap">Select {2 - compareIds.length} more to compare</p>
+            : (
+              <button
+                onClick={onOpen}
+                className="text-[12px] font-bold px-4 py-2 bg-lantern-blue text-white rounded-xl hover:bg-lantern-blue/80 transition-colors whitespace-nowrap"
+              >
+                Compare {compareIds.length} hotels →
+              </button>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── HotelComparePanel ─────────────────────────────────────────────────────────
+
+const COMPARE_AMENITY_ROWS = [
+  { label: "Pool",       terms: ["pool", "swimming"] },
+  { label: "Gym",        terms: ["gym", "fitness", "exercise"] },
+  { label: "Breakfast",  terms: ["breakfast"] },
+  { label: "Spa",        terms: ["spa", "wellness", "massage"] },
+  { label: "Parking",    terms: ["parking"] },
+  { label: "Wi-Fi",      terms: ["wifi", "wi-fi", "wireless internet"] },
+] as const;
+
+function HotelComparePanel({
+  hotels,
+  onClose,
+  onRemove,
+}: {
+  hotels: HotelOffer[];
+  onClose: () => void;
+  onRemove: (id: string) => void;
+}) {
+  if (hotels.length < 2) return null;
+  const verdict = generateVerdict(hotels);
+
+  return (
+    <div className="fixed inset-0 z-50 flex flex-col bg-black/75 backdrop-blur-sm">
+      {/* Header */}
+      <div className="flex-shrink-0 border-b border-white/[0.08] bg-[#0d1117]/98 backdrop-blur-md px-4 sm:px-6 py-4 flex items-center justify-between">
+        <h2 className="text-sm font-bold text-white">Compare Hotels</h2>
+        <button
+          onClick={onClose}
+          className="text-[11px] font-semibold text-white/45 hover:text-white/80 transition-colors flex items-center gap-1.5 border border-white/[0.08] rounded-lg px-3 py-1.5"
+        >
+          <svg className="w-3 h-3" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
+            <path d="M1.5 1.5l7 7M8.5 1.5l-7 7" />
+          </svg>
+          Close
+        </button>
+      </div>
+
+      {/* Scrollable body */}
+      <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-5">
+        <div className="max-w-4xl mx-auto">
+
+          {/* Verdict */}
+          <div className="mb-5 rounded-xl border border-lantern-violet/30 bg-lantern-violet/[0.06] px-4 py-3.5">
+            <div className="text-[9px] font-black uppercase tracking-widest text-lantern-violet mb-1.5">
+              TravelGrab Verdict
+            </div>
+            <p className="text-[12px] text-white/70 leading-relaxed">{verdict}</p>
+          </div>
+
+          {/* Table — horizontal scroll on narrow screens */}
+          <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
+            <table className="w-full min-w-[500px] border-collapse text-[12px]">
+              <thead>
+                <tr className="border-b border-white/[0.07]">
+                  <th className="py-3 pr-4 text-left text-[10px] font-bold uppercase tracking-wider text-white/20 w-28">Metric</th>
+                  {hotels.map(h => (
+                    <th key={h.hotel_id} className="py-3 px-3 text-left min-w-[140px] align-top">
+                      <div className="flex items-start gap-2">
+                        {h.image_url && (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={h.image_url} alt={h.name} className="w-9 h-9 rounded-lg object-cover flex-shrink-0 bg-white/[0.05]" />
+                        )}
+                        <div className="min-w-0">
+                          <div className="text-[11px] font-bold text-white leading-snug line-clamp-2">{h.name}</div>
+                          {h.inferred_neighborhood && (
+                            <div className="text-[9px] text-white/35 mt-0.5">{h.inferred_neighborhood}</div>
+                          )}
+                        </div>
+                      </div>
+                      <button onClick={() => onRemove(h.hotel_id)} className="mt-1.5 text-[9px] text-white/20 hover:text-white/50 transition-colors">
+                        Remove
+                      </button>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+
+                <CompareSectionRow label="Pricing" colCount={hotels.length} />
+                {/* Price/night */}
+                {(() => {
+                  const vals = hotels.map(h => ({ id: h.hotel_id, val: h.price_per_night }));
+                  const w = priceWinner(vals);
+                  return (
+                    <tr className="border-b border-white/[0.04]">
+                      <td className="py-2.5 pr-4 text-white/40 text-[11px]">Price/night</td>
+                      {hotels.map(h => {
+                        const isW = w?.id === h.hotel_id;
+                        return (
+                          <td key={h.hotel_id} className={`py-2.5 px-3 text-[11px] ${isW ? "text-lantern-mint font-bold" : "text-white/55"}`}>
+                            ${Math.round(h.price_per_night).toLocaleString()}
+                            {isW && <span className="ml-1 text-[9px] text-lantern-mint/55">Lowest</span>}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })()}
+                {/* Total stay */}
+                {(() => {
+                  const vals = hotels.map(h => ({ id: h.hotel_id, val: h.total_price }));
+                  const w = priceWinner(vals);
+                  const nights = hotels[0]?.nights ?? 0;
+                  return (
+                    <tr className="border-b border-white/[0.04]">
+                      <td className="py-2.5 pr-4 text-white/40 text-[11px]">
+                        Total{nights > 0 ? ` (${nights}n)` : ""}
+                      </td>
+                      {hotels.map(h => {
+                        const isW = w?.id === h.hotel_id;
+                        return (
+                          <td key={h.hotel_id} className={`py-2.5 px-3 text-[11px] ${isW ? "text-lantern-mint font-bold" : "text-white/55"}`}>
+                            ${Math.round(h.total_price).toLocaleString()}
+                            {isW && <span className="ml-1 text-[9px] text-lantern-mint/55">Lowest</span>}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })()}
+
+                <CompareSectionRow label="Quality Scores" colCount={hotels.length} />
+                {(() => {
+                  const vals = hotels.map(h => ({ id: h.hotel_id, val: h.ai_score }));
+                  return <CompareScoreRow label="TravelGrab Score" hotels={hotels} vals={vals} winner={qualityWinner(vals)} format={String} winnerLabel="Highest" />;
+                })()}
+                {(() => {
+                  const vals = hotels.map(h => ({ id: h.hotel_id, val: h.overall_rating }));
+                  return <CompareScoreRow label="Guest Rating" hotels={hotels} vals={vals} winner={qualityWinner(vals)} format={v => v > 0 ? `${v.toFixed(1)}★` : "–"} winnerLabel="Highest" />;
+                })()}
+                {(() => {
+                  const vals = hotels.map(h => ({ id: h.hotel_id, val: h.score_breakdown.reviews }));
+                  return <CompareScoreRow label="Reviews" hotels={hotels} vals={vals} winner={qualityWinner(vals)} format={String} winnerLabel="Best" />;
+                })()}
+                {hotels.some(h => h.neighborhood_fit_score > 0) && (() => {
+                  const vals = hotels.map(h => ({ id: h.hotel_id, val: h.neighborhood_fit_score }));
+                  return <CompareScoreRow label="Neighborhood Fit" hotels={hotels} vals={vals} winner={qualityWinner(vals)} format={v => v > 0 ? String(v) : "–"} winnerLabel="Best" />;
+                })()}
+                {(() => {
+                  const vals = hotels.map(h => ({ id: h.hotel_id, val: h.score_breakdown.location }));
+                  return <CompareScoreRow label="Location" hotels={hotels} vals={vals} winner={qualityWinner(vals)} format={String} winnerLabel="Best" />;
+                })()}
+                {(() => {
+                  const vals = hotels.map(h => ({ id: h.hotel_id, val: h.score_breakdown.walkability }));
+                  return <CompareScoreRow label="Walkability" hotels={hotels} vals={vals} winner={qualityWinner(vals)} format={String} winnerLabel="Most walkable" />;
+                })()}
+                {(() => {
+                  const vals = hotels.map(h => ({ id: h.hotel_id, val: h.score_breakdown.stars }));
+                  return <CompareScoreRow label="Hotel Quality" hotels={hotels} vals={vals} winner={qualityWinner(vals)} format={String} winnerLabel="Highest" />;
+                })()}
+                {(() => {
+                  const vals = hotels.map(h => ({ id: h.hotel_id, val: h.score_breakdown.price }));
+                  return <CompareScoreRow label="Price/Value" hotels={hotels} vals={vals} winner={qualityWinner(vals)} format={String} winnerLabel="Best value" />;
+                })()}
+
+                <CompareSectionRow label="Amenities" colCount={hotels.length} />
+                {COMPARE_AMENITY_ROWS.map(({ label, terms }) => (
+                  <tr key={label} className="border-b border-white/[0.04]">
+                    <td className="py-2 pr-4 text-white/40 text-[11px]">{label}</td>
+                    {hotels.map(h => {
+                      const has = hotelHasAmenity(h.amenities, terms as unknown as string[]);
+                      return (
+                        <td key={h.hotel_id} className="py-2 px-3 text-[12px]">
+                          <span className={has ? "text-lantern-mint" : "text-white/20"}>{has ? "✓" : "–"}</span>
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+
+                <CompareSectionRow label="Location" colCount={hotels.length} />
+                {/* Nearest landmark */}
+                {(() => {
+                  const vals = hotels.map(h => ({ id: h.hotel_id, val: h.nearby_walk?.minutes ?? 0 }));
+                  const withData = vals.filter(v => v.val > 0);
+                  const w: CompareWinner = withData.length >= 2
+                    ? { id: withData.reduce((a, b) => a.val < b.val ? a : b).id, type: "price" }
+                    : null;
+                  return (
+                    <tr className="border-b border-white/[0.04]">
+                      <td className="py-2.5 pr-4 text-white/40 text-[11px]">Nearest walk</td>
+                      {hotels.map(h => {
+                        const isW = w?.id === h.hotel_id;
+                        const nw = h.nearby_walk;
+                        return (
+                          <td key={h.hotel_id} className={`py-2.5 px-3 text-[11px] ${isW ? "text-lantern-mint font-bold" : "text-white/50"}`}>
+                            {nw ? `${nw.minutes} min to ${nw.name}` : "–"}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })()}
+                <tr>
+                  <td className="py-2.5 pr-4 text-white/40 text-[11px]">Transit</td>
+                  {hotels.map(h => (
+                    <td key={h.hotel_id} className="py-2.5 px-3 text-[11px] text-white/45">{h.transit_note || "–"}</td>
+                  ))}
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+          {/* Legend */}
+          <div className="mt-4 flex items-center gap-4 text-[10px] text-white/25">
+            <div className="flex items-center gap-1.5">
+              <div className="w-3 h-3 rounded bg-lantern-mint/20 border border-lantern-mint/30" />
+              <span>Best price</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="w-3 h-3 rounded bg-lantern-violet/20 border border-lantern-violet/30" />
+              <span>Highest score</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Recommendation panel ──────────────────────────────────────────────────────
 
 function RecommendationPanel({
   offers,
@@ -2402,6 +2814,14 @@ export default function HotelSearch() {
   const [viewMode,            setViewMode]            = useState<"list" | "map">("list");
   const [selectedHotelId,     setSelectedHotelId]     = useState<string | null>(null);
   const [detailHotelId,       setDetailHotelId]       = useState<string | null>(null);
+  const [compareIds,          setCompareIds]          = useState<string[]>([]);
+  const [comparePanelOpen,    setComparePanelOpen]    = useState(false);
+
+  const toggleCompare = useCallback((id: string) => {
+    setCompareIds(prev =>
+      prev.includes(id) ? prev.filter(x => x !== id) : prev.length < 4 ? [...prev, id] : prev
+    );
+  }, []);
 
   const resultsRef = useRef<HTMLDivElement>(null);
 
@@ -2869,7 +3289,7 @@ export default function HotelSearch() {
               />
 
               {/* Hotel cards */}
-              <div className="space-y-3">
+              <div className={`space-y-3 ${compareIds.length > 0 ? "pb-24" : ""}`}>
                 {cardList.map((offer) => (
                   <HotelCard
                     key={offer.hotel_id}
@@ -2881,6 +3301,9 @@ export default function HotelSearch() {
                     isMapSelected={viewMode === "map" && offer.hotel_id === selectedHotelId}
                     onSelectForMap={viewMode === "map" ? setSelectedHotelId : undefined}
                     onOpenDetail={() => setDetailHotelId(offer.hotel_id)}
+                    isInCompare={compareIds.includes(offer.hotel_id)}
+                    onToggleCompare={() => toggleCompare(offer.hotel_id)}
+                    compareDisabled={compareIds.length >= 4}
                   />
                 ))}
               </div>
@@ -2891,6 +3314,29 @@ export default function HotelSearch() {
             </div>
           );
         })()}
+
+        {/* ── Compare floating tray ────────────────────────────────────── */}
+        {compareIds.length > 0 && (
+          <CompareFloatingTray
+            compareIds={compareIds}
+            offers={offers}
+            onOpen={() => setComparePanelOpen(true)}
+            onRemove={(id) => setCompareIds(prev => prev.filter(x => x !== id))}
+          />
+        )}
+
+        {/* ── Compare overlay panel ─────────────────────────────────────── */}
+        {comparePanelOpen && (
+          <HotelComparePanel
+            hotels={compareIds.map(id => offers.find(o => o.hotel_id === id)).filter(Boolean) as HotelOffer[]}
+            onClose={() => setComparePanelOpen(false)}
+            onRemove={(id) => {
+              const next = compareIds.filter(x => x !== id);
+              setCompareIds(next);
+              if (next.length < 2) setComparePanelOpen(false);
+            }}
+          />
+        )}
 
         {/* ── Hotel detail drawer ───────────────────────────────────────── */}
         <HotelDetailDrawer
