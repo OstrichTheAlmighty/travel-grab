@@ -954,7 +954,7 @@ function NeighborhoodChips({
   );
 }
 
-// ── NeighborhoodRecommendation (Phase 1 + 2 + 4) ─────────────────────────────
+// ── NeighborhoodRecommendation ────────────────────────────────────────────────
 
 function NeighborhoodRecommendation({
   summaries,
@@ -971,163 +971,226 @@ function NeighborhoodRecommendation({
   const withHotels = summaries.filter((s) => s.count > 0);
   if (withHotels.length === 0) return null;
 
-  const recommended   = withHotels[0];
-  const alternatives  = withHotels.slice(1, 4);
-  const selectedSumm  = selectedId ? summaries.find((s) => s.nbhd.id === selectedId) : null;
-  const isNonRecSel   = !!selectedId && selectedId !== recommended.nbhd.id;
+  const recommended  = withHotels[0];
+  const altGrid      = withHotels.slice(1, 4);
+  const selectedSumm = selectedId ? summaries.find((s) => s.nbhd.id === selectedId) : null;
+  const isNonRecSel  = !!selectedId && selectedId !== recommended.nbhd.id;
+  const recIsSelected = selectedId === recommended.nbhd.id;
 
-  function comparisonCopy(sel: NeighborhoodSummary, rec: NeighborhoodSummary): string {
-    const recPref = rec.matchedPrefs[0];
-    const recLabel = recPref ? (NEIGHBORHOOD_PREFS.find((x) => x.id === recPref)?.label ?? recPref) : "your preferences";
-    const selPrefs = sel.matchedPrefs.slice(0, 2).map((p) => NEIGHBORHOOD_PREFS.find((x) => x.id === p)?.label ?? p).join(" and ");
-    const scoreDiff = rec.avgNfScore - sel.avgNfScore;
-    const priceDiff = rec.avgPrice > 0 && sel.avgPrice > 0 ? rec.avgPrice - sel.avgPrice : 0;
+  // Price range string: "$75–$189/night" or "$189/night" or "avg $X/night"
+  const highestPrice = recommended.hotels.length > 0
+    ? Math.round(Math.max(...recommended.hotels.map((h) => h.price_per_night)))
+    : 0;
+  const priceRange = recommended.lowestPrice > 0 && highestPrice > 0
+    ? recommended.lowestPrice === highestPrice
+      ? `$${recommended.lowestPrice}/night`
+      : `$${recommended.lowestPrice}–$${highestPrice}/night`
+    : recommended.avgPrice > 0
+      ? `avg $${recommended.avgPrice}/night`
+      : "";
 
-    let copy = `${rec.nbhd.name} scores ${scoreDiff > 0 ? `${scoreDiff} points higher` : "similarly"} for ${recLabel}.`;
-    if (sel.matchedPrefs.length > 0) copy += ` ${sel.nbhd.name} is stronger for ${selPrefs}.`;
-    if (priceDiff > 20) copy += ` Avg price in ${sel.nbhd.name} is $${Math.abs(priceDiff)}/night ${priceDiff > 0 ? "cheaper" : "more"}.`;
+  // Primary pref label
+  const primaryPref     = activePrefs[0] as PrefId | undefined;
+  const prefLabel       = primaryPref ? (NEIGHBORHOOD_PREFS.find((x) => x.id === primaryPref)?.label ?? primaryPref) : "your preferences";
+  const prefLabelLower  = prefLabel.toLowerCase();
+
+  // "Why ranked #1" bullets — factual, comparative, max 4
+  const whyBullets: string[] = [];
+
+  if (recommended.avgNfScore > 0) {
+    whyBullets.push(`Best neighborhood match for ${prefLabel} in this search`);
+  }
+
+  if (recommended.bestHotel && recommended.bestHotel.ai_score >= 65) {
+    whyBullets.push(`Top hotel scores ${recommended.bestHotel.ai_score} — strongest in-area quality`);
+  } else if (recommended.count >= 3) {
+    whyBullets.push(`${recommended.count} ${prefLabelLower} hotels — widest selection in this search`);
+  }
+
+  const altMaxCount = altGrid.length > 0 ? Math.max(...altGrid.map((a) => a.count)) : 0;
+  if (recommended.count > altMaxCount && recommended.count >= 2) {
+    whyBullets.push(`More hotel options than any alternative area`);
+  } else if (
+    recommended.avgPrice > 0 &&
+    altGrid.some((a) => a.avgPrice > 0 && a.avgPrice > recommended.avgPrice + 40)
+  ) {
+    whyBullets.push(`Lower average nightly price than nearby alternatives`);
+  }
+
+  const lowerAlts = altGrid
+    .filter((a) => recommended.avgNfScore - a.avgNfScore >= 8)
+    .map((a) => a.nbhd.name)
+    .slice(0, 2);
+  if (lowerAlts.length > 0 && whyBullets.length < 4) {
+    whyBullets.push(`Stronger ${prefLabelLower} fit than ${lowerAlts.join(" and ")}`);
+  }
+
+  // Inline "Why not X?" — one compact sentence per top alternative
+  function altWhyNot(alt: NeighborhoodSummary): string {
+    const uniqueStrengths = (alt.matchedPrefs as PrefId[])
+      .filter((p) => !recommended.matchedPrefs.includes(p))
+      .slice(0, 1)
+      .map((p) => NEIGHBORHOOD_PREFS.find((x) => x.id === p)?.label?.toLowerCase() ?? p);
+
+    const strengthPart = uniqueStrengths.length > 0
+      ? `Better for ${uniqueStrengths[0]}`
+      : alt.nbhd.description.split(".")[0];
+
+    const scoreDiff = recommended.avgNfScore - alt.avgNfScore;
+    const weakPart  = scoreDiff >= 10
+      ? `scores ${scoreDiff}pts lower for ${prefLabelLower}`
+      : `weaker ${prefLabelLower} concentration`;
+
+    return `${strengthPart} · ${weakPart}.`;
+  }
+
+  // "You picked X over Y" copy
+  function comparisonCopy(sel: NeighborhoodSummary): string {
+    const scoreDiff = recommended.avgNfScore - sel.avgNfScore;
+    let copy = `${recommended.nbhd.name} scores ${scoreDiff > 0 ? `${scoreDiff} points higher` : "similarly"} for ${prefLabel}.`;
+    if (sel.matchedPrefs.length > 0) {
+      const selStr = (sel.matchedPrefs as PrefId[]).slice(0, 2).map((p) => NEIGHBORHOOD_PREFS.find((x) => x.id === p)?.label ?? p).join(" and ");
+      copy += ` ${sel.nbhd.name} is stronger for ${selStr}.`;
+    }
+    const priceDiff = recommended.avgPrice > 0 && sel.avgPrice > 0 ? sel.avgPrice - recommended.avgPrice : 0;
+    if (Math.abs(priceDiff) > 20) copy += ` Avg price is $${Math.abs(priceDiff)}/night ${priceDiff > 0 ? "cheaper" : "more"}.`;
     return copy;
   }
 
-  const recIsSelected = selectedId === recommended.nbhd.id;
+  // Short name for CTA button (drop " / Chuo" etc.)
+  const shortName = recommended.nbhd.name.split(" /")[0].split(",")[0];
 
   return (
     <div className="mb-5">
-      {/* ── Phase 1: Main recommended area panel ─────────────────────────── */}
-      <div className="rounded-2xl border border-lantern-violet/35 bg-lantern-violet/[0.06] p-4 sm:p-5 mb-3 shadow-[0_0_28px_rgba(167,139,250,0.08)]">
+      {/* ── Main recommendation card ─────────────────────────────────────── */}
+      <div className="rounded-2xl border border-lantern-violet/30 bg-lantern-violet/[0.05] p-4 mb-3">
 
-        {/* Header */}
-        <div className="flex items-center justify-between gap-2 mb-3">
-          <div className="flex items-center gap-2">
-            <svg className="w-3.5 h-3.5 text-lantern-violet flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-            </svg>
-            <span className="text-[10px] font-black uppercase tracking-widest text-lantern-violet">
-              Recommended Area for Your Preferences
-            </span>
-          </div>
+        {/* Row 1: label + coverage badge */}
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-[9px] font-black uppercase tracking-widest text-lantern-violet/65">
+            Recommended Area
+          </span>
           <span className={`text-[9px] font-bold uppercase tracking-wider border rounded-full px-2 py-0.5 leading-none flex-shrink-0 ${coverageBadgeStyle(recommended.coverageConfidence)}`}>
             {coverageLabel(recommended.coverageConfidence)}
           </span>
         </div>
 
-        {/* Name + score badge */}
-        <div className="flex items-start justify-between gap-3 mb-2.5">
-          <div className="min-w-0">
-            <h2 className="text-xl sm:text-2xl font-black text-white leading-tight">{recommended.nbhd.name}</h2>
-            <div className="text-[11px] text-white/35 mt-0.5">
-              {recommended.count} hotel{recommended.count !== 1 ? "s" : ""}
-              {recommended.lowestPrice > 0 && recommended.lowestPrice !== recommended.avgPrice && (
-                <> · from <span className="text-white/55 font-semibold">${recommended.lowestPrice}</span>/night</>
-              )}
-              {recommended.avgPrice > 0 && <> · avg <span className="text-white/55 font-semibold">${recommended.avgPrice}</span>/night</>}
-            </div>
-          </div>
+        {/* Row 2: name + match score (inline) */}
+        <div className="flex items-baseline justify-between gap-3 mb-0.5">
+          <h2 className="text-lg font-black text-white leading-tight">{recommended.nbhd.name}</h2>
           {recommended.avgNfScore > 0 && (
-            <div className={`flex-shrink-0 text-center border rounded-xl px-3 py-1.5 ${scoreBg(recommended.avgNfScore)}`}>
-              <div className="text-xl font-black tabular-nums leading-none">{recommended.avgNfScore}</div>
-              <div className="text-[9px] font-bold uppercase tracking-wider mt-0.5">{scoreLabel(recommended.avgNfScore)}</div>
+            <div className="flex-shrink-0 flex items-baseline gap-1">
+              <span className={`text-lg font-black tabular-nums ${scoreColor(recommended.avgNfScore)}`}>
+                {recommended.avgNfScore}
+              </span>
+              <span className={`text-[10px] font-bold ${scoreColor(recommended.avgNfScore)}`}>
+                {scoreLabel(recommended.avgNfScore)} Match
+              </span>
             </div>
           )}
         </div>
 
-        {/* Coverage warning when fewer than 5 hotels */}
-        {recommended.count < 5 && withHotels.length > 1 && (
-          <div className="mb-2.5 rounded-lg border border-amber-500/20 bg-amber-500/[0.05] px-3 py-2 flex items-start gap-2">
-            <svg className="w-3 h-3 text-amber-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2L1 21h22L12 2zm0 3.5L21 19H3L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z" />
-            </svg>
-            <p className="text-[10px] text-amber-300/70 leading-relaxed">
-              {recommended.count === 1
-                ? `Only 1 hotel found in ${recommended.nbhd.name} for these dates.`
-                : `${recommended.count} hotels in ${recommended.nbhd.name} for these dates.`
-              }
-              {" "}Also compare{" "}
-              {withHotels.slice(1, 3).map((s, i, arr) => (
-                <span key={s.nbhd.id}>
-                  <button
-                    onClick={() => onSelect(s.nbhd.id)}
-                    className="underline underline-offset-2 hover:text-amber-200 transition-colors"
-                  >
-                    {s.nbhd.name}
-                  </button>
-                  {i < arr.length - 1 ? " and " : ""}
-                </span>
-              ))} for more options.
-            </p>
+        {/* Row 3: count + price range */}
+        <div className="text-[11px] text-white/40 mb-3">
+          {recommended.count} hotel{recommended.count !== 1 ? "s" : ""}
+          {priceRange && <> · {priceRange}</>}
+        </div>
+
+        {/* Why ranked #1 */}
+        {whyBullets.length > 0 && (
+          <div className="mb-3">
+            <div className="text-[9px] font-black uppercase tracking-widest text-white/22 mb-1.5">
+              Why ranked #1
+            </div>
+            <div className="space-y-1.5">
+              {whyBullets.map((b, i) => (
+                <div key={i} className="flex items-start gap-2">
+                  <svg className="w-2.5 h-2.5 text-lantern-violet/70 flex-shrink-0 mt-[3px]" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M1 6l3.5 3.5L11 2" />
+                  </svg>
+                  <span className="text-[11px] text-white/65 leading-snug">{b}</span>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
-        {/* Matched preference pills */}
-        {recommended.matchedPrefs.length > 0 && (
-          <div className="flex flex-wrap items-center gap-1.5 mb-2.5">
-            <span className="text-[10px] text-white/30">Best for:</span>
-            {recommended.matchedPrefs.map((p) => (
-              <span
-                key={p}
-                className="flex items-center gap-1 text-[10px] font-semibold border rounded-full px-2 py-0.5 bg-lantern-violet/15 text-lantern-violet border-lantern-violet/30"
-              >
-                <svg className="w-2 h-2 flex-shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M1 6l3.5 3.5L11 2" />
-                </svg>
-                {NEIGHBORHOOD_PREFS.find((x) => x.id === p)?.label ?? p}
-              </span>
+        {/* Why not alternatives — inline comparisons */}
+        {altGrid.length > 0 && (
+          <div className="mb-3 space-y-1.5">
+            {altGrid.slice(0, 2).map((alt) => (
+              <div key={alt.nbhd.id} className="flex items-start gap-2">
+                <span className="text-[10px] font-semibold text-white/28 flex-shrink-0 whitespace-nowrap mt-[1px]">
+                  vs. {alt.nbhd.name}:
+                </span>
+                <span className="text-[10px] text-white/35 leading-snug">{altWhyNot(alt)}</span>
+              </div>
             ))}
           </div>
         )}
 
-        {/* Description */}
-        <p className="text-xs text-white/55 leading-relaxed mb-3">{recommended.nbhd.description}</p>
-
-        {/* Top hotels in area */}
+        {/* Top hotel preview */}
         {recommended.bestHotel && (
-          <div className="space-y-1 mb-3">
-            <div className="flex items-center gap-2 text-[11px] text-white/35">
-              <svg className="w-3 h-3 text-lantern-mint flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-              </svg>
-              <span>
-                Top pick: <span className="text-white/60 font-semibold">{recommended.bestHotel.name}</span>
-                {" "}· ${Math.round(recommended.bestHotel.price_per_night)}/night · score {recommended.bestHotel.ai_score}
-              </span>
+          <div className="flex items-center justify-between gap-3 py-2.5 border-t border-b border-white/[0.06] mb-3">
+            <div className="min-w-0">
+              <div className="text-[9px] font-black uppercase tracking-widest text-white/22 mb-0.5">Top Hotel</div>
+              <div className="text-[12px] font-bold text-white/80 leading-tight truncate">{recommended.bestHotel.name}</div>
             </div>
-            {recommended.topRated && recommended.topRated.hotel_id !== recommended.bestHotel.hotel_id && (
-              <div className="flex items-center gap-2 text-[11px] text-white/25">
-                <svg className="w-3 h-3 text-amber-400/50 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                </svg>
-                <span>
-                  Best rated: <span className="text-white/45 font-semibold">{recommended.topRated.name}</span>
-                  {" "}· {recommended.topRated.overall_rating.toFixed(1)}★
-                </span>
+            <div className="text-right flex-shrink-0">
+              <div className="text-[12px] font-bold text-white/70">
+                ${Math.round(recommended.bestHotel.price_per_night)}/night
               </div>
-            )}
+              <div className="text-[10px] text-white/35">
+                Score {recommended.bestHotel.ai_score}
+                {recommended.bestHotel.overall_rating > 0 && ` · ${recommended.bestHotel.overall_rating.toFixed(1)}★`}
+              </div>
+            </div>
           </div>
         )}
 
-        {/* CTA */}
+        {/* Coverage note — informational, not alarming */}
+        {recommended.count < 5 && withHotels.length > 1 && (
+          <p className="text-[10px] text-white/28 leading-relaxed mb-3">
+            <span className="font-semibold text-white/35">Coverage note:</span>
+            {" "}{recommended.count} hotel{recommended.count !== 1 ? "s" : ""} found in {shortName} for these dates.
+            {" "}Also explore{" "}
+            {withHotels.slice(1, 3).map((s, i, arr) => (
+              <span key={s.nbhd.id}>
+                <button
+                  onClick={() => onSelect(s.nbhd.id)}
+                  className="underline underline-offset-2 hover:text-white/55 transition-colors"
+                >
+                  {s.nbhd.name}
+                </button>
+                {i < arr.length - 1 ? " and " : ""}
+              </span>
+            ))} for more options.
+          </p>
+        )}
+
+        {/* CTA — specific, lighter */}
         <button
           onClick={() => onSelect(recIsSelected ? null : recommended.nbhd.id)}
-          className={`w-full py-2.5 rounded-xl text-sm font-bold transition-all ${
+          className={`text-[12px] font-bold px-4 py-2 rounded-lg transition-all ${
             recIsSelected
-              ? "bg-lantern-violet text-white shadow-[0_0_16px_rgba(139,92,246,0.3)]"
-              : "bg-lantern-violet/15 text-lantern-violet hover:bg-lantern-violet/25 border border-lantern-violet/30"
+              ? "bg-lantern-violet text-white"
+              : "bg-lantern-violet/12 text-lantern-violet hover:bg-lantern-violet/20 border border-lantern-violet/25"
           }`}
         >
           {recIsSelected
-            ? "✓ Showing hotels in this area — click to clear"
-            : `Show hotels in ${recommended.nbhd.name} →`}
+            ? `✓ Showing ${shortName} hotels — clear`
+            : `View ${recommended.count} ${shortName} Hotel${recommended.count !== 1 ? "s" : ""} →`}
         </button>
       </div>
 
-      {/* ── Phase 4: Comparison copy when non-recommended is selected ────── */}
+      {/* ── You picked X over Y ──────────────────────────────────────────── */}
       {isNonRecSel && selectedSumm && (
         <div className="mb-3 rounded-xl border border-amber-500/20 bg-amber-500/[0.05] px-4 py-3">
           <div className="text-[10px] font-bold uppercase tracking-widest text-amber-400/80 mb-1.5">
             You picked {selectedSumm.nbhd.name} over {recommended.nbhd.name}
           </div>
           <p className="text-[11px] text-white/50 leading-relaxed mb-2">
-            {comparisonCopy(selectedSumm, recommended)}
+            {comparisonCopy(selectedSumm)}
           </p>
           <button
             onClick={() => onSelect(recommended.nbhd.id)}
@@ -1138,76 +1201,41 @@ function NeighborhoodRecommendation({
         </div>
       )}
 
-      {/* ── Phase 2: Alternative area cards ──────────────────────────────── */}
-      {alternatives.length > 0 && (
+      {/* ── Also consider ────────────────────────────────────────────────── */}
+      {altGrid.length > 0 && (
         <div>
-          <div className="text-[10px] font-black uppercase tracking-widest text-white/25 mb-2 px-0.5">
+          <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2 px-0.5">
             Also consider
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-            {alternatives.map((s) => {
+            {altGrid.map((s) => {
               const isSel = selectedId === s.nbhd.id;
-              const altPrefs = s.matchedPrefs.slice(0, 2);
-              const missingPrefs = (activePrefs as PrefId[])
-                .filter((p) => !s.matchedPrefs.includes(p))
-                .slice(0, 1);
               return (
-                <div
+                <button
                   key={s.nbhd.id}
-                  className={`rounded-xl border p-3 flex flex-col transition-all ${
+                  onClick={() => onSelect(isSel ? null : s.nbhd.id)}
+                  className={`rounded-xl border p-3 text-left transition-all ${
                     isSel
                       ? "border-lantern-blue/40 bg-lantern-blue/[0.05]"
                       : "border-white/[0.07] bg-white/[0.02] hover:border-white/[0.14]"
                   }`}
                 >
-                  {/* Name + score */}
                   <div className="flex items-start justify-between gap-2 mb-1">
-                    <div className="font-bold text-sm text-white leading-tight flex-1 min-w-0">{s.nbhd.name}</div>
+                    <span className="font-bold text-sm text-white leading-tight">{s.nbhd.name}</span>
                     {s.avgNfScore > 0 && (
                       <span className={`text-[11px] font-bold tabular-nums flex-shrink-0 ${scoreColor(s.avgNfScore)}`}>
                         {s.avgNfScore}
                       </span>
                     )}
                   </div>
-
-                  {/* Matched pref tags */}
-                  {altPrefs.length > 0 && (
-                    <div className="flex flex-wrap gap-1 mb-1.5">
-                      {altPrefs.map((p) => (
-                        <span key={p} className="text-[9px] text-white/35 border border-white/[0.08] rounded-full px-1.5 py-0.5 leading-none">
-                          {NEIGHBORHOOD_PREFS.find((x) => x.id === p)?.label ?? p}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* First sentence of description as tradeoff */}
-                  <p className="text-[11px] text-white/40 leading-relaxed mb-1.5 flex-1 line-clamp-2">
-                    {s.nbhd.description.split(".")[0]}.
-                    {missingPrefs.length > 0 && (
-                      <span className="text-white/25">
-                        {" "}Less {NEIGHBORHOOD_PREFS.find((x) => x.id === missingPrefs[0])?.label?.toLowerCase() ?? missingPrefs[0]}.
-                      </span>
-                    )}
-                  </p>
-
-                  {/* Stats */}
-                  <div className="text-[10px] text-white/25 mb-2">
+                  <div className="text-[10px] text-white/30 mb-1.5">
                     {s.count} hotel{s.count !== 1 ? "s" : ""}
                     {s.avgPrice > 0 && <> · avg ${s.avgPrice}/night</>}
                   </div>
-
-                  <button
-                    onClick={() => onSelect(isSel ? null : s.nbhd.id)}
-                    className={`w-full text-[11px] font-semibold rounded-lg py-1.5 transition-all ${
-                      isSel
-                        ? "bg-lantern-blue/20 text-lantern-blue border border-lantern-blue/30"
-                        : "bg-white/[0.05] text-white/50 hover:bg-white/[0.1] hover:text-white"
-                    }`}
-                  >
-                    {isSel ? "Showing these hotels" : "Stay here"}
-                  </button>
-                </div>
+                  <p className="text-[10px] text-white/38 leading-relaxed line-clamp-2">
+                    {s.nbhd.description.split(".")[0]}.
+                  </p>
+                </button>
               );
             })}
           </div>
