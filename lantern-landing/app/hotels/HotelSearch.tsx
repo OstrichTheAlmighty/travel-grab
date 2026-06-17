@@ -441,13 +441,16 @@ function detectCityGuide(destination: string): CityGuide | null {
 // ── Neighborhood recommendation engine ───────────────────────────────────────
 
 interface NeighborhoodSummary {
-  nbhd:         NeighborhoodCard;
-  hotels:       HotelOffer[];
-  count:        number;
-  avgPrice:     number;
-  avgNfScore:   number;
-  bestHotel:    HotelOffer | null;
-  matchedPrefs: PrefId[];
+  nbhd:               NeighborhoodCard;
+  hotels:             HotelOffer[];
+  count:              number;
+  lowestPrice:        number;
+  avgPrice:           number;
+  avgNfScore:         number;
+  bestHotel:          HotelOffer | null;   // top by TravelGrab score
+  topRated:           HotelOffer | null;   // top by guest rating
+  matchedPrefs:       PrefId[];
+  coverageConfidence: "strong" | "good" | "limited";
 }
 
 // Maps PrefId → tags that appear in CITY_GUIDES neighborhood cards
@@ -486,8 +489,14 @@ function computeNeighborhoodSummaries(
     const avgPrice = hotels.length > 0
       ? Math.round(hotels.reduce((s, h) => s + h.price_per_night, 0) / hotels.length)
       : 0;
+    const lowestPrice = hotels.length > 0
+      ? Math.round(Math.min(...hotels.map((h) => h.price_per_night)))
+      : 0;
     const bestHotel = hotels.length > 0
       ? hotels.reduce((a, b) => b.ai_score > a.ai_score ? b : a)
+      : null;
+    const topRated = hotels.length > 0
+      ? hotels.reduce((a, b) => b.overall_rating > a.overall_rating ? b : a)
       : null;
     const matchedPrefs = (activePrefs as PrefId[]).filter((p) => {
       const tagKws = PREF_TAG_MAP[p] ?? [p];
@@ -495,7 +504,12 @@ function computeNeighborhoodSummaries(
         tagKws.some((kw) => tag.toLowerCase().includes(kw.toLowerCase()))
       );
     });
-    return { nbhd, hotels, count: hotels.length, avgPrice, avgNfScore, bestHotel, matchedPrefs };
+    const count = hotels.length;
+    const coverageConfidence: "strong" | "good" | "limited" =
+      count >= 5 && avgNfScore >= 55 ? "strong" :
+      count >= 3 ? "good" :
+      "limited";
+    return { nbhd, hotels, count, lowestPrice, avgPrice, avgNfScore, bestHotel, topRated, matchedPrefs, coverageConfidence };
   });
   return sums.sort((a, b) =>
     b.avgNfScore !== a.avgNfScore ? b.avgNfScore - a.avgNfScore : b.count - a.count
@@ -540,6 +554,18 @@ function scoreLabel(n: number): string {
   if (n >= 58) return "Good";
   if (n >= 45) return "Fair";
   return "Weak";
+}
+
+function coverageLabel(c: "strong" | "good" | "limited"): string {
+  if (c === "strong")  return "Strong coverage";
+  if (c === "good")    return "Good coverage";
+  return "Limited coverage";
+}
+
+function coverageBadgeStyle(c: "strong" | "good" | "limited"): string {
+  if (c === "strong")  return "bg-lantern-mint/10 text-lantern-mint border-lantern-mint/25";
+  if (c === "good")    return "bg-lantern-blue/10 text-lantern-blue border-lantern-blue/25";
+  return "bg-amber-500/10 text-amber-400 border-amber-500/25";
 }
 
 function StarRating({ count }: { count: number }) {
@@ -704,6 +730,47 @@ function buildFitNote(offer: HotelOffer, prefs: readonly PrefId[]): string {
   if (offer.transit_note)     return `${label} for ${prefPart}: ${offer.transit_note}.`;
   if (offer.location_summary) return `${label} for ${prefPart}: ${offer.location_summary}.`;
   return `${label} for ${prefPart}.`;
+}
+
+// ── Amenity detail data (Phase 4) ─────────────────────────────────────────────
+
+const AMENITY_DETAIL_MAP: Array<[string, string]> = [
+  ["pool",        "Swimming pool on premises. Contact hotel for seasonal hours and access rules."],
+  ["gym",         "Fitness center available. Contact hotel to confirm hours and equipment."],
+  ["fitness",     "Fitness center available. Contact hotel to confirm hours and equipment."],
+  ["spa",         "Spa services available. Advance booking is usually required."],
+  ["breakfast",   "Breakfast available — may be included in rate or purchasable separately. Confirm with hotel."],
+  ["restaurant",  "On-site dining. Hours and cuisine vary — check the hotel website for current menus."],
+  ["bar",         "Bar or lounge on premises. Hours may be seasonal."],
+  ["parking",     "Parking available. Rates and availability vary — contact hotel to reserve in advance."],
+  ["airport",     "Airport shuttle available. Confirm schedule and cost directly with the hotel."],
+  ["beach",       "Beach access or beachfront location. Confirm seasonal availability with hotel."],
+  ["rooftop",     "Rooftop terrace or bar. Access may be restricted or seasonal."],
+  ["pet",         "Pets allowed. Confirm size limits and fees with the hotel before booking."],
+  ["wi-fi",       "Wi-Fi available. Connection quality varies — some hotels charge extra for premium speeds."],
+  ["wifi",        "Wi-Fi available. Connection quality varies — some hotels charge extra for premium speeds."],
+  ["kitchen",     "In-room kitchen or kitchenette. Confirm equipment and utensils with hotel."],
+  ["laundry",     "Laundry facilities on premises (self-service or valet). Confirm availability and pricing."],
+  ["ev",          "Electric vehicle charging station on premises. Confirm compatibility and cost."],
+  ["accessible",  "Accessibility features available. Contact hotel to confirm specific accommodations."],
+  ["wheelchair",  "Wheelchair accessible facilities. Contact hotel to confirm specific accommodations."],
+  ["childcare",   "Childcare or babysitting services available. Advance booking required."],
+  ["concierge",   "Concierge service available for dining reservations, transport, and local recommendations."],
+  ["casino",      "Casino on premises or connected to property."],
+  ["golf",        "Golf course access available. Greens fees may apply."],
+  ["tennis",      "Tennis courts available. Equipment rental may be available."],
+  ["air",         "Air conditioning available in rooms."],
+  ["hot tub",     "Hot tub or jacuzzi available. May be in-room or shared facility."],
+  ["jacuzzi",     "Jacuzzi available. May be in-room or shared facility."],
+  ["sauna",       "Sauna on premises. Access may require reservation."],
+];
+
+function getAmenityDetail(amenity: string): string | null {
+  const lower = amenity.toLowerCase();
+  for (const [key, detail] of AMENITY_DETAIL_MAP) {
+    if (lower.includes(key)) return detail;
+  }
+  return null;
 }
 
 // ── DestinationCombobox ───────────────────────────────────────────────────────
@@ -929,12 +996,17 @@ function NeighborhoodRecommendation({
       <div className="rounded-2xl border border-lantern-violet/35 bg-lantern-violet/[0.06] p-4 sm:p-5 mb-3 shadow-[0_0_28px_rgba(167,139,250,0.08)]">
 
         {/* Header */}
-        <div className="flex items-center gap-2 mb-3">
-          <svg className="w-3.5 h-3.5 text-lantern-violet flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-          </svg>
-          <span className="text-[10px] font-black uppercase tracking-widest text-lantern-violet">
-            Recommended Area for Your Preferences
+        <div className="flex items-center justify-between gap-2 mb-3">
+          <div className="flex items-center gap-2">
+            <svg className="w-3.5 h-3.5 text-lantern-violet flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+            </svg>
+            <span className="text-[10px] font-black uppercase tracking-widest text-lantern-violet">
+              Recommended Area for Your Preferences
+            </span>
+          </div>
+          <span className={`text-[9px] font-bold uppercase tracking-wider border rounded-full px-2 py-0.5 leading-none flex-shrink-0 ${coverageBadgeStyle(recommended.coverageConfidence)}`}>
+            {coverageLabel(recommended.coverageConfidence)}
           </span>
         </div>
 
@@ -944,6 +1016,9 @@ function NeighborhoodRecommendation({
             <h2 className="text-xl sm:text-2xl font-black text-white leading-tight">{recommended.nbhd.name}</h2>
             <div className="text-[11px] text-white/35 mt-0.5">
               {recommended.count} hotel{recommended.count !== 1 ? "s" : ""}
+              {recommended.lowestPrice > 0 && recommended.lowestPrice !== recommended.avgPrice && (
+                <> · from <span className="text-white/55 font-semibold">${recommended.lowestPrice}</span>/night</>
+              )}
               {recommended.avgPrice > 0 && <> · avg <span className="text-white/55 font-semibold">${recommended.avgPrice}</span>/night</>}
             </div>
           </div>
@@ -954,6 +1029,33 @@ function NeighborhoodRecommendation({
             </div>
           )}
         </div>
+
+        {/* Coverage warning when fewer than 5 hotels */}
+        {recommended.count < 5 && withHotels.length > 1 && (
+          <div className="mb-2.5 rounded-lg border border-amber-500/20 bg-amber-500/[0.05] px-3 py-2 flex items-start gap-2">
+            <svg className="w-3 h-3 text-amber-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L1 21h22L12 2zm0 3.5L21 19H3L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z" />
+            </svg>
+            <p className="text-[10px] text-amber-300/70 leading-relaxed">
+              {recommended.count === 1
+                ? `Only 1 hotel found in ${recommended.nbhd.name} for these dates.`
+                : `${recommended.count} hotels in ${recommended.nbhd.name} for these dates.`
+              }
+              {" "}Also compare{" "}
+              {withHotels.slice(1, 3).map((s, i, arr) => (
+                <span key={s.nbhd.id}>
+                  <button
+                    onClick={() => onSelect(s.nbhd.id)}
+                    className="underline underline-offset-2 hover:text-amber-200 transition-colors"
+                  >
+                    {s.nbhd.name}
+                  </button>
+                  {i < arr.length - 1 ? " and " : ""}
+                </span>
+              ))} for more options.
+            </p>
+          </div>
+        )}
 
         {/* Matched preference pills */}
         {recommended.matchedPrefs.length > 0 && (
@@ -976,16 +1078,29 @@ function NeighborhoodRecommendation({
         {/* Description */}
         <p className="text-xs text-white/55 leading-relaxed mb-3">{recommended.nbhd.description}</p>
 
-        {/* Top hotel in area */}
+        {/* Top hotels in area */}
         {recommended.bestHotel && (
-          <div className="flex items-center gap-2 mb-3 text-[11px] text-white/35">
-            <svg className="w-3 h-3 text-lantern-mint flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-            </svg>
-            <span>
-              Top hotel: <span className="text-white/60 font-semibold">{recommended.bestHotel.name}</span>
-              {" "}· ${Math.round(recommended.bestHotel.price_per_night)}/night · score {recommended.bestHotel.ai_score}
-            </span>
+          <div className="space-y-1 mb-3">
+            <div className="flex items-center gap-2 text-[11px] text-white/35">
+              <svg className="w-3 h-3 text-lantern-mint flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+              <span>
+                Top pick: <span className="text-white/60 font-semibold">{recommended.bestHotel.name}</span>
+                {" "}· ${Math.round(recommended.bestHotel.price_per_night)}/night · score {recommended.bestHotel.ai_score}
+              </span>
+            </div>
+            {recommended.topRated && recommended.topRated.hotel_id !== recommended.bestHotel.hotel_id && (
+              <div className="flex items-center gap-2 text-[11px] text-white/25">
+                <svg className="w-3 h-3 text-amber-400/50 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+                <span>
+                  Best rated: <span className="text-white/45 font-semibold">{recommended.topRated.name}</span>
+                  {" "}· {recommended.topRated.overall_rating.toFixed(1)}★
+                </span>
+              </div>
+            )}
           </div>
         )}
 
@@ -1163,11 +1278,19 @@ function NeighborhoodGuide({
                 )}
               </div>
 
+              {/* Coverage badge */}
+              {s && s.count > 0 && (
+                <span className={`inline-block text-[9px] font-bold uppercase tracking-wider border rounded-full px-1.5 py-0.5 leading-none mb-1.5 ${coverageBadgeStyle(s.coverageConfidence)}`}>
+                  {coverageLabel(s.coverageConfidence)}
+                </span>
+              )}
+
               {/* Price + count */}
               {s && s.count > 0 && (
                 <div className="text-[10px] text-white/30 mb-1.5">
                   {s.count} hotel{s.count !== 1 ? "s" : ""}
-                  {s.avgPrice > 0 && <> · from ${s.avgPrice}/night</>}
+                  {s.lowestPrice > 0 && s.lowestPrice !== s.avgPrice && <> · from ${s.lowestPrice}/night</>}
+                  {s.avgPrice > 0 && <> · avg ${s.avgPrice}/night</>}
                 </div>
               )}
 
@@ -1216,6 +1339,330 @@ function NeighborhoodGuide({
   );
 }
 
+// ── HotelDetailDrawer ─────────────────────────────────────────────────────────
+
+function HotelDetailDrawer({
+  offer,
+  onClose,
+  activePrefs,
+  cityGuide,
+  guests,
+}: {
+  offer: HotelOffer | null;
+  onClose: () => void;
+  activePrefs: readonly PrefId[];
+  cityGuide: CityGuide | null;
+  guests: number;
+}) {
+  const [activeAmenity, setActiveAmenity] = useState<string | null>(null);
+
+  if (!offer) return null;
+
+  const fitNote = activePrefs.length > 0 ? buildFitNote(offer, activePrefs) : "";
+
+  const nbhdCard = cityGuide?.neighborhoods.find((n) =>
+    n.matchKeywords.some(
+      (k) =>
+        offer.inferred_neighborhood.toLowerCase().includes(k.toLowerCase()) ||
+        offer.address.toLowerCase().includes(k.toLowerCase())
+    )
+  );
+
+  const breakdownRows = [
+    { key: "reviews",     label: "Guest Reviews",  score: offer.score_breakdown.reviews     },
+    { key: "location",    label: "Location",        score: offer.score_breakdown.location    },
+    { key: "price",       label: "Price / Value",   score: offer.score_breakdown.price       },
+    { key: "stars",       label: "Hotel Quality",   score: offer.score_breakdown.stars       },
+    { key: "walkability", label: "Walkability",     score: offer.score_breakdown.walkability },
+  ].sort((a, b) => b.score - a.score);
+
+  const tradeoffs: string[] = [];
+  if (offer.score_breakdown.price < 45)       tradeoffs.push("Priced above average for this search.");
+  if (offer.score_breakdown.walkability < 45) tradeoffs.push("Limited walkability in the immediate area.");
+  if (offer.score_breakdown.reviews < 45)     tradeoffs.push("Guest reviews below the search average.");
+
+  const barColor = (s: number) => s >= 65 ? "bg-lantern-mint" : s >= 45 ? "bg-white/25" : "bg-lantern-gold/70";
+  const barText  = (s: number) => s >= 65 ? "text-lantern-mint" : s >= 45 ? "text-white/50" : "text-lantern-gold";
+
+  const sortedAmenities = [...offer.amenities].sort((a, b) => {
+    const KEY = ["pool", "gym", "fitness", "spa", "breakfast", "restaurant", "bar", "beach", "parking"];
+    const aKey = KEY.some((k) => a.toLowerCase().includes(k));
+    const bKey = KEY.some((k) => b.toLowerCase().includes(k));
+    return (bKey ? 1 : 0) - (aKey ? 1 : 0);
+  });
+
+  const isBestOverall = offer.recommendation_label === "Best Overall";
+
+  return (
+    <>
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm"
+        onClick={onClose}
+        aria-hidden="true"
+      />
+
+      {/* Panel */}
+      <div className="fixed inset-y-0 right-0 z-50 w-full max-w-lg bg-[#0e0e14] border-l border-white/[0.07] flex flex-col shadow-2xl overflow-hidden">
+
+        {/* Sticky header */}
+        <div className="flex items-center justify-between px-5 py-3 border-b border-white/[0.06] bg-[#0e0e14]/95 backdrop-blur-sm flex-shrink-0">
+          <span className="text-[10px] font-black uppercase tracking-widest text-white/30">Research this hotel</span>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 flex items-center justify-center rounded-lg border border-white/[0.08] text-white/40 hover:text-white hover:border-white/20 transition-all"
+          >
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Scrollable content */}
+        <div className="flex-1 overflow-y-auto p-5 space-y-4">
+
+          {/* Hero image */}
+          {offer.image_url && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={offer.image_url}
+              alt={offer.name}
+              className="w-full h-48 sm:h-56 rounded-xl object-cover bg-white/[0.04]"
+              onError={(e) => { e.currentTarget.style.display = "none"; }}
+            />
+          )}
+
+          {/* Name + location */}
+          <div>
+            <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+              {isBestOverall && (
+                <span className="text-[10px] font-black uppercase tracking-widest text-lantern-violet border border-lantern-violet/50 bg-lantern-violet/15 rounded-full px-2 py-0.5 leading-none">
+                  AI Pick
+                </span>
+              )}
+              {!isBestOverall && offer.recommendation_label && (
+                <span className={`text-[10px] font-bold uppercase tracking-widest border rounded-full px-2 py-0.5 leading-none ${labelBg(offer.recommendation_label)}`}>
+                  {offer.recommendation_label}
+                </span>
+              )}
+              {offer.eco_certified && (
+                <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-400 border border-emerald-500/30 bg-emerald-500/10 rounded-full px-1.5 py-0.5 leading-none">
+                  Eco Certified
+                </span>
+              )}
+            </div>
+            {offer.inferred_neighborhood && (
+              <div className="flex items-center gap-1 mb-1">
+                <svg className="w-3 h-3 text-white/20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                </svg>
+                <span className="text-[11px] font-semibold text-white/40">{offer.inferred_neighborhood}</span>
+              </div>
+            )}
+            <h2 className="text-xl font-black text-white leading-tight">{offer.name}</h2>
+            {offer.address && <p className="text-xs text-white/35 mt-0.5">{offer.address}</p>}
+          </div>
+
+          {/* Rating row */}
+          <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4 flex items-center gap-4 flex-wrap">
+            {offer.star_rating > 0 && <StarRating count={offer.star_rating} />}
+            {offer.overall_rating > 0 && (
+              <div className="flex items-baseline gap-1.5">
+                <span className={`text-2xl font-black tabular-nums ${scoreColor(offer.ai_score)}`}>
+                  {offer.overall_rating.toFixed(1)}
+                </span>
+                {offer.review_count > 0 && (
+                  <span className="text-[11px] text-white/30">
+                    ({offer.review_count.toLocaleString()} reviews)
+                  </span>
+                )}
+              </div>
+            )}
+            <div className={`ml-auto border rounded-xl px-3 py-1.5 text-center flex-shrink-0 ${scoreBg(offer.ai_score)}`}>
+              <div className="text-xl font-black tabular-nums leading-none">{offer.ai_score}</div>
+              <div className="text-[9px] font-bold uppercase tracking-wider mt-0.5">TravelGrab Score</div>
+            </div>
+          </div>
+
+          {/* Price */}
+          <div className="flex items-baseline gap-2 flex-wrap">
+            <span className={`text-3xl font-black tabular-nums ${scoreColor(offer.ai_score)}`}>
+              ${Math.round(offer.price_per_night).toLocaleString()}
+            </span>
+            <span className="text-sm text-white/40">per night</span>
+            {guests > 1 && (
+              <span className="text-xs text-white/25">
+                · ${Math.round(offer.price_per_night / guests).toLocaleString()}/person
+              </span>
+            )}
+            {offer.nights > 1 && (
+              <span className="text-xs text-white/25 ml-auto">
+                ${Math.round(offer.total_price).toLocaleString()} total · {offer.nights} nights
+              </span>
+            )}
+          </div>
+
+          {/* Score breakdown */}
+          <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4">
+            <div className="text-[10px] font-bold uppercase tracking-wider text-white/30 mb-3">Score Breakdown</div>
+            <div className="space-y-2.5">
+              {breakdownRows.map(({ key, label, score }) => (
+                <div key={key}>
+                  <div className="flex items-center justify-between mb-0.5">
+                    <span className="text-[11px] text-white/55">{label}</span>
+                    <span className={`text-[11px] font-bold tabular-nums ${barText(score)}`}>{score}</span>
+                  </div>
+                  <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
+                    <div className={`h-full rounded-full ${barColor(score)}`} style={{ width: `${score}%` }} />
+                  </div>
+                </div>
+              ))}
+              {activePrefs.length > 0 && offer.neighborhood_fit_score > 0 && (
+                <div>
+                  <div className="flex items-center justify-between mb-0.5">
+                    <span className="text-[11px] text-lantern-violet/80">Neighborhood Fit</span>
+                    <span className={`text-[11px] font-bold tabular-nums ${barText(offer.neighborhood_fit_score)}`}>
+                      {offer.neighborhood_fit_score}
+                    </span>
+                  </div>
+                  <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
+                    <div
+                      className={`h-full rounded-full ${barColor(offer.neighborhood_fit_score)}`}
+                      style={{ width: `${offer.neighborhood_fit_score}%` }}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Amenities — Phase 4 */}
+          {sortedAmenities.length > 0 && (
+            <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4">
+              <div className="text-[10px] font-bold uppercase tracking-wider text-white/30 mb-3">
+                Amenities
+                <span className="ml-1.5 text-white/15 normal-case font-normal">· tap any for details</span>
+              </div>
+              <div className="flex flex-wrap gap-1.5 mb-3">
+                {sortedAmenities.map((a) => {
+                  const hasDetail = !!getAmenityDetail(a);
+                  const isActive  = activeAmenity === a;
+                  return (
+                    <button
+                      key={a}
+                      onClick={() => setActiveAmenity(isActive ? null : a)}
+                      className={`px-2.5 py-1 rounded-full text-[11px] font-semibold border transition-all ${
+                        isActive
+                          ? "bg-lantern-blue/20 text-lantern-blue border-lantern-blue/40"
+                          : hasDetail
+                            ? "bg-white/[0.04] text-white/60 border-white/[0.1] hover:border-white/20 hover:text-white/80 cursor-pointer"
+                            : "bg-white/[0.02] text-white/30 border-white/[0.06] cursor-default"
+                      }`}
+                    >
+                      {a}
+                    </button>
+                  );
+                })}
+              </div>
+              {activeAmenity && (
+                <div className="rounded-lg border border-lantern-blue/20 bg-lantern-blue/[0.04] px-3 py-2.5">
+                  <div className="text-[11px] font-bold text-white/60 mb-0.5">{activeAmenity}</div>
+                  <p className="text-[11px] text-white/45 leading-relaxed">
+                    {getAmenityDetail(activeAmenity)
+                      ?? "Amenity listed by this hotel. Contact them directly to confirm availability and details."}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Neighborhood explanation */}
+          {nbhdCard && (
+            <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4">
+              <div className="text-[10px] font-bold uppercase tracking-wider text-white/30 mb-2">
+                About {nbhdCard.name}
+              </div>
+              <p className="text-xs text-white/50 leading-relaxed mb-2">{nbhdCard.description}</p>
+              <div className="flex flex-wrap gap-1">
+                {nbhdCard.tags.slice(0, 5).map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-[10px] text-white/30 border border-white/[0.08] rounded-full px-1.5 py-0.5 leading-none"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Why this hotel */}
+          {(fitNote || offer.recommendation_why) && (
+            <div className="rounded-xl border border-lantern-violet/20 bg-lantern-violet/[0.04] p-4">
+              <div className="text-[10px] font-bold uppercase tracking-wider text-lantern-violet/60 mb-2">
+                Why this hotel fits
+              </div>
+              {fitNote && (
+                <p className="text-xs text-white/55 leading-relaxed mb-1.5">{fitNote}</p>
+              )}
+              {offer.recommendation_why && (
+                <p className="text-xs text-white/45 leading-relaxed">{offer.recommendation_why}</p>
+              )}
+            </div>
+          )}
+
+          {/* Tradeoffs */}
+          {tradeoffs.length > 0 && (
+            <div className="rounded-xl border border-amber-500/20 bg-amber-500/[0.04] p-4">
+              <div className="text-[10px] font-bold uppercase tracking-wider text-amber-400/70 mb-2">
+                Consider before booking
+              </div>
+              <ul className="space-y-1.5">
+                {tradeoffs.map((t, i) => (
+                  <li key={i} className="text-[11px] text-white/45 flex items-start gap-2">
+                    <span className="text-amber-400/50 flex-shrink-0">·</span>
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Bottom padding for sticky CTA */}
+          <div className="h-2" />
+        </div>
+
+        {/* Sticky CTA — Phase 5 */}
+        <div className="flex-shrink-0 p-4 border-t border-white/[0.07] bg-[#0e0e14]/95 backdrop-blur-sm">
+          {offer.booking_url ? (
+            <>
+              <a
+                href={offer.booking_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => track("hotel_booking_clicked", {
+                  hotel: offer.name,
+                  price: Math.round(offer.price_per_night),
+                  score: offer.ai_score,
+                  source: offer.source,
+                })}
+                className="block w-full text-center py-3 rounded-xl text-sm font-bold text-white bg-lantern-violet hover:bg-lantern-violet/80 transition-colors shadow-[0_0_20px_rgba(139,92,246,0.20)] mb-2"
+              >
+                Check availability →
+              </a>
+              <p className="text-[10px] text-white/25 text-center leading-relaxed">
+                Opens Google Hotels · Prices may change · Final booking happens off TravelGrab
+              </p>
+            </>
+          ) : (
+            <p className="text-[11px] text-white/25 text-center">No booking link available for this hotel.</p>
+          )}
+        </div>
+      </div>
+    </>
+  );
+}
+
 // ── HotelCard ─────────────────────────────────────────────────────────────────
 
 function HotelCard({
@@ -1226,6 +1673,7 @@ function HotelCard({
   guests,
   isMapSelected,
   onSelectForMap,
+  onOpenDetail,
 }: {
   offer: HotelOffer;
   isBestOverall: boolean;
@@ -1234,6 +1682,7 @@ function HotelCard({
   guests: number;
   isMapSelected?: boolean;
   onSelectForMap?: (id: string | null) => void;
+  onOpenDetail?: () => void;
 }) {
   const [breakdownOpen, setBreakdownOpen] = useState(isBestOverall);
   const prefsActive = activePrefs.length > 0;
@@ -1471,20 +1920,30 @@ function HotelCard({
               </svg>
             </button>
 
-            {offer.booking_url && (
-              <div className="flex flex-col items-end gap-0.5">
-                <a
-                  href={offer.booking_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => track("hotel_booking_clicked", { hotel: offer.name, price: Math.round(offer.price_per_night), score: offer.ai_score, source: offer.source })}
-                  className="text-[11px] font-bold text-white bg-lantern-violet hover:bg-lantern-violet/80 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
+            <div className="flex items-center gap-2">
+              {onOpenDetail && (
+                <button
+                  onClick={(e) => { e.stopPropagation(); onOpenDetail(); }}
+                  className="text-[11px] font-semibold text-white/45 border border-white/[0.1] hover:border-white/25 hover:text-white/70 rounded-lg px-3 py-1.5 transition-all whitespace-nowrap"
                 >
-                  Check availability
-                </a>
-                <span className="text-[9px] text-white/20">via Google Hotels</span>
-              </div>
-            )}
+                  Research
+                </button>
+              )}
+              {offer.booking_url && (
+                <div className="flex flex-col items-end gap-0.5">
+                  <a
+                    href={offer.booking_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => { e.stopPropagation(); track("hotel_booking_clicked", { hotel: offer.name, price: Math.round(offer.price_per_night), score: offer.ai_score, source: offer.source }); }}
+                    className="text-[11px] font-bold text-white bg-lantern-violet hover:bg-lantern-violet/80 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
+                  >
+                    Check availability
+                  </a>
+                  <span className="text-[9px] text-white/20">Opens Google Hotels · price may vary</span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
@@ -1664,6 +2123,7 @@ export default function HotelSearch() {
   const [errors,              setErrors]              = useState<string[]>([]);
   const [viewMode,            setViewMode]            = useState<"list" | "map">("list");
   const [selectedHotelId,     setSelectedHotelId]     = useState<string | null>(null);
+  const [detailHotelId,       setDetailHotelId]       = useState<string | null>(null);
 
   const resultsRef = useRef<HTMLDivElement>(null);
 
@@ -2134,6 +2594,7 @@ export default function HotelSearch() {
                     guests={guests}
                     isMapSelected={viewMode === "map" && offer.hotel_id === selectedHotelId}
                     onSelectForMap={viewMode === "map" ? setSelectedHotelId : undefined}
+                    onOpenDetail={() => setDetailHotelId(offer.hotel_id)}
                   />
                 ))}
               </div>
@@ -2144,6 +2605,15 @@ export default function HotelSearch() {
             </div>
           );
         })()}
+
+        {/* ── Hotel detail drawer ───────────────────────────────────────── */}
+        <HotelDetailDrawer
+          offer={detailHotelId ? (offers.find((o) => o.hotel_id === detailHotelId) ?? null) : null}
+          onClose={() => setDetailHotelId(null)}
+          activePrefs={activePrefs}
+          cityGuide={detectCityGuide(searchedDest)}
+          guests={guests}
+        />
 
         {/* Idle state feature cards */}
         {searchState === "idle" && (
