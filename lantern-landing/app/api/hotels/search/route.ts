@@ -1964,7 +1964,7 @@ export async function POST(req: Request) {
   }
 
   const deduped = deduplicateHotels(serpResult.hotels);
-  console.log(`[hotels] raw=${serpResult.rawCount}  deduped=${deduped.length}  prefs=[${neighborhood_prefs.join(",")}]  places=${!!placesApiKey}  (serp=${serpResult.latencyMs}ms)`);
+  console.log(`[hotels] pages=${serpResult.pagesFetched}  raw=${serpResult.rawCount}  deduped=${deduped.length}  prefs=[${neighborhood_prefs.join(",")}]  places=${!!placesApiKey}  (serp=${serpResult.latencyMs}ms)`);
 
   let enrichments = new Map<string, PlacesEnrichment>();
   if (placesApiKey) {
@@ -1983,7 +1983,11 @@ export async function POST(req: Request) {
     h.recommendation_why = buildWhy(h, scored, neighborhood_prefs, enrichments.get(h.hotel_id), destination);
   }
 
-  console.log(`[pipeline] ${scored.length}_offers_rendered_as_cards=${scored.length} (reranked=${neighborhood_prefs.length > 0 ? scored.length : 0})`);
+  const nbhdCount = new Set(scored.map((h) => h.inferred_neighborhood).filter(Boolean)).size;
+  console.log(
+    `[pipeline] raw_hotels_retrieved=${serpResult.rawCount}  deduped_hotels=${deduped.length}  neighborhood_count=${nbhdCount}  offers=${scored.length}  (reranked=${neighborhood_prefs.length > 0 ? scored.length : 0})`
+  );
+  console.log(`Raw hotels: ${serpResult.rawCount}\nDeduped hotels: ${deduped.length}\nNeighborhoods: ${nbhdCount}`);
 
   return NextResponse.json({
     status: "ok",

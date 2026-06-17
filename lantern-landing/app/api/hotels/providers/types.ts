@@ -46,6 +46,7 @@ export interface HotelSearchParams {
 export interface HotelProviderResult {
   hotels: ProviderHotel[];
   rawCount: number;
+  pagesFetched: number;
   requestUrl: string;
   latencyMs: number;
 }
