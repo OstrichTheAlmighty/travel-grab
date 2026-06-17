@@ -2226,7 +2226,7 @@ function RecommendationPanel({
       <div className="flex items-center justify-between gap-2 mb-2.5">
         <div className="flex items-center gap-1.5 flex-wrap">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/apple-touch-icon.png" alt="" aria-hidden width={14} height={14} className="h-3.5 w-3.5 flex-shrink-0 rounded-sm object-cover" />
+          <img src="/nav-icon.png" alt="" aria-hidden width={16} height={16} className="h-4 w-4 flex-shrink-0 rounded-sm object-cover" />
           <span className="text-[10px] font-black uppercase tracking-widest text-lantern-violet">AI Pick</span>
           <span className="text-[10px] text-white/15">·</span>
           <span className={`text-[10px] font-bold uppercase tracking-wider ${confidenceColor}`}>
@@ -2511,11 +2511,11 @@ export default function HotelSearch() {
           <Link href="/" className="flex items-center gap-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/apple-touch-icon.png"
+              src="/nav-icon.png"
               alt="TravelGrab"
-              width={28}
-              height={28}
-              className="h-7 w-7 flex-shrink-0 rounded-md object-cover"
+              width={36}
+              height={36}
+              className="h-9 w-9 flex-shrink-0 rounded-xl object-cover shadow-sm"
             />
             <span className="text-sm font-bold tracking-tight text-white/90">TravelGrab</span>
           </Link>
@@ -2617,12 +2617,12 @@ export default function HotelSearch() {
           <div className="max-w-3xl mx-auto text-center py-14 flex flex-col items-center gap-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/apple-touch-icon.png"
+              src="/nav-icon.png"
               alt=""
               aria-hidden
               width={48}
               height={48}
-              className="h-12 w-12 rounded-xl object-cover animate-pulse"
+              className="h-12 w-12 rounded-2xl object-cover animate-pulse shadow-[0_0_24px_rgba(119,167,255,0.2)]"
             />
             <div className="text-sm text-white/50">Searching hotels in {searchedDest}…</div>
             <p className="text-xs text-white/25">
