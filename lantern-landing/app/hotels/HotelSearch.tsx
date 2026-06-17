@@ -3083,6 +3083,7 @@ export default function HotelSearch() {
   const [compareIds,          setCompareIds]          = useState<string[]>([]);
   const [comparePanelOpen,    setComparePanelOpen]    = useState(false);
   const [visibleCount,        setVisibleCount]        = useState(20);
+  const [searchMode,          setSearchMode]          = useState<"best-area" | "best-hotels">("best-area");
 
   const toggleCompare = useCallback((id: string) => {
     setCompareIds(prev =>
@@ -3164,6 +3165,7 @@ export default function HotelSearch() {
       setViewMode("list");
       setSelectedHotelId(null);
       setVisibleCount(20);
+      setSearchMode("best-area");
       setSearchState("results");
       setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
     } catch {
@@ -3339,8 +3341,11 @@ export default function HotelSearch() {
             ? nbhdSummaries[0]
             : null;
 
-          // Filter displayed hotels when a neighborhood is selected
-          const selectedCard = cityGuide?.neighborhoods.find((n) => n.id === selectedNeighborhood);
+          // Filter displayed hotels when a neighborhood is selected.
+          // In "best-hotels" mode, skip the neighborhood filter so all hotels are always shown.
+          const selectedCard = searchMode === "best-area"
+            ? cityGuide?.neighborhoods.find((n) => n.id === selectedNeighborhood)
+            : undefined;
           const filteredOffers = selectedCard
             ? offers.filter((o) =>
                 selectedCard.matchKeywords.some(
@@ -3382,6 +3387,35 @@ export default function HotelSearch() {
           return (
             <div className="max-w-3xl mx-auto" ref={resultsRef}>
 
+              {/* ── Search mode toggle ─────────────────────────────────────── */}
+              {cityGuide && (
+                <div className="flex justify-center mb-5">
+                  <div className="inline-flex items-center rounded-xl border border-white/[0.09] bg-white/[0.02] p-0.5 gap-0.5">
+                    {(
+                      [
+                        { mode: "best-area"   as const, label: "Best Area For Me" },
+                        { mode: "best-hotels" as const, label: "Best Hotels Overall" },
+                      ] as const
+                    ).map(({ mode, label }) => (
+                      <button
+                        key={mode}
+                        onClick={() => {
+                          setSearchMode(mode);
+                          if (mode === "best-hotels") setSelectedNeighborhood(null);
+                        }}
+                        className={`px-4 py-1.5 rounded-[10px] text-[12px] font-semibold transition-all ${
+                          searchMode === mode
+                            ? "bg-lantern-violet text-white shadow-sm"
+                            : "text-white/35 hover:text-white/60"
+                        }`}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* ── View toggle + sort bar ─────────────────────────────────── */}
               <div className="flex items-center justify-between mb-3 px-1 gap-3 flex-wrap">
                 {/* List / Map toggle */}
@@ -3418,7 +3452,7 @@ export default function HotelSearch() {
                 </div>
 
                 {/* Hotel count */}
-                <div className="text-xs text-white/40 flex-1 min-w-0">
+                <div className="text-xs text-white/40 flex-1 min-w-0 truncate">
                   {selectedCard ? (
                     <>
                       <span className="font-semibold text-white/70">
@@ -3426,6 +3460,30 @@ export default function HotelSearch() {
                       </span>
                       {" "}in <span className="text-white/60">{selectedCard.name}</span>
                       {showAllFallback && <span className="text-white/25"> · no exact matches, showing all</span>}
+                    </>
+                  ) : cityGuide && searchMode === "best-area" ? (
+                    <>
+                      <span className="font-semibold text-white/70">{offers.length}</span>
+                      <span className="text-white/25"> hotels analyzed across </span>
+                      <span className="text-white/55 font-semibold">
+                        {nbhdSummaries.filter((s) => s.count > 0).length} neighborhoods
+                      </span>
+                      {(() => {
+                        const active = nbhdSummaries.filter((s) => s.count > 0);
+                        if (active.length === 0) return null;
+                        const shown = active.slice(0, 3);
+                        const rest  = active.length - shown.length;
+                        return (
+                          <span className="text-white/20 hidden sm:inline">
+                            {" · "}
+                            {shown.map((s) => s.nbhd.name.split(" /")[0]).join(" · ")}
+                            {rest > 0 && <span> +{rest} more</span>}
+                          </span>
+                        );
+                      })()}
+                      {amenityFilters.length > 0 && (
+                        <span className="text-white/20"> · {amenityFilteredOffers.length} match filters</span>
+                      )}
                     </>
                   ) : (
                     <>
@@ -3489,8 +3547,8 @@ export default function HotelSearch() {
                 </div>
               )}
 
-              {/* ── LIST VIEW: Neighborhood guide ─────────────────────────── */}
-              {viewMode === "list" && cityGuide && (
+              {/* ── LIST VIEW: Neighborhood guide (Best Area mode only) ───── */}
+              {viewMode === "list" && cityGuide && searchMode === "best-area" && (
                 activePrefs.length > 0 && nbhdSummaries.length > 0 ? (
                   <NeighborhoodRecommendation
                     summaries={nbhdSummaries}
@@ -3508,8 +3566,8 @@ export default function HotelSearch() {
                 )
               )}
 
-              {/* ── Neighborhood Comparison Engine ─────────────────────── */}
-              {viewMode === "list" && cityGuide && nbhdSummaries.filter((s) => s.count > 0).length >= 2 && (
+              {/* ── Neighborhood Comparison Engine (Best Area mode only) ─── */}
+              {viewMode === "list" && cityGuide && searchMode === "best-area" && nbhdSummaries.filter((s) => s.count > 0).length >= 2 && (
                 <NeighborhoodCompare
                   cityName={cityGuide.displayName}
                   summaries={nbhdSummaries
