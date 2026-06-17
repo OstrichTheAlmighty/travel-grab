@@ -50,6 +50,9 @@ interface HotelOffer {
   transit_note:     string;
   latitude?:  number;
   longitude?: number;
+  rank_position?: number;
+  rank_bullets?:  string[];
+  rank_weakness?: string;
 }
 
 interface AutocompleteSuggestion {
@@ -578,10 +581,10 @@ function isStreetIntersectionName(name: string): boolean {
 }
 
 function scoreLabel(n: number): string {
-  if (n >= 82) return "Excellent";
-  if (n >= 70) return "Great";
-  if (n >= 58) return "Good";
-  if (n >= 45) return "Fair";
+  if (n >= 90) return "Elite";
+  if (n >= 80) return "Excellent";
+  if (n >= 65) return "Good";
+  if (n >= 50) return "Fair";
   return "Weak";
 }
 
@@ -1935,17 +1938,33 @@ function HotelCard({
           </div>
         )}
 
-        {/* Recommendation sentence — shown when no fit note, or always */}
-        {offer.recommendation_why && !fitNote && (
-          <p className="text-[11px] text-white/50 leading-relaxed mb-3">
+        {/* Why it ranked here — hotel-specific bullets + weakness */}
+        {offer.rank_bullets && offer.rank_bullets.length > 0 ? (
+          <div className="mb-3">
+            <div className="space-y-1">
+              {offer.rank_bullets.map((bullet, idx) => (
+                <div key={idx} className="flex items-start gap-1.5">
+                  <svg className="w-2.5 h-2.5 text-lantern-mint/60 flex-shrink-0 mt-0.5" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M1 6l3.5 3.5L11 2" />
+                  </svg>
+                  <span className="text-[11px] text-white/55 leading-tight">{bullet}</span>
+                </div>
+              ))}
+            </div>
+            {offer.rank_weakness && (
+              <div className="flex items-start gap-1.5 mt-1.5 pt-1.5 border-t border-white/[0.04]">
+                <svg className="w-2.5 h-2.5 text-amber-400/50 flex-shrink-0 mt-0.5" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
+                  <path d="M6 1v6M6 9.5v.5" />
+                </svg>
+                <span className="text-[10px] text-white/30 leading-tight">{offer.rank_weakness}</span>
+              </div>
+            )}
+          </div>
+        ) : offer.recommendation_why ? (
+          <p className={`text-[11px] leading-relaxed mb-3 ${fitNote ? "text-white/40" : "text-white/50"}`}>
             {offer.recommendation_why}
           </p>
-        )}
-        {offer.recommendation_why && fitNote && (
-          <p className="text-[11px] text-white/40 leading-relaxed mb-3">
-            {offer.recommendation_why}
-          </p>
-        )}
+        ) : null}
 
         {/* Transit note (Google Places) or nearby landmark fallback */}
         {!fitNote && (offer.transit_note ? (

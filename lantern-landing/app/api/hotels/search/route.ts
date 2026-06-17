@@ -903,6 +903,9 @@ export interface HotelOffer {
   transit_note:     string;
   latitude?:  number;
   longitude?: number;
+  rank_position: number;
+  rank_bullets:  string[];
+  rank_weakness: string;
 }
 
 // ── Base helpers ──────────────────────────────────────────────────────────────
@@ -1537,6 +1540,9 @@ function scoreHotels(
       })(),
       location_summary: enrichment?.locationSummary ?? "",
       transit_note:     enrichment?.transitNote     ?? "",
+      rank_position:  0,
+      rank_bullets:   [],
+      rank_weakness:  "",
     };
   });
 }
@@ -1775,140 +1781,185 @@ function buildWhy(
   h: HotelOffer,
   all: HotelOffer[],
   prefs: string[],
-  enrichment: PlacesEnrichment | undefined,
-  destination: string,
+  _enrichment: PlacesEnrichment | undefined,
+  _destination: string,
 ): string {
-  const cheapest  = all.reduce((a, b) => a.price_per_night <= b.price_per_night ? a : b);
-  const priceDiff = Math.round(h.price_per_night - cheapest.price_per_night);
+  // Hotel-specific, non-neighborhood explanation.
+  // Neighbourhood is already shown in the card badge; this focuses on what makes
+  // THIS property stand out — amenities, reviews, value, proximity.
   const parts: string[] = [];
+  const cheapest  = all.reduce((a, b) => a.price_per_night <= b.price_per_night ? a : b);
+  const avgPrice  = all.reduce((s, x) => s + x.price_per_night, 0) / all.length;
+  const avgRating = all.reduce((s, x) => s + x.overall_rating,  0) / all.length;
 
-  const nbhd    = h.inferred_neighborhood;
-  const destL   = destination.toLowerCase();
-  const cityKey = destL.includes("barcelona") ? "barcelona"
-                : (destL.includes("tokyo") || destL.includes("tōkyō")) ? "tokyo"
-                : destL.includes("london") ? "london"
-                : (destL.includes("new york") || destL.includes("nyc")) ? "new york"
-                : (destL.includes("bangkok") || destL.includes("krung thep")) ? "bangkok"
-                : destL.includes("singapore") ? "singapore"
-                : (destL.includes("seoul") || destL.includes("서울")) ? "seoul"
-                : null;
+  if (h.star_rating >= 5) parts.push("5-star luxury property");
 
-  // ── Location context ───────────────────────────────────────────────────────
-  if (prefs.length > 0 && nbhd) {
-    // Score each pref for this hotel's neighborhood
-    const prefScores = prefs.map((p) => ({
-      pref: p,
-      score: lookupCityNeighborhoodScore(destination, nbhd, h.address, p)
-             ?? (enrichment?.bestFor.includes(p) ? 65 : 20),
-    }));
-
-    const avgScore = prefScores.reduce((s, ps) => s + ps.score, 0) / prefScores.length;
-
-    // ── Poor fit: lead with mismatch explanation ──────────────────────────
-    if (avgScore < 50) {
-      const weakest = prefScores.reduce((a, b) => b.score < a.score ? b : a);
-      const mismatchMap: Record<string, string> = {
-        luxury:       `Not ideal for Luxury: ${nbhd} suits budget travelers better than premium stays`,
-        quiet:        `Less suited for a quiet stay — ${nbhd} is a busy, lively area`,
-        family:       `Less family-oriented — ${nbhd} is better for solo travelers and nightlife`,
-        sightseeing:  `Peripheral location — ${nbhd} is farther from major attractions`,
-        nightlife:    `Quiet area — ${nbhd} has limited evening entertainment`,
-        food:         `Limited dining — ${nbhd} has fewer restaurants than central districts`,
-        "first-time": `Off the tourist trail — ${nbhd} is better for experienced visitors`,
-        transit:      `Limited transit — ${nbhd} has fewer transport links than central areas`,
-        walkable:     `Less walkable — ${nbhd} requires more transit use`,
-        budget:       `Premium pricing — ${nbhd} is one of the more expensive areas`,
-      };
-      parts.push(mismatchMap[weakest.pref] ?? `Limited ${PREF_DISPLAY[weakest.pref] ?? weakest.pref} fit in ${nbhd}`);
-    } else {
-      // ── Good fit: positive preference-aware copy ──────────────────────
-      const strongFits = prefScores.filter((ps) => ps.score >= 75);
-      const mediumFits = prefScores.filter((ps) => ps.score >= 50 && ps.score < 75);
-      const weakFits   = prefScores.filter((ps) => ps.score < 50);
-
-      const locationParts: string[] = [];
-
-      if (strongFits.length > 0) {
-        locationParts.push(
-          strongFits.slice(0, 2).map((ps) => prefStrengthCopy(ps.pref, ps.score, nbhd, cityKey)).join(", ")
-        );
-      }
-      if (mediumFits.length > 0) {
-        locationParts.push(
-          mediumFits.slice(0, 1).map((ps) => prefStrengthCopy(ps.pref, ps.score, nbhd, cityKey)).join(", ")
-        );
-      }
-      if (weakFits.length > 0 && cityKey) {
-        const comparisons = weakFits.flatMap((ps) => {
-          const bestNbhd = CITY_BEST_NEIGHBORHOOD[cityKey]?.[ps.pref];
-          if (bestNbhd && bestNbhd.toLowerCase() !== nbhd.toLowerCase()) {
-            return [`less ${prefAdjective(ps.pref)} than ${bestNbhd}`];
-          }
-          return [];
-        });
-        if (comparisons.length > 0) locationParts.push(comparisons[0]);
-      }
-
-      if (locationParts.length > 0) {
-        parts.push(`${nbhd} — ${locationParts.join("; ")}`);
-      } else if (enrichment?.locationSummary) {
-        parts.push(`${nbhd} — ${enrichment.locationSummary}`);
-      } else {
-        parts.push(`In ${nbhd}`);
-      }
-    }
-  } else if (enrichment) {
-    if (nbhd) {
-      const summaryPart = enrichment.locationSummary
-        ? `${nbhd} — ${enrichment.locationSummary}`
-        : nbhd;
-      const matchedPrefs = prefs.filter((p) => enrichment.bestFor.includes(p));
-      if (matchedPrefs.length > 0) {
-        const pl = matchedPrefs.slice(0, 2).map((p) => PREF_DISPLAY[p] ?? p).join(" and ");
-        parts.push(`${summaryPart} — great for ${pl}`);
-      } else {
-        parts.push(summaryPart);
-      }
-    }
-    if (
-      enrichment.transitNote &&
-      !enrichment.locationSummary.toLowerCase().includes("metro") &&
-      !enrichment.locationSummary.toLowerCase().includes("transit")
-    ) {
-      parts.push(enrichment.transitNote);
-    }
-  } else if (nbhd) {
-    parts.push(`In ${nbhd}`);
+  if (h.overall_rating >= 4.8 && h.review_count >= 50) {
+    parts.push(`exceptional reviews (${h.overall_rating.toFixed(1)}★ from ${h.review_count.toLocaleString()} guests)`);
+  } else if (h.overall_rating >= 4.5 && h.overall_rating > avgRating + 0.15 && h.review_count >= 50) {
+    parts.push(`among the highest-rated in this search (${h.overall_rating.toFixed(1)}★)`);
+  } else if (h.overall_rating >= 4.3 && h.review_count >= 500) {
+    parts.push(`${h.review_count.toLocaleString()} guest reviews at ${h.overall_rating.toFixed(1)}★`);
   }
 
-  // ── Review quality ─────────────────────────────────────────────────────────
-  if (h.overall_rating >= 4.7)      parts.push("outstanding guest reviews");
-  else if (h.overall_rating >= 4.4) parts.push("excellent reviews");
-  else if (h.overall_rating >= 4.0) parts.push("very good reviews");
-  else if (h.overall_rating >= 3.5) parts.push("solid guest ratings");
-
-  // ── Standout amenity ───────────────────────────────────────────────────────
-  const topAmenities = ["Pool", "Spa", "Free breakfast", "Gym", "Airport shuttle", "Restaurant"];
-  const highlight = h.amenities.find((a) =>
-    topAmenities.some((ta) => a.toLowerCase().includes(ta.toLowerCase()))
+  const premiumOrder = ["Rooftop pool", "Infinity pool", "Pool", "Spa", "Free breakfast", "Airport shuttle", "Restaurant"];
+  const topAmenity = h.amenities.find((a) =>
+    premiumOrder.some((pa) => a.toLowerCase().includes(pa.toLowerCase()))
   );
-  if (highlight && parts.length < 3) parts.push(`includes ${highlight.toLowerCase()}`);
+  if (topAmenity && parts.length < 2) parts.push(`includes ${topAmenity.toLowerCase()}`);
 
-  // ── Price comparison ───────────────────────────────────────────────────────
-  if (priceDiff <= 0) {
-    parts.push(`the lowest price in this set at $${Math.round(h.price_per_night)}/night`);
-  } else if (priceDiff <= 25) {
-    parts.push(`only $${priceDiff}/night more than the cheapest option`);
-  } else if (priceDiff <= 60) {
-    parts.push(`$${priceDiff}/night more than the cheapest option`);
+  if (h.nearby_walk && h.nearby_walk.minutes <= 3 && parts.length < 2) {
+    parts.push(`${h.nearby_walk.name} is ${h.nearby_walk.minutes} min walk`);
   }
 
-  if (parts.length === 0)
+  const priceDiff = Math.round(h.price_per_night - cheapest.price_per_night);
+  if (priceDiff <= 0) {
+    parts.push(`lowest price in this set ($${Math.round(h.price_per_night)}/night)`);
+  } else if (h.price_per_night < avgPrice * 0.82 && parts.length < 3) {
+    parts.push(`competitive at $${Math.round(h.price_per_night)}/night`);
+  }
+
+  if (prefs.length > 0 && h.neighborhood_fit_score >= 80 && parts.length < 3) {
+    const pl = PREF_DISPLAY[prefs[0]] ?? prefs[0];
+    parts.push(`excellent ${pl} neighborhood fit`);
+  }
+
+  if (parts.length === 0) {
     return `${h.star_rating > 0 ? `${h.star_rating}-star ` : ""}${h.hotel_type.toLowerCase()} at $${Math.round(h.price_per_night)}/night.`;
-  if (parts.length === 1)
-    return `${parts[0].charAt(0).toUpperCase()}${parts[0].slice(1)}.`;
-  const last = parts.pop()!;
-  return `${parts[0].charAt(0).toUpperCase()}${parts[0].slice(1)}${parts.length > 1 ? `, ${parts.slice(1).join(", ")}` : ""}, and ${last}.`;
+  }
+  if (parts.length === 1) {
+    const [a] = parts;
+    return `${a.charAt(0).toUpperCase()}${a.slice(1)}.`;
+  }
+  const [first, ...rest] = parts;
+  const joined = rest.length === 1
+    ? `and ${rest[0]}`
+    : `${rest.slice(0, -1).join(", ")}, and ${rest[rest.length - 1]}`;
+  return `${first.charAt(0).toUpperCase()}${first.slice(1)}, ${joined}.`;
+}
+
+// ── Score normalization ───────────────────────────────────────────────────────
+// Stretches ai_score to a 45–97 range so results span ~50 points rather than
+// clustering in 80–86 (typical for a set of 4-star city hotels).
+function normalizeAiScores(hotels: HotelOffer[]): void {
+  if (hotels.length < 3) return;
+  const scores = hotels.map((h) => h.ai_score);
+  const minS   = Math.min(...scores);
+  const maxS   = Math.max(...scores);
+  const spread = maxS - minS;
+  if (spread < 1) return;
+  for (const h of hotels) {
+    h.ai_score = Math.round(45 + ((h.ai_score - minS) / spread) * 52);
+  }
+}
+
+// ── Per-hotel rank explanations ───────────────────────────────────────────────
+// Called after sorting. Sets rank_position, rank_bullets (hotel-specific reasons
+// why it sits at this rank), and rank_weakness (what the hotel above does better).
+function buildRankExplanations(sorted: HotelOffer[], prefs: string[]): void {
+  if (sorted.length === 0) return;
+  const prefsActive = prefs.length > 0;
+  const avgRating   = sorted.reduce((s, h) => s + h.overall_rating,  0) / sorted.length;
+  const avgPrice    = sorted.reduce((s, h) => s + h.price_per_night, 0) / sorted.length;
+
+  for (let i = 0; i < sorted.length; i++) {
+    const h     = sorted[i];
+    const above = i > 0 ? sorted[i - 1] : null;
+    h.rank_position = i + 1;
+
+    const bullets: string[] = [];
+
+    // Guest reviews
+    if (h.overall_rating >= 4.7 && h.review_count >= 100) {
+      bullets.push(`Outstanding reviews (${h.overall_rating.toFixed(1)}★ · ${h.review_count.toLocaleString()} guests)`);
+    } else if (h.overall_rating >= 4.4 && h.overall_rating >= avgRating + 0.1 && h.review_count >= 50) {
+      bullets.push(`Above-average reviews (${h.overall_rating.toFixed(1)}★ · ${h.review_count.toLocaleString()} guests)`);
+    } else if (above && h.score_breakdown.reviews > above.score_breakdown.reviews + 5) {
+      bullets.push(`Better guest reviews than #${i} (${h.overall_rating.toFixed(1)} vs ${above.overall_rating.toFixed(1)}★)`);
+    }
+
+    // Price / value
+    if (above && h.price_per_night < above.price_per_night - 20) {
+      bullets.push(`$${Math.round(above.price_per_night - h.price_per_night)}/night less than #${i}`);
+    } else if (h.price_per_night < avgPrice * 0.78) {
+      bullets.push(`Strong value at $${Math.round(h.price_per_night)}/night (${Math.round((1 - h.price_per_night / avgPrice) * 100)}% below average)`);
+    } else if (h.score_breakdown.price >= 80) {
+      bullets.push(`Competitive pricing in this set ($${Math.round(h.price_per_night)}/night)`);
+    }
+
+    // Hotel quality / stars
+    if (h.star_rating >= 5 && bullets.length < 3) {
+      bullets.push(`5-star luxury property`);
+    } else if (h.star_rating >= 4 && h.score_breakdown.stars >= 85 && h.overall_rating >= 4.3 && bullets.length < 3) {
+      bullets.push(`High-quality 4-star hotel (reviews ${h.score_breakdown.reviews})`);
+    }
+
+    // Neighborhood / destination fit
+    if (prefsActive && h.neighborhood_fit_score >= 78 && bullets.length < 3) {
+      const pl = PREF_DISPLAY[prefs[0]] ?? prefs[0];
+      bullets.push(`Strong ${pl} neighborhood fit (score ${h.neighborhood_fit_score})`);
+    } else if (!prefsActive && h.score_breakdown.destination_fit >= 85 && bullets.length < 3) {
+      bullets.push(`Prime visitor location (area fit ${h.score_breakdown.destination_fit})`);
+    } else if (!prefsActive && h.score_breakdown.destination_fit >= 70 && bullets.length < 3) {
+      bullets.push(`Good visitor location (area fit ${h.score_breakdown.destination_fit})`);
+    }
+
+    // Walkability
+    if (h.score_breakdown.walkability >= 82 && bullets.length < 3) {
+      if (h.nearby_walk && h.nearby_walk.minutes <= 5) {
+        bullets.push(`Excellent walkability — ${h.nearby_walk.name} ${h.nearby_walk.minutes} min away`);
+      } else {
+        bullets.push(`Excellent walkability (score ${h.score_breakdown.walkability})`);
+      }
+    }
+
+    // Premium amenities
+    if (bullets.length < 3) {
+      const prem = h.amenities.filter((a) => {
+        const al = a.toLowerCase();
+        return al.includes("pool") || al.includes("spa") || al.includes("breakfast") || al.includes("rooftop");
+      });
+      if (prem.length >= 2) {
+        bullets.push(`Includes ${prem[0].toLowerCase()} and ${prem[1].toLowerCase()}`);
+      } else if (prem.length === 1) {
+        bullets.push(`Includes ${prem[0].toLowerCase()}`);
+      }
+    }
+
+    // Fallback
+    if (bullets.length === 0) {
+      const starStr = h.star_rating > 0 ? `${h.star_rating}-star ` : "";
+      bullets.push(`${starStr}hotel at $${Math.round(h.price_per_night)}/night`);
+    }
+
+    // Weakness vs hotel ranked above
+    let weakness = "";
+    if (above) {
+      const dimGaps = [
+        { label: "guest satisfaction", delta: above.score_breakdown.reviews         - h.score_breakdown.reviews         },
+        { label: "hotel quality",      delta: above.score_breakdown.stars           - h.score_breakdown.stars           },
+        { label: "destination fit",    delta: above.score_breakdown.destination_fit - h.score_breakdown.destination_fit },
+        { label: "location score",     delta: above.score_breakdown.location        - h.score_breakdown.location        },
+        { label: "walkability",        delta: above.score_breakdown.walkability     - h.score_breakdown.walkability     },
+      ].filter((g) => g.delta > 8).sort((a, b) => b.delta - a.delta);
+
+      const aboveShort = above.name.split(/\s+/).slice(0, 3).join(" ");
+      const priceDiff  = h.price_per_night - above.price_per_night;
+
+      if (dimGaps.length > 0) {
+        weakness = `Lower ${dimGaps[0].label} than ${aboveShort}`;
+      } else if (priceDiff > 20) {
+        weakness = `$${Math.round(priceDiff)}/night more than ${aboveShort}`;
+      } else if (above.ai_score - h.ai_score < 5) {
+        weakness = `Nearly tied with #${i} — very close scores`;
+      } else {
+        weakness = `Overall score behind ${aboveShort} (${above.ai_score} vs ${h.ai_score})`;
+      }
+    }
+
+    h.rank_bullets  = bullets.slice(0, 3);
+    h.rank_weakness = weakness;
+  }
 }
 
 // ── Deduplication ─────────────────────────────────────────────────────────────
@@ -1973,11 +2024,15 @@ export async function POST(req: Request) {
 
   const scored = scoreHotels(deduped, neighborhood_prefs, destination, enrichments).map((h) => ({ ...h, nights }));
 
+  // Stretch scores to 45–97 before sorting so results always span ~50 points.
+  normalizeAiScores(scored);
+
   scored.sort((a, b) =>
     b.ai_score !== a.ai_score ? b.ai_score - a.ai_score : a.price_per_night - b.price_per_night
   );
 
   assignLabels(scored, neighborhood_prefs);
+  buildRankExplanations(scored, neighborhood_prefs);
 
   for (const h of scored) {
     h.recommendation_why = buildWhy(h, scored, neighborhood_prefs, enrichments.get(h.hotel_id), destination);
