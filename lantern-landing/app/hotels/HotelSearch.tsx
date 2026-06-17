@@ -2115,47 +2115,86 @@ function computePickDecisionLabel(
 
 // ── Hotel Comparison helpers ──────────────────────────────────────────────────
 
-function generateVerdict(hotels: HotelOffer[]): string {
-  if (hotels.length < 2) return "";
+function MetricInfo({ text }: { text: string }) {
+  return (
+    <span className="relative group inline-flex items-center ml-1 leading-none">
+      <span className="text-[9px] text-white/20 hover:text-white/50 cursor-default select-none transition-colors">ⓘ</span>
+      <span className="absolute bottom-full left-0 mb-2 w-44 rounded-lg bg-[#1c2333] border border-white/[0.12] px-2.5 py-2 text-[10px] text-white/60 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 whitespace-normal shadow-lg">
+        {text}
+      </span>
+    </span>
+  );
+}
+
+interface VerdictParts {
+  chooseIf: string;
+  tradeoff: string | null;
+  considerAlternativeIf: string | null;
+  isCloseCall: boolean;
+}
+
+function buildVerdictParts(hotels: HotelOffer[]): VerdictParts | null {
+  if (hotels.length < 2) return null;
   const sorted = [...hotels].sort((a, b) => b.ai_score - a.ai_score);
   const winner = sorted[0];
   const runnerUp = sorted[1];
   const margin = winner.ai_score - runnerUp.ai_score;
 
-  if (margin < 3) {
-    const m = Math.round(margin);
-    const diff = m === 0 ? "equal scores" : `${m} point${m !== 1 ? "s" : ""} apart`;
-    return `This is a close call. ${winner.name} and ${runnerUp.name} are ${diff} — the right choice depends on your priorities.`;
-  }
-
-  const dims = [
-    { label: "guest reviews",  val: winner.score_breakdown.reviews },
-    { label: "location",       val: winner.score_breakdown.location },
-    { label: "walkability",    val: winner.score_breakdown.walkability },
-    { label: "hotel quality",  val: winner.score_breakdown.stars },
-    { label: "price/value",    val: winner.score_breakdown.price },
-  ].sort((a, b) => b.val - a.val);
-
-  let verdict = `${winner.name} ranks highest in this comparison, led by its ${dims[0].label} and ${dims[1].label} scores.`;
-
-  const priceDiff = winner.price_per_night - runnerUp.price_per_night;
-  if (priceDiff > 20) {
-    verdict += ` The tradeoff: $${Math.round(priceDiff)}/night more than ${runnerUp.name}.`;
-  } else if (priceDiff < -20) {
-    verdict += ` It's also $${Math.round(Math.abs(priceDiff))}/night cheaper than ${runnerUp.name}.`;
-  }
+  const winnerStrengths = [
+    { label: "guest reviews",    val: winner.score_breakdown.reviews },
+    { label: "location",         val: winner.score_breakdown.location },
+    { label: "walkability",      val: winner.score_breakdown.walkability },
+    { label: "hotel quality",    val: winner.score_breakdown.stars },
+    { label: "neighborhood fit", val: winner.neighborhood_fit_score },
+  ].filter(d => d.val > 0).sort((a, b) => b.val - a.val);
 
   const runnerLeads = [
-    { label: "guest reviews",  gap: runnerUp.score_breakdown.reviews - winner.score_breakdown.reviews },
-    { label: "walkability",    gap: runnerUp.score_breakdown.walkability - winner.score_breakdown.walkability },
-    { label: "hotel quality",  gap: runnerUp.score_breakdown.stars - winner.score_breakdown.stars },
-    { label: "price/value",    gap: runnerUp.score_breakdown.price - winner.score_breakdown.price },
-  ].filter(d => d.gap >= 8).sort((a, b) => b.gap - a.gap);
-  if (runnerLeads.length > 0) {
-    verdict += ` ${runnerUp.name} scores higher on ${runnerLeads[0].label}.`;
+    { label: "price",         gap: runnerUp.price_per_night < winner.price_per_night - 15 ? winner.price_per_night - runnerUp.price_per_night : 0, isPrice: true  },
+    { label: "walkability",   gap: runnerUp.score_breakdown.walkability - winner.score_breakdown.walkability,  isPrice: false },
+    { label: "hotel quality", gap: runnerUp.score_breakdown.stars - winner.score_breakdown.stars,             isPrice: false },
+    { label: "guest reviews", gap: runnerUp.score_breakdown.reviews - winner.score_breakdown.reviews,         isPrice: false },
+  ].filter(d => d.gap > 0).sort((a, b) => b.gap - a.gap);
+
+  if (margin < 3) {
+    const m = Math.round(margin * 10) / 10;
+    const diffStr = m === 0 ? "the same overall score" : `scores just ${m} point${m !== 1 ? "s" : ""} apart`;
+    const lead = runnerLeads[0];
+    return {
+      isCloseCall: true,
+      chooseIf: `This is a close call — ${winner.name} and ${runnerUp.name} have ${diffStr}.`,
+      tradeoff: winnerStrengths.length > 0
+        ? `${winner.name} edges ahead on ${winnerStrengths[0].label}${winnerStrengths[1] ? ` and ${winnerStrengths[1].label}` : ""}.`
+        : null,
+      considerAlternativeIf: lead
+        ? lead.isPrice
+          ? `${runnerUp.name} is $${Math.round(lead.gap)}/night cheaper — worth it if budget is the priority.`
+          : `${runnerUp.name} scores higher on ${lead.label} if that matters more to you.`
+        : null,
+    };
   }
 
-  return verdict;
+  const s1 = winnerStrengths[0]?.label ?? "overall balance";
+  const s2 = winnerStrengths[1]?.label;
+  const chooseIf = `Choose ${winner.name} if you want the best ${s1}${s2 ? ` and ${s2}` : ""}.`;
+
+  const priceDiff = winner.price_per_night - runnerUp.price_per_night;
+  let tradeoff: string | null = null;
+  if (priceDiff > 20) {
+    tradeoff = `It costs $${Math.round(priceDiff)}/night more than ${runnerUp.name}.`;
+  } else if (priceDiff < -20) {
+    tradeoff = `It's also $${Math.round(Math.abs(priceDiff))}/night cheaper than ${runnerUp.name}.`;
+  } else if (winner.score_breakdown.walkability < runnerUp.score_breakdown.walkability - 8) {
+    tradeoff = `${runnerUp.name} is more walkable.`;
+  }
+
+  const lead = runnerLeads[0];
+  const considerAlternativeIf = lead
+    ? lead.isPrice
+      ? `Consider ${runnerUp.name} if budget is the priority — saves $${Math.round(lead.gap)}/night.`
+      : `Consider ${runnerUp.name} if ${lead.label} matters more to you.`
+    : null;
+
+  return { isCloseCall: false, chooseIf, tradeoff, considerAlternativeIf };
 }
 
 type CompareWinner = { id: string; type: "price" | "quality" } | null;
@@ -2175,6 +2214,51 @@ function qualityWinner(vals: { id: string; val: number }[]): CompareWinner {
   return { id: winner.id, type: "quality" };
 }
 
+const SUMMARY_CARD_STYLES = {
+  violet: { border: "border-lantern-violet/25", bg: "bg-lantern-violet/[0.05]", label: "text-lantern-violet/70", metric: "text-lantern-violet/55" },
+  mint:   { border: "border-lantern-mint/25",   bg: "bg-lantern-mint/[0.05]",   label: "text-lantern-mint/70",   metric: "text-lantern-mint/55"   },
+  blue:   { border: "border-lantern-blue/25",   bg: "bg-lantern-blue/[0.05]",   label: "text-lantern-blue/70",   metric: "text-lantern-blue/55"   },
+} as const;
+
+function CompareSummaryCards({ hotels }: { hotels: HotelOffer[] }) {
+  const bestOverall  = [...hotels].sort((a, b) => b.ai_score - a.ai_score)[0];
+  const bestValue    = [...hotels].sort((a, b) => b.score_breakdown.price - a.score_breakdown.price)[0];
+  const mostWalkable = [...hotels].sort((a, b) => b.score_breakdown.walkability - a.score_breakdown.walkability)[0];
+
+  const cards: { icon: string; label: string; hotel: HotelOffer; metric: string; style: keyof typeof SUMMARY_CARD_STYLES }[] = [
+    { icon: "★", label: "Best Overall",    hotel: bestOverall,  metric: `Score ${bestOverall.ai_score}`,                                                            style: "violet" },
+    { icon: "↓", label: "Best Value",      hotel: bestValue,    metric: `$${Math.round(bestValue.price_per_night)}/night · Value ${bestValue.score_breakdown.price}`, style: "mint"   },
+    { icon: "⚡", label: "Most Walkable",   hotel: mostWalkable, metric: `Walk score ${mostWalkable.score_breakdown.walkability}`,                                    style: "blue"   },
+  ];
+
+  return (
+    <div className="grid grid-cols-3 gap-2.5 mb-5">
+      {cards.map(({ icon, label, hotel, metric, style }) => {
+        const s = SUMMARY_CARD_STYLES[style];
+        return (
+          <div key={label} className={`rounded-xl border ${s.border} ${s.bg} p-3`}>
+            <div className={`text-[8px] font-black uppercase tracking-widest ${s.label} mb-2 flex items-center gap-1`}>
+              <span>{icon}</span><span>{label}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              {hotel.image_url && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={hotel.image_url} alt={hotel.name} className="w-8 h-8 rounded-lg object-cover flex-shrink-0 bg-white/[0.05]" />
+              )}
+              <div className="min-w-0">
+                <div className="text-[11px] font-bold text-white leading-tight line-clamp-1">
+                  {hotel.name.split(",")[0].split("–")[0].trim()}
+                </div>
+                <div className={`text-[9px] mt-0.5 ${s.metric}`}>{metric}</div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 function CompareSectionRow({ label, colCount }: { label: string; colCount: number }) {
   return (
     <tr>
@@ -2186,7 +2270,7 @@ function CompareSectionRow({ label, colCount }: { label: string; colCount: numbe
 }
 
 function CompareScoreRow({
-  label, hotels, vals, winner, format, winnerLabel,
+  label, hotels, vals, winner, format, winnerLabel, tooltip,
 }: {
   label: string;
   hotels: HotelOffer[];
@@ -2194,17 +2278,35 @@ function CompareScoreRow({
   winner: CompareWinner;
   format: (v: number) => string;
   winnerLabel: string;
+  tooltip?: string;
 }) {
+  const maxVal = Math.max(...vals.map(v => v.val), 1);
   return (
     <tr className="border-b border-white/[0.04]">
-      <td className="py-2.5 pr-4 text-white/40 text-[11px] whitespace-nowrap">{label}</td>
+      <td className="py-3 pr-4 text-white/40 text-[11px] whitespace-nowrap align-top">
+        <span className="flex items-center gap-0.5">
+          {label}
+          {tooltip && <MetricInfo text={tooltip} />}
+        </span>
+      </td>
       {hotels.map(h => {
         const v = vals.find(x => x.id === h.hotel_id)!;
         const isW = winner?.id === h.hotel_id;
+        const barPct = Math.round((v.val / maxVal) * 100);
         return (
-          <td key={h.hotel_id} className={`py-2.5 px-3 text-[11px] ${isW ? "text-lantern-violet font-bold" : "text-white/55"}`}>
-            {format(v.val)}
-            {isW && <span className="ml-1 text-[9px] text-lantern-violet/55">{winnerLabel}</span>}
+          <td key={h.hotel_id} className="py-3 px-3 align-top">
+            <div className="space-y-1.5">
+              <div className="h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+                <div
+                  className={`h-full rounded-full ${isW ? "bg-lantern-violet" : "bg-white/[0.16]"}`}
+                  style={{ width: `${barPct}%` }}
+                />
+              </div>
+              <div className={`text-[11px] leading-none ${isW ? "text-lantern-violet font-bold" : "text-white/55"}`}>
+                {format(v.val)}
+                {isW && <span className="ml-1 text-[9px] text-lantern-violet/50">{winnerLabel}</span>}
+              </div>
+            </div>
           </td>
         );
       })}
@@ -2231,47 +2333,60 @@ function CompareFloatingTray({
 
   return (
     <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-30 w-full max-w-2xl px-4 pointer-events-none">
-      <div className="pointer-events-auto rounded-2xl border border-lantern-blue/40 bg-[#0d1117]/95 backdrop-blur-md shadow-[0_8px_40px_rgba(0,0,0,0.7)] px-4 py-3 flex items-center gap-3">
-        <div className="flex items-center gap-2 flex-1 min-w-0">
+      <div className="pointer-events-auto rounded-2xl border border-white/[0.12] bg-[#0c1018]/97 backdrop-blur-xl shadow-[0_8px_48px_rgba(0,0,0,0.85)] px-4 py-3 flex items-center gap-3">
+
+        {/* Label */}
+        <span className="text-[9px] font-black uppercase tracking-widest text-white/20 flex-shrink-0 hidden sm:block">Compare</span>
+
+        {/* Hotel slots */}
+        <div className="flex items-center gap-2 flex-1 min-w-0 overflow-hidden">
           {selected.map(h => (
-            <div key={h.hotel_id} className="relative flex-shrink-0">
-              <div className="w-10 h-10 rounded-lg overflow-hidden bg-white/[0.06] border border-white/[0.1]">
+            <div key={h.hotel_id} className="flex items-center gap-1.5 flex-shrink-0 rounded-xl bg-white/[0.05] border border-white/[0.07] pl-1.5 pr-2 py-1.5">
+              <div className="w-7 h-7 rounded-md overflow-hidden bg-white/[0.06] flex-shrink-0">
                 {h.image_url
                   // eslint-disable-next-line @next/next/no-img-element
                   ? <img src={h.image_url} alt={h.name} className="w-full h-full object-cover" />
-                  : <div className="w-full h-full flex items-center justify-center text-white/20 text-base">🏨</div>
+                  : <span className="w-full h-full flex items-center justify-center text-white/20 text-sm">🏨</span>
                 }
               </div>
+              <span className="text-[11px] font-semibold text-white/80 truncate max-w-[80px] sm:max-w-[110px]">
+                {h.name.split(",")[0].split("–")[0].trim()}
+              </span>
               <button
                 onClick={() => onRemove(h.hotel_id)}
-                className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-white/25 hover:bg-white/50 flex items-center justify-center transition-colors"
+                className="flex-shrink-0 text-white/25 hover:text-white/70 transition-colors ml-0.5"
                 aria-label={`Remove ${h.name}`}
               >
-                <svg className="w-2.5 h-2.5 text-white" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
+                <svg className="w-3 h-3" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
                   <path d="M1.5 1.5l7 7M8.5 1.5l-7 7" />
                 </svg>
               </button>
             </div>
           ))}
-          {compareIds.length < 2 && (
-            <div className="w-10 h-10 rounded-lg border border-dashed border-white/15 flex items-center justify-center flex-shrink-0">
-              <span className="text-white/20 text-lg leading-none">+</span>
+
+          {/* Empty slot hint */}
+          {selected.length < 2 && (
+            <div className="flex items-center gap-1.5 rounded-xl border border-dashed border-white/[0.10] px-3 py-1.5 flex-shrink-0">
+              <span className="text-[11px] text-white/20">+ Add hotel</span>
             </div>
           )}
         </div>
 
-        <div className="flex-shrink-0 flex flex-col items-end gap-1">
-          {compareIds.length < 2
-            ? <p className="text-[11px] text-white/35 whitespace-nowrap">Select {2 - compareIds.length} more to compare</p>
-            : (
-              <button
-                onClick={onOpen}
-                className="text-[12px] font-bold px-4 py-2 bg-lantern-blue text-white rounded-xl hover:bg-lantern-blue/80 transition-colors whitespace-nowrap"
-              >
-                Compare {compareIds.length} hotels →
-              </button>
-            )
-          }
+        {/* CTA */}
+        <div className="flex-shrink-0">
+          {compareIds.length < 2 ? (
+            <span className="text-[11px] text-white/25 whitespace-nowrap">1 more needed</span>
+          ) : (
+            <button
+              onClick={onOpen}
+              className="flex items-center gap-1.5 text-[13px] font-bold px-5 py-2.5 bg-lantern-blue text-white rounded-xl hover:bg-lantern-blue/80 active:scale-95 transition-all whitespace-nowrap shadow-[0_2px_16px_rgba(119,167,255,0.35)]"
+            >
+              Compare {compareIds.length}
+              <svg className="w-3.5 h-3.5" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
+                <path d="M2 6h8M6 2l4 4-4 4" />
+              </svg>
+            </button>
+          )}
         </div>
       </div>
     </div>
@@ -2299,7 +2414,7 @@ function HotelComparePanel({
   onRemove: (id: string) => void;
 }) {
   if (hotels.length < 2) return null;
-  const verdict = generateVerdict(hotels);
+  const verdictParts = buildVerdictParts(hotels);
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-black/75 backdrop-blur-sm">
@@ -2321,13 +2436,30 @@ function HotelComparePanel({
       <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-5">
         <div className="max-w-4xl mx-auto">
 
+          {/* Summary award cards */}
+          <CompareSummaryCards hotels={hotels} />
+
           {/* Verdict */}
-          <div className="mb-5 rounded-xl border border-lantern-violet/30 bg-lantern-violet/[0.06] px-4 py-3.5">
-            <div className="text-[9px] font-black uppercase tracking-widest text-lantern-violet mb-1.5">
-              TravelGrab Verdict
+          {verdictParts && (
+            <div className="mb-5 rounded-xl border border-white/[0.08] bg-white/[0.025] px-4 py-4">
+              <div className="text-[9px] font-black uppercase tracking-widest text-lantern-violet mb-3">
+                TravelGrab Verdict
+              </div>
+              <div className="space-y-2">
+                <p className="text-[12px] text-white/85 font-semibold leading-snug">{verdictParts.chooseIf}</p>
+                {verdictParts.tradeoff && (
+                  <p className="text-[11px] text-lantern-gold/75 leading-relaxed">
+                    <span className="mr-1 opacity-70">⚠</span>{verdictParts.tradeoff}
+                  </p>
+                )}
+                {verdictParts.considerAlternativeIf && (
+                  <p className="text-[11px] text-white/45 leading-relaxed">
+                    <span className="mr-1 opacity-60">→</span>{verdictParts.considerAlternativeIf}
+                  </p>
+                )}
+              </div>
             </div>
-            <p className="text-[12px] text-white/70 leading-relaxed">{verdict}</p>
-          </div>
+          )}
 
           {/* Table — horizontal scroll on narrow screens */}
           <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
@@ -2416,7 +2548,7 @@ function HotelComparePanel({
                 })()}
                 {hotels.some(h => h.neighborhood_fit_score > 0) && (() => {
                   const vals = hotels.map(h => ({ id: h.hotel_id, val: h.neighborhood_fit_score }));
-                  return <CompareScoreRow label="Neighborhood Fit" hotels={hotels} vals={vals} winner={qualityWinner(vals)} format={v => v > 0 ? String(v) : "–"} winnerLabel="Best" />;
+                  return <CompareScoreRow label="Neighborhood Fit" hotels={hotels} vals={vals} winner={qualityWinner(vals)} format={v => v > 0 ? String(v) : "–"} winnerLabel="Best" tooltip="How well the hotel's area matches your selected travel style — scored across dining, nightlife, sightseeing, and transport density." />;
                 })()}
                 {(() => {
                   const vals = hotels.map(h => ({ id: h.hotel_id, val: h.score_breakdown.location }));
@@ -2424,15 +2556,15 @@ function HotelComparePanel({
                 })()}
                 {(() => {
                   const vals = hotels.map(h => ({ id: h.hotel_id, val: h.score_breakdown.walkability }));
-                  return <CompareScoreRow label="Walkability" hotels={hotels} vals={vals} winner={qualityWinner(vals)} format={String} winnerLabel="Most walkable" />;
+                  return <CompareScoreRow label="Walkability" hotels={hotels} vals={vals} winner={qualityWinner(vals)} format={String} winnerLabel="Most walkable" tooltip="How easy it is to get around on foot from this hotel — based on proximity to transit, shops, and attractions." />;
                 })()}
                 {(() => {
                   const vals = hotels.map(h => ({ id: h.hotel_id, val: h.score_breakdown.stars }));
-                  return <CompareScoreRow label="Hotel Quality" hotels={hotels} vals={vals} winner={qualityWinner(vals)} format={String} winnerLabel="Highest" />;
+                  return <CompareScoreRow label="Hotel Quality" hotels={hotels} vals={vals} winner={qualityWinner(vals)} format={String} winnerLabel="Highest" tooltip="Based on star class, brand tier, and property condition. Higher means a more upscale or well-maintained property." />;
                 })()}
                 {(() => {
                   const vals = hotels.map(h => ({ id: h.hotel_id, val: h.score_breakdown.price }));
-                  return <CompareScoreRow label="Price/Value" hotels={hotels} vals={vals} winner={qualityWinner(vals)} format={String} winnerLabel="Best value" />;
+                  return <CompareScoreRow label="Price/Value" hotels={hotels} vals={vals} winner={qualityWinner(vals)} format={String} winnerLabel="Best value" tooltip="How much quality you get per dollar relative to the other results in this search. High score = strong value; low score = priced above average for what's offered." />;
                 })()}
 
                 <CompareSectionRow label="Amenities" colCount={hotels.length} />
@@ -2485,14 +2617,18 @@ function HotelComparePanel({
           </div>
 
           {/* Legend */}
-          <div className="mt-4 flex items-center gap-4 text-[10px] text-white/25">
+          <div className="mt-5 flex items-center gap-4 text-[10px] text-white/20">
             <div className="flex items-center gap-1.5">
-              <div className="w-3 h-3 rounded bg-lantern-mint/20 border border-lantern-mint/30" />
-              <span>Best price</span>
+              <div className="w-3 h-1.5 rounded-full bg-lantern-mint/50" />
+              <span>Lowest price</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <div className="w-3 h-3 rounded bg-lantern-violet/20 border border-lantern-violet/30" />
+              <div className="w-3 h-1.5 rounded-full bg-lantern-violet/60" />
               <span>Highest score</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="w-3 h-1.5 rounded-full bg-white/[0.16]" />
+              <span>Other</span>
             </div>
           </div>
 
