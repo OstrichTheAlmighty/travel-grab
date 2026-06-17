@@ -2072,46 +2072,6 @@ function HotelCard({
   );
 }
 
-// ── Recommendation panel ──────────────────────────────────────────────────────
-
-/** Compute a decision-quality label for the AI Pick that explains the win condition. */
-function computePickDecisionLabel(
-  pick: HotelOffer,
-  allOffers: HotelOffer[],
-  activePrefs: readonly PrefId[],
-): string {
-  const others    = allOffers.filter((o) => o.hotel_id !== pick.hotel_id);
-  const prefLabel = activePrefs[0]
-    ? (NEIGHBORHOOD_PREFS.find((x) => x.id === activePrefs[0])?.label ?? "")
-    : "";
-
-  const sortedPrices  = [...allOffers].map((o) => o.price_per_night).sort((a, b) => a - b);
-  const priceIdx      = sortedPrices.indexOf(pick.price_per_night);
-  const priceRankPct  = sortedPrices.length > 1 ? priceIdx / (sortedPrices.length - 1) : 0.5;
-
-  if (activePrefs.length > 0 && prefLabel) {
-    const hasTopNf = others.length === 0 || others.every((o) => pick.neighborhood_fit_score >= o.neighborhood_fit_score);
-    const isHighNf = pick.neighborhood_fit_score >= 65;
-    if (hasTopNf && priceRankPct <= 0.4)  return `Best Overall ${prefLabel} Match`;
-    if (hasTopNf && priceRankPct > 0.65)  return `Highest ${prefLabel} Fit Score`;
-    if (hasTopNf)                          return `Best Overall ${prefLabel} Match`;
-    if (isHighNf && priceRankPct <= 0.3)   return `Best Value ${prefLabel} Option`;
-    if (pick.score_breakdown.location >= 75 && pick.neighborhood_fit_score >= 55) return `Great Location, ${prefLabel} Area`;
-    if (isHighNf)                          return `Strong ${prefLabel} Match`;
-    return `${prefLabel} Area Pick`;
-  } else {
-    const hasTopRating = others.length === 0 || others.every((o) => pick.overall_rating >= o.overall_rating);
-    const isExpensive  = priceRankPct > 0.65;
-    const isCheap      = priceRankPct < 0.35;
-    if (hasTopRating && isExpensive)                 return "Excellent Reviews, Higher Price";
-    if (hasTopRating && isCheap)                     return "Best Reviews, Best Value";
-    if (hasTopRating)                                return "Highest Guest Rating";
-    if (pick.score_breakdown.destination_fit >= 80)  return "Prime Location Pick";
-    if (pick.score_breakdown.location >= 75)         return "Best Location Score";
-    if (isCheap)                                     return "Best Value Overall";
-    return "Best Overall Balance";
-  }
-}
 
 // ── Hotel Comparison helpers ──────────────────────────────────────────────────
 
@@ -2652,14 +2612,10 @@ function RecommendationPanel({
   const pick = offers.find((o) => o.recommendation_label === "Best Overall") ?? offers[0];
   if (!pick) return null;
 
-  // Runner-up: highest ai_score that isn't the pick
   const sortedByScore = [...offers].sort((a, b) => b.ai_score - a.ai_score);
   const runnerUp = sortedByScore.find((o) => o.hotel_id !== pick.hotel_id) ?? null;
-
-  const margin     = runnerUp ? pick.ai_score - runnerUp.ai_score : 0;
-  const confidence = margin >= 5 ? "High" : margin >= 2 ? "Medium" : "Low";
-  const confidenceColor = confidence === "High"
-    ? "text-lantern-mint" : confidence === "Medium" ? "text-lantern-blue" : "text-lantern-gold";
+  const margin   = runnerUp ? Math.round((pick.ai_score - runnerUp.ai_score) * 10) / 10 : 0;
+  const isCloseCall = margin < 5 && runnerUp !== null;
 
   const pickInRecNbhd = recommendedSummary
     ? recommendedSummary.hotels.some((h) => h.hotel_id === pick.hotel_id)
@@ -2671,72 +2627,123 @@ function RecommendationPanel({
     : "") as string;
   const prefLabelLower = prefLabel.toLowerCase();
 
-  const decisionLabel = computePickDecisionLabel(pick, offers, activePrefs);
-
-  // ── Why ranked #1 (strengths, max 4) ──────────────────────────────────────
-  const strengths: string[] = [];
+  // ── "Won because" bullets (max 3, sorted by weighted impact) ────────────────
+  const wonCandidates: { text: string; impact: number }[] = [];
   if (runnerUp) {
-    if (prefsActive && pick.neighborhood_fit_score > runnerUp.neighborhood_fit_score + 5) {
-      strengths.push(`Highest ${prefLabel} neighborhood fit score in this search`);
+    if (prefsActive) {
+      const nfGap = pick.neighborhood_fit_score - runnerUp.neighborhood_fit_score;
+      if (nfGap >= 5) {
+        wonCandidates.push({
+          text: `Better ${prefLabelLower || "preference"} neighborhood fit (${pick.neighborhood_fit_score} vs ${runnerUp.neighborhood_fit_score})`,
+          impact: nfGap * 0.35,
+        });
+      } else if (pick.neighborhood_fit_score >= 60 && nfGap >= 0) {
+        wonCandidates.push({
+          text: `Good ${prefLabelLower || "preference"} neighborhood match (score ${pick.neighborhood_fit_score})`,
+          impact: pick.neighborhood_fit_score * 0.15,
+        });
+      }
+    } else if (pick.score_breakdown.destination_fit > 0) {
+      const dfGap = pick.score_breakdown.destination_fit - runnerUp.score_breakdown.destination_fit;
+      if (dfGap >= 8) {
+        wonCandidates.push({
+          text: `Better visitor-facing location (area score ${pick.score_breakdown.destination_fit} vs ${runnerUp.score_breakdown.destination_fit})`,
+          impact: dfGap * 0.22,
+        });
+      }
     }
-    if (pick.score_breakdown.reviews > runnerUp.score_breakdown.reviews + 7) {
-      strengths.push("Highest guest satisfaction among top contenders");
-    } else if (pick.overall_rating >= 4.5 && runnerUp.overall_rating < 4.5) {
-      strengths.push(`Outstanding guest rating (${pick.overall_rating.toFixed(1)}★)`);
-    }
-    if (pick.score_breakdown.location > runnerUp.score_breakdown.location + 7) {
-      strengths.push("Best location score in this search");
-    }
-    if (pick.score_breakdown.walkability > runnerUp.score_breakdown.walkability + 7) {
-      strengths.push("More walkable than other top contenders");
-    }
-    if (pick.score_breakdown.price > runnerUp.score_breakdown.price + 7) {
-      strengths.push("Best price/value balance among top options");
-    }
-    if (pick.score_breakdown.stars > runnerUp.score_breakdown.stars + 7) {
-      strengths.push("Highest hotel quality rating");
-    }
-    if (!prefsActive && pick.score_breakdown.destination_fit > 0
-        && pick.score_breakdown.destination_fit > runnerUp.score_breakdown.destination_fit + 10) {
-      strengths.push("Best visitor-facing location in this search");
-    }
-  }
-  // Catch-all when fewer than 2 specific strengths found
-  if (strengths.length < 2) {
-    const topKeys = (Object.entries(pick.score_breakdown) as [string, number][])
-      .filter(([, v]) => v > 0)
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 2)
-      .map(([k]) => k);
-    const keyLabel = (k: string): string =>
-      ({ reviews: "guest reviews", location: "location", price: "price/value",
-         stars: "hotel quality", walkability: "walkability", destination_fit: "area appeal" }[k] ?? k);
-    if (topKeys.length >= 2) {
-      strengths.push(`Strong balance of ${keyLabel(topKeys[0])} and ${keyLabel(topKeys[1])}`);
-    }
-  }
-  const strengthBullets = strengths.slice(0, 4);
 
-  // ── Tradeoffs (max 2) ──────────────────────────────────────────────────────
-  const tradeoffs: string[] = [];
-  if (runnerUp) {
-    if (runnerUp.overall_rating > pick.overall_rating + 0.2) {
-      tradeoffs.push(`Reviews solid but not highest — ${runnerUp.name} rated ${runnerUp.overall_rating.toFixed(1)}★ vs ${pick.overall_rating.toFixed(1)}★`);
+    const reviewGap = pick.score_breakdown.reviews - runnerUp.score_breakdown.reviews;
+    const reviewW   = prefsActive ? 0.20 : 0.25;
+    if (reviewGap >= 5) {
+      wonCandidates.push({ text: `Stronger guest satisfaction (${pick.score_breakdown.reviews} vs ${runnerUp.score_breakdown.reviews})`, impact: reviewGap * reviewW });
+    } else if (pick.score_breakdown.reviews >= 70 && reviewGap >= 0) {
+      wonCandidates.push({ text: `Strong guest reviews (${pick.score_breakdown.reviews}) — similar quality to alternatives`, impact: pick.score_breakdown.reviews * reviewW * 0.4 });
     }
-    const priceGap = pick.price_per_night - runnerUp.price_per_night;
-    if (priceGap > 25) {
-      tradeoffs.push(`$${Math.round(priceGap)}/night more than the next ranked option`);
-    }
-  }
-  if (tradeoffs.length < 2 && pick.score_breakdown.price < 45) {
-    tradeoffs.push("Priced at a premium compared to alternatives in this search");
-  }
-  if (tradeoffs.length < 2 && pick.score_breakdown.walkability < 45) {
-    tradeoffs.push("Walkability below average for this search");
-  }
-  const tradeoffBullets = tradeoffs.slice(0, 2);
 
-  // ── Closest alternative analysis ───────────────────────────────────────────
+    const starsGap = pick.score_breakdown.stars - runnerUp.score_breakdown.stars;
+    const starsW   = prefsActive ? 0.25 : 0.18;
+    if (starsGap >= 5) {
+      wonCandidates.push({ text: `Higher hotel quality score (${pick.score_breakdown.stars} vs ${runnerUp.score_breakdown.stars})`, impact: starsGap * starsW });
+    }
+
+    if (!prefsActive) {
+      const locGap = pick.score_breakdown.location - runnerUp.score_breakdown.location;
+      if (locGap >= 8) {
+        wonCandidates.push({ text: `Better central location score (${pick.score_breakdown.location} vs ${runnerUp.score_breakdown.location})`, impact: locGap * 0.17 });
+      }
+    }
+
+    const priceScoreGap = pick.score_breakdown.price - runnerUp.score_breakdown.price;
+    const priceW        = prefsActive ? 0.10 : 0.14;
+    if (priceScoreGap >= 7) {
+      wonCandidates.push({ text: `Better value for price paid (value score ${pick.score_breakdown.price} vs ${runnerUp.score_breakdown.price})`, impact: priceScoreGap * priceW });
+    } else if (pick.price_per_night < runnerUp.price_per_night - 20) {
+      wonCandidates.push({
+        text: `Lower price ($${Math.round(pick.price_per_night)} vs $${Math.round(runnerUp.price_per_night)}/night)`,
+        impact: (runnerUp.price_per_night - pick.price_per_night) * 0.04,
+      });
+    }
+
+    const walkGap = pick.score_breakdown.walkability - runnerUp.score_breakdown.walkability;
+    if (walkGap >= 10) {
+      wonCandidates.push({ text: `More walkable area (${pick.score_breakdown.walkability} vs ${runnerUp.score_breakdown.walkability})`, impact: walkGap * (prefsActive ? 0.10 : 0.04) });
+    }
+
+    if (wonCandidates.length === 0) {
+      wonCandidates.push({ text: "Best overall balance across all scoring factors", impact: margin });
+    }
+  }
+  wonCandidates.sort((a, b) => b.impact - a.impact);
+  const wonBullets = wonCandidates.slice(0, 3).map((c) => c.text);
+
+  // ── Close-call one-liner ────────────────────────────────────────────────────
+  let closeCallSentence = "";
+  if (isCloseCall && runnerUp) {
+    const allDims = prefsActive ? [
+      { label: "neighborhood fit", pickV: pick.neighborhood_fit_score,          runnerV: runnerUp.neighborhood_fit_score,          w: 0.35 },
+      { label: "hotel quality",   pickV: pick.score_breakdown.stars,            runnerV: runnerUp.score_breakdown.stars,            w: 0.25 },
+      { label: "guest reviews",   pickV: pick.score_breakdown.reviews,          runnerV: runnerUp.score_breakdown.reviews,          w: 0.20 },
+      { label: "price/value",     pickV: pick.score_breakdown.price,            runnerV: runnerUp.score_breakdown.price,            w: 0.10 },
+      { label: "walkability",     pickV: pick.score_breakdown.walkability,      runnerV: runnerUp.score_breakdown.walkability,      w: 0.10 },
+    ] : [
+      { label: "guest reviews",   pickV: pick.score_breakdown.reviews,          runnerV: runnerUp.score_breakdown.reviews,          w: 0.25 },
+      { label: "destination fit", pickV: pick.score_breakdown.destination_fit,  runnerV: runnerUp.score_breakdown.destination_fit,  w: 0.22 },
+      { label: "hotel quality",   pickV: pick.score_breakdown.stars,            runnerV: runnerUp.score_breakdown.stars,            w: 0.18 },
+      { label: "location",        pickV: pick.score_breakdown.location,         runnerV: runnerUp.score_breakdown.location,         w: 0.17 },
+      { label: "price/value",     pickV: pick.score_breakdown.price,            runnerV: runnerUp.score_breakdown.price,            w: 0.14 },
+      { label: "walkability",     pickV: pick.score_breakdown.walkability,      runnerV: runnerUp.score_breakdown.walkability,      w: 0.04 },
+    ];
+    const pickWins   = allDims.filter(d => d.pickV > d.runnerV + 2).sort((a, b) => (b.pickV - b.runnerV) * b.w - (a.pickV - a.runnerV) * a.w);
+    const runnerWins = allDims.filter(d => d.runnerV > d.pickV + 2).sort((a, b) => (b.runnerV - b.pickV) * b.w - (a.runnerV - a.pickV) * a.w);
+    const winFactor    = pickWins[0]?.label ?? "overall balance";
+    const loseFactor   = runnerWins[0]?.label;
+    const ptStr        = margin === 0 ? "Equal total score but ranked" : `Won by ${margin} pt${margin !== 1 ? "s" : ""} on`;
+    closeCallSentence  = `${ptStr} stronger ${winFactor}${loseFactor ? `. #2 ${runnerUp.name} has better ${loseFactor}.` : "."}`;
+  }
+
+  // ── Score drivers (top 3 weighted contributors) ─────────────────────────────
+  const allFactors = prefsActive ? [
+    { key: "nbhd",      label: "Neighborhood Fit", val: pick.neighborhood_fit_score,          w: 0.35 },
+    { key: "stars",     label: "Hotel Quality",    val: pick.score_breakdown.stars,           w: 0.25 },
+    { key: "reviews",   label: "Guest Reviews",    val: pick.score_breakdown.reviews,         w: 0.20 },
+    { key: "price",     label: "Price/Value",      val: pick.score_breakdown.price,           w: 0.10 },
+    { key: "walk",      label: "Walkability",      val: pick.score_breakdown.walkability,     w: 0.10 },
+  ] : [
+    { key: "reviews",   label: "Guest Reviews",    val: pick.score_breakdown.reviews,         w: 0.25 },
+    { key: "dest",      label: "Destination Fit",  val: pick.score_breakdown.destination_fit, w: 0.22 },
+    { key: "stars",     label: "Hotel Quality",    val: pick.score_breakdown.stars,           w: 0.18 },
+    { key: "location",  label: "Location",         val: pick.score_breakdown.location,        w: 0.17 },
+    { key: "price",     label: "Price/Value",      val: pick.score_breakdown.price,           w: 0.14 },
+    { key: "walk",      label: "Walkability",      val: pick.score_breakdown.walkability,     w: 0.04 },
+  ];
+  const scoreDrivers = allFactors
+    .filter(f => f.val > 0)
+    .map(f => ({ ...f, pts: Math.round(f.val * f.w) }))
+    .sort((a, b) => b.pts - a.pts)
+    .slice(0, 3);
+
+  // ── Closest alternative ─────────────────────────────────────────────────────
   const altStrengths: string[] = [];
   const altWeaknesses: string[] = [];
   if (runnerUp) {
@@ -2768,31 +2775,40 @@ function RecommendationPanel({
   }
 
   return (
-    <div className="mb-4 rounded-xl border border-lantern-violet/40 bg-lantern-violet/[0.07] px-4 sm:px-5 py-4 shadow-[0_0_24px_rgba(139,92,246,0.10)]">
+    <div className={`mb-4 rounded-xl border px-4 sm:px-5 py-4 shadow-[0_0_24px_rgba(139,92,246,0.10)] ${
+      isCloseCall
+        ? "border-lantern-gold/35 bg-lantern-gold/[0.04]"
+        : "border-lantern-violet/40 bg-lantern-violet/[0.07]"
+    }`}>
 
-      {/* Header: AI PICK · CONFIDENCE · MARGIN */}
-      <div className="flex items-center justify-between gap-2 mb-2.5">
-        <div className="flex items-center gap-1.5 flex-wrap">
+      {/* Header */}
+      <div className="flex items-center justify-between gap-2 mb-3">
+        <div className="flex items-center gap-2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/nav-icon.png" alt="" aria-hidden width={16} height={16} className="h-4 w-4 flex-shrink-0 rounded-sm object-cover" />
-          <span className="text-[10px] font-black uppercase tracking-widest text-lantern-violet">AI Pick</span>
-          <span className="text-[10px] text-white/15">·</span>
-          <span className={`text-[10px] font-bold uppercase tracking-wider ${confidenceColor}`}>
-            {confidence} Confidence
+          <span className={`text-[10px] font-black uppercase tracking-widest ${isCloseCall ? "text-lantern-gold" : "text-lantern-violet"}`}>
+            {isCloseCall ? "Close Call" : "AI Pick"}
           </span>
         </div>
-        {margin > 0 && (
-          <span className="text-[10px] text-white/30 flex-shrink-0">
-            Won by {margin} pt{margin !== 1 ? "s" : ""}
+        <div className="flex items-center gap-2 flex-shrink-0">
+          {margin > 0 && (
+            <span className="text-[10px] text-white/30">
+              Won by {margin} pt{margin !== 1 ? "s" : ""}
+            </span>
+          )}
+          <span className={`text-[10px] font-bold border rounded-full px-2 py-0.5 ${scoreBg(pick.ai_score)}`}>
+            {pick.ai_score}
           </span>
-        )}
+        </div>
       </div>
 
-      {/* Pick name + neighborhood + price */}
-      <div className="flex items-start justify-between gap-3 mb-2">
+      {/* Hotel name + price */}
+      <div className="flex items-start justify-between gap-3 mb-3">
         <div className="min-w-0">
           {pick.inferred_neighborhood && (
-            <div className="text-[10px] text-lantern-violet/55 font-semibold mb-0.5">{pick.inferred_neighborhood}</div>
+            <div className={`text-[10px] font-semibold mb-0.5 ${isCloseCall ? "text-lantern-gold/50" : "text-lantern-violet/55"}`}>
+              {pick.inferred_neighborhood}
+            </div>
           )}
           <div className="text-sm font-bold text-white leading-tight">{pick.name}</div>
         </div>
@@ -2802,41 +2818,48 @@ function RecommendationPanel({
         </span>
       </div>
 
-      {/* Decision label */}
-      <div className="mb-3">
-        <span className={`inline-flex items-center gap-1 text-[10px] font-bold border rounded-full px-2.5 py-1 ${scoreBg(pick.ai_score)}`}>
-          {decisionLabel}
-        </span>
-      </div>
+      {/* Close call: one-liner explanation */}
+      {isCloseCall && closeCallSentence && (
+        <div className="mb-3 px-3 py-2.5 rounded-lg bg-lantern-gold/[0.08] border border-lantern-gold/20">
+          <p className="text-[11px] text-lantern-gold/80 leading-snug">{closeCallSentence}</p>
+        </div>
+      )}
 
-      {/* Why ranked #1 */}
-      {strengthBullets.length > 0 && (
+      {/* Won because bullets (clear wins only) */}
+      {!isCloseCall && wonBullets.length > 0 && (
         <div className="mb-3">
-          <div className="text-[9px] font-black uppercase tracking-widest text-white/22 mb-1.5">Why ranked #1</div>
+          <div className="text-[9px] font-black uppercase tracking-widest text-white/22 mb-1.5">Won because</div>
           <div className="space-y-1.5">
-            {strengthBullets.map((b, i) => (
+            {wonBullets.map((b, i) => (
               <div key={i} className="flex items-start gap-2">
-                <svg className="w-2.5 h-2.5 text-lantern-violet/70 flex-shrink-0 mt-[3px]" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                <svg className="w-2.5 h-2.5 text-lantern-violet/65 flex-shrink-0 mt-[3px]" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M1 6l3.5 3.5L11 2" />
                 </svg>
-                <span className="text-[11px] text-white/65 leading-snug">{b}</span>
+                <span className="text-[11px] text-white/68 leading-snug">{b}</span>
               </div>
             ))}
           </div>
         </div>
       )}
 
-      {/* Tradeoffs */}
-      {tradeoffBullets.length > 0 && (
+      {/* Score Drivers */}
+      {scoreDrivers.length > 0 && (
         <div className="mb-3">
-          <div className="text-[9px] font-black uppercase tracking-widest text-white/22 mb-1.5">
-            Tradeoff{tradeoffBullets.length > 1 ? "s" : ""}
-          </div>
-          <div className="space-y-1">
-            {tradeoffBullets.map((t, i) => (
-              <div key={i} className="flex items-start gap-1.5">
-                <span className="text-white/25 flex-shrink-0 leading-[18px]">•</span>
-                <span className="text-[11px] text-white/42 leading-snug">{t}</span>
+          <div className="text-[9px] font-black uppercase tracking-widest text-white/22 mb-2">Score Drivers</div>
+          <div className="space-y-2">
+            {scoreDrivers.map((d, i) => (
+              <div key={d.key} className="flex items-center gap-2">
+                <span className="text-[9px] text-white/20 w-3 text-right flex-shrink-0 tabular-nums">{i + 1}.</span>
+                <span className="text-[11px] text-white/50 flex-1 min-w-0 truncate">{d.label}</span>
+                <div className="h-1 w-14 rounded-full bg-white/[0.06] overflow-hidden flex-shrink-0">
+                  <div
+                    className={`h-full rounded-full ${i === 0 ? (isCloseCall ? "bg-lantern-gold" : "bg-lantern-violet") : "bg-white/20"}`}
+                    style={{ width: `${d.val}%` }}
+                  />
+                </div>
+                <span className={`text-[10px] font-bold tabular-nums w-7 text-right flex-shrink-0 ${i === 0 ? (isCloseCall ? "text-lantern-gold" : "text-lantern-violet") : "text-white/30"}`}>
+                  +{d.pts}
+                </span>
               </div>
             ))}
           </div>
@@ -2857,27 +2880,23 @@ function RecommendationPanel({
               )}
             </div>
             <div className="text-right flex-shrink-0">
-              <div className="text-[11px] font-bold text-white/50 tabular-nums">
-                ${Math.round(runnerUp.price_per_night)}/night
-              </div>
-              <div className={`text-[10px] font-bold ${scoreColor(runnerUp.ai_score)}`}>
-                Score {runnerUp.ai_score}
-              </div>
+              <div className="text-[11px] font-bold text-white/45 tabular-nums">${Math.round(runnerUp.price_per_night)}/night</div>
+              <div className={`text-[10px] font-bold ${scoreColor(runnerUp.ai_score)}`}>Score {runnerUp.ai_score}</div>
             </div>
           </div>
           <div className="space-y-1 mb-1.5">
-            <div className="text-[9px] text-white/22 mb-0.5">What it does better:</div>
+            <div className="text-[9px] text-white/22 mb-0.5">What it does better</div>
             {altStrengths.slice(0, 2).map((s, i) => (
               <div key={i} className="flex items-start gap-2">
                 <svg className="w-2.5 h-2.5 text-lantern-mint/45 flex-shrink-0 mt-[3px]" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M1 6l3.5 3.5L11 2" />
                 </svg>
-                <span className="text-[10px] text-white/42 leading-snug">{s}</span>
+                <span className="text-[10px] text-white/40 leading-snug">{s}</span>
               </div>
             ))}
           </div>
           <div className="space-y-1">
-            <div className="text-[9px] text-white/22 mb-0.5">Why it ranked lower:</div>
+            <div className="text-[9px] text-white/22 mb-0.5">Why it ranked lower</div>
             {altWeaknesses.slice(0, 2).map((w, i) => (
               <div key={i} className="flex items-start gap-1.5">
                 <span className="text-white/20 flex-shrink-0 leading-[18px]">•</span>
@@ -2888,7 +2907,7 @@ function RecommendationPanel({
         </div>
       )}
 
-      {/* Phase 6: AI Pick not from recommended neighborhood */}
+      {/* AI Pick not from recommended neighborhood */}
       {prefsActive && !pickInRecNbhd && recommendedSummary && (
         <div className="mt-3 pt-3 border-t border-white/[0.05]">
           <p className="text-[10px] text-white/35 leading-relaxed">
