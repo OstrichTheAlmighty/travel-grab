@@ -903,9 +903,11 @@ export interface HotelOffer {
   transit_note:     string;
   latitude?:  number;
   longitude?: number;
-  rank_position: number;
-  rank_bullets:  string[];
-  rank_weakness: string;
+  rank_position:       number;
+  rank_bullets:        string[];
+  rank_weakness:       string;
+  rating_sanity_note:  string;
+  extra_badges:        string[];
 }
 
 // ── Base helpers ──────────────────────────────────────────────────────────────
@@ -1540,9 +1542,11 @@ function scoreHotels(
       })(),
       location_summary: enrichment?.locationSummary ?? "",
       transit_note:     enrichment?.transitNote     ?? "",
-      rank_position:  0,
-      rank_bullets:   [],
-      rank_weakness:  "",
+      rank_position:      0,
+      rank_bullets:       [],
+      rank_weakness:      "",
+      rating_sanity_note: "",
+      extra_badges:       [],
     };
   });
 }
@@ -1596,6 +1600,25 @@ function assignLabels(scored: HotelOffer[], prefs: string[]): void {
       (a.score_breakdown.reviews + a.score_breakdown.location - a.score_breakdown.price * 0.3)
     )[0];
   if (val) claim(val, "Best Value");
+
+  // ── Extra category badges (coexist with primary label) ────────────────────
+  const bestReviews = scored
+    .filter((h) => h.overall_rating >= 4.5 && h.review_count >= 100)
+    .sort((a, b) => b.overall_rating !== a.overall_rating ? b.overall_rating - a.overall_rating : b.review_count - a.review_count)[0];
+  if (bestReviews) bestReviews.extra_badges.push("Best Reviews");
+
+  const mostWalkable = scored
+    .filter((h) => h.score_breakdown.walkability >= 65)
+    .sort((a, b) => b.score_breakdown.walkability - a.score_breakdown.walkability)[0];
+  if (mostWalkable) mostWalkable.extra_badges.push("Most Walkable");
+
+  const bizPick = scored
+    .filter((h) => h.star_rating >= 4 && h.overall_rating >= 4.0)
+    .sort((a, b) =>
+      (b.score_breakdown.location + b.score_breakdown.reviews - b.score_breakdown.price * 0.15) -
+      (a.score_breakdown.location + a.score_breakdown.reviews - a.score_breakdown.price * 0.15)
+    )[0];
+  if (bizPick) bizPick.extra_badges.push("Business Pick");
 }
 
 // ── Recommendation text ───────────────────────────────────────────────────────
@@ -1959,6 +1982,29 @@ function buildRankExplanations(sorted: HotelOffer[], prefs: string[]): void {
 
     h.rank_bullets  = bullets.slice(0, 3);
     h.rank_weakness = weakness;
+
+    // Rating sanity note: if this hotel is ranked above one with >0.5★ higher rating,
+    // show an explicit explanation so users never see an unexplained surprise.
+    const below = i < sorted.length - 1 ? sorted[i + 1] : null;
+    let ratingNote = "";
+    if (below && below.overall_rating > h.overall_rating + 0.5 && below.overall_rating >= 4.0) {
+      const reasons: string[] = [];
+      if (h.score_breakdown.price         > below.score_breakdown.price         + 12) reasons.push("better value");
+      if (h.score_breakdown.destination_fit > below.score_breakdown.destination_fit + 8) reasons.push("stronger location fit");
+      if (h.score_breakdown.location      > below.score_breakdown.location      + 8)  reasons.push("better location score");
+      if (h.neighborhood_fit_score        > below.neighborhood_fit_score        + 8)  reasons.push("stronger neighborhood fit");
+      if (h.score_breakdown.stars         > below.score_breakdown.stars         + 8)  reasons.push("higher hotel quality");
+      if (h.score_breakdown.walkability   > below.score_breakdown.walkability   + 15) reasons.push("better walkability");
+      const ratingStr = `${h.overall_rating.toFixed(1)}★ vs ${below.overall_rating.toFixed(1)}★`;
+      if (reasons.length >= 2) {
+        ratingNote = `Lower guest rating (${ratingStr}) offset by ${reasons.slice(0, 2).join(" and ")}.`;
+      } else if (reasons.length === 1) {
+        ratingNote = `Lower guest rating (${ratingStr}), but ${reasons[0]} compensates.`;
+      } else {
+        ratingNote = `Lower guest rating (${ratingStr}) — higher overall score from location and value factors.`;
+      }
+    }
+    h.rating_sanity_note = ratingNote;
   }
 }
 
