@@ -282,6 +282,355 @@ const NEIGHBORHOOD_FIT_TABLES: Record<string, CityNeighborhoodTable> = {
       "l'hospitalet": 42, "hospitalet": 42, "les corts": 60, "poblenou": 65,
     },
   },
+  london: {
+    luxury: {
+      "mayfair": 98, "belgravia": 95, "knightsbridge": 95,
+      "kensington": 90, "chelsea": 87, "marylebone": 85,
+      "st james's": 95, "st james": 95, "covent garden": 75,
+      "westminster": 78, "fitzrovia": 72, "soho": 68,
+      "bloomsbury": 65, "city of london": 62, "canary wharf": 72,
+      "shoreditch": 42, "hackney": 35, "peckham": 28, "brixton": 30,
+      "stratford": 32, "notting hill": 78, "hammersmith": 55,
+      "battersea": 58, "south bank": 62, "southwark": 55,
+      "shepherd's bush": 48, "king's cross": 55, "kings cross": 55,
+    },
+    quiet: {
+      "kensington": 88, "chelsea": 85, "notting hill": 87,
+      "marylebone": 82, "belgravia": 85, "mayfair": 72,
+      "richmond": 95, "hampstead": 92, "bloomsbury": 72,
+      "fitzrovia": 65, "covent garden": 42, "soho": 25,
+      "shoreditch": 35, "city of london": 55, "canary wharf": 60,
+      "south bank": 58, "southwark": 52, "hackney": 48,
+      "brixton": 42, "peckham": 45, "westminster": 55,
+      "st james's": 70, "st james": 70, "stratford": 50,
+      "king's cross": 52, "kings cross": 52,
+    },
+    "first-time": {
+      "westminster": 92, "covent garden": 95, "south bank": 92,
+      "soho": 87, "bloomsbury": 88, "st james's": 88, "st james": 88,
+      "mayfair": 82, "kensington": 82, "city of london": 78,
+      "shoreditch": 72, "notting hill": 75, "chelsea": 70,
+      "canary wharf": 55, "stratford": 48, "hackney": 60,
+      "brixton": 55, "peckham": 48, "king's cross": 70, "kings cross": 70,
+    },
+    sightseeing: {
+      "westminster": 97, "south bank": 95, "covent garden": 92,
+      "bloomsbury": 92, "city of london": 90, "st james's": 90, "st james": 90,
+      "kensington": 88, "soho": 78, "mayfair": 80, "notting hill": 72,
+      "shoreditch": 68, "canary wharf": 62, "chelsea": 72,
+      "marylebone": 75, "hackney": 60, "brixton": 50,
+      "stratford": 55, "king's cross": 72, "kings cross": 72,
+    },
+    food: {
+      "soho": 95, "covent garden": 92, "shoreditch": 90,
+      "south bank": 85, "southwark": 88, "brixton": 87,
+      "mayfair": 90, "chelsea": 85, "kensington": 80,
+      "notting hill": 80, "hackney": 82, "peckham": 80,
+      "bloomsbury": 72, "fitzrovia": 78, "marylebone": 80,
+      "city of london": 65, "canary wharf": 68, "stratford": 55,
+      "king's cross": 75, "kings cross": 75,
+    },
+    nightlife: {
+      "shoreditch": 95, "soho": 95, "brixton": 90,
+      "hackney": 88, "peckham": 85, "covent garden": 78,
+      "south bank": 72, "mayfair": 72, "kensington": 55,
+      "chelsea": 65, "notting hill": 68, "city of london": 52,
+      "canary wharf": 58, "bloomsbury": 52, "stratford": 58,
+      "king's cross": 72, "kings cross": 72,
+    },
+    transit: {
+      "city of london": 95, "westminster": 92, "covent garden": 92,
+      "king's cross": 97, "kings cross": 97, "victoria": 92,
+      "paddington": 90, "canary wharf": 90, "stratford": 88,
+      "shoreditch": 80, "soho": 85, "south bank": 82,
+      "bloomsbury": 82, "mayfair": 78, "kensington": 78,
+      "chelsea": 68, "notting hill": 72, "hackney": 72,
+      "brixton": 75, "hammersmith": 82,
+    },
+    budget: {
+      "stratford": 82, "hackney": 75, "peckham": 78,
+      "brixton": 77, "shoreditch": 62, "hammersmith": 62,
+      "shepherd's bush": 65, "bloomsbury": 60,
+      "king's cross": 65, "kings cross": 65, "south bank": 55,
+      "covent garden": 40, "mayfair": 8, "belgravia": 5,
+      "knightsbridge": 8, "chelsea": 18, "kensington": 22, "soho": 35,
+    },
+    family: {
+      "kensington": 90, "notting hill": 85, "richmond": 92,
+      "hampstead": 88, "bloomsbury": 82, "south bank": 85,
+      "westminster": 75, "covent garden": 72, "shoreditch": 52,
+      "soho": 45, "brixton": 55, "hackney": 60, "stratford": 65,
+      "canary wharf": 68, "chelsea": 72, "marylebone": 75,
+      "city of london": 55,
+    },
+    walkable: {
+      "covent garden": 95, "soho": 92, "bloomsbury": 90,
+      "south bank": 90, "westminster": 88, "city of london": 82,
+      "notting hill": 82, "chelsea": 80, "kensington": 78,
+      "shoreditch": 82, "mayfair": 80, "marylebone": 80,
+      "hackney": 72, "brixton": 72, "king's cross": 78, "kings cross": 78,
+      "canary wharf": 68, "stratford": 60, "hammersmith": 68,
+    },
+  },
+  "new york": {
+    luxury: {
+      "upper east side": 95, "midtown": 88, "tribeca": 90,
+      "soho": 88, "west village": 82, "flatiron": 85,
+      "upper west side": 80, "central park south": 97,
+      "chelsea": 78, "greenwich village": 80, "carnegie hill": 90,
+      "financial district": 65, "lower east side": 55,
+      "williamsburg": 55, "harlem": 42, "queens": 40,
+      "park slope": 65, "brooklyn heights": 70,
+    },
+    quiet: {
+      "upper east side": 90, "upper west side": 88,
+      "tribeca": 82, "west village": 80, "brooklyn heights": 88,
+      "park slope": 85, "greenwich village": 72,
+      "midtown": 45, "times square": 15, "soho": 62,
+      "chelsea": 60, "flatiron": 55, "lower east side": 35,
+      "williamsburg": 42, "financial district": 60, "harlem": 55,
+      "east village": 48,
+    },
+    "first-time": {
+      "midtown": 97, "times square": 95, "central park south": 92,
+      "upper east side": 82, "soho": 85, "greenwich village": 80,
+      "financial district": 82, "chelsea": 72, "west village": 75,
+      "williamsburg": 68, "upper west side": 75, "harlem": 62,
+      "queens": 52, "lower east side": 65, "east village": 68,
+      "tribeca": 72, "brooklyn heights": 70,
+    },
+    sightseeing: {
+      "midtown": 97, "times square": 95, "upper east side": 92,
+      "central park south": 95, "financial district": 90,
+      "soho": 82, "greenwich village": 80, "west village": 75,
+      "chelsea": 78, "upper west side": 80, "williamsburg": 70,
+      "harlem": 75, "lower east side": 68, "east village": 70,
+      "brooklyn heights": 80, "tribeca": 75,
+    },
+    food: {
+      "soho": 95, "west village": 95, "greenwich village": 92,
+      "lower east side": 90, "east village": 92,
+      "williamsburg": 90, "flushing": 92, "astoria": 88,
+      "midtown": 82, "chelsea": 85, "flatiron": 85,
+      "upper east side": 80, "upper west side": 78,
+      "harlem": 82, "financial district": 68, "times square": 62,
+      "tribeca": 88, "park slope": 80,
+    },
+    nightlife: {
+      "lower east side": 95, "east village": 95, "williamsburg": 90,
+      "soho": 85, "west village": 85, "chelsea": 82,
+      "midtown": 72, "times square": 68, "upper east side": 60,
+      "upper west side": 55, "harlem": 70, "financial district": 55,
+      "bushwick": 90, "park slope": 68,
+    },
+    transit: {
+      "midtown": 97, "times square": 97, "financial district": 92,
+      "lower east side": 85, "east village": 82, "chelsea": 82,
+      "soho": 85, "west village": 78, "greenwich village": 80,
+      "upper east side": 80, "upper west side": 82,
+      "williamsburg": 78, "harlem": 80, "brooklyn heights": 78,
+      "park slope": 75, "tribeca": 80, "flatiron": 85,
+    },
+    budget: {
+      "queens": 87, "astoria": 82, "flushing": 80,
+      "harlem": 78, "williamsburg": 72, "bushwick": 80,
+      "lower east side": 70, "east village": 65,
+      "financial district": 60, "chelsea": 55, "soho": 45,
+      "upper east side": 35, "tribeca": 30, "midtown": 50,
+      "times square": 58, "upper west side": 55, "park slope": 62,
+    },
+    family: {
+      "upper east side": 92, "upper west side": 90,
+      "central park south": 90, "brooklyn heights": 88,
+      "park slope": 87, "tribeca": 82, "midtown": 72,
+      "soho": 70, "west village": 68, "greenwich village": 65,
+      "lower east side": 48, "williamsburg": 55,
+      "times square": 62, "financial district": 62,
+    },
+    walkable: {
+      "soho": 95, "west village": 95, "greenwich village": 92,
+      "chelsea": 90, "lower east side": 88, "east village": 90,
+      "midtown": 88, "upper west side": 85, "upper east side": 82,
+      "tribeca": 85, "flatiron": 88, "williamsburg": 80,
+      "financial district": 78, "times square": 85,
+      "harlem": 72, "brooklyn heights": 78, "park slope": 82,
+    },
+  },
+  bangkok: {
+    luxury: {
+      "riverside": 95, "charoenkrung": 95, "iconsiam": 90,
+      "sathorn": 85, "silom": 82, "sukhumvit": 80,
+      "siam": 75, "ploenchit": 88, "asok": 72,
+      "nana": 65, "pratunam": 45, "rattanakosin": 50,
+      "on nut": 35, "phaya thai": 58, "ari": 55,
+    },
+    quiet: {
+      "riverside": 82, "sathorn": 78, "ari": 80,
+      "phaya thai": 72, "silom": 62, "charoenkrung": 75,
+      "sukhumvit": 35, "siam": 42, "khao san": 10,
+      "pratunam": 28, "nana": 25, "asok": 40, "rattanakosin": 45,
+    },
+    "first-time": {
+      "rattanakosin": 92, "khao san": 88, "siam": 85,
+      "sukhumvit": 82, "silom": 75, "riverside": 78,
+      "ploenchit": 72, "pratunam": 68, "phaya thai": 65,
+    },
+    sightseeing: {
+      "rattanakosin": 97, "khao san": 80, "riverside": 85,
+      "charoenkrung": 88, "silom": 72, "sukhumvit": 58,
+      "siam": 70, "sathorn": 65, "ari": 45,
+    },
+    food: {
+      "riverside": 92, "charoenkrung": 92, "sukhumvit": 88,
+      "silom": 85, "siam": 80, "ari": 85,
+      "phaya thai": 80, "rattanakosin": 75, "khao san": 72,
+      "pratunam": 70, "on nut": 75, "nana": 72,
+    },
+    nightlife: {
+      "sukhumvit": 95, "nana": 92, "asok": 90,
+      "silom": 88, "siam": 72, "khao san": 82,
+      "riverside": 55, "ari": 48, "sathorn": 58,
+      "rattanakosin": 45, "pratunam": 60,
+    },
+    transit: {
+      "siam": 97, "asok": 92, "silom": 90,
+      "sukhumvit": 88, "ploenchit": 90, "phaya thai": 85,
+      "sathorn": 82, "nana": 80, "pratunam": 78,
+      "riverside": 58, "khao san": 60, "rattanakosin": 65,
+    },
+    budget: {
+      "khao san": 92, "pratunam": 88, "rattanakosin": 82,
+      "phaya thai": 78, "on nut": 80, "ari": 72,
+      "sukhumvit": 52, "silom": 48, "riverside": 28,
+      "sathorn": 32, "siam": 55,
+    },
+    family: {
+      "riverside": 80, "siam": 78, "rattanakosin": 72,
+      "sukhumvit": 65, "silom": 60, "khao san": 32,
+      "sathorn": 55, "ari": 62,
+    },
+    walkable: {
+      "siam": 88, "rattanakosin": 85, "riverside": 85,
+      "charoenkrung": 83, "khao san": 88, "sukhumvit": 82,
+      "silom": 80, "pratunam": 75, "ari": 72,
+      "phaya thai": 70, "sathorn": 68,
+    },
+  },
+  singapore: {
+    luxury: {
+      "marina bay": 97, "orchard road": 93, "orchard": 92,
+      "sentosa": 82, "tanjong pagar": 72, "robertson quay": 80,
+      "chinatown": 55, "little india": 35, "arab street": 42,
+      "bugis": 50, "city hall": 88, "raffles place": 85,
+    },
+    quiet: {
+      "sentosa": 90, "orchard road": 75, "orchard": 74,
+      "marina bay": 65, "tanjong pagar": 68, "robertson quay": 72,
+      "chinatown": 55, "little india": 38, "arab street": 48,
+      "bugis": 50, "city hall": 60, "raffles place": 62,
+    },
+    "first-time": {
+      "marina bay": 97, "orchard road": 92, "orchard": 91,
+      "chinatown": 85, "little india": 80, "arab street": 80,
+      "city hall": 88, "raffles place": 85, "sentosa": 78,
+      "bugis": 75, "tanjong pagar": 70,
+    },
+    sightseeing: {
+      "marina bay": 97, "chinatown": 88, "little india": 85,
+      "arab street": 85, "orchard road": 75, "sentosa": 80,
+      "city hall": 90, "raffles place": 88, "bugis": 78,
+      "tanjong pagar": 65,
+    },
+    food: {
+      "chinatown": 97, "little india": 92, "arab street": 92,
+      "tanjong pagar": 90, "bugis": 88, "orchard road": 78,
+      "marina bay": 75, "robertson quay": 85, "sentosa": 65,
+    },
+    nightlife: {
+      "clarke quay": 95, "robertson quay": 90, "tanjong pagar": 88,
+      "arab street": 82, "chinatown": 80, "marina bay": 72,
+      "orchard road": 68, "sentosa": 75, "bugis": 70,
+      "little india": 55,
+    },
+    transit: {
+      "marina bay": 95, "orchard road": 95, "orchard": 94,
+      "raffles place": 92, "city hall": 92, "bugis": 88,
+      "chinatown": 88, "tanjong pagar": 85, "little india": 85,
+      "arab street": 82, "sentosa": 52,
+    },
+    budget: {
+      "little india": 88, "chinatown": 85, "arab street": 80,
+      "bugis": 78, "tanjong pagar": 65, "orchard road": 30,
+      "marina bay": 22, "sentosa": 28, "raffles place": 38,
+    },
+    family: {
+      "sentosa": 95, "marina bay": 85, "orchard road": 75,
+      "chinatown": 68, "little india": 60, "arab street": 62,
+      "tanjong pagar": 60, "city hall": 72,
+    },
+    walkable: {
+      "chinatown": 92, "arab street": 90, "little india": 88,
+      "marina bay": 85, "orchard road": 85, "tanjong pagar": 82,
+      "bugis": 85, "city hall": 88, "raffles place": 85,
+      "sentosa": 62, "robertson quay": 80,
+    },
+  },
+  seoul: {
+    luxury: {
+      "gangnam": 92, "cheongdam": 97, "apgujeong": 95,
+      "itaewon": 80, "myeongdong": 78, "jongno": 65,
+      "insadong": 58, "hongdae": 38, "dongdaemun": 35,
+      "mapo": 42, "sinchon": 40, "yongsan": 72, "hannam": 85,
+    },
+    quiet: {
+      "insadong": 82, "jongno": 78, "gangnam": 72,
+      "apgujeong": 75, "cheongdam": 78, "hannam": 80,
+      "itaewon": 60, "myeongdong": 38, "hongdae": 30,
+      "dongdaemun": 35, "sinchon": 42, "mapo": 52,
+    },
+    "first-time": {
+      "myeongdong": 97, "insadong": 90, "jongno": 88,
+      "gangnam": 85, "itaewon": 80, "hongdae": 75,
+      "dongdaemun": 72, "sinchon": 68, "cheongdam": 72,
+    },
+    sightseeing: {
+      "insadong": 95, "jongno": 95, "myeongdong": 88,
+      "bukchon": 90, "gangnam": 62, "itaewon": 72,
+      "hongdae": 58, "dongdaemun": 70,
+    },
+    food: {
+      "itaewon": 92, "hongdae": 90, "myeongdong": 88,
+      "insadong": 85, "gangnam": 82, "dongdaemun": 78,
+      "jongno": 82, "sinchon": 80, "mapo": 78,
+    },
+    nightlife: {
+      "hongdae": 97, "itaewon": 95, "gangnam": 90,
+      "sinchon": 85, "myeongdong": 72, "insadong": 50,
+      "dongdaemun": 62, "jongno": 58, "mapo": 72,
+    },
+    transit: {
+      "myeongdong": 95, "gangnam": 92, "dongdaemun": 90,
+      "itaewon": 85, "hongdae": 85, "insadong": 80,
+      "jongno": 82, "sinchon": 82, "cheongdam": 75,
+      "apgujeong": 78,
+    },
+    budget: {
+      "hongdae": 85, "dongdaemun": 88, "myeongdong": 75,
+      "insadong": 72, "sinchon": 82, "mapo": 80,
+      "itaewon": 58, "jongno": 68, "gangnam": 30,
+      "cheongdam": 22,
+    },
+    family: {
+      "insadong": 80, "jongno": 78, "myeongdong": 82,
+      "gangnam": 72, "itaewon": 68, "hongdae": 55,
+      "dongdaemun": 62,
+    },
+    walkable: {
+      "myeongdong": 92, "insadong": 90, "jongno": 88,
+      "hongdae": 85, "itaewon": 82, "gangnam": 80,
+      "dongdaemun": 85, "sinchon": 78, "cheongdam": 75,
+    },
+  },
 };
 
 // Best neighborhood per preference per city (used in "less X than Y" comparisons)
@@ -310,7 +659,126 @@ const CITY_BEST_NEIGHBORHOOD: Record<string, Record<string, string>> = {
     budget:       "L'Hospitalet",
     family:       "Sarrià-Sant Gervasi",
   },
+  london: {
+    quiet:        "Kensington / Notting Hill",
+    luxury:       "Mayfair",
+    food:         "Soho / Shoreditch",
+    sightseeing:  "South Bank / Westminster",
+    transit:      "King's Cross",
+    nightlife:    "Shoreditch / Soho",
+    "first-time": "Covent Garden",
+    walkable:     "Covent Garden",
+    budget:       "Shoreditch / Hackney",
+    family:       "Kensington",
+  },
+  "new york": {
+    quiet:        "Upper East Side",
+    luxury:       "Tribeca / Midtown",
+    food:         "West Village / SoHo",
+    sightseeing:  "Midtown",
+    transit:      "Midtown",
+    nightlife:    "Lower East Side",
+    "first-time": "Midtown",
+    walkable:     "SoHo / West Village",
+    budget:       "Queens / Harlem",
+    family:       "Upper East Side",
+  },
+  bangkok: {
+    quiet:        "Riverside / Sathorn",
+    luxury:       "Riverside / Charoenkrung",
+    food:         "Riverside / Sukhumvit",
+    sightseeing:  "Rattanakosin",
+    transit:      "Siam / Silom",
+    nightlife:    "Sukhumvit / Nana",
+    "first-time": "Rattanakosin",
+    walkable:     "Rattanakosin / Siam",
+    budget:       "Khao San Road",
+    family:       "Riverside",
+  },
+  singapore: {
+    quiet:        "Sentosa Island",
+    luxury:       "Marina Bay",
+    food:         "Chinatown / Arab Street",
+    sightseeing:  "Marina Bay",
+    transit:      "Marina Bay / Orchard",
+    nightlife:    "Clarke Quay",
+    "first-time": "Marina Bay",
+    walkable:     "Chinatown / Arab Street",
+    budget:       "Little India",
+    family:       "Sentosa Island",
+  },
+  seoul: {
+    quiet:        "Insadong / Jongno",
+    luxury:       "Gangnam / Cheongdam",
+    food:         "Itaewon / Hongdae",
+    sightseeing:  "Insadong / Jongno",
+    transit:      "Myeongdong",
+    nightlife:    "Hongdae",
+    "first-time": "Myeongdong",
+    walkable:     "Myeongdong / Insadong",
+    budget:       "Hongdae / Dongdaemun",
+    family:       "Insadong",
+  },
 };
+
+// ── Neighborhood display-name normalization ───────────────────────────────────
+// Maps raw administrative district names from Google Places to friendlier
+// display names. Applied after scoring so lookup tables still use raw names.
+
+const NEIGHBORHOOD_DISPLAY: Record<string, Record<string, string>> = {
+  tokyo: {
+    "chuo city":    "Ginza / Chuo",
+    "chuo-ku":      "Ginza / Chuo",
+    "chūō":         "Ginza / Chuo",
+    "chuo":         "Ginza / Chuo",
+    "taito city":   "Asakusa / Taito",
+    "taito-ku":     "Asakusa / Taito",
+    "taitō":        "Asakusa / Taito",
+    "taito":        "Asakusa / Taito",
+    "minato city":  "Roppongi / Minato",
+    "minato-ku":    "Roppongi / Minato",
+    "shibuya city": "Shibuya",
+    "shibuya-ku":   "Shibuya",
+    "shinjuku city":"Shinjuku",
+    "shinjuku-ku":  "Shinjuku",
+    "chiyoda city": "Marunouchi / Chiyoda",
+    "chiyoda-ku":   "Marunouchi / Chiyoda",
+    "meguro city":  "Meguro / Ebisu",
+    "meguro-ku":    "Meguro / Ebisu",
+    "bunkyo city":  "Ueno / Bunkyo",
+    "bunkyo-ku":    "Ueno / Bunkyo",
+    "bunkyo":       "Ueno / Bunkyo",
+    "sumida city":  "Sumida",
+    "sumida-ku":    "Sumida",
+    "koto city":    "Koto",
+    "koto-ku":      "Koto",
+    "shinagawa city":"Shinagawa",
+    "shinagawa-ku": "Shinagawa",
+    "setagaya city":"Setagaya",
+    "setagaya-ku":  "Setagaya",
+  },
+  london: {
+    "london borough of camden":                   "Bloomsbury / Camden",
+    "london borough of hackney":                  "Shoreditch / Hackney",
+    "royal borough of kensington and chelsea":    "Kensington / Chelsea",
+    "city of westminster":                        "Westminster",
+    "london borough of tower hamlets":            "Shoreditch / East London",
+    "london borough of southwark":                "South Bank / Southwark",
+    "london borough of lambeth":                  "Brixton / Lambeth",
+    "london borough of islington":                "Islington",
+    "london borough of wandsworth":               "Battersea / Wandsworth",
+  },
+};
+
+function normalizeNeighborhoodDisplay(neighborhood: string, destination: string): string {
+  const destL  = destination.toLowerCase();
+  const nbhdL  = neighborhood.toLowerCase().trim();
+  let cityKey: string | null = null;
+  if (destL.includes("tokyo")) cityKey = "tokyo";
+  if (destL.includes("london")) cityKey = "london";
+  if (!cityKey) return neighborhood;
+  return NEIGHBORHOOD_DISPLAY[cityKey]?.[nbhdL] ?? neighborhood;
+}
 
 // ── HotelOffer — shape sent to the client ─────────────────────────────────────
 
@@ -383,9 +851,12 @@ function walkabilityScore(places: NearbyPlace[]): number {
       .map((t) => parseDurationMinutes(t.duration))
   );
   if (walkable.length === 0) return 40;
+  const under5  = walkable.filter((m) => m <=  5).length;
   const under10 = walkable.filter((m) => m <= 10).length;
   const under20 = walkable.filter((m) => m <= 20).length;
-  return Math.min(100, under10 * 18 + under20 * 6 + 10);
+  // Floor at 20 when we have walkable data — prevents a hotel with far-away
+  // walkable places scoring lower (10) than a hotel with no data (40).
+  return Math.min(100, Math.max(20, under5 * 22 + (under10 - under5) * 14 + (under20 - under10) * 5 + 15));
 }
 
 // ── Neighborhood helpers ──────────────────────────────────────────────────────
@@ -425,6 +896,107 @@ function inferNeighborhoodFallback(hotel: ProviderHotel): string {
     ["champs elysees",      "Champs-Élysées / 8th"],
     ["louvre",              "Louvre / 1st"],
     ["eiffel",              "Eiffel Tower / 7th"],
+    // London
+    ["mayfair",         "Mayfair"],
+    ["belgravia",       "Belgravia"],
+    ["knightsbridge",   "Knightsbridge"],
+    ["covent garden",   "Covent Garden"],
+    ["notting hill",    "Notting Hill"],
+    ["portobello",      "Notting Hill"],
+    ["shoreditch",      "Shoreditch"],
+    ["brick lane",      "Shoreditch"],
+    ["south bank",      "South Bank"],
+    ["borough market",  "South Bank"],
+    ["southwark",       "South Bank"],
+    ["tate modern",     "South Bank"],
+    ["bloomsbury",      "Bloomsbury"],
+    ["british museum",  "Bloomsbury"],
+    ["kensington",      "Kensington"],
+    ["chelsea",         "Chelsea"],
+    ["soho",            "Soho"],
+    ["westminster",     "Westminster"],
+    ["buckingham",      "Westminster"],
+    ["big ben",         "Westminster"],
+    ["parliament",      "Westminster"],
+    ["canary wharf",    "Canary Wharf"],
+    ["hackney",         "Hackney"],
+    ["brixton",         "Brixton"],
+    ["stratford",       "Stratford"],
+    ["king's cross",    "King's Cross"],
+    ["kings cross",     "King's Cross"],
+    // New York
+    ["upper east side", "Upper East Side"],
+    ["upper west side", "Upper West Side"],
+    ["lower east side", "Lower East Side"],
+    ["east village",    "East Village"],
+    ["west village",    "West Village"],
+    ["greenwich village","Greenwich Village"],
+    ["washington square","Greenwich Village"],
+    ["tribeca",         "TriBeCa"],
+    ["soho",            "SoHo"],
+    ["williamsburg",    "Williamsburg"],
+    ["dumbo",           "DUMBO / Brooklyn"],
+    ["financial district","Financial District"],
+    ["wall street",     "Financial District"],
+    ["battery park",    "Financial District"],
+    ["times square",    "Midtown"],
+    ["42nd street",     "Midtown"],
+    ["midtown",         "Midtown"],
+    ["fifth avenue",    "Midtown"],
+    ["park avenue",     "Upper East Side"],
+    ["central park",    "Midtown"],
+    ["harlem",          "Harlem"],
+    ["chelsea",         "Chelsea"],
+    ["flatiron",        "Flatiron"],
+    ["gramercy",        "Gramercy / Flatiron"],
+    // Bangkok
+    ["riverside",         "Riverside / Charoenkrung"],
+    ["charoenkrung",      "Riverside / Charoenkrung"],
+    ["chao phraya",       "Riverside / Charoenkrung"],
+    ["rattanakosin",      "Rattanakosin"],
+    ["grand palace",      "Rattanakosin"],
+    ["wat pho",           "Rattanakosin"],
+    ["khao san",          "Khao San Road"],
+    ["khaosan",           "Khao San Road"],
+    ["banglamphu",        "Khao San Road"],
+    ["sukhumvit",         "Sukhumvit"],
+    ["silom",             "Silom"],
+    ["sathorn",           "Sathorn"],
+    ["siam paragon",      "Siam"],
+    ["patpong",           "Silom"],
+    ["ploenchit",         "Ploenchit"],
+    ["asok",              "Asok / Sukhumvit"],
+    ["pratunam",          "Pratunam"],
+    ["phaya thai",        "Phaya Thai"],
+    // Singapore
+    ["marina bay sands",  "Marina Bay"],
+    ["marina bay",        "Marina Bay"],
+    ["raffles place",     "Marina Bay / Raffles Place"],
+    ["orchard road",      "Orchard Road"],
+    ["sentosa",           "Sentosa Island"],
+    ["chinatown",         "Chinatown"],
+    ["tanjong pagar",     "Tanjong Pagar"],
+    ["little india",      "Little India"],
+    ["arab street",       "Arab Street / Kampong Glam"],
+    ["kampong glam",      "Arab Street / Kampong Glam"],
+    ["bugis",             "Bugis"],
+    ["clarke quay",       "Clarke Quay"],
+    ["robertson quay",    "Robertson Quay"],
+    // Seoul
+    ["gangnam",           "Gangnam"],
+    ["cheongdam",         "Cheongdam / Gangnam"],
+    ["apgujeong",         "Apgujeong / Gangnam"],
+    ["myeongdong",        "Myeongdong"],
+    ["namdaemun",         "Myeongdong / Jung-gu"],
+    ["insadong",          "Insadong"],
+    ["bukchon",           "Bukchon Hanok Village"],
+    ["gyeongbokgung",     "Jongno / Insadong"],
+    ["jongno",            "Jongno"],
+    ["hongdae",           "Hongdae"],
+    ["itaewon",           "Itaewon"],
+    ["hannam",            "Hannam / Itaewon"],
+    ["dongdaemun",        "Dongdaemun"],
+    ["sinchon",           "Sinchon"],
     // Generic
     ["old town",        "Old Town"],
     ["historic center", "Historic Center"],
@@ -457,6 +1029,11 @@ function lookupCityNeighborhoodScore(
   let cityKey: string | null = null;
   if (destL.includes("barcelona")) cityKey = "barcelona";
   if (destL.includes("tokyo") || destL.includes("tōkyō")) cityKey = "tokyo";
+  if (destL.includes("london")) cityKey = "london";
+  if (destL.includes("new york") || destL.includes("nyc")) cityKey = "new york";
+  if (destL.includes("bangkok") || destL.includes("krung thep")) cityKey = "bangkok";
+  if (destL.includes("singapore")) cityKey = "singapore";
+  if (destL.includes("seoul") || destL.includes("서울")) cityKey = "seoul";
   if (!cityKey) return null;
 
   const prefTable = NEIGHBORHOOD_FIT_TABLES[cityKey]?.[pref];
@@ -502,6 +1079,85 @@ function lookupCityNeighborhoodScore(
       return prefTable["sants-montjuïc"] ?? null;
     if (addrL.includes("gràcia") || addrL.includes("gracia"))
       return prefTable["gràcia"] ?? null;
+  }
+
+  if (cityKey === "london") {
+    if (addrL.includes("mayfair"))                                     return prefTable["mayfair"]       ?? null;
+    if (addrL.includes("belgravia"))                                   return prefTable["belgravia"]     ?? null;
+    if (addrL.includes("knightsbridge"))                               return prefTable["knightsbridge"] ?? null;
+    if (addrL.includes("covent garden"))                               return prefTable["covent garden"] ?? null;
+    if (addrL.includes("notting hill"))                                return prefTable["notting hill"]  ?? null;
+    if (addrL.includes("shoreditch") || addrL.includes("brick lane")) return prefTable["shoreditch"]    ?? null;
+    if (addrL.includes("south bank") || addrL.includes("southwark"))  return prefTable["south bank"]    ?? null;
+    if (addrL.includes("bloomsbury"))                                  return prefTable["bloomsbury"]    ?? null;
+    if (addrL.includes("kensington") && !addrL.includes("south kensington road")) return prefTable["kensington"] ?? null;
+    if (addrL.includes("chelsea"))                                     return prefTable["chelsea"]       ?? null;
+    if (addrL.includes("soho"))                                        return prefTable["soho"]          ?? null;
+    if (addrL.includes("westminster"))                                 return prefTable["westminster"]   ?? null;
+    if (addrL.includes("marylebone"))                                  return prefTable["marylebone"]    ?? null;
+    if (addrL.includes("canary wharf"))                                return prefTable["canary wharf"]  ?? null;
+    if (addrL.includes("hackney"))                                     return prefTable["hackney"]       ?? null;
+    if (addrL.includes("brixton"))                                     return prefTable["brixton"]       ?? null;
+    if (addrL.includes("peckham"))                                     return prefTable["peckham"]       ?? null;
+    if (addrL.includes("stratford"))                                   return prefTable["stratford"]     ?? null;
+    if (addrL.includes("king's cross") || addrL.includes("kings cross")) return prefTable["king's cross"] ?? prefTable["kings cross"] ?? null;
+  }
+
+  if (cityKey === "new york") {
+    if (addrL.includes("upper east side"))   return prefTable["upper east side"]  ?? null;
+    if (addrL.includes("upper west side"))   return prefTable["upper west side"]  ?? null;
+    if (addrL.includes("lower east side"))   return prefTable["lower east side"]  ?? null;
+    if (addrL.includes("east village"))      return prefTable["east village"]     ?? null;
+    if (addrL.includes("west village"))      return prefTable["west village"]     ?? null;
+    if (addrL.includes("greenwich village")) return prefTable["greenwich village"]?? null;
+    if (addrL.includes("times square"))      return prefTable["times square"]     ?? prefTable["midtown"] ?? null;
+    if (addrL.includes("tribeca") || addrL.includes("tri beca")) return prefTable["tribeca"] ?? null;
+    if (addrL.includes("williamsburg"))      return prefTable["williamsburg"]     ?? null;
+    if (addrL.includes("brooklyn"))          return prefTable["brooklyn heights"] ?? prefTable["williamsburg"] ?? null;
+    if (addrL.includes("financial district") || addrL.includes("wall street") || addrL.includes("battery park")) return prefTable["financial district"] ?? null;
+    if (addrL.includes("chelsea") && addrL.includes("new york")) return prefTable["chelsea"] ?? null;
+    if (addrL.includes("soho") && (addrL.includes("new york") || addrL.includes("manhattan"))) return prefTable["soho"] ?? null;
+    if (addrL.includes("harlem"))            return prefTable["harlem"]           ?? null;
+    if (addrL.includes("midtown") || addrL.includes("5th ave") || addrL.includes("fifth ave") || addrL.includes("park ave")) return prefTable["midtown"] ?? null;
+    if (addrL.includes("flatiron") || addrL.includes("gramercy") || addrL.includes("union square")) return prefTable["flatiron"] ?? null;
+  }
+
+  if (cityKey === "bangkok") {
+    if (addrL.includes("riverside") || addrL.includes("charoenkrung") || addrL.includes("chao phraya")) return prefTable["riverside"] ?? prefTable["charoenkrung"] ?? null;
+    if (addrL.includes("sathorn"))                                              return prefTable["sathorn"]     ?? null;
+    if (addrL.includes("silom"))                                                return prefTable["silom"]       ?? null;
+    if (addrL.includes("sukhumvit"))                                            return prefTable["sukhumvit"]   ?? null;
+    if (addrL.includes("siam"))                                                 return prefTable["siam"]        ?? null;
+    if (addrL.includes("rattanakosin") || addrL.includes("grand palace") || addrL.includes("phra nakhon")) return prefTable["rattanakosin"] ?? null;
+    if (addrL.includes("khao san") || addrL.includes("khaosan") || addrL.includes("banglamphu")) return prefTable["khao san"] ?? null;
+    if (addrL.includes("ploenchit"))                                            return prefTable["ploenchit"]   ?? null;
+    if (addrL.includes("asok") || addrL.includes("asoke"))                     return prefTable["asok"]        ?? null;
+    if (addrL.includes("nana"))                                                 return prefTable["nana"]        ?? null;
+    if (addrL.includes("pratunam"))                                             return prefTable["pratunam"]    ?? null;
+    if (addrL.includes("ari"))                                                  return prefTable["ari"]         ?? null;
+    if (addrL.includes("phaya thai"))                                           return prefTable["phaya thai"]  ?? null;
+    if (addrL.includes("on nut") || addrL.includes("onnut"))                   return prefTable["on nut"]      ?? null;
+  }
+
+  if (cityKey === "singapore") {
+    if (addrL.includes("marina bay") || addrL.includes("raffles place") || addrL.includes("city hall")) return prefTable["marina bay"] ?? prefTable["city hall"] ?? null;
+    if (addrL.includes("orchard"))                                              return prefTable["orchard road"] ?? null;
+    if (addrL.includes("sentosa"))                                              return prefTable["sentosa"]     ?? null;
+    if (addrL.includes("chinatown") || addrL.includes("tanjong pagar") || addrL.includes("telok ayer")) return prefTable["chinatown"] ?? prefTable["tanjong pagar"] ?? null;
+    if (addrL.includes("little india") || addrL.includes("serangoon") || addrL.includes("mustafa")) return prefTable["little india"] ?? null;
+    if (addrL.includes("arab street") || addrL.includes("kampong glam") || addrL.includes("bugis")) return prefTable["arab street"] ?? prefTable["bugis"] ?? null;
+    if (addrL.includes("clarke quay") || addrL.includes("robertson quay"))     return prefTable["clarke quay"] ?? prefTable["robertson quay"] ?? null;
+  }
+
+  if (cityKey === "seoul") {
+    if (addrL.includes("gangnam") || addrL.includes("apgujeong") || addrL.includes("cheongdam")) return prefTable["gangnam"] ?? prefTable["cheongdam"] ?? null;
+    if (addrL.includes("myeongdong") || addrL.includes("namdaemun") || addrL.includes("jung-gu")) return prefTable["myeongdong"] ?? null;
+    if (addrL.includes("insadong") || addrL.includes("bukchon") || addrL.includes("gyeongbokgung")) return prefTable["insadong"] ?? prefTable["jongno"] ?? null;
+    if (addrL.includes("jongno"))                                               return prefTable["jongno"]      ?? null;
+    if (addrL.includes("hongdae") || addrL.includes("mapo-gu"))                return prefTable["hongdae"]     ?? prefTable["mapo"] ?? null;
+    if (addrL.includes("itaewon") || addrL.includes("yongsan") || addrL.includes("hannam")) return prefTable["itaewon"] ?? prefTable["hannam"] ?? null;
+    if (addrL.includes("dongdaemun"))                                           return prefTable["dongdaemun"]  ?? null;
+    if (addrL.includes("sinchon") || addrL.includes("ewha"))                   return prefTable["sinchon"]     ?? null;
   }
 
   // Exact match on neighborhood name
@@ -640,9 +1296,16 @@ function scoreHotels(
     const enrichment = enrichments.get(h.sourceHotelId);
 
     const priceScore    = ((maxP - h.pricePerNight) / priceRange) * 100;
-    const reviewScore   = Math.min(100, (h.overallRating / 5) * 100);
+    const rawReviewScore = Math.min(100, (h.overallRating / 5) * 100);
+    // Bayesian regression toward neutral (70) when review count is low.
+    // Hotels with <200 reviews have their score partially shrunk toward 70.
+    // This prevents a 5.0 from 3 reviews outscoring a 4.7 from 2,000 reviews.
+    const reviewConfidence = h.reviewCount > 0 ? Math.min(1.0, h.reviewCount / 200) : 0;
+    const reviewScore = h.reviewCount > 0
+      ? Math.round(rawReviewScore * reviewConfidence + 70 * (1 - reviewConfidence))
+      : 70;
     const locationScore = h.locationRating > 0 ? Math.min(100, (h.locationRating / 10) * 100) : 50;
-    const starsScore    = Math.min(100, (h.starRating / 5) * 100);
+    const starsScore    = h.starRating > 0 ? Math.min(100, (h.starRating / 5) * 100) : 40;
     const walkScore     = walkabilityScore(h.nearbyPlaces);
 
     const baseScore = Math.round(
@@ -653,9 +1316,11 @@ function scoreHotels(
       walkScore     * 0.11
     );
 
-    // Compute inferred neighborhood before fit scoring (it's an input to the score)
-    const inferred_neighborhood =
+    // Compute inferred neighborhood before fit scoring (raw name needed for lookup)
+    const raw_neighborhood =
       enrichment?.neighborhood || inferNeighborhoodFallback(h);
+    // Normalize to user-friendly display name (e.g. "Chuo City" → "Ginza / Chuo")
+    const inferred_neighborhood = normalizeNeighborhoodDisplay(raw_neighborhood, destination);
 
     const neighborhood_fit_score = computeNeighborhoodFit(
       h, prefs, enrichment, inferred_neighborhood, destination,
@@ -721,7 +1386,18 @@ function scoreHotels(
       },
       neighborhood_fit_score,
       inferred_neighborhood,
-      neighborhood_fit_label: neighborhoodFitLabel(neighborhood_fit_score, prefs),
+      neighborhood_fit_label: (() => {
+        let label = neighborhoodFitLabel(neighborhood_fit_score, prefs);
+        // For Luxury: "Great fit" requires the hotel itself to be upscale.
+        // A budget hostel in a great luxury area should not claim "Great fit".
+        if (prefs.includes("luxury") && label === "Great fit") {
+          const hotelQualityMet = starsScore >= 75 && reviewScore >= 80 && neighborhood_fit_score >= 80;
+          if (!hotelQualityMet) {
+            label = starsScore < 75 ? "Location fit, but basic hotel" : "Good area fit";
+          }
+        }
+        return label;
+      })(),
       location_summary: enrichment?.locationSummary ?? "",
       transit_note:     enrichment?.transitNote     ?? "",
     };
@@ -842,6 +1518,96 @@ function prefStrengthCopy(pref: string, score: number, neighborhood: string, cit
       return "heart of Barcelona's nightlife and bar scene";
   }
 
+  if (high && cityKey === "london") {
+    if (pref === "luxury") {
+      if (nbhdL.includes("mayfair") || nbhdL.includes("belgravia") || nbhdL.includes("st james"))
+        return "London's most exclusive address — designer boutiques, Michelin dining, and world-class hotels";
+      if (nbhdL.includes("knightsbridge") || nbhdL.includes("chelsea"))
+        return "upscale boutiques, Harrods, and premium hotel options";
+      if (nbhdL.includes("kensington"))
+        return "prestigious residential address with excellent high-end hotels";
+    }
+    if (pref === "quiet") {
+      if (nbhdL.includes("kensington") || nbhdL.includes("notting hill") || nbhdL.includes("chelsea"))
+        return "leafy, residential streets away from tourist crowds";
+    }
+    if (pref === "sightseeing") {
+      if (nbhdL.includes("westminster") || nbhdL.includes("south bank") || nbhdL.includes("covent garden"))
+        return "walking distance to Big Ben, Tower of London, Tate Modern, and top museums";
+      if (nbhdL.includes("bloomsbury"))
+        return "British Museum, National Gallery, and literary London on the doorstep";
+    }
+    if (pref === "nightlife" && (nbhdL.includes("shoreditch") || nbhdL.includes("soho")))
+      return "London's most vibrant bar and club scene";
+    if (pref === "food") {
+      if (nbhdL.includes("soho") || nbhdL.includes("covent garden"))
+        return "some of London's best restaurants and street food";
+      if (nbhdL.includes("shoreditch") || nbhdL.includes("brixton"))
+        return "trendy street food markets, independent restaurants, and food halls";
+    }
+  }
+  if (high && cityKey === "new york") {
+    if (pref === "luxury") {
+      if (nbhdL.includes("upper east side") || nbhdL.includes("tribeca") || nbhdL.includes("central park"))
+        return "premium Manhattan address with world-class hotels and fine dining";
+      if (nbhdL.includes("soho") || nbhdL.includes("west village"))
+        return "upscale boutiques, Michelin-starred dining, and elegant hotels";
+    }
+    if (pref === "quiet") {
+      if (nbhdL.includes("upper east side") || nbhdL.includes("upper west side"))
+        return "one of Manhattan's most peaceful, residential neighborhoods";
+    }
+    if (pref === "sightseeing") {
+      if (nbhdL.includes("midtown") || nbhdL.includes("times square"))
+        return "steps from Times Square, Empire State Building, and Central Park";
+      if (nbhdL.includes("financial district"))
+        return "near 9/11 Memorial, Statue of Liberty ferry, and Brooklyn Bridge";
+    }
+    if (pref === "nightlife" && (nbhdL.includes("lower east side") || nbhdL.includes("east village") || nbhdL.includes("williamsburg")))
+      return "NYC's best bar-hopping streets with late-night venues and live music";
+    if (pref === "food" && (nbhdL.includes("west village") || nbhdL.includes("soho") || nbhdL.includes("east village")))
+      return "some of New York's most acclaimed restaurants and food culture";
+  }
+
+  if (high && cityKey === "bangkok") {
+    if (pref === "luxury") {
+      if (nbhdL.includes("riverside") || nbhdL.includes("charoenkrung"))
+        return "Bangkok's finest riverside luxury hotels with iconic Chao Phraya views";
+      if (nbhdL.includes("sathorn") || nbhdL.includes("silom"))
+        return "upscale business district hotels with rooftop bars and fine dining";
+    }
+    if (pref === "sightseeing" && (nbhdL.includes("rattanakosin") || nbhdL.includes("khao san")))
+      return "steps from the Grand Palace, Wat Pho, and the heart of historic Bangkok";
+    if (pref === "nightlife" && (nbhdL.includes("sukhumvit") || nbhdL.includes("nana") || nbhdL.includes("asok")))
+      return "Bangkok's most vibrant entertainment and nightlife strip";
+    if (pref === "food" && (nbhdL.includes("riverside") || nbhdL.includes("sukhumvit") || nbhdL.includes("ari")))
+      return "excellent street food, rooftop dining, and Bangkok's most celebrated restaurants";
+  }
+  if (high && cityKey === "singapore") {
+    if (pref === "luxury" && (nbhdL.includes("marina bay") || nbhdL.includes("raffles")))
+      return "Singapore's iconic Marina Bay with world-class hotels, infinity pools, and Gardens by the Bay";
+    if (pref === "food" && (nbhdL.includes("chinatown") || nbhdL.includes("arab street") || nbhdL.includes("little india") || nbhdL.includes("tanjong pagar")))
+      return "Singapore's hawker culture heartland — Michelin-rated stalls, diverse cuisines, and legendary food courts";
+    if (pref === "sightseeing" && nbhdL.includes("marina bay"))
+      return "Gardens by the Bay, Marina Bay Sands, and Singapore's most photographed skyline";
+    if (pref === "family" && nbhdL.includes("sentosa"))
+      return "Universal Studios Singapore, S.E.A. Aquarium, and family resorts on Sentosa Island";
+    if (pref === "nightlife" && (nbhdL.includes("clarke quay") || nbhdL.includes("robertson quay") || nbhdL.includes("tanjong pagar")))
+      return "Singapore's most vibrant nightlife strip with bars, clubs, and waterfront dining";
+  }
+  if (high && cityKey === "seoul") {
+    if (pref === "luxury" && (nbhdL.includes("gangnam") || nbhdL.includes("cheongdam") || nbhdL.includes("apgujeong")))
+      return "Seoul's most prestigious district — luxury hotels, designer boutiques, and Michelin-starred dining";
+    if (pref === "nightlife" && (nbhdL.includes("hongdae") || nbhdL.includes("itaewon")))
+      return "Seoul's legendary club and bar district, alive until dawn with world-class DJs and venues";
+    if (pref === "sightseeing" && (nbhdL.includes("insadong") || nbhdL.includes("jongno") || nbhdL.includes("bukchon")))
+      return "Gyeongbokgung Palace, Bukchon Hanok Village, and Seoul's historic heart";
+    if (pref === "food" && (nbhdL.includes("itaewon") || nbhdL.includes("hongdae") || nbhdL.includes("myeongdong")))
+      return "Seoul's most diverse food scene — Korean BBQ, global cuisine, and street food culture";
+    if (pref === "first-time" && nbhdL.includes("myeongdong"))
+      return "the beating heart of Seoul tourism — shopping, street food, and easy access to every major sight";
+  }
+
   switch (pref) {
     case "luxury":      return high ? "excellent luxury options"          : "moderate luxury offering";
     case "quiet":       return high ? "quiet, residential atmosphere"     : "reasonably quiet";
@@ -881,7 +1647,14 @@ function buildWhy(
 
   const nbhd    = h.inferred_neighborhood;
   const destL   = destination.toLowerCase();
-  const cityKey = destL.includes("barcelona") ? "barcelona" : null;
+  const cityKey = destL.includes("barcelona") ? "barcelona"
+                : (destL.includes("tokyo") || destL.includes("tōkyō")) ? "tokyo"
+                : destL.includes("london") ? "london"
+                : (destL.includes("new york") || destL.includes("nyc")) ? "new york"
+                : (destL.includes("bangkok") || destL.includes("krung thep")) ? "bangkok"
+                : destL.includes("singapore") ? "singapore"
+                : (destL.includes("seoul") || destL.includes("서울")) ? "seoul"
+                : null;
 
   // ── Location context ───────────────────────────────────────────────────────
   if (prefs.length > 0 && nbhd) {
