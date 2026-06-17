@@ -41,6 +41,7 @@ interface HotelOffer {
   nearby_walk: { name: string; minutes: number } | null;
   score_breakdown: {
     price: number; reviews: number; location: number; stars: number; walkability: number;
+    destination_fit: number;
   };
   neighborhood_fit_score: number;
   inferred_neighborhood:  string;
@@ -1533,6 +1534,22 @@ function HotelDetailDrawer({
                   </div>
                 </div>
               )}
+              {activePrefs.length === 0 && offer.score_breakdown.destination_fit > 0 && (
+                <div>
+                  <div className="flex items-center justify-between mb-0.5">
+                    <span className="text-[11px] text-lantern-violet/80">Destination Fit</span>
+                    <span className={`text-[11px] font-bold tabular-nums ${barText(offer.score_breakdown.destination_fit)}`}>
+                      {offer.score_breakdown.destination_fit}
+                    </span>
+                  </div>
+                  <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
+                    <div
+                      className={`h-full rounded-full ${barColor(offer.score_breakdown.destination_fit)}`}
+                      style={{ width: `${offer.score_breakdown.destination_fit}%` }}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -1712,6 +1729,8 @@ function HotelCard({
 
   if (prefsActive && offer.neighborhood_fit_score > 0) {
     breakdownRows.push({ key: "nbhd", label: "Neighborhood Fit", score: offer.neighborhood_fit_score });
+  } else if (!prefsActive && offer.score_breakdown.destination_fit > 0) {
+    breakdownRows.push({ key: "dest", label: "Destination Fit", score: offer.score_breakdown.destination_fit });
   }
 
   const barColor = (s: number) => s >= 65 ? "bg-lantern-mint" : s >= 45 ? "bg-white/25" : "bg-lantern-gold/70";
@@ -1965,7 +1984,9 @@ function HotelCard({
             <p className="text-[10px] text-white/20 leading-relaxed pt-1">
               {prefsActive
                 ? "Preference mode: Neighborhood Fit 35% · Hotel Quality 25% · Reviews 20% · Price 10% · Walkability 10%. Price scored relative to other results in this search."
-                : "No preferences: Price 28% · Reviews 27% · Location 20% · Hotel Quality 14% · Walkability 11%. All scores are relative to this result set."}
+                : offer.score_breakdown.destination_fit > 0
+                  ? "No preferences: Reviews 25% · Destination Fit 22% · Hotel Quality 18% · Location 17% · Price 14% · Walkability 4%. Destination Fit measures how desirable this neighborhood is for a typical visitor to this city."
+                  : "No preferences: Price 28% · Reviews 27% · Location 20% · Hotel Quality 14% · Walkability 11%. All scores are relative to this result set."}
             </p>
           </div>
         )}

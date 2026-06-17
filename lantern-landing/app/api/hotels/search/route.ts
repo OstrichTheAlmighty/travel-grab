@@ -200,6 +200,28 @@ const NEIGHBORHOOD_FIT_TABLES: Record<string, CityNeighborhoodTable> = {
       "roppongi": 78, "minato city": 72, "minato-ku": 72,
       "meguro": 55, "sumida": 82,
     },
+    visitor: {
+      // Desirability for a typical visitor (no stated preferences).
+      // Ginza 95 → Ota City 45 per product spec.
+      "ginza": 95, "chuo city": 95, "chuo-ku": 95, "chūō": 95,
+      "shibuya": 92, "shibuya city": 92, "shibuya-ku": 92,
+      "shinjuku": 90, "shinjuku city": 90, "shinjuku-ku": 90,
+      "omotesando": 88, "marunouchi": 88, "chiyoda city": 86, "chiyoda-ku": 86,
+      "harajuku": 86, "aoyama": 84,
+      "asakusa": 85, "taito city": 84, "taito-ku": 84, "taitō": 84,
+      "roppongi": 82, "minato city": 80, "minato-ku": 80, "azabu": 82, "akasaka": 80,
+      "ueno": 82, "bunkyo": 78, "bunkyo city": 78, "bunkyo-ku": 78,
+      "sumida": 70, "sumida city": 70, "sumida-ku": 70,
+      "ebisu": 72, "daikanyama": 70, "meguro": 65, "meguro city": 65, "meguro-ku": 65,
+      "shinagawa": 58, "shinagawa city": 58, "shinagawa-ku": 58,
+      "koto": 60, "koto city": 60, "koto-ku": 60,
+      "setagaya": 52, "setagaya-ku": 52,
+      "nerima": 38, "nerima city": 38,
+      "itabashi": 36, "itabashi city": 36,
+      "kita city": 38, "kita-ku": 38,
+      "adachi": 28, "edogawa": 28, "katsushika": 26,
+      "ota city": 45, "ota-ku": 45, "ōta": 45,
+    },
   },
   barcelona: {
     quiet: {
@@ -280,6 +302,14 @@ const NEIGHBORHOOD_FIT_TABLES: Record<string, CityNeighborhoodTable> = {
       "el raval": 82, "sarrià-sant gervasi": 57,
       "sants-montjuïc": 62, "sant martí": 67,
       "l'hospitalet": 42, "hospitalet": 42, "les corts": 60, "poblenou": 65,
+    },
+    visitor: {
+      "barri gòtic": 95, "gothic quarter": 95, "el born": 91, "eixample": 89,
+      "barceloneta": 80, "gràcia": 76, "el raval": 72, "sant antoni": 74,
+      "poblenou": 65, "sants-montjuïc": 58, "sarrià-sant gervasi": 50,
+      "sant gervasi": 48, "pedralbes": 46, "les corts": 44,
+      "sant andreu": 38, "nou barris": 32, "horta-guinardó": 35,
+      "l'hospitalet": 30, "hospitalet": 30,
     },
   },
   london: {
@@ -371,6 +401,15 @@ const NEIGHBORHOOD_FIT_TABLES: Record<string, CityNeighborhoodTable> = {
       "hackney": 72, "brixton": 72, "king's cross": 78, "kings cross": 78,
       "canary wharf": 68, "stratford": 60, "hammersmith": 68,
     },
+    visitor: {
+      "covent garden": 95, "soho": 92, "south bank": 91, "westminster": 90,
+      "bloomsbury": 88, "mayfair": 88, "marylebone": 80, "city of london": 80,
+      "shoreditch": 79, "kensington": 78, "notting hill": 76, "chelsea": 75,
+      "st james's": 82, "st james": 82, "fitzrovia": 75,
+      "king's cross": 72, "kings cross": 72, "belgravia": 74, "knightsbridge": 77,
+      "hackney": 62, "brixton": 58, "peckham": 52, "canary wharf": 60,
+      "stratford": 46, "hammersmith": 50, "shepherd's bush": 44,
+    },
   },
   "new york": {
     luxury: {
@@ -455,6 +494,16 @@ const NEIGHBORHOOD_FIT_TABLES: Record<string, CityNeighborhoodTable> = {
       "financial district": 78, "times square": 85,
       "harlem": 72, "brooklyn heights": 78, "park slope": 82,
     },
+    visitor: {
+      "midtown": 95, "times square": 92, "central park south": 94,
+      "soho": 88, "greenwich village": 86, "west village": 85,
+      "tribeca": 82, "flatiron": 82, "financial district": 78,
+      "upper east side": 80, "upper west side": 78,
+      "chelsea": 75, "lower east side": 72, "east village": 73,
+      "williamsburg": 68, "brooklyn heights": 70, "harlem": 64,
+      "park slope": 62, "astoria": 50, "flushing": 48, "queens": 45,
+      "bushwick": 50,
+    },
   },
   bangkok: {
     luxury: {
@@ -515,6 +564,12 @@ const NEIGHBORHOOD_FIT_TABLES: Record<string, CityNeighborhoodTable> = {
       "silom": 80, "pratunam": 75, "ari": 72,
       "phaya thai": 70, "sathorn": 68,
     },
+    visitor: {
+      "rattanakosin": 90, "siam": 86, "riverside": 85, "charoenkrung": 83,
+      "sukhumvit": 82, "silom": 78, "khao san": 75, "ploenchit": 76,
+      "sathorn": 72, "asok": 70, "phaya thai": 62, "ari": 57,
+      "pratunam": 65, "nana": 60, "on nut": 45,
+    },
   },
   singapore: {
     luxury: {
@@ -574,6 +629,13 @@ const NEIGHBORHOOD_FIT_TABLES: Record<string, CityNeighborhoodTable> = {
       "bugis": 85, "city hall": 88, "raffles place": 85,
       "sentosa": 62, "robertson quay": 80,
     },
+    visitor: {
+      "marina bay": 97, "orchard road": 91, "orchard": 90,
+      "chinatown": 88, "arab street": 84, "little india": 82,
+      "city hall": 90, "raffles place": 88, "bugis": 83,
+      "sentosa": 80, "tanjong pagar": 78, "robertson quay": 75,
+      "clarke quay": 78,
+    },
   },
   seoul: {
     luxury: {
@@ -629,6 +691,12 @@ const NEIGHBORHOOD_FIT_TABLES: Record<string, CityNeighborhoodTable> = {
       "myeongdong": 92, "insadong": 90, "jongno": 88,
       "hongdae": 85, "itaewon": 82, "gangnam": 80,
       "dongdaemun": 85, "sinchon": 78, "cheongdam": 75,
+    },
+    visitor: {
+      "myeongdong": 95, "insadong": 88, "bukchon": 84, "jongno": 84,
+      "gangnam": 82, "itaewon": 80, "hongdae": 78,
+      "dongdaemun": 75, "cheongdam": 72, "apgujeong": 68,
+      "sinchon": 65, "hannam": 70, "mapo": 54,
     },
   },
 };
@@ -756,6 +824,19 @@ const NEIGHBORHOOD_DISPLAY: Record<string, Record<string, string>> = {
     "shinagawa-ku": "Shinagawa",
     "setagaya city":"Setagaya",
     "setagaya-ku":  "Setagaya",
+    "ota city":     "Ota City",
+    "ota-ku":       "Ota City",
+    "ōta":          "Ota City",
+    "nerima city":  "Nerima",
+    "nerima-ku":    "Nerima",
+    "itabashi city":"Itabashi",
+    "itabashi-ku":  "Itabashi",
+    "kita city":    "Kita",
+    "kita-ku":      "Kita",
+    "adachi city":  "Adachi",
+    "adachi-ku":    "Adachi",
+    "edogawa city": "Edogawa",
+    "edogawa-ku":   "Edogawa",
   },
   london: {
     "london borough of camden":                   "Bloomsbury / Camden",
@@ -808,11 +889,12 @@ export interface HotelOffer {
   recommendation_why: string;
   nearby_walk: { name: string; minutes: number } | null;
   score_breakdown: {
-    price:       number;
-    reviews:     number;
-    location:    number;
-    stars:       number;
-    walkability: number;
+    price:           number;
+    reviews:         number;
+    location:        number;
+    stars:           number;
+    walkability:     number;
+    destination_fit: number;
   };
   neighborhood_fit_score:  number;
   inferred_neighborhood:   string;
@@ -1058,7 +1140,19 @@ function lookupCityNeighborhoodScore(
     if (addrL.includes("meguro"))        return prefTable["meguro"]       ?? prefTable["meguro city"]  ?? null;
     if (addrL.includes("shibuya"))       return prefTable["shibuya"]      ?? null;
     if (addrL.includes("shinjuku"))      return prefTable["shinjuku"]     ?? null;
-    if (addrL.includes("shimokitazawa")) return prefTable["setagaya"] ?? prefTable["shibuya city"] ?? null;
+    if (addrL.includes("shimokitazawa")) return prefTable["setagaya"]     ?? prefTable["shibuya city"] ?? null;
+    // Outer wards — important for visitor/destination-fit scoring
+    if (addrL.includes("ota city") || addrL.includes("ota-ku") || addrL.includes("ōta") || addrL.includes("haneda") || addrL.includes("kamata") || addrL.includes("omori") || (addrL.includes("sanno") && addrL.includes("ota"))) return prefTable["ota city"] ?? prefTable["ota-ku"] ?? null;
+    if (addrL.includes("setagaya"))   return prefTable["setagaya"]    ?? prefTable["setagaya-ku"]  ?? null;
+    if (addrL.includes("koto-ku") || addrL.includes("koto city"))  return prefTable["koto"]        ?? null;
+    if (addrL.includes("sumida"))     return prefTable["sumida"]      ?? prefTable["sumida city"]  ?? null;
+    if (addrL.includes("nerima"))     return prefTable["nerima"]      ?? null;
+    if (addrL.includes("itabashi"))   return prefTable["itabashi"]    ?? null;
+    if (addrL.includes("adachi"))     return prefTable["adachi"]      ?? null;
+    if (addrL.includes("edogawa"))    return prefTable["edogawa"]     ?? null;
+    if (addrL.includes("katsushika")) return prefTable["katsushika"]  ?? null;
+    if (addrL.includes("kita city") || addrL.includes("kita-ku")) return prefTable["kita city"] ?? null;
+    if (addrL.includes("shinagawa"))  return prefTable["shinagawa"]   ?? prefTable["shinagawa city"] ?? null;
   }
 
   if (cityKey === "barcelona") {
@@ -1281,6 +1375,21 @@ function neighborhoodFitLabel(score: number, prefs: string[]): string {
   return "";
 }
 
+// ── Destination Fit ───────────────────────────────────────────────────────────
+// Desirability score for a typical visitor to this city when no preferences are
+// selected. Uses the "visitor" table in NEIGHBORHOOD_FIT_TABLES via the same
+// lookup infrastructure as preference-based scoring. Returns 0 when the city
+// or neighborhood is not in the table (formula gracefully falls back to original
+// weights in that case).
+
+function computeDestinationFit(
+  destination: string,
+  inferredNeighborhood: string,
+  hotelAddressAndName: string,
+): number {
+  return lookupCityNeighborhoodScore(destination, inferredNeighborhood, hotelAddressAndName, "visitor") ?? 0;
+}
+
 // ── Scoring ───────────────────────────────────────────────────────────────────
 
 function scoreHotels(
@@ -1328,9 +1437,32 @@ function scoreHotels(
       h, prefs, enrichment, inferred_neighborhood, destination,
     );
 
+    // Destination fit: how desirable is this neighborhood for a typical visitor?
+    // Only used in no-prefs mode; 0 when city is not in the visitor table.
+    const destinationFit = computeDestinationFit(
+      destination,
+      inferred_neighborhood,
+      h.address + " " + h.name,
+    );
+
     let ai_score: number;
     if (prefs.length === 0) {
-      ai_score = baseScore;
+      if (destinationFit > 0) {
+        // Destination-fit-aware formula (supported cities).
+        // Weights: Reviews 25% · Destination Fit 22% · Stars 18% · Location 17% · Price 14% · Walk 4%
+        // Price weight reduced from 28%→14% to prevent cheap remote apartments beating central hotels.
+        ai_score = Math.round(
+          reviewScore    * 0.25 +
+          destinationFit * 0.22 +
+          starsScore     * 0.18 +
+          locationScore  * 0.17 +
+          priceScore     * 0.14 +
+          walkScore      * 0.04
+        );
+      } else {
+        // Original formula for cities without a visitor table.
+        ai_score = baseScore;
+      }
     } else if (prefs.length === 1 && prefs[0] === "budget") {
       // Budget mode: price dominates
       ai_score = Math.round(
@@ -1380,11 +1512,12 @@ function scoreHotels(
       recommendation_why:   "",
       nearby_walk:         nearestWalk(h.nearbyPlaces),
       score_breakdown: {
-        price:       Math.round(priceScore),
-        reviews:     Math.round(reviewScore),
-        location:    Math.round(locationScore),
-        stars:       Math.round(starsScore),
-        walkability: Math.round(walkScore),
+        price:           Math.round(priceScore),
+        reviews:         Math.round(reviewScore),
+        location:        Math.round(locationScore),
+        stars:           Math.round(starsScore),
+        walkability:     Math.round(walkScore),
+        destination_fit: Math.round(destinationFit),
       },
       neighborhood_fit_score,
       inferred_neighborhood,
