@@ -819,6 +819,8 @@ export interface HotelOffer {
   neighborhood_fit_label:  string;
   location_summary: string;
   transit_note:     string;
+  latitude?:  number;
+  longitude?: number;
 }
 
 // ── Base helpers ──────────────────────────────────────────────────────────────
@@ -1386,6 +1388,8 @@ function scoreHotels(
       },
       neighborhood_fit_score,
       inferred_neighborhood,
+      latitude:  h.latitude,
+      longitude: h.longitude,
       neighborhood_fit_label: (() => {
         let label = neighborhoodFitLabel(neighborhood_fit_score, prefs);
         // For Luxury: "Great fit" requires the hotel itself to be upscale.

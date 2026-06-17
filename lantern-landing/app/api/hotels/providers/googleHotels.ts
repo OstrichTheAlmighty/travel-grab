@@ -105,6 +105,8 @@ export async function searchGoogleHotels(
                (raw.serpapi_property_details_link as string | undefined) ??
                `${name.replace(/\W/g, "_").slice(0, 40)}_${Math.round(pricePerNight)}`;
 
+    const gps = raw.gps_coordinates as { latitude?: number; longitude?: number } | undefined;
+
     hotels.push({
       source:         "google_hotels",
       sourceHotelId:  id,
@@ -126,6 +128,8 @@ export async function searchGoogleHotels(
       hotelType:      (raw.type        as string | undefined) ?? "Hotel",
       ecoCertified:   !!(raw.eco_certified),
       description:    (raw.description as string | undefined) ?? "",
+      latitude:       typeof gps?.latitude  === "number" ? gps.latitude  : undefined,
+      longitude:      typeof gps?.longitude === "number" ? gps.longitude : undefined,
     });
   }
 

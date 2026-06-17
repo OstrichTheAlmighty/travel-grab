@@ -31,6 +31,8 @@ export interface ProviderHotel {
   hotelType: string;        // "Hotel", "Hostel", "Motel", etc.
   ecoCertified: boolean;
   description: string;
+  latitude?: number;
+  longitude?: number;
 }
 
 export interface HotelSearchParams {

@@ -1,8 +1,16 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
+
+const HotelMapView = dynamic(() => import("./HotelMapView"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full rounded-xl border border-white/[0.08] bg-white/[0.02] animate-pulse" style={{ height: 480 }} />
+  ),
+});
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -39,6 +47,8 @@ interface HotelOffer {
   neighborhood_fit_label: string;
   location_summary: string;
   transit_note:     string;
+  latitude?:  number;
+  longitude?: number;
 }
 
 interface AutocompleteSuggestion {
@@ -903,12 +913,16 @@ function HotelCard({
   isCheapest,
   activePrefs,
   guests,
+  isMapSelected,
+  onSelectForMap,
 }: {
   offer: HotelOffer;
   isBestOverall: boolean;
   isCheapest: boolean;
   activePrefs: readonly PrefId[];
   guests: number;
+  isMapSelected?: boolean;
+  onSelectForMap?: (id: string | null) => void;
 }) {
   const [breakdownOpen, setBreakdownOpen] = useState(isBestOverall);
   const prefsActive = activePrefs.length > 0;
@@ -946,11 +960,17 @@ function HotelCard({
   const visibleAmenities = offer.amenities.slice(0, 5);
 
   return (
-    <div className={`rounded-xl border transition-all ${
-      isBestOverall
-        ? "border-lantern-violet/40 bg-lantern-violet/[0.04] shadow-[0_0_32px_rgba(167,139,250,0.07)]"
-        : "border-white/[0.07] bg-white/[0.02]"
-    }`}>
+    <div
+      data-hotel-id={offer.hotel_id}
+      onClick={() => onSelectForMap?.(isMapSelected ? null : offer.hotel_id)}
+      className={`rounded-xl border transition-all ${
+        isMapSelected
+          ? "border-lantern-blue/50 bg-lantern-blue/[0.04] shadow-[0_0_24px_rgba(119,167,255,0.12)]"
+          : isBestOverall
+            ? "border-lantern-violet/40 bg-lantern-violet/[0.04] shadow-[0_0_32px_rgba(167,139,250,0.07)]"
+            : "border-white/[0.07] bg-white/[0.02]"
+      } ${onSelectForMap ? "cursor-pointer" : ""}`}
+    >
       <div className="p-4 sm:p-5">
 
         {/* Header */}
@@ -1298,6 +1318,8 @@ export default function HotelSearch() {
   const [errorTitle,          setErrorTitle]          = useState("");
   const [errorBody,           setErrorBody]           = useState("");
   const [errors,              setErrors]              = useState<string[]>([]);
+  const [viewMode,            setViewMode]            = useState<"list" | "map">("list");
+  const [selectedHotelId,     setSelectedHotelId]     = useState<string | null>(null);
 
   const resultsRef = useRef<HTMLDivElement>(null);
 
@@ -1370,6 +1392,8 @@ export default function HotelSearch() {
       setSelectedNeighborhood(null);
       setSortOrder("score");
       setAmenityFilters([]);
+      setViewMode("list");
+      setSelectedHotelId(null);
       setSearchState("results");
       setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
     } catch {
@@ -1581,11 +1605,120 @@ export default function HotelSearch() {
             .filter(([a, b]) => activePrefs.includes(a) && activePrefs.includes(b))
             .map(([,, msg]) => msg);
 
+          const cardList = (showAllFallback ? offers : displayedOffers);
+
           return (
             <div className="max-w-3xl mx-auto" ref={resultsRef}>
 
-              {/* Neighborhood guide */}
-              {cityGuide && (
+              {/* ── View toggle + sort bar ─────────────────────────────────── */}
+              <div className="flex items-center justify-between mb-3 px-1 gap-3 flex-wrap">
+                {/* List / Map toggle */}
+                <div className="flex items-center rounded-lg border border-white/[0.08] overflow-hidden">
+                  <button
+                    onClick={() => setViewMode("list")}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-semibold transition-all ${
+                      viewMode === "list"
+                        ? "bg-lantern-violet/20 text-lantern-violet"
+                        : "text-white/35 hover:text-white/60 hover:bg-white/[0.04]"
+                    }`}
+                  >
+                    <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
+                      <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
+                    </svg>
+                    List
+                  </button>
+                  <div className="w-px h-4 bg-white/[0.08]" />
+                  <button
+                    onClick={() => setViewMode("map")}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-semibold transition-all ${
+                      viewMode === "map"
+                        ? "bg-lantern-violet/20 text-lantern-violet"
+                        : "text-white/35 hover:text-white/60 hover:bg-white/[0.04]"
+                    }`}
+                  >
+                    <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                      <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+                      <line x1="8" y1="2" x2="8" y2="18" />
+                      <line x1="16" y1="6" x2="16" y2="22" />
+                    </svg>
+                    Map
+                  </button>
+                </div>
+
+                {/* Hotel count */}
+                <div className="text-xs text-white/40 flex-1 min-w-0">
+                  {selectedCard ? (
+                    <>
+                      <span className="font-semibold text-white/70">
+                        {showAllFallback ? offers.length : amenityFilteredOffers.length} hotels
+                      </span>
+                      {" "}in <span className="text-white/60">{selectedCard.name}</span>
+                      {showAllFallback && <span className="text-white/25"> · no exact matches, showing all</span>}
+                    </>
+                  ) : (
+                    <>
+                      <span className="font-semibold text-white/70">{amenityFilteredOffers.length} hotels</span>
+                      {amenityFilters.length > 0
+                        ? <span className="text-white/25"> · filtered</span>
+                        : <span className="text-white/25"> in {searchedDest}</span>}
+                    </>
+                  )}
+                </div>
+
+                {/* Sort (only in list view) */}
+                {viewMode === "list" && (
+                  <div className="flex items-center gap-1">
+                    {(["score", "price_asc", "price_desc", "rating"] as const).map((opt) => {
+                      const labels = { score: "Best match", price_asc: "Price ↑", price_desc: "Price ↓", rating: "Rating" };
+                      return (
+                        <button
+                          key={opt}
+                          onClick={() => setSortOrder(opt)}
+                          className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold border transition-all ${
+                            sortOrder === opt
+                              ? "bg-lantern-violet/20 text-lantern-violet border-lantern-violet/40"
+                              : "bg-transparent text-white/30 border-white/[0.08] hover:text-white/60 hover:border-white/20"
+                          }`}
+                        >
+                          {labels[opt]}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* ── MAP VIEW ──────────────────────────────────────────────── */}
+              {viewMode === "map" && (
+                <div className="mb-4">
+                  <HotelMapView
+                    offers={offers}
+                    selectedHotelId={selectedHotelId}
+                    onSelectHotel={setSelectedHotelId}
+                    destination={searchedDest}
+                    cityGuide={cityGuide}
+                    selectedNeighborhood={selectedNeighborhood}
+                    onSelectNeighborhood={setSelectedNeighborhood}
+                    activePrefs={activePrefs}
+                  />
+                  {selectedNeighborhood && (
+                    <div className="mt-2 flex items-center justify-between px-1">
+                      <span className="text-[11px] text-white/40">
+                        Filtered: <span className="text-white/70 font-semibold">{cityGuide?.neighborhoods.find(n => n.id === selectedNeighborhood)?.name}</span>
+                      </span>
+                      <button
+                        onClick={() => setSelectedNeighborhood(null)}
+                        className="text-[11px] text-white/30 hover:text-white/60 transition-colors"
+                      >
+                        × Show all
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* ── LIST VIEW: Neighborhood guide ─────────────────────────── */}
+              {viewMode === "list" && cityGuide && (
                 <NeighborhoodGuide
                   guide={cityGuide}
                   selectedId={selectedNeighborhood}
@@ -1635,46 +1768,6 @@ export default function HotelSearch() {
                 )}
               </div>
 
-              {/* Summary + Sort bar */}
-              <div className="flex items-center justify-between mb-3 px-1 gap-3 flex-wrap">
-                <div className="text-xs text-white/40">
-                  {selectedCard ? (
-                    <>
-                      <span className="font-semibold text-white/70">
-                        {showAllFallback ? offers.length : amenityFilteredOffers.length} hotels
-                      </span>
-                      {" "}in <span className="text-white/60">{selectedCard.name}</span>
-                      {showAllFallback && <span className="text-white/25"> · no exact matches, showing all</span>}
-                    </>
-                  ) : (
-                    <>
-                      <span className="font-semibold text-white/70">{amenityFilteredOffers.length} hotels</span>
-                      {amenityFilters.length > 0
-                        ? <span className="text-white/25"> · filtered</span>
-                        : <span className="text-white/25"> in {searchedDest}</span>}
-                    </>
-                  )}
-                </div>
-                <div className="flex items-center gap-1">
-                  {(["score", "price_asc", "price_desc", "rating"] as const).map((opt) => {
-                    const labels = { score: "Best match", price_asc: "Price ↑", price_desc: "Price ↓", rating: "Rating" };
-                    return (
-                      <button
-                        key={opt}
-                        onClick={() => setSortOrder(opt)}
-                        className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold border transition-all ${
-                          sortOrder === opt
-                            ? "bg-lantern-violet/20 text-lantern-violet border-lantern-violet/40"
-                            : "bg-transparent text-white/30 border-white/[0.08] hover:text-white/60 hover:border-white/20"
-                        }`}
-                      >
-                        {labels[opt]}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
               {/* Recommendation panel — always use score-ranked order */}
               <RecommendationPanel
                 offers={showAllFallback ? offers : filteredOffers}
@@ -1683,7 +1776,7 @@ export default function HotelSearch() {
 
               {/* Hotel cards */}
               <div className="space-y-3">
-                {(showAllFallback ? offers : displayedOffers).map((offer) => (
+                {cardList.map((offer) => (
                   <HotelCard
                     key={offer.hotel_id}
                     offer={offer}
@@ -1691,6 +1784,8 @@ export default function HotelSearch() {
                     isCheapest={offer.hotel_id === cheapestId}
                     activePrefs={activePrefs}
                     guests={guests}
+                    isMapSelected={viewMode === "map" && offer.hotel_id === selectedHotelId}
+                    onSelectForMap={viewMode === "map" ? setSelectedHotelId : undefined}
                   />
                 ))}
               </div>
