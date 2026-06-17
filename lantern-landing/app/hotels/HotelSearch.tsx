@@ -4,6 +4,8 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
+import { NeighborhoodCompare } from "./NeighborhoodCompare";
+import type { ComparableSummary } from "./NeighborhoodCompare";
 
 const HotelMapView = dynamic(() => import("./HotelMapView"), {
   ssr: false,
@@ -3504,6 +3506,27 @@ export default function HotelSearch() {
                     onSelect={setSelectedNeighborhood}
                   />
                 )
+              )}
+
+              {/* ── Neighborhood Comparison Engine ─────────────────────── */}
+              {viewMode === "list" && cityGuide && nbhdSummaries.filter((s) => s.count > 0).length >= 2 && (
+                <NeighborhoodCompare
+                  cityName={cityGuide.displayName}
+                  summaries={nbhdSummaries
+                    .filter((s) => s.count > 0)
+                    .map((s): ComparableSummary => ({
+                      nbhd: s.nbhd,
+                      count: s.count,
+                      avgPrice: s.avgPrice,
+                      avgRating: s.avgRating,
+                      avgHotelScore:
+                        s.hotels.length > 0
+                          ? Math.round(
+                              s.hotels.reduce((acc, h) => acc + h.ai_score, 0) / s.hotels.length
+                            )
+                          : 0,
+                    }))}
+                />
               )}
 
               {/* Preference conflict warning */}
