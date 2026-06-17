@@ -2703,6 +2703,158 @@ function HotelComparePanel({
   );
 }
 
+// ── Recommended Hotels (Top 3 picks) ─────────────────────────────────────────
+
+function topPickSentence(h: HotelOffer, rank: number, top3: HotelOffer[]): string {
+  const first     = top3[0];
+  const priceSave = Math.round(first.price_per_night - h.price_per_night);
+
+  const strengths: string[] = [];
+  if (h.star_rating >= 5)                    strengths.push("5-star luxury");
+  if (h.overall_rating >= 4.7)               strengths.push(`${h.overall_rating.toFixed(1)}★ guest rating`);
+  else if (h.overall_rating >= 4.4)          strengths.push("strong guest reviews");
+  if (h.score_breakdown.walkability >= 72)   strengths.push("excellent walkability");
+  else if (h.score_breakdown.walkability >= 55) strengths.push("good walkability");
+  if (h.score_breakdown.location >= 85)      strengths.push("prime location");
+  else if (h.score_breakdown.location >= 70) strengths.push("central location");
+  if (h.score_breakdown.price >= 75)         strengths.push("great value");
+  if (h.score_breakdown.reviews >= 80)       strengths.push("strong reviews");
+
+  if (rank === 0) {
+    const qualifier = h.star_rating >= 5 ? "luxury" : h.overall_rating >= 4.7 ? "premium" : "overall";
+    const str = strengths.slice(0, 2).join(" and ") || "balanced strengths";
+    return `Best ${qualifier} choice with ${str}.`;
+  }
+
+  if (rank === 1) {
+    const str = strengths.slice(0, 2).join(" and ") || "strong performance";
+    const priceNote = priceSave >= 30 ? ` at $${priceSave}/night less than #1`
+                    : priceSave >= 10 ? " at a slightly lower price"
+                    : "";
+    return `${str.charAt(0).toUpperCase() + str.slice(1)}${priceNote}.`;
+  }
+
+  if (priceSave >= 40) return `Best value in the top 3 — saves $${priceSave}/night vs #1.`;
+  const str = strengths.slice(0, 2).join(" and ") || "solid overall performance";
+  return `Strong option with ${str}.`;
+}
+
+function RecommendedHotels({
+  top3,
+  compareIds,
+  onSetCompareIds,
+  onOpenCompare,
+}: {
+  top3:            HotelOffer[];
+  compareIds:      string[];
+  onSetCompareIds: (ids: string[]) => void;
+  onOpenCompare:   () => void;
+}) {
+  if (top3.length === 0) return null;
+
+  const RANK_LABEL  = ["#1", "#2", "#3"];
+  const RANK_COLOR  = ["text-amber-400", "text-white/45", "text-amber-700/70"];
+  const CARD_STYLE  = [
+    "border-amber-500/20 bg-amber-500/[0.04]",
+    "border-white/[0.07] bg-white/[0.025]",
+    "border-white/[0.05] bg-white/[0.015]",
+  ];
+
+  return (
+    <div className="mb-5">
+      {/* Header row */}
+      <div className="flex items-center justify-between mb-2.5">
+        <div>
+          <span className="text-[9px] font-black uppercase tracking-widest text-white/28">
+            Top Picks For You
+          </span>
+          <p className="text-[11px] text-white/18 mt-0.5">
+            Highest-ranked hotels from this search
+          </p>
+        </div>
+        {top3.length >= 2 && (
+          <button
+            onClick={() => {
+              onSetCompareIds(top3.map((h) => h.hotel_id));
+              onOpenCompare();
+            }}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-lantern-violet/30 bg-lantern-violet/[0.08] text-lantern-violet text-[11px] font-semibold hover:bg-lantern-violet/[0.15] transition-all"
+          >
+            <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
+              <path d="M2 6h8M6 2v8" />
+            </svg>
+            Compare These {top3.length}
+          </button>
+        )}
+      </div>
+
+      {/* Pick cards */}
+      <div className="space-y-2">
+        {top3.map((h, i) => {
+          const sentence  = topPickSentence(h, i, top3);
+          const shortNbhd = h.inferred_neighborhood?.split(" /")[0].split(",")[0] ?? "";
+
+          return (
+            <div key={h.hotel_id} className={`flex items-start gap-3 rounded-xl border p-3 ${CARD_STYLE[i]}`}>
+              {/* Rank */}
+              <div className="flex-shrink-0 w-6 pt-0.5 text-center">
+                <span className={`text-[12px] font-black tabular-nums ${RANK_COLOR[i]}`}>
+                  {RANK_LABEL[i]}
+                </span>
+              </div>
+
+              {/* Image */}
+              <div className="flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden bg-white/[0.04]">
+                {h.image_url ? (
+                  <img src={h.image_url} alt={h.name} className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <svg className="w-5 h-5 text-white/12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                      <rect x="3" y="3" width="18" height="18" rx="2" />
+                      <path d="M3 9h18" />
+                    </svg>
+                  </div>
+                )}
+              </div>
+
+              {/* Info */}
+              <div className="flex-1 min-w-0">
+                <div className="flex items-start justify-between gap-2 mb-0.5">
+                  <h3 className="text-[13px] font-bold text-white leading-tight line-clamp-1 flex-1 min-w-0">
+                    {h.name}
+                  </h3>
+                  <span className={`flex-shrink-0 text-[13px] font-black tabular-nums ${scoreColor(h.ai_score)}`}>
+                    {h.ai_score}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-1.5 mb-1.5 flex-wrap">
+                  {shortNbhd && (
+                    <span className="text-[10px] text-white/28">{shortNbhd}</span>
+                  )}
+                  <span className="text-[10px] text-white/18">·</span>
+                  <span className="text-[11px] font-semibold text-white/55">
+                    ${Math.round(h.price_per_night)}
+                    <span className="text-[10px] text-white/25 font-normal">/night</span>
+                  </span>
+                  {h.overall_rating > 0 && (
+                    <>
+                      <span className="text-[10px] text-white/18">·</span>
+                      <span className="text-[10px] text-white/30">{h.overall_rating.toFixed(1)}★</span>
+                    </>
+                  )}
+                </div>
+
+                <p className="text-[11px] text-white/42 leading-snug">{sentence}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ── Recommendation panel ──────────────────────────────────────────────────────
 
 function RecommendationPanel({
@@ -3377,6 +3529,11 @@ export default function HotelSearch() {
           const showAllFallback = selectedCard && filteredOffers.length === 0;
           const cheapestId = [...offers].sort((a, b) => a.price_per_night - b.price_per_night)[0]?.hotel_id;
 
+          // Top 3 by score from the full unfiltered list (always global best, not per-neighborhood)
+          const top3 = [...offers]
+            .sort((a, b) => (b.ai_score - a.ai_score) || (a.price_per_night - b.price_per_night))
+            .slice(0, 3);
+
           // Preference conflict warnings
           const conflictWarnings = PREF_CONFLICTS
             .filter(([a, b]) => activePrefs.includes(a) && activePrefs.includes(b))
@@ -3584,6 +3741,16 @@ export default function HotelSearch() {
                             )
                           : 0,
                     }))}
+                />
+              )}
+
+              {/* ── Recommended Hotels (Top 3 picks) ───────────────────────── */}
+              {viewMode === "list" && top3.length > 0 && (
+                <RecommendedHotels
+                  top3={top3}
+                  compareIds={compareIds}
+                  onSetCompareIds={setCompareIds}
+                  onOpenCompare={() => setComparePanelOpen(true)}
                 />
               )}
 
