@@ -2855,6 +2855,246 @@ function RecommendedHotels({
   );
 }
 
+// ── Book This One ─────────────────────────────────────────────────────────────
+
+function BookThisOne({
+  h1,
+  h2,
+  cityGuide,
+}: {
+  h1: HotelOffer;
+  h2: HotelOffer;
+  cityGuide: CityGuide | null;
+}) {
+  const gap        = h1.ai_score - h2.ai_score;
+  const confidence = gap >= 5 ? "high" : gap >= 2 ? "medium" : "close-call";
+
+  const pricePremium  = Math.round(h1.price_per_night - h2.price_per_night);   // >0 = h1 more expensive
+  const priceSavings  = -pricePremium;                                          // >0 = h1 cheaper
+  const h1NbhdRaw     = h1.inferred_neighborhood?.split(",")[0].split(" /")[0] ?? "";
+  const h2Short       = h2.name.length > 26 ? h2.name.slice(0, 23) + "…" : h2.name;
+
+  // ── Why (#1 strengths) ──────────────────────────────────────────────────────
+  const why: string[] = [];
+  why.push(`Highest TravelGrab score (${h1.ai_score})`);
+
+  if (h1.overall_rating >= 4.7)      why.push(`Outstanding guest reviews (${h1.overall_rating.toFixed(1)}★)`);
+  else if (h1.overall_rating >= 4.4) why.push(`Strong guest reviews (${h1.overall_rating.toFixed(1)}★)`);
+  else if (h1.score_breakdown.reviews > h2.score_breakdown.reviews + 8)
+    why.push("Higher guest satisfaction score");
+
+  if (h1.score_breakdown.walkability >= 75)
+    why.push("Excellent walkability");
+  else if (h1.score_breakdown.walkability >= 58 && h1.score_breakdown.walkability > h2.score_breakdown.walkability + 5)
+    why.push("Better walkability than alternatives");
+
+  if (h1.score_breakdown.location >= 85)
+    why.push("Prime central location");
+  else if (h1.score_breakdown.location > h2.score_breakdown.location + 8)
+    why.push("Better location score");
+
+  if (h1NbhdRaw) {
+    const recNbhd = cityGuide?.neighborhoods[0];
+    const isRec   = recNbhd?.matchKeywords.some(
+      (k) => h1.inferred_neighborhood.toLowerCase().includes(k.toLowerCase()),
+    );
+    if (isRec && recNbhd)
+      why.push(`Located in recommended neighborhood (${recNbhd.name.split(" /")[0]})`);
+    else if (h1NbhdRaw)
+      why.push(`Located in ${h1NbhdRaw}`);
+  }
+
+  if (h1.star_rating >= 5)                                    why.push("5-star luxury hotel");
+  else if (h1.star_rating > h2.star_rating && h1.star_rating >= 4) why.push(`Higher star category (${h1.star_rating}★)`);
+  if (priceSavings >= 25) why.push(`$${priceSavings}/night cheaper than comparable options`);
+
+  const finalWhy = why.slice(0, 4);
+
+  // ── Tradeoffs (#1 weaknesses) ───────────────────────────────────────────────
+  const tradeoffs: string[] = [];
+  if (pricePremium >= 20)
+    tradeoffs.push(`Costs $${pricePremium}/night more than ${h2Short}`);
+  if (h2.review_count > h1.review_count + 100 && h2.review_count > h1.review_count * 1.3)
+    tradeoffs.push(`Fewer reviews than ${h2Short} (${h1.review_count} vs ${h2.review_count})`);
+  if (h2.overall_rating > h1.overall_rating + 0.2)
+    tradeoffs.push(`Slightly lower guest rating (${h1.overall_rating.toFixed(1)}★ vs ${h2.overall_rating.toFixed(1)}★)`);
+
+  // ── Why not #2: pros ────────────────────────────────────────────────────────
+  const runnerPros: string[] = [];
+  if (priceSavings >= 20)
+    runnerPros.push(`Saves $${priceSavings}/night`);
+  if (h2.overall_rating > h1.overall_rating + 0.1)
+    runnerPros.push(`Higher guest rating (${h2.overall_rating.toFixed(1)}★ vs ${h1.overall_rating.toFixed(1)}★)`);
+  if (h2.review_count > h1.review_count + 75)
+    runnerPros.push(`More guest reviews (${h2.review_count.toLocaleString()} vs ${h1.review_count.toLocaleString()})`);
+  if (h2.score_breakdown.walkability > h1.score_breakdown.walkability + 5)
+    runnerPros.push("Better walkability");
+  if (h2.star_rating > h1.star_rating)
+    runnerPros.push(`Higher star category (${h2.star_rating}★ vs ${h1.star_rating}★)`);
+
+  // ── Why not #2: cons ────────────────────────────────────────────────────────
+  const runnerCons: string[] = [];
+  runnerCons.push(`Lower overall score (${h2.ai_score} vs ${h1.ai_score})`);
+  if (h2.score_breakdown.walkability < h1.score_breakdown.walkability - 5)
+    runnerCons.push("Lower walkability");
+  if (h2.overall_rating < h1.overall_rating - 0.2)
+    runnerCons.push(`Lower guest rating (${h2.overall_rating.toFixed(1)}★)`);
+  if (h2.score_breakdown.location < h1.score_breakdown.location - 8)
+    runnerCons.push("Weaker location score");
+
+  // ── Who should pick #2 ──────────────────────────────────────────────────────
+  const whoShouldPick: string[] = [];
+  if (priceSavings >= 20)
+    whoShouldPick.push("Value matters more than location quality");
+  if (h2.score_breakdown.walkability >= h1.score_breakdown.walkability - 5)
+    whoShouldPick.push("You plan to use public transit over walking");
+  if (h2.review_count > h1.review_count)
+    whoShouldPick.push("You prefer properties with a larger review base");
+  if (h2.overall_rating >= h1.overall_rating)
+    whoShouldPick.push("Raw guest satisfaction is your top priority");
+  whoShouldPick.push("You want to minimize hotel spend");
+
+  const finalRunnerPros    = runnerPros.slice(0, 3);
+  const finalRunnerCons    = runnerCons.slice(0, 3);
+  const finalWhoShouldPick = whoShouldPick.slice(0, 3);
+
+  const confLabel = confidence === "high"       ? "High Confidence"
+                  : confidence === "medium"     ? "Medium Confidence"
+                  : "Close Call";
+  const confColor = confidence === "high"       ? "text-lantern-mint"
+                  : confidence === "medium"     ? "text-amber-400"
+                  : "text-white/35";
+  const confDot   = confidence === "high"       ? "bg-lantern-mint"
+                  : confidence === "medium"     ? "bg-amber-400"
+                  : "bg-white/25";
+
+  return (
+    <div className="mb-5 rounded-2xl border border-lantern-mint/15 bg-lantern-mint/[0.025] overflow-hidden">
+      {/* Top bar */}
+      <div className="flex items-center justify-between px-4 pt-3.5 pb-2 border-b border-white/[0.04]">
+        <span className="text-[9px] font-black uppercase tracking-[0.14em] text-lantern-mint/55">
+          Book This One
+        </span>
+        <div className="flex items-center gap-1.5">
+          <span className={`w-1.5 h-1.5 rounded-full ${confDot} opacity-80`} />
+          <span className={`text-[10px] font-bold ${confColor}`}>{confLabel}</span>
+        </div>
+      </div>
+
+      <div className="px-4 pt-3 pb-4 space-y-3.5">
+        {/* Hotel name + tagline */}
+        <div>
+          <h2 className="text-[15px] font-bold text-white leading-tight">{h1.name}</h2>
+          <p className="text-[11.5px] text-white/35 mt-0.5">
+            {confidence === "close-call"
+              ? "One of two equally strong options for this search."
+              : "Best overall fit for this search."}
+          </p>
+        </div>
+
+        {confidence === "close-call" && (
+          <div className="rounded-lg border border-white/[0.06] bg-white/[0.03] px-3 py-2">
+            <p className="text-[11.5px] text-white/45 italic">
+              You can safely choose either option. Both score within 1 point of each other.
+            </p>
+          </div>
+        )}
+
+        {/* Why */}
+        {finalWhy.length > 0 && (
+          <div>
+            <span className="text-[9.5px] font-bold uppercase tracking-widest text-white/25 block mb-1.5">Why</span>
+            <ul className="space-y-1.5">
+              {finalWhy.map((b, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="flex-shrink-0 w-1 h-1 rounded-full bg-lantern-mint/50 mt-[5px]" />
+                  <span className="text-[12px] text-white/55 leading-snug">{b}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Tradeoffs */}
+        {tradeoffs.length > 0 && (
+          <div>
+            <span className="text-[9.5px] font-bold uppercase tracking-widest text-white/25 block mb-1.5">Tradeoffs</span>
+            <ul className="space-y-1.5">
+              {tradeoffs.map((t, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="flex-shrink-0 w-1 h-1 rounded-full bg-amber-400/50 mt-[5px]" />
+                  <span className="text-[12px] text-white/42 leading-snug">{t}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Divider */}
+        <div className="border-t border-white/[0.05]" />
+
+        {/* Why not #2 */}
+        <div>
+          <span className="text-[9.5px] font-bold uppercase tracking-widest text-white/22 block mb-2">
+            Why not {h2Short}?
+          </span>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+            {/* Pros column */}
+            <div>
+              {finalRunnerPros.length > 0 && (
+                <>
+                  <span className="text-[9px] font-bold uppercase tracking-wide text-lantern-mint/45 block mb-1">Pros</span>
+                  <ul className="space-y-1">
+                    {finalRunnerPros.map((p, i) => (
+                      <li key={i} className="flex items-start gap-1.5">
+                        <span className="flex-shrink-0 w-1 h-1 rounded-full bg-lantern-mint/35 mt-[5px]" />
+                        <span className="text-[11px] text-white/40 leading-snug">{p}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </div>
+            {/* Cons column */}
+            <div>
+              {finalRunnerCons.length > 0 && (
+                <>
+                  <span className="text-[9px] font-bold uppercase tracking-wide text-white/22 block mb-1">Cons</span>
+                  <ul className="space-y-1">
+                    {finalRunnerCons.map((c, i) => (
+                      <li key={i} className="flex items-start gap-1.5">
+                        <span className="flex-shrink-0 w-1 h-1 rounded-full bg-white/20 mt-[5px]" />
+                        <span className="text-[11px] text-white/32 leading-snug">{c}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Who should pick #2 */}
+        {confidence !== "close-call" && finalWhoShouldPick.length > 0 && (
+          <div>
+            <span className="text-[9.5px] font-bold uppercase tracking-widest text-white/22 block mb-1.5">
+              Choose {h2Short} instead if:
+            </span>
+            <ul className="space-y-1.5">
+              {finalWhoShouldPick.map((w, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="flex-shrink-0 w-1 h-1 rounded-full bg-white/18 mt-[5px]" />
+                  <span className="text-[11.5px] text-white/35 leading-snug">{w}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // ── Recommendation panel ──────────────────────────────────────────────────────
 
 function RecommendationPanel({
@@ -3744,8 +3984,13 @@ export default function HotelSearch() {
                 />
               )}
 
-              {/* ── Recommended Hotels (Top 3 picks) ───────────────────────── */}
-              {viewMode === "list" && top3.length > 0 && (
+              {/* ── Book This One (Best Hotels Overall only) ────────────── */}
+              {viewMode === "list" && searchMode === "best-hotels" && top3.length >= 2 && (
+                <BookThisOne h1={top3[0]} h2={top3[1]} cityGuide={cityGuide} />
+              )}
+
+              {/* ── Recommended Hotels Top 3 (Best Area mode only) ──────── */}
+              {viewMode === "list" && searchMode === "best-area" && top3.length > 0 && (
                 <RecommendedHotels
                   top3={top3}
                   compareIds={compareIds}
