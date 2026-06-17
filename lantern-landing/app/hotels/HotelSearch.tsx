@@ -595,10 +595,10 @@ function scoreLabel(n: number): string {
 }
 
 function coverageLabel(c: "strong" | "good" | "limited", count?: number): string {
-  const n = count !== undefined ? ` (${count})` : "";
-  if (c === "strong")  return `Excellent coverage${n}`;
-  if (c === "good")    return `Moderate coverage${n}`;
-  return `Limited coverage${n}`;
+  const n = count !== undefined ? `${count} ` : "";
+  if (c === "strong")  return `${n}Hotels · Strong`;
+  if (c === "good")    return `${n}Hotels`;
+  return `${n}Hotels · Limited`;
 }
 
 function coverageBadgeStyle(c: "strong" | "good" | "limited"): string {
@@ -2103,7 +2103,8 @@ function HotelCard({
 
         {/* "Why this score?" weighted contribution breakdown */}
         {breakdownOpen && (() => {
-          // Compute weighted contribution rows based on active scoring mode
+          // Compute weighted contribution rows based on active scoring mode.
+          // score_breakdown.reviews uses the amplified 3.0–5.0★ scale (4.7★→85, 4.2★→60, 3.9★→45).
           const contributions: { label: string; score: number; weight: number; pts: number }[] = prefsActive
             ? [
                 { label: "Neighborhood Fit", score: offer.neighborhood_fit_score,       weight: 0.35 },
@@ -2114,16 +2115,16 @@ function HotelCard({
               ].map((r) => ({ ...r, pts: Math.round(r.score * r.weight) }))
             : offer.score_breakdown.destination_fit > 0
               ? [
-                  { label: "Guest Reviews",     score: offer.score_breakdown.reviews,        weight: 0.25 },
-                  { label: "Destination Fit",   score: offer.score_breakdown.destination_fit, weight: 0.22 },
+                  { label: "Guest Reviews",     score: offer.score_breakdown.reviews,        weight: 0.30 },
+                  { label: "Destination Fit",   score: offer.score_breakdown.destination_fit, weight: 0.18 },
                   { label: "Hotel Quality",     score: offer.score_breakdown.stars,          weight: 0.18 },
-                  { label: "Location",          score: offer.score_breakdown.location,       weight: 0.17 },
+                  { label: "Location",          score: offer.score_breakdown.location,       weight: 0.16 },
                   { label: "Price / Value",     score: offer.score_breakdown.price,          weight: 0.14 },
                   { label: "Walkability",       score: offer.score_breakdown.walkability,    weight: 0.04 },
                 ].map((r) => ({ ...r, pts: Math.round(r.score * r.weight) }))
               : [
-                  { label: "Price / Value",     score: offer.score_breakdown.price,        weight: 0.28 },
-                  { label: "Guest Reviews",     score: offer.score_breakdown.reviews,      weight: 0.27 },
+                  { label: "Guest Reviews",     score: offer.score_breakdown.reviews,      weight: 0.32 },
+                  { label: "Price / Value",     score: offer.score_breakdown.price,        weight: 0.23 },
                   { label: "Location",          score: offer.score_breakdown.location,     weight: 0.20 },
                   { label: "Hotel Quality",     score: offer.score_breakdown.stars,        weight: 0.14 },
                   { label: "Walkability",       score: offer.score_breakdown.walkability,  weight: 0.11 },
@@ -2159,7 +2160,7 @@ function HotelCard({
                 <span className={`text-[12px] font-black tabular-nums ${scoreColor(offer.ai_score)}`}>{offer.ai_score}</span>
               </div>
               <p className="text-[10px] text-white/18 mt-1.5 leading-relaxed">
-                Component scores × weight = pts. Normalized to 45–97 across all results so every search has a clear top hotel.
+                Component scores × weight = pts. Guest Reviews amplifies the 3.0–5.0★ range (4.7★=85, 4.2★=60, 3.9★=45). Totals normalized to 45–97 across results.
               </p>
             </div>
           );
@@ -2831,13 +2832,19 @@ function RecommendationPanel({
     { key: "reviews",   label: "Guest Reviews",    val: pick.score_breakdown.reviews,         w: 0.20 },
     { key: "price",     label: "Price/Value",      val: pick.score_breakdown.price,           w: 0.10 },
     { key: "walk",      label: "Walkability",      val: pick.score_breakdown.walkability,     w: 0.10 },
-  ] : [
-    { key: "reviews",   label: "Guest Reviews",    val: pick.score_breakdown.reviews,         w: 0.25 },
-    { key: "dest",      label: "Destination Fit",  val: pick.score_breakdown.destination_fit, w: 0.22 },
+  ] : pick.score_breakdown.destination_fit > 0 ? [
+    { key: "reviews",   label: "Guest Reviews",    val: pick.score_breakdown.reviews,         w: 0.30 },
+    { key: "dest",      label: "Destination Fit",  val: pick.score_breakdown.destination_fit, w: 0.18 },
     { key: "stars",     label: "Hotel Quality",    val: pick.score_breakdown.stars,           w: 0.18 },
-    { key: "location",  label: "Location",         val: pick.score_breakdown.location,        w: 0.17 },
+    { key: "location",  label: "Location",         val: pick.score_breakdown.location,        w: 0.16 },
     { key: "price",     label: "Price/Value",      val: pick.score_breakdown.price,           w: 0.14 },
     { key: "walk",      label: "Walkability",      val: pick.score_breakdown.walkability,     w: 0.04 },
+  ] : [
+    { key: "reviews",   label: "Guest Reviews",    val: pick.score_breakdown.reviews,         w: 0.32 },
+    { key: "price",     label: "Price/Value",      val: pick.score_breakdown.price,           w: 0.23 },
+    { key: "location",  label: "Location",         val: pick.score_breakdown.location,        w: 0.20 },
+    { key: "stars",     label: "Hotel Quality",    val: pick.score_breakdown.stars,           w: 0.14 },
+    { key: "walk",      label: "Walkability",      val: pick.score_breakdown.walkability,     w: 0.11 },
   ];
   const scoreDrivers = allFactors
     .filter(f => f.val > 0)

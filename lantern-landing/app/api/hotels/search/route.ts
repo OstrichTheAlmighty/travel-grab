@@ -1420,17 +1420,33 @@ function scoreHotels(
     const reviewScore = h.reviewCount > 0
       ? Math.round(rawReviewScore * reviewConfidence + 70 * (1 - reviewConfidence))
       : 70;
+
+    // Amplified review score: maps the realistic 3.0–5.0★ range to 0–100 so that
+    // the gap between 3.9★ (→45) and 4.5★ (→75) is 30 pts instead of the raw 12 pts.
+    // Stored in score_breakdown.reviews so "Why this score?" reflects actual ranking math.
+    const reviewRankScore = Math.max(0, Math.min(100, Math.round((reviewScore - 60) / 40 * 100)));
+
     const locationScore = h.locationRating > 0 ? Math.min(100, (h.locationRating / 10) * 100) : 50;
     const starsScore    = h.starRating > 0 ? Math.min(100, (h.starRating / 5) * 100) : 40;
     const walkScore     = walkabilityScore(h.nearbyPlaces);
 
+    // Quality floor: hotels with guest rating < 4.0 receive a pre-normalization
+    // penalty that makes it harder to outrank well-reviewed competitors.
+    // Dramatically cheaper hotels (top-25% price score) receive half the penalty.
+    let qualityPenalty = 0;
+    if (h.overallRating > 0 && h.overallRating < 4.0) {
+      const basePenalty  = Math.round((4.0 - h.overallRating) * 15);
+      const cheapDiscount = priceScore >= 75 && h.overallRating >= 3.6 ? 0.5 : 1.0;
+      qualityPenalty = Math.round(basePenalty * cheapDiscount);
+    }
+
     const baseScore = Math.round(
-      priceScore    * 0.28 +
-      reviewScore   * 0.27 +
-      locationScore * 0.20 +
-      starsScore    * 0.14 +
-      walkScore     * 0.11
-    );
+      priceScore        * 0.23 +
+      reviewRankScore   * 0.32 +
+      locationScore     * 0.20 +
+      starsScore        * 0.14 +
+      walkScore         * 0.11
+    ) - qualityPenalty;
 
     // Compute inferred neighborhood before fit scoring (raw name needed for lookup)
     const raw_neighborhood =
@@ -1454,29 +1470,29 @@ function scoreHotels(
     if (prefs.length === 0) {
       if (destinationFit > 0) {
         // Destination-fit-aware formula (supported cities).
-        // Weights: Reviews 25% · Destination Fit 22% · Stars 18% · Location 17% · Price 14% · Walk 4%
-        // Price weight reduced from 28%→14% to prevent cheap remote apartments beating central hotels.
+        // Weights: Reviews 30% · Stars 18% · DestFit 18% · Location 16% · Price 14% · Walk 4%
+        // reviewRankScore amplifies the 3.0–5.0★ band so a 0.5★ difference matters ~2.5× more.
         ai_score = Math.round(
-          reviewScore    * 0.25 +
-          destinationFit * 0.22 +
-          starsScore     * 0.18 +
-          locationScore  * 0.17 +
-          priceScore     * 0.14 +
-          walkScore      * 0.04
-        );
+          reviewRankScore * 0.30 +
+          destinationFit  * 0.18 +
+          starsScore      * 0.18 +
+          locationScore   * 0.16 +
+          priceScore      * 0.14 +
+          walkScore       * 0.04
+        ) - qualityPenalty;
       } else {
-        // Original formula for cities without a visitor table.
+        // Original formula for cities without a visitor table (qualityPenalty already in baseScore).
         ai_score = baseScore;
       }
     } else if (prefs.length === 1 && prefs[0] === "budget") {
-      // Budget mode: price dominates
+      // Budget mode: price dominates; use raw reviewScore so 3.9★ isn't crushed.
       ai_score = Math.round(
-        priceScore    * 0.50 +
-        reviewScore   * 0.25 +
-        locationScore * 0.10 +
-        starsScore    * 0.08 +
-        walkScore     * 0.07
-      );
+        priceScore        * 0.50 +
+        reviewRankScore   * 0.25 +
+        locationScore     * 0.10 +
+        starsScore        * 0.08 +
+        walkScore         * 0.07
+      ) - Math.round(qualityPenalty * 0.4); // softer quality floor in budget mode
     } else {
       // Preference-aware mode:
       // NF 35% | Hotel Quality (stars) 25% | Reviews 20% | Price 10% | Walk 10%
@@ -1485,10 +1501,10 @@ function scoreHotels(
       ai_score = Math.round(
         neighborhood_fit_score * 0.35 +
         starsScore             * 0.25 +
-        reviewScore            * 0.20 +
+        reviewRankScore        * 0.20 +
         priceScore             * 0.10 +
         walkScore              * 0.10
-      );
+      ) - qualityPenalty;
     }
 
     return {
@@ -1518,7 +1534,7 @@ function scoreHotels(
       nearby_walk:         nearestWalk(h.nearbyPlaces),
       score_breakdown: {
         price:           Math.round(priceScore),
-        reviews:         Math.round(reviewScore),
+        reviews:         reviewRankScore, // amplified 3.0–5.0★ scale; drives "Why this score?" accuracy
         location:        Math.round(locationScore),
         stars:           Math.round(starsScore),
         walkability:     Math.round(walkScore),
