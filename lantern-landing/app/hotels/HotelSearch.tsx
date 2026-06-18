@@ -1684,6 +1684,355 @@ function PhotoCarousel({ images, thumbnails, hotelName, hotelId }: {
   );
 }
 
+// ── Guest Reviews ─────────────────────────────────────────────────────────────
+
+interface PlaceReview {
+  rating: number;
+  text: string;
+  relativePublishTimeDescription: string;
+  publishTime: string;
+  authorName: string;
+  authorPhotoUri: string;
+  googleMapsUri: string;
+}
+
+const REVIEW_CHIPS = ["Room", "Location", "Breakfast", "Noise", "Staff", "Small rooms", "Transit"] as const;
+const REVIEW_HIGHLIGHT_RE = (query: string) => {
+  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`(${escaped})`, "gi");
+};
+
+function highlightText(text: string, query: string): React.ReactNode {
+  if (!query.trim()) return text;
+  const parts = text.split(REVIEW_HIGHLIGHT_RE(query));
+  return parts.map((part, i) =>
+    REVIEW_HIGHLIGHT_RE(query).test(part)
+      ? <mark key={i} className="bg-lantern-gold/30 text-lantern-gold rounded-sm px-0.5">{part}</mark>
+      : part
+  );
+}
+
+function ReviewStars({ rating }: { rating: number }) {
+  return (
+    <span className="flex items-center gap-0.5">
+      {[1, 2, 3, 4, 5].map((s) => (
+        <svg key={s} className={`w-3 h-3 ${s <= rating ? "text-lantern-gold" : "text-white/15"}`} viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+      ))}
+    </span>
+  );
+}
+
+function ReviewCard({
+  review,
+  query,
+}: {
+  review: PlaceReview;
+  query: string;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const COLLAPSE_THRESHOLD = 280;
+  const isLong = review.text.length > COLLAPSE_THRESHOLD;
+  const displayText = isLong && !expanded ? review.text.slice(0, COLLAPSE_THRESHOLD) + "…" : review.text;
+
+  return (
+    <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4 space-y-2.5">
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-center gap-2.5 min-w-0">
+          {review.authorPhotoUri ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={review.authorPhotoUri}
+              alt={review.authorName}
+              className="w-7 h-7 rounded-full object-cover flex-shrink-0 bg-white/[0.06]"
+            />
+          ) : (
+            <div className="w-7 h-7 rounded-full bg-white/[0.08] flex-shrink-0 flex items-center justify-center text-[10px] font-bold text-white/40">
+              {review.authorName.charAt(0).toUpperCase()}
+            </div>
+          )}
+          <div className="min-w-0">
+            <div className="text-[12px] font-semibold text-white/70 truncate">{review.authorName}</div>
+            <div className="text-[10px] text-white/30">{review.relativePublishTimeDescription}</div>
+          </div>
+        </div>
+        <ReviewStars rating={review.rating} />
+      </div>
+
+      {review.text ? (
+        <div className="text-[12px] text-white/55 leading-relaxed">
+          {highlightText(displayText, query)}
+          {isLong && (
+            <button
+              onClick={() => {
+                setExpanded((e) => !e);
+                if (!expanded) track("hotel_review_opened", { author: review.authorName });
+              }}
+              className="ml-1.5 text-[11px] text-lantern-blue hover:text-lantern-blue/80 font-semibold transition-colors"
+            >
+              {expanded ? "Show less" : "Read more"}
+            </button>
+          )}
+        </div>
+      ) : (
+        <p className="text-[11px] text-white/25 italic">No review text.</p>
+      )}
+
+      {review.googleMapsUri && (
+        <a
+          href={review.googleMapsUri}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-[10px] text-white/25 hover:text-white/50 transition-colors"
+        >
+          <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
+          </svg>
+          View on Google
+        </a>
+      )}
+    </div>
+  );
+}
+
+function GuestReviewsSection({
+  hotelName,
+  city,
+  hotelId,
+  // SerpAPI aggregate data used as fallback while Places reviews load
+  serpRating,
+  serpReviewCount,
+}: {
+  hotelName: string;
+  city: string;
+  hotelId: string;
+  serpRating: number;
+  serpReviewCount: number;
+}) {
+  const [reviews,      setReviews]      = useState<PlaceReview[]>([]);
+  const [loading,      setLoading]      = useState(true);
+  const [error,        setError]        = useState<string | null>(null);
+  const [placesRating, setPlacesRating] = useState(0);
+  const [placeCount,   setPlaceCount]   = useState(0);
+  const [query,        setQuery]        = useState("");
+  const [ratingFilter, setRatingFilter] = useState<"all" | 5 | 4 | "low">("all");
+
+  const searchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Fetch from Places API when hotel changes
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+    setReviews([]);
+    setQuery("");
+    setRatingFilter("all");
+
+    fetch("/api/hotels/place-reviews", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ hotelName, city }),
+    })
+      .then((r) => r.json())
+      .then((data: { rating?: number; userRatingCount?: number; reviews?: PlaceReview[]; error?: string }) => {
+        if (data.reviews) {
+          setReviews(data.reviews);
+          setPlacesRating(data.rating ?? 0);
+          setPlaceCount(data.userRatingCount ?? 0);
+          track("hotel_reviews_loaded", {
+            hotel_name:   hotelName,
+            review_count: data.reviews.length,
+            total_count:  data.userRatingCount ?? 0,
+          });
+        } else {
+          setError(data.error ?? "No reviews returned");
+        }
+      })
+      .catch((e: unknown) => {
+        setError(String(e));
+      })
+      .finally(() => setLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hotelId]);
+
+  const handleQueryChange = (q: string) => {
+    setQuery(q);
+    if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current);
+    if (q.trim().length >= 2) {
+      searchDebounceRef.current = setTimeout(() => {
+        track("hotel_reviews_searched", { hotel_name: hotelName, query: q.trim() });
+      }, 800);
+    }
+  };
+
+  // The effective rating/count: prefer Places data, fall back to SerpAPI aggregate
+  const displayRating = placesRating > 0 ? placesRating : serpRating;
+  const displayCount  = placeCount   > 0 ? placeCount   : serpReviewCount;
+
+  // Filter reviews
+  const filtered = reviews.filter((r) => {
+    if (ratingFilter === 5   && r.rating !== 5) return false;
+    if (ratingFilter === 4   && r.rating !== 4) return false;
+    if (ratingFilter === "low" && r.rating > 3) return false;
+    if (!query.trim()) return true;
+    const q = query.toLowerCase();
+    return (
+      r.text.toLowerCase().includes(q) ||
+      r.authorName.toLowerCase().includes(q) ||
+      r.relativePublishTimeDescription.toLowerCase().includes(q)
+    );
+  });
+
+  const barColor = (s: number) => s >= 65 ? "bg-lantern-mint" : s >= 45 ? "bg-white/25" : "bg-lantern-gold/70";
+  const barText  = (s: number) => s >= 65 ? "text-lantern-mint" : s >= 45 ? "text-white/50" : "text-lantern-gold";
+  const overallPct = displayRating > 0 ? Math.round((displayRating / 5) * 100) : 0;
+
+  return (
+    <div>
+      <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">Guest Reviews</div>
+      <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4 space-y-4">
+
+        {/* Aggregate rating — always shown from whichever source is available */}
+        {displayRating > 0 && (
+          <div className="flex items-center gap-3">
+            <span className="text-3xl font-black tabular-nums text-lantern-mint">
+              {displayRating.toFixed(1)}
+            </span>
+            <div className="flex-1">
+              <ReviewStars rating={Math.round(displayRating)} />
+              {displayCount > 0 && (
+                <div className="text-[10px] text-white/30 mt-0.5">
+                  {displayCount.toLocaleString()} Google reviews
+                </div>
+              )}
+            </div>
+            <div className="w-28">
+              <div className="h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+                <div className={`h-full rounded-full ${barColor(overallPct)}`} style={{ width: `${overallPct}%` }} />
+              </div>
+              <div className={`text-[10px] font-bold tabular-nums mt-0.5 text-right ${barText(overallPct)}`}>
+                {displayRating.toFixed(1)} / 5
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Loading skeletons */}
+        {loading && (
+          <div className="space-y-3">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="rounded-xl border border-white/[0.06] p-4 space-y-2.5 animate-pulse">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-full bg-white/[0.08]" />
+                  <div className="space-y-1.5 flex-1">
+                    <div className="h-2.5 w-24 rounded bg-white/[0.08]" />
+                    <div className="h-2 w-16 rounded bg-white/[0.05]" />
+                  </div>
+                </div>
+                <div className="space-y-1.5">
+                  <div className="h-2 rounded bg-white/[0.06] w-full" />
+                  <div className="h-2 rounded bg-white/[0.06] w-5/6" />
+                  <div className="h-2 rounded bg-white/[0.06] w-4/6" />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Review search and filter UI — only shown once reviews are loaded */}
+        {!loading && reviews.length > 0 && (
+          <>
+            {/* Search input */}
+            <div className="relative">
+              <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/25 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
+              </svg>
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => handleQueryChange(e.target.value)}
+                placeholder="Search reviews for noise, room, breakfast..."
+                className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-white/[0.08] bg-white/[0.03] text-[12px] text-white/70 placeholder:text-white/25 focus:outline-none focus:border-lantern-blue/40 focus:bg-white/[0.04] transition-all"
+              />
+              {query && (
+                <button
+                  onClick={() => handleQueryChange("")}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/25 hover:text-white/50"
+                >
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                  </svg>
+                </button>
+              )}
+            </div>
+
+            {/* Quick-filter chips */}
+            <div className="flex flex-wrap gap-1.5">
+              {REVIEW_CHIPS.map((chip) => (
+                <button
+                  key={chip}
+                  onClick={() => handleQueryChange(query === chip.toLowerCase() ? "" : chip.toLowerCase())}
+                  className={`px-2.5 py-1 rounded-full text-[10px] font-semibold border transition-all ${
+                    query.toLowerCase() === chip.toLowerCase()
+                      ? "bg-lantern-blue/20 text-lantern-blue border-lantern-blue/40"
+                      : "bg-transparent text-white/35 border-white/[0.09] hover:text-white/55 hover:border-white/20"
+                  }`}
+                >
+                  {chip}
+                </button>
+              ))}
+            </div>
+
+            {/* Rating filter */}
+            <div className="flex items-center gap-1.5">
+              <span className="text-[10px] text-white/25 font-semibold mr-1">Rating:</span>
+              {(["all", 5, 4, "low"] as const).map((f) => {
+                const label = f === "all" ? "All" : f === "low" ? "≤3★" : `${f}★`;
+                return (
+                  <button
+                    key={String(f)}
+                    onClick={() => setRatingFilter(f)}
+                    className={`px-2.5 py-1 rounded-full text-[10px] font-semibold border transition-all ${
+                      ratingFilter === f
+                        ? "bg-white/10 text-white/80 border-white/20"
+                        : "text-white/30 border-white/[0.07] hover:text-white/50 hover:border-white/15"
+                    }`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Review cards */}
+            {filtered.length > 0 ? (
+              <div className="space-y-3">
+                {filtered.map((r, i) => (
+                  <ReviewCard key={`${r.authorName}-${i}`} review={r} query={query} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-[11px] text-white/30 py-2">No reviews matched this search.</p>
+            )}
+          </>
+        )}
+
+        {/* No reviews from Places API — show plain fallback */}
+        {!loading && reviews.length === 0 && !error && (
+          <p className="text-[11px] text-white/35">No written reviews available yet.</p>
+        )}
+
+        {/* API error — fall back to SerpAPI aggregate note */}
+        {!loading && error && serpRating > 0 && (
+          <p className="text-[10px] text-white/22 leading-relaxed">
+            Review text isn&apos;t available right now. Scoring uses the {serpRating.toFixed(1)}★ aggregate from {serpReviewCount.toLocaleString()} reviews.
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // ── HotelDetailDrawer ─────────────────────────────────────────────────────────
 
 function HotelDetailDrawer({
@@ -1767,10 +2116,6 @@ function HotelDetailDrawer({
   // Upscaled URLs for the main carousel display; small URLs for the thumbnail strip
   const hdPhotos    = rawPhotos.map(upscalePhoto);
   const thumbPhotos = rawPhotos.map(thumbnailPhoto);
-
-  // Review category data — we have location_rating from Google; no text snippets from current provider
-  const hasRatings = offer.overall_rating > 0;
-  const locationRatingPct = offer.location_rating > 0 ? Math.round((offer.location_rating / 10) * 100) : 0;
 
   return (
     <>
@@ -2033,58 +2378,15 @@ function HotelDetailDrawer({
               </div>
             )}
 
-            {/* ── Guest Ratings ── */}
-            <div>
-              <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">Guest Ratings</div>
-              <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4">
-                {hasRatings ? (
-                  <>
-                    <div className="flex items-baseline gap-2 mb-4">
-                      <span className={`text-3xl font-black tabular-nums ${scoreColor(offer.ai_score)}`}>
-                        {offer.overall_rating.toFixed(1)}
-                      </span>
-                      <span className="text-sm text-white/35">/ 5</span>
-                      {offer.review_count > 0 && (
-                        <span className="text-[11px] text-white/30 ml-1">
-                          · {offer.review_count.toLocaleString()} reviews
-                        </span>
-                      )}
-                    </div>
-                    <div className="space-y-2.5 mb-3">
-                      <div>
-                        <div className="flex items-center justify-between mb-0.5">
-                          <span className="text-[11px] text-white/45">Overall</span>
-                          <span className={`text-[11px] font-bold tabular-nums ${barText(Math.round(offer.overall_rating / 5 * 100))}`}>
-                            {offer.overall_rating.toFixed(1)}★
-                          </span>
-                        </div>
-                        <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
-                          <div className={`h-full rounded-full ${barColor(Math.round(offer.overall_rating / 5 * 100))}`} style={{ width: `${(offer.overall_rating / 5) * 100}%` }} />
-                        </div>
-                      </div>
-                      {offer.location_rating > 0 && (
-                        <div>
-                          <div className="flex items-center justify-between mb-0.5">
-                            <span className="text-[11px] text-white/45">Location</span>
-                            <span className={`text-[11px] font-bold tabular-nums ${barText(locationRatingPct)}`}>
-                              {offer.location_rating.toFixed(1)}/10
-                            </span>
-                          </div>
-                          <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
-                            <div className={`h-full rounded-full ${barColor(locationRatingPct)}`} style={{ width: `${locationRatingPct}%` }} />
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                    <p className="text-[10px] text-white/22 leading-relaxed">
-                      Review text isn't available from this search result yet. We're using the aggregate rating and review count for scoring.
-                    </p>
-                  </>
-                ) : (
-                  <p className="text-[11px] text-white/35">Review detail unavailable for this hotel.</p>
-                )}
-              </div>
-            </div>
+            {/* ── Guest Reviews — full text from Google Places API;
+                    aggregate rating/count from SerpAPI used as fallback ── */}
+            <GuestReviewsSection
+              hotelName={offer.name}
+              city={cityGuide?.displayName ?? ""}
+              hotelId={offer.hotel_id}
+              serpRating={offer.overall_rating}
+              serpReviewCount={offer.review_count}
+            />
 
             {/* ── Consider before booking ── */}
             {tradeoffs.length > 0 && (
