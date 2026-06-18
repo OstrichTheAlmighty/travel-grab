@@ -4448,7 +4448,7 @@ export default function HotelSearch() {
               <div className={viewMode === "map" ? "lg:flex lg:items-start" : ""}>
 
                 {/* ── Left panel: hotel list + inline nbhd panel ───────────── */}
-                <div className={viewMode === "map" ? "w-full lg:w-[420px] xl:w-[460px] lg:flex-shrink-0 lg:pr-4" : ""}>
+                <div className={viewMode === "map" ? "w-full lg:w-[60%] lg:flex-shrink-0 lg:pr-4" : ""}>
 
                   {/* ── MAP VIEW (mobile): fixed full-screen overlay ─────────── */}
                   {viewMode === "map" && (
@@ -4474,7 +4474,7 @@ export default function HotelSearch() {
                         />
                       </div>
                       {/* Mobile spacer prevents list content from peeking under the fixed map */}
-                      <div className="lg:hidden" style={{ height: "calc(100vh - 56px)" }} />
+                      <div className="lg:hidden" style={{ height: "calc(100vh - 56px)" }} aria-hidden="true" />
                       {/* Desktop: inline neighborhood panel above hotel cards */}
                       {mapPanelData && (
                         <div className="hidden lg:block mb-4">
@@ -4659,7 +4659,7 @@ export default function HotelSearch() {
                 {viewMode === "map" && (
                   <div
                     className="hidden lg:block flex-1 sticky top-14 overflow-hidden rounded-xl border border-white/[0.07]"
-                    style={{ height: "calc(100vh - 56px)" }}
+                    style={{ height: "85vh" }}
                   >
                     <HotelMapView
                       offers={offers}

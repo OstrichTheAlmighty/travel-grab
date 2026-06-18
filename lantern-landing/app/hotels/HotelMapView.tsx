@@ -102,9 +102,9 @@ function makeFillLayer(recId: string | null, selId: string | null): LayerProps {
       ],
       "fill-opacity": [
         "case",
-        ["==", ["get", "id"], recId ?? ""],  0.13,
-        ["==", ["get", "id"], selId ?? ""],  0.11,
-        0.04,
+        ["==", ["get", "id"], recId ?? ""],  0.20,
+        ["==", ["get", "id"], selId ?? ""],  0.13,
+        0.02,
       ],
     },
   };
@@ -123,13 +123,13 @@ function makeLineLayer(recId: string | null, selId: string | null): LayerProps {
       ],
       "line-opacity": [
         "case",
-        ["==", ["get", "id"], recId ?? ""],  0.55,
-        ["==", ["get", "id"], selId ?? ""],  0.50,
-        0.10,
+        ["==", ["get", "id"], recId ?? ""],  0.70,
+        ["==", ["get", "id"], selId ?? ""],  0.55,
+        0.06,
       ],
       "line-width": [
         "case",
-        ["==", ["get", "id"], recId ?? ""],  2,
+        ["==", ["get", "id"], recId ?? ""],  2.5,
         ["==", ["get", "id"], selId ?? ""],  1.5,
         1,
       ],
@@ -137,147 +137,92 @@ function makeLineLayer(recId: string | null, selId: string | null): LayerProps {
   };
 }
 
-// ── Hotel marker components ───────────────────────────────────────────────────
+// ── Hotel marker component ────────────────────────────────────────────────────
 
-function Marker1({ hotel, isSelected, onClick }: {
-  hotel:      MapHotelOffer;
-  isSelected: boolean;
-  onClick:    (e: React.MouseEvent) => void;
-}) {
-  const shortName = hotel.name.split(",")[0].split("–")[0].trim();
-  const display   = shortName.length > 22 ? shortName.slice(0, 20) + "…" : shortName;
-  return (
-    <button
-      onClick={onClick}
-      className={`
-        flex flex-col items-start
-        rounded-xl px-2.5 py-1.5
-        border shadow-lg
-        transition-all duration-150
-        text-left
-        ${isSelected
-          ? "bg-lantern-mint border-lantern-mint/80 text-[#090e1a] scale-105 shadow-lantern-mint/20"
-          : "bg-[#090e1a]/95 border-lantern-mint/50 text-white hover:border-lantern-mint/80"}
-      `}
-      style={{ backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)" }}
-    >
-      <span className="text-[10px] font-black uppercase tracking-[0.08em] opacity-70 leading-none mb-0.5">
-        #1 Pick
-      </span>
-      <span className={`text-[11px] font-bold leading-tight ${isSelected ? "text-[#090e1a]" : "text-white/90"}`}>
-        {display}
-      </span>
-      <span className={`text-[10px] font-semibold mt-0.5 ${isSelected ? "text-[#090e1a]/70" : "text-lantern-mint/80"}`}>
-        ${Math.round(hotel.price_per_night)}/night
-        {hotel.overall_rating && hotel.overall_rating > 0
-          ? ` · ${hotel.overall_rating.toFixed(1)}★`
-          : ""}
-      </span>
-    </button>
-  );
-}
-
-function Marker2({ hotel, rank, isSelected, onClick }: {
+function HotelMarker({ hotel, rank, isSelected, onClick }: {
   hotel:      MapHotelOffer;
   rank:       number;
   isSelected: boolean;
   onClick:    (e: React.MouseEvent) => void;
 }) {
   const shortName = hotel.name.split(",")[0].split("–")[0].trim();
-  const display   = shortName.length > 18 ? shortName.slice(0, 16) + "…" : shortName;
 
-  if (isSelected) {
+  if (!isSelected) {
+    const opacity      = rank === 1 ? 1 : rank === 2 ? 0.80 : rank === 3 ? 0.65 : rank === 4 ? 0.52 : 0.40;
+    const borderColor  = rank === 1 ? "border-lantern-mint/55" : "border-white/18";
+    const labelColor   = rank === 1 ? "text-lantern-mint" : "text-white/65";
     return (
       <button
         onClick={onClick}
-        className="flex flex-col items-start rounded-xl px-2.5 py-1.5 border shadow-lg text-left
-          bg-[#090e1a]/95 border-lantern-violet/60 text-white scale-105 shadow-lantern-violet/15
-          transition-all duration-150"
-        style={{ backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)" }}
+        style={{ opacity, backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)" }}
+        className={`rounded-full px-2 py-0.5 border text-[10px] font-bold transition-all duration-150
+          bg-[#0e1422]/90 ${borderColor} ${labelColor} hover:opacity-100 hover:border-white/40 hover:text-white`}
       >
-        <span className="text-[10px] font-black uppercase tracking-[0.08em] text-lantern-violet/80 leading-none mb-0.5">
-          #{rank}
-        </span>
-        <span className="text-[11px] font-bold leading-tight text-white/90 mb-0.5">{display}</span>
-        <span className="text-[10px] font-semibold text-lantern-violet/80">
-          ${Math.round(hotel.price_per_night)}/night
-          {hotel.overall_rating && hotel.overall_rating > 0
-            ? ` · ${hotel.overall_rating.toFixed(1)}★`
-            : ""}
-        </span>
-        {hotel.rank_weakness && (
-          <span className="text-[9px] text-white/35 leading-snug mt-0.5 max-w-[140px]">
-            {hotel.rank_weakness}
-          </span>
-        )}
+        #{rank} · ${Math.round(hotel.price_per_night)}
       </button>
     );
   }
 
+  const display = shortName.length > 20 ? shortName.slice(0, 18) + "…" : shortName;
+  const isTop   = rank === 1;
   return (
     <button
       onClick={onClick}
-      className="rounded-full px-2.5 py-1 border text-[10px] font-bold transition-all duration-150
-        bg-[#0e1422]/90 border-white/20 text-white/75 hover:border-white/45 hover:text-white"
-      style={{ backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)" }}
+      className={`flex flex-col items-start rounded-xl px-2.5 py-1.5 border shadow-lg text-left
+        transition-all duration-150 scale-105
+        ${isTop
+          ? "bg-lantern-mint border-lantern-mint/80 shadow-lantern-mint/20"
+          : "bg-[#090e1a]/95 border-lantern-violet/60 shadow-lantern-violet/15"}`}
+      style={{ backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)" }}
     >
-      #{rank} · ${Math.round(hotel.price_per_night)}
-    </button>
-  );
-}
-
-function Marker3({ hotel, isSelected, isOutsideArea, onClick }: {
-  hotel:           MapHotelOffer;
-  isSelected:      boolean;
-  isOutsideArea?:  boolean;
-  onClick:         (e: React.MouseEvent) => void;
-}) {
-  const areaName = hotel.inferred_neighborhood || "another area";
-  return (
-    <div className="relative">
-      <button
-        onClick={onClick}
-        className={`
-          w-2.5 h-2.5 rounded-full border transition-all duration-150
-          ${isSelected
-            ? "bg-white border-white scale-150"
-            : "bg-white/30 border-white/20 hover:bg-white/55 hover:border-white/45"}
-        `}
-      />
-      {isSelected && isOutsideArea && (
-        <div
-          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 pointer-events-none
-            bg-[#090e1a]/95 border border-white/[0.12] rounded-lg px-2.5 py-1.5 whitespace-nowrap"
-          style={{ backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)" }}
-        >
-          <p className="text-[10px] text-white/50 leading-snug">
-            In {areaName} · ranked lower area
-          </p>
-        </div>
+      <span className={`text-[9px] font-black uppercase tracking-[0.08em] leading-none mb-0.5
+        ${isTop ? "text-[#090e1a]/55" : "text-lantern-violet/75"}`}>
+        #{rank}
+      </span>
+      <span className={`text-[11px] font-bold leading-tight ${isTop ? "text-[#090e1a]" : "text-white/90"}`}>
+        {display}
+      </span>
+      <span className={`text-[10px] font-semibold mt-0.5
+        ${isTop ? "text-[#090e1a]/65" : "text-lantern-violet/75"}`}>
+        ${Math.round(hotel.price_per_night)}/night
+        {hotel.overall_rating && hotel.overall_rating > 0 ? ` · ${hotel.overall_rating.toFixed(1)}★` : ""}
+      </span>
+      {hotel.rank_weakness && (
+        <span className={`text-[9px] leading-snug mt-0.5 max-w-[140px]
+          ${isTop ? "text-[#090e1a]/45" : "text-white/30"}`}>
+          {hotel.rank_weakness}
+        </span>
       )}
-    </div>
+    </button>
   );
 }
 
 // ── Neighborhood label overlay ────────────────────────────────────────────────
 
-function NbhdLabel({ name, isRec, isSelected }: {
+function NbhdLabel({ name, isRec, isSelected, reason }: {
   name:       string;
   isRec:      boolean;
   isSelected: boolean;
+  reason?:    string | null;
 }) {
   return (
     <div
       className={`
-        text-[10px] font-black uppercase tracking-[0.12em]
-        select-none cursor-pointer
-        px-1.5 py-0.5
-        ${isSelected ? "text-lantern-violet" : isRec ? "text-lantern-mint" : "text-white/35"}
+        rounded-full px-2 py-0.5 border
+        text-[9px] font-black uppercase tracking-[0.10em]
+        select-none cursor-pointer transition-colors duration-150
+        ${isSelected
+          ? "bg-lantern-violet/20 border-lantern-violet/40 text-lantern-violet"
+          : isRec
+            ? "bg-lantern-mint/15 border-lantern-mint/35 text-lantern-mint"
+            : "bg-black/45 border-white/08 text-white/28"}
       `}
-      style={{ textShadow: "0 1px 4px rgba(0,0,0,0.9), 0 0 8px rgba(0,0,0,0.7)" }}
+      style={{ backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)" }}
     >
       {name.split(" /")[0]}
-      {isRec && <span className="ml-1 opacity-70 normal-case font-semibold tracking-normal">· Top pick</span>}
+      {isRec && reason && (
+        <span className="ml-1 opacity-65 normal-case font-semibold tracking-normal">· {reason}</span>
+      )}
     </div>
   );
 }
@@ -357,10 +302,12 @@ export default function HotelMapView({
   );
 
   const geoOffers = useMemo(
-    () => sortedOffers.filter(
-      (o) => typeof o.latitude === "number" && typeof o.longitude === "number"
-        && !isNaN(o.latitude!) && !isNaN(o.longitude!),
-    ),
+    () => sortedOffers
+      .slice(0, 5)
+      .filter(
+        (o) => typeof o.latitude === "number" && typeof o.longitude === "number"
+          && !isNaN(o.latitude!) && !isNaN(o.longitude!),
+      ),
     [sortedOffers],
   );
 
@@ -433,6 +380,7 @@ export default function HotelMapView({
                 name={n.name}
                 isRec={n.id === recommendedNbhdId}
                 isSelected={n.id === selectedNeighborhood}
+                reason={n.id === recommendedNbhdId ? (n.tags[0] ?? null) : null}
               />
             </Marker>
           );
@@ -440,18 +388,12 @@ export default function HotelMapView({
 
         {/* ── Hotel markers ─────────────────────────────────────────────── */}
         {geoOffers.map((offer) => {
-          const rank          = rankOf(offer.hotel_id);
-          const isSelected    = offer.hotel_id === selectedHotelId;
-          const isOutsideArea = !!recommendedNbhdId
-            && !!offer.inferred_neighborhood
-            && offer.inferred_neighborhood !== recommendedNbhdId;
+          const rank       = rankOf(offer.hotel_id);
+          const isSelected = offer.hotel_id === selectedHotelId;
 
           const handleClick = (e: React.MouseEvent) => {
             e.stopPropagation();
-            const nextId = offer.hotel_id === selectedHotelId ? null : offer.hotel_id;
-            console.log("marker clicked", offer.hotel_id, offer.name);
-            console.log("selected hotel", nextId);
-            onSelectHotel(nextId);
+            onSelectHotel(offer.hotel_id === selectedHotelId ? null : offer.hotel_id);
           };
 
           return (
@@ -461,27 +403,12 @@ export default function HotelMapView({
               latitude={offer.latitude!}
               anchor="bottom"
             >
-              {rank === 1 ? (
-                <Marker1
-                  hotel={offer}
-                  isSelected={isSelected}
-                  onClick={handleClick}
-                />
-              ) : rank <= 4 ? (
-                <Marker2
-                  hotel={offer}
-                  rank={rank}
-                  isSelected={isSelected}
-                  onClick={handleClick}
-                />
-              ) : (
-                <Marker3
-                  hotel={offer}
-                  isSelected={isSelected}
-                  isOutsideArea={isOutsideArea}
-                  onClick={handleClick}
-                />
-              )}
+              <HotelMarker
+                hotel={offer}
+                rank={rank}
+                isSelected={isSelected}
+                onClick={handleClick}
+              />
             </Marker>
           );
         })}
