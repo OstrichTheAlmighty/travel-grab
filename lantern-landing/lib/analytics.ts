@@ -28,6 +28,8 @@ export type AnalyticsEvent =
   | "hotel_reviews_sort_changed"
   | "hotel_review_read_more_clicked"
   | "hotel_review_external_clicked"
+  | "hotel_review_summary_loaded"
+  | "hotel_review_summary_expanded"
   | "hotel_compare_opened"
   | "map_viewed"
   | "neighborhood_selected"

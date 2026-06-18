@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { fetchHotelReviews } from "@/lib/reviews/service";
-import type { ReviewsResult } from "@/lib/reviews/types";
+import { generateReviewSummary } from "@/lib/reviews/summarizer";
+import type { ReviewSummary } from "@/lib/reviews/types";
+import { emptySummary } from "@/lib/reviews/types";
 
-// Re-export the normalized result type so the client can import it with `import type`
-export type { ReviewsResult };
+export type { ReviewSummary };
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   let body: { hotelName?: string; city?: string; placeId?: string };
@@ -24,18 +25,24 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ error: "Either city or placeId is required" }, { status: 400 });
   }
 
+  // Fetch reviews from the shared service — hits cache if place-reviews was called first
+  let reviews;
   try {
     const result = await fetchHotelReviews(
       { hotelName, city, placeId: placeId || undefined },
       "google_places",
     );
-    return NextResponse.json(result);
+    reviews = result.reviews;
   } catch (err) {
-    const message = err instanceof Error ? err.message : "Unknown error";
-    // 503 only for misconfiguration; 200 with empty payload for lookup failures
-    if (message.includes("not configured")) {
-      return NextResponse.json({ error: message }, { status: 503 });
-    }
-    return NextResponse.json({ error: message }, { status: 500 });
+    console.error("[review-summary] failed to fetch reviews:", err);
+    return NextResponse.json(emptySummary);
   }
+
+  if (reviews.length === 0) {
+    return NextResponse.json(emptySummary);
+  }
+
+  // Generate (or serve cached) AI summary
+  const summary = await generateReviewSummary(hotelName, city, reviews);
+  return NextResponse.json(summary);
 }

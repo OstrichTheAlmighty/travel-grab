@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
+import type { Review, ReviewsResult, ReviewSummary } from "@/lib/reviews/types";
 import { NeighborhoodCompare } from "./NeighborhoodCompare";
 import type { ComparableSummary } from "./NeighborhoodCompare";
 import MapNeighborhoodPanel from "./MapNeighborhoodPanel";
@@ -1686,16 +1687,6 @@ function PhotoCarousel({ images, thumbnails, hotelName, hotelId }: {
 
 // ── Guest Reviews ─────────────────────────────────────────────────────────────
 
-interface PlaceReview {
-  rating: number;
-  text: string;
-  relativePublishTimeDescription: string;
-  publishTime: string;
-  authorName: string;
-  authorPhotoUri: string;
-  googleMapsUri: string;
-}
-
 const REVIEW_CHIPS = ["Room", "Location", "Breakfast", "Noise", "Staff", "Small rooms", "Transit"] as const;
 const REVIEW_HIGHLIGHT_RE = (query: string) => {
   const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -1731,7 +1722,7 @@ function ReviewCard({
   query,
   hotelName,
 }: {
-  review: PlaceReview;
+  review: Review;
   query: string;
   hotelName: string;
 }) {
@@ -1744,10 +1735,10 @@ function ReviewCard({
     <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4 space-y-2.5">
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-2.5 min-w-0">
-          {review.authorPhotoUri ? (
+          {review.profilePhotoUrl ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={review.authorPhotoUri}
+              src={review.profilePhotoUrl}
               alt={review.authorName}
               className="w-7 h-7 rounded-full object-cover flex-shrink-0 bg-white/[0.06]"
             />
@@ -1758,7 +1749,7 @@ function ReviewCard({
           )}
           <div className="min-w-0">
             <div className="text-[12px] font-semibold text-white/70 truncate">{review.authorName}</div>
-            <div className="text-[10px] text-white/30">{review.relativePublishTimeDescription}</div>
+            <div className="text-[10px] text-white/30">{review.relativeTime}</div>
           </div>
         </div>
         <ReviewStars rating={review.rating} />
@@ -1792,9 +1783,9 @@ function ReviewCard({
         <p className="text-[11px] text-white/25 italic">No review text.</p>
       )}
 
-      {review.googleMapsUri && (
+      {review.externalUrl && (
         <a
-          href={review.googleMapsUri}
+          href={review.externalUrl}
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => track("hotel_review_external_clicked", {
@@ -1814,6 +1805,137 @@ function ReviewCard({
   );
 }
 
+// ── AI Review Insights panel ──────────────────────────────────────────────────
+
+const INSIGHT_CATEGORIES = [
+  {
+    key:    "guestsLove"       as const,
+    label:  "Guests Love",
+    icon:   "✓",
+    iconCls: "text-lantern-mint",
+    itemCls: "text-white/65",
+  },
+  {
+    key:    "commonComplaints" as const,
+    label:  "Common Complaints",
+    icon:   "⚠",
+    iconCls: "text-lantern-gold",
+    itemCls: "text-white/60",
+  },
+  {
+    key:    "bestFor"          as const,
+    label:  "Best For",
+    icon:   "•",
+    iconCls: "text-lantern-blue",
+    itemCls: "text-white/65",
+  },
+  {
+    key:    "notIdealFor"      as const,
+    label:  "Not Ideal For",
+    icon:   "•",
+    iconCls: "text-white/30",
+    itemCls: "text-white/45",
+  },
+] as const;
+
+type InsightKey = typeof INSIGHT_CATEGORIES[number]["key"];
+
+function ReviewInsightsPanel({
+  summary,
+  loading,
+  hotelName,
+}: {
+  summary: ReviewSummary | null;
+  loading: boolean;
+  hotelName: string;
+}) {
+  const [expanded, setExpanded] = useState(true);
+
+  // Show skeleton while loading, hide entirely if unavailable after load
+  if (!loading && (!summary || !summary.available)) return null;
+
+  const activeCats = loading
+    ? []
+    : INSIGHT_CATEGORIES.filter((c) => (summary![c.key] as string[]).length > 0);
+
+  const handleToggle = () => {
+    const next = !expanded;
+    setExpanded(next);
+    if (next) {
+      track("hotel_review_summary_expanded", { hotel_name: hotelName });
+    }
+  };
+
+  return (
+    <div className="border-t border-white/[0.06] pt-4">
+      {/* Header row */}
+      <button
+        onClick={handleToggle}
+        className="w-full flex items-center justify-between mb-3 group"
+      >
+        <div className="flex items-center gap-2">
+          <span className="text-[10px] font-black uppercase tracking-widest text-white/40">
+            Guest Review Insights
+          </span>
+          {!loading && summary?.limitedCoverage && (
+            <span className="text-[9px] text-white/25 font-normal normal-case tracking-normal">
+              · limited sample
+            </span>
+          )}
+        </div>
+        <svg
+          className={`w-3.5 h-3.5 text-white/25 transition-transform group-hover:text-white/45 ${expanded ? "" : "-rotate-90"}`}
+          viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round"
+        >
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </button>
+
+      {expanded && (
+        <>
+          {/* Loading skeleton */}
+          {loading && (
+            <div className="grid grid-cols-2 gap-2 animate-pulse">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="rounded-lg border border-white/[0.06] p-3 space-y-2">
+                  <div className="h-2 w-20 rounded bg-white/[0.08]" />
+                  <div className="h-2 w-full rounded bg-white/[0.05]" />
+                  <div className="h-2 w-4/5 rounded bg-white/[0.05]" />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Category cards */}
+          {!loading && activeCats.length > 0 && (
+            <div className="grid grid-cols-2 gap-2">
+              {activeCats.map((cat) => {
+                const items = (summary![cat.key] as string[]);
+                return (
+                  <div
+                    key={cat.key}
+                    className="rounded-lg border border-white/[0.07] bg-white/[0.02] p-3 space-y-1.5"
+                  >
+                    <div className="text-[10px] font-bold text-white/45 mb-1">{cat.label}</div>
+                    {items.map((item, i) => (
+                      <div key={i} className="flex items-start gap-1.5">
+                        <span className={`text-[10px] flex-shrink-0 mt-px font-bold ${cat.iconCls}`}>
+                          {cat.icon}
+                        </span>
+                        <span className={`text-[11px] leading-snug ${cat.itemCls}`}>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
 function GuestReviewsSection({
   hotelName,
   city,
@@ -1828,18 +1950,21 @@ function GuestReviewsSection({
   serpRating: number;
   serpReviewCount: number;
 }) {
-  const [reviews,      setReviews]      = useState<PlaceReview[]>([]);
-  const [loading,      setLoading]      = useState(true);
-  const [error,        setError]        = useState<string | null>(null);
-  const [placesRating, setPlacesRating] = useState(0);
-  const [placeCount,   setPlaceCount]   = useState(0);
-  const [query,        setQuery]        = useState("");
-  const [ratingFilter, setRatingFilter] = useState<"all" | 5 | 4 | "low">("all");
-  const [sortKey,      setSortKey]      = useState<ReviewSortKey>("relevant");
+  const [reviews,              setReviews]              = useState<Review[]>([]);
+  const [loading,              setLoading]              = useState(true);
+  const [error,                setError]                = useState<string | null>(null);
+  const [placesRating,         setPlacesRating]         = useState(0);
+  const [placeCount,           setPlaceCount]           = useState(0);
+  const [providerLimitReached, setProviderLimitReached] = useState(false);
+  const [query,                setQuery]                = useState("");
+  const [ratingFilter,         setRatingFilter]         = useState<"all" | 5 | 4 | "low">("all");
+  const [sortKey,              setSortKey]              = useState<ReviewSortKey>("relevant");
+  const [summary,              setSummary]              = useState<ReviewSummary | null>(null);
+  const [summaryLoading,       setSummaryLoading]       = useState(true);
 
   const searchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Fetch from Places API when hotel changes
+  // Fetch reviews from Places API
   useEffect(() => {
     setLoading(true);
     setError(null);
@@ -1847,6 +1972,8 @@ function GuestReviewsSection({
     setQuery("");
     setRatingFilter("all");
     setSortKey("relevant");
+    setProviderLimitReached(false);
+    setSummary(null);
 
     fetch("/api/hotels/place-reviews", {
       method: "POST",
@@ -1854,24 +1981,53 @@ function GuestReviewsSection({
       body: JSON.stringify({ hotelName, city }),
     })
       .then((r) => r.json())
-      .then((data: { rating?: number; userRatingCount?: number; reviews?: PlaceReview[]; error?: string }) => {
-        if (data.reviews) {
+      .then((data: ReviewsResult & { error?: string }) => {
+        if (Array.isArray(data.reviews)) {
           setReviews(data.reviews);
-          setPlacesRating(data.rating ?? 0);
-          setPlaceCount(data.userRatingCount ?? 0);
+          setPlacesRating(data.aggregateRating ?? 0);
+          setPlaceCount(data.totalReviewCount ?? 0);
+          setProviderLimitReached(data.providerLimitReached ?? false);
           track("hotel_reviews_loaded", {
-            hotel_name:   hotelName,
-            review_count: data.reviews.length,
-            total_count:  data.userRatingCount ?? 0,
+            hotel_name:              hotelName,
+            review_count:            data.reviews.length,
+            total_count:             data.totalReviewCount ?? 0,
+            provider_limit_reached:  data.providerLimitReached ?? false,
           });
         } else {
-          setError(data.error ?? "No reviews returned");
+          setError((data as { error?: string }).error ?? "No reviews returned");
         }
       })
       .catch((e: unknown) => {
         setError(String(e));
       })
       .finally(() => setLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hotelId]);
+
+  // Parallel fetch: AI summary — server shares review cache so no double Places API call
+  useEffect(() => {
+    setSummaryLoading(true);
+    setSummary(null);
+
+    fetch("/api/hotels/review-summary", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ hotelName, city }),
+    })
+      .then((r) => r.json())
+      .then((data: ReviewSummary) => {
+        setSummary(data);
+        if (data.available) {
+          track("hotel_review_summary_loaded", {
+            hotel_name:      hotelName,
+            loves_count:     data.guestsLove.length,
+            complaints_count: data.commonComplaints.length,
+            limited_coverage: data.limitedCoverage,
+          });
+        }
+      })
+      .catch(() => setSummary(null))
+      .finally(() => setSummaryLoading(false));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hotelId]);
 
@@ -1905,7 +2061,7 @@ function GuestReviewsSection({
       return (
         r.text.toLowerCase().includes(q) ||
         r.authorName.toLowerCase().includes(q) ||
-        r.relativePublishTimeDescription.toLowerCase().includes(q)
+        r.relativeTime.toLowerCase().includes(q)
       );
     })
     .sort((a, b) => {
@@ -1956,6 +2112,13 @@ function GuestReviewsSection({
             </div>
           </div>
         )}
+
+        {/* AI Review Insights — shown below aggregate rating, above review list */}
+        <ReviewInsightsPanel
+          summary={summary}
+          loading={summaryLoading}
+          hotelName={hotelName}
+        />
 
         {/* Loading skeletons */}
         {loading && (
@@ -2081,9 +2244,11 @@ function GuestReviewsSection({
               <p className="text-[11px] text-white/30 py-2">No reviews matched this search.</p>
             )}
 
-            {/* Disclosure — always shown when we have review snippets */}
+            {/* Provider-limit disclosure */}
             <p className="text-[10px] text-white/20 leading-relaxed border-t border-white/[0.05] pt-3">
-              Showing available Google review samples. Full review coverage may require an additional review provider.
+              {providerLimitReached
+                ? "Google only provides a limited review sample here. Full review coverage may require an additional review provider."
+                : "Showing available Google review samples."}
             </p>
           </>
         )}
