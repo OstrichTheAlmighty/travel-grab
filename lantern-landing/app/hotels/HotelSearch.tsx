@@ -656,13 +656,13 @@ function getNeighborhoodPrefDetail(nbhd: string, pref: PrefId): string {
   }
   if (pref === "sightseeing") {
     if (n.includes("asakusa") || n.includes("taito"))
-      return "traditional temples, Senso-ji, and cultural landmarks";
+      return "historic temple district with traditional streetscapes and cultural institutions";
     if (n.includes("ueno") || n.includes("bunkyo"))
-      return "major museums, Ueno Park, and cultural attractions";
+      return "major museum district with parks, galleries, and historic sites";
     if (n.includes("gothic") || n.includes("gòtic"))
-      return "Barcelona's historic medieval core with top landmarks";
+      return "Barcelona's historic medieval core with preserved Roman and Gothic architecture";
     if (n.includes("born"))
-      return "Picasso Museum, Basilica de Santa Maria, and walkable streets";
+      return "historic waterfront district with medieval streets and galleries";
   }
   if (pref === "transit") {
     if (n.includes("shinjuku"))
@@ -684,11 +684,11 @@ function getNeighborhoodPrefDetail(nbhd: string, pref: PrefId): string {
   }
   if (pref === "nightlife") {
     if (n.includes("shinjuku"))
-      return "Kabukicho and Golden Gai — Tokyo's most vibrant bar districts";
+      return "Tokyo's most active bar and entertainment district";
     if (n.includes("roppongi"))
-      return "international clubs, late-night bars, and upscale lounges";
+      return "dense late-night bar and club scene with an international crowd";
     if (n.includes("shibuya"))
-      return "youth-focused bars, live music, and an energetic nightlife scene";
+      return "youth-focused bars, live music, and an active nightlife scene";
   }
   // London
   if (pref === "luxury") {
@@ -705,15 +705,15 @@ function getNeighborhoodPrefDetail(nbhd: string, pref: PrefId): string {
   }
   if (pref === "sightseeing") {
     if (n.includes("westminster") || n.includes("south bank") || n.includes("covent garden"))
-      return "walking distance to Big Ben, Tower of London, Tate Modern, and the National Gallery";
+      return "walking distance to the city's major historic sites, galleries, and landmarks";
     if (n.includes("bloomsbury"))
-      return "the British Museum, National Portrait Gallery, and literary London on the doorstep";
+      return "museum district with major institutions, galleries, and historic architecture";
   }
   if (pref === "nightlife") {
     if (n.includes("shoreditch") || n.includes("soho"))
-      return "London's most vibrant bar and club scene with venues open until dawn";
+      return "London's densest bar and club district with late-night venues";
     if (n.includes("brixton"))
-      return "legendary live music venues, diverse bar scene, and a bohemian energy";
+      return "live music venues, diverse bar scene, and a local arts community";
   }
   if (pref === "food") {
     if (n.includes("soho") || n.includes("covent garden"))
@@ -736,13 +736,13 @@ function getNeighborhoodPrefDetail(nbhd: string, pref: PrefId): string {
   }
   if (pref === "sightseeing") {
     if (n.includes("midtown") || n.includes("times square"))
-      return "steps from Times Square, Empire State Building, MoMA, and Central Park";
+      return "central Manhattan with easy access to the city's major landmarks and cultural institutions";
     if (n.includes("financial district"))
-      return "near the 9/11 Memorial, Brooklyn Bridge, and Statue of Liberty ferry";
+      return "lower Manhattan with historic waterfront, ferry access, and iconic architecture";
   }
   if (pref === "nightlife") {
     if (n.includes("lower east side") || n.includes("east village") || n.includes("williamsburg"))
-      return "NYC's best bar-hopping streets with late-night venues and live music";
+      return "dense bar scene with late-night venues and live music";
   }
   if (pref === "food") {
     if (n.includes("west village") || n.includes("soho") || n.includes("east village"))
@@ -1186,7 +1186,7 @@ function NeighborhoodRecommendation({
 
     const scoreDiff = recommended.avgNfScore - alt.avgNfScore;
     const weakPart  = scoreDiff >= 10
-      ? `scores ${scoreDiff}pts lower for ${prefLabelLower}`
+      ? `lower ${prefLabelLower} concentration`
       : `weaker ${prefLabelLower} concentration`;
 
     return `${strengthPart} · ${weakPart}.`;
@@ -2342,16 +2342,16 @@ function buildVerdictParts(hotels: HotelOffer[]): VerdictParts | null {
   const winAdv = [
     { label: "location",         gap: winner.score_breakdown.location     - runnerUp.score_breakdown.location     },
     { label: "walkability",      gap: winner.score_breakdown.walkability  - runnerUp.score_breakdown.walkability  },
-    { label: "guest satisfaction", gap: winner.score_breakdown.reviews   - runnerUp.score_breakdown.reviews      },
-    { label: "hotel quality",    gap: winner.score_breakdown.stars        - runnerUp.score_breakdown.stars        },
+    { label: "guest reviews",    gap: winner.score_breakdown.reviews      - runnerUp.score_breakdown.reviews      },
+    { label: "property quality", gap: winner.score_breakdown.stars        - runnerUp.score_breakdown.stars        },
     { label: "value",            gap: winner.score_breakdown.price        - runnerUp.score_breakdown.price        },
     { label: "neighborhood fit", gap: winner.neighborhood_fit_score       - runnerUp.neighborhood_fit_score       },
-    { label: "destination fit",  gap: winner.score_breakdown.destination_fit - runnerUp.score_breakdown.destination_fit },
+    { label: "area fit",         gap: winner.score_breakdown.destination_fit - runnerUp.score_breakdown.destination_fit },
   ].filter((d) => d.gap > 5).sort((a, b) => b.gap - a.gap);
 
   const ruAdv = [
-    { label: "hotel quality",    gap: runnerUp.score_breakdown.stars      - winner.score_breakdown.stars      },
-    { label: "guest satisfaction", gap: runnerUp.score_breakdown.reviews - winner.score_breakdown.reviews     },
+    { label: "property quality", gap: runnerUp.score_breakdown.stars      - winner.score_breakdown.stars      },
+    { label: "guest reviews",    gap: runnerUp.score_breakdown.reviews    - winner.score_breakdown.reviews    },
     { label: "walkability",      gap: runnerUp.score_breakdown.walkability - winner.score_breakdown.walkability },
     { label: "location",         gap: runnerUp.score_breakdown.location   - winner.score_breakdown.location   },
   ].filter((d) => d.gap > 5).sort((a, b) => b.gap - a.gap);
@@ -3377,10 +3377,10 @@ function BookThisOne({
                   : confidence === "medium"     ? "Medium Confidence"
                   : "Close Call";
   const confDesc  = confidence === "high"
-                  ? `Leads by ${gap} points — clear recommendation.`
+                  ? "Clear recommendation based on overall balance."
                   : confidence === "medium"
-                  ? `Leads by ${gap} points — solid edge over alternatives.`
-                  : `${gap <= 1 ? "Under 2" : gap} points apart — genuinely close.`;
+                  ? "Solid advantage over the alternatives."
+                  : "Genuinely close — either is a reasonable choice.";
   const confColor = confidence === "high"       ? "text-lantern-mint"
                   : confidence === "medium"     ? "text-amber-400"
                   : "text-white/35";
@@ -3630,8 +3630,8 @@ function RecommendationPanel({
     const runnerWins = allDims.filter(d => d.runnerV > d.pickV + 2).sort((a, b) => (b.runnerV - b.pickV) * b.w - (a.runnerV - a.pickV) * a.w);
     const winFactor    = pickWins[0]?.label ?? "overall balance";
     const loseFactor   = runnerWins[0]?.label;
-    const ptStr        = margin === 0 ? "Equal total score but ranked" : `Won by ${margin} pt${margin !== 1 ? "s" : ""} on`;
-    closeCallSentence  = `${ptStr} stronger ${winFactor}${loseFactor ? `. #2 ${runnerUp.name} has better ${loseFactor}.` : "."}`;
+    const advantage    = margin === 0 ? "Tied overall but ranked ahead on" : "Slight edge on";
+    closeCallSentence  = `${advantage} ${winFactor}${loseFactor ? `. ${runnerUp.name} has better ${loseFactor}.` : "."}`;
   }
 
   // ── Score drivers (top 3 weighted contributors) ─────────────────────────────
@@ -3685,10 +3685,10 @@ function RecommendationPanel({
     if (prefsActive && pick.neighborhood_fit_score > runnerUp.neighborhood_fit_score + 5) {
       altWeaknesses.push(`Lower ${prefLabelLower} neighborhood fit (${runnerUp.neighborhood_fit_score} vs ${pick.neighborhood_fit_score})`);
     } else if (pick.score_breakdown.reviews > runnerUp.score_breakdown.reviews + 5) {
-      altWeaknesses.push("Weaker overall guest satisfaction score");
+      altWeaknesses.push(`Lower guest reviews (${runnerUp.overall_rating.toFixed(1)}★ vs ${pick.overall_rating.toFixed(1)}★)`);
     }
     if (altWeaknesses.length === 0) {
-      altWeaknesses.push(`Lower combined score (${runnerUp.ai_score} vs ${pick.ai_score}) across all weighted factors`);
+      altWeaknesses.push("Lower overall ranking across all factors");
     }
   }
 
@@ -3709,11 +3709,6 @@ function RecommendationPanel({
           </span>
         </div>
         <div className="flex items-center gap-2 flex-shrink-0">
-          {margin > 0 && (
-            <span className="text-[10px] text-white/30">
-              Won by {margin} pt{margin !== 1 ? "s" : ""}
-            </span>
-          )}
           <span className={`text-[10px] font-bold border rounded-full px-2 py-0.5 ${scoreBg(pick.ai_score)}`}>
             {pick.ai_score}
           </span>

@@ -1935,7 +1935,7 @@ function buildRankExplanations(sorted: HotelOffer[], prefs: string[]): void {
     } else if (!prefsActive && h.score_breakdown.destination_fit >= 85 && bullets.length < 3) {
       bullets.push("Well-positioned for exploring the area");
     } else if (!prefsActive && h.score_breakdown.destination_fit >= 70 && bullets.length < 3) {
-      bullets.push("Good location for sightseeing");
+      bullets.push("Well-positioned within the city");
     }
 
     // Walkability
@@ -1970,11 +1970,11 @@ function buildRankExplanations(sorted: HotelOffer[], prefs: string[]): void {
     let weakness = "";
     if (above) {
       const dimGaps = [
-        { label: "guest satisfaction", delta: above.score_breakdown.reviews         - h.score_breakdown.reviews         },
-        { label: "hotel quality",      delta: above.score_breakdown.stars           - h.score_breakdown.stars           },
-        { label: "destination fit",    delta: above.score_breakdown.destination_fit - h.score_breakdown.destination_fit },
-        { label: "location",           delta: above.score_breakdown.location        - h.score_breakdown.location        },
-        { label: "walkability",        delta: above.score_breakdown.walkability     - h.score_breakdown.walkability     },
+        { label: "guest ratings",  delta: above.score_breakdown.reviews         - h.score_breakdown.reviews         },
+        { label: "property class", delta: above.score_breakdown.stars           - h.score_breakdown.stars           },
+        { label: "centrality",     delta: above.score_breakdown.destination_fit - h.score_breakdown.destination_fit },
+        { label: "location",       delta: above.score_breakdown.location        - h.score_breakdown.location        },
+        { label: "walkability",    delta: above.score_breakdown.walkability     - h.score_breakdown.walkability     },
       ].filter((g) => g.delta > 8).sort((a, b) => b.delta - a.delta);
 
       const aboveShort = above.name.split(/\s+/).slice(0, 3).join(" ");
