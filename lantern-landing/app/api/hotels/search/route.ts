@@ -1966,7 +1966,7 @@ function buildRankExplanations(sorted: HotelOffer[], prefs: string[]): void {
       bullets.push(`${starStr}hotel in this search`);
     }
 
-    // Weakness vs hotel ranked above
+    // Tradeoff vs hotel ranked above — bilateral: what's weaker AND what compensates
     let weakness = "";
     if (above) {
       const dimGaps = [
@@ -1978,12 +1978,25 @@ function buildRankExplanations(sorted: HotelOffer[], prefs: string[]): void {
       ].filter((g) => g.delta > 8).sort((a, b) => b.delta - a.delta);
 
       const aboveShort = above.name.split(/\s+/).slice(0, 3).join(" ");
-      const priceDiff  = h.price_per_night - above.price_per_night;
+      const priceDiff  = h.price_per_night - above.price_per_night;   // positive = h costs more
+      const priceSave  = Math.round(-priceDiff);                       // positive = h is cheaper
+      const reviewAdv  = h.score_breakdown.reviews - above.score_breakdown.reviews; // positive = h has better reviews
 
       if (dimGaps.length > 0) {
-        weakness = `Lower ${dimGaps[0].label} than ${aboveShort}`;
+        const gap = dimGaps[0];
+        if (priceSave >= 25) {
+          weakness = `Lower ${gap.label} than ${aboveShort}, but saves $${priceSave}/night`;
+        } else if (reviewAdv >= 10 && gap.label !== "guest satisfaction") {
+          weakness = `Lower ${gap.label} than ${aboveShort}, offset by stronger guest reviews (${h.overall_rating.toFixed(1)} vs ${above.overall_rating.toFixed(1)}★)`;
+        } else {
+          weakness = `Lower ${gap.label} than ${aboveShort}`;
+        }
       } else if (priceDiff > 20) {
-        weakness = `$${Math.round(priceDiff)}/night more than ${aboveShort}`;
+        if (reviewAdv >= 10) {
+          weakness = `$${Math.round(priceDiff)}/night more than ${aboveShort} — offset by stronger reviews (${h.overall_rating.toFixed(1)} vs ${above.overall_rating.toFixed(1)}★)`;
+        } else {
+          weakness = `$${Math.round(priceDiff)}/night more than ${aboveShort}`;
+        }
       } else if (above.ai_score - h.ai_score < 5) {
         weakness = "Nearly tied — very close to the hotel above";
       } else {
