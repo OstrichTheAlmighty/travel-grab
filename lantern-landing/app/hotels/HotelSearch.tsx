@@ -771,9 +771,6 @@ function buildFitNote(offer: HotelOffer, prefs: readonly PrefId[]): string {
     if (detail) return `${label} for ${prefPart}: ${detail}.`;
   }
 
-  // Fall back to Places enrichment data
-  if (offer.transit_note)     return `${label} for ${prefPart}: ${offer.transit_note}.`;
-  if (offer.location_summary) return `${label} for ${prefPart}: ${offer.location_summary}.`;
   return `${label} for ${prefPart}.`;
 }
 
@@ -817,14 +814,15 @@ function breakdownEvidence(
     case "Destination Fit":
     case "Location":
       if (offer.transit_note) return offer.transit_note;
+      if (offer.nearby_walk && offer.nearby_walk.minutes <= 5)
+        return `Walkable area — major destinations within ${offer.nearby_walk.minutes} min`;
       if (offer.nearby_walk && offer.nearby_walk.minutes <= 8)
-        return `${offer.nearby_walk.name} — ${offer.nearby_walk.minutes} min walk`;
-      if (offer.location_summary) return offer.location_summary;
-      return offer.inferred_neighborhood || "Location data";
+        return `Walkable area — destinations within ${offer.nearby_walk.minutes} min`;
+      return offer.inferred_neighborhood || "Centrally located";
 
     case "Walkability":
       if (offer.nearby_walk && offer.nearby_walk.minutes <= 5)
-        return `${offer.nearby_walk.name} — ${offer.nearby_walk.minutes} min walk`;
+        return `${offer.nearby_walk.minutes} min walk to major destinations`;
       return `Score: ${offer.score_breakdown.walkability}/100`;
 
     default:
@@ -2079,7 +2077,7 @@ function HotelDetailDrawer({
                       )}
                     </div>
                     <p className="text-[10px] text-white/22 leading-relaxed">
-                      Individual review text is not available from this search result.
+                      Review text isn't available from this search result yet. We're using the aggregate rating and review count for scoring.
                     </p>
                   </>
                 ) : (
@@ -4209,10 +4207,10 @@ export default function HotelSearch() {
 
   // Scroll the matching hotel card into view whenever a map marker is clicked.
   useEffect(() => {
-    if (!selectedHotelId || viewMode !== "map") return;
+    if (!selectedHotelId) return;
     const el = document.querySelector<HTMLElement>(`[data-hotel-id="${selectedHotelId}"]`);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }, [selectedHotelId, viewMode]);
+  }, [selectedHotelId]);
 
   const togglePref = (id: string) => {
     setSelectedPrefs((prev) =>
@@ -4346,7 +4344,7 @@ export default function HotelSearch() {
         </div>
       </nav>
 
-      <main className={viewMode === "map" ? "w-full px-4 sm:px-6 py-6" : "mx-auto max-w-5xl px-4 sm:px-6 py-8 sm:py-12"}>
+      <main className="w-full px-4 sm:px-6 py-6 sm:py-8">
         {/* Hero */}
         <div className="mb-7 text-center">
           <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white mb-2">
@@ -4570,7 +4568,7 @@ export default function HotelSearch() {
           };
 
           return (
-            <div className={viewMode === "map" ? "w-full" : "max-w-3xl mx-auto"} ref={resultsRef}>
+            <div className="w-full" ref={resultsRef}>
 
               {/* ── Search mode toggle ─────────────────────────────────────── */}
               {cityGuide && (
@@ -4738,16 +4736,15 @@ export default function HotelSearch() {
                 )}
               </div>
 
-              {/* ── Split layout wrapper: flex row on desktop in map mode ──── */}
-              <div className={viewMode === "map" ? "lg:flex lg:items-start lg:-mx-6" : ""}>
+              {/* ── Split layout: list left, map right — map always on desktop ── */}
+              <div className="lg:flex lg:items-start lg:-mx-6">
 
-                {/* ── Left panel: hotel list + inline nbhd panel ───────────── */}
-                <div className={viewMode === "map" ? "w-full lg:w-[45%] lg:flex-shrink-0 lg:pl-6 lg:pr-3" : ""}>
+                {/* ── Left panel ──────────────────────────────────────────────── */}
+                <div className="w-full lg:w-[54%] lg:flex-shrink-0 lg:pl-6 lg:pr-2">
 
-                  {/* ── MAP VIEW (mobile): fixed full-screen overlay ─────────── */}
+                  {/* Mobile map: full-screen overlay when toggle = Map */}
                   {viewMode === "map" && (
                     <>
-                      {/* Full-screen map fixed below the nav bar */}
                       <div className="lg:hidden fixed inset-x-0 bottom-0 z-30" style={{ top: 56 }}>
                         <HotelMapView
                           offers={offers}
@@ -4760,214 +4757,215 @@ export default function HotelSearch() {
                           activePrefs={activePrefs}
                           recommendedNbhdId={recommendedNbhdId}
                         />
-                        {/* Mobile bottom sheet */}
                         <MapNeighborhoodPanel
                           data={mapPanelData}
                           onClose={() => setSelectedNeighborhood(null)}
                           variant="sheet"
                         />
                       </div>
-                      {/* Mobile spacer prevents list content from peeking under the fixed map */}
                       <div className="lg:hidden" style={{ height: "calc(100vh - 56px)" }} aria-hidden="true" />
-                      {/* Desktop: inline neighborhood panel above hotel cards */}
-                      {mapPanelData && (
-                        <div className="hidden lg:block mb-4">
-                          <MapNeighborhoodPanel
-                            data={mapPanelData}
-                            onClose={() => setSelectedNeighborhood(null)}
-                            variant="sidebar"
-                          />
-                        </div>
-                      )}
                     </>
                   )}
 
-              {/* ── LIST VIEW: Neighborhood guide (Best Area mode only) ───── */}
-              {viewMode === "list" && cityGuide && searchMode === "best-area" && (
-                activePrefs.length > 0 && nbhdSummaries.length > 0 ? (
-                  <NeighborhoodRecommendation
-                    summaries={nbhdSummaries}
-                    selectedId={selectedNeighborhood}
-                    onSelect={handleSelectNeighborhood}
-                    activePrefs={activePrefs}
-                  />
-                ) : (
-                  <NeighborhoodGuide
-                    guide={cityGuide}
-                    summaries={nbhdSummaries}
-                    selectedId={selectedNeighborhood}
-                    onSelect={handleSelectNeighborhood}
-                  />
-                )
-              )}
+                  {/* Desktop neighborhood panel — shown when a neighborhood is selected on map */}
+                  {mapPanelData && (
+                    <div className="hidden lg:block mb-4">
+                      <MapNeighborhoodPanel
+                        data={mapPanelData}
+                        onClose={() => setSelectedNeighborhood(null)}
+                        variant="sidebar"
+                      />
+                    </div>
+                  )}
 
-              {/* ── Neighborhood Comparison Engine (Best Area mode only) ─── */}
-              {viewMode === "list" && cityGuide && searchMode === "best-area" && nbhdSummaries.filter((s) => s.count > 0).length >= 2 && (
-                <NeighborhoodCompare
-                  cityName={cityGuide.displayName}
-                  summaries={nbhdSummaries
-                    .filter((s) => s.count > 0)
-                    .map((s): ComparableSummary => ({
-                      nbhd: s.nbhd,
-                      count: s.count,
-                      avgPrice: s.avgPrice,
-                      avgRating: s.avgRating,
-                      avgHotelScore:
-                        s.hotels.length > 0
-                          ? Math.round(
-                              s.hotels.reduce((acc, h) => acc + h.ai_score, 0) / s.hotels.length
-                            )
-                          : 0,
-                    }))}
-                />
-              )}
-
-              {/* ── Book This One (Best Hotels Overall only) ────────────── */}
-              {viewMode === "list" && searchMode === "best-hotels" && top3.length >= 2 && (
-                <BookThisOne h1={top3[0]} h2={top3[1]} cityGuide={cityGuide} />
-              )}
-
-              {/* ── Recommended Hotels Top 3 (Best Area mode only) ──────── */}
-              {viewMode === "list" && searchMode === "best-area" && top3.length > 0 && (
-                <RecommendedHotels
-                  top3={top3}
-                  compareIds={compareIds}
-                  onSetCompareIds={setCompareIds}
-                  onOpenCompare={handleOpenCompare}
-                />
-              )}
-
-              {/* Preference conflict warning */}
-              {conflictWarnings.length > 0 && (
-                <div className="mb-3 rounded-xl border border-amber-500/20 bg-amber-500/[0.05] px-4 py-2.5 flex items-start gap-2">
-                  <svg className="w-3.5 h-3.5 text-amber-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2L1 21h22L12 2zm0 3.5L21 19H3L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z" />
-                  </svg>
-                  <p className="text-[11px] text-amber-300/80 leading-relaxed">{conflictWarnings[0]}</p>
-                </div>
-              )}
-
-              {/* Amenity quick-filters */}
-              <div className="flex items-center gap-1.5 mb-3 flex-wrap">
-                <span className="text-[10px] font-semibold text-white/25 uppercase tracking-wider mr-1">Must have:</span>
-                {AMENITY_FILTERS.map((f) => {
-                  const active = amenityFilters.includes(f.id);
-                  return (
-                    <button
-                      key={f.id}
-                      onClick={() => setAmenityFilters((prev) =>
-                        prev.includes(f.id) ? prev.filter((x) => x !== f.id) : [...prev, f.id]
-                      )}
-                      className={`px-2.5 py-1 rounded-full text-[10px] font-semibold border transition-all ${
-                        active
-                          ? "bg-lantern-blue/20 text-lantern-blue border-lantern-blue/40"
-                          : "bg-transparent text-white/25 border-white/[0.07] hover:text-white/50 hover:border-white/15"
-                      }`}
-                    >
-                      {f.label}
-                    </button>
-                  );
-                })}
-                {amenityFilters.length > 0 && (
-                  <button
-                    onClick={() => setAmenityFilters([])}
-                    className="text-[10px] text-white/20 hover:text-white/50 transition-colors ml-1"
-                  >
-                    Clear
-                  </button>
-                )}
-              </div>
-
-              {/* Recommendation panel — always use score-ranked order */}
-              <RecommendationPanel
-                offers={showAllFallback ? offers : filteredOffers}
-                activePrefs={activePrefs}
-                recommendedSummary={recommendedSummary}
-              />
-
-              {/* Hotel cards */}
-              <div className={`space-y-3 ${compareIds.length > 0 ? "pb-24" : ""}`}>
-                {cardList.slice(0, visibleCount).map((offer, idx) => {
-                  const isGemPosition = hiddenGem !== null &&
-                    offer.hotel_id === hiddenGem.hotel_id &&
-                    sortOrder === "score" &&
-                    top3[0] !== undefined;
-                  return (
-                  <div key={offer.hotel_id}>
-                    {/* "Why #1 beats #2" separator — only between the first and second card when sorted by score */}
-                    {idx === 1 && sortOrder === "score" && top3.length >= 2 && (
-                      <WhyTopRanks h1={top3[0]} h2={top3[1]} />
+                  {/* Neighborhood guide + comparison + top picks
+                      Hidden on mobile when map toggle is active; always visible on desktop */}
+                  <div className={viewMode === "map" ? "hidden lg:block" : ""}>
+                    {/* Neighborhood guide (Best Area mode only) */}
+                    {cityGuide && searchMode === "best-area" && (
+                      activePrefs.length > 0 && nbhdSummaries.length > 0 ? (
+                        <NeighborhoodRecommendation
+                          summaries={nbhdSummaries}
+                          selectedId={selectedNeighborhood}
+                          onSelect={handleSelectNeighborhood}
+                          activePrefs={activePrefs}
+                        />
+                      ) : (
+                        <NeighborhoodGuide
+                          guide={cityGuide}
+                          summaries={nbhdSummaries}
+                          selectedId={selectedNeighborhood}
+                          onSelect={handleSelectNeighborhood}
+                        />
+                      )
                     )}
-                    {/* Hidden gem callout — shown just above the gem hotel's card */}
-                    {isGemPosition && (
-                      <HiddenGemCallout gem={hiddenGem!} topHotel={top3[0]!} avgPrice={avgPrice} />
+
+                    {/* Neighborhood Comparison Engine */}
+                    {cityGuide && searchMode === "best-area" && nbhdSummaries.filter((s) => s.count > 0).length >= 2 && (
+                      <NeighborhoodCompare
+                        cityName={cityGuide.displayName}
+                        summaries={nbhdSummaries
+                          .filter((s) => s.count > 0)
+                          .map((s): ComparableSummary => ({
+                            nbhd: s.nbhd,
+                            count: s.count,
+                            avgPrice: s.avgPrice,
+                            avgRating: s.avgRating,
+                            avgHotelScore:
+                              s.hotels.length > 0
+                                ? Math.round(
+                                    s.hotels.reduce((acc, h) => acc + h.ai_score, 0) / s.hotels.length
+                                  )
+                                : 0,
+                          }))}
+                      />
                     )}
-                    <HotelCard
-                      offer={offer}
-                      isBestOverall={offer.hotel_id === bestOverallId}
-                      isCheapest={offer.hotel_id === cheapestId}
-                      activePrefs={activePrefs}
-                      guests={guests}
-                      avgPrice={avgPrice}
-                      isMapSelected={viewMode === "map" && offer.hotel_id === selectedHotelId}
-                      onSelectForMap={viewMode === "map" ? setSelectedHotelId : undefined}
-                      onHoverForMap={viewMode === "map" ? setHoveredHotelId : undefined}
-                      onOpenDetail={() => {
-                        track("hotel_selected", {
-                          hotel_name:   offer.name,
-                          hotel_rank:   offer.rank_position ?? (idx + 1),
-                          neighborhood: offer.inferred_neighborhood,
-                          score:        offer.ai_score,
-                        });
-                        setDetailHotelId(offer.hotel_id);
-                      }}
-                      isInCompare={compareIds.includes(offer.hotel_id)}
-                      onToggleCompare={() => toggleCompare(offer.hotel_id)}
-                      compareDisabled={compareIds.length >= 4}
-                    />
+
+                    {/* Book This One (Best Hotels Overall only) */}
+                    {searchMode === "best-hotels" && top3.length >= 2 && (
+                      <BookThisOne h1={top3[0]} h2={top3[1]} cityGuide={cityGuide} />
+                    )}
+
+                    {/* Recommended Hotels Top 3 (Best Area mode only) */}
+                    {searchMode === "best-area" && top3.length > 0 && (
+                      <RecommendedHotels
+                        top3={top3}
+                        compareIds={compareIds}
+                        onSetCompareIds={setCompareIds}
+                        onOpenCompare={handleOpenCompare}
+                      />
+                    )}
                   </div>
-                  );
-                })}
-              </div>
 
-              {/* Load More button */}
-              {visibleCount < cardList.length && (
-                <div className="py-6 text-center">
-                  <button
-                    onClick={() => setVisibleCount((v) => v + 20)}
-                    className="inline-flex items-center gap-2 text-[12px] font-semibold text-white/55 border border-white/[0.1] hover:border-white/25 hover:text-white/80 rounded-xl px-5 py-2.5 transition-all"
-                  >
-                    Load 20 More Hotels
-                    <span className="text-white/25 font-normal">({cardList.length - visibleCount} remaining)</span>
-                  </button>
-                </div>
-              )}
+                  {/* Preference conflict warning */}
+                  {conflictWarnings.length > 0 && (
+                    <div className="mb-3 rounded-xl border border-amber-500/20 bg-amber-500/[0.05] px-4 py-2.5 flex items-start gap-2">
+                      <svg className="w-3.5 h-3.5 text-amber-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L1 21h22L12 2zm0 3.5L21 19H3L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z" />
+                      </svg>
+                      <p className="text-[11px] text-amber-300/80 leading-relaxed">{conflictWarnings[0]}</p>
+                    </div>
+                  )}
 
-              <div className="mt-6 text-center text-[11px] text-white/20 leading-relaxed">
-                Prices from Google Hotels via SerpAPI · Same prices as Google Hotels, ranked by your preferences.
-              </div>
+                  {/* Amenity quick-filters */}
+                  <div className="flex items-center gap-1.5 mb-3 flex-wrap">
+                <span className="text-[10px] font-semibold text-white/25 uppercase tracking-wider mr-1">Must have:</span>
+                  {AMENITY_FILTERS.map((f) => {
+                    const active = amenityFilters.includes(f.id);
+                    return (
+                      <button
+                        key={f.id}
+                        onClick={() => setAmenityFilters((prev) =>
+                          prev.includes(f.id) ? prev.filter((x) => x !== f.id) : [...prev, f.id]
+                        )}
+                        className={`px-2.5 py-1 rounded-full text-[10px] font-semibold border transition-all ${
+                          active
+                            ? "bg-lantern-blue/20 text-lantern-blue border-lantern-blue/40"
+                            : "bg-transparent text-white/25 border-white/[0.07] hover:text-white/50 hover:border-white/15"
+                        }`}
+                      >
+                        {f.label}
+                      </button>
+                    );
+                  })}
+                  {amenityFilters.length > 0 && (
+                    <button
+                      onClick={() => setAmenityFilters([])}
+                      className="text-[10px] text-white/20 hover:text-white/50 transition-colors ml-1"
+                    >
+                      Clear
+                    </button>
+                  )}
+                  </div>
+
+                  {/* Recommendation panel — always use score-ranked order */}
+                  <RecommendationPanel
+                    offers={showAllFallback ? offers : filteredOffers}
+                    activePrefs={activePrefs}
+                    recommendedSummary={recommendedSummary}
+                  />
+
+                  {/* Hotel cards */}
+                  <div className={`space-y-3 ${compareIds.length > 0 ? "pb-24" : ""}`}>
+                    {cardList.slice(0, visibleCount).map((offer, idx) => {
+                      const isGemPosition = hiddenGem !== null &&
+                        offer.hotel_id === hiddenGem.hotel_id &&
+                        sortOrder === "score" &&
+                        top3[0] !== undefined;
+                      return (
+                        <div key={offer.hotel_id}>
+                          {/* "Why #1 beats #2" separator — only between the first and second card when sorted by score */}
+                          {idx === 1 && sortOrder === "score" && top3.length >= 2 && (
+                            <WhyTopRanks h1={top3[0]} h2={top3[1]} />
+                          )}
+                          {/* Hidden gem callout — shown just above the gem hotel's card */}
+                          {isGemPosition && (
+                            <HiddenGemCallout gem={hiddenGem!} topHotel={top3[0]!} avgPrice={avgPrice} />
+                          )}
+                          <HotelCard
+                            offer={offer}
+                            isBestOverall={offer.hotel_id === bestOverallId}
+                            isCheapest={offer.hotel_id === cheapestId}
+                            activePrefs={activePrefs}
+                            guests={guests}
+                            avgPrice={avgPrice}
+                            isMapSelected={offer.hotel_id === selectedHotelId}
+                            onSelectForMap={setSelectedHotelId}
+                            onHoverForMap={setHoveredHotelId}
+                            onOpenDetail={() => {
+                              track("hotel_selected", {
+                                hotel_name:   offer.name,
+                                hotel_rank:   offer.rank_position ?? (idx + 1),
+                                neighborhood: offer.inferred_neighborhood,
+                                score:        offer.ai_score,
+                              });
+                              setDetailHotelId(offer.hotel_id);
+                            }}
+                            isInCompare={compareIds.includes(offer.hotel_id)}
+                            onToggleCompare={() => toggleCompare(offer.hotel_id)}
+                            compareDisabled={compareIds.length >= 4}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Load More button */}
+                  {visibleCount < cardList.length && (
+                    <div className="py-6 text-center">
+                      <button
+                        onClick={() => setVisibleCount((v) => v + 20)}
+                        className="inline-flex items-center gap-2 text-[12px] font-semibold text-white/55 border border-white/[0.1] hover:border-white/25 hover:text-white/80 rounded-xl px-5 py-2.5 transition-all"
+                      >
+                        Load 20 More Hotels
+                        <span className="text-white/25 font-normal">({cardList.length - visibleCount} remaining)</span>
+                      </button>
+                    </div>
+                  )}
+
+                  <div className="mt-6 text-center text-[11px] text-white/20 leading-relaxed">
+                    Prices from Google Hotels via SerpAPI · Same prices as Google Hotels, ranked by your preferences.
+                  </div>
 
                 </div>{/* ── end left panel ── */}
 
-                {/* ── Right panel: sticky map (desktop only, map mode only) ── */}
-                {viewMode === "map" && (
-                  <div
-                    className="hidden lg:block flex-1 sticky top-14 overflow-hidden rounded-l-xl border-l border-y border-white/[0.07]"
-                    style={{ height: "85vh" }}
-                  >
-                    <HotelMapView
-                      offers={offers}
-                      selectedHotelId={hoveredHotelId ?? selectedHotelId}
-                      onSelectHotel={setSelectedHotelId}
-                      destination={searchedDest}
-                      cityGuide={cityGuide}
-                      selectedNeighborhood={selectedNeighborhood}
-                      onSelectNeighborhood={handleSelectNeighborhood}
-                      activePrefs={activePrefs}
-                      recommendedNbhdId={recommendedNbhdId}
-                    />
-                  </div>
-                )}
+                {/* ── Right panel: sticky map (desktop always, mobile hidden) ── */}
+                <div
+                  className="hidden lg:block flex-1 sticky top-14 overflow-hidden rounded-l-xl border-l border-y border-white/[0.07]"
+                  style={{ height: "85vh" }}
+                >
+                  <HotelMapView
+                    offers={offers}
+                    selectedHotelId={hoveredHotelId ?? selectedHotelId}
+                    onSelectHotel={setSelectedHotelId}
+                    destination={searchedDest}
+                    cityGuide={cityGuide}
+                    selectedNeighborhood={selectedNeighborhood}
+                    onSelectNeighborhood={handleSelectNeighborhood}
+                    activePrefs={activePrefs}
+                    recommendedNbhdId={recommendedNbhdId}
+                  />
+                </div>
               </div>{/* ── end split wrapper ── */}
             </div>
           );

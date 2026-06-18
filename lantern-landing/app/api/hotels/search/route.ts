@@ -1850,7 +1850,7 @@ function buildWhy(
   if (topAmenity && parts.length < 2) parts.push(`includes ${topAmenity.toLowerCase()}`);
 
   if (h.nearby_walk && h.nearby_walk.minutes <= 3 && parts.length < 2) {
-    parts.push(`${h.nearby_walk.name} is ${h.nearby_walk.minutes} min walk`);
+    parts.push(`${h.nearby_walk.minutes} min walk to nearby landmarks`);
   }
 
   const priceDiff = Math.round(h.price_per_night - cheapest.price_per_night);
