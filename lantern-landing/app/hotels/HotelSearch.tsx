@@ -2898,9 +2898,11 @@ function HotelComparePanel({
 // ── Recommended Hotels (Top 3 picks) ─────────────────────────────────────────
 
 function topPickSentence(h: HotelOffer, rank: number, top3: HotelOffer[]): string {
-  const first     = top3[0];
-  const second    = top3[1];
-  const priceSave = rank > 0 ? Math.round(first.price_per_night - h.price_per_night) : 0;
+  const first      = top3[0];
+  const second     = top3[1];
+  const priceSave  = rank > 0 ? Math.round(first.price_per_night - h.price_per_night) : 0;
+  const nights     = h.nights > 0 ? h.nights : (first?.nights ?? 0);
+  const tripSave   = nights >= 2 && priceSave >= 20 ? priceSave * nights : 0;
 
   const strengths: string[] = [];
   if (h.star_rating >= 5)                       strengths.push("5-star luxury");
@@ -2914,13 +2916,15 @@ function topPickSentence(h: HotelOffer, rank: number, top3: HotelOffer[]): strin
   if (h.score_breakdown.reviews >= 80)          strengths.push("strong reviews");
 
   if (rank === 0) {
-    // For #1: surface the main strength, then hint at the top tradeoff vs #2
     const qualifier = h.star_rating >= 5 ? "luxury" : h.overall_rating >= 4.7 ? "premium" : "overall";
     const str = strengths.slice(0, 2).join(" and ") || "balanced strengths";
     if (second) {
-      const costMore = Math.round(h.price_per_night - second.price_per_night);
-      if (costMore >= 30) return `Best ${qualifier} choice. Costs $${costMore}/night more than #2 — worth it if quality is the priority.`;
-      const reviewAdv = Math.round((second.overall_rating - h.overall_rating) * 10);
+      const costMore  = Math.round(h.price_per_night - second.price_per_night);
+      const tripExtra = nights >= 2 && costMore >= 20 ? costMore * nights : 0;
+      if (costMore >= 30)
+        return tripExtra > 0
+          ? `Best ${qualifier} choice. $${tripExtra} more than #2 over this ${nights}-night trip — worth it if quality is the priority.`
+          : `Best ${qualifier} choice. Costs $${costMore}/night more than #2 — worth it if quality is the priority.`;
       if (second.overall_rating > h.overall_rating + 0.1)
         return `Best ${qualifier} choice with ${str}. #2 edges it on guest reviews (${second.overall_rating.toFixed(1)} vs ${h.overall_rating.toFixed(1)}★).`;
     }
@@ -2928,14 +2932,14 @@ function topPickSentence(h: HotelOffer, rank: number, top3: HotelOffer[]): strin
   }
 
   if (rank === 1) {
-    // For #2: lead with the real differentiator vs #1
-    const second2 = h; // just for clarity
     const firstShort = first.name.split(",")[0].split("–")[0].trim();
     if (priceSave >= 30) {
-      const ratingCost = first.overall_rating > second2.overall_rating + 0.1
-        ? `, though ${firstShort} has higher guest scores (${first.overall_rating.toFixed(1)} vs ${second2.overall_rating.toFixed(1)}★)`
+      const ratingCost = first.overall_rating > h.overall_rating + 0.1
+        ? `, though ${firstShort} has higher guest scores (${first.overall_rating.toFixed(1)} vs ${h.overall_rating.toFixed(1)}★)`
         : "";
-      return `Saves $${priceSave}/night vs. ${firstShort}${ratingCost}.`;
+      return tripSave > 0
+        ? `Saves $${tripSave} on this ${nights}-night trip vs. ${firstShort}${ratingCost}.`
+        : `Saves $${priceSave}/night vs. ${firstShort}${ratingCost}.`;
     }
     if (priceSave >= 10) {
       const str = strengths.slice(0, 1)[0] ?? "strong performance";
@@ -2945,7 +2949,11 @@ function topPickSentence(h: HotelOffer, rank: number, top3: HotelOffer[]): strin
     return `${str.charAt(0).toUpperCase() + str.slice(1)} — very close to #1.`;
   }
 
-  if (priceSave >= 40) return `Best value in the top 3 — saves $${priceSave}/night vs #1.`;
+  if (priceSave >= 40) {
+    return tripSave > 0
+      ? `Best value in the top 3 — saves $${tripSave} on this ${nights}-night trip vs. #1.`
+      : `Best value in the top 3 — saves $${priceSave}/night vs #1.`;
+  }
   const str = strengths.slice(0, 2).join(" and ") || "solid overall performance";
   return `Strong option with ${str}.`;
 }
@@ -3136,17 +3144,25 @@ function HiddenGemCallout({ gem, topHotel, avgPrice }: {
   topHotel: HotelOffer;
   avgPrice: number;
 }) {
-  const gemShort = gem.name.split(",")[0].split("–")[0].trim();
-  const topShort = topHotel.name.split(",")[0].split("–")[0].trim();
-  const savings  = Math.round(topHotel.price_per_night - gem.price_per_night);
-  const pctBelow = avgPrice > 0 ? Math.round((1 - gem.price_per_night / avgPrice) * 100) : 0;
+  const gemShort  = gem.name.split(",")[0].split("–")[0].trim();
+  const topShort  = topHotel.name.split(",")[0].split("–")[0].trim();
+  const savings   = Math.round(topHotel.price_per_night - gem.price_per_night);
+  const nights    = gem.nights > 0 ? gem.nights : (topHotel.nights > 0 ? topHotel.nights : 0);
+  const tripSaves = nights >= 2 && savings >= 20 ? savings * nights : 0;
+  const pctBelow  = avgPrice > 0 ? Math.round((1 - gem.price_per_night / avgPrice) * 100) : 0;
+
+  const savingsText = tripSaves > 0
+    ? `saves $${tripSaves} on this ${nights}-night trip vs. ${topShort}`
+    : savings >= 20
+      ? `saves $${savings}/night vs. ${topShort}`
+      : `is priced ${pctBelow}% below the search average`;
 
   const gainLine = (() => {
     if (gem.overall_rating >= 4.5 && gem.review_count >= 100)
       return `${gem.overall_rating.toFixed(1)}★ from ${gem.review_count.toLocaleString()} guests — rivals pricier hotels.`;
     if (gem.star_rating >= 4)
       return `${gem.star_rating}-star quality at well below the search average.`;
-    return `Strong guest scores at ${Math.round(gem.price_per_night)}/night.`;
+    return `Strong guest scores at $${Math.round(gem.price_per_night)}/night.`;
   })();
 
   const tradeoffLine = (() => {
@@ -3164,8 +3180,7 @@ function HiddenGemCallout({ gem, topHotel, avgPrice }: {
       </div>
       <p className="text-[11.5px] text-white/60 leading-snug mb-2">
         <span className="font-semibold text-white/75">{gemShort}</span>
-        {savings >= 20 ? ` saves $${savings}/night vs. ${topShort}.` : ` is priced ${pctBelow}% below the search average.`}
-        {` `}{gainLine}
+        {` ${savingsText}. `}{gainLine}
       </p>
       <div className="flex items-start gap-2">
         <span className="text-[9px] font-bold uppercase tracking-wider text-amber-400/50 flex-shrink-0 mt-px">Tradeoff</span>
@@ -3176,6 +3191,61 @@ function HiddenGemCallout({ gem, topHotel, avgPrice }: {
 }
 
 // ── Book This One ─────────────────────────────────────────────────────────────
+
+function buildPersonalPickSentence(
+  h1: HotelOffer, h2: HotelOffer,
+  confidence: "high" | "medium" | "close-call",
+  cityGuide: CityGuide | null,
+): string {
+  const h1Short = h1.name.split(",")[0].split("–")[0].trim();
+  const h2Short = h2.name.split(",")[0].split("–")[0].trim();
+  const nights  = h1.nights > 0 ? h1.nights : 0;
+  const savings = Math.round(h2.price_per_night - h1.price_per_night);   // >0 = h1 cheaper
+  const premium = -savings;                                               // >0 = h1 costs more
+
+  const recNbhd  = cityGuide?.neighborhoods[0];
+  const h1InRec  = recNbhd?.matchKeywords.some(
+    (k) => h1.inferred_neighborhood?.toLowerCase().includes(k.toLowerCase()),
+  );
+  const outstandingReviews = h1.overall_rating >= 4.7 && h1.review_count >= 200;
+  const strongReviews      = h1.overall_rating >= 4.4;
+  const tripSavings        = nights >= 2 && savings >= 20 ? savings * nights : 0;
+
+  if (confidence === "close-call") {
+    if (savings >= 20)
+      return `Either hotel is a genuinely good choice here. We'd lean toward ${h2Short} — the savings matter more than the small score gap.`;
+    return `Both score almost identically. If forced to pick, we'd go with ${h1Short} on a slight gut-read of the reviews.`;
+  }
+
+  if (premium >= 30 && outstandingReviews) {
+    const savingsNote = tripSavings > 0 ? ` worth the extra $${tripSavings} over the trip` : ` worth paying more for`;
+    return `We'd book ${h1Short}. The ${h1.overall_rating.toFixed(1)}★ guest reviews make it${savingsNote}.`;
+  }
+
+  if (h1InRec && recNbhd) {
+    const areaNote = recNbhd.name.split(" /")[0];
+    const reviewNote = outstandingReviews
+      ? ` and the ${h1.overall_rating.toFixed(1)}★ reviews seal it`
+      : strongReviews
+        ? ` with solid guest reviews to back it up`
+        : "";
+    return `We'd book ${h1Short} — it's in ${areaNote}, the best area for this search${reviewNote}.`;
+  }
+
+  if (tripSavings > 0 && outstandingReviews)
+    return `We'd personally book ${h1Short}. The savings over the trip ($${tripSavings}) are real, and the guest reviews are outstanding.`;
+
+  if (tripSavings > 0 && strongReviews)
+    return `We'd book ${h1Short} — it saves $${tripSavings} on this ${nights}-night trip and the reviews are strong.`;
+
+  if (outstandingReviews)
+    return `We'd book ${h1Short}. The ${h1.overall_rating.toFixed(1)}★ guest rating with ${h1.review_count.toLocaleString()} reviews is hard to argue with.`;
+
+  if (h1.star_rating >= 5)
+    return `We'd book ${h1Short} — 5-star quality here is exceptional and it scores above everything else in this search.`;
+
+  return `If this were our trip, we'd book ${h1Short}. It leads on the factors that matter most for this kind of stay.`;
+}
 
 function BookThisOne({
   h1,
@@ -3188,11 +3258,15 @@ function BookThisOne({
 }) {
   const gap        = h1.ai_score - h2.ai_score;
   const confidence = gap >= 5 ? "high" : gap >= 2 ? "medium" : "close-call";
+  const nights     = h1.nights > 0 ? h1.nights : (h2.nights > 0 ? h2.nights : 0);
 
   const pricePremium  = Math.round(h1.price_per_night - h2.price_per_night);   // >0 = h1 more expensive
   const priceSavings  = -pricePremium;                                          // >0 = h1 cheaper
+  const tripSavings   = nights >= 2 ? Math.abs(pricePremium) * nights : 0;
   const h1NbhdRaw     = h1.inferred_neighborhood?.split(",")[0].split(" /")[0] ?? "";
   const h2Short       = h2.name.length > 26 ? h2.name.slice(0, 23) + "…" : h2.name;
+
+  const personalPick = buildPersonalPickSentence(h1, h2, confidence, cityGuide);
 
   // ── Why (#1 strengths) ──────────────────────────────────────────────────────
   const why: string[] = [];
@@ -3226,14 +3300,25 @@ function BookThisOne({
 
   if (h1.star_rating >= 5)                                    why.push("5-star luxury hotel");
   else if (h1.star_rating > h2.star_rating && h1.star_rating >= 4) why.push(`Higher star category (${h1.star_rating}★)`);
-  if (priceSavings >= 25) why.push(`$${priceSavings}/night cheaper than comparable options`);
+  if (priceSavings >= 25) {
+    why.push(
+      tripSavings > 0
+        ? `Saves $${tripSavings} on this ${nights}-night trip`
+        : `$${priceSavings}/night cheaper than comparable options`,
+    );
+  }
 
   const finalWhy = why.slice(0, 4);
 
   // ── Tradeoffs (#1 weaknesses) ───────────────────────────────────────────────
   const tradeoffs: string[] = [];
-  if (pricePremium >= 20)
-    tradeoffs.push(`Costs $${pricePremium}/night more than ${h2Short}`);
+  if (pricePremium >= 20) {
+    tradeoffs.push(
+      tripSavings > 0
+        ? `Costs $${tripSavings} more over this ${nights}-night trip vs. ${h2Short}`
+        : `Costs $${pricePremium}/night more than ${h2Short}`,
+    );
+  }
   if (h2.review_count > h1.review_count + 100 && h2.review_count > h1.review_count * 1.3)
     tradeoffs.push(`Fewer reviews than ${h2Short} (${h1.review_count} vs ${h2.review_count})`);
   if (h2.overall_rating > h1.overall_rating + 0.2)
@@ -3241,8 +3326,13 @@ function BookThisOne({
 
   // ── Why not #2: pros ────────────────────────────────────────────────────────
   const runnerPros: string[] = [];
-  if (priceSavings >= 20)
-    runnerPros.push(`Saves $${priceSavings}/night`);
+  if (priceSavings >= 20) {
+    runnerPros.push(
+      tripSavings > 0
+        ? `Saves $${tripSavings} on this ${nights}-night trip`
+        : `Saves $${priceSavings}/night`,
+    );
+  }
   if (h2.overall_rating > h1.overall_rating + 0.1)
     runnerPros.push(`Higher guest rating (${h2.overall_rating.toFixed(1)}★ vs ${h1.overall_rating.toFixed(1)}★)`);
   if (h2.review_count > h1.review_count + 75)
@@ -3281,6 +3371,11 @@ function BookThisOne({
   const confLabel = confidence === "high"       ? "High Confidence"
                   : confidence === "medium"     ? "Medium Confidence"
                   : "Close Call";
+  const confDesc  = confidence === "high"
+                  ? `Leads by ${gap} points — clear recommendation.`
+                  : confidence === "medium"
+                  ? `Leads by ${gap} points — solid edge over alternatives.`
+                  : `${gap <= 1 ? "Under 2" : gap} points apart — genuinely close.`;
   const confColor = confidence === "high"       ? "text-lantern-mint"
                   : confidence === "medium"     ? "text-amber-400"
                   : "text-white/35";
@@ -3293,32 +3388,27 @@ function BookThisOne({
       {/* Top bar */}
       <div className="flex items-center justify-between px-4 pt-3.5 pb-2 border-b border-white/[0.04]">
         <span className="text-[9px] font-black uppercase tracking-[0.14em] text-lantern-mint/55">
-          Book This One
+          TravelGrab Pick
         </span>
         <div className="flex items-center gap-1.5">
           <span className={`w-1.5 h-1.5 rounded-full ${confDot} opacity-80`} />
-          <span className={`text-[10px] font-bold ${confColor}`}>{confLabel}</span>
+          <div>
+            <span className={`text-[10px] font-bold ${confColor}`}>{confLabel}</span>
+            <span className="text-[9px] text-white/22 ml-1.5">{confDesc}</span>
+          </div>
         </div>
       </div>
 
       <div className="px-4 pt-3 pb-4 space-y-3.5">
-        {/* Hotel name + tagline */}
+        {/* Hotel name */}
         <div>
           <h2 className="text-[15px] font-bold text-white leading-tight">{h1.name}</h2>
-          <p className="text-[11.5px] text-white/35 mt-0.5">
-            {confidence === "close-call"
-              ? "One of two equally strong options for this search."
-              : "Best overall fit for this search."}
-          </p>
         </div>
 
-        {confidence === "close-call" && (
-          <div className="rounded-lg border border-white/[0.06] bg-white/[0.03] px-3 py-2">
-            <p className="text-[11.5px] text-white/45 italic">
-              You can safely choose either option. Both score within 1 point of each other.
-            </p>
-          </div>
-        )}
+        {/* Personal pick sentence */}
+        <div className="rounded-lg border border-lantern-mint/10 bg-lantern-mint/[0.04] px-3 py-2.5">
+          <p className="text-[12px] text-white/70 leading-relaxed italic">{personalPick}</p>
+        </div>
 
         {/* Why */}
         {finalWhy.length > 0 && (
