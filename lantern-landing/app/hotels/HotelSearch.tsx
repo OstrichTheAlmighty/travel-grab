@@ -1866,11 +1866,10 @@ function HotelDetailDrawer({
                 href={offer.booking_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => track("hotel_booking_clicked", {
-                  hotel: offer.name,
-                  price: Math.round(offer.price_per_night),
-                  score: offer.ai_score,
-                  source: offer.source,
+                onClick={() => track("hotel_availability_clicked", {
+                  hotel_name:   offer.name,
+                  neighborhood: offer.inferred_neighborhood,
+                  score:        offer.ai_score,
                 })}
                 className="block w-full text-center py-3 rounded-xl text-sm font-bold text-white bg-lantern-violet hover:bg-lantern-violet/80 transition-colors shadow-[0_0_20px_rgba(139,92,246,0.20)] mb-2"
               >
@@ -2229,7 +2228,7 @@ function HotelCard({
                     href={offer.booking_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={(e) => { e.stopPropagation(); track("hotel_booking_clicked", { hotel: offer.name, price: Math.round(offer.price_per_night), score: offer.ai_score, source: offer.source }); }}
+                    onClick={(e) => { e.stopPropagation(); track("hotel_availability_clicked", { hotel_name: offer.name, neighborhood: offer.inferred_neighborhood, score: offer.ai_score }); }}
                     className="text-[11px] font-bold text-white bg-lantern-violet hover:bg-lantern-violet/80 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
                   >
                     Check availability
@@ -3900,7 +3899,19 @@ export default function HotelSearch() {
     );
   }, []);
 
-  const resultsRef = useRef<HTMLDivElement>(null);
+  const handleOpenCompare = useCallback(() => {
+    track("hotel_compare_opened", { hotels_compared: compareIds.length });
+    setComparePanelOpen(true);
+  }, [compareIds.length]);
+
+  const resultsRef        = useRef<HTMLDivElement>(null);
+  const searchStartTimeRef = useRef<number>(0);
+
+  // Debug: fire on mount to confirm analytics pipeline is wired up.
+  // Remove this useEffect once PostHog Live Events confirms events are arriving.
+  useEffect(() => {
+    track("hotels_page_loaded", { source: "debug" });
+  }, []);
 
   // Scroll the matching hotel card into view whenever a map marker is clicked.
   useEffect(() => {
@@ -3926,14 +3937,16 @@ export default function HotelSearch() {
     setErrors(errs);
     if (errs.length > 0) return;
 
-    track("hotel_search_submitted", {
-      destination:        destination.trim(),
-      check_in:           checkIn,
-      check_out:          checkOut,
-      guests,
-      rooms,
-      neighborhood_prefs: prefs.join(","),
+    const nights = (checkIn && checkOut)
+      ? Math.round((new Date(checkOut).getTime() - new Date(checkIn).getTime()) / 86_400_000)
+      : 0;
+    track("hotel_search", {
+      destination:   destination.trim(),
+      traveler_type: prefs.join(",") || "none",
+      nights,
+      budget:        null,
     });
+    searchStartTimeRef.current = Date.now();
 
     setSearchState("loading");
     setSearchedDest(destination.trim());
@@ -3972,6 +3985,12 @@ export default function HotelSearch() {
         setErrorBody(data.message ?? `No hotels found for "${destination}". Try a different city name.`);
         setSearchState("error"); return;
       }
+
+      track("hotel_search_completed", {
+        destination:   destination.trim(),
+        results_count: data.offers!.length,
+        load_time_ms:  Date.now() - searchStartTimeRef.current,
+      });
 
       setOffers(data.offers!);
       setActivePrefs((data.neighborhood_prefs ?? prefs) as PrefId[]);
@@ -4245,6 +4264,17 @@ export default function HotelSearch() {
               }
             : null;
 
+          // Track neighborhood selections; null (deselect) is not tracked.
+          const handleSelectNeighborhood = (id: string | null) => {
+            if (id) {
+              track("neighborhood_selected", {
+                neighborhood: id,
+                recommended:  id === recommendedNbhdId,
+              });
+            }
+            setSelectedNeighborhood(id);
+          };
+
           return (
             <div className={viewMode === "map" ? "w-full" : "max-w-3xl mx-auto"} ref={resultsRef}>
 
@@ -4301,7 +4331,7 @@ export default function HotelSearch() {
                   </button>
                   <div className="w-px h-4 bg-white/[0.08]" />
                   <button
-                    onClick={() => setViewMode("map")}
+                    onClick={() => { track("map_viewed"); setViewMode("map"); }}
                     className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-semibold transition-all ${
                       viewMode === "map"
                         ? "bg-lantern-violet/20 text-lantern-violet"
@@ -4432,7 +4462,7 @@ export default function HotelSearch() {
                           destination={searchedDest}
                           cityGuide={cityGuide}
                           selectedNeighborhood={selectedNeighborhood}
-                          onSelectNeighborhood={setSelectedNeighborhood}
+                          onSelectNeighborhood={handleSelectNeighborhood}
                           activePrefs={activePrefs}
                           recommendedNbhdId={recommendedNbhdId}
                         />
@@ -4464,7 +4494,7 @@ export default function HotelSearch() {
                   <NeighborhoodRecommendation
                     summaries={nbhdSummaries}
                     selectedId={selectedNeighborhood}
-                    onSelect={setSelectedNeighborhood}
+                    onSelect={handleSelectNeighborhood}
                     activePrefs={activePrefs}
                   />
                 ) : (
@@ -4472,7 +4502,7 @@ export default function HotelSearch() {
                     guide={cityGuide}
                     summaries={nbhdSummaries}
                     selectedId={selectedNeighborhood}
-                    onSelect={setSelectedNeighborhood}
+                    onSelect={handleSelectNeighborhood}
                   />
                 )
               )}
@@ -4509,7 +4539,7 @@ export default function HotelSearch() {
                   top3={top3}
                   compareIds={compareIds}
                   onSetCompareIds={setCompareIds}
-                  onOpenCompare={() => setComparePanelOpen(true)}
+                  onOpenCompare={handleOpenCompare}
                 />
               )}
 
@@ -4588,7 +4618,15 @@ export default function HotelSearch() {
                       isMapSelected={viewMode === "map" && offer.hotel_id === selectedHotelId}
                       onSelectForMap={viewMode === "map" ? setSelectedHotelId : undefined}
                       onHoverForMap={viewMode === "map" ? setHoveredHotelId : undefined}
-                      onOpenDetail={() => setDetailHotelId(offer.hotel_id)}
+                      onOpenDetail={() => {
+                        track("hotel_selected", {
+                          hotel_name:   offer.name,
+                          hotel_rank:   offer.rank_position ?? (idx + 1),
+                          neighborhood: offer.inferred_neighborhood,
+                          score:        offer.ai_score,
+                        });
+                        setDetailHotelId(offer.hotel_id);
+                      }}
                       isInCompare={compareIds.includes(offer.hotel_id)}
                       onToggleCompare={() => toggleCompare(offer.hotel_id)}
                       compareDisabled={compareIds.length >= 4}
@@ -4630,7 +4668,7 @@ export default function HotelSearch() {
                       destination={searchedDest}
                       cityGuide={cityGuide}
                       selectedNeighborhood={selectedNeighborhood}
-                      onSelectNeighborhood={setSelectedNeighborhood}
+                      onSelectNeighborhood={handleSelectNeighborhood}
                       activePrefs={activePrefs}
                       recommendedNbhdId={recommendedNbhdId}
                     />
@@ -4646,7 +4684,7 @@ export default function HotelSearch() {
           <CompareFloatingTray
             compareIds={compareIds}
             offers={offers}
-            onOpen={() => setComparePanelOpen(true)}
+            onOpen={handleOpenCompare}
             onRemove={(id) => setCompareIds(prev => prev.filter(x => x !== id))}
           />
         )}
