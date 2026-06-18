@@ -1724,12 +1724,16 @@ function ReviewStars({ rating }: { rating: number }) {
   );
 }
 
+type ReviewSortKey = "relevant" | "newest" | "highest" | "lowest";
+
 function ReviewCard({
   review,
   query,
+  hotelName,
 }: {
   review: PlaceReview;
   query: string;
+  hotelName: string;
 }) {
   const [expanded, setExpanded] = useState(false);
   const COLLAPSE_THRESHOLD = 280;
@@ -1766,8 +1770,17 @@ function ReviewCard({
           {isLong && (
             <button
               onClick={() => {
+                const opening = !expanded;
                 setExpanded((e) => !e);
-                if (!expanded) track("hotel_review_opened", { author: review.authorName });
+                if (opening) {
+                  track("hotel_review_read_more_clicked", {
+                    hotel_name:  hotelName,
+                    author_name: review.authorName,
+                    rating:      review.rating,
+                  });
+                  // legacy event kept for backwards compatibility
+                  track("hotel_review_opened", { author: review.authorName });
+                }
               }}
               className="ml-1.5 text-[11px] text-lantern-blue hover:text-lantern-blue/80 font-semibold transition-colors"
             >
@@ -1784,6 +1797,11 @@ function ReviewCard({
           href={review.googleMapsUri}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => track("hotel_review_external_clicked", {
+            hotel_name:  hotelName,
+            author_name: review.authorName,
+            rating:      review.rating,
+          })}
           className="inline-flex items-center gap-1 text-[10px] text-white/25 hover:text-white/50 transition-colors"
         >
           <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
@@ -1817,6 +1835,7 @@ function GuestReviewsSection({
   const [placeCount,   setPlaceCount]   = useState(0);
   const [query,        setQuery]        = useState("");
   const [ratingFilter, setRatingFilter] = useState<"all" | 5 | 4 | "low">("all");
+  const [sortKey,      setSortKey]      = useState<ReviewSortKey>("relevant");
 
   const searchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -1827,6 +1846,7 @@ function GuestReviewsSection({
     setReviews([]);
     setQuery("");
     setRatingFilter("all");
+    setSortKey("relevant");
 
     fetch("/api/hotels/place-reviews", {
       method: "POST",
@@ -1865,27 +1885,47 @@ function GuestReviewsSection({
     }
   };
 
+  const handleSortChange = (key: ReviewSortKey) => {
+    setSortKey(key);
+    track("hotel_reviews_sort_changed", { hotel_name: hotelName, sort: key });
+  };
+
   // The effective rating/count: prefer Places data, fall back to SerpAPI aggregate
   const displayRating = placesRating > 0 ? placesRating : serpRating;
   const displayCount  = placeCount   > 0 ? placeCount   : serpReviewCount;
 
-  // Filter reviews
-  const filtered = reviews.filter((r) => {
-    if (ratingFilter === 5   && r.rating !== 5) return false;
-    if (ratingFilter === 4   && r.rating !== 4) return false;
-    if (ratingFilter === "low" && r.rating > 3) return false;
-    if (!query.trim()) return true;
-    const q = query.toLowerCase();
-    return (
-      r.text.toLowerCase().includes(q) ||
-      r.authorName.toLowerCase().includes(q) ||
-      r.relativePublishTimeDescription.toLowerCase().includes(q)
-    );
-  });
+  // Filter then sort
+  const filtered = reviews
+    .filter((r) => {
+      if (ratingFilter === 5     && r.rating !== 5) return false;
+      if (ratingFilter === 4     && r.rating !== 4) return false;
+      if (ratingFilter === "low" && r.rating > 3)   return false;
+      if (!query.trim()) return true;
+      const q = query.toLowerCase();
+      return (
+        r.text.toLowerCase().includes(q) ||
+        r.authorName.toLowerCase().includes(q) ||
+        r.relativePublishTimeDescription.toLowerCase().includes(q)
+      );
+    })
+    .sort((a, b) => {
+      // "relevant" preserves the API order (Google's own relevance ranking)
+      if (sortKey === "newest")  return (b.publishTime > a.publishTime ? 1 : b.publishTime < a.publishTime ? -1 : 0);
+      if (sortKey === "highest") return b.rating - a.rating;
+      if (sortKey === "lowest")  return a.rating - b.rating;
+      return 0;
+    });
 
   const barColor = (s: number) => s >= 65 ? "bg-lantern-mint" : s >= 45 ? "bg-white/25" : "bg-lantern-gold/70";
   const barText  = (s: number) => s >= 65 ? "text-lantern-mint" : s >= 45 ? "text-white/50" : "text-lantern-gold";
   const overallPct = displayRating > 0 ? Math.round((displayRating / 5) * 100) : 0;
+
+  const SORT_OPTIONS: { key: ReviewSortKey; label: string }[] = [
+    { key: "relevant", label: "Relevant" },
+    { key: "newest",   label: "Newest"   },
+    { key: "highest",  label: "Highest"  },
+    { key: "lowest",   label: "Lowest"   },
+  ];
 
   return (
     <div>
@@ -1939,7 +1979,7 @@ function GuestReviewsSection({
           </div>
         )}
 
-        {/* Review search and filter UI — only shown once reviews are loaded */}
+        {/* Review search, sort, and filter UI — only shown once reviews are loaded */}
         {!loading && reviews.length > 0 && (
           <>
             {/* Search input */}
@@ -1983,43 +2023,74 @@ function GuestReviewsSection({
               ))}
             </div>
 
-            {/* Rating filter */}
-            <div className="flex items-center gap-1.5">
-              <span className="text-[10px] text-white/25 font-semibold mr-1">Rating:</span>
-              {(["all", 5, 4, "low"] as const).map((f) => {
-                const label = f === "all" ? "All" : f === "low" ? "≤3★" : `${f}★`;
-                return (
+            {/* Sort + rating filter row */}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+              {/* Sort chips */}
+              <div className="flex items-center gap-1.5">
+                <span className="text-[10px] text-white/25 font-semibold mr-0.5">Sort:</span>
+                {SORT_OPTIONS.map(({ key, label }) => (
                   <button
-                    key={String(f)}
-                    onClick={() => setRatingFilter(f)}
+                    key={key}
+                    onClick={() => handleSortChange(key)}
                     className={`px-2.5 py-1 rounded-full text-[10px] font-semibold border transition-all ${
-                      ratingFilter === f
+                      sortKey === key
                         ? "bg-white/10 text-white/80 border-white/20"
                         : "text-white/30 border-white/[0.07] hover:text-white/50 hover:border-white/15"
                     }`}
                   >
                     {label}
                   </button>
-                );
-              })}
+                ))}
+              </div>
+
+              {/* Rating filter */}
+              <div className="flex items-center gap-1.5">
+                <span className="text-[10px] text-white/25 font-semibold mr-0.5">Rating:</span>
+                {(["all", 5, 4, "low"] as const).map((f) => {
+                  const label = f === "all" ? "All" : f === "low" ? "≤3★" : `${f}★`;
+                  return (
+                    <button
+                      key={String(f)}
+                      onClick={() => setRatingFilter(f)}
+                      className={`px-2.5 py-1 rounded-full text-[10px] font-semibold border transition-all ${
+                        ratingFilter === f
+                          ? "bg-white/10 text-white/80 border-white/20"
+                          : "text-white/30 border-white/[0.07] hover:text-white/50 hover:border-white/15"
+                      }`}
+                    >
+                      {label}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Review cards */}
             {filtered.length > 0 ? (
               <div className="space-y-3">
                 {filtered.map((r, i) => (
-                  <ReviewCard key={`${r.authorName}-${i}`} review={r} query={query} />
+                  <ReviewCard
+                    key={`${r.authorName}-${i}`}
+                    review={r}
+                    query={query}
+                    hotelName={hotelName}
+                  />
                 ))}
               </div>
             ) : (
               <p className="text-[11px] text-white/30 py-2">No reviews matched this search.</p>
             )}
+
+            {/* Disclosure — always shown when we have review snippets */}
+            <p className="text-[10px] text-white/20 leading-relaxed border-t border-white/[0.05] pt-3">
+              Showing available Google review samples. Full review coverage may require an additional review provider.
+            </p>
           </>
         )}
 
-        {/* No reviews from Places API — show plain fallback */}
+        {/* No reviews from Places API */}
         {!loading && reviews.length === 0 && !error && (
-          <p className="text-[11px] text-white/35">No written reviews available yet.</p>
+          <p className="text-[11px] text-white/35">Detailed review text is not available for this hotel yet.</p>
         )}
 
         {/* API error — fall back to SerpAPI aggregate note */}
