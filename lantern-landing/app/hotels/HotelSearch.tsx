@@ -1042,7 +1042,7 @@ function NeighborhoodRecommendation({
   }
 
   if (recommended.bestHotel && recommended.bestHotel.ai_score >= 65) {
-    whyBullets.push(`Top hotel scores ${recommended.bestHotel.ai_score} — strongest in-area quality`);
+    whyBullets.push(`Strongest hotel quality of any recommended neighborhood`);
   } else if (recommended.count >= 3) {
     whyBullets.push(`${recommended.count} ${prefLabelLower} hotels — widest selection in this search`);
   }
@@ -1087,13 +1087,19 @@ function NeighborhoodRecommendation({
   // "You picked X over Y" copy
   function comparisonCopy(sel: NeighborhoodSummary): string {
     const scoreDiff = recommended.avgNfScore - sel.avgNfScore;
-    let copy = `${recommended.nbhd.name} scores ${scoreDiff > 0 ? `${scoreDiff} points higher` : "similarly"} for ${prefLabel}.`;
+    const recShortName = recommended.nbhd.name.split(" /")[0].split(",")[0];
+    const selShortName = sel.nbhd.name.split(" /")[0].split(",")[0];
+    let copy = scoreDiff >= 15
+      ? `${recShortName} is a stronger fit for ${prefLabel} travel overall.`
+      : scoreDiff >= 5
+        ? `${recShortName} is a better fit for ${prefLabel} travel.`
+        : `Both areas are comparable for ${prefLabel} travel.`;
     if (sel.matchedPrefs.length > 0) {
       const selStr = (sel.matchedPrefs as PrefId[]).slice(0, 2).map((p) => NEIGHBORHOOD_PREFS.find((x) => x.id === p)?.label ?? p).join(" and ");
-      copy += ` ${sel.nbhd.name} is stronger for ${selStr}.`;
+      copy += ` ${selShortName} is stronger for ${selStr}.`;
     }
     const priceDiff = recommended.avgPrice > 0 && sel.avgPrice > 0 ? sel.avgPrice - recommended.avgPrice : 0;
-    if (Math.abs(priceDiff) > 20) copy += ` Avg price is $${Math.abs(priceDiff)}/night ${priceDiff > 0 ? "cheaper" : "more"}.`;
+    if (Math.abs(priceDiff) > 20) copy += ` Average price is $${Math.abs(priceDiff)}/night ${priceDiff > 0 ? "lower" : "higher"} here.`;
     return copy;
   }
 
@@ -1279,6 +1285,21 @@ function NeighborhoodRecommendation({
               );
             })}
           </div>
+          {/* Hidden neighborhoods footer */}
+          {withHotels.length > 4 && (
+            <div className="mt-2 text-center">
+              <span className="text-[10px] text-white/22">
+                +{withHotels.length - 4} more neighborhoods
+                {" "}({withHotels.slice(4).reduce((sum, s) => sum + s.count, 0)} hotels) ·{" "}
+              </span>
+              <button
+                onClick={() => onSelect(null)}
+                className="text-[10px] text-white/30 hover:text-white/60 transition-colors"
+              >
+                Browse all hotels to explore them
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -1299,7 +1320,9 @@ function NeighborhoodGuide({
   onSelect: (id: string | null) => void;
   summaries: NeighborhoodSummary[];
 }) {
-  const summaryById = Object.fromEntries(summaries.map((s) => [s.nbhd.id, s]));
+  const summaryById   = Object.fromEntries(summaries.map((s) => [s.nbhd.id, s]));
+  const totalHotels   = summaries.reduce((sum, s) => sum + s.count, 0);
+  const activeNbhdCount = summaries.filter((s) => s.count > 0).length;
 
   return (
     <div className="mb-5">
@@ -1309,15 +1332,19 @@ function NeighborhoodGuide({
             {guide.displayName} Neighborhoods
           </span>
           <p className="text-[11px] text-white/20 mt-0.5">
-            Choose an area to filter hotels — or browse all results below.
+            {selectedId
+              ? <>Filtered to one neighborhood · <button onClick={() => onSelect(null)} className="text-lantern-violet/60 hover:text-lantern-violet transition-colors font-semibold">Browse all {totalHotels} hotels</button></>
+              : activeNbhdCount > 0
+                ? `${totalHotels} hotels across ${activeNbhdCount} neighborhoods — select one to filter, or scroll to browse all.`
+                : "Select a neighborhood to filter hotels, or browse all results below."}
           </p>
         </div>
         {selectedId && (
           <button
             onClick={() => onSelect(null)}
-            className="text-[11px] text-white/35 hover:text-white/70 transition-colors whitespace-nowrap"
+            className="text-[11px] text-white/35 hover:text-white/70 transition-colors whitespace-nowrap ml-4 flex-shrink-0"
           >
-            × Show all
+            × Clear filter
           </button>
         )}
       </div>
@@ -3908,7 +3935,7 @@ export default function HotelSearch() {
 
               {/* ── Search mode toggle ─────────────────────────────────────── */}
               {cityGuide && (
-                <div className="flex justify-center mb-5">
+                <div className="flex flex-col items-center mb-5 gap-1.5">
                   <div className="inline-flex items-center rounded-xl border border-white/[0.09] bg-white/[0.02] p-0.5 gap-0.5">
                     {(
                       [
@@ -3932,6 +3959,11 @@ export default function HotelSearch() {
                       </button>
                     ))}
                   </div>
+                  <p className="text-[10px] text-white/22 text-center">
+                    {searchMode === "best-area"
+                      ? "Recommends the best neighborhood for your trip, then shows hotels there"
+                      : `All ${offers.length} hotels ranked by overall quality — neighborhoods hidden`}
+                  </p>
                 </div>
               )}
 
@@ -3971,37 +4003,67 @@ export default function HotelSearch() {
                 </div>
 
                 {/* Hotel count */}
-                <div className="text-xs text-white/40 flex-1 min-w-0 truncate">
+                <div className="text-xs text-white/40 flex-1 min-w-0 flex items-center flex-wrap gap-x-1">
                   {selectedCard ? (
                     <>
                       <span className="font-semibold text-white/70">
-                        {showAllFallback ? offers.length : amenityFilteredOffers.length} hotels
+                        {showAllFallback ? offers.length : amenityFilteredOffers.length}
                       </span>
-                      {" "}in <span className="text-white/60">{selectedCard.name}</span>
-                      {showAllFallback && <span className="text-white/25"> · no exact matches, showing all</span>}
+                      {!showAllFallback && (
+                        <span className="text-white/25">of {offers.length}</span>
+                      )}
+                      <span className="text-white/25">hotels in</span>
+                      <span className="text-white/60 font-semibold">{selectedCard.name.split(" /")[0]}</span>
+                      {showAllFallback
+                        ? <span className="text-white/25 ml-1">· no exact matches, showing all</span>
+                        : filteredOffers.length < offers.length && (
+                            <button
+                              onClick={() => setSelectedNeighborhood(null)}
+                              className="ml-1.5 text-lantern-violet/65 hover:text-lantern-violet text-[11px] font-semibold transition-colors"
+                            >
+                              Browse all {offers.length} →
+                            </button>
+                          )
+                      }
                     </>
                   ) : cityGuide && searchMode === "best-area" ? (
                     <>
                       <span className="font-semibold text-white/70">{offers.length}</span>
-                      <span className="text-white/25"> hotels analyzed across </span>
+                      <span className="text-white/25">hotels ·</span>
                       <span className="text-white/55 font-semibold">
                         {nbhdSummaries.filter((s) => s.count > 0).length} neighborhoods
                       </span>
                       {(() => {
                         const active = nbhdSummaries.filter((s) => s.count > 0);
                         if (active.length === 0) return null;
-                        const shown = active.slice(0, 3);
-                        const rest  = active.length - shown.length;
+                        const shown      = active.slice(0, 3);
+                        const rest       = active.slice(3);
+                        const hiddenHotels = rest.reduce((sum, s) => sum + s.count, 0);
                         return (
                           <span className="text-white/20 hidden sm:inline">
                             {" · "}
                             {shown.map((s) => s.nbhd.name.split(" /")[0]).join(" · ")}
-                            {rest > 0 && <span> +{rest} more</span>}
+                            {rest.length > 0 && (
+                              <span>
+                                {" +"}
+                                {rest.length} more
+                                {hiddenHotels > 0 && ` (${hiddenHotels} hotels)`}
+                              </span>
+                            )}
                           </span>
                         );
                       })()}
                       {amenityFilters.length > 0 && (
-                        <span className="text-white/20"> · {amenityFilteredOffers.length} match filters</span>
+                        <span className="text-white/20">· {amenityFilteredOffers.length} match filters</span>
+                      )}
+                    </>
+                  ) : searchMode === "best-hotels" ? (
+                    <>
+                      <span className="text-white/25">All</span>
+                      <span className="font-semibold text-white/70">{amenityFilteredOffers.length}</span>
+                      <span className="text-white/25">hotels in {searchedDest}, ranked by quality</span>
+                      {amenityFilters.length > 0 && (
+                        <span className="text-white/20">· {amenityFilteredOffers.length} match filters</span>
                       )}
                     </>
                   ) : (
