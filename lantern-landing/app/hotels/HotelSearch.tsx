@@ -33,6 +33,7 @@ interface HotelOffer {
   currency: string;
   amenities: string[];
   image_url: string;
+  image_urls?: string[];
   booking_url: string;
   check_in: string;
   check_out: string;
@@ -1548,6 +1549,85 @@ function NeighborhoodGuide({
   );
 }
 
+// ── PhotoCarousel ─────────────────────────────────────────────────────────────
+
+function PhotoCarousel({ images, hotelName, hotelId }: {
+  images: string[];
+  hotelName: string;
+  hotelId: string;
+}) {
+  const [idx, setIdx] = useState(0);
+
+  if (images.length === 0) return null;
+
+  if (images.length === 1) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={images[0]}
+        alt={hotelName}
+        className="w-full h-52 sm:h-64 rounded-xl object-cover bg-white/[0.04]"
+        onError={(e) => { e.currentTarget.style.display = "none"; }}
+      />
+    );
+  }
+
+  const go = (dir: "prev" | "next") => {
+    track("hotel_photo_scrolled", { hotel_id: hotelId, hotel_name: hotelName, direction: dir });
+    setIdx((i) => dir === "next" ? (i + 1) % images.length : (i - 1 + images.length) % images.length);
+  };
+
+  return (
+    <div className="relative rounded-xl overflow-hidden bg-white/[0.04] h-52 sm:h-64 flex-shrink-0">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        key={idx}
+        src={images[idx]}
+        alt={`${hotelName} — photo ${idx + 1} of ${images.length}`}
+        className="w-full h-full object-cover"
+        onError={(e) => { e.currentTarget.style.display = "none"; }}
+      />
+
+      {/* Left arrow */}
+      <button
+        onClick={() => go("prev")}
+        aria-label="Previous photo"
+        className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/55 border border-white/15 flex items-center justify-center text-white/70 hover:bg-black/75 hover:text-white transition-all"
+      >
+        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+
+      {/* Right arrow */}
+      <button
+        onClick={() => go("next")}
+        aria-label="Next photo"
+        className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/55 border border-white/15 flex items-center justify-center text-white/70 hover:bg-black/75 hover:text-white transition-all"
+      >
+        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </button>
+
+      {/* Dot indicators */}
+      <div className="absolute bottom-2.5 left-0 right-0 flex justify-center gap-1.5 pointer-events-none">
+        {images.map((_, i) => (
+          <span
+            key={i}
+            className={`rounded-full transition-all ${i === idx ? "w-3.5 h-1.5 bg-white" : "w-1.5 h-1.5 bg-white/35"}`}
+          />
+        ))}
+      </div>
+
+      {/* Counter */}
+      <div className="absolute top-2 right-2 text-[10px] font-bold text-white/70 bg-black/50 rounded-full px-2 py-0.5 leading-none">
+        {idx + 1} / {images.length}
+      </div>
+    </div>
+  );
+}
+
 // ── HotelDetailDrawer ─────────────────────────────────────────────────────────
 
 function HotelDetailDrawer({
@@ -1564,6 +1644,20 @@ function HotelDetailDrawer({
   guests: number;
 }) {
   const [activeAmenity, setActiveAmenity] = useState<string | null>(null);
+
+  // Fire hotel_reviews_viewed when drawer opens with a hotel that has rating data
+  useEffect(() => {
+    if (offer && offer.overall_rating > 0) {
+      track("hotel_reviews_viewed", {
+        hotel_name:   offer.name,
+        hotel_id:     offer.hotel_id,
+        rating:       offer.overall_rating,
+        review_count: offer.review_count,
+        has_snippets: false,
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [offer?.hotel_id]);
 
   if (!offer) return null;
 
@@ -1602,6 +1696,15 @@ function HotelDetailDrawer({
 
   const isBestOverall = offer.recommendation_label === "Best Overall";
 
+  // Photo sources: prefer image_urls array, fall back to single image_url
+  const photos = (offer.image_urls && offer.image_urls.length > 0)
+    ? offer.image_urls
+    : offer.image_url ? [offer.image_url] : [];
+
+  // Review category data — we have location_rating from Google; no text snippets from current provider
+  const hasRatings = offer.overall_rating > 0;
+  const locationRatingPct = offer.location_rating > 0 ? Math.round((offer.location_rating / 10) * 100) : 0;
+
   return (
     <>
       {/* Backdrop */}
@@ -1628,236 +1731,291 @@ function HotelDetailDrawer({
         </div>
 
         {/* Scrollable content */}
-        <div className="flex-1 overflow-y-auto p-5 space-y-4">
+        <div className="flex-1 overflow-y-auto">
 
-          {/* Hero image */}
-          {offer.image_url && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={offer.image_url}
-              alt={offer.name}
-              className="w-full h-48 sm:h-56 rounded-xl object-cover bg-white/[0.04]"
-              onError={(e) => { e.currentTarget.style.display = "none"; }}
-            />
+          {/* ── Photo carousel ── */}
+          {photos.length > 0 && (
+            <div className="p-4 pb-0">
+              <PhotoCarousel images={photos} hotelName={offer.name} hotelId={offer.hotel_id} />
+            </div>
           )}
 
-          {/* Name + location */}
-          <div>
-            <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-              {isBestOverall && (
-                <span className="text-[10px] font-black uppercase tracking-widest text-lantern-violet border border-lantern-violet/50 bg-lantern-violet/15 rounded-full px-2 py-0.5 leading-none">
-                  AI Pick
-                </span>
-              )}
-              {!isBestOverall && offer.recommendation_label && (
-                <span className={`text-[10px] font-bold uppercase tracking-widest border rounded-full px-2 py-0.5 leading-none ${labelBg(offer.recommendation_label)}`}>
-                  {offer.recommendation_label}
-                </span>
-              )}
-              {offer.eco_certified && (
-                <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-400 border border-emerald-500/30 bg-emerald-500/10 rounded-full px-1.5 py-0.5 leading-none">
-                  Eco Certified
-                </span>
-              )}
-            </div>
-            {offer.inferred_neighborhood && (
-              <div className="flex items-center gap-1 mb-1">
-                <svg className="w-3 h-3 text-white/20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                </svg>
-                <span className="text-[11px] font-semibold text-white/40">{offer.inferred_neighborhood}</span>
-              </div>
-            )}
-            <h2 className="text-xl font-black text-white leading-tight">{offer.name}</h2>
-            {offer.address && <p className="text-xs text-white/35 mt-0.5">{offer.address}</p>}
-          </div>
+          <div className="p-5 space-y-5">
 
-          {/* Rating row */}
-          <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4 flex items-center gap-4 flex-wrap">
-            {offer.star_rating > 0 && <StarRating count={offer.star_rating} />}
-            {offer.overall_rating > 0 && (
-              <div className="flex items-baseline gap-1.5">
-                <span className={`text-2xl font-black tabular-nums ${scoreColor(offer.ai_score)}`}>
-                  {offer.overall_rating.toFixed(1)}
-                </span>
-                {offer.review_count > 0 && (
-                  <span className="text-[11px] text-white/30">
-                    ({offer.review_count.toLocaleString()} reviews)
+            {/* ── Name + location ── */}
+            <div>
+              <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                {isBestOverall && (
+                  <span className="text-[10px] font-black uppercase tracking-widest text-lantern-violet border border-lantern-violet/50 bg-lantern-violet/15 rounded-full px-2 py-0.5 leading-none">
+                    AI Pick
+                  </span>
+                )}
+                {!isBestOverall && offer.recommendation_label && (
+                  <span className={`text-[10px] font-bold uppercase tracking-widest border rounded-full px-2 py-0.5 leading-none ${labelBg(offer.recommendation_label)}`}>
+                    {offer.recommendation_label}
+                  </span>
+                )}
+                {offer.eco_certified && (
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-400 border border-emerald-500/30 bg-emerald-500/10 rounded-full px-1.5 py-0.5 leading-none">
+                    Eco Certified
                   </span>
                 )}
               </div>
-            )}
-            <div className={`ml-auto border rounded-xl px-3 py-1.5 text-center flex-shrink-0 ${scoreBg(offer.ai_score)}`}>
-              <div className="text-xl font-black tabular-nums leading-none">{offer.ai_score}</div>
-              <div className="text-[9px] font-bold uppercase tracking-wider mt-0.5">TravelGrab Score</div>
-            </div>
-          </div>
-
-          {/* Price */}
-          <div className="flex items-baseline gap-2 flex-wrap">
-            <span className={`text-3xl font-black tabular-nums ${scoreColor(offer.ai_score)}`}>
-              ${Math.round(offer.price_per_night).toLocaleString()}
-            </span>
-            <span className="text-sm text-white/40">per night</span>
-            {guests > 1 && (
-              <span className="text-xs text-white/25">
-                · ${Math.round(offer.price_per_night / guests).toLocaleString()}/person
-              </span>
-            )}
-            {offer.nights > 1 && (
-              <span className="text-xs text-white/25 ml-auto">
-                ${Math.round(offer.total_price).toLocaleString()} total · {offer.nights} nights
-              </span>
-            )}
-          </div>
-
-          {/* Score breakdown */}
-          <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4">
-            <div className="text-[10px] font-bold uppercase tracking-wider text-white/30 mb-3">Score Breakdown</div>
-            <div className="space-y-2.5">
-              {breakdownRows.map(({ key, label, score }) => (
-                <div key={key}>
-                  <div className="flex items-center justify-between mb-0.5">
-                    <span className="text-[11px] text-white/55">{label}</span>
-                    <span className={`text-[11px] font-bold tabular-nums ${barText(score)}`}>{score}</span>
-                  </div>
-                  <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
-                    <div className={`h-full rounded-full ${barColor(score)}`} style={{ width: `${score}%` }} />
-                  </div>
-                </div>
-              ))}
-              {activePrefs.length > 0 && offer.neighborhood_fit_score > 0 && (
-                <div>
-                  <div className="flex items-center justify-between mb-0.5">
-                    <span className="text-[11px] text-lantern-violet/80">Neighborhood Fit</span>
-                    <span className={`text-[11px] font-bold tabular-nums ${barText(offer.neighborhood_fit_score)}`}>
-                      {offer.neighborhood_fit_score}
-                    </span>
-                  </div>
-                  <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
-                    <div
-                      className={`h-full rounded-full ${barColor(offer.neighborhood_fit_score)}`}
-                      style={{ width: `${offer.neighborhood_fit_score}%` }}
-                    />
-                  </div>
+              {offer.inferred_neighborhood && (
+                <div className="flex items-center gap-1 mb-1">
+                  <svg className="w-3 h-3 text-white/20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                  </svg>
+                  <span className="text-[11px] font-semibold text-white/40">{offer.inferred_neighborhood}</span>
                 </div>
               )}
-              {activePrefs.length === 0 && offer.score_breakdown.destination_fit > 0 && (
-                <div>
-                  <div className="flex items-center justify-between mb-0.5">
-                    <span className="text-[11px] text-lantern-violet/80">Destination Fit</span>
-                    <span className={`text-[11px] font-bold tabular-nums ${barText(offer.score_breakdown.destination_fit)}`}>
-                      {offer.score_breakdown.destination_fit}
-                    </span>
-                  </div>
-                  <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
-                    <div
-                      className={`h-full rounded-full ${barColor(offer.score_breakdown.destination_fit)}`}
-                      style={{ width: `${offer.score_breakdown.destination_fit}%` }}
-                    />
+              <h2 className="text-xl font-black text-white leading-tight">{offer.name}</h2>
+              {offer.address && <p className="text-xs text-white/35 mt-0.5">{offer.address}</p>}
+            </div>
+
+            {/* ── Overview ── */}
+            <div>
+              <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">Overview</div>
+              <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4">
+                <div className="flex items-center gap-4 flex-wrap mb-3">
+                  {offer.star_rating > 0 && <StarRating count={offer.star_rating} />}
+                  {offer.overall_rating > 0 && (
+                    <div className="flex items-baseline gap-1.5">
+                      <span className={`text-2xl font-black tabular-nums ${scoreColor(offer.ai_score)}`}>
+                        {offer.overall_rating.toFixed(1)}
+                      </span>
+                      <span className="text-[11px] text-white/30">★</span>
+                      {offer.review_count > 0 && (
+                        <span className="text-[11px] text-white/30">
+                          · {offer.review_count.toLocaleString()} reviews
+                        </span>
+                      )}
+                    </div>
+                  )}
+                  <div className={`ml-auto border rounded-xl px-3 py-1.5 text-center flex-shrink-0 ${scoreBg(offer.ai_score)}`}>
+                    <div className="text-xl font-black tabular-nums leading-none">{offer.ai_score}</div>
+                    <div className="text-[9px] font-bold uppercase tracking-wider mt-0.5">TravelGrab Score</div>
                   </div>
                 </div>
-              )}
-            </div>
-          </div>
-
-          {/* Amenities — Phase 4 */}
-          {sortedAmenities.length > 0 && (
-            <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4">
-              <div className="text-[10px] font-bold uppercase tracking-wider text-white/30 mb-3">
-                Amenities
-                <span className="ml-1.5 text-white/15 normal-case font-normal">· tap any for details</span>
-              </div>
-              <div className="flex flex-wrap gap-1.5 mb-3">
-                {sortedAmenities.map((a) => {
-                  const hasDetail = !!getAmenityDetail(a);
-                  const isActive  = activeAmenity === a;
-                  return (
-                    <button
-                      key={a}
-                      onClick={() => setActiveAmenity(isActive ? null : a)}
-                      className={`px-2.5 py-1 rounded-full text-[11px] font-semibold border transition-all ${
-                        isActive
-                          ? "bg-lantern-blue/20 text-lantern-blue border-lantern-blue/40"
-                          : hasDetail
-                            ? "bg-white/[0.04] text-white/60 border-white/[0.1] hover:border-white/20 hover:text-white/80 cursor-pointer"
-                            : "bg-white/[0.02] text-white/30 border-white/[0.06] cursor-default"
-                      }`}
-                    >
-                      {a}
-                    </button>
-                  );
-                })}
-              </div>
-              {activeAmenity && (
-                <div className="rounded-lg border border-lantern-blue/20 bg-lantern-blue/[0.04] px-3 py-2.5">
-                  <div className="text-[11px] font-bold text-white/60 mb-0.5">{activeAmenity}</div>
-                  <p className="text-[11px] text-white/45 leading-relaxed">
-                    {getAmenityDetail(activeAmenity)
-                      ?? "Amenity listed by this hotel. Contact them directly to confirm availability and details."}
-                  </p>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Neighborhood explanation */}
-          {nbhdCard && (
-            <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4">
-              <div className="text-[10px] font-bold uppercase tracking-wider text-white/30 mb-2">
-                About {nbhdCard.name}
-              </div>
-              <p className="text-xs text-white/50 leading-relaxed mb-2">{nbhdCard.description}</p>
-              <div className="flex flex-wrap gap-1">
-                {nbhdCard.tags.slice(0, 5).map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[10px] text-white/30 border border-white/[0.08] rounded-full px-1.5 py-0.5 leading-none"
-                  >
-                    {tag}
+                <div className="flex items-baseline gap-2 flex-wrap border-t border-white/[0.05] pt-3">
+                  <span className={`text-2xl font-black tabular-nums ${scoreColor(offer.ai_score)}`}>
+                    ${Math.round(offer.price_per_night).toLocaleString()}
                   </span>
+                  <span className="text-sm text-white/40">/ night</span>
+                  {guests > 1 && (
+                    <span className="text-xs text-white/25">
+                      · ${Math.round(offer.price_per_night / guests).toLocaleString()}/person
+                    </span>
+                  )}
+                  {offer.nights > 1 && (
+                    <span className="text-xs text-white/25 ml-auto">
+                      ${Math.round(offer.total_price).toLocaleString()} total · {offer.nights}n
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* ── Score Breakdown ── */}
+            <div>
+              <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">Score Breakdown</div>
+              <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4 space-y-2.5">
+                {breakdownRows.map(({ key, label, score }) => (
+                  <div key={key}>
+                    <div className="flex items-center justify-between mb-0.5">
+                      <span className="text-[11px] text-white/55">{label}</span>
+                      <span className={`text-[11px] font-bold tabular-nums ${barText(score)}`}>{score}</span>
+                    </div>
+                    <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
+                      <div className={`h-full rounded-full ${barColor(score)}`} style={{ width: `${score}%` }} />
+                    </div>
+                  </div>
                 ))}
+                {activePrefs.length > 0 && offer.neighborhood_fit_score > 0 && (
+                  <div>
+                    <div className="flex items-center justify-between mb-0.5">
+                      <span className="text-[11px] text-lantern-violet/80">Neighborhood Fit</span>
+                      <span className={`text-[11px] font-bold tabular-nums ${barText(offer.neighborhood_fit_score)}`}>
+                        {offer.neighborhood_fit_score}
+                      </span>
+                    </div>
+                    <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
+                      <div className={`h-full rounded-full ${barColor(offer.neighborhood_fit_score)}`} style={{ width: `${offer.neighborhood_fit_score}%` }} />
+                    </div>
+                  </div>
+                )}
+                {activePrefs.length === 0 && offer.score_breakdown.destination_fit > 0 && (
+                  <div>
+                    <div className="flex items-center justify-between mb-0.5">
+                      <span className="text-[11px] text-lantern-violet/80">Destination Fit</span>
+                      <span className={`text-[11px] font-bold tabular-nums ${barText(offer.score_breakdown.destination_fit)}`}>
+                        {offer.score_breakdown.destination_fit}
+                      </span>
+                    </div>
+                    <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
+                      <div className={`h-full rounded-full ${barColor(offer.score_breakdown.destination_fit)}`} style={{ width: `${offer.score_breakdown.destination_fit}%` }} />
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
-          )}
 
-          {/* Why this hotel */}
-          {(fitNote || offer.recommendation_why) && (
-            <div className="rounded-xl border border-lantern-violet/20 bg-lantern-violet/[0.04] p-4">
-              <div className="text-[10px] font-bold uppercase tracking-wider text-lantern-violet/60 mb-2">
-                Why this hotel fits
+            {/* ── Amenities ── */}
+            {sortedAmenities.length > 0 && (
+              <div>
+                <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">
+                  Amenities
+                  <span className="ml-1.5 text-white/15 normal-case font-normal tracking-normal">· tap for details</span>
+                </div>
+                <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4">
+                  <div className="flex flex-wrap gap-1.5 mb-3">
+                    {sortedAmenities.map((a) => {
+                      const hasDetail = !!getAmenityDetail(a);
+                      const isActive  = activeAmenity === a;
+                      return (
+                        <button
+                          key={a}
+                          onClick={() => setActiveAmenity(isActive ? null : a)}
+                          className={`px-2.5 py-1 rounded-full text-[11px] font-semibold border transition-all ${
+                            isActive
+                              ? "bg-lantern-blue/20 text-lantern-blue border-lantern-blue/40"
+                              : hasDetail
+                                ? "bg-white/[0.04] text-white/60 border-white/[0.1] hover:border-white/20 hover:text-white/80 cursor-pointer"
+                                : "bg-white/[0.02] text-white/30 border-white/[0.06] cursor-default"
+                          }`}
+                        >
+                          {a}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {activeAmenity && (
+                    <div className="rounded-lg border border-lantern-blue/20 bg-lantern-blue/[0.04] px-3 py-2.5">
+                      <div className="text-[11px] font-bold text-white/60 mb-0.5">{activeAmenity}</div>
+                      <p className="text-[11px] text-white/45 leading-relaxed">
+                        {getAmenityDetail(activeAmenity)
+                          ?? "Amenity listed by this hotel. Contact them directly to confirm availability and details."}
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
-              {fitNote && (
-                <p className="text-xs text-white/55 leading-relaxed mb-1.5">{fitNote}</p>
-              )}
-              {offer.recommendation_why && (
-                <p className="text-xs text-white/45 leading-relaxed">{offer.recommendation_why}</p>
-              )}
-            </div>
-          )}
+            )}
 
-          {/* Tradeoffs */}
-          {tradeoffs.length > 0 && (
-            <div className="rounded-xl border border-amber-500/20 bg-amber-500/[0.04] p-4">
-              <div className="text-[10px] font-bold uppercase tracking-wider text-amber-400/70 mb-2">
-                Consider before booking
+            {/* ── Neighborhood Context ── */}
+            {nbhdCard && (
+              <div>
+                <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">Neighborhood Context</div>
+                <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4">
+                  <div className="text-[11px] font-bold text-white/55 mb-1.5">{nbhdCard.name}</div>
+                  <p className="text-xs text-white/45 leading-relaxed mb-2.5">{nbhdCard.description}</p>
+                  <div className="flex flex-wrap gap-1">
+                    {nbhdCard.tags.slice(0, 5).map((tag) => (
+                      <span key={tag} className="text-[10px] text-white/30 border border-white/[0.08] rounded-full px-1.5 py-0.5 leading-none">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <ul className="space-y-1.5">
-                {tradeoffs.map((t, i) => (
-                  <li key={i} className="text-[11px] text-white/45 flex items-start gap-2">
-                    <span className="text-amber-400/50 flex-shrink-0">·</span>
-                    {t}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+            )}
 
-          {/* Bottom padding for sticky CTA */}
-          <div className="h-2" />
+            {/* ── Why this hotel fits ── */}
+            {(fitNote || offer.recommendation_why) && (
+              <div className="rounded-xl border border-lantern-violet/20 bg-lantern-violet/[0.04] p-4">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-lantern-violet/60 mb-2">
+                  Why this hotel fits
+                </div>
+                {fitNote && (
+                  <p className="text-xs text-white/55 leading-relaxed mb-1.5">{fitNote}</p>
+                )}
+                {offer.recommendation_why && (
+                  <p className="text-xs text-white/45 leading-relaxed">{offer.recommendation_why}</p>
+                )}
+              </div>
+            )}
+
+            {/* ── Guest Review Signals ── */}
+            <div>
+              <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">Guest Review Signals</div>
+              <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4">
+                {hasRatings ? (
+                  <>
+                    {/* Overall rating */}
+                    <div className="flex items-baseline gap-2 mb-4">
+                      <span className={`text-3xl font-black tabular-nums ${scoreColor(offer.ai_score)}`}>
+                        {offer.overall_rating.toFixed(1)}
+                      </span>
+                      <span className="text-sm text-white/35">/ 5</span>
+                      {offer.review_count > 0 && (
+                        <span className="text-[11px] text-white/30 ml-1">
+                          · {offer.review_count.toLocaleString()} reviews
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Category bars — only what we actually have data for */}
+                    <div className="space-y-2.5 mb-3">
+                      {/* Overall rating as a bar */}
+                      <div>
+                        <div className="flex items-center justify-between mb-0.5">
+                          <span className="text-[11px] text-white/45">Overall</span>
+                          <span className={`text-[11px] font-bold tabular-nums ${barText(Math.round(offer.overall_rating / 5 * 100))}`}>
+                            {offer.overall_rating.toFixed(1)}★
+                          </span>
+                        </div>
+                        <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
+                          <div className={`h-full rounded-full ${barColor(Math.round(offer.overall_rating / 5 * 100))}`} style={{ width: `${(offer.overall_rating / 5) * 100}%` }} />
+                        </div>
+                      </div>
+                      {/* Location — from Google location_rating (0–10) */}
+                      {offer.location_rating > 0 && (
+                        <div>
+                          <div className="flex items-center justify-between mb-0.5">
+                            <span className="text-[11px] text-white/45">Location</span>
+                            <span className={`text-[11px] font-bold tabular-nums ${barText(locationRatingPct)}`}>
+                              {offer.location_rating.toFixed(1)}/10
+                            </span>
+                          </div>
+                          <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
+                            <div className={`h-full rounded-full ${barColor(locationRatingPct)}`} style={{ width: `${locationRatingPct}%` }} />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    <p className="text-[10px] text-white/22 leading-relaxed">
+                      Individual review text is not available in this search. Visit the booking page for full guest reviews.
+                    </p>
+                  </>
+                ) : (
+                  <p className="text-[11px] text-white/35">Review detail unavailable for this hotel.</p>
+                )}
+              </div>
+            </div>
+
+            {/* ── Consider before booking ── */}
+            {tradeoffs.length > 0 && (
+              <div className="rounded-xl border border-amber-500/20 bg-amber-500/[0.04] p-4">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-amber-400/70 mb-2">
+                  Consider before booking
+                </div>
+                <ul className="space-y-1.5">
+                  {tradeoffs.map((t, i) => (
+                    <li key={i} className="text-[11px] text-white/45 flex items-start gap-2">
+                      <span className="text-amber-400/50 flex-shrink-0">·</span>
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div className="h-2" />
+          </div>
         </div>
 
-        {/* Sticky CTA — Phase 5 */}
+        {/* Sticky CTA */}
         <div className="flex-shrink-0 p-4 border-t border-white/[0.07] bg-[#0e0e14]/95 backdrop-blur-sm">
           {offer.booking_url ? (
             <>

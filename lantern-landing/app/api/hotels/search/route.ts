@@ -878,6 +878,7 @@ export interface HotelOffer {
   currency: string;
   amenities: string[];
   image_url: string;
+  image_urls: string[];
   booking_url: string;
   check_in: string;
   check_out: string;
@@ -1523,6 +1524,7 @@ function scoreHotels(
       currency:            h.currency,
       amenities:           h.amenities,
       image_url:           h.imageUrl,
+      image_urls:          h.imageUrls,
       booking_url:         h.bookingUrl,
       check_in:            h.checkIn,
       check_out:           h.checkOut,

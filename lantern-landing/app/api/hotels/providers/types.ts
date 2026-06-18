@@ -25,6 +25,7 @@ export interface ProviderHotel {
   amenities: string[];
   nearbyPlaces: NearbyPlace[];
   imageUrl: string;
+  imageUrls: string[];
   bookingUrl: string;
   checkIn: string;          // ISO date
   checkOut: string;

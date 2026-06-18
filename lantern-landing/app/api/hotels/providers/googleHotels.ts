@@ -46,6 +46,9 @@ function parseHotel(raw: R, params: HotelSearchParams): ProviderHotel | null {
   const imageUrl = (images[0]?.thumbnail as string | undefined)
                 ?? (images[0]?.original  as string | undefined)
                 ?? "";
+  const imageUrls = images.slice(0, 8).map((img) =>
+    (img.original as string | undefined) ?? (img.thumbnail as string | undefined) ?? ""
+  ).filter(Boolean);
 
   // Prefer a direct property booking link from prices[]; fall back to the Google Hotels link
   const prices     = (raw.prices as R[] | undefined) ?? [];
@@ -78,6 +81,7 @@ function parseHotel(raw: R, params: HotelSearchParams): ProviderHotel | null {
     amenities:      (raw.amenities as string[] | undefined) ?? [],
     nearbyPlaces:   parseNearbyPlaces(raw.nearby_places),
     imageUrl,
+    imageUrls,
     bookingUrl,
     checkIn:        params.check_in,
     checkOut:       params.check_out,

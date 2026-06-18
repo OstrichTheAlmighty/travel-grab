@@ -20,6 +20,8 @@ export type AnalyticsEvent =
   // Hotels — interactions
   | "hotel_selected"
   | "hotel_availability_clicked"
+  | "hotel_photo_scrolled"
+  | "hotel_reviews_viewed"
   | "hotel_compare_opened"
   | "map_viewed"
   | "neighborhood_selected"
