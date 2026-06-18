@@ -4052,7 +4052,7 @@ export default function HotelSearch() {
         </div>
       </nav>
 
-      <main className="mx-auto max-w-5xl px-4 sm:px-6 py-8 sm:py-12">
+      <main className={viewMode === "map" ? "w-full px-4 sm:px-6 py-6" : "mx-auto max-w-5xl px-4 sm:px-6 py-8 sm:py-12"}>
         {/* Hero */}
         <div className="mb-7 text-center">
           <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white mb-2">
@@ -4445,10 +4445,10 @@ export default function HotelSearch() {
               </div>
 
               {/* ── Split layout wrapper: flex row on desktop in map mode ──── */}
-              <div className={viewMode === "map" ? "lg:flex lg:items-start" : ""}>
+              <div className={viewMode === "map" ? "lg:flex lg:items-start lg:-mx-6" : ""}>
 
                 {/* ── Left panel: hotel list + inline nbhd panel ───────────── */}
-                <div className={viewMode === "map" ? "w-full lg:w-[60%] lg:flex-shrink-0 lg:pr-4" : ""}>
+                <div className={viewMode === "map" ? "w-full lg:w-[45%] lg:flex-shrink-0 lg:pl-6 lg:pr-3" : ""}>
 
                   {/* ── MAP VIEW (mobile): fixed full-screen overlay ─────────── */}
                   {viewMode === "map" && (
@@ -4658,7 +4658,7 @@ export default function HotelSearch() {
                 {/* ── Right panel: sticky map (desktop only, map mode only) ── */}
                 {viewMode === "map" && (
                   <div
-                    className="hidden lg:block flex-1 sticky top-14 overflow-hidden rounded-xl border border-white/[0.07]"
+                    className="hidden lg:block flex-1 sticky top-14 overflow-hidden rounded-l-xl border-l border-y border-white/[0.07]"
                     style={{ height: "85vh" }}
                   >
                     <HotelMapView

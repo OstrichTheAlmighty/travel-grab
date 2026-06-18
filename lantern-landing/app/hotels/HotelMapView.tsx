@@ -147,8 +147,19 @@ function HotelMarker({ hotel, rank, isSelected, onClick }: {
 }) {
   const shortName = hotel.name.split(",")[0].split("–")[0].trim();
 
+  // Ghost dot for hotels ranked 6+
+  if (rank > 5 && !isSelected) {
+    return (
+      <button
+        onClick={onClick}
+        className="w-2 h-2 rounded-full border border-white/20 bg-white/20 hover:bg-white/45 hover:border-white/40 transition-all duration-150"
+        title={`#${rank} ${shortName}`}
+      />
+    );
+  }
+
   if (!isSelected) {
-    const opacity      = rank === 1 ? 1 : rank === 2 ? 0.80 : rank === 3 ? 0.65 : rank === 4 ? 0.52 : 0.40;
+    const opacity      = rank === 1 ? 1 : rank === 2 ? 0.85 : rank === 3 ? 0.70 : rank === 4 ? 0.57 : 0.45;
     const borderColor  = rank === 1 ? "border-lantern-mint/55" : "border-white/18";
     const labelColor   = rank === 1 ? "text-lantern-mint" : "text-white/65";
     return (
@@ -302,12 +313,10 @@ export default function HotelMapView({
   );
 
   const geoOffers = useMemo(
-    () => sortedOffers
-      .slice(0, 5)
-      .filter(
-        (o) => typeof o.latitude === "number" && typeof o.longitude === "number"
-          && !isNaN(o.latitude!) && !isNaN(o.longitude!),
-      ),
+    () => sortedOffers.filter(
+      (o) => typeof o.latitude === "number" && typeof o.longitude === "number"
+        && !isNaN(o.latitude!) && !isNaN(o.longitude!),
+    ),
     [sortedOffers],
   );
 
