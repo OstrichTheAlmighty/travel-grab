@@ -906,6 +906,7 @@ export interface HotelOffer {
   rank_position:       number;
   rank_bullets:        string[];
   rank_weakness:       string;
+  skip_reason:         string;
   rating_sanity_note:  string;
   extra_badges:        string[];
 }
@@ -1561,6 +1562,7 @@ function scoreHotels(
       rank_position:      0,
       rank_bullets:       [],
       rank_weakness:      "",
+      skip_reason:        "",
       rating_sanity_note: "",
       extra_badges:       [],
     };
@@ -1911,39 +1913,56 @@ function buildRankExplanations(sorted: HotelOffer[], prefs: string[]): void {
       bullets.push(`Stronger guest reviews than the hotel ranked above (${h.overall_rating.toFixed(1)} vs ${above.overall_rating.toFixed(1)}★)`);
     }
 
+    // Percentile helpers (O(n) per hotel — fine for typical result counts)
+    const walkRank = sorted.filter(s => s.score_breakdown.walkability > h.score_breakdown.walkability).length + 1;
+    const walkTopPct = Math.ceil((walkRank / sorted.length) * 100);
+    const destRank = sorted.filter(s => s.score_breakdown.destination_fit > h.score_breakdown.destination_fit).length + 1;
+    const destTopPct = Math.ceil((destRank / sorted.length) * 100);
+    const nbhdRank = sorted.filter(s => s.neighborhood_fit_score > h.neighborhood_fit_score).length + 1;
+    const nbhdTopPct = Math.ceil((nbhdRank / sorted.length) * 100);
+
     // Price / value
     if (above && h.price_per_night < above.price_per_night - 20) {
-      bullets.push(`$${Math.round(above.price_per_night - h.price_per_night)}/night less than the hotel ranked above`);
+      bullets.push(`$${Math.round(above.price_per_night - h.price_per_night)}/night less than #${above.rank_position}`);
     } else if (h.price_per_night < avgPrice * 0.78) {
       const pctBelow = Math.round((1 - h.price_per_night / avgPrice) * 100);
-      bullets.push(`Strong value — ${pctBelow}% below the search average`);
+      bullets.push(`$${Math.round(h.price_per_night)}/night — ${pctBelow}% below the search average`);
     } else if (h.score_breakdown.price >= 80) {
-      bullets.push("Competitive pricing for this search");
+      bullets.push(`$${Math.round(h.price_per_night)}/night — near the search average`);
     }
 
     // Hotel quality / stars
     if (h.star_rating >= 5 && bullets.length < 3) {
       bullets.push("5-star hotel");
     } else if (h.star_rating >= 4 && h.score_breakdown.stars >= 85 && h.overall_rating >= 4.3 && bullets.length < 3) {
-      bullets.push("Highly-rated 4-star property");
+      const revStr = h.review_count > 0 ? ` · ${h.overall_rating.toFixed(1)}★ from ${h.review_count.toLocaleString()} guests` : "";
+      bullets.push(`4-star property${revStr}`);
     }
 
     // Neighborhood / destination fit
     if (prefsActive && h.neighborhood_fit_score >= 78 && bullets.length < 3) {
       const pl = PREF_DISPLAY[prefs[0]] ?? prefs[0];
-      bullets.push(`Great match for ${pl} travelers`);
-    } else if (!prefsActive && h.score_breakdown.destination_fit >= 85 && bullets.length < 3) {
-      bullets.push("Well-positioned for exploring the area");
+      if (nbhdRank === 1) {
+        bullets.push(`Top ${pl.toLowerCase()} match in this search`);
+      } else {
+        bullets.push(`Top ${nbhdTopPct}% for ${pl.toLowerCase()} fit in this search`);
+      }
     } else if (!prefsActive && h.score_breakdown.destination_fit >= 70 && bullets.length < 3) {
-      bullets.push("Well-positioned within the city");
+      if (h.transit_note) {
+        bullets.push(h.transit_note.split(".")[0]);
+      } else if (destRank === 1) {
+        bullets.push("Best-positioned hotel for city access in this search");
+      } else {
+        bullets.push(`Top ${destTopPct}% for central location in this search`);
+      }
     }
 
     // Walkability
     if (h.score_breakdown.walkability >= 82 && bullets.length < 3) {
-      if (h.nearby_walk && h.nearby_walk.minutes <= 5) {
-        bullets.push(`Excellent walkability — ${h.nearby_walk.name} is ${h.nearby_walk.minutes} min away`);
+      if (walkRank === 1) {
+        bullets.push("Most walkable hotel in this search");
       } else {
-        bullets.push("Excellent walkability — easy to get around on foot");
+        bullets.push(`Top ${walkTopPct}% for walkability in this search`);
       }
     }
 
@@ -1986,7 +2005,7 @@ function buildRankExplanations(sorted: HotelOffer[], prefs: string[]): void {
         const gap = dimGaps[0];
         if (priceSave >= 25) {
           weakness = `Lower ${gap.label} than ${aboveShort}, but saves $${priceSave}/night`;
-        } else if (reviewAdv >= 10 && gap.label !== "guest satisfaction") {
+        } else if (reviewAdv >= 10 && gap.label !== "guest ratings") {
           weakness = `Lower ${gap.label} than ${aboveShort}, offset by stronger guest reviews (${h.overall_rating.toFixed(1)} vs ${above.overall_rating.toFixed(1)}★)`;
         } else {
           weakness = `Lower ${gap.label} than ${aboveShort}`;
@@ -2006,6 +2025,43 @@ function buildRankExplanations(sorted: HotelOffer[], prefs: string[]): void {
 
     h.rank_bullets  = bullets.slice(0, 3);
     h.rank_weakness = weakness;
+
+    // Skip reason — one concise decision trigger per card
+    let skipReason = "";
+    if (i === 0 && sorted.length > 1) {
+      const r2 = sorted[1];
+      const r2PriceSave = h.price_per_night - r2.price_per_night; // positive = r2 is cheaper
+      const r2WalkAdv   = r2.score_breakdown.walkability - h.score_breakdown.walkability;
+      const r2RatingAdv = r2.overall_rating - h.overall_rating;
+      const r2ReviewAdv = r2.review_count - h.review_count;
+      if (r2PriceSave > 20) {
+        skipReason = `Skip if price matters — $${Math.round(r2PriceSave)}/night cheaper at #2`;
+      } else if (r2WalkAdv > 8) {
+        skipReason = `Skip if walkability matters — #2 is more walkable`;
+      } else if (r2RatingAdv > 0.2) {
+        skipReason = `Skip if rating matters — #2 rated ${r2.overall_rating.toFixed(1)}★ vs ${h.overall_rating.toFixed(1)}★`;
+      } else if (r2ReviewAdv > h.review_count * 0.4 && r2.review_count >= 100) {
+        skipReason = `Skip if review count matters — #2 has ${r2.review_count.toLocaleString()} reviews`;
+      }
+    } else if (above) {
+      const abovePos   = above.rank_position;
+      const priceDiff  = h.price_per_night - above.price_per_night;
+      const dimGapsSkip = [
+        { label: "walkability",  delta: above.score_breakdown.walkability - h.score_breakdown.walkability },
+        { label: "guest ratings", delta: above.score_breakdown.reviews    - h.score_breakdown.reviews    },
+        { label: "location",     delta: above.score_breakdown.location    - h.score_breakdown.location   },
+      ].filter(g => g.delta > 8).sort((a, b) => b.delta - a.delta);
+      if (priceDiff > 20) {
+        skipReason = `Skip if price matters — $${Math.round(priceDiff)}/night more than #${abovePos}`;
+      } else if (dimGapsSkip[0]?.label === "walkability") {
+        skipReason = `Skip if walkability matters — lower than #${abovePos}`;
+      } else if (dimGapsSkip[0]?.label === "guest ratings") {
+        skipReason = `Skip if reviews matter — lower guest ratings than #${abovePos}`;
+      } else if (dimGapsSkip[0]?.label === "location") {
+        skipReason = `Skip if location matters — less central than #${abovePos}`;
+      }
+    }
+    h.skip_reason = skipReason;
 
     // Rating sanity note: if this hotel is ranked above one with >0.5★ higher rating,
     // show an explicit explanation so users never see an unexplained surprise.

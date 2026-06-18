@@ -57,6 +57,7 @@ interface HotelOffer {
   rank_position?:      number;
   rank_bullets?:       string[];
   rank_weakness?:      string;
+  skip_reason?:        string;
   rating_sanity_note?: string;
   extra_badges?:       string[];
 }
@@ -822,10 +823,8 @@ function breakdownEvidence(
 
     case "Walkability":
       if (offer.nearby_walk && offer.nearby_walk.minutes <= 5)
-        return `${offer.nearby_walk.name} is ${offer.nearby_walk.minutes} min walk`;
-      if (offer.score_breakdown.walkability >= 80) return "High walkability — easy to get around on foot";
-      if (offer.score_breakdown.walkability >= 55) return "Moderate walkability from this area";
-      return "Limited walkable destinations nearby";
+        return `${offer.nearby_walk.name} — ${offer.nearby_walk.minutes} min walk`;
+      return `Score: ${offer.score_breakdown.walkability}/100`;
 
     default:
       return "";
@@ -2120,6 +2119,11 @@ function HotelCard({
               <div className="flex items-start gap-2 mt-2 pt-2 border-t border-white/[0.04]">
                 <span className="text-[9px] font-bold uppercase tracking-wider text-amber-400/60 flex-shrink-0 mt-[2px] whitespace-nowrap">Tradeoff</span>
                 <span className="text-[11px] text-white/42 leading-snug">{offer.rank_weakness}</span>
+              </div>
+            )}
+            {offer.skip_reason && (
+              <div className="flex items-start gap-1.5 mt-1.5">
+                <span className="text-[10px] text-white/22 leading-snug italic">{offer.skip_reason}</span>
               </div>
             )}
           </div>
