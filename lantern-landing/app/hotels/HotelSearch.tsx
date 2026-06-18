@@ -1,16 +1,18 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
 import { NeighborhoodCompare } from "./NeighborhoodCompare";
 import type { ComparableSummary } from "./NeighborhoodCompare";
+import MapNeighborhoodPanel from "./MapNeighborhoodPanel";
+import type { NbhdPanelData } from "./MapNeighborhoodPanel";
 
 const HotelMapView = dynamic(() => import("./HotelMapView"), {
   ssr: false,
   loading: () => (
-    <div className="w-full rounded-xl border border-white/[0.08] bg-white/[0.02] animate-pulse" style={{ height: 480 }} />
+    <div className="w-full h-full rounded-xl border border-white/[0.08] bg-white/[0.02] animate-pulse" />
   ),
 });
 
@@ -4377,33 +4379,77 @@ export default function HotelSearch() {
               </div>
 
               {/* ── MAP VIEW ──────────────────────────────────────────────── */}
-              {viewMode === "map" && (
-                <div className="mb-4">
-                  <HotelMapView
-                    offers={offers}
-                    selectedHotelId={selectedHotelId}
-                    onSelectHotel={setSelectedHotelId}
-                    destination={searchedDest}
-                    cityGuide={cityGuide}
-                    selectedNeighborhood={selectedNeighborhood}
-                    onSelectNeighborhood={setSelectedNeighborhood}
-                    activePrefs={activePrefs}
-                  />
-                  {selectedNeighborhood && (
-                    <div className="mt-2 flex items-center justify-between px-1">
-                      <span className="text-[11px] text-white/40">
-                        Filtered: <span className="text-white/70 font-semibold">{cityGuide?.neighborhoods.find(n => n.id === selectedNeighborhood)?.name}</span>
-                      </span>
-                      <button
-                        onClick={() => setSelectedNeighborhood(null)}
-                        className="text-[11px] text-white/30 hover:text-white/60 transition-colors"
-                      >
-                        × Show all
-                      </button>
+              {viewMode === "map" && (() => {
+                // Recommended neighborhood = the one containing the best-scoring hotel
+                const recommendedNbhdId = nbhdSummaries[0]?.nbhd.id ?? null;
+
+                // Build NbhdPanelData for the selected neighborhood
+                const selSummary = selectedNeighborhood
+                  ? nbhdSummaries.find((s) => s.nbhd.id === selectedNeighborhood) ?? null
+                  : null;
+
+                const panelData: NbhdPanelData | null = selSummary
+                  ? {
+                      id:             selSummary.nbhd.id,
+                      name:           selSummary.nbhd.name,
+                      description:    selSummary.nbhd.description,
+                      tags:           selSummary.nbhd.tags,
+                      isRecommended:  selSummary.nbhd.id === recommendedNbhdId,
+                      chooseIfCopy:   selSummary.nbhd.id !== recommendedNbhdId && nbhdSummaries[0]
+                        ? altChooseIfCopy(selSummary, nbhdSummaries[0], activePrefs)
+                        : null,
+                      hotelCount:     selSummary.count,
+                      avgPrice:       selSummary.avgPrice,
+                      lowestPrice:    selSummary.lowestPrice,
+                      topHotelName:   selSummary.bestHotel?.name ?? null,
+                      topHotelPrice:  selSummary.bestHotel?.price_per_night ?? null,
+                      topHotelRating: selSummary.bestHotel?.overall_rating ?? null,
+                    }
+                  : null;
+
+                return (
+                  <div className="relative -mx-4 sm:-mx-0 mb-4">
+                    {/* Desktop: sidebar + map side by side */}
+                    {/* Mobile: map full height, bottom sheet overlay */}
+                    <div className="flex flex-col lg:flex-row lg:rounded-xl lg:overflow-hidden lg:border lg:border-white/[0.07]"
+                      style={{ height: "clamp(420px, calc(100vh - 320px), 680px)" }}>
+
+                      {/* Left sidebar — desktop only */}
+                      <div className="hidden lg:flex lg:flex-col lg:w-[280px] lg:flex-shrink-0 lg:border-r lg:border-white/[0.06] lg:bg-[#090e1a]">
+                        <MapNeighborhoodPanel
+                          data={panelData}
+                          onClose={() => setSelectedNeighborhood(null)}
+                          variant="sidebar"
+                        />
+                      </div>
+
+                      {/* Map area */}
+                      <div className="relative flex-1 min-h-[420px] lg:min-h-0 rounded-xl lg:rounded-none overflow-hidden border border-white/[0.07] lg:border-0">
+                        <HotelMapView
+                          offers={offers}
+                          selectedHotelId={selectedHotelId}
+                          onSelectHotel={setSelectedHotelId}
+                          destination={searchedDest}
+                          cityGuide={cityGuide}
+                          selectedNeighborhood={selectedNeighborhood}
+                          onSelectNeighborhood={setSelectedNeighborhood}
+                          activePrefs={activePrefs}
+                          recommendedNbhdId={recommendedNbhdId}
+                        />
+                      </div>
                     </div>
-                  )}
-                </div>
-              )}
+
+                    {/* Mobile bottom sheet */}
+                    <div className="lg:hidden">
+                      <MapNeighborhoodPanel
+                        data={panelData}
+                        onClose={() => setSelectedNeighborhood(null)}
+                        variant="sheet"
+                      />
+                    </div>
+                  </div>
+                );
+              })()}
 
               {/* ── LIST VIEW: Neighborhood guide (Best Area mode only) ───── */}
               {viewMode === "list" && cityGuide && searchMode === "best-area" && (

@@ -1,117 +1,66 @@
 "use client";
 
-// Loaded via dynamic({ ssr: false }) — never runs on the server.
-import "leaflet/dist/leaflet.css";
-import { useEffect, useRef, useCallback } from "react";
+// Loaded via dynamic({ ssr: false }) — react-map-gl requires a browser environment.
+import "maplibre-gl/dist/maplibre-gl.css";
+
+import { useCallback, useMemo, useRef, useState } from "react";
+import Map, {
+  Source,
+  Layer,
+  Marker,
+  NavigationControl,
+  type MapRef,
+  type MapLayerMouseEvent,
+  type LayerProps,
+} from "react-map-gl/maplibre";
+import type { FeatureCollection, GeoJsonProperties, Geometry } from "geojson";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
-interface MapHotelOffer {
-  hotel_id: string;
-  name: string;
-  price_per_night: number;
-  ai_score: number;
-  recommendation_label: string;
-  inferred_neighborhood: string;
-  address: string;
-  latitude?: number;
-  longitude?: number;
+export interface MapHotelOffer {
+  hotel_id:               string;
+  name:                   string;
+  price_per_night:        number;
+  ai_score:               number;
+  recommendation_label:   string;
+  inferred_neighborhood:  string;
+  address:                string;
+  latitude?:              number;
+  longitude?:             number;
+  overall_rating?:        number;
+  rank_bullets?:          string[];
 }
 
 interface MapNeighborhood {
-  id: string;
-  name: string;
+  id:            string;
+  name:          string;
   matchKeywords: string[];
-  tags: string[];
+  tags:          string[];
 }
 
 interface MapCityGuide {
-  displayName: string;
+  displayName:   string;
   neighborhoods: MapNeighborhood[];
 }
 
 interface Props {
-  offers: MapHotelOffer[];
-  selectedHotelId: string | null;
-  onSelectHotel: (id: string | null) => void;
-  destination: string;
-  cityGuide: MapCityGuide | null;
-  selectedNeighborhood: string | null;
-  onSelectNeighborhood: (id: string | null) => void;
-  activePrefs: readonly string[];
+  offers:                 MapHotelOffer[];
+  selectedHotelId:        string | null;
+  onSelectHotel:          (id: string | null) => void;
+  destination:            string;
+  cityGuide:              MapCityGuide | null;
+  selectedNeighborhood:   string | null;
+  onSelectNeighborhood:   (id: string | null) => void;
+  activePrefs:            readonly string[];
+  recommendedNbhdId:      string | null;
 }
 
-// ── Neighborhood centre coordinates ───────────────────────────────────────────
-// Approximate centres for Phase 1 circle overlays. Good enough for visual zones.
+// ── Map style — free CartoDB dark, no API key required ─────────────────────────
+const MAP_STYLE = "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json";
 
-type LatLng = [number, number];
-
-const NEIGHBORHOOD_CENTERS: Record<string, Record<string, LatLng>> = {
-  tokyo: {
-    "ginza-chuo":       [35.6717, 139.7645],
-    "shinjuku":         [35.6938, 139.7036],
-    "shibuya":          [35.6580, 139.7016],
-    "roppongi-minato":  [35.6603, 139.7292],
-    "asakusa-taito":    [35.7148, 139.7967],
-    "ueno":             [35.7140, 139.7773],
-    "ebisu-daikanyama": [35.6479, 139.7076],
-  },
-  barcelona: {
-    "eixample":      [41.3934, 2.1622],
-    "gothic-quarter":[41.3827, 2.1762],
-    "el-born":       [35.6853, 2.1829],
-    "gracia":        [41.4035, 2.1563],
-    "barceloneta":   [41.3789, 2.1893],
-    "sarria":        [41.4007, 2.1197],
-  },
-  london: {
-    "mayfair":        [51.5098, -0.1454],
-    "covent-garden":  [51.5117, -0.1233],
-    "shoreditch":     [51.5222, -0.0784],
-    "south-bank":     [51.5044, -0.1087],
-    "kensington":     [51.5007, -0.1948],
-    "bloomsbury":     [51.5229, -0.1296],
-  },
-  "new york": {
-    "midtown":           [40.7549, -73.9840],
-    "upper-east-side":   [40.7736, -73.9566],
-    "soho-west-village": [40.7266, -74.0054],
-    "brooklyn":          [40.7081, -73.9571],
-    "lower-east-side":   [40.7150, -73.9857],
-    "financial-district":[40.7074, -74.0113],
-  },
-  bangkok: {
-    "riverside":      [13.7264, 100.5149],
-    "rattanakosin":   [13.7543, 100.4921],
-    "sukhumvit":      [13.7399, 100.5615],
-    "silom-sathorn":  [13.7238, 100.5323],
-    "siam":           [13.7463, 100.5347],
-  },
-  singapore: {
-    "marina-bay":        [1.2838, 103.8590],
-    "orchard":           [1.3048, 103.8318],
-    "chinatown":         [1.2818, 103.8442],
-    "little-india-arab": [1.3067, 103.8515],
-    "sentosa":           [1.2494, 103.8303],
-  },
-  seoul: {
-    "myeongdong":        [37.5636, 126.9836],
-    "insadong-jongno":   [37.5740, 126.9900],
-    "gangnam":           [37.4979, 127.0276],
-    "hongdae":           [37.5563, 126.9228],
-    "itaewon":           [37.5348, 126.9943],
-  },
-};
-
-// Default city centre fallback when hotels have no GPS data
-const CITY_CENTERS: Record<string, LatLng> = {
-  tokyo:      [35.6762, 139.6503],
-  barcelona:  [41.3851, 2.1734],
-  london:     [51.5074, -0.1278],
-  "new york": [40.7128, -74.0060],
-  bangkok:    [13.7563, 100.5018],
-  singapore:  [1.3521, 103.8198],
-  seoul:      [37.5665, 126.9780],
+// ── Static GeoJSON paths ───────────────────────────────────────────────────────
+const GEOJSON_BY_CITY: Record<string, string> = {
+  tokyo: "/geojson/tokyo.geojson",
 };
 
 function detectCityKey(destination: string): string | null {
@@ -120,49 +69,191 @@ function detectCityKey(destination: string): string | null {
   if (d.includes("barcelona")) return "barcelona";
   if (d.includes("london"))    return "london";
   if (d.includes("new york") || d.includes("nyc")) return "new york";
-  if (d.includes("bangkok") || d.includes("krung thep")) return "bangkok";
+  if (d.includes("bangkok"))   return "bangkok";
   if (d.includes("singapore")) return "singapore";
   if (d.includes("seoul"))     return "seoul";
   return null;
 }
 
-// ── Icon HTML builders ────────────────────────────────────────────────────────
+// Default city centers for initial viewport when hotel coords are absent
+const CITY_CENTERS: Record<string, { longitude: number; latitude: number; zoom: number }> = {
+  tokyo:      { longitude: 139.710, latitude: 35.680, zoom: 12.5 },
+  barcelona:  { longitude: 2.173,   latitude: 41.385, zoom: 13   },
+  london:     { longitude: -0.128,  latitude: 51.508, zoom: 12.5 },
+  "new york": { longitude: -73.984, latitude: 40.748, zoom: 12.5 },
+  bangkok:    { longitude: 100.502, latitude: 13.754, zoom: 12.5 },
+  singapore:  { longitude: 103.820, latitude: 1.352,  zoom: 12.5 },
+  seoul:      { longitude: 126.978, latitude: 37.567, zoom: 12.5 },
+};
 
-function buildMarkerHTML(
-  price: number,
-  isSelected: boolean,
-  isBestOverall: boolean,
-): string {
-  const bg     = isBestOverall ? "#A78BFA" : isSelected ? "#77A7FF" : "#131929";
-  const border = isBestOverall ? "rgba(167,139,250,0.9)" : isSelected ? "rgba(119,167,255,0.9)" : "rgba(255,255,255,0.14)";
-  const color  = isSelected || isBestOverall ? "#fff" : "rgba(255,255,255,0.85)";
-  const shadow = isSelected || isBestOverall
-    ? `0 2px 12px rgba(0,0,0,0.5), 0 0 0 3px ${isBestOverall ? "rgba(167,139,250,0.35)" : "rgba(119,167,255,0.35)"}`
-    : "0 2px 6px rgba(0,0,0,0.45)";
-  const scale = isSelected ? "scale(1.15)" : "scale(1)";
-  return `<div style="
-    background:${bg};border:1px solid ${border};
-    border-radius:20px;padding:4px 9px;
-    font-size:11px;font-weight:700;color:${color};
-    white-space:nowrap;box-shadow:${shadow};
-    cursor:pointer;transform:${scale};
-    transition:all 0.15s ease;font-family:ui-sans-serif,system-ui,sans-serif;
-    letter-spacing:-0.01em;
-  ">$${Math.round(price)}</div>`;
+// ── Layer style definitions ───────────────────────────────────────────────────
+
+function makeFillLayer(recId: string | null, selId: string | null): LayerProps {
+  return {
+    id:   "nbhd-fill",
+    type: "fill",
+    paint: {
+      "fill-color": [
+        "case",
+        ["==", ["get", "id"], recId ?? ""],  "#4ADE80",  // lantern-mint
+        ["==", ["get", "id"], selId ?? ""],  "#A78BFA",  // lantern-violet
+        "#ffffff",
+      ],
+      "fill-opacity": [
+        "case",
+        ["==", ["get", "id"], recId ?? ""],  0.13,
+        ["==", ["get", "id"], selId ?? ""],  0.11,
+        0.04,
+      ],
+    },
+  };
 }
 
-function buildNeighborhoodLabelHTML(name: string, isRecommended: boolean, isSelected: boolean): string {
-  const color = isSelected ? "#fff" : isRecommended ? "rgba(167,139,250,0.9)" : "rgba(255,255,255,0.55)";
-  const fontWeight = isSelected || isRecommended ? "700" : "600";
-  const textShadow = "0 1px 4px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.6)";
-  return `<div style="
-    color:${color};font-size:11px;font-weight:${fontWeight};
-    white-space:nowrap;text-shadow:${textShadow};
-    cursor:pointer;padding:2px 4px;
-    font-family:ui-sans-serif,system-ui,sans-serif;
-    letter-spacing:0.02em;text-transform:uppercase;
-  ">${name}</div>`;
+function makeLineLayer(recId: string | null, selId: string | null): LayerProps {
+  return {
+    id:   "nbhd-line",
+    type: "line",
+    paint: {
+      "line-color": [
+        "case",
+        ["==", ["get", "id"], recId ?? ""],  "#4ADE80",
+        ["==", ["get", "id"], selId ?? ""],  "#A78BFA",
+        "#ffffff",
+      ],
+      "line-opacity": [
+        "case",
+        ["==", ["get", "id"], recId ?? ""],  0.55,
+        ["==", ["get", "id"], selId ?? ""],  0.50,
+        0.10,
+      ],
+      "line-width": [
+        "case",
+        ["==", ["get", "id"], recId ?? ""],  2,
+        ["==", ["get", "id"], selId ?? ""],  1.5,
+        1,
+      ],
+    },
+  };
 }
+
+// ── Hotel marker components ───────────────────────────────────────────────────
+
+function Marker1({ hotel, isSelected, onClick }: {
+  hotel:      MapHotelOffer;
+  isSelected: boolean;
+  onClick:    () => void;
+}) {
+  const shortName = hotel.name.split(",")[0].split("–")[0].trim();
+  const display   = shortName.length > 22 ? shortName.slice(0, 20) + "…" : shortName;
+  return (
+    <button
+      onClick={onClick}
+      className={`
+        flex flex-col items-start
+        rounded-xl px-2.5 py-1.5
+        border shadow-lg
+        transition-all duration-150
+        text-left
+        ${isSelected
+          ? "bg-lantern-mint border-lantern-mint/80 text-[#090e1a] scale-105 shadow-lantern-mint/20"
+          : "bg-[#090e1a]/95 border-lantern-mint/50 text-white hover:border-lantern-mint/80"}
+      `}
+      style={{ backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)" }}
+    >
+      <span className="text-[10px] font-black uppercase tracking-[0.08em] opacity-70 leading-none mb-0.5">
+        #1 Pick
+      </span>
+      <span className={`text-[11px] font-bold leading-tight ${isSelected ? "text-[#090e1a]" : "text-white/90"}`}>
+        {display}
+      </span>
+      <span className={`text-[10px] font-semibold mt-0.5 ${isSelected ? "text-[#090e1a]/70" : "text-lantern-mint/80"}`}>
+        ${Math.round(hotel.price_per_night)}/night
+        {hotel.overall_rating && hotel.overall_rating > 0
+          ? ` · ${hotel.overall_rating.toFixed(1)}★`
+          : ""}
+      </span>
+    </button>
+  );
+}
+
+function Marker2({ hotel, rank, isSelected, onClick }: {
+  hotel:      MapHotelOffer;
+  rank:       number;
+  isSelected: boolean;
+  onClick:    () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`
+        rounded-full px-2.5 py-1
+        border text-[10px] font-bold
+        transition-all duration-150
+        ${isSelected
+          ? "bg-lantern-violet border-lantern-violet/80 text-white scale-110"
+          : "bg-[#0e1422]/90 border-white/20 text-white/75 hover:border-white/45 hover:text-white"}
+      `}
+      style={{ backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)" }}
+    >
+      #{rank} · ${Math.round(hotel.price_per_night)}
+    </button>
+  );
+}
+
+function Marker3({ isSelected, onClick }: {
+  hotel:      MapHotelOffer;
+  isSelected: boolean;
+  onClick:    () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`
+        w-2.5 h-2.5 rounded-full border transition-all duration-150
+        ${isSelected
+          ? "bg-white border-white scale-150"
+          : "bg-white/30 border-white/20 hover:bg-white/55 hover:border-white/45"}
+      `}
+    />
+  );
+}
+
+// ── Neighborhood label overlay ────────────────────────────────────────────────
+
+function NbhdLabel({ name, isRec, isSelected }: {
+  name:       string;
+  isRec:      boolean;
+  isSelected: boolean;
+}) {
+  return (
+    <div
+      className={`
+        text-[10px] font-black uppercase tracking-[0.12em]
+        pointer-events-none select-none
+        px-1.5 py-0.5
+        ${isSelected ? "text-lantern-violet" : isRec ? "text-lantern-mint" : "text-white/35"}
+      `}
+      style={{ textShadow: "0 1px 4px rgba(0,0,0,0.9), 0 0 8px rgba(0,0,0,0.7)" }}
+    >
+      {name.split(" /")[0]}
+      {isRec && <span className="ml-1 opacity-70 normal-case font-semibold tracking-normal">· Top pick</span>}
+    </div>
+  );
+}
+
+// ── Neighborhood centroid helpers ─────────────────────────────────────────────
+
+const NBHD_CENTROIDS: Record<string, Record<string, [number, number]>> = {
+  tokyo: {
+    "ginza-chuo":       [139.763,  35.673],
+    "shinjuku":         [139.700,  35.695],
+    "shibuya":          [139.703,  35.657],
+    "roppongi-minato":  [139.733,  35.662],
+    "asakusa-taito":    [139.798,  35.716],
+    "ueno":             [139.772,  35.714],
+    "ebisu-daikanyama": [139.708,  35.648],
+  },
+};
 
 // ── Main component ─────────────────────────────────────────────────────────────
 
@@ -175,335 +266,182 @@ export default function HotelMapView({
   selectedNeighborhood,
   onSelectNeighborhood,
   activePrefs,
+  recommendedNbhdId,
 }: Props) {
-  const containerRef      = useRef<HTMLDivElement>(null);
-  const mapRef            = useRef<import("leaflet").Map | null>(null);
-  const markersLayerRef   = useRef<import("leaflet").LayerGroup | null>(null);
-  const nbhdLayerRef      = useRef<import("leaflet").LayerGroup | null>(null);
-  const leafletRef        = useRef<typeof import("leaflet") | null>(null);
-  const isInitialized     = useRef(false);
-
-  // Determine which city to show neighborhoods for
+  const mapRef  = useRef<MapRef>(null);
   const cityKey = detectCityKey(destination);
-  const nbhdCenters = cityKey ? (NEIGHBORHOOD_CENTERS[cityKey] ?? {}) : {};
-  const cityCenter  = cityKey ? (CITY_CENTERS[cityKey] ?? null) : null;
+  const geojsonPath = cityKey ? GEOJSON_BY_CITY[cityKey] : null;
+  const centroids   = cityKey ? (NBHD_CENTROIDS[cityKey] ?? {}) : {};
 
-  // Determine "recommended" neighborhood — where the AI Pick hotel lives
-  const bestOffer = offers.find((o) => o.recommendation_label === "Best Overall") ?? offers[0];
-  const bestNbhdId = (() => {
-    if (!bestOffer || !cityGuide) return null;
-    const nbhd = bestOffer.inferred_neighborhood.toLowerCase();
-    const addr = bestOffer.address.toLowerCase();
-    for (const n of cityGuide.neighborhoods) {
-      if (n.matchKeywords.some((k) => nbhd.includes(k) || addr.includes(k))) {
-        return n.id;
-      }
+  // ── GeoJSON data (fetched once) ──────────────────────────────────────────────
+  const [geoData, setGeoData] = useState<FeatureCollection<Geometry, GeoJsonProperties> | null>(null);
+  const geoFetched = useRef(false);
+
+  const fetchGeo = useCallback(() => {
+    if (geoFetched.current || !geojsonPath) return;
+    geoFetched.current = true;
+    fetch(geojsonPath)
+      .then((r) => r.json())
+      .then((d) => setGeoData(d))
+      .catch(() => { /* no polygon data for this city */ });
+  }, [geojsonPath]);
+
+  // ── Initial viewport ─────────────────────────────────────────────────────────
+  const initialViewState = useMemo(() => {
+    const geoHotels = offers.filter(
+      (o) => typeof o.latitude === "number" && typeof o.longitude === "number"
+        && !isNaN(o.latitude!) && !isNaN(o.longitude!),
+    );
+    if (geoHotels.length > 0) {
+      const lats = geoHotels.map((o) => o.latitude!);
+      const lngs = geoHotels.map((o) => o.longitude!);
+      return {
+        longitude: (Math.min(...lngs) + Math.max(...lngs)) / 2,
+        latitude:  (Math.min(...lats) + Math.max(...lats)) / 2,
+        zoom:      12.8,
+      };
     }
-    return null;
-  })();
+    return cityKey ? CITY_CENTERS[cityKey] : { longitude: 139.710, latitude: 35.680, zoom: 12.5 };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Determine the "best for prefs" label for the recommended neighborhood
-  const bestNbhdPrefLabel = (() => {
-    if (!activePrefs.length || !bestNbhdId || !cityGuide) return null;
-    const n = cityGuide.neighborhoods.find((x) => x.id === bestNbhdId);
-    if (!n) return null;
-    const pref = activePrefs[0];
-    const labelMap: Record<string, string> = {
-      luxury: "Best for Luxury",
-      quiet: "Best for Quiet",
-      food: "Best for Food",
-      nightlife: "Best for Nightlife",
-      sightseeing: "Best for Sightseeing",
-      transit: "Best for Transit",
-      "first-time": "Best for First-timers",
-      walkable: "Most Walkable",
-      budget: "Best for Budget",
-      family: "Best for Families",
-    };
-    return labelMap[pref] ?? null;
-  })();
+  // ── Hotel ranking ────────────────────────────────────────────────────────────
+  const sortedOffers = useMemo(
+    () => [...offers].sort((a, b) => b.ai_score - a.ai_score),
+    [offers],
+  );
 
-  // Draw neighborhood overlays
-  const drawNeighborhoods = useCallback(() => {
-    const L = leafletRef.current;
-    const map = mapRef.current;
-    const layer = nbhdLayerRef.current;
-    if (!L || !map || !layer || !cityGuide) return;
+  const rankOf = useCallback(
+    (id: string) => sortedOffers.findIndex((o) => o.hotel_id === id) + 1,
+    [sortedOffers],
+  );
 
-    layer.clearLayers();
+  const geoOffers = useMemo(
+    () => sortedOffers.filter(
+      (o) => typeof o.latitude === "number" && typeof o.longitude === "number"
+        && !isNaN(o.latitude!) && !isNaN(o.longitude!),
+    ),
+    [sortedOffers],
+  );
 
-    for (const n of cityGuide.neighborhoods) {
-      const center = nbhdCenters[n.id];
-      if (!center) continue;
-
-      const isRec      = n.id === bestNbhdId;
-      const isSelected = n.id === selectedNeighborhood;
-
-      // Circle overlay
-      const circleColor = isRec
-        ? "rgba(167,139,250,0.18)"
-        : isSelected
-          ? "rgba(119,167,255,0.15)"
-          : "rgba(255,255,255,0.04)";
-      const strokeColor = isRec
-        ? "rgba(167,139,250,0.55)"
-        : isSelected
-          ? "rgba(119,167,255,0.5)"
-          : "rgba(255,255,255,0.12)";
-
-      const circle = L.circle(center, {
-        radius: 650,
-        fillColor: circleColor,
-        fillOpacity: 1,
-        color: strokeColor,
-        weight: 1,
-        interactive: true,
-      });
-
-      circle.on("click", () => {
-        onSelectNeighborhood(isSelected ? null : n.id);
-      });
-
-      layer.addLayer(circle);
-
-      // Neighborhood name label
-      const labelIcon = L.divIcon({
-        html: buildNeighborhoodLabelHTML(n.name, isRec, isSelected),
-        className: "",
-        iconAnchor: [0, 0],
-      });
-      const labelMarker = L.marker(center, { icon: labelIcon, interactive: true, zIndexOffset: 100 });
-      labelMarker.on("click", () => {
-        onSelectNeighborhood(isSelected ? null : n.id);
-      });
-      layer.addLayer(labelMarker);
-
-      // Recommendation badge for AI Pick area
-      if (isRec && bestNbhdPrefLabel) {
-        const badgeIcon = L.divIcon({
-          html: `<div style="
-            background:rgba(167,139,250,0.85);color:#fff;
-            font-size:9px;font-weight:700;
-            border-radius:20px;padding:2px 7px;
-            white-space:nowrap;margin-top:16px;
-            font-family:ui-sans-serif,system-ui,sans-serif;
-            letter-spacing:0.04em;text-transform:uppercase;
-            box-shadow:0 2px 8px rgba(0,0,0,0.4);
-          ">${bestNbhdPrefLabel}</div>`,
-          className: "",
-          iconAnchor: [-8, 0],
-        });
-        const badgeMarker = L.marker(center, { icon: badgeIcon, interactive: false, zIndexOffset: 200 });
-        layer.addLayer(badgeMarker);
-      }
-    }
-  }, [cityGuide, nbhdCenters, bestNbhdId, selectedNeighborhood, bestNbhdPrefLabel, onSelectNeighborhood]);
-
-  // Draw hotel markers
-  const drawMarkers = useCallback(() => {
-    const L = leafletRef.current;
-    const map = mapRef.current;
-    const layer = markersLayerRef.current;
-    if (!L || !map || !layer) return;
-
-    layer.clearLayers();
-
-    const bounds: [number, number][] = [];
-
-    for (const offer of offers) {
-      // Skip offers without coords — can't place on map
-      if (
-        typeof offer.latitude  !== "number" ||
-        typeof offer.longitude !== "number" ||
-        isNaN(offer.latitude)  ||
-        isNaN(offer.longitude)
-      ) continue;
-
-      const latlng: LatLng = [offer.latitude, offer.longitude];
-      bounds.push(latlng);
-
-      const isBestOverall = offer.recommendation_label === "Best Overall";
-      const isSelected    = offer.hotel_id === selectedHotelId;
-
-      const icon = L.divIcon({
-        html: buildMarkerHTML(offer.price_per_night, isSelected, isBestOverall),
-        className: "",
-        iconAnchor: [24, 14],
-      });
-
-      const marker = L.marker(latlng, {
-        icon,
-        zIndexOffset: isBestOverall ? 1000 : isSelected ? 900 : 0,
-        interactive: true,
-      });
-
-      const popupContent = `
-        <div style="
-          font-family:ui-sans-serif,system-ui,sans-serif;
-          font-size:12px;color:#e2e8f0;
-          background:#0E1422;padding:10px 12px;
-          border-radius:8px;min-width:160px;
-          border:1px solid rgba(255,255,255,0.1);
-        ">
-          <div style="font-weight:700;margin-bottom:2px;">${offer.name}</div>
-          ${offer.inferred_neighborhood ? `<div style="font-size:10px;color:rgba(255,255,255,0.45);margin-bottom:4px;">${offer.inferred_neighborhood}</div>` : ""}
-          <div style="display:flex;align-items:center;gap:6px;">
-            <span style="font-weight:700;color:#A78BFA;">$${Math.round(offer.price_per_night)}<span style="font-weight:400;color:rgba(255,255,255,0.4);font-size:10px;">/night</span></span>
-            <span style="font-size:10px;color:rgba(255,255,255,0.35);">Score: ${offer.ai_score}</span>
-          </div>
-        </div>`;
-
-      const popup = L.popup({
-        className: "tg-popup",
-        closeButton: false,
-        offset: [0, -6],
-        maxWidth: 220,
-      }).setContent(popupContent);
-
-      marker.bindPopup(popup);
-
-      marker.on("click", () => {
-        onSelectHotel(offer.hotel_id === selectedHotelId ? null : offer.hotel_id);
-        // Scroll to matching card
-        const el = document.querySelector(`[data-hotel-id="${offer.hotel_id}"]`);
-        if (el) el.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      });
-
-      layer.addLayer(marker);
-    }
-
-    // Fit map to hotel bounds on initial render
-    if (bounds.length >= 2) {
-      map.fitBounds(bounds as L.LatLngBoundsExpression, { padding: [40, 40], maxZoom: 15 });
-    } else if (bounds.length === 1) {
-      map.setView(bounds[0] as L.LatLngExpression, 15);
-    } else if (cityCenter) {
-      map.setView(cityCenter as L.LatLngExpression, 13);
-    }
-  }, [offers, selectedHotelId, onSelectHotel, cityCenter]);
-
-  // ── Initialise map once ──────────────────────────────────────────────────────
-  useEffect(() => {
-    if (isInitialized.current || !containerRef.current) return;
-    isInitialized.current = true;
-
-    void (async () => {
-      const L = await import("leaflet");
-      leafletRef.current = L;
-
-      // Fix Leaflet's default icon path issue in webpack
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      delete (L.Icon.Default.prototype as any)._getIconUrl;
-      L.Icon.Default.mergeOptions({
-        iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-        iconUrl:       "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-        shadowUrl:     "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-      });
-
-      const map = L.map(containerRef.current!, {
-        zoomControl: true,
-        scrollWheelZoom: true,
-        attributionControl: true,
-      });
-      mapRef.current = map;
-
-      // Dark-themed OSM tiles via CartoDB Voyager Dark Matter
-      L.tileLayer(
-        "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-        {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-          subdomains: "abcd",
-          maxZoom: 19,
+  // ── Click handler for polygon layers ────────────────────────────────────────
+  const handleMapClick = useCallback(
+    (e: MapLayerMouseEvent) => {
+      if (e.features && e.features.length > 0) {
+        const id = e.features[0].properties?.id as string | undefined;
+        if (id) {
+          onSelectNeighborhood(id === selectedNeighborhood ? null : id);
+          return;
         }
-      ).addTo(map);
+      }
+      // Click on empty map → deselect hotel
+      onSelectHotel(null);
+    },
+    [selectedNeighborhood, onSelectNeighborhood, onSelectHotel],
+  );
 
-      // Layers
-      const nbhdLayer = L.layerGroup().addTo(map);
-      const markersLayer = L.layerGroup().addTo(map);
-      nbhdLayerRef.current = nbhdLayer;
-      markersLayerRef.current = markersLayer;
-
-      // Initial draw
-      drawNeighborhoods();
-      drawMarkers();
-
-      // Click on map background deselects hotel
-      map.on("click", () => {
-        onSelectHotel(null);
-      });
-    })();
-
-    return () => {
-      mapRef.current?.remove();
-      mapRef.current     = null;
-      markersLayerRef.current = null;
-      nbhdLayerRef.current    = null;
-      leafletRef.current       = null;
-      isInitialized.current    = false;
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // ── Re-draw markers when selection or offers change ──────────────────────────
-  useEffect(() => {
-    if (!mapRef.current) return;
-    drawMarkers();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedHotelId, offers]);
-
-  // ── Re-draw neighborhoods when selection changes ─────────────────────────────
-  useEffect(() => {
-    if (!mapRef.current) return;
-    drawNeighborhoods();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedNeighborhood, bestNbhdId, bestNbhdPrefLabel]);
+  // ── Layer paint (memoised so we avoid recreation on every render) ────────────
+  const fillLayer = useMemo(
+    () => makeFillLayer(recommendedNbhdId, selectedNeighborhood),
+    [recommendedNbhdId, selectedNeighborhood],
+  );
+  const lineLayer = useMemo(
+    () => makeLineLayer(recommendedNbhdId, selectedNeighborhood),
+    [recommendedNbhdId, selectedNeighborhood],
+  );
 
   return (
-    <div className="relative w-full rounded-xl overflow-hidden border border-white/[0.08]" style={{ height: "480px" }}>
-      {/* Map container */}
-      <div ref={containerRef} className="w-full h-full" />
+    <div className="relative w-full h-full rounded-xl overflow-hidden">
+      <Map
+        ref={mapRef}
+        initialViewState={initialViewState}
+        mapStyle={MAP_STYLE}
+        interactiveLayerIds={geoData ? ["nbhd-fill"] : []}
+        onClick={handleMapClick}
+        cursor={geoData ? "pointer" : "default"}
+        onLoad={fetchGeo}
+        attributionControl={false}
+        reuseMaps
+      >
+        {/* Navigation controls */}
+        <NavigationControl position="top-right" showCompass={false} />
 
-      {/* Overlay: legend */}
-      <div className="absolute bottom-3 left-3 z-[1000] flex flex-col gap-1.5 pointer-events-none">
-        <div className="flex items-center gap-1.5">
-          <div style={{ background: "#A78BFA", width: 10, height: 10, borderRadius: "50%" }} />
-          <span className="text-[10px] text-white/60 font-semibold" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.8)" }}>
-            AI Pick
-          </span>
-        </div>
-        {cityGuide && (
-          <div className="flex items-center gap-1.5">
-            <div style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", width: 10, height: 10, borderRadius: "50%" }} />
-            <span className="text-[10px] text-white/40 font-semibold" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.8)" }}>
-              Neighborhoods (click to filter)
-            </span>
-          </div>
+        {/* ── Neighborhood polygon source + layers ─────────────────────── */}
+        {geoData && (
+          <Source id="neighborhoods" type="geojson" data={geoData}>
+            <Layer {...fillLayer} />
+            <Layer {...lineLayer} />
+          </Source>
         )}
-      </div>
 
-      {/* Inject popup styles */}
-      <style>{`
-        .tg-popup .leaflet-popup-content-wrapper {
-          background: transparent;
-          border: none;
-          box-shadow: none;
-          padding: 0;
-        }
-        .tg-popup .leaflet-popup-content {
-          margin: 0;
-        }
-        .tg-popup .leaflet-popup-tip-container {
-          display: none;
-        }
-        .leaflet-control-attribution {
-          background: rgba(7,10,18,0.7) !important;
-          color: rgba(255,255,255,0.25) !important;
-          font-size: 9px !important;
-        }
-        .leaflet-control-attribution a {
-          color: rgba(255,255,255,0.35) !important;
-        }
-      `}</style>
+        {/* ── Neighborhood name labels (at centroid) ────────────────────── */}
+        {cityGuide?.neighborhoods.map((n) => {
+          const centroid = centroids[n.id];
+          if (!centroid) return null;
+          return (
+            <Marker
+              key={`label-${n.id}`}
+              longitude={centroid[0]}
+              latitude={centroid[1]}
+              anchor="center"
+              onClick={(e) => {
+                e.originalEvent.stopPropagation();
+                onSelectNeighborhood(n.id === selectedNeighborhood ? null : n.id);
+              }}
+            >
+              <NbhdLabel
+                name={n.name}
+                isRec={n.id === recommendedNbhdId}
+                isSelected={n.id === selectedNeighborhood}
+              />
+            </Marker>
+          );
+        })}
+
+        {/* ── Hotel markers ─────────────────────────────────────────────── */}
+        {geoOffers.map((offer) => {
+          const rank       = rankOf(offer.hotel_id);
+          const isSelected = offer.hotel_id === selectedHotelId;
+
+          return (
+            <Marker
+              key={offer.hotel_id}
+              longitude={offer.longitude!}
+              latitude={offer.latitude!}
+              anchor="bottom"
+              onClick={(e) => {
+                e.originalEvent.stopPropagation();
+                onSelectHotel(offer.hotel_id === selectedHotelId ? null : offer.hotel_id);
+              }}
+            >
+              {rank === 1 ? (
+                <Marker1
+                  hotel={offer}
+                  isSelected={isSelected}
+                  onClick={() => onSelectHotel(offer.hotel_id === selectedHotelId ? null : offer.hotel_id)}
+                />
+              ) : rank <= 4 ? (
+                <Marker2
+                  hotel={offer}
+                  rank={rank}
+                  isSelected={isSelected}
+                  onClick={() => onSelectHotel(offer.hotel_id === selectedHotelId ? null : offer.hotel_id)}
+                />
+              ) : (
+                <Marker3
+                  hotel={offer}
+                  isSelected={isSelected}
+                  onClick={() => onSelectHotel(offer.hotel_id === selectedHotelId ? null : offer.hotel_id)}
+                />
+              )}
+            </Marker>
+          );
+        })}
+      </Map>
+
+      {/* Attribution */}
+      <div className="absolute bottom-2 right-2 z-10 text-[8px] text-white/20 pointer-events-none">
+        © CartoDB · OpenStreetMap contributors
+      </div>
     </div>
   );
 }

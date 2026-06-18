@@ -1,0 +1,131 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "shinjuku",
+        "name": "Shinjuku",
+        "shortName": "Shinjuku"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [139.685, 35.682],
+          [139.716, 35.682],
+          [139.716, 35.708],
+          [139.685, 35.708],
+          [139.685, 35.682]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ginza-chuo",
+        "name": "Ginza / Chuo",
+        "shortName": "Ginza"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [139.748, 35.662],
+          [139.778, 35.662],
+          [139.778, 35.683],
+          [139.748, 35.683],
+          [139.748, 35.662]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "shibuya",
+        "name": "Shibuya",
+        "shortName": "Shibuya"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [139.689, 35.644],
+          [139.718, 35.644],
+          [139.718, 35.669],
+          [139.689, 35.669],
+          [139.689, 35.644]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "roppongi-minato",
+        "name": "Roppongi / Minato",
+        "shortName": "Roppongi"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [139.718, 35.648],
+          [139.749, 35.648],
+          [139.749, 35.675],
+          [139.718, 35.675],
+          [139.718, 35.648]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "asakusa-taito",
+        "name": "Asakusa / Taito",
+        "shortName": "Asakusa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [139.782, 35.703],
+          [139.814, 35.703],
+          [139.814, 35.729],
+          [139.782, 35.729],
+          [139.782, 35.703]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ueno",
+        "name": "Ueno",
+        "shortName": "Ueno"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [139.762, 35.703],
+          [139.782, 35.703],
+          [139.782, 35.725],
+          [139.762, 35.725],
+          [139.762, 35.703]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ebisu-daikanyama",
+        "name": "Ebisu / Daikanyama",
+        "shortName": "Ebisu"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [139.694, 35.638],
+          [139.722, 35.638],
+          [139.722, 35.658],
+          [139.694, 35.658],
+          [139.694, 35.638]
+        ]]
+      }
+    }
+  ]
+}
