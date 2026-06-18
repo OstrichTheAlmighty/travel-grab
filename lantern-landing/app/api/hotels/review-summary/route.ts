@@ -3,10 +3,22 @@ import { fetchHotelReviews } from "@/lib/reviews/service";
 import { generateReviewSummary } from "@/lib/reviews/summarizer";
 import type { ReviewSummary } from "@/lib/reviews/types";
 import { emptySummary } from "@/lib/reviews/types";
+import { createRateLimiter, getClientIP, rateLimitedResponse } from "@/lib/rate-limit";
 
 export type { ReviewSummary };
 
-export async function POST(req: NextRequest): Promise<NextResponse> {
+// 15 requests per 10 minutes per IP — lower than reviews because LLM calls are expensive
+// TODO: replace createRateLimiter with Upstash Ratelimit when adding Redis
+const limiter = createRateLimiter({ windowMs: 10 * 60 * 1000, max: 15 });
+
+export async function POST(req: NextRequest): Promise<NextResponse | Response> {
+  const ip    = getClientIP(req);
+  const limit = limiter(ip);
+  if (!limit.allowed) {
+    console.warn(`[review-summary] rate limited: ${ip}`);
+    return rateLimitedResponse(limit.resetAt);
+  }
+
   let body: { hotelName?: string; city?: string; placeId?: string };
   try {
     body = (await req.json()) as typeof body;
@@ -25,24 +37,23 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ error: "Either city or placeId is required" }, { status: 400 });
   }
 
-  // Fetch reviews from the shared service — hits cache if place-reviews was called first
+  // Fetch reviews — hits the shared review cache when place-reviews was called first
   let reviews;
   try {
-    const result = await fetchHotelReviews(
+    const { data } = await fetchHotelReviews(
       { hotelName, city, placeId: placeId || undefined },
       "google_places",
     );
-    reviews = result.reviews;
+    reviews = data.reviews;
   } catch (err) {
     console.error("[review-summary] failed to fetch reviews:", err);
-    return NextResponse.json(emptySummary);
+    return NextResponse.json({ ...emptySummary, cacheHit: false });
   }
 
   if (reviews.length === 0) {
-    return NextResponse.json(emptySummary);
+    return NextResponse.json({ ...emptySummary, cacheHit: false });
   }
 
-  // Generate (or serve cached) AI summary
-  const summary = await generateReviewSummary(hotelName, city, reviews);
-  return NextResponse.json(summary);
+  const { summary, cacheHit } = await generateReviewSummary(hotelName, city, reviews);
+  return NextResponse.json({ ...summary, cacheHit });
 }

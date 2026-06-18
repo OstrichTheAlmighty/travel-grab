@@ -1687,6 +1687,11 @@ function PhotoCarousel({ images, thumbnails, hotelName, hotelId }: {
 
 // ── Guest Reviews ─────────────────────────────────────────────────────────────
 
+// Session-scoped caches — prevent re-fetching when the drawer is closed and reopened
+// for the same hotel within a browser session. Keyed by hotel_id.
+const sessionReviewCache  = new Map<string, ReviewsResult & { cacheHit: boolean }>();
+const sessionSummaryCache = new Map<string, ReviewSummary & { cacheHit: boolean }>();
+
 const REVIEW_CHIPS = ["Room", "Location", "Breakfast", "Noise", "Staff", "Small rooms", "Transit"] as const;
 const REVIEW_HIGHLIGHT_RE = (query: string) => {
   const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -1964,7 +1969,7 @@ function GuestReviewsSection({
 
   const searchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Fetch reviews from Places API
+  // Fetch reviews — checks session cache first to avoid refetching on drawer reopen
   useEffect(() => {
     setLoading(true);
     setError(null);
@@ -1975,31 +1980,52 @@ function GuestReviewsSection({
     setProviderLimitReached(false);
     setSummary(null);
 
+    const cached = sessionReviewCache.get(hotelId);
+    if (cached) {
+      setReviews(cached.reviews);
+      setPlacesRating(cached.aggregateRating ?? 0);
+      setPlaceCount(cached.totalReviewCount ?? 0);
+      setProviderLimitReached(cached.providerLimitReached ?? false);
+      track("google_reviews_cache_hit", { hotel_name: hotelName });
+      setLoading(false);
+      return;
+    }
+
     fetch("/api/hotels/place-reviews", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ hotelName, city }),
     })
-      .then((r) => r.json())
-      .then((data: ReviewsResult & { error?: string }) => {
+      .then(async (r) => {
+        if (r.status === 429) {
+          track("api_rate_limited", { route: "place-reviews", hotel_name: hotelName });
+          setError("rate_limited");
+          return null;
+        }
+        return r.json() as Promise<ReviewsResult & { cacheHit?: boolean; error?: string }>;
+      })
+      .then((data) => {
+        if (!data) return;
         if (Array.isArray(data.reviews)) {
           setReviews(data.reviews);
           setPlacesRating(data.aggregateRating ?? 0);
           setPlaceCount(data.totalReviewCount ?? 0);
           setProviderLimitReached(data.providerLimitReached ?? false);
+          sessionReviewCache.set(hotelId, { ...data, cacheHit: data.cacheHit ?? false });
+          track(data.cacheHit ? "google_reviews_cache_hit" : "google_reviews_cache_miss", {
+            hotel_name: hotelName,
+          });
           track("hotel_reviews_loaded", {
-            hotel_name:              hotelName,
-            review_count:            data.reviews.length,
-            total_count:             data.totalReviewCount ?? 0,
-            provider_limit_reached:  data.providerLimitReached ?? false,
+            hotel_name:             hotelName,
+            review_count:           data.reviews.length,
+            total_count:            data.totalReviewCount ?? 0,
+            provider_limit_reached: data.providerLimitReached ?? false,
           });
         } else {
-          setError((data as { error?: string }).error ?? "No reviews returned");
+          setError(data.error ?? "No reviews returned");
         }
       })
-      .catch((e: unknown) => {
-        setError(String(e));
-      })
+      .catch((e: unknown) => setError(String(e)))
       .finally(() => setLoading(false));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hotelId]);
@@ -2009,18 +2035,38 @@ function GuestReviewsSection({
     setSummaryLoading(true);
     setSummary(null);
 
+    const cached = sessionSummaryCache.get(hotelId);
+    if (cached) {
+      setSummary(cached);
+      track("review_summary_cache_hit", { hotel_name: hotelName });
+      setSummaryLoading(false);
+      return;
+    }
+
     fetch("/api/hotels/review-summary", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ hotelName, city }),
     })
-      .then((r) => r.json())
-      .then((data: ReviewSummary) => {
-        setSummary(data);
+      .then(async (r) => {
+        if (r.status === 429) {
+          track("api_rate_limited", { route: "review-summary", hotel_name: hotelName });
+          return null;
+        }
+        return r.json() as Promise<ReviewSummary & { cacheHit?: boolean }>;
+      })
+      .then((data) => {
+        if (!data) return;
+        const withHit = { ...data, cacheHit: data.cacheHit ?? false };
+        setSummary(withHit);
+        sessionSummaryCache.set(hotelId, withHit);
+        track(data.cacheHit ? "review_summary_cache_hit" : "review_summary_cache_miss", {
+          hotel_name: hotelName,
+        });
         if (data.available) {
           track("hotel_review_summary_loaded", {
-            hotel_name:      hotelName,
-            loves_count:     data.guestsLove.length,
+            hotel_name:       hotelName,
+            loves_count:      data.guestsLove.length,
             complaints_count: data.commonComplaints.length,
             limited_coverage: data.limitedCoverage,
           });
@@ -2253,13 +2299,20 @@ function GuestReviewsSection({
           </>
         )}
 
+        {/* Rate limited */}
+        {!loading && error === "rate_limited" && (
+          <p className="text-[11px] text-white/35">
+            Review details are temporarily unavailable. Please try again shortly.
+          </p>
+        )}
+
         {/* No reviews from Places API */}
         {!loading && reviews.length === 0 && !error && (
           <p className="text-[11px] text-white/35">Detailed review text is not available for this hotel yet.</p>
         )}
 
-        {/* API error — fall back to SerpAPI aggregate note */}
-        {!loading && error && serpRating > 0 && (
+        {/* Other API error — fall back to SerpAPI aggregate note */}
+        {!loading && error && error !== "rate_limited" && serpRating > 0 && (
           <p className="text-[10px] text-white/22 leading-relaxed">
             Review text isn&apos;t available right now. Scoring uses the {serpRating.toFixed(1)}★ aggregate from {serpReviewCount.toLocaleString()} reviews.
           </p>
@@ -4794,6 +4847,13 @@ export default function HotelSearch() {
           neighborhood_prefs: prefs,
         }),
       });
+
+      if (res.status === 429) {
+        track("api_rate_limited", { route: "hotel-search" });
+        setErrorTitle("Too many searches");
+        setErrorBody("You've made too many search requests. Please wait a few minutes and try again.");
+        setSearchState("error"); return;
+      }
 
       const data = await res.json() as {
         status: string; message?: string; offers?: HotelOffer[];

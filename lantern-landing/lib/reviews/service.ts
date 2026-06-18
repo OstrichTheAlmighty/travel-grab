@@ -2,10 +2,12 @@ import type { FetchParams, ReviewSource, ReviewsResult } from "./types";
 import { emptyResult } from "./types";
 import { createGooglePlacesProvider } from "./providers/googlePlaces";
 
-// TODO: replace with a durable cache (Vercel KV / Redis) for production.
-// Serverless cold starts reset this map, so identical requests may re-fetch.
+// TODO: replace with Upstash Redis / Vercel KV for durability across cold starts.
+// Current Map is reset per-instance; a durable store would survive deploys.
 const cache = new Map<string, { result: ReviewsResult; ts: number }>();
-const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 h
+
+// 7-day TTL: Google Places review text changes infrequently; long cache reduces API spend.
+const CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
 function cacheKey(params: FetchParams, source: ReviewSource): string {
   const name = params.hotelName.toLowerCase().replace(/\s+/g, " ").trim();
@@ -25,13 +27,20 @@ function getProvider(source: ReviewSource) {
   throw new Error(`Review provider "${source}" is not implemented`);
 }
 
+export interface FetchHotelReviewsResult {
+  data:     ReviewsResult;
+  cacheHit: boolean;
+}
+
 export async function fetchHotelReviews(
   params: FetchParams,
   source: ReviewSource = "google_places",
-): Promise<ReviewsResult> {
+): Promise<FetchHotelReviewsResult> {
   const key = cacheKey(params, source);
   const hit = cache.get(key);
-  if (hit && Date.now() - hit.ts < CACHE_TTL_MS) return hit.result;
+  if (hit && Date.now() - hit.ts < CACHE_TTL_MS) {
+    return { data: hit.result, cacheHit: true };
+  }
 
   let result: ReviewsResult;
   try {
@@ -42,5 +51,5 @@ export async function fetchHotelReviews(
   }
 
   cache.set(key, { result, ts: Date.now() });
-  return result;
+  return { data: result, cacheHit: false };
 }

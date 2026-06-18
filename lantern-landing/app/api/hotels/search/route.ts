@@ -3,6 +3,11 @@ import { searchGoogleHotels } from "../providers/googleHotels";
 import { enrichWithGooglePlaces } from "../providers/googlePlaces";
 import type { PlacesEnrichment } from "../providers/googlePlaces";
 import type { NearbyPlace, ProviderHotel } from "../providers/types";
+import { createRateLimiter, getClientIP, rateLimitedResponse } from "@/lib/rate-limit";
+
+// 20 requests per 10 minutes per IP — hotel search triggers multiple downstream API calls
+// TODO: replace createRateLimiter with Upstash Ratelimit when adding Redis
+const searchLimiter = createRateLimiter({ windowMs: 10 * 60 * 1000, max: 20 });
 
 export const runtime     = "nodejs";
 export const dynamic     = "force-dynamic";
@@ -2110,6 +2115,13 @@ function nightsBetween(checkIn: string, checkOut: string): number {
 // ── POST /api/hotels/search ───────────────────────────────────────────────────
 
 export async function POST(req: Request) {
+  const ip          = getClientIP(req);
+  const limitResult = searchLimiter(ip);
+  if (!limitResult.allowed) {
+    console.warn(`[hotel-search] rate limited: ${ip}`);
+    return rateLimitedResponse(limitResult.resetAt);
+  }
+
   let body: Record<string, unknown>;
   try { body = await req.json() as Record<string, unknown>; }
   catch { return NextResponse.json({ status: "error", message: "Invalid JSON." }, { status: 400 }); }

@@ -4,7 +4,10 @@ import { emptySummary } from "./types";
 // TODO: replace with durable cache (Vercel KV / Redis) for production.
 // Keyed by a stable hash of the review texts so summaries regenerate if content changes.
 const summaryCache = new Map<string, { summary: ReviewSummary; ts: number }>();
-const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 h
+
+// TODO: replace with Upstash Redis / Vercel KV for durability across cold starts.
+// 7-day TTL: summary only regenerates when review content changes (key includes review IDs).
+const CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
 // Simple deterministic key: sorted review IDs joined.
 // If review content changes (e.g. new snippet), key changes → regenerate.
@@ -117,25 +120,30 @@ async function callOpenAI(prompt: string): Promise<SummaryRaw | null> {
 
 // ── Public API ────────────────────────────────────────────────────────────────
 
+export interface GenerateSummaryResult {
+  summary:  ReviewSummary;
+  cacheHit: boolean;
+}
+
 export async function generateReviewSummary(
   hotelName: string,
   city: string,
   reviews: Review[],
-): Promise<ReviewSummary> {
+): Promise<GenerateSummaryResult> {
   // Only summarise when there is text to work with
   const usable = reviews.filter((r) => r.text.trim().length > 10);
-  if (usable.length === 0) return emptySummary;
+  if (usable.length === 0) return { summary: emptySummary, cacheHit: false };
 
   const key = summaryKey(hotelName, usable);
   const hit = summaryCache.get(key);
-  if (hit && Date.now() - hit.ts < CACHE_TTL_MS) return hit.summary;
+  if (hit && Date.now() - hit.ts < CACHE_TTL_MS) return { summary: hit.summary, cacheHit: true };
 
   const prompt = buildPrompt(hotelName, city, usable);
   const raw    = await callOpenAI(prompt);
 
   if (!raw) {
     // OpenAI unavailable — return empty so the UI degrades gracefully
-    return emptySummary;
+    return { summary: emptySummary, cacheHit: false };
   }
 
   const summary: ReviewSummary = {
@@ -154,7 +162,7 @@ export async function generateReviewSummary(
     summary.bestFor.length > 0 ||
     summary.notIdealFor.length > 0;
 
-  if (!hasContent) return emptySummary;
+  if (!hasContent) return { summary: emptySummary, cacheHit: false };
 
   summaryCache.set(key, { summary, ts: Date.now() });
   console.log(
@@ -163,5 +171,5 @@ export async function generateReviewSummary(
     `${summary.bestFor.length} best-for, ${summary.notIdealFor.length} not-ideal`,
   );
 
-  return summary;
+  return { summary, cacheHit: false };
 }
