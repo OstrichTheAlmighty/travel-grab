@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
-import type { Review, ReviewsResult } from "@/lib/reviews/types";
+import type { Review, ReviewsResult, ReviewSummary } from "@/lib/reviews/types";
 import { NeighborhoodCompare } from "./NeighborhoodCompare";
 import type { ComparableSummary } from "./NeighborhoodCompare";
 import MapNeighborhoodPanel from "./MapNeighborhoodPanel";
@@ -1689,7 +1689,8 @@ function PhotoCarousel({ images, thumbnails, hotelName, hotelId }: {
 
 // Session-scoped caches — prevent re-fetching when the drawer is closed and reopened
 // for the same hotel within a browser session. Keyed by hotel_id.
-const sessionReviewCache = new Map<string, ReviewsResult & { cacheHit: boolean }>();
+const sessionReviewCache  = new Map<string, ReviewsResult & { cacheHit: boolean }>();
+const sessionSummaryCache = new Map<string, ReviewSummary & { cacheHit: boolean }>();
 
 const REVIEW_CHIPS = ["Room", "Location", "Breakfast", "Noise", "Staff", "Small rooms", "Transit"] as const;
 const REVIEW_HIGHLIGHT_RE = (query: string) => {
@@ -1809,185 +1810,105 @@ function ReviewCard({
   );
 }
 
-// ── Client-side Review Insights (keyword matching, no LLM) ───────────────────
-//
-// Themes are derived entirely from the review text already in state — no extra
-// API call. A theme only qualifies if it appears in ≥ 2 reviews; if fewer than
-// 2 themes are found in total the panel stays hidden.
+// ── AI Review Insights panel ──────────────────────────────────────────────────
 
-type ClientFrequency = "frequently mentioned" | "recurring theme" | "mentioned by several guests";
-
-interface ClientInsight { label: string; frequency: ClientFrequency; }
-
-interface ClientInsights {
-  guestsLove:        ClientInsight[];
-  potentialConcerns: ClientInsight[];
-  bestFor:           ClientInsight[];
-}
-
-interface ThemeRule {
-  category: keyof ClientInsights;
-  label:    string;
-  keywords: string[];  // OR'd per review — any keyword hit counts as one mention
-}
-
-const THEME_RULES: ThemeRule[] = [
-  // ── Guests Love ───────────────────────────────────────────────────────
+const INSIGHT_CATEGORIES = [
   {
-    category: "guestsLove", label: "Convenient location",
-    keywords: ["great location", "perfect location", "excellent location", "good location",
-               "convenient location", "central location", "convenient", "near station",
-               "near metro", "near subway", "walking distance", "close to station",
-               "minutes walk", "minute walk", "minutes from"],
+    key:     "guestsLove"       as const,
+    label:   "Guests Love",
+    icon:    "✓",
+    iconCls: "text-lantern-mint",
+    itemCls: "text-white/65",
   },
   {
-    category: "guestsLove", label: "Helpful staff",
-    keywords: ["helpful staff", "friendly staff", "great staff", "amazing staff",
-               "excellent staff", "kind staff", "staff were helpful", "staff was helpful",
-               "staff were friendly", "staff was friendly", "helpful", "friendly",
-               "staff very", "very friendly"],
+    key:     "commonComplaints" as const,
+    label:   "Common Complaints",
+    icon:    "⚠",
+    iconCls: "text-lantern-gold",
+    itemCls: "text-white/60",
   },
   {
-    category: "guestsLove", label: "Clean and tidy",
-    keywords: ["clean", "spotless", "tidy", "immaculate", "hygienic", "well maintained"],
+    key:     "bestFor"          as const,
+    label:   "Best For",
+    icon:    "•",
+    iconCls: "text-lantern-blue",
+    itemCls: "text-white/65",
   },
   {
-    category: "guestsLove", label: "Comfortable beds",
-    keywords: ["comfortable bed", "comfy bed", "great bed", "good bed", "slept well",
-               "good sleep", "soft bed", "comfortable mattress"],
+    key:     "notIdealFor"      as const,
+    label:   "Not Ideal For",
+    icon:    "•",
+    iconCls: "text-white/30",
+    itemCls: "text-white/45",
   },
-  {
-    category: "guestsLove", label: "Good value",
-    keywords: ["good value", "great value", "excellent value", "value for money",
-               "affordable", "reasonable price", "inexpensive", "budget friendly"],
-  },
-  {
-    category: "guestsLove", label: "Good breakfast",
-    keywords: ["breakfast", "buffet"],
-  },
-  // ── Potential Concerns ────────────────────────────────────────────────
-  {
-    category: "potentialConcerns", label: "Rooms are small",
-    keywords: ["small room", "tiny room", "rooms are small", "room was small",
-               "room is small", "very small", "quite small", "cramped", "narrow room",
-               "compact room", "compact but"],
-  },
-  {
-    category: "potentialConcerns", label: "Noise from outside",
-    keywords: ["noisy", "loud", "street noise", "thin walls", "could hear",
-               "noise from", "traffic noise", "heard noise"],
-  },
-  {
-    category: "potentialConcerns", label: "Wi-Fi issues",
-    keywords: ["wifi", "wi-fi", "slow internet", "weak wifi", "poor wifi",
-               "internet was slow", "bad wifi", "no wifi"],
-  },
-  // ── Best For ──────────────────────────────────────────────────────────
-  {
-    category: "bestFor", label: "Sightseeing base",
-    keywords: ["sightseeing", "tourist attractions", "explore", "landmarks", "tourism"],
-  },
-  {
-    category: "bestFor", label: "Business travel",
-    keywords: ["business trip", "business travel", "work trip", "conference"],
-  },
-  {
-    category: "bestFor", label: "Short stays",
-    keywords: ["short stay", "overnight", "stopover", "layover", "one night stay", "transit"],
-  },
-];
+] as const;
 
-function toClientFrequency(count: number): ClientFrequency {
-  if (count >= 5) return "frequently mentioned";
-  if (count >= 3) return "recurring theme";
-  return "mentioned by several guests";
-}
+type InsightKey = typeof INSIGHT_CATEGORIES[number]["key"];
 
-function computeInsights(reviews: Review[]): ClientInsights | null {
-  if (reviews.length === 0) return null;
-  const texts = reviews.map((r) => r.text.toLowerCase());
+function ReviewInsightsPanel({
+  summary,
+  loading,
+  hotelName,
+}: {
+  summary:   ReviewSummary | null;
+  loading:   boolean;
+  hotelName: string;
+}) {
+  // Hide entirely if the AI returned nothing useful
+  if (!loading && (!summary || !summary.available)) return null;
 
-  const result: ClientInsights = { guestsLove: [], potentialConcerns: [], bestFor: [] };
-
-  for (const rule of THEME_RULES) {
-    const count = texts.filter((t) => rule.keywords.some((kw) => t.includes(kw))).length;
-    if (count >= 2) {
-      result[rule.category].push({ label: rule.label, frequency: toClientFrequency(count) });
-    }
-  }
-
-  const total = result.guestsLove.length + result.potentialConcerns.length + result.bestFor.length;
-  return total >= 2 ? result : null;
-}
-
-function ClientInsightsPanel({ reviews }: { reviews: Review[] }) {
-  const [expanded, setExpanded] = useState(false);
-  const insights = useMemo(() => computeInsights(reviews), [reviews]);
-
-  if (!insights) return null;
+  const activeCats = loading
+    ? []
+    : INSIGHT_CATEGORIES.filter((c) => (summary![c.key] as string[]).length > 0);
 
   return (
     <div className="border-t border-white/[0.06] pt-4">
-      <button
-        onClick={() => setExpanded((v) => !v)}
-        className="w-full flex items-center justify-between mb-3 group"
-      >
+      <div className="flex items-center gap-2 mb-3">
         <span className="text-[10px] font-black uppercase tracking-widest text-white/40">
           Guest Review Insights
         </span>
-        <svg
-          className={`w-3.5 h-3.5 text-white/25 transition-transform group-hover:text-white/45 ${expanded ? "" : "-rotate-90"}`}
-          viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round"
-        >
-          <path d="M6 9l6 6 6-6" />
-        </svg>
-      </button>
+        {!loading && summary?.limitedCoverage && (
+          <span className="text-[9px] text-white/25 font-normal normal-case tracking-normal">
+            · limited sample
+          </span>
+        )}
+      </div>
 
-      {expanded && (
+      {/* Loading skeleton */}
+      {loading && (
+        <div className="grid grid-cols-2 gap-2 animate-pulse">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="rounded-lg border border-white/[0.06] p-3 space-y-2">
+              <div className="h-2 w-20 rounded bg-white/[0.08]" />
+              <div className="h-2 w-full rounded bg-white/[0.05]" />
+              <div className="h-2 w-4/5 rounded bg-white/[0.05]" />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Category cards */}
+      {!loading && activeCats.length > 0 && (
         <div className="grid grid-cols-2 gap-2">
-          {insights.guestsLove.length > 0 && (
-            <div className="rounded-lg border border-white/[0.07] bg-white/[0.02] p-3 space-y-1.5">
-              <div className="text-[10px] font-bold text-white/45 mb-1">Guests Love</div>
-              {insights.guestsLove.map((item, i) => (
-                <div key={i} className="flex items-start gap-1.5">
-                  <span className="text-[10px] flex-shrink-0 mt-px font-bold text-lantern-mint">✓</span>
-                  <div>
-                    <span className="text-[11px] leading-snug text-white/65">{item.label}</span>
-                    <span className="block text-[9px] text-white/25 mt-0.5">{item.frequency}</span>
+          {activeCats.map((cat) => {
+            const items = summary![cat.key] as string[];
+            return (
+              <div
+                key={cat.key}
+                className="rounded-lg border border-white/[0.07] bg-white/[0.02] p-3 space-y-1.5"
+              >
+                <div className="text-[10px] font-bold text-white/45 mb-1">{cat.label}</div>
+                {items.map((item, i) => (
+                  <div key={i} className="flex items-start gap-1.5">
+                    <span className={`text-[10px] flex-shrink-0 mt-px font-bold ${cat.iconCls}`}>
+                      {cat.icon}
+                    </span>
+                    <span className={`text-[11px] leading-snug ${cat.itemCls}`}>{item}</span>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
-          {insights.potentialConcerns.length > 0 && (
-            <div className="rounded-lg border border-white/[0.07] bg-white/[0.02] p-3 space-y-1.5">
-              <div className="text-[10px] font-bold text-white/45 mb-1">Potential Concerns</div>
-              {insights.potentialConcerns.map((item, i) => (
-                <div key={i} className="flex items-start gap-1.5">
-                  <span className="text-[10px] flex-shrink-0 mt-px font-bold text-lantern-gold">⚠</span>
-                  <div>
-                    <span className="text-[11px] leading-snug text-white/60">{item.label}</span>
-                    <span className="block text-[9px] text-white/25 mt-0.5">{item.frequency}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-          {insights.bestFor.length > 0 && (
-            <div className="col-span-2 rounded-lg border border-white/[0.07] bg-white/[0.02] p-3">
-              <div className="text-[10px] font-bold text-white/45 mb-1.5">Best For</div>
-              <div className="flex flex-wrap gap-1.5">
-                {insights.bestFor.map((item, i) => (
-                  <span
-                    key={i}
-                    className="text-[10px] px-2 py-0.5 rounded-full border border-lantern-blue/30 text-lantern-blue/70 bg-lantern-blue/5"
-                  >
-                    {item.label}
-                  </span>
                 ))}
               </div>
-            </div>
-          )}
+            );
+          })}
         </div>
       )}
     </div>
@@ -2017,6 +1938,8 @@ function GuestReviewsSection({
   const [query,                setQuery]                = useState("");
   const [ratingFilter,         setRatingFilter]         = useState<"all" | 5 | 4 | "low">("all");
   const [sortKey,              setSortKey]              = useState<ReviewSortKey>("relevant");
+  const [summary,              setSummary]              = useState<ReviewSummary | null>(null);
+  const [summaryLoading,       setSummaryLoading]       = useState(true);
 
   const searchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -2029,6 +1952,7 @@ function GuestReviewsSection({
     setRatingFilter("all");
     setSortKey("relevant");
     setProviderLimitReached(false);
+    setSummary(null);
 
     const cached = sessionReviewCache.get(hotelId);
     if (cached) {
@@ -2077,6 +2001,53 @@ function GuestReviewsSection({
       })
       .catch((e: unknown) => setError(String(e)))
       .finally(() => setLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hotelId]);
+
+  // Parallel fetch: AI summary — server shares review cache so no double Places API call
+  useEffect(() => {
+    setSummaryLoading(true);
+    setSummary(null);
+
+    const cached = sessionSummaryCache.get(hotelId);
+    if (cached) {
+      setSummary(cached);
+      track("review_summary_cache_hit", { hotel_name: hotelName });
+      setSummaryLoading(false);
+      return;
+    }
+
+    fetch("/api/hotels/review-summary", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ hotelName, city }),
+    })
+      .then(async (r) => {
+        if (r.status === 429) {
+          track("api_rate_limited", { route: "review-summary", hotel_name: hotelName });
+          return null;
+        }
+        return r.json() as Promise<ReviewSummary & { cacheHit?: boolean }>;
+      })
+      .then((data) => {
+        if (!data) return;
+        const withHit = { ...data, cacheHit: data.cacheHit ?? false };
+        setSummary(withHit);
+        sessionSummaryCache.set(hotelId, withHit);
+        track(data.cacheHit ? "review_summary_cache_hit" : "review_summary_cache_miss", {
+          hotel_name: hotelName,
+        });
+        if (data.available) {
+          track("hotel_review_summary_loaded", {
+            hotel_name:       hotelName,
+            loves_count:      data.guestsLove.length,
+            complaints_count: data.commonComplaints.length,
+            limited_coverage: data.limitedCoverage,
+          });
+        }
+      })
+      .catch(() => setSummary(null))
+      .finally(() => setSummaryLoading(false));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hotelId]);
 
@@ -2162,6 +2133,13 @@ function GuestReviewsSection({
           </div>
         )}
 
+        {/* AI Review Insights — shown above reviews, has its own loading state */}
+        <ReviewInsightsPanel
+          summary={summary}
+          loading={summaryLoading}
+          hotelName={hotelName}
+        />
+
         {/* Loading skeletons */}
         {loading && (
           <div className="space-y-3">
@@ -2187,9 +2165,6 @@ function GuestReviewsSection({
         {/* Review search, sort, and filter UI — only shown once reviews are loaded */}
         {!loading && reviews.length > 0 && (
           <>
-            {/* Guest Review Insights — computed client-side from loaded review text */}
-            <ClientInsightsPanel reviews={reviews} />
-
             {/* Search input */}
             <div className="relative">
               <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/25 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
