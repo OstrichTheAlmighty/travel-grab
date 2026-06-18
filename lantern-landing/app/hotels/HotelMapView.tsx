@@ -29,6 +29,7 @@ export interface MapHotelOffer {
   longitude?:             number;
   overall_rating?:        number;
   rank_bullets?:          string[];
+  rank_weakness?:         string;
 }
 
 interface MapNeighborhood {
@@ -141,7 +142,7 @@ function makeLineLayer(recId: string | null, selId: string | null): LayerProps {
 function Marker1({ hotel, isSelected, onClick }: {
   hotel:      MapHotelOffer;
   isSelected: boolean;
-  onClick:    () => void;
+  onClick:    (e: React.MouseEvent) => void;
 }) {
   const shortName = hotel.name.split(",")[0].split("–")[0].trim();
   const display   = shortName.length > 22 ? shortName.slice(0, 20) + "…" : shortName;
@@ -180,19 +181,44 @@ function Marker2({ hotel, rank, isSelected, onClick }: {
   hotel:      MapHotelOffer;
   rank:       number;
   isSelected: boolean;
-  onClick:    () => void;
+  onClick:    (e: React.MouseEvent) => void;
 }) {
+  const shortName = hotel.name.split(",")[0].split("–")[0].trim();
+  const display   = shortName.length > 18 ? shortName.slice(0, 16) + "…" : shortName;
+
+  if (isSelected) {
+    return (
+      <button
+        onClick={onClick}
+        className="flex flex-col items-start rounded-xl px-2.5 py-1.5 border shadow-lg text-left
+          bg-[#090e1a]/95 border-lantern-violet/60 text-white scale-105 shadow-lantern-violet/15
+          transition-all duration-150"
+        style={{ backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)" }}
+      >
+        <span className="text-[10px] font-black uppercase tracking-[0.08em] text-lantern-violet/80 leading-none mb-0.5">
+          #{rank}
+        </span>
+        <span className="text-[11px] font-bold leading-tight text-white/90 mb-0.5">{display}</span>
+        <span className="text-[10px] font-semibold text-lantern-violet/80">
+          ${Math.round(hotel.price_per_night)}/night
+          {hotel.overall_rating && hotel.overall_rating > 0
+            ? ` · ${hotel.overall_rating.toFixed(1)}★`
+            : ""}
+        </span>
+        {hotel.rank_weakness && (
+          <span className="text-[9px] text-white/35 leading-snug mt-0.5 max-w-[140px]">
+            {hotel.rank_weakness}
+          </span>
+        )}
+      </button>
+    );
+  }
+
   return (
     <button
       onClick={onClick}
-      className={`
-        rounded-full px-2.5 py-1
-        border text-[10px] font-bold
-        transition-all duration-150
-        ${isSelected
-          ? "bg-lantern-violet border-lantern-violet/80 text-white scale-110"
-          : "bg-[#0e1422]/90 border-white/20 text-white/75 hover:border-white/45 hover:text-white"}
-      `}
+      className="rounded-full px-2.5 py-1 border text-[10px] font-bold transition-all duration-150
+        bg-[#0e1422]/90 border-white/20 text-white/75 hover:border-white/45 hover:text-white"
       style={{ backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)" }}
     >
       #{rank} · ${Math.round(hotel.price_per_night)}
@@ -200,21 +226,36 @@ function Marker2({ hotel, rank, isSelected, onClick }: {
   );
 }
 
-function Marker3({ isSelected, onClick }: {
-  hotel:      MapHotelOffer;
-  isSelected: boolean;
-  onClick:    () => void;
+function Marker3({ hotel, isSelected, isOutsideArea, onClick }: {
+  hotel:           MapHotelOffer;
+  isSelected:      boolean;
+  isOutsideArea?:  boolean;
+  onClick:         (e: React.MouseEvent) => void;
 }) {
+  const areaName = hotel.inferred_neighborhood || "another area";
   return (
-    <button
-      onClick={onClick}
-      className={`
-        w-2.5 h-2.5 rounded-full border transition-all duration-150
-        ${isSelected
-          ? "bg-white border-white scale-150"
-          : "bg-white/30 border-white/20 hover:bg-white/55 hover:border-white/45"}
-      `}
-    />
+    <div className="relative">
+      <button
+        onClick={onClick}
+        className={`
+          w-2.5 h-2.5 rounded-full border transition-all duration-150
+          ${isSelected
+            ? "bg-white border-white scale-150"
+            : "bg-white/30 border-white/20 hover:bg-white/55 hover:border-white/45"}
+        `}
+      />
+      {isSelected && isOutsideArea && (
+        <div
+          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 pointer-events-none
+            bg-[#090e1a]/95 border border-white/[0.12] rounded-lg px-2.5 py-1.5 whitespace-nowrap"
+          style={{ backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)" }}
+        >
+          <p className="text-[10px] text-white/50 leading-snug">
+            In {areaName} · ranked lower area
+          </p>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -229,7 +270,7 @@ function NbhdLabel({ name, isRec, isSelected }: {
     <div
       className={`
         text-[10px] font-black uppercase tracking-[0.12em]
-        pointer-events-none select-none
+        select-none cursor-pointer
         px-1.5 py-0.5
         ${isSelected ? "text-lantern-violet" : isRec ? "text-lantern-mint" : "text-white/35"}
       `}
@@ -330,13 +371,13 @@ export default function HotelMapView({
         const id = e.features[0].properties?.id as string | undefined;
         if (id) {
           onSelectNeighborhood(id === selectedNeighborhood ? null : id);
-          return;
         }
       }
-      // Click on empty map → deselect hotel
-      onSelectHotel(null);
+      // Intentionally do NOT clear selectedHotelId on empty-map click.
+      // Marker button clicks are DOM events and don't reach the canvas; however
+      // clearing here would race with and cancel any marker-click selection.
     },
-    [selectedNeighborhood, onSelectNeighborhood, onSelectHotel],
+    [selectedNeighborhood, onSelectNeighborhood],
   );
 
   // ── Layer paint (memoised so we avoid recreation on every render) ────────────
@@ -399,8 +440,19 @@ export default function HotelMapView({
 
         {/* ── Hotel markers ─────────────────────────────────────────────── */}
         {geoOffers.map((offer) => {
-          const rank       = rankOf(offer.hotel_id);
-          const isSelected = offer.hotel_id === selectedHotelId;
+          const rank          = rankOf(offer.hotel_id);
+          const isSelected    = offer.hotel_id === selectedHotelId;
+          const isOutsideArea = !!recommendedNbhdId
+            && !!offer.inferred_neighborhood
+            && offer.inferred_neighborhood !== recommendedNbhdId;
+
+          const handleClick = (e: React.MouseEvent) => {
+            e.stopPropagation();
+            const nextId = offer.hotel_id === selectedHotelId ? null : offer.hotel_id;
+            console.log("marker clicked", offer.hotel_id, offer.name);
+            console.log("selected hotel", nextId);
+            onSelectHotel(nextId);
+          };
 
           return (
             <Marker
@@ -408,29 +460,26 @@ export default function HotelMapView({
               longitude={offer.longitude!}
               latitude={offer.latitude!}
               anchor="bottom"
-              onClick={(e) => {
-                e.originalEvent.stopPropagation();
-                onSelectHotel(offer.hotel_id === selectedHotelId ? null : offer.hotel_id);
-              }}
             >
               {rank === 1 ? (
                 <Marker1
                   hotel={offer}
                   isSelected={isSelected}
-                  onClick={() => onSelectHotel(offer.hotel_id === selectedHotelId ? null : offer.hotel_id)}
+                  onClick={handleClick}
                 />
               ) : rank <= 4 ? (
                 <Marker2
                   hotel={offer}
                   rank={rank}
                   isSelected={isSelected}
-                  onClick={() => onSelectHotel(offer.hotel_id === selectedHotelId ? null : offer.hotel_id)}
+                  onClick={handleClick}
                 />
               ) : (
                 <Marker3
                   hotel={offer}
                   isSelected={isSelected}
-                  onClick={() => onSelectHotel(offer.hotel_id === selectedHotelId ? null : offer.hotel_id)}
+                  isOutsideArea={isOutsideArea}
+                  onClick={handleClick}
                 />
               )}
             </Marker>

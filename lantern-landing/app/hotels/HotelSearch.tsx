@@ -3902,6 +3902,13 @@ export default function HotelSearch() {
 
   const resultsRef = useRef<HTMLDivElement>(null);
 
+  // Scroll the matching hotel card into view whenever a map marker is clicked.
+  useEffect(() => {
+    if (!selectedHotelId || viewMode !== "map") return;
+    const el = document.querySelector<HTMLElement>(`[data-hotel-id="${selectedHotelId}"]`);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [selectedHotelId, viewMode]);
+
   const togglePref = (id: string) => {
     setSelectedPrefs((prev) =>
       prev.includes(id as PrefId)
