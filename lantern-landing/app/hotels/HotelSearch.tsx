@@ -1549,14 +1549,45 @@ function NeighborhoodGuide({
   );
 }
 
+// ── Photo URL helpers ─────────────────────────────────────────────────────────
+
+// Google image-serving URLs (lh3/lh5/etc.) accept a size specifier at the end
+// of the path: =w800-h600-k-no, =s300, etc.  We can replace that suffix to
+// request a larger (or smaller) version of the same image.
+function resizeGoogleImageUrl(url: string, param: string): string {
+  if (!url || !/lh\d+\.googleusercontent\.com/i.test(url)) return url;
+  return url.replace(/=[swh]\d+[^?#]*/i, "") + param;
+}
+
+const upscalePhoto    = (url: string) => resizeGoogleImageUrl(url, "=w1400");
+const thumbnailPhoto  = (url: string) => resizeGoogleImageUrl(url, "=w200");
+
 // ── PhotoCarousel ─────────────────────────────────────────────────────────────
 
-function PhotoCarousel({ images, hotelName, hotelId }: {
-  images: string[];
+function PhotoCarousel({ images, thumbnails, hotelName, hotelId }: {
+  images: string[];       // full-res for main display
+  thumbnails?: string[];  // small for the strip (falls back to images[])
   hotelName: string;
   hotelId: string;
 }) {
   const [idx, setIdx] = useState(0);
+  // Keyed by index so we remember each photo's resolution once loaded
+  const [imgSizes, setImgSizes] = useState<Record<number, { w: number; h: number }>>({});
+
+  // Reset when a different hotel is opened in the drawer
+  useEffect(() => {
+    setIdx(0);
+    setImgSizes({});
+    if (process.env.NODE_ENV !== "production" && images.length > 0) {
+      console.log("[PhotoCarousel] hotel photos:", {
+        hotel:    hotelName,
+        count:    images.length,
+        firstUrl: images[0],
+      });
+    }
+  // images ref changes every render; hotelId is the stable identity signal
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hotelId]);
 
   if (images.length === 0) return null;
 
@@ -1565,16 +1596,45 @@ function PhotoCarousel({ images, hotelName, hotelId }: {
     setIdx((i) => dir === "next" ? (i + 1) % images.length : (i - 1 + images.length) % images.length);
   };
 
+  const currentSize = imgSizes[idx];
+  // Only switch to contain after we've confirmed the image is low-res
+  const isLowRes = currentSize != null && currentSize.w < 800;
+  const thumbs = thumbnails ?? images;
+
   return (
     <div className="flex-shrink-0">
       {/* Main image */}
       <div className="relative bg-black/30 h-60 sm:h-72 overflow-hidden">
+
+        {/* Blurred background fill shown behind low-res images to avoid letterboxing */}
+        {isLowRes && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={images[idx]}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover blur-xl opacity-30 scale-110 pointer-events-none"
+          />
+        )}
+
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           key={idx}
           src={images[idx]}
           alt={`${hotelName} — photo ${idx + 1}${images.length > 1 ? " of " + images.length : ""}`}
-          className="w-full h-full object-cover"
+          className={`relative w-full h-full transition-none ${isLowRes ? "object-contain" : "object-cover"}`}
+          onLoad={(e) => {
+            const { naturalWidth: w, naturalHeight: h } = e.currentTarget;
+            setImgSizes((prev) => ({ ...prev, [idx]: { w, h } }));
+            if (process.env.NODE_ENV !== "production") {
+              console.log("[PhotoCarousel] image loaded:", {
+                hotel:        hotelName,
+                url:          images[idx],
+                naturalWidth: w,
+                naturalHeight: h,
+              });
+            }
+          }}
           onError={(e) => { e.currentTarget.style.display = "none"; }}
         />
 
@@ -1605,10 +1665,10 @@ function PhotoCarousel({ images, hotelName, hotelId }: {
         )}
       </div>
 
-      {/* Thumbnail strip */}
+      {/* Thumbnail strip — uses smaller URLs to avoid downloading 1400px images at 56px */}
       {images.length > 1 && (
         <div className="flex gap-1.5 overflow-x-auto px-4 py-2.5 bg-black/20 scrollbar-none">
-          {images.map((src, i) => (
+          {thumbs.map((src, i) => (
             <button
               key={i}
               onClick={() => setIdx(i)}
@@ -1653,6 +1713,14 @@ function HotelDetailDrawer({
         review_count: offer.review_count,
         has_snippets: false,
       });
+      if (process.env.NODE_ENV !== "production") {
+        console.log("[HotelDetailDrawer] review fields available:", {
+          hotel:           offer.name,
+          overall_rating:  offer.overall_rating,
+          review_count:    offer.review_count,
+          location_rating: offer.location_rating,
+        });
+      }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offer?.hotel_id]);
@@ -1695,9 +1763,12 @@ function HotelDetailDrawer({
   const isBestOverall = offer.recommendation_label === "Best Overall";
 
   // Photo sources: prefer image_urls array, fall back to single image_url
-  const photos = (offer.image_urls && offer.image_urls.length > 0)
+  const rawPhotos   = (offer.image_urls && offer.image_urls.length > 0)
     ? offer.image_urls
     : offer.image_url ? [offer.image_url] : [];
+  // Upscaled URLs for the main carousel display; small URLs for the thumbnail strip
+  const hdPhotos    = rawPhotos.map(upscalePhoto);
+  const thumbPhotos = rawPhotos.map(thumbnailPhoto);
 
   // Review category data — we have location_rating from Google; no text snippets from current provider
   const hasRatings = offer.overall_rating > 0;
@@ -1732,8 +1803,13 @@ function HotelDetailDrawer({
         <div className="flex-1 overflow-y-auto">
 
           {/* ── Photo gallery — edge-to-edge ── */}
-          {photos.length > 0 && (
-            <PhotoCarousel images={photos} hotelName={offer.name} hotelId={offer.hotel_id} />
+          {rawPhotos.length > 0 && (
+            <PhotoCarousel
+              images={hdPhotos}
+              thumbnails={thumbPhotos}
+              hotelName={offer.name}
+              hotelId={offer.hotel_id}
+            />
           )}
 
           <div className="p-5 space-y-5">
