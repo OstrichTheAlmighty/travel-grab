@@ -1900,6 +1900,7 @@ function HotelCard({
   avgPrice,
   isMapSelected,
   onSelectForMap,
+  onHoverForMap,
   onOpenDetail,
   isInCompare,
   onToggleCompare,
@@ -1913,6 +1914,7 @@ function HotelCard({
   avgPrice: number;
   isMapSelected?: boolean;
   onSelectForMap?: (id: string | null) => void;
+  onHoverForMap?: (id: string | null) => void;
   onOpenDetail?: () => void;
   isInCompare?: boolean;
   onToggleCompare?: () => void;
@@ -1959,6 +1961,8 @@ function HotelCard({
     <div
       data-hotel-id={offer.hotel_id}
       onClick={() => onSelectForMap?.(isMapSelected ? null : offer.hotel_id)}
+      onMouseEnter={() => onHoverForMap?.(offer.hotel_id)}
+      onMouseLeave={() => onHoverForMap?.(null)}
       className={`rounded-xl border transition-all ${
         isMapSelected
           ? "border-lantern-blue/50 bg-lantern-blue/[0.04] shadow-[0_0_24px_rgba(119,167,255,0.12)]"
@@ -3883,6 +3887,7 @@ export default function HotelSearch() {
   const [errors,              setErrors]              = useState<string[]>([]);
   const [viewMode,            setViewMode]            = useState<"list" | "map">("list");
   const [selectedHotelId,     setSelectedHotelId]     = useState<string | null>(null);
+  const [hoveredHotelId,      setHoveredHotelId]      = useState<string | null>(null);
   const [detailHotelId,       setDetailHotelId]       = useState<string | null>(null);
   const [compareIds,          setCompareIds]          = useState<string[]>([]);
   const [comparePanelOpen,    setComparePanelOpen]    = useState(false);
@@ -4209,8 +4214,32 @@ export default function HotelSearch() {
 
           const cardList = (showAllFallback ? offers : displayedOffers);
 
+          // Map computations — used in both mobile overlay and desktop right panel
+          const recommendedNbhdId = nbhdSummaries[0]?.nbhd.id ?? null;
+          const mapSelSummary = selectedNeighborhood
+            ? nbhdSummaries.find((s) => s.nbhd.id === selectedNeighborhood) ?? null
+            : null;
+          const mapPanelData: NbhdPanelData | null = mapSelSummary
+            ? {
+                id:             mapSelSummary.nbhd.id,
+                name:           mapSelSummary.nbhd.name,
+                description:    mapSelSummary.nbhd.description,
+                tags:           mapSelSummary.nbhd.tags,
+                isRecommended:  mapSelSummary.nbhd.id === recommendedNbhdId,
+                chooseIfCopy:   mapSelSummary.nbhd.id !== recommendedNbhdId && nbhdSummaries[0]
+                  ? altChooseIfCopy(mapSelSummary, nbhdSummaries[0], activePrefs)
+                  : null,
+                hotelCount:     mapSelSummary.count,
+                avgPrice:       mapSelSummary.avgPrice,
+                lowestPrice:    mapSelSummary.lowestPrice,
+                topHotelName:   mapSelSummary.bestHotel?.name ?? null,
+                topHotelPrice:  mapSelSummary.bestHotel?.price_per_night ?? null,
+                topHotelRating: mapSelSummary.bestHotel?.overall_rating ?? null,
+              }
+            : null;
+
           return (
-            <div className="max-w-3xl mx-auto" ref={resultsRef}>
+            <div className={viewMode === "map" ? "w-full" : "max-w-3xl mx-auto"} ref={resultsRef}>
 
               {/* ── Search mode toggle ─────────────────────────────────────── */}
               {cityGuide && (
@@ -4378,56 +4407,20 @@ export default function HotelSearch() {
                 )}
               </div>
 
-              {/* ── MAP VIEW ──────────────────────────────────────────────── */}
-              {viewMode === "map" && (() => {
-                // Recommended neighborhood = the one containing the best-scoring hotel
-                const recommendedNbhdId = nbhdSummaries[0]?.nbhd.id ?? null;
+              {/* ── Split layout wrapper: flex row on desktop in map mode ──── */}
+              <div className={viewMode === "map" ? "lg:flex lg:items-start" : ""}>
 
-                // Build NbhdPanelData for the selected neighborhood
-                const selSummary = selectedNeighborhood
-                  ? nbhdSummaries.find((s) => s.nbhd.id === selectedNeighborhood) ?? null
-                  : null;
+                {/* ── Left panel: hotel list + inline nbhd panel ───────────── */}
+                <div className={viewMode === "map" ? "w-full lg:w-[420px] xl:w-[460px] lg:flex-shrink-0 lg:pr-4" : ""}>
 
-                const panelData: NbhdPanelData | null = selSummary
-                  ? {
-                      id:             selSummary.nbhd.id,
-                      name:           selSummary.nbhd.name,
-                      description:    selSummary.nbhd.description,
-                      tags:           selSummary.nbhd.tags,
-                      isRecommended:  selSummary.nbhd.id === recommendedNbhdId,
-                      chooseIfCopy:   selSummary.nbhd.id !== recommendedNbhdId && nbhdSummaries[0]
-                        ? altChooseIfCopy(selSummary, nbhdSummaries[0], activePrefs)
-                        : null,
-                      hotelCount:     selSummary.count,
-                      avgPrice:       selSummary.avgPrice,
-                      lowestPrice:    selSummary.lowestPrice,
-                      topHotelName:   selSummary.bestHotel?.name ?? null,
-                      topHotelPrice:  selSummary.bestHotel?.price_per_night ?? null,
-                      topHotelRating: selSummary.bestHotel?.overall_rating ?? null,
-                    }
-                  : null;
-
-                return (
-                  <div className="relative -mx-4 sm:-mx-0 mb-4">
-                    {/* Desktop: sidebar + map side by side */}
-                    {/* Mobile: map full height, bottom sheet overlay */}
-                    <div className="flex flex-col lg:flex-row lg:rounded-xl lg:overflow-hidden lg:border lg:border-white/[0.07]"
-                      style={{ height: "clamp(420px, calc(100vh - 320px), 680px)" }}>
-
-                      {/* Left sidebar — desktop only */}
-                      <div className="hidden lg:flex lg:flex-col lg:w-[280px] lg:flex-shrink-0 lg:border-r lg:border-white/[0.06] lg:bg-[#090e1a]">
-                        <MapNeighborhoodPanel
-                          data={panelData}
-                          onClose={() => setSelectedNeighborhood(null)}
-                          variant="sidebar"
-                        />
-                      </div>
-
-                      {/* Map area */}
-                      <div className="relative flex-1 min-h-[420px] lg:min-h-0 rounded-xl lg:rounded-none overflow-hidden border border-white/[0.07] lg:border-0">
+                  {/* ── MAP VIEW (mobile): fixed full-screen overlay ─────────── */}
+                  {viewMode === "map" && (
+                    <>
+                      {/* Full-screen map fixed below the nav bar */}
+                      <div className="lg:hidden fixed inset-x-0 bottom-0 z-30" style={{ top: 56 }}>
                         <HotelMapView
                           offers={offers}
-                          selectedHotelId={selectedHotelId}
+                          selectedHotelId={hoveredHotelId ?? selectedHotelId}
                           onSelectHotel={setSelectedHotelId}
                           destination={searchedDest}
                           cityGuide={cityGuide}
@@ -4436,20 +4429,27 @@ export default function HotelSearch() {
                           activePrefs={activePrefs}
                           recommendedNbhdId={recommendedNbhdId}
                         />
+                        {/* Mobile bottom sheet */}
+                        <MapNeighborhoodPanel
+                          data={mapPanelData}
+                          onClose={() => setSelectedNeighborhood(null)}
+                          variant="sheet"
+                        />
                       </div>
-                    </div>
-
-                    {/* Mobile bottom sheet */}
-                    <div className="lg:hidden">
-                      <MapNeighborhoodPanel
-                        data={panelData}
-                        onClose={() => setSelectedNeighborhood(null)}
-                        variant="sheet"
-                      />
-                    </div>
-                  </div>
-                );
-              })()}
+                      {/* Mobile spacer prevents list content from peeking under the fixed map */}
+                      <div className="lg:hidden" style={{ height: "calc(100vh - 56px)" }} />
+                      {/* Desktop: inline neighborhood panel above hotel cards */}
+                      {mapPanelData && (
+                        <div className="hidden lg:block mb-4">
+                          <MapNeighborhoodPanel
+                            data={mapPanelData}
+                            onClose={() => setSelectedNeighborhood(null)}
+                            variant="sidebar"
+                          />
+                        </div>
+                      )}
+                    </>
+                  )}
 
               {/* ── LIST VIEW: Neighborhood guide (Best Area mode only) ───── */}
               {viewMode === "list" && cityGuide && searchMode === "best-area" && (
@@ -4580,6 +4580,7 @@ export default function HotelSearch() {
                       avgPrice={avgPrice}
                       isMapSelected={viewMode === "map" && offer.hotel_id === selectedHotelId}
                       onSelectForMap={viewMode === "map" ? setSelectedHotelId : undefined}
+                      onHoverForMap={viewMode === "map" ? setHoveredHotelId : undefined}
                       onOpenDetail={() => setDetailHotelId(offer.hotel_id)}
                       isInCompare={compareIds.includes(offer.hotel_id)}
                       onToggleCompare={() => toggleCompare(offer.hotel_id)}
@@ -4606,6 +4607,29 @@ export default function HotelSearch() {
               <div className="mt-6 text-center text-[11px] text-white/20 leading-relaxed">
                 Prices from Google Hotels via SerpAPI · Same prices as Google Hotels, ranked by your preferences.
               </div>
+
+                </div>{/* ── end left panel ── */}
+
+                {/* ── Right panel: sticky map (desktop only, map mode only) ── */}
+                {viewMode === "map" && (
+                  <div
+                    className="hidden lg:block flex-1 sticky top-14 overflow-hidden rounded-xl border border-white/[0.07]"
+                    style={{ height: "calc(100vh - 56px)" }}
+                  >
+                    <HotelMapView
+                      offers={offers}
+                      selectedHotelId={hoveredHotelId ?? selectedHotelId}
+                      onSelectHotel={setSelectedHotelId}
+                      destination={searchedDest}
+                      cityGuide={cityGuide}
+                      selectedNeighborhood={selectedNeighborhood}
+                      onSelectNeighborhood={setSelectedNeighborhood}
+                      activePrefs={activePrefs}
+                      recommendedNbhdId={recommendedNbhdId}
+                    />
+                  </div>
+                )}
+              </div>{/* ── end split wrapper ── */}
             </div>
           );
         })()}
