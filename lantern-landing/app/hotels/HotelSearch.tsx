@@ -1560,70 +1560,68 @@ function PhotoCarousel({ images, hotelName, hotelId }: {
 
   if (images.length === 0) return null;
 
-  if (images.length === 1) {
-    return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        src={images[0]}
-        alt={hotelName}
-        className="w-full h-52 sm:h-64 rounded-xl object-cover bg-white/[0.04]"
-        onError={(e) => { e.currentTarget.style.display = "none"; }}
-      />
-    );
-  }
-
   const go = (dir: "prev" | "next") => {
     track("hotel_photo_scrolled", { hotel_id: hotelId, hotel_name: hotelName, direction: dir });
     setIdx((i) => dir === "next" ? (i + 1) % images.length : (i - 1 + images.length) % images.length);
   };
 
   return (
-    <div className="relative rounded-xl overflow-hidden bg-white/[0.04] h-52 sm:h-64 flex-shrink-0">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        key={idx}
-        src={images[idx]}
-        alt={`${hotelName} — photo ${idx + 1} of ${images.length}`}
-        className="w-full h-full object-cover"
-        onError={(e) => { e.currentTarget.style.display = "none"; }}
-      />
+    <div className="flex-shrink-0">
+      {/* Main image */}
+      <div className="relative bg-black/30 h-60 sm:h-72 overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          key={idx}
+          src={images[idx]}
+          alt={`${hotelName} — photo ${idx + 1}${images.length > 1 ? " of " + images.length : ""}`}
+          className="w-full h-full object-cover"
+          onError={(e) => { e.currentTarget.style.display = "none"; }}
+        />
 
-      {/* Left arrow */}
-      <button
-        onClick={() => go("prev")}
-        aria-label="Previous photo"
-        className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/55 border border-white/15 flex items-center justify-center text-white/70 hover:bg-black/75 hover:text-white transition-all"
-      >
-        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-          <path d="M15 18l-6-6 6-6" />
-        </svg>
-      </button>
-
-      {/* Right arrow */}
-      <button
-        onClick={() => go("next")}
-        aria-label="Next photo"
-        className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/55 border border-white/15 flex items-center justify-center text-white/70 hover:bg-black/75 hover:text-white transition-all"
-      >
-        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-          <path d="M9 18l6-6-6-6" />
-        </svg>
-      </button>
-
-      {/* Dot indicators */}
-      <div className="absolute bottom-2.5 left-0 right-0 flex justify-center gap-1.5 pointer-events-none">
-        {images.map((_, i) => (
-          <span
-            key={i}
-            className={`rounded-full transition-all ${i === idx ? "w-3.5 h-1.5 bg-white" : "w-1.5 h-1.5 bg-white/35"}`}
-          />
-        ))}
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={() => go("prev")}
+              aria-label="Previous photo"
+              className="absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 border border-white/15 flex items-center justify-center text-white/75 hover:bg-black/80 hover:text-white transition-all"
+            >
+              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <button
+              onClick={() => go("next")}
+              aria-label="Next photo"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 border border-white/15 flex items-center justify-center text-white/75 hover:bg-black/80 hover:text-white transition-all"
+            >
+              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+            <div className="absolute top-2.5 right-2.5 text-[10px] font-bold text-white/80 bg-black/55 rounded-full px-2 py-0.5 leading-none">
+              {idx + 1} / {images.length}
+            </div>
+          </>
+        )}
       </div>
 
-      {/* Counter */}
-      <div className="absolute top-2 right-2 text-[10px] font-bold text-white/70 bg-black/50 rounded-full px-2 py-0.5 leading-none">
-        {idx + 1} / {images.length}
-      </div>
+      {/* Thumbnail strip */}
+      {images.length > 1 && (
+        <div className="flex gap-1.5 overflow-x-auto px-4 py-2.5 bg-black/20 scrollbar-none">
+          {images.map((src, i) => (
+            <button
+              key={i}
+              onClick={() => setIdx(i)}
+              className={`flex-shrink-0 w-14 h-10 rounded overflow-hidden border transition-all ${
+                i === idx ? "border-white/50 opacity-100" : "border-white/10 opacity-40 hover:opacity-70"
+              }`}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={src} alt="" className="w-full h-full object-cover" />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -1715,7 +1713,7 @@ function HotelDetailDrawer({
       />
 
       {/* Panel */}
-      <div className="fixed inset-y-0 right-0 z-50 w-full max-w-lg bg-[#0e0e14] border-l border-white/[0.07] flex flex-col shadow-2xl overflow-hidden">
+      <div className="fixed inset-y-0 right-0 z-50 w-full max-w-full lg:max-w-[840px] bg-[#0e0e14] border-l border-white/[0.07] flex flex-col shadow-2xl overflow-hidden">
 
         {/* Sticky header */}
         <div className="flex items-center justify-between px-5 py-3 border-b border-white/[0.06] bg-[#0e0e14]/95 backdrop-blur-sm flex-shrink-0">
@@ -1733,16 +1731,14 @@ function HotelDetailDrawer({
         {/* Scrollable content */}
         <div className="flex-1 overflow-y-auto">
 
-          {/* ── Photo carousel ── */}
+          {/* ── Photo gallery — edge-to-edge ── */}
           {photos.length > 0 && (
-            <div className="p-4 pb-0">
-              <PhotoCarousel images={photos} hotelName={offer.name} hotelId={offer.hotel_id} />
-            </div>
+            <PhotoCarousel images={photos} hotelName={offer.name} hotelId={offer.hotel_id} />
           )}
 
           <div className="p-5 space-y-5">
 
-            {/* ── Name + location ── */}
+            {/* ── Name + badges ── */}
             <div>
               <div className="flex items-center gap-2 mb-1.5 flex-wrap">
                 {isBestOverall && (
@@ -1777,7 +1773,7 @@ function HotelDetailDrawer({
             <div>
               <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">Overview</div>
               <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4">
-                <div className="flex items-center gap-4 flex-wrap mb-3">
+                <div className="flex items-center gap-4 flex-wrap">
                   {offer.star_rating > 0 && <StarRating count={offer.star_rating} />}
                   {offer.overall_rating > 0 && (
                     <div className="flex items-baseline gap-1.5">
@@ -1797,24 +1793,67 @@ function HotelDetailDrawer({
                     <div className="text-[9px] font-bold uppercase tracking-wider mt-0.5">TravelGrab Score</div>
                   </div>
                 </div>
-                <div className="flex items-baseline gap-2 flex-wrap border-t border-white/[0.05] pt-3">
-                  <span className={`text-2xl font-black tabular-nums ${scoreColor(offer.ai_score)}`}>
-                    ${Math.round(offer.price_per_night).toLocaleString()}
-                  </span>
-                  <span className="text-sm text-white/40">/ night</span>
-                  {guests > 1 && (
-                    <span className="text-xs text-white/25">
-                      · ${Math.round(offer.price_per_night / guests).toLocaleString()}/person
-                    </span>
-                  )}
-                  {offer.nights > 1 && (
-                    <span className="text-xs text-white/25 ml-auto">
-                      ${Math.round(offer.total_price).toLocaleString()} total · {offer.nights}n
-                    </span>
+                {offer.hotel_type && offer.hotel_type !== "Hotel" && (
+                  <div className="mt-3 border-t border-white/[0.05] pt-3">
+                    <span className="text-[11px] text-white/35">{offer.hotel_type}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* ── Why this hotel fits ── */}
+            {(fitNote || offer.recommendation_why) && (
+              <div className="rounded-xl border border-lantern-violet/20 bg-lantern-violet/[0.04] p-4">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-lantern-violet/60 mb-2">
+                  Why this hotel fits
+                </div>
+                {fitNote && (
+                  <p className="text-xs text-white/55 leading-relaxed mb-1.5">{fitNote}</p>
+                )}
+                {offer.recommendation_why && (
+                  <p className="text-xs text-white/45 leading-relaxed">{offer.recommendation_why}</p>
+                )}
+              </div>
+            )}
+
+            {/* ── Why ranked here ── */}
+            {offer.rank_bullets && offer.rank_bullets.length > 0 && (
+              <div>
+                <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">
+                  {offer.rank_position ? `Ranked #${offer.rank_position} in this search` : "Why this hotel ranked here"}
+                </div>
+                <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4 space-y-2.5">
+                  {offer.rank_bullets.map((b, i) => (
+                    <div key={i} className="flex items-start gap-2.5">
+                      <svg className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-lantern-mint/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20 6L9 17l-5-5" />
+                      </svg>
+                      <span className="text-[12px] text-white/50 leading-snug">{b}</span>
+                    </div>
+                  ))}
+                  {offer.rank_weakness && (
+                    <div className="border-t border-white/[0.05] pt-2.5 mt-1">
+                      <div className="flex items-start gap-2.5">
+                        <svg className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-amber-400/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                        </svg>
+                        <span className="text-[11px] text-white/40 leading-snug">{offer.rank_weakness}</span>
+                      </div>
+                    </div>
                   )}
                 </div>
               </div>
-            </div>
+            )}
+
+            {/* ── About this property ── */}
+            {offer.description && offer.description.trim().length > 30 && (
+              <div>
+                <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">About this property</div>
+                <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4">
+                  <p className="text-[12px] text-white/45 leading-relaxed">{offer.description.trim()}</p>
+                </div>
+              </div>
+            )}
 
             {/* ── Score Breakdown ── */}
             <div>
@@ -1920,28 +1959,12 @@ function HotelDetailDrawer({
               </div>
             )}
 
-            {/* ── Why this hotel fits ── */}
-            {(fitNote || offer.recommendation_why) && (
-              <div className="rounded-xl border border-lantern-violet/20 bg-lantern-violet/[0.04] p-4">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-lantern-violet/60 mb-2">
-                  Why this hotel fits
-                </div>
-                {fitNote && (
-                  <p className="text-xs text-white/55 leading-relaxed mb-1.5">{fitNote}</p>
-                )}
-                {offer.recommendation_why && (
-                  <p className="text-xs text-white/45 leading-relaxed">{offer.recommendation_why}</p>
-                )}
-              </div>
-            )}
-
-            {/* ── Guest Review Signals ── */}
+            {/* ── Guest Ratings ── */}
             <div>
-              <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">Guest Review Signals</div>
+              <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">Guest Ratings</div>
               <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4">
                 {hasRatings ? (
                   <>
-                    {/* Overall rating */}
                     <div className="flex items-baseline gap-2 mb-4">
                       <span className={`text-3xl font-black tabular-nums ${scoreColor(offer.ai_score)}`}>
                         {offer.overall_rating.toFixed(1)}
@@ -1953,10 +1976,7 @@ function HotelDetailDrawer({
                         </span>
                       )}
                     </div>
-
-                    {/* Category bars — only what we actually have data for */}
                     <div className="space-y-2.5 mb-3">
-                      {/* Overall rating as a bar */}
                       <div>
                         <div className="flex items-center justify-between mb-0.5">
                           <span className="text-[11px] text-white/45">Overall</span>
@@ -1968,7 +1988,6 @@ function HotelDetailDrawer({
                           <div className={`h-full rounded-full ${barColor(Math.round(offer.overall_rating / 5 * 100))}`} style={{ width: `${(offer.overall_rating / 5) * 100}%` }} />
                         </div>
                       </div>
-                      {/* Location — from Google location_rating (0–10) */}
                       {offer.location_rating > 0 && (
                         <div>
                           <div className="flex items-center justify-between mb-0.5">
@@ -1983,9 +2002,8 @@ function HotelDetailDrawer({
                         </div>
                       )}
                     </div>
-
                     <p className="text-[10px] text-white/22 leading-relaxed">
-                      Individual review text is not available in this search. Visit the booking page for full guest reviews.
+                      Individual review text is not available from this search result.
                     </p>
                   </>
                 ) : (
@@ -2010,6 +2028,49 @@ function HotelDetailDrawer({
                 </ul>
               </div>
             )}
+
+            {/* ── Price & Booking ── */}
+            <div>
+              <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">Price & Booking</div>
+              <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4 space-y-3">
+                <div className="flex items-baseline gap-2 flex-wrap">
+                  <span className={`text-2xl font-black tabular-nums ${scoreColor(offer.ai_score)}`}>
+                    ${Math.round(offer.price_per_night).toLocaleString()}
+                  </span>
+                  <span className="text-sm text-white/40">/ night</span>
+                  {guests > 1 && (
+                    <span className="text-xs text-white/25">
+                      · ${Math.round(offer.price_per_night / guests).toLocaleString()}/person
+                    </span>
+                  )}
+                </div>
+                {offer.nights > 1 && (
+                  <div className="flex items-center justify-between border-t border-white/[0.05] pt-3">
+                    <span className="text-[11px] text-white/35">Total ({offer.nights} nights)</span>
+                    <span className="text-[13px] font-bold text-white/55">${Math.round(offer.total_price).toLocaleString()}</span>
+                  </div>
+                )}
+                {(offer.check_in || offer.check_out) && (
+                  <div className="flex items-center gap-6 border-t border-white/[0.05] pt-3">
+                    {offer.check_in && (
+                      <div>
+                        <div className="text-[9px] text-white/25 uppercase tracking-wide mb-0.5">Check-in</div>
+                        <div className="text-[12px] text-white/50 font-semibold">{offer.check_in}</div>
+                      </div>
+                    )}
+                    {offer.check_out && (
+                      <div>
+                        <div className="text-[9px] text-white/25 uppercase tracking-wide mb-0.5">Check-out</div>
+                        <div className="text-[12px] text-white/50 font-semibold">{offer.check_out}</div>
+                      </div>
+                    )}
+                  </div>
+                )}
+                <p className="text-[10px] text-white/20 leading-relaxed border-t border-white/[0.05] pt-3">
+                  Prices are from the search results and may change at checkout.
+                </p>
+              </div>
+            </div>
 
             <div className="h-2" />
           </div>

@@ -43,8 +43,8 @@ function parseHotel(raw: R, params: HotelSearchParams): ProviderHotel | null {
   if (pricePerNight <= 0) return null;
 
   const images   = (raw.images as R[] | undefined) ?? [];
-  const imageUrl = (images[0]?.thumbnail as string | undefined)
-                ?? (images[0]?.original  as string | undefined)
+  const imageUrl = (images[0]?.original  as string | undefined)
+                ?? (images[0]?.thumbnail as string | undefined)
                 ?? "";
   const imageUrls = images.slice(0, 8).map((img) =>
     (img.original as string | undefined) ?? (img.thumbnail as string | undefined) ?? ""
