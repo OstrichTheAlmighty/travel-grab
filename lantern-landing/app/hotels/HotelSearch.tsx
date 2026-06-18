@@ -1108,6 +1108,14 @@ function NeighborhoodRecommendation({
 
   return (
     <div className="mb-5">
+      {/* ── Advisor headline — single declarative answer ─────────────────── */}
+      <p className="text-[12px] text-white/50 mb-2.5 leading-snug">
+        {primaryPref
+          ? <>For <span className="font-semibold text-white/70">{prefLabelLower}</span>, we recommend staying in <span className="font-bold text-white/85">{shortName}</span>.</>
+          : <>Our top area pick for this search: <span className="font-bold text-white/85">{shortName}</span>.</>
+        }
+      </p>
+
       {/* ── Main recommendation card ─────────────────────────────────────── */}
       <div className="rounded-2xl border border-lantern-violet/30 bg-lantern-violet/[0.05] p-4 mb-3">
 
@@ -1142,11 +1150,11 @@ function NeighborhoodRecommendation({
           {priceRange && <> · {priceRange}</>}
         </div>
 
-        {/* Why ranked #1 */}
+        {/* Why we recommend this area */}
         {whyBullets.length > 0 && (
           <div className="mb-3">
             <div className="text-[9px] font-black uppercase tracking-widest text-white/22 mb-1.5">
-              Why ranked #1
+              Why this area
             </div>
             <div className="space-y-1.5">
               {whyBullets.map((b, i) => (
@@ -1175,23 +1183,11 @@ function NeighborhoodRecommendation({
           </div>
         )}
 
-        {/* Top hotel preview */}
-        {recommended.bestHotel && (
-          <div className="flex items-center justify-between gap-3 py-2.5 border-t border-b border-white/[0.06] mb-3">
-            <div className="min-w-0">
-              <div className="text-[9px] font-black uppercase tracking-widest text-white/22 mb-0.5">Top Hotel</div>
-              <div className="text-[12px] font-bold text-white/80 leading-tight truncate">{recommended.bestHotel.name}</div>
-            </div>
-            <div className="text-right flex-shrink-0">
-              <div className="text-[12px] font-bold text-white/70">
-                ${Math.round(recommended.bestHotel.price_per_night)}/night
-              </div>
-              <div className="text-[10px] text-white/35">
-                Score {recommended.bestHotel.ai_score}
-                {recommended.bestHotel.overall_rating > 0 && ` · ${recommended.bestHotel.overall_rating.toFixed(1)}★`}
-              </div>
-            </div>
-          </div>
+        {/* Area vibe — practical preview replacing duplicate hotel listing */}
+        {recommended.nbhd.description && (
+          <p className="text-[11px] text-white/48 leading-snug mb-3 border-t border-white/[0.06] pt-3">
+            {recommended.nbhd.description.split(".")[0]}.
+          </p>
         )}
 
         {/* Coverage note — informational, not alarming */}
@@ -1268,9 +1264,9 @@ function NeighborhoodRecommendation({
                 >
                   <div className="flex items-start justify-between gap-2 mb-1">
                     <span className="font-bold text-sm text-white leading-tight">{s.nbhd.name}</span>
-                    {s.avgNfScore > 0 && (
-                      <span className={`text-[11px] font-bold tabular-nums flex-shrink-0 ${scoreColor(s.avgNfScore)}`}>
-                        {s.avgNfScore}
+                    {s.matchedPrefs.length > 0 && (
+                      <span className="text-[10px] text-white/30 flex-shrink-0 mt-0.5">
+                        {s.matchedPrefs.length >= 2 ? "Strong fit" : "Good fit"}
                       </span>
                     )}
                   </div>
