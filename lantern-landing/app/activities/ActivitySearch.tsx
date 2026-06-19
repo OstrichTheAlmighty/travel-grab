@@ -77,22 +77,6 @@ function IconHeart({ filled, className }: { filled: boolean; className?: string 
   );
 }
 
-function IconCalendar({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round">
-      <rect x="3" y="4" width="18" height="18" rx="2" />
-      <path d="M16 2v4M8 2v4M3 10h18" />
-    </svg>
-  );
-}
-
-function IconPeople({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
-    </svg>
-  );
-}
 
 function IconChevron({ className }: { className?: string }) {
   return (
@@ -1055,98 +1039,165 @@ function CategoryFilter({
   );
 }
 
-// ── Search Bar ────────────────────────────────────────────────────────────────
+// ── Destination Search (with Places Autocomplete) ─────────────────────────────
 
-function SearchBar({
-  destination,
-  setDestination,
+interface AutocompleteSuggestionItem {
+  placeId: string;
+  text: string;
+  mainText: string;
+  secondaryText: string;
+}
+
+function DestinationSearch({
+  value,
+  onChange,
   onSearch,
   loading,
 }: {
-  destination: string;
-  setDestination: (v: string) => void;
-  onSearch: () => void;
+  value: string;
+  onChange: (v: string) => void;
+  onSearch: (v?: string) => void;
   loading: boolean;
 }) {
-  const [dateFrom, setDateFrom] = useState("");
-  const [dateTo,   setDateTo]   = useState("");
-  const [travelers, setTravelers] = useState(2);
+  const [suggestions, setSuggestions] = useState<AutocompleteSuggestionItem[]>([]);
+  const [open, setOpen]               = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const [fetching, setFetching]       = useState(false);
+  const debounceRef                   = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const inputRef                      = useRef<HTMLInputElement>(null);
+  const listRef                       = useRef<HTMLUListElement>(null);
+
+  function fetchSuggestions(input: string) {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (input.length < 2) { setSuggestions([]); setOpen(false); return; }
+
+    debounceRef.current = setTimeout(async () => {
+      setFetching(true);
+      try {
+        const res = await fetch("/api/activities/autocomplete", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ input }),
+        });
+        if (!res.ok) return;
+        const data = await res.json() as { suggestions: AutocompleteSuggestionItem[] };
+        setSuggestions(data.suggestions ?? []);
+        setOpen((data.suggestions?.length ?? 0) > 0);
+        setActiveIndex(-1);
+      } catch { /* silently ignore */ }
+      finally { setFetching(false); }
+    }, 300);
+  }
+
+  function selectSuggestion(s: AutocompleteSuggestionItem) {
+    onChange(s.text);
+    setSuggestions([]);
+    setOpen(false);
+    setActiveIndex(-1);
+    onSearch(s.text);
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (!open) {
+      if (e.key === "Enter") onSearch();
+      return;
+    }
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActiveIndex((i) => Math.min(i + 1, suggestions.length - 1));
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActiveIndex((i) => Math.max(i - 1, -1));
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      if (activeIndex >= 0 && suggestions[activeIndex]) {
+        selectSuggestion(suggestions[activeIndex]);
+      } else {
+        setOpen(false);
+        onSearch();
+      }
+    } else if (e.key === "Escape") {
+      setOpen(false);
+      setActiveIndex(-1);
+    }
+  }
 
   return (
     <div className="rounded-2xl border border-white/[0.1] bg-white/[0.03] p-2">
-      <div className="flex flex-col lg:flex-row lg:items-center lg:divide-x lg:divide-white/[0.07] gap-2 lg:gap-0">
+      <div className="flex items-center gap-2">
 
-        {/* Destination */}
-        <div className="flex items-center gap-3 flex-1 min-w-0 px-3 py-2 lg:px-3 lg:pr-5 lg:py-1">
-          <IconPin className="w-4 h-4 text-white/25 flex-shrink-0" />
-          <div className="flex-1 min-w-0">
-            <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-0.5">Destination</div>
+        {/* Input area */}
+        <div className="relative flex-1 min-w-0">
+          <div className="flex items-center gap-3 px-3 py-2">
+            <IconPin className="w-4 h-4 text-white/25 flex-shrink-0" />
             <input
+              ref={inputRef}
               type="text"
-              value={destination}
-              onChange={(e) => setDestination(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && onSearch()}
-              placeholder="City or country"
-              className="w-full bg-transparent text-sm text-white placeholder-white/20 outline-none"
+              value={value}
+              onChange={(e) => {
+                onChange(e.target.value);
+                fetchSuggestions(e.target.value);
+              }}
+              onKeyDown={handleKeyDown}
+              onFocus={() => { if (suggestions.length > 0) setOpen(true); }}
+              onBlur={() => {
+                // small delay so click on suggestion registers first
+                setTimeout(() => setOpen(false), 150);
+              }}
+              placeholder="City, region, or country…"
+              autoComplete="off"
+              spellCheck={false}
+              className="w-full bg-transparent text-sm text-white placeholder-white/25 outline-none"
             />
-          </div>
-        </div>
-
-        {/* Check in */}
-        <div className="flex items-center gap-3 px-3 py-2 lg:px-5 lg:py-1">
-          <IconCalendar className="w-4 h-4 text-white/25 flex-shrink-0" />
-          <div>
-            <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-0.5">Check in</div>
-            <input
-              type="date"
-              value={dateFrom}
-              onChange={(e) => setDateFrom(e.target.value)}
-              className="bg-transparent text-sm text-white/55 outline-none [color-scheme:dark] w-32"
-            />
-          </div>
-        </div>
-
-        {/* Check out */}
-        <div className="flex items-center gap-3 px-3 py-2 lg:px-5 lg:py-1">
-          <IconCalendar className="w-4 h-4 text-white/25 flex-shrink-0" />
-          <div>
-            <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-0.5">Check out</div>
-            <input
-              type="date"
-              value={dateTo}
-              onChange={(e) => setDateTo(e.target.value)}
-              className="bg-transparent text-sm text-white/55 outline-none [color-scheme:dark] w-32"
-            />
-          </div>
-        </div>
-
-        {/* Travelers */}
-        <div className="flex items-center gap-3 px-3 py-2 lg:px-5 lg:py-1">
-          <IconPeople className="w-4 h-4 text-white/25 flex-shrink-0" />
-          <div>
-            <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-0.5">Travelers</div>
-            <div className="flex items-center gap-2">
+            {fetching && (
+              <svg className="w-3.5 h-3.5 text-white/30 animate-spin flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                <circle cx="12" cy="12" r="10" strokeDasharray="31.4" strokeDashoffset="10" />
+              </svg>
+            )}
+            {!fetching && value && (
               <button
-                onClick={() => setTravelers((n) => Math.max(1, n - 1))}
-                className="w-5 h-5 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 transition-colors text-xs font-bold leading-none"
-              >−</button>
-              <span className="text-sm text-white/65 min-w-[64px]">
-                {travelers} {travelers === 1 ? "adult" : "adults"}
-              </span>
-              <button
-                onClick={() => setTravelers((n) => Math.min(20, n + 1))}
-                className="w-5 h-5 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 transition-colors text-xs font-bold leading-none"
-              >+</button>
-            </div>
+                onMouseDown={(e) => { e.preventDefault(); onChange(""); setSuggestions([]); setOpen(false); inputRef.current?.focus(); }}
+                className="text-white/20 hover:text-white/50 transition-colors flex-shrink-0 text-base leading-none"
+              >×</button>
+            )}
           </div>
+
+          {/* Dropdown */}
+          {open && suggestions.length > 0 && (
+            <ul
+              ref={listRef}
+              className="absolute left-0 right-0 top-full mt-1 z-50 rounded-xl border border-white/[0.1] bg-[#0e1422] shadow-xl overflow-hidden"
+            >
+              {suggestions.map((s, i) => (
+                <li key={s.placeId || i}>
+                  <button
+                    onMouseDown={(e) => { e.preventDefault(); selectSuggestion(s); }}
+                    className={`w-full text-left flex items-center gap-3 px-4 py-2.5 transition-colors ${
+                      i === activeIndex
+                        ? "bg-white/[0.08] text-white"
+                        : "text-white/70 hover:bg-white/[0.05] hover:text-white"
+                    }`}
+                  >
+                    <IconPin className="w-3.5 h-3.5 text-white/20 flex-shrink-0" />
+                    <span className="min-w-0 truncate">
+                      <span className="text-sm font-medium text-white">{s.mainText}</span>
+                      {s.secondaryText && (
+                        <span className="text-xs text-white/40 ml-1.5">{s.secondaryText}</span>
+                      )}
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         {/* CTA */}
-        <div className="px-2 pt-1 pb-2 lg:pt-0 lg:pb-0 lg:pl-3">
+        <div className="flex-shrink-0">
           <button
-            onClick={onSearch}
+            onClick={() => onSearch()}
             disabled={loading}
-            className="w-full lg:w-auto flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-gradient-to-r from-lantern-violet to-lantern-blue text-sm font-bold text-white transition-all duration-200 hover:opacity-90 active:scale-[0.98] whitespace-nowrap shadow-[0_4px_20px_rgba(119,167,255,0.2)] disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-gradient-to-r from-lantern-violet to-lantern-blue text-sm font-bold text-white transition-all duration-200 hover:opacity-90 active:scale-[0.98] whitespace-nowrap shadow-[0_4px_20px_rgba(119,167,255,0.2)] disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? (
               <>
@@ -1272,8 +1323,8 @@ export default function ActivitySearch() {
     fetchActivities("Tokyo, Japan");
   }, [fetchActivities]);
 
-  function handleSearch() {
-    const dest = destination.trim();
+  function handleSearch(overrideValue?: string) {
+    const dest = (overrideValue ?? destination).trim();
     if (dest) fetchActivities(dest);
   }
 
@@ -1390,10 +1441,10 @@ export default function ActivitySearch() {
         </div>
 
         {/* ── Search bar ── */}
-        <div className="mb-8">
-          <SearchBar
-            destination={destination}
-            setDestination={setDestination}
+        <div className="mb-8 relative">
+          <DestinationSearch
+            value={destination}
+            onChange={setDestination}
             onSearch={handleSearch}
             loading={loading}
           />
