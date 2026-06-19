@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import type { Activity, Badge, Category } from "./data/types";
-import { DESTINATION_DATA } from "./data/tokyo";
 
 // ── Filter config ─────────────────────────────────────────────────────────────
 
@@ -112,6 +111,31 @@ function IconSearch({ className }: { className?: string }) {
   );
 }
 
+// ── Skeleton card ─────────────────────────────────────────────────────────────
+
+function SkeletonCard() {
+  return (
+    <div className="rounded-2xl border border-white/[0.07] bg-panel overflow-hidden animate-pulse">
+      <div className="h-52 bg-white/[0.05]" />
+      <div className="p-4 space-y-3">
+        <div className="h-2.5 bg-white/[0.06] rounded-full w-1/3" />
+        <div className="h-4 bg-white/[0.07] rounded-full w-5/6" />
+        <div className="h-3 bg-white/[0.05] rounded-full w-2/3" />
+        <div className="space-y-1.5 mt-2">
+          <div className="h-2.5 bg-white/[0.04] rounded-full w-full" />
+          <div className="h-2.5 bg-white/[0.04] rounded-full w-4/5" />
+        </div>
+        <div className="flex gap-1.5 pt-1">
+          <div className="h-5 w-14 bg-white/[0.04] rounded-full" />
+          <div className="h-5 w-16 bg-white/[0.04] rounded-full" />
+          <div className="h-5 w-12 bg-white/[0.04] rounded-full" />
+        </div>
+        <div className="h-8 bg-white/[0.04] rounded-xl mt-2" />
+      </div>
+    </div>
+  );
+}
+
 // ── Activity Card ─────────────────────────────────────────────────────────────
 
 function ActivityCard({
@@ -123,31 +147,47 @@ function ActivityCard({
   saved: boolean;
   onToggleSave: () => void;
 }) {
-  const [showWhy, setShowWhy] = useState(false);
+  const [showWhy,   setShowWhy]   = useState(false);
+  const [imgFailed, setImgFailed] = useState(false);
 
-  // Show up to 2 badges in hero; skip "free" badge if price already says Free
   const heroBadges = activity.badges
     .filter((b) => !(b === "free" && activity.isFree))
     .slice(0, 2);
+
+  const showPhoto = Boolean(activity.photoRef) && !imgFailed;
 
   return (
     <div className="group flex flex-col rounded-2xl border border-white/[0.08] bg-panel overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.55)] hover:border-white/[0.14]">
 
       {/* ── Hero ── */}
-      <div
-        className="relative h-52 flex items-center justify-center overflow-hidden flex-shrink-0"
-        style={{ background: activity.gradient }}
-      >
-        {/* Bottom fade into card */}
-        <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-panel/60 to-transparent pointer-events-none z-10" />
+      <div className="relative h-52 overflow-hidden flex-shrink-0">
+        {showPhoto ? (
+          // Real photo from Google Places (proxied server-side)
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={`/api/activities/photo?ref=${encodeURIComponent(activity.photoRef!)}`}
+            alt={activity.title}
+            loading="lazy"
+            className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+            onError={() => setImgFailed(true)}
+          />
+        ) : (
+          // Gradient + emoji fallback
+          <div
+            className="w-full h-full flex items-center justify-center"
+            style={{ background: activity.gradient }}
+          >
+            <span
+              className="text-8xl select-none transition-transform duration-500 ease-out group-hover:scale-110"
+              style={{ filter: "drop-shadow(0 4px 24px rgba(0,0,0,0.5))" }}
+            >
+              {activity.emoji}
+            </span>
+          </div>
+        )}
 
-        {/* Emoji */}
-        <span
-          className="text-8xl select-none transition-transform duration-500 ease-out group-hover:scale-110"
-          style={{ filter: "drop-shadow(0 4px 24px rgba(0,0,0,0.5))" }}
-        >
-          {activity.emoji}
-        </span>
+        {/* Bottom fade to panel bg */}
+        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-panel/70 to-transparent pointer-events-none z-10" />
 
         {/* Save button */}
         <button
@@ -156,7 +196,7 @@ function ActivityCard({
           className={`absolute top-3 right-3 z-20 w-9 h-9 rounded-full backdrop-blur-sm border flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-90 ${
             saved
               ? "bg-white/20 border-white/30"
-              : "bg-black/35 border-white/[0.12] hover:bg-black/55"
+              : "bg-black/40 border-white/[0.12] hover:bg-black/55"
           }`}
         >
           <IconHeart
@@ -168,17 +208,14 @@ function ActivityCard({
         {/* Badges */}
         {heroBadges.length > 0 && (
           <div className="absolute top-3 left-3 z-20 flex flex-col gap-1.5">
-            {heroBadges.map((badge) => {
-              const meta = BADGE_META[badge];
-              return (
-                <span
-                  key={badge}
-                  className={`inline-flex items-center text-[10px] font-bold rounded-full px-2.5 py-1 border leading-none ${meta.className}`}
-                >
-                  {meta.label}
-                </span>
-              );
-            })}
+            {heroBadges.map((badge) => (
+              <span
+                key={badge}
+                className={`inline-flex items-center text-[10px] font-bold rounded-full px-2.5 py-1 border leading-none ${BADGE_META[badge].className}`}
+              >
+                {BADGE_META[badge].label}
+              </span>
+            ))}
           </div>
         )}
       </div>
@@ -189,8 +226,16 @@ function ActivityCard({
         {/* Rating + category */}
         <div className="flex items-center gap-1.5 mb-2">
           <IconStar className="w-3 h-3 text-amber-400 flex-shrink-0" />
-          <span className="text-[12px] font-bold text-white tabular-nums">{activity.rating.toFixed(1)}</span>
-          <span className="text-[11px] text-white/30">({activity.reviewCount.toLocaleString()})</span>
+          <span className="text-[12px] font-bold text-white tabular-nums">
+            {activity.rating > 0 ? activity.rating.toFixed(1) : "—"}
+          </span>
+          {activity.reviewCount > 0 && (
+            <span className="text-[11px] text-white/30">
+              ({activity.reviewCount >= 1000
+                ? `${(activity.reviewCount / 1000).toFixed(0)}k`
+                : activity.reviewCount.toLocaleString()})
+            </span>
+          )}
           <span className="text-white/[0.12] mx-0.5">·</span>
           <span className="text-[11px] text-white/35">{CATEGORY_LABEL[activity.category]}</span>
         </div>
@@ -200,7 +245,7 @@ function ActivityCard({
           {activity.title}
         </h3>
 
-        {/* Meta row */}
+        {/* Meta: location · duration · price */}
         <div className="flex items-center flex-wrap gap-x-2 gap-y-1 text-[11px] text-white/35 mb-3">
           <span className="flex items-center gap-1">
             <IconPin className="w-2.5 h-2.5 flex-shrink-0" />
@@ -223,33 +268,36 @@ function ActivityCard({
         </p>
 
         {/* Tags */}
-        <div className="flex flex-wrap gap-1 mb-4">
-          {activity.tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-[10px] text-white/30 border border-white/[0.08] bg-white/[0.03] rounded-full px-2 py-0.5 leading-none"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+        {activity.tags.length > 0 && (
+          <div className="flex flex-wrap gap-1 mb-4">
+            {activity.tags.map((tag) => (
+              <span
+                key={tag}
+                className="text-[10px] text-white/30 border border-white/[0.08] bg-white/[0.03] rounded-full px-2 py-0.5 leading-none"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
 
         {/* Footer */}
         <div className="mt-auto pt-3 border-t border-white/[0.06] space-y-2.5">
 
-          {/* Why Visit toggle */}
+          {/* Why visit? */}
           <button
             onClick={() => setShowWhy((v) => !v)}
             className="flex items-center gap-1.5 text-[11px] text-white/30 hover:text-white/55 transition-colors"
           >
-            <IconChevron className={`w-3 h-3 flex-shrink-0 transition-transform duration-200 ${showWhy ? "rotate-180" : ""}`} />
+            <IconChevron
+              className={`w-3 h-3 flex-shrink-0 transition-transform duration-200 ${showWhy ? "rotate-180" : ""}`}
+            />
             Why visit?
           </button>
 
-          {/* Why Visit text (animated) */}
           <div
             className="overflow-hidden transition-all duration-300 ease-out"
-            style={{ maxHeight: showWhy ? "128px" : "0px", opacity: showWhy ? 1 : 0 }}
+            style={{ maxHeight: showWhy ? "160px" : "0px", opacity: showWhy ? 1 : 0 }}
           >
             <p className="text-[12px] text-white/50 leading-relaxed pl-4 border-l-2 border-lantern-violet/30 italic pb-1">
               {activity.whyVisit}
@@ -276,19 +324,16 @@ function CategoryFilter({
 }: {
   active: FilterId;
   onChange: (id: FilterId) => void;
-  counts: Record<FilterId, number>;
+  counts: Partial<Record<FilterId, number>>;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-
   return (
     <div
-      ref={ref}
       className="flex gap-2 overflow-x-auto pb-1"
       style={{ scrollbarWidth: "none" } as React.CSSProperties}
     >
       {FILTERS.map((f) => {
         const isActive = f.id === active;
-        const count = counts[f.id] ?? 0;
+        const count    = counts[f.id] ?? 0;
         return (
           <button
             key={f.id}
@@ -302,7 +347,11 @@ function CategoryFilter({
             {f.icon && <span className="leading-none">{f.icon}</span>}
             {f.label}
             {f.id !== "all" && count > 0 && (
-              <span className={`text-[10px] rounded-full px-1.5 py-0.5 leading-none tabular-nums ${isActive ? "bg-white/20 text-white" : "bg-white/[0.06] text-white/35"}`}>
+              <span
+                className={`text-[10px] rounded-full px-1.5 py-0.5 leading-none tabular-nums ${
+                  isActive ? "bg-white/20 text-white" : "bg-white/[0.06] text-white/35"
+                }`}
+              >
                 {count}
               </span>
             )}
@@ -318,13 +367,17 @@ function CategoryFilter({
 function SearchBar({
   destination,
   setDestination,
+  onSearch,
+  loading,
 }: {
   destination: string;
   setDestination: (v: string) => void;
+  onSearch: () => void;
+  loading: boolean;
 }) {
-  const [dateFrom, setDateFrom]     = useState("");
-  const [dateTo, setDateTo]         = useState("");
-  const [travelers, setTravelers]   = useState(2);
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo,   setDateTo]   = useState("");
+  const [travelers, setTravelers] = useState(2);
 
   return (
     <div className="rounded-2xl border border-white/[0.1] bg-white/[0.03] p-2">
@@ -339,7 +392,8 @@ function SearchBar({
               type="text"
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
-              placeholder="Where are you going?"
+              onKeyDown={(e) => e.key === "Enter" && onSearch()}
+              placeholder="City or country"
               className="w-full bg-transparent text-sm text-white placeholder-white/20 outline-none"
             />
           </div>
@@ -396,9 +450,24 @@ function SearchBar({
 
         {/* CTA */}
         <div className="px-2 pt-1 pb-2 lg:pt-0 lg:pb-0 lg:pl-3">
-          <button className="w-full lg:w-auto flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-gradient-to-r from-lantern-violet to-lantern-blue text-sm font-bold text-white transition-all duration-200 hover:opacity-90 active:scale-[0.98] whitespace-nowrap shadow-[0_4px_20px_rgba(119,167,255,0.2)]">
-            <IconSearch className="w-4 h-4" />
-            Find Activities
+          <button
+            onClick={onSearch}
+            disabled={loading}
+            className="w-full lg:w-auto flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-gradient-to-r from-lantern-violet to-lantern-blue text-sm font-bold text-white transition-all duration-200 hover:opacity-90 active:scale-[0.98] whitespace-nowrap shadow-[0_4px_20px_rgba(119,167,255,0.2)] disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {loading ? (
+              <>
+                <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                  <circle cx="12" cy="12" r="10" strokeDasharray="31.4" strokeDashoffset="10" />
+                </svg>
+                Searching…
+              </>
+            ) : (
+              <>
+                <IconSearch className="w-4 h-4" />
+                Find Activities
+              </>
+            )}
           </button>
         </div>
 
@@ -407,7 +476,7 @@ function SearchBar({
   );
 }
 
-// ── Empty State ───────────────────────────────────────────────────────────────
+// ── Empty / Error states ──────────────────────────────────────────────────────
 
 function EmptyState({ filter }: { filter: FilterId }) {
   return (
@@ -416,47 +485,96 @@ function EmptyState({ filter }: { filter: FilterId }) {
       <h3 className="text-base font-bold text-white/50 mb-2">No activities found</h3>
       <p className="text-[13px] text-white/25">
         {filter === "free"
-          ? "No free activities in this destination yet."
-          : `No ${FILTERS.find((f) => f.id === filter)?.label ?? filter} activities available.`}
+          ? "No free activities available for this destination."
+          : `No ${FILTERS.find((f) => f.id === filter)?.label ?? filter} activities in the results.`}
       </p>
+    </div>
+  );
+}
+
+function ErrorState({ message, onRetry }: { message: string; onRetry: () => void }) {
+  return (
+    <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
+      <div className="text-5xl mb-4">⚠️</div>
+      <h3 className="text-base font-bold text-white/50 mb-2">Something went wrong</h3>
+      <p className="text-[13px] text-white/25 mb-5 max-w-xs">{message}</p>
+      <button
+        onClick={onRetry}
+        className="px-5 py-2 rounded-xl bg-white/[0.06] border border-white/[0.1] text-sm font-semibold text-white/60 hover:bg-white/[0.09] hover:text-white/80 transition-all"
+      >
+        Try again
+      </button>
     </div>
   );
 }
 
 // ── Main Component ────────────────────────────────────────────────────────────
 
+interface SearchResult {
+  activities: Activity[];
+  city: string;
+  country: string;
+}
+
 export default function ActivitySearch() {
-  const [destination, setDestination]   = useState("Tokyo, Japan");
-  const [activeFilter, setActiveFilter] = useState<FilterId>("all");
-  const [savedIds, setSavedIds]         = useState<Set<string>>(new Set());
+  const [destination,   setDestination]   = useState("Tokyo, Japan");
+  const [activeFilter,  setActiveFilter]  = useState<FilterId>("all");
+  const [savedIds,      setSavedIds]      = useState<Set<string>>(new Set());
+  const [loading,       setLoading]       = useState(false);
+  const [error,         setError]         = useState<string | null>(null);
+  const [result,        setResult]        = useState<SearchResult | null>(null);
 
-  // Resolve dataset — reactive, always falls back to Tokyo for now
-  const data = useMemo(() => {
-    const key = Object.keys(DESTINATION_DATA).find(
-      (k) => k.toLowerCase() === destination.trim().toLowerCase(),
-    );
-    return key ? DESTINATION_DATA[key] : DESTINATION_DATA["Tokyo, Japan"];
-  }, [destination]);
+  // Simple client-side cache so switching back to a searched destination is instant
+  const clientCache = useRef(new Map<string, SearchResult>());
 
-  // Filter activities
-  const filtered = useMemo(() => {
-    if (!data) return [];
-    if (activeFilter === "all")  return data.activities;
-    if (activeFilter === "free") return data.activities.filter((a) => a.isFree);
-    return data.activities.filter((a) => a.category === activeFilter);
-  }, [data, activeFilter]);
-
-  // Counts per filter chip
-  const counts = useMemo(() => {
-    const c: Partial<Record<FilterId, number>> = {};
-    if (!data) return c as Record<FilterId, number>;
-    c["all"] = data.activities.length;
-    for (const a of data.activities) {
-      c[a.category] = (c[a.category] ?? 0) + 1;
-      if (a.isFree) c["free"] = (c["free"] ?? 0) + 1;
+  const fetchActivities = useCallback(async (dest: string) => {
+    const key = dest.trim().toLowerCase();
+    const cached = clientCache.current.get(key);
+    if (cached) {
+      setResult(cached);
+      setError(null);
+      return;
     }
-    return c as Record<FilterId, number>;
-  }, [data]);
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const res = await fetch(`/api/activities/search?destination=${encodeURIComponent(dest.trim())}`);
+      const data = await res.json() as { activities?: Activity[]; city?: string; country?: string; error?: string };
+
+      if (!res.ok || data.error) {
+        throw new Error(data.error ?? `HTTP ${res.status}`);
+      }
+      if (!data.activities?.length) {
+        throw new Error("No activities found for this destination.");
+      }
+
+      const r: SearchResult = {
+        activities: data.activities,
+        city:       data.city    ?? dest.split(",")[0].trim(),
+        country:    data.country ?? dest.split(",").pop()?.trim() ?? "",
+      };
+
+      clientCache.current.set(key, r);
+      setResult(r);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "An unexpected error occurred.";
+      setError(msg);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // Load default destination on mount
+  useEffect(() => {
+    fetchActivities("Tokyo, Japan");
+  }, [fetchActivities]);
+
+  function handleSearch() {
+    const dest = destination.trim();
+    if (dest) fetchActivities(dest);
+  }
 
   function toggleSave(id: string) {
     setSavedIds((prev) => {
@@ -466,8 +584,28 @@ export default function ActivitySearch() {
     });
   }
 
-  const city    = data?.city    ?? "Tokyo";
-  const country = data?.country ?? "Japan";
+  // Filter activities by active chip
+  const filtered = useMemo(() => {
+    if (!result) return [];
+    const { activities } = result;
+    if (activeFilter === "all")  return activities;
+    if (activeFilter === "free") return activities.filter((a) => a.isFree);
+    return activities.filter((a) => a.category === activeFilter);
+  }, [result, activeFilter]);
+
+  // Category counts for chips
+  const counts = useMemo((): Partial<Record<FilterId, number>> => {
+    if (!result) return {};
+    const c: Partial<Record<FilterId, number>> = { all: result.activities.length };
+    for (const a of result.activities) {
+      c[a.category] = (c[a.category] ?? 0) + 1;
+      if (a.isFree) c["free"] = (c["free"] ?? 0) + 1;
+    }
+    return c;
+  }, [result]);
+
+  const city    = result?.city    ?? destination.split(",")[0].trim();
+  const country = result?.country ?? destination.split(",").pop()?.trim() ?? "";
 
   return (
     <div className="min-h-screen bg-ink text-white">
@@ -481,9 +619,9 @@ export default function ActivitySearch() {
             <span className="text-sm font-bold tracking-tight text-white/90">TravelGrab</span>
           </Link>
           <div className="h-4 w-px bg-white/10" />
-          <Link href="/flights"    className="text-sm font-medium text-white/40 hover:text-white/75 transition-colors">Flights</Link>
-          <Link href="/hotels"     className="text-sm font-medium text-white/40 hover:text-white/75 transition-colors">Hotels</Link>
-          <span                    className="text-sm font-semibold text-lantern-violet">Activities</span>
+          <Link href="/flights"  className="text-sm font-medium text-white/40 hover:text-white/75 transition-colors">Flights</Link>
+          <Link href="/hotels"   className="text-sm font-medium text-white/40 hover:text-white/75 transition-colors">Hotels</Link>
+          <span                  className="text-sm font-semibold text-lantern-violet">Activities</span>
           {savedIds.size > 0 && (
             <div className="ml-auto flex items-center gap-1.5 text-[11px] text-white/35">
               <IconHeart filled className="w-3 h-3 text-red-400" />
@@ -498,13 +636,17 @@ export default function ActivitySearch() {
         {/* ── Hero ── */}
         <div className="pt-12 pb-8 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.1] bg-white/[0.04] px-4 py-1.5 text-[11px] font-semibold text-white/45 mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-lantern-mint animate-pulse" />
-            {data.activities.length} experiences · {city}
+            <span className={`w-1.5 h-1.5 rounded-full ${loading ? "bg-amber-400 animate-pulse" : "bg-lantern-mint animate-pulse"}`} />
+            {loading
+              ? "Searching…"
+              : result
+              ? `${result.activities.length} experiences in ${city}`
+              : "Discover experiences"}
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight mb-3">
             Discover the best of{" "}
             <span className="bg-gradient-to-r from-lantern-violet via-lantern-blue to-lantern-mint bg-clip-text text-transparent">
-              {city}, {country}
+              {city}{country ? `, ${country}` : ""}
             </span>
           </h1>
           <p className="text-white/35 text-base max-w-md mx-auto">
@@ -514,7 +656,12 @@ export default function ActivitySearch() {
 
         {/* ── Search bar ── */}
         <div className="mb-8">
-          <SearchBar destination={destination} setDestination={setDestination} />
+          <SearchBar
+            destination={destination}
+            setDestination={setDestination}
+            onSearch={handleSearch}
+            loading={loading}
+          />
         </div>
 
         {/* ── Category filter strip ── */}
@@ -527,33 +674,42 @@ export default function ActivitySearch() {
         </div>
 
         {/* ── Result count ── */}
-        <div className="flex items-center justify-between mb-5">
-          <p className="text-[12px] text-white/30">
-            {activeFilter === "all"
-              ? `Showing all ${filtered.length} activities`
-              : `${filtered.length} ${FILTERS.find((f) => f.id === activeFilter)?.label ?? activeFilter} activit${filtered.length === 1 ? "y" : "ies"}`}{" "}
-            in {city}
-          </p>
-          {savedIds.size > 0 && (
-            <p className="text-[11px] text-white/20 flex items-center gap-1">
-              <IconHeart filled className="w-2.5 h-2.5 text-red-400/70" />
-              {savedIds.size} saved
+        {result && !loading && (
+          <div className="flex items-center justify-between mb-5">
+            <p className="text-[12px] text-white/30">
+              {activeFilter === "all"
+                ? `Showing all ${filtered.length} activities`
+                : `${filtered.length} ${FILTERS.find((f) => f.id === activeFilter)?.label ?? activeFilter} activit${filtered.length === 1 ? "y" : "ies"}`}{" "}
+              in {city}
             </p>
-          )}
-        </div>
+            {savedIds.size > 0 && (
+              <p className="text-[11px] text-white/20 flex items-center gap-1">
+                <IconHeart filled className="w-2.5 h-2.5 text-red-400/70" />
+                {savedIds.size} saved
+              </p>
+            )}
+          </div>
+        )}
 
         {/* ── Grid ── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-          {filtered.length > 0
-            ? filtered.map((activity) => (
-                <ActivityCard
-                  key={activity.id}
-                  activity={activity}
-                  saved={savedIds.has(activity.id)}
-                  onToggleSave={() => toggleSave(activity.id)}
-                />
-              ))
-            : <EmptyState filter={activeFilter} />}
+          {loading ? (
+            // Skeleton loading state
+            Array.from({ length: 9 }).map((_, i) => <SkeletonCard key={i} />)
+          ) : error ? (
+            <ErrorState message={error} onRetry={() => fetchActivities(destination)} />
+          ) : filtered.length > 0 ? (
+            filtered.map((activity) => (
+              <ActivityCard
+                key={activity.id}
+                activity={activity}
+                saved={savedIds.has(activity.id)}
+                onToggleSave={() => toggleSave(activity.id)}
+              />
+            ))
+          ) : (
+            <EmptyState filter={activeFilter} />
+          )}
         </div>
 
       </main>

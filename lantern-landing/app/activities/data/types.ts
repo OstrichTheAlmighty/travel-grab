@@ -29,7 +29,9 @@ export interface Activity {
   tags: string[];
   badges: Badge[];
   emoji: string;
-  gradient: string; // CSS gradient string for hero background
+  gradient: string;    // CSS gradient string for hero background (fallback when no photo)
+  photoRef?: string;   // Google Places photo_reference — fetched via /api/activities/photo
+  placeId?:  string;   // Google Place ID
 }
 
 export interface DestinationData {
