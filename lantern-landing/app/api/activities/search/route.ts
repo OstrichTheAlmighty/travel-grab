@@ -305,13 +305,26 @@ function mapToActivity(place: GooglePlace, category: Category, city: string): Ac
 // ── Google API calls ──────────────────────────────────────────────────────────
 
 async function geocodeDestination(destination: string, apiKey: string): Promise<GeoResult | null> {
+  // DEBUG: log key presence without revealing the value
+  console.log(`[activities/geocode] START dest="${destination}" key_set=${Boolean(apiKey)} key_len=${apiKey.length}`);
+
   try {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(destination)}&key=${apiKey}`;
-    const res = await fetch(url, { signal: AbortSignal.timeout(6000) });
-    if (!res.ok) return null;
+    console.log(`[activities/geocode] fetching url (key redacted): ${url.replace(apiKey, "REDACTED")}`);
+
+    const res = await fetch(url, { signal: AbortSignal.timeout(10000) });
+
+    // DEBUG: log HTTP-level response
+    console.log(`[activities/geocode] http_status=${res.status} ok=${res.ok}`);
+
+    if (!res.ok) {
+      console.error(`[activities/geocode] FAIL: non-200 HTTP status ${res.status} for dest="${destination}"`);
+      return null;
+    }
 
     const data = await res.json() as {
       status: string;
+      error_message?: string;
       results?: Array<{
         geometry?: {
           location?: { lat?: number; lng?: number };
@@ -324,17 +337,40 @@ async function geocodeDestination(destination: string, apiKey: string): Promise<
       }>;
     };
 
-    if (data.status !== "OK" || !data.results?.[0]) return null;
+    // DEBUG: log Google API status — this reveals REQUEST_DENIED, OVER_QUERY_LIMIT, etc.
+    console.log(`[activities/geocode] google_status="${data.status}" error_message="${data.error_message ?? "none"}" result_count=${data.results?.length ?? 0}`);
+
+    if (data.status !== "OK" || !data.results?.[0]) {
+      console.error(
+        `[activities/geocode] FAIL: google_status="${data.status}" error="${data.error_message ?? "none"}" dest="${destination}"`,
+      );
+      return null;
+    }
 
     const result = data.results[0];
     const loc = result.geometry?.location;
     const vp  = result.geometry?.viewport;
 
+    // DEBUG: log what we actually got from geometry
+    console.log(`[activities/geocode] loc=${JSON.stringify(loc)} viewport_ne=${JSON.stringify(vp?.northeast)} viewport_sw=${JSON.stringify(vp?.southwest)}`);
+
     if (
       typeof loc?.lat !== "number" ||
-      typeof loc?.lng !== "number" ||
-      !vp?.northeast?.lat || !vp?.southwest?.lat
-    ) return null;
+      typeof loc?.lng !== "number"
+    ) {
+      console.error(`[activities/geocode] FAIL: location not a number pair — loc=${JSON.stringify(loc)}`);
+      return null;
+    }
+
+    if (
+      typeof vp?.northeast?.lat !== "number" ||
+      typeof vp?.northeast?.lng !== "number" ||
+      typeof vp?.southwest?.lat !== "number" ||
+      typeof vp?.southwest?.lng !== "number"
+    ) {
+      console.error(`[activities/geocode] FAIL: viewport incomplete — vp=${JSON.stringify(vp)}`);
+      return null;
+    }
 
     let city = "", country = "";
     for (const c of result.address_components ?? []) {
@@ -345,20 +381,21 @@ async function geocodeDestination(destination: string, apiKey: string): Promise<
     if (!city)    city    = destination.split(",")[0].trim();
     if (!country) country = destination.split(",").pop()?.trim() ?? "";
 
-    console.log(`[activities/geocode] "${destination}" → ${city}, ${country} (${loc.lat.toFixed(4)}, ${loc.lng.toFixed(4)})`);
+    console.log(`[activities/geocode] OK dest="${destination}" → city="${city}" country="${country}" lat=${loc.lat.toFixed(4)} lng=${loc.lng.toFixed(4)}`);
 
     return {
       lat:      loc.lat,
       lng:      loc.lng,
       viewport: {
-        northeast: { lat: vp.northeast.lat!, lng: vp.northeast.lng! },
-        southwest: { lat: vp.southwest.lat!, lng: vp.southwest.lng! },
+        northeast: { lat: vp.northeast.lat, lng: vp.northeast.lng },
+        southwest: { lat: vp.southwest.lat, lng: vp.southwest.lng },
       },
       city,
       country,
     };
   } catch (err) {
-    console.error("[activities/geocode] error", err);
+    // Catches timeout (AbortError), network failures, and JSON parse errors
+    console.error(`[activities/geocode] EXCEPTION dest="${destination}" err=${String(err)}`);
     return null;
   }
 }
@@ -377,9 +414,8 @@ async function nearbySearch(
       return [];
     }
     const data = await res.json() as PlacesResponse;
-    if (data.status !== "OK" && data.status !== "ZERO_RESULTS") {
-      console.warn(`[activities/nearby] status=${data.status} type=${type}`, data.error_message ?? "");
-    }
+    // Always log status + count so we can see if Places API is denying or returning zero
+    console.log(`[activities/nearby] type=${type} status=${data.status} count=${data.results?.length ?? 0}${data.error_message ? ` err="${data.error_message}"` : ""}`);
     return (data.results ?? []).slice(0, limit);
   } catch (err) {
     console.warn(`[activities/nearby] fetch error type=${type}`, err);
@@ -401,9 +437,8 @@ async function textSearch(
       return [];
     }
     const data = await res.json() as PlacesResponse;
-    if (data.status !== "OK" && data.status !== "ZERO_RESULTS") {
-      console.warn(`[activities/text] status=${data.status} query="${query}"`, data.error_message ?? "");
-    }
+    // Always log status + count
+    console.log(`[activities/text] query="${query}" status=${data.status} count=${data.results?.length ?? 0}${data.error_message ? ` err="${data.error_message}"` : ""}`);
     return (data.results ?? []).slice(0, limit);
   } catch (err) {
     console.warn(`[activities/text] fetch error query="${query}"`, err);
@@ -461,7 +496,9 @@ export async function GET(req: NextRequest) {
   // ── Geocode ──
   const geo = await geocodeDestination(destination, apiKey);
   if (!geo) {
-    console.warn(`[activities/search] geocode failed for "${destination}"`);
+    console.error(
+      `[activities/search] GEOCODE FAILED — dest="${destination}" key_len=${apiKey.length} key_prefix="${apiKey.slice(0, 8)}..." — check logs above for google_status/error_message`,
+    );
     return NextResponse.json({ error: "Could not locate that destination", activities: [] }, { status: 404 });
   }
 
@@ -493,20 +530,40 @@ export async function GET(req: NextRequest) {
   const seen    = new Set<string>();
   const mapped: Activity[] = [];
 
+  let rejectedDedup    = 0;
+  let rejectedClosed   = 0;
+  let rejectedNoRating = 0;
+  let rejectedLowRating = 0;
+  let rejectedBounds   = 0;
+  const totalRaw = searchResults.reduce((s, r) => s + r.places.length, 0);
+
   for (const { places, category } of searchResults) {
     for (const p of places) {
-      if (seen.has(p.place_id)) continue;
+      if (seen.has(p.place_id)) { rejectedDedup++; continue; }
       seen.add(p.place_id);
 
-      // Skip closed or unrated places
-      if (p.business_status === "CLOSED_PERMANENTLY") continue;
-      if (!p.rating || p.rating < 3.5)               continue;
+      if (p.business_status === "CLOSED_PERMANENTLY") { rejectedClosed++; continue; }
 
-      // Skip if outside city bounds
-      if (!insideBounds(p, viewport)) continue;
+      // Keep unrated places but skip truly low-rated ones
+      if (p.rating !== undefined && p.rating < 2.5) { rejectedLowRating++; continue; }
+      if (p.rating === undefined && (p.user_ratings_total ?? 0) === 0) { rejectedNoRating++; continue; }
+
+      if (!insideBounds(p, viewport)) { rejectedBounds++; continue; }
 
       mapped.push(mapToActivity(p, category, city));
     }
+  }
+
+  console.log(
+    `[activities/search] FILTER dest="${destination}" raw=${totalRaw} ` +
+    `dedup_skip=${rejectedDedup} closed=${rejectedClosed} ` +
+    `no_rating=${rejectedNoRating} low_rating=${rejectedLowRating} ` +
+    `out_of_bounds=${rejectedBounds} → kept=${mapped.length}`,
+  );
+
+  if (mapped.length > 0) {
+    const first3 = mapped.slice(0, 3).map((a) => `"${a.title}"`).join(", ");
+    console.log(`[activities/search] first 3 places (pre-sort): ${first3}`);
   }
 
   // Sort: photos first, then weighted by rating × log(reviews)
@@ -522,13 +579,21 @@ export async function GET(req: NextRequest) {
   const withPhotos    = mapped.filter((a) => a.photoRef).length;
   const withoutPhotos = mapped.length - withPhotos;
   console.log(
-    `[activities/search] "${destination}" → ${mapped.length} activities ` +
-    `(${withPhotos} with photos, ${withoutPhotos} gradient-only)`,
+    `[activities/search] dest="${destination}" → ${mapped.length} activities ` +
+    `(${withPhotos} with photos, ${withoutPhotos} gradient-only) source=places_api`,
   );
 
-  // ── Fallback if Google returned nothing useful ──
-  if (mapped.length < 5) {
-    console.warn(`[activities/search] too few results (${mapped.length}) — returning mock fallback`);
+  if (mapped.length > 0) {
+    const top3 = mapped.slice(0, 3).map((a) => `"${a.title}"`).join(", ");
+    console.log(`[activities/search] top 3 after sort: ${top3}`);
+  }
+
+  // ── Fallback only if Google returned nothing at all ──
+  if (mapped.length === 0) {
+    console.warn(
+      `[activities/search] MOCK FALLBACK dest="${destination}" — zero real results passed filters. ` +
+      `raw=${totalRaw} check [activities/nearby] logs above for REQUEST_DENIED or ZERO_RESULTS`,
+    );
     const mock = DESTINATION_DATA["Tokyo, Japan"];
     return NextResponse.json({
       activities: mock.activities,
