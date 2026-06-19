@@ -142,10 +142,12 @@ function ActivityCard({
   activity,
   saved,
   onToggleSave,
+  onViewDetails,
 }: {
   activity: Activity;
   saved: boolean;
   onToggleSave: () => void;
+  onViewDetails: () => void;
 }) {
   const [showWhy,   setShowWhy]   = useState(false);
   const [imgFailed, setImgFailed] = useState(false);
@@ -304,25 +306,485 @@ function ActivityCard({
             </p>
           </div>
 
-          {/* View Details — real link when Google provides a URI */}
-          {activity.googleMapsUri || activity.websiteUri ? (
-            <a
-              href={activity.websiteUri ?? activity.googleMapsUri}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center w-full h-9 rounded-xl bg-white/[0.05] border border-white/[0.09] text-[12px] font-semibold text-white/50 hover:bg-white/[0.09] hover:text-white/80 hover:border-white/[0.18] transition-all duration-200 active:scale-[0.98]"
-            >
-              View Details →
-            </a>
-          ) : (
-            <button className="w-full h-9 rounded-xl bg-white/[0.05] border border-white/[0.09] text-[12px] font-semibold text-white/50 hover:bg-white/[0.09] hover:text-white/80 hover:border-white/[0.18] transition-all duration-200 active:scale-[0.98]">
-              View Details →
-            </button>
-          )}
+          {/* View Details → opens in-app detail modal */}
+          <button
+            onClick={onViewDetails}
+            className="w-full h-9 rounded-xl bg-white/[0.05] border border-white/[0.09] text-[12px] font-semibold text-white/50 hover:bg-white/[0.09] hover:text-white/80 hover:border-white/[0.18] transition-all duration-200 active:scale-[0.98]"
+          >
+            View Details →
+          </button>
 
         </div>
       </div>
     </div>
+  );
+}
+
+// ── Place Detail type (mirrors /api/activities/place response) ────────────────
+
+interface PlaceDetail {
+  id: string;
+  displayName?: { text: string };
+  photos?: Array<{ name: string; widthPx?: number; heightPx?: number }>;
+  rating?: number;
+  userRatingCount?: number;
+  formattedAddress?: string;
+  shortFormattedAddress?: string;
+  types?: string[];
+  regularOpeningHours?: { openNow?: boolean; weekdayDescriptions?: string[] };
+  priceLevel?: string;
+  websiteUri?: string;
+  googleMapsUri?: string;
+  nationalPhoneNumber?: string;
+  internationalPhoneNumber?: string;
+  editorialSummary?: { text: string };
+}
+
+// ── Practical-tip helpers (all labeled as estimated in the UI) ────────────────
+
+function getBestTime(types: string[]): string {
+  if (types.some((t) => ["night_club", "bar"].includes(t))) return "Evenings from 9 PM onwards";
+  if (types.some((t) => ["park", "natural_feature", "campground"].includes(t))) return "Morning or late afternoon";
+  if (types.some((t) => ["museum", "art_gallery"].includes(t))) return "Weekday mornings to avoid crowds";
+  if (types.some((t) => ["restaurant", "cafe", "bakery"].includes(t))) return "Lunch (noon–2 PM) or dinner (6–8 PM)";
+  if (types.some((t) => ["shopping_mall", "market"].includes(t))) return "Weekday mornings";
+  if (types.some((t) => ["amusement_park", "zoo", "aquarium"].includes(t))) return "Weekday opening hours";
+  return "Early morning or late afternoon for smaller crowds";
+}
+
+function getCrowdLevel(count: number): string {
+  if (count >= 10000) return "Very busy — expect crowds, especially on weekends and holidays";
+  if (count >= 5000)  return "Popular — can get crowded during peak hours";
+  if (count >= 1000)  return "Moderately visited — comfortable most days";
+  if (count >= 100)   return "Relatively uncrowded";
+  return "Quiet — few visitors";
+}
+
+function getGoodFor(badges: Badge[], types: string[]): string {
+  const parts: string[] = [];
+  if (badges.includes("family_friendly")) parts.push("families with children");
+  if (badges.includes("popular"))         parts.push("first-time visitors");
+  if (badges.includes("hidden_gem"))      parts.push("those seeking off-the-beaten-path experiences");
+  if (types.some((t) => ["museum", "art_gallery"].includes(t))) parts.push("culture enthusiasts");
+  if (types.some((t) => ["park", "natural_feature"].includes(t))) parts.push("outdoor lovers");
+  if (types.some((t) => ["restaurant", "cafe", "food"].includes(t))) parts.push("food lovers");
+  if (types.some((t) => ["night_club", "bar"].includes(t))) parts.push("night owls");
+  if (types.some((t) => ["zoo", "aquarium", "amusement_park"].includes(t))) parts.push("families");
+  return parts.length > 0 ? parts.join(", ") : "most travelers";
+}
+
+// ── Activity Detail Modal ─────────────────────────────────────────────────────
+
+function ActivityDetailModal({
+  activity,
+  detail,
+  loading,
+  onClose,
+}: {
+  activity: Activity;
+  detail: PlaceDetail | null;
+  loading: boolean;
+  onClose: () => void;
+}) {
+  const [activePhoto, setActivePhoto] = useState(0);
+  const [showHours,   setShowHours]   = useState(false);
+
+  // Close on Escape and lock body scroll
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) { if (e.key === "Escape") onClose(); }
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  // Reset photo index when detail changes
+  useEffect(() => { setActivePhoto(0); }, [detail]);
+
+  // Resolve fields — prefer detail data, fall back to card data
+  const photos        = detail?.photos ?? (activity.photoRef ? [{ name: activity.photoRef }] : []);
+  const name          = detail?.displayName?.text ?? activity.title;
+  const rating        = detail?.rating        ?? activity.rating;
+  const reviewCount   = detail?.userRatingCount ?? activity.reviewCount;
+  const address       = detail?.formattedAddress ?? detail?.shortFormattedAddress ?? activity.neighborhood;
+  const summary       = detail?.editorialSummary?.text ?? activity.description;
+  const openNow       = detail?.regularOpeningHours?.openNow ?? activity.openNow;
+  const hours         = detail?.regularOpeningHours?.weekdayDescriptions ?? [];
+  const types         = detail?.types ?? [];
+  const websiteUri    = detail?.websiteUri    ?? activity.websiteUri;
+  const googleMapsUri = detail?.googleMapsUri ?? activity.googleMapsUri;
+  const phone         = detail?.nationalPhoneNumber ?? detail?.internationalPhoneNumber;
+
+  return (
+    <>
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm"
+        onClick={onClose}
+        aria-hidden="true"
+      />
+
+      {/* Slide-in panel (mirrors hotel research panel) */}
+      <div
+        className="fixed inset-y-0 right-0 z-50 w-full max-w-full lg:max-w-[720px] bg-[#0e0e14] border-l border-white/[0.07] flex flex-col shadow-2xl overflow-hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-label={name}
+      >
+        {/* ── Sticky header ── */}
+        <div className="flex items-center justify-between px-5 py-3 border-b border-white/[0.06] bg-[#0e0e14]/95 backdrop-blur-sm flex-shrink-0">
+          <span className="text-[10px] font-black uppercase tracking-widest text-white/30">Place Details</span>
+          <button
+            onClick={onClose}
+            aria-label="Close"
+            className="w-8 h-8 flex items-center justify-center rounded-lg border border-white/[0.08] text-white/40 hover:text-white hover:border-white/20 transition-all"
+          >
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        {/* ── Scrollable content ── */}
+        <div className="flex-1 overflow-y-auto">
+
+          {/* Photo gallery — show immediately from card data, upgrade when detail loads */}
+          {photos.length > 0 ? (
+            <div>
+              {/* Main photo */}
+              <div className="relative h-64 sm:h-80 bg-white/[0.03] overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  key={photos[activePhoto]?.name}
+                  src={`/api/activities/photo?name=${encodeURIComponent(photos[activePhoto]?.name ?? "")}&w=1200`}
+                  alt={`${name} — photo ${activePhoto + 1}`}
+                  className="w-full h-full object-cover"
+                />
+                {/* Nav arrows */}
+                {photos.length > 1 && (
+                  <>
+                    <button
+                      onClick={() => setActivePhoto((n) => Math.max(0, n - 1))}
+                      disabled={activePhoto === 0}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/70 transition-all disabled:opacity-20 disabled:cursor-not-allowed"
+                    >
+                      <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round"><path d="M15 18l-6-6 6-6" /></svg>
+                    </button>
+                    <button
+                      onClick={() => setActivePhoto((n) => Math.min(photos.length - 1, n + 1))}
+                      disabled={activePhoto === photos.length - 1}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/70 transition-all disabled:opacity-20 disabled:cursor-not-allowed"
+                    >
+                      <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round"><path d="M9 18l6-6-6-6" /></svg>
+                    </button>
+                  </>
+                )}
+                {/* Photo counter */}
+                {photos.length > 1 && (
+                  <div className="absolute bottom-3 right-3 bg-black/55 backdrop-blur-sm rounded-full px-2.5 py-1 text-[10px] text-white/70 font-semibold tabular-nums">
+                    {activePhoto + 1} / {photos.length}
+                  </div>
+                )}
+              </div>
+
+              {/* Thumbnail strip */}
+              {photos.length > 1 && (
+                <div
+                  className="flex gap-1.5 px-4 py-2.5 bg-white/[0.015] border-b border-white/[0.05] overflow-x-auto"
+                  style={{ scrollbarWidth: "none" } as React.CSSProperties}
+                >
+                  {photos.slice(0, 10).map((photo, i) => (
+                    <button
+                      key={photo.name}
+                      onClick={() => setActivePhoto(i)}
+                      className={`flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden border-2 transition-all ${
+                        i === activePhoto
+                          ? "border-lantern-violet/70 opacity-100"
+                          : "border-transparent opacity-45 hover:opacity-75"
+                      }`}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={`/api/activities/photo?name=${encodeURIComponent(photo.name)}&w=120`}
+                        alt={`Thumbnail ${i + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          ) : (
+            // Fallback gradient hero while no photos available
+            <div
+              className="h-52 flex items-center justify-center flex-shrink-0"
+              style={{ background: activity.gradient }}
+            >
+              <span className="text-8xl select-none" style={{ filter: "drop-shadow(0 4px 24px rgba(0,0,0,0.5))" }}>
+                {activity.emoji}
+              </span>
+            </div>
+          )}
+
+          {/* Body */}
+          <div className="p-5 space-y-5">
+
+            {/* ── Name + category + open status ── */}
+            <div>
+              <div className="flex items-center gap-2 flex-wrap mb-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-white/30 border border-white/[0.1] rounded-full px-2 py-0.5">
+                  {CATEGORY_LABEL[activity.category]}
+                </span>
+                {openNow !== undefined && (
+                  <span className={`text-[10px] font-semibold rounded-full px-2 py-0.5 ${
+                    openNow ? "text-emerald-400 bg-emerald-400/10" : "text-red-400/60 bg-red-400/[0.08]"
+                  }`}>
+                    {openNow ? "Open now" : "Closed now"}
+                  </span>
+                )}
+                {loading && (
+                  <span className="text-[10px] text-white/20 flex items-center gap-1">
+                    <svg className="w-3 h-3 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                      <circle cx="12" cy="12" r="10" strokeDasharray="31.4" strokeDashoffset="10" />
+                    </svg>
+                    Loading details…
+                  </span>
+                )}
+              </div>
+
+              <h2 className="text-xl font-black text-white leading-tight mb-2.5">{name}</h2>
+
+              {/* Rating + reviews + price */}
+              <div className="flex items-center gap-2 flex-wrap">
+                <svg className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+                <span className="text-sm font-bold text-white tabular-nums">
+                  {rating > 0 ? rating.toFixed(1) : "—"}
+                </span>
+                {reviewCount > 0 && (
+                  <span className="text-[12px] text-white/35">
+                    ({reviewCount >= 1000 ? `${Math.round(reviewCount / 1000)}k` : reviewCount.toLocaleString()} reviews)
+                  </span>
+                )}
+                {activity.price !== "Varies" && (
+                  <>
+                    <span className="text-white/[0.15] mx-0.5">·</span>
+                    <span className={`text-[12px] font-semibold ${activity.isFree ? "text-lantern-mint/80" : "text-white/55"}`}>
+                      {activity.price}
+                    </span>
+                  </>
+                )}
+              </div>
+            </div>
+
+            {/* ── Address ── */}
+            {address && (
+              <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-3.5 flex items-start gap-3">
+                <svg className="w-4 h-4 text-white/25 flex-shrink-0 mt-px" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                </svg>
+                <p className="text-[12px] text-white/50 leading-relaxed">{address}</p>
+              </div>
+            )}
+
+            {/* ── Editorial summary / About ── */}
+            {summary && (
+              <div>
+                <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">About</div>
+                <p className="text-[13px] text-white/60 leading-relaxed">{summary}</p>
+              </div>
+            )}
+
+            {/* ── Why visit ── */}
+            <div className="rounded-xl border border-lantern-violet/20 bg-lantern-violet/[0.04] p-4">
+              <div className="text-[10px] font-bold uppercase tracking-wider text-lantern-violet/60 mb-2">Why visit</div>
+              <p className="text-[12px] text-white/55 leading-relaxed italic">{activity.whyVisit}</p>
+            </div>
+
+            {/* ── Opening hours ── */}
+            {hours.length > 0 && (
+              <div>
+                <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">Hours</div>
+                <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] overflow-hidden">
+                  <button
+                    onClick={() => setShowHours((v) => !v)}
+                    className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-white/[0.02] transition-colors"
+                  >
+                    <span className={`text-[12px] font-semibold ${
+                      openNow === true  ? "text-emerald-400" :
+                      openNow === false ? "text-red-400/70"  : "text-white/50"
+                    }`}>
+                      {openNow === true ? "Open now" : openNow === false ? "Closed now" : "See weekly hours"}
+                      {!showHours && " — tap to expand"}
+                    </span>
+                    <svg
+                      className={`w-3.5 h-3.5 text-white/30 transition-transform flex-shrink-0 ${showHours ? "rotate-180" : ""}`}
+                      viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round"
+                    >
+                      <path d="M2 4l4 4 4-4" />
+                    </svg>
+                  </button>
+                  {showHours && (
+                    <div className="border-t border-white/[0.06] px-4 pb-4 pt-3 space-y-1.5">
+                      {hours.map((day, i) => {
+                        const colonIdx = day.indexOf(": ");
+                        const dayName  = colonIdx >= 0 ? day.slice(0, colonIdx) : day;
+                        const dayHours = colonIdx >= 0 ? day.slice(colonIdx + 2) : "";
+                        return (
+                          <div key={i} className="flex text-[11px] gap-3">
+                            <span className="text-white/30 w-24 flex-shrink-0">{dayName}</span>
+                            <span className="text-white/55">{dayHours || "—"}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* ── Contact & links ── */}
+            {(phone || websiteUri || googleMapsUri) && (
+              <div>
+                <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">Contact & links</div>
+                <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] divide-y divide-white/[0.05] overflow-hidden">
+                  {phone && (
+                    <a
+                      href={`tel:${phone}`}
+                      className="flex items-center gap-3 px-4 py-3 text-[12px] text-white/50 hover:text-white/80 hover:bg-white/[0.02] transition-colors"
+                    >
+                      <svg className="w-3.5 h-3.5 flex-shrink-0 text-white/25" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                      </svg>
+                      {phone}
+                    </a>
+                  )}
+                  {websiteUri && (
+                    <a
+                      href={websiteUri}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 px-4 py-3 text-[12px] text-white/50 hover:text-white/80 hover:bg-white/[0.02] transition-colors"
+                    >
+                      <svg className="w-3.5 h-3.5 flex-shrink-0 text-white/25" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                        <path d="M2 12h20" />
+                      </svg>
+                      <span className="truncate">{websiteUri.replace(/^https?:\/\//, "").replace(/\/$/, "")}</span>
+                    </a>
+                  )}
+                  {googleMapsUri && (
+                    <a
+                      href={googleMapsUri}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 px-4 py-3 text-[12px] text-white/50 hover:text-white/80 hover:bg-white/[0.02] transition-colors"
+                    >
+                      <svg className="w-3.5 h-3.5 flex-shrink-0 text-white/25" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                      </svg>
+                      Open in Google Maps
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* ── Practical tips ── */}
+            <div>
+              <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">Practical Tips</div>
+              <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] divide-y divide-white/[0.05] overflow-hidden">
+
+                <div className="flex items-start gap-3 px-4 py-3">
+                  <svg className="w-3.5 h-3.5 text-white/20 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
+                    <circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" />
+                  </svg>
+                  <div>
+                    <div className="text-[10px] text-white/30 mb-0.5">Estimated visit duration</div>
+                    <div className="text-[12px] text-white/60">{activity.duration}</div>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 px-4 py-3">
+                  <svg className="w-3.5 h-3.5 text-white/20 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
+                    <circle cx="12" cy="12" r="5" />
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                  </svg>
+                  <div>
+                    <div className="text-[10px] text-white/30 mb-0.5">
+                      Best time to visit <span className="text-white/15">(typical)</span>
+                    </div>
+                    <div className="text-[12px] text-white/60">{getBestTime(types)}</div>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 px-4 py-3">
+                  <svg className="w-3.5 h-3.5 text-white/20 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+                  </svg>
+                  <div>
+                    <div className="text-[10px] text-white/30 mb-0.5">
+                      Crowd level <span className="text-white/15">(estimated from review volume)</span>
+                    </div>
+                    <div className="text-[12px] text-white/60">{getCrowdLevel(reviewCount)}</div>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 px-4 py-3">
+                  <svg className="w-3.5 h-3.5 text-white/20 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
+                  </svg>
+                  <div>
+                    <div className="text-[10px] text-white/30 mb-0.5">Good for</div>
+                    <div className="text-[12px] text-white/60 capitalize">{getGoodFor(activity.badges, types)}</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* ── Sticky footer CTAs ── */}
+        <div className="flex-shrink-0 p-4 border-t border-white/[0.07] bg-[#0e0e14]/95 backdrop-blur-sm">
+          <div className="flex gap-2">
+            {googleMapsUri ? (
+              <a
+                href={googleMapsUri}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 text-center py-3 rounded-xl text-sm font-bold text-white bg-lantern-violet hover:bg-lantern-violet/80 transition-colors shadow-[0_0_20px_rgba(139,92,246,0.20)]"
+              >
+                Open in Google Maps →
+              </a>
+            ) : (
+              <button
+                onClick={onClose}
+                className="flex-1 py-3 rounded-xl text-sm font-semibold text-white/50 bg-white/[0.06] border border-white/[0.1] hover:bg-white/[0.09] transition-all"
+              >
+                Close
+              </button>
+            )}
+            {websiteUri && (
+              <a
+                href={websiteUri}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 text-center py-3 rounded-xl text-sm font-semibold text-white/70 bg-white/[0.06] border border-white/[0.1] hover:bg-white/[0.09] hover:text-white transition-all"
+              >
+                Visit Website →
+              </a>
+            )}
+          </div>
+        </div>
+
+      </div>
+    </>
   );
 }
 
@@ -536,6 +998,12 @@ export default function ActivitySearch() {
   const [error,         setError]         = useState<string | null>(null);
   const [result,        setResult]        = useState<SearchResult | null>(null);
 
+  // ── Detail modal state ──
+  const [modalActivity,   setModalActivity]   = useState<Activity | null>(null);
+  const [modalDetail,     setModalDetail]     = useState<PlaceDetail | null>(null);
+  const [modalLoading,    setModalLoading]    = useState(false);
+  const detailsCache = useRef(new Map<string, PlaceDetail>());
+
   // Simple client-side cache so switching back to a searched destination is instant
   const clientCache = useRef(new Map<string, SearchResult>());
 
@@ -595,6 +1063,40 @@ export default function ActivitySearch() {
       if (next.has(id)) next.delete(id); else next.add(id);
       return next;
     });
+  }
+
+  async function openDetails(activity: Activity) {
+    setModalActivity(activity);
+    setModalDetail(null);
+
+    const placeId = activity.placeId;
+    if (!placeId) return; // show modal with card data only
+
+    const cached = detailsCache.current.get(placeId);
+    if (cached) {
+      setModalDetail(cached);
+      return;
+    }
+
+    setModalLoading(true);
+    try {
+      const res  = await fetch(`/api/activities/place?id=${encodeURIComponent(placeId)}`);
+      if (!res.ok) throw new Error("Failed to load place details");
+      const data = await res.json() as PlaceDetail;
+      detailsCache.current.set(placeId, data);
+      setModalDetail(data);
+    } catch {
+      // Non-fatal: modal still shows with card-level data
+      setModalDetail(null);
+    } finally {
+      setModalLoading(false);
+    }
+  }
+
+  function closeDetails() {
+    setModalActivity(null);
+    setModalDetail(null);
+    setModalLoading(false);
   }
 
   // Filter activities by active chip
@@ -732,6 +1234,7 @@ export default function ActivitySearch() {
                 activity={activity}
                 saved={savedIds.has(activity.id)}
                 onToggleSave={() => toggleSave(activity.id)}
+                onViewDetails={() => openDetails(activity)}
               />
             ))
           ) : (
@@ -740,6 +1243,17 @@ export default function ActivitySearch() {
         </div>
 
       </main>
+
+      {/* ── Detail modal ── */}
+      {modalActivity && (
+        <ActivityDetailModal
+          activity={modalActivity}
+          detail={modalDetail}
+          loading={modalLoading}
+          onClose={closeDetails}
+        />
+      )}
+
     </div>
   );
 }
