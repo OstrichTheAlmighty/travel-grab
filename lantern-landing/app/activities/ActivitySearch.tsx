@@ -304,10 +304,21 @@ function ActivityCard({
             </p>
           </div>
 
-          {/* View Details */}
-          <button className="w-full h-9 rounded-xl bg-white/[0.05] border border-white/[0.09] text-[12px] font-semibold text-white/50 hover:bg-white/[0.09] hover:text-white/80 hover:border-white/[0.18] transition-all duration-200 active:scale-[0.98]">
-            View Details →
-          </button>
+          {/* View Details — real link when Google provides a URI */}
+          {activity.googleMapsUri || activity.websiteUri ? (
+            <a
+              href={activity.websiteUri ?? activity.googleMapsUri}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-full h-9 rounded-xl bg-white/[0.05] border border-white/[0.09] text-[12px] font-semibold text-white/50 hover:bg-white/[0.09] hover:text-white/80 hover:border-white/[0.18] transition-all duration-200 active:scale-[0.98]"
+            >
+              View Details →
+            </a>
+          ) : (
+            <button className="w-full h-9 rounded-xl bg-white/[0.05] border border-white/[0.09] text-[12px] font-semibold text-white/50 hover:bg-white/[0.09] hover:text-white/80 hover:border-white/[0.18] transition-all duration-200 active:scale-[0.98]">
+              View Details →
+            </button>
+          )}
 
         </div>
       </div>

@@ -14,9 +14,13 @@ interface GooglePlace {
   userRatingCount?: number;
   types?: string[];
   photos?: Array<{ name: string; widthPx?: number; heightPx?: number }>;
-  priceLevel?: string;   // "PRICE_LEVEL_FREE" | "PRICE_LEVEL_INEXPENSIVE" | "PRICE_LEVEL_MODERATE" | "PRICE_LEVEL_EXPENSIVE" | "PRICE_LEVEL_VERY_EXPENSIVE"
-  businessStatus?: string;  // "OPERATIONAL" | "CLOSED_TEMPORARILY" | "CLOSED_PERMANENTLY"
+  priceLevel?: string;
+  businessStatus?: string;
   location?: { latitude: number; longitude: number };
+  editorialSummary?: { text: string; languageCode?: string };
+  regularOpeningHours?: { openNow?: boolean; weekdayDescriptions?: string[] };
+  websiteUri?: string;
+  googleMapsUri?: string;
 }
 
 interface PlacesResponse {
@@ -236,6 +240,9 @@ function generateBadges(place: GooglePlace): Badge[] {
 }
 
 function buildDescription(place: GooglePlace, neighborhood: string): string {
+  // Prefer Google's own editorial summary — it's the most accurate real description
+  if (place.editorialSummary?.text) return place.editorialSummary.text;
+
   const parts: string[] = [];
   if (neighborhood) parts.push(`Located in ${neighborhood}.`);
   if (place.rating && place.userRatingCount) {
@@ -279,23 +286,26 @@ function mapToActivity(place: GooglePlace, category: Category, city: string): Ac
       : category;
 
   return {
-    id:          place.id,
-    title:       place.displayName.text,
+    id:           place.id,
+    title:        place.displayName.text,
     neighborhood,
-    duration:    estimateDuration(types),
+    duration:     estimateDuration(types),
     price,
     isFree,
-    rating:      place.rating ?? 0,
-    reviewCount: place.userRatingCount ?? 0,
-    description: buildDescription(place, neighborhood),
-    whyVisit:    buildWhyVisit(place, finalCategory, city),
-    category:    finalCategory,
-    tags:        buildTags(types),
+    rating:       place.rating ?? 0,
+    reviewCount:  place.userRatingCount ?? 0,
+    description:  buildDescription(place, neighborhood),
+    whyVisit:     buildWhyVisit(place, finalCategory, city),
+    category:     finalCategory,
+    tags:         buildTags(types),
     badges,
-    emoji:       pickEmoji(types) || CATEGORY_EMOJI[finalCategory],
-    gradient:    CATEGORY_GRADIENTS[finalCategory],
-    photoRef:    place.photos?.[0]?.name,   // Places API (New) photo name path
-    placeId:     place.id,
+    emoji:        pickEmoji(types) || CATEGORY_EMOJI[finalCategory],
+    gradient:     CATEGORY_GRADIENTS[finalCategory],
+    photoRef:     place.photos?.[0]?.name,  // Places API (New) resource name
+    placeId:      place.id,
+    websiteUri:   place.websiteUri,
+    googleMapsUri: place.googleMapsUri,
+    openNow:      place.regularOpeningHours?.openNow,
   };
 }
 
@@ -410,6 +420,10 @@ const PLACES_FIELD_MASK = [
   "places.priceLevel",
   "places.businessStatus",
   "places.location",
+  "places.editorialSummary",
+  "places.regularOpeningHours",
+  "places.websiteUri",
+  "places.googleMapsUri",
 ].join(",");
 
 async function nearbySearch(
@@ -568,6 +582,22 @@ export async function GET(req: NextRequest) {
       return { places: [], category: g.category };
     }),
   );
+
+  // ── Log first 5 raw places to verify photo fields ──
+  const allRaw = searchResults.flatMap((r) => r.places);
+  const sample = allRaw.slice(0, 5);
+  for (const p of sample) {
+    const photoName = p.photos?.[0]?.name ?? "NONE";
+    const photoUrl  = p.photos?.[0]?.name
+      ? `https://places.googleapis.com/v1/${p.photos[0].name}/media?maxWidthPx=800&key=REDACTED`
+      : "NO_URL";
+    console.log(
+      `[activities/places] name="${p.displayName?.text ?? "?"}" ` +
+      `has_photos=${Boolean(p.photos?.length)} ` +
+      `photo_name="${photoName.slice(0, 80)}" ` +
+      `photo_url="${photoUrl.slice(0, 120)}"`,
+    );
+  }
 
   // ── Dedup + filter ──
   const seen    = new Set<string>();
