@@ -2112,6 +2112,81 @@ function nightsBetween(checkIn: string, checkOut: string): number {
   return n > 0 ? n : 1;
 }
 
+// ── Geographic filtering ──────────────────────────────────────────────────────
+
+function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number): number {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+async function geocodeDestination(
+  destination: string,
+  apiKey: string,
+): Promise<{ lat: number; lng: number } | null> {
+  try {
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(destination)}&key=${apiKey}`;
+    const resp = await fetch(url, { signal: AbortSignal.timeout(5_000) });
+    if (!resp.ok) return null;
+    const data = await resp.json() as {
+      status: string;
+      results?: Array<{ geometry?: { location?: { lat?: number; lng?: number } } }>;
+    };
+    const loc = data.results?.[0]?.geometry?.location;
+    if (typeof loc?.lat !== "number" || typeof loc?.lng !== "number") return null;
+    return { lat: loc.lat, lng: loc.lng };
+  } catch {
+    return null;
+  }
+}
+
+const GEO_RADIUS_KM = 50;
+
+function geoFilterHotels(
+  hotels: ProviderHotel[],
+  center: { lat: number; lng: number },
+  destination: string,
+): ProviderHotel[] {
+  const pre = hotels.length;
+  const passed: ProviderHotel[] = [];
+  const excluded: Array<{ name: string; address: string; dist: string }> = [];
+
+  for (const h of hotels) {
+    if (h.latitude == null || h.longitude == null) {
+      // No coordinates — exclude when we have a reliable center
+      excluded.push({ name: h.name, address: h.address, dist: "no coords" });
+      continue;
+    }
+    const dist = haversineKm(center.lat, center.lng, h.latitude, h.longitude);
+    if (dist <= GEO_RADIUS_KM) {
+      passed.push(h);
+    } else {
+      excluded.push({ name: h.name, address: h.address, dist: `${dist.toFixed(0)}km` });
+    }
+  }
+
+  console.log(
+    `[geo-filter] destination="${destination}" ` +
+    `center=(${center.lat.toFixed(4)},${center.lng.toFixed(4)}) ` +
+    `radius=${GEO_RADIUS_KM}km  pre=${pre}  post=${passed.length}  removed=${excluded.length}`,
+  );
+  for (const h of excluded.slice(0, 15)) {
+    console.log(`  [geo-filter] EXCLUDED "${h.name}" (${h.address}) dist=${h.dist}`);
+  }
+
+  // Safety fallback: if everything is filtered, the geocode was probably wrong — skip filter
+  if (passed.length === 0 && pre > 0) {
+    console.warn(`[geo-filter] all ${pre} hotels filtered — reverting to unfiltered set`);
+    return hotels;
+  }
+
+  return passed;
+}
+
 // ── POST /api/hotels/search ───────────────────────────────────────────────────
 
 export async function POST(req: Request) {
@@ -2157,12 +2232,24 @@ export async function POST(req: Request) {
   const deduped = deduplicateHotels(serpResult.hotels);
   console.log(`[hotels] pages=${serpResult.pagesFetched}  raw=${serpResult.rawCount}  deduped=${deduped.length}  prefs=[${neighborhood_prefs.join(",")}]  places=${!!placesApiKey}  (serp=${serpResult.latencyMs}ms)`);
 
-  let enrichments = new Map<string, PlacesEnrichment>();
+  // Geographic filter — resolve destination to coordinates, then drop hotels outside 50 km radius.
+  // Runs only when a Places API key is available (same key works for Geocoding API).
+  let geoFiltered = deduped;
   if (placesApiKey) {
-    enrichments = await enrichWithGooglePlaces(deduped, destination, placesApiKey);
+    const geoCenter = await geocodeDestination(destination, placesApiKey);
+    if (geoCenter) {
+      geoFiltered = geoFilterHotels(deduped, geoCenter, destination);
+    } else {
+      console.warn(`[geo-filter] geocoding failed for "${destination}" — skipping geo filter`);
+    }
   }
 
-  const scored = scoreHotels(deduped, neighborhood_prefs, destination, enrichments).map((h) => ({ ...h, nights }));
+  let enrichments = new Map<string, PlacesEnrichment>();
+  if (placesApiKey) {
+    enrichments = await enrichWithGooglePlaces(geoFiltered, destination, placesApiKey);
+  }
+
+  const scored = scoreHotels(geoFiltered, neighborhood_prefs, destination, enrichments).map((h) => ({ ...h, nights }));
 
   // Stretch scores to 45–97 before sorting so results always span ~50 points.
   normalizeAiScores(scored);
@@ -2180,9 +2267,9 @@ export async function POST(req: Request) {
 
   const nbhdCount = new Set(scored.map((h) => h.inferred_neighborhood).filter(Boolean)).size;
   console.log(
-    `[pipeline] raw_hotels_retrieved=${serpResult.rawCount}  deduped_hotels=${deduped.length}  neighborhood_count=${nbhdCount}  offers=${scored.length}  (reranked=${neighborhood_prefs.length > 0 ? scored.length : 0})`
+    `[pipeline] raw_hotels_retrieved=${serpResult.rawCount}  deduped=${deduped.length}  geo_filtered=${geoFiltered.length}  neighborhood_count=${nbhdCount}  offers=${scored.length}  (reranked=${neighborhood_prefs.length > 0 ? scored.length : 0})`
   );
-  console.log(`Raw hotels: ${serpResult.rawCount}\nDeduped hotels: ${deduped.length}\nNeighborhoods: ${nbhdCount}`);
+  console.log(`Raw hotels: ${serpResult.rawCount}\nDeduped: ${deduped.length}\nGeo-filtered: ${geoFiltered.length}\nNeighborhoods: ${nbhdCount}`);
 
   return NextResponse.json({
     status: "ok",
