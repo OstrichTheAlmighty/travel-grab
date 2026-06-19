@@ -352,6 +352,97 @@ function buildWhyVisit(place: GooglePlace, category: Category, city: string): st
   return s2 ? `${s1} ${s2}` : s1;
 }
 
+// ── AI-enhanced Why Visit ─────────────────────────────────────────────────────
+
+async function generateWhyVisitBatch(
+  activities: Activity[],
+  placeMap: Map<string, GooglePlace>,
+  city: string,
+): Promise<Map<string, string>> {
+  const apiKey = (process.env.OPENAI_API_KEY ?? "").trim();
+  if (!apiKey) return new Map();
+
+  const items = activities.map((a) => {
+    const p = placeMap.get(a.id);
+    return {
+      id:        a.id,
+      name:      a.title,
+      category:  a.category,
+      city,
+      editorial: p?.editorialSummary?.text ?? null,
+      types:     (p?.types ?? []).filter((t) => !SKIP_TYPES.has(t)).slice(0, 6),
+    };
+  });
+
+  const prompt = `You write concise "Why visit?" summaries for an activity card in a travel app. Each summary is shown when a user taps "Why visit?" on the card.
+
+RULES — strictly enforced:
+- Exactly 2 sentences. No more, no less.
+- No ratings, star ratings, or review counts.
+- Forbidden phrases: "must-see", "world-renowned", "vibrant", "bustling", "amazing", "popular attraction", "hidden gem", "unique experience".
+- "Iconic" is allowed only when attached to a specific named feature (e.g. "the iconic Kaminarimon Gate"), never used alone.
+- First sentence: what the visitor will specifically DO or SEE that is unique to this place. Name specific features, streets, rooms, items, or rituals where possible.
+- Second sentence: who it is best for, OR what makes it stand out from similar attractions, OR a practical tip.
+- Present tense. Visitor's perspective. Do not repeat the place name in both sentences.
+
+Examples of the quality and specificity required:
+- "Walk through the thundering Kaminarimon Gate and browse Nakamise Street's snack stalls before reaching the main hall of Tokyo's oldest temple. The blend of street food, incense, and active worship makes it unlike any other temple visit in the city."
+- "Ride to the 350-metre observation floor for sweeping views across Tokyo's sprawl and, on clear days, Mount Fuji on the horizon. Sunset is the most rewarding time as the city lights begin to glow across every direction."
+- "Leave the crowds behind and wander forested paths leading to a grand Shinto shrine dedicated to Emperor Meiji. Occasional wedding processions in traditional dress add a sense of living ritual that most tourist sites in Tokyo lack."
+- "Classic castle-centred parades, themed lands, and the full Disney ride lineup make this the right choice for first-time visitors who want the definitive Disney experience. Arrive early to beat queues for the most popular attractions."
+
+PLACES:
+${JSON.stringify(items, null, 2)}
+
+Return ONLY a JSON object mapping each place ID to its why_visit string.
+{"ChIJ...": "Sentence one. Sentence two.", ...}`;
+
+  try {
+    const controller = new AbortController();
+    const tid = setTimeout(() => controller.abort(), 20000);
+
+    const resp = await fetch("https://api.openai.com/v1/chat/completions", {
+      method:  "POST",
+      signal:  controller.signal,
+      headers: {
+        "Content-Type":  "application/json",
+        "Authorization": `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model:           "gpt-4o-mini",
+        temperature:     0.4,
+        max_tokens:      4000,
+        response_format: { type: "json_object" },
+        messages: [{ role: "user", content: prompt }],
+      }),
+    });
+
+    clearTimeout(tid);
+
+    if (!resp.ok) {
+      console.error(`[activities/openai] HTTP ${resp.status}: ${await resp.text().catch(() => "")}`);
+      return new Map();
+    }
+
+    const data = await resp.json() as { choices?: Array<{ message?: { content?: string } }> };
+    const raw  = (data.choices?.[0]?.message?.content ?? "").trim();
+    const parsed = JSON.parse(raw) as Record<string, unknown>;
+
+    const result = new Map<string, string>();
+    for (const [id, text] of Object.entries(parsed)) {
+      if (typeof text === "string" && text.trim()) result.set(id, text.trim());
+    }
+
+    console.log(`[activities/openai] whyVisit generated for ${result.size}/${activities.length} places`);
+    return result;
+  } catch (err) {
+    console.error("[activities/openai] whyVisit error:", err instanceof Error ? err.message : String(err));
+    return new Map();
+  }
+}
+
+// ── Activity mapper ───────────────────────────────────────────────────────────
+
 function mapToActivity(place: GooglePlace, category: Category, city: string): Activity {
   const types       = place.types ?? [];
   const { price, isFree } = estimatePrice(place.priceLevel);
@@ -677,6 +768,14 @@ export async function GET(req: NextRequest) {
     );
   }
 
+  // ── Flat map of all raw places (used for AI context later) ──
+  const placeMap = new Map<string, GooglePlace>();
+  for (const { places } of searchResults) {
+    for (const p of places) {
+      if (!placeMap.has(p.id)) placeMap.set(p.id, p);
+    }
+  }
+
   // ── Dedup + filter ──
   const seen    = new Set<string>();
   const mapped: Activity[] = [];
@@ -752,6 +851,16 @@ export async function GET(req: NextRequest) {
       country:    mock.country,
       source:     "mock_fallback",
     });
+  }
+
+  // ── AI-enhanced Why Visit — overwrites template text with place-specific summaries ──
+  // Templates (set in mapToActivity) serve as fallback if OpenAI is unavailable.
+  const aiWhyVisit = await generateWhyVisitBatch(mapped, placeMap, city);
+  if (aiWhyVisit.size > 0) {
+    for (const activity of mapped) {
+      const text = aiWhyVisit.get(activity.id);
+      if (text) activity.whyVisit = text;
+    }
   }
 
   cache.set(cacheKey, { activities: mapped, city, country, ts: Date.now() });
