@@ -9,15 +9,15 @@ import type { Activity, Badge, Category } from "./data/types";
 type FilterId = "all" | Category | "free";
 
 const FILTERS: { id: FilterId; label: string; icon: string }[] = [
-  { id: "all",         label: "All",          icon: "" },
-  { id: "food",        label: "Food",         icon: "🍜" },
-  { id: "nightlife",   label: "Nightlife",    icon: "🌃" },
-  { id: "culture",     label: "Culture",      icon: "🎭" },
-  { id: "adventure",   label: "Adventure",    icon: "⚡" },
-  { id: "nature",      label: "Nature",       icon: "🌿" },
-  { id: "luxury",      label: "Luxury",       icon: "✨" },
-  { id: "hidden_gems", label: "Hidden Gems",  icon: "💎" },
-  { id: "free",        label: "Free",         icon: "🎁" },
+  { id: "all",         label: "Featured",    icon: "⭐" },
+  { id: "food",        label: "Food",        icon: "🍜" },
+  { id: "nightlife",   label: "Nightlife",   icon: "🌃" },
+  { id: "culture",     label: "Culture",     icon: "🎭" },
+  { id: "adventure",   label: "Adventure",   icon: "⚡" },
+  { id: "nature",      label: "Nature",      icon: "🌿" },
+  { id: "luxury",      label: "Luxury",      icon: "✨" },
+  { id: "hidden_gems", label: "Hidden Gems", icon: "💎" },
+  { id: "free",        label: "Free",        icon: "🎁" },
 ];
 
 const BADGE_META: Record<Badge, { label: string; className: string }> = {
@@ -1029,7 +1029,7 @@ function CategoryFilter({
                   isActive ? "bg-white/20 text-white" : "bg-white/[0.06] text-white/35"
                 }`}
               >
-                {count}
+                {count.toLocaleString()}
               </span>
             )}
           </button>
@@ -1451,31 +1451,48 @@ export default function ActivitySearch() {
     setModalLoading(false);
   }
 
-  const isSearching = activityQuery.trim().length > 0;
+  const isSearching  = activityQuery.trim().length > 0;
+  const isFeatured   = activeFilter === "all" && !isSearching;
 
-  // Tier 1 (top CURATED_COUNT by quality) or full relevance-ranked search results
-  const searchBase = useMemo(() => {
-    const all = result?.activities ?? [];
-    if (!isSearching) return all.slice(0, CURATED_COUNT);
-    return sortByRelevance(all, activityQuery.trim());
-  }, [result?.activities, isSearching, activityQuery]);
+  // Two datasets — fullDataset is the source of truth for counts and browsing
+  const fullDataset  = useMemo(() => result?.activities ?? [], [result?.activities]);
+  const featured     = useMemo(() => fullDataset.slice(0, CURATED_COUNT), [fullDataset]);
 
-  // Category counts from searchBase (so chips reflect current search scope)
+  // Category counts ALWAYS from full dataset (not just the top 30)
   const counts = useMemo((): Partial<Record<FilterId, number>> => {
-    const c: Partial<Record<FilterId, number>> = { all: searchBase.length };
-    for (const a of searchBase) {
+    const c: Partial<Record<FilterId, number>> = {};
+    for (const a of fullDataset) {
       c[a.category] = (c[a.category] ?? 0) + 1;
       if (a.isFree) c.free = (c.free ?? 0) + 1;
     }
     return c;
-  }, [searchBase]);
+  }, [fullDataset]);
 
-  // Final display set — category filter applied on top of searchBase
-  const displayed = useMemo(() => {
-    if (activeFilter === "all")  return searchBase;
-    if (activeFilter === "free") return searchBase.filter((a) => a.isFree);
-    return searchBase.filter((a) => a.category === activeFilter);
-  }, [searchBase, activeFilter]);
+  // Full view before pagination — three modes:
+  //   featured  → top 30, no pagination
+  //   category  → all in that category from fullDataset, paginated
+  //   search    → relevance-ranked from fullDataset (+ optional category), paginated
+  const viewBase = useMemo(() => {
+    if (isSearching) {
+      let base = fullDataset;
+      if (activeFilter !== "all") {
+        if (activeFilter === "free") base = base.filter((a) => a.isFree);
+        else base = base.filter((a) => a.category === activeFilter);
+      }
+      return sortByRelevance(base, activityQuery.trim());
+    }
+    if (activeFilter === "all")  return featured;
+    if (activeFilter === "free") return fullDataset.filter((a) => a.isFree);
+    return fullDataset.filter((a) => a.category === activeFilter);
+  }, [isSearching, activeFilter, activityQuery, fullDataset, featured]);
+
+  // Pagination — reset page whenever the view changes
+  const [page, setPage] = useState(1);
+  useEffect(() => { setPage(1); }, [viewBase]);
+
+  const PAGE_SIZE = 24;
+  const displayed = viewBase.slice(0, page * PAGE_SIZE);
+  const hasMore   = displayed.length < viewBase.length;
 
   const city    = result?.city    ?? destination.split(",")[0].trim();
   const country = result?.country ?? destination.split(",").pop()?.trim() ?? "";
@@ -1556,10 +1573,10 @@ export default function ActivitySearch() {
           <div className="flex items-center justify-between mb-5">
             <p className="text-[12px] text-white/30">
               {isSearching
-                ? `${displayed.length} ${displayed.length === 1 ? "result" : "results"} for "${activityQuery}"${city ? ` in ${city}` : ""}`
-                : activeFilter === "all"
-                  ? `${displayed.length} top experiences in ${city}`
-                  : `${displayed.length} ${FILTERS.find((f) => f.id === activeFilter)?.label ?? activeFilter} activit${displayed.length === 1 ? "y" : "ies"} in ${city}`
+                ? `${viewBase.length.toLocaleString()} ${viewBase.length === 1 ? "result" : "results"} for "${activityQuery}"${city ? ` in ${city}` : ""}`
+                : isFeatured
+                  ? `${featured.length} featured experiences in ${city} · ${fullDataset.length.toLocaleString()} total discovered`
+                  : `${viewBase.length.toLocaleString()} ${FILTERS.find((f) => f.id === activeFilter)?.label ?? activeFilter} experience${viewBase.length === 1 ? "" : "s"} found in ${city}`
               }
             </p>
             {savedIds.size > 0 && (
@@ -1593,6 +1610,18 @@ export default function ActivitySearch() {
             <EmptyState filter={activeFilter} />
           )}
         </div>
+
+        {/* ── Load more ── */}
+        {!loading && hasMore && (
+          <div className="flex flex-col items-center gap-2 mt-10">
+            <button
+              onClick={() => setPage((p) => p + 1)}
+              className="px-8 py-3 rounded-xl bg-white/[0.05] border border-white/[0.1] text-sm font-semibold text-white/55 hover:bg-white/[0.09] hover:text-white/80 hover:border-white/[0.18] transition-all duration-200 active:scale-[0.98]"
+            >
+              Load more · {(viewBase.length - displayed.length).toLocaleString()} remaining
+            </button>
+          </div>
+        )}
 
       </main>
 
