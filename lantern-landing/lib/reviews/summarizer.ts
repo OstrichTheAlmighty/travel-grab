@@ -37,7 +37,7 @@ function buildPrompt(hotelName: string, city: string, reviews: Review[]): string
     .map((r, i) => `Review ${i + 1} (${r.rating}★): ${r.text.trim()}`)
     .join("\n\n");
 
-  return `You are extracting themes from hotel guest reviews. Your only job is to report what the reviews actually say — not what you know about the hotel, city, or hotel category.
+  return `You are extracting themes from hotel guest reviews. Report only what the reviews actually say. Do not use outside knowledge about the hotel or city.
 
 Hotel: ${hotelName}
 City: ${city}
@@ -47,34 +47,40 @@ Reviews: ${reviews.length}
 ${reviewLines}
 --- END ---
 
-RULES — read before writing a single word:
+EVIDENCE RULE (non-negotiable):
+A theme is only valid if it is explicitly stated in 2 or more reviews above.
+If you cannot point to 2+ reviews that say the thing, omit it. An empty array is correct output.
 
-1. EVIDENCE REQUIREMENT
-   A theme is valid only if it is explicitly stated or directly implied in 2 or more of the reviews above.
-   If you are not certain a theme meets this bar, leave the array empty. An empty array is correct output.
+────────────────────────────────────────────────
 
-2. CONCRETE LANGUAGE
-   Write what guests observed, not conclusions you draw.
-   Good: "Rooms are small", "Staff helped with luggage", "Street noise at night"
-   Bad: "Compact but cozy rooms", "Exceptional service culture", "Vibrant urban atmosphere"
+"guestsLove" — up to 4 most frequently praised things
+- Use the specific language guests used, including place names or hotel-specific details when they appear.
+- GOOD: "Convenient location near Shinjuku Station", "Helpful and friendly staff", "Clean and well-maintained rooms", "Unique Godzilla-themed experience"
+- BAD: "Exceptional hospitality experience", "Great atmosphere", "Perfect location"
 
-3. FORBIDDEN PHRASES
-   Never use these unless 3+ reviews explicitly contain the word or phrase:
-   boutique experience, luxury seekers, minimalist aesthetic, family friendly,
-   romantic getaway, hidden gem, cozy retreat, urban explorer, ideal for couples,
-   perfect for business, great for solo travelers, immersive experience.
-   If you find yourself writing one of these, delete it and leave the slot empty.
+"commonComplaints" — up to 4 most frequently repeated criticisms
+- Concrete only. One-off complaints are excluded.
+- GOOD: "Rooms are small", "Street noise at night", "Slow elevator"
+- BAD: "Value could be better", "Experience not for everyone"
 
-4. TRAVELER TYPES (bestFor / notIdealFor only)
-   Only include a traveler type if the reviews explicitly name it or describe a pattern
-   that makes it unambiguous. "Near Shinjuku station" does not make it "ideal for tourists"
-   unless reviews say so. "Small rooms" does not make it "not ideal for families" unless
-   reviews complain about it in a family context.
+"bestFor" — traveler types, only if strongly supported by review patterns
+- The reviews must name or clearly imply the traveler type. Do not infer from features.
+- GOOD: "First-time visitors to Tokyo", "Travelers wanting easy rail access", "Fans of themed hotels"
+- BAD: "Perfect for couples", "Great for families", "Business travelers" (unless reviews say so)
 
-5. FORMAT
-   - Each bullet: plain English, max 8 words, no hotel name, no city name.
-   - Max 4 bullets per category.
-   - Return ONLY valid JSON — no prose, no markdown, no explanation.
+"notIdealFor" — traveler types, only if supported by recurring complaints
+- GOOD: "Travelers needing spacious rooms", "Guests seeking luxury accommodations", "Light sleepers"
+- BAD: "Luxury seekers", "Minimalist aesthetic lovers", "Family friendly" (do not invent)
+
+FORBIDDEN — never use these unless 3+ reviews explicitly use the phrase:
+boutique experience, luxury seekers, minimalist aesthetic, romantic getaway,
+family friendly, hidden gem, cozy retreat, urban explorer, ideal for couples,
+immersive experience, exceptional hospitality, great atmosphere.
+
+FORMAT:
+- Each bullet: plain English, max 10 words.
+- No hotel name repetition. No city name repetition.
+- Return ONLY valid JSON, no prose, no markdown:
 
 {
   "guestsLove": ["...", ...],

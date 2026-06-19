@@ -2066,6 +2066,13 @@ function GuestReviewsSection({
     track("hotel_reviews_sort_changed", { hotel_name: hotelName, sort: key });
   };
 
+  // Per-bucket counts for the rating filter chips
+  const ratingCounts = useMemo(() => ({
+    5:   reviews.filter((r) => r.rating === 5).length,
+    4:   reviews.filter((r) => r.rating === 4).length,
+    low: reviews.filter((r) => r.rating <= 3).length,
+  }), [reviews]);
+
   // The effective rating/count: prefer Places data, fall back to SerpAPI aggregate
   const displayRating = placesRating > 0 ? placesRating : serpRating;
   const displayCount  = placeCount   > 0 ? placeCount   : serpReviewCount;
@@ -2229,19 +2236,35 @@ function GuestReviewsSection({
               {/* Rating filter */}
               <div className="flex items-center gap-1.5">
                 <span className="text-[10px] text-white/25 font-semibold mr-0.5">Rating:</span>
-                {(["all", 5, 4, "low"] as const).map((f) => {
-                  const label = f === "all" ? "All" : f === "low" ? "≤3★" : `${f}★`;
+                {/* "All" always enabled */}
+                <button
+                  onClick={() => setRatingFilter("all")}
+                  className={`px-2.5 py-1 rounded-full text-[10px] font-semibold border transition-all ${
+                    ratingFilter === "all"
+                      ? "bg-white/10 text-white/80 border-white/20"
+                      : "text-white/30 border-white/[0.07] hover:text-white/50 hover:border-white/15"
+                  }`}
+                >
+                  All
+                </button>
+                {([5, 4, "low"] as const).map((f) => {
+                  const count   = ratingCounts[f];
+                  const label   = f === "low" ? "≤3★" : `${f}★`;
+                  const isEmpty = count === 0;
                   return (
                     <button
                       key={String(f)}
-                      onClick={() => setRatingFilter(f)}
+                      disabled={isEmpty}
+                      onClick={() => !isEmpty && setRatingFilter(f)}
                       className={`px-2.5 py-1 rounded-full text-[10px] font-semibold border transition-all ${
-                        ratingFilter === f
-                          ? "bg-white/10 text-white/80 border-white/20"
-                          : "text-white/30 border-white/[0.07] hover:text-white/50 hover:border-white/15"
+                        isEmpty
+                          ? "text-white/15 border-white/[0.04] cursor-not-allowed"
+                          : ratingFilter === f
+                            ? "bg-white/10 text-white/80 border-white/20"
+                            : "text-white/30 border-white/[0.07] hover:text-white/50 hover:border-white/15"
                       }`}
                     >
-                      {label}
+                      {label}{!isEmpty && <span className="ml-1 text-white/30">({count})</span>}
                     </button>
                   );
                 })}
@@ -2261,14 +2284,14 @@ function GuestReviewsSection({
                 ))}
               </div>
             ) : (
-              <p className="text-[11px] text-white/30 py-2">No reviews matched this search.</p>
+              <p className="text-[11px] text-white/30 py-2">No reviews in the current review sample match this search.</p>
             )}
 
             {/* Provider-limit disclosure */}
             <p className="text-[10px] text-white/20 leading-relaxed border-t border-white/[0.05] pt-3">
               {providerLimitReached
-                ? "Google only provides a limited review sample here. Full review coverage may require an additional review provider."
-                : "Showing available Google review samples."}
+                ? "Showing a sample of available Google reviews. Full coverage may require additional sources."
+                : "Showing a sample of available Google reviews."}
             </p>
           </>
         )}
@@ -2282,7 +2305,7 @@ function GuestReviewsSection({
 
         {/* No reviews from Places API */}
         {!loading && reviews.length === 0 && !error && (
-          <p className="text-[11px] text-white/35">Detailed review text is not available for this hotel yet.</p>
+          <p className="text-[11px] text-white/35">Review text is not currently available. Ratings are based on Google review aggregates.</p>
         )}
 
         {/* Other API error — fall back to SerpAPI aggregate note */}
