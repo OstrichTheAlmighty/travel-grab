@@ -65,8 +65,10 @@ interface HotelOffer {
 }
 
 interface AutocompleteSuggestion {
-  text: string;
+  text:      string;
   secondary: string;
+  label:     string;   // full unambiguous label: "Nara, Japan"
+  placeId?:  string;
 }
 
 type SearchState = "idle" | "loading" | "results" | "error";
@@ -877,10 +879,12 @@ function getAmenityDetail(amenity: string): string | null {
 function DestinationCombobox({
   value,
   onChange,
+  onSelectPlace,
   onConfirm,
 }: {
   value: string;
   onChange: (v: string) => void;
+  onSelectPlace: (s: AutocompleteSuggestion) => void;
   onConfirm: () => void;
 }) {
   const [open, setOpen]             = useState(false);
@@ -910,9 +914,12 @@ function DestinationCombobox({
   };
 
   const selectSuggestion = (s: AutocompleteSuggestion) => {
-    onChange(s.text);
+    // Show the full unambiguous label in the input ("Nara, Japan" not just "Nara")
+    // and notify the parent so it can store the full place object with placeId.
+    onSelectPlace(s);
     setSuggestions([]);
     setOpen(false);
+    console.log("[autocomplete] selected place:", { label: s.label, placeId: s.placeId });
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -4748,6 +4755,7 @@ export default function HotelSearch() {
   const today = new Date().toISOString().split("T")[0];
 
   const [destination,   setDestination]   = useState("");
+  const [selectedPlace, setSelectedPlace] = useState<AutocompleteSuggestion | null>(null);
   const [checkIn,       setCheckIn]       = useState("");
   const [checkOut,      setCheckOut]      = useState("");
   const [guests,        setGuests]        = useState(2);
@@ -4817,32 +4825,44 @@ export default function HotelSearch() {
     setErrors(errs);
     if (errs.length > 0) return;
 
+    // Use the full unambiguous label from autocomplete selection ("Nara, Japan")
+    // rather than raw input text which could be just "Nara" (ambiguous).
+    const destLabel = (selectedPlace?.label ?? destination).trim();
+
     const nights = (checkIn && checkOut)
       ? Math.round((new Date(checkOut).getTime() - new Date(checkIn).getTime()) / 86_400_000)
       : 0;
     track("hotel_search", {
-      destination:   destination.trim(),
+      destination:   destLabel,
       traveler_type: prefs.join(",") || "none",
       nights,
       budget:        null,
     });
     searchStartTimeRef.current = Date.now();
 
+    console.log("[hotel-search] raw_input:", destination.trim());
+    console.log("[hotel-search] resolved_label:", destLabel);
+    console.log("[hotel-search] selected_place:", selectedPlace);
+
     setSearchState("loading");
-    setSearchedDest(destination.trim());
+    setSearchedDest(destLabel);
 
     try {
+      const requestBody = {
+        destination:        destLabel,
+        check_in:           checkIn,
+        check_out:          checkOut,
+        guests,
+        rooms,
+        neighborhood_prefs: prefs,
+        ...(selectedPlace?.placeId ? { place_id: selectedPlace.placeId } : {}),
+      };
+      console.log("[hotel-search] request_sent:", requestBody);
+
       const res = await fetch("/api/hotels/search", {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          destination:        destination.trim(),
-          check_in:           checkIn,
-          check_out:          checkOut,
-          guests,
-          rooms,
-          neighborhood_prefs: prefs,
-        }),
+        body: JSON.stringify(requestBody),
       });
 
       if (res.status === 429) {
@@ -4869,12 +4889,12 @@ export default function HotelSearch() {
       }
       if (data.status === "empty" || !data.offers?.length) {
         setErrorTitle("No hotels found");
-        setErrorBody(data.message ?? `No hotels found for "${destination}". Try a different city name.`);
+        setErrorBody(data.message ?? `No hotels found for "${destLabel}". Try a different city name.`);
         setSearchState("error"); return;
       }
 
       track("hotel_search_completed", {
-        destination:   destination.trim(),
+        destination:   destLabel,
         results_count: data.offers!.length,
         load_time_ms:  Date.now() - searchStartTimeRef.current,
       });
@@ -4895,7 +4915,7 @@ export default function HotelSearch() {
       setErrorBody("Couldn't reach TravelGrab's servers. Check your connection and try again.");
       setSearchState("error");
     }
-  }, [destination, checkIn, checkOut, guests, rooms]);
+  }, [destination, selectedPlace, checkIn, checkOut, guests, rooms]);
 
   const handleSearch = () => doSearch(selectedPrefs);
 
@@ -4959,7 +4979,8 @@ export default function HotelSearch() {
             </label>
             <DestinationCombobox
               value={destination}
-              onChange={setDestination}
+              onChange={(v) => { setDestination(v); setSelectedPlace(null); }}
+              onSelectPlace={(s) => { setDestination(s.label); setSelectedPlace(s); }}
               onConfirm={handleSearch}
             />
           </div>

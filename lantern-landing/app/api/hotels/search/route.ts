@@ -2127,9 +2127,14 @@ function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number): nu
 async function geocodeDestination(
   destination: string,
   apiKey: string,
+  placeId?: string,
 ): Promise<{ lat: number; lng: number } | null> {
   try {
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(destination)}&key=${apiKey}`;
+    // placeId lookup is more accurate than text-based geocoding — prefer it when available.
+    const param = placeId
+      ? `place_id=${encodeURIComponent(placeId)}`
+      : `address=${encodeURIComponent(destination)}`;
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?${param}&key=${apiKey}`;
     const resp = await fetch(url, { signal: AbortSignal.timeout(5_000) });
     if (!resp.ok) return null;
     const data = await resp.json() as {
@@ -2138,6 +2143,9 @@ async function geocodeDestination(
     };
     const loc = data.results?.[0]?.geometry?.location;
     if (typeof loc?.lat !== "number" || typeof loc?.lng !== "number") return null;
+    console.log(
+      `[geocode] "${destination}" (${placeId ? `placeId=${placeId}` : "text"}) → (${loc.lat.toFixed(4)}, ${loc.lng.toFixed(4)})`,
+    );
     return { lat: loc.lat, lng: loc.lng };
   } catch {
     return null;
@@ -2202,6 +2210,7 @@ export async function POST(req: Request) {
   catch { return NextResponse.json({ status: "error", message: "Invalid JSON." }, { status: 400 }); }
 
   const destination        = (body.destination as string | undefined)?.trim() ?? "";
+  const place_id           = (body.place_id    as string | undefined)?.trim() ?? "";
   const check_in           = (body.check_in    as string | undefined)?.trim() ?? "";
   const check_out          = (body.check_out   as string | undefined)?.trim() ?? "";
   const guests             = Math.max(1, Math.min(8, Number(body.guests ?? 2)));
@@ -2209,6 +2218,8 @@ export async function POST(req: Request) {
   const neighborhood_prefs = Array.isArray(body.neighborhood_prefs)
     ? (body.neighborhood_prefs as unknown[]).filter((p): p is string => typeof p === "string" && p in PREF_SIGNALS)
     : [];
+
+  console.log(`[hotel-search] destination="${destination}" place_id="${place_id}"`);
 
   if (!destination || !check_in || !check_out) {
     return NextResponse.json({ status: "error", message: "destination, check_in, and check_out are required." }, { status: 400 });
@@ -2232,11 +2243,17 @@ export async function POST(req: Request) {
   const deduped = deduplicateHotels(serpResult.hotels);
   console.log(`[hotels] pages=${serpResult.pagesFetched}  raw=${serpResult.rawCount}  deduped=${deduped.length}  prefs=[${neighborhood_prefs.join(",")}]  places=${!!placesApiKey}  (serp=${serpResult.latencyMs}ms)`);
 
+  // Log first 10 returned hotels with coordinates for debugging
+  deduped.slice(0, 10).forEach((h) =>
+    console.log(`  [serp-hotel] "${h.name}" | ${h.address} | lat=${h.latitude ?? "?"} lng=${h.longitude ?? "?"}`)
+  );
+
   // Geographic filter — resolve destination to coordinates, then drop hotels outside 50 km radius.
-  // Runs only when a Places API key is available (same key works for Geocoding API).
+  // Prefers placeId-based geocoding (sent by the client when user selects from autocomplete)
+  // since it is unambiguous. Falls back to text-based geocoding for manual input.
   let geoFiltered = deduped;
   if (placesApiKey) {
-    const geoCenter = await geocodeDestination(destination, placesApiKey);
+    const geoCenter = await geocodeDestination(destination, placesApiKey, place_id || undefined);
     if (geoCenter) {
       geoFiltered = geoFilterHotels(deduped, geoCenter, destination);
     } else {

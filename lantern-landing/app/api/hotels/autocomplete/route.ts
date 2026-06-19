@@ -60,12 +60,16 @@ const LOCAL_CITIES: Array<{ city: string; country: string }> = [
 ];
 
 export interface AutocompleteSuggestion {
-  text:      string;   // city name
-  secondary: string;   // country / state
+  text:      string;    // city name (dropdown primary line)
+  secondary: string;    // country / region (dropdown secondary line)
+  label:     string;    // unambiguous full label sent to hotel search: "Nara, Japan"
+  placeId?:  string;    // Google Place ID for accurate server-side geocoding
 }
 
 type PlacesAutoSuggestion = {
   placePrediction?: {
+    place?:   string;
+    placeId?: string;
     text?: { text?: string };
     structuredFormat?: {
       mainText?:      { text?: string };
@@ -74,18 +78,31 @@ type PlacesAutoSuggestion = {
   };
 };
 
+// Build an unambiguous label like "Nara, Japan" from mainText and secondaryText.
+// Takes only the last segment of secondary (the country) to avoid "Nara, Nara, Japan".
+function buildLabel(text: string, secondary: string): string {
+  if (!secondary) return text;
+  const parts = secondary.split(",");
+  const country = parts[parts.length - 1].trim();
+  return country ? `${text}, ${country}` : text;
+}
+
 function localFallback(q: string): AutocompleteSuggestion[] {
   const ql = q.toLowerCase();
   return LOCAL_CITIES
     .filter(({ city }) => city.toLowerCase().includes(ql))
     .sort((a, b) => {
-      // Exact prefix first
       const aStart = a.city.toLowerCase().startsWith(ql) ? 0 : 1;
       const bStart = b.city.toLowerCase().startsWith(ql) ? 0 : 1;
       return aStart - bStart || a.city.localeCompare(b.city);
     })
     .slice(0, 8)
-    .map(({ city, country }) => ({ text: city, secondary: country }));
+    .map(({ city, country }) => ({
+      text:      city,
+      secondary: country,
+      label:     `${city}, ${country}`,
+      placeId:   undefined,
+    }));
 }
 
 export async function GET(req: Request): Promise<Response> {
@@ -122,12 +139,15 @@ export async function GET(req: Request): Promise<Response> {
 
     const suggestions: AutocompleteSuggestion[] = (body.suggestions ?? [])
       .slice(0, 8)
-      .map((s) => ({
-        text:      s.placePrediction?.structuredFormat?.mainText?.text
-                ?? s.placePrediction?.text?.text
-                ?? "",
-        secondary: s.placePrediction?.structuredFormat?.secondaryText?.text ?? "",
-      }))
+      .map((s) => {
+        const text      = s.placePrediction?.structuredFormat?.mainText?.text
+                       ?? s.placePrediction?.text?.text
+                       ?? "";
+        const secondary = s.placePrediction?.structuredFormat?.secondaryText?.text ?? "";
+        // placeId is returned as placePrediction.placeId in the Places Autocomplete (New) API
+        const placeId   = s.placePrediction?.placeId ?? undefined;
+        return { text, secondary, label: buildLabel(text, secondary), placeId };
+      })
       .filter((s) => s.text.length > 0);
 
     // Blend with local results in case API returns nothing useful
