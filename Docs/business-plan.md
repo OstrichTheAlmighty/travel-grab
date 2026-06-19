@@ -79,9 +79,12 @@ The hybrid approach reduces early conversion friction — users start free, expe
 
 ## 5. Cost Model
 
+> For a detailed, code-grounded breakdown of third-party API cost per itinerary (~$1.00–1.60, ~95% Google Places), see [api-cost-analysis.md](api-cost-analysis.md).
+
 ### Key Cost Drivers
-- **AI inference** — LLM API calls per proposal (estimate per-query cost)
-- **Data APIs** — Amadeus, Viator, Booking.com (rev share or flat fee)
+- **Data APIs (live cost)** — Google Places (hotels + activities) is the dominant variable cost; SerpAPI (Google Flights + Google Shopping engines) bills per search; Duffel flight search is free (rev-share only on bookings). See [api-cost-analysis.md](api-cost-analysis.md).
+- **AI inference** — OpenAI `gpt-4o-mini` for flight-advisor copy (one cached call per search); negligible today, scales only if the proposal flow adds more LLM steps
+- **Analytics** — PostHog (free under 1M events/month at current scale)
 - **Engineering** — Initial build cost
 - **Marketing** — CAC estimates TBD
 
@@ -104,12 +107,18 @@ The hybrid approach reduces early conversion friction — users start free, expe
 - Even at the same conversion rate, group-heavy user mix significantly raises commission revenue per booking
 
 **AI inference cost per proposal:**
-- Estimated LLM cost (Claude Sonnet / GPT-4o): $0.05–0.15 per full proposal
-- At 50K proposals/month: ~$2,500–7,500/month
+- Current implementation: one cached `gpt-4o-mini` flight-advisor call (~$0.001 per search) — effectively negligible
+- The $0.05–0.15/proposal figure applies only if the roadmap moves to a fuller multi-step LLM proposal (larger models and/or per-activity generation)
+- At 50K proposals/month: ~$50/month at current scope; ~$2,500–7,500/month under a full-LLM proposal design
 
-**API & infrastructure:**
-- Amadeus / Duffel: revenue-share on completed bookings (no upfront cost at low volume)
-- Viator / GetYourGuide: affiliate model, no flat fee
+**API & infrastructure (actual stack):**
+- **Google Places** — dominant variable cost: ~$1.00–1.60 per itinerary created (activities + hotel Text Search, Place Details, Photos). Free per-SKU monthly tiers can zero this out at low volume. See [api-cost-analysis.md](api-cost-analysis.md).
+- **SerpAPI** — billed per search (~$0.01–0.015/search): Google Flights engine in the landing flight search **and** Google Shopping engine in the budget/affordability product
+- **Duffel** — flight *search* is free; cost / rev-share applies only on completed bookings
+- **OpenAI** — `gpt-4o-mini` advisor copy, ~$0.001 per search
+- **PostHog** — analytics, free under 1M events/month at current scale
+- **Amadeus** — integrated in code but currently disabled (no active cost); flip on as a flight-supply fallback once credentials are added
+- **TripAdvisor** — optional activity enrichment; bills only when a key is configured
 - Hosting & infra: ~$500–2,000/month at early scale
 
 **Customer Acquisition Cost (CAC) target:**
@@ -153,3 +162,9 @@ The hybrid approach reduces early conversion friction — users start free, expe
 | AI hallucinations in proposals | Medium | High | Human-in-the-loop review, source grounding |
 | Low booking conversion | Medium | High | Nail the proposal quality first |
 | API partner dependency | High | Medium | Multi-source fallbacks |
+
+---
+
+## 10. Legal & Compliance
+
+Every revenue and product item above carries legal obligations that must be met before it ships. See [legal/legal-requirements-by-plan.md](legal/legal-requirements-by-plan.md), which maps each plan item to its requirements (entity/foundation, affiliate FTC disclosure, subscription tax + auto-renewal, group split-payment/money-transmission, B2B contracts, AI liability, and data/training rights). The sequenced execution list lives in [legal-compliance-checklist.md](legal-compliance-checklist.md).
