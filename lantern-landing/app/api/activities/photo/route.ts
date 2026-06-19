@@ -9,11 +9,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
-  const ref   = (searchParams.get("ref") ?? "").trim();
+  // Places API (New) uses photo `name` like "places/xxx/photos/yyy"
+  const name  = (searchParams.get("name") ?? "").trim();
   const width = Math.min(parseInt(searchParams.get("w") ?? "800", 10) || 800, 1600);
 
-  if (!ref) {
-    return new NextResponse("Missing ref parameter", { status: 400 });
+  if (!name) {
+    return new NextResponse("Missing name parameter", { status: 400 });
   }
 
   const apiKey = (process.env.GOOGLE_PLACES_API_KEY ?? "").trim();
@@ -21,18 +22,18 @@ export async function GET(req: NextRequest) {
     return new NextResponse("API key not configured", { status: 503 });
   }
 
+  // Places API (New) photo endpoint: GET /v1/{name}/media
   const photoUrl =
-    `https://maps.googleapis.com/maps/api/place/photo` +
-    `?maxwidth=${width}&photo_reference=${encodeURIComponent(ref)}&key=${apiKey}`;
+    `https://places.googleapis.com/v1/${name}/media` +
+    `?maxWidthPx=${width}&key=${apiKey}&skipHttpRedirect=true`;
 
   try {
     const upstream = await fetch(photoUrl, {
       signal: AbortSignal.timeout(8000),
-      // Follow the redirect Google sends — Node fetch does this automatically.
     });
 
     if (!upstream.ok) {
-      console.warn(`[activities/photo] upstream ${upstream.status} for ref=${ref.slice(0, 20)}…`);
+      console.warn(`[activities/photo] upstream ${upstream.status} for name=${name.slice(0, 40)}…`);
       return new NextResponse("Photo unavailable", { status: 502 });
     }
 

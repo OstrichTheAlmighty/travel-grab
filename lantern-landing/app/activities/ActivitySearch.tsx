@@ -162,10 +162,10 @@ function ActivityCard({
       {/* ── Hero ── */}
       <div className="relative h-52 overflow-hidden flex-shrink-0">
         {showPhoto ? (
-          // Real photo from Google Places (proxied server-side)
+          // Real photo from Google Places (proxied server-side via /api/activities/photo)
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={`/api/activities/photo?ref=${encodeURIComponent(activity.photoRef!)}`}
+            src={`/api/activities/photo?name=${encodeURIComponent(activity.photoRef!)}`}
             alt={activity.title}
             loading="lazy"
             className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
@@ -514,6 +514,7 @@ interface SearchResult {
   activities: Activity[];
   city: string;
   country: string;
+  source?: string;  // "places_api" | "mock" | "mock_fallback" | "cache"
 }
 
 export default function ActivitySearch() {
@@ -541,7 +542,7 @@ export default function ActivitySearch() {
 
     try {
       const res = await fetch(`/api/activities/search?destination=${encodeURIComponent(dest.trim())}`);
-      const data = await res.json() as { activities?: Activity[]; city?: string; country?: string; error?: string };
+      const data = await res.json() as { activities?: Activity[]; city?: string; country?: string; source?: string; error?: string };
 
       if (!res.ok || data.error) {
         throw new Error(data.error ?? `HTTP ${res.status}`);
@@ -554,6 +555,7 @@ export default function ActivitySearch() {
         activities: data.activities,
         city:       data.city    ?? dest.split(",")[0].trim(),
         country:    data.country ?? dest.split(",").pop()?.trim() ?? "",
+        source:     data.source,
       };
 
       clientCache.current.set(key, r);
@@ -673,15 +675,29 @@ export default function ActivitySearch() {
           />
         </div>
 
-        {/* ── Result count ── */}
+        {/* ── Result count + debug source ── */}
         {result && !loading && (
           <div className="flex items-center justify-between mb-5">
-            <p className="text-[12px] text-white/30">
-              {activeFilter === "all"
-                ? `Showing all ${filtered.length} activities`
-                : `${filtered.length} ${FILTERS.find((f) => f.id === activeFilter)?.label ?? activeFilter} activit${filtered.length === 1 ? "y" : "ies"}`}{" "}
-              in {city}
-            </p>
+            <div className="flex items-center gap-3">
+              <p className="text-[12px] text-white/30">
+                {activeFilter === "all"
+                  ? `Showing all ${filtered.length} activities`
+                  : `${filtered.length} ${FILTERS.find((f) => f.id === activeFilter)?.label ?? activeFilter} activit${filtered.length === 1 ? "y" : "ies"}`}{" "}
+                in {city}
+              </p>
+              {/* DEBUG: remove once real data is confirmed */}
+              <span className={`text-[10px] font-mono px-2 py-0.5 rounded border ${
+                result.source === "places_api" || result.source === "cache"
+                  ? "text-green-400 border-green-400/30 bg-green-400/5"
+                  : "text-amber-400 border-amber-400/30 bg-amber-400/5"
+              }`}>
+                {result.source === "places_api" ? "Data source: Google Places"
+                  : result.source === "cache" ? "Data source: Google Places (cached)"
+                  : result.source === "mock_fallback" ? "Data source: Mock fallback"
+                  : result.source === "mock" ? "Data source: Mock (no API key)"
+                  : `Data source: ${result.source ?? "unknown"}`}
+              </span>
+            </div>
             {savedIds.size > 0 && (
               <p className="text-[11px] text-white/20 flex items-center gap-1">
                 <IconHeart filled className="w-2.5 h-2.5 text-red-400/70" />

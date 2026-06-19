@@ -4,26 +4,24 @@ import { DESTINATION_DATA } from "../../../activities/data/tokyo";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
+// Places API (New) — https://places.googleapis.com/v1/places:searchNearby / :searchText
 interface GooglePlace {
-  place_id: string;
-  name: string;
-  types?: string[];
+  id: string;
+  displayName: { text: string; languageCode?: string };
+  formattedAddress?: string;
+  shortFormattedAddress?: string;
   rating?: number;
-  user_ratings_total?: number;
-  vicinity?: string;
-  formatted_address?: string;
-  photos?: Array<{ photo_reference: string; width: number; height: number }>;
-  price_level?: number;    // 0–4
-  business_status?: string;
-  geometry: {
-    location: { lat: number; lng: number };
-  };
+  userRatingCount?: number;
+  types?: string[];
+  photos?: Array<{ name: string; widthPx?: number; heightPx?: number }>;
+  priceLevel?: string;   // "PRICE_LEVEL_FREE" | "PRICE_LEVEL_INEXPENSIVE" | "PRICE_LEVEL_MODERATE" | "PRICE_LEVEL_EXPENSIVE" | "PRICE_LEVEL_VERY_EXPENSIVE"
+  businessStatus?: string;  // "OPERATIONAL" | "CLOSED_TEMPORARILY" | "CLOSED_PERMANENTLY"
+  location?: { latitude: number; longitude: number };
 }
 
 interface PlacesResponse {
-  results: GooglePlace[];
-  status: string;
-  error_message?: string;
+  places?: GooglePlace[];
+  error?: { message: string; code: number; status: string };
 }
 
 interface Viewport {
@@ -162,14 +160,15 @@ function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number): nu
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-function extractNeighborhood(vicinity: string | undefined, fallback: string): string {
-  if (!vicinity) return fallback;
-  const parts = vicinity.split(",").map((s) => s.trim()).filter(Boolean);
+function extractNeighborhood(place: GooglePlace, fallback: string): string {
+  const addr = place.shortFormattedAddress ?? place.formattedAddress;
+  if (!addr) return fallback;
+  const parts = addr.split(",").map((s) => s.trim()).filter(Boolean);
   if (parts.length === 0) return fallback;
-  // Prefer the second segment (ward / district) when available
-  const candidate = parts.length >= 2 ? parts[1] : parts[0];
-  // Strip leading street numbers like "2-3-1 "
-  return candidate.replace(/^[\d][\d\-]*\s+/, "") || fallback;
+  // For "Name, District, City, Country" prefer the second segment (district/ward)
+  if (parts.length >= 3) return parts[1];
+  if (parts.length >= 2) return parts[1];
+  return parts[0] || fallback;
 }
 
 function pickEmoji(types: string[]): string {
@@ -208,27 +207,27 @@ function estimateDuration(types: string[]): string {
   return "1–2 hours";
 }
 
-function estimatePrice(priceLevel: number | undefined): { price: string; isFree: boolean } {
+function estimatePrice(priceLevel: string | undefined): { price: string; isFree: boolean } {
   switch (priceLevel) {
-    case 0:  return { price: "Free",   isFree: true  };
-    case 1:  return { price: "$",      isFree: false };
-    case 2:  return { price: "$$",     isFree: false };
-    case 3:  return { price: "$$$",    isFree: false };
-    case 4:  return { price: "$$$$",   isFree: false };
-    default: return { price: "Varies", isFree: false };
+    case "PRICE_LEVEL_FREE":           return { price: "Free",   isFree: true  };
+    case "PRICE_LEVEL_INEXPENSIVE":    return { price: "$",      isFree: false };
+    case "PRICE_LEVEL_MODERATE":       return { price: "$$",     isFree: false };
+    case "PRICE_LEVEL_EXPENSIVE":      return { price: "$$$",    isFree: false };
+    case "PRICE_LEVEL_VERY_EXPENSIVE": return { price: "$$$$",   isFree: false };
+    default:                           return { price: "Varies", isFree: false };
   }
 }
 
 function generateBadges(place: GooglePlace): Badge[] {
   const types  = place.types ?? [];
   const rating = place.rating ?? 0;
-  const count  = place.user_ratings_total ?? 0;
+  const count  = place.userRatingCount ?? 0;
   const badges: Badge[] = [];
 
-  if (place.price_level === 0)                        badges.push("free");
-  if (place.price_level === 4)                        badges.push("worth_the_splurge");
-  if (rating >= 4.5 && count >= 1000)                 badges.push("popular");
-  if (rating >= 4.7 && count > 0 && count < 300)      badges.push("hidden_gem");
+  if (place.priceLevel === "PRICE_LEVEL_FREE")            badges.push("free");
+  if (place.priceLevel === "PRICE_LEVEL_VERY_EXPENSIVE")  badges.push("worth_the_splurge");
+  if (rating >= 4.5 && count >= 1000)                     badges.push("popular");
+  if (rating >= 4.7 && count > 0 && count < 300)          badges.push("hidden_gem");
   if (types.some((t) => ["park", "zoo", "aquarium", "amusement_park"].includes(t))) {
     badges.push("family_friendly");
   }
@@ -239,8 +238,8 @@ function generateBadges(place: GooglePlace): Badge[] {
 function buildDescription(place: GooglePlace, neighborhood: string): string {
   const parts: string[] = [];
   if (neighborhood) parts.push(`Located in ${neighborhood}.`);
-  if (place.rating && place.user_ratings_total) {
-    const n = place.user_ratings_total;
+  if (place.rating && place.userRatingCount) {
+    const n = place.userRatingCount;
     const nStr = n >= 1000 ? `${Math.round(n / 1000)}k` : String(n);
     parts.push(`Rated ${place.rating.toFixed(1)}/5 by ${nStr} visitors.`);
   }
@@ -251,7 +250,7 @@ function buildDescription(place: GooglePlace, neighborhood: string): string {
 
 function buildWhyVisit(place: GooglePlace, category: Category, city: string): string {
   const r     = place.rating;
-  const n     = place.user_ratings_total ?? 0;
+  const n     = place.userRatingCount ?? 0;
   const nStr  = n >= 1000 ? `${Math.round(n / 1000)}k` : n > 0 ? String(n) : null;
   const rPart = r ? `Rated ${r.toFixed(1)}/5${nStr ? ` by ${nStr} visitors` : ""}.` : "";
 
@@ -270,26 +269,24 @@ function buildWhyVisit(place: GooglePlace, category: Category, city: string): st
 
 function mapToActivity(place: GooglePlace, category: Category, city: string): Activity {
   const types       = place.types ?? [];
-  const { price, isFree } = estimatePrice(place.price_level);
-  const vicinity    = place.vicinity ?? place.formatted_address;
-  const neighborhood = extractNeighborhood(vicinity, city);
+  const { price, isFree } = estimatePrice(place.priceLevel);
+  const neighborhood = extractNeighborhood(place, city);
   const badges      = generateBadges(place);
 
-  // Promote to hidden_gems if badge earned and not food/nightlife (those have rich sub-filters already)
   const finalCategory: Category =
     badges.includes("hidden_gem") && !["food", "nightlife"].includes(category)
       ? "hidden_gems"
       : category;
 
   return {
-    id:          place.place_id,
-    title:       place.name,
+    id:          place.id,
+    title:       place.displayName.text,
     neighborhood,
     duration:    estimateDuration(types),
     price,
     isFree,
     rating:      place.rating ?? 0,
-    reviewCount: place.user_ratings_total ?? 0,
+    reviewCount: place.userRatingCount ?? 0,
     description: buildDescription(place, neighborhood),
     whyVisit:    buildWhyVisit(place, finalCategory, city),
     category:    finalCategory,
@@ -297,8 +294,8 @@ function mapToActivity(place: GooglePlace, category: Category, city: string): Ac
     badges,
     emoji:       pickEmoji(types) || CATEGORY_EMOJI[finalCategory],
     gradient:    CATEGORY_GRADIENTS[finalCategory],
-    photoRef:    place.photos?.[0]?.photo_reference,
-    placeId:     place.place_id,
+    photoRef:    place.photos?.[0]?.name,   // Places API (New) photo name path
+    placeId:     place.id,
   };
 }
 
@@ -400,23 +397,52 @@ async function geocodeDestination(destination: string, apiKey: string): Promise<
   }
 }
 
+// Field mask for Places API (New) — request only the fields we use
+const PLACES_FIELD_MASK = [
+  "places.id",
+  "places.displayName",
+  "places.formattedAddress",
+  "places.shortFormattedAddress",
+  "places.rating",
+  "places.userRatingCount",
+  "places.types",
+  "places.photos",
+  "places.priceLevel",
+  "places.businessStatus",
+  "places.location",
+].join(",");
+
 async function nearbySearch(
   lat: number, lng: number, radius: number,
   type: string, limit: number, apiKey: string,
 ): Promise<GooglePlace[]> {
-  const url =
-    `https://maps.googleapis.com/maps/api/place/nearbysearch/json` +
-    `?location=${lat},${lng}&radius=${radius}&type=${encodeURIComponent(type)}&key=${apiKey}`;
+  const url = "https://places.googleapis.com/v1/places:searchNearby";
   try {
-    const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type":     "application/json",
+        "X-Goog-Api-Key":   apiKey,
+        "X-Goog-FieldMask": PLACES_FIELD_MASK,
+      },
+      body: JSON.stringify({
+        includedTypes:       [type],
+        maxResultCount:      Math.min(limit, 20),
+        locationRestriction: {
+          circle: { center: { latitude: lat, longitude: lng }, radius },
+        },
+      }),
+      signal: AbortSignal.timeout(8000),
+    });
     if (!res.ok) {
-      console.warn(`[activities/nearby] HTTP ${res.status} type=${type}`);
+      const errText = await res.text().catch(() => "");
+      console.warn(`[activities/nearby] HTTP ${res.status} type=${type} body="${errText.slice(0, 200)}"`);
       return [];
     }
     const data = await res.json() as PlacesResponse;
-    // Always log status + count so we can see if Places API is denying or returning zero
-    console.log(`[activities/nearby] type=${type} status=${data.status} count=${data.results?.length ?? 0}${data.error_message ? ` err="${data.error_message}"` : ""}`);
-    return (data.results ?? []).slice(0, limit);
+    const count = data.places?.length ?? 0;
+    console.log(`[activities/nearby] type=${type} count=${count}${data.error ? ` err="${data.error.message}"` : ""}`);
+    return data.places ?? [];
   } catch (err) {
     console.warn(`[activities/nearby] fetch error type=${type}`, err);
     return [];
@@ -427,19 +453,33 @@ async function textSearch(
   query: string, lat: number, lng: number,
   limit: number, apiKey: string,
 ): Promise<GooglePlace[]> {
-  const url =
-    `https://maps.googleapis.com/maps/api/place/textsearch/json` +
-    `?query=${encodeURIComponent(query)}&location=${lat},${lng}&radius=30000&key=${apiKey}`;
+  const url = "https://places.googleapis.com/v1/places:searchText";
   try {
-    const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type":     "application/json",
+        "X-Goog-Api-Key":   apiKey,
+        "X-Goog-FieldMask": PLACES_FIELD_MASK,
+      },
+      body: JSON.stringify({
+        textQuery:      query,
+        maxResultCount: Math.min(limit, 20),
+        locationBias: {
+          circle: { center: { latitude: lat, longitude: lng }, radius: 30000 },
+        },
+      }),
+      signal: AbortSignal.timeout(8000),
+    });
     if (!res.ok) {
-      console.warn(`[activities/text] HTTP ${res.status} query="${query}"`);
+      const errText = await res.text().catch(() => "");
+      console.warn(`[activities/text] HTTP ${res.status} query="${query}" body="${errText.slice(0, 200)}"`);
       return [];
     }
     const data = await res.json() as PlacesResponse;
-    // Always log status + count
-    console.log(`[activities/text] query="${query}" status=${data.status} count=${data.results?.length ?? 0}${data.error_message ? ` err="${data.error_message}"` : ""}`);
-    return (data.results ?? []).slice(0, limit);
+    const count = data.places?.length ?? 0;
+    console.log(`[activities/text] query="${query}" count=${count}${data.error ? ` err="${data.error.message}"` : ""}`);
+    return data.places ?? [];
   } catch (err) {
     console.warn(`[activities/text] fetch error query="${query}"`, err);
     return [];
@@ -449,7 +489,10 @@ async function textSearch(
 // ── Viewport filter ───────────────────────────────────────────────────────────
 
 function insideBounds(place: GooglePlace, viewport: Viewport): boolean {
-  const { lat, lng } = place.geometry.location;
+  const lat = place.location?.latitude;
+  const lng = place.location?.longitude;
+  // Nearby Search results are already constrained to the radius — be permissive if location missing
+  if (lat === undefined || lng === undefined) return true;
   const padLat = Math.abs(viewport.northeast.lat - viewport.southwest.lat) * 0.25;
   const padLng = Math.abs(viewport.northeast.lng - viewport.southwest.lng) * 0.25;
   return (
@@ -539,14 +582,14 @@ export async function GET(req: NextRequest) {
 
   for (const { places, category } of searchResults) {
     for (const p of places) {
-      if (seen.has(p.place_id)) { rejectedDedup++; continue; }
-      seen.add(p.place_id);
+      if (seen.has(p.id)) { rejectedDedup++; continue; }
+      seen.add(p.id);
 
-      if (p.business_status === "CLOSED_PERMANENTLY") { rejectedClosed++; continue; }
+      if (p.businessStatus === "CLOSED_PERMANENTLY") { rejectedClosed++; continue; }
 
       // Keep unrated places but skip truly low-rated ones
       if (p.rating !== undefined && p.rating < 2.5) { rejectedLowRating++; continue; }
-      if (p.rating === undefined && (p.user_ratings_total ?? 0) === 0) { rejectedNoRating++; continue; }
+      if (p.rating === undefined && (p.userRatingCount ?? 0) === 0) { rejectedNoRating++; continue; }
 
       if (!insideBounds(p, viewport)) { rejectedBounds++; continue; }
 
