@@ -30,6 +30,10 @@ Format: `- [ ] [Priority] [Added: YYYY-MM-DD] [By: HU|Claude] Task description`
 - [ ] [P2] [Added: 2026-06-03] [By: Claude] Draft high-level go-to-market strategy — flesh out channel tactics once channel priorities decided
 - [ ] [P2] [Added: 2026-06-14] [By: HU] Fill in target time-to-plan in overview once user testing data is available
 
+### Legal & Compliance
+- [ ] [P1] [Added: 2026-06-15] [By: Claude] Work through `legal-compliance-checklist.md` — foundation (LLC, EIN, Privacy Policy, ToS) before launch; affiliate disclosure before affiliate programs; tax + auto-renewal compliance before subscriptions
+- [ ] [P1] [Added: 2026-06-15] [By: Claude] Review `legal/legal-requirements-by-plan.md` — plan-by-plan legal map; gate split-payment (V2) and B2B (V3) on the money-transmission and contract/DPA work it flags before building
+
 ### Docs Maintenance
 
 ---
