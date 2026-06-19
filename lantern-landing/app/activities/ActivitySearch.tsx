@@ -322,6 +322,16 @@ function ActivityCard({
 
 // ── Place Detail type (mirrors /api/activities/place response) ────────────────
 
+interface PlaceReview {
+  name?: string;
+  relativePublishTimeDescription?: string;
+  rating?: number;
+  text?: { text: string; languageCode?: string };
+  authorAttribution?: { displayName?: string; uri?: string; photoUri?: string };
+  publishTime?: string;
+  googleMapsUri?: string;
+}
+
 interface PlaceDetail {
   id: string;
   displayName?: { text: string };
@@ -338,6 +348,7 @@ interface PlaceDetail {
   nationalPhoneNumber?: string;
   internationalPhoneNumber?: string;
   editorialSummary?: { text: string };
+  reviews?: PlaceReview[];
 }
 
 // ── Practical-tip helpers (all labeled as estimated in the UI) ────────────────
@@ -386,8 +397,10 @@ function ActivityDetailModal({
   loading: boolean;
   onClose: () => void;
 }) {
-  const [activePhoto, setActivePhoto] = useState(0);
-  const [showHours,   setShowHours]   = useState(false);
+  const [activePhoto,   setActivePhoto]   = useState(0);
+  const [showHours,     setShowHours]     = useState(false);
+  const [reviewFilter,  setReviewFilter]  = useState<"all" | "5" | "4" | "lte3">("all");
+  const [reviewSearch,  setReviewSearch]  = useState("");
 
   // Close on Escape and lock body scroll
   useEffect(() => {
@@ -400,8 +413,12 @@ function ActivityDetailModal({
     };
   }, [onClose]);
 
-  // Reset photo index when detail changes
-  useEffect(() => { setActivePhoto(0); }, [detail]);
+  // Reset photo index and review filters when detail changes
+  useEffect(() => {
+    setActivePhoto(0);
+    setReviewFilter("all");
+    setReviewSearch("");
+  }, [detail]);
 
   // Resolve fields — prefer detail data, fall back to card data
   const photos        = detail?.photos ?? (activity.photoRef ? [{ name: activity.photoRef }] : []);
@@ -746,6 +763,196 @@ function ActivityDetailModal({
 
               </div>
             </div>
+
+            {/* ── Guest Reviews ── */}
+            {(() => {
+              const allReviews = detail?.reviews ?? [];
+
+              // Filter by star rating
+              const starFiltered = allReviews.filter((r) => {
+                const s = r.rating ?? 0;
+                if (reviewFilter === "5")   return s === 5;
+                if (reviewFilter === "4")   return s === 4;
+                if (reviewFilter === "lte3") return s <= 3;
+                return true;
+              });
+
+              // Filter by search text
+              const q = reviewSearch.trim().toLowerCase();
+              const shownReviews = q
+                ? starFiltered.filter((r) =>
+                    (r.text?.text ?? "").toLowerCase().includes(q) ||
+                    (r.authorAttribution?.displayName ?? "").toLowerCase().includes(q),
+                  )
+                : starFiltered;
+
+              // Counts per bucket for filter chips
+              const count5   = allReviews.filter((r) => (r.rating ?? 0) === 5).length;
+              const count4   = allReviews.filter((r) => (r.rating ?? 0) === 4).length;
+              const countLt3 = allReviews.filter((r) => (r.rating ?? 0) <= 3).length;
+
+              return (
+                <div>
+                  <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-3">
+                    Guest Reviews
+                    {allReviews.length > 0 && (
+                      <span className="ml-2 font-semibold text-white/15 normal-case tracking-normal">
+                        (Google sample · {allReviews.length} shown)
+                      </span>
+                    )}
+                  </div>
+
+                  {detail && !loading && allReviews.length === 0 ? (
+                    <p className="text-[12px] text-white/30 italic px-0.5">
+                      Review text is not available from Google for this place.
+                    </p>
+                  ) : (
+                    <>
+                      {/* Filter chips */}
+                      {allReviews.length > 0 && (
+                        <div className="flex items-center gap-2 flex-wrap mb-3">
+                          {(
+                            [
+                              { id: "all",  label: "All",  count: allReviews.length },
+                              { id: "5",    label: "5★",   count: count5 },
+                              { id: "4",    label: "4★",   count: count4 },
+                              { id: "lte3", label: "≤3★",  count: countLt3 },
+                            ] as const
+                          ).map((chip) => (
+                            <button
+                              key={chip.id}
+                              onClick={() => setReviewFilter(chip.id)}
+                              disabled={chip.count === 0}
+                              className={`flex-shrink-0 rounded-full px-3 py-1 text-[11px] font-semibold border transition-all disabled:opacity-30 disabled:cursor-not-allowed ${
+                                reviewFilter === chip.id
+                                  ? "bg-lantern-violet text-white border-lantern-violet"
+                                  : "bg-white/[0.04] text-white/45 border-white/[0.08] hover:bg-white/[0.07] hover:text-white/70"
+                              }`}
+                            >
+                              {chip.label}
+                              {chip.count > 0 && (
+                                <span className={`ml-1.5 tabular-nums ${reviewFilter === chip.id ? "text-white/70" : "text-white/25"}`}>
+                                  {chip.count}
+                                </span>
+                              )}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Search box */}
+                      {allReviews.length > 0 && (
+                        <div className="relative mb-3">
+                          <svg
+                            className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/20 pointer-events-none"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round"
+                          >
+                            <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
+                          </svg>
+                          <input
+                            type="text"
+                            value={reviewSearch}
+                            onChange={(e) => setReviewSearch(e.target.value)}
+                            placeholder="Search reviews for crowds, kids, food, wait times…"
+                            className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl pl-9 pr-3 py-2.5 text-[12px] text-white/70 placeholder-white/20 outline-none focus:border-white/[0.16] focus:bg-white/[0.05] transition-all"
+                          />
+                          {reviewSearch && (
+                            <button
+                              onClick={() => setReviewSearch("")}
+                              className="absolute right-3 top-1/2 -translate-y-1/2 text-white/25 hover:text-white/55 transition-colors"
+                            >
+                              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
+                                <path d="M18 6L6 18M6 6l12 12" />
+                              </svg>
+                            </button>
+                          )}
+                        </div>
+                      )}
+
+                      {/* No results after filtering */}
+                      {allReviews.length > 0 && shownReviews.length === 0 && (
+                        <p className="text-[12px] text-white/25 italic py-4 text-center">
+                          No reviews match your filter.
+                        </p>
+                      )}
+
+                      {/* Review cards */}
+                      <div className="space-y-3">
+                        {shownReviews.map((review, i) => {
+                          const stars  = review.rating ?? 0;
+                          const author = review.authorAttribution?.displayName ?? "Google Reviewer";
+                          const initial = author.charAt(0).toUpperCase();
+                          const text   = review.text?.text;
+                          const link   = review.authorAttribution?.uri ?? review.googleMapsUri;
+
+                          return (
+                            <div
+                              key={review.name ?? i}
+                              className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4"
+                            >
+                              {/* Author + meta row */}
+                              <div className="flex items-start gap-3 mb-3">
+                                {/* Avatar initial */}
+                                <div className="w-8 h-8 rounded-full bg-lantern-violet/20 border border-lantern-violet/30 flex items-center justify-center flex-shrink-0 text-[12px] font-bold text-lantern-violet/80">
+                                  {initial}
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    <span className="text-[12px] font-semibold text-white/70 truncate">{author}</span>
+                                    {review.relativePublishTimeDescription && (
+                                      <span className="text-[10px] text-white/25 flex-shrink-0">
+                                        {review.relativePublishTimeDescription}
+                                      </span>
+                                    )}
+                                  </div>
+                                  {/* Star row */}
+                                  <div className="flex items-center gap-0.5 mt-1">
+                                    {[1, 2, 3, 4, 5].map((s) => (
+                                      <svg
+                                        key={s}
+                                        className={`w-3 h-3 ${s <= stars ? "text-amber-400" : "text-white/15"}`}
+                                        viewBox="0 0 24 24" fill="currentColor"
+                                      >
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                      </svg>
+                                    ))}
+                                  </div>
+                                </div>
+                                {/* View on Google */}
+                                {link && (
+                                  <a
+                                    href={link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex-shrink-0 text-[10px] text-white/25 hover:text-lantern-blue transition-colors whitespace-nowrap"
+                                  >
+                                    View on Google ↗
+                                  </a>
+                                )}
+                              </div>
+
+                              {/* Review text */}
+                              <p className="text-[12px] text-white/55 leading-relaxed">
+                                {text && text.trim()
+                                  ? text
+                                  : "Review text is not available from Google for this place."}
+                              </p>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      {/* Attribution */}
+                      {allReviews.length > 0 && (
+                        <p className="text-[10px] text-white/15 mt-3 text-center leading-relaxed">
+                          Reviews sourced from Google · Sample of up to 5 reviews returned by the Places API
+                        </p>
+                      )}
+                    </>
+                  )}
+                </div>
+              );
+            })()}
 
           </div>
         </div>

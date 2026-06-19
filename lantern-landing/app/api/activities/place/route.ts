@@ -4,6 +4,21 @@ import { NextRequest, NextResponse } from "next/server";
 // Fetches Place Details from the Places API (New) for a single place.
 // Caches by placeId (1-hour TTL) so repeated modal opens skip the API.
 
+export interface PlaceReview {
+  name?: string;
+  relativePublishTimeDescription?: string;
+  rating?: number;
+  text?: { text: string; languageCode?: string };
+  originalText?: { text: string; languageCode?: string };
+  authorAttribution?: {
+    displayName?: string;
+    uri?: string;         // reviewer's Google Maps profile link
+    photoUri?: string;
+  };
+  publishTime?: string;
+  googleMapsUri?: string; // link to the reviews section of this place
+}
+
 export interface PlaceDetail {
   id: string;
   displayName?: { text: string; languageCode?: string };
@@ -27,6 +42,7 @@ export interface PlaceDetail {
   nationalPhoneNumber?: string;
   internationalPhoneNumber?: string;
   editorialSummary?: { text: string; languageCode?: string };
+  reviews?: PlaceReview[];
 }
 
 const cache = new Map<string, { detail: PlaceDetail; ts: number }>();
@@ -49,7 +65,27 @@ const FIELD_MASK = [
   "nationalPhoneNumber",
   "internationalPhoneNumber",
   "editorialSummary",
+  "reviews",
 ].join(",");
+
+// Log review count for debugging
+function logDetail(id: string, data: PlaceDetail) {
+  console.log(
+    `[activities/place] OK id="${id}" name="${data.displayName?.text}" ` +
+    `photos=${data.photos?.length ?? 0} ` +
+    `reviews=${data.reviews?.length ?? 0} ` +
+    `has_hours=${Boolean(data.regularOpeningHours?.weekdayDescriptions?.length)}`,
+  );
+  if (data.reviews?.length) {
+    for (const r of data.reviews.slice(0, 3)) {
+      console.log(
+        `[activities/place]   review by="${r.authorAttribution?.displayName}" ` +
+        `rating=${r.rating} time="${r.relativePublishTimeDescription}" ` +
+        `text_len=${r.text?.text?.length ?? 0}`,
+      );
+    }
+  }
+}
 
 export async function GET(req: NextRequest) {
   const id = (req.nextUrl.searchParams.get("id") ?? "").trim();
@@ -86,11 +122,7 @@ export async function GET(req: NextRequest) {
     }
 
     const data = await res.json() as PlaceDetail;
-    console.log(
-      `[activities/place] OK id="${id}" name="${data.displayName?.text}" ` +
-      `photos=${data.photos?.length ?? 0} has_hours=${Boolean(data.regularOpeningHours?.weekdayDescriptions?.length)}`,
-    );
-
+    logDetail(id, data);
     cache.set(id, { detail: data, ts: Date.now() });
     return NextResponse.json({ ...data, source: "places_api" });
   } catch (err) {
