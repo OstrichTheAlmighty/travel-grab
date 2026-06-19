@@ -108,11 +108,11 @@ export default function Page() {
           <a href="/" className="flex items-center gap-2.5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/nav-icon.png"
+              src="/travelgrab-logo.svg"
               alt="TravelGrab"
               width={36}
               height={36}
-              className="h-9 w-9 flex-shrink-0 rounded-xl object-cover shadow-sm"
+              className="h-9 w-9 flex-shrink-0 object-contain"
             />
             <span className="text-sm font-bold tracking-tight text-white">{BRAND_NAME}</span>
           </a>
@@ -452,11 +452,11 @@ export default function Page() {
             <div className="flex items-center gap-2">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/nav-icon.png"
+                src="/travelgrab-logo.svg"
                 alt="TravelGrab"
                 width={28}
                 height={28}
-                className="h-7 w-7 flex-shrink-0 rounded-lg object-cover"
+                className="h-7 w-7 flex-shrink-0 object-contain"
               />
               <span className="text-sm font-semibold text-white/70">{BRAND_NAME}</span>
             </div>

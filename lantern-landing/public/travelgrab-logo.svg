@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <defs>
+    <!-- Arc gradient: deep blue → bright cyan -->
+    <linearGradient id="arcG" x1="20" y1="6" x2="60" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#1a4fff"/>
+      <stop offset="55%"  stop-color="#0096e6"/>
+      <stop offset="100%" stop-color="#00c8ff"/>
+    </linearGradient>
+    <!-- Pin gradient: cyan → green -->
+    <linearGradient id="pinG" x1="40" y1="33" x2="40" y2="77" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#00c0ff"/>
+      <stop offset="100%" stop-color="#00e87a"/>
+    </linearGradient>
+    <!-- Glow for arc -->
+    <filter id="arcGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Glow for pin -->
+    <filter id="pinGlow" x="-30%" y="-20%" width="160%" height="150%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!--
+    Arc: circle center (40,28) r=21
+    Start: 2-o'clock position  (58,17)
+    End:   12-o'clock position (40, 7)
+    Goes the long way (300°) counter-clockwise: large-arc=1 sweep=0
+  -->
+  <path
+    d="M 58,17 A 21,21 0 1,0 40,7"
+    stroke="url(#arcG)"
+    stroke-width="5.5"
+    stroke-linecap="round"
+    fill="none"
+    filter="url(#arcGlow)"
+  />
+
+  <!--
+    Airplane silhouette — positioned in the arc's gap (~1-o'clock, near (51,10))
+    Dark navy, rotated so nose points toward upper-right
+  -->
+  <g transform="translate(51,10) rotate(-35)" fill="#0c1d5e">
+    <!-- Fuselage -->
+    <rect x="-2" y="-7" width="4" height="13" rx="1.5"/>
+    <!-- Wings -->
+    <path d="M -1.5,-1 L -8.5,5 L -1.5,3.5 Z"/>
+    <path d="M  1.5,-1 L  8.5,5 L  1.5,3.5 Z"/>
+    <!-- Tail fins -->
+    <path d="M -1.5,4.5 L -5,8 L -1.5,6.5 Z"/>
+    <path d="M  1.5,4.5 L  5,8 L  1.5,6.5 Z"/>
+  </g>
+
+  <!--
+    Location pin (map-marker teardrop)
+    Spans y=33→77, centered at x=40, widest point ~38px at equator
+  -->
+  <path
+    d="M 40,33
+       C 27,33 21,43 21,50.5
+       C 21,61.5 33,71 40,77
+       C 47,71 59,61.5 59,50.5
+       C 59,43 53,33 40,33 Z"
+    fill="url(#pinG)"
+    opacity="0.90"
+    filter="url(#pinGlow)"
+  />
+
+  <!--
+    Route inside pin: 3 waypoint dots connected by an S-curve
+    Dots at lower-left, upper-center, lower-right
+  -->
+  <path
+    d="M 30.5,57 Q 35,47.5 40,50.5 Q 45,53.5 49.5,57"
+    stroke="#001a40"
+    stroke-width="1.6"
+    stroke-linecap="round"
+    fill="none"
+    opacity="0.70"
+  />
+  <circle cx="30.5" cy="57"   r="2.8" fill="#001a40" opacity="0.75"/>
+  <circle cx="40"   cy="50.5" r="2.8" fill="#001a40" opacity="0.75"/>
+  <circle cx="49.5" cy="57"   r="2.8" fill="#001a40" opacity="0.75"/>
+</svg>

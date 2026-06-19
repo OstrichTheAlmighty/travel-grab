@@ -1240,7 +1240,7 @@ function RecommendationPanel({
       <div className="flex items-start justify-between gap-3 mb-2.5">
         <div className="flex items-center gap-2 min-w-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/nav-icon.png" alt="" aria-hidden width={16} height={16} className="h-4 w-4 flex-shrink-0 rounded-sm object-cover" />
+          <img src="/travelgrab-logo.svg" alt="" aria-hidden width={16} height={16} className="h-4 w-4 flex-shrink-0 object-contain" />
           <span className="text-[10px] font-black uppercase tracking-widest text-lantern-violet">
             TravelGrab Recommendation
           </span>
@@ -2230,11 +2230,11 @@ export default function FlightSearch() {
           <Link href="/" className="flex items-center gap-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/nav-icon.png"
+              src="/travelgrab-logo.svg"
               alt="TravelGrab"
               width={36}
               height={36}
-              className="h-9 w-9 flex-shrink-0 rounded-xl object-cover shadow-sm"
+              className="h-9 w-9 flex-shrink-0 object-contain"
             />
             <span className="text-sm font-bold tracking-tight text-white/90">TravelGrab</span>
           </Link>
@@ -2431,12 +2431,12 @@ export default function FlightSearch() {
           <div className="mt-8 flex flex-col items-center gap-4 py-14 text-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/nav-icon.png"
+              src="/travelgrab-logo.svg"
               alt=""
               aria-hidden
               width={48}
               height={48}
-              className="h-12 w-12 rounded-2xl object-cover animate-pulse shadow-[0_0_24px_rgba(119,167,255,0.2)]"
+              className="h-12 w-12 object-contain animate-pulse drop-shadow-[0_0_12px_rgba(0,180,255,0.5)]"
             />
             <div className="text-sm text-white/50">Searching live fares and ranking options…</div>
           </div>
