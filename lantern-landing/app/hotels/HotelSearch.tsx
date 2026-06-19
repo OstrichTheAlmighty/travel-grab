@@ -62,6 +62,8 @@ interface HotelOffer {
   skip_reason?:        string;
   rating_sanity_note?: string;
   extra_badges?:       string[];
+  risk_flags?: Array<{ key: string; label: string; reason: string }>;
+  watch_out?:  string;
 }
 
 interface AutocompleteSuggestion {
@@ -2611,6 +2613,28 @@ function HotelDetailDrawer({
               </div>
             </div>
 
+            {/* ── Risk Flags ── */}
+            {offer.risk_flags && offer.risk_flags.length > 0 && (
+              <div>
+                <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">Risk flags</div>
+                <div className="rounded-xl border border-amber-500/20 bg-amber-500/[0.03] p-4 space-y-2.5">
+                  {offer.risk_flags.map((flag) => (
+                    <div key={flag.key} className="flex items-start gap-2.5">
+                      <div className="flex-shrink-0 w-5 h-5 rounded-full bg-amber-500/15 border border-amber-500/25 flex items-center justify-center mt-0.5">
+                        <svg className="w-2.5 h-2.5 text-amber-400/80" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M6 1v5M6 8v1M3 11h6L6 1 3 11z" />
+                        </svg>
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[11px] font-bold text-amber-300/80 leading-none mb-0.5">{flag.label}</div>
+                        <p className="text-[11px] text-white/40 leading-snug">{flag.reason}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* ── Amenities ── */}
             {sortedAmenities.length > 0 && (
               <div>
@@ -3020,6 +3044,16 @@ function HotelCard({
             {offer.recommendation_why}
           </p>
         ) : null}
+
+        {/* Watch-out / Best-if line */}
+        {offer.watch_out && (
+          <div className="flex items-start gap-1.5 mb-2.5 rounded-lg bg-amber-500/[0.05] border border-amber-500/15 px-2.5 py-1.5">
+            <svg className="w-2.5 h-2.5 text-amber-400/60 flex-shrink-0 mt-[1px]" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 1v5M6 8v1M3 11h6L6 1 3 11z" />
+            </svg>
+            <span className="text-[10px] text-amber-300/70 leading-tight">{offer.watch_out}</span>
+          </div>
+        )}
 
         {/* Rating sanity note — explains when lower-rated hotel outranks a higher-rated one */}
         {offer.rating_sanity_note && (

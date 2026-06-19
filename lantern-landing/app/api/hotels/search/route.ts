@@ -915,6 +915,8 @@ export interface HotelOffer {
   skip_reason:         string;
   rating_sanity_note:  string;
   extra_badges:        string[];
+  risk_flags:  Array<{ key: string; label: string; reason: string }>;
+  watch_out:   string;
 }
 
 // ── Base helpers ──────────────────────────────────────────────────────────────
@@ -1572,6 +1574,8 @@ function scoreHotels(
       skip_reason:        "",
       rating_sanity_note: "",
       extra_badges:       [],
+      risk_flags:         [],
+      watch_out:          "",
     };
   });
 }
@@ -2095,6 +2099,143 @@ function buildRankExplanations(sorted: HotelOffer[], prefs: string[]): void {
   }
 }
 
+// ── Risk flags ────────────────────────────────────────────────────────────────
+
+type RiskFlag = { key: string; label: string; reason: string };
+
+function generateRiskFlags(h: HotelOffer, allHotels: HotelOffer[]): RiskFlag[] {
+  const flags: RiskFlag[] = [];
+  const desc = h.description.toLowerCase();
+  const avgPrice = allHotels.reduce((s, x) => s + x.price_per_night, 0) / (allHotels.length || 1);
+
+  // Poor value: priced meaningfully above search average AND not a high-star property
+  if (h.score_breakdown.price < 32 && h.star_rating < 5) {
+    const pctAbove = Math.round((h.price_per_night / avgPrice - 1) * 100);
+    if (pctAbove >= 20) {
+      flags.push({
+        key:    "poor_value",
+        label:  "Poor value",
+        reason: `$${Math.round(h.price_per_night)}/night — ${pctAbove}% above the search average.`,
+      });
+    }
+  }
+
+  // Small rooms: capsule/pod/hostel type OR description signals compact spaces
+  const capsuleTypes = ["capsule", "pod hotel", "hostel", "bunk"];
+  const isCapsule = capsuleTypes.some((t) => h.hotel_type.toLowerCase().includes(t));
+  const smallRoomDesc = ["compact room", "small room", "capsule", "pod room", "limited space"].some(
+    (s) => desc.includes(s),
+  );
+  if (isCapsule) {
+    flags.push({
+      key:    "small_rooms",
+      label:  "Small rooms",
+      reason: `${h.hotel_type} properties have very limited room space by design.`,
+    });
+  } else if (smallRoomDesc) {
+    flags.push({
+      key:    "small_rooms",
+      label:  "Small rooms",
+      reason: "Property description suggests limited room size.",
+    });
+  }
+
+  // Noise risk: description mentions lively streets / nightlife / busy area
+  const noiseSignals = ["busy street", "lively area", "entertainment district", "nightlife district",
+                        "busy neighborhood", "bar street", "party area"];
+  const noiseMatch = noiseSignals.find((s) => desc.includes(s));
+  if (noiseMatch) {
+    flags.push({
+      key:    "noise_risk",
+      label:  "Noise risk",
+      reason: "Description places this hotel in a lively, high-traffic area — may be noisy at night.",
+    });
+  }
+
+  // Weak transit / walkability — only flag when we have actual score data
+  if (h.score_breakdown.walkability > 0 && h.score_breakdown.walkability < 32) {
+    flags.push({
+      key:    "weak_transit",
+      label:  "Weak transit",
+      reason: "Limited walkable destinations nearby — factor in taxi or transit costs.",
+    });
+  }
+
+  // Below-average reviews compared with the search pool
+  if (h.score_breakdown.reviews < 32) {
+    flags.push({
+      key:    "below_avg_reviews",
+      label:  "Below-avg reviews",
+      reason: `${h.overall_rating > 0 ? h.overall_rating.toFixed(1) + "★" : "Guest rating"} — below the search average for this destination.`,
+    });
+  } else if (h.overall_rating > 0 && h.overall_rating < 3.5) {
+    flags.push({
+      key:    "low_rating",
+      label:  "Low guest rating",
+      reason: `${h.overall_rating.toFixed(1)}★ from ${h.review_count > 0 ? h.review_count.toLocaleString() + " reviews" : "guests"} — below typical hotel standards.`,
+    });
+  }
+
+  // Limited amenities — only when zero listed (not just few)
+  if (h.amenities.length === 0) {
+    flags.push({
+      key:    "limited_amenities",
+      label:  "Limited amenities",
+      reason: "No amenities listed for this property — verify facilities directly.",
+    });
+  }
+
+  // Older property: description signals combined with low star rating
+  const olderSignals = ["historic building", "original building", "built in 19", "opened in 19"].some(
+    (s) => desc.includes(s),
+  );
+  if (olderSignals && h.star_rating <= 2) {
+    flags.push({
+      key:    "older_property",
+      label:  "Older property",
+      reason: "May be an older building — check recent reviews for room condition.",
+    });
+  }
+
+  return flags;
+}
+
+// Priority order for the watch-out headline on the card.
+const RISK_PRIORITY = [
+  "poor_value", "small_rooms", "noise_risk", "weak_transit",
+  "below_avg_reviews", "low_rating", "limited_amenities", "older_property",
+];
+
+const RISK_HEADLINE: Record<string, string> = {
+  poor_value:         "Watch out: priced above the search average — compare nearby alternatives.",
+  small_rooms:        "Watch out: limited room size — verify space before booking.",
+  noise_risk:         "Watch out: lively area may be noisy — check if that fits your sleep style.",
+  weak_transit:       "Watch out: limited walkability — factor in transport time and cost.",
+  below_avg_reviews:  "Watch out: guest rating below the search average.",
+  low_rating:         "Watch out: below-average guest rating.",
+  limited_amenities:  "Watch out: no amenities listed — confirm facilities with the hotel.",
+  older_property:     "Watch out: older building — read recent reviews for room condition.",
+};
+
+function buildWatchOut(flags: RiskFlag[], h: HotelOffer, prefs: string[]): string {
+  if (flags.length === 0) {
+    // Positive "Best if" framing for clear strengths with no red flags
+    if (prefs.includes("budget") && h.score_breakdown.price >= 72) {
+      return `Best if: you prioritize value — among the most affordable in this search.`;
+    }
+    if (prefs.includes("luxury") && h.star_rating >= 5) {
+      return `Best if: you want top-tier luxury — 5-star property in this search.`;
+    }
+    if ((prefs.includes("walkable") || prefs.includes("transit")) && h.score_breakdown.walkability >= 80) {
+      return `Best if: walkability is a priority — highest transit access in this area.`;
+    }
+    return "";
+  }
+
+  const topKey = RISK_PRIORITY.find((k) => flags.some((f) => f.key === k));
+  return topKey ? (RISK_HEADLINE[topKey] ?? `Watch out: ${flags[0].reason}`) : "";
+}
+
 // ── Deduplication ─────────────────────────────────────────────────────────────
 
 function deduplicateHotels(hotels: ProviderHotel[]): ProviderHotel[] {
@@ -2285,10 +2426,37 @@ export async function POST(req: Request) {
   );
 
   assignLabels(scored, neighborhood_prefs);
+
+  // When preferences are active the Best Overall (AI Pick) hotel may have been outranked
+  // by raw ai_score from a hotel that doesn't match the user's stated priorities.
+  // Elevate the AI Pick to position #1 so the list leads with the most relevant result.
+  if (neighborhood_prefs.length > 0) {
+    const aiPickIdx = scored.findIndex((h) => h.recommendation_label === "Best Overall");
+    if (aiPickIdx > 0) {
+      const [aiPick] = scored.splice(aiPickIdx, 1);
+      scored.unshift(aiPick);
+      console.log(`[ai-pick] elevated "${aiPick.name}" from #${aiPickIdx + 1} to #1 (prefs=[${neighborhood_prefs.join(",")}])`);
+    }
+  }
+
   buildRankExplanations(scored, neighborhood_prefs);
 
   for (const h of scored) {
     h.recommendation_why = buildWhy(h, scored, neighborhood_prefs, enrichments.get(h.hotel_id), destination);
+  }
+
+  // Generate risk flags and watch-out lines after all scoring + ranking is done.
+  let flaggedCount = 0;
+  for (const h of scored) {
+    h.risk_flags = generateRiskFlags(h, scored);
+    h.watch_out  = buildWatchOut(h.risk_flags, h, neighborhood_prefs);
+    if (h.risk_flags.length > 0) {
+      flaggedCount++;
+      console.log(`[risk-flags] "${h.name}" → [${h.risk_flags.map((f) => f.key).join(", ")}]: ${h.watch_out}`);
+    }
+  }
+  if (flaggedCount === 0) {
+    console.log("[risk-flags] no flags generated for this result set");
   }
 
   const nbhdCount = new Set(scored.map((h) => h.inferred_neighborhood).filter(Boolean)).size;
