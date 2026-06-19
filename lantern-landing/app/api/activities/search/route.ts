@@ -60,21 +60,56 @@ interface SearchGroup {
   query?: string;         // text search; {city} is substituted at runtime
   category: Category;
   limit: number;
+  tags?: string[];        // searchable tags applied to all results from this group
 }
 
 const SEARCH_GROUPS: SearchGroup[] = [
-  { type: "tourist_attraction", category: "culture",   limit: 20 },
-  { type: "museum",             category: "culture",   limit: 15 },
-  { type: "art_gallery",        category: "culture",   limit: 10 },
-  { type: "amusement_park",     category: "adventure", limit: 10 },
-  { type: "zoo",                category: "adventure", limit:  5 },
-  { type: "aquarium",           category: "adventure", limit:  5 },
-  { type: "park",               category: "nature",    limit: 15 },
-  { type: "night_club",         category: "nightlife", limit: 15 },
-  { type: "bar",                category: "nightlife", limit: 15 },
-  { type: "shopping_mall",      category: "culture",   limit: 10 },
-  { query: "food market {city}",          category: "food", limit: 10 },
-  { query: "popular restaurant {city}",   category: "food", limit: 10 },
+  // ── Culture & Sightseeing ──────────────────────────────────────────────────
+  { type: "tourist_attraction",                        category: "culture",   limit: 20 },
+  { type: "museum",                                    category: "culture",   limit: 20 },
+  { type: "art_gallery",                               category: "culture",   limit: 15 },
+  { query: "temple {city}",                            category: "culture",   limit: 20, tags: ["Temple"] },
+  { query: "shrine {city}",                            category: "culture",   limit: 20, tags: ["Shrine"] },
+  { query: "historical site {city}",                   category: "culture",   limit: 20, tags: ["Historical Site"] },
+  { query: "traditional market {city}",                category: "culture",   limit: 15, tags: ["Market", "Shopping"] },
+  { type: "shopping_mall",                             category: "culture",   limit: 15, tags: ["Shopping"] },
+  { query: "anime shop {city}",                        category: "culture",   limit: 15, tags: ["Anime", "Shopping"] },
+  { query: "manga {city}",                             category: "culture",   limit: 10, tags: ["Manga", "Anime", "Shopping"] },
+
+  // ── Food & Drink (specific first, generic last for tag priority) ───────────
+  { query: "sushi restaurant {city}",                  category: "food",      limit: 20, tags: ["Sushi"] },
+  { query: "ramen restaurant {city}",                  category: "food",      limit: 20, tags: ["Ramen"] },
+  { query: "izakaya {city}",                           category: "food",      limit: 20, tags: ["Izakaya"] },
+  { query: "omakase restaurant {city}",                category: "food",      limit: 15, tags: ["Omakase", "Fine Dining"] },
+  { query: "yakitori restaurant {city}",               category: "food",      limit: 15, tags: ["Yakitori"] },
+  { query: "tempura restaurant {city}",                category: "food",      limit: 15, tags: ["Tempura"] },
+  { query: "street food market {city}",                category: "food",      limit: 15, tags: ["Street Food"] },
+  { query: "food market {city}",                       category: "food",      limit: 15, tags: ["Market", "Street Food"] },
+  { type: "cafe",                                      category: "food",      limit: 20, tags: ["Café"] },
+  { query: "dessert cafe {city}",                      category: "food",      limit: 15, tags: ["Dessert", "Café"] },
+  { query: "popular restaurant {city}",                category: "food",      limit: 20 },
+
+  // ── Nightlife ──────────────────────────────────────────────────────────────
+  { type: "night_club",                                category: "nightlife", limit: 20 },
+  { type: "bar",                                       category: "nightlife", limit: 20 },
+  { query: "rooftop bar {city}",                       category: "nightlife", limit: 20, tags: ["Rooftop Bar", "Rooftop", "Views"] },
+  { query: "jazz club {city}",                         category: "nightlife", limit: 15, tags: ["Jazz", "Live Music"] },
+  { query: "cocktail bar {city}",                      category: "nightlife", limit: 20, tags: ["Cocktail Bar"] },
+  { query: "karaoke {city}",                           category: "nightlife", limit: 15, tags: ["Karaoke"] },
+  { query: "sake bar {city}",                          category: "nightlife", limit: 15, tags: ["Sake", "Bar"] },
+
+  // ── Adventure & Experiences ────────────────────────────────────────────────
+  { type: "amusement_park",                            category: "adventure", limit: 10, tags: ["Theme Park", "Family Friendly"] },
+  { type: "zoo",                                       category: "adventure", limit:  5, tags: ["Zoo", "Family Friendly"] },
+  { type: "aquarium",                                  category: "adventure", limit:  5, tags: ["Aquarium", "Family Friendly"] },
+  { query: "observation deck {city}",                  category: "adventure", limit: 15, tags: ["Observation Deck", "Views", "Rooftop"] },
+  { query: "go kart {city}",                           category: "adventure", limit: 10, tags: ["Go Kart", "Racing"] },
+  { query: "escape room {city}",                       category: "adventure", limit: 10, tags: ["Escape Room"] },
+
+  // ── Nature ────────────────────────────────────────────────────────────────
+  { type: "park",                                      category: "nature",    limit: 20 },
+  { query: "botanical garden {city}",                  category: "nature",    limit: 15, tags: ["Garden", "Botanical Garden"] },
+  { query: "garden {city}",                            category: "nature",    limit: 15, tags: ["Garden"] },
 ];
 
 // ── Category / type maps ──────────────────────────────────────────────────────
@@ -443,7 +478,12 @@ Return ONLY a JSON object mapping each place ID to its why_visit string.
 
 // ── Activity mapper ───────────────────────────────────────────────────────────
 
-function mapToActivity(place: GooglePlace, category: Category, city: string): Activity {
+function mapToActivity(
+  place: GooglePlace,
+  category: Category,
+  city: string,
+  extraTags: string[] = [],
+): Activity {
   const types       = place.types ?? [];
   const { price, isFree } = estimatePrice(place.priceLevel);
   const neighborhood = extractNeighborhood(place, city);
@@ -466,7 +506,7 @@ function mapToActivity(place: GooglePlace, category: Category, city: string): Ac
     description:  buildDescription(place, neighborhood),
     whyVisit:     buildWhyVisit(place, finalCategory, city),
     category:     finalCategory,
-    tags:         buildTags(types),
+    tags:         [...new Set([...buildTags(types), ...extraTags])].slice(0, 8),
     badges,
     emoji:        pickEmoji(types) || CATEGORY_EMOJI[finalCategory],
     gradient:     CATEGORY_GRADIENTS[finalCategory],
@@ -738,17 +778,18 @@ export async function GET(req: NextRequest) {
 
   // ── Concurrent searches ──
   const searchResults = await Promise.all(
-    SEARCH_GROUPS.map(async (g): Promise<{ places: GooglePlace[]; category: Category }> => {
+    SEARCH_GROUPS.map(async (g): Promise<{ places: GooglePlace[]; category: Category; tags: string[] }> => {
+      const tags = g.tags ?? [];
       if (g.type) {
         const places = await nearbySearch(lat, lng, radiusM, g.type, g.limit, apiKey);
-        return { places, category: g.category };
+        return { places, category: g.category, tags };
       }
       if (g.query) {
         const query = g.query.replace("{city}", city);
         const places = await textSearch(query, lat, lng, g.limit, apiKey);
-        return { places, category: g.category };
+        return { places, category: g.category, tags };
       }
-      return { places: [], category: g.category };
+      return { places: [], category: g.category, tags };
     }),
   );
 
@@ -768,11 +809,21 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  // ── Flat map of all raw places (used for AI context later) ──
-  const placeMap = new Map<string, GooglePlace>();
-  for (const { places } of searchResults) {
+  // ── Build per-place maps: raw place data + accumulated tags from all groups ──
+  // A place can appear in multiple groups (e.g. both "sushi" and "omakase" queries).
+  // We keep the raw place from the first occurrence and union all group tags so the
+  // place is discoverable by any relevant search term.
+  const placeMap    = new Map<string, GooglePlace>();
+  const placeTagMap = new Map<string, string[]>();
+
+  for (const { places, tags } of searchResults) {
     for (const p of places) {
-      if (!placeMap.has(p.id)) placeMap.set(p.id, p);
+      if (!placeMap.has(p.id))    placeMap.set(p.id, p);
+      if (!placeTagMap.has(p.id)) placeTagMap.set(p.id, []);
+      const acc = placeTagMap.get(p.id)!;
+      for (const t of tags) {
+        if (!acc.includes(t)) acc.push(t);
+      }
     }
   }
 
@@ -780,11 +831,11 @@ export async function GET(req: NextRequest) {
   const seen    = new Set<string>();
   const mapped: Activity[] = [];
 
-  let rejectedDedup    = 0;
-  let rejectedClosed   = 0;
-  let rejectedNoRating = 0;
+  let rejectedDedup     = 0;
+  let rejectedClosed    = 0;
+  let rejectedNoRating  = 0;
   let rejectedLowRating = 0;
-  let rejectedBounds   = 0;
+  let rejectedBounds    = 0;
   const totalRaw = searchResults.reduce((s, r) => s + r.places.length, 0);
 
   for (const { places, category } of searchResults) {
@@ -800,7 +851,7 @@ export async function GET(req: NextRequest) {
 
       if (!insideBounds(p, viewport)) { rejectedBounds++; continue; }
 
-      mapped.push(mapToActivity(p, category, city));
+      mapped.push(mapToActivity(p, category, city, placeTagMap.get(p.id) ?? []));
     }
   }
 
@@ -855,7 +906,8 @@ export async function GET(req: NextRequest) {
 
   // ── AI-enhanced Why Visit — overwrites template text with place-specific summaries ──
   // Templates (set in mapToActivity) serve as fallback if OpenAI is unavailable.
-  const aiWhyVisit = await generateWhyVisitBatch(mapped, placeMap, city);
+  // Limit AI generation to the top 60 — rest use template text from mapToActivity
+  const aiWhyVisit = await generateWhyVisitBatch(mapped.slice(0, 60), placeMap, city);
   if (aiWhyVisit.size > 0) {
     for (const activity of mapped) {
       const text = aiWhyVisit.get(activity.id);

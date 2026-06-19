@@ -1236,6 +1236,16 @@ function EmptyState({ filter }: { filter: FilterId }) {
   );
 }
 
+function EmptySearchState({ query }: { query: string }) {
+  return (
+    <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
+      <div className="text-5xl mb-4">🔍</div>
+      <h3 className="text-base font-bold text-white/50 mb-2">No results for "{query}"</h3>
+      <p className="text-[13px] text-white/25">Try a different search term or clear the filter.</p>
+    </div>
+  );
+}
+
 function ErrorState({ message, onRetry }: { message: string; onRetry: () => void }) {
   return (
     <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
@@ -1252,6 +1262,75 @@ function ErrorState({ message, onRetry }: { message: string; onRetry: () => void
   );
 }
 
+// ── Activity search ───────────────────────────────────────────────────────────
+
+const CURATED_COUNT = 30;
+
+function sortByRelevance(activities: Activity[], query: string): Activity[] {
+  const tokens = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
+  if (tokens.length === 0) return activities;
+
+  const scored = activities.map((a) => {
+    const title  = a.title.toLowerCase();
+    const tags   = a.tags.join(" ").toLowerCase();
+    const cat    = a.category.replace(/_/g, " ").toLowerCase();      // "hidden gems"
+    const badges = a.badges.join(" ").replace(/_/g, " ").toLowerCase(); // "hidden gem"
+    const desc   = (a.description + " " + a.whyVisit + " " + a.neighborhood).toLowerCase();
+
+    let score = 0;
+    for (const token of tokens) {
+      // Title: strongest signal
+      if (title === token)                  score += 20;
+      else if (title.startsWith(token + " ")) score += 12;
+      else if (title.includes(token))        score += 8;
+      // Tags (includes query-derived tags like "Sushi", "Ramen", "Rooftop Bar")
+      if (tags.split(" ").some(t => t === token)) score += 12;
+      else if (tags.includes(token))         score += 7;
+      // Category / badge
+      if (cat.includes(token))               score += 5;
+      if (badges.includes(token))            score += 5;
+      // Description / whyVisit / neighborhood
+      if (desc.includes(token))              score += 2;
+    }
+
+    return { activity: a, score };
+  });
+
+  return scored
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score)
+    .map(({ activity }) => activity);
+}
+
+function ActivitySearchInput({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  return (
+    <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] focus-within:border-white/[0.15] transition-colors">
+      <IconSearch className="w-3.5 h-3.5 text-white/20 flex-shrink-0" />
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder="Search sushi, ramen, temple, rooftop bar, anime…"
+        className="flex-1 bg-transparent text-sm text-white placeholder-white/20 outline-none"
+      />
+      {value && (
+        <button
+          onClick={() => onChange("")}
+          className="text-white/20 hover:text-white/50 transition-colors text-base leading-none px-1"
+        >
+          ×
+        </button>
+      )}
+    </div>
+  );
+}
+
 // ── Main Component ────────────────────────────────────────────────────────────
 
 interface SearchResult {
@@ -1262,12 +1341,13 @@ interface SearchResult {
 }
 
 export default function ActivitySearch() {
-  const [destination,   setDestination]   = useState("Tokyo, Japan");
-  const [activeFilter,  setActiveFilter]  = useState<FilterId>("all");
-  const [savedIds,      setSavedIds]      = useState<Set<string>>(new Set());
-  const [loading,       setLoading]       = useState(false);
-  const [error,         setError]         = useState<string | null>(null);
-  const [result,        setResult]        = useState<SearchResult | null>(null);
+  const [destination,    setDestination]    = useState("Tokyo, Japan");
+  const [activityQuery,  setActivityQuery]  = useState("");
+  const [activeFilter,   setActiveFilter]   = useState<FilterId>("all");
+  const [savedIds,       setSavedIds]       = useState<Set<string>>(new Set());
+  const [loading,        setLoading]        = useState(false);
+  const [error,          setError]          = useState<string | null>(null);
+  const [result,         setResult]         = useState<SearchResult | null>(null);
 
   // ── Detail modal state ──
   const [modalActivity,   setModalActivity]   = useState<Activity | null>(null);
@@ -1289,6 +1369,7 @@ export default function ActivitySearch() {
 
     setLoading(true);
     setError(null);
+    setActivityQuery(""); // clear activity search when switching destinations
 
     try {
       const res = await fetch(`/api/activities/search?destination=${encodeURIComponent(dest.trim())}`);
@@ -1370,25 +1451,31 @@ export default function ActivitySearch() {
     setModalLoading(false);
   }
 
-  // Filter activities by active chip
-  const filtered = useMemo(() => {
-    if (!result) return [];
-    const { activities } = result;
-    if (activeFilter === "all")  return activities;
-    if (activeFilter === "free") return activities.filter((a) => a.isFree);
-    return activities.filter((a) => a.category === activeFilter);
-  }, [result, activeFilter]);
+  const isSearching = activityQuery.trim().length > 0;
 
-  // Category counts for chips
+  // Tier 1 (top CURATED_COUNT by quality) or full relevance-ranked search results
+  const searchBase = useMemo(() => {
+    const all = result?.activities ?? [];
+    if (!isSearching) return all.slice(0, CURATED_COUNT);
+    return sortByRelevance(all, activityQuery.trim());
+  }, [result?.activities, isSearching, activityQuery]);
+
+  // Category counts from searchBase (so chips reflect current search scope)
   const counts = useMemo((): Partial<Record<FilterId, number>> => {
-    if (!result) return {};
-    const c: Partial<Record<FilterId, number>> = { all: result.activities.length };
-    for (const a of result.activities) {
+    const c: Partial<Record<FilterId, number>> = { all: searchBase.length };
+    for (const a of searchBase) {
       c[a.category] = (c[a.category] ?? 0) + 1;
-      if (a.isFree) c["free"] = (c["free"] ?? 0) + 1;
+      if (a.isFree) c.free = (c.free ?? 0) + 1;
     }
     return c;
-  }, [result]);
+  }, [searchBase]);
+
+  // Final display set — category filter applied on top of searchBase
+  const displayed = useMemo(() => {
+    if (activeFilter === "all")  return searchBase;
+    if (activeFilter === "free") return searchBase.filter((a) => a.isFree);
+    return searchBase.filter((a) => a.category === activeFilter);
+  }, [searchBase, activeFilter]);
 
   const city    = result?.city    ?? destination.split(",")[0].trim();
   const country = result?.country ?? destination.split(",").pop()?.trim() ?? "";
@@ -1440,14 +1527,19 @@ export default function ActivitySearch() {
           </p>
         </div>
 
-        {/* ── Search bar ── */}
-        <div className="mb-8 relative">
+        {/* ── Destination search bar ── */}
+        <div className="mb-3 relative">
           <DestinationSearch
             value={destination}
             onChange={setDestination}
             onSearch={handleSearch}
             loading={loading}
           />
+        </div>
+
+        {/* ── Activity search ── */}
+        <div className="mb-6">
+          <ActivitySearchInput value={activityQuery} onChange={setActivityQuery} />
         </div>
 
         {/* ── Category filter strip ── */}
@@ -1459,29 +1551,17 @@ export default function ActivitySearch() {
           />
         </div>
 
-        {/* ── Result count + debug source ── */}
+        {/* ── Result count ── */}
         {result && !loading && (
           <div className="flex items-center justify-between mb-5">
-            <div className="flex items-center gap-3">
-              <p className="text-[12px] text-white/30">
-                {activeFilter === "all"
-                  ? `Showing all ${filtered.length} activities`
-                  : `${filtered.length} ${FILTERS.find((f) => f.id === activeFilter)?.label ?? activeFilter} activit${filtered.length === 1 ? "y" : "ies"}`}{" "}
-                in {city}
-              </p>
-              {/* DEBUG: remove once real data is confirmed */}
-              <span className={`text-[10px] font-mono px-2 py-0.5 rounded border ${
-                result.source === "places_api" || result.source === "cache"
-                  ? "text-green-400 border-green-400/30 bg-green-400/5"
-                  : "text-amber-400 border-amber-400/30 bg-amber-400/5"
-              }`}>
-                {result.source === "places_api" ? "Data source: Google Places"
-                  : result.source === "cache" ? "Data source: Google Places (cached)"
-                  : result.source === "mock_fallback" ? "Data source: Mock fallback"
-                  : result.source === "mock" ? "Data source: Mock (no API key)"
-                  : `Data source: ${result.source ?? "unknown"}`}
-              </span>
-            </div>
+            <p className="text-[12px] text-white/30">
+              {isSearching
+                ? `${displayed.length} ${displayed.length === 1 ? "result" : "results"} for "${activityQuery}"${city ? ` in ${city}` : ""}`
+                : activeFilter === "all"
+                  ? `${displayed.length} top experiences in ${city}`
+                  : `${displayed.length} ${FILTERS.find((f) => f.id === activeFilter)?.label ?? activeFilter} activit${displayed.length === 1 ? "y" : "ies"} in ${city}`
+              }
+            </p>
             {savedIds.size > 0 && (
               <p className="text-[11px] text-white/20 flex items-center gap-1">
                 <IconHeart filled className="w-2.5 h-2.5 text-red-400/70" />
@@ -1494,12 +1574,11 @@ export default function ActivitySearch() {
         {/* ── Grid ── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {loading ? (
-            // Skeleton loading state
             Array.from({ length: 9 }).map((_, i) => <SkeletonCard key={i} />)
           ) : error ? (
             <ErrorState message={error} onRetry={() => fetchActivities(destination)} />
-          ) : filtered.length > 0 ? (
-            filtered.map((activity) => (
+          ) : displayed.length > 0 ? (
+            displayed.map((activity) => (
               <ActivityCard
                 key={activity.id}
                 activity={activity}
@@ -1508,6 +1587,8 @@ export default function ActivitySearch() {
                 onViewDetails={() => openDetails(activity)}
               />
             ))
+          ) : isSearching ? (
+            <EmptySearchState query={activityQuery} />
           ) : (
             <EmptyState filter={activeFilter} />
           )}
