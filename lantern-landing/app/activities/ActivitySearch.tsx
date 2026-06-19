@@ -793,12 +793,25 @@ function ActivityDetailModal({
 
               return (
                 <div>
-                  <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-3">
-                    Guest Reviews
-                    {allReviews.length > 0 && (
-                      <span className="ml-2 font-semibold text-white/15 normal-case tracking-normal">
-                        (Google sample · {allReviews.length} shown)
-                      </span>
+                  <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">
+                    Review sample
+                  </div>
+
+                  {/* Limitation notice + "Open full reviews" CTA */}
+                  <div className="flex items-center justify-between gap-3 mb-3">
+                    <p className="text-[11px] text-white/30 leading-snug">
+                      Google provides a limited review sample here
+                      {allReviews.length > 0 && ` (${allReviews.length} shown)`}.
+                    </p>
+                    {(detail?.googleMapsUri ?? activity.googleMapsUri) && (
+                      <a
+                        href={detail?.googleMapsUri ?? activity.googleMapsUri}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-shrink-0 text-[11px] font-semibold text-lantern-blue hover:text-lantern-blue/80 transition-colors whitespace-nowrap"
+                      >
+                        Open full reviews ↗
+                      </a>
                     )}
                   </div>
 
@@ -945,7 +958,7 @@ function ActivityDetailModal({
                       {/* Attribution */}
                       {allReviews.length > 0 && (
                         <p className="text-[10px] text-white/15 mt-3 text-center leading-relaxed">
-                          Reviews sourced from Google · Sample of up to 5 reviews returned by the Places API
+                          Reviews from Google · up to 5 returned by the Places API
                         </p>
                       )}
                     </>
