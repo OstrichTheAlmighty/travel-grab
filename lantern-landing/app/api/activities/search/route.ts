@@ -240,38 +240,116 @@ function generateBadges(place: GooglePlace): Badge[] {
 }
 
 function buildDescription(place: GooglePlace, neighborhood: string): string {
-  // Prefer Google's own editorial summary — it's the most accurate real description
   if (place.editorialSummary?.text) return place.editorialSummary.text;
-
-  const parts: string[] = [];
-  if (neighborhood) parts.push(`Located in ${neighborhood}.`);
-  if (place.rating && place.userRatingCount) {
-    const n = place.userRatingCount;
-    const nStr = n >= 1000 ? `${Math.round(n / 1000)}k` : String(n);
-    parts.push(`Rated ${place.rating.toFixed(1)}/5 by ${nStr} visitors.`);
-  }
+  // No editorial summary — build a neutral factual line without ratings or review counts
   const tags = buildTags(place.types ?? []).slice(0, 2).join(" & ");
-  if (tags) parts.push(`Category: ${tags}.`);
-  return parts.join(" ") || "A popular destination.";
+  if (tags && neighborhood) return `${tags} in ${neighborhood}.`;
+  if (tags) return `${tags}.`;
+  if (neighborhood) return `Located in ${neighborhood}.`;
+  return "";
+}
+
+function buildWhyVisitS1(name: string, types: string[], category: Category, city: string): string {
+  if (types.includes("museum"))
+    return `Explore ${name}'s collections spanning art, history, or science across multiple exhibition floors.`;
+  if (types.includes("art_gallery"))
+    return `Browse original works at ${name}, from paintings and sculpture to contemporary installation.`;
+  if (types.includes("aquarium"))
+    return `Watch sharks, rays, and tropical fish drift through ${name}'s immersive tanks and walk-through tunnels.`;
+  if (types.includes("zoo"))
+    return `See wildlife from dozens of species across ${name}'s enclosures, aviaries, and habitat zones.`;
+  if (types.includes("amusement_park"))
+    return `Take on roller coasters, family rides, and live shows across ${name}'s grounds.`;
+  if (types.includes("park") && (types.includes("natural_feature") || /forest|wood/i.test(name)))
+    return `Hike or wander through ${name}'s woodland trails and open natural landscape.`;
+  if (types.includes("park"))
+    return `Walk, cycle, or picnic across ${name}'s open green spaces and gardens in ${city}.`;
+  if (types.includes("night_club"))
+    return `Dance to live DJ sets and late-night music at ${name} in ${city}.`;
+  if (types.includes("bar"))
+    return `Pull up a stool at ${name} for cocktails, local beers, or wine in a proper bar setting.`;
+  if (types.includes("restaurant"))
+    return `Sit down at ${name} for a full meal in a relaxed dining environment.`;
+  if (types.includes("cafe"))
+    return `Stop at ${name} for coffee, pastries, or a light lunch in a laid-back setting.`;
+  if (types.includes("shopping_mall"))
+    return `Browse a wide range of shops, food halls, and restaurants across ${name}'s floors.`;
+  if (types.includes("spa"))
+    return `Book a treatment at ${name} for a proper break from sightseeing and city noise.`;
+  if (types.includes("church") || types.includes("hindu_temple") || types.includes("place_of_worship"))
+    return `Step inside ${name} for striking architecture, history, and a quieter moment in ${city}.`;
+  if (types.includes("stadium"))
+    return `Catch a live match or take a behind-the-scenes tour at ${name}.`;
+  if (types.includes("tourist_attraction"))
+    return `Take in ${name}'s architecture, views, and street-level atmosphere at your own pace.`;
+
+  const fallback: Record<Category, string> = {
+    food:        `Grab a meal or snack at ${name}, a local favourite in ${city}.`,
+    nightlife:   `Experience ${city}'s night scene at ${name} with drinks and a lively crowd.`,
+    culture:     `Spend time at ${name} and explore what makes it a distinct part of ${city}.`,
+    adventure:   `Get hands-on at ${name} for an active, memorable experience in ${city}.`,
+    nature:      `Escape to ${name} for open space, greenery, and a break from the city.`,
+    luxury:      `Treat yourself to a premium experience at ${name} in ${city}.`,
+    hidden_gems: `Discover ${name}, a quieter spot that rewards those who seek it out in ${city}.`,
+  };
+  return fallback[category];
+}
+
+function buildWhyVisitS2(types: string[], category: Category, isFree: boolean): string {
+  if (types.includes("museum"))
+    return isFree ? "Free to enter; allow at least two hours." : "Allow at least two hours to cover the main galleries.";
+  if (types.includes("art_gallery"))
+    return "Best on a weekday morning when it's quieter.";
+  if (types.includes("aquarium"))
+    return "Great for families and anyone curious about marine life.";
+  if (types.includes("zoo"))
+    return "Plan for half a day; best on weekdays to avoid school groups.";
+  if (types.includes("amusement_park"))
+    return "Better with a group — most rides are more fun together.";
+  if (types.includes("park"))
+    return "Perfect for an unhurried afternoon away from the tourist trail.";
+  if (types.includes("night_club"))
+    return "Expect a queue on weekends; arrive early or book a table ahead.";
+  if (types.includes("bar"))
+    return "Walk-in friendly most evenings; livelier after 9 pm.";
+  if (types.includes("restaurant"))
+    return "Book a table in advance for weekend dinner service.";
+  if (types.includes("cafe"))
+    return "Good for a quick stop without a reservation.";
+  if (types.includes("shopping_mall"))
+    return "Best on a weekday to avoid weekend crowds.";
+  if (types.includes("spa"))
+    return "Book ahead — popular treatment slots fill up quickly.";
+  if (types.includes("church") || types.includes("hindu_temple") || types.includes("place_of_worship"))
+    return "Respectful dress required; usually free to visit.";
+  if (types.includes("stadium"))
+    return "Check the fixture schedule — tours run on non-match days.";
+  if (types.includes("tourist_attraction"))
+    return isFree ? "Free to visit — worth combining with nearby sights." : "Best visited in the morning to beat afternoon crowds.";
+
+  const fallback: Record<Category, string> = {
+    food:        isFree ? "Good value and easy to drop in without a reservation." : "Worth booking ahead for busy evenings.",
+    nightlife:   "Best experienced on a Thursday, Friday, or Saturday night.",
+    culture:     isFree ? "Free to visit — pair it with nearby sights for a full day out." : "Allow a couple of hours to do it justice.",
+    adventure:   "Good for active travellers and families alike.",
+    nature:      "Pack a bag and plan for at least an hour.",
+    luxury:      "Worth splashing out on — book in advance.",
+    hidden_gems: "Less well-known but consistently well-regarded by locals.",
+  };
+  return fallback[category];
 }
 
 function buildWhyVisit(place: GooglePlace, category: Category, city: string): string {
-  const r     = place.rating;
-  const n     = place.userRatingCount ?? 0;
-  const nStr  = n >= 1000 ? `${Math.round(n / 1000)}k` : n > 0 ? String(n) : null;
-  const rPart = r ? `Rated ${r.toFixed(1)}/5${nStr ? ` by ${nStr} visitors` : ""}.` : "";
+  const types  = place.types ?? [];
+  const name   = place.displayName.text;
+  const isFree = place.priceLevel === "PRICE_LEVEL_FREE";
 
-  const suffix: Record<Category, string> = {
-    food:        `A well-regarded food and dining experience in ${city}.`,
-    nightlife:   `Known for its lively atmosphere and vibrant nightlife.`,
-    culture:     `One of ${city}'s most celebrated cultural attractions.`,
-    adventure:   `A memorable activity worth building time around.`,
-    nature:      `A peaceful natural escape from the urban bustle of ${city}.`,
-    luxury:      `A premium experience for those looking to treat themselves.`,
-    hidden_gems: `Less crowded than the famous tourist spots but highly regarded by those who seek it out.`,
-  };
+  // description already carries editorialSummary verbatim, so whyVisit is always
+  // action-first + "best for" — no repetition between the two card fields.
+  const s1 = buildWhyVisitS1(name, types, category, city);
+  const s2 = buildWhyVisitS2(types, category, isFree);
 
-  return [rPart, suffix[category]].filter(Boolean).join(" ");
+  return s2 ? `${s1} ${s2}` : s1;
 }
 
 function mapToActivity(place: GooglePlace, category: Category, city: string): Activity {
