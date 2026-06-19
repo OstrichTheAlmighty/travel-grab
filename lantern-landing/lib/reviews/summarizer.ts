@@ -72,7 +72,13 @@ If you cannot point to 2+ reviews that say the thing, omit it. An empty array is
 - GOOD: "Travelers needing spacious rooms", "Guests seeking luxury accommodations", "Light sleepers"
 - BAD: "Luxury seekers", "Minimalist aesthetic lovers", "Family friendly" (do not invent)
 
-FORBIDDEN — never use these unless 3+ reviews explicitly use the phrase:
+SPECIFIC AMENITIES / ROOM FEATURES — require 3+ reviews:
+Do not mention a specific amenity or room feature unless at least 3 separate reviews reference it.
+- BAD (mentioned once): "Wood bathtub", "Complimentary croissants", "Purple wallpaper", "Elevator music"
+- GOOD (mentioned by many): "Comfortable rooms", "Complimentary breakfast", "Convenient location", "Helpful staff"
+If a feature only appears in 1–2 reviews, raise the abstraction level ("Breakfast options available") or omit it entirely.
+
+FORBIDDEN PHRASES — never use unless 3+ reviews explicitly use the phrase:
 boutique experience, luxury seekers, minimalist aesthetic, romantic getaway,
 family friendly, hidden gem, cozy retreat, urban explorer, ideal for couples,
 immersive experience, exceptional hospitality, great atmosphere.
