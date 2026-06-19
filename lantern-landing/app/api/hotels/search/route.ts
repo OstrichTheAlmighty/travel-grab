@@ -2240,27 +2240,36 @@ export async function POST(req: Request) {
     return NextResponse.json({ status: "empty", message: `No hotels found for "${destination}". Try a different city name.`, offers: [] });
   }
 
+  // ── Pipeline stage 1: deduplicate ────────────────────────────────────────────
   const deduped = deduplicateHotels(serpResult.hotels);
-  console.log(`[hotels] pages=${serpResult.pagesFetched}  raw=${serpResult.rawCount}  deduped=${deduped.length}  prefs=[${neighborhood_prefs.join(",")}]  places=${!!placesApiKey}  (serp=${serpResult.latencyMs}ms)`);
-
-  // Log first 10 returned hotels with coordinates for debugging
-  deduped.slice(0, 10).forEach((h) =>
-    console.log(`  [serp-hotel] "${h.name}" | ${h.address} | lat=${h.latitude ?? "?"} lng=${h.longitude ?? "?"}`)
+  console.log(
+    `[pipeline:1-fetch]  destination="${destination}"  pages=${serpResult.pagesFetched}  raw=${serpResult.rawCount}  after_dedup=${deduped.length}  (serp=${serpResult.latencyMs}ms)`,
   );
 
-  // Geographic filter — resolve destination to coordinates, then drop hotels outside 50 km radius.
-  // Prefers placeId-based geocoding (sent by the client when user selects from autocomplete)
-  // since it is unambiguous. Falls back to text-based geocoding for manual input.
+  // Log first 10 raw hotels with coordinates to verify geo data quality
+  console.log(`[pipeline:1-fetch]  first ${Math.min(10, deduped.length)} hotels (pre-filter):`);
+  deduped.slice(0, 10).forEach((h, i) =>
+    console.log(`  [${i + 1}] "${h.name}" | ${h.address} | lat=${h.latitude ?? "?"} lng=${h.longitude ?? "?"}`)
+  );
+
+  // ── Pipeline stage 2: geo-filter ──────────────────────────────────────────────
+  // Resolve destination → coordinates, then drop hotels outside 50 km.
+  // Uses placeId when provided by the client (autocomplete selection) for unambiguous geocoding;
+  // falls back to text-based geocoding when the user typed manually.
   let geoFiltered = deduped;
   if (placesApiKey) {
     const geoCenter = await geocodeDestination(destination, placesApiKey, place_id || undefined);
     if (geoCenter) {
       geoFiltered = geoFilterHotels(deduped, geoCenter, destination);
     } else {
-      console.warn(`[geo-filter] geocoding failed for "${destination}" — skipping geo filter`);
+      console.warn(`[pipeline:2-geo]  geocoding failed for "${destination}" — skipping geo filter`);
     }
+  } else {
+    console.warn(`[pipeline:2-geo]  no Places API key — skipping geo filter`);
   }
+  console.log(`[pipeline:2-geo]  after_geo_filter=${geoFiltered.length}  (removed ${deduped.length - geoFiltered.length})`);
 
+  // ── Pipeline stage 3: enrich + score ─────────────────────────────────────────
   let enrichments = new Map<string, PlacesEnrichment>();
   if (placesApiKey) {
     enrichments = await enrichWithGooglePlaces(geoFiltered, destination, placesApiKey);
@@ -2284,9 +2293,11 @@ export async function POST(req: Request) {
 
   const nbhdCount = new Set(scored.map((h) => h.inferred_neighborhood).filter(Boolean)).size;
   console.log(
-    `[pipeline] raw_hotels_retrieved=${serpResult.rawCount}  deduped=${deduped.length}  geo_filtered=${geoFiltered.length}  neighborhood_count=${nbhdCount}  offers=${scored.length}  (reranked=${neighborhood_prefs.length > 0 ? scored.length : 0})`
+    `[pipeline:3-rank]  scored=${scored.length}  neighborhoods=${nbhdCount}  prefs=[${neighborhood_prefs.join(",")}]  reranked=${neighborhood_prefs.length > 0 ? scored.length : 0}`,
   );
-  console.log(`Raw hotels: ${serpResult.rawCount}\nDeduped: ${deduped.length}\nGeo-filtered: ${geoFiltered.length}\nNeighborhoods: ${nbhdCount}`);
+  console.log(
+    `[pipeline:summary]  destination="${destination}"  raw=${serpResult.rawCount}  deduped=${deduped.length}  geo_filtered=${geoFiltered.length}  final_offers=${scored.length}`,
+  );
 
   return NextResponse.json({
     status: "ok",

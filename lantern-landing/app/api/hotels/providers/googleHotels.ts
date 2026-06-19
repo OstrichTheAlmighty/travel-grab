@@ -8,10 +8,11 @@ import type {
 
 type R = Record<string, unknown>;
 
-// SerpAPI Google Hotels returns ~18-20 properties per page.
-// Each page costs 1 SerpAPI credit. 5 pages → ~100 hotels, 5× credit use.
-// Increase MAX_PAGES to widen coverage; decrease to save credits.
-const MAX_PAGES = 5;
+// SerpAPI Google Hotels returns ~16-20 properties per page.
+// Each page costs 1 SerpAPI credit. 15 pages → up to ~300 hotels max.
+// Pagination stops early when SerpAPI returns no next_page_token (provider exhausted).
+// MAX_PAGES is a hard safety ceiling to prevent runaway loops or unexpectedly deep APIs.
+const MAX_PAGES = 15;
 
 function parseStarRating(hotelClass: string | undefined): number {
   if (!hotelClass) return 0;
@@ -115,6 +116,7 @@ export async function searchGoogleHotels(
   let rawCount        = 0;
   let pagesFetched    = 0;
   let nextPageToken: string | null = null;
+  let stopReason      = "max_pages_reached";
   const debugUrl      = `https://serpapi.com/search?${new URLSearchParams({ ...Object.fromEntries(baseQs), api_key: "[REDACTED]" })}`;
 
   for (let page = 0; page < MAX_PAGES; page++) {
@@ -128,6 +130,7 @@ export async function searchGoogleHotels(
       resp = await fetch(url, { headers: { Accept: "application/json" } });
     } catch (err) {
       console.error(`[google_hotels] page=${page} network error:`, String(err).slice(0, 120));
+      stopReason = "network_error";
       break;
     }
 
@@ -138,6 +141,7 @@ export async function searchGoogleHotels(
         msg = e?.error ?? msg;
       } catch { /* ignore */ }
       console.error(`[google_hotels] page=${page} error: ${msg}`);
+      stopReason = `http_error_${resp.status}`;
       break;
     }
 
@@ -158,18 +162,23 @@ export async function searchGoogleHotels(
 
     console.log(`[google_hotels] page=${page} raw=${pageRaw.length} parsed=${parsed} (sponsored=${sponsored.length} organic=${organic.length})`);
 
-    if (pageRaw.length === 0) break; // empty page — stop
+    if (pageRaw.length === 0) { stopReason = "empty_page"; break; }
 
     // Follow next_page_token if SerpAPI provides one
     const pagination  = body.serpapi_pagination as R | undefined;
     nextPageToken     = (pagination?.next_page_token as string | undefined)
                      ?? (body.next_page_token         as string | undefined)
                      ?? null;
-    if (!nextPageToken) break; // no more pages
+    if (!nextPageToken) { stopReason = "provider_exhausted"; break; }
   }
 
   const latencyMs = Date.now() - t0;
-  console.log(`[google_hotels] done: pages=${pagesFetched} raw_total=${rawCount} parsed=${allHotels.length} (${latencyMs}ms)`);
+  if (stopReason === "max_pages_reached") {
+    console.log(`[google_hotels] hit MAX_PAGES=${MAX_PAGES} ceiling — provider may have more results`);
+  } else if (stopReason === "provider_exhausted") {
+    console.log(`[google_hotels] provider returned all available hotels (${rawCount} raw) — no more pages`);
+  }
+  console.log(`[google_hotels] done: stop=${stopReason} pages=${pagesFetched} raw_total=${rawCount} parsed=${allHotels.length} (${latencyMs}ms)`);
 
   return { hotels: allHotels, rawCount, pagesFetched, requestUrl: debugUrl, latencyMs };
 }
