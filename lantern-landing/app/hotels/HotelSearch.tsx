@@ -4990,6 +4990,9 @@ export default function HotelSearch() {
             Flights
           </Link>
           <span className="text-sm font-medium text-lantern-violet">Hotels</span>
+          <Link href="/activities" className="text-sm font-medium text-white/45 hover:text-white/80 transition-colors">
+            Activities
+          </Link>
         </div>
       </nav>
 
