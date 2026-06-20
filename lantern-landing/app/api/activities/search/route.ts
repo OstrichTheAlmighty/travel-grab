@@ -56,68 +56,81 @@ const CACHE_TTL = 30 * 60 * 1000; // 30 min
 // ── Search group config ───────────────────────────────────────────────────────
 
 interface SearchGroup {
-  type?: string;          // nearby search
+  type?: string;          // nearby search (no pagination)
   query?: string;         // text search; {city} is substituted at runtime
   category: Category;
   limit: number;
   tags?: string[];        // searchable tags applied to all results from this group
+  pages?: number;         // textSearch pages to fetch (default 1, max 3)
 }
 
 const SEARCH_GROUPS: SearchGroup[] = [
-  // ── Food & Drink ──────────────────────────────────────────────────────────
-  { query: "sushi restaurant {city}",       category: "food",      limit: 20, tags: ["Sushi"] },
-  { query: "ramen restaurant {city}",       category: "food",      limit: 20, tags: ["Ramen"] },
-  { query: "izakaya {city}",                category: "food",      limit: 20, tags: ["Izakaya"] },
-  { query: "omakase restaurant {city}",     category: "food",      limit: 20, tags: ["Omakase", "Fine Dining"] },
-  { query: "yakitori restaurant {city}",    category: "food",      limit: 20, tags: ["Yakitori"] },
-  { query: "tempura restaurant {city}",     category: "food",      limit: 20, tags: ["Tempura"] },
-  { query: "soba restaurant {city}",        category: "food",      limit: 20, tags: ["Soba"] },
-  { query: "udon restaurant {city}",        category: "food",      limit: 20, tags: ["Udon"] },
-  { query: "seafood restaurant {city}",     category: "food",      limit: 20, tags: ["Seafood"] },
-  { query: "street food {city}",            category: "food",      limit: 20, tags: ["Street Food"] },
-  { query: "food market {city}",            category: "food",      limit: 20, tags: ["Market", "Street Food"] },
-  { type: "cafe",                           category: "food",      limit: 20, tags: ["Coffee", "Café"] },
-  { query: "coffee shop {city}",            category: "food",      limit: 20, tags: ["Coffee", "Café"] },
-  { query: "dessert {city}",                category: "food",      limit: 20, tags: ["Dessert"] },
-  { query: "breakfast restaurant {city}",   category: "food",      limit: 20, tags: ["Breakfast"] },
-  { query: "restaurant {city}",             category: "food",      limit: 20 },
+  // ── Food — specific cuisines first so tags are assigned before generic sweep ──
+  { query: "sushi restaurant {city}",           category: "food",      limit: 60, pages: 3, tags: ["Sushi"] },
+  { query: "ramen restaurant {city}",           category: "food",      limit: 60, pages: 3, tags: ["Ramen"] },
+  { query: "tonkotsu ramen {city}",             category: "food",      limit: 40, pages: 2, tags: ["Ramen", "Tonkotsu"] },
+  { query: "izakaya {city}",                    category: "food",      limit: 60, pages: 3, tags: ["Izakaya"] },
+  { query: "omakase restaurant {city}",         category: "food",      limit: 40, pages: 2, tags: ["Omakase", "Fine Dining"] },
+  { query: "yakitori restaurant {city}",        category: "food",      limit: 40, pages: 2, tags: ["Yakitori"] },
+  { query: "tempura restaurant {city}",         category: "food",      limit: 40, pages: 2, tags: ["Tempura"] },
+  { query: "soba restaurant {city}",            category: "food",      limit: 40, pages: 2, tags: ["Soba"] },
+  { query: "udon restaurant {city}",            category: "food",      limit: 40, pages: 2, tags: ["Udon"] },
+  { query: "seafood restaurant {city}",         category: "food",      limit: 40, pages: 2, tags: ["Seafood"] },
+  { query: "street food {city}",                category: "food",      limit: 40, pages: 2, tags: ["Street Food"] },
+  { query: "food market {city}",                category: "food",      limit: 40, pages: 2, tags: ["Market", "Street Food"] },
+  { query: "coffee shop {city}",                category: "food",      limit: 60, pages: 3, tags: ["Coffee", "Café"] },
+  { type: "cafe",                               category: "food",      limit: 20,            tags: ["Coffee", "Café"] },
+  { query: "dessert cafe {city}",               category: "food",      limit: 40, pages: 2, tags: ["Dessert"] },
+  { query: "bakery {city}",                     category: "food",      limit: 40, pages: 2, tags: ["Bakery", "Breakfast"] },
+  { query: "breakfast restaurant {city}",       category: "food",      limit: 40, pages: 2, tags: ["Breakfast"] },
+  { query: "curry restaurant {city}",           category: "food",      limit: 40, pages: 2, tags: ["Curry"] },
+  { query: "restaurant {city}",                 category: "food",      limit: 60, pages: 3 },
 
-  // ── Nightlife ──────────────────────────────────────────────────────────────
-  { type: "bar",                            category: "nightlife", limit: 20 },
-  { type: "night_club",                     category: "nightlife", limit: 20 },
-  { query: "rooftop bar {city}",            category: "nightlife", limit: 20, tags: ["Rooftop Bar", "Rooftop", "Views"] },
-  { query: "cocktail bar {city}",           category: "nightlife", limit: 20, tags: ["Cocktail Bar"] },
-  { query: "jazz club {city}",              category: "nightlife", limit: 20, tags: ["Jazz", "Live Music"] },
-  { query: "live music venue {city}",       category: "nightlife", limit: 20, tags: ["Live Music"] },
-  { query: "karaoke {city}",               category: "nightlife", limit: 20, tags: ["Karaoke"] },
-  { query: "sake bar {city}",              category: "nightlife", limit: 20, tags: ["Sake Bar"] },
-  { query: "speakeasy bar {city}",         category: "nightlife", limit: 15, tags: ["Speakeasy", "Cocktail Bar"] },
+  // ── Nightlife ────────────────────────────────────────────────────────────────
+  { type: "bar",                                category: "nightlife", limit: 20 },
+  { type: "night_club",                         category: "nightlife", limit: 20 },
+  { query: "bar {city}",                        category: "nightlife", limit: 60, pages: 3 },
+  { query: "rooftop bar {city}",                category: "nightlife", limit: 40, pages: 2, tags: ["Rooftop Bar", "Rooftop", "Views"] },
+  { query: "cocktail bar {city}",               category: "nightlife", limit: 40, pages: 2, tags: ["Cocktail Bar"] },
+  { query: "jazz club {city}",                  category: "nightlife", limit: 40, pages: 2, tags: ["Jazz", "Live Music"] },
+  { query: "live music venue {city}",           category: "nightlife", limit: 40, pages: 2, tags: ["Live Music"] },
+  { query: "karaoke {city}",                    category: "nightlife", limit: 40, pages: 2, tags: ["Karaoke"] },
+  { query: "sake bar {city}",                   category: "nightlife", limit: 40, pages: 2, tags: ["Sake Bar"] },
+  { query: "speakeasy bar {city}",              category: "nightlife", limit: 20, pages: 1, tags: ["Speakeasy", "Cocktail Bar"] },
 
-  // ── Culture & Sightseeing ──────────────────────────────────────────────────
-  { type: "tourist_attraction",            category: "culture",   limit: 20 },
-  { type: "museum",                        category: "culture",   limit: 20 },
-  { type: "art_gallery",                   category: "culture",   limit: 20 },
-  { query: "temple {city}",               category: "culture",   limit: 20, tags: ["Temple"] },
-  { query: "shrine {city}",               category: "culture",   limit: 20, tags: ["Shrine"] },
-  { query: "historical landmark {city}",  category: "culture",   limit: 20, tags: ["Historical Site", "Landmark"] },
-  { query: "historical site {city}",      category: "culture",   limit: 20, tags: ["Historical Site"] },
-  { query: "garden {city}",              category: "culture",   limit: 20, tags: ["Garden"] },
-  { query: "traditional market {city}",  category: "culture",   limit: 20, tags: ["Market", "Shopping"] },
-  { type: "shopping_mall",               category: "culture",   limit: 20, tags: ["Shopping"] },
-  { query: "anime shop {city}",          category: "culture",   limit: 20, tags: ["Anime", "Shopping"] },
+  // ── Culture & Sightseeing ────────────────────────────────────────────────────
+  { type: "tourist_attraction",                 category: "culture",   limit: 20 },
+  { type: "museum",                             category: "culture",   limit: 20 },
+  { type: "art_gallery",                        category: "culture",   limit: 20 },
+  { query: "temple {city}",                     category: "culture",   limit: 40, pages: 2, tags: ["Temple"] },
+  { query: "shrine {city}",                     category: "culture",   limit: 40, pages: 2, tags: ["Shrine"] },
+  { query: "museum {city}",                     category: "culture",   limit: 40, pages: 2, tags: ["Museum"] },
+  { query: "historical landmark {city}",        category: "culture",   limit: 40, pages: 2, tags: ["Historical Site", "Landmark"] },
+  { query: "traditional market {city}",         category: "culture",   limit: 40, pages: 2, tags: ["Market", "Shopping"] },
+  { type: "shopping_mall",                      category: "culture",   limit: 20,            tags: ["Shopping"] },
+  { query: "anime shop {city}",                 category: "culture",   limit: 40, pages: 2, tags: ["Anime", "Shopping"] },
+  { query: "garden {city}",                     category: "culture",   limit: 40, pages: 2, tags: ["Garden"] },
 
-  // ── Adventure & Experiences ────────────────────────────────────────────────
-  { type: "amusement_park",              category: "adventure", limit: 10, tags: ["Theme Park", "Family Friendly"] },
-  { type: "zoo",                         category: "adventure", limit:  5, tags: ["Zoo", "Family Friendly"] },
-  { type: "aquarium",                    category: "adventure", limit:  5, tags: ["Aquarium", "Family Friendly"] },
-  { query: "observation deck {city}",   category: "adventure", limit: 20, tags: ["Observation Deck", "Views", "Rooftop"] },
-  { query: "go kart {city}",            category: "adventure", limit: 15, tags: ["Go Kart", "Racing"] },
-  { query: "escape room {city}",        category: "adventure", limit: 15, tags: ["Escape Room"] },
+  // ── Luxury ──────────────────────────────────────────────────────────────────
+  { query: "luxury restaurant {city}",          category: "luxury",    limit: 40, pages: 2, tags: ["Fine Dining", "Luxury"] },
+  { query: "Michelin star restaurant {city}",   category: "luxury",    limit: 40, pages: 2, tags: ["Michelin", "Fine Dining"] },
+  { query: "luxury spa {city}",                 category: "luxury",    limit: 40, pages: 2, tags: ["Spa", "Luxury"] },
+  { query: "high end hotel bar {city}",         category: "luxury",    limit: 20, pages: 1, tags: ["Rooftop Bar", "Luxury", "Views"] },
 
-  // ── Nature ────────────────────────────────────────────────────────────────
-  { type: "park",                        category: "nature",    limit: 20 },
-  { query: "botanical garden {city}",   category: "nature",    limit: 20, tags: ["Garden", "Botanical Garden"] },
-  { query: "nature trail {city}",       category: "nature",    limit: 20, tags: ["Nature", "Walking"] },
+  // ── Adventure & Experiences ──────────────────────────────────────────────────
+  { type: "amusement_park",                     category: "adventure", limit: 10,            tags: ["Theme Park", "Family Friendly"] },
+  { type: "zoo",                                category: "adventure", limit:  5,            tags: ["Zoo", "Family Friendly"] },
+  { type: "aquarium",                           category: "adventure", limit:  5,            tags: ["Aquarium", "Family Friendly"] },
+  { query: "observation deck {city}",           category: "adventure", limit: 40, pages: 2, tags: ["Observation Deck", "Views", "Rooftop"] },
+  { query: "go kart {city}",                    category: "adventure", limit: 20, pages: 1, tags: ["Go Kart", "Racing"] },
+  { query: "escape room {city}",                category: "adventure", limit: 20, pages: 1, tags: ["Escape Room"] },
+  { query: "activity {city}",                   category: "adventure", limit: 40, pages: 2 },
+
+  // ── Nature ──────────────────────────────────────────────────────────────────
+  { type: "park",                               category: "nature",    limit: 20 },
+  { query: "park {city}",                       category: "nature",    limit: 40, pages: 2 },
+  { query: "botanical garden {city}",           category: "nature",    limit: 40, pages: 2, tags: ["Garden", "Botanical Garden"] },
+  { query: "nature walk {city}",                category: "nature",    limit: 20, pages: 1, tags: ["Nature", "Walking"] },
 ];
 
 // ── Category / type maps ──────────────────────────────────────────────────────
@@ -683,38 +696,57 @@ async function nearbySearch(
 async function textSearch(
   query: string, lat: number, lng: number,
   limit: number, apiKey: string,
+  maxPages = 1,
 ): Promise<GooglePlace[]> {
   const url = "https://places.googleapis.com/v1/places:searchText";
-  try {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type":     "application/json",
-        "X-Goog-Api-Key":   apiKey,
-        "X-Goog-FieldMask": PLACES_FIELD_MASK,
-      },
-      body: JSON.stringify({
+  const all: GooglePlace[] = [];
+  let pageToken: string | undefined;
+
+  for (let page = 0; page < maxPages && all.length < limit; page++) {
+    try {
+      const body: Record<string, unknown> = {
         textQuery:      query,
-        maxResultCount: Math.min(limit, 20),
+        maxResultCount: 20,
         locationBias: {
           circle: { center: { latitude: lat, longitude: lng }, radius: 30000 },
         },
-      }),
-      signal: AbortSignal.timeout(8000),
-    });
-    if (!res.ok) {
-      const errText = await res.text().catch(() => "");
-      console.warn(`[activities/text] HTTP ${res.status} query="${query}" body="${errText.slice(0, 200)}"`);
-      return [];
+      };
+      if (pageToken) body.pageToken = pageToken;
+
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type":     "application/json",
+          "X-Goog-Api-Key":   apiKey,
+          "X-Goog-FieldMask": PLACES_FIELD_MASK,
+        },
+        body: JSON.stringify(body),
+        signal: AbortSignal.timeout(8000),
+      });
+
+      if (!res.ok) {
+        const errText = await res.text().catch(() => "");
+        console.warn(`[activities/text] p${page+1} HTTP ${res.status} query="${query}" body="${errText.slice(0, 200)}"`);
+        break;
+      }
+
+      const data = await res.json() as PlacesResponse & { nextPageToken?: string };
+      const places = data.places ?? [];
+      all.push(...places);
+
+      console.log(`[activities/text] p${page+1} query="${query}" got=${places.length} total=${all.length}${data.error ? ` err="${data.error.message}"` : ""}`);
+
+      if (!data.nextPageToken || places.length === 0) break;
+      pageToken = data.nextPageToken;
+
+      if (page < maxPages - 1) await new Promise<void>((r) => setTimeout(r, 150));
+    } catch (err) {
+      console.warn(`[activities/text] fetch error p${page+1} query="${query}"`, err);
+      break;
     }
-    const data = await res.json() as PlacesResponse;
-    const count = data.places?.length ?? 0;
-    console.log(`[activities/text] query="${query}" count=${count}${data.error ? ` err="${data.error.message}"` : ""}`);
-    return data.places ?? [];
-  } catch (err) {
-    console.warn(`[activities/text] fetch error query="${query}"`, err);
-    return [];
   }
+
+  return all.slice(0, limit);
 }
 
 // ── Viewport filter ───────────────────────────────────────────────────────────
@@ -794,7 +826,7 @@ export async function GET(req: NextRequest) {
       }
       if (g.query) {
         const query = g.query.replace("{city}", city);
-        const places = await textSearch(query, lat, lng, g.limit, apiKey);
+        const places = await textSearch(query, lat, lng, g.limit, apiKey, g.pages ?? 1);
         return { places, category: g.category, tags };
       }
       return { places: [], category: g.category, tags };

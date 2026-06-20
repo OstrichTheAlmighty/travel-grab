@@ -6,7 +6,7 @@ import type { Activity, Badge, Category } from "./data/types";
 
 // ── Filter config ─────────────────────────────────────────────────────────────
 
-type FilterId = "all" | Category | "free";
+type FilterId = "all" | Category | "free" | "browse_all";
 
 const FILTERS: { id: FilterId; label: string; icon: string }[] = [
   { id: "all",         label: "Featured",    icon: "⭐" },
@@ -18,6 +18,7 @@ const FILTERS: { id: FilterId; label: string; icon: string }[] = [
   { id: "luxury",      label: "Luxury",      icon: "✨" },
   { id: "hidden_gems", label: "Hidden Gems", icon: "💎" },
   { id: "free",        label: "Free",        icon: "🎁" },
+  { id: "browse_all",  label: "Browse All",  icon: "🗂" },
 ];
 
 const BADGE_META: Record<Badge, { label: string; className: string }> = {
@@ -1230,6 +1231,8 @@ function EmptyState({ filter }: { filter: FilterId }) {
       <p className="text-[13px] text-white/25">
         {filter === "free"
           ? "No free activities available for this destination."
+          : filter === "browse_all"
+          ? "No activities have been loaded yet."
           : `No ${FILTERS.find((f) => f.id === filter)?.label ?? filter} activities in the results.`}
       </p>
     </div>
@@ -1344,6 +1347,7 @@ export default function ActivitySearch() {
   const [destination,    setDestination]    = useState("Tokyo, Japan");
   const [activityQuery,  setActivityQuery]  = useState("");
   const [activeFilter,   setActiveFilter]   = useState<FilterId>("all");
+  const [activeSubTag,   setActiveSubTag]   = useState<string | null>(null);
   const [savedIds,       setSavedIds]       = useState<Set<string>>(new Set());
   const [loading,        setLoading]        = useState(false);
   const [error,          setError]          = useState<string | null>(null);
@@ -1454,6 +1458,9 @@ export default function ActivitySearch() {
   const isSearching  = activityQuery.trim().length > 0;
   const isFeatured   = activeFilter === "all" && !isSearching;
 
+  // Reset sub-tag when category filter changes
+  useEffect(() => { setActiveSubTag(null); }, [activeFilter]);
+
   // Two datasets — fullDataset is the source of truth for counts and browsing
   const fullDataset  = useMemo(() => result?.activities ?? [], [result?.activities]);
   const featured     = useMemo(() => fullDataset.slice(0, CURATED_COUNT), [fullDataset]);
@@ -1465,26 +1472,47 @@ export default function ActivitySearch() {
       c[a.category] = (c[a.category] ?? 0) + 1;
       if (a.isFree) c.free = (c.free ?? 0) + 1;
     }
+    if (fullDataset.length > 0) c.browse_all = fullDataset.length;
     return c;
   }, [fullDataset]);
 
-  // Full view before pagination — three modes:
-  //   featured  → top 30, no pagination
-  //   category  → all in that category from fullDataset, paginated
-  //   search    → relevance-ranked from fullDataset (+ optional category), paginated
+  // Sub-tag counts within the current category view (for the chip strip)
+  const subTagCounts = useMemo((): Map<string, number> => {
+    if (activeFilter === "all" || activeFilter === "browse_all" || isSearching) return new Map();
+    let base: Activity[];
+    if (activeFilter === "free")        base = fullDataset.filter((a) => a.isFree);
+    else if (activeFilter in CATEGORY_LABEL) base = fullDataset.filter((a) => a.category === activeFilter);
+    else base = [];
+    const map = new Map<string, number>();
+    for (const a of base) {
+      for (const tag of a.tags) map.set(tag, (map.get(tag) ?? 0) + 1);
+    }
+    return map;
+  }, [activeFilter, fullDataset, isSearching]);
+
+  // Full view before pagination — four modes:
+  //   featured    → top 30, no pagination
+  //   browse_all  → entire fullDataset, paginated
+  //   category    → all in that category from fullDataset, paginated (+ optional sub-tag)
+  //   search      → relevance-ranked from fullDataset (+ optional category filter), paginated
   const viewBase = useMemo(() => {
     if (isSearching) {
       let base = fullDataset;
-      if (activeFilter !== "all") {
-        if (activeFilter === "free") base = base.filter((a) => a.isFree);
-        else base = base.filter((a) => a.category === activeFilter);
+      if (activeFilter !== "all" && activeFilter !== "browse_all") {
+        if (activeFilter === "free")         base = base.filter((a) => a.isFree);
+        else if (activeFilter in CATEGORY_LABEL) base = base.filter((a) => a.category === activeFilter);
       }
       return sortByRelevance(base, activityQuery.trim());
     }
-    if (activeFilter === "all")  return featured;
-    if (activeFilter === "free") return fullDataset.filter((a) => a.isFree);
-    return fullDataset.filter((a) => a.category === activeFilter);
-  }, [isSearching, activeFilter, activityQuery, fullDataset, featured]);
+    if (activeFilter === "all")        return featured;
+    if (activeFilter === "browse_all") {
+      return activeSubTag ? fullDataset.filter((a) => a.tags.some((t) => t === activeSubTag)) : fullDataset;
+    }
+    let base: Activity[];
+    if (activeFilter === "free") base = fullDataset.filter((a) => a.isFree);
+    else base = fullDataset.filter((a) => a.category === activeFilter);
+    return activeSubTag ? base.filter((a) => a.tags.some((t) => t === activeSubTag)) : base;
+  }, [isSearching, activeFilter, activityQuery, fullDataset, featured, activeSubTag]);
 
   // Pagination — reset page whenever the view changes
   const [page, setPage] = useState(1);
@@ -1560,13 +1588,49 @@ export default function ActivitySearch() {
         </div>
 
         {/* ── Category filter strip ── */}
-        <div className="mb-6">
+        <div className="mb-4">
           <CategoryFilter
             active={activeFilter}
             onChange={setActiveFilter}
             counts={counts}
           />
         </div>
+
+        {/* ── Sub-category chips (within a category, hidden in Featured / search mode) ── */}
+        {!isSearching && activeFilter !== "all" && subTagCounts.size > 0 && (
+          <div
+            className="flex gap-2 overflow-x-auto pb-1 mb-4"
+            style={{ scrollbarWidth: "none" } as React.CSSProperties}
+          >
+            <button
+              onClick={() => setActiveSubTag(null)}
+              className={`flex-shrink-0 rounded-full px-3 py-1.5 text-[11px] font-semibold border transition-all ${
+                activeSubTag === null
+                  ? "bg-white/10 text-white border-white/20"
+                  : "bg-white/[0.03] text-white/40 border-white/[0.07] hover:bg-white/[0.06] hover:text-white/65"
+              }`}
+            >
+              All
+            </button>
+            {[...subTagCounts.entries()]
+              .sort((a, b) => b[1] - a[1])
+              .slice(0, 14)
+              .map(([tag, count]) => (
+                <button
+                  key={tag}
+                  onClick={() => setActiveSubTag(activeSubTag === tag ? null : tag)}
+                  className={`flex-shrink-0 rounded-full px-3 py-1.5 text-[11px] font-semibold border transition-all whitespace-nowrap ${
+                    activeSubTag === tag
+                      ? "bg-white/10 text-white border-white/20"
+                      : "bg-white/[0.03] text-white/40 border-white/[0.07] hover:bg-white/[0.06] hover:text-white/65"
+                  }`}
+                >
+                  {tag}
+                  <span className="ml-1.5 text-[10px] opacity-50 tabular-nums">{count.toLocaleString()}</span>
+                </button>
+              ))}
+          </div>
+        )}
 
         {/* ── Result count ── */}
         {result && !loading && (
@@ -1576,7 +1640,11 @@ export default function ActivitySearch() {
                 ? `${viewBase.length.toLocaleString()} ${viewBase.length === 1 ? "result" : "results"} for "${activityQuery}"${city ? ` in ${city}` : ""}`
                 : isFeatured
                   ? `${featured.length} featured experiences in ${city} · ${fullDataset.length.toLocaleString()} total discovered`
-                  : `${viewBase.length.toLocaleString()} ${FILTERS.find((f) => f.id === activeFilter)?.label ?? activeFilter} experience${viewBase.length === 1 ? "" : "s"} found in ${city}`
+                  : activeFilter === "browse_all"
+                    ? `${fullDataset.length.toLocaleString()} total experiences in ${city}${activeSubTag ? ` · filtered to "${activeSubTag}"` : ""}`
+                    : activeSubTag
+                      ? `${viewBase.length.toLocaleString()} "${activeSubTag}" experiences in ${city}`
+                      : `${viewBase.length.toLocaleString()} ${FILTERS.find((f) => f.id === activeFilter)?.label ?? activeFilter} experience${viewBase.length === 1 ? "" : "s"} found in ${city}`
               }
             </p>
             {savedIds.size > 0 && (
