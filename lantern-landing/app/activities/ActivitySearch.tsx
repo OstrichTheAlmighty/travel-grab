@@ -1301,8 +1301,8 @@ const FEATURED_TAG_WEIGHT: Record<string, number> = {
   "Park":             1.2,
 };
 
-// Max share of Featured slots that can go to Food category
-const FOOD_CAP_IN_FEATURED = 0.20;
+// Hard cap on food slots in Featured
+const MAX_FOOD_IN_FEATURED = 5;
 
 function buildFeatured(activities: Activity[], count: number): Activity[] {
   const scored = activities.map((a) => {
@@ -1318,7 +1318,7 @@ function buildFeatured(activities: Activity[], count: number): Activity[] {
 
   scored.sort((a, b) => b.score - a.score);
 
-  const maxFood = Math.ceil(count * FOOD_CAP_IN_FEATURED);
+  const maxFood = MAX_FOOD_IN_FEATURED;
   const result: Activity[] = [];
   let foodCount = 0;
 

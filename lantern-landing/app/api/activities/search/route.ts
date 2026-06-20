@@ -151,10 +151,19 @@ export async function GET(req: NextRequest) {
     if (cached) activity.whyVisit = cached;
   }
 
+  // ── Debug: category breakdown + Featured preview ─────────────────────────
+  const catCounts: Record<string, number> = {};
+  for (const a of activities) catCounts[a.category] = (catCounts[a.category] ?? 0) + 1;
+  const top10 = activities.slice(0, 10).map((a) => `"${a.title}"(${a.category})`).join(", ");
+  const foodInTop30 = activities.slice(0, 30).filter((a) => a.category === "food").length;
   console.log(
     `[activities/search] "${destination}" → ${activities.length} activities ` +
-    `inventoryStatus=${inv.status} inventorySize=${inv.entries.size}`,
+    `inventoryStatus=${inv.status} queries=${inv.queriesCompleted}/${inv.queriesTotal}`,
   );
+  console.log(`[activities/search] categories: ${JSON.stringify(catCounts)}`);
+  console.log(`[activities/search] top-10 by quality: ${top10}`);
+  console.log(`[activities/search] food in raw top-30: ${foodInTop30}`);
+  // ── End debug ─────────────────────────────────────────────────────────────
 
   return NextResponse.json({
     activities,

@@ -52,9 +52,25 @@ interface SearchGroup {
   pages?: number;   // textSearch pages, default 1, max 3
 }
 
+// First 12 entries form the SEED batch — run in parallel, must complete before the
+// initial server response is sent. Keep this batch diverse (all 6 categories) so
+// buildFeatured() has landmark data on first load, not just restaurants.
 export const SEARCH_GROUPS: SearchGroup[] = [
-  // ─── Food (28 groups) ────────────────────────────────────────────────────
-  { query: "restaurant {city}",                category: "food",      limit: 60, pages: 3 },
+  // ─── SEED batch (groups 0-11): diverse, all categories ───────────────────
+  { type: "tourist_attraction",                category: "culture",   limit: 20 },
+  { type: "museum",                            category: "culture",   limit: 20 },
+  { query: "museum {city}",                    category: "culture",   limit: 40, pages: 2, tags: ["Museum"] },
+  { query: "temple {city}",                    category: "culture",   limit: 40, pages: 2, tags: ["Temple"] },
+  { query: "shrine {city}",                    category: "culture",   limit: 40, pages: 2, tags: ["Shrine"] },
+  { type: "art_gallery",                       category: "culture",   limit: 20 },
+  { query: "observation deck {city}",          category: "adventure", limit: 40, pages: 2, tags: ["Views", "Observation Deck"] },
+  { type: "amusement_park",                    category: "adventure", limit: 10,            tags: ["Theme Park", "Family Friendly"] },
+  { type: "park",                              category: "nature",    limit: 20 },
+  { query: "restaurant {city}",               category: "food",      limit: 60, pages: 3 },
+  { query: "bar {city}",                       category: "nightlife", limit: 60, pages: 3 },
+  { query: "luxury restaurant {city}",         category: "luxury",    limit: 40, pages: 2, tags: ["Fine Dining", "Luxury"] },
+
+  // ─── Food (27 groups) ────────────────────────────────────────────────────
   { query: "sushi restaurant {city}",          category: "food",      limit: 60, pages: 3, tags: ["Sushi"] },
   { query: "ramen restaurant {city}",          category: "food",      limit: 60, pages: 3, tags: ["Ramen"] },
   { query: "tonkotsu ramen {city}",            category: "food",      limit: 40, pages: 2, tags: ["Ramen", "Tonkotsu"] },
@@ -83,10 +99,9 @@ export const SEARCH_GROUPS: SearchGroup[] = [
   { query: "vegan restaurant {city}",          category: "food",      limit: 40, pages: 2, tags: ["Vegan", "Vegetarian"] },
   { query: "fine dining restaurant {city}",    category: "food",      limit: 40, pages: 2, tags: ["Fine Dining"] },
 
-  // ─── Nightlife (11 groups) ────────────────────────────────────────────────
+  // ─── Nightlife (10 groups) ────────────────────────────────────────────────
   { type: "bar",                               category: "nightlife", limit: 20 },
   { type: "night_club",                        category: "nightlife", limit: 20 },
-  { query: "bar {city}",                       category: "nightlife", limit: 60, pages: 3 },
   { query: "rooftop bar {city}",               category: "nightlife", limit: 40, pages: 2, tags: ["Rooftop Bar", "Views"] },
   { query: "cocktail bar {city}",              category: "nightlife", limit: 40, pages: 2, tags: ["Cocktail Bar"] },
   { query: "jazz club {city}",                 category: "nightlife", limit: 40, pages: 2, tags: ["Jazz", "Live Music"] },
@@ -96,14 +111,8 @@ export const SEARCH_GROUPS: SearchGroup[] = [
   { query: "wine bar {city}",                  category: "nightlife", limit: 40, pages: 2, tags: ["Wine Bar"] },
   { query: "speakeasy bar {city}",             category: "nightlife", limit: 20, pages: 1, tags: ["Speakeasy", "Cocktail Bar"] },
 
-  // ─── Culture (13 groups) ─────────────────────────────────────────────────
-  { type: "tourist_attraction",                category: "culture",   limit: 20 },
-  { type: "museum",                            category: "culture",   limit: 20 },
-  { type: "art_gallery",                       category: "culture",   limit: 20 },
-  { query: "museum {city}",                    category: "culture",   limit: 40, pages: 2, tags: ["Museum"] },
+  // ─── Culture (7 groups) ──────────────────────────────────────────────────
   { query: "art gallery {city}",               category: "culture",   limit: 40, pages: 2, tags: ["Art Gallery"] },
-  { query: "temple {city}",                    category: "culture",   limit: 40, pages: 2, tags: ["Temple"] },
-  { query: "shrine {city}",                    category: "culture",   limit: 40, pages: 2, tags: ["Shrine"] },
   { query: "historical landmark {city}",       category: "culture",   limit: 40, pages: 2, tags: ["Historical Site"] },
   { query: "traditional market {city}",        category: "culture",   limit: 40, pages: 2, tags: ["Market", "Shopping"] },
   { type: "shopping_mall",                     category: "culture",   limit: 20,            tags: ["Shopping"] },
@@ -111,23 +120,19 @@ export const SEARCH_GROUPS: SearchGroup[] = [
   { query: "garden {city}",                    category: "culture",   limit: 40, pages: 2, tags: ["Garden"] },
   { query: "shopping street {city}",           category: "culture",   limit: 40, pages: 2, tags: ["Shopping"] },
 
-  // ─── Luxury (4 groups) ───────────────────────────────────────────────────
-  { query: "luxury restaurant {city}",         category: "luxury",    limit: 40, pages: 2, tags: ["Fine Dining", "Luxury"] },
+  // ─── Luxury (3 groups) ───────────────────────────────────────────────────
   { query: "Michelin star restaurant {city}",  category: "luxury",    limit: 40, pages: 2, tags: ["Michelin", "Fine Dining"] },
   { query: "luxury spa {city}",                category: "luxury",    limit: 40, pages: 2, tags: ["Spa", "Luxury"] },
   { query: "hotel rooftop bar {city}",         category: "luxury",    limit: 40, pages: 2, tags: ["Rooftop Bar", "Luxury", "Views"] },
 
-  // ─── Adventure (7 groups) ────────────────────────────────────────────────
-  { type: "amusement_park",                    category: "adventure", limit: 10,            tags: ["Theme Park", "Family Friendly"] },
+  // ─── Adventure (5 groups) ────────────────────────────────────────────────
   { type: "zoo",                               category: "adventure", limit:  5,            tags: ["Zoo", "Family Friendly"] },
   { type: "aquarium",                          category: "adventure", limit:  5,            tags: ["Aquarium", "Family Friendly"] },
-  { query: "observation deck {city}",          category: "adventure", limit: 40, pages: 2, tags: ["Views", "Observation Deck"] },
   { query: "escape room {city}",               category: "adventure", limit: 20, pages: 1, tags: ["Escape Room"] },
   { query: "activity {city}",                  category: "adventure", limit: 40, pages: 2 },
   { query: "tour {city}",                      category: "adventure", limit: 40, pages: 2, tags: ["Guided Tour"] },
 
-  // ─── Nature (5 groups) ───────────────────────────────────────────────────
-  { type: "park",                              category: "nature",    limit: 20 },
+  // ─── Nature (4 groups) ───────────────────────────────────────────────────
   { query: "park {city}",                      category: "nature",    limit: 40, pages: 2 },
   { query: "botanical garden {city}",          category: "nature",    limit: 40, pages: 2, tags: ["Garden", "Botanical Garden"] },
   { query: "nature walk {city}",               category: "nature",    limit: 20, pages: 1, tags: ["Nature", "Walking"] },
@@ -666,12 +671,12 @@ export async function getOrCreateInventory(
   const knownKey = destinationToKey.get(rawKey);
   if (knownKey) {
     const inv = inventoryStore.get(knownKey);
-    if (inv && inv.entries.size > 0) return inv;
-    // Inventory exists but empty (build just started) — fall through to wait
+    if (inv && inv.queriesCompleted >= 12) return inv;
+    // Inventory exists but seed batch not yet done — fall through to wait
     if (inv) {
       const deadline = Date.now() + waitMs;
-      while (inv.entries.size === 0 && Date.now() < deadline) {
-        await new Promise<void>((r) => setTimeout(r, 500));
+      while (inv.queriesCompleted < Math.min(12, inv.queriesTotal) && Date.now() < deadline) {
+        await new Promise<void>((r) => setTimeout(r, 300));
       }
       return inv;
     }
@@ -687,10 +692,10 @@ export async function getOrCreateInventory(
   // Another request might have created it while we were geocoding
   const existing = inventoryStore.get(cityKey);
   if (existing) {
-    if (existing.entries.size > 0) return existing;
+    if (existing.queriesCompleted >= 12) return existing;
     const deadline = Date.now() + waitMs;
-    while (existing.entries.size === 0 && Date.now() < deadline) {
-      await new Promise<void>((r) => setTimeout(r, 500));
+    while (existing.queriesCompleted < Math.min(12, existing.queriesTotal) && Date.now() < deadline) {
+      await new Promise<void>((r) => setTimeout(r, 300));
     }
     return existing;
   }
@@ -712,10 +717,11 @@ export async function getOrCreateInventory(
     inv.status = "ready";  // unblock clients even on error
   });
 
-  // Wait for the first batch to populate
+  // Wait for the seed batch (first 12 queries) to complete before returning.
+  // This ensures the initial response has diverse culture/adventure/nature results.
   const deadline = Date.now() + waitMs;
-  while (inv.entries.size === 0 && Date.now() < deadline) {
-    await new Promise<void>((r) => setTimeout(r, 500));
+  while (inv.queriesCompleted < Math.min(12, inv.queriesTotal) && Date.now() < deadline) {
+    await new Promise<void>((r) => setTimeout(r, 300));
   }
 
   return inv;
