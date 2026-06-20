@@ -1745,6 +1745,7 @@ export default function ActivitySearch() {
   const [activeFilter,       setActiveFilter]       = useState<FilterId>("all");
   const [activeSubTag,       setActiveSubTag]       = useState<string | null>(null);
   const [savedIds,           setSavedIds]           = useState<Set<string>>(new Set());
+  const [savedMeta,          setSavedMeta]          = useState<Record<string, { title: string; category: string; neighborhood: string; duration: string; rating: number; photoRef?: string }>>({});
   const [showItineraryModal, setShowItineraryModal] = useState(false);
   const [loading,            setLoading]            = useState(false);
   const [error,              setError]              = useState<string | null>(null);
@@ -1759,11 +1760,13 @@ export default function ActivitySearch() {
   const detailsCache  = useRef(new Map<string, PlaceDetail>());
   const insightsCache = useRef(new Map<string, ReviewInsights | null>());
 
-  // Persist saved IDs to localStorage
+  // Persist saved IDs + metadata to localStorage
   useEffect(() => {
     try {
       const stored = localStorage.getItem("travelgrab:saved-activities");
       if (stored) setSavedIds(new Set(JSON.parse(stored) as string[]));
+      const storedMeta = localStorage.getItem("travelgrab:saved-activities-data");
+      if (storedMeta) setSavedMeta(JSON.parse(storedMeta));
     } catch { /* ignore parse errors */ }
   }, []);
 
@@ -1772,6 +1775,12 @@ export default function ActivitySearch() {
       localStorage.setItem("travelgrab:saved-activities", JSON.stringify([...savedIds]));
     } catch { /* ignore quota errors */ }
   }, [savedIds]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("travelgrab:saved-activities-data", JSON.stringify(savedMeta));
+    } catch { /* ignore quota errors */ }
+  }, [savedMeta]);
 
   // Client-side cache keyed by lowercased destination — cleared when inventory finishes building
   const clientCache = useRef(new Map<string, SearchResult>());
@@ -1865,15 +1874,27 @@ export default function ActivitySearch() {
     if (dest) fetchActivities(dest);
   }
 
-  function toggleSave(id: string) {
+  function toggleSave(activity: Activity) {
+    const id = activity.id;
     setSavedIds((prev) => {
       const next = new Set(prev);
       if (next.has(id)) {
         next.delete(id);
-        // If we just removed the last saved item, leave the saved filter gracefully
         if (next.size === 0 && activeFilter === "saved") setActiveFilter("all");
+        setSavedMeta((m) => { const u = { ...m }; delete u[id]; return u; });
       } else {
         next.add(id);
+        setSavedMeta((m) => ({
+          ...m,
+          [id]: {
+            title:        activity.title,
+            category:     activity.category,
+            neighborhood: activity.neighborhood,
+            duration:     activity.duration,
+            rating:       activity.rating,
+            photoRef:     activity.photoRef,
+          },
+        }));
       }
       return next;
     });
@@ -2202,7 +2223,7 @@ export default function ActivitySearch() {
                 key={activity.id}
                 activity={activity}
                 saved={savedIds.has(activity.id)}
-                onToggleSave={() => toggleSave(activity.id)}
+                onToggleSave={() => toggleSave(activity)}
                 onViewDetails={() => openDetails(activity)}
               />
             ))
