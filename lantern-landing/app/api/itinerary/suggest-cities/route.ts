@@ -21,15 +21,19 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json() as {
-    region:       string;
-    travelStyle:  TravelStyle | null;
-    durationDays: number;
-    firstTime:    boolean | null;
+    region:        string;
+    travelStyles:  TravelStyle[];
+    durationDays:  number;
+    firstTime:     boolean | null;
   };
 
-  const { region, travelStyle, durationDays, firstTime } = body;
+  const { region, travelStyles, durationDays, firstTime } = body;
   const days = Math.max(1, Math.min(60, durationDays || 7));
-  const styleLabel = travelStyle ? STYLE_LABELS[travelStyle] : "general interest";
+
+  const styleLabel = travelStyles.length > 0
+    ? travelStyles.map((s) => STYLE_LABELS[s]).join(", ")
+    : "general interest";
+
   const firstTimeStr =
     firstTime === true  ? " It's their first visit to this destination." :
     firstTime === false ? " They've been before and want something beyond the tourist trail." :
@@ -52,7 +56,7 @@ Rules:
 - Each city must be specific (e.g. "Kyoto, Japan" not just "Japan")
 - If the input is already a specific city, return just that one city with all ${days} days
 - For countries/regions, suggest 2–5 cities that form a logical travel route (minimize backtracking)
-- Prioritize the most iconic or style-appropriate cities for the given travel style`;
+- Weight city selection toward the stated travel styles`;
 
   try {
     const resp = await fetch("https://api.openai.com/v1/chat/completions", {

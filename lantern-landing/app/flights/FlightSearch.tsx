@@ -2152,18 +2152,23 @@ export default function FlightSearch() {
     } catch { /* ignore */ }
   }, []);
 
-  // Pre-fill departure/return dates from shared trip store
+  // Trip context banner state
+  const [tripContext, setTripContext] = useState<{ destination: string; startDate: string; endDate: string } | null>(null);
+
+  // Pre-fill departure/return dates from canonical trip store and show context banner
   useEffect(() => {
     try {
       const trip = readTripStore();
-      if (!trip || !trip.startDate) return;
+      if (!trip || !trip.startDate || trip.cityStops.length === 0) return;
       if (!departureDate) setDepartureDate(trip.startDate);
-      if (!returnDate && trip.cityStops.length > 0) {
-        const totalDays = trip.cityStops.reduce((s, c) => s + (c.days || 0), 0);
-        const ret = new Date(trip.startDate + "T00:00:00");
-        ret.setDate(ret.getDate() + Math.max(1, totalDays));
-        setReturnDate(ret.toISOString().slice(0, 10));
-      }
+      const totalDays = trip.cityStops.reduce((s, c) => s + (c.days || 0), 0);
+      const retDate = new Date(trip.startDate + "T00:00:00");
+      retDate.setDate(retDate.getDate() + Math.max(1, totalDays));
+      const retIso = retDate.toISOString().slice(0, 10);
+      if (!returnDate) setReturnDate(retIso);
+      // Show context banner showing where the trip is going
+      const dest = trip.destinationRegion || trip.cityStops.map(c => c.city).join(" → ");
+      if (dest) setTripContext({ destination: dest, startDate: trip.startDate, endDate: retIso });
     } catch { /* ignore */ }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -2298,6 +2303,24 @@ export default function FlightSearch() {
             TravelGrab checks nearby airports automatically and ranks flights by comfort, timing, and value.
           </p>
         </div>
+
+        {/* Trip context banner */}
+        {tripContext && (
+          <div className="max-w-3xl mx-auto mb-4 rounded-xl border border-lantern-violet/20 bg-lantern-violet/[0.06] px-4 py-3 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3 min-w-0">
+              <span className="text-lantern-violet text-sm">✦</span>
+              <div className="min-w-0">
+                <p className="text-xs font-semibold text-white truncate">Trip to {tripContext.destination}</p>
+                <p className="text-[11px] text-white/40 mt-0.5">
+                  Dates pre-filled from your trip plan · {new Date(tripContext.startDate + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })}–{new Date(tripContext.endDate + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                </p>
+              </div>
+            </div>
+            <Link href="/itinerary" className="shrink-0 text-[11px] text-lantern-violet/60 hover:text-lantern-violet transition-colors whitespace-nowrap">
+              Edit trip →
+            </Link>
+          </div>
+        )}
 
         {/* Search panel */}
         <div className="max-w-3xl mx-auto rounded-2xl border border-white/[0.09] bg-white/[0.03] p-5 sm:p-6 mb-4 shadow-card">

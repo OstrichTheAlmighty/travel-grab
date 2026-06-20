@@ -6,10 +6,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { PlannerOutput, PlannedDay, PlannedSlot } from "@/lib/itinerary/types";
 import {
-  readTripStore, writeTripStore, updateTripStore,
+  readTripStore, writeTripStore, updateTripStore, clearTripStore,
   TRAVEL_STYLE_LABELS, TRIP_STORE_DEFAULT,
 } from "@/lib/trip-store";
-import type { TravelStyle, TripStoreV2 } from "@/lib/trip-store";
+import type { TravelStyle } from "@/lib/trip-store";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -645,13 +645,13 @@ export default function ItineraryPlanner() {
   const [obStart,     setObStart]     = useState("");
   const [obDuration,  setObDuration]  = useState(7);
   const [obFirstTime, setObFirstTime] = useState<boolean | null>(null);
-  const [obStyle,     setObStyle]     = useState<TravelStyle | null>(null);
+  const [obStyles,    setObStyles]    = useState<TravelStyle[]>([]);
   const [obCities,    setObCities]    = useState<{ city: string; days: number; why: string }[]>([]);
   const [obSummary,   setObSummary]   = useState("");
   const [obLoading,   setObLoading]   = useState(false);
   const [obError,     setObError]     = useState<string | null>(null);
 
-  // Track whether metadata (destinationRegion, style, firstTime) loaded from v2 store
+  // Tracks destinationRegion for display in the summary banner
   const obDestRef = useRef("");
 
   // ── Load from localStorage on mount ──
@@ -682,19 +682,22 @@ export default function ItineraryPlanner() {
           itinerary:            v2.itinerary,
           itineraryGeneratedAt: v2.itineraryGeneratedAt,
         });
-        if (v2.selectedFlight)      setSelectedFlight(v2.selectedFlight);
+        if (v2.selectedFlight) setSelectedFlight(v2.selectedFlight);
         else {
           const fs = localStorage.getItem(FLIGHT_KEY);
           if (fs) setSelectedFlight(JSON.parse(fs) as SelectedFlight);
         }
-        if (v2.selectedHotel)       setSelectedHotel(v2.selectedHotel);
+        // selectedHotels is now a per-city map; use first city's hotel for display
+        const firstCity = v2.cityStops[0]?.city ?? "";
+        const firstHotel = v2.selectedHotels?.[firstCity] ?? null;
+        if (firstHotel) setSelectedHotel(firstHotel);
         else {
           const hs = localStorage.getItem(HOTEL_KEY);
           if (hs) setSelectedHotel(JSON.parse(hs) as SelectedHotel);
         }
-        if (v2.destinationRegion)   { setObDest(v2.destinationRegion); obDestRef.current = v2.destinationRegion; }
-        if (v2.travelStyle)         setObStyle(v2.travelStyle);
-        if (v2.firstTime !== null)  setObFirstTime(v2.firstTime);
+        if (v2.destinationRegion) { setObDest(v2.destinationRegion); obDestRef.current = v2.destinationRegion; }
+        if (v2.travelStyles?.length) setObStyles(v2.travelStyles);
+        if (v2.firstTime !== null)   setObFirstTime(v2.firstTime);
         setObStep("done");
         setHydrated(true);
         return;
@@ -730,10 +733,17 @@ export default function ItineraryPlanner() {
     const timer = setTimeout(() => {
       try {
         localStorage.setItem(TRIP_KEY, JSON.stringify(trip));
-        // Also sync to the shared v2 store so other pages can read the latest
+        // Sync to canonical trip store so Flights/Hotels/Activities can read it
+        const primaryCity = trip.cities[0]?.city ?? "";
+        const existing = readTripStore();
+        const existingHotels = existing?.selectedHotels ?? {};
+        const updatedHotels = selectedHotel
+          ? { ...existingHotels, [primaryCity]: selectedHotel }
+          : existingHotels;
         updateTripStore({
           cityStops:            trip.cities,
           startDate:            trip.startDate,
+          tripLength:           trip.cities.reduce((s, c) => s + (c.days || 0), 0),
           manualArrivalTime:    trip.manualArrivalTime,
           manualDepartureTime:  trip.manualDepartureTime,
           manualHotelName:      trip.manualHotelName,
@@ -744,16 +754,22 @@ export default function ItineraryPlanner() {
           excludedActivityIds:  trip.excludedActivityIds,
           itinerary:            trip.itinerary,
           itineraryGeneratedAt: trip.itineraryGeneratedAt,
-          destinationRegion:    obDestRef.current || trip.cities[0]?.city || "",
-          travelStyle:          obStyle,
+          destinationRegion:    obDestRef.current || primaryCity,
+          travelStyles:         obStyles,
           firstTime:            obFirstTime,
           selectedFlight:       selectedFlight ?? null,
-          selectedHotel:        selectedHotel  ?? null,
+          selectedHotels:       updatedHotels,
         });
       } catch { /* ignore */ }
     }, 400);
     return () => clearTimeout(timer);
-  }, [trip, hydrated, obStep, obStyle, obFirstTime, selectedFlight, selectedHotel]);
+  }, [trip, hydrated, obStep, obStyles, obFirstTime, selectedFlight, selectedHotel]);
+
+  // ── Sync saved activities to canonical trip store ──
+  useEffect(() => {
+    if (!hydrated) return;
+    updateTripStore({ savedActivities: savedIds });
+  }, [savedIds, hydrated]);
 
   // ── Helpers ──
   function updateTrip(patch: Partial<TripStorage>) {
@@ -787,12 +803,18 @@ export default function ItineraryPlanner() {
 
   function clearHotel() {
     setSelectedHotel(null);
-    try { localStorage.removeItem(HOTEL_KEY); } catch { /* ignore */ }
+    try {
+      localStorage.removeItem(HOTEL_KEY);
+      updateTripStore({ selectedHotels: {} });
+    } catch { /* ignore */ }
   }
 
   function clearFlight() {
     setSelectedFlight(null);
-    try { localStorage.removeItem(FLIGHT_KEY); } catch { /* ignore */ }
+    try {
+      localStorage.removeItem(FLIGHT_KEY);
+      updateTripStore({ selectedFlight: null });
+    } catch { /* ignore */ }
   }
 
   function saveTrip() {
@@ -812,10 +834,43 @@ export default function ItineraryPlanner() {
     try { localStorage.removeItem(TRIP_KEY); } catch { /* ignore */ }
   }
 
+  function startNewTrip() {
+    clearTrip();
+    setSelectedHotel(null);
+    setSelectedFlight(null);
+    setObDest("");
+    setObStart("");
+    setObDuration(7);
+    setObFirstTime(null);
+    setObStyles([]);
+    setObCities([]);
+    setObSummary("");
+    setObError(null);
+    obDestRef.current = "";
+    clearTripStore();
+    setObStep("destination");
+  }
+
+  function clearSavedPlaces() {
+    setSavedIds([]);
+    setSavedMeta({});
+    try {
+      localStorage.removeItem("travelgrab:saved-activities");
+      localStorage.removeItem("travelgrab:saved-activities-data");
+    } catch { /* ignore */ }
+    updateTripStore({ savedActivities: [] });
+  }
+
   function startOnboarding() {
     setObStep("destination");
     setObError(null);
     setObCities([]);
+  }
+
+  function toggleObStyle(style: TravelStyle) {
+    setObStyles((prev) =>
+      prev.includes(style) ? prev.filter((s) => s !== style) : [...prev, style]
+    );
   }
 
   async function suggestCities() {
@@ -827,7 +882,7 @@ export default function ItineraryPlanner() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           region:       obDest.trim(),
-          travelStyle:  obStyle,
+          travelStyles: obStyles,
           durationDays: obDuration,
           firstTime:    obFirstTime,
         }),
@@ -853,19 +908,22 @@ export default function ItineraryPlanner() {
   function finishOnboarding() {
     const cities = obCities.map(({ city, days }) => ({ city, days }));
     const startDate = obStart || tomorrowIso();
+    const tripLength = cities.reduce((s, c) => s + (c.days || 0), 0);
     updateTrip({ cities, startDate });
     obDestRef.current = obDest;
+    // Write immediately to canonical store so other pages get it right away
     writeTripStore({
       ...TRIP_STORE_DEFAULT,
-      destinationRegion:    obDest,
-      cityStops:            cities,
+      destinationRegion: obDest,
+      cityStops:         cities,
       startDate,
-      travelStyle:          obStyle,
-      firstTime:            obFirstTime,
-      wakeTime:             trip.wakeTime,
-      bedTime:              trip.bedTime,
-      pace:                 trip.pace,
-      transit:              trip.transit,
+      tripLength,
+      travelStyles:      obStyles,
+      firstTime:         obFirstTime,
+      wakeTime:          trip.wakeTime,
+      bedTime:           trip.bedTime,
+      pace:              trip.pace,
+      transit:           trip.transit,
     });
     setObStep("done");
   }
@@ -1085,7 +1143,7 @@ export default function ItineraryPlanner() {
             <div className="space-y-6">
               <div>
                 <h1 className="text-3xl font-bold text-white mb-2">How do you travel?</h1>
-                <p className="text-sm text-white/40">We&apos;ll use this to suggest the right cities and plan your days.</p>
+                <p className="text-sm text-white/40">Select all that apply. We&apos;ll use this to suggest cities and activities.</p>
               </div>
               <div>
                 <p className="text-xs text-white/40 mb-3">First time visiting {obDest}?</p>
@@ -1094,7 +1152,7 @@ export default function ItineraryPlanner() {
                     <button
                       key={String(v)}
                       type="button"
-                      onClick={() => setObFirstTime(v)}
+                      onClick={() => setObFirstTime(obFirstTime === v ? null : v)}
                       className={`rounded-xl border py-2.5 text-sm font-medium transition-colors ${
                         obFirstTime === v
                           ? "border-lantern-mint/50 bg-lantern-mint/10 text-lantern-mint"
@@ -1107,22 +1165,25 @@ export default function ItineraryPlanner() {
                 </div>
               </div>
               <div>
-                <p className="text-xs text-white/40 mb-3">Travel style</p>
+                <p className="text-xs text-white/40 mb-3">Travel style <span className="text-white/25">(pick all that apply)</span></p>
                 <div className="grid grid-cols-2 gap-2">
-                  {(Object.entries(TRAVEL_STYLE_LABELS) as [TravelStyle, string][]).map(([key, label]) => (
-                    <button
-                      key={key}
-                      type="button"
-                      onClick={() => setObStyle(key)}
-                      className={`rounded-xl border px-3 py-2.5 text-sm font-medium text-left transition-colors ${
-                        obStyle === key
-                          ? "border-lantern-mint/50 bg-lantern-mint/10 text-lantern-mint"
-                          : "border-white/[0.08] bg-white/[0.02] text-white/50 hover:text-white/80"
-                      }`}
-                    >
-                      {label}
-                    </button>
-                  ))}
+                  {(Object.entries(TRAVEL_STYLE_LABELS) as [TravelStyle, string][]).map(([key, label]) => {
+                    const selected = obStyles.includes(key);
+                    return (
+                      <button
+                        key={key}
+                        type="button"
+                        onClick={() => toggleObStyle(key)}
+                        className={`rounded-xl border px-3 py-2.5 text-sm font-medium text-left transition-colors ${
+                          selected
+                            ? "border-lantern-mint/50 bg-lantern-mint/10 text-lantern-mint"
+                            : "border-white/[0.08] bg-white/[0.02] text-white/50 hover:text-white/80"
+                        }`}
+                      >
+                        {label}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
               {obError && <p className="text-xs text-red-400">{obError}</p>}
@@ -1132,13 +1193,15 @@ export default function ItineraryPlanner() {
                 </button>
                 <button
                   type="button"
-                  disabled={obLoading}
+                  disabled={obStyles.length === 0 || obLoading}
                   onClick={() => void suggestCities()}
-                  className="flex-[2] h-12 rounded-full bg-gradient-to-r from-lantern-mint to-lantern-blue text-ink text-sm font-bold transition hover:opacity-90 disabled:opacity-50 inline-flex items-center justify-center gap-2"
+                  className="flex-[2] h-12 rounded-full bg-gradient-to-r from-lantern-mint to-lantern-blue text-ink text-sm font-bold transition hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
                 >
                   {obLoading ? (
                     <><span className="h-3.5 w-3.5 rounded-full border-2 border-ink/40 border-t-ink animate-spin" /> Planning…</>
-                  ) : "Build my trip →"}
+                  ) : (
+                    obStyles.length === 0 ? "Select a travel style to continue" : "Build my trip →"
+                  )}
                 </button>
               </div>
             </div>
@@ -1190,7 +1253,7 @@ export default function ItineraryPlanner() {
               </div>
               <div className="flex gap-3">
                 <button type="button" onClick={() => setObStep("style")} className="flex-1 h-12 rounded-full border border-white/[0.1] text-sm text-white/50 hover:text-white/80 transition-colors">
-                  Back
+                  Edit answers
                 </button>
                 <button
                   type="button"
@@ -1198,7 +1261,7 @@ export default function ItineraryPlanner() {
                   onClick={finishOnboarding}
                   className="flex-[2] h-12 rounded-full bg-gradient-to-r from-lantern-mint to-lantern-blue text-ink text-sm font-bold transition hover:opacity-90 disabled:opacity-40"
                 >
-                  Start planning →
+                  Save trip &amp; build itinerary →
                 </button>
               </div>
             </div>
@@ -1215,25 +1278,48 @@ export default function ItineraryPlanner() {
 
           {/* ── Trip summary banner ── */}
           {(obDestRef.current || trip.cities[0]?.city) && (
-            <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] px-4 py-3 flex items-center justify-between gap-3">
-              <div className="min-w-0">
-                <p className="text-xs font-semibold text-white truncate">
-                  {obDestRef.current || trip.cities.map(c=>c.city).filter(Boolean).join(", ")}
-                </p>
-                <p className="text-[11px] text-white/35 mt-0.5">
-                  {[
-                    obStyle ? TRAVEL_STYLE_LABELS[obStyle] : null,
-                    obFirstTime === true ? "First visit" : obFirstTime === false ? "Been before" : null,
-                  ].filter(Boolean).join(" · ")}
-                </p>
+            <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] px-4 py-3 space-y-2">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold text-white truncate">
+                    {obDestRef.current || trip.cities.map(c=>c.city).filter(Boolean).join(" → ")}
+                  </p>
+                  <p className="text-[11px] text-white/35 mt-0.5">
+                    {[
+                      obStyles.length > 0 ? obStyles.map(s => TRAVEL_STYLE_LABELS[s]).join(", ") : null,
+                      obFirstTime === true ? "First visit" : obFirstTime === false ? "Been before" : null,
+                    ].filter(Boolean).join(" · ")}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={startOnboarding}
+                  className="shrink-0 text-[11px] text-white/35 hover:text-lantern-mint transition-colors"
+                >
+                  Edit trip
+                </button>
               </div>
-              <button
-                type="button"
-                onClick={startOnboarding}
-                className="shrink-0 text-[11px] text-white/35 hover:text-lantern-mint transition-colors"
-              >
-                Edit trip
-              </button>
+              <div className="flex gap-3 pt-0.5">
+                <button
+                  type="button"
+                  onClick={startNewTrip}
+                  className="text-[11px] text-white/25 hover:text-red-400 transition-colors"
+                >
+                  Start new trip
+                </button>
+                {savedIds.length > 0 && (
+                  <>
+                    <span className="text-white/10">·</span>
+                    <button
+                      type="button"
+                      onClick={clearSavedPlaces}
+                      className="text-[11px] text-white/25 hover:text-red-400 transition-colors"
+                    >
+                      Clear saved places
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
           )}
 

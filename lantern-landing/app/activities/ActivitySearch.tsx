@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useRef, useEffect, useCallback } from "react";
-import { readTripStore } from "@/lib/trip-store";
+import { readTripStore, updateTripStore } from "@/lib/trip-store";
 import Link from "next/link";
 import type { Activity, Badge, Category } from "./data/types";
 
@@ -1783,7 +1783,9 @@ export default function ActivitySearch() {
 
   useEffect(() => {
     try {
-      localStorage.setItem("travelgrab:saved-activities", JSON.stringify([...savedIds]));
+      const arr = [...savedIds];
+      localStorage.setItem("travelgrab:saved-activities", JSON.stringify(arr));
+      updateTripStore({ savedActivities: arr });
     } catch { /* ignore quota errors */ }
   }, [savedIds]);
 

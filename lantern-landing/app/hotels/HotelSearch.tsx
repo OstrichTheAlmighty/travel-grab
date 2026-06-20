@@ -4827,6 +4827,7 @@ export default function HotelSearch() {
   const [viewMode,            setViewMode]            = useState<"list" | "map">("list");
   const [selectedHotelId,     setSelectedHotelId]     = useState<string | null>(null);
   const [hoveredHotelId,      setHoveredHotelId]      = useState<string | null>(null);
+  const [tripBannerDest,      setTripBannerDest]      = useState<string | null>(null);
   const [detailHotelId,       setDetailHotelId]       = useState<string | null>(null);
   const [compareIds,          setCompareIds]          = useState<string[]>([]);
   const [comparePanelOpen,    setComparePanelOpen]    = useState(false);
@@ -4859,22 +4860,28 @@ export default function HotelSearch() {
     } catch { /* ignore */ }
   }, []);
 
-  // Pre-fill destination and dates from shared trip store
+  // Pre-fill destination and dates from canonical trip store
   useEffect(() => {
     try {
       const trip = readTripStore();
       if (!trip || trip.cityStops.length === 0) return;
-      const primaryCity = trip.cityStops[0].city;
-      if (primaryCity) {
-        setDestination(primaryCity);
-        setSelectedPlace({ text: primaryCity.split(",")[0].trim(), secondary: primaryCity, label: primaryCity });
+      const firstStop = trip.cityStops[0];
+      if (firstStop.city) {
+        setDestination(firstStop.city);
+        setSelectedPlace({
+          text:      firstStop.city.split(",")[0].trim(),
+          secondary: firstStop.city,
+          label:     firstStop.city,
+        });
+        const bannerDest = trip.destinationRegion || trip.cityStops.map(c => c.city).join(" → ");
+        setTripBannerDest(bannerDest);
       }
       if (trip.startDate) {
         setCheckIn(trip.startDate);
-        // Compute checkout from total days across all city stops
-        const totalDays = trip.cityStops.reduce((s, c) => s + (c.days || 0), 0);
+        // Checkout = end of first city stop only (not total trip length)
+        const firstCityDays = Math.max(1, firstStop.days || 1);
         const checkout = new Date(trip.startDate + "T00:00:00");
-        checkout.setDate(checkout.getDate() + Math.max(1, totalDays));
+        checkout.setDate(checkout.getDate() + firstCityDays);
         setCheckOut(checkout.toISOString().slice(0, 10));
       }
     } catch { /* ignore */ }
@@ -5145,6 +5152,22 @@ export default function HotelSearch() {
             Tell us the kind of area you want and we'll rank hotels by neighborhood fit, reviews, and value — not commission rates.
           </p>
         </div>
+
+        {/* Trip context banner — shown when a trip plan exists */}
+        {tripBannerDest && (
+          <div className="max-w-3xl mx-auto mb-4 rounded-xl border border-lantern-violet/20 bg-lantern-violet/[0.06] px-4 py-3 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3 min-w-0">
+              <span className="text-lantern-violet text-sm">✦</span>
+              <div className="min-w-0">
+                <p className="text-xs font-semibold text-white truncate">Trip to {tripBannerDest}</p>
+                <p className="text-[11px] text-white/40 mt-0.5">City and dates pre-filled from your trip plan</p>
+              </div>
+            </div>
+            <Link href="/itinerary" className="shrink-0 text-[11px] text-lantern-violet/60 hover:text-lantern-violet transition-colors whitespace-nowrap">
+              Edit trip →
+            </Link>
+          </div>
+        )}
 
         {/* ── Search panel ─────────────────────────────────────────────────── */}
         <div className="max-w-3xl mx-auto rounded-2xl border border-white/[0.09] bg-white/[0.03] p-5 sm:p-6 mb-4 shadow-card">
@@ -5756,7 +5779,14 @@ export default function HotelSearch() {
                               try {
                                 localStorage.setItem("travelgrab_selected_hotel_v1", JSON.stringify(data));
                                 setItineraryHotelId(offer.hotel_id);
-                                updateTripStore({ selectedHotel: data });
+                                // Save under the city key so the itinerary can look it up by city
+                                const tripStore = readTripStore();
+                                const cityKey = tripStore?.cityStops[0]?.city ?? destination;
+                                const updatedHotels = {
+                                  ...(tripStore?.selectedHotels ?? {}),
+                                  [cityKey]: data,
+                                };
+                                updateTripStore({ selectedHotels: updatedHotels });
                               } catch { /* ignore */ }
                             }}
                           />
