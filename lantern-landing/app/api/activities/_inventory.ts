@@ -214,7 +214,8 @@ export interface InventoryEntry {
   place: GooglePlace;
   category: Category;
   tags: string[];
-  whyVisit?: string;  // cached AI text — avoids regenerating on every request
+  querySources: string[];  // which search queries found this place (e.g. ["ramen restaurant", "restaurant"])
+  whyVisit?: string;       // cached AI text — avoids regenerating on every request
 }
 
 export interface CityInventory {
@@ -417,10 +418,24 @@ export function mapToActivity(
   const neighborhood = extractNeighborhood(place, city);
   const badges      = generateBadges(place);
 
-  const finalCategory: Category =
+  let finalCategory: Category =
     badges.includes("hidden_gem") && !["food", "nightlife", "luxury"].includes(category)
       ? "hidden_gems"
       : category;
+
+  // Dynamically upgrade very expensive food places to luxury.
+  // Omakase, Michelin, etc. found via generic food queries still end up in the right bucket.
+  if (finalCategory === "food" && place.priceLevel === "PRICE_LEVEL_VERY_EXPENSIVE") {
+    finalCategory = "luxury";
+  }
+
+  // Infer free admission for public parks, shrines, and temples that lack a price level.
+  // (Google sometimes returns undefined priceLevel for paid-entry temples, so we only add
+  // the badge when the type strongly implies free public access.)
+  const freeByType = new Set(["park", "natural_feature"]);
+  if (!badges.includes("free") && place.priceLevel === undefined) {
+    if (types.some((t) => freeByType.has(t))) badges.push("free");
+  }
 
   return {
     id:           place.id,
@@ -624,21 +639,38 @@ const CATEGORY_SPECIFICITY: Record<Category, number> = {
   hidden_gems:  0,  // never set directly; derived by mapToActivity from badge
 };
 
-function upsertEntry(inv: CityInventory, place: GooglePlace, category: Category, tags: string[]): void {
+// Derive a human-readable keyword from a SearchGroup for querySources tracking.
+// "ramen restaurant {city}" → "ramen restaurant"
+// type "tourist_attraction" → "tourist attraction"
+function deriveSource(g: { type?: string; query?: string }): string {
+  if (g.type)  return g.type.replace(/_/g, " ");
+  if (g.query) return g.query.replace(/\s*\{city\}/g, "").trim().toLowerCase();
+  return "unknown";
+}
+
+function upsertEntry(
+  inv: CityInventory,
+  place: GooglePlace,
+  category: Category,
+  tags: string[],
+  source: string,
+): void {
   if (inv.entries.has(place.id)) {
     const entry = inv.entries.get(place.id)!;
     // Merge tags
     for (const tag of tags) {
       if (!entry.tags.includes(tag)) entry.tags.push(tag);
     }
+    // Track every query that found this place
+    if (!entry.querySources.includes(source)) entry.querySources.push(source);
     // Allow a more-specific category to override.
-    // This prevents tourist_attraction (fast nearbySearch → "culture") from permanently
+    // Prevents tourist_attraction (fast nearbySearch → "culture") from permanently
     // claiming restaurants/bars/parks before the specific food/nightlife/nature queries finish.
     if ((CATEGORY_SPECIFICITY[category] ?? 0) > (CATEGORY_SPECIFICITY[entry.category] ?? 0)) {
       entry.category = category;
     }
   } else {
-    inv.entries.set(place.id, { place, category, tags: [...tags] });
+    inv.entries.set(place.id, { place, category, tags: [...tags], querySources: [source] });
   }
 }
 
@@ -658,6 +690,7 @@ export async function buildInventoryBatched(inv: CityInventory, apiKey: string):
     const batch = SEARCH_GROUPS.slice(i, i + BATCH);
 
     await Promise.all(batch.map(async (g) => {
+      const source = deriveSource(g);
       try {
         let places: GooglePlace[];
         if (g.type) {
@@ -670,11 +703,11 @@ export async function buildInventoryBatched(inv: CityInventory, apiKey: string):
         }
         for (const place of places) {
           if (shouldInclude(place, inv.viewport)) {
-            upsertEntry(inv, place, g.category, g.tags ?? []);
+            upsertEntry(inv, place, g.category, g.tags ?? [], source);
           }
         }
       } catch (err) {
-        console.warn(`[inventory/build] query error:`, err);
+        console.warn(`[inventory/build] query="${source}" error:`, err);
       } finally {
         inv.queriesCompleted++;
       }
@@ -779,6 +812,7 @@ export function convertInventoryToActivities(inv: CityInventory): Activity[] {
   for (const entry of inv.entries.values()) {
     const activity = mapToActivity(entry.place, entry.category, inv.city, entry.tags);
     if (entry.whyVisit) activity.whyVisit = entry.whyVisit;
+    activity.querySources = entry.querySources;
     activities.push(activity);
   }
 

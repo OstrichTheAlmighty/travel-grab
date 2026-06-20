@@ -153,7 +153,6 @@ export async function GET(req: NextRequest) {
 
   // ── Debug ────────────────────────────────────────────────────────────────
   const totalIndexed   = inv.entries.size;
-  const featuredCount  = activities.filter((a) => a.category !== "food").length; // rough proxy
   const foodCount      = activities.filter((a) => a.category === "food").length;
   const cultureCount   = activities.filter((a) => a.category === "culture").length;
   const nightlifeCount = activities.filter((a) => a.category === "nightlife").length;
@@ -161,6 +160,7 @@ export async function GET(req: NextRequest) {
   const natureCount    = activities.filter((a) => a.category === "nature").length;
   const luxuryCount    = activities.filter((a) => a.category === "luxury").length;
   const hiddenGemCount = activities.filter((a) => a.category === "hidden_gems").length;
+  const featuredCount  = cultureCount + adventureCount + natureCount + luxuryCount + hiddenGemCount;
   console.log({
     totalIndexed,
     featuredCount,
@@ -175,6 +175,14 @@ export async function GET(req: NextRequest) {
     queriesTotal:     inv.queriesTotal,
     inventoryStatus:  inv.status,
   });
+  const first20Indexed = activities.slice(0, 20)
+    .map((a) => `${a.title} [${a.category}] src:${(a.querySources ?? []).join(",")}`)
+    .join("\n  ");
+  const first20Food = activities.filter((a) => a.category === "food").slice(0, 20)
+    .map((a) => `${a.title} | tags:${a.tags.join(",")} | src:${(a.querySources ?? []).join(",")}`)
+    .join("\n  ");
+  console.log(`[activities/search] first 20 indexed:\n  ${first20Indexed}`);
+  console.log(`[activities/search] first 20 food:\n  ${first20Food || "(none)"}`);
   // ── End debug ─────────────────────────────────────────────────────────────
 
   return NextResponse.json({

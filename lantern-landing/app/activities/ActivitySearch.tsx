@@ -1239,12 +1239,36 @@ function EmptyState({ filter }: { filter: FilterId }) {
   );
 }
 
-function EmptySearchState({ query }: { query: string }) {
+function EmptySearchState({
+  query,
+  activeFilter,
+  onClearFilter,
+}: {
+  query: string;
+  activeFilter: FilterId;
+  onClearFilter: () => void;
+}) {
+  const isFiltered = activeFilter !== "all" && activeFilter !== "browse_all";
+  const filterLabel = FILTERS.find((f) => f.id === activeFilter)?.label ?? String(activeFilter);
   return (
     <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
       <div className="text-5xl mb-4">🔍</div>
-      <h3 className="text-base font-bold text-white/50 mb-2">No results for "{query}"</h3>
-      <p className="text-[13px] text-white/25">Try a different search term or clear the filter.</p>
+      <h3 className="text-base font-bold text-white/50 mb-2">
+        {isFiltered ? `No "${query}" results in ${filterLabel}` : `No results for "${query}"`}
+      </h3>
+      <p className="text-[13px] text-white/25 mb-4">
+        {isFiltered
+          ? "This search term might match a different category."
+          : "Try a different search term or browse by category."}
+      </p>
+      {isFiltered && (
+        <button
+          onClick={onClearFilter}
+          className="px-4 py-2 rounded-lg bg-white/[0.06] border border-white/[0.1] text-sm font-medium text-white/60 hover:bg-white/[0.09] hover:text-white/80 transition-all"
+        >
+          Search all categories
+        </button>
+      )}
     </div>
   );
 }
@@ -1343,26 +1367,33 @@ function sortByRelevance(activities: Activity[], query: string): Activity[] {
   if (tokens.length === 0) return activities;
 
   const scored = activities.map((a) => {
-    const title  = a.title.toLowerCase();
-    const tags   = a.tags.join(" ").toLowerCase();
-    const cat    = a.category.replace(/_/g, " ").toLowerCase();      // "hidden gems"
-    const badges = a.badges.join(" ").replace(/_/g, " ").toLowerCase(); // "hidden gem"
-    const desc   = (a.description + " " + a.whyVisit + " " + a.neighborhood).toLowerCase();
+    const title   = a.title.toLowerCase();
+    const tags    = a.tags.join(" ").toLowerCase();
+    const cat     = a.category.replace(/_/g, " ").toLowerCase();
+    const badges  = a.badges.join(" ").replace(/_/g, " ").toLowerCase();
+    const desc    = (a.description + " " + (a.whyVisit ?? "") + " " + a.neighborhood).toLowerCase();
+    // querySources: "ramen restaurant", "sushi restaurant", "tourist attraction", etc.
+    // A place found via "ramen restaurant" query matches search token "ramen" even if its
+    // display name is in Japanese.
+    const sources = (a.querySources ?? []).join(" ").toLowerCase();
 
     let score = 0;
     for (const token of tokens) {
       // Title: strongest signal
-      if (title === token)                  score += 20;
+      if (title === token)                    score += 20;
       else if (title.startsWith(token + " ")) score += 12;
-      else if (title.includes(token))        score += 8;
-      // Tags (includes query-derived tags like "Sushi", "Ramen", "Rooftop Bar")
-      if (tags.split(" ").some(t => t === token)) score += 12;
-      else if (tags.includes(token))         score += 7;
+      else if (title.includes(token))         score += 8;
+      // Tags (type-derived: "Ramen", "Sushi", "Rooftop Bar", etc.)
+      if (tags.split(/\s+/).some((t) => t === token)) score += 12;
+      else if (tags.includes(token))          score += 7;
+      // Query source: "ramen restaurant" query → place matches token "ramen"
+      if (sources.split(/\s+/).some((t) => t === token)) score += 10;
+      else if (sources.includes(token))       score += 6;
       // Category / badge
-      if (cat.includes(token))               score += 5;
-      if (badges.includes(token))            score += 5;
+      if (cat.includes(token))                score += 5;
+      if (badges.includes(token))             score += 5;
       // Description / whyVisit / neighborhood
-      if (desc.includes(token))              score += 2;
+      if (desc.includes(token))               score += 2;
     }
 
     return { activity: a, score };
@@ -1372,11 +1403,12 @@ function sortByRelevance(activities: Activity[], query: string): Activity[] {
   matched.sort((a, b) => b.score - a.score);
   const results = matched.map(({ activity }) => activity);
 
-  const searchQuery = query;
-  const totalPlaces = activities.length;
+  // Debug log — visible in browser console
+  const searchQuery   = query;
+  const totalPlaces   = activities.length;
   const matchedPlaces = results.length;
   const firstTenMatches = results.slice(0, 10).map((a) => ({
-    title: a.title, category: a.category, tags: a.tags,
+    title: a.title, category: a.category, tags: a.tags, querySources: a.querySources,
   }));
   console.log({ searchQuery, totalPlaces, matchedPlaces, firstTenMatches });
 
@@ -1800,7 +1832,11 @@ export default function ActivitySearch() {
               />
             ))
           ) : isSearching ? (
-            <EmptySearchState query={activityQuery} />
+            <EmptySearchState
+              query={activityQuery}
+              activeFilter={activeFilter}
+              onClearFilter={() => setActiveFilter("all")}
+            />
           ) : (
             <EmptyState filter={activeFilter} />
           )}

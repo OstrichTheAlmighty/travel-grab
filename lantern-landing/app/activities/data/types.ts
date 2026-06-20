@@ -36,6 +36,9 @@ export interface Activity {
   websiteUri?: string;
   googleMapsUri?: string;
   openNow?: boolean;
+  // Which Google search queries found this place (e.g. ["ramen restaurant", "restaurant"])
+  // Used by search to match "ramen" even when the place name is in Japanese
+  querySources?: string[];
 }
 
 export interface DestinationData {
