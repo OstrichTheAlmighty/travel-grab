@@ -639,7 +639,7 @@ export default function ItineraryPlanner() {
   const [showAllActivities, setShowAllActivities]  = useState(false);
 
   // Onboarding state (new users see a guided wizard; existing users skip to "done")
-  type ObStep = "destination" | "dates" | "style" | "cities" | "done";
+  type ObStep = "destination" | "dates" | "style" | "recommendations" | "cities" | "done";
   const [obStep,      setObStep]      = useState<ObStep>("done");
   const [obDest,      setObDest]      = useState("");
   const [obStart,     setObStart]     = useState("");
@@ -878,6 +878,9 @@ export default function ItineraryPlanner() {
   async function suggestCities() {
     setObLoading(true);
     setObError(null);
+    setObCities([]);
+    setObSummary("");
+    setObStep("recommendations");
     try {
       const res = await fetch("/api/itinerary/suggest-cities", {
         method: "POST",
@@ -899,7 +902,7 @@ export default function ItineraryPlanner() {
       if (stops.length === 0) throw new Error("No cities returned");
       setObCities(stops);
       setObSummary(data.summary ?? "");
-      setObStep("cities");
+      // Stay on recommendations step — user will review then click through to customize
     } catch (e) {
       setObError(e instanceof Error ? e.message : "Something went wrong");
     } finally {
@@ -1056,9 +1059,9 @@ export default function ItineraryPlanner() {
         <div className="mx-auto max-w-lg px-4 sm:px-6 py-16">
           {/* Step indicators */}
           <div className="flex items-center gap-2 mb-10 justify-center">
-            {(["destination", "dates", "style", "cities"] as const).map((s, i) => {
-              const steps = ["destination", "dates", "style", "cities"] as const;
-              const stepIdx = steps.indexOf(obStep);
+            {(["destination", "dates", "style", "recommendations", "cities"] as const).map((s, i) => {
+              const steps = ["destination", "dates", "style", "recommendations", "cities"] as const;
+              const stepIdx = steps.indexOf(obStep as typeof steps[number]);
               const isActive = s === obStep;
               const isDone = i < stepIdx;
               return (
@@ -1066,7 +1069,7 @@ export default function ItineraryPlanner() {
                   <div className={`h-2 w-2 rounded-full transition-colors ${
                     isActive ? "bg-lantern-mint" : isDone ? "bg-lantern-mint/40" : "bg-white/15"
                   }`} />
-                  {i < 3 && <div className="h-px w-8 bg-white/10" />}
+                  {i < 4 && <div className="h-px w-6 bg-white/10" />}
                 </div>
               );
             })}
@@ -1244,24 +1247,98 @@ export default function ItineraryPlanner() {
                 </button>
                 <button
                   type="button"
-                  disabled={obStyles.length === 0 || obLoading}
+                  disabled={obStyles.length === 0}
                   onClick={() => void suggestCities()}
-                  className="flex-[2] h-12 rounded-full bg-lantern-mint text-ink text-sm font-bold transition hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
+                  className="flex-[2] h-12 rounded-full bg-lantern-mint text-ink text-sm font-bold transition hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed"
                 >
-                  {obLoading
-                    ? <><span className="h-3.5 w-3.5 rounded-full border-2 border-ink/40 border-t-ink animate-spin" /> Planning…</>
-                    : "Continue"}
+                  Continue
                 </button>
               </div>
             </div>
           )}
 
-          {/* Step: cities confirmation */}
+          {/* Step: AI route recommendations */}
+          {obStep === "recommendations" && (
+            <div className="space-y-6">
+              {obLoading && (
+                <div className="flex flex-col items-center justify-center py-20 text-center">
+                  <div className="h-10 w-10 rounded-full border-2 border-white/10 border-t-lantern-mint animate-spin mb-6" />
+                  <p className="text-base font-semibold text-white">Finding your best route…</p>
+                  <p className="text-sm text-white/35 mt-2">Planning {obDuration} days in {obDest}</p>
+                </div>
+              )}
+              {!obLoading && obError && (
+                <div className="space-y-5">
+                  <div>
+                    <h1 className="text-3xl font-bold text-white mb-2">Something went wrong</h1>
+                    <p className="text-sm text-red-400">{obError}</p>
+                  </div>
+                  <div className="flex gap-3">
+                    <button
+                      type="button"
+                      onClick={() => { setObStep("style"); setObError(null); }}
+                      className="flex-1 h-12 rounded-full border border-white/[0.1] text-sm text-white/50 hover:text-white/80 transition-colors"
+                    >
+                      Back
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => void suggestCities()}
+                      className="flex-[2] h-12 rounded-full bg-lantern-mint text-ink text-sm font-bold transition hover:opacity-90"
+                    >
+                      Try again
+                    </button>
+                  </div>
+                </div>
+              )}
+              {!obLoading && !obError && obCities.length > 0 && (
+                <div className="space-y-6">
+                  <div>
+                    <h1 className="text-3xl font-bold text-white mb-2">Your AI route</h1>
+                    {obSummary && <p className="text-sm text-white/50 leading-relaxed">{obSummary}</p>}
+                  </div>
+                  <div className="space-y-3">
+                    {obCities.map((stop, i) => (
+                      <div key={i} className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-4">
+                        <div className="flex items-center justify-between mb-1">
+                          <p className="text-sm font-semibold text-white">{stop.city}</p>
+                          <span className="text-xs font-semibold text-lantern-mint">{stop.days}d</span>
+                        </div>
+                        {stop.why && <p className="text-[11px] text-white/40 leading-relaxed">{stop.why}</p>}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex items-center justify-between text-xs text-white/30 px-1">
+                    <span>{obCities.reduce((s, c) => s + c.days, 0)} days total</span>
+                    <span>{obDest}</span>
+                  </div>
+                  <div className="flex gap-3">
+                    <button
+                      type="button"
+                      onClick={() => { setObStep("style"); setObError(null); }}
+                      className="flex-1 h-12 rounded-full border border-white/[0.1] text-sm text-white/50 hover:text-white/80 transition-colors"
+                    >
+                      Back
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setObStep("cities")}
+                      className="flex-[2] h-12 rounded-full bg-lantern-mint text-ink text-sm font-bold transition hover:opacity-90"
+                    >
+                      Customize route →
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Step: customize route */}
           {obStep === "cities" && (
             <div className="space-y-6">
               <div>
-                <h1 className="text-3xl font-bold text-white mb-2">Here&apos;s your trip</h1>
-                {obSummary && <p className="text-sm text-white/50">{obSummary}</p>}
+                <h1 className="text-3xl font-bold text-white mb-2">Customize your route</h1>
+                <p className="text-sm text-white/40">Edit cities, adjust days, or add stops.</p>
               </div>
               <div className="space-y-3">
                 {obCities.map((stop, i) => (
@@ -1303,7 +1380,7 @@ export default function ItineraryPlanner() {
               <div className="flex gap-3">
                 <button
                   type="button"
-                  onClick={() => setObStep("style")}
+                  onClick={() => setObStep("recommendations")}
                   className="flex-1 h-12 rounded-full border border-white/[0.1] text-sm text-white/50 hover:text-white/80 transition-colors"
                 >
                   Back
@@ -1314,7 +1391,7 @@ export default function ItineraryPlanner() {
                   onClick={finishOnboarding}
                   className="flex-[2] h-12 rounded-full bg-lantern-mint text-ink text-sm font-bold transition hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
-                  Save trip &amp; build itinerary
+                  Save route
                 </button>
               </div>
             </div>
@@ -1555,32 +1632,38 @@ export default function ItineraryPlanner() {
           </SectionCard>
 
           {/* ── Actions ── */}
-          <div className="space-y-2">
+          <div className="space-y-3 pt-1">
             <button
               type="button"
               onClick={generate}
-              disabled={!primaryCity || isGenerating}
-              className="w-full inline-flex h-12 items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-lantern-mint to-lantern-blue px-8 text-sm font-bold text-ink shadow-glow transition hover:opacity-90 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed disabled:scale-100"
+              disabled={!primaryCity || !trip.startDate || isGenerating}
+              className="w-full inline-flex h-14 items-center justify-center gap-2.5 rounded-2xl bg-lantern-mint px-8 text-base font-bold text-ink transition hover:opacity-90 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-30 disabled:cursor-not-allowed disabled:scale-100"
             >
               {isGenerating ? (
                 <>
-                  <span className="h-3.5 w-3.5 rounded-full border-2 border-ink/40 border-t-ink animate-spin" />
+                  <span className="h-4 w-4 rounded-full border-2 border-ink/30 border-t-ink animate-spin" />
                   Planning your trip…
                 </>
               ) : hasItinerary ? (
                 <>
-                  <span className="text-base">↺</span>
-                  Regenerate itinerary
+                  <span className="text-lg">↺</span>
+                  Regenerate Itinerary
                 </>
               ) : (
                 <>
-                  <span className="text-base">✦</span>
-                  Generate itinerary
+                  <span className="text-lg">✦</span>
+                  Build My Itinerary
                 </>
               )}
             </button>
 
-            <div className="flex gap-2">
+            {(!primaryCity || !trip.startDate) && !isGenerating && (
+              <p className="text-[11px] text-white/25 text-center">
+                {!primaryCity ? "Enter a destination above to continue." : "Add a start date to continue."}
+              </p>
+            )}
+
+            <div className="flex gap-2 pt-1">
               <button
                 type="button"
                 onClick={saveTrip}
@@ -1600,12 +1683,6 @@ export default function ItineraryPlanner() {
                 Clear trip
               </button>
             </div>
-
-            {!primaryCity && (
-              <p className="text-[11px] text-white/25 text-center">
-                Enter a destination above to generate.
-              </p>
-            )}
           </div>
         </aside>
 
