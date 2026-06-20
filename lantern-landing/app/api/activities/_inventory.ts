@@ -400,7 +400,7 @@ function buildWhyVisitS2(types: string[], category: Category, isFree: boolean): 
 
 function buildWhyVisit(place: GooglePlace, category: Category, city: string): string {
   const types  = place.types ?? [];
-  const name   = place.displayName.text;
+  const name   = place.displayName?.text ?? "";
   const isFree = place.priceLevel === "PRICE_LEVEL_FREE";
   const s1     = buildWhyVisitS1(name, types, category, city);
   const s2     = buildWhyVisitS2(types, category, isFree);
@@ -439,7 +439,7 @@ export function mapToActivity(
 
   return {
     id:           place.id,
-    title:        place.displayName.text,
+    title:        place.displayName?.text ?? "(unnamed)",
     neighborhood,
     duration:     estimateDuration(types),
     price,
@@ -808,12 +808,26 @@ export async function getOrCreateInventory(
 
 export function convertInventoryToActivities(inv: CityInventory): Activity[] {
   const activities: Activity[] = [];
+  const total = inv.entries.size;
+  let skipped = 0;
 
   for (const entry of inv.entries.values()) {
-    const activity = mapToActivity(entry.place, entry.category, inv.city, entry.tags);
-    if (entry.whyVisit) activity.whyVisit = entry.whyVisit;
-    activity.querySources = entry.querySources;
-    activities.push(activity);
+    try {
+      const activity = mapToActivity(entry.place, entry.category, inv.city, entry.tags);
+      if (entry.whyVisit) activity.whyVisit = entry.whyVisit;
+      activity.querySources = entry.querySources;
+      activities.push(activity);
+    } catch (err) {
+      skipped++;
+      console.warn(
+        `[inventory/convert] skipped ${entry.place.id} ` +
+        `(${entry.place.displayName?.text ?? "no name"}): ${String(err)}`,
+      );
+    }
+  }
+
+  if (skipped > 0) {
+    console.warn(`[inventory/convert] ${inv.city}: skipped ${skipped}/${total} entries due to errors`);
   }
 
   // Sort: photos-first, then by rating × log(reviews)
@@ -823,6 +837,11 @@ export function convertInventoryToActivities(inv: CityInventory): Activity[] {
     if (aPhoto !== bPhoto) return bPhoto - aPhoto;
     return b.rating * Math.log1p(b.reviewCount) - a.rating * Math.log1p(a.reviewCount);
   });
+
+  console.log(
+    `[inventory/convert] ${inv.city}: ${activities.length}/${total} entries converted` +
+    (skipped > 0 ? `, ${skipped} skipped` : ""),
+  );
 
   return activities;
 }

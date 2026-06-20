@@ -132,10 +132,13 @@ export async function GET(req: NextRequest) {
     });
   }
 
-  // Convert inventory → sorted Activity[]
-  const activities = convertInventoryToActivities(inv);
+  // Convert inventory → sorted Activity[] (snapshot of what's indexed right now)
+  let activities = convertInventoryToActivities(inv);
+  const snapshotSize = activities.length;
 
-  // AI whyVisit — only for top-60 places that don't have cached text
+  // AI whyVisit — only for top-60 places that don't have cached text.
+  // The background build continues concurrently during this await, so inv.entries
+  // may grow significantly (or even complete) by the time we resume.
   const needsAI = activities.slice(0, 60).filter((a) => !inv.entries.get(a.id)?.whyVisit);
   if (needsAI.length > 0) {
     const aiResults = await generateWhyVisitBatch(needsAI, inv);
@@ -145,14 +148,25 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  // Apply all cached whyVisit texts to the activity list
+  // If the background build completed while we were waiting for AI, re-convert now
+  // so the response includes all indexed places (not just the seed-batch snapshot).
+  // Without this, the client would receive inventoryStatus="ready" with only the
+  // seed-batch activities, suppressing the polling re-fetch that would fix the count.
+  if (inv.entries.size > snapshotSize) {
+    console.log(
+      `[activities/search] re-converting after AI: ` +
+      `${snapshotSize} → ${inv.entries.size} entries (build progressed during AI wait)`,
+    );
+    activities = convertInventoryToActivities(inv);
+  }
+
+  // Apply all cached whyVisit texts to the (possibly expanded) activity list
   for (const activity of activities) {
     const cached = inv.entries.get(activity.id)?.whyVisit;
     if (cached) activity.whyVisit = cached;
   }
 
-  // ── Debug ────────────────────────────────────────────────────────────────
-  const totalIndexed   = inv.entries.size;
+  // ── Pipeline diagnostic log ───────────────────────────────────────────────
   const foodCount      = activities.filter((a) => a.category === "food").length;
   const cultureCount   = activities.filter((a) => a.category === "culture").length;
   const nightlifeCount = activities.filter((a) => a.category === "nightlife").length;
@@ -160,30 +174,33 @@ export async function GET(req: NextRequest) {
   const natureCount    = activities.filter((a) => a.category === "nature").length;
   const luxuryCount    = activities.filter((a) => a.category === "luxury").length;
   const hiddenGemCount = activities.filter((a) => a.category === "hidden_gems").length;
-  const featuredCount  = cultureCount + adventureCount + natureCount + luxuryCount + hiddenGemCount;
-  console.log({
-    totalIndexed,
-    featuredCount,
-    foodCount,
-    cultureCount,
-    nightlifeCount,
-    adventureCount,
-    natureCount,
-    luxuryCount,
-    hiddenGemCount,
-    queriesCompleted: inv.queriesCompleted,
-    queriesTotal:     inv.queriesTotal,
-    inventoryStatus:  inv.status,
+  const noPhotoCount   = activities.filter((a) => !a.photoRef).length;
+  const noRatingCount  = activities.filter((a) => a.rating === 0).length;
+
+  console.log("[activities pipeline]", {
+    // Raw inventory size (may differ from activities if convert had errors)
+    rawIndexed:        inv.entries.size,
+    // Snapshot when convert was first called
+    snapshotSize,
+    // Final activities returned (after optional re-convert)
+    displayableCount:  activities.length,
+    // Category breakdown
+    food:              foodCount,
+    culture:           cultureCount,
+    nightlife:         nightlifeCount,
+    adventure:         adventureCount,
+    nature:            natureCount,
+    luxury:            luxuryCount,
+    hidden_gems:       hiddenGemCount,
+    // Notable non-dropped counts (all are in Browse All)
+    noPhoto:           noPhotoCount,  // uses gradient fallback
+    noRating:          noRatingCount,
+    // Build status
+    queriesCompleted:  inv.queriesCompleted,
+    queriesTotal:      inv.queriesTotal,
+    inventoryStatus:   inv.status,
   });
-  const first20Indexed = activities.slice(0, 20)
-    .map((a) => `${a.title} [${a.category}] src:${(a.querySources ?? []).join(",")}`)
-    .join("\n  ");
-  const first20Food = activities.filter((a) => a.category === "food").slice(0, 20)
-    .map((a) => `${a.title} | tags:${a.tags.join(",")} | src:${(a.querySources ?? []).join(",")}`)
-    .join("\n  ");
-  console.log(`[activities/search] first 20 indexed:\n  ${first20Indexed}`);
-  console.log(`[activities/search] first 20 food:\n  ${first20Food || "(none)"}`);
-  // ── End debug ─────────────────────────────────────────────────────────────
+  // ── End pipeline log ──────────────────────────────────────────────────────
 
   return NextResponse.json({
     activities,
@@ -191,7 +208,10 @@ export async function GET(req: NextRequest) {
     country:           inv.country,
     source:            "places_api",
     inventoryStatus:   inv.status,
-    inventorySize:     inv.entries.size,
+    // inventorySize always equals activities.length so the badge and Browse All
+    // count always use the same dataset. The status polling also updates this
+    // via result.inventorySize if the build is still running.
+    inventorySize:     activities.length,
     inventoryProgress: { completed: inv.queriesCompleted, total: inv.queriesTotal },
   });
 }
