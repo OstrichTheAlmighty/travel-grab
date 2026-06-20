@@ -1340,7 +1340,10 @@ interface SearchResult {
   activities: Activity[];
   city: string;
   country: string;
-  source?: string;  // "places_api" | "mock" | "mock_fallback" | "cache"
+  source?: string;
+  inventoryStatus?: "building" | "ready";
+  inventorySize?: number;
+  inventoryProgress?: { completed: number; total: number };
 }
 
 export default function ActivitySearch() {
@@ -1359,38 +1362,44 @@ export default function ActivitySearch() {
   const [modalLoading,    setModalLoading]    = useState(false);
   const detailsCache = useRef(new Map<string, PlaceDetail>());
 
-  // Simple client-side cache so switching back to a searched destination is instant
+  // Client-side cache keyed by lowercased destination — cleared when inventory finishes building
   const clientCache = useRef(new Map<string, SearchResult>());
+  const pollingRef  = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const fetchActivities = useCallback(async (dest: string) => {
+  const fetchActivities = useCallback(async (dest: string, skipCache = false) => {
     const key = dest.trim().toLowerCase();
-    const cached = clientCache.current.get(key);
-    if (cached) {
-      setResult(cached);
-      setError(null);
-      return;
+    if (!skipCache) {
+      const cached = clientCache.current.get(key);
+      if (cached) {
+        setResult(cached);
+        setError(null);
+        return;
+      }
     }
 
     setLoading(true);
     setError(null);
-    setActivityQuery(""); // clear activity search when switching destinations
+    if (!skipCache) setActivityQuery(""); // clear activity search when switching destinations
 
     try {
-      const res = await fetch(`/api/activities/search?destination=${encodeURIComponent(dest.trim())}`);
-      const data = await res.json() as { activities?: Activity[]; city?: string; country?: string; source?: string; error?: string };
+      const res  = await fetch(`/api/activities/search?destination=${encodeURIComponent(dest.trim())}`);
+      const data = await res.json() as {
+        activities?: Activity[]; city?: string; country?: string; source?: string; error?: string;
+        inventoryStatus?: "building" | "ready"; inventorySize?: number;
+        inventoryProgress?: { completed: number; total: number };
+      };
 
-      if (!res.ok || data.error) {
-        throw new Error(data.error ?? `HTTP ${res.status}`);
-      }
-      if (!data.activities?.length) {
-        throw new Error("No activities found for this destination.");
-      }
+      if (!res.ok || data.error) throw new Error(data.error ?? `HTTP ${res.status}`);
+      if (!data.activities?.length) throw new Error("No activities found for this destination.");
 
       const r: SearchResult = {
-        activities: data.activities,
-        city:       data.city    ?? dest.split(",")[0].trim(),
-        country:    data.country ?? dest.split(",").pop()?.trim() ?? "",
-        source:     data.source,
+        activities:        data.activities,
+        city:              data.city    ?? dest.split(",")[0].trim(),
+        country:           data.country ?? dest.split(",").pop()?.trim() ?? "",
+        source:            data.source,
+        inventoryStatus:   data.inventoryStatus,
+        inventorySize:     data.inventorySize,
+        inventoryProgress: data.inventoryProgress,
       };
 
       clientCache.current.set(key, r);
@@ -1402,6 +1411,38 @@ export default function ActivitySearch() {
       setLoading(false);
     }
   }, []);
+
+  // Poll inventory status while it's building; refresh once it's ready
+  useEffect(() => {
+    if (result?.inventoryStatus !== "building") {
+      if (pollingRef.current) { clearInterval(pollingRef.current); pollingRef.current = null; }
+      return;
+    }
+
+    const cityKey = result.city.toLowerCase();
+    pollingRef.current = setInterval(async () => {
+      try {
+        const res  = await fetch(`/api/activities/inventory/status?city=${encodeURIComponent(cityKey)}`);
+        if (!res.ok) return;
+        const data = await res.json() as { status: string; count: number };
+
+        if (data.status === "ready") {
+          clearInterval(pollingRef.current!);
+          pollingRef.current = null;
+          // Clear stale cache entry and re-fetch the full inventory
+          clientCache.current.delete(destination.trim().toLowerCase());
+          void fetchActivities(destination, true);
+        } else {
+          // Update the live count without re-fetching all activities
+          setResult((prev) => prev ? { ...prev, inventorySize: data.count } : prev);
+        }
+      } catch { /* ignore network errors during polling */ }
+    }, 3000);
+
+    return () => {
+      if (pollingRef.current) { clearInterval(pollingRef.current); pollingRef.current = null; }
+    };
+  }, [result?.inventoryStatus, result?.city, destination, fetchActivities]);
 
   // Load default destination on mount
   useEffect(() => {
@@ -1554,12 +1595,18 @@ export default function ActivitySearch() {
         {/* ── Hero ── */}
         <div className="pt-12 pb-8 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.1] bg-white/[0.04] px-4 py-1.5 text-[11px] font-semibold text-white/45 mb-5">
-            <span className={`w-1.5 h-1.5 rounded-full ${loading ? "bg-amber-400 animate-pulse" : "bg-lantern-mint animate-pulse"}`} />
+            <span className={`w-1.5 h-1.5 rounded-full ${
+              loading ? "bg-amber-400 animate-pulse" :
+              result?.inventoryStatus === "building" ? "bg-amber-400 animate-pulse" :
+              "bg-lantern-mint animate-pulse"
+            }`} />
             {loading
-              ? "Searching…"
-              : result
-              ? `${result.activities.length} experiences in ${city}`
-              : "Discover experiences"}
+              ? "Indexing city…"
+              : result?.inventoryStatus === "building"
+                ? `Indexing ${city} — ${(result.inventorySize ?? 0).toLocaleString()} places found so far…`
+                : result
+                  ? `${(result.inventorySize ?? result.activities.length).toLocaleString()} places indexed in ${city}`
+                  : "Discover experiences"}
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight mb-3">
             Discover the best of{" "}
@@ -1639,7 +1686,7 @@ export default function ActivitySearch() {
               {isSearching
                 ? `${viewBase.length.toLocaleString()} ${viewBase.length === 1 ? "result" : "results"} for "${activityQuery}"${city ? ` in ${city}` : ""}`
                 : isFeatured
-                  ? `${featured.length} featured experiences in ${city} · ${fullDataset.length.toLocaleString()} total discovered`
+                  ? `${featured.length} featured experiences · ${(result?.inventorySize ?? fullDataset.length).toLocaleString()} total indexed in ${city}${result?.inventoryStatus === "building" ? " (still indexing…)" : ""}`
                   : activeFilter === "browse_all"
                     ? `${fullDataset.length.toLocaleString()} total experiences in ${city}${activeSubTag ? ` · filtered to "${activeSubTag}"` : ""}`
                     : activeSubTag
