@@ -6,7 +6,7 @@ import type { Activity, Badge, Category } from "./data/types";
 
 // ── Filter config ─────────────────────────────────────────────────────────────
 
-type FilterId = "all" | Category | "free" | "browse_all";
+type FilterId = "all" | Category | "free" | "saved" | "browse_all";
 
 const FILTERS: { id: FilterId; label: string; icon: string }[] = [
   { id: "all",         label: "Featured",    icon: "⭐" },
@@ -18,15 +18,16 @@ const FILTERS: { id: FilterId; label: string; icon: string }[] = [
   { id: "luxury",      label: "Luxury",      icon: "✨" },
   { id: "hidden_gems", label: "Hidden Gems", icon: "💎" },
   { id: "free",        label: "Free",        icon: "🎁" },
+  { id: "saved",       label: "Saved",       icon: "❤" },
   { id: "browse_all",  label: "Browse All",  icon: "🗂" },
 ];
 
 const BADGE_META: Record<Badge, { label: string; className: string }> = {
-  hidden_gem:        { label: "Hidden Gem",        className: "text-lantern-violet bg-lantern-violet/20 border-lantern-violet/40" },
-  worth_the_splurge: { label: "Worth the Splurge", className: "text-lantern-gold   bg-lantern-gold/10   border-lantern-gold/30"   },
-  family_friendly:   { label: "Family Friendly",   className: "text-lantern-mint   bg-lantern-mint/10   border-lantern-mint/30"   },
-  popular:           { label: "Popular",            className: "text-amber-300      bg-amber-500/15      border-amber-500/30"      },
-  free:              { label: "Free",               className: "text-lantern-mint   bg-lantern-mint/10   border-lantern-mint/30"   },
+  hidden_gem:        { label: "Hidden Gem",        className: "text-lantern-violet bg-black/60 border-lantern-violet/55 backdrop-blur-sm shadow-sm" },
+  worth_the_splurge: { label: "Worth the Splurge", className: "text-lantern-gold   bg-black/60 border-lantern-gold/55   backdrop-blur-sm shadow-sm" },
+  family_friendly:   { label: "Family Friendly",   className: "text-lantern-mint   bg-black/60 border-lantern-mint/55   backdrop-blur-sm shadow-sm" },
+  popular:           { label: "Popular",            className: "text-amber-300      bg-black/60 border-amber-500/55      backdrop-blur-sm shadow-sm" },
+  free:              { label: "Free",               className: "text-lantern-mint   bg-black/60 border-lantern-mint/55   backdrop-blur-sm shadow-sm" },
 };
 
 const CATEGORY_LABEL: Record<Category, string> = {
@@ -999,19 +1000,23 @@ function CategoryFilter({
   active,
   onChange,
   counts,
+  savedCount,
 }: {
   active: FilterId;
   onChange: (id: FilterId) => void;
   counts: Partial<Record<FilterId, number>>;
+  savedCount: number;
 }) {
+  const visibleFilters = savedCount > 0 ? FILTERS : FILTERS.filter((f) => f.id !== "saved");
+
   return (
     <div
-      className="flex gap-2 overflow-x-auto pb-1"
+      className="flex gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0"
       style={{ scrollbarWidth: "none" } as React.CSSProperties}
     >
-      {FILTERS.map((f) => {
+      {visibleFilters.map((f) => {
         const isActive = f.id === active;
-        const count    = counts[f.id] ?? 0;
+        const count    = f.id === "saved" ? savedCount : (counts[f.id] ?? 0);
         return (
           <button
             key={f.id}
@@ -1224,6 +1229,17 @@ function DestinationSearch({
 // ── Empty / Error states ──────────────────────────────────────────────────────
 
 function EmptyState({ filter }: { filter: FilterId }) {
+  if (filter === "saved") {
+    return (
+      <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
+        <div className="text-5xl mb-4">🤍</div>
+        <h3 className="text-base font-bold text-white/50 mb-2">No saved places yet</h3>
+        <p className="text-[13px] text-white/25 max-w-xs mb-2">
+          Tap the ♥ on any activity to save it. Saved places stay here on this browser — no account needed.
+        </p>
+      </div>
+    );
+  }
   return (
     <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
       <div className="text-5xl mb-4">🔍</div>
@@ -1248,7 +1264,7 @@ function EmptySearchState({
   activeFilter: FilterId;
   onClearFilter: () => void;
 }) {
-  const isFiltered = activeFilter !== "all" && activeFilter !== "browse_all";
+  const isFiltered = activeFilter !== "all" && activeFilter !== "browse_all" && activeFilter !== "saved";
   const filterLabel = FILTERS.find((f) => f.id === activeFilter)?.label ?? String(activeFilter);
   return (
     <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
@@ -1444,6 +1460,105 @@ function ActivitySearchInput({
   );
 }
 
+// ── Saved bar (sticky bottom, only when saves exist) ─────────────────────────
+
+function SavedBar({
+  count,
+  onPlanItinerary,
+}: {
+  count: number;
+  onPlanItinerary: () => void;
+}) {
+  return (
+    <div className="fixed bottom-0 inset-x-0 z-50 border-t border-white/[0.08] bg-ink/90 backdrop-blur-md">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 flex items-center justify-between h-14 gap-4">
+        <div className="flex items-center gap-2 text-sm text-white/60">
+          <IconHeart filled className="w-4 h-4 text-red-400" />
+          <span>
+            <span className="font-semibold text-white/80 tabular-nums">{count}</span>
+            {" "}{count === 1 ? "place" : "places"} saved on this device
+          </span>
+        </div>
+        <button
+          onClick={onPlanItinerary}
+          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-lantern-violet text-white text-[12px] font-semibold hover:bg-lantern-violet/85 transition-all duration-200 active:scale-[0.97] shadow-[0_0_20px_rgba(167,139,250,0.25)]"
+        >
+          Plan from saved
+          <span className="text-white/70">→</span>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ── Itinerary placeholder modal ───────────────────────────────────────────────
+
+function ItineraryModal({
+  savedActivities,
+  onClose,
+}: {
+  savedActivities: Activity[];
+  onClose: () => void;
+}) {
+  // Close on Escape
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) { if (e.key === "Escape") onClose(); }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center p-4 sm:p-6"
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+    >
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
+
+      <div className="relative w-full max-w-md rounded-2xl border border-white/[0.1] bg-panel shadow-2xl overflow-hidden">
+        {/* Header */}
+        <div className="flex items-start justify-between p-5 pb-4 border-b border-white/[0.07]">
+          <div>
+            <h2 className="text-base font-bold text-white mb-1">Plan your itinerary</h2>
+            <p className="text-[12px] text-white/35">
+              {savedActivities.length} {savedActivities.length === 1 ? "place" : "places"} saved on this device
+            </p>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-7 h-7 rounded-full bg-white/[0.06] border border-white/[0.1] flex items-center justify-center text-white/40 hover:text-white/70 hover:bg-white/[0.1] transition-all text-sm"
+          >
+            ×
+          </button>
+        </div>
+
+        {/* Saved list */}
+        {savedActivities.length > 0 && (
+          <ul className="px-5 py-3 space-y-2 max-h-52 overflow-y-auto">
+            {savedActivities.map((a) => (
+              <li key={a.id} className="flex items-center gap-2.5 text-[12px]">
+                <span className="text-lg leading-none flex-shrink-0">{a.emoji}</span>
+                <div className="min-w-0">
+                  <p className="text-white/75 font-medium truncate">{a.title}</p>
+                  <p className="text-white/30 truncate">{a.neighborhood} · {a.duration}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {/* Coming soon callout */}
+        <div className="mx-5 mb-5 mt-2 rounded-xl border border-lantern-violet/25 bg-lantern-violet/8 px-4 py-3.5">
+          <p className="text-[12px] text-lantern-violet/80 font-medium mb-1">Coming next</p>
+          <p className="text-[12px] text-white/45 leading-relaxed">
+            We&apos;ll turn your saved activities into a day-by-day plan — with travel times,
+            opening hours, and neighbourhood grouping built in.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Main Component ────────────────────────────────────────────────────────────
 
 interface SearchResult {
@@ -1457,20 +1572,35 @@ interface SearchResult {
 }
 
 export default function ActivitySearch() {
-  const [destination,    setDestination]    = useState("Tokyo, Japan");
-  const [activityQuery,  setActivityQuery]  = useState("");
-  const [activeFilter,   setActiveFilter]   = useState<FilterId>("all");
-  const [activeSubTag,   setActiveSubTag]   = useState<string | null>(null);
-  const [savedIds,       setSavedIds]       = useState<Set<string>>(new Set());
-  const [loading,        setLoading]        = useState(false);
-  const [error,          setError]          = useState<string | null>(null);
-  const [result,         setResult]         = useState<SearchResult | null>(null);
+  const [destination,        setDestination]        = useState("Tokyo, Japan");
+  const [activityQuery,      setActivityQuery]      = useState("");
+  const [activeFilter,       setActiveFilter]       = useState<FilterId>("all");
+  const [activeSubTag,       setActiveSubTag]       = useState<string | null>(null);
+  const [savedIds,           setSavedIds]           = useState<Set<string>>(new Set());
+  const [showItineraryModal, setShowItineraryModal] = useState(false);
+  const [loading,            setLoading]            = useState(false);
+  const [error,              setError]              = useState<string | null>(null);
+  const [result,             setResult]             = useState<SearchResult | null>(null);
 
   // ── Detail modal state ──
   const [modalActivity,   setModalActivity]   = useState<Activity | null>(null);
   const [modalDetail,     setModalDetail]     = useState<PlaceDetail | null>(null);
   const [modalLoading,    setModalLoading]    = useState(false);
   const detailsCache = useRef(new Map<string, PlaceDetail>());
+
+  // Persist saved IDs to localStorage
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("travelgrab:saved-activities");
+      if (stored) setSavedIds(new Set(JSON.parse(stored) as string[]));
+    } catch { /* ignore parse errors */ }
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("travelgrab:saved-activities", JSON.stringify([...savedIds]));
+    } catch { /* ignore quota errors */ }
+  }, [savedIds]);
 
   // Client-side cache keyed by lowercased destination — cleared when inventory finishes building
   const clientCache = useRef(new Map<string, SearchResult>());
@@ -1567,7 +1697,13 @@ export default function ActivitySearch() {
   function toggleSave(id: string) {
     setSavedIds((prev) => {
       const next = new Set(prev);
-      if (next.has(id)) next.delete(id); else next.add(id);
+      if (next.has(id)) {
+        next.delete(id);
+        // If we just removed the last saved item, leave the saved filter gracefully
+        if (next.size === 0 && activeFilter === "saved") setActiveFilter("all");
+      } else {
+        next.add(id);
+      }
       return next;
     });
   }
@@ -1624,16 +1760,20 @@ export default function ActivitySearch() {
     for (const a of fullDataset) {
       c[a.category] = (c[a.category] ?? 0) + 1;
       if (a.isFree) c.free = (c.free ?? 0) + 1;
+      if (savedIds.has(a.id)) c.saved = (c.saved ?? 0) + 1;
     }
     if (fullDataset.length > 0) c.browse_all = fullDataset.length;
+    // Also count saves from other destinations (not in current fullDataset)
+    if (savedIds.size > 0 && !c.saved) c.saved = 0;
     return c;
-  }, [fullDataset]);
+  }, [fullDataset, savedIds]);
 
   // Sub-tag counts within the current category view (for the chip strip)
   const subTagCounts = useMemo((): Map<string, number> => {
     if (activeFilter === "all" || activeFilter === "browse_all" || isSearching) return new Map();
     let base: Activity[];
     if (activeFilter === "free")        base = fullDataset.filter((a) => a.isFree);
+    else if (activeFilter === "saved")  base = fullDataset.filter((a) => savedIds.has(a.id));
     else if (activeFilter in CATEGORY_LABEL) base = fullDataset.filter((a) => a.category === activeFilter);
     else base = [];
     const map = new Map<string, number>();
@@ -1641,10 +1781,11 @@ export default function ActivitySearch() {
       for (const tag of a.tags) map.set(tag, (map.get(tag) ?? 0) + 1);
     }
     return map;
-  }, [activeFilter, fullDataset, isSearching]);
+  }, [activeFilter, fullDataset, isSearching, savedIds]);
 
-  // Full view before pagination — four modes:
+  // Full view before pagination — five modes:
   //   featured    → top 30, no pagination
+  //   saved       → only saved activities (from current dataset)
   //   browse_all  → entire fullDataset, paginated
   //   category    → all in that category from fullDataset, paginated (+ optional sub-tag)
   //   search      → relevance-ranked from fullDataset (+ optional category filter), paginated
@@ -1653,11 +1794,13 @@ export default function ActivitySearch() {
       let base = fullDataset;
       if (activeFilter !== "all" && activeFilter !== "browse_all") {
         if (activeFilter === "free")         base = base.filter((a) => a.isFree);
+        else if (activeFilter === "saved")   base = base.filter((a) => savedIds.has(a.id));
         else if (activeFilter in CATEGORY_LABEL) base = base.filter((a) => a.category === activeFilter);
       }
       return sortByRelevance(base, activityQuery.trim());
     }
     if (activeFilter === "all")        return featured;
+    if (activeFilter === "saved")      return fullDataset.filter((a) => savedIds.has(a.id));
     if (activeFilter === "browse_all") {
       return activeSubTag ? fullDataset.filter((a) => a.tags.some((t) => t === activeSubTag)) : fullDataset;
     }
@@ -1665,7 +1808,7 @@ export default function ActivitySearch() {
     if (activeFilter === "free") base = fullDataset.filter((a) => a.isFree);
     else base = fullDataset.filter((a) => a.category === activeFilter);
     return activeSubTag ? base.filter((a) => a.tags.some((t) => t === activeSubTag)) : base;
-  }, [isSearching, activeFilter, activityQuery, fullDataset, featured, activeSubTag]);
+  }, [isSearching, activeFilter, activityQuery, fullDataset, featured, activeSubTag, savedIds]);
 
   // Pagination — reset page whenever the view changes
   const [page, setPage] = useState(1);
@@ -1677,6 +1820,12 @@ export default function ActivitySearch() {
 
   const city    = result?.city    ?? destination.split(",")[0].trim();
   const country = result?.country ?? destination.split(",").pop()?.trim() ?? "";
+
+  // All saved activities from the current dataset (for modal list + sticky bar)
+  const savedActivities = useMemo(
+    () => fullDataset.filter((a) => savedIds.has(a.id)),
+    [fullDataset, savedIds],
+  );
 
   return (
     <div className="min-h-screen bg-ink text-white">
@@ -1702,7 +1851,7 @@ export default function ActivitySearch() {
         </div>
       </nav>
 
-      <main className="mx-auto max-w-6xl px-4 sm:px-6 pb-16">
+      <main className={`mx-auto max-w-6xl px-4 sm:px-6 ${savedIds.size > 0 ? "pb-28" : "pb-16"}`}>
 
         {/* ── Hero ── */}
         <div className="pt-12 pb-8 text-center">
@@ -1752,6 +1901,7 @@ export default function ActivitySearch() {
             active={activeFilter}
             onChange={setActiveFilter}
             counts={counts}
+            savedCount={savedIds.size}
           />
         </div>
 
@@ -1799,11 +1949,13 @@ export default function ActivitySearch() {
                 ? `${viewBase.length.toLocaleString()} ${viewBase.length === 1 ? "result" : "results"} for "${activityQuery}"${city ? ` in ${city}` : ""}`
                 : isFeatured
                   ? `${featured.length} featured experiences · ${(result?.inventorySize ?? fullDataset.length).toLocaleString()} total indexed in ${city}${result?.inventoryStatus === "building" ? " (still indexing…)" : ""}`
-                  : activeFilter === "browse_all"
-                    ? `${fullDataset.length.toLocaleString()} total experiences in ${city}${activeSubTag ? ` · filtered to "${activeSubTag}"` : ""}`
-                    : activeSubTag
-                      ? `${viewBase.length.toLocaleString()} "${activeSubTag}" experiences in ${city}`
-                      : `${viewBase.length.toLocaleString()} ${FILTERS.find((f) => f.id === activeFilter)?.label ?? activeFilter} experience${viewBase.length === 1 ? "" : "s"} found in ${city}`
+                  : activeFilter === "saved"
+                    ? `${viewBase.length.toLocaleString()} saved on this device${activeSubTag ? ` · "${activeSubTag}"` : ""}`
+                    : activeFilter === "browse_all"
+                      ? `${fullDataset.length.toLocaleString()} total experiences in ${city}${activeSubTag ? ` · filtered to "${activeSubTag}"` : ""}`
+                      : activeSubTag
+                        ? `${viewBase.length.toLocaleString()} "${activeSubTag}" experiences in ${city}`
+                        : `${viewBase.length.toLocaleString()} ${FILTERS.find((f) => f.id === activeFilter)?.label ?? activeFilter} experience${viewBase.length === 1 ? "" : "s"} found in ${city}`
               }
             </p>
             {savedIds.size > 0 && (
@@ -1863,6 +2015,22 @@ export default function ActivitySearch() {
           detail={modalDetail}
           loading={modalLoading}
           onClose={closeDetails}
+        />
+      )}
+
+      {/* ── Sticky saved bar ── */}
+      {savedIds.size > 0 && (
+        <SavedBar
+          count={savedIds.size}
+          onPlanItinerary={() => setShowItineraryModal(true)}
+        />
+      )}
+
+      {/* ── Itinerary placeholder modal ── */}
+      {showItineraryModal && (
+        <ItineraryModal
+          savedActivities={savedActivities}
+          onClose={() => setShowItineraryModal(false)}
         />
       )}
 
