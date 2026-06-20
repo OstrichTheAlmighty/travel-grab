@@ -2061,9 +2061,10 @@ export default function ActivitySearch() {
             <span className="text-sm font-bold tracking-tight text-white/90">TravelGrab</span>
           </Link>
           <div className="h-4 w-px bg-white/10" />
-          <Link href="/flights"  className="text-sm font-medium text-white/40 hover:text-white/75 transition-colors">Flights</Link>
-          <Link href="/hotels"   className="text-sm font-medium text-white/40 hover:text-white/75 transition-colors">Hotels</Link>
-          <span                  className="text-sm font-semibold text-lantern-violet">Activities</span>
+          <Link href="/flights"    className="text-sm font-medium text-white/40 hover:text-white/75 transition-colors">Flights</Link>
+          <Link href="/hotels"     className="text-sm font-medium text-white/40 hover:text-white/75 transition-colors">Hotels</Link>
+          <span                    className="text-sm font-semibold text-lantern-violet">Activities</span>
+          <Link href="/itinerary"  className="text-sm font-medium text-white/40 hover:text-white/75 transition-colors">Itinerary</Link>
           {savedIds.size > 0 && (
             <div className="ml-auto flex items-center gap-1.5 text-[11px] text-white/35">
               <IconHeart filled className="w-3 h-3 text-red-400" />
