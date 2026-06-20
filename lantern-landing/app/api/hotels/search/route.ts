@@ -13,6 +13,40 @@ export const runtime     = "nodejs";
 export const dynamic     = "force-dynamic";
 export const maxDuration = 45;
 
+// ── Server-side SerpAPI result cache ─────────────────────────────────────────
+// Stores raw (pre-scored) hotels + enrichments keyed by search params (no prefs).
+// Scoring is re-run on every request (CPU only, <50ms), so changing prefs
+// never calls SerpAPI again — it just re-scores from the cache.
+// Uses globalThis so the same instance reuses the cache across requests.
+// Vercel serverless: cache is per-function-instance, not shared globally,
+// but this still eliminates the vast majority of redundant SerpAPI calls.
+
+type ServerCacheEntry = {
+  rawHotels:        ProviderHotel[];
+  enrichments:      Map<string, PlacesEnrichment>;
+  fetchedAt:        number;
+  rawCount:         number;
+  pagesFetched:     number;
+  geoFilteredCount: number;
+};
+
+const CACHE_TTL_WITH_DATES_MS    = 24 * 60 * 60 * 1000;  // 24 h
+const CACHE_TTL_WITHOUT_DATES_MS =  7 * 24 * 60 * 60 * 1000; // 7 d (future date-less mode)
+const MAX_CACHE_ENTRIES = 100; // evict oldest when over limit
+
+const g = globalThis as unknown as { _hotelSearchCache?: Map<string, ServerCacheEntry> };
+function getServerCache(): Map<string, ServerCacheEntry> {
+  if (!g._hotelSearchCache) g._hotelSearchCache = new Map();
+  return g._hotelSearchCache;
+}
+
+function makeCacheKey(
+  destination: string, check_in: string, check_out: string,
+  guests: number, rooms: number,
+): string {
+  return `${destination.toLowerCase().trim()}|${check_in}|${check_out}|${guests}|${rooms}`;
+}
+
 // ── Neighborhood preference → keyword signals (SerpAPI fallback path) ─────────
 
 const PREF_SIGNALS: Record<string, {
@@ -2350,17 +2384,18 @@ export async function POST(req: Request) {
   try { body = await req.json() as Record<string, unknown>; }
   catch { return NextResponse.json({ status: "error", message: "Invalid JSON." }, { status: 400 }); }
 
-  const destination        = (body.destination as string | undefined)?.trim() ?? "";
-  const place_id           = (body.place_id    as string | undefined)?.trim() ?? "";
-  const check_in           = (body.check_in    as string | undefined)?.trim() ?? "";
-  const check_out          = (body.check_out   as string | undefined)?.trim() ?? "";
+  const destination        = (body.destination   as string | undefined)?.trim() ?? "";
+  const place_id           = (body.place_id      as string | undefined)?.trim() ?? "";
+  const check_in           = (body.check_in      as string | undefined)?.trim() ?? "";
+  const check_out          = (body.check_out     as string | undefined)?.trim() ?? "";
   const guests             = Math.max(1, Math.min(8, Number(body.guests ?? 2)));
   const rooms              = Math.max(1, Math.min(4, Number(body.rooms  ?? 1)));
+  const force_refresh      = body.force_refresh === true;
   const neighborhood_prefs = Array.isArray(body.neighborhood_prefs)
     ? (body.neighborhood_prefs as unknown[]).filter((p): p is string => typeof p === "string" && p in PREF_SIGNALS)
     : [];
 
-  console.log(`[hotel-search] destination="${destination}" place_id="${place_id}"`);
+  console.log(`[hotel-search] destination="${destination}" place_id="${place_id}" force_refresh=${force_refresh}`);
 
   if (!destination || !check_in || !check_out) {
     return NextResponse.json({ status: "error", message: "destination, check_in, and check_out are required." }, { status: 400 });
@@ -2373,50 +2408,102 @@ export async function POST(req: Request) {
     return NextResponse.json({ status: "not_configured", message: "Hotel search is temporarily unavailable." }, { status: 200 });
   }
 
-  const nights = nightsBetween(check_in, check_out);
+  const nights   = nightsBetween(check_in, check_out);
+  const cacheKey = makeCacheKey(destination, check_in, check_out, guests, rooms);
+  const cacheTtl = (check_in && check_out) ? CACHE_TTL_WITH_DATES_MS : CACHE_TTL_WITHOUT_DATES_MS;
+  const cache    = getServerCache();
+  const now      = Date.now();
+  const cached   = cache.get(cacheKey);
 
-  const serpResult = await searchGoogleHotels({ destination, check_in, check_out, guests, rooms }, serpApiKey);
+  // ── Raw hotel data: serve from cache or fetch fresh ──────────────────────────
+  let rawHotels:    ProviderHotel[];
+  let enrichments:  Map<string, PlacesEnrichment>;
+  let fetchedAt:    number;
+  let fromCache:    boolean;
+  let rawCount:     number;
+  let geoFilteredCount: number;
 
-  if (serpResult.hotels.length === 0) {
-    return NextResponse.json({ status: "empty", message: `No hotels found for "${destination}". Try a different city name.`, offers: [] });
-  }
-
-  // ── Pipeline stage 1: deduplicate ────────────────────────────────────────────
-  const deduped = deduplicateHotels(serpResult.hotels);
-  console.log(
-    `[pipeline:1-fetch]  destination="${destination}"  pages=${serpResult.pagesFetched}  raw=${serpResult.rawCount}  after_dedup=${deduped.length}  (serp=${serpResult.latencyMs}ms)`,
-  );
-
-  // Log first 10 raw hotels with coordinates to verify geo data quality
-  console.log(`[pipeline:1-fetch]  first ${Math.min(10, deduped.length)} hotels (pre-filter):`);
-  deduped.slice(0, 10).forEach((h, i) =>
-    console.log(`  [${i + 1}] "${h.name}" | ${h.address} | lat=${h.latitude ?? "?"} lng=${h.longitude ?? "?"}`)
-  );
-
-  // ── Pipeline stage 2: geo-filter ──────────────────────────────────────────────
-  // Resolve destination → coordinates, then drop hotels outside 50 km.
-  // Uses placeId when provided by the client (autocomplete selection) for unambiguous geocoding;
-  // falls back to text-based geocoding when the user typed manually.
-  let geoFiltered = deduped;
-  if (placesApiKey) {
-    const geoCenter = await geocodeDestination(destination, placesApiKey, place_id || undefined);
-    if (geoCenter) {
-      geoFiltered = geoFilterHotels(deduped, geoCenter, destination);
-    } else {
-      console.warn(`[pipeline:2-geo]  geocoding failed for "${destination}" — skipping geo filter`);
-    }
+  if (!force_refresh && cached && (now - cached.fetchedAt) < cacheTtl) {
+    const ageMin = Math.round((now - cached.fetchedAt) / 60_000);
+    console.log(`SERPAPI_CACHE_HIT ${cacheKey} age=${ageMin}min hotels=${cached.rawHotels.length}`);
+    rawHotels        = cached.rawHotels;
+    enrichments      = cached.enrichments;
+    fetchedAt        = cached.fetchedAt;
+    fromCache        = true;
+    rawCount         = cached.rawCount;
+    geoFilteredCount = cached.geoFilteredCount;
   } else {
-    console.warn(`[pipeline:2-geo]  no Places API key — skipping geo filter`);
-  }
-  console.log(`[pipeline:2-geo]  after_geo_filter=${geoFiltered.length}  (removed ${deduped.length - geoFiltered.length})`);
+    if (force_refresh) {
+      console.log(`SERPAPI_CALL hotel_search force_refresh ${cacheKey}`);
+    } else {
+      console.log(`SERPAPI_CALL hotel_search cache_miss ${cacheKey}`);
+    }
 
-  // ── Pipeline stage 3: enrich + score ─────────────────────────────────────────
-  let enrichments = new Map<string, PlacesEnrichment>();
-  if (placesApiKey) {
-    enrichments = await enrichWithGooglePlaces(geoFiltered, destination, placesApiKey);
+    const serpResult = await searchGoogleHotels({ destination, check_in, check_out, guests, rooms }, serpApiKey);
+
+    if (serpResult.hotels.length === 0) {
+      return NextResponse.json({ status: "empty", message: `No hotels found for "${destination}". Try a different city name.`, offers: [] });
+    }
+
+    // ── Pipeline stage 1: deduplicate ──────────────────────────────────────────
+    const deduped = deduplicateHotels(serpResult.hotels);
+    console.log(
+      `[pipeline:1-fetch]  destination="${destination}"  pages=${serpResult.pagesFetched}  raw=${serpResult.rawCount}  after_dedup=${deduped.length}  (serp=${serpResult.latencyMs}ms)`,
+    );
+
+    console.log(`[pipeline:1-fetch]  first ${Math.min(10, deduped.length)} hotels (pre-filter):`);
+    deduped.slice(0, 10).forEach((h, i) =>
+      console.log(`  [${i + 1}] "${h.name}" | ${h.address} | lat=${h.latitude ?? "?"} lng=${h.longitude ?? "?"}`)
+    );
+
+    // ── Pipeline stage 2: geo-filter ────────────────────────────────────────────
+    let geoFiltered = deduped;
+    if (placesApiKey) {
+      const geoCenter = await geocodeDestination(destination, placesApiKey, place_id || undefined);
+      if (geoCenter) {
+        geoFiltered = geoFilterHotels(deduped, geoCenter, destination);
+      } else {
+        console.warn(`[pipeline:2-geo]  geocoding failed for "${destination}" — skipping geo filter`);
+      }
+    } else {
+      console.warn(`[pipeline:2-geo]  no Places API key — skipping geo filter`);
+    }
+    console.log(`[pipeline:2-geo]  after_geo_filter=${geoFiltered.length}  (removed ${deduped.length - geoFiltered.length})`);
+
+    // ── Pipeline stage 3: Places enrichment ─────────────────────────────────────
+    enrichments = new Map<string, PlacesEnrichment>();
+    if (placesApiKey) {
+      enrichments = await enrichWithGooglePlaces(geoFiltered, destination, placesApiKey);
+    }
+
+    // ── Store in server cache ────────────────────────────────────────────────────
+    // Evict oldest entry if over limit (simple FIFO — first key inserted)
+    if (cache.size >= MAX_CACHE_ENTRIES) {
+      const oldestKey = cache.keys().next().value;
+      if (oldestKey !== undefined) {
+        cache.delete(oldestKey);
+        console.log(`[hotel-cache] evicted oldest entry: ${oldestKey}`);
+      }
+    }
+    cache.set(cacheKey, {
+      rawHotels:        geoFiltered,
+      enrichments,
+      fetchedAt:        now,
+      rawCount:         serpResult.rawCount,
+      pagesFetched:     serpResult.pagesFetched,
+      geoFilteredCount: geoFiltered.length,
+    });
+    console.log(`[hotel-cache] stored ${geoFiltered.length} hotels for "${cacheKey}" (cache size: ${cache.size})`);
+
+    rawHotels        = geoFiltered;
+    fetchedAt        = now;
+    fromCache        = false;
+    rawCount         = serpResult.rawCount;
+    geoFilteredCount = geoFiltered.length;
   }
 
-  const scored = scoreHotels(geoFiltered, neighborhood_prefs, destination, enrichments).map((h) => ({ ...h, nights }));
+  // ── Pipeline stage 4: score (always runs — prefs may differ per request) ──────
+  const scored = scoreHotels(rawHotels, neighborhood_prefs, destination, enrichments).map((h) => ({ ...h, nights }));
 
   // Stretch scores to 45–97 before sorting so results always span ~50 points.
   normalizeAiScores(scored);
@@ -2461,10 +2548,10 @@ export async function POST(req: Request) {
 
   const nbhdCount = new Set(scored.map((h) => h.inferred_neighborhood).filter(Boolean)).size;
   console.log(
-    `[pipeline:3-rank]  scored=${scored.length}  neighborhoods=${nbhdCount}  prefs=[${neighborhood_prefs.join(",")}]  reranked=${neighborhood_prefs.length > 0 ? scored.length : 0}`,
+    `[pipeline:4-rank]  scored=${scored.length}  neighborhoods=${nbhdCount}  prefs=[${neighborhood_prefs.join(",")}]  from_cache=${fromCache}`,
   );
   console.log(
-    `[pipeline:summary]  destination="${destination}"  raw=${serpResult.rawCount}  deduped=${deduped.length}  geo_filtered=${geoFiltered.length}  final_offers=${scored.length}`,
+    `[pipeline:summary]  destination="${destination}"  raw=${rawCount}  geo_filtered=${geoFilteredCount}  final_offers=${scored.length}  from_cache=${fromCache}`,
   );
 
   return NextResponse.json({
@@ -2476,8 +2563,10 @@ export async function POST(req: Request) {
     guests,
     rooms,
     neighborhood_prefs,
-    places_enriched: enrichments.size > 0,
-    offer_count: scored.length,
-    offers: scored,
+    places_enriched:  enrichments.size > 0,
+    offer_count:      scored.length,
+    last_fetched_at:  new Date(fetchedAt).toISOString(),
+    from_cache:       fromCache,
+    offers:           scored,
   });
 }

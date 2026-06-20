@@ -4815,6 +4815,7 @@ export default function HotelSearch() {
   const [searchState,         setSearchState]         = useState<SearchState>("idle");
   const [offers,              setOffers]              = useState<HotelOffer[]>([]);
   const [searchedDest,        setSearchedDest]        = useState("");
+  const [lastFetchedAt,       setLastFetchedAt]       = useState<string | null>(null);
   const [activePrefs,         setActivePrefs]         = useState<readonly PrefId[]>([]);
   const [selectedNeighborhood, setSelectedNeighborhood] = useState<string | null>(null);
   const [sortOrder,           setSortOrder]           = useState<"score" | "price_asc" | "price_desc" | "rating">("score");
@@ -4878,7 +4879,50 @@ export default function HotelSearch() {
     );
   };
 
-  const doSearch = useCallback(async (prefs: PrefId[]) => {
+  // ── Client-side hotel search cache (localStorage) ────────────────────────────
+  // Keyed by full search params (including prefs) so pref changes read from server
+  // cache (no SerpAPI) and the client caches the resulting scored set separately.
+  const CLIENT_CACHE_KEY_PREFIX = "travelgrab_hotel_results_v1";
+  const CLIENT_CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes
+
+  type ClientCacheEntry = {
+    offers:           HotelOffer[];
+    neighborhood_prefs: string[];
+    last_fetched_at:  string;
+    cachedAt:         number;
+  };
+
+  function makeClientCacheKey(destLabel: string, ci: string, co: string, g: number, r: number, prefs: PrefId[]): string {
+    return `${CLIENT_CACHE_KEY_PREFIX}:${destLabel}|${ci}|${co}|${g}|${r}|${[...prefs].sort().join(",")}`;
+  }
+
+  function readClientCache(key: string): ClientCacheEntry | null {
+    try {
+      const raw = localStorage.getItem(key);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw) as ClientCacheEntry & { cachedAt?: number };
+      if (!parsed.cachedAt || Date.now() - parsed.cachedAt > CLIENT_CACHE_TTL_MS) return null;
+      return parsed;
+    } catch { return null; }
+  }
+
+  function writeClientCache(key: string, entry: ClientCacheEntry): void {
+    try { localStorage.setItem(key, JSON.stringify(entry)); } catch { /* quota exceeded — ignore */ }
+  }
+
+  function clearClientCacheForSearch(destLabel: string, ci: string, co: string, g: number, r: number): void {
+    // Clear all pref variants for this base search
+    try {
+      const prefix = `${CLIENT_CACHE_KEY_PREFIX}:${destLabel}|${ci}|${co}|${g}|${r}|`;
+      for (let i = localStorage.length - 1; i >= 0; i--) {
+        const k = localStorage.key(i);
+        if (k?.startsWith(prefix)) localStorage.removeItem(k);
+      }
+    } catch { /* ignore */ }
+  }
+
+  const doSearch = useCallback(async (prefs: PrefId[], opts?: { forceRefresh?: boolean }) => {
+    const forceRefresh = opts?.forceRefresh ?? false;
     const errs: string[] = [];
     if (!destination.trim()) errs.push("Please enter a destination.");
     if (!checkIn)             errs.push("Please select a check-in date.");
@@ -4890,6 +4934,29 @@ export default function HotelSearch() {
     // Use the full unambiguous label from autocomplete selection ("Nara, Japan")
     // rather than raw input text which could be just "Nara" (ambiguous).
     const destLabel = (selectedPlace?.label ?? destination).trim();
+
+    // ── Client cache check (skip on force refresh) ──────────────────────────────
+    if (!forceRefresh) {
+      const clientKey   = makeClientCacheKey(destLabel, checkIn, checkOut, guests, rooms, prefs);
+      const clientCached = readClientCache(clientKey);
+      if (clientCached) {
+        console.log("[hotel-search] client cache hit:", clientKey);
+        setOffers(clientCached.offers);
+        setActivePrefs(clientCached.neighborhood_prefs as PrefId[]);
+        setLastFetchedAt(clientCached.last_fetched_at);
+        setSearchedDest(destLabel);
+        setSelectedNeighborhood(null);
+        setSortOrder("score");
+        setAmenityFilters([]);
+        setViewMode("list");
+        setSelectedHotelId(null);
+        setVisibleCount(20);
+        setSearchMode("best-area");
+        setSearchState("results");
+        setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+        return;
+      }
+    }
 
     const nights = (checkIn && checkOut)
       ? Math.round((new Date(checkOut).getTime() - new Date(checkIn).getTime()) / 86_400_000)
@@ -4917,6 +4984,7 @@ export default function HotelSearch() {
         guests,
         rooms,
         neighborhood_prefs: prefs,
+        force_refresh:      forceRefresh,
         ...(selectedPlace?.placeId ? { place_id: selectedPlace.placeId } : {}),
       };
       console.log("[hotel-search] request_sent:", requestBody);
@@ -4937,6 +5005,8 @@ export default function HotelSearch() {
       const data = await res.json() as {
         status: string; message?: string; offers?: HotelOffer[];
         neighborhood_prefs?: string[];
+        last_fetched_at?: string;
+        from_cache?: boolean;
       };
 
       if (data.status === "not_configured") {
@@ -4959,10 +5029,27 @@ export default function HotelSearch() {
         destination:   destLabel,
         results_count: data.offers!.length,
         load_time_ms:  Date.now() - searchStartTimeRef.current,
+        from_cache:    data.from_cache ?? false,
+      });
+
+      const fetchedAt = data.last_fetched_at ?? new Date().toISOString();
+      const returnedPrefs = (data.neighborhood_prefs ?? prefs) as PrefId[];
+
+      // Write result to client cache
+      if (forceRefresh) {
+        clearClientCacheForSearch(destLabel, checkIn, checkOut, guests, rooms);
+      }
+      const clientKey = makeClientCacheKey(destLabel, checkIn, checkOut, guests, rooms, prefs);
+      writeClientCache(clientKey, {
+        offers:             data.offers!,
+        neighborhood_prefs: returnedPrefs,
+        last_fetched_at:    fetchedAt,
+        cachedAt:           Date.now(),
       });
 
       setOffers(data.offers!);
-      setActivePrefs((data.neighborhood_prefs ?? prefs) as PrefId[]);
+      setActivePrefs(returnedPrefs);
+      setLastFetchedAt(fetchedAt);
       setSelectedNeighborhood(null);
       setSortOrder("score");
       setAmenityFilters([]);
@@ -4980,6 +5067,11 @@ export default function HotelSearch() {
   }, [destination, selectedPlace, checkIn, checkOut, guests, rooms]);
 
   const handleSearch = () => doSearch(selectedPrefs);
+  const handleRefreshPrices = () => {
+    const destLabel = (selectedPlace?.label ?? destination).trim();
+    clearClientCacheForSearch(destLabel, checkIn, checkOut, guests, rooms);
+    void doSearch(activePrefs as PrefId[], { forceRefresh: true });
+  };
 
   // Re-run search when prefs change while results are visible
   const handleRefineToggle = (id: string) => {
@@ -5413,6 +5505,28 @@ export default function HotelSearch() {
                   </div>
                 )}
               </div>
+
+              {/* ── Prices last checked + Refresh ───────────────────────────── */}
+              {lastFetchedAt && (
+                <div className="flex items-center gap-2 mb-3 px-1">
+                  <span className="text-[11px] text-white/28">
+                    Prices last checked {(() => {
+                      const ms = Date.now() - new Date(lastFetchedAt).getTime();
+                      const mins = Math.round(ms / 60_000);
+                      if (mins < 2)  return "just now";
+                      if (mins < 60) return `${mins} min ago`;
+                      const hrs = Math.round(mins / 60);
+                      return hrs === 1 ? "1 hour ago" : `${hrs} hours ago`;
+                    })()}
+                  </span>
+                  <button
+                    onClick={handleRefreshPrices}
+                    className="text-[11px] font-semibold text-lantern-violet/60 hover:text-lantern-violet transition-colors"
+                  >
+                    Refresh prices
+                  </button>
+                </div>
+              )}
 
               {/* ── Split layout: list left, map right — map always on desktop ── */}
               <div className="lg:flex lg:items-start lg:-mx-6">
