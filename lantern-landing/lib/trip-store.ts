@@ -75,6 +75,7 @@ export interface TripStore {
   destinationRegion:   string;
   cityStops:           TripCityStop[];
   startDate:           string;
+  returnDate:          string;
   tripLength:          number;
   travelers:           number;
   travelStyles:        TravelStyle[];
@@ -104,6 +105,7 @@ export const TRIP_STORE_DEFAULT: TripStore = {
   destinationRegion:    "",
   cityStops:            [],
   startDate:            "",
+  returnDate:           "",
   tripLength:           7,
   travelers:            1,
   travelStyles:         [],

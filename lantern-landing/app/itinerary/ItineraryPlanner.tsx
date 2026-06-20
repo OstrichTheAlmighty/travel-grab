@@ -643,6 +643,7 @@ export default function ItineraryPlanner() {
   const [obStep,      setObStep]      = useState<ObStep>("done");
   const [obDest,      setObDest]      = useState("");
   const [obStart,     setObStart]     = useState("");
+  const [obReturn,    setObReturn]    = useState("");
   const [obDuration,  setObDuration]  = useState(7);
   const [obFirstTime, setObFirstTime] = useState<boolean | null>(null);
   const [obStyles,    setObStyles]    = useState<TravelStyle[]>([]);
@@ -840,6 +841,7 @@ export default function ItineraryPlanner() {
     setSelectedFlight(null);
     setObDest("");
     setObStart("");
+    setObReturn("");
     setObDuration(7);
     setObFirstTime(null);
     setObStyles([]);
@@ -909,14 +911,21 @@ export default function ItineraryPlanner() {
     const cities = obCities.map(({ city, days }) => ({ city, days }));
     const startDate = obStart || tomorrowIso();
     const tripLength = cities.reduce((s, c) => s + (c.days || 0), 0);
+    // Compute returnDate: use explicit obReturn if set, else derive from startDate + tripLength
+    const returnDate = obReturn || (() => {
+      const d = new Date(startDate + "T00:00:00");
+      d.setDate(d.getDate() + tripLength);
+      return d.toISOString().slice(0, 10);
+    })();
     updateTrip({ cities, startDate });
     obDestRef.current = obDest;
-    // Write immediately to canonical store so other pages get it right away
+    // Write immediately to canonical store so other pages see it right away
     writeTripStore({
       ...TRIP_STORE_DEFAULT,
       destinationRegion: obDest,
       cityStops:         cities,
       startDate,
+      returnDate,
       tripLength,
       travelStyles:      obStyles,
       firstTime:         obFirstTime,
@@ -924,6 +933,9 @@ export default function ItineraryPlanner() {
       bedTime:           trip.bedTime,
       pace:              trip.pace,
       transit:           trip.transit,
+      selectedFlight:    null,
+      selectedHotels:    {},
+      savedActivities:   [],
     });
     setObStep("done");
   }
@@ -1092,7 +1104,7 @@ export default function ItineraryPlanner() {
             <div className="space-y-6">
               <div>
                 <h1 className="text-3xl font-bold text-white mb-2">When are you going?</h1>
-                <p className="text-sm text-white/40">Pick a start date and how many days you have.</p>
+                <p className="text-sm text-white/40">Set a start date and trip length, or pick a return date.</p>
               </div>
               <div className="space-y-4">
                 <div>
@@ -1101,25 +1113,60 @@ export default function ItineraryPlanner() {
                     type="date"
                     value={obStart}
                     min={todayIso()}
-                    onChange={(e) => setObStart(e.target.value)}
-                    className="w-full rounded-xl border border-white/[0.12] bg-white/[0.05] px-4 py-3 text-sm text-white focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors"
+                    onChange={(e) => {
+                      const newStart = e.target.value;
+                      setObStart(newStart);
+                      // Recompute return date when start changes, keeping duration fixed
+                      if (newStart) {
+                        const d = new Date(newStart + "T00:00:00");
+                        d.setDate(d.getDate() + obDuration);
+                        setObReturn(d.toISOString().slice(0, 10));
+                      }
+                    }}
+                    className="w-full rounded-xl border border-white/[0.12] bg-white/[0.05] px-4 py-3 text-sm text-white focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors [color-scheme:dark]"
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-white/40 block mb-1.5">Trip length</label>
-                  <div className="flex items-center gap-4">
-                    <input
-                      type="range"
-                      min={2}
-                      max={30}
-                      value={obDuration}
-                      onChange={(e) => setObDuration(parseInt(e.target.value))}
-                      className="flex-1 accent-lantern-mint"
-                    />
-                    <span className="text-sm font-semibold text-white w-20 shrink-0 text-right">
-                      {obDuration} {obDuration === 1 ? "day" : "days"}
-                    </span>
-                  </div>
+                  <label className="text-xs text-white/40 block mb-1.5">
+                    Trip length — <span className="text-white/60 font-semibold">{obDuration} {obDuration === 1 ? "day" : "days"}</span>
+                  </label>
+                  <input
+                    type="range"
+                    min={2}
+                    max={30}
+                    value={obDuration}
+                    onChange={(e) => {
+                      const n = parseInt(e.target.value);
+                      setObDuration(n);
+                      // Update return date when slider moves (if start is set)
+                      if (obStart) {
+                        const d = new Date(obStart + "T00:00:00");
+                        d.setDate(d.getDate() + n);
+                        setObReturn(d.toISOString().slice(0, 10));
+                      }
+                    }}
+                    className="w-full accent-lantern-mint"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs text-white/40 block mb-1.5">Return date <span className="text-white/25">(optional)</span></label>
+                  <input
+                    type="date"
+                    value={obReturn}
+                    min={obStart || todayIso()}
+                    onChange={(e) => {
+                      const newReturn = e.target.value;
+                      setObReturn(newReturn);
+                      // Compute duration from start → return
+                      if (obStart && newReturn && newReturn > obStart) {
+                        const start = new Date(obStart + "T00:00:00");
+                        const end   = new Date(newReturn + "T00:00:00");
+                        const diff  = Math.round((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+                        if (diff >= 1 && diff <= 30) setObDuration(diff);
+                      }
+                    }}
+                    className="w-full rounded-xl border border-white/[0.12] bg-white/[0.05] px-4 py-3 text-sm text-white focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors [color-scheme:dark]"
+                  />
                 </div>
               </div>
               <div className="flex gap-3">
@@ -1143,7 +1190,7 @@ export default function ItineraryPlanner() {
             <div className="space-y-6">
               <div>
                 <h1 className="text-3xl font-bold text-white mb-2">How do you travel?</h1>
-                <p className="text-sm text-white/40">Select all that apply. We&apos;ll use this to suggest cities and activities.</p>
+                <p className="text-sm text-white/40">Select all that apply — we&apos;ll use this to recommend the right cities.</p>
               </div>
               <div>
                 <p className="text-xs text-white/40 mb-3">First time visiting {obDest}?</p>
@@ -1188,20 +1235,22 @@ export default function ItineraryPlanner() {
               </div>
               {obError && <p className="text-xs text-red-400">{obError}</p>}
               <div className="flex gap-3">
-                <button type="button" onClick={() => setObStep("dates")} className="flex-1 h-12 rounded-full border border-white/[0.1] text-sm text-white/50 hover:text-white/80 transition-colors">
+                <button
+                  type="button"
+                  onClick={() => setObStep("dates")}
+                  className="flex-1 h-12 rounded-full border border-white/[0.1] text-sm text-white/50 hover:text-white/80 transition-colors"
+                >
                   Back
                 </button>
                 <button
                   type="button"
                   disabled={obStyles.length === 0 || obLoading}
                   onClick={() => void suggestCities()}
-                  className="flex-[2] h-12 rounded-full bg-gradient-to-r from-lantern-mint to-lantern-blue text-ink text-sm font-bold transition hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
+                  className="flex-[2] h-12 rounded-full bg-lantern-mint text-ink text-sm font-bold transition hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
                 >
-                  {obLoading ? (
-                    <><span className="h-3.5 w-3.5 rounded-full border-2 border-ink/40 border-t-ink animate-spin" /> Planning…</>
-                  ) : (
-                    obStyles.length === 0 ? "Select a travel style to continue" : "Build my trip →"
-                  )}
+                  {obLoading
+                    ? <><span className="h-3.5 w-3.5 rounded-full border-2 border-ink/40 border-t-ink animate-spin" /> Planning…</>
+                    : "Continue"}
                 </button>
               </div>
             </div>
@@ -1252,16 +1301,20 @@ export default function ItineraryPlanner() {
                 </button>
               </div>
               <div className="flex gap-3">
-                <button type="button" onClick={() => setObStep("style")} className="flex-1 h-12 rounded-full border border-white/[0.1] text-sm text-white/50 hover:text-white/80 transition-colors">
-                  Edit answers
+                <button
+                  type="button"
+                  onClick={() => setObStep("style")}
+                  className="flex-1 h-12 rounded-full border border-white/[0.1] text-sm text-white/50 hover:text-white/80 transition-colors"
+                >
+                  Back
                 </button>
                 <button
                   type="button"
                   disabled={obCities.length === 0 || obCities.some(c => !c.city.trim())}
                   onClick={finishOnboarding}
-                  className="flex-[2] h-12 rounded-full bg-gradient-to-r from-lantern-mint to-lantern-blue text-ink text-sm font-bold transition hover:opacity-90 disabled:opacity-40"
+                  className="flex-[2] h-12 rounded-full bg-lantern-mint text-ink text-sm font-bold transition hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
-                  Save trip &amp; build itinerary →
+                  Save trip &amp; build itinerary
                 </button>
               </div>
             </div>
