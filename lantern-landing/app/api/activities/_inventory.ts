@@ -387,7 +387,7 @@ export function mapToActivity(
   const badges      = generateBadges(place);
 
   const finalCategory: Category =
-    badges.includes("hidden_gem") && !["food", "nightlife"].includes(category)
+    badges.includes("hidden_gem") && !["food", "nightlife", "luxury"].includes(category)
       ? "hidden_gems"
       : category;
 

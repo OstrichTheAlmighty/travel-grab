@@ -1265,6 +1265,75 @@ function ErrorState({ message, onRetry }: { message: string; onRetry: () => void
   );
 }
 
+// ── Featured curation ─────────────────────────────────────────────────────────
+// Featured is NOT the top-N by review score — it's a curated blend that
+// prioritises landmarks, culture, and experiences over restaurants.
+
+const FEATURED_CAT_WEIGHT: Partial<Record<Category, number>> = {
+  culture:     4.5,
+  adventure:   4.0,
+  nature:      3.0,
+  luxury:      2.5,
+  hidden_gems: 2.5,
+  nightlife:   1.5,
+  food:        0.25, // food lives in the Food tab; keep Featured landmark-first
+};
+
+// Extra multiplier for tags that signal iconic attractions / destinations
+const FEATURED_TAG_WEIGHT: Record<string, number> = {
+  "Observation Deck": 2.0,
+  "Theme Park":       2.0,
+  "Sightseeing":      1.9,  // tourist_attraction type places
+  "Temple":           1.8,
+  "Shrine":           1.7,
+  "Museum":           1.6,
+  "Historical Site":  1.5,
+  "Landmark":         1.5,
+  "Art Gallery":      1.4,
+  "Aquarium":         1.4,
+  "Botanical Garden": 1.4,
+  "Guided Tour":      1.3,
+  "Zoo":              1.3,
+  "Views":            1.3,
+  "Garden":           1.3,
+  "Market":           1.2,
+  "Beach":            1.2,
+  "Park":             1.2,
+};
+
+// Max share of Featured slots that can go to Food category
+const FOOD_CAP_IN_FEATURED = 0.20;
+
+function buildFeatured(activities: Activity[], count: number): Activity[] {
+  const scored = activities.map((a) => {
+    const base = a.rating * Math.log1p(a.reviewCount);
+    const catW = FEATURED_CAT_WEIGHT[a.category] ?? 1.0;
+    let tagW = 1.0;
+    for (const tag of a.tags) {
+      const w = FEATURED_TAG_WEIGHT[tag] ?? 0;
+      if (w > tagW) tagW = w;
+    }
+    return { activity: a, score: base * catW * tagW };
+  });
+
+  scored.sort((a, b) => b.score - a.score);
+
+  const maxFood = Math.ceil(count * FOOD_CAP_IN_FEATURED);
+  const result: Activity[] = [];
+  let foodCount = 0;
+
+  for (const { activity } of scored) {
+    if (result.length >= count) break;
+    if (activity.category === "food") {
+      if (foodCount >= maxFood) continue;
+      foodCount++;
+    }
+    result.push(activity);
+  }
+
+  return result;
+}
+
 // ── Activity search ───────────────────────────────────────────────────────────
 
 const CURATED_COUNT = 30;
@@ -1504,7 +1573,9 @@ export default function ActivitySearch() {
 
   // Two datasets — fullDataset is the source of truth for counts and browsing
   const fullDataset  = useMemo(() => result?.activities ?? [], [result?.activities]);
-  const featured     = useMemo(() => fullDataset.slice(0, CURATED_COUNT), [fullDataset]);
+  // Featured uses a curated ranking (landmark/culture bias + food cap) rather than
+  // raw review-score order, which would be dominated by high-volume restaurants.
+  const featured     = useMemo(() => buildFeatured(fullDataset, CURATED_COUNT), [fullDataset]);
 
   // Category counts ALWAYS from full dataset (not just the top 30)
   const counts = useMemo((): Partial<Record<FilterId, number>> => {
