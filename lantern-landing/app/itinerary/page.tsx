@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ItineraryPlanner from "./ItineraryPlanner";
+import DemoGuard from "@/app/components/DemoGuard";
 
 export const metadata: Metadata = {
   title: "Plan your itinerary — TravelGrab",
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function ItineraryPage() {
-  return <ItineraryPlanner />;
+  return (
+    <DemoGuard>
+      <ItineraryPlanner />
+    </DemoGuard>
+  );
 }

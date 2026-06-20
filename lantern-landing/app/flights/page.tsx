@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import FlightSearch from "./FlightSearch";
+import DemoGuard from "@/app/components/DemoGuard";
 
 export const metadata: Metadata = {
   title: "Flight Search — TravelGrab",
@@ -8,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function FlightsPage() {
-  return <FlightSearch />;
+  return (
+    <DemoGuard>
+      <FlightSearch />
+    </DemoGuard>
+  );
 }

@@ -10,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: `${BRAND_NAME} — Find the best flight, not just the cheapest one`,
-  description: `${BRAND_NAME} compares price, layovers, timing, airlines, airports, and comfort to explain which flight is actually worth booking.`,
+  title: `${BRAND_NAME} — Plan the trip that actually fits you`,
+  description: `${BRAND_NAME} helps you choose better flights, smarter hotels, worthwhile activities, and an itinerary that saves time instead of wasting it.`,
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
