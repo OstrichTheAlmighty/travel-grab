@@ -2240,12 +2240,9 @@ export default function FlightSearch() {
           </Link>
           <div className="h-4 w-px bg-white/10" />
           <span className="text-sm font-medium text-lantern-violet">Flights</span>
-          <Link href="/hotels" className="text-sm font-medium text-white/45 hover:text-white/80 transition-colors">
-            Hotels
-          </Link>
-          <Link href="/activities" className="text-sm font-medium text-white/45 hover:text-white/80 transition-colors">
-            Activities
-          </Link>
+          <Link href="/hotels"     className="text-sm font-medium text-white/45 hover:text-white/80 transition-colors">Hotels</Link>
+          <Link href="/activities" className="text-sm font-medium text-white/45 hover:text-white/80 transition-colors">Activities</Link>
+          <Link href="/itinerary"  className="text-sm font-medium text-white/45 hover:text-white/80 transition-colors">Itinerary</Link>
         </div>
       </nav>
 

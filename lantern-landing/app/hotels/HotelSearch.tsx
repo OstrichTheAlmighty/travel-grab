@@ -4986,13 +4986,10 @@ export default function HotelSearch() {
             <span className="text-sm font-bold tracking-tight text-white/90">TravelGrab</span>
           </Link>
           <div className="h-4 w-px bg-white/10" />
-          <Link href="/flights" className="text-sm font-medium text-white/45 hover:text-white/80 transition-colors">
-            Flights
-          </Link>
+          <Link href="/flights"    className="text-sm font-medium text-white/45 hover:text-white/80 transition-colors">Flights</Link>
           <span className="text-sm font-medium text-lantern-violet">Hotels</span>
-          <Link href="/activities" className="text-sm font-medium text-white/45 hover:text-white/80 transition-colors">
-            Activities
-          </Link>
+          <Link href="/activities" className="text-sm font-medium text-white/45 hover:text-white/80 transition-colors">Activities</Link>
+          <Link href="/itinerary"  className="text-sm font-medium text-white/45 hover:text-white/80 transition-colors">Itinerary</Link>
         </div>
       </nav>
 
