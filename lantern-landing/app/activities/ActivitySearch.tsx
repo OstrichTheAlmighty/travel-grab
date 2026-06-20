@@ -138,41 +138,42 @@ function ActivityCard({
 }) {
   const [showWhy,   setShowWhy]   = useState(false);
   const [imgFailed, setImgFailed] = useState(false);
+  const [imgLoaded, setImgLoaded] = useState(false);
 
   const heroBadges = activity.badges
     .filter((b) => !(b === "free" && activity.isFree))
     .slice(0, 2);
 
-  const showPhoto = Boolean(activity.photoRef) && !imgFailed;
+  const hasPhoto = Boolean(activity.photoRef) && !imgFailed;
 
   return (
     <div className="group flex flex-col rounded-2xl border border-white/[0.08] bg-panel overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.55)] hover:border-white/[0.14]">
 
       {/* ── Hero ── */}
       <div className="relative h-52 overflow-hidden flex-shrink-0">
-        {showPhoto ? (
-          // Real photo from Google Places (proxied server-side via /api/activities/photo)
+        {/* Gradient + emoji always visible as background/loading placeholder */}
+        <div
+          className="absolute inset-0 w-full h-full flex items-center justify-center"
+          style={{ background: activity.gradient }}
+        >
+          <span
+            className="text-8xl select-none transition-transform duration-500 ease-out group-hover:scale-110"
+            style={{ filter: "drop-shadow(0 4px 24px rgba(0,0,0,0.5))" }}
+          >
+            {activity.emoji}
+          </span>
+        </div>
+        {/* Photo fades in over gradient once loaded */}
+        {hasPhoto && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={`/api/activities/photo?name=${encodeURIComponent(activity.photoRef!)}`}
             alt={activity.title}
             loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+            className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105 ${imgLoaded ? "opacity-100" : "opacity-0"}`}
+            onLoad={() => setImgLoaded(true)}
             onError={() => setImgFailed(true)}
           />
-        ) : (
-          // Gradient + emoji fallback
-          <div
-            className="w-full h-full flex items-center justify-center"
-            style={{ background: activity.gradient }}
-          >
-            <span
-              className="text-8xl select-none transition-transform duration-500 ease-out group-hover:scale-110"
-              style={{ filter: "drop-shadow(0 4px 24px rgba(0,0,0,0.5))" }}
-            >
-              {activity.emoji}
-            </span>
-          </div>
         )}
 
         {/* Bottom fade to panel bg */}
@@ -1747,6 +1748,7 @@ export default function ActivitySearch() {
   const [activeSubTag,       setActiveSubTag]       = useState<string | null>(null);
   const [savedIds,           setSavedIds]           = useState<Set<string>>(new Set());
   const [savedMeta,          setSavedMeta]          = useState<Record<string, { title: string; category: string; neighborhood: string; duration: string; rating: number; photoRef?: string }>>({});
+  const [tripCities,         setTripCities]         = useState<string[]>([]); // city stops from itinerary
   const [showItineraryModal, setShowItineraryModal] = useState(false);
   const [loading,            setLoading]            = useState(false);
   const [error,              setError]              = useState<string | null>(null);
@@ -1761,25 +1763,43 @@ export default function ActivitySearch() {
   const detailsCache  = useRef(new Map<string, PlaceDetail>());
   const insightsCache = useRef(new Map<string, ReviewInsights | null>());
 
-  // Pre-fill destination from the shared trip store (set on the Itinerary page)
+  // Mount — load saved activities, preload session cache, prefill from trip store
   useEffect(() => {
-    try {
-      const trip = readTripStore();
-      if (trip && trip.cityStops.length > 0 && trip.cityStops[0].city) {
-        setDestination(trip.cityStops[0].city);
-      }
-    } catch { /* ignore */ }
-  }, []);
-
-  // Persist saved IDs + metadata to localStorage
-  useEffect(() => {
+    // 1. Restore saved activities from localStorage
     try {
       const stored = localStorage.getItem("travelgrab:saved-activities");
       if (stored) setSavedIds(new Set(JSON.parse(stored) as string[]));
       const storedMeta = localStorage.getItem("travelgrab:saved-activities-data");
       if (storedMeta) setSavedMeta(JSON.parse(storedMeta));
-    } catch { /* ignore parse errors */ }
-  }, []);
+    } catch { /* ignore */ }
+
+    // 2. Preload per-city session cache into in-memory map (instant on revisit)
+    try {
+      for (let i = 0; i < sessionStorage.length; i++) {
+        const k = sessionStorage.key(i);
+        if (k?.startsWith("tg_act_")) {
+          const raw = sessionStorage.getItem(k);
+          if (raw) clientCache.current.set(k.slice(7), JSON.parse(raw) as SearchResult);
+        }
+      }
+    } catch { /* ignore */ }
+
+    // 3. Prefill destination from trip store, show city chips for multi-city itineraries
+    let initialDest = "Tokyo, Japan";
+    try {
+      const trip = readTripStore();
+      if (trip?.cityStops.length) {
+        const cities = trip.cityStops.map((c) => c.city).filter(Boolean);
+        if (cities.length > 1) setTripCities(cities);
+        if (cities[0]) {
+          initialDest = cities[0];
+          setDestination(cities[0]);
+        }
+      }
+    } catch { /* ignore */ }
+
+    void fetchActivities(initialDest);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     try {
@@ -1837,6 +1857,10 @@ export default function ActivitySearch() {
 
       clientCache.current.set(key, r);
       setResult(r);
+      // Persist to session storage so revisiting the page shows results instantly
+      if (r.inventoryStatus !== "building") {
+        try { sessionStorage.setItem(`tg_act_${key}`, JSON.stringify(r)); } catch { /* quota */ }
+      }
     } catch (err) {
       const msg = err instanceof Error ? err.message : "An unexpected error occurred.";
       setError(msg);
@@ -1876,11 +1900,6 @@ export default function ActivitySearch() {
       if (pollingRef.current) { clearInterval(pollingRef.current); pollingRef.current = null; }
     };
   }, [result?.inventoryStatus, result?.city, destination, fetchActivities]);
-
-  // Load default destination on mount
-  useEffect(() => {
-    fetchActivities("Tokyo, Japan");
-  }, [fetchActivities]);
 
   function handleSearch(overrideValue?: string) {
     const dest = (overrideValue ?? destination).trim();
@@ -2136,6 +2155,35 @@ export default function ActivitySearch() {
             Hand-picked experiences across food, culture, nightlife, adventure, and more.
           </p>
         </div>
+
+        {/* ── Trip city chips (shown when itinerary has 2+ stops) ── */}
+        {tripCities.length > 1 && (
+          <div className="mb-3">
+            <p className="text-[11px] text-white/30 mb-2 font-medium">Browse by city</p>
+            <div
+              className="flex gap-2 overflow-x-auto pb-0.5"
+              style={{ scrollbarWidth: "none" } as React.CSSProperties}
+            >
+              {tripCities.map((city) => {
+                const cityShort = city.split(",")[0].trim();
+                const isActive = destination.split(",")[0].trim().toLowerCase() === cityShort.toLowerCase();
+                return (
+                  <button
+                    key={city}
+                    onClick={() => { setDestination(city); void fetchActivities(city); }}
+                    className={`flex-shrink-0 rounded-full px-4 py-1.5 text-xs font-semibold border transition-all whitespace-nowrap ${
+                      isActive
+                        ? "bg-lantern-mint/15 border-lantern-mint/40 text-lantern-mint"
+                        : "bg-white/[0.04] border-white/[0.09] text-white/50 hover:text-white/75 hover:border-white/[0.15]"
+                    }`}
+                  >
+                    {cityShort}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* ── Destination search bar ── */}
         <div className="mb-3 relative">

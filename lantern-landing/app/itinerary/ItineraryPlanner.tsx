@@ -195,6 +195,119 @@ function fmt24(t: string): string {
   return `${displayH}:${(m ?? 0).toString().padStart(2, "0")} ${period}`;
 }
 
+// ── Destination autocomplete (onboarding step 1) ──────────────────────────────
+
+interface AutocompleteSuggestion {
+  placeId: string;
+  text: string;
+  mainText: string;
+  secondaryText: string;
+}
+
+function ItineraryDestinationInput({
+  value,
+  validated,
+  error,
+  onChange,
+  onValidate,
+}: {
+  value: string;
+  validated: boolean;
+  error: string | null;
+  onChange: (v: string) => void;
+  onValidate: (normalized: string) => void;
+}) {
+  const [suggestions, setSuggestions] = useState<AutocompleteSuggestion[]>([]);
+  const [open, setOpen]               = useState(false);
+  const [fetching, setFetching]       = useState(false);
+  const [activeIdx, setActiveIdx]     = useState(-1);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function fetchSuggestions(input: string) {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (input.length < 2) { setSuggestions([]); setOpen(false); return; }
+    debounceRef.current = setTimeout(async () => {
+      setFetching(true);
+      try {
+        const res = await fetch("/api/activities/autocomplete", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ input }),
+        });
+        if (!res.ok) return;
+        const data = await res.json() as { suggestions: AutocompleteSuggestion[] };
+        setSuggestions(data.suggestions ?? []);
+        setOpen((data.suggestions?.length ?? 0) > 0);
+        setActiveIdx(-1);
+      } catch { /* ignore */ }
+      finally { setFetching(false); }
+    }, 300);
+  }
+
+  function select(s: AutocompleteSuggestion) {
+    onValidate(s.text);
+    setSuggestions([]);
+    setOpen(false);
+    setActiveIdx(-1);
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (!open) return;
+    if (e.key === "ArrowDown")      { e.preventDefault(); setActiveIdx((i) => Math.min(i + 1, suggestions.length - 1)); }
+    else if (e.key === "ArrowUp")   { e.preventDefault(); setActiveIdx((i) => Math.max(i - 1, -1)); }
+    else if (e.key === "Enter" && activeIdx >= 0 && suggestions[activeIdx]) {
+      e.preventDefault(); select(suggestions[activeIdx]);
+    } else if (e.key === "Escape")  { setOpen(false); setActiveIdx(-1); }
+  }
+
+  return (
+    <div className="relative">
+      <div className={`relative rounded-xl border transition-colors ${
+        error ? "border-red-500/50" : validated ? "border-lantern-mint/40" : "border-white/[0.12]"
+      } bg-white/[0.05]`}>
+        <input
+          autoFocus
+          type="text"
+          value={value}
+          onChange={(e) => { onChange(e.target.value); fetchSuggestions(e.target.value); }}
+          onKeyDown={handleKeyDown}
+          onFocus={() => { if (suggestions.length > 0) setOpen(true); }}
+          onBlur={() => setTimeout(() => setOpen(false), 150)}
+          placeholder="e.g. Japan, Southeast Asia, Tokyo…"
+          autoComplete="off"
+          spellCheck={false}
+          className="w-full bg-transparent px-4 py-3.5 text-base text-white placeholder:text-white/25 focus:outline-none pr-10"
+        />
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+          {fetching && <span className="block h-3.5 w-3.5 rounded-full border-2 border-white/20 border-t-white/60 animate-spin" />}
+          {!fetching && validated && <span className="text-lantern-mint text-sm font-bold">✓</span>}
+        </div>
+      </div>
+      {error && <p className="text-xs text-red-400 mt-1.5 px-1">{error}</p>}
+      {!error && !validated && value.trim().length > 0 && (
+        <p className="text-xs text-white/30 mt-1.5 px-1">Select a destination from the suggestions.</p>
+      )}
+      {open && suggestions.length > 0 && (
+        <ul className="absolute left-0 right-0 top-full mt-1 z-50 rounded-xl border border-white/[0.1] bg-[#0e1422] shadow-xl overflow-hidden">
+          {suggestions.map((s, i) => (
+            <li key={s.placeId || i}>
+              <button
+                onMouseDown={(e) => { e.preventDefault(); select(s); }}
+                className={`w-full text-left flex items-center gap-2 px-4 py-2.5 transition-colors ${
+                  i === activeIdx ? "bg-white/[0.08] text-white" : "text-white/70 hover:bg-white/[0.05] hover:text-white"
+                }`}
+              >
+                <span className="text-sm font-medium text-white truncate">{s.mainText}</span>
+                {s.secondaryText && <span className="text-xs text-white/40 flex-shrink-0">{s.secondaryText}</span>}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 // ── Nav ────────────────────────────────────────────────────────────────────────
 
 function NavLink({ href, label, active }: { href: string; label: string; active: boolean }) {
@@ -640,17 +753,19 @@ export default function ItineraryPlanner() {
 
   // Onboarding state (new users see a guided wizard; existing users skip to "done")
   type ObStep = "destination" | "dates" | "style" | "recommendations" | "cities" | "done";
-  const [obStep,      setObStep]      = useState<ObStep>("done");
-  const [obDest,      setObDest]      = useState("");
-  const [obStart,     setObStart]     = useState("");
-  const [obReturn,    setObReturn]    = useState("");
-  const [obDuration,  setObDuration]  = useState(7);
-  const [obFirstTime, setObFirstTime] = useState<boolean | null>(null);
-  const [obStyles,    setObStyles]    = useState<TravelStyle[]>([]);
-  const [obCities,    setObCities]    = useState<{ city: string; days: number; why: string }[]>([]);
-  const [obSummary,   setObSummary]   = useState("");
-  const [obLoading,   setObLoading]   = useState(false);
-  const [obError,     setObError]     = useState<string | null>(null);
+  const [obStep,           setObStep]           = useState<ObStep>("done");
+  const [obDest,           setObDest]           = useState("");
+  const [obDestValidated,  setObDestValidated]  = useState(false);
+  const [obDestError,      setObDestError]      = useState<string | null>(null);
+  const [obStart,          setObStart]          = useState("");
+  const [obReturn,         setObReturn]         = useState("");
+  const [obDuration,       setObDuration]       = useState(7);
+  const [obFirstTime,      setObFirstTime]      = useState<boolean | null>(null);
+  const [obStyles,         setObStyles]         = useState<TravelStyle[]>([]);
+  const [obCities,         setObCities]         = useState<{ city: string; days: number; why: string }[]>([]);
+  const [obSummary,        setObSummary]        = useState("");
+  const [obLoading,        setObLoading]        = useState(false);
+  const [obError,          setObError]          = useState<string | null>(null);
 
   // Tracks destinationRegion for display in the summary banner
   const obDestRef = useRef("");
@@ -696,7 +811,7 @@ export default function ItineraryPlanner() {
           const hs = localStorage.getItem(HOTEL_KEY);
           if (hs) setSelectedHotel(JSON.parse(hs) as SelectedHotel);
         }
-        if (v2.destinationRegion) { setObDest(v2.destinationRegion); obDestRef.current = v2.destinationRegion; }
+        if (v2.destinationRegion) { setObDest(v2.destinationRegion); obDestRef.current = v2.destinationRegion; setObDestValidated(true); }
         if (v2.travelStyles?.length) setObStyles(v2.travelStyles);
         if (v2.firstTime !== null)   setObFirstTime(v2.firstTime);
         setObStep("done");
@@ -840,6 +955,8 @@ export default function ItineraryPlanner() {
     setSelectedHotel(null);
     setSelectedFlight(null);
     setObDest("");
+    setObDestValidated(false);
+    setObDestError(null);
     setObStart("");
     setObReturn("");
     setObDuration(7);
@@ -1080,21 +1197,34 @@ export default function ItineraryPlanner() {
             <div className="space-y-6">
               <div>
                 <h1 className="text-3xl font-bold text-white mb-2">Where are you going?</h1>
-                <p className="text-sm text-white/40">Enter a country, region, or city — broad is fine.</p>
+                <p className="text-sm text-white/40">Enter a country, region, or city and select from suggestions.</p>
               </div>
-              <input
-                autoFocus
-                type="text"
-                placeholder="e.g. Japan, Southeast Asia, Tokyo..."
+              <ItineraryDestinationInput
                 value={obDest}
-                onChange={(e) => setObDest(e.target.value)}
-                onKeyDown={(e) => { if (e.key === "Enter" && obDest.trim()) setObStep("dates"); }}
-                className="w-full rounded-xl border border-white/[0.12] bg-white/[0.05] px-4 py-3.5 text-base text-white placeholder:text-white/25 focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors"
+                validated={obDestValidated}
+                error={obDestError}
+                onChange={(v) => {
+                  setObDest(v);
+                  setObDestValidated(false);
+                  if (!v) setObDestError(null);
+                }}
+                onValidate={(normalized) => {
+                  setObDest(normalized);
+                  setObDestValidated(true);
+                  setObDestError(null);
+                }}
               />
               <button
                 type="button"
                 disabled={!obDest.trim()}
-                onClick={() => setObStep("dates")}
+                onClick={() => {
+                  if (!obDestValidated) {
+                    setObDestError("Choose a destination from the suggestions.");
+                    return;
+                  }
+                  setObDestError(null);
+                  setObStep("dates");
+                }}
                 className="w-full h-12 rounded-full bg-lantern-mint text-ink text-sm font-bold transition hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed"
               >
                 Next
