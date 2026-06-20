@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { PlannerOutput, PlannedDay, PlannedSlot } from "@/lib/itinerary/types";
 
-// ── Local types ────────────────────────────────────────────────────────────────
+// ── Types ──────────────────────────────────────────────────────────────────────
 
 type SavedMeta = {
   title:        string;
@@ -18,6 +19,55 @@ type SavedMeta = {
 
 type UIPace    = "relaxed" | "balanced" | "packed";
 type UITransit = "walking" | "public transit" | "taxi" | "mixed";
+
+interface CityStop {
+  city: string;
+  days: number;
+}
+
+interface FlightInput {
+  arrivalCity:       string;
+  arrivalDateTime:   string;  // "YYYY-MM-DDTHH:mm"
+  departureDateTime: string;
+}
+
+interface HotelInput {
+  name: string;
+}
+
+interface TripStorage {
+  version:              1;
+  cities:               CityStop[];
+  startDate:            string;
+  flight:               FlightInput | null;
+  hotel:                HotelInput | null;
+  wakeTime:             string;
+  bedTime:              string;
+  pace:                 UIPace;
+  transit:              UITransit;
+  excludedActivityIds:  string[];
+  itinerary:            PlannerOutput | null;
+  itineraryGeneratedAt: string | null;
+}
+
+// ── Constants ──────────────────────────────────────────────────────────────────
+
+const STORAGE_KEY = "travelgrab_itinerary_trip_v1";
+
+const DEFAULT_TRIP: TripStorage = {
+  version:              1,
+  cities:               [{ city: "", days: 5 }],
+  startDate:            "",
+  flight:               null,
+  hotel:                null,
+  wakeTime:             "08:00",
+  bedTime:              "22:00",
+  pace:                 "balanced",
+  transit:              "public transit",
+  excludedActivityIds:  [],
+  itinerary:            null,
+  itineraryGeneratedAt: null,
+};
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
@@ -61,13 +111,10 @@ function mapTransit(ui: UITransit): string {
 }
 
 function addDays(iso: string, n: number): string {
+  if (!iso) return "";
   const d = new Date(iso + "T00:00:00");
   d.setDate(d.getDate() + n - 1);
   return d.toISOString().slice(0, 10);
-}
-
-function todayIso(): string {
-  return new Date().toISOString().slice(0, 10);
 }
 
 function tomorrowIso(): string {
@@ -76,13 +123,19 @@ function tomorrowIso(): string {
   return d.toISOString().slice(0, 10);
 }
 
+function todayIso(): string {
+  return new Date().toISOString().slice(0, 10);
+}
+
 function shortDate(iso: string): string {
+  if (!iso) return "";
   return new Date(iso + "T00:00:00").toLocaleDateString("en-US", {
     month: "short", day: "numeric",
   });
 }
 
 function longDate(iso: string): string {
+  if (!iso) return "";
   return new Date(iso + "T00:00:00").toLocaleDateString("en-US", {
     weekday: "short", month: "short", day: "numeric",
   });
@@ -99,24 +152,21 @@ function NavLink({ href, label, active }: { href: string; label: string; active:
   return active ? (
     <span className="text-sm font-semibold text-lantern-violet">{label}</span>
   ) : (
-    <Link
-      href={href}
-      className="text-sm font-medium text-white/45 hover:text-white/80 transition-colors"
-    >
+    <Link href={href} className="text-sm font-medium text-white/45 hover:text-white/80 transition-colors">
       {label}
     </Link>
   );
 }
 
-// ── Design tokens for slot kinds and categories ────────────────────────────────
+// ── Design tokens ──────────────────────────────────────────────────────────────
 
 const SLOT_STYLE: Record<string, { dot: string; border: string; bg: string }> = {
-  activity:         { dot: "bg-lantern-mint",  border: "border-lantern-mint/25", bg: "bg-lantern-mint/[0.05]"  },
-  meal:             { dot: "bg-lantern-gold",  border: "border-lantern-gold/25", bg: "bg-lantern-gold/[0.05]"  },
-  hotel_checkin:    { dot: "bg-white/25",      border: "border-white/10",        bg: "bg-white/[0.02]"         },
-  hotel_checkout:   { dot: "bg-white/25",      border: "border-white/10",        bg: "bg-white/[0.02]"         },
-  airport_transfer: { dot: "bg-lantern-blue",  border: "border-lantern-blue/25", bg: "bg-lantern-blue/[0.05]"  },
-  free_time:        { dot: "bg-white/15",      border: "border-white/[0.07]",    bg: "bg-white/[0.01]"         },
+  activity:         { dot: "bg-lantern-mint",  border: "border-lantern-mint/25", bg: "bg-lantern-mint/[0.05]" },
+  meal:             { dot: "bg-lantern-gold",  border: "border-lantern-gold/25", bg: "bg-lantern-gold/[0.05]" },
+  hotel_checkin:    { dot: "bg-white/25",      border: "border-white/10",        bg: "bg-white/[0.02]"        },
+  hotel_checkout:   { dot: "bg-white/25",      border: "border-white/10",        bg: "bg-white/[0.02]"        },
+  airport_transfer: { dot: "bg-lantern-blue",  border: "border-lantern-blue/25", bg: "bg-lantern-blue/[0.05]" },
+  free_time:        { dot: "bg-white/15",      border: "border-white/[0.07]",    bg: "bg-white/[0.01]"        },
 };
 
 const CAT_STYLE: Record<string, string> = {
@@ -129,7 +179,7 @@ const CAT_STYLE: Record<string, string> = {
   hidden_gems: "text-pink-400      bg-pink-400/10      border-pink-400/20",
 };
 
-// ── Timeline components ────────────────────────────────────────────────────────
+// ── Timeline ──────────────────────────────────────────────────────────────────
 
 function TransitConnector({ slot }: { slot: PlannedSlot }) {
   const t = slot.transit!;
@@ -144,30 +194,23 @@ function TransitConnector({ slot }: { slot: PlannedSlot }) {
 }
 
 function TimelineSlot({
-  slot,
-  savedMeta,
-  isLast,
+  slot, savedMeta, isLast,
 }: {
   slot:      PlannedSlot;
   savedMeta: Record<string, SavedMeta>;
   isLast:    boolean;
 }) {
-  // Transit-only free_time slots → connector row
   if (slot.kind === "free_time" && slot.transit) {
     return <TransitConnector slot={slot} />;
   }
 
   const style = SLOT_STYLE[slot.kind] ?? SLOT_STYLE.free_time;
-
-  // Match metadata by title for neighborhood and category
-  const meta =
-    Object.values(savedMeta).find((m) => m.title === slot.title) ?? null;
-  const cat = meta?.category ?? null;
-  const nbhd = meta?.neighborhood ?? null;
+  const meta  = Object.values(savedMeta).find((m) => m.title === slot.title) ?? null;
+  const cat   = meta?.category ?? null;
+  const nbhd  = meta?.neighborhood ?? null;
 
   return (
     <div className="flex gap-3">
-      {/* Time + dot + connector */}
       <div className="flex flex-col items-center shrink-0 w-14">
         <span className="text-[11px] font-mono text-white/30 leading-none mb-1.5">
           {formatTime(slot.startMinutes)}
@@ -176,15 +219,12 @@ function TimelineSlot({
         {!isLast && <div className="flex-1 w-px bg-white/[0.07] mt-1" />}
       </div>
 
-      {/* Card */}
       <div className={`flex-1 mb-4 rounded-xl border px-4 py-3 ${style.border} ${style.bg}`}>
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1 min-w-0">
             <p className="text-sm font-semibold text-white leading-snug">{slot.title}</p>
             <div className="flex items-center gap-2 mt-1 flex-wrap">
-              <span className="text-[11px] text-white/35">
-                {formatDuration(slot.durationMinutes)}
-              </span>
+              <span className="text-[11px] text-white/35">{formatDuration(slot.durationMinutes)}</span>
               {nbhd && (
                 <>
                   <span className="text-white/15 text-xs">·</span>
@@ -194,9 +234,7 @@ function TimelineSlot({
             </div>
           </div>
           {cat && cat in CAT_STYLE && (
-            <span
-              className={`shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold capitalize ${CAT_STYLE[cat]}`}
-            >
+            <span className={`shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold capitalize ${CAT_STYLE[cat]}`}>
               {cat}
             </span>
           )}
@@ -211,35 +249,22 @@ function TimelineSlot({
   );
 }
 
-function DayView({
-  day,
-  savedMeta,
-}: {
-  day:       PlannedDay;
-  savedMeta: Record<string, SavedMeta>;
-}) {
+function DayView({ day, savedMeta }: { day: PlannedDay; savedMeta: Record<string, SavedMeta> }) {
   return (
     <div>
-      <div className="mb-6">
+      <div className="mb-5">
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/25 mb-1">
           {longDate(day.date)}
         </p>
-        <h2 className="text-lg font-bold text-white">
-          {day.theme || `Day ${day.dayIndex + 1}`}
-        </h2>
+        <h2 className="text-lg font-bold text-white">{day.theme || `Day ${day.dayIndex + 1}`}</h2>
         {day.geographicArea && (
           <p className="text-sm text-white/40 mt-0.5">{day.geographicArea}</p>
         )}
-        <div className="flex gap-4 mt-3">
-          <span className="text-xs text-white/30">
-            {day.scheduledActivityCount} activities
-          </span>
-          <span className="text-xs text-white/30">
-            {formatDuration(day.totalActivityMinutes)} of sightseeing
-          </span>
+        <div className="flex gap-4 mt-2">
+          <span className="text-xs text-white/30">{day.scheduledActivityCount} activities</span>
+          <span className="text-xs text-white/30">{formatDuration(day.totalActivityMinutes)} of sightseeing</span>
         </div>
       </div>
-
       <div>
         {day.slots.map((slot, i) => (
           <TimelineSlot
@@ -254,57 +279,53 @@ function DayView({
   );
 }
 
-// ── Saved activity chip ────────────────────────────────────────────────────────
+// ── Form building blocks ───────────────────────────────────────────────────────
 
-function SavedChip({
-  id,
-  meta,
-}: {
-  id:   string;
-  meta: SavedMeta | undefined;
-}) {
-  const cat = meta?.category;
+function SectionCard({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div className="flex items-center gap-2.5 rounded-lg border border-white/[0.07] bg-white/[0.02] px-3 py-2">
-      <div className="flex-1 min-w-0">
-        <p className="text-xs font-medium text-white truncate">{meta?.title ?? id}</p>
-        {meta && (
-          <p className="text-[10px] text-white/30 mt-0.5 truncate">
-            {meta.neighborhood}
-            {meta.duration ? ` · ${meta.duration}` : ""}
-          </p>
-        )}
-      </div>
-      {cat && cat in CAT_STYLE && (
-        <span
-          className={`shrink-0 rounded-full border px-1.5 py-0.5 text-[9px] font-semibold capitalize ${CAT_STYLE[cat]}`}
-        >
-          {cat}
-        </span>
-      )}
-    </div>
+    <section className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5">
+      <h2 className="text-sm font-semibold text-white mb-4">{title}</h2>
+      <div className="space-y-3">{children}</div>
+    </section>
   );
 }
 
-// ── Preference toggle ──────────────────────────────────────────────────────────
+function FieldLabel({ label, note }: { label: string; note?: string }) {
+  return (
+    <label className="text-xs text-white/40 block mb-1.5">
+      {label}
+      {note && <span className="ml-1 text-white/20">{note}</span>}
+    </label>
+  );
+}
+
+const inputCls =
+  "w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-3 py-2 text-sm text-white placeholder:text-white/20 focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors";
+
+function CtaLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link
+      href={href}
+      className="inline-flex items-center gap-1 text-xs text-white/35 hover:text-lantern-mint transition-colors"
+    >
+      {label} <span>→</span>
+    </Link>
+  );
+}
 
 function ToggleGroup<T extends string>({
-  label,
-  options,
-  value,
-  onChange,
-  cols,
+  label, options, value, onChange, cols = 2,
 }: {
-  label:    string;
-  options:  T[];
-  value:    T;
+  label:   string;
+  options: T[];
+  value:   T;
   onChange: (v: T) => void;
-  cols?:    2 | 3;
+  cols?:   2 | 3 | 4;
 }) {
-  const gridCls = cols === 3 ? "grid-cols-3" : "grid-cols-2";
+  const gridCls = cols === 3 ? "grid-cols-3" : cols === 4 ? "grid-cols-4" : "grid-cols-2";
   return (
     <div>
-      <label className="text-xs text-white/40 block mb-2">{label}</label>
+      <FieldLabel label={label} />
       <div className={`grid ${gridCls} gap-2`}>
         {options.map((opt) => (
           <button
@@ -325,49 +346,206 @@ function ToggleGroup<T extends string>({
   );
 }
 
+// ── City row ───────────────────────────────────────────────────────────────────
+
+function CityRow({
+  stop, index, onUpdate, onRemove, canRemove,
+}: {
+  stop:     CityStop;
+  index:    number;
+  onUpdate: (patch: Partial<CityStop>) => void;
+  onRemove: () => void;
+  canRemove: boolean;
+}) {
+  return (
+    <div className="flex items-center gap-2">
+      <input
+        type="text"
+        placeholder={index === 0 ? "e.g. Tokyo, Japan" : "e.g. Kyoto, Japan"}
+        value={stop.city}
+        onChange={(e) => onUpdate({ city: e.target.value })}
+        className="flex-1 rounded-lg border border-white/[0.1] bg-white/[0.04] px-3 py-2 text-sm text-white placeholder:text-white/20 focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors"
+      />
+      <input
+        type="number"
+        min={1}
+        max={21}
+        value={stop.days}
+        onChange={(e) => onUpdate({ days: Math.max(1, parseInt(e.target.value) || 1) })}
+        className="w-14 rounded-lg border border-white/[0.1] bg-white/[0.04] px-2 py-2 text-sm text-white text-center focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors"
+      />
+      <span className="text-[11px] text-white/30 shrink-0">d</span>
+      {canRemove ? (
+        <button
+          type="button"
+          onClick={onRemove}
+          className="shrink-0 w-5 text-white/25 hover:text-red-400 transition-colors text-lg leading-none"
+        >
+          ×
+        </button>
+      ) : (
+        <div className="w-5" />
+      )}
+    </div>
+  );
+}
+
+// ── Activity row (include/exclude from itinerary) ─────────────────────────────
+
+function ActivityRow({
+  id, meta, excluded, onToggle,
+}: {
+  id:       string;
+  meta:     SavedMeta | undefined;
+  excluded: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      className={`w-full flex items-center gap-2.5 rounded-lg border px-3 py-2 text-left transition-all ${
+        excluded
+          ? "border-white/[0.04] bg-transparent opacity-40 hover:opacity-60"
+          : "border-white/[0.07] bg-white/[0.02] hover:border-white/[0.12]"
+      }`}
+    >
+      <div className={`shrink-0 h-3.5 w-3.5 rounded border flex items-center justify-center transition-colors ${
+        excluded ? "border-white/20 bg-transparent" : "border-lantern-mint/60 bg-lantern-mint/15"
+      }`}>
+        {!excluded && (
+          <svg viewBox="0 0 10 8" fill="none" className="w-2.5 h-2 text-lantern-mint" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M1 4l3 3 5-6" />
+          </svg>
+        )}
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className="text-xs font-medium text-white truncate">{meta?.title ?? id}</p>
+        {meta && (
+          <p className="text-[10px] text-white/30 mt-0.5 truncate">
+            {[meta.neighborhood, meta.duration].filter(Boolean).join(" · ")}
+          </p>
+        )}
+      </div>
+      {meta?.category && meta.category in CAT_STYLE && (
+        <span className={`shrink-0 rounded-full border px-1.5 py-0.5 text-[9px] font-semibold capitalize ${CAT_STYLE[meta.category]}`}>
+          {meta.category}
+        </span>
+      )}
+    </button>
+  );
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 export default function ItineraryPlanner() {
   const pathname = usePathname();
 
-  // ── Saved activities ──────────────────────────────────────────────────────
+  // Global saved activities (written by Activities page)
   const [savedIds,  setSavedIds]  = useState<string[]>([]);
   const [savedMeta, setSavedMeta] = useState<Record<string, SavedMeta>>({});
 
+  // Persistent trip state
+  const [trip,     setTrip]     = useState<TripStorage>(DEFAULT_TRIP);
+  const [hydrated, setHydrated] = useState(false);
+
+  // Generation UI state (not persisted)
+  const [genStatus,   setGenStatus]   = useState<"idle" | "generating" | "error">("idle");
+  const [genError,    setGenError]    = useState<string | null>(null);
+  const [selectedDay, setSelectedDay] = useState(0);
+  const [saveNotice,  setSaveNotice]  = useState(false);
+
+  // ── Load from localStorage on mount ──
   useEffect(() => {
     try {
       const ids  = localStorage.getItem("travelgrab:saved-activities");
       const meta = localStorage.getItem("travelgrab:saved-activities-data");
       if (ids)  setSavedIds(JSON.parse(ids) as string[]);
       if (meta) setSavedMeta(JSON.parse(meta) as Record<string, SavedMeta>);
+
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored) as TripStorage;
+        if (parsed.version === 1) {
+          setTrip(parsed);
+          setHydrated(true);
+          return;
+        }
+      }
     } catch { /* ignore */ }
+
+    setTrip((prev) => ({ ...prev, startDate: tomorrowIso() }));
+    setHydrated(true);
   }, []);
 
-  // ── Preferences ───────────────────────────────────────────────────────────
-  const [destination, setDestination] = useState("");
-  const [startDate,   setStartDate]   = useState(tomorrowIso());
-  const [numDays,     setNumDays]     = useState(5);
-  const [wakeTime,    setWakeTime]    = useState("08:00");
-  const [bedTime,     setBedTime]     = useState("22:00");
-  const [pace,        setPace]        = useState<UIPace>("balanced");
-  const [transit,     setTransit]     = useState<UITransit>("public transit");
-  const [hotelBase,   setHotelBase]   = useState("");
+  // ── Auto-save (debounced 400 ms) ──
+  useEffect(() => {
+    if (!hydrated) return;
+    const timer = setTimeout(() => {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(trip)); } catch { /* ignore */ }
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [trip, hydrated]);
 
-  // ── Generation state ──────────────────────────────────────────────────────
-  const [status,      setStatus]      = useState<"idle" | "generating" | "ready" | "error">("idle");
-  const [itinerary,   setItinerary]   = useState<PlannerOutput | null>(null);
-  const [genError,    setGenError]    = useState<string | null>(null);
-  const [selectedDay, setSelectedDay] = useState(0);
+  // ── Helpers ──
+  function updateTrip(patch: Partial<TripStorage>) {
+    setTrip((prev) => ({ ...prev, ...patch }));
+  }
 
-  const endDate = addDays(startDate, numDays);
+  const totalDays       = Math.max(1, trip.cities.reduce((s, c) => s + (c.days || 0), 0));
+  const primaryCity     = trip.cities[0]?.city?.trim() ?? "";
+  const endDate         = addDays(trip.startDate, totalDays);
+  const activeActivityIds = savedIds.filter((id) => !trip.excludedActivityIds.includes(id));
+
+  function updateCity(i: number, patch: Partial<CityStop>) {
+    updateTrip({ cities: trip.cities.map((c, j) => (j === i ? { ...c, ...patch } : c)) });
+  }
+
+  function addCity() {
+    updateTrip({ cities: [...trip.cities, { city: "", days: 3 }] });
+  }
+
+  function removeCity(i: number) {
+    if (trip.cities.length <= 1) return;
+    updateTrip({ cities: trip.cities.filter((_, j) => j !== i) });
+  }
+
+  function toggleExclude(id: string) {
+    const excl = trip.excludedActivityIds;
+    updateTrip({
+      excludedActivityIds: excl.includes(id) ? excl.filter((x) => x !== id) : [...excl, id],
+    });
+  }
+
+  function updateFlight(patch: Partial<FlightInput>) {
+    const base = trip.flight ?? { arrivalCity: "", arrivalDateTime: "", departureDateTime: "" };
+    updateTrip({ flight: { ...base, ...patch } });
+  }
+
+  function saveTrip() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(trip));
+      setSaveNotice(true);
+      setTimeout(() => setSaveNotice(false), 2000);
+    } catch { /* ignore */ }
+  }
+
+  function clearTrip() {
+    const fresh = { ...DEFAULT_TRIP, startDate: tomorrowIso() };
+    setTrip(fresh);
+    setGenStatus("idle");
+    setGenError(null);
+    setSelectedDay(0);
+    try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
+  }
 
   async function generate() {
-    if (!destination.trim()) return;
-    setStatus("generating");
+    if (!primaryCity) return;
+    setGenStatus("generating");
     setGenError(null);
 
     try {
-      const activities = savedIds.map((id) => {
+      const activities = activeActivityIds.map((id) => {
         const m = savedMeta[id];
         return {
           title:           m?.title        ?? id,
@@ -376,30 +554,38 @@ export default function ItineraryPlanner() {
         };
       });
 
+      const destination = trip.cities.map((c) => c.city).filter(Boolean).join(", ");
+
       const body = {
         trip: {
-          startDate,
+          startDate:    trip.startDate,
           endDate,
           numTravelers: 1,
-          city:         destination.split(",")[0].trim(),
-          destination:  destination.trim(),
+          city:         primaryCity.split(",")[0].trim(),
+          destination:  destination || primaryCity,
         },
         preferences: {
-          wakeTimeMinutes:      timeToMinutes(wakeTime),
-          sleepTimeMinutes:     timeToMinutes(bedTime),
-          pace:                 mapPace(pace),
-          preferredTransitMode: mapTransit(transit),
+          wakeTimeMinutes:      timeToMinutes(trip.wakeTime),
+          sleepTimeMinutes:     timeToMinutes(trip.bedTime),
+          pace:                 mapPace(trip.pace),
+          preferredTransitMode: mapTransit(trip.transit),
         },
-        hotel: hotelBase.trim()
-          ? { name: hotelBase.trim(), checkInDate: startDate, checkOutDate: endDate }
+        hotel: trip.hotel?.name
+          ? { name: trip.hotel.name, checkInDate: trip.startDate, checkOutDate: endDate }
+          : undefined,
+        outboundFlight: trip.flight?.arrivalDateTime
+          ? { arrivesAt: new Date(trip.flight.arrivalDateTime).toISOString() }
+          : undefined,
+        returnFlight: trip.flight?.departureDateTime
+          ? { departsAt: new Date(trip.flight.departureDateTime).toISOString() }
           : undefined,
         activities,
       };
 
       const res = await fetch("/api/itinerary/preview", {
-        method:  "POST",
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify(body),
+        body: JSON.stringify(body),
       });
 
       if (!res.ok) {
@@ -408,14 +594,19 @@ export default function ItineraryPlanner() {
       }
 
       const data = await res.json() as PlannerOutput;
-      setItinerary(data);
+      updateTrip({ itinerary: data, itineraryGeneratedAt: new Date().toISOString() });
       setSelectedDay(0);
-      setStatus("ready");
+      setGenStatus("idle");
     } catch (e) {
       setGenError(e instanceof Error ? e.message : "Something went wrong.");
-      setStatus("error");
+      setGenStatus("error");
     }
   }
+
+  const isGenerating = genStatus === "generating";
+  const hasItinerary = !!trip.itinerary;
+
+  // ── Render ────────────────────────────────────────────────────────────────
 
   return (
     <div className="min-h-screen bg-ink text-white">
@@ -425,13 +616,7 @@ export default function ItineraryPlanner() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 flex items-center h-14 gap-6">
           <Link href="/" className="flex items-center gap-2 shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/travelgrab-logo.svg"
-              alt="TravelGrab"
-              width={36}
-              height={36}
-              className="h-9 w-9 object-contain"
-            />
+            <img src="/travelgrab-logo.svg" alt="TravelGrab" width={36} height={36} className="h-9 w-9 object-contain" />
             <span className="text-sm font-bold tracking-tight text-white/90">TravelGrab</span>
           </Link>
           <div className="h-4 w-px bg-white/10" />
@@ -442,123 +627,156 @@ export default function ItineraryPlanner() {
         </div>
       </nav>
 
-      {/* Two-column layout */}
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 lg:grid lg:grid-cols-[360px_1fr] lg:gap-8 lg:items-start">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 lg:grid lg:grid-cols-[380px_1fr] lg:gap-8 lg:items-start">
 
-        {/* ── LEFT: Form ── */}
-        <aside className="space-y-5 mb-8 lg:mb-0 lg:sticky lg:top-[3.75rem]">
+        {/* ── LEFT: Form panels ── */}
+        <aside className="space-y-4 mb-8 lg:mb-0">
 
-          {/* Saved activities */}
-          <section className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5">
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-sm font-semibold text-white">Saved places</h2>
-              <span className="text-[11px] text-white/30">
-                {savedIds.length} {savedIds.length === 1 ? "place" : "places"}
-              </span>
-            </div>
-
+          {/* Saved places */}
+          <SectionCard title="Saved places">
             {savedIds.length === 0 ? (
-              <div className="py-3 text-center">
+              <div className="py-2 text-center">
                 <p className="text-xs text-white/35">No saved places yet.</p>
-                <Link
-                  href="/activities"
-                  className="mt-2 inline-block text-xs text-lantern-mint hover:underline"
-                >
+                <Link href="/activities" className="mt-2 inline-block text-xs text-lantern-mint hover:underline">
                   Browse activities →
                 </Link>
               </div>
             ) : (
-              <div className="space-y-1.5">
-                {savedIds.slice(0, 10).map((id) => (
-                  <SavedChip key={id} id={id} meta={savedMeta[id]} />
-                ))}
-                {savedIds.length > 10 && (
-                  <p className="text-[11px] text-white/25 text-center pt-1">
-                    +{savedIds.length - 10} more
-                  </p>
-                )}
-              </div>
+              <>
+                <p className="text-[11px] text-white/30">
+                  Checked places are included in your itinerary.
+                </p>
+                <div className="space-y-1.5">
+                  {savedIds.map((id) => (
+                    <ActivityRow
+                      key={id}
+                      id={id}
+                      meta={savedMeta[id]}
+                      excluded={trip.excludedActivityIds.includes(id)}
+                      onToggle={() => toggleExclude(id)}
+                    />
+                  ))}
+                </div>
+                <p className="text-[11px] text-white/25">
+                  {activeActivityIds.length} of {savedIds.length} included
+                </p>
+              </>
             )}
-          </section>
+          </SectionCard>
 
-          {/* Trip details */}
-          <section className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 space-y-4">
-            <h2 className="text-sm font-semibold text-white">Trip details</h2>
+          {/* Destination / cities */}
+          <SectionCard title="Destination">
+            <div className="space-y-2">
+              {trip.cities.map((stop, i) => (
+                <CityRow
+                  key={i}
+                  index={i}
+                  stop={stop}
+                  onUpdate={(patch) => updateCity(i, patch)}
+                  onRemove={() => removeCity(i)}
+                  canRemove={trip.cities.length > 1}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={addCity}
+              className="flex items-center gap-1.5 text-xs text-white/35 hover:text-lantern-mint transition-colors"
+            >
+              <span className="text-base leading-none">+</span>
+              Add city stop
+            </button>
 
             <div>
-              <label className="text-xs text-white/40 block mb-1.5">Destination</label>
+              <FieldLabel label="Start date" />
               <input
-                type="text"
-                placeholder="e.g. Tokyo, Japan"
-                value={destination}
-                onChange={(e) => setDestination(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && generate()}
-                className="w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-3 py-2 text-sm text-white placeholder:text-white/20 focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors"
+                type="date"
+                value={trip.startDate}
+                min={todayIso()}
+                onChange={(e) => updateTrip({ startDate: e.target.value })}
+                className={inputCls}
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="text-xs text-white/40 block mb-1.5">Start date</label>
+            {trip.startDate && (
+              <p className="text-[11px] text-white/25">
+                {totalDays} {totalDays === 1 ? "day" : "days"} ·{" "}
+                {shortDate(trip.startDate)} – {shortDate(endDate)}
+              </p>
+            )}
+          </SectionCard>
+
+          {/* Flight */}
+          <SectionCard title="Flight">
+            <div>
+              <FieldLabel label="Outbound — arrival" />
+              <div className="space-y-2">
                 <input
-                  type="date"
-                  value={startDate}
-                  min={todayIso()}
-                  onChange={(e) => setStartDate(e.target.value)}
-                  className="w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-3 py-2 text-sm text-white focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors"
+                  type="text"
+                  placeholder="Arrival airport or city"
+                  value={trip.flight?.arrivalCity ?? ""}
+                  onChange={(e) => updateFlight({ arrivalCity: e.target.value })}
+                  className={inputCls}
                 />
-              </div>
-              <div>
-                <label className="text-xs text-white/40 block mb-1.5">Days</label>
                 <input
-                  type="number"
-                  min={1}
-                  max={21}
-                  value={numDays}
-                  onChange={(e) =>
-                    setNumDays(Math.max(1, Math.min(21, parseInt(e.target.value) || 1)))
-                  }
-                  className="w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-3 py-2 text-sm text-white focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors"
+                  type="datetime-local"
+                  value={trip.flight?.arrivalDateTime ?? ""}
+                  onChange={(e) => updateFlight({ arrivalDateTime: e.target.value })}
+                  className={inputCls}
                 />
               </div>
             </div>
 
             <div>
-              <label className="text-xs text-white/40 block mb-1.5">
-                Hotel / base area{" "}
-                <span className="text-white/20">(optional)</span>
-              </label>
+              <FieldLabel label="Return — departure" />
               <input
-                type="text"
-                placeholder="e.g. Shinjuku"
-                value={hotelBase}
-                onChange={(e) => setHotelBase(e.target.value)}
-                className="w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-3 py-2 text-sm text-white placeholder:text-white/20 focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors"
+                type="datetime-local"
+                value={trip.flight?.departureDateTime ?? ""}
+                onChange={(e) => updateFlight({ departureDateTime: e.target.value })}
+                className={inputCls}
               />
             </div>
-          </section>
+
+            <CtaLink href="/flights" label="Search on Flights" />
+          </SectionCard>
+
+          {/* Hotel */}
+          <SectionCard title="Hotel / base">
+            <div>
+              <FieldLabel label="Hotel name or neighborhood" note="(optional)" />
+              <input
+                type="text"
+                placeholder="e.g. Park Hyatt Shinjuku"
+                value={trip.hotel?.name ?? ""}
+                onChange={(e) =>
+                  updateTrip({ hotel: { name: e.target.value } })
+                }
+                className={inputCls}
+              />
+            </div>
+            <CtaLink href="/hotels" label="Search on Hotels" />
+          </SectionCard>
 
           {/* Preferences */}
-          <section className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 space-y-4">
-            <h2 className="text-sm font-semibold text-white">Preferences</h2>
-
+          <SectionCard title="Preferences">
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-xs text-white/40 block mb-1.5">Wake time</label>
+                <FieldLabel label="Wake time" />
                 <input
                   type="time"
-                  value={wakeTime}
-                  onChange={(e) => setWakeTime(e.target.value)}
-                  className="w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-3 py-2 text-sm text-white focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors"
+                  value={trip.wakeTime}
+                  onChange={(e) => updateTrip({ wakeTime: e.target.value })}
+                  className={inputCls}
                 />
               </div>
               <div>
-                <label className="text-xs text-white/40 block mb-1.5">Bedtime</label>
+                <FieldLabel label="Bedtime" />
                 <input
                   type="time"
-                  value={bedTime}
-                  onChange={(e) => setBedTime(e.target.value)}
-                  className="w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-3 py-2 text-sm text-white focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors"
+                  value={trip.bedTime}
+                  onChange={(e) => updateTrip({ bedTime: e.target.value })}
+                  className={inputCls}
                 />
               </div>
             </div>
@@ -566,66 +784,93 @@ export default function ItineraryPlanner() {
             <ToggleGroup
               label="Travel pace"
               options={["relaxed", "balanced", "packed"] as UIPace[]}
-              value={pace}
-              onChange={setPace}
+              value={trip.pace}
+              onChange={(v) => updateTrip({ pace: v })}
               cols={3}
             />
 
             <ToggleGroup
               label="Getting around"
               options={["walking", "public transit", "taxi", "mixed"] as UITransit[]}
-              value={transit}
-              onChange={setTransit}
+              value={trip.transit}
+              onChange={(v) => updateTrip({ transit: v })}
               cols={2}
             />
-          </section>
+          </SectionCard>
 
-          {/* Generate CTA */}
-          <button
-            type="button"
-            onClick={generate}
-            disabled={!destination.trim() || status === "generating"}
-            className="w-full inline-flex h-12 items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-lantern-mint to-lantern-blue px-8 text-sm font-bold text-ink shadow-glow transition hover:opacity-90 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed disabled:scale-100"
-          >
-            {status === "generating" ? (
-              <>
-                <span className="h-3.5 w-3.5 rounded-full border-2 border-ink/40 border-t-ink animate-spin" />
-                Planning your trip…
-              </>
-            ) : (
-              <>
-                <span className="text-base">✦</span>
-                Generate itinerary
-              </>
+          {/* Action buttons */}
+          <div className="space-y-2">
+            <button
+              type="button"
+              onClick={generate}
+              disabled={!primaryCity || isGenerating}
+              className="w-full inline-flex h-12 items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-lantern-mint to-lantern-blue px-8 text-sm font-bold text-ink shadow-glow transition hover:opacity-90 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed disabled:scale-100"
+            >
+              {isGenerating ? (
+                <>
+                  <span className="h-3.5 w-3.5 rounded-full border-2 border-ink/40 border-t-ink animate-spin" />
+                  Planning your trip…
+                </>
+              ) : hasItinerary ? (
+                <>
+                  <span className="text-base">↺</span>
+                  Regenerate itinerary
+                </>
+              ) : (
+                <>
+                  <span className="text-base">✦</span>
+                  Generate itinerary
+                </>
+              )}
+            </button>
+
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={saveTrip}
+                className={`flex-1 h-9 rounded-full border text-xs font-medium transition-colors ${
+                  saveNotice
+                    ? "border-lantern-mint/40 text-lantern-mint"
+                    : "border-white/[0.1] text-white/45 hover:text-white/75 hover:border-white/20"
+                }`}
+              >
+                {saveNotice ? "Saved ✓" : "Save trip"}
+              </button>
+              <button
+                type="button"
+                onClick={clearTrip}
+                className="flex-1 h-9 rounded-full border border-white/[0.06] text-xs font-medium text-white/30 hover:text-red-400 hover:border-red-400/20 transition-colors"
+              >
+                Clear trip
+              </button>
+            </div>
+
+            {!primaryCity && (
+              <p className="text-[11px] text-white/25 text-center">
+                Enter a destination above to generate.
+              </p>
             )}
-          </button>
-
-          {savedIds.length === 0 && (
-            <p className="text-[11px] text-white/25 text-center">
-              Save places on the{" "}
-              <Link href="/activities" className="text-lantern-mint hover:underline">
-                Activities
-              </Link>{" "}
-              page to include them in your plan.
-            </p>
-          )}
+          </div>
         </aside>
 
-        {/* ── RIGHT: Results ── */}
-        <main className="min-h-[500px]">
+        {/* ── RIGHT: Itinerary output ── */}
+        <main>
 
-          {status === "idle" && (
-            <div className="flex flex-col items-center justify-center h-full min-h-[480px] rounded-2xl border border-white/[0.06] bg-white/[0.01] p-10 text-center">
+          {/* No itinerary, not generating */}
+          {!hasItinerary && !isGenerating && genStatus !== "error" && (
+            <div className="flex flex-col items-center justify-center min-h-[480px] rounded-2xl border border-white/[0.06] bg-white/[0.01] p-10 text-center">
               <div className="h-14 w-14 rounded-2xl border border-white/[0.1] bg-white/[0.03] flex items-center justify-center text-2xl mb-5">
                 ✦
               </div>
               <h1 className="text-2xl font-bold text-white mb-3">Build your itinerary</h1>
               <p className="text-sm text-white/40 max-w-xs leading-relaxed">
                 {savedIds.length === 0
-                  ? "Start by saving places on the Activities page, then fill in your trip details and hit Generate."
-                  : savedIds.length < 2
-                  ? "You have 1 saved place. Add a few more activities for a fuller itinerary, then enter your destination and hit Generate."
-                  : `You have ${savedIds.length} saved places. Enter your destination and hit Generate to build your day-by-day plan.`}
+                  ? "Save places on the Activities page, fill in your trip details, then click Generate."
+                  : activeActivityIds.length === 0
+                  ? "All saved places are excluded. Check some to include them in your plan."
+                  : !primaryCity
+                  ? `${activeActivityIds.length} places ready. Enter a destination and click Generate.`
+                  : `${activeActivityIds.length} places ready for ${primaryCity}. Click Generate to plan your days.`}
               </p>
               {savedIds.length === 0 && (
                 <Link
@@ -638,19 +883,19 @@ export default function ItineraryPlanner() {
             </div>
           )}
 
-          {status === "generating" && (
-            <div className="flex flex-col items-center justify-center h-full min-h-[480px] rounded-2xl border border-white/[0.06] bg-white/[0.01] p-10 text-center">
+          {/* Generating spinner */}
+          {isGenerating && (
+            <div className="flex flex-col items-center justify-center min-h-[480px] rounded-2xl border border-white/[0.06] bg-white/[0.01] p-10 text-center">
               <div className="h-10 w-10 rounded-full border-2 border-white/10 border-t-lantern-mint animate-spin mb-6" />
               <p className="text-sm text-white/50">Clustering activities by geography…</p>
               <p className="text-xs text-white/25 mt-2">Usually under a second</p>
             </div>
           )}
 
-          {status === "error" && (
-            <div className="flex flex-col items-center justify-center h-full min-h-[480px] rounded-2xl border border-red-500/20 bg-red-500/[0.03] p-10 text-center">
-              <p className="text-sm font-semibold text-red-400 mb-2">
-                Failed to generate itinerary
-              </p>
+          {/* Error with no previous result */}
+          {genStatus === "error" && !hasItinerary && (
+            <div className="flex flex-col items-center justify-center min-h-[480px] rounded-2xl border border-red-500/20 bg-red-500/[0.03] p-10 text-center">
+              <p className="text-sm font-semibold text-red-400 mb-2">Failed to generate itinerary</p>
               <p className="text-xs text-white/30 mb-6">{genError}</p>
               <button
                 type="button"
@@ -662,30 +907,36 @@ export default function ItineraryPlanner() {
             </div>
           )}
 
-          {status === "ready" && itinerary && (
+          {/* Itinerary result */}
+          {hasItinerary && trip.itinerary && !isGenerating && (
             <div>
-              {/* Header */}
+              {/* Result header */}
               <div className="flex items-start justify-between gap-4 mb-6">
                 <div>
-                  <h1 className="text-xl font-bold text-white">{destination}</h1>
+                  <h1 className="text-xl font-bold text-white">
+                    {trip.cities.map((c) => c.city).filter(Boolean).join(" → ") || "Your trip"}
+                  </h1>
                   <p className="text-sm text-white/40 mt-1">
-                    {shortDate(startDate)} – {shortDate(endDate)} ·{" "}
-                    {itinerary.days.length} {itinerary.days.length === 1 ? "day" : "days"} ·{" "}
-                    {itinerary.meta.totalActivitiesScheduled} activities
+                    {trip.startDate && `${shortDate(trip.startDate)} – ${shortDate(endDate)} · `}
+                    {trip.itinerary.days.length} {trip.itinerary.days.length === 1 ? "day" : "days"} ·{" "}
+                    {trip.itinerary.meta.totalActivitiesScheduled} activities
                   </p>
+                  {trip.itineraryGeneratedAt && (
+                    <p className="text-[11px] text-white/20 mt-1">
+                      Generated {new Date(trip.itineraryGeneratedAt).toLocaleString()}
+                    </p>
+                  )}
                 </div>
-                <button
-                  type="button"
-                  onClick={() => setStatus("idle")}
-                  className="shrink-0 text-xs text-white/30 hover:text-white/60 transition-colors mt-0.5"
-                >
-                  ← Edit
-                </button>
+                {genStatus === "error" && (
+                  <p className="text-xs text-red-400 shrink-0 mt-1">
+                    Regeneration failed — showing last result
+                  </p>
+                )}
               </div>
 
               {/* Day tabs */}
               <div className="flex gap-2 mb-6 overflow-x-auto pb-1 -mx-1 px-1">
-                {itinerary.days.map((day, i) => (
+                {trip.itinerary.days.map((day, i) => (
                   <button
                     key={i}
                     type="button"
@@ -705,22 +956,24 @@ export default function ItineraryPlanner() {
               </div>
 
               {/* Selected day timeline */}
-              <div className="rounded-2xl border border-white/[0.08] bg-white/[0.01] p-6">
-                <DayView
-                  day={itinerary.days[selectedDay]}
-                  savedMeta={savedMeta}
-                />
-              </div>
+              {trip.itinerary.days[selectedDay] && (
+                <div className="rounded-2xl border border-white/[0.08] bg-white/[0.01] p-6">
+                  <DayView
+                    day={trip.itinerary.days[selectedDay]}
+                    savedMeta={savedMeta}
+                  />
+                </div>
+              )}
 
               {/* Dropped activities */}
-              {itinerary.meta.droppedActivities.length > 0 && (
+              {trip.itinerary.meta.droppedActivities.length > 0 && (
                 <div className="mt-4 rounded-xl border border-lantern-gold/20 bg-lantern-gold/[0.04] px-5 py-4">
                   <p className="text-xs font-semibold text-lantern-gold mb-2">
-                    {itinerary.meta.droppedActivities.length} place
-                    {itinerary.meta.droppedActivities.length === 1 ? "" : "s"} couldn&apos;t fit
+                    {trip.itinerary.meta.droppedActivities.length} place
+                    {trip.itinerary.meta.droppedActivities.length === 1 ? "" : "s"} couldn&apos;t fit
                   </p>
                   <ul className="space-y-1">
-                    {itinerary.meta.droppedActivities.map((d, i) => (
+                    {trip.itinerary.meta.droppedActivities.map((d, i) => (
                       <li key={i} className="text-xs text-white/35">
                         <span className="text-white/55">{d.title}</span> — {d.reason}
                       </li>
@@ -730,22 +983,20 @@ export default function ItineraryPlanner() {
               )}
 
               {/* Planner notes */}
-              {itinerary.meta.conflicts.length > 0 && (
+              {trip.itinerary.meta.conflicts.length > 0 && (
                 <div className="mt-3 rounded-xl border border-white/[0.07] bg-white/[0.01] px-5 py-4">
                   <p className="text-xs font-semibold text-white/30 mb-2">Notes</p>
                   <ul className="space-y-1">
-                    {itinerary.meta.conflicts.map((c, i) => (
-                      <li key={i} className="text-xs text-white/30">
-                        {c.description}
-                      </li>
+                    {trip.itinerary.meta.conflicts.map((c, i) => (
+                      <li key={i} className="text-xs text-white/30">{c.description}</li>
                     ))}
                   </ul>
                 </div>
               )}
             </div>
           )}
-        </main>
 
+        </main>
       </div>
     </div>
   );
