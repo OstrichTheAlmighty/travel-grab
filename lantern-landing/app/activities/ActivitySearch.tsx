@@ -306,6 +306,16 @@ function ActivityCard({
   );
 }
 
+// ── Review Insights (returned by /api/activities/review-insights) ─────────────
+
+interface ReviewInsights {
+  guestsLove: string[];
+  watchOut:   string[];
+  bestFor:    string[];
+  tips:       string[];
+  limited:    boolean;
+}
+
 // ── Place Detail type (mirrors /api/activities/place response) ────────────────
 
 interface PlaceReview {
@@ -372,15 +382,163 @@ function getGoodFor(badges: Badge[], types: string[]): string {
 
 // ── Activity Detail Modal ─────────────────────────────────────────────────────
 
+// ── Review Insights section ───────────────────────────────────────────────────
+
+function ReviewInsightsSection({
+  insights,
+  loading,
+}: {
+  insights: ReviewInsights | null;
+  loading: boolean;
+}) {
+  if (loading) {
+    return (
+      <div className="mb-6 animate-pulse">
+        <div className="h-2 w-28 bg-white/[0.06] rounded-full mb-4" />
+        <div className="grid grid-cols-2 gap-3">
+          {[1, 2, 3, 4].map((n) => (
+            <div key={n} className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-3.5">
+              <div className="h-2 w-16 bg-white/[0.07] rounded-full mb-3" />
+              <div className="space-y-2">
+                <div className="h-2 bg-white/[0.04] rounded-full w-full" />
+                <div className="h-2 bg-white/[0.04] rounded-full w-4/5" />
+                <div className="h-2 bg-white/[0.04] rounded-full w-3/4" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (!insights) return null;
+
+  const hasContent =
+    insights.guestsLove.length > 0 ||
+    insights.watchOut.length > 0 ||
+    insights.bestFor.length > 0 ||
+    insights.tips.length > 0;
+
+  if (!hasContent) return null;
+
+  return (
+    <div className="mb-6">
+      <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-3">
+        Review Insights
+      </div>
+
+      {insights.limited && (
+        <p className="text-[11px] text-white/25 italic mb-3">
+          Based on Google&apos;s limited review sample.
+        </p>
+      )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+        {/* Guests love */}
+        {insights.guestsLove.length > 0 && (
+          <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-3.5">
+            <div className="flex items-center gap-1.5 mb-2.5">
+              <svg className="w-3 h-3 text-lantern-mint flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              <span className="text-[11px] font-bold text-white/50">Guests love</span>
+            </div>
+            <ul className="space-y-1.5">
+              {insights.guestsLove.map((item, i) => (
+                <li key={i} className="flex items-start gap-1.5 text-[12px] text-white/50 leading-snug">
+                  <span className="text-white/15 flex-shrink-0 mt-px">·</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Watch out */}
+        {insights.watchOut.length > 0 && (
+          <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-3.5">
+            <div className="flex items-center gap-1.5 mb-2.5">
+              <svg className="w-3 h-3 text-amber-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg>
+              <span className="text-[11px] font-bold text-white/50">Watch out</span>
+            </div>
+            <ul className="space-y-1.5">
+              {insights.watchOut.map((item, i) => (
+                <li key={i} className="flex items-start gap-1.5 text-[12px] text-white/50 leading-snug">
+                  <span className="text-white/15 flex-shrink-0 mt-px">·</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Best for */}
+        {insights.bestFor.length > 0 && (
+          <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-3.5">
+            <div className="flex items-center gap-1.5 mb-2.5">
+              <svg className="w-3 h-3 text-lantern-blue flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+              <span className="text-[11px] font-bold text-white/50">Best for</span>
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {insights.bestFor.map((item, i) => (
+                <span
+                  key={i}
+                  className="text-[11px] text-white/45 bg-white/[0.04] border border-white/[0.07] rounded-full px-2.5 py-1 leading-none"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Tips from reviews */}
+        {insights.tips.length > 0 && (
+          <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-3.5">
+            <div className="flex items-center gap-1.5 mb-2.5">
+              <svg className="w-3 h-3 text-lantern-gold flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7zm2 19v1a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-1h4z" />
+              </svg>
+              <span className="text-[11px] font-bold text-white/50">Tips from reviews</span>
+            </div>
+            <ul className="space-y-1.5">
+              {insights.tips.map((item, i) => (
+                <li key={i} className="flex items-start gap-1.5 text-[12px] text-white/50 leading-snug">
+                  <span className="text-white/15 flex-shrink-0 mt-px">·</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 function ActivityDetailModal({
   activity,
   detail,
   loading,
+  insights,
+  insightsLoading,
   onClose,
 }: {
   activity: Activity;
   detail: PlaceDetail | null;
   loading: boolean;
+  insights: ReviewInsights | null;
+  insightsLoading: boolean;
   onClose: () => void;
 }) {
   const [activePhoto,   setActivePhoto]   = useState(0);
@@ -749,6 +907,16 @@ function ActivityDetailModal({
 
               </div>
             </div>
+
+            {/* ── Review Insights ── */}
+            {(insightsLoading || insights) && (
+              <div className="px-5 pb-1">
+                <ReviewInsightsSection
+                  insights={insights}
+                  loading={insightsLoading}
+                />
+              </div>
+            )}
 
             {/* ── Guest Reviews ── */}
             {(() => {
@@ -1583,10 +1751,13 @@ export default function ActivitySearch() {
   const [result,             setResult]             = useState<SearchResult | null>(null);
 
   // ── Detail modal state ──
-  const [modalActivity,   setModalActivity]   = useState<Activity | null>(null);
-  const [modalDetail,     setModalDetail]     = useState<PlaceDetail | null>(null);
-  const [modalLoading,    setModalLoading]    = useState(false);
-  const detailsCache = useRef(new Map<string, PlaceDetail>());
+  const [modalActivity,      setModalActivity]      = useState<Activity | null>(null);
+  const [modalDetail,        setModalDetail]        = useState<PlaceDetail | null>(null);
+  const [modalLoading,       setModalLoading]       = useState(false);
+  const [modalInsights,      setModalInsights]      = useState<ReviewInsights | null>(null);
+  const [modalInsightsLoading, setModalInsightsLoading] = useState(false);
+  const detailsCache  = useRef(new Map<string, PlaceDetail>());
+  const insightsCache = useRef(new Map<string, ReviewInsights | null>());
 
   // Persist saved IDs to localStorage
   useEffect(() => {
@@ -1708,16 +1879,63 @@ export default function ActivitySearch() {
     });
   }
 
+  async function fetchInsights(placeId: string, detail: PlaceDetail, activity: Activity) {
+    // Cache hit (including null = "tried, no result")
+    if (insightsCache.current.has(placeId)) {
+      setModalInsights(insightsCache.current.get(placeId) ?? null);
+      return;
+    }
+
+    const reviews = (detail.reviews ?? [])
+      .filter((r) => r.text?.text)
+      .map((r) => ({ text: r.text!.text, rating: r.rating ?? 0 }));
+
+    if (reviews.length === 0) {
+      insightsCache.current.set(placeId, null);
+      setModalInsights(null);
+      return;
+    }
+
+    setModalInsightsLoading(true);
+    try {
+      const res = await fetch("/api/activities/review-insights", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          placeId,
+          placeName: detail.displayName?.text ?? activity.title,
+          category:  activity.category,
+          reviews,
+        }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json() as ReviewInsights;
+      insightsCache.current.set(placeId, data);
+      setModalInsights(data);
+    } catch (err) {
+      console.warn("[review-insights] fetch failed:", err instanceof Error ? err.message : String(err));
+      insightsCache.current.set(placeId, null);
+      setModalInsights(null);
+    } finally {
+      setModalInsightsLoading(false);
+    }
+  }
+
   async function openDetails(activity: Activity) {
     setModalActivity(activity);
     setModalDetail(null);
+    setModalInsights(null);
+    setModalInsightsLoading(false);
 
     const placeId = activity.placeId;
     if (!placeId) return; // show modal with card data only
 
+    // Load from detail cache or fetch
     const cached = detailsCache.current.get(placeId);
     if (cached) {
       setModalDetail(cached);
+      // Insights may already be cached too
+      void fetchInsights(placeId, cached, activity);
       return;
     }
 
@@ -1728,6 +1946,8 @@ export default function ActivitySearch() {
       const data = await res.json() as PlaceDetail;
       detailsCache.current.set(placeId, data);
       setModalDetail(data);
+      // Fetch insights concurrently once we have the reviews
+      void fetchInsights(placeId, data, activity);
     } catch {
       // Non-fatal: modal still shows with card-level data
       setModalDetail(null);
@@ -1740,6 +1960,8 @@ export default function ActivitySearch() {
     setModalActivity(null);
     setModalDetail(null);
     setModalLoading(false);
+    setModalInsights(null);
+    setModalInsightsLoading(false);
   }
 
   const isSearching  = activityQuery.trim().length > 0;
@@ -2014,6 +2236,8 @@ export default function ActivitySearch() {
           activity={modalActivity}
           detail={modalDetail}
           loading={modalLoading}
+          insights={modalInsights}
+          insightsLoading={modalInsightsLoading}
           onClose={closeDetails}
         />
       )}
