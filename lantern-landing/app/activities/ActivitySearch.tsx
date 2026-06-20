@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useRef, useEffect, useCallback } from "react";
+import { readTripStore } from "@/lib/trip-store";
 import Link from "next/link";
 import type { Activity, Badge, Category } from "./data/types";
 
@@ -1759,6 +1760,16 @@ export default function ActivitySearch() {
   const [modalInsightsLoading, setModalInsightsLoading] = useState(false);
   const detailsCache  = useRef(new Map<string, PlaceDetail>());
   const insightsCache = useRef(new Map<string, ReviewInsights | null>());
+
+  // Pre-fill destination from the shared trip store (set on the Itinerary page)
+  useEffect(() => {
+    try {
+      const trip = readTripStore();
+      if (trip && trip.cityStops.length > 0 && trip.cityStops[0].city) {
+        setDestination(trip.cityStops[0].city);
+      }
+    } catch { /* ignore */ }
+  }, []);
 
   // Persist saved IDs + metadata to localStorage
   useEffect(() => {

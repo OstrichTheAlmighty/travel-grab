@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
+import { readTripStore, updateTripStore } from "@/lib/trip-store";
 import type { Review, ReviewsResult, ReviewSummary } from "@/lib/reviews/types";
 import { NeighborhoodCompare } from "./NeighborhoodCompare";
 import type { ComparableSummary } from "./NeighborhoodCompare";
@@ -4858,6 +4859,27 @@ export default function HotelSearch() {
     } catch { /* ignore */ }
   }, []);
 
+  // Pre-fill destination and dates from shared trip store
+  useEffect(() => {
+    try {
+      const trip = readTripStore();
+      if (!trip || trip.cityStops.length === 0) return;
+      const primaryCity = trip.cityStops[0].city;
+      if (primaryCity) {
+        setDestination(primaryCity);
+        setSelectedPlace({ text: primaryCity.split(",")[0].trim(), secondary: primaryCity, label: primaryCity });
+      }
+      if (trip.startDate) {
+        setCheckIn(trip.startDate);
+        // Compute checkout from total days across all city stops
+        const totalDays = trip.cityStops.reduce((s, c) => s + (c.days || 0), 0);
+        const checkout = new Date(trip.startDate + "T00:00:00");
+        checkout.setDate(checkout.getDate() + Math.max(1, totalDays));
+        setCheckOut(checkout.toISOString().slice(0, 10));
+      }
+    } catch { /* ignore */ }
+  }, []);
+
   // Debug: fire on mount to confirm analytics pipeline is wired up.
   // Remove this useEffect once PostHog Live Events confirms events are arriving.
   useEffect(() => {
@@ -5734,6 +5756,7 @@ export default function HotelSearch() {
                               try {
                                 localStorage.setItem("travelgrab_selected_hotel_v1", JSON.stringify(data));
                                 setItineraryHotelId(offer.hotel_id);
+                                updateTripStore({ selectedHotel: data });
                               } catch { /* ignore */ }
                             }}
                           />

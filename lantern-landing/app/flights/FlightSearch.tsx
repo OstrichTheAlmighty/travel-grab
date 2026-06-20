@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect, useCallback, useMemo } from "react";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
+import { readTripStore, updateTripStore } from "@/lib/trip-store";
 
 // ── Airport data ──────────────────────────────────────────────────────────────
 
@@ -2151,6 +2152,22 @@ export default function FlightSearch() {
     } catch { /* ignore */ }
   }, []);
 
+  // Pre-fill departure/return dates from shared trip store
+  useEffect(() => {
+    try {
+      const trip = readTripStore();
+      if (!trip || !trip.startDate) return;
+      if (!departureDate) setDepartureDate(trip.startDate);
+      if (!returnDate && trip.cityStops.length > 0) {
+        const totalDays = trip.cityStops.reduce((s, c) => s + (c.days || 0), 0);
+        const ret = new Date(trip.startDate + "T00:00:00");
+        ret.setDate(ret.getDate() + Math.max(1, totalDays));
+        setReturnDate(ret.toISOString().slice(0, 10));
+      }
+    } catch { /* ignore */ }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleSearch = async () => {
     const errs: string[] = [];
     if (!origin) errs.push("Please select an origin.");
@@ -2591,6 +2608,7 @@ export default function FlightSearch() {
                     try {
                       localStorage.setItem("travelgrab_selected_flight_v1", JSON.stringify(data));
                       setItineraryFlightKey(flightKey);
+                      updateTripStore({ selectedFlight: data });
                     } catch { /* ignore */ }
                   }}
                 />
