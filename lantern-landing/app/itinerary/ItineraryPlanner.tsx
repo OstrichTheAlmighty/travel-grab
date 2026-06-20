@@ -25,22 +25,54 @@ interface CityStop {
   days: number;
 }
 
-interface FlightInput {
-  arrivalCity:       string;
-  arrivalDateTime:   string;  // "YYYY-MM-DDTHH:mm"
-  departureDateTime: string;
+// Written by Hotels page ("+ Itinerary" button)
+interface SelectedHotel {
+  hotelId:      string;
+  name:         string;
+  neighborhood: string;
+  address:      string;
+  lat?:         number;
+  lng?:         number;
+  pricePerNight: number;
+  currency:     string;
+  rating:       number;
+  imageUrl:     string;
+  aiScore:      number;
 }
 
-interface HotelInput {
-  name: string;
+// Written by Flights page ("+ Itinerary" button)
+interface SelectedFlight {
+  flightKey:          string;
+  airline:            string;
+  airlineCode:        string;
+  flightNumber:       string;
+  origin:             string;
+  destination:        string;
+  departTime:         string;   // "HH:MM" 24-hour
+  arriveTime:         string;   // "HH:MM" 24-hour
+  duration:           string;
+  stops:              number;
+  stopLabel:          string;
+  price:              number;
+  currency:           string;
+  returnOrigin?:       string;
+  returnDestination?:  string;
+  returnDepartTime?:   string;
+  returnArriveTime?:   string;
+  returnDuration?:     string;
+  returnStopLabel?:    string;
 }
 
+// Trip form state (persisted to travelgrab_itinerary_trip_v1)
 interface TripStorage {
   version:              1;
   cities:               CityStop[];
   startDate:            string;
-  flight:               FlightInput | null;
-  hotel:                HotelInput | null;
+  // Manual flight fallback (used only if no SelectedFlight in localStorage)
+  manualArrivalTime:    string;
+  manualDepartureTime:  string;
+  // Manual hotel fallback (used only if no SelectedHotel in localStorage)
+  manualHotelName:      string;
   wakeTime:             string;
   bedTime:              string;
   pace:                 UIPace;
@@ -52,14 +84,17 @@ interface TripStorage {
 
 // ── Constants ──────────────────────────────────────────────────────────────────
 
-const STORAGE_KEY = "travelgrab_itinerary_trip_v1";
+const TRIP_KEY   = "travelgrab_itinerary_trip_v1";
+const HOTEL_KEY  = "travelgrab_selected_hotel_v1";
+const FLIGHT_KEY = "travelgrab_selected_flight_v1";
 
 const DEFAULT_TRIP: TripStorage = {
   version:              1,
   cities:               [{ city: "", days: 5 }],
   startDate:            "",
-  flight:               null,
-  hotel:                null,
+  manualArrivalTime:    "",
+  manualDepartureTime:  "",
+  manualHotelName:      "",
   wakeTime:             "08:00",
   bedTime:              "22:00",
   pace:                 "balanced",
@@ -146,6 +181,15 @@ function timeToMinutes(t: string): number {
   return h * 60 + (m ?? 0);
 }
 
+// Format "HH:MM" 24h to "8:30 AM"
+function fmt24(t: string): string {
+  if (!t) return "";
+  const [h, m] = t.split(":").map(Number);
+  const period = h < 12 ? "AM" : "PM";
+  const displayH = h === 0 ? 12 : h > 12 ? h - 12 : h;
+  return `${displayH}:${(m ?? 0).toString().padStart(2, "0")} ${period}`;
+}
+
 // ── Nav ────────────────────────────────────────────────────────────────────────
 
 function NavLink({ href, label, active }: { href: string; label: string; active: boolean }) {
@@ -203,7 +247,6 @@ function TimelineSlot({
   if (slot.kind === "free_time" && slot.transit) {
     return <TransitConnector slot={slot} />;
   }
-
   const style = SLOT_STYLE[slot.kind] ?? SLOT_STYLE.free_time;
   const meta  = Object.values(savedMeta).find((m) => m.title === slot.title) ?? null;
   const cat   = meta?.category ?? null;
@@ -218,7 +261,6 @@ function TimelineSlot({
         <div className={`h-2.5 w-2.5 rounded-full border-2 border-ink shrink-0 ${style.dot}`} />
         {!isLast && <div className="flex-1 w-px bg-white/[0.07] mt-1" />}
       </div>
-
       <div className={`flex-1 mb-4 rounded-xl border px-4 py-3 ${style.border} ${style.bg}`}>
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1 min-w-0">
@@ -279,16 +321,22 @@ function DayView({ day, savedMeta }: { day: PlannedDay; savedMeta: Record<string
   );
 }
 
-// ── Form building blocks ───────────────────────────────────────────────────────
+// ── Form helpers ───────────────────────────────────────────────────────────────
 
-function SectionCard({ title, children }: { title: string; children: ReactNode }) {
+function SectionCard({ title, children, action }: { title: string; children: ReactNode; action?: ReactNode }) {
   return (
     <section className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5">
-      <h2 className="text-sm font-semibold text-white mb-4">{title}</h2>
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="text-sm font-semibold text-white">{title}</h2>
+        {action}
+      </div>
       <div className="space-y-3">{children}</div>
     </section>
   );
 }
+
+const inputCls =
+  "w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-3 py-2 text-sm text-white placeholder:text-white/20 focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors";
 
 function FieldLabel({ label, note }: { label: string; note?: string }) {
   return (
@@ -299,15 +347,9 @@ function FieldLabel({ label, note }: { label: string; note?: string }) {
   );
 }
 
-const inputCls =
-  "w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-3 py-2 text-sm text-white placeholder:text-white/20 focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors";
-
 function CtaLink({ href, label }: { href: string; label: string }) {
   return (
-    <Link
-      href={href}
-      className="inline-flex items-center gap-1 text-xs text-white/35 hover:text-lantern-mint transition-colors"
-    >
+    <Link href={href} className="inline-flex items-center gap-1 text-xs text-white/35 hover:text-lantern-mint transition-colors">
       {label} <span>→</span>
     </Link>
   );
@@ -316,13 +358,13 @@ function CtaLink({ href, label }: { href: string; label: string }) {
 function ToggleGroup<T extends string>({
   label, options, value, onChange, cols = 2,
 }: {
-  label:   string;
-  options: T[];
-  value:   T;
+  label:    string;
+  options:  T[];
+  value:    T;
   onChange: (v: T) => void;
-  cols?:   2 | 3 | 4;
+  cols?:    2 | 3;
 }) {
-  const gridCls = cols === 3 ? "grid-cols-3" : cols === 4 ? "grid-cols-4" : "grid-cols-2";
+  const gridCls = cols === 3 ? "grid-cols-3" : "grid-cols-2";
   return (
     <div>
       <FieldLabel label={label} />
@@ -376,11 +418,7 @@ function CityRow({
       />
       <span className="text-[11px] text-white/30 shrink-0">d</span>
       {canRemove ? (
-        <button
-          type="button"
-          onClick={onRemove}
-          className="shrink-0 w-5 text-white/25 hover:text-red-400 transition-colors text-lg leading-none"
-        >
+        <button type="button" onClick={onRemove} className="shrink-0 w-5 text-white/25 hover:text-red-400 transition-colors text-lg leading-none">
           ×
         </button>
       ) : (
@@ -390,7 +428,7 @@ function CityRow({
   );
 }
 
-// ── Activity row (include/exclude from itinerary) ─────────────────────────────
+// ── Activity row (include/exclude) ────────────────────────────────────────────
 
 function ActivityRow({
   id, meta, excluded, onToggle,
@@ -436,12 +474,147 @@ function ActivityRow({
   );
 }
 
+// ── Selected flight card ───────────────────────────────────────────────────────
+
+function SelectedFlightCard({
+  flight, onClear,
+}: {
+  flight:  SelectedFlight;
+  onClear: () => void;
+}) {
+  return (
+    <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-3.5 space-y-2">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2 min-w-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`https://www.gstatic.com/flights/airline_logos/70px/${flight.airlineCode}.png`}
+            alt={flight.airline}
+            width={18}
+            height={18}
+            className="rounded object-contain shrink-0"
+            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+          />
+          <span className="text-xs font-semibold text-white truncate">{flight.airline}</span>
+          {flight.flightNumber && (
+            <span className="text-[10px] text-white/35 shrink-0">{flight.flightNumber}</span>
+          )}
+        </div>
+        <span className="text-xs font-bold text-white/60 shrink-0">
+          ${Math.round(flight.price).toLocaleString()}
+        </span>
+      </div>
+
+      {/* Outbound */}
+      <div className="flex items-center gap-2 rounded-lg bg-white/[0.025] border border-white/[0.05] px-3 py-2">
+        <div className="text-center shrink-0">
+          <div className="text-sm font-bold text-white">{fmt24(flight.departTime)}</div>
+          <div className="text-[10px] font-mono text-white/40">{flight.origin}</div>
+        </div>
+        <div className="flex-1 text-center px-1">
+          <div className="text-[10px] text-white/30">{flight.duration}</div>
+          <div className="w-full h-px bg-white/10 my-1" />
+          <div className="text-[10px] text-white/25">{flight.stopLabel}</div>
+        </div>
+        <div className="text-center shrink-0">
+          <div className="text-sm font-bold text-white">{fmt24(flight.arriveTime)}</div>
+          <div className="text-[10px] font-mono text-white/40">{flight.destination}</div>
+        </div>
+      </div>
+
+      {/* Return if present */}
+      {flight.returnDepartTime && (
+        <div className="flex items-center gap-2 rounded-lg bg-white/[0.015] border border-white/[0.04] px-3 py-2">
+          <div className="text-center shrink-0">
+            <div className="text-sm font-bold text-white/70">{fmt24(flight.returnDepartTime)}</div>
+            <div className="text-[10px] font-mono text-white/30">{flight.returnOrigin}</div>
+          </div>
+          <div className="flex-1 text-center px-1">
+            <div className="text-[10px] text-white/25">{flight.returnDuration}</div>
+            <div className="w-full h-px bg-white/[0.07] my-1" />
+            <div className="text-[10px] text-white/20">{flight.returnStopLabel}</div>
+          </div>
+          <div className="text-center shrink-0">
+            <div className="text-sm font-bold text-white/70">{fmt24(flight.returnArriveTime ?? "")}</div>
+            <div className="text-[10px] font-mono text-white/30">{flight.returnDestination}</div>
+          </div>
+        </div>
+      )}
+
+      <div className="flex items-center justify-between pt-0.5">
+        <CtaLink href="/flights" label="Change flight" />
+        <button
+          type="button"
+          onClick={onClear}
+          className="text-[11px] text-white/25 hover:text-red-400 transition-colors"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ── Selected hotel card ────────────────────────────────────────────────────────
+
+function SelectedHotelCard({
+  hotel, onClear,
+}: {
+  hotel:   SelectedHotel;
+  onClear: () => void;
+}) {
+  return (
+    <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] overflow-hidden">
+      {hotel.imageUrl && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={hotel.imageUrl}
+          alt={hotel.name}
+          className="w-full h-24 object-cover"
+          onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+        />
+      )}
+      <div className="p-3.5 space-y-2">
+        <div>
+          <p className="text-sm font-semibold text-white leading-snug">{hotel.name}</p>
+          <p className="text-[11px] text-white/40 mt-0.5">
+            {hotel.neighborhood}
+            {hotel.pricePerNight > 0 && ` · $${Math.round(hotel.pricePerNight)}/night`}
+          </p>
+        </div>
+        <div className="flex items-center gap-3">
+          {hotel.rating > 0 && (
+            <span className="text-[11px] text-white/50">
+              ★ {hotel.rating.toFixed(1)}
+            </span>
+          )}
+          {hotel.aiScore > 0 && (
+            <span className="text-[11px] text-lantern-mint/70">
+              TG score {hotel.aiScore}
+            </span>
+          )}
+        </div>
+        <div className="flex items-center justify-between pt-0.5">
+          <CtaLink href="/hotels" label="Change hotel" />
+          <button
+            type="button"
+            onClick={onClear}
+            className="text-[11px] text-white/25 hover:text-red-400 transition-colors"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 export default function ItineraryPlanner() {
   const pathname = usePathname();
 
-  // Global saved activities (written by Activities page)
+  // Global saved activities
   const [savedIds,  setSavedIds]  = useState<string[]>([]);
   const [savedMeta, setSavedMeta] = useState<Record<string, SavedMeta>>({});
 
@@ -449,23 +622,36 @@ export default function ItineraryPlanner() {
   const [trip,     setTrip]     = useState<TripStorage>(DEFAULT_TRIP);
   const [hydrated, setHydrated] = useState(false);
 
-  // Generation UI state (not persisted)
-  const [genStatus,   setGenStatus]   = useState<"idle" | "generating" | "error">("idle");
-  const [genError,    setGenError]    = useState<string | null>(null);
-  const [selectedDay, setSelectedDay] = useState(0);
-  const [saveNotice,  setSaveNotice]  = useState(false);
+  // Cross-page selected hotel/flight (from Hotels/Flights pages)
+  const [selectedHotel,  setSelectedHotel]  = useState<SelectedHotel | null>(null);
+  const [selectedFlight, setSelectedFlight] = useState<SelectedFlight | null>(null);
+
+  // UI state
+  const [genStatus,         setGenStatus]         = useState<"idle" | "generating" | "error">("idle");
+  const [genError,          setGenError]           = useState<string | null>(null);
+  const [selectedDay,       setSelectedDay]        = useState(0);
+  const [saveNotice,        setSaveNotice]         = useState(false);
+  const [showAllActivities, setShowAllActivities]  = useState(false);
 
   // ── Load from localStorage on mount ──
   useEffect(() => {
     try {
+      // Global saved activities
       const ids  = localStorage.getItem("travelgrab:saved-activities");
       const meta = localStorage.getItem("travelgrab:saved-activities-data");
       if (ids)  setSavedIds(JSON.parse(ids) as string[]);
       if (meta) setSavedMeta(JSON.parse(meta) as Record<string, SavedMeta>);
 
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored) as TripStorage;
+      // Cross-page hotel/flight selections
+      const hotelStored  = localStorage.getItem(HOTEL_KEY);
+      const flightStored = localStorage.getItem(FLIGHT_KEY);
+      if (hotelStored)  setSelectedHotel(JSON.parse(hotelStored) as SelectedHotel);
+      if (flightStored) setSelectedFlight(JSON.parse(flightStored) as SelectedFlight);
+
+      // Persistent trip form
+      const tripStored = localStorage.getItem(TRIP_KEY);
+      if (tripStored) {
+        const parsed = JSON.parse(tripStored) as TripStorage;
         if (parsed.version === 1) {
           setTrip(parsed);
           setHydrated(true);
@@ -478,11 +664,11 @@ export default function ItineraryPlanner() {
     setHydrated(true);
   }, []);
 
-  // ── Auto-save (debounced 400 ms) ──
+  // ── Auto-save trip state (debounced 400 ms) ──
   useEffect(() => {
     if (!hydrated) return;
     const timer = setTimeout(() => {
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(trip)); } catch { /* ignore */ }
+      try { localStorage.setItem(TRIP_KEY, JSON.stringify(trip)); } catch { /* ignore */ }
     }, 400);
     return () => clearTimeout(timer);
   }, [trip, hydrated]);
@@ -492,9 +678,9 @@ export default function ItineraryPlanner() {
     setTrip((prev) => ({ ...prev, ...patch }));
   }
 
-  const totalDays       = Math.max(1, trip.cities.reduce((s, c) => s + (c.days || 0), 0));
-  const primaryCity     = trip.cities[0]?.city?.trim() ?? "";
-  const endDate         = addDays(trip.startDate, totalDays);
+  const totalDays         = Math.max(1, trip.cities.reduce((s, c) => s + (c.days || 0), 0));
+  const primaryCity       = trip.cities[0]?.city?.trim() ?? "";
+  const endDate           = addDays(trip.startDate, totalDays);
   const activeActivityIds = savedIds.filter((id) => !trip.excludedActivityIds.includes(id));
 
   function updateCity(i: number, patch: Partial<CityStop>) {
@@ -517,14 +703,19 @@ export default function ItineraryPlanner() {
     });
   }
 
-  function updateFlight(patch: Partial<FlightInput>) {
-    const base = trip.flight ?? { arrivalCity: "", arrivalDateTime: "", departureDateTime: "" };
-    updateTrip({ flight: { ...base, ...patch } });
+  function clearHotel() {
+    setSelectedHotel(null);
+    try { localStorage.removeItem(HOTEL_KEY); } catch { /* ignore */ }
+  }
+
+  function clearFlight() {
+    setSelectedFlight(null);
+    try { localStorage.removeItem(FLIGHT_KEY); } catch { /* ignore */ }
   }
 
   function saveTrip() {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(trip));
+      localStorage.setItem(TRIP_KEY, JSON.stringify(trip));
       setSaveNotice(true);
       setTimeout(() => setSaveNotice(false), 2000);
     } catch { /* ignore */ }
@@ -536,9 +727,10 @@ export default function ItineraryPlanner() {
     setGenStatus("idle");
     setGenError(null);
     setSelectedDay(0);
-    try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
+    try { localStorage.removeItem(TRIP_KEY); } catch { /* ignore */ }
   }
 
+  // ── Generate ──
   async function generate() {
     if (!primaryCity) return;
     setGenStatus("generating");
@@ -556,6 +748,32 @@ export default function ItineraryPlanner() {
 
       const destination = trip.cities.map((c) => c.city).filter(Boolean).join(", ");
 
+      // Hotel: prefer selected from Hotels page, fallback to manual
+      const hotel = selectedHotel
+        ? {
+            name:         selectedHotel.name,
+            lat:          selectedHotel.lat,
+            lng:          selectedHotel.lng,
+            checkInDate:  trip.startDate,
+            checkOutDate: endDate,
+          }
+        : trip.manualHotelName
+          ? { name: trip.manualHotelName, checkInDate: trip.startDate, checkOutDate: endDate }
+          : undefined;
+
+      // Flight: prefer selected from Flights page, fallback to manual
+      const outboundFlight = selectedFlight?.arriveTime
+        ? { arrivesAt: `${trip.startDate}T${selectedFlight.arriveTime}:00` }
+        : trip.manualArrivalTime
+          ? { arrivesAt: new Date(trip.manualArrivalTime).toISOString() }
+          : undefined;
+
+      const returnFlight = selectedFlight?.returnDepartTime
+        ? { departsAt: `${endDate}T${selectedFlight.returnDepartTime}:00` }
+        : trip.manualDepartureTime
+          ? { departsAt: new Date(trip.manualDepartureTime).toISOString() }
+          : undefined;
+
       const body = {
         trip: {
           startDate:    trip.startDate,
@@ -570,15 +788,9 @@ export default function ItineraryPlanner() {
           pace:                 mapPace(trip.pace),
           preferredTransitMode: mapTransit(trip.transit),
         },
-        hotel: trip.hotel?.name
-          ? { name: trip.hotel.name, checkInDate: trip.startDate, checkOutDate: endDate }
-          : undefined,
-        outboundFlight: trip.flight?.arrivalDateTime
-          ? { arrivesAt: new Date(trip.flight.arrivalDateTime).toISOString() }
-          : undefined,
-        returnFlight: trip.flight?.departureDateTime
-          ? { departsAt: new Date(trip.flight.departureDateTime).toISOString() }
-          : undefined,
+        hotel,
+        outboundFlight,
+        returnFlight,
         activities,
       };
 
@@ -606,7 +818,9 @@ export default function ItineraryPlanner() {
   const isGenerating = genStatus === "generating";
   const hasItinerary = !!trip.itinerary;
 
-  // ── Render ────────────────────────────────────────────────────────────────
+  // Saved activities collapsed / expanded
+  const ACTIVITY_PREVIEW = 5;
+  const visibleActivityIds = showAllActivities ? savedIds : savedIds.slice(0, ACTIVITY_PREVIEW);
 
   return (
     <div className="min-h-screen bg-ink text-white">
@@ -629,43 +843,11 @@ export default function ItineraryPlanner() {
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 lg:grid lg:grid-cols-[380px_1fr] lg:gap-8 lg:items-start">
 
-        {/* ── LEFT: Form panels ── */}
+        {/* ── LEFT: Form ── */}
         <aside className="space-y-4 mb-8 lg:mb-0">
 
-          {/* Saved places */}
-          <SectionCard title="Saved places">
-            {savedIds.length === 0 ? (
-              <div className="py-2 text-center">
-                <p className="text-xs text-white/35">No saved places yet.</p>
-                <Link href="/activities" className="mt-2 inline-block text-xs text-lantern-mint hover:underline">
-                  Browse activities →
-                </Link>
-              </div>
-            ) : (
-              <>
-                <p className="text-[11px] text-white/30">
-                  Checked places are included in your itinerary.
-                </p>
-                <div className="space-y-1.5">
-                  {savedIds.map((id) => (
-                    <ActivityRow
-                      key={id}
-                      id={id}
-                      meta={savedMeta[id]}
-                      excluded={trip.excludedActivityIds.includes(id)}
-                      onToggle={() => toggleExclude(id)}
-                    />
-                  ))}
-                </div>
-                <p className="text-[11px] text-white/25">
-                  {activeActivityIds.length} of {savedIds.length} included
-                </p>
-              </>
-            )}
-          </SectionCard>
-
-          {/* Destination / cities */}
-          <SectionCard title="Destination">
+          {/* ── Trip basics (cities + dates) ── */}
+          <SectionCard title="Trip">
             <div className="space-y-2">
               {trip.cities.map((stop, i) => (
                 <CityRow
@@ -678,7 +860,6 @@ export default function ItineraryPlanner() {
                 />
               ))}
             </div>
-
             <button
               type="button"
               onClick={addCity}
@@ -701,64 +882,110 @@ export default function ItineraryPlanner() {
 
             {trip.startDate && (
               <p className="text-[11px] text-white/25">
-                {totalDays} {totalDays === 1 ? "day" : "days"} ·{" "}
-                {shortDate(trip.startDate)} – {shortDate(endDate)}
+                {totalDays} {totalDays === 1 ? "day" : "days"} · {shortDate(trip.startDate)} – {shortDate(endDate)}
               </p>
             )}
           </SectionCard>
 
-          {/* Flight */}
-          <SectionCard title="Flight">
-            <div>
-              <FieldLabel label="Outbound — arrival" />
-              <div className="space-y-2">
-                <input
-                  type="text"
-                  placeholder="Arrival airport or city"
-                  value={trip.flight?.arrivalCity ?? ""}
-                  onChange={(e) => updateFlight({ arrivalCity: e.target.value })}
-                  className={inputCls}
-                />
-                <input
-                  type="datetime-local"
-                  value={trip.flight?.arrivalDateTime ?? ""}
-                  onChange={(e) => updateFlight({ arrivalDateTime: e.target.value })}
-                  className={inputCls}
-                />
+          {/* ── Flight ── */}
+          <SectionCard
+            title="Flight"
+            action={<span className="text-[11px] text-white/25">(optional)</span>}
+          >
+            {selectedFlight ? (
+              <SelectedFlightCard flight={selectedFlight} onClear={clearFlight} />
+            ) : (
+              <>
+                <div>
+                  <FieldLabel label="Outbound — arrival date & time" />
+                  <input
+                    type="datetime-local"
+                    value={trip.manualArrivalTime}
+                    onChange={(e) => updateTrip({ manualArrivalTime: e.target.value })}
+                    className={inputCls}
+                  />
+                </div>
+                <div>
+                  <FieldLabel label="Return — departure date & time" />
+                  <input
+                    type="datetime-local"
+                    value={trip.manualDepartureTime}
+                    onChange={(e) => updateTrip({ manualDepartureTime: e.target.value })}
+                    className={inputCls}
+                  />
+                </div>
+                <CtaLink href="/flights" label="Search on Flights and add" />
+              </>
+            )}
+          </SectionCard>
+
+          {/* ── Hotel ── */}
+          <SectionCard
+            title="Hotel / base"
+            action={<span className="text-[11px] text-white/25">(optional)</span>}
+          >
+            {selectedHotel ? (
+              <SelectedHotelCard hotel={selectedHotel} onClear={clearHotel} />
+            ) : (
+              <>
+                <div>
+                  <FieldLabel label="Hotel name or neighborhood" />
+                  <input
+                    type="text"
+                    placeholder="e.g. Park Hyatt Shinjuku"
+                    value={trip.manualHotelName}
+                    onChange={(e) => updateTrip({ manualHotelName: e.target.value })}
+                    className={inputCls}
+                  />
+                </div>
+                <CtaLink href="/hotels" label="Search on Hotels and add" />
+              </>
+            )}
+          </SectionCard>
+
+          {/* ── Saved places ── */}
+          <SectionCard
+            title={`Saved places · ${activeActivityIds.length} of ${savedIds.length} selected`}
+          >
+            {savedIds.length === 0 ? (
+              <div className="py-2 text-center">
+                <p className="text-xs text-white/35">No saved places yet.</p>
+                <Link href="/activities" className="mt-2 inline-block text-xs text-lantern-mint hover:underline">
+                  Browse activities →
+                </Link>
               </div>
-            </div>
-
-            <div>
-              <FieldLabel label="Return — departure" />
-              <input
-                type="datetime-local"
-                value={trip.flight?.departureDateTime ?? ""}
-                onChange={(e) => updateFlight({ departureDateTime: e.target.value })}
-                className={inputCls}
-              />
-            </div>
-
-            <CtaLink href="/flights" label="Search on Flights" />
+            ) : (
+              <>
+                <p className="text-[11px] text-white/30">
+                  Checked places are included in your itinerary.
+                </p>
+                <div className="space-y-1.5">
+                  {visibleActivityIds.map((id) => (
+                    <ActivityRow
+                      key={id}
+                      id={id}
+                      meta={savedMeta[id]}
+                      excluded={trip.excludedActivityIds.includes(id)}
+                      onToggle={() => toggleExclude(id)}
+                    />
+                  ))}
+                </div>
+                {savedIds.length > ACTIVITY_PREVIEW && (
+                  <button
+                    type="button"
+                    onClick={() => setShowAllActivities((v) => !v)}
+                    className="text-xs text-white/35 hover:text-lantern-mint transition-colors"
+                  >
+                    {showAllActivities
+                      ? "Collapse"
+                      : `Show all ${savedIds.length} saved places`}
+                  </button>
+                )}
+              </>
+            )}
           </SectionCard>
 
-          {/* Hotel */}
-          <SectionCard title="Hotel / base">
-            <div>
-              <FieldLabel label="Hotel name or neighborhood" note="(optional)" />
-              <input
-                type="text"
-                placeholder="e.g. Park Hyatt Shinjuku"
-                value={trip.hotel?.name ?? ""}
-                onChange={(e) =>
-                  updateTrip({ hotel: { name: e.target.value } })
-                }
-                className={inputCls}
-              />
-            </div>
-            <CtaLink href="/hotels" label="Search on Hotels" />
-          </SectionCard>
-
-          {/* Preferences */}
+          {/* ── Preferences ── */}
           <SectionCard title="Preferences">
             <div className="grid grid-cols-2 gap-3">
               <div>
@@ -794,11 +1021,10 @@ export default function ItineraryPlanner() {
               options={["walking", "public transit", "taxi", "mixed"] as UITransit[]}
               value={trip.transit}
               onChange={(v) => updateTrip({ transit: v })}
-              cols={2}
             />
           </SectionCard>
 
-          {/* Action buttons */}
+          {/* ── Actions ── */}
           <div className="space-y-2">
             <button
               type="button"
@@ -855,8 +1081,6 @@ export default function ItineraryPlanner() {
 
         {/* ── RIGHT: Itinerary output ── */}
         <main>
-
-          {/* No itinerary, not generating */}
           {!hasItinerary && !isGenerating && genStatus !== "error" && (
             <div className="flex flex-col items-center justify-center min-h-[480px] rounded-2xl border border-white/[0.06] bg-white/[0.01] p-10 text-center">
               <div className="h-14 w-14 rounded-2xl border border-white/[0.1] bg-white/[0.03] flex items-center justify-center text-2xl mb-5">
@@ -867,7 +1091,7 @@ export default function ItineraryPlanner() {
                 {savedIds.length === 0
                   ? "Save places on the Activities page, fill in your trip details, then click Generate."
                   : activeActivityIds.length === 0
-                  ? "All saved places are excluded. Check some to include them in your plan."
+                  ? "All saved places are excluded. Check some to include them."
                   : !primaryCity
                   ? `${activeActivityIds.length} places ready. Enter a destination and click Generate.`
                   : `${activeActivityIds.length} places ready for ${primaryCity}. Click Generate to plan your days.`}
@@ -883,7 +1107,6 @@ export default function ItineraryPlanner() {
             </div>
           )}
 
-          {/* Generating spinner */}
           {isGenerating && (
             <div className="flex flex-col items-center justify-center min-h-[480px] rounded-2xl border border-white/[0.06] bg-white/[0.01] p-10 text-center">
               <div className="h-10 w-10 rounded-full border-2 border-white/10 border-t-lantern-mint animate-spin mb-6" />
@@ -892,7 +1115,6 @@ export default function ItineraryPlanner() {
             </div>
           )}
 
-          {/* Error with no previous result */}
           {genStatus === "error" && !hasItinerary && (
             <div className="flex flex-col items-center justify-center min-h-[480px] rounded-2xl border border-red-500/20 bg-red-500/[0.03] p-10 text-center">
               <p className="text-sm font-semibold text-red-400 mb-2">Failed to generate itinerary</p>
@@ -907,10 +1129,8 @@ export default function ItineraryPlanner() {
             </div>
           )}
 
-          {/* Itinerary result */}
           {hasItinerary && trip.itinerary && !isGenerating && (
             <div>
-              {/* Result header */}
               <div className="flex items-start justify-between gap-4 mb-6">
                 <div>
                   <h1 className="text-xl font-bold text-white">
@@ -928,9 +1148,7 @@ export default function ItineraryPlanner() {
                   )}
                 </div>
                 {genStatus === "error" && (
-                  <p className="text-xs text-red-400 shrink-0 mt-1">
-                    Regeneration failed — showing last result
-                  </p>
+                  <p className="text-xs text-red-400 shrink-0 mt-1">Regeneration failed — showing last result</p>
                 )}
               </div>
 
@@ -948,24 +1166,17 @@ export default function ItineraryPlanner() {
                     }`}
                   >
                     <span className="block">Day {i + 1}</span>
-                    <span className="block font-normal opacity-70 mt-0.5">
-                      {shortDate(day.date)}
-                    </span>
+                    <span className="block font-normal opacity-70 mt-0.5">{shortDate(day.date)}</span>
                   </button>
                 ))}
               </div>
 
-              {/* Selected day timeline */}
               {trip.itinerary.days[selectedDay] && (
                 <div className="rounded-2xl border border-white/[0.08] bg-white/[0.01] p-6">
-                  <DayView
-                    day={trip.itinerary.days[selectedDay]}
-                    savedMeta={savedMeta}
-                  />
+                  <DayView day={trip.itinerary.days[selectedDay]} savedMeta={savedMeta} />
                 </div>
               )}
 
-              {/* Dropped activities */}
               {trip.itinerary.meta.droppedActivities.length > 0 && (
                 <div className="mt-4 rounded-xl border border-lantern-gold/20 bg-lantern-gold/[0.04] px-5 py-4">
                   <p className="text-xs font-semibold text-lantern-gold mb-2">
@@ -982,7 +1193,6 @@ export default function ItineraryPlanner() {
                 </div>
               )}
 
-              {/* Planner notes */}
               {trip.itinerary.meta.conflicts.length > 0 && (
                 <div className="mt-3 rounded-xl border border-white/[0.07] bg-white/[0.01] px-5 py-4">
                   <p className="text-xs font-semibold text-white/30 mb-2">Notes</p>
@@ -995,7 +1205,6 @@ export default function ItineraryPlanner() {
               )}
             </div>
           )}
-
         </main>
       </div>
     </div>

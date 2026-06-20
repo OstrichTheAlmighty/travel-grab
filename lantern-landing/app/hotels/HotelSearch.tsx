@@ -2815,6 +2815,8 @@ function HotelCard({
   isInCompare,
   onToggleCompare,
   compareDisabled,
+  isAddedToItinerary,
+  onAddToItinerary,
 }: {
   offer: HotelOffer;
   isBestOverall: boolean;
@@ -2829,6 +2831,8 @@ function HotelCard({
   isInCompare?: boolean;
   onToggleCompare?: () => void;
   compareDisabled?: boolean;
+  isAddedToItinerary?: boolean;
+  onAddToItinerary?: () => void;
 }) {
   const [breakdownOpen, setBreakdownOpen] = useState(isBestOverall);
   const prefsActive = activePrefs.length > 0;
@@ -3146,6 +3150,18 @@ function HotelCard({
                   className="text-[11px] font-semibold text-white/45 border border-white/[0.1] hover:border-white/25 hover:text-white/70 rounded-lg px-3 py-1.5 transition-all whitespace-nowrap"
                 >
                   Research
+                </button>
+              )}
+              {onAddToItinerary && (
+                <button
+                  onClick={(e) => { e.stopPropagation(); onAddToItinerary(); }}
+                  className={`text-[11px] font-semibold rounded-lg px-2.5 py-1.5 transition-all border whitespace-nowrap ${
+                    isAddedToItinerary
+                      ? "bg-lantern-mint/15 text-lantern-mint border-lantern-mint/30"
+                      : "text-white/40 border-white/[0.08] hover:border-lantern-mint/30 hover:text-lantern-mint/70"
+                  }`}
+                >
+                  {isAddedToItinerary ? "✓ In itinerary" : "+ Itinerary"}
                 </button>
               )}
               {offer.booking_url && (
@@ -4814,6 +4830,7 @@ export default function HotelSearch() {
   const [comparePanelOpen,    setComparePanelOpen]    = useState(false);
   const [visibleCount,        setVisibleCount]        = useState(20);
   const [searchMode,          setSearchMode]          = useState<"best-area" | "best-hotels">("best-area");
+  const [itineraryHotelId,    setItineraryHotelId]    = useState<string | null>(null);
 
   const toggleCompare = useCallback((id: string) => {
     setCompareIds(prev =>
@@ -4828,6 +4845,17 @@ export default function HotelSearch() {
 
   const resultsRef        = useRef<HTMLDivElement>(null);
   const searchStartTimeRef = useRef<number>(0);
+
+  // Load saved-to-itinerary hotel id from localStorage
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("travelgrab_selected_hotel_v1");
+      if (stored) {
+        const parsed = JSON.parse(stored) as { hotelId: string };
+        setItineraryHotelId(parsed.hotelId ?? null);
+      }
+    } catch { /* ignore */ }
+  }, []);
 
   // Debug: fire on mount to confirm analytics pipeline is wired up.
   // Remove this useEffect once PostHog Live Events confirms events are arriving.
@@ -5574,6 +5602,26 @@ export default function HotelSearch() {
                             isInCompare={compareIds.includes(offer.hotel_id)}
                             onToggleCompare={() => toggleCompare(offer.hotel_id)}
                             compareDisabled={compareIds.length >= 4}
+                            isAddedToItinerary={offer.hotel_id === itineraryHotelId}
+                            onAddToItinerary={() => {
+                              const data = {
+                                hotelId:      offer.hotel_id,
+                                name:         offer.name,
+                                neighborhood: offer.inferred_neighborhood,
+                                address:      offer.address,
+                                lat:          offer.latitude,
+                                lng:          offer.longitude,
+                                pricePerNight: offer.price_per_night,
+                                currency:     offer.currency,
+                                rating:       offer.overall_rating,
+                                imageUrl:     offer.image_url,
+                                aiScore:      offer.ai_score,
+                              };
+                              try {
+                                localStorage.setItem("travelgrab_selected_hotel_v1", JSON.stringify(data));
+                                setItineraryHotelId(offer.hotel_id);
+                              } catch { /* ignore */ }
+                            }}
                           />
                         </div>
                       );

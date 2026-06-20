@@ -1490,12 +1490,14 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
 
 // ── FlightCard ────────────────────────────────────────────────────────────────
 
-function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType }: {
+function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isAddedToItinerary, onAddToItinerary }: {
   offer: FlightOffer;
   cardRef?: React.RefObject<HTMLDivElement | null>;
   priorityWeights: Record<string, number>;
   priorities: Priority[];
   tripType?: string;
+  isAddedToItinerary?: boolean;
+  onAddToItinerary?: () => void;
 }) {
   const rec = offer.is_recommended;
   const [scoreOpen, setScoreOpen] = useState(false);
@@ -1881,7 +1883,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType }: {
           )}
           <button
             onClick={() => setDetailsOpen((o) => !o)}
-            className="ml-auto flex items-center gap-1.5 text-[11px] font-medium text-white/40 hover:text-white/70 border border-white/[0.08] hover:border-white/20 rounded-lg px-3 py-1.5 transition-colors"
+            className="flex items-center gap-1.5 text-[11px] font-medium text-white/40 hover:text-white/70 border border-white/[0.08] hover:border-white/20 rounded-lg px-3 py-1.5 transition-colors"
           >
             <svg
               className={`w-3 h-3 transition-transform ${detailsOpen ? "rotate-180" : ""}`}
@@ -1894,6 +1896,18 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType }: {
             </svg>
             {detailsOpen ? "Hide details" : "Details"}
           </button>
+          {onAddToItinerary && (
+            <button
+              onClick={onAddToItinerary}
+              className={`ml-auto text-[11px] font-semibold rounded-lg px-2.5 py-1.5 transition-all border whitespace-nowrap ${
+                isAddedToItinerary
+                  ? "bg-lantern-mint/15 text-lantern-mint border-lantern-mint/30"
+                  : "text-white/40 border-white/[0.08] hover:border-lantern-mint/30 hover:text-lantern-mint/70"
+              }`}
+            >
+              {isAddedToItinerary ? "✓ In itinerary" : "+ Itinerary"}
+            </button>
+          )}
         </div>
       </div>
 
@@ -2125,6 +2139,17 @@ export default function FlightSearch() {
   const [searchedParams, setSearchedParams] = useState<{
     origin: Selection; destination: Selection; tripType: TripType; cabin: CabinClass; travelers: number;
   } | null>(null);
+  const [itineraryFlightKey, setItineraryFlightKey] = useState<string | null>(null);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("travelgrab_selected_flight_v1");
+      if (stored) {
+        const parsed = JSON.parse(stored) as { flightKey: string };
+        setItineraryFlightKey(parsed.flightKey ?? null);
+      }
+    } catch { /* ignore */ }
+  }, []);
 
   const handleSearch = async () => {
     const errs: string[] = [];
@@ -2539,6 +2564,35 @@ export default function FlightSearch() {
                   priorityWeights={activeWeights}
                   priorities={priorities}
                   tripType={searchedParams?.tripType}
+                  isAddedToItinerary={`${offer.airline_code}|${offer.flight_number}|${offer.depart_time}` === itineraryFlightKey}
+                  onAddToItinerary={() => {
+                    const flightKey = `${offer.airline_code}|${offer.flight_number}|${offer.depart_time}`;
+                    const data = {
+                      flightKey,
+                      airline:            offer.airline,
+                      airlineCode:        offer.airline_code,
+                      flightNumber:       offer.flight_number,
+                      origin:             offer.origin,
+                      destination:        offer.destination,
+                      departTime:         offer.depart_time,
+                      arriveTime:         offer.arrive_time,
+                      duration:           offer.duration,
+                      stops:              offer.stops,
+                      stopLabel:          offer.stop_label,
+                      price:              offer.price_total,
+                      currency:           offer.currency,
+                      returnOrigin:       offer.return_origin,
+                      returnDestination:  offer.return_destination,
+                      returnDepartTime:   offer.return_depart_time,
+                      returnArriveTime:   offer.return_arrive_time,
+                      returnDuration:     offer.return_duration,
+                      returnStopLabel:    offer.return_stop_label,
+                    };
+                    try {
+                      localStorage.setItem("travelgrab_selected_flight_v1", JSON.stringify(data));
+                      setItineraryFlightKey(flightKey);
+                    } catch { /* ignore */ }
+                  }}
                 />
               ))}
             </div>
