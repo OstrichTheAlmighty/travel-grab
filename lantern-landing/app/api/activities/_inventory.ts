@@ -164,12 +164,38 @@ const TYPE_EMOJI: Record<string, string> = {
 };
 
 const TYPE_TAGS: Record<string, string> = {
+  // Landmarks & culture
   museum: "Museum", art_gallery: "Art Gallery", park: "Park",
-  tourist_attraction: "Sightseeing", night_club: "Nightclub", bar: "Bar",
-  restaurant: "Restaurant", shopping_mall: "Shopping", zoo: "Zoo",
+  tourist_attraction: "Sightseeing", shopping_mall: "Shopping",
   aquarium: "Aquarium", amusement_park: "Theme Park", church: "Historic Site",
-  hindu_temple: "Temple", place_of_worship: "Cultural Site", food: "Food",
-  cafe: "Café", natural_feature: "Nature", spa: "Spa",
+  hindu_temple: "Temple", buddhist_temple: "Temple",
+  shinto_shrine: "Shrine", place_of_worship: "Cultural Site",
+  natural_feature: "Nature", historical_landmark: "Historical Site",
+  // Nightlife
+  night_club: "Nightclub", bar: "Bar", karaoke: "Karaoke",
+  // Food — generic
+  restaurant: "Restaurant", food: "Food", cafe: "Café",
+  // Food — Japanese subtypes (Google Places New API types)
+  japanese_restaurant: "Japanese", ramen_restaurant: "Ramen",
+  sushi_restaurant: "Sushi", tempura_restaurant: "Tempura",
+  yakitori_restaurant: "Yakitori", tonkatsu_restaurant: "Tonkatsu",
+  soba_noodle_shop: "Soba", udon_restaurant: "Udon",
+  shabu_shabu_restaurant: "Shabu Shabu", yakiniku_restaurant: "Yakiniku",
+  izakaya: "Izakaya", gyoza_restaurant: "Gyoza",
+  // Food — other cuisine subtypes
+  seafood_restaurant: "Seafood", italian_restaurant: "Italian",
+  french_restaurant: "French", chinese_restaurant: "Chinese",
+  korean_restaurant: "Korean", thai_restaurant: "Thai",
+  indian_restaurant: "Indian", american_restaurant: "American",
+  mediterranean_restaurant: "Mediterranean", steak_house: "Steak",
+  vegetarian_restaurant: "Vegetarian", vegan_restaurant: "Vegan",
+  fast_food_restaurant: "Fast Food", pizza_restaurant: "Pizza",
+  hamburger_restaurant: "Burgers", breakfast_restaurant: "Breakfast",
+  // Food — cafes & desserts
+  coffee_shop: "Coffee", bakery: "Bakery", ice_cream_shop: "Dessert",
+  dessert_shop: "Dessert", confectionery: "Sweets",
+  // Other
+  spa: "Spa", zoo: "Zoo",
   movie_theater: "Cinema", bowling_alley: "Bowling", casino: "Casino",
   stadium: "Stadium",
 };
@@ -587,11 +613,29 @@ function shouldInclude(place: GooglePlace, viewport: Viewport): boolean {
   return true;
 }
 
+// Higher number = more specific / takes priority over catch-all "culture"
+const CATEGORY_SPECIFICITY: Record<Category, number> = {
+  food:        10,
+  nightlife:    9,
+  luxury:       8,
+  adventure:    7,
+  nature:       6,
+  culture:      5,
+  hidden_gems:  0,  // never set directly; derived by mapToActivity from badge
+};
+
 function upsertEntry(inv: CityInventory, place: GooglePlace, category: Category, tags: string[]): void {
   if (inv.entries.has(place.id)) {
     const entry = inv.entries.get(place.id)!;
+    // Merge tags
     for (const tag of tags) {
       if (!entry.tags.includes(tag)) entry.tags.push(tag);
+    }
+    // Allow a more-specific category to override.
+    // This prevents tourist_attraction (fast nearbySearch → "culture") from permanently
+    // claiming restaurants/bars/parks before the specific food/nightlife/nature queries finish.
+    if ((CATEGORY_SPECIFICITY[category] ?? 0) > (CATEGORY_SPECIFICITY[entry.category] ?? 0)) {
+      entry.category = category;
     }
   } else {
     inv.entries.set(place.id, { place, category, tags: [...tags] });

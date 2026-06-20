@@ -1368,10 +1368,19 @@ function sortByRelevance(activities: Activity[], query: string): Activity[] {
     return { activity: a, score };
   });
 
-  return scored
-    .filter(({ score }) => score > 0)
-    .sort((a, b) => b.score - a.score)
-    .map(({ activity }) => activity);
+  const matched = scored.filter(({ score }) => score > 0);
+  matched.sort((a, b) => b.score - a.score);
+  const results = matched.map(({ activity }) => activity);
+
+  const searchQuery = query;
+  const totalPlaces = activities.length;
+  const matchedPlaces = results.length;
+  const firstTenMatches = results.slice(0, 10).map((a) => ({
+    title: a.title, category: a.category, tags: a.tags,
+  }));
+  console.log({ searchQuery, totalPlaces, matchedPlaces, firstTenMatches });
+
+  return results;
 }
 
 function ActivitySearchInput({
