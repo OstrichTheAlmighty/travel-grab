@@ -11,6 +11,7 @@ export type SlotKind =
   | "hotel_checkin"
   | "hotel_checkout"
   | "airport_transfer"
+  | "intercity_transfer"
   | "free_time";
 
 // ── Activity representation inside the planner ────────────────────────────────
@@ -33,6 +34,7 @@ export interface PlannerActivity {
   userPriority:    number;   // 1 = must-do, 2 = want, 3 = nice-to-have
   rating:          number;
   reviewCount:     number;
+  hasRealCoords?:  boolean;  // false = city-centre fallback; suppresses fake distance display
 }
 
 // ── Slot / day output ─────────────────────────────────────────────────────────
@@ -41,6 +43,7 @@ export interface TransitInfo {
   mode:            TransitMode;
   durationMinutes: number;
   distanceKm:      number;
+  coordsSource?:   "real" | "estimated";  // "estimated" = hide km in UI
 }
 
 export interface PlannedSlot {
@@ -62,6 +65,7 @@ export interface PlannedDay {
   date:                   string;   // ISO "YYYY-MM-DD"
   theme:                  string;
   geographicArea:         string;
+  cityLabel?:             string;   // explicit city name for multi-city trips
   slots:                  PlannedSlot[];
   scheduledActivityCount: number;
   totalActivityMinutes:   number;
@@ -117,6 +121,7 @@ export interface ItineraryInput {
     numTravelers: number;
     city:         string;
     destination:  string;
+    cityStops?:   { city: string; days: number }[];  // multi-city route
   };
   preferences: PlannerPreferences;
   hotel: {
@@ -153,6 +158,12 @@ export interface SchedulerInput {
   pace:                  Pace;
   mealsPerDay:           number;
   mealDurations:         { breakfast: number; lunch: number; dinner: number };
+  intercityTransfer?:    {
+    durationMinutes: number;
+    description:     string;
+    fromCity:        string;
+    toCity:          string;
+  };
 }
 
 export interface SchedulerOutput {

@@ -323,12 +323,13 @@ function NavLink({ href, label, active }: { href: string; label: string; active:
 // ── Design tokens ──────────────────────────────────────────────────────────────
 
 const SLOT_STYLE: Record<string, { dot: string; border: string; bg: string }> = {
-  activity:         { dot: "bg-lantern-mint",  border: "border-lantern-mint/25", bg: "bg-lantern-mint/[0.05]" },
-  meal:             { dot: "bg-lantern-gold",  border: "border-lantern-gold/25", bg: "bg-lantern-gold/[0.05]" },
-  hotel_checkin:    { dot: "bg-white/25",      border: "border-white/10",        bg: "bg-white/[0.02]"        },
-  hotel_checkout:   { dot: "bg-white/25",      border: "border-white/10",        bg: "bg-white/[0.02]"        },
-  airport_transfer: { dot: "bg-lantern-blue",  border: "border-lantern-blue/25", bg: "bg-lantern-blue/[0.05]" },
-  free_time:        { dot: "bg-white/15",      border: "border-white/[0.07]",    bg: "bg-white/[0.01]"        },
+  activity:           { dot: "bg-lantern-mint",   border: "border-lantern-mint/25",  bg: "bg-lantern-mint/[0.05]"  },
+  meal:               { dot: "bg-lantern-gold",   border: "border-lantern-gold/25",  bg: "bg-lantern-gold/[0.05]"  },
+  hotel_checkin:      { dot: "bg-white/25",       border: "border-white/10",         bg: "bg-white/[0.02]"         },
+  hotel_checkout:     { dot: "bg-white/25",       border: "border-white/10",         bg: "bg-white/[0.02]"         },
+  airport_transfer:   { dot: "bg-lantern-blue",   border: "border-lantern-blue/25",  bg: "bg-lantern-blue/[0.05]"  },
+  intercity_transfer: { dot: "bg-lantern-violet", border: "border-lantern-violet/30",bg: "bg-lantern-violet/[0.07]"},
+  free_time:          { dot: "bg-white/15",       border: "border-white/[0.07]",     bg: "bg-white/[0.01]"         },
 };
 
 const CAT_STYLE: Record<string, string> = {
@@ -346,30 +347,61 @@ const CAT_STYLE: Record<string, string> = {
 function TransitConnector({ slot }: { slot: PlannedSlot }) {
   const t = slot.transit!;
   const icon = t.mode === "walking" ? "🚶" : t.mode === "driving" ? "🚕" : "🚇";
+  const showKm = t.coordsSource !== "estimated" && t.distanceKm > 0;
   return (
     <div className="flex items-center gap-2 py-1.5 pl-[4.5rem]">
       <span className="text-xs text-white/25">
-        {icon} {t.durationMinutes}m · {t.distanceKm.toFixed(1)} km
+        {icon} {t.durationMinutes}m{showKm ? ` · ${t.distanceKm.toFixed(1)} km` : ""}
       </span>
     </div>
   );
 }
 
 function TimelineSlot({
-  slot, savedMeta, isLast,
+  slot, savedMeta, isLast, compact, onSlotClick,
 }: {
-  slot:      PlannedSlot;
-  savedMeta: Record<string, SavedMeta>;
-  isLast:    boolean;
+  slot:        PlannedSlot;
+  savedMeta:   Record<string, SavedMeta>;
+  isLast:      boolean;
+  compact:     boolean;
+  onSlotClick: (slot: PlannedSlot) => void;
 }) {
   if (slot.kind === "free_time" && slot.transit) {
-    return <TransitConnector slot={slot} />;
+    return compact ? null : <TransitConnector slot={slot} />;
   }
+
   const style = SLOT_STYLE[slot.kind] ?? SLOT_STYLE.free_time;
   const meta  = Object.values(savedMeta).find((m) => m.title === slot.title) ?? null;
   const cat   = meta?.category ?? null;
   const nbhd  = meta?.neighborhood ?? null;
+  const isClickable = slot.kind === "activity" || slot.kind === "intercity_transfer";
 
+  if (compact) {
+    if (slot.kind === "free_time") return null; // hide free-time in compact
+    const lineColor = slot.kind === "intercity_transfer" ? "border-lantern-violet/20" : "border-white/[0.06]";
+    return (
+      <div
+        className={`flex items-center gap-3 py-2.5 border-b ${lineColor} ${isClickable ? "cursor-pointer hover:bg-white/[0.02] -mx-2 px-2 rounded-lg transition-colors" : ""}`}
+        onClick={isClickable ? () => onSlotClick(slot) : undefined}
+      >
+        <span className="text-[11px] font-mono text-white/30 w-16 shrink-0 tabular-nums">
+          {formatTime(slot.startMinutes)}
+        </span>
+        <div className={`h-1.5 w-1.5 rounded-full shrink-0 ${style.dot}`} />
+        <span className={`flex-1 text-[13px] truncate ${slot.kind === "intercity_transfer" ? "text-lantern-violet font-medium" : "text-white/80"}`}>
+          {slot.title}
+        </span>
+        <span className="text-[11px] text-white/25 shrink-0">{formatDuration(slot.durationMinutes)}</span>
+        {cat && cat in CAT_STYLE && (
+          <span className={`shrink-0 hidden sm:inline-block rounded-full border px-1.5 py-0.5 text-[9px] font-semibold capitalize ${CAT_STYLE[cat]}`}>
+            {cat}
+          </span>
+        )}
+      </div>
+    );
+  }
+
+  // Detailed view
   return (
     <div className="flex gap-3">
       <div className="flex flex-col items-center shrink-0 w-14">
@@ -377,12 +409,17 @@ function TimelineSlot({
           {formatTime(slot.startMinutes)}
         </span>
         <div className={`h-2.5 w-2.5 rounded-full border-2 border-ink shrink-0 ${style.dot}`} />
-        {!isLast && <div className="flex-1 w-px bg-white/[0.07] mt-1" />}
+        {!isLast && <div className={`flex-1 w-px mt-1 ${slot.kind === "intercity_transfer" ? "bg-lantern-violet/20" : "bg-white/[0.07]"}`} />}
       </div>
-      <div className={`flex-1 mb-4 rounded-xl border px-4 py-3 ${style.border} ${style.bg}`}>
+      <div
+        className={`flex-1 mb-4 rounded-xl border px-4 py-3 ${style.border} ${style.bg} ${isClickable ? "cursor-pointer hover:border-white/20 transition-colors" : ""}`}
+        onClick={isClickable ? () => onSlotClick(slot) : undefined}
+      >
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-semibold text-white leading-snug">{slot.title}</p>
+            <p className={`text-sm font-semibold leading-snug ${slot.kind === "intercity_transfer" ? "text-lantern-violet" : "text-white"}`}>
+              {slot.title}
+            </p>
             <div className="flex items-center gap-2 mt-1 flex-wrap">
               <span className="text-[11px] text-white/35">{formatDuration(slot.durationMinutes)}</span>
               {nbhd && (
@@ -404,12 +441,22 @@ function TimelineSlot({
             {slot.explanation}
           </p>
         )}
+        {isClickable && slot.kind === "activity" && (
+          <p className="mt-1.5 text-[10px] text-white/20">Tap for details</p>
+        )}
       </div>
     </div>
   );
 }
 
-function DayView({ day, savedMeta }: { day: PlannedDay; savedMeta: Record<string, SavedMeta> }) {
+function DayView({
+  day, savedMeta, compact, onSlotClick,
+}: {
+  day:         PlannedDay;
+  savedMeta:   Record<string, SavedMeta>;
+  compact:     boolean;
+  onSlotClick: (slot: PlannedSlot) => void;
+}) {
   return (
     <div>
       <div className="mb-5">
@@ -417,8 +464,8 @@ function DayView({ day, savedMeta }: { day: PlannedDay; savedMeta: Record<string
           {longDate(day.date)}
         </p>
         <h2 className="text-lg font-bold text-white">{day.theme || `Day ${day.dayIndex + 1}`}</h2>
-        {day.geographicArea && (
-          <p className="text-sm text-white/40 mt-0.5">{day.geographicArea}</p>
+        {day.cityLabel && (
+          <p className="text-sm text-white/40 mt-0.5">{day.cityLabel}</p>
         )}
         <div className="flex gap-4 mt-2">
           <span className="text-xs text-white/30">{day.scheduledActivityCount} activities</span>
@@ -432,6 +479,8 @@ function DayView({ day, savedMeta }: { day: PlannedDay; savedMeta: Record<string
             slot={slot}
             savedMeta={savedMeta}
             isLast={i === day.slots.length - 1}
+            compact={compact}
+            onSlotClick={onSlotClick}
           />
         ))}
       </div>
@@ -750,6 +799,8 @@ export default function ItineraryPlanner() {
   const [selectedDay,       setSelectedDay]        = useState(0);
   const [saveNotice,        setSaveNotice]         = useState(false);
   const [showAllActivities, setShowAllActivities]  = useState(false);
+  const [compactView,       setCompactView]        = useState(true);
+  const [detailSlot,        setDetailSlot]         = useState<PlannedSlot | null>(null);
 
   // Onboarding state (new users see a guided wizard; existing users skip to "done")
   type ObStep = "destination" | "dates" | "style" | "recommendations" | "cities" | "done";
@@ -1111,6 +1162,9 @@ export default function ItineraryPlanner() {
           numTravelers: 1,
           city:         primaryCity.split(",")[0].trim(),
           destination:  destination || primaryCity,
+          cityStops:    trip.cities
+            .filter((c) => c.city.trim() && c.days > 0)
+            .map((c) => ({ city: c.city, days: c.days })),
         },
         preferences: {
           wakeTimeMinutes:      timeToMinutes(trip.wakeTime),
@@ -1884,35 +1938,125 @@ export default function ItineraryPlanner() {
                     </p>
                   )}
                 </div>
-                {genStatus === "error" && (
-                  <p className="text-xs text-red-400 shrink-0 mt-1">Regeneration failed — showing last result</p>
-                )}
+                <div className="flex flex-col items-end gap-2">
+                  {genStatus === "error" && (
+                    <p className="text-xs text-red-400">Regeneration failed — showing last result</p>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setCompactView((v) => !v)}
+                    className="text-[11px] text-white/35 hover:text-white/65 border border-white/10 rounded-lg px-3 py-1.5 transition-colors"
+                  >
+                    {compactView ? "Detailed" : "Compact"}
+                  </button>
+                </div>
               </div>
 
               {/* Day tabs */}
               <div className="flex gap-2 mb-6 overflow-x-auto pb-1 -mx-1 px-1">
-                {trip.itinerary.days.map((day, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={() => setSelectedDay(i)}
-                    className={`shrink-0 rounded-xl border px-4 py-2.5 text-xs font-semibold transition-colors ${
-                      selectedDay === i
-                        ? "border-lantern-mint/50 bg-lantern-mint/10 text-lantern-mint"
-                        : "border-white/[0.08] bg-white/[0.02] text-white/40 hover:text-white/65"
-                    }`}
-                  >
-                    <span className="block">Day {i + 1}</span>
-                    <span className="block font-normal opacity-70 mt-0.5">{shortDate(day.date)}</span>
-                  </button>
-                ))}
+                {trip.itinerary.days.map((day, i) => {
+                  const cityShort = day.cityLabel ? day.cityLabel.split(",")[0].trim() : null;
+                  const showCity  = cityShort && trip.cities.length > 1;
+                  return (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setSelectedDay(i)}
+                      className={`shrink-0 rounded-xl border px-4 py-2.5 text-xs font-semibold transition-colors ${
+                        selectedDay === i
+                          ? "border-lantern-mint/50 bg-lantern-mint/10 text-lantern-mint"
+                          : "border-white/[0.08] bg-white/[0.02] text-white/40 hover:text-white/65"
+                      }`}
+                    >
+                      <span className="block">Day {i + 1}</span>
+                      <span className="block font-normal opacity-70 mt-0.5">{shortDate(day.date)}</span>
+                      {showCity && (
+                        <span className="block font-normal text-[9px] mt-0.5 opacity-50">{cityShort}</span>
+                      )}
+                    </button>
+                  );
+                })}
               </div>
 
               {trip.itinerary.days[selectedDay] && (
                 <div className="rounded-2xl border border-white/[0.08] bg-white/[0.01] p-6">
-                  <DayView day={trip.itinerary.days[selectedDay]} savedMeta={savedMeta} />
+                  <DayView
+                    day={trip.itinerary.days[selectedDay]}
+                    savedMeta={savedMeta}
+                    compact={compactView}
+                    onSlotClick={setDetailSlot}
+                  />
                 </div>
               )}
+
+              {/* Slot detail modal */}
+              {detailSlot && (() => {
+                const dMeta = Object.values(savedMeta).find((m) => m.title === detailSlot.title) ?? null;
+                return (
+                  <div
+                    className="fixed inset-0 z-50 flex items-end sm:items-center justify-center"
+                    onClick={() => setDetailSlot(null)}
+                  >
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+                    <div
+                      className="relative z-10 w-full max-w-lg mx-4 mb-4 sm:mb-0 rounded-3xl border border-white/10 bg-[#0D1019] overflow-hidden shadow-2xl"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {dMeta?.photoRef && (
+                        <div className="h-40 relative overflow-hidden">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={`/api/activities/photo?name=${dMeta.photoRef}`}
+                            className="w-full h-full object-cover"
+                            alt={detailSlot.title}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#0D1019] via-[#0D1019]/30 to-transparent" />
+                        </div>
+                      )}
+                      <div className="p-6">
+                        <button
+                          type="button"
+                          className="absolute top-4 right-4 text-white/40 hover:text-white/80 transition-colors text-lg leading-none"
+                          onClick={() => setDetailSlot(null)}
+                        >
+                          ✕
+                        </button>
+                        <p className="text-[11px] font-mono text-white/30 mb-1">
+                          {formatTime(detailSlot.startMinutes)} — {formatDuration(detailSlot.durationMinutes)}
+                        </p>
+                        <h3 className="text-lg font-bold text-white mb-2">{detailSlot.title}</h3>
+                        <div className="flex items-center flex-wrap gap-2 mb-3">
+                          {dMeta?.neighborhood && (
+                            <span className="text-sm text-white/40">{dMeta.neighborhood}</span>
+                          )}
+                          {dMeta?.rating != null && dMeta.rating > 0 && (
+                            <>
+                              {dMeta?.neighborhood && <span className="text-white/20">·</span>}
+                              <span className="text-sm text-lantern-gold">★ {dMeta.rating.toFixed(1)}</span>
+                            </>
+                          )}
+                          {dMeta?.category && dMeta.category in CAT_STYLE && (
+                            <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold capitalize ${CAT_STYLE[dMeta.category]}`}>
+                              {dMeta.category}
+                            </span>
+                          )}
+                        </div>
+                        {detailSlot.explanation && (
+                          <p className="text-sm text-white/50 leading-relaxed">{detailSlot.explanation}</p>
+                        )}
+                        <a
+                          href={`https://maps.google.com/?q=${encodeURIComponent(detailSlot.title)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-4 inline-flex items-center gap-1.5 text-xs text-lantern-blue hover:text-white transition-colors"
+                        >
+                          Open in Google Maps →
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
 
               {trip.itinerary.meta.droppedActivities.length > 0 && (
                 <div className="mt-4 rounded-xl border border-lantern-gold/20 bg-lantern-gold/[0.04] px-5 py-4">

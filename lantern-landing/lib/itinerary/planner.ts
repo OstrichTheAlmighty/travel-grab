@@ -10,6 +10,72 @@
 
 import { clusterByLocation } from "./geo";
 import { scheduleDay, formatTime } from "./scheduler";
+
+// ── Intercity route lookup (Japan-focused, extendable) ────────────────────────
+
+const INTERCITY_ROUTES: Record<string, { durationMinutes: number; description: string }> = {
+  "tokyo-osaka":      { durationMinutes: 150, description: "Shinkansen Nozomi · Shinagawa → Shin-Osaka" },
+  "osaka-tokyo":      { durationMinutes: 150, description: "Shinkansen Nozomi · Shin-Osaka → Shinagawa" },
+  "tokyo-kyoto":      { durationMinutes: 135, description: "Shinkansen Nozomi · Shinagawa → Kyoto" },
+  "kyoto-tokyo":      { durationMinutes: 135, description: "Shinkansen Nozomi · Kyoto → Shinagawa" },
+  "osaka-kyoto":      { durationMinutes: 30,  description: "JR Rapid Service · Osaka → Kyoto" },
+  "kyoto-osaka":      { durationMinutes: 30,  description: "JR Rapid Service · Kyoto → Osaka" },
+  "kyoto-hiroshima":  { durationMinutes: 90,  description: "Shinkansen Hikari/Kodama · Kyoto → Hiroshima" },
+  "hiroshima-kyoto":  { durationMinutes: 90,  description: "Shinkansen Hikari/Kodama · Hiroshima → Kyoto" },
+  "osaka-hiroshima":  { durationMinutes: 75,  description: "Shinkansen Nozomi · Shin-Osaka → Hiroshima" },
+  "hiroshima-osaka":  { durationMinutes: 75,  description: "Shinkansen Nozomi · Hiroshima → Shin-Osaka" },
+  "tokyo-hiroshima":  { durationMinutes: 240, description: "Shinkansen Nozomi · Shinagawa → Hiroshima" },
+  "hiroshima-tokyo":  { durationMinutes: 240, description: "Shinkansen Nozomi · Hiroshima → Shinagawa" },
+  "osaka-fukuoka":    { durationMinutes: 120, description: "Shinkansen Nozomi · Shin-Osaka → Hakata" },
+  "fukuoka-osaka":    { durationMinutes: 120, description: "Shinkansen Nozomi · Hakata → Shin-Osaka" },
+  "tokyo-fukuoka":    { durationMinutes: 300, description: "Shinkansen Nozomi · Shinagawa → Hakata" },
+  "fukuoka-tokyo":    { durationMinutes: 300, description: "Shinkansen Nozomi · Hakata → Shinagawa" },
+  "kyoto-nara":       { durationMinutes: 45,  description: "JR Nara Line · Kyoto → Nara" },
+  "nara-kyoto":       { durationMinutes: 45,  description: "JR Nara Line · Nara → Kyoto" },
+  "osaka-nara":       { durationMinutes: 40,  description: "Kintetsu/JR · Osaka → Nara" },
+  "nara-osaka":       { durationMinutes: 40,  description: "Kintetsu/JR · Nara → Osaka" },
+  "paris-london":     { durationMinutes: 150, description: "Eurostar · Paris Gare du Nord → London St Pancras" },
+  "london-paris":     { durationMinutes: 150, description: "Eurostar · London St Pancras → Paris Gare du Nord" },
+  "paris-amsterdam":  { durationMinutes: 200, description: "Thalys/Eurostar · Paris → Amsterdam Centraal" },
+  "amsterdam-paris":  { durationMinutes: 200, description: "Thalys/Eurostar · Amsterdam Centraal → Paris" },
+  "barcelona-madrid": { durationMinutes: 150, description: "AVE High-Speed · Barcelona Sants → Madrid Atocha" },
+  "madrid-barcelona": { durationMinutes: 150, description: "AVE High-Speed · Madrid Atocha → Barcelona Sants" },
+};
+
+interface CitySegment { city: string; startDay: number; endDay: number; }
+
+function buildCitySegments(stops: { city: string; days: number }[]): CitySegment[] {
+  const segments: CitySegment[] = [];
+  let day = 0;
+  for (const stop of stops) {
+    if (stop.city.trim() && stop.days > 0) {
+      segments.push({ city: stop.city, startDay: day, endDay: day + stop.days });
+      day += stop.days;
+    }
+  }
+  return segments;
+}
+
+function getCityForDay(segments: CitySegment[], dayIndex: number, def: string): string {
+  for (const seg of segments) {
+    if (dayIndex >= seg.startDay && dayIndex < seg.endDay) return seg.city;
+  }
+  return def;
+}
+
+function getCityTransition(segments: CitySegment[], dayIndex: number): { fromCity: string; toCity: string } | null {
+  for (let i = 1; i < segments.length; i++) {
+    if (dayIndex === segments[i].startDay) {
+      return { fromCity: segments[i - 1].city, toCity: segments[i].city };
+    }
+  }
+  return null;
+}
+
+function getIntercityRoute(from: string, to: string): { durationMinutes: number; description: string } {
+  const key = `${from.toLowerCase().split(",")[0].trim()}-${to.toLowerCase().split(",")[0].trim()}`;
+  return INTERCITY_ROUTES[key] ?? { durationMinutes: 90, description: `Intercity transfer to ${to.split(",")[0].trim()}` };
+}
 import type {
   ItineraryInput,
   PlannerOutput,
@@ -164,33 +230,86 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
   const allDropped: DroppedActivity[] = [];
   const conflicts: PlanningConflict[] = [];
 
-  // ── Geographic clustering ─────────────────────────────────────────────────
-  const k = Math.max(1, schedulingDays.length);
+  // ── Multi-city route segments ─────────────────────────────────────────────
+  const citySegments = buildCitySegments(trip.cityStops ?? []);
+  const isMultiCity = citySegments.length > 1;
 
-  let clusterAssignments: number[];
-  if (activities.length === 0) {
-    clusterAssignments = [];
-  } else if (activities.length <= k) {
-    // Fewer activities than days — assign one per day
-    clusterAssignments = activities.map((_, i) => i);
+  // ── Activity distribution ─────────────────────────────────────────────────
+  // For multi-city trips: distribute activities proportionally across city day segments.
+  // For single-city or no segment info: fall back to geographic k-means clustering.
+  let dayActivityMap: Map<number, PlannerActivity[]>;
+
+  if (isMultiCity && activities.length > 0) {
+    // Proportional distribution: each scheduling day gets activities from its city segment
+    dayActivityMap = new Map();
+
+    // Group activities by city segment (proportional to activity index)
+    const segmentActivities = new Map<number, PlannerActivity[]>();
+    activities.forEach((act, i) => {
+      const progress = (i + 0.5) / activities.length;
+      const targetSegIdx = (() => {
+        let cumDays = 0;
+        const totalDays = citySegments.reduce((s, seg) => s + (seg.endDay - seg.startDay), 0) || 1;
+        const targetDay = progress * totalDays;
+        for (let si = 0; si < citySegments.length; si++) {
+          cumDays += citySegments[si].endDay - citySegments[si].startDay;
+          if (targetDay <= cumDays) return si;
+        }
+        return citySegments.length - 1;
+      })();
+      if (!segmentActivities.has(targetSegIdx)) segmentActivities.set(targetSegIdx, []);
+      segmentActivities.get(targetSegIdx)!.push(act);
+    });
+
+    // Assign segment activities across that segment's scheduling days
+    schedulingDays.forEach((b, schedIdx) => {
+      const seg = citySegments.findIndex(
+        (seg) => b.dayIndex >= seg.startDay && b.dayIndex < seg.endDay,
+      );
+      const segIdx = seg >= 0 ? seg : 0;
+      const segDays = schedulingDays.filter((bd) => {
+        const s = citySegments[segIdx];
+        return s && bd.dayIndex >= s.startDay && bd.dayIndex < s.endDay;
+      });
+      const segActs = segmentActivities.get(segIdx) ?? [];
+      const posInSeg = segDays.findIndex((d) => d.dayIndex === b.dayIndex);
+      const totalSegDays = segDays.length || 1;
+      // Slice this day's share of the segment's activities
+      const startIdx = Math.round((posInSeg / totalSegDays) * segActs.length);
+      const endIdx   = Math.round(((posInSeg + 1) / totalSegDays) * segActs.length);
+      dayActivityMap.set(schedIdx, segActs.slice(startIdx, endIdx));
+    });
   } else {
-    const locations = activities.map((a) => a.location);
-    clusterAssignments = clusterByLocation(locations, k);
-  }
-
-  // Map cluster index → activity list
-  const clusterMap = new Map<number, PlannerActivity[]>();
-  for (let i = 0; i < activities.length; i++) {
-    const c = clusterAssignments[i];
-    if (!clusterMap.has(c)) clusterMap.set(c, []);
-    clusterMap.get(c)!.push(activities[i]);
+    // ── Geographic clustering (single-city fallback) ──────────────────────
+    const k = Math.max(1, schedulingDays.length);
+    let clusterAssignments: number[];
+    if (activities.length === 0) {
+      clusterAssignments = [];
+    } else if (activities.length <= k) {
+      clusterAssignments = activities.map((_, i) => i);
+    } else {
+      const locations = activities.map((a) => a.location);
+      clusterAssignments = clusterByLocation(locations, k);
+    }
+    const clusterMap = new Map<number, PlannerActivity[]>();
+    for (let i = 0; i < activities.length; i++) {
+      const c = clusterAssignments[i];
+      if (!clusterMap.has(c)) clusterMap.set(c, []);
+      clusterMap.get(c)!.push(activities[i]);
+    }
+    dayActivityMap = clusterMap;
   }
 
   // ── Build each day ────────────────────────────────────────────────────────
   const days: PlannedDay[] = boundaries.map((boundary) => {
-    // Map schedulingDay index → cluster index (0-based within scheduling days)
     const schedIdx = schedulingDays.findIndex((d) => d.dayIndex === boundary.dayIndex);
-    const dayActivities = schedIdx >= 0 ? (clusterMap.get(schedIdx) ?? []) : [];
+    const dayActivities = schedIdx >= 0 ? (dayActivityMap.get(schedIdx) ?? []) : [];
+
+    const dayCity = getCityForDay(citySegments, boundary.dayIndex, trip.city);
+    const transition = getCityTransition(citySegments, boundary.dayIndex);
+    const intercityTransfer = transition
+      ? { ...getIntercityRoute(transition.fromCity, transition.toCity), ...transition }
+      : undefined;
 
     const { slots, dropped } = scheduleDay({
       activities:    dayActivities,
@@ -204,11 +323,12 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
         lunch:     preferences.lunchDurationMin,
         dinner:    preferences.dinnerDurationMin,
       },
+      intercityTransfer,
     });
 
     allDropped.push(...dropped);
 
-    const { theme, area } = buildTheme(dayActivities, boundary.dayIndex, trip.city);
+    const { theme, area } = buildTheme(dayActivities, boundary.dayIndex, dayCity);
 
     const scheduledActivities = slots.filter((s) => s.kind === "activity");
 
@@ -237,6 +357,7 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
       date:                   boundary.date,
       theme,
       geographicArea:         area,
+      cityLabel:              dayCity,
       slots,
       scheduledActivityCount: scheduledActivities.length,
       totalActivityMinutes:   scheduledActivities.reduce((s, sl) => s + sl.durationMinutes, 0),

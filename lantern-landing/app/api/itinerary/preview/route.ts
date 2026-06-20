@@ -18,6 +18,10 @@ const CITY_CENTRES: Record<string, LatLng> = {
   tokyo:         { lat: 35.6762, lng: 139.6503 },
   osaka:         { lat: 34.6937, lng: 135.5023 },
   kyoto:         { lat: 35.0116, lng: 135.7681 },
+  hiroshima:     { lat: 34.3853, lng: 132.4553 },
+  nara:          { lat: 34.6851, lng: 135.8048 },
+  fukuoka:       { lat: 33.5904, lng: 130.4017 },
+  sapporo:       { lat: 43.0618, lng: 141.3545 },
   paris:         { lat: 48.8566, lng:   2.3522 },
   london:        { lat: 51.5074, lng:  -0.1278 },
   "new york":    { lat: 40.7128, lng: -74.0060 },
@@ -47,14 +51,64 @@ function cityCenter(destination: string): LatLng {
   return { lat: 48.8566, lng: 2.3522 }; // Paris as ultimate fallback
 }
 
+// ── Smarter activity durations by category / title keywords ──────────────────
+
+function categoryDuration(category: string, title: string = ""): number {
+  const lc = `${category} ${title}`.toLowerCase();
+  if (
+    lc.includes("disney") || lc.includes("universal") ||
+    lc.includes("theme park") || lc.includes("usp ") || lc.includes("bush")
+  ) return 360;
+  if (lc.includes("spa") || lc.includes("onsen") || lc.includes("hot spring") || lc.includes("bath")) return 120;
+  if (lc.includes("museum") || lc.includes("gallery") || lc.includes(" art ")) return 90;
+  if (lc.includes("shrine") || lc.includes("temple") || lc.includes("jinja") || lc.includes("ji ")) return 60;
+  if (lc.includes("castle") || lc.includes("palace") || lc.includes("fort")) return 75;
+  if (lc.includes("market") || lc.includes("bazaar")) return 90;
+  if (lc.includes("park") || lc.includes("garden") || lc.includes("forest") || lc.includes("beach")) return 75;
+  if (lc.includes("tower") || lc.includes("observation")) return 60;
+  if (
+    lc.includes("restaurant") || lc.includes("ramen") || lc.includes("sushi") ||
+    lc.includes("cafe") || lc.includes("café") || lc.includes("izakaya")
+  ) return 75;
+  switch (category) {
+    case "food":        return 75;
+    case "nightlife":   return 120;
+    case "culture":     return 90;
+    case "adventure":   return 180;
+    case "nature":      return 90;
+    case "luxury":      return 120;
+    case "hidden_gems": return 60;
+    default:            return 90;
+  }
+}
+
+// ── Activity-to-city assignment for multi-city trips ─────────────────────────
+
+function getActivityCity(
+  actIndex: number,
+  totalActivities: number,
+  cityStops: { city: string; days: number }[],
+): string | null {
+  if (cityStops.length === 0) return null;
+  const totalDays = cityStops.reduce((s, c) => s + c.days, 0) || 1;
+  const progress = (actIndex + 0.5) / Math.max(1, totalActivities);
+  const targetDay = progress * totalDays;
+  let cumDays = 0;
+  for (const stop of cityStops) {
+    cumDays += stop.days;
+    if (targetDay <= cumDays) return stop.city;
+  }
+  return cityStops[cityStops.length - 1].city;
+}
+
 // ── Request body types ────────────────────────────────────────────────────────
 
 interface PreviewActivity {
-  title:           string;
-  category?:       string;
-  priority?:       1 | 2 | 3;
-  lat?:            number;
-  lng?:            number;
+  title:            string;
+  category?:        string;
+  priority?:        1 | 2 | 3;
+  lat?:             number;
+  lng?:             number;
   durationMinutes?: number;
 }
 
@@ -65,6 +119,7 @@ interface PreviewRequest {
     numTravelers: number;
     city:         string;
     destination:  string;
+    cityStops?:   { city: string; days: number }[];
   };
   preferences?: Partial<{
     wakeTimeMinutes:      number;
@@ -105,27 +160,37 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "trip.startDate, endDate, and destination are required" }, { status: 422 });
   }
 
-  const centre = cityCenter(body.trip.destination);
+  const centre   = cityCenter(body.trip.destination);
   const hotelLat = body.hotel?.lat ?? centre.lat;
   const hotelLng = body.hotel?.lng ?? centre.lng;
 
-  // Build PlannerActivity list — assign positions around hotel/city-centre for
-  // activities that don't have explicit coordinates
-  const activities: PlannerActivity[] = body.activities.map((a, i) => ({
-    id:              `preview-${i}`,
-    sourceId:        `preview-${i}`,
-    title:           a.title || `Activity ${i + 1}`,
-    category:        a.category ?? "culture",
-    location: {
-      lat: a.lat ?? hotelLat + (i % 3 - 1) * 0.008 + Math.floor(i / 3) * 0.005,
-      lng: a.lng ?? hotelLng + (i % 3 - 1) * 0.010 + Math.floor(i / 3) * 0.005,
-    },
-    durationMinutes: a.durationMinutes ?? 90,
-    timeWindows:     [],
-    userPriority:    a.priority ?? 3,
-    rating:          0,
-    reviewCount:     0,
-  }));
+  const cityStops = (body.trip.cityStops ?? []).filter((c) => c.city.trim() && c.days > 0);
+
+  // Build PlannerActivity list — use real coordinates when provided;
+  // fall back to per-city centre (not random offsets) to avoid misleading fake distances.
+  const activities: PlannerActivity[] = body.activities.map((a, i) => {
+    const hasRealCoords = a.lat != null && a.lng != null;
+
+    // Assign this activity to its city by proportional index, then use that city's centre
+    const actCity = getActivityCity(i, body.activities.length, cityStops);
+    const actCentre = actCity ? cityCenter(actCity) : centre;
+
+    return {
+      id:              `preview-${i}`,
+      sourceId:        `preview-${i}`,
+      title:           a.title || `Activity ${i + 1}`,
+      category:        a.category ?? "culture",
+      location:        hasRealCoords
+        ? { lat: a.lat!, lng: a.lng! }
+        : actCentre,
+      durationMinutes: a.durationMinutes ?? categoryDuration(a.category ?? "culture", a.title),
+      timeWindows:     [],
+      userPriority:    a.priority ?? 3,
+      rating:          0,
+      reviewCount:     0,
+      hasRealCoords,
+    };
+  });
 
   const prefs = body.preferences ?? {};
 
@@ -137,6 +202,7 @@ export async function POST(req: NextRequest) {
       numTravelers: body.trip.numTravelers ?? 1,
       city:         body.trip.city || body.trip.destination.split(",")[0].trim(),
       destination:  body.trip.destination,
+      cityStops,
     },
     preferences: {
       wakeTimeMinutes:      prefs.wakeTimeMinutes      ?? 480,

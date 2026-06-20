@@ -111,8 +111,11 @@ function buildExplanation(
     windows.length > 0
       ? `Open until ${formatTime(Math.max(...windows.map((w) => w.closesAt)))}.`
       : "";
-  const transitNote =
-    transit.durationMinutes >= 8
+  // Suppress distance when activity uses city-centre fallback coordinates
+  const hasReal = activity.hasRealCoords !== false;
+  const transitNote = !hasReal
+    ? "Nearby."
+    : transit.durationMinutes >= 8
       ? `${transit.durationMinutes} min travel (${transit.distanceKm} km).`
       : "Nearby.";
   const crowdNote =
@@ -133,6 +136,7 @@ export function scheduleDay(input: SchedulerInput): SchedulerOutput {
     pace,
     mealsPerDay,
     mealDurations,
+    intercityTransfer,
   } = input;
 
   const dow = new Date(boundary.date + "T12:00:00Z").getDay(); // UTC noon → stable day of week
@@ -154,6 +158,24 @@ export function scheduleDay(input: SchedulerInput): SchedulerOutput {
       explanation: "Settle in, freshen up, drop luggage before exploring.",
     });
     currentMinute += 45;
+  }
+
+  // ── Intercity transfer (first day of each new city in a multi-city trip) ──
+  if (intercityTransfer) {
+    const { durationMinutes, description, toCity } = intercityTransfer;
+    const dh = Math.floor(durationMinutes / 60);
+    const dm = durationMinutes % 60;
+    const durStr = dh > 0 ? `${dh}h${dm > 0 ? ` ${dm}m` : ""}` : `${dm}m`;
+    const cityShort = toCity.split(",")[0].trim();
+    slots.push({
+      kind:           "intercity_transfer",
+      startMinutes:   currentMinute,
+      endMinutes:     currentMinute + durationMinutes,
+      durationMinutes,
+      title:          `Travel to ${cityShort}`,
+      explanation:    `${description} · ~${durStr}. Allow extra time for station navigation and hotel check-in.`,
+    });
+    currentMinute += durationMinutes + 30; // +30 min to settle into new city
   }
 
   // ── Departure-day hotel check-out ─────────────────────────────────────────
@@ -274,8 +296,8 @@ export function scheduleDay(input: SchedulerInput): SchedulerOutput {
     const actStart = arrival;
     const actEnd   = actStart + dur;
 
-    // Transit slot (only when meaningful and we have a known prior location)
-    if (currentLocation && transit.durationMinutes >= 8) {
+    // Transit slot — only when meaningful, prior location known, and coords are real
+    if (currentLocation && transit.durationMinutes >= 8 && next.hasRealCoords !== false) {
       slots.push({
         kind:        "free_time",
         startMinutes: currentMinute,
@@ -287,6 +309,7 @@ export function scheduleDay(input: SchedulerInput): SchedulerOutput {
           mode:            transitMode,
           durationMinutes: transit.durationMinutes,
           distanceKm:      transit.distanceKm,
+          coordsSource:    "real",
         },
         explanation: `${transit.distanceKm} km · ~${transit.durationMinutes} min by ${transitMode}`,
       });
@@ -314,10 +337,11 @@ export function scheduleDay(input: SchedulerInput): SchedulerOutput {
       sourceId:       next.sourceId,
       title:          next.title,
       location:       next.location,
-      transit: currentLocation && transit.durationMinutes < 8 ? {
+      transit: (currentLocation && transit.durationMinutes < 8 && next.hasRealCoords !== false) ? {
         mode:            transitMode,
         durationMinutes: transit.durationMinutes,
         distanceKm:      transit.distanceKm,
+        coordsSource:    "real" as const,
       } : undefined,
       explanation: buildExplanation(next, actStart, dow, transit),
     });
