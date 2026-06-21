@@ -1,5 +1,10 @@
 // ── Primitives ────────────────────────────────────────────────────────────────
 
+export interface DayWarning {
+  type: 'packed' | 'food_heavy' | 'transit_heavy' | 'late_night' | 'flight_recovery' | 'ai_note';
+  message: string;
+}
+
 export interface LatLng { lat: number; lng: number }
 
 export type TransitMode = "walking" | "transit" | "driving";
@@ -58,6 +63,7 @@ export interface PlannedSlot {
   transit?:        TransitInfo;   // travel TO this slot from the previous one
   explanation:     string;
   note?:           string;
+  category?:       string;        // activity category — set when kind === "activity"
 }
 
 export interface PlannedDay {
@@ -66,6 +72,8 @@ export interface PlannedDay {
   theme:                  string;
   geographicArea:         string;
   cityLabel?:             string;   // explicit city name for multi-city trips
+  warnings?:              DayWarning[];
+  daySummary?:            string;   // AI-generated or rules-based "why this day works"
   slots:                  PlannedSlot[];
   scheduledActivityCount: number;
   totalActivityMinutes:   number;
@@ -111,6 +119,7 @@ export interface PlannerPreferences {
   breakfastDurationMin: number;
   lunchDurationMin:     number;
   dinnerDurationMin:    number;
+  isFoodFocused?:       boolean;  // true when user selected Food & Culinary
 }
 
 export interface ItineraryInput {
@@ -164,6 +173,7 @@ export interface SchedulerInput {
     fromCity:        string;
     toCity:          string;
   };
+  isFoodFocused?:        boolean;  // true when user selected Food & Culinary interest
 }
 
 export interface SchedulerOutput {

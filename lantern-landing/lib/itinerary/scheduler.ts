@@ -147,6 +147,11 @@ export function scheduleDay(input: SchedulerInput): SchedulerOutput {
   let currentMinute  = boundary.effectiveStartMinutes;
   let currentLocation: LatLng | null = hotelLocation;
 
+  // Category balance tracking
+  const foodCap = input.isFoodFocused ? 4 : 2;
+  let foodSlotsScheduled = 0;
+  let lastActivityCategory: string | null = null;
+
   // ── Arrival-day hotel check-in ────────────────────────────────────────────
   if (boundary.isArrivalDay) {
     slots.push({
@@ -246,6 +251,16 @@ export function scheduleDay(input: SchedulerInput): SchedulerOutput {
       if (entry !== Infinity && arrival > entry) continue;  // arrive too late
       if (departure > boundary.effectiveEndMinutes) continue; // runs past end of day
 
+      // Food cap: skip food activities if daily limit reached
+      if (a.category === "food" && foodSlotsScheduled >= foodCap) continue;
+
+      // Avoid back-to-back food unless food-focused
+      if (
+        a.category === "food" &&
+        lastActivityCategory === "food" &&
+        !input.isFoodFocused
+      ) continue;
+
       candidates.push({ activity: a, transitDur: transit.durationMinutes, arrival: effectiveArrival });
     }
 
@@ -289,6 +304,9 @@ export function scheduleDay(input: SchedulerInput): SchedulerOutput {
 
     const { activity: next, transitDur, arrival } = candidates[0];
     remaining.delete(next);
+
+    if (next.category === "food") foodSlotsScheduled++;
+    lastActivityCategory = next.category;
 
     const origin = currentLocation ?? next.location;
     const transit = estimateTransit(origin, next.location, transitMode);
@@ -337,6 +355,7 @@ export function scheduleDay(input: SchedulerInput): SchedulerOutput {
       sourceId:       next.sourceId,
       title:          next.title,
       location:       next.location,
+      category:       next.category,
       transit: (currentLocation && transit.durationMinutes < 8 && next.hasRealCoords !== false) ? {
         mode:            transitMode,
         durationMinutes: transit.durationMinutes,

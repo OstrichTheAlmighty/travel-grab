@@ -1739,6 +1739,11 @@ interface SearchResult {
   inventoryStatus?: "building" | "ready";
   inventorySize?: number;
   inventoryProgress?: { completed: number; total: number };
+  _debug?: {
+    cacheSource:   string;
+    apiCallsMade:  number;
+    entriesLoaded: number;
+  };
 }
 
 export default function ActivitySearch() {
@@ -1840,6 +1845,7 @@ export default function ActivitySearch() {
         activities?: Activity[]; city?: string; country?: string; source?: string; error?: string;
         inventoryStatus?: "building" | "ready"; inventorySize?: number;
         inventoryProgress?: { completed: number; total: number };
+        _debug?: { cacheSource: string; apiCallsMade: number; entriesLoaded: number };
       };
 
       if (!res.ok || data.error) throw new Error(data.error ?? `HTTP ${res.status}`);
@@ -1853,6 +1859,7 @@ export default function ActivitySearch() {
         inventoryStatus:   data.inventoryStatus,
         inventorySize:     data.inventorySize,
         inventoryProgress: data.inventoryProgress,
+        _debug:            data._debug,
       };
 
       clientCache.current.set(key, r);
@@ -2144,6 +2151,13 @@ export default function ActivitySearch() {
                 : result
                   ? `${(result.inventorySize ?? result.activities.length).toLocaleString()} places indexed in ${city}`
                   : "Discover experiences"}
+            {process.env.NODE_ENV !== "production" && result?._debug && (
+              <span className="font-mono text-[9px] text-amber-400/70 ml-2">
+                {result._debug.apiCallsMade === 0
+                  ? `💾 ${result._debug.cacheSource}`
+                  : `⚡ ${result._debug.apiCallsMade} API calls`}
+              </span>
+            )}
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight mb-3">
             Discover the best of{" "}

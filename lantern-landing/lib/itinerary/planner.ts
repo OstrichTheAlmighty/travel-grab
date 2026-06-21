@@ -9,7 +9,8 @@
  */
 
 import { clusterByLocation } from "./geo";
-import { scheduleDay, formatTime } from "./scheduler";
+import { scheduleDay } from "./scheduler";
+import { deduplicateActivities } from "./dedup";
 
 // ── Intercity route lookup (Japan-focused, extendable) ────────────────────────
 
@@ -41,6 +42,54 @@ const INTERCITY_ROUTES: Record<string, { durationMinutes: number; description: s
   "barcelona-madrid": { durationMinutes: 150, description: "AVE High-Speed · Barcelona Sants → Madrid Atocha" },
   "madrid-barcelona": { durationMinutes: 150, description: "AVE High-Speed · Madrid Atocha → Barcelona Sants" },
 };
+
+// ── Landmark priority keywords per city ────────────────────────────────────────
+// Activities whose titles contain these keywords (case-insensitive) get userPriority
+// boosted to 1 (must-schedule) unless they already have a higher priority.
+
+const CITY_LANDMARKS: Record<string, string[]> = {
+  hiroshima: [
+    "peace memorial", "peace park", "atomic bomb dome", "genbaku", "genbaku dome",
+    "miyajima", "itsukushima", "torii", "momijidani", "hiroshima castle",
+  ],
+  kyoto: [
+    "fushimi inari", "kiyomizu", "gion", "yasaka", "nishiki",
+    "arashiyama", "bamboo", "kinkaku", "golden pavilion", "ryoan",
+    "nijo", "philosopher", "daitoku", "nanzen",
+  ],
+  osaka: [
+    "dotonbori", "osaka castle", "umeda", "harukas", "kuromon",
+    "shinsekai", "tsutenkaku", "universal studios", "usj",
+    "osaka aquarium", "kaiyukan",
+  ],
+  tokyo: [
+    "senso-ji", "sensoji", "asakusa", "meiji jingu", "meiji shrine",
+    "shibuya crossing", "shinjuku gyoen", "skytree", "tokyo tower",
+    "tsukiji", "teamlab", "disneyland", "disney sea", "ueno", "imperial palace",
+  ],
+  nara: [
+    "todai-ji", "todaiji", "deer park", "kasuga", "nishino",
+    "nara park", "horyu",
+  ],
+  fukuoka: [
+    "ohori park", "fukuoka castle", "dazaifu", "canal city",
+    "yatai", "tenjin", "nakasu",
+  ],
+};
+
+function boostLandmarks(acts: PlannerActivity[], city: string): PlannerActivity[] {
+  const keywords = CITY_LANDMARKS[city.toLowerCase().split(",")[0].trim()] ?? [];
+  if (keywords.length === 0) return acts;
+
+  return acts.map((act) => {
+    const titleLc = act.title.toLowerCase();
+    const isLandmark = keywords.some((kw) => titleLc.includes(kw));
+    if (isLandmark && act.userPriority > 1) {
+      return { ...act, userPriority: 1 };
+    }
+    return act;
+  });
+}
 
 interface CitySegment { city: string; startDay: number; endDay: number; }
 
@@ -86,6 +135,7 @@ import type {
   LatLng,
   TransitMode,
   PlannerActivity,
+  DayWarning,
 } from "./types";
 
 // ── Date helpers ──────────────────────────────────────────────────────────────
@@ -234,19 +284,22 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
   const citySegments = buildCitySegments(trip.cityStops ?? []);
   const isMultiCity = citySegments.length > 1;
 
+  // ── Deduplication (remove chain repeats, near-duplicate names) ───────────────
+  const dedupedActivities = deduplicateActivities(activities);
+
   // ── Activity distribution ─────────────────────────────────────────────────
   // For multi-city trips: distribute activities proportionally across city day segments.
   // For single-city or no segment info: fall back to geographic k-means clustering.
   let dayActivityMap: Map<number, PlannerActivity[]>;
 
-  if (isMultiCity && activities.length > 0) {
+  if (isMultiCity && dedupedActivities.length > 0) {
     // Proportional distribution: each scheduling day gets activities from its city segment
     dayActivityMap = new Map();
 
     // Group activities by city segment (proportional to activity index)
     const segmentActivities = new Map<number, PlannerActivity[]>();
-    activities.forEach((act, i) => {
-      const progress = (i + 0.5) / activities.length;
+    dedupedActivities.forEach((act, i) => {
+      const progress = (i + 0.5) / dedupedActivities.length;
       const targetSegIdx = (() => {
         let cumDays = 0;
         const totalDays = citySegments.reduce((s, seg) => s + (seg.endDay - seg.startDay), 0) || 1;
@@ -283,19 +336,19 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
     // ── Geographic clustering (single-city fallback) ──────────────────────
     const k = Math.max(1, schedulingDays.length);
     let clusterAssignments: number[];
-    if (activities.length === 0) {
+    if (dedupedActivities.length === 0) {
       clusterAssignments = [];
-    } else if (activities.length <= k) {
-      clusterAssignments = activities.map((_, i) => i);
+    } else if (dedupedActivities.length <= k) {
+      clusterAssignments = dedupedActivities.map((_, i) => i);
     } else {
-      const locations = activities.map((a) => a.location);
+      const locations = dedupedActivities.map((a) => a.location);
       clusterAssignments = clusterByLocation(locations, k);
     }
     const clusterMap = new Map<number, PlannerActivity[]>();
-    for (let i = 0; i < activities.length; i++) {
+    for (let i = 0; i < dedupedActivities.length; i++) {
       const c = clusterAssignments[i];
       if (!clusterMap.has(c)) clusterMap.set(c, []);
-      clusterMap.get(c)!.push(activities[i]);
+      clusterMap.get(c)!.push(dedupedActivities[i]);
     }
     dayActivityMap = clusterMap;
   }
@@ -303,9 +356,13 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
   // ── Build each day ────────────────────────────────────────────────────────
   const days: PlannedDay[] = boundaries.map((boundary) => {
     const schedIdx = schedulingDays.findIndex((d) => d.dayIndex === boundary.dayIndex);
-    const dayActivities = schedIdx >= 0 ? (dayActivityMap.get(schedIdx) ?? []) : [];
 
+    // Compute city first so we can boost landmarks before scheduling
     const dayCity = getCityForDay(citySegments, boundary.dayIndex, trip.city);
+
+    const rawDayActivities = schedIdx >= 0 ? (dayActivityMap.get(schedIdx) ?? []) : [];
+    const dayActivities = boostLandmarks(rawDayActivities, dayCity);
+
     const transition = getCityTransition(citySegments, boundary.dayIndex);
     const intercityTransfer = transition
       ? { ...getIntercityRoute(transition.fromCity, transition.toCity), ...transition }
@@ -324,6 +381,7 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
         dinner:    preferences.dinnerDurationMin,
       },
       intercityTransfer,
+      isFoodFocused: preferences.isFoodFocused ?? false,
     });
 
     allDropped.push(...dropped);
@@ -352,12 +410,41 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
       });
     }
 
+    // ── Rules-based day warnings ─────────────────────────────────────────
+    const dayWarnings: DayWarning[] = [];
+    const activityCount = scheduledActivities.length;
+    const foodSlots = slots.filter(
+      (s) => s.kind === "activity" && s.category === "food"
+    ).length;
+    const transitSlots = slots.filter(
+      (s) => s.kind === "free_time" && s.transit != null
+    ).length;
+    const lastSlotEnd = slots.length > 0 ? slots[slots.length - 1].endMinutes : 0;
+    const paceCap = preferences.pace === "packed" ? 8 : preferences.pace === "relaxed" ? 5 : 6;
+
+    if (activityCount > paceCap) {
+      dayWarnings.push({ type: "packed", message: `${activityCount} activities — this is a full day. Consider dropping one for breathing room.` });
+    }
+    if (foodSlots > (preferences.isFoodFocused ? 3 : 2)) {
+      dayWarnings.push({ type: "food_heavy", message: `${foodSlots} food stops in one day — the day skews towards eating. Swap one for a landmark.` });
+    }
+    if (transitSlots >= 3) {
+      dayWarnings.push({ type: "transit_heavy", message: "Multiple transit hops — consider grouping nearby attractions together." });
+    }
+    if (lastSlotEnd > 22 * 60) {
+      dayWarnings.push({ type: "late_night", message: "Schedule runs past 10 PM. Consider ending earlier, especially if flying the next day." });
+    }
+    if (boundary.isArrivalDay && activityCount >= 4) {
+      dayWarnings.push({ type: "flight_recovery", message: "Arrival day with many activities. Jet lag can hit hard — consider a lighter first day." });
+    }
+
     return {
       dayIndex:               boundary.dayIndex,
       date:                   boundary.date,
       theme,
       geographicArea:         area,
       cityLabel:              dayCity,
+      warnings:               dayWarnings.length > 0 ? dayWarnings : undefined,
       slots,
       scheduledActivityCount: scheduledActivities.length,
       totalActivityMinutes:   scheduledActivities.reduce((s, sl) => s + sl.durationMinutes, 0),
@@ -406,3 +493,4 @@ export function snapshotToPlanner(
     reviewCount:     typeof snap.reviewCount === "number" ? snap.reviewCount : 0,
   };
 }
+

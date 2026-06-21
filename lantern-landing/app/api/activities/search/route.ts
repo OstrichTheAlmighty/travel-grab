@@ -202,6 +202,8 @@ export async function GET(req: NextRequest) {
   });
   // ── End pipeline log ──────────────────────────────────────────────────────
 
+  const isDev = process.env.NODE_ENV !== "production" || process.env.DEBUG_PLACES === "1";
+
   return NextResponse.json({
     activities,
     city:              inv.city,
@@ -213,5 +215,12 @@ export async function GET(req: NextRequest) {
     // via result.inventorySize if the build is still running.
     inventorySize:     activities.length,
     inventoryProgress: { completed: inv.queriesCompleted, total: inv.queriesTotal },
+    ...(isDev ? {
+      _debug: {
+        cacheSource:   inv.cacheSource ?? "api",
+        apiCallsMade:  inv.apiCallsMade ?? inv.queriesCompleted,
+        entriesLoaded: inv.entries.size,
+      },
+    } : {}),
   });
 }

@@ -10,7 +10,75 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { runPlanner } from "@/lib/itinerary/planner";
-import type { ItineraryInput, PlannerActivity, LatLng } from "@/lib/itinerary/types";
+import type { ItineraryInput, PlannerActivity, LatLng, PlannedDay } from "@/lib/itinerary/types";
+
+// ── AI day summaries (best-effort — absent key or timeout skips silently) ─────
+
+interface AiDaySummaryResult {
+  dayIndex: number;
+  summary:  string;
+  warnings: string[];
+}
+
+async function aiDaySummaries(
+  days: PlannedDay[],
+  destination: string,
+): Promise<AiDaySummaryResult[]> {
+  const apiKey = (process.env.OPENAI_API_KEY ?? "").trim();
+  if (!apiKey) return [];
+
+  // Build compact itinerary for AI (keep tokens low)
+  const compact = days.map((d) => ({
+    dayIndex: d.dayIndex,
+    city:     d.cityLabel ?? d.geographicArea,
+    date:     d.date,
+    slots:    d.slots
+      .filter((s) => s.kind === "activity" || s.kind === "intercity_transfer")
+      .map((s) => ({
+        time:     `${Math.floor(s.startMinutes / 60)}:${String(s.startMinutes % 60).padStart(2, "0")}`,
+        title:    s.title,
+        category: s.category ?? (s.kind === "intercity_transfer" ? "transfer" : ""),
+        duration: `${s.durationMinutes}m`,
+      })),
+    warnings: (d.warnings ?? []).map((w) => w.message),
+  }));
+
+  const resp = await fetch("https://api.openai.com/v1/chat/completions", {
+    method:  "POST",
+    headers: {
+      "Content-Type":  "application/json",
+      "Authorization": `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model:           "gpt-4o-mini",
+      max_tokens:      1200,
+      temperature:     0.7,
+      response_format: { type: "json_object" },
+      messages: [
+        {
+          role:    "system",
+          content: `You are a world-class travel itinerary writer for ${destination}.
+Given a list of planned days, return a JSON object:
+{"days": [{"dayIndex": 0, "summary": "2-sentence description of why this day works — mention real place names and what makes the combination special", "warnings": ["optional warning only if genuinely problematic, otherwise empty array"]}]}
+
+Be specific and enthusiastic. Keep summaries under 40 words. Only add warnings for real problems (not just busy days). Return every dayIndex provided.`,
+        },
+        {
+          role:    "user",
+          content: JSON.stringify(compact),
+        },
+      ],
+    }),
+    signal: AbortSignal.timeout(10_000),
+  });
+
+  if (!resp.ok) return [];
+
+  const json = await resp.json() as { choices?: Array<{ message?: { content?: string } }> };
+  const content = json.choices?.[0]?.message?.content ?? "{}";
+  const parsed = JSON.parse(content) as { days?: AiDaySummaryResult[] };
+  return parsed.days ?? [];
+}
 
 // ── Rough city-centre coordinates for lat/lng fallback ────────────────────────
 
@@ -132,6 +200,7 @@ interface PreviewRequest {
     breakfastDurationMin: number;
     lunchDurationMin:     number;
     dinnerDurationMin:    number;
+    categories:           string[];
   }>;
   hotel?: {
     name:         string;
@@ -194,6 +263,10 @@ export async function POST(req: NextRequest) {
 
   const prefs = body.preferences ?? {};
 
+  const isFoodFocused = (prefs.categories ?? []).some(
+    (c: string) => c.toLowerCase().includes("food"),
+  );
+
   const input: ItineraryInput = {
     trip: {
       id:           "preview",
@@ -215,6 +288,7 @@ export async function POST(req: NextRequest) {
       breakfastDurationMin: prefs.breakfastDurationMin ?? 30,
       lunchDurationMin:     prefs.lunchDurationMin      ?? 60,
       dinnerDurationMin:    prefs.dinnerDurationMin     ?? 75,
+      isFoodFocused,
     },
     hotel: body.hotel
       ? {
@@ -236,6 +310,21 @@ export async function POST(req: NextRequest) {
   };
 
   const output = runPlanner(input);
+
+  // ── AI critique pass: generate day summaries and validate itinerary ───────────
+  try {
+    const summaryOutput = await aiDaySummaries(output.days, body.trip.destination);
+    summaryOutput.forEach(({ dayIndex, summary, warnings }) => {
+      const day = output.days[dayIndex];
+      if (!day) return;
+      if (summary) day.daySummary = summary;
+      if (warnings?.length) {
+        day.warnings = [...(day.warnings ?? []), ...warnings.map((w: string) => ({ type: "ai_note" as const, message: w }))];
+      }
+    });
+  } catch {
+    // AI pass is best-effort — never fail the response
+  }
 
   return NextResponse.json(output);
 }

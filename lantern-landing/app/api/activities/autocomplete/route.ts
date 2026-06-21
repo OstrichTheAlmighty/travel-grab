@@ -5,6 +5,9 @@ import { NextRequest, NextResponse } from "next/server";
 // Proxies to Places API (New) :autocomplete, returning city/region/country suggestions.
 // The API key never leaves the server.
 
+const acCache = new Map<string, { suggestions: unknown[]; ts: number }>();
+const AC_TTL = 5 * 60 * 1000;
+
 interface AutocompleteSuggestion {
   placePrediction?: {
     placeId?: string;
@@ -63,6 +66,18 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "API key not configured" }, { status: 503 });
   }
 
+  const cacheKey = input.toLowerCase();
+  if (acCache.size > 200) {
+    const now = Date.now();
+    for (const [k, v] of acCache) {
+      if (now - v.ts > AC_TTL) acCache.delete(k);
+    }
+  }
+  const cachedAc = acCache.get(cacheKey);
+  if (cachedAc && Date.now() - cachedAc.ts < AC_TTL) {
+    return NextResponse.json({ suggestions: cachedAc.suggestions });
+  }
+
   try {
     const res = await fetch("https://places.googleapis.com/v1/places:autocomplete", {
       method: "POST",
@@ -101,6 +116,7 @@ export async function POST(req: NextRequest) {
         };
       });
 
+    acCache.set(cacheKey, { suggestions, ts: Date.now() });
     return NextResponse.json({ suggestions });
   } catch (err) {
     console.error("[activities/autocomplete] error", err);

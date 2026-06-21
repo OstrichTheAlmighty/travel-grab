@@ -2,6 +2,11 @@
 // Module-level state persists for the lifetime of the Node.js server process.
 
 import type { Activity, Category, Badge } from "../../activities/data/types";
+import {
+  readGeoCache, writeGeoCache,
+  readCityCache, writeQueryCache, makeCacheKey,
+  type CachedEntry,
+} from "./_inventoryCache";
 
 // ── Google Places API types ───────────────────────────────────────────────────
 
@@ -230,6 +235,8 @@ export interface CityInventory {
   builtAt?: number;
   queriesCompleted: number;
   queriesTotal: number;
+  cacheSource?: "db" | "api";
+  apiCallsMade?: number;
 }
 
 // Singletons — persist for the lifetime of the server process
@@ -678,8 +685,14 @@ function upsertEntry(
 
 // Runs all SEARCH_GROUPS in batches. Updates inv.entries in place.
 // Fire-and-forget safe: sets status='ready' when done.
-export async function buildInventoryBatched(inv: CityInventory, apiKey: string): Promise<void> {
+export async function buildInventoryBatched(
+  inv: CityInventory,
+  apiKey: string,
+  skipKeys: ReadonlySet<string> = new Set(),
+): Promise<void> {
   const BATCH = 12;
+  const cityKey = inv.city.toLowerCase();
+  let apiCallsMade = 0;
   const diagKm = haversineKm(
     inv.viewport.southwest.lat, inv.viewport.southwest.lng,
     inv.viewport.northeast.lat, inv.viewport.northeast.lng,
@@ -691,6 +704,14 @@ export async function buildInventoryBatched(inv: CityInventory, apiKey: string):
 
     await Promise.all(batch.map(async (g) => {
       const source = deriveSource(g);
+      const cacheKey = makeCacheKey(cityKey, g);
+
+      // Skip queries that were already loaded from DB cache
+      if (skipKeys.has(cacheKey)) {
+        inv.queriesCompleted++;
+        return;
+      }
+
       try {
         let places: GooglePlace[];
         if (g.type) {
@@ -701,11 +722,20 @@ export async function buildInventoryBatched(inv: CityInventory, apiKey: string):
         } else {
           places = [];
         }
+        apiCallsMade++;
+        // Capture valid places for DB cache write
+        const validPlaces: GooglePlace[] = [];
         for (const place of places) {
           if (shouldInclude(place, inv.viewport)) {
             upsertEntry(inv, place, g.category, g.tags ?? [], source);
+            validPlaces.push(place);
           }
         }
+        // Write this query's results to DB (fire-and-forget, doesn't block response)
+        const entriesToCache: CachedEntry[] = validPlaces.map((p) => ({
+          place: p, category: g.category, tags: g.tags ?? [], querySources: [source],
+        }));
+        writeQueryCache(cityKey, cacheKey, entriesToCache).catch(() => {});
       } catch (err) {
         console.warn(`[inventory/build] query="${source}" error:`, err);
       } finally {
@@ -728,8 +758,51 @@ export async function buildInventoryBatched(inv: CityInventory, apiKey: string):
 
   inv.status = "ready";
   inv.builtAt = Date.now();
+  inv.apiCallsMade = apiCallsMade;
   const elapsed = inv.builtAt - inv.buildStartedAt;
-  console.log(`[inventory/build] ${inv.city}: COMPLETE — ${inv.entries.size} unique places in ${elapsed}ms`);
+  console.log(`[inventory/build] ${inv.city}: COMPLETE — ${inv.entries.size} unique places in ${elapsed}ms (${apiCallsMade} API calls)`);
+}
+
+// ── DB cache reconstruction ───────────────────────────────────────────────────
+
+function mergeDbCacheIntoInventory(dbCache: Map<string, CachedEntry[]>, inv: CityInventory): void {
+  const specificity: Record<string, number> = {
+    food: 10, nightlife: 9, luxury: 8, adventure: 7, nature: 6, culture: 5, hidden_gems: 0,
+  };
+  for (const entries of dbCache.values()) {
+    for (const e of entries) {
+      if (inv.entries.has(e.place.id)) {
+        const ex = inv.entries.get(e.place.id)!;
+        for (const tag of e.tags) if (!ex.tags.includes(tag)) ex.tags.push(tag);
+        for (const qs  of e.querySources) if (!ex.querySources.includes(qs)) ex.querySources.push(qs);
+        if ((specificity[e.category] ?? 0) > (specificity[ex.category] ?? 0)) ex.category = e.category;
+      } else {
+        inv.entries.set(e.place.id, {
+          place: e.place, category: e.category, tags: [...e.tags], querySources: [...e.querySources],
+        });
+      }
+    }
+  }
+}
+
+function reconstructFromDbCache(
+  dbCache: Map<string, CachedEntry[]>,
+  geo: GeoResult,
+): CityInventory {
+  const inv: CityInventory = {
+    city: geo.city, country: geo.country,
+    lat:  geo.lat,  lng:  geo.lng, viewport: geo.viewport,
+    entries:          new Map(),
+    status:           dbCache.size >= SEARCH_GROUPS.length ? "ready" : "building",
+    buildStartedAt:   Date.now(),
+    builtAt:          dbCache.size >= SEARCH_GROUPS.length ? Date.now() : undefined,
+    queriesCompleted: dbCache.size,
+    queriesTotal:     SEARCH_GROUPS.length,
+    cacheSource:      "db",
+    apiCallsMade:     0,
+  };
+  mergeDbCacheIntoInventory(dbCache, inv);
+  return inv;
 }
 
 // ── Entry point ───────────────────────────────────────────────────────────────
@@ -759,9 +832,13 @@ export async function getOrCreateInventory(
     }
   }
 
-  // Geocode to canonicalise city name + get coordinates
-  const geo = await geocodeDestination(destination, apiKey);
-  if (!geo) return null;
+  // Geocode: check DB cache first, fall back to Places API
+  let geo = await readGeoCache(rawKey);
+  if (!geo) {
+    geo = await geocodeDestination(destination, apiKey);
+    if (!geo) return null;
+    writeGeoCache(rawKey, geo).catch(() => {});
+  }
 
   const cityKey = geo.city.toLowerCase();
   destinationToKey.set(rawKey, cityKey);
@@ -777,6 +854,30 @@ export async function getOrCreateInventory(
     return existing;
   }
 
+  // Check DB cache — restores full inventory without any Places API calls
+  const dbCache = await readCityCache(cityKey);
+  if (dbCache) {
+    if (dbCache.size >= SEARCH_GROUPS.length) {
+      // Full cache hit — all queries covered, return immediately
+      const inv = reconstructFromDbCache(dbCache, geo);
+      inventoryStore.set(cityKey, inv);
+      console.log(`[inventory/getOrCreate] ${geo.city}: full DB cache (${dbCache.size} queries, ${inv.entries.size} places)`);
+      return inv;
+    } else if (dbCache.size >= 12) {
+      // Partial cache — enough for seed batch; preload and run missing queries in background
+      console.log(`[inventory/getOrCreate] ${geo.city}: partial DB cache (${dbCache.size}/${SEARCH_GROUPS.length})`);
+      const inv = reconstructFromDbCache(dbCache, geo);
+      inventoryStore.set(cityKey, inv);
+      // Run missing queries in the background using skipKeys to avoid re-fetching cached ones
+      const skipKeys = new Set(dbCache.keys());
+      buildInventoryBatched(inv, apiKey, skipKeys).catch((err) => {
+        console.error(`[inventory/build] error for "${inv.city}":`, err);
+        inv.status = "ready";
+      });
+      return inv;
+    }
+  }
+
   // Create inventory and start background build
   const inv: CityInventory = {
     city: geo.city, country: geo.country,
@@ -786,10 +887,12 @@ export async function getOrCreateInventory(
     buildStartedAt: Date.now(),
     queriesCompleted: 0,
     queriesTotal: SEARCH_GROUPS.length,
+    cacheSource: "api",
+    apiCallsMade: 0,
   };
   inventoryStore.set(cityKey, inv);
 
-  buildInventoryBatched(inv, apiKey).catch((err) => {
+  buildInventoryBatched(inv, apiKey, new Set()).catch((err) => {
     console.error(`[inventory/build] fatal error for "${inv.city}":`, err);
     inv.status = "ready";  // unblock clients even on error
   });

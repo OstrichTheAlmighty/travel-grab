@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { PlannerOutput, PlannedDay, PlannedSlot } from "@/lib/itinerary/types";
+import type { PlannerOutput, PlannedDay, PlannedSlot, DayWarning } from "@/lib/itinerary/types";
 import {
   readTripStore, writeTripStore, updateTripStore, clearTripStore,
   TRAVEL_STYLE_LABELS, TRIP_STORE_DEFAULT,
@@ -320,6 +320,16 @@ function NavLink({ href, label, active }: { href: string; label: string; active:
   );
 }
 
+// ── Place detail (loaded lazily on modal open) ────────────────────────────────
+
+interface PlaceDetailData {
+  address?:             string;
+  openNow?:             boolean;
+  weekdayDescriptions?: string[];
+  website?:             string;
+  googleMapsUri?:       string;
+}
+
 // ── Design tokens ──────────────────────────────────────────────────────────────
 
 const SLOT_STYLE: Record<string, { dot: string; border: string; bg: string }> = {
@@ -449,6 +459,15 @@ function TimelineSlot({
   );
 }
 
+const WARNING_COLORS: Record<DayWarning["type"], string> = {
+  packed:          "bg-amber-500/10 text-amber-400 border-amber-500/20",
+  food_heavy:      "bg-orange-500/10 text-orange-400 border-orange-500/20",
+  transit_heavy:   "bg-blue-500/10 text-blue-400 border-blue-500/20",
+  late_night:      "bg-violet-500/10 text-violet-400 border-violet-500/20",
+  flight_recovery: "bg-red-500/10 text-red-400 border-red-500/20",
+  ai_note:         "bg-white/5 text-white/50 border-white/10",
+};
+
 function DayView({
   day, savedMeta, compact, onSlotClick,
 }: {
@@ -471,6 +490,21 @@ function DayView({
           <span className="text-xs text-white/30">{day.scheduledActivityCount} activities</span>
           <span className="text-xs text-white/30">{formatDuration(day.totalActivityMinutes)} of sightseeing</span>
         </div>
+        {day.warnings && day.warnings.length > 0 && (
+          <div className="flex flex-wrap gap-1 mt-2 mb-1">
+            {day.warnings.map((w, i) => (
+              <span
+                key={i}
+                className={`text-[10px] px-2 py-0.5 rounded-full border ${WARNING_COLORS[w.type] ?? WARNING_COLORS.ai_note}`}
+              >
+                {w.message}
+              </span>
+            ))}
+          </div>
+        )}
+        {day.daySummary && (
+          <p className="text-[11px] text-white/40 italic mt-2 mb-1 leading-relaxed">{day.daySummary}</p>
+        )}
       </div>
       <div>
         {day.slots.map((slot, i) => (
@@ -801,6 +835,8 @@ export default function ItineraryPlanner() {
   const [showAllActivities, setShowAllActivities]  = useState(false);
   const [compactView,       setCompactView]        = useState(true);
   const [detailSlot,        setDetailSlot]         = useState<PlannedSlot | null>(null);
+  const [modalPlaceDetail,  setModalPlaceDetail]   = useState<PlaceDetailData | null>(null);
+  const [modalDetailLoading, setModalDetailLoading] = useState(false);
 
   // Onboarding state (new users see a guided wizard; existing users skip to "done")
   type ObStep = "destination" | "dates" | "style" | "recommendations" | "cities" | "done";
@@ -937,6 +973,32 @@ export default function ItineraryPlanner() {
     if (!hydrated) return;
     updateTripStore({ savedActivities: savedIds });
   }, [savedIds, hydrated]);
+
+  // ── Lazy-load place details when modal opens ──
+  useEffect(() => {
+    if (!detailSlot?.sourceId || detailSlot.sourceId.startsWith("preview-")) {
+      setModalPlaceDetail(null);
+      return;
+    }
+    setModalDetailLoading(true);
+    fetch(`/api/activities/place?id=${encodeURIComponent(detailSlot.sourceId)}`)
+      .then((r) => r.ok ? r.json() : null)
+      .then((data: { address?: string; openingHours?: { openNow?: boolean; weekdayDescriptions?: string[] }; website?: string; googleMapsUri?: string } | null) => {
+        if (data?.openingHours || data?.address || data?.website) {
+          setModalPlaceDetail({
+            address:             data.address,
+            openNow:             data.openingHours?.openNow,
+            weekdayDescriptions: data.openingHours?.weekdayDescriptions,
+            website:             data.website,
+            googleMapsUri:       data.googleMapsUri,
+          });
+        } else {
+          setModalPlaceDetail(null);
+        }
+      })
+      .catch(() => { setModalPlaceDetail(null); })
+      .finally(() => setModalDetailLoading(false));
+  }, [detailSlot?.sourceId]);
 
   // ── Helpers ──
   function updateTrip(patch: Partial<TripStorage>) {
@@ -2044,6 +2106,37 @@ export default function ItineraryPlanner() {
                         {detailSlot.explanation && (
                           <p className="text-sm text-white/50 leading-relaxed">{detailSlot.explanation}</p>
                         )}
+                        {modalDetailLoading && (
+                          <div className="text-[10px] text-white/30 mt-2">Loading details…</div>
+                        )}
+                        {modalPlaceDetail?.address && (
+                          <p className="text-[11px] text-white/50 mt-2 flex items-start gap-1.5">
+                            <span className="mt-0.5 opacity-70">📍</span>
+                            <span>{modalPlaceDetail.address}</span>
+                          </p>
+                        )}
+                        {modalPlaceDetail?.weekdayDescriptions && modalPlaceDetail.weekdayDescriptions.length > 0 && (
+                          <details className="mt-2">
+                            <summary className="text-[10px] text-white/40 cursor-pointer select-none">
+                              {modalPlaceDetail.openNow === false ? "🔴 Closed now" : modalPlaceDetail.openNow ? "🟢 Open now" : "Opening hours"}
+                            </summary>
+                            <ul className="mt-1 space-y-0.5">
+                              {modalPlaceDetail.weekdayDescriptions.map((line, i) => (
+                                <li key={i} className="text-[10px] text-white/40">{line}</li>
+                              ))}
+                            </ul>
+                          </details>
+                        )}
+                        {modalPlaceDetail?.website && (
+                          <a
+                            href={modalPlaceDetail.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block mt-2 text-[11px] text-lantern-blue/80 hover:text-lantern-blue truncate"
+                          >
+                            🌐 {modalPlaceDetail.website.replace(/^https?:\/\/(www\.)?/, "")}
+                          </a>
+                        )}
                         <a
                           href={`https://maps.google.com/?q=${encodeURIComponent(detailSlot.title)}`}
                           target="_blank"
@@ -2058,21 +2151,64 @@ export default function ItineraryPlanner() {
                 );
               })()}
 
-              {trip.itinerary.meta.droppedActivities.length > 0 && (
-                <div className="mt-4 rounded-xl border border-lantern-gold/20 bg-lantern-gold/[0.04] px-5 py-4">
-                  <p className="text-xs font-semibold text-lantern-gold mb-2">
-                    {trip.itinerary.meta.droppedActivities.length} place
-                    {trip.itinerary.meta.droppedActivities.length === 1 ? "" : "s"} couldn&apos;t fit
-                  </p>
-                  <ul className="space-y-1">
-                    {trip.itinerary.meta.droppedActivities.map((d, i) => (
-                      <li key={i} className="text-xs text-white/35">
-                        <span className="text-white/55">{d.title}</span> — {d.reason}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              {trip.itinerary.meta.droppedActivities.length > 0 && (() => {
+                const dropped = trip.itinerary.meta.droppedActivities;
+                const cities = trip.cities.filter((c) => c.city.trim());
+                const isMulti = cities.length > 1;
+
+                // For multi-city trips, group dropped activities by city
+                if (isMulti) {
+                  const cityNames = cities.map((c) => c.city);
+                  const groups = new Map<string, typeof dropped>();
+                  cityNames.forEach((c) => groups.set(c, []));
+                  const ungrouped: typeof dropped = [];
+                  dropped.forEach((d) => {
+                    const match = cityNames.find((c) =>
+                      d.title.toLowerCase().includes(c.toLowerCase().split(",")[0].trim())
+                    );
+                    if (match) groups.get(match)!.push(d);
+                    else ungrouped.push(d);
+                  });
+                  if (ungrouped.length > 0) groups.set("Other", ungrouped);
+
+                  const nonEmptyGroups = [...groups.entries()].filter(([, acts]) => acts.length > 0);
+
+                  return (
+                    <div className="mt-4 rounded-xl border border-lantern-gold/20 bg-lantern-gold/[0.04] px-5 py-4">
+                      <p className="text-xs font-semibold text-lantern-gold mb-3">Also worth considering</p>
+                      <div className="space-y-3">
+                        {nonEmptyGroups.map(([city, acts]) => (
+                          <details key={city} open={nonEmptyGroups.length === 1}>
+                            <summary className="text-[11px] font-semibold text-white/50 cursor-pointer select-none mb-1">
+                              {city} <span className="font-normal text-white/30">({acts.length})</span>
+                            </summary>
+                            <ul className="mt-1 space-y-1 pl-2">
+                              {acts.map((d, i) => (
+                                <li key={i} className="text-xs text-white/35">
+                                  <span className="text-white/55">{d.title}</span> — {d.reason}
+                                </li>
+                              ))}
+                            </ul>
+                          </details>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                }
+
+                return (
+                  <div className="mt-4 rounded-xl border border-lantern-gold/20 bg-lantern-gold/[0.04] px-5 py-4">
+                    <p className="text-xs font-semibold text-lantern-gold mb-2">Also worth considering</p>
+                    <ul className="space-y-1">
+                      {dropped.map((d, i) => (
+                        <li key={i} className="text-xs text-white/35">
+                          <span className="text-white/55">{d.title}</span> — {d.reason}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })()}
 
               {trip.itinerary.meta.conflicts.length > 0 && (
                 <div className="mt-3 rounded-xl border border-white/[0.07] bg-white/[0.01] px-5 py-4">
