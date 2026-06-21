@@ -339,12 +339,14 @@ export async function POST(req: NextRequest) {
 
   // ── T1-T4 city detection ──────────────────────────────────────────────────
   interface ActivityDebugEntry {
-    i:            number;
-    title:        string;
-    savedCity:    string | null;
-    detectedCity: string | null;
-    tier:         string;
-    assignedCity: string;
+    i:             number;
+    title:         string;
+    savedCity:     string | null;
+    detectedCity:  string | null;
+    tier:          string;
+    lat:           number;
+    lng:           number;
+    hasRealCoords: boolean;
   }
   const activityDebug: ActivityDebugEntry[] = [];
   const t4Dropped:     DroppedActivity[]    = [];
@@ -353,39 +355,58 @@ export async function POST(req: NextRequest) {
   for (let i = 0; i < body.activities.length; i++) {
     const a     = body.activities[i];
     const title = a.title || `Activity ${i + 1}`;
-    const dur   = a.durationMinutes ?? categoryDuration(a.category ?? "culture", title);
-    const profile = profileActivity({ title, category: a.category, durationMinutes: dur });
+    const dur     = Math.max(30, a.durationMinutes ?? categoryDuration(a.category ?? "culture", title));
+    const profile = (() => {
+      try { return profileActivity({ title, category: a.category, durationMinutes: dur }); }
+      catch { return profileActivity({ title: "activity", category: "culture", durationMinutes: dur }); }
+    })();
 
-    let assignedCity: string;
-    let tier:         string;
-    let detectedCity: string | null = null;
+    let assignedCity:  string;
+    let tier:          string;
+    let detectedCity:  string | null = null;
+    let debugLat       = centre.lat;
+    let debugLng       = centre.lng;
+    let hasRealCoords  = false;
 
     if (a.lat != null && a.lng != null) {
       // T1: real GPS — find nearest city stop
-      tier         = "T1:gps";
-      assignedCity = isMultiCity
+      tier          = "T1:gps";
+      hasRealCoords = true;
+      debugLat      = a.lat;
+      debugLng      = a.lng;
+      assignedCity  = isMultiCity
         ? nearestStopCity(a.lat, a.lng, cityStops)
         : body.trip.destination;
     } else if (isMultiCity) {
       // T2: city explicitly saved with the activity
       const cityFromSaved = a.city ? knownCityCenter(a.city) : null;
       if (cityFromSaved) {
-        tier         = "T2:savedCity";
-        assignedCity = a.city!;
-        detectedCity = a.city!;
+        tier          = "T2:savedCity";
+        hasRealCoords = true;
+        debugLat      = cityFromSaved.lat;
+        debugLng      = cityFromSaved.lng;
+        assignedCity  = a.city!;
+        detectedCity  = a.city!;
       } else {
         // T3: city name / landmark keyword in the activity title
         const det           = detectCityFromTitle(title);
         const cityFromTitle = det ? knownCityCenter(det) : null;
         if (cityFromTitle) {
-          tier         = "T3:titleDetect";
-          assignedCity = det!;
-          detectedCity = det;
+          tier          = "T3:titleDetect";
+          hasRealCoords = true;
+          debugLat      = cityFromTitle.lat;
+          debugLng      = cityFromTitle.lng;
+          assignedCity  = det!;
+          detectedCity  = det;
         } else {
           // T4: proportional fallback — unreliable for multi-city
           const fallback = getActivityCity(i, body.activities.length, cityStops) ?? body.trip.destination;
           tier           = "T4:proportional";
+          hasRealCoords  = false;
           detectedCity   = fallback;
+          const fallbackCentre = cityCenter(fallback);
+          debugLat       = fallbackCentre.lat;
+          debugLng       = fallbackCentre.lng;
 
           if (profile.activityType === "nightlife") {
             // T4 nightlife → pin to primary city (better than proportional)
@@ -395,7 +416,7 @@ export async function POST(req: NextRequest) {
             // T4 non-nightlife → city unknown, surface as dropped
             console.log(`[CITY-DROP] T4 "${title}" (${a.category}) → city unknown, dropped`);
             t4Dropped.push({ sourceId: `preview-${i}`, title, reason: "City unknown for multi-city trip" });
-            activityDebug.push({ i, title, savedCity: a.city ?? null, detectedCity, tier, assignedCity: "(dropped)" });
+            activityDebug.push({ i, title, savedCity: a.city ?? null, detectedCity, tier, lat: debugLat, lng: debugLng, hasRealCoords });
             continue;
           }
         }
@@ -407,9 +428,9 @@ export async function POST(req: NextRequest) {
     }
 
     if (isMultiCity) {
-      activityDebug.push({ i, title, savedCity: a.city ?? null, detectedCity, tier, assignedCity });
+      activityDebug.push({ i, title, savedCity: a.city ?? null, detectedCity, tier, lat: debugLat, lng: debugLng, hasRealCoords });
       console.log(
-        `[preview/cityAssign] ${tier.padEnd(20)} | city=${assignedCity} | "${title}"`,
+        `[preview/cityAssign] ${tier.padEnd(20)} | lat=${debugLat.toFixed(4)} lng=${debugLng.toFixed(4)} | city=${assignedCity} | "${title}"`,
       );
     }
 
@@ -458,7 +479,16 @@ export async function POST(req: NextRequest) {
     returnDepartsAt:   body.returnFlight   ? new Date(body.returnFlight.departsAt)   : null,
   };
 
-  const output = smartScheduleItinerary(smartInput);
+  let output: ReturnType<typeof smartScheduleItinerary>;
+  try {
+    output = smartScheduleItinerary(smartInput);
+  } catch (err: unknown) {
+    const msg   = err instanceof Error ? err.message : String(err);
+    const stack = err instanceof Error ? err.stack  : "";
+    console.error("[SCHEDULER CRASH]", msg);
+    console.error(stack);
+    return NextResponse.json({ error: `Scheduler error: ${msg}`, stack }, { status: 500 });
+  }
 
   // Merge T4 drops into meta
   const allDropped = [...t4Dropped, ...output.dropped];
@@ -466,7 +496,8 @@ export async function POST(req: NextRequest) {
   output.meta.totalActivitiesDropped   = allDropped.length;
   output.meta.totalActivitiesScheduled = smartActivities.length - output.dropped.length;
 
-  // ── Debug logging ─────────────────────────────────────────────────────────
+  // ── Debug logging + dayAssignments (needed by frontend debug block) ───────
+  const dayDebug: Array<{ day: number; city: string; activities: string[]; totalMin: number }> = [];
   if (isMultiCity) {
     console.log("\n[preview/dayAssignments] ─────────────────────────────────────");
     for (const d of output.days) {
@@ -476,6 +507,7 @@ export async function POST(req: NextRequest) {
         `  Day ${String(d.dayIndex + 1).padStart(2)} (${(d.cityLabel ?? "?").padEnd(12)}) ` +
         `${d.totalActivityMinutes}min | ${summary}`,
       );
+      dayDebug.push({ day: d.dayIndex + 1, city: d.cityLabel ?? "?", activities: acts, totalMin: d.totalActivityMinutes });
     }
     console.log("────────────────────────────────────────────────────────────\n");
   }
@@ -505,6 +537,7 @@ export async function POST(req: NextRequest) {
       ? {
           cityStops:         resolvedStops.map((c) => ({ city: c.city, days: c.days })),
           activityDetection: activityDebug,
+          dayAssignments:    dayDebug,
         }
       : undefined,
   };

@@ -112,7 +112,8 @@ function assignActivitiesToDays(
   // Group activities by normalised assigned city
   const actsByCity = new Map<string, SmartActivity[]>();
   for (const act of activities) {
-    const ck = normCity(act.assignedCity);
+    const ck = normCity(act.assignedCity ?? "");
+    if (!ck) continue; // skip activities with no city
     if (!actsByCity.has(ck)) actsByCity.set(ck, []);
     actsByCity.get(ck)!.push(act);
   }
@@ -130,8 +131,8 @@ function assignActivitiesToDays(
     }
     if (!cityActs || cityActs.length === 0) continue;
 
-    const nightlife = cityActs.filter((a) => a.profile.activityType === "nightlife");
-    const daytime   = cityActs.filter((a) => a.profile.activityType !== "nightlife");
+    const nightlife = cityActs.filter((a) => a.profile?.activityType === "nightlife");
+    const daytime   = cityActs.filter((a) => a.profile?.activityType !== "nightlife");
 
     // Round-robin distribute daytime activities across city days
     daytime.forEach((act, i) => {
@@ -165,6 +166,7 @@ function assignActivitiesToDays(
 
 function buildDayTimeline(
   day:               ScheduleDay,
+  allDays:           ScheduleDay[],
   prefs:             SmartSchedulerInput["preferences"],
   outboundArrivesAt: Date | null,
   returnDepartsAt:   Date | null,
@@ -218,23 +220,26 @@ function buildDayTimeline(
     cursor = Math.max(cursor, checkIn + 45);
   }
 
-  // Hotel checkout (last day of a city, before travelling on)
+  // Hotel checkout (last day of a city, only when actually moving to a different city)
   if (day.isLastInCity && !day.isLastOverall && !day.isFirstInCity) {
-    const checkout = Math.max(cursor, 10 * 60); // by 10 AM
-    push(slots, occupied, {
-      kind:            "hotel_checkout",
-      startMinutes:    checkout,
-      endMinutes:      checkout + 30,
-      durationMinutes: 30,
-      title:           "Hotel Checkout",
-      explanation:     "Check out and store luggage if needed",
-    });
-    cursor = Math.max(cursor, checkout + 30);
+    const nextCity = allDays[day.dayIndex + 1]?.cityNorm;
+    if (nextCity && nextCity !== day.cityNorm) {
+      const checkout = Math.max(cursor, 10 * 60);
+      push(slots, occupied, {
+        kind:            "hotel_checkout",
+        startMinutes:    checkout,
+        endMinutes:      checkout + 30,
+        durationMinutes: 30,
+        title:           "Hotel Checkout",
+        explanation:     "Check out and store luggage if needed",
+      });
+      cursor = Math.max(cursor, checkout + 30);
+    }
   }
 
   // Split activities into daytime vs nightlife
-  const daytime   = day.activities.filter((a) => a.profile.activityType !== "nightlife");
-  const nightlife = day.activities.filter((a) => a.profile.activityType === "nightlife");
+  const daytime   = day.activities.filter((a) => a.profile?.activityType !== "nightlife");
+  const nightlife = day.activities.filter((a) => a.profile?.activityType === "nightlife");
 
   // Daytime activities start at 9 AM at the earliest
   let dayCursor = Math.max(cursor, 9 * 60);
@@ -242,11 +247,11 @@ function buildDayTimeline(
   // Sort: morning-preference first, then flexible, then afternoon
   const prefOrder: Record<string, number> = { morning: 0, flexible: 1, afternoon: 2, evening: 3 };
   const sortedDaytime = [...daytime].sort(
-    (a, b) => (prefOrder[a.profile.timePreference] ?? 1) - (prefOrder[b.profile.timePreference] ?? 1),
+    (a, b) => (prefOrder[a.profile?.timePreference ?? "flexible"] ?? 1) - (prefOrder[b.profile?.timePreference ?? "flexible"] ?? 1),
   );
 
   for (const act of sortedDaytime) {
-    const dur   = act.profile.durationMinutes;
+    const dur   = Math.max(30, act.profile?.durationMinutes ?? 60); // never zero-duration
     const start = findGap(dayCursor, dur, occupied, dayEnd - 120); // leave 2h buffer before day end
     if (start === null) {
       day.unplacedIds.add(act.sourceId);
@@ -271,7 +276,8 @@ function buildDayTimeline(
     if (dayActSlots.length > 0) {
       const firstStart = Math.min(...dayActSlots.map((s) => s.startMinutes));
       const lastEnd    = Math.max(...dayActSlots.map((s) => s.endMinutes));
-      placeMeals(slots, occupied, firstStart, lastEnd, day.hasIntercityTransfer, prefs);
+      const isFullDay  = dayActSlots.some((s) => s.durationMinutes >= 240);
+      placeMeals(slots, occupied, firstStart, lastEnd, day.hasIntercityTransfer, prefs, dayEnd, isFullDay);
     }
   }
 
@@ -279,7 +285,7 @@ function buildDayTimeline(
   if (!day.isLastOverall) {
     let nightCursor = 20 * 60;
     for (const act of nightlife) {
-      const dur   = act.profile.durationMinutes;
+      const dur   = Math.max(30, act.profile?.durationMinutes ?? 120);
       const start = findGap(nightCursor, dur, occupied, dayEnd);
       if (start === null) {
         day.unplacedIds.add(act.sourceId);
@@ -317,6 +323,8 @@ function placeMeals(
   lastEnd:     number,
   isTravelDay: boolean,
   prefs:       SmartSchedulerInput["preferences"],
+  dayEnd:      number,
+  isFullDay    = false,
 ): void {
   const { breakfastDurationMin: bkDur, lunchDurationMin: lunchDur, dinnerDurationMin: dinnerDur, mealsPerDay } = prefs;
   if (mealsPerDay === 0) return;
@@ -328,8 +336,8 @@ function placeMeals(
     );
 
   const addMeal = (title: string, target: number, dur: number) => {
-    const start = findGap(target, dur, occupied, 23 * 60);
-    if (start === null || start + dur > 23 * 60) return;
+    const start = findGap(target, dur, occupied, dayEnd);
+    if (start === null || start + dur > dayEnd) return;
     push(slots, occupied, {
       kind:            "meal",
       startMinutes:    start,
@@ -346,23 +354,31 @@ function placeMeals(
     return;
   }
 
+  // Full-day activities (theme parks, day tours etc.) get dinner only
+  if (isFullDay) {
+    if (!hasFood(17 * 60, 21 * 60)) addMeal("Dinner", lastEnd + 30, dinnerDur);
+    return;
+  }
+
   // Breakfast — before first activity if enough time
   if (!hasFood(7 * 60, 10 * 60) && firstStart > 7 * 60 + 45) {
-    addMeal("Breakfast", firstStart - bkDur - 15, bkDur);
+    addMeal("Breakfast", Math.max(7 * 60, firstStart - bkDur - 15), bkDur);
   }
 
   if (lastEnd <= 12 * 60 + 30) return; // very short day
 
-  // Lunch
+  // Lunch — aim for midpoint of activity span
   if (!hasFood(11 * 60, 14 * 60)) {
-    addMeal("Lunch", 12 * 60, lunchDur);
+    const lunchTarget = Math.min(12 * 60, (firstStart + lastEnd) / 2);
+    addMeal("Lunch", lunchTarget, lunchDur);
   }
 
   if (lastEnd <= 17 * 60) return; // half day
 
-  // Dinner
+  // Dinner — after activities but before bedtime
   if (!hasFood(17 * 60, 21 * 60)) {
-    addMeal("Dinner", lastEnd + 30, dinnerDur);
+    const dinnerTarget = Math.min(lastEnd + 30, dayEnd - dinnerDur - 60);
+    addMeal("Dinner", dinnerTarget, dinnerDur);
   }
 }
 
@@ -421,6 +437,7 @@ export function smartScheduleItinerary(input: SmartSchedulerInput): SmartSchedul
   const plannedDays: PlannedDay[] = scheduleDays.map((day) => {
     const slots = buildDayTimeline(
       day,
+      scheduleDays,
       input.preferences,
       input.outboundArrivesAt,
       input.returnDepartsAt,
@@ -433,7 +450,7 @@ export function smartScheduleItinerary(input: SmartSchedulerInput): SmartSchedul
       isArrivalDay:         day.isFirstOverall,
       isDepartureDay:       day.isLastOverall,
       hasIntercityTransfer: day.hasIntercityTransfer,
-      profiles:             day.activities.map((a) => a.profile),
+      profiles:             day.activities.map((a) => a.profile).filter(Boolean),
     });
 
     const actSlots = slots.filter((s) => s.kind === "activity");
