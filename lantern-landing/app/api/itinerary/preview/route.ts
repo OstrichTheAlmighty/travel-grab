@@ -2,15 +2,20 @@
  * POST /api/itinerary/preview
  *
  * Stateless itinerary planner — no database required.
- * Accepts all trip data in the request body, runs the V1 deterministic
- * planner, and returns the planned days.
+ * Accepts all trip data in the request body and returns planned days.
  *
- * Used by the Itinerary UI before a user has a persisted trip.
+ * City detection: T1=GPS coords, T2=savedCity field, T3=title keywords, T4=proportional
+ * Scheduling: smartScheduler — activities first, meals after, nightlife at 8pm+
  */
 
-import { NextRequest, NextResponse } from "next/server";
-import { runPlanner } from "@/lib/itinerary/planner";
-import type { ItineraryInput, PlannerActivity, LatLng, PlannedDay } from "@/lib/itinerary/types";
+import { NextRequest, NextResponse }  from "next/server";
+import { profileActivity }             from "../activityProfiler";
+import {
+  smartScheduleItinerary,
+  type SmartActivity,
+  type SmartSchedulerInput,
+} from "../smartScheduler";
+import type { PlannedDay, DroppedActivity } from "@/lib/itinerary/types";
 
 // ── AI day summaries (best-effort — absent key or timeout skips silently) ─────
 
@@ -21,13 +26,12 @@ interface AiDaySummaryResult {
 }
 
 async function aiDaySummaries(
-  days: PlannedDay[],
+  days:        PlannedDay[],
   destination: string,
 ): Promise<AiDaySummaryResult[]> {
   const apiKey = (process.env.OPENAI_API_KEY ?? "").trim();
   if (!apiKey) return [];
 
-  // Build compact itinerary for AI (keep tokens low)
   const compact = days.map((d) => ({
     dayIndex: d.dayIndex,
     city:     d.cityLabel ?? d.geographicArea,
@@ -63,10 +67,7 @@ Given a list of planned days, return a JSON object:
 
 Be specific and enthusiastic. Keep summaries under 40 words. Only add warnings for real problems (not just busy days). Return every dayIndex provided.`,
         },
-        {
-          role:    "user",
-          content: JSON.stringify(compact),
-        },
+        { role: "user", content: JSON.stringify(compact) },
       ],
     }),
     signal: AbortSignal.timeout(10_000),
@@ -74,13 +75,15 @@ Be specific and enthusiastic. Keep summaries under 40 words. Only add warnings f
 
   if (!resp.ok) return [];
 
-  const json = await resp.json() as { choices?: Array<{ message?: { content?: string } }> };
+  const json    = await resp.json() as { choices?: Array<{ message?: { content?: string } }> };
   const content = json.choices?.[0]?.message?.content ?? "{}";
-  const parsed = JSON.parse(content) as { days?: AiDaySummaryResult[] };
+  const parsed  = JSON.parse(content) as { days?: AiDaySummaryResult[] };
   return parsed.days ?? [];
 }
 
-// ── Rough city-centre coordinates for lat/lng fallback ────────────────────────
+// ── City-centre coordinates ───────────────────────────────────────────────────
+
+interface LatLng { lat: number; lng: number }
 
 const CITY_CENTRES: Record<string, LatLng> = {
   tokyo:         { lat: 35.6762, lng: 139.6503 },
@@ -102,7 +105,6 @@ const CITY_CENTRES: Record<string, LatLng> = {
   bangkok:       { lat: 13.7563, lng: 100.5018 },
   bali:          { lat: -8.4095, lng: 115.1889 },
   sydney:        { lat:-33.8688, lng: 151.2093 },
-  "new zealand": { lat:-36.8509, lng: 174.7645 },
   singapore:     { lat:  1.3521, lng: 103.8198 },
   seoul:         { lat: 37.5665, lng: 126.9780 },
   "hong kong":   { lat: 22.3193, lng: 114.1694 },
@@ -116,28 +118,22 @@ function cityCenter(destination: string): LatLng {
   for (const [name, coords] of Object.entries(CITY_CENTRES)) {
     if (key.includes(name)) return coords;
   }
-  return { lat: 48.8566, lng: 2.3522 }; // Paris as ultimate fallback
+  return { lat: 48.8566, lng: 2.3522 };
 }
 
-// ── Smarter activity durations by category / title keywords ──────────────────
+// ── Duration fallback by category / title ─────────────────────────────────────
 
-function categoryDuration(category: string, title: string = ""): number {
+function categoryDuration(category: string, title = ""): number {
   const lc = `${category} ${title}`.toLowerCase();
-  if (
-    lc.includes("disney") || lc.includes("universal") ||
-    lc.includes("theme park") || lc.includes("usp ") || lc.includes("bush")
-  ) return 360;
-  if (lc.includes("spa") || lc.includes("onsen") || lc.includes("hot spring") || lc.includes("bath")) return 120;
-  if (lc.includes("museum") || lc.includes("gallery") || lc.includes(" art ")) return 90;
-  if (lc.includes("shrine") || lc.includes("temple") || lc.includes("jinja") || lc.includes("ji ")) return 60;
-  if (lc.includes("castle") || lc.includes("palace") || lc.includes("fort")) return 75;
-  if (lc.includes("market") || lc.includes("bazaar")) return 90;
-  if (lc.includes("park") || lc.includes("garden") || lc.includes("forest") || lc.includes("beach")) return 75;
-  if (lc.includes("tower") || lc.includes("observation")) return 60;
-  if (
-    lc.includes("restaurant") || lc.includes("ramen") || lc.includes("sushi") ||
-    lc.includes("cafe") || lc.includes("café") || lc.includes("izakaya")
-  ) return 75;
+  if (["disney", "universal", "theme park"].some((k) => lc.includes(k))) return 360;
+  if (["spa", "onsen", "hot spring", "bath"].some((k) => lc.includes(k))) return 120;
+  if (["museum", "gallery", " art "].some((k) => lc.includes(k))) return 90;
+  if (["shrine", "temple", "jinja", "ji "].some((k) => lc.includes(k))) return 60;
+  if (["castle", "palace", "fort"].some((k) => lc.includes(k))) return 75;
+  if (["market", "bazaar"].some((k) => lc.includes(k))) return 90;
+  if (["park", "garden", "forest", "beach"].some((k) => lc.includes(k))) return 75;
+  if (["tower", "observation"].some((k) => lc.includes(k))) return 60;
+  if (["restaurant", "ramen", "sushi", "cafe", "café", "izakaya"].some((k) => lc.includes(k))) return 75;
   switch (category) {
     case "food":        return 75;
     case "nightlife":   return 120;
@@ -150,23 +146,16 @@ function categoryDuration(category: string, title: string = ""): number {
   }
 }
 
-// ── City detection for multi-city trips ──────────────────────────────────────
-// Priority order (highest confidence first):
-//   1. Real GPS coords from Places API   (hasRealCoords=true)
-//   2. `city` field from savedMeta       (activity saved while searching that city)
-//   3. Title keyword / city name in title (server-side landmark detection)
-//   4. Proportional index fallback        (last resort — same-city activities only)
+// ── City detection helpers ────────────────────────────────────────────────────
 
-/** Normalise a string for keyword matching: lowercase + strip diacritics. */
 function normStr(s: string): string {
   return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 }
 
-/** Well-known landmark keywords → city name (must match CITY_CENTRES keys). */
 const LANDMARK_KEYWORDS: Array<[string, string]> = [
   // Tokyo
   ["senso-ji", "tokyo"], ["sensoji", "tokyo"], ["asakusa", "tokyo"],
-  ["meiji shrine", "tokyo"], ["meiji jingu", "tokyo"], ["meiji-jingu", "tokyo"],
+  ["meiji shrine", "tokyo"], ["meiji jingu", "tokyo"],
   ["shibuya crossing", "tokyo"], ["shinjuku gyoen", "tokyo"],
   ["tokyo skytree", "tokyo"], ["tokyo tower", "tokyo"],
   ["tsukiji", "tokyo"], ["teamlab", "tokyo"],
@@ -203,10 +192,6 @@ const LANDMARK_KEYWORDS: Array<[string, string]> = [
   ["nakasu", "fukuoka"], ["tenjin", "fukuoka"],
 ];
 
-/**
- * Look up city centre coordinates. Returns null when the city isn't in
- * CITY_CENTRES so the caller can decide whether to trust the result.
- */
 function knownCityCenter(name: string): LatLng | null {
   const key = normStr(name);
   for (const [cityKey, coords] of Object.entries(CITY_CENTRES)) {
@@ -215,33 +200,25 @@ function knownCityCenter(name: string): LatLng | null {
   return null;
 }
 
-/**
- * Try to detect a city name from an activity title using landmark keywords
- * and direct city-name inclusion (e.g. "Tokyo Dome" → "tokyo").
- * Returns null if no confident match.
- */
 function detectCityFromTitle(title: string): string | null {
   const n = normStr(title);
-  // Direct city name in title (handles "Tokyo Dome", "Osaka Aquarium" etc.)
   for (const city of Object.keys(CITY_CENTRES)) {
     if (n.includes(city)) return city;
   }
-  // Landmark keywords
   for (const [kw, city] of LANDMARK_KEYWORDS) {
     if (n.includes(normStr(kw))) return city;
   }
   return null;
 }
 
-/** Proportional index fallback — used only when no other signal available. */
 function getActivityCity(
-  actIndex: number,
+  actIndex:        number,
   totalActivities: number,
-  cityStops: { city: string; days: number }[],
+  cityStops:       { city: string; days: number }[],
 ): string | null {
   if (cityStops.length === 0) return null;
   const totalDays = cityStops.reduce((s, c) => s + c.days, 0) || 1;
-  const progress = (actIndex + 0.5) / Math.max(1, totalActivities);
+  const progress  = (actIndex + 0.5) / Math.max(1, totalActivities);
   const targetDay = progress * totalDays;
   let cumDays = 0;
   for (const stop of cityStops) {
@@ -249,6 +226,38 @@ function getActivityCity(
     if (targetDay <= cumDays) return stop.city;
   }
   return cityStops[cityStops.length - 1].city;
+}
+
+// ── Haversine + nearest city stop ─────────────────────────────────────────────
+
+function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number): number {
+  const R  = 6371;
+  const φ1 = lat1 * Math.PI / 180, φ2 = lat2 * Math.PI / 180;
+  const Δφ = (lat2 - lat1) * Math.PI / 180;
+  const Δλ = (lng2 - lng1) * Math.PI / 180;
+  const a  = Math.sin(Δφ / 2) ** 2 + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) ** 2;
+  return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function nearestStopCity(
+  lat:   number,
+  lng:   number,
+  stops: { city: string; lat: number; lng: number }[],
+): string {
+  if (stops.length === 0) return "";
+  let best     = stops[0];
+  let bestDist = haversineKm(lat, lng, best.lat, best.lng);
+  for (const stop of stops.slice(1)) {
+    const d = haversineKm(lat, lng, stop.lat, stop.lng);
+    if (d < bestDist) { best = stop; bestDist = d; }
+  }
+  return best.city;
+}
+
+function daysBetween(startDate: string, endDate: string): number {
+  const a = new Date(startDate + "T00:00:00Z");
+  const b = new Date(endDate   + "T00:00:00Z");
+  return Math.max(1, Math.round((b.getTime() - a.getTime()) / 86_400_000));
 }
 
 // ── Request body types ────────────────────────────────────────────────────────
@@ -260,7 +269,7 @@ interface PreviewActivity {
   lat?:             number;
   lng?:             number;
   durationMinutes?: number;
-  city?:            string;   // search destination when activity was saved
+  city?:            string;
 }
 
 interface PreviewRequest {
@@ -293,8 +302,8 @@ interface PreviewRequest {
     checkOutDate: string;
     timezone?:    string;
   };
-  outboundFlight?: { arrivesAt: string };  // ISO datetime string
-  returnFlight?:   { departsAt: string };  // ISO datetime string
+  outboundFlight?: { arrivesAt: string };
+  returnFlight?:   { departsAt: string };
   activities:      PreviewActivity[];
 }
 
@@ -309,7 +318,10 @@ export async function POST(req: NextRequest) {
   }
 
   if (!body.trip?.startDate || !body.trip?.endDate || !body.trip?.destination) {
-    return NextResponse.json({ error: "trip.startDate, endDate, and destination are required" }, { status: 422 });
+    return NextResponse.json(
+      { error: "trip.startDate, endDate, and destination are required" },
+      { status: 422 },
+    );
   }
 
   const centre   = cityCenter(body.trip.destination);
@@ -323,191 +335,152 @@ export async function POST(req: NextRequest) {
       return { city: c.city, days: c.days, lat: cc.lat, lng: cc.lng };
     });
 
-  // Build PlannerActivity list.
-  //
-  // City assignment priority (for multi-city trips):
-  //   T1. Real GPS coordinates from Places API          → hasRealCoords=true
-  //   T2. `city` field saved with the activity          → city centre, hasRealCoords=true
-  //   T3. City name / landmark keyword in activity title → city centre, hasRealCoords=true
-  //   T4. Proportional index fallback                   → hasRealCoords=false (last resort)
   const isMultiCity = cityStops.length > 1;
 
-  // ── Debug tracking (always on — cheap, helps diagnose city assignment issues) ─
+  // ── T1-T4 city detection ──────────────────────────────────────────────────
   interface ActivityDebugEntry {
-    i:             number;
-    title:         string;
-    savedCity:     string | null;
-    detectedCity:  string | null;
-    tier:          string;
-    lat:           number;
-    lng:           number;
-    hasRealCoords: boolean;
+    i:            number;
+    title:        string;
+    savedCity:    string | null;
+    detectedCity: string | null;
+    tier:         string;
+    assignedCity: string;
   }
   const activityDebug: ActivityDebugEntry[] = [];
+  const t4Dropped:     DroppedActivity[]    = [];
+  const smartActivities: SmartActivity[]    = [];
 
-  const activities: PlannerActivity[] = body.activities.map((a, i) => {
+  for (let i = 0; i < body.activities.length; i++) {
+    const a     = body.activities[i];
     const title = a.title || `Activity ${i + 1}`;
+    const dur   = a.durationMinutes ?? categoryDuration(a.category ?? "culture", title);
+    const profile = profileActivity({ title, category: a.category, durationMinutes: dur });
 
-    let location: LatLng;
-    let hasRealCoords: boolean;
-    let tier: string;
-    let detectedCityName: string | null = null;
+    let assignedCity: string;
+    let tier:         string;
+    let detectedCity: string | null = null;
 
     if (a.lat != null && a.lng != null) {
-      // Tier 1: real GPS from Places API
-      location      = { lat: a.lat, lng: a.lng };
-      hasRealCoords = true;
-      tier          = "T1:gps";
+      // T1: real GPS — find nearest city stop
+      tier         = "T1:gps";
+      assignedCity = isMultiCity
+        ? nearestStopCity(a.lat, a.lng, cityStops)
+        : body.trip.destination;
     } else if (isMultiCity) {
-      // Tier 2: city field explicitly stored in savedMeta
+      // T2: city explicitly saved with the activity
       const cityFromSaved = a.city ? knownCityCenter(a.city) : null;
       if (cityFromSaved) {
-        location         = cityFromSaved;
-        hasRealCoords    = true;
-        tier             = "T2:savedCity";
-        detectedCityName = a.city ?? null;
+        tier         = "T2:savedCity";
+        assignedCity = a.city!;
+        detectedCity = a.city!;
       } else {
-        // Tier 3: detect city from title keywords / city name in title
-        const det = detectCityFromTitle(title);
+        // T3: city name / landmark keyword in the activity title
+        const det           = detectCityFromTitle(title);
         const cityFromTitle = det ? knownCityCenter(det) : null;
         if (cityFromTitle) {
-          location         = cityFromTitle;
-          hasRealCoords    = true;
-          tier             = "T3:titleDetect";
-          detectedCityName = det;
+          tier         = "T3:titleDetect";
+          assignedCity = det!;
+          detectedCity = det;
         } else {
-          // Tier 4: proportional index fallback
-          const fallbackCity = getActivityCity(i, body.activities.length, cityStops);
-          location         = fallbackCity ? cityCenter(fallbackCity) : centre;
-          hasRealCoords    = false;
-          tier             = "T4:proportional";
-          detectedCityName = fallbackCity;
+          // T4: proportional fallback — unreliable for multi-city
+          const fallback = getActivityCity(i, body.activities.length, cityStops) ?? body.trip.destination;
+          tier           = "T4:proportional";
+          detectedCity   = fallback;
+
+          if (profile.activityType === "nightlife") {
+            // T4 nightlife → pin to primary city (better than proportional)
+            assignedCity = cityStops[0]?.city ?? body.trip.destination;
+            console.log(`[CITY-NIGHTLIFE] T4 nightlife "${title}" → pinned to ${assignedCity}`);
+          } else {
+            // T4 non-nightlife → city unknown, surface as dropped
+            console.log(`[CITY-DROP] T4 "${title}" (${a.category}) → city unknown, dropped`);
+            t4Dropped.push({ sourceId: `preview-${i}`, title, reason: "City unknown for multi-city trip" });
+            activityDebug.push({ i, title, savedCity: a.city ?? null, detectedCity, tier, assignedCity: "(dropped)" });
+            continue;
+          }
         }
       }
     } else {
-      location      = centre;
-      hasRealCoords = false;
-      tier          = "T0:singleCity";
+      // Single-city or no city stops configured
+      tier         = "T0:singleCity";
+      assignedCity = body.trip.destination;
     }
 
     if (isMultiCity) {
-      const entry: ActivityDebugEntry = {
-        i,
-        title,
-        savedCity:    a.city ?? null,
-        detectedCity: detectedCityName,
-        tier,
-        lat:          location.lat,
-        lng:          location.lng,
-        hasRealCoords,
-      };
-      activityDebug.push(entry);
+      activityDebug.push({ i, title, savedCity: a.city ?? null, detectedCity, tier, assignedCity });
       console.log(
-        `[preview/cityAssign] ${tier.padEnd(20)} | lat=${location.lat.toFixed(4)} lng=${location.lng.toFixed(4)}` +
-        ` | savedCity=${a.city ?? "—"} | detected=${detectedCityName ?? "—"} | "${title}"`,
+        `[preview/cityAssign] ${tier.padEnd(20)} | city=${assignedCity} | "${title}"`,
       );
     }
 
-    return {
-      id:              `preview-${i}`,
+    smartActivities.push({
       sourceId:        `preview-${i}`,
       title,
       category:        a.category ?? "culture",
-      location,
-      durationMinutes: a.durationMinutes ?? categoryDuration(a.category ?? "culture", title),
-      timeWindows:     [],
-      userPriority:    a.priority ?? 3,
-      rating:          0,
-      reviewCount:     0,
-      hasRealCoords,
-    };
-  });
+      durationMinutes: dur,
+      lat:             a.lat ?? undefined,
+      lng:             a.lng ?? undefined,
+      assignedCity,
+      profile,
+    });
+  }
 
+  // ── Build SmartSchedulerInput ─────────────────────────────────────────────
   const prefs = body.preferences ?? {};
 
-  const isFoodFocused = (prefs.categories ?? []).some(
-    (c: string) => c.toLowerCase().includes("food"),
-  );
+  // If no cityStops provided, synthesise a single-city stop from startDate/endDate
+  const resolvedStops = cityStops.length > 0
+    ? cityStops
+    : [{
+        city: body.trip.destination,
+        days: daysBetween(body.trip.startDate, body.trip.endDate),
+        lat:  centre.lat,
+        lng:  centre.lng,
+      }];
 
-  const input: ItineraryInput = {
-    trip: {
-      id:           "preview",
-      startDate:    body.trip.startDate,
-      endDate:      body.trip.endDate,
-      numTravelers: body.trip.numTravelers ?? 1,
-      city:         body.trip.city || body.trip.destination.split(",")[0].trim(),
-      destination:  body.trip.destination,
-      cityStops,
-    },
+  const smartInput: SmartSchedulerInput = {
+    startDate:  body.trip.startDate,
+    cityStops:  resolvedStops,
+    activities: smartActivities,
     preferences: {
       wakeTimeMinutes:      prefs.wakeTimeMinutes      ?? 480,
       sleepTimeMinutes:     prefs.sleepTimeMinutes     ?? 1320,
       pace:                 prefs.pace                 ?? "moderate",
-      jetLagDays:           prefs.jetLagDays           ?? 0,
-      preferredTransitMode: prefs.preferredTransitMode ?? "transit",
-      maxWalkMinutes:       prefs.maxWalkMinutes        ?? 20,
-      mealsPerDay:          prefs.mealsPerDay           ?? 3,
+      mealsPerDay:          prefs.mealsPerDay          ?? 3,
       breakfastDurationMin: prefs.breakfastDurationMin ?? 30,
-      lunchDurationMin:     prefs.lunchDurationMin      ?? 60,
-      dinnerDurationMin:    prefs.dinnerDurationMin     ?? 75,
-      isFoodFocused,
+      lunchDurationMin:     prefs.lunchDurationMin     ?? 60,
+      dinnerDurationMin:    prefs.dinnerDurationMin    ?? 75,
     },
     hotel: body.hotel
-      ? {
-          lat:          hotelLat,
-          lng:          hotelLng,
-          checkInDate:  body.hotel.checkInDate,
-          checkOutDate: body.hotel.checkOutDate,
-          name:         body.hotel.name,
-          timezone:     body.hotel.timezone ?? null,
-        }
+      ? { name: body.hotel.name, checkInDate: body.hotel.checkInDate, checkOutDate: body.hotel.checkOutDate }
       : null,
-    outboundFlight: body.outboundFlight
-      ? { arrivesAt: new Date(body.outboundFlight.arrivesAt) }
-      : null,
-    returnFlight: body.returnFlight
-      ? { departsAt: new Date(body.returnFlight.departsAt) }
-      : null,
-    activities,
+    outboundArrivesAt: body.outboundFlight ? new Date(body.outboundFlight.arrivesAt) : null,
+    returnDepartsAt:   body.returnFlight   ? new Date(body.returnFlight.departsAt)   : null,
   };
 
-  const output = runPlanner(input);
+  const output = smartScheduleItinerary(smartInput);
 
-  // ── Debug: log day assignments after planning ─────────────────────────────
-  const dayDebug: Array<{ day: number; city: string; activities: string[]; totalMin: number }> = [];
+  // Merge T4 drops into meta
+  const allDropped = [...t4Dropped, ...output.dropped];
+  output.meta.droppedActivities        = allDropped;
+  output.meta.totalActivitiesDropped   = allDropped.length;
+  output.meta.totalActivitiesScheduled = smartActivities.length - output.dropped.length;
+
+  // ── Debug logging ─────────────────────────────────────────────────────────
   if (isMultiCity) {
     console.log("\n[preview/dayAssignments] ─────────────────────────────────────");
     for (const d of output.days) {
-      const acts = d.slots
-        .filter((s) => s.kind === "activity")
-        .map((s) => s.title);
-      const totalMin = d.totalActivityMinutes;
+      const acts    = d.slots.filter((s) => s.kind === "activity").map((s) => s.title);
+      const summary = acts.length > 0 ? acts.join(", ") : "(no activities)";
       console.log(
         `  Day ${String(d.dayIndex + 1).padStart(2)} (${(d.cityLabel ?? "?").padEnd(12)}) ` +
-        `${totalMin}min | ${acts.length > 0 ? acts.join(", ") : "(no activities)"}`,
+        `${d.totalActivityMinutes}min | ${summary}`,
       );
-      dayDebug.push({ day: d.dayIndex + 1, city: d.cityLabel ?? "?", activities: acts, totalMin });
-    }
-
-    // Flag cross-city violations
-    console.log("\n[preview/cityViolations] ────────────────────────────────────");
-    for (const entry of activityDebug) {
-      for (const d of dayDebug) {
-        if (d.activities.includes(entry.title)) {
-          const actCity = (entry.detectedCity ?? "?").toLowerCase().split(",")[0].trim();
-          const dayCity = d.city.toLowerCase().split(",")[0].trim();
-          const match   = dayCity.includes(actCity) || actCity.includes(dayCity);
-          console.log(
-            `  [${match ? "OK  " : "MISMATCH"}] Day ${d.day} (${d.city}) ← "${entry.title}"` +
-            ` (detected: ${entry.detectedCity ?? "unknown"}, tier: ${entry.tier})`,
-          );
-        }
-      }
     }
     console.log("────────────────────────────────────────────────────────────\n");
   }
 
-  // ── AI critique pass: generate day summaries and validate itinerary ───────────
+  // ── AI day summaries ──────────────────────────────────────────────────────
   try {
     const summaryOutput = await aiDaySummaries(output.days, body.trip.destination);
     summaryOutput.forEach(({ dayIndex, summary, warnings }) => {
@@ -515,21 +488,25 @@ export async function POST(req: NextRequest) {
       if (!day) return;
       if (summary) day.daySummary = summary;
       if (warnings?.length) {
-        day.warnings = [...(day.warnings ?? []), ...warnings.map((w: string) => ({ type: "ai_note" as const, message: w }))];
+        day.warnings = [
+          ...(day.warnings ?? []),
+          ...warnings.map((w: string) => ({ type: "ai_note" as const, message: w })),
+        ];
       }
     });
   } catch {
-    // AI pass is best-effort — never fail the response
+    // AI summaries are best-effort — never fail the response
   }
 
-  // Include debug in response so it's visible in browser network tab
   const responseBody = {
-    ...output,
-    _debugCityAssignment: isMultiCity ? {
-      cityStops:         cityStops.map((c) => ({ city: c.city, days: c.days })),
-      activityDetection: activityDebug,
-      dayAssignments:    dayDebug,
-    } : undefined,
+    days: output.days,
+    meta: output.meta,
+    _debugCityAssignment: isMultiCity
+      ? {
+          cityStops:         resolvedStops.map((c) => ({ city: c.city, days: c.days })),
+          activityDetection: activityDebug,
+        }
+      : undefined,
   };
 
   return NextResponse.json(responseBody);
