@@ -507,24 +507,38 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
   }
 
   // ── Reject T4:proportional activities for multi-city trips ───────────────
-  // Activities without a confident city assignment (hasRealCoords=false, i.e.
-  // T4:proportional in the preview route) cannot be reliably placed in the
-  // correct city when segments have real coordinates. Drop them to allDropped
-  // ("Also worth considering") to prevent geographic mixing.
-  // Safety valve: if ALL activities are T4, keep them — proportional is better
-  // than an empty itinerary.
+  // Activities without a confident city assignment (hasRealCoords=false) are
+  // split by category before filtering:
+  //
+  //   Nightlife T4: KEPT — scheduled at 8pm+ in their own pass, so a slightly
+  //     wrong-city day is acceptable and "disappearing nightlife" is worse.
+  //     Assigned to primary city (segment 0) as the safest default.
+  //
+  //   All other T4: DROPPED to allDropped ("Also worth considering") to prevent
+  //     daytime sightseeing activities from appearing in the wrong city.
+  //
+  // Safety valve: if ALL activities are T4, keep everything — proportional
+  // assignment is better than an empty itinerary.
   if (isMultiCity && segmentsHaveCoords) {
-    const confident   = schedulableActivities.filter((a) => a.hasRealCoords !== false);
-    const unknownCity = schedulableActivities.filter((a) => a.hasRealCoords === false);
-    if (unknownCity.length > 0 && confident.length > 0) {
-      for (const act of unknownCity) {
-        console.log(`[CITY-DROP] T4:proportional "${act.title}" — city unknown, moved to 'Also worth considering'`);
+    const confident        = schedulableActivities.filter((a) => a.hasRealCoords !== false);
+    const unknownNightlife = schedulableActivities.filter((a) => a.hasRealCoords === false && a.category === "nightlife");
+    const unknownOther     = schedulableActivities.filter((a) => a.hasRealCoords === false && a.category !== "nightlife");
+
+    if ((unknownNightlife.length > 0 || unknownOther.length > 0) && confident.length > 0) {
+      for (const act of unknownOther) {
+        console.log(`[CITY-DROP] T4:proportional "${act.title}" (${act.category}) — city unknown, moved to 'Also worth considering'`);
         allDropped.push({ sourceId: act.sourceId, title: act.title, reason: "City unknown for multi-city trip" });
       }
-      schedulableActivities = confident;
-    } else if (unknownCity.length > 0) {
+      if (unknownNightlife.length > 0) {
+        console.log(
+          `[CITY-NIGHTLIFE] Keeping ${unknownNightlife.length} T4 nightlife activities` +
+          ` — will assign to primary city (segment 0): ${unknownNightlife.map((a) => `"${a.title}"`).join(", ")}`,
+        );
+      }
+      schedulableActivities = [...confident, ...unknownNightlife];
+    } else if (unknownNightlife.length > 0 || unknownOther.length > 0) {
       console.log(
-        `[CITY-DROP] All ${unknownCity.length} activities are T4:proportional — ` +
+        `[CITY-DROP] All activities are T4:proportional — ` +
         `proceeding with proportional fallback (no T1/T2/T3 activities available)`,
       );
     }
@@ -549,6 +563,12 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
       if (segmentsHaveCoords && act.hasRealCoords !== false) {
         segIdx = nearestCitySegment(act.location.lat, act.location.lng, citySegments);
         method = `haversine→${citySegments[segIdx]?.city ?? "?"}`;
+      } else if (act.category === "nightlife") {
+        // T4 nightlife: pin to primary city (segment 0). No GPS, but nightlife
+        // is scheduled at 8pm+ separately — better to show on day 1-N of the
+        // primary city than to misplace via proportional index.
+        segIdx = 0;
+        method = `nightlife-primary(${citySegments[0]?.city ?? "seg0"})`;
       } else {
         const progress  = (i + 0.5) / schedulableActivities.length;
         const totalDays = citySegments.reduce((s, seg) => s + (seg.endDay - seg.startDay), 0) || 1;
