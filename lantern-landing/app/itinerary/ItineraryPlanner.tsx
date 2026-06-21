@@ -20,6 +20,8 @@ type SavedMeta = {
   duration:     string;
   rating:       number;
   photoRef?:    string;
+  lat?:         number;
+  lng?:         number;
 };
 
 type UIPace    = "relaxed" | "balanced" | "packed";
@@ -1186,6 +1188,8 @@ export default function ItineraryPlanner() {
           title:           m?.title        ?? id,
           category:        m?.category     ?? "culture",
           durationMinutes: parseDuration(m?.duration),
+          lat:             m?.lat,
+          lng:             m?.lng,
         };
       });
 

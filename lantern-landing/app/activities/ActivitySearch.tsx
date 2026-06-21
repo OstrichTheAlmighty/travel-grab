@@ -1752,7 +1752,7 @@ export default function ActivitySearch() {
   const [activeFilter,       setActiveFilter]       = useState<FilterId>("all");
   const [activeSubTag,       setActiveSubTag]       = useState<string | null>(null);
   const [savedIds,           setSavedIds]           = useState<Set<string>>(new Set());
-  const [savedMeta,          setSavedMeta]          = useState<Record<string, { title: string; category: string; neighborhood: string; duration: string; rating: number; photoRef?: string }>>({});
+  const [savedMeta,          setSavedMeta]          = useState<Record<string, { title: string; category: string; neighborhood: string; duration: string; rating: number; photoRef?: string; lat?: number; lng?: number }>>({});
   const [tripCities,         setTripCities]         = useState<string[]>([]); // city stops from itinerary
   const [showItineraryModal, setShowItineraryModal] = useState(false);
   const [loading,            setLoading]            = useState(false);
@@ -1932,6 +1932,8 @@ export default function ActivitySearch() {
             duration:     activity.duration,
             rating:       activity.rating,
             photoRef:     activity.photoRef,
+            lat:          activity.lat,
+            lng:          activity.lng,
           },
         }));
       }

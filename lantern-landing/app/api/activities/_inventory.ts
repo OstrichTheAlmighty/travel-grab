@@ -462,6 +462,8 @@ export function mapToActivity(
     gradient:     CATEGORY_GRADIENTS[finalCategory],
     photoRef:     place.photos?.[0]?.name,
     placeId:      place.id,
+    lat:          place.location?.latitude,
+    lng:          place.location?.longitude,
     websiteUri:   place.websiteUri,
     googleMapsUri: place.googleMapsUri,
     openNow:      place.regularOpeningHours?.openNow,
