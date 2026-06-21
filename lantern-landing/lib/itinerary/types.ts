@@ -131,7 +131,7 @@ export interface ItineraryInput {
     numTravelers: number;
     city:         string;
     destination:  string;
-    cityStops?:   { city: string; days: number }[];  // multi-city route
+    cityStops?:   { city: string; days: number; lat?: number; lng?: number }[];  // multi-city route
   };
   preferences: PlannerPreferences;
   hotel: {

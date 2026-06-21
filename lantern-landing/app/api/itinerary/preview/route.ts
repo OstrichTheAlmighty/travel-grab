@@ -233,7 +233,12 @@ export async function POST(req: NextRequest) {
   const hotelLat = body.hotel?.lat ?? centre.lat;
   const hotelLng = body.hotel?.lng ?? centre.lng;
 
-  const cityStops = (body.trip.cityStops ?? []).filter((c) => c.city.trim() && c.days > 0);
+  const cityStops = (body.trip.cityStops ?? [])
+    .filter((c) => c.city.trim() && c.days > 0)
+    .map((c) => {
+      const cc = cityCenter(c.city);
+      return { city: c.city, days: c.days, lat: cc.lat, lng: cc.lng };
+    });
 
   // Build PlannerActivity list — use real coordinates when provided;
   // fall back to per-city centre (not random offsets) to avoid misleading fake distances.
