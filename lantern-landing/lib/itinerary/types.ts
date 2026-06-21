@@ -74,6 +74,7 @@ export interface PlannedDay {
   cityLabel?:             string;   // explicit city name for multi-city trips
   warnings?:              DayWarning[];
   daySummary?:            string;   // AI-generated or rules-based "why this day works"
+  fatigueScore?:          number;   // cumulative fatigue after this day (0–12+)
   slots:                  PlannedSlot[];
   scheduledActivityCount: number;
   totalActivityMinutes:   number;

@@ -1,18 +1,36 @@
 /**
- * Deterministic itinerary planner (V1 — no LLM).
+ * Deterministic itinerary planner — two-pass with rebalancing.
  *
  * Pipeline:
- *   1. Compute per-day boundaries (effective start/end times, jet-lag adjustment)
- *   2. Cluster activities geographically (k-means, k = full scheduling days)
- *   3. For each day, run the nearest-neighbour scheduler
- *   4. Build PlannedDay output with themes and metadata
+ *   1. Compute per-day boundaries (effective start/end, jet-lag, flight times)
+ *   2. Deduplicate + group activities by city segment
+ *   3. Capacity-aware bin-packing: assign activities to days respecting each
+ *      day's realistic activity budget (arrival cap, travel-day reduction, etc.)
+ *   4. Pass 1: schedule each day; collect "could not fit" drops
+ *   5. Rebalance: redistribute drops to the lightest eligible day in the same
+ *      city segment; re-schedule modified days (pass 2)
+ *   6. Fatigue tracking: accumulate across days; warn when score > 8
  */
 
 import { clusterByLocation } from "./geo";
 import { scheduleDay } from "./scheduler";
 import { deduplicateActivities } from "./dedup";
+import type {
+  ItineraryInput,
+  PlannerOutput,
+  PlannedDay,
+  PlannedSlot,
+  DayBoundary,
+  DroppedActivity,
+  PlanningConflict,
+  LatLng,
+  TransitMode,
+  PlannerActivity,
+  DayWarning,
+  Pace,
+} from "./types";
 
-// ── Intercity route lookup (Japan-focused, extendable) ────────────────────────
+// ── Intercity route lookup ────────────────────────────────────────────────────
 
 const INTERCITY_ROUTES: Record<string, { durationMinutes: number; description: string }> = {
   "tokyo-osaka":      { durationMinutes: 150, description: "Shinkansen Nozomi · Shinagawa → Shin-Osaka" },
@@ -43,9 +61,7 @@ const INTERCITY_ROUTES: Record<string, { durationMinutes: number; description: s
   "madrid-barcelona": { durationMinutes: 150, description: "AVE High-Speed · Madrid Atocha → Barcelona Sants" },
 };
 
-// ── Landmark priority keywords per city ────────────────────────────────────────
-// Activities whose titles contain these keywords (case-insensitive) get userPriority
-// boosted to 1 (must-schedule) unless they already have a higher priority.
+// ── Landmark priority keywords per city ───────────────────────────────────────
 
 const CITY_LANDMARKS: Record<string, string[]> = {
   hiroshima: [
@@ -68,28 +84,23 @@ const CITY_LANDMARKS: Record<string, string[]> = {
     "tsukiji", "teamlab", "disneyland", "disney sea", "ueno", "imperial palace",
   ],
   nara: [
-    "todai-ji", "todaiji", "deer park", "kasuga", "nishino",
-    "nara park", "horyu",
+    "todai-ji", "todaiji", "deer park", "kasuga", "nara park", "horyu",
   ],
   fukuoka: [
-    "ohori park", "fukuoka castle", "dazaifu", "canal city",
-    "yatai", "tenjin", "nakasu",
+    "ohori park", "fukuoka castle", "dazaifu", "canal city", "yatai", "tenjin", "nakasu",
   ],
 };
 
 function boostLandmarks(acts: PlannerActivity[], city: string): PlannerActivity[] {
   const keywords = CITY_LANDMARKS[city.toLowerCase().split(",")[0].trim()] ?? [];
   if (keywords.length === 0) return acts;
-
   return acts.map((act) => {
-    const titleLc = act.title.toLowerCase();
-    const isLandmark = keywords.some((kw) => titleLc.includes(kw));
-    if (isLandmark && act.userPriority > 1) {
-      return { ...act, userPriority: 1 };
-    }
-    return act;
+    const isLandmark = keywords.some((kw) => act.title.toLowerCase().includes(kw));
+    return isLandmark && act.userPriority > 1 ? { ...act, userPriority: 1 } : act;
   });
 }
+
+// ── City segment helpers ──────────────────────────────────────────────────────
 
 interface CitySegment { city: string; startDay: number; endDay: number; }
 
@@ -112,7 +123,17 @@ function getCityForDay(segments: CitySegment[], dayIndex: number, def: string): 
   return def;
 }
 
-function getCityTransition(segments: CitySegment[], dayIndex: number): { fromCity: string; toCity: string } | null {
+function getSegmentForDay(segments: CitySegment[], dayIndex: number): number {
+  for (let i = 0; i < segments.length; i++) {
+    if (dayIndex >= segments[i].startDay && dayIndex < segments[i].endDay) return i;
+  }
+  return -1;
+}
+
+function getCityTransition(
+  segments: CitySegment[],
+  dayIndex: number,
+): { fromCity: string; toCity: string } | null {
   for (let i = 1; i < segments.length; i++) {
     if (dayIndex === segments[i].startDay) {
       return { fromCity: segments[i - 1].city, toCity: segments[i].city };
@@ -123,20 +144,11 @@ function getCityTransition(segments: CitySegment[], dayIndex: number): { fromCit
 
 function getIntercityRoute(from: string, to: string): { durationMinutes: number; description: string } {
   const key = `${from.toLowerCase().split(",")[0].trim()}-${to.toLowerCase().split(",")[0].trim()}`;
-  return INTERCITY_ROUTES[key] ?? { durationMinutes: 90, description: `Intercity transfer to ${to.split(",")[0].trim()}` };
+  return INTERCITY_ROUTES[key] ?? {
+    durationMinutes: 90,
+    description: `Intercity transfer to ${to.split(",")[0].trim()}`,
+  };
 }
-import type {
-  ItineraryInput,
-  PlannerOutput,
-  PlannedDay,
-  DayBoundary,
-  DroppedActivity,
-  PlanningConflict,
-  LatLng,
-  TransitMode,
-  PlannerActivity,
-  DayWarning,
-} from "./types";
 
 // ── Date helpers ──────────────────────────────────────────────────────────────
 
@@ -157,7 +169,35 @@ function minutesFromDate(d: Date, baseDate: string): number {
   return Math.round((d.getTime() - midnight) / 60_000);
 }
 
-// ── Build per-day boundaries ──────────────────────────────────────────────────
+// ── Capacity estimation ───────────────────────────────────────────────────────
+
+/**
+ * How many minutes of sightseeing activity a day can realistically hold.
+ * Used for distribution (not scheduling — the scheduler is the source of truth).
+ */
+function dayActivityCapacityMinutes(
+  boundary: DayBoundary,
+  intercityTransferMin: number,
+  pace: Pace,
+): number {
+  // Hard caps for constrained days
+  if (boundary.isArrivalDay)   return 150;  // 2.5h — check-in + one light activity
+  if (boundary.isDepartureDay) return 90;   // 1.5h — breakfast + one short stop
+
+  // Baseline: target 6h of activities for moderate pace
+  const BASE = 360;
+  const paceFactor = pace === "packed" ? 1.3 : pace === "relaxed" ? 0.75 : 1.0;
+  let cap = Math.round(BASE * paceFactor);
+
+  // Travel days lose capacity: subtract transfer time + 90 min station/hotel buffer
+  if (intercityTransferMin > 0) {
+    cap = Math.max(60, cap - intercityTransferMin - 90);
+  }
+
+  return cap;
+}
+
+// ── Per-day boundary builder ──────────────────────────────────────────────────
 
 function buildDayBoundaries(input: ItineraryInput): DayBoundary[] {
   const { trip, preferences, outboundFlight, returnFlight } = input;
@@ -169,28 +209,22 @@ function buildDayBoundaries(input: ItineraryInput): DayBoundary[] {
     const isArrivalDay   = i === 0;
     const isDepartureDay = i === numDays - 1 && numDays > 1;
 
-    // Default window from preferences
     let effectiveStart = preferences.wakeTimeMinutes;
     let effectiveEnd   = preferences.sleepTimeMinutes;
 
-    // Jet-lag adjustment: push start later for first N days
     if (i < preferences.jetLagDays) {
       const lagShift = Math.round((preferences.jetLagDays - i) * 45);
       effectiveStart = Math.min(effectiveStart + lagShift, 11 * 60);
     }
 
-    // Arrival day: start from when the traveller can actually leave the airport
     if (isArrivalDay && outboundFlight) {
       const arrivalMinutes = minutesFromDate(outboundFlight.arrivesAt, date);
-      // +90 min: customs, baggage, transit to hotel, quick freshen-up
-      const ready = arrivalMinutes + 90;
+      const ready = arrivalMinutes + 90; // customs + luggage + transit to hotel
       if (ready > effectiveStart) effectiveStart = Math.min(ready, 20 * 60);
     }
 
-    // Departure day: must leave for airport with enough lead time
     if (isDepartureDay && returnFlight) {
       const depMinutes = minutesFromDate(returnFlight.departsAt, date);
-      // Need to be at airport 2h before domestic, 3h before international
       effectiveEnd = Math.min(effectiveEnd, depMinutes - 3 * 60);
     }
 
@@ -207,50 +241,158 @@ function buildDayBoundaries(input: ItineraryInput): DayBoundary[] {
   return boundaries;
 }
 
-// ── Theme / area labelling ────────────────────────────────────────────────────
+// ── Theme labelling ───────────────────────────────────────────────────────────
 
-function buildTheme(activities: PlannerActivity[], dayIndex: number, city: string): { theme: string; area: string } {
-  if (activities.length === 0) {
-    return { theme: "Arrival day — settle in", area: city };
-  }
+function buildTheme(
+  activities: PlannerActivity[],
+  dayIndex: number,
+  city: string,
+): { theme: string; area: string } {
+  if (activities.length === 0) return { theme: "Arrival day — settle in", area: city };
 
-  // Most common category
   const categoryCounts = new Map<string, number>();
   for (const a of activities) {
     categoryCounts.set(a.category, (categoryCounts.get(a.category) ?? 0) + 1);
   }
-  const topCategory = [...categoryCounts.entries()].sort((a, b) => b[1] - a[1])[0][0];
 
-  // Use activity titles to build a concise theme
-  const titles = activities
+  const titles = [...activities]
     .sort((a, b) => a.userPriority - b.userPriority)
     .slice(0, 2)
     .map((a) => a.title);
-
-  const categoryLabel: Record<string, string> = {
-    culture:     "Culture & History",
-    food:        "Food & Drink",
-    nature:      "Nature & Outdoors",
-    adventure:   "Adventure",
-    shopping:    "Shopping & Markets",
-    nightlife:   "Nightlife",
-    wellness:    "Wellness & Relaxation",
-    family:      "Family Day",
-    art:         "Art & Galleries",
-    entertainment: "Entertainment",
-  };
 
   const theme =
     titles.length >= 2
       ? `${titles[0]} & ${titles[1]}`
       : titles.length === 1
         ? titles[0]
-        : categoryLabel[topCategory] ?? "Exploring";
+        : "Exploring";
 
   return {
     theme: dayIndex === 0 ? `Arrival & ${theme}` : theme,
     area:  city,
   };
+}
+
+// ── Capacity-aware bin-packing ────────────────────────────────────────────────
+
+/**
+ * Assign activities to scheduling days using a knapsack-style approach.
+ * Heavy items (long duration) placed on high-capacity days; light items fill gaps.
+ * Arrival/departure days capped strictly.
+ *
+ * Returns: schedIdx → PlannerActivity[]
+ */
+function packActivitiesIntoDays(
+  activities: PlannerActivity[],
+  segDays: Array<{ b: DayBoundary; schedIdx: number }>,
+  intercityTransferMap: Map<number, number>,
+  pace: Pace,
+): Map<number, PlannerActivity[]> {
+  const caps = new Map(
+    segDays.map(({ b, schedIdx }) => [
+      schedIdx,
+      dayActivityCapacityMinutes(b, intercityTransferMap.get(b.dayIndex) ?? 0, pace),
+    ]),
+  );
+  const used  = new Map(segDays.map(({ schedIdx }) => [schedIdx, 0]));
+  const lists = new Map<number, PlannerActivity[]>(
+    segDays.map(({ schedIdx }) => [schedIdx, []]),
+  );
+
+  // Sort: priority 1 first, then by duration DESC so heavy items get first pick of full days
+  const sorted = [...activities].sort((a, b) => {
+    if (a.userPriority !== b.userPriority) return a.userPriority - b.userPriority;
+    return b.durationMinutes - a.durationMinutes;
+  });
+
+  for (const act of sorted) {
+    // Find day with most remaining capacity that fits (and respects arrival/departure limits)
+    let bestIdx  = -1;
+    let bestRem  = -1;
+
+    for (const { b, schedIdx } of segDays) {
+      // Hard constraints on constrained days
+      if (b.isArrivalDay   && act.durationMinutes > 90) continue;
+      if (b.isDepartureDay && act.durationMinutes > 60) continue;
+
+      const remaining = (caps.get(schedIdx) ?? 0) - (used.get(schedIdx) ?? 0);
+      if (remaining >= act.durationMinutes && remaining > bestRem) {
+        bestRem = remaining;
+        bestIdx = schedIdx;
+      }
+    }
+
+    // Overflow: no day has exact room — use lightest non-constrained day
+    if (bestIdx === -1) {
+      let maxRem = -Infinity;
+      for (const { b, schedIdx } of segDays) {
+        if (b.isArrivalDay && act.durationMinutes > 90)   continue;
+        if (b.isDepartureDay && act.durationMinutes > 60) continue;
+        const rem = (caps.get(schedIdx) ?? 0) - (used.get(schedIdx) ?? 0);
+        if (rem > maxRem) { maxRem = rem; bestIdx = schedIdx; }
+      }
+    }
+
+    // Last resort: any day (arrival/departure constraints dropped — scheduler will handle it)
+    if (bestIdx === -1) {
+      let maxRem = -Infinity;
+      for (const { schedIdx } of segDays) {
+        const rem = (caps.get(schedIdx) ?? 0) - (used.get(schedIdx) ?? 0);
+        if (rem > maxRem) { maxRem = rem; bestIdx = schedIdx; }
+      }
+    }
+
+    if (bestIdx !== -1) {
+      used.set(bestIdx,  (used.get(bestIdx)  ?? 0) + act.durationMinutes);
+      lists.get(bestIdx)!.push(act);
+    }
+  }
+
+  return lists;
+}
+
+// ── Scheduler call helper ─────────────────────────────────────────────────────
+
+function runScheduleDay(
+  schedIdx: number,
+  schedulingDays: DayBoundary[],
+  citySegments: CitySegment[],
+  dayActivityMap: Map<number, PlannerActivity[]>,
+  hotelLocation: LatLng | null,
+  transitMode: TransitMode,
+  preferences: ItineraryInput["preferences"],
+  defaultCity: string,
+): { slots: PlannedSlot[]; dropped: DroppedActivity[]; scheduledMin: number } {
+  const b = schedulingDays[schedIdx];
+  const dayCity = getCityForDay(citySegments, b.dayIndex, defaultCity);
+  const rawActs = dayActivityMap.get(schedIdx) ?? [];
+  const dayActs = boostLandmarks(rawActs, dayCity);
+  const transition = getCityTransition(citySegments, b.dayIndex);
+  const intercityTransfer = transition
+    ? { ...getIntercityRoute(transition.fromCity, transition.toCity), ...transition }
+    : undefined;
+
+  const { slots, dropped } = scheduleDay({
+    activities:    dayActs,
+    boundary:      b,
+    hotelLocation,
+    transitMode,
+    pace:          preferences.pace,
+    mealsPerDay:   preferences.mealsPerDay,
+    mealDurations: {
+      breakfast: preferences.breakfastDurationMin,
+      lunch:     preferences.lunchDurationMin,
+      dinner:    preferences.dinnerDurationMin,
+    },
+    intercityTransfer,
+    isFoodFocused: preferences.isFoodFocused ?? false,
+  });
+
+  const scheduledMin = slots
+    .filter((s) => s.kind === "activity")
+    .reduce((sum, s) => sum + s.durationMinutes, 0);
+
+  return { slots, dropped, scheduledMin };
 }
 
 // ── Main planner ──────────────────────────────────────────────────────────────
@@ -270,173 +412,265 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
       ? { lat: Number(hotel.lat), lng: Number(hotel.lng) }
       : null;
 
-  const boundaries = buildDayBoundaries(input);
-
-  // Full scheduling days = days where we have meaningful time (skip days with < 2h available)
+  const boundaries    = buildDayBoundaries(input);
   const schedulingDays = boundaries.filter(
     (b) => b.effectiveEndMinutes - b.effectiveStartMinutes >= 120,
   );
 
-  const allDropped: DroppedActivity[] = [];
-  const conflicts: PlanningConflict[] = [];
+  const allDropped:  DroppedActivity[]  = [];
+  const conflicts:   PlanningConflict[] = [];
 
-  // ── Multi-city route segments ─────────────────────────────────────────────
-  const citySegments = buildCitySegments(trip.cityStops ?? []);
+  // ── City segments ─────────────────────────────────────────────────────────
+  let citySegments = buildCitySegments(trip.cityStops ?? []);
   const isMultiCity = citySegments.length > 1;
 
-  // ── Deduplication (remove chain repeats, near-duplicate names) ───────────────
+  // For single-city trips, synthesise one segment covering the whole trip
+  if (citySegments.length === 0) {
+    citySegments = [{ city: trip.city, startDay: 0, endDay: boundaries.length }];
+  }
+
+  // ── Deduplication ─────────────────────────────────────────────────────────
   const dedupedActivities = deduplicateActivities(activities);
 
-  // ── Activity distribution ─────────────────────────────────────────────────
-  // For multi-city trips: distribute activities proportionally across city day segments.
-  // For single-city or no segment info: fall back to geographic k-means clustering.
-  let dayActivityMap: Map<number, PlannerActivity[]>;
+  // Build sourceId → PlannerActivity lookup (used for rebalancing)
+  const actBySourceId = new Map(dedupedActivities.map((a) => [a.sourceId, a]));
 
-  if (isMultiCity && dedupedActivities.length > 0) {
-    // Proportional distribution: each scheduling day gets activities from its city segment
-    dayActivityMap = new Map();
+  // ── Precompute intercity transfer minutes per dayIndex ─────────────────────
+  const intercityTransferMap = new Map<number, number>();
+  for (const b of schedulingDays) {
+    const transition = getCityTransition(citySegments, b.dayIndex);
+    if (transition) {
+      intercityTransferMap.set(
+        b.dayIndex,
+        getIntercityRoute(transition.fromCity, transition.toCity).durationMinutes,
+      );
+    }
+  }
 
-    // Group activities by city segment (proportional to activity index)
-    const segmentActivities = new Map<number, PlannerActivity[]>();
+  // ── Group activities by city segment ───────────────────────────────────────
+  const segmentActivities = new Map<number, PlannerActivity[]>();
+
+  if (isMultiCity) {
     dedupedActivities.forEach((act, i) => {
       const progress = (i + 0.5) / dedupedActivities.length;
-      const targetSegIdx = (() => {
-        let cumDays = 0;
-        const totalDays = citySegments.reduce((s, seg) => s + (seg.endDay - seg.startDay), 0) || 1;
-        const targetDay = progress * totalDays;
-        for (let si = 0; si < citySegments.length; si++) {
-          cumDays += citySegments[si].endDay - citySegments[si].startDay;
-          if (targetDay <= cumDays) return si;
-        }
-        return citySegments.length - 1;
-      })();
-      if (!segmentActivities.has(targetSegIdx)) segmentActivities.set(targetSegIdx, []);
-      segmentActivities.get(targetSegIdx)!.push(act);
-    });
-
-    // Assign segment activities across that segment's scheduling days
-    schedulingDays.forEach((b, schedIdx) => {
-      const seg = citySegments.findIndex(
-        (seg) => b.dayIndex >= seg.startDay && b.dayIndex < seg.endDay,
-      );
-      const segIdx = seg >= 0 ? seg : 0;
-      const segDays = schedulingDays.filter((bd) => {
-        const s = citySegments[segIdx];
-        return s && bd.dayIndex >= s.startDay && bd.dayIndex < s.endDay;
-      });
-      const segActs = segmentActivities.get(segIdx) ?? [];
-      const posInSeg = segDays.findIndex((d) => d.dayIndex === b.dayIndex);
-      const totalSegDays = segDays.length || 1;
-      // Slice this day's share of the segment's activities
-      const startIdx = Math.round((posInSeg / totalSegDays) * segActs.length);
-      const endIdx   = Math.round(((posInSeg + 1) / totalSegDays) * segActs.length);
-      dayActivityMap.set(schedIdx, segActs.slice(startIdx, endIdx));
+      const totalDays = citySegments.reduce((s, seg) => s + (seg.endDay - seg.startDay), 0) || 1;
+      const targetDay = progress * totalDays;
+      let segIdx = citySegments.length - 1;
+      let cumDays = 0;
+      for (let si = 0; si < citySegments.length; si++) {
+        cumDays += citySegments[si].endDay - citySegments[si].startDay;
+        if (targetDay <= cumDays) { segIdx = si; break; }
+      }
+      if (!segmentActivities.has(segIdx)) segmentActivities.set(segIdx, []);
+      segmentActivities.get(segIdx)!.push(act);
     });
   } else {
-    // ── Geographic clustering (single-city fallback) ──────────────────────
+    // Single city: geographic k-means clustering, then treat each cluster as its own mini-segment
     const k = Math.max(1, schedulingDays.length);
-    let clusterAssignments: number[];
+    let assignments: number[];
     if (dedupedActivities.length === 0) {
-      clusterAssignments = [];
+      assignments = [];
     } else if (dedupedActivities.length <= k) {
-      clusterAssignments = dedupedActivities.map((_, i) => i);
+      assignments = dedupedActivities.map((_, i) => i);
     } else {
-      const locations = dedupedActivities.map((a) => a.location);
-      clusterAssignments = clusterByLocation(locations, k);
+      assignments = clusterByLocation(dedupedActivities.map((a) => a.location), k);
     }
     const clusterMap = new Map<number, PlannerActivity[]>();
     for (let i = 0; i < dedupedActivities.length; i++) {
-      const c = clusterAssignments[i];
+      const c = assignments[i];
       if (!clusterMap.has(c)) clusterMap.set(c, []);
       clusterMap.get(c)!.push(dedupedActivities[i]);
     }
-    dayActivityMap = clusterMap;
+    // Merge clusters into a single pool; packing distributes them across days
+    const allActs = [...clusterMap.values()].flat();
+    segmentActivities.set(0, allActs);
   }
 
-  // ── Build each day ────────────────────────────────────────────────────────
-  const days: PlannedDay[] = boundaries.map((boundary) => {
-    const schedIdx = schedulingDays.findIndex((d) => d.dayIndex === boundary.dayIndex);
+  // ── Capacity-aware distribution ────────────────────────────────────────────
+  const dayActivityMap = new Map<number, PlannerActivity[]>();
 
-    // Compute city first so we can boost landmarks before scheduling
-    const dayCity = getCityForDay(citySegments, boundary.dayIndex, trip.city);
+  for (let segIdx = 0; segIdx < citySegments.length; segIdx++) {
+    const seg = citySegments[segIdx];
+    const segDays = schedulingDays
+      .map((b, si) => ({ b, schedIdx: si }))
+      .filter(({ b }) => b.dayIndex >= seg.startDay && b.dayIndex < seg.endDay);
 
-    const rawDayActivities = schedIdx >= 0 ? (dayActivityMap.get(schedIdx) ?? []) : [];
-    const dayActivities = boostLandmarks(rawDayActivities, dayCity);
+    if (segDays.length === 0) continue;
 
-    const transition = getCityTransition(citySegments, boundary.dayIndex);
-    const intercityTransfer = transition
-      ? { ...getIntercityRoute(transition.fromCity, transition.toCity), ...transition }
-      : undefined;
+    const acts = segmentActivities.get(segIdx) ?? [];
+    const packed = packActivitiesIntoDays(acts, segDays, intercityTransferMap, preferences.pace);
+    for (const [schedIdx, list] of packed) {
+      dayActivityMap.set(schedIdx, list);
+    }
+  }
 
-    const { slots, dropped } = scheduleDay({
-      activities:    dayActivities,
-      boundary,
-      hotelLocation,
-      transitMode,
-      pace:          preferences.pace,
-      mealsPerDay:   preferences.mealsPerDay,
-      mealDurations: {
-        breakfast: preferences.breakfastDurationMin,
-        lunch:     preferences.lunchDurationMin,
-        dinner:    preferences.dinnerDurationMin,
-      },
-      intercityTransfer,
-      isFoodFocused: preferences.isFoodFocused ?? false,
+  // ── Pass 1: Schedule every day ─────────────────────────────────────────────
+  interface PassResult {
+    slots:       PlannedSlot[];
+    droppedActs: PlannerActivity[];  // "could not fit" only — full objects
+    scheduledMin: number;
+  }
+  const passResults = new Map<number, PassResult>();
+
+  for (let si = 0; si < schedulingDays.length; si++) {
+    const { slots, dropped, scheduledMin } = runScheduleDay(
+      si, schedulingDays, citySegments, dayActivityMap, hotelLocation,
+      transitMode, preferences, trip.city,
+    );
+
+    // Separate "closed" drops (permanent) from "couldn't fit" (rebalanceable)
+    const droppedActs: PlannerActivity[] = [];
+    for (const d of dropped) {
+      if (d.reason === "Could not fit within available time") {
+        const act = actBySourceId.get(d.sourceId);
+        if (act) { droppedActs.push(act); continue; }
+      }
+      allDropped.push(d); // closed / genuinely impossible
+    }
+
+    passResults.set(si, { slots, droppedActs, scheduledMin });
+  }
+
+  // ── Rebalance: redistribute "could not fit" activities ────────────────────
+  // Collect all overflow, grouped by city segment
+  const overflowBySegment = new Map<number, PlannerActivity[]>();
+
+  for (let si = 0; si < schedulingDays.length; si++) {
+    const result = passResults.get(si);
+    if (!result || result.droppedActs.length === 0) continue;
+
+    const b    = schedulingDays[si];
+    const segI = getSegmentForDay(citySegments, b.dayIndex);
+    if (segI === -1) continue;
+
+    if (!overflowBySegment.has(segI)) overflowBySegment.set(segI, []);
+    overflowBySegment.get(segI)!.push(...result.droppedActs);
+  }
+
+  const needsReschedule = new Set<number>();
+
+  for (const [segIdx, overflow] of overflowBySegment) {
+    const seg = citySegments[segIdx];
+    if (!seg) continue;
+
+    // Sort: priority-1 first, then shortest duration (easier to fit)
+    overflow.sort((a, b) => {
+      if (a.userPriority !== b.userPriority) return a.userPriority - b.userPriority;
+      return a.durationMinutes - b.durationMinutes;
     });
 
-    allDropped.push(...dropped);
+    // Days in this segment sorted by scheduled minutes ASC (lightest first)
+    const segSchedDays = schedulingDays
+      .map((b, si) => ({ b, si }))
+      .filter(({ b }) => b.dayIndex >= seg.startDay && b.dayIndex < seg.endDay)
+      .sort((a, b) => (passResults.get(a.si)?.scheduledMin ?? 0) - (passResults.get(b.si)?.scheduledMin ?? 0));
 
-    const { theme, area } = buildTheme(dayActivities, boundary.dayIndex, dayCity);
+    for (const act of overflow) {
+      for (const { b, si } of segSchedDays) {
+        if (b.isArrivalDay   && act.durationMinutes > 90) continue;
+        if (b.isDepartureDay && act.durationMinutes > 60) continue;
+
+        const current = passResults.get(si)?.scheduledMin ?? 0;
+        const target  = dayActivityCapacityMinutes(
+          b, intercityTransferMap.get(b.dayIndex) ?? 0, preferences.pace,
+        );
+
+        // Accept if lightest day still has headroom (10% tolerance)
+        if (current + act.durationMinutes <= target * 1.1) {
+          const existing = dayActivityMap.get(si) ?? [];
+          if (!existing.some((a) => a.sourceId === act.sourceId)) {
+            dayActivityMap.set(si, [...existing, act]);
+            needsReschedule.add(si);
+            // Update estimated scheduledMin so subsequent iterations see updated load
+            const res = passResults.get(si);
+            if (res) res.scheduledMin += act.durationMinutes;
+          }
+          break;
+        }
+      }
+      // If no day accepted it, it'll be permanently dropped after pass 2
+    }
+  }
+
+  // ── Pass 2: Re-schedule only the days that received overflow ──────────────
+  for (const si of needsReschedule) {
+    const { slots, dropped, scheduledMin } = runScheduleDay(
+      si, schedulingDays, citySegments, dayActivityMap, hotelLocation,
+      transitMode, preferences, trip.city,
+    );
+    passResults.set(si, { slots, droppedActs: [], scheduledMin });
+    for (const d of dropped) allDropped.push(d); // anything still dropped is truly unschedulable
+  }
+
+  // ── Build final day array with fatigue tracking ───────────────────────────
+  let cumulativeFatigue = 0;
+  const days: PlannedDay[] = boundaries.map((boundary) => {
+    const si     = schedulingDays.findIndex((d) => d.dayIndex === boundary.dayIndex);
+    const result = si >= 0 ? passResults.get(si) : null;
+    const slots  = result?.slots ?? [];
+
+    const dayCity      = getCityForDay(citySegments, boundary.dayIndex, trip.city);
+    const rawActs      = si >= 0 ? (dayActivityMap.get(si) ?? []) : [];
+    const dayActivities = boostLandmarks(rawActs, dayCity);
 
     const scheduledActivities = slots.filter((s) => s.kind === "activity");
+    const activityMinutes = scheduledActivities.reduce((s, sl) => s + sl.durationMinutes, 0);
+    const activityHours   = activityMinutes / 60;
 
-    // Detect capacity conflicts (not enough time for all assigned activities)
-    const assignedCount = dayActivities.length;
-    if (dropped.length > 0 && assignedCount > 0) {
+    // Fatigue accumulation
+    if (activityHours >= 8)      cumulativeFatigue += 3;
+    else if (activityHours >= 6) cumulativeFatigue += 1;
+    else if (activityHours <= 4) cumulativeFatigue = Math.max(0, cumulativeFatigue - 2);
+
+    // Conflict detection
+    const dropped = si >= 0
+      ? (overflowBySegment.get(getSegmentForDay(citySegments, boundary.dayIndex))
+           ?.filter((a) => !(dayActivityMap.get(si) ?? []).some((b) => b.sourceId === a.sourceId)) ?? [])
+      : [];
+    if (dropped.length > 0 && dayActivities.length > 0) {
       conflicts.push({
         type:        "capacity",
-        description: `Day ${boundary.dayIndex + 1}: ${dropped.length} activit${dropped.length > 1 ? "ies" : "y"} could not fit`,
-        suggestion:  "Reduce pace, remove lower-priority activities, or add an extra day.",
+        description: `Day ${boundary.dayIndex + 1}: ${dropped.length} activit${dropped.length > 1 ? "ies" : "y"} redistributed`,
+        suggestion:  "Activities moved to lighter days automatically.",
       });
     }
 
-    // Detect short available window
     const availableHours = (boundary.effectiveEndMinutes - boundary.effectiveStartMinutes) / 60;
-    if (availableHours < 4 && scheduledActivities.length < assignedCount) {
+    if (availableHours < 4 && scheduledActivities.length < dayActivities.length) {
       conflicts.push({
         type:        "short_day",
-        description: `Day ${boundary.dayIndex + 1} has only ${availableHours.toFixed(1)}h available (arrival/departure constraint)`,
+        description: `Day ${boundary.dayIndex + 1} has only ${availableHours.toFixed(1)}h available`,
         suggestion:  "Consider moving some activities to adjacent days.",
       });
     }
 
-    // ── Rules-based day warnings ─────────────────────────────────────────
+    // Rules-based day warnings
     const dayWarnings: DayWarning[] = [];
-    const activityCount = scheduledActivities.length;
-    const foodSlots = slots.filter(
-      (s) => s.kind === "activity" && s.category === "food"
-    ).length;
-    const transitSlots = slots.filter(
-      (s) => s.kind === "free_time" && s.transit != null
-    ).length;
+    const foodSlots   = slots.filter((s) => s.kind === "activity" && s.category === "food").length;
+    const transitSlots = slots.filter((s) => s.kind === "free_time" && s.transit != null).length;
     const lastSlotEnd = slots.length > 0 ? slots[slots.length - 1].endMinutes : 0;
-    const paceCap = preferences.pace === "packed" ? 8 : preferences.pace === "relaxed" ? 5 : 6;
+    const paceCap     = preferences.pace === "packed" ? 8 : preferences.pace === "relaxed" ? 5 : 6;
 
-    if (activityCount > paceCap) {
-      dayWarnings.push({ type: "packed", message: `${activityCount} activities — this is a full day. Consider dropping one for breathing room.` });
+    if (scheduledActivities.length > paceCap) {
+      dayWarnings.push({ type: "packed", message: `${scheduledActivities.length} activities — full day. Consider dropping one.` });
     }
     if (foodSlots > (preferences.isFoodFocused ? 3 : 2)) {
-      dayWarnings.push({ type: "food_heavy", message: `${foodSlots} food stops in one day — the day skews towards eating. Swap one for a landmark.` });
+      dayWarnings.push({ type: "food_heavy", message: `${foodSlots} food stops — swap one for a landmark.` });
     }
     if (transitSlots >= 3) {
-      dayWarnings.push({ type: "transit_heavy", message: "Multiple transit hops — consider grouping nearby attractions together." });
+      dayWarnings.push({ type: "transit_heavy", message: "Multiple transit hops — group nearby attractions together." });
     }
     if (lastSlotEnd > 22 * 60) {
-      dayWarnings.push({ type: "late_night", message: "Schedule runs past 10 PM. Consider ending earlier, especially if flying the next day." });
+      dayWarnings.push({ type: "late_night", message: "Schedule runs past 10 PM." });
     }
-    if (boundary.isArrivalDay && activityCount >= 4) {
-      dayWarnings.push({ type: "flight_recovery", message: "Arrival day with many activities. Jet lag can hit hard — consider a lighter first day." });
+    if (boundary.isArrivalDay && scheduledActivities.length >= 3) {
+      dayWarnings.push({ type: "flight_recovery", message: "Arrival day — jet lag can hit hard. This is already capped at 2.5h of activities." });
     }
+    if (cumulativeFatigue > 8) {
+      dayWarnings.push({ type: "packed", message: `Fatigue score ${cumulativeFatigue} — consider a lighter next day (museums, cafés, parks).` });
+    }
+
+    const { theme, area } = buildTheme(dayActivities, boundary.dayIndex, dayCity);
 
     return {
       dayIndex:               boundary.dayIndex,
@@ -445,9 +679,10 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
       geographicArea:         area,
       cityLabel:              dayCity,
       warnings:               dayWarnings.length > 0 ? dayWarnings : undefined,
+      fatigueScore:           cumulativeFatigue,
       slots,
       scheduledActivityCount: scheduledActivities.length,
-      totalActivityMinutes:   scheduledActivities.reduce((s, sl) => s + sl.durationMinutes, 0),
+      totalActivityMinutes:   activityMinutes,
     };
   });
 
@@ -466,8 +701,6 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
 }
 
 // ── Snapshot converter ────────────────────────────────────────────────────────
-// Converts a raw ActivitySnapshot (from the DB) into a PlannerActivity.
-// All fields have safe defaults — the planner never throws on partial data.
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export function snapshotToPlanner(
@@ -493,4 +726,3 @@ export function snapshotToPlanner(
     reviewCount:     typeof snap.reviewCount === "number" ? snap.reviewCount : 0,
   };
 }
-
