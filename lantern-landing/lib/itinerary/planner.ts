@@ -477,8 +477,14 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
   }
 
   // ── Activity budget pre-filter ────────────────────────────────────────────
-  // Cap total activities to what realistically fits across all days (75% fill
-  // factor accounts for transit, meals, and buffer between activities).
+  // For single-city trips: cap total activities to what realistically fits
+  // (75% fill factor for transit, meals, buffer). All activities have identical
+  // userPriority/rating so this is effectively a stable first-N slice.
+  //
+  // For multi-city trips: SKIP this global filter. Each segment groups its own
+  // activities and packs only what fits into its days via knapsack — a global
+  // budget cut would silently discard all later-city activities (e.g. Osaka and
+  // Hiroshima activities saved after Tokyo/Kyoto would get zero budget slots).
   const totalCapacityMin = [...adjustedCaps.values()].reduce((s, c) => s + c, 0);
   const avgDuration = dedupedActivities.length > 0
     ? dedupedActivities.reduce((s, a) => s + a.durationMinutes, 0) / dedupedActivities.length
@@ -486,12 +492,18 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
   const maxActivities = Math.ceil((totalCapacityMin * 0.75) / avgDuration);
 
   let schedulableActivities = dedupedActivities;
-  if (dedupedActivities.length > maxActivities) {
+  if (!isMultiCity && dedupedActivities.length > maxActivities) {
     const sorted = [...dedupedActivities].sort((a, b) => {
       if (a.userPriority !== b.userPriority) return a.userPriority - b.userPriority;
       return (b.rating * Math.log1p(b.reviewCount)) - (a.rating * Math.log1p(a.reviewCount));
     });
     schedulableActivities = sorted.slice(0, maxActivities);
+    console.log(`[planner/budget] Single-city: ${dedupedActivities.length} → ${schedulableActivities.length} activities (cap=${maxActivities})`);
+  } else if (isMultiCity) {
+    console.log(
+      `[planner/budget] Multi-city: skipping global budget filter ` +
+      `(${dedupedActivities.length} activities — each segment packs independently)`,
+    );
   }
 
   // ── Reject T4:proportional activities for multi-city trips ───────────────
