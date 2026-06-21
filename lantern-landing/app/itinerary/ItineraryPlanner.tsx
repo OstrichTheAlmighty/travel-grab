@@ -22,6 +22,7 @@ type SavedMeta = {
   photoRef?:    string;
   lat?:         number;
   lng?:         number;
+  city?:        string;  // destination searched when activity was saved
 };
 
 type UIPace    = "relaxed" | "balanced" | "packed";
@@ -1190,6 +1191,7 @@ export default function ItineraryPlanner() {
           durationMinutes: parseDuration(m?.duration),
           lat:             m?.lat,
           lng:             m?.lng,
+          city:            m?.city,
         };
       });
 
@@ -1255,7 +1257,70 @@ export default function ItineraryPlanner() {
         throw new Error(err.error ?? `HTTP ${res.status}`);
       }
 
-      const data = await res.json() as PlannerOutput;
+      const raw  = await res.json() as PlannerOutput & { _debugCityAssignment?: unknown };
+      const data = raw as PlannerOutput;
+
+      // ── Browser-visible city assignment debug ─────────────────────────────
+      // These logs appear in DevTools Console (F12 → Console tab).
+      // The scheduling runs server-side so planner logs only appear in
+      // Vercel function output, NOT here — but the server embeds a summary
+      // in _debugCityAssignment so you can inspect it client-side.
+      if (raw._debugCityAssignment) {
+        const dbg = raw._debugCityAssignment as {
+          cityStops:         { city: string; days: number }[];
+          activityDetection: { i: number; title: string; savedCity: string | null; detectedCity: string | null; tier: string; lat: number; lng: number; hasRealCoords: boolean }[];
+          dayAssignments:    { day: number; city: string; activities: string[]; totalMin: number }[];
+        };
+
+        console.group("=== ITINERARY CITY ASSIGNMENT DEBUG ===");
+        console.log("City stops:", dbg.cityStops.map((s) => `${s.city} (${s.days}d)`).join(" → "));
+
+        console.group("Activity detection (server-side tier used)");
+        for (const a of dbg.activityDetection) {
+          const icon = a.tier === "T4:proportional" ? "⚠️" : "✅";
+          console.log(
+            `${icon} [${a.tier}] "${a.title}" → detected=${a.detectedCity ?? "UNKNOWN"} ` +
+            `| savedCity=${a.savedCity ?? "—"} | hasRealCoords=${a.hasRealCoords} ` +
+            `| lat=${a.lat.toFixed(4)} lng=${a.lng.toFixed(4)}`,
+          );
+        }
+        console.groupEnd();
+
+        console.group("Day assignments");
+        for (const d of dbg.dayAssignments) {
+          console.log(`Day ${d.day} (${d.city}) ${d.totalMin}min: ${d.activities.join(", ") || "(no activities)"}`);
+        }
+        console.groupEnd();
+
+        // City violation check (cross-reference)
+        const violations: string[] = [];
+        const CITY_KEYS: Record<string, string> = {
+          tokyo: "tokyo", osaka: "osaka", kyoto: "kyoto",
+          hiroshima: "hiroshima", nara: "nara", fukuoka: "fukuoka",
+          paris: "paris", london: "london",
+        };
+        for (const a of dbg.activityDetection) {
+          if (!a.detectedCity) continue;
+          const actCityKey = CITY_KEYS[a.detectedCity.toLowerCase().split(",")[0].trim()] ?? a.detectedCity.toLowerCase();
+          for (const d of dbg.dayAssignments) {
+            if (!d.activities.includes(a.title)) continue;
+            const dayCityKey = Object.keys(CITY_KEYS).find((k) => d.city.toLowerCase().includes(k)) ?? d.city.toLowerCase();
+            if (actCityKey !== dayCityKey) {
+              const msg = `[CITY-VIOLATION] Day ${d.day} (${d.city}) ← "${a.title}" (detected: ${a.detectedCity}, tier: ${a.tier})`;
+              violations.push(msg);
+              console.error(msg);
+            }
+          }
+        }
+        if (violations.length === 0) {
+          console.log("✅ No city violations detected");
+        }
+
+        console.log(`[SCHEDULING-COMPLETE] ${dbg.activityDetection.filter((a) => a.tier !== "T4:proportional").length} confident assignments, ${dbg.activityDetection.filter((a) => a.tier === "T4:proportional").length} proportional fallbacks`);
+        console.groupEnd();
+      }
+      // ── End debug ─────────────────────────────────────────────────────────
+
       updateTrip({ itinerary: data, itineraryGeneratedAt: new Date().toISOString() });
       setSelectedDay(0);
       setGenStatus("idle");

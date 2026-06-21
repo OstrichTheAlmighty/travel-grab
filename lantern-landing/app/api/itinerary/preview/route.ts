@@ -150,8 +150,90 @@ function categoryDuration(category: string, title: string = ""): number {
   }
 }
 
-// ── Activity-to-city assignment for multi-city trips ─────────────────────────
+// ── City detection for multi-city trips ──────────────────────────────────────
+// Priority order (highest confidence first):
+//   1. Real GPS coords from Places API   (hasRealCoords=true)
+//   2. `city` field from savedMeta       (activity saved while searching that city)
+//   3. Title keyword / city name in title (server-side landmark detection)
+//   4. Proportional index fallback        (last resort — same-city activities only)
 
+/** Normalise a string for keyword matching: lowercase + strip diacritics. */
+function normStr(s: string): string {
+  return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+}
+
+/** Well-known landmark keywords → city name (must match CITY_CENTRES keys). */
+const LANDMARK_KEYWORDS: Array<[string, string]> = [
+  // Tokyo
+  ["senso-ji", "tokyo"], ["sensoji", "tokyo"], ["asakusa", "tokyo"],
+  ["meiji shrine", "tokyo"], ["meiji jingu", "tokyo"], ["meiji-jingu", "tokyo"],
+  ["shibuya crossing", "tokyo"], ["shinjuku gyoen", "tokyo"],
+  ["tokyo skytree", "tokyo"], ["tokyo tower", "tokyo"],
+  ["tsukiji", "tokyo"], ["teamlab", "tokyo"],
+  ["tokyo disneyland", "tokyo"], ["disney sea", "tokyo"], ["disneysea", "tokyo"],
+  ["ueno park", "tokyo"], ["akihabara", "tokyo"], ["ginza", "tokyo"],
+  ["odaiba", "tokyo"], ["harajuku", "tokyo"], ["takeshita", "tokyo"],
+  ["roppongi", "tokyo"], ["shibuya", "tokyo"], ["shinjuku", "tokyo"],
+  ["ikebukuro", "tokyo"], ["imperial palace", "tokyo"],
+  // Kyoto
+  ["fushimi inari", "kyoto"], ["fushimi-inari", "kyoto"],
+  ["kiyomizu", "kyoto"], ["gion", "kyoto"], ["yasaka", "kyoto"],
+  ["arashiyama", "kyoto"], ["bamboo grove", "kyoto"], ["bamboo forest", "kyoto"],
+  ["kinkaku", "kyoto"], ["golden pavilion", "kyoto"],
+  ["ryoan", "kyoto"], ["nijo castle", "kyoto"], ["nijo-jo", "kyoto"],
+  ["philosopher", "kyoto"], ["daitoku", "kyoto"], ["nanzen", "kyoto"],
+  ["nishiki", "kyoto"], ["togetsu", "kyoto"], ["tenryu", "kyoto"],
+  // Osaka
+  ["dotonbori", "osaka"], ["kuromon", "osaka"], ["shinsekai", "osaka"],
+  ["tsutenkaku", "osaka"], ["universal studios", "osaka"], ["usj", "osaka"],
+  ["kaiyukan", "osaka"], ["osaka aquarium", "osaka"],
+  ["umeda sky", "osaka"], ["shinsaibashi", "osaka"], ["namba", "osaka"],
+  ["osaka castle", "osaka"],
+  // Hiroshima
+  ["peace memorial", "hiroshima"], ["peace park", "hiroshima"],
+  ["atomic bomb dome", "hiroshima"], ["a-bomb dome", "hiroshima"],
+  ["genbaku", "hiroshima"], ["miyajima", "hiroshima"],
+  ["itsukushima", "hiroshima"], ["hiroshima castle", "hiroshima"],
+  // Nara
+  ["todai-ji", "nara"], ["todaiji", "nara"], ["nara deer", "nara"],
+  ["kasuga", "nara"], ["nara park", "nara"], ["horyu", "nara"],
+  // Fukuoka
+  ["dazaifu", "fukuoka"], ["ohori park", "fukuoka"],
+  ["fukuoka castle", "fukuoka"], ["canal city", "fukuoka"],
+  ["nakasu", "fukuoka"], ["tenjin", "fukuoka"],
+];
+
+/**
+ * Look up city centre coordinates. Returns null when the city isn't in
+ * CITY_CENTRES so the caller can decide whether to trust the result.
+ */
+function knownCityCenter(name: string): LatLng | null {
+  const key = normStr(name);
+  for (const [cityKey, coords] of Object.entries(CITY_CENTRES)) {
+    if (key.includes(cityKey)) return coords;
+  }
+  return null;
+}
+
+/**
+ * Try to detect a city name from an activity title using landmark keywords
+ * and direct city-name inclusion (e.g. "Tokyo Dome" → "tokyo").
+ * Returns null if no confident match.
+ */
+function detectCityFromTitle(title: string): string | null {
+  const n = normStr(title);
+  // Direct city name in title (handles "Tokyo Dome", "Osaka Aquarium" etc.)
+  for (const city of Object.keys(CITY_CENTRES)) {
+    if (n.includes(city)) return city;
+  }
+  // Landmark keywords
+  for (const [kw, city] of LANDMARK_KEYWORDS) {
+    if (n.includes(normStr(kw))) return city;
+  }
+  return null;
+}
+
+/** Proportional index fallback — used only when no other signal available. */
 function getActivityCity(
   actIndex: number,
   totalActivities: number,
@@ -178,6 +260,7 @@ interface PreviewActivity {
   lat?:             number;
   lng?:             number;
   durationMinutes?: number;
+  city?:            string;   // search destination when activity was saved
 }
 
 interface PreviewRequest {
@@ -240,24 +323,98 @@ export async function POST(req: NextRequest) {
       return { city: c.city, days: c.days, lat: cc.lat, lng: cc.lng };
     });
 
-  // Build PlannerActivity list — use real coordinates when provided;
-  // fall back to per-city centre (not random offsets) to avoid misleading fake distances.
-  const activities: PlannerActivity[] = body.activities.map((a, i) => {
-    const hasRealCoords = a.lat != null && a.lng != null;
+  // Build PlannerActivity list.
+  //
+  // City assignment priority (for multi-city trips):
+  //   T1. Real GPS coordinates from Places API          → hasRealCoords=true
+  //   T2. `city` field saved with the activity          → city centre, hasRealCoords=true
+  //   T3. City name / landmark keyword in activity title → city centre, hasRealCoords=true
+  //   T4. Proportional index fallback                   → hasRealCoords=false (last resort)
+  const isMultiCity = cityStops.length > 1;
 
-    // Assign this activity to its city by proportional index, then use that city's centre
-    const actCity = getActivityCity(i, body.activities.length, cityStops);
-    const actCentre = actCity ? cityCenter(actCity) : centre;
+  // ── Debug tracking (always on — cheap, helps diagnose city assignment issues) ─
+  interface ActivityDebugEntry {
+    i:             number;
+    title:         string;
+    savedCity:     string | null;
+    detectedCity:  string | null;
+    tier:          string;
+    lat:           number;
+    lng:           number;
+    hasRealCoords: boolean;
+  }
+  const activityDebug: ActivityDebugEntry[] = [];
+
+  const activities: PlannerActivity[] = body.activities.map((a, i) => {
+    const title = a.title || `Activity ${i + 1}`;
+
+    let location: LatLng;
+    let hasRealCoords: boolean;
+    let tier: string;
+    let detectedCityName: string | null = null;
+
+    if (a.lat != null && a.lng != null) {
+      // Tier 1: real GPS from Places API
+      location      = { lat: a.lat, lng: a.lng };
+      hasRealCoords = true;
+      tier          = "T1:gps";
+    } else if (isMultiCity) {
+      // Tier 2: city field explicitly stored in savedMeta
+      const cityFromSaved = a.city ? knownCityCenter(a.city) : null;
+      if (cityFromSaved) {
+        location         = cityFromSaved;
+        hasRealCoords    = true;
+        tier             = "T2:savedCity";
+        detectedCityName = a.city ?? null;
+      } else {
+        // Tier 3: detect city from title keywords / city name in title
+        const det = detectCityFromTitle(title);
+        const cityFromTitle = det ? knownCityCenter(det) : null;
+        if (cityFromTitle) {
+          location         = cityFromTitle;
+          hasRealCoords    = true;
+          tier             = "T3:titleDetect";
+          detectedCityName = det;
+        } else {
+          // Tier 4: proportional index fallback
+          const fallbackCity = getActivityCity(i, body.activities.length, cityStops);
+          location         = fallbackCity ? cityCenter(fallbackCity) : centre;
+          hasRealCoords    = false;
+          tier             = "T4:proportional";
+          detectedCityName = fallbackCity;
+        }
+      }
+    } else {
+      location      = centre;
+      hasRealCoords = false;
+      tier          = "T0:singleCity";
+    }
+
+    if (isMultiCity) {
+      const entry: ActivityDebugEntry = {
+        i,
+        title,
+        savedCity:    a.city ?? null,
+        detectedCity: detectedCityName,
+        tier,
+        lat:          location.lat,
+        lng:          location.lng,
+        hasRealCoords,
+      };
+      activityDebug.push(entry);
+      console.log(
+        `[preview/cityAssign] ${tier.padEnd(20)} | lat=${location.lat.toFixed(4)} lng=${location.lng.toFixed(4)}` +
+        ` | savedCity=${a.city ?? "—"} | detected=${detectedCityName ?? "—"} | "${title}"`,
+      );
+    }
 
     return {
       id:              `preview-${i}`,
       sourceId:        `preview-${i}`,
-      title:           a.title || `Activity ${i + 1}`,
+      title,
       category:        a.category ?? "culture",
-      location:        hasRealCoords
-        ? { lat: a.lat!, lng: a.lng! }
-        : actCentre,
-      durationMinutes: a.durationMinutes ?? categoryDuration(a.category ?? "culture", a.title),
+      location,
+      durationMinutes: a.durationMinutes ?? categoryDuration(a.category ?? "culture", title),
       timeWindows:     [],
       userPriority:    a.priority ?? 3,
       rating:          0,
@@ -316,6 +473,40 @@ export async function POST(req: NextRequest) {
 
   const output = runPlanner(input);
 
+  // ── Debug: log day assignments after planning ─────────────────────────────
+  const dayDebug: Array<{ day: number; city: string; activities: string[]; totalMin: number }> = [];
+  if (isMultiCity) {
+    console.log("\n[preview/dayAssignments] ─────────────────────────────────────");
+    for (const d of output.days) {
+      const acts = d.slots
+        .filter((s) => s.kind === "activity")
+        .map((s) => s.title);
+      const totalMin = d.totalActivityMinutes;
+      console.log(
+        `  Day ${String(d.dayIndex + 1).padStart(2)} (${(d.cityLabel ?? "?").padEnd(12)}) ` +
+        `${totalMin}min | ${acts.length > 0 ? acts.join(", ") : "(no activities)"}`,
+      );
+      dayDebug.push({ day: d.dayIndex + 1, city: d.cityLabel ?? "?", activities: acts, totalMin });
+    }
+
+    // Flag cross-city violations
+    console.log("\n[preview/cityViolations] ────────────────────────────────────");
+    for (const entry of activityDebug) {
+      for (const d of dayDebug) {
+        if (d.activities.includes(entry.title)) {
+          const actCity = (entry.detectedCity ?? "?").toLowerCase().split(",")[0].trim();
+          const dayCity = d.city.toLowerCase().split(",")[0].trim();
+          const match   = dayCity.includes(actCity) || actCity.includes(dayCity);
+          console.log(
+            `  [${match ? "OK  " : "MISMATCH"}] Day ${d.day} (${d.city}) ← "${entry.title}"` +
+            ` (detected: ${entry.detectedCity ?? "unknown"}, tier: ${entry.tier})`,
+          );
+        }
+      }
+    }
+    console.log("────────────────────────────────────────────────────────────\n");
+  }
+
   // ── AI critique pass: generate day summaries and validate itinerary ───────────
   try {
     const summaryOutput = await aiDaySummaries(output.days, body.trip.destination);
@@ -331,5 +522,15 @@ export async function POST(req: NextRequest) {
     // AI pass is best-effort — never fail the response
   }
 
-  return NextResponse.json(output);
+  // Include debug in response so it's visible in browser network tab
+  const responseBody = {
+    ...output,
+    _debugCityAssignment: isMultiCity ? {
+      cityStops:         cityStops.map((c) => ({ city: c.city, days: c.days })),
+      activityDetection: activityDebug,
+      dayAssignments:    dayDebug,
+    } : undefined,
+  };
+
+  return NextResponse.json(responseBody);
 }

@@ -504,11 +504,18 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
   const segmentActivities = new Map<number, PlannerActivity[]>();
 
   if (isMultiCity) {
+    console.log(
+      `[planner/segments] Multi-city: ${citySegments.map((s) => `${s.city}(days${s.startDay}-${s.endDay - 1})`).join(" → ")}` +
+      ` | segmentsHaveCoords=${segmentsHaveCoords} | activities=${schedulableActivities.length}`,
+    );
+
     schedulableActivities.forEach((act, i) => {
       let segIdx: number;
+      let method: string;
 
       if (segmentsHaveCoords && act.hasRealCoords !== false) {
         segIdx = nearestCitySegment(act.location.lat, act.location.lng, citySegments);
+        method = `haversine→${citySegments[segIdx]?.city ?? "?"}`;
       } else {
         const progress  = (i + 0.5) / schedulableActivities.length;
         const totalDays = citySegments.reduce((s, seg) => s + (seg.endDay - seg.startDay), 0) || 1;
@@ -519,7 +526,16 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
           cumDays += citySegments[si].endDay - citySegments[si].startDay;
           if (targetDay <= cumDays) { segIdx = si; break; }
         }
+        method = `proportional(i=${i},prog=${(progress * 100).toFixed(0)}%)→${citySegments[segIdx]?.city ?? "?"}`;
       }
+
+      const assignedCity = citySegments[segIdx]?.city ?? "unknown";
+      console.log(
+        `[CITY-CHECK] segment=${segIdx} city=${assignedCity.padEnd(12)} | ` +
+        `hasRealCoords=${String(act.hasRealCoords ?? true).padEnd(5)} | ` +
+        `lat=${act.location.lat.toFixed(4)} lng=${act.location.lng.toFixed(4)} | ` +
+        `method=${method} | "${act.title}"`,
+      );
 
       if (!segmentActivities.has(segIdx)) segmentActivities.set(segIdx, []);
       segmentActivities.get(segIdx)!.push(act);
@@ -558,6 +574,12 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
     const packed = packActivitiesIntoDays(acts, segDays);
     for (const [schedIdx, list] of packed) {
       dayActivityMap.set(schedIdx, list);
+      if (isMultiCity && list.length > 0) {
+        console.log(
+          `[DAY-PACK] schedIdx=${schedIdx} dayIndex=${schedulingDays[schedIdx]?.dayIndex ?? "?"} ` +
+          `city=${seg.city} | ${list.map((a) => `"${a.title}"`).join(", ")}`,
+        );
+      }
     }
   }
 
@@ -693,7 +715,18 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
       // City guard: verify activity belongs to this segment's city
       if (segmentsHaveCoords && act.hasRealCoords !== false) {
         const actSegIdx = nearestCitySegment(act.location.lat, act.location.lng, citySegments);
-        if (actSegIdx !== segIdx) continue; // wrong city — permanently drop
+        if (actSegIdx !== segIdx) {
+          console.log(
+            `[CITY-GUARD] REJECT rebalance: "${act.title}" nearest=${citySegments[actSegIdx]?.city ?? "?"} ` +
+            `≠ segment=${seg.city} (hasRealCoords=${String(act.hasRealCoords ?? true)})`,
+          );
+          continue; // wrong city — permanently drop
+        }
+      } else if (isMultiCity) {
+        console.log(
+          `[CITY-GUARD] SKIP guard for "${act.title}" (hasRealCoords=${String(act.hasRealCoords ?? true)}, ` +
+          `segmentsHaveCoords=${segmentsHaveCoords}) — no coordinate check possible`,
+        );
       }
 
       for (const { b, si } of segSchedDays) {
@@ -809,6 +842,20 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
   });
 
   const totalScheduled = days.reduce((s, d) => s + d.scheduledActivityCount, 0);
+
+  // ── Scheduling-complete summary ────────────────────────────────────────────
+  if (isMultiCity) {
+    console.log("\n[SCHEDULING-COMPLETE] ────────────────────────────────────────");
+    console.log(`  Activities in: ${schedulableActivities.length} | scheduled: ${totalScheduled} | dropped: ${allDropped.length}`);
+    for (const d of days) {
+      const acts = d.slots.filter((s) => s.kind === "activity").map((s) => s.title);
+      console.log(
+        `  Day ${String(d.dayIndex + 1).padStart(2)} (${(d.cityLabel ?? "?").padEnd(12)}) ` +
+        `${d.totalActivityMinutes}min | ${acts.length > 0 ? acts.join(", ") : "(no activities)"}`,
+      );
+    }
+    console.log("──────────────────────────────────────────────────────────────\n");
+  }
 
   return {
     days,
