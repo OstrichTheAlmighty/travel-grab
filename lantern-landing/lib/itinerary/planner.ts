@@ -494,13 +494,34 @@ export function runPlanner(input: ItineraryInput): PlannerOutput {
     schedulableActivities = sorted.slice(0, maxActivities);
   }
 
+  // ── Reject T4:proportional activities for multi-city trips ───────────────
+  // Activities without a confident city assignment (hasRealCoords=false, i.e.
+  // T4:proportional in the preview route) cannot be reliably placed in the
+  // correct city when segments have real coordinates. Drop them to allDropped
+  // ("Also worth considering") to prevent geographic mixing.
+  // Safety valve: if ALL activities are T4, keep them — proportional is better
+  // than an empty itinerary.
+  if (isMultiCity && segmentsHaveCoords) {
+    const confident   = schedulableActivities.filter((a) => a.hasRealCoords !== false);
+    const unknownCity = schedulableActivities.filter((a) => a.hasRealCoords === false);
+    if (unknownCity.length > 0 && confident.length > 0) {
+      for (const act of unknownCity) {
+        console.log(`[CITY-DROP] T4:proportional "${act.title}" — city unknown, moved to 'Also worth considering'`);
+        allDropped.push({ sourceId: act.sourceId, title: act.title, reason: "City unknown for multi-city trip" });
+      }
+      schedulableActivities = confident;
+    } else if (unknownCity.length > 0) {
+      console.log(
+        `[CITY-DROP] All ${unknownCity.length} activities are T4:proportional — ` +
+        `proceeding with proportional fallback (no T1/T2/T3 activities available)`,
+      );
+    }
+  }
+
   // ── Group activities by city segment ──────────────────────────────────────
   // Multi-city with real coordinates: assign each activity to the nearest city
-  // by haversine distance. This is the fix for geographic mixing — Osaka activities
-  // (USJ, Osaka Castle) correctly land in the Osaka segment, never Kyoto.
-  //
-  // Activities without real coordinates (hasRealCoords=false) fall back to
-  // proportional index assignment within their segment group.
+  // by haversine distance. T4:proportional activities are pre-filtered above
+  // so only T1/T2/T3 activities reach this point for haversine assignment.
   const segmentActivities = new Map<number, PlannerActivity[]>();
 
   if (isMultiCity) {
