@@ -10,7 +10,7 @@ import type {
   TransitMode,
 } from "./types";
 
-// ── Time formatting (used in explanation strings) ─────────────────────────────
+// ── Time formatting ───────────────────────────────────────────────────────────
 
 export function formatTime(minutes: number): string {
   const h = Math.floor(minutes / 60) % 24;
@@ -20,9 +20,35 @@ export function formatTime(minutes: number): string {
   return `${h12}:${String(m).padStart(2, "0")} ${ampm}`;
 }
 
+// ── Activity-type helpers ─────────────────────────────────────────────────────
+
+/**
+ * Nightlife must start at or after 8pm. Detect by category (authoritative) or
+ * title keywords as a safety net for activities without a nightlife category.
+ */
+function isNightlifeActivity(a: PlannerActivity): boolean {
+  if (a.category === "nightlife") return true;
+  const t = a.title.toLowerCase();
+  return (
+    t.includes("nightclub") ||
+    t.includes("burlesque") ||
+    t.includes("club") ||
+    t.includes(" lounge") ||
+    // "bar" but not "ramen bar / sushi bar / tempura bar" which are daytime food
+    (t.includes(" bar") && !t.includes("ramen") && !t.includes("sushi") && !t.includes("tempura"))
+  );
+}
+
+/**
+ * A food-category activity that is clearly a sit-down meal (≥45 min).
+ * If one of these is scheduled within a meal window, skip the generic meal.
+ */
+function isMealTypeActivity(a: PlannerActivity): boolean {
+  return a.category === "food" && a.durationMinutes >= 45;
+}
+
 // ── Opening-hours helpers ─────────────────────────────────────────────────────
 
-/** Returns the latest minute you can arrive and still enter. */
 function latestEntry(w: TimeWindow): number {
   return w.lastEntry ?? w.closesAt - 30;
 }
@@ -32,16 +58,11 @@ function windowsForDay(activity: PlannerActivity, dow: number): TimeWindow[] {
   return activity.timeWindows.filter((w) => w.dayOfWeek.includes(dow));
 }
 
-/** True if the place is open on this day of week at all. */
 function isOpenOnDay(activity: PlannerActivity, dow: number): boolean {
   if (activity.timeWindows.length === 0) return true;
   return windowsForDay(activity, dow).length > 0;
 }
 
-/**
- * Returns the last minute you can arrive and enter the venue.
- * -1 = closed; Infinity = no data (treat as always open).
- */
 function lastEntryForDay(activity: PlannerActivity, dow: number): number {
   if (activity.timeWindows.length === 0) return Infinity;
   const windows = windowsForDay(activity, dow);
@@ -49,7 +70,6 @@ function lastEntryForDay(activity: PlannerActivity, dow: number): number {
   return Math.max(...windows.map(latestEntry));
 }
 
-/** Earliest opening minute on this day (or 0 if no data). */
 function firstOpeningForDay(activity: PlannerActivity, dow: number): number {
   if (activity.timeWindows.length === 0) return 0;
   const windows = windowsForDay(activity, dow);
@@ -88,6 +108,7 @@ function mealSlot(
 
 const BREAKFAST_WINDOW = { start: 7 * 60, end: 9 * 60 + 30 };
 const LUNCH_WINDOW     = { start: 11 * 60 + 30, end: 14 * 60 };
+const NIGHTLIFE_START  = 20 * 60; // 8pm — earliest nightlife slot
 
 // ── Explanation builder ───────────────────────────────────────────────────────
 
@@ -115,16 +136,14 @@ function buildExplanation(
   return [transitNote, openNote, crowdNote].filter(Boolean).join(" ");
 }
 
-// ── Meal placement ────────────────────────────────────────────────────────────
+// ── Gap finder ────────────────────────────────────────────────────────────────
 
 type OccupiedSlot = { start: number; end: number };
 
 /**
- * Find the first time >= targetMinute at which [t, t+duration] doesn't overlap
- * any slot in `occupied`. Returns null if it can't fit before endMinutes.
- *
- * Uses an iterative "push past any conflict" loop — simpler and safer than a
- * one-pass scan which can miss overlapping intervals.
+ * Find the first time >= targetMinute where [t, t+duration) fits without
+ * overlapping any occupied slot. Iterates until no conflicts remain.
+ * Returns null if it can't fit before endMinutes.
  */
 function findGap(
   targetMinute: number,
@@ -137,9 +156,8 @@ function findGap(
   while (changed) {
     changed = false;
     for (const o of occupied) {
-      // [t, t+duration) overlaps [o.start, o.end) ?
       if (t < o.end && t + duration > o.start) {
-        t = o.end; // push past the conflicting slot
+        t = o.end;
         changed = true;
       }
     }
@@ -147,22 +165,23 @@ function findGap(
   return t + duration <= endMinutes ? t : null;
 }
 
+// ── Meal placement ────────────────────────────────────────────────────────────
+
 /**
- * Schedule meals for a day after all activities have been placed.
+ * Place meals after all daytime activities have been scheduled.
  *
- * Rules (user-specified):
+ * Rules:
  *   departure day          → no meals
- *   travel day (xfer>60m)  → dinner only (after last activity)
- *   lastEnd ≤ 12:30pm      → breakfast only
- *   lastEnd ≤ 5pm          → breakfast + lunch
- *   lastEnd > 5pm          → breakfast + lunch + dinner
+ *   travel day (xfer>60m)  → dinner only (after last daytime activity)
+ *   lastDaytimeEnd ≤ 12:30 → breakfast only
+ *   lastDaytimeEnd ≤ 5pm   → breakfast + lunch
+ *   lastDaytimeEnd > 5pm   → breakfast + lunch + dinner
  *
- * Lunch formula : first_activity_start + 4h  (full day)
- *               : 11:30am or firstStart+1h   (half day)
- * Dinner formula: last_activity_end + 30min
+ * Nightlife slots are excluded from the daytime bounds — dinner is placed
+ * after the last sightseeing/culture/food activity, before nightlife.
  *
- * Every meal is placed in the first gap at or after its target time so it
- * never overlaps an existing slot.
+ * Generic meal blocks are skipped for any meal window already covered by a
+ * food-category activity (restaurants replace generic meals, no double-count).
  */
 function scheduleMeals(
   slots: PlannedSlot[],
@@ -172,99 +191,114 @@ function scheduleMeals(
   mealsPerDay: number,
   mealDurations: { breakfast: number; lunch: number; dinner: number },
 ): void {
-  // Departure days: skip all meals (eating at airport/during transit)
   if (boundary.isDepartureDay) {
     console.log(`[MEAL-SCHEDULE] Day ${boundary.dayIndex + 1}: departure day → no meals`);
     return;
   }
 
-  const actSlots = slots.filter((s) => s.kind === "activity");
-  if (actSlots.length === 0) {
-    console.log(`[MEAL-SCHEDULE] Day ${boundary.dayIndex + 1}: no activities scheduled → no meals`);
+  // Use DAYTIME activity slots only — exclude nightlife when computing meal bounds
+  const daytimeActSlots = slots.filter(
+    (s) => s.kind === "activity" && s.category !== "nightlife",
+  );
+  if (daytimeActSlots.length === 0) {
+    console.log(`[MEAL-SCHEDULE] Day ${boundary.dayIndex + 1}: no daytime activities → no meals`);
     return;
   }
 
-  const firstActivityStart = Math.min(...actSlots.map((s) => s.startMinutes));
-  const lastActivityEnd    = Math.max(...actSlots.map((s) => s.endMinutes));
+  const firstActivityStart = Math.min(...daytimeActSlots.map((s) => s.startMinutes));
+  const lastActivityEnd    = Math.max(...daytimeActSlots.map((s) => s.endMinutes));
   const isTravelDay        = (intercityTransfer?.durationMinutes ?? 0) > 60;
 
-  const TWELVE_THIRTY = 12 * 60 + 30; // 750 min
-  const FIVE_PM       = 17 * 60;      // 1020 min
+  // Detect food-category activities that already cover a meal window → skip generic meal
+  const foodCovered = (windowStart: number, windowEnd: number) =>
+    daytimeActSlots.some(
+      (s) => s.category === "food" && s.startMinutes >= windowStart && s.startMinutes < windowEnd,
+    );
+  const restaurantCoversBreakfast = foodCovered(7 * 60, 10 * 60);
+  const restaurantCoversLunch     = foodCovered(11 * 60, 14 * 60);
+  const restaurantCoversDinner    = foodCovered(18 * 60, 21 * 60);
 
-  // Build occupied intervals from all non-meal slots (sorted for findGap)
+  const TWELVE_THIRTY = 12 * 60 + 30;
+  const FIVE_PM       = 17 * 60;
+
+  // Occupied intervals for gap insertion (non-meal slots)
   const occupied: OccupiedSlot[] = slots
     .filter((s) => s.kind !== "meal")
     .map((s) => ({ start: s.startMinutes, end: s.endMinutes }))
     .sort((a, b) => a.start - b.start);
 
   const placed: string[] = [];
+  const skipped: string[] = [];
+
+  const insertMeal = (kind: "Breakfast" | "Lunch" | "Dinner", target: number, dur: number, upTo: number) => {
+    const t = findGap(target, dur, occupied, upTo);
+    if (t !== null) {
+      slots.push(mealSlot(kind, t, dur));
+      occupied.push({ start: t, end: t + dur });
+      occupied.sort((a, b) => a.start - b.start);
+      placed.push(`${kind}@${formatTime(t)}`);
+    }
+  };
 
   // ── Breakfast ──────────────────────────────────────────────────────────────
   if (mealsPerDay >= 3 && pace !== "packed") {
-    const bfTarget = Math.max(boundary.effectiveStartMinutes, BREAKFAST_WINDOW.start);
-    const bfTime = findGap(bfTarget, mealDurations.breakfast, occupied, firstActivityStart);
-    if (bfTime !== null) {
-      slots.push(mealSlot("Breakfast", bfTime, mealDurations.breakfast));
-      occupied.push({ start: bfTime, end: bfTime + mealDurations.breakfast });
-      occupied.sort((a, b) => a.start - b.start);
-      placed.push(`Breakfast@${formatTime(bfTime)}`);
+    if (restaurantCoversBreakfast) {
+      skipped.push("Breakfast(restaurant)");
+    } else {
+      const bfTarget = Math.max(boundary.effectiveStartMinutes, BREAKFAST_WINDOW.start);
+      insertMeal("Breakfast", bfTarget, mealDurations.breakfast, firstActivityStart);
     }
   }
 
-  // ── Lunch & Dinner based on how long the day runs ─────────────────────────
+  // ── Lunch & Dinner ─────────────────────────────────────────────────────────
   if (isTravelDay) {
-    // Heavy travel day: 1 meal max — dinner after last activity
     if (mealsPerDay >= 1) {
-      const dinnerTarget = lastActivityEnd + 30;
-      const dinnerTime = findGap(dinnerTarget, mealDurations.dinner, occupied, boundary.effectiveEndMinutes);
-      if (dinnerTime !== null) {
-        slots.push(mealSlot("Dinner", dinnerTime, mealDurations.dinner));
-        placed.push(`Dinner@${formatTime(dinnerTime)}`);
+      if (restaurantCoversDinner) {
+        skipped.push("Dinner(restaurant)");
+      } else {
+        insertMeal("Dinner", lastActivityEnd + 30, mealDurations.dinner, boundary.effectiveEndMinutes);
       }
     }
   } else if (lastActivityEnd <= TWELVE_THIRTY) {
-    // Very short day ending before 12:30pm — breakfast only (already placed above)
+    // Short day — breakfast only
   } else if (lastActivityEnd <= FIVE_PM) {
-    // Half day ending before 5pm — add lunch
     if (mealsPerDay >= 2) {
-      // Place lunch in the first gap at or after 11:30am (or 1h after first activity,
-      // whichever is later), but only up to lastActivityEnd
-      const lunchTarget = Math.max(LUNCH_WINDOW.start, firstActivityStart + 60);
-      const lunchTime = findGap(lunchTarget, mealDurations.lunch, occupied, boundary.effectiveEndMinutes);
-      if (lunchTime !== null && lunchTime < lastActivityEnd) {
-        slots.push(mealSlot("Lunch", lunchTime, mealDurations.lunch));
-        placed.push(`Lunch@${formatTime(lunchTime)}`);
+      if (restaurantCoversLunch) {
+        skipped.push("Lunch(restaurant)");
+      } else {
+        const lunchTarget = Math.max(LUNCH_WINDOW.start, firstActivityStart + 60);
+        const lunchEnd = findGap(lunchTarget, mealDurations.lunch, occupied, boundary.effectiveEndMinutes);
+        if (lunchEnd !== null && lunchEnd < lastActivityEnd) {
+          insertMeal("Lunch", lunchTarget, mealDurations.lunch, boundary.effectiveEndMinutes);
+        }
       }
     }
   } else {
-    // Full day ending after 5pm — lunch + dinner
     if (mealsPerDay >= 2) {
-      // Lunch: first_activity_start + 4 hours (user-specified formula)
-      const lunchTarget = Math.max(firstActivityStart + 4 * 60, LUNCH_WINDOW.start);
-      const lunchTime = findGap(lunchTarget, mealDurations.lunch, occupied, boundary.effectiveEndMinutes);
-      if (lunchTime !== null) {
-        slots.push(mealSlot("Lunch", lunchTime, mealDurations.lunch));
-        occupied.push({ start: lunchTime, end: lunchTime + mealDurations.lunch });
-        occupied.sort((a, b) => a.start - b.start);
-        placed.push(`Lunch@${formatTime(lunchTime)}`);
+      if (restaurantCoversLunch) {
+        skipped.push("Lunch(restaurant)");
+      } else {
+        insertMeal("Lunch", Math.max(firstActivityStart + 4 * 60, LUNCH_WINDOW.start), mealDurations.lunch, boundary.effectiveEndMinutes);
       }
     }
     if (mealsPerDay >= 1) {
-      // Dinner: last_activity_end + 30 min
-      const dinnerTarget = lastActivityEnd + 30;
-      const dinnerTime = findGap(dinnerTarget, mealDurations.dinner, occupied, boundary.effectiveEndMinutes);
-      if (dinnerTime !== null) {
-        slots.push(mealSlot("Dinner", dinnerTime, mealDurations.dinner));
-        placed.push(`Dinner@${formatTime(dinnerTime)}`);
+      if (restaurantCoversDinner) {
+        skipped.push("Dinner(restaurant)");
+      } else {
+        insertMeal("Dinner", lastActivityEnd + 30, mealDurations.dinner, boundary.effectiveEndMinutes);
       }
     }
   }
+
+  const summary = [
+    placed.length > 0 ? placed.join(", ") : "",
+    skipped.length > 0 ? `skipped: ${skipped.join(", ")}` : "",
+  ].filter(Boolean).join(" | ") || "no meals placed";
 
   console.log(
     `[MEAL-SCHEDULE] Day ${boundary.dayIndex + 1}: ` +
     `activities ${formatTime(firstActivityStart)}–${formatTime(lastActivityEnd)} | ` +
-    `isTravelDay=${isTravelDay} | ` +
-    (placed.length > 0 ? placed.join(", ") : "no meals placed"),
+    `isTravelDay=${isTravelDay} | ${summary}`,
   );
 }
 
@@ -292,6 +326,12 @@ export function scheduleDay(input: SchedulerInput): SchedulerOutput {
   const foodCap = input.isFoodFocused ? 4 : 2;
   let foodSlotsScheduled    = 0;
   let lastActivityCategory: string | null = null;
+
+  // ── Separate nightlife from daytime activities ────────────────────────────
+  // Nightlife must start at 8pm or later. Separating it prevents the greedy
+  // loop from scheduling a nightclub at noon just because it has no time data.
+  const daytimeActivities  = activities.filter((a) => !isNightlifeActivity(a));
+  const nightlifeActivities = activities.filter((a) => isNightlifeActivity(a));
 
   // ── Arrival-day hotel check-in ────────────────────────────────────────────
   if (boundary.isArrivalDay) {
@@ -338,9 +378,9 @@ export function scheduleDay(input: SchedulerInput): SchedulerOutput {
     currentMinute = Math.max(currentMinute, checkoutMinute + 30);
   }
 
-  // ── Pre-filter: remove activities closed today ────────────────────────────
+  // ── Pre-filter: remove daytime activities closed today ────────────────────
   const available: PlannerActivity[] = [];
-  for (const a of activities) {
+  for (const a of daytimeActivities) {
     if (!isOpenOnDay(a, dow)) {
       dropped.push({ sourceId: a.sourceId, title: a.title, reason: "Closed on this day of the week" });
     } else {
@@ -355,10 +395,9 @@ export function scheduleDay(input: SchedulerInput): SchedulerOutput {
 
   const remaining = new Set(available);
 
-  // ── Activity scheduling loop ──────────────────────────────────────────────
-  // Schedule all activities without inserting any meals. Meals are placed
-  // post-hoc by scheduleMeals() based on the final activity bounds, so they
-  // never overlap or interrupt an activity in progress.
+  // ── Daytime activity scheduling loop ─────────────────────────────────────
+  // Nightlife is excluded here and scheduled in a separate pass below.
+  // No meals are inserted during this loop — they're placed post-hoc.
   while (remaining.size > 0 && currentMinute < boundary.effectiveEndMinutes) {
     const candidates: Array<{ activity: PlannerActivity; transitDur: number; arrival: number }> = [];
 
@@ -481,10 +520,54 @@ export function scheduleDay(input: SchedulerInput): SchedulerOutput {
     currentLocation = next.location;
   }
 
-  // ── Post-activity meal placement ──────────────────────────────────────────
-  // Meals go in natural gaps after activities are fully scheduled. The
-  // scheduleMeals() function never pushes a meal on top of an activity.
+  // ── Meals — placed after all daytime activities, before nightlife ─────────
   scheduleMeals(slots, boundary, intercityTransfer, pace, mealsPerDay, mealDurations);
+
+  // ── Nightlife — always at 8pm or later ───────────────────────────────────
+  // Scheduled after meals so dinner appears before the nightlife block.
+  if (nightlifeActivities.length > 0 && !boundary.isDepartureDay) {
+    let nightCursor = NIGHTLIFE_START; // 20:00
+
+    for (const a of nightlifeActivities) {
+      if (!isOpenOnDay(a, dow)) {
+        dropped.push({ sourceId: a.sourceId, title: a.title, reason: "Closed on this day of the week" });
+        continue;
+      }
+
+      const dur = adjustedDuration(a.durationMinutes, pace);
+
+      // Find a free slot at or after 8pm
+      const nightOccupied: OccupiedSlot[] = slots
+        .map((s) => ({ start: s.startMinutes, end: s.endMinutes }));
+      const startAt = findGap(nightCursor, dur, nightOccupied, boundary.effectiveEndMinutes);
+
+      if (startAt === null) {
+        dropped.push({
+          sourceId: a.sourceId,
+          title:    a.title,
+          reason:   "No available slot after 8pm within the day",
+        });
+        console.log(`[NIGHTLIFE] DROPPED "${a.title}" — no slot after 8pm`);
+        continue;
+      }
+
+      slots.push({
+        kind:            "activity",
+        startMinutes:    startAt,
+        endMinutes:      startAt + dur,
+        durationMinutes: dur,
+        tripActivityId:  a.id,
+        sourceId:        a.sourceId,
+        title:           a.title,
+        location:        a.location,
+        category:        a.category,
+        explanation:     "Evening — best experienced after 8pm.",
+      });
+
+      nightCursor = startAt + dur + 30; // 30 min gap between nightlife venues
+      console.log(`[NIGHTLIFE] "${a.title}" → ${formatTime(startAt)}–${formatTime(startAt + dur)}`);
+    }
+  }
 
   // Sort everything chronologically
   slots.sort((a, b) => a.startMinutes - b.startMinutes);
