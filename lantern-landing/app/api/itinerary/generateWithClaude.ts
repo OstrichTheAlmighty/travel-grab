@@ -35,7 +35,7 @@ Output ONLY a single valid JSON object — no markdown, no backticks, no comment
   const userPrompt = buildPrompt(input);
 
   const response = await client.messages.create({
-    model: "claude-opus-4-6",
+    model: "claude-3-5-sonnet-20241022",
     max_tokens: 8192,
     system: systemPrompt,
     messages: [
