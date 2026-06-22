@@ -10,6 +10,9 @@ import {
   TRAVEL_STYLE_LABELS, TRIP_STORE_DEFAULT,
 } from "@/lib/trip-store";
 import type { TravelStyle } from "@/lib/trip-store";
+import { PreferencesPanel } from "./components/PreferencesPanel";
+import { RecommendationsPanel } from "./components/RecommendationsPanel";
+import { SavedPlacesPanel } from "./components/SavedPlacesPanel";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -846,17 +849,19 @@ export default function ItineraryPlanner() {
   const [genError,          setGenError]           = useState<string | null>(null);
   const [selectedDay,       setSelectedDay]        = useState(0);
   const [saveNotice,        setSaveNotice]         = useState(false);
-  const [showAllActivities, setShowAllActivities]  = useState(false);
   const [compactView,       setCompactView]        = useState(true);
   const [detailSlot,        setDetailSlot]         = useState<PlannedSlot | null>(null);
   const [modalPlaceDetail,  setModalPlaceDetail]   = useState<PlaceDetailData | null>(null);
   const [modalDetailLoading, setModalDetailLoading] = useState(false);
 
+  // Tab navigation
+  type ActiveTab = "itinerary" | "preferences" | "recommendations" | "saved";
+  const [activeTab, setActiveTab] = useState<ActiveTab>("itinerary");
+
   // AI Recommendations panel
   const [aiRecs,        setAiRecs]        = useState<AiRecommendation[]>([]);
   const [aiRecsStatus,  setAiRecsStatus]  = useState<"idle" | "loading" | "loaded" | "error">("idle");
   const [aiRecsFilter,  setAiRecsFilter]  = useState("all");
-  const [showAiRecs,    setShowAiRecs]    = useState(false);
   const [dismissedIds,  setDismissedIds]  = useState<Set<string>>(new Set());
   const [addedRecIds,   setAddedRecIds]   = useState<Set<string>>(new Set());
 
@@ -1393,10 +1398,6 @@ export default function ItineraryPlanner() {
   const isGenerating = genStatus === "generating";
   const hasItinerary = !!trip.itinerary;
 
-  // Saved activities collapsed / expanded
-  const ACTIVITY_PREVIEW = 5;
-  const visibleActivityIds = showAllActivities ? savedIds : savedIds.slice(0, ACTIVITY_PREVIEW);
-
   return (
     <div className="min-h-screen bg-ink text-white">
 
@@ -1776,486 +1777,131 @@ export default function ItineraryPlanner() {
 
       {/* ── Main planner (shown after onboarding) ── */}
       {obStep === "done" && (
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 lg:grid lg:grid-cols-[380px_1fr] lg:gap-8 lg:items-start">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-6">
 
-        {/* ── LEFT: Form ── */}
-        <aside className="space-y-4 mb-8 lg:mb-0">
-
-          {/* ── Trip summary banner ── */}
-          {(obDestRef.current || trip.cities[0]?.city) && (
-            <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] px-4 py-3 space-y-2">
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <p className="text-xs font-semibold text-white truncate">
-                    {obDestRef.current || trip.cities.map(c=>c.city).filter(Boolean).join(" → ")}
-                  </p>
-                  <p className="text-[11px] text-white/35 mt-0.5">
-                    {[
-                      obStyles.length > 0 ? obStyles.map(s => TRAVEL_STYLE_LABELS[s]).join(", ") : null,
-                      obFirstTime === true ? "First visit" : obFirstTime === false ? "Been before" : null,
-                    ].filter(Boolean).join(" · ")}
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={startOnboarding}
-                  className="shrink-0 text-[11px] text-white/35 hover:text-lantern-mint transition-colors"
-                >
-                  Edit trip
-                </button>
-              </div>
-              <div className="flex gap-3 pt-0.5">
-                <button
-                  type="button"
-                  onClick={startNewTrip}
-                  className="text-[11px] text-white/25 hover:text-red-400 transition-colors"
-                >
-                  Start new trip
-                </button>
-                {savedIds.length > 0 && (
-                  <>
-                    <span className="text-white/10">·</span>
-                    <button
-                      type="button"
-                      onClick={clearSavedPlaces}
-                      className="text-[11px] text-white/25 hover:text-red-400 transition-colors"
-                    >
-                      Clear saved places
-                    </button>
-                  </>
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* ── Trip basics (cities + dates) ── */}
-          <SectionCard title="Trip">
-            <div className="space-y-2">
-              {trip.cities.map((stop, i) => (
-                <CityRow
-                  key={i}
-                  index={i}
-                  stop={stop}
-                  onUpdate={(patch) => updateCity(i, patch)}
-                  onRemove={() => removeCity(i)}
-                  canRemove={trip.cities.length > 1}
-                />
-              ))}
-            </div>
+        {/* ── Tab bar ── */}
+        <div className="flex gap-0 border-b border-white/[0.07] mb-5 overflow-x-auto">
+          {([
+            { key: "itinerary",       label: "Itinerary" },
+            { key: "preferences",     label: "Preferences" },
+            { key: "recommendations", label: "Recommendations" },
+            { key: "saved",           label: `Saved (${activeActivityIds.length})` },
+          ] as const).map(({ key, label }) => (
             <button
+              key={key}
               type="button"
-              onClick={addCity}
-              className="flex items-center gap-1.5 text-xs text-white/35 hover:text-lantern-mint transition-colors"
+              onClick={() => {
+                setActiveTab(key);
+                if (key === "recommendations" && aiRecsStatus === "idle" && obStyles.length > 0 && trip.cities.some((c) => c.city.trim())) {
+                  void loadAiRecommendations();
+                }
+              }}
+              className={`shrink-0 px-5 py-2.5 text-sm font-medium border-b-2 -mb-px transition-colors ${
+                activeTab === key
+                  ? "border-lantern-mint text-white"
+                  : "border-transparent text-white/35 hover:text-white/65"
+              }`}
             >
-              <span className="text-base leading-none">+</span>
-              Add city stop
+              {label}
             </button>
+          ))}
+        </div>
 
-            <div>
-              <FieldLabel label="Start date" />
-              <input
-                type="date"
-                value={trip.startDate}
-                min={todayIso()}
-                onChange={(e) => updateTrip({ startDate: e.target.value })}
-                className={inputCls}
-              />
-            </div>
-
-            {trip.startDate && (
-              <p className="text-[11px] text-white/25">
-                {totalDays} {totalDays === 1 ? "day" : "days"} · {shortDate(trip.startDate)} – {shortDate(endDate)}
-              </p>
-            )}
-          </SectionCard>
-
-          {/* ── Flight ── */}
-          <SectionCard
-            title="Flight"
-            action={<span className="text-[11px] text-white/25">(optional)</span>}
-          >
-            {selectedFlight ? (
-              <SelectedFlightCard flight={selectedFlight} onClear={clearFlight} />
-            ) : (
-              <>
-                <div>
-                  <FieldLabel label="Outbound — arrival date & time" />
-                  <input
-                    type="datetime-local"
-                    value={trip.manualArrivalTime}
-                    onChange={(e) => updateTrip({ manualArrivalTime: e.target.value })}
-                    className={inputCls}
-                  />
-                </div>
-                <div>
-                  <FieldLabel label="Return — departure date & time" />
-                  <input
-                    type="datetime-local"
-                    value={trip.manualDepartureTime}
-                    onChange={(e) => updateTrip({ manualDepartureTime: e.target.value })}
-                    className={inputCls}
-                  />
-                </div>
-                <CtaLink href="/flights" label="Search on Flights and add" />
-              </>
-            )}
-          </SectionCard>
-
-          {/* ── Hotel ── */}
-          <SectionCard
-            title="Hotel / base"
-            action={<span className="text-[11px] text-white/25">(optional)</span>}
-          >
-            {selectedHotel ? (
-              <SelectedHotelCard hotel={selectedHotel} onClear={clearHotel} />
-            ) : (
-              <>
-                <div>
-                  <FieldLabel label="Hotel name or neighborhood" />
-                  <input
-                    type="text"
-                    placeholder="e.g. Park Hyatt Shinjuku"
-                    value={trip.manualHotelName}
-                    onChange={(e) => updateTrip({ manualHotelName: e.target.value })}
-                    className={inputCls}
-                  />
-                </div>
-                <CtaLink href="/hotels" label="Search on Hotels and add" />
-              </>
-            )}
-          </SectionCard>
-
-          {/* ── Saved places ── */}
-          <SectionCard
-            title={`Saved places · ${activeActivityIds.length} of ${savedIds.length} selected`}
-          >
-            {savedIds.length === 0 ? (
-              <div className="py-2 text-center">
-                <p className="text-xs text-white/35">No saved places yet.</p>
-                <Link href="/activities" className="mt-2 inline-block text-xs text-lantern-mint hover:underline">
-                  Browse activities →
-                </Link>
-              </div>
-            ) : (
-              <>
-                <p className="text-[11px] text-white/30">
-                  Checked places are included in your itinerary.
+        {/* ── Always-visible: trip + flight strip ── */}
+        {(obDestRef.current || primaryCity) && (
+          <div className="flex flex-wrap items-start justify-between gap-3 pb-4 mb-5 border-b border-white/[0.05]">
+            <div className="flex flex-wrap items-center gap-4">
+              <div>
+                <p className="text-sm font-semibold text-white">
+                  {obDestRef.current || trip.cities.map((c) => c.city).filter(Boolean).join(" → ")}
                 </p>
-                <div className="space-y-1.5">
-                  {visibleActivityIds.map((id) => (
-                    <ActivityRow
-                      key={id}
-                      id={id}
-                      meta={savedMeta[id]}
-                      excluded={trip.excludedActivityIds.includes(id)}
-                      onToggle={() => toggleExclude(id)}
-                    />
-                  ))}
+                <p className="text-[11px] text-white/35 mt-0.5">
+                  {[
+                    trip.startDate ? `${shortDate(trip.startDate)} – ${shortDate(endDate)}` : null,
+                    `${totalDays}d`,
+                    obStyles.length > 0 ? obStyles.map((s) => TRAVEL_STYLE_LABELS[s]).join(", ") : null,
+                  ].filter(Boolean).join(" · ")}
+                </p>
+              </div>
+              {selectedFlight && (
+                <div className="flex items-center gap-2 rounded-lg border border-white/[0.07] bg-white/[0.02] px-3 py-1.5">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`https://www.gstatic.com/flights/airline_logos/70px/${selectedFlight.airlineCode}.png`}
+                    alt={selectedFlight.airline}
+                    width={14}
+                    height={14}
+                    className="rounded object-contain shrink-0 opacity-70"
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+                  />
+                  <span className="text-[11px] font-mono text-white/40">{selectedFlight.origin}</span>
+                  <span className="text-white/20 text-xs">→</span>
+                  <span className="text-[11px] font-mono text-white/40">{selectedFlight.destination}</span>
+                  <span className="text-white/15">·</span>
+                  <span className="text-[11px] text-white/35">{fmt24(selectedFlight.departTime)}</span>
                 </div>
-                {savedIds.length > ACTIVITY_PREVIEW && (
-                  <button
-                    type="button"
-                    onClick={() => setShowAllActivities((v) => !v)}
-                    className="text-xs text-white/35 hover:text-lantern-mint transition-colors"
-                  >
-                    {showAllActivities
-                      ? "Collapse"
-                      : `Show all ${savedIds.length} saved places`}
-                  </button>
-                )}
-              </>
-            )}
-          </SectionCard>
-
-          {/* ── AI Recommends ── */}
-          {obStyles.length > 0 && trip.cities.some((c) => c.city.trim()) && (
-            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] overflow-hidden">
-              {/* Header toggle */}
-              <button
-                type="button"
-                onClick={() => {
-                  const next = !showAiRecs;
-                  setShowAiRecs(next);
-                  if (next && aiRecsStatus === "idle") {
-                    void loadAiRecommendations();
-                  }
-                }}
-                className="w-full flex items-center justify-between px-5 py-4 text-left"
-              >
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-semibold text-white">AI Recommends</span>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-lantern-mint/15 text-lantern-mint font-semibold tracking-wide">
-                    For you
-                  </span>
-                  {aiRecsStatus === "loaded" && aiRecs.length > 0 && (
-                    <span className="text-[10px] text-white/30">
-                      {aiRecs.filter((r) => !dismissedIds.has(r.id)).length} suggestions
-                    </span>
-                  )}
-                </div>
-                <span className={`text-white/30 text-xs transition-transform duration-200 ${showAiRecs ? "rotate-180" : ""}`}>
-                  ▾
-                </span>
-              </button>
-
-              {showAiRecs && (
-                <div className="px-5 pb-5 space-y-3 border-t border-white/[0.06]">
-                  {/* Loading */}
-                  {aiRecsStatus === "loading" && (
-                    <div className="flex items-center justify-center gap-3 py-6">
-                      <span className="h-4 w-4 rounded-full border-2 border-white/10 border-t-lantern-mint animate-spin" />
-                      <span className="text-xs text-white/40">Finding activities for you…</span>
-                    </div>
-                  )}
-
-                  {/* Error */}
-                  {aiRecsStatus === "error" && (
-                    <div className="py-4 text-center">
-                      <p className="text-xs text-red-400/70 mb-2">Couldn't load recommendations</p>
-                      <button
-                        type="button"
-                        onClick={() => { setAiRecsStatus("idle"); void loadAiRecommendations(); }}
-                        className="text-[11px] text-lantern-mint hover:underline"
-                      >
-                        Try again
-                      </button>
-                    </div>
-                  )}
-
-                  {/* Loaded */}
-                  {aiRecsStatus === "loaded" && (() => {
-                    const FILTER_LABELS: Record<string, string> = {
-                      all: "All", food: "Food", culture: "Culture", adventure: "Adventure",
-                      nightlife: "Nightlife", nature: "Nature", hidden_gems: "Hidden Gems", luxury: "Luxury",
-                    };
-                    const available = aiRecs.filter((r) => !dismissedIds.has(r.id));
-                    const visible   = available.filter((r) => aiRecsFilter === "all" || r.category === aiRecsFilter);
-                    const cats      = ["all", ...Array.from(new Set(available.map((r) => r.category)))];
-
-                    return (
-                      <div className="space-y-3 pt-1">
-                        {/* Filter chips */}
-                        <div className="flex gap-1.5 flex-wrap">
-                          {cats.map((f) => (
-                            <button
-                              key={f}
-                              type="button"
-                              onClick={() => setAiRecsFilter(f)}
-                              className={`text-[10px] px-2.5 py-1 rounded-full border capitalize transition-colors ${
-                                aiRecsFilter === f
-                                  ? "border-lantern-mint/50 bg-lantern-mint/10 text-lantern-mint"
-                                  : "border-white/[0.08] text-white/35 hover:text-white/60"
-                              }`}
-                            >
-                              {FILTER_LABELS[f] ?? f}
-                            </button>
-                          ))}
-                        </div>
-
-                        {/* Cards */}
-                        {visible.length === 0 ? (
-                          <p className="text-xs text-white/25 text-center py-3">
-                            No more in this category.
-                          </p>
-                        ) : (
-                          <div className="space-y-2">
-                            {visible.map((rec) => {
-                              const isAdded  = addedRecIds.has(rec.id) || savedIds.includes(`ai-rec-${rec.id}`);
-                              const catStyle = CAT_STYLE[rec.category] ?? "text-white/50 bg-white/5 border-white/10";
-                              return (
-                                <div
-                                  key={rec.id}
-                                  className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-3.5"
-                                >
-                                  {/* Title row */}
-                                  <div className="flex items-start gap-2 mb-1.5">
-                                    <div className="flex-1 min-w-0">
-                                      <p className="text-xs font-semibold text-white leading-snug">{rec.title}</p>
-                                      <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
-                                        <span className="text-[10px] text-white/35">{rec.city}</span>
-                                        <span className="text-white/15">·</span>
-                                        <span className="text-[10px] text-white/35">{rec.duration}</span>
-                                        <span className="text-white/15">·</span>
-                                        <span className="text-[10px] text-white/35">{rec.estimatedCost}</span>
-                                      </div>
-                                    </div>
-                                    <button
-                                      type="button"
-                                      aria-label="Dismiss"
-                                      onClick={() => setDismissedIds((prev) => new Set([...prev, rec.id]))}
-                                      className="shrink-0 text-white/15 hover:text-white/45 transition-colors text-lg leading-none mt-0.5"
-                                    >
-                                      ×
-                                    </button>
-                                  </div>
-
-                                  {/* Reason */}
-                                  <p className="text-[10px] text-white/40 leading-relaxed italic mb-2.5">
-                                    {rec.reason}
-                                  </p>
-
-                                  {/* Tags + Add button */}
-                                  <div className="flex items-center justify-between gap-2">
-                                    <div className="flex gap-1 flex-wrap min-w-0">
-                                      <span className={`shrink-0 rounded-full border px-1.5 py-0.5 text-[9px] font-semibold capitalize ${catStyle}`}>
-                                        {rec.category === "hidden_gems" ? "Hidden Gem" : rec.category}
-                                      </span>
-                                      {rec.tags.slice(0, 2).map((tag) => (
-                                        <span
-                                          key={tag}
-                                          className="rounded-full border border-white/[0.07] px-1.5 py-0.5 text-[9px] text-white/28"
-                                        >
-                                          {tag}
-                                        </span>
-                                      ))}
-                                    </div>
-                                    <button
-                                      type="button"
-                                      onClick={() => { if (!isAdded) addAiRecToTrip(rec); }}
-                                      disabled={isAdded}
-                                      className={`shrink-0 text-[10px] font-semibold px-2.5 py-1 rounded-lg transition-colors ${
-                                        isAdded
-                                          ? "text-lantern-mint/60 bg-lantern-mint/10 cursor-default"
-                                          : "text-lantern-mint border border-lantern-mint/30 hover:bg-lantern-mint/10"
-                                      }`}
-                                    >
-                                      {isAdded ? "Added ✓" : "+ Add"}
-                                    </button>
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        )}
-
-                        {/* Refresh */}
-                        <button
-                          type="button"
-                          onClick={() => void loadAiRecommendations()}
-                          className="text-[10px] text-white/25 hover:text-lantern-mint transition-colors w-full text-center pt-1"
-                        >
-                          ↺ Refresh recommendations
-                        </button>
-                      </div>
-                    );
-                  })()}
+              )}
+              {selectedHotel && (
+                <div className="flex items-center gap-1.5 rounded-lg border border-white/[0.07] bg-white/[0.02] px-3 py-1.5">
+                  <span className="text-[10px] text-white/25">🏨</span>
+                  <span className="text-[11px] text-white/45 truncate max-w-[160px]">{selectedHotel.name}</span>
                 </div>
               )}
             </div>
-          )}
-
-          {/* ── Preferences ── */}
-          <SectionCard title="Preferences">
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <FieldLabel label="Wake time" />
-                <input
-                  type="time"
-                  value={trip.wakeTime}
-                  onChange={(e) => updateTrip({ wakeTime: e.target.value })}
-                  className={inputCls}
-                />
-              </div>
-              <div>
-                <FieldLabel label="Bedtime" />
-                <input
-                  type="time"
-                  value={trip.bedTime}
-                  onChange={(e) => updateTrip({ bedTime: e.target.value })}
-                  className={inputCls}
-                />
-              </div>
+            <div className="flex items-center gap-4">
+              <button
+                type="button"
+                onClick={startOnboarding}
+                className="text-[11px] text-white/35 hover:text-lantern-mint transition-colors"
+              >
+                Edit trip
+              </button>
+              <button
+                type="button"
+                onClick={startNewTrip}
+                className="text-[11px] text-white/25 hover:text-red-400 transition-colors"
+              >
+                New trip
+              </button>
             </div>
+          </div>
+        )}
 
-            <ToggleGroup
-              label="Travel pace"
-              options={["relaxed", "balanced", "packed"] as UIPace[]}
-              value={trip.pace}
-              onChange={(v) => updateTrip({ pace: v })}
-              cols={3}
-            />
-
-            <ToggleGroup
-              label="Getting around"
-              options={["walking", "public transit", "taxi", "mixed"] as UITransit[]}
-              value={trip.transit}
-              onChange={(v) => updateTrip({ transit: v })}
-            />
-
-            <ToggleGroup
-              label="Daily budget (per person)"
-              options={["budget", "moderate", "premium"] as ("budget" | "moderate" | "premium")[]}
-              value={budgetTier}
-              onChange={(v) => setBudgetTier(v)}
-              cols={3}
-            />
-
-            <div>
-              <FieldLabel label="Cuisine preferences" note="(affects AI recommendations)" />
-              <div className="flex flex-wrap gap-1.5">
-                {["Street food", "Ramen & noodles", "Izakaya & sake", "Fine dining", "Cooking classes", "Local markets", "Sushi & sashimi", "Vegetarian"].map((opt) => {
-                  const active = cuisinePrefs.includes(opt);
-                  return (
-                    <button
-                      key={opt}
-                      type="button"
-                      onClick={() => setCuisinePrefs((prev) =>
-                        prev.includes(opt) ? prev.filter((x) => x !== opt) : [...prev, opt]
-                      )}
-                      className={`rounded-full border px-2.5 py-1 text-[10px] font-medium transition-colors ${
-                        active
-                          ? "border-lantern-gold/50 bg-lantern-gold/10 text-lantern-gold"
-                          : "border-white/[0.08] text-white/35 hover:text-white/60"
-                      }`}
-                    >
-                      {opt}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </SectionCard>
-
-          {/* ── Actions ── */}
-          <div className="space-y-3 pt-1">
+        {/* ── Tab: Itinerary ── */}
+        {activeTab === "itinerary" && (
+        <div>
+          {/* Generate + save/clear actions */}
+          <div className="flex flex-wrap items-center gap-3 mb-6">
             <button
               type="button"
               onClick={generate}
               disabled={!primaryCity || !trip.startDate || isGenerating}
-              className="w-full inline-flex h-14 items-center justify-center gap-2.5 rounded-2xl bg-lantern-mint px-8 text-base font-bold text-ink transition hover:opacity-90 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-30 disabled:cursor-not-allowed disabled:scale-100"
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-lantern-mint px-7 text-sm font-bold text-ink transition hover:opacity-90 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-30 disabled:cursor-not-allowed disabled:scale-100"
             >
               {isGenerating ? (
                 <>
-                  <span className="h-4 w-4 rounded-full border-2 border-ink/30 border-t-ink animate-spin" />
+                  <span className="h-3.5 w-3.5 rounded-full border-2 border-ink/30 border-t-ink animate-spin" />
                   Planning your trip…
                 </>
               ) : hasItinerary ? (
-                <>
-                  <span className="text-lg">↺</span>
-                  Regenerate Itinerary
-                </>
+                <><span className="text-base">↺</span> Regenerate Itinerary</>
               ) : (
-                <>
-                  <span className="text-lg">✦</span>
-                  Build My Itinerary
-                </>
+                <><span className="text-base">✦</span> Build My Itinerary</>
               )}
             </button>
-
             {(!primaryCity || !trip.startDate) && !isGenerating && (
-              <p className="text-[11px] text-white/25 text-center">
-                {!primaryCity ? "Enter a destination above to continue." : "Add a start date to continue."}
+              <p className="text-[11px] text-white/25">
+                {!primaryCity ? "Enter a destination in Preferences." : "Add a start date in Preferences."}
               </p>
             )}
-
-            <div className="flex gap-2 pt-1">
+            <div className="flex gap-2 ml-auto">
               <button
                 type="button"
                 onClick={saveTrip}
-                className={`flex-1 h-9 rounded-full border text-xs font-medium transition-colors ${
+                className={`h-9 rounded-full border px-4 text-xs font-medium transition-colors ${
                   saveNotice
                     ? "border-lantern-mint/40 text-lantern-mint"
-                    : "border-white/[0.1] text-white/45 hover:text-white/75 hover:border-white/20"
+                    : "border-white/[0.1] text-white/40 hover:text-white/70 hover:border-white/20"
                 }`}
               >
                 {saveNotice ? "Saved ✓" : "Save trip"}
@@ -2263,16 +1909,14 @@ export default function ItineraryPlanner() {
               <button
                 type="button"
                 onClick={clearTrip}
-                className="flex-1 h-9 rounded-full border border-white/[0.06] text-xs font-medium text-white/30 hover:text-red-400 hover:border-red-400/20 transition-colors"
+                className="h-9 rounded-full border border-white/[0.06] px-4 text-xs font-medium text-white/30 hover:text-red-400 hover:border-red-400/20 transition-colors"
               >
                 Clear trip
               </button>
             </div>
           </div>
-        </aside>
 
-        {/* ── RIGHT: Itinerary output ── */}
-        <main>
+          {/* ── Itinerary output ── */}
           {!hasItinerary && !isGenerating && genStatus !== "error" && (
             <div className="flex flex-col items-center justify-center min-h-[480px] rounded-2xl border border-white/[0.06] bg-white/[0.01] p-10 text-center">
               <div className="h-14 w-14 rounded-2xl border border-white/[0.1] bg-white/[0.03] flex items-center justify-center text-2xl mb-5">
@@ -2283,9 +1927,9 @@ export default function ItineraryPlanner() {
                 {savedIds.length === 0
                   ? "Save places on the Activities page, fill in your trip details, then click Generate."
                   : activeActivityIds.length === 0
-                  ? "All saved places are excluded. Check some to include them."
+                  ? "All saved places are excluded. Check some in the Saved tab to include them."
                   : !primaryCity
-                  ? `${activeActivityIds.length} places ready. Enter a destination and click Generate.`
+                  ? `${activeActivityIds.length} places ready. Enter a destination in Preferences and click Generate.`
                   : `${activeActivityIds.length} places ready for ${primaryCity}. Click Generate to plan your days.`}
               </p>
               {savedIds.length === 0 && (
@@ -2495,7 +2139,6 @@ export default function ItineraryPlanner() {
                 const cities = trip.cities.filter((c) => c.city.trim());
                 const isMulti = cities.length > 1;
 
-                // For multi-city trips, group dropped activities by city
                 if (isMulti) {
                   const cityNames = cities.map((c) => c.city);
                   const groups = new Map<string, typeof dropped>();
@@ -2561,7 +2204,76 @@ export default function ItineraryPlanner() {
               )}
             </div>
           )}
-        </main>
+        </div>
+        )}
+
+        {/* ── Tab: Preferences ── */}
+        {activeTab === "preferences" && (
+          <PreferencesPanel
+            cities={trip.cities}
+            startDate={trip.startDate}
+            endDate={endDate}
+            totalDays={totalDays}
+            onUpdateCity={(i, patch) => updateCity(i, patch)}
+            onAddCity={addCity}
+            onRemoveCity={removeCity}
+            onUpdateStartDate={(v) => updateTrip({ startDate: v })}
+            wakeTime={trip.wakeTime}
+            bedTime={trip.bedTime}
+            pace={trip.pace}
+            transit={trip.transit}
+            onUpdateWakeTime={(v) => updateTrip({ wakeTime: v })}
+            onUpdateBedTime={(v) => updateTrip({ bedTime: v })}
+            onUpdatePace={(v) => updateTrip({ pace: v })}
+            onUpdateTransit={(v) => updateTrip({ transit: v })}
+            budgetTier={budgetTier}
+            setBudgetTier={setBudgetTier}
+            cuisinePrefs={cuisinePrefs}
+            setCuisinePrefs={setCuisinePrefs}
+            selectedFlight={selectedFlight}
+            selectedHotel={selectedHotel}
+            manualArrivalTime={trip.manualArrivalTime}
+            manualDepartureTime={trip.manualDepartureTime}
+            manualHotelName={trip.manualHotelName}
+            onUpdateManualArrival={(v) => updateTrip({ manualArrivalTime: v })}
+            onUpdateManualDeparture={(v) => updateTrip({ manualDepartureTime: v })}
+            onUpdateManualHotel={(v) => updateTrip({ manualHotelName: v })}
+            onClearFlight={clearFlight}
+            onClearHotel={clearHotel}
+            obStyles={obStyles}
+            obFirstTime={obFirstTime}
+            onEditTrip={startOnboarding}
+          />
+        )}
+
+        {/* ── Tab: Recommendations ── */}
+        {activeTab === "recommendations" && (
+          <RecommendationsPanel
+            aiRecs={aiRecs}
+            aiRecsStatus={aiRecsStatus}
+            aiRecsFilter={aiRecsFilter}
+            setAiRecsFilter={setAiRecsFilter}
+            dismissedIds={dismissedIds}
+            setDismissedIds={setDismissedIds}
+            addedRecIds={addedRecIds}
+            savedIds={savedIds}
+            onLoad={() => void loadAiRecommendations()}
+            onAdd={addAiRecToTrip}
+            hasTripInfo={obStyles.length > 0 && trip.cities.some((c) => c.city.trim())}
+          />
+        )}
+
+        {/* ── Tab: Saved places ── */}
+        {activeTab === "saved" && (
+          <SavedPlacesPanel
+            savedIds={savedIds}
+            savedMeta={savedMeta}
+            excludedActivityIds={trip.excludedActivityIds}
+            onToggle={toggleExclude}
+            onClearAll={clearSavedPlaces}
+          />
+        )}
+
       </div>
       )}
     </div>
