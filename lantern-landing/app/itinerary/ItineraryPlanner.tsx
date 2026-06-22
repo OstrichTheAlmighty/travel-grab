@@ -1185,68 +1185,48 @@ export default function ItineraryPlanner() {
     try {
       const activities = activeActivityIds.map((id) => {
         const m = savedMeta[id];
+        const durationMinutes = parseDuration(m?.duration);
         return {
-          title:           m?.title        ?? id,
-          category:        m?.category     ?? "culture",
-          durationMinutes: parseDuration(m?.duration),
-          lat:             m?.lat,
-          lng:             m?.lng,
-          city:            m?.city,
+          sourceId:               id,
+          title:                  m?.title    ?? id,
+          category:               m?.category ?? "culture",
+          estimatedDurationHours: Math.round((durationMinutes / 60) * 10) / 10,
+          ...(durationMinutes >= 300 ? { isFullDay: true } : {}),
         };
       });
 
-      const destination = trip.cities.map((c) => c.city).filter(Boolean).join(", ");
-
-      // Hotel: prefer selected from Hotels page, fallback to manual
-      const hotel = selectedHotel
-        ? {
-            name:         selectedHotel.name,
-            lat:          selectedHotel.lat,
-            lng:          selectedHotel.lng,
-            checkInDate:  trip.startDate,
-            checkOutDate: endDate,
-          }
-        : trip.manualHotelName
-          ? { name: trip.manualHotelName, checkInDate: trip.startDate, checkOutDate: endDate }
-          : undefined;
-
-      // Flight: prefer selected from Flights page, fallback to manual
-      const outboundFlight = selectedFlight?.arriveTime
-        ? { arrivesAt: `${trip.startDate}T${selectedFlight.arriveTime}:00` }
+      const outboundArrivesAt = selectedFlight?.arriveTime
+        ? `${trip.startDate}T${selectedFlight.arriveTime}:00`
         : trip.manualArrivalTime
-          ? { arrivesAt: new Date(trip.manualArrivalTime).toISOString() }
-          : undefined;
+          ? new Date(trip.manualArrivalTime).toISOString()
+          : null;
 
-      const returnFlight = selectedFlight?.returnDepartTime
-        ? { departsAt: `${endDate}T${selectedFlight.returnDepartTime}:00` }
+      const returnDepartsAt = selectedFlight?.returnDepartTime
+        ? `${endDate}T${selectedFlight.returnDepartTime}:00`
         : trip.manualDepartureTime
-          ? { departsAt: new Date(trip.manualDepartureTime).toISOString() }
-          : undefined;
+          ? new Date(trip.manualDepartureTime).toISOString()
+          : null;
 
       const body = {
-        trip: {
-          startDate:    trip.startDate,
-          endDate,
-          numTravelers: 1,
-          city:         primaryCity.split(",")[0].trim(),
-          destination:  destination || primaryCity,
-          cityStops:    trip.cities
-            .filter((c) => c.city.trim() && c.days > 0)
-            .map((c) => ({ city: c.city, days: c.days })),
-        },
-        preferences: {
-          wakeTimeMinutes:      timeToMinutes(trip.wakeTime),
-          sleepTimeMinutes:     timeToMinutes(trip.bedTime),
-          pace:                 mapPace(trip.pace),
-          preferredTransitMode: mapTransit(trip.transit),
-        },
-        hotel,
-        outboundFlight,
-        returnFlight,
+        startDate: trip.startDate,
+        endDate,
+        cities:    trip.cities
+          .filter((c) => c.city.trim() && c.days > 0)
+          .map((c, i) => ({ name: c.city, days: c.days, order: i + 1 })),
         activities,
+        userPreferences: {
+          pace:      mapPace(trip.pace),
+          interests: obStyles.length > 0 ? obStyles : ["culture"],
+        },
+        ...(outboundArrivesAt || returnDepartsAt ? {
+          flights: {
+            ...(outboundArrivesAt ? { outboundArrivesAt } : {}),
+            ...(returnDepartsAt   ? { returnDepartsAt   } : {}),
+          },
+        } : {}),
       };
 
-      const res = await fetch("/api/itinerary/preview", {
+      const res = await fetch("/api/itinerary", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
