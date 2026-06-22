@@ -124,13 +124,19 @@ export async function generateItinerary(input: ItineraryRequest): Promise<Genera
 
   // ── Post-processing ────────────────────────────────────────────────────────
 
-  // 1. Remove duplicate activities (Claude sometimes schedules the same place twice)
-  const { cleaned, duplicateDropped } = deduplicateSchedule(itinerary);
+  // 1. Remove duplicates (handles shrine/jinja/temple semantic equivalence)
+  const { cleaned: deduped, duplicateDropped } = deduplicateSchedule(itinerary);
 
-  // 2. Compute which input activities were not scheduled at all
+  // 2. Remove activities placed in the wrong city
+  const { cleaned: geoValidated, geoViolations } = validateGeography(deduped, input);
+
+  // 3. Remove last-day activities that run into the flight check-in window
+  const { cleaned, lateViolations } = validateLastDayTimeline(geoValidated, input.flights);
+
+  // 4. Find input activities Claude omitted entirely
   const missed = computeMissed(input.activities, cleaned);
 
-  const dropped: DroppedActivity[] = [...duplicateDropped, ...missed];
+  const dropped: DroppedActivity[] = [...duplicateDropped, ...geoViolations, ...lateViolations, ...missed];
 
   // ── Logging ───────────────────────────────────────────────────────────────
   const scheduledCount = (cleaned.days ?? [])
@@ -139,10 +145,17 @@ export async function generateItinerary(input: ItineraryRequest): Promise<Genera
 
   console.log(
     `[generateItinerary] input=${input.activities.length} scheduled=${scheduledCount}` +
-    ` dupes_removed=${duplicateDropped.length} missed=${missed.length}`,
+    ` dupes=${duplicateDropped.length} geo_violations=${geoViolations.length}` +
+    ` late_violations=${lateViolations.length} missed=${missed.length}`,
   );
   if (duplicateDropped.length > 0) {
     console.log("[generateItinerary] Duplicates removed:", duplicateDropped.map((d) => d.title).join(" | "));
+  }
+  if (geoViolations.length > 0) {
+    console.log("[generateItinerary] Geo violations:", geoViolations.map((d) => d.title).join(" | "));
+  }
+  if (lateViolations.length > 0) {
+    console.log("[generateItinerary] Late-day violations:", lateViolations.map((d) => d.title).join(" | "));
   }
   if (missed.length > 0) {
     console.log("[generateItinerary] Not scheduled:", missed.map((d) => d.title).join(" | "));
@@ -152,6 +165,29 @@ export async function generateItinerary(input: ItineraryRequest): Promise<Genera
 }
 
 // ── Post-processing helpers ────────────────────────────────────────────────────
+
+/**
+ * Produces a dedup key that treats semantic equivalents as identical:
+ *   - Shrine synonyms: jinja, jingu, taisha → "shrine"
+ *   - Temple synonyms: dera, tera → "temple"
+ *   - Subtitles after " - " or " – " are stripped
+ *   - Generic descriptors like "Main Sanctuary" are stripped
+ */
+function toDedupeKey(title: string): string {
+  let s = title.toLowerCase();
+  // Unify shrine/temple synonyms while word boundaries are still clear
+  s = s.replace(/\bjinja\b/g,  "shrine")
+       .replace(/\bjingu\b/g,  "shrine")
+       .replace(/\btaisha\b/g, "shrine")
+       .replace(/\bdera\b/g,   "temple")
+       .replace(/\btera\b/g,   "temple");
+  // Strip subtitles after spaced dashes (not hyphens within a name like "To-ji")
+  s = s.replace(/\s[-–—]\s.+$/, "");
+  // Strip trailing generic descriptors
+  s = s.replace(/\b(main sanctuary|hall of worship|inner sanctuary|outer shrine|main hall)\b.*/g, "");
+  s = s.replace(/[^a-z0-9\s]/g, "").replace(/\s+/g, " ").trim();
+  return s;
+}
 
 function deduplicateSchedule(itinerary: ClaudeItinerary): {
   cleaned: ClaudeItinerary;
@@ -166,12 +202,12 @@ function deduplicateSchedule(itinerary: ClaudeItinerary): {
       // Meals, logistics, and transfers are allowed to recur (breakfast every day, etc.)
       if (item.type !== "activity") return true;
 
-      const key = normalise(item.activity);
+      const key = toDedupeKey(item.activity);
       if (seen.has(key)) {
         duplicateDropped.push({
           sourceId: "",
           title:    item.activity,
-          reason:   "Duplicate — already scheduled on an earlier day (removed)",
+          reason:   "Duplicate — same location already scheduled on an earlier day (removed)",
         });
         return false;
       }
@@ -182,6 +218,163 @@ function deduplicateSchedule(itinerary: ClaudeItinerary): {
 
   return { cleaned: { ...itinerary, days: cleanedDays }, duplicateDropped };
 }
+
+// ── Geographic validation ──────────────────────────────────────────────────────
+
+function normCity(city: string): string {
+  return city.toLowerCase().split(",")[0].trim();
+}
+
+function citiesMatch(a: string, b: string): boolean {
+  const aFirst = a.split(/[\s,]/)[0];
+  const bFirst = b.split(/[\s,]/)[0];
+  return aFirst === bFirst || a.includes(b) || b.includes(a);
+}
+
+function computeDayToCityMap(cities: CityConfig[]): Map<number, string> {
+  const sorted = [...cities].sort((a, b) => a.order - b.order);
+  const map = new Map<number, string>();
+  let offset = 0;
+  for (const city of sorted) {
+    for (let i = 0; i < city.days; i++) {
+      map.set(offset + i + 1, normCity(city.name));
+    }
+    offset += city.days;
+  }
+  return map;
+}
+
+function buildActivityCityMap(activities: ActivityInput[]): Map<string, string> {
+  const map = new Map<string, string>();
+  for (const a of activities) {
+    if (!a.city) continue;
+    const city = normCity(a.city);
+    map.set(toDedupeKey(a.title), city);
+    map.set(normalise(a.title), city);
+  }
+  return map;
+}
+
+function findActivityCity(
+  scheduledTitle: string,
+  cityMap: Map<string, string>,
+): string | null {
+  const dkey = toDedupeKey(scheduledTitle);
+  if (cityMap.has(dkey)) return cityMap.get(dkey)!;
+
+  const norm = normalise(scheduledTitle);
+  if (cityMap.has(norm)) return cityMap.get(norm)!;
+
+  // Substring fallback — only when the overlapping token is specific enough (>6 chars)
+  for (const [mapKey, city] of cityMap) {
+    if (mapKey.length <= 6 || norm.length <= 6) continue;
+    if (norm.includes(mapKey) || mapKey.includes(norm)) return city;
+  }
+
+  return null;
+}
+
+function validateGeography(
+  itinerary: ClaudeItinerary,
+  input: ItineraryRequest,
+): { cleaned: ClaudeItinerary; geoViolations: DroppedActivity[] } {
+  const dayToCity  = computeDayToCityMap(input.cities);
+  const actCityMap = buildActivityCityMap(input.activities);
+  const geoViolations: DroppedActivity[] = [];
+
+  const cleanedDays = itinerary.days.map((day) => {
+    const expectedCity = dayToCity.get(day.dayIndex);
+    if (!expectedCity) return day;
+
+    const schedule = day.schedule.filter((item) => {
+      if (item.type !== "activity") return true;
+
+      const actCity = findActivityCity(item.activity, actCityMap);
+      if (!actCity) return true; // Unknown activity — trust Claude
+
+      if (!citiesMatch(actCity, expectedCity)) {
+        geoViolations.push({
+          sourceId: "",
+          title:    item.activity,
+          reason:   `Geographic error: activity is in ${actCity} but scheduled on a ${day.city} day`,
+        });
+        console.error(
+          `[geo-validate] Removed "${item.activity}" from Day ${day.dayIndex} (${day.city}): ` +
+          `belongs in ${actCity}`,
+        );
+        return false;
+      }
+      return true;
+    });
+
+    return { ...day, schedule };
+  });
+
+  return { cleaned: { ...itinerary, days: cleanedDays }, geoViolations };
+}
+
+// ── Last-day timeline validation ───────────────────────────────────────────────
+
+function validateLastDayTimeline(
+  itinerary: ClaudeItinerary,
+  flights: ItineraryRequest["flights"],
+): { cleaned: ClaudeItinerary; lateViolations: DroppedActivity[] } {
+  if (!flights?.returnDepartsAt) return { cleaned: itinerary, lateViolations: [] };
+
+  const dep    = new Date(flights.returnDepartsAt);
+  const depStr = dep.toTimeString().slice(0, 5);
+  const [dh, dm] = depStr.split(":").map(Number);
+  const depMin    = dh * 60 + dm;
+  const cutoffMin = depMin - 120; // 2h buffer for airport
+
+  const lateViolations: DroppedActivity[] = [];
+  const lastDayIndex = Math.max(...itinerary.days.map((d) => d.dayIndex));
+
+  const cleanedDays = itinerary.days.map((day) => {
+    if (day.dayIndex !== lastDayIndex) return day;
+
+    const schedule = day.schedule.filter((item) => {
+      // Never remove airport / departure logistics
+      const t = (item.activity ?? "").toLowerCase();
+      if (item.type === "logistics" || item.type === "transfer") return true;
+      if (t.includes("airport") || t.includes("departure") || t.includes("depart")) return true;
+
+      const [sh, sm]  = (item.time ?? "09:00").split(":").map(Number);
+      const startMin  = (sh ?? 9) * 60 + (sm ?? 0);
+      const durMatch  = item.duration?.match(/(\d+(?:\.\d+)?)\s*h/i);
+      const minMatch  = item.duration?.match(/(\d+)\s*m(?!o)/i);
+      let durMin      = 0;
+      if (durMatch) durMin += Math.round(parseFloat(durMatch[1]) * 60);
+      if (minMatch) durMin += parseInt(minMatch[1]);
+      if (!durMin)  durMin  = 60;
+      const endMin = startMin + durMin;
+
+      if (endMin > cutoffMin) {
+        const endH = String(Math.floor(endMin / 60)).padStart(2, "0");
+        const endM = String(endMin % 60).padStart(2, "0");
+        const cutH = String(Math.floor(cutoffMin / 60)).padStart(2, "0");
+        const cutM = String(cutoffMin % 60).padStart(2, "0");
+        lateViolations.push({
+          sourceId: "",
+          title:    item.activity,
+          reason:   `Last-day conflict: ends at ${endH}:${endM} but airport check-in needed by ${cutH}:${cutM}`,
+        });
+        console.warn(
+          `[timeline-validate] Removed "${item.activity}" from last day: ` +
+          `ends ${endH}:${endM}, cutoff ${cutH}:${cutM}`,
+        );
+        return false;
+      }
+      return true;
+    });
+
+    return { ...day, schedule };
+  });
+
+  return { cleaned: { ...itinerary, days: cleanedDays }, lateViolations };
+}
+
+// ── Missed-activity computation ────────────────────────────────────────────────
 
 function computeMissed(
   inputActivities: ActivityInput[],
@@ -215,6 +408,8 @@ function computeMissed(
       reason:   "Not scheduled — insufficient time or not assigned by AI",
     }));
 }
+
+// ── Utilities ──────────────────────────────────────────────────────────────────
 
 function normalise(s: string): string {
   return s.toLowerCase().replace(/[^a-z0-9\s]/g, "").trim();
@@ -271,12 +466,6 @@ function buildPrompt(input: ItineraryRequest): string {
   }
 
   for (const a of input.activities) {
-    const line =
-      `  - [${a.sourceId.slice(0, 8)}] ${a.title}` +
-      ` (${a.estimatedDurationHours}h, ${a.category})` +
-      (a.isFullDay ? " [FULL-DAY — needs its own day]" : "");
-
-    // Match saved city to one of the trip cities
     const savedCity = a.city?.toLowerCase().split(",")[0].trim() ?? "";
     const matched = savedCity
       ? sortedCities.find(
@@ -285,6 +474,16 @@ function buildPrompt(input: ItineraryRequest): string {
             savedCity.includes(c.name.toLowerCase().split(",")[0].trim()),
         )
       : null;
+
+    const range = matched ? cityDateRanges.find((r) => r.name === matched.name) : null;
+    const cityTag = range
+      ? `[${matched!.name.split(",")[0].toUpperCase()}-ONLY, Days ${range.startDay}–${range.endDay}]`
+      : "[FLEX]";
+
+    const line =
+      `  - [${a.sourceId.slice(0, 8)}] ${a.title} ${cityTag}` +
+      ` (${a.estimatedDurationHours}h, ${a.category})` +
+      (a.isFullDay ? " [FULL-DAY — needs its own day]" : "");
 
     if (matched) {
       cityGroups.get(matched.name)!.push(line);
@@ -298,9 +497,9 @@ function buildPrompt(input: ItineraryRequest): string {
       const acts = cityGroups.get(c.name) ?? [];
       if (acts.length === 0) return null;
       const range = cityDateRanges.find((r) => r.name === c.name)!;
-      return `${c.name} (Days ${range.startDay}–${range.endDay}):\n${acts.join("\n")}`;
+      return `${c.name} — schedule ONLY on Days ${range.startDay}–${range.endDay}:\n${acts.join("\n")}`;
     }).filter(Boolean),
-    ...(flexGroup.length > 0 ? [`Any city (schedule where they fit):\n${flexGroup.join("\n")}`] : []),
+    ...(flexGroup.length > 0 ? [`Flexible (any city):\n${flexGroup.join("\n")}`] : []),
   ].join("\n\n");
 
   // ── Flight constraints ───────────────────────────────────────────────────
@@ -327,23 +526,24 @@ function buildPrompt(input: ItineraryRequest): string {
       const ap = input.flights.departureAirport ?? "departure airport";
       flightBlock +=
         `\n- Last day (${input.endDate}): Return departs from ${ap} at ${depT}.` +
-        ` Leave hotel by ${leaveT}. Last schedule item must be departure to ${ap}. Use exactly "${ap}" — no other airport.`;
+        ` Leave hotel by ${leaveT}. No activity may end after ${leaveT}.` +
+        ` Last schedule item must be departure to ${ap}. Use exactly "${ap}" — no other airport.`;
     }
   }
 
   return `Generate a ${totalDays}-day travel itinerary.
 
-CITY SCHEDULE (activities MUST stay in their assigned city on the correct days):
+CITY SCHEDULE:
 ${cityScheduleLines.join("\n")}
 
-ACTIVITIES (${input.activities.length} total — schedule as many as possible):
+ACTIVITIES (${input.activities.length} total — each is tagged with which city/days it belongs to):
 ${activityBlock}
 
-DUPLICATE RULE — CRITICAL: Each activity ID (shown in brackets) can appear AT MOST ONCE across all ${totalDays} days. Never schedule the same place twice, even under a slightly different name.
+DUPLICATE RULE — CRITICAL: Each activity ID can appear AT MOST ONCE across all ${totalDays} days. "Itsukushima Jinja" and "Itsukushima Shrine" are the same place — pick one name and schedule it once only. Never schedule the same place twice under any variation of its name.
+
+GEOGRAPHIC RULE — ABSOLUTE: Each activity's city tag (e.g. [OSAKA-ONLY, Days 5–7]) tells you exactly which days it may appear. Scheduling a Kyoto activity on an Osaka day is wrong. Scheduling an Osaka activity on a Tokyo departure day is wrong. Check every placement.
 
 RESTAURANT TIMING RULE: Fish markets, breakfast cafes, and morning markets → 7am–12pm only. Lunch restaurants → 11:30am–2pm. Dinner → 5:30pm–8:30pm.
-
-GEOGRAPHIC RULE: Only schedule city-assigned activities on that city's days. Do not backtrack (e.g., do not insert a Tokyo activity into a Kyoto day or vice versa).
 
 PACE: ${input.userPreferences.pace} | Interests: ${input.userPreferences.interests.join(", ")}${input.userPreferences.budgetLevel ? ` | Budget: ${input.userPreferences.budgetLevel}` : ""}${flightBlock}
 
@@ -352,6 +552,8 @@ General rules:
 - Full-day activities [FULL-DAY] need their own day with only dinner added
 - Transition days: include a travel/transfer item when moving city to city
 - Keep "notes" and "reasoning" to 1 sentence each
+
+SELF-CHECK before finalizing: For each day verify (1) every activity's city tag matches the day's city, (2) no activity appears more than once across all days, (3) on the last day all activities finish before the departure cutoff.
 
 Return ONLY this JSON structure (no other text, no markdown):
 {
