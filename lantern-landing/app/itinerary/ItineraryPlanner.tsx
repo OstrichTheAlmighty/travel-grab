@@ -1289,8 +1289,11 @@ export default function ItineraryPlanner() {
           .map((c, i) => ({ name: c.city, days: c.days, order: i + 1 })),
         activities,
         userPreferences: {
-          pace:      mapPace(trip.pace),
-          interests: obStyles.length > 0 ? obStyles : ["culture"],
+          pace:               mapPace(trip.pace),
+          interests:          obStyles.length > 0 ? obStyles : ["culture"],
+          budgetLevel:        budgetTier,
+          wakeTime:           trip.wakeTime,
+          cuisinePreferences: cuisinePrefs.length > 0 ? cuisinePrefs : undefined,
         },
         ...(outboundArrivesAt || returnDepartsAt ? {
           flights: {

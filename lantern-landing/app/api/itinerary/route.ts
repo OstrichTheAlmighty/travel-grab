@@ -50,7 +50,7 @@ function inferKind(type: string, title: string): SlotKind {
   return "activity";
 }
 
-function transformDay(day: ClaudeDay): PlannedDay {
+function transformDay(day: ClaudeDay, paceLimitMin: number): PlannedDay {
   const slots: PlannedSlot[] = (day.schedule ?? []).map((item) => {
     const startMinutes    = timeToMin(item.time ?? "09:00");
     const durationMinutes = parseDur(item.duration ?? "1h");
@@ -72,7 +72,7 @@ function transformDay(day: ClaudeDay): PlannedDay {
     .reduce((s, sl) => s + sl.durationMinutes, 0);
 
   const warnings: import("@/lib/itinerary/types").DayWarning[] = [];
-  if (allScheduleMin > 600) {
+  if (allScheduleMin > paceLimitMin) {
     warnings.push({
       type:    "packed",
       message: `Long day — ${Math.round(allScheduleMin / 60)}h of activities & meals scheduled`,
@@ -100,7 +100,12 @@ export async function POST(req: NextRequest) {
     const input = await req.json();
     const result = await generateItinerary(input);
 
-    const days: PlannedDay[] = (result.days ?? []).map(transformDay);
+    // Warning threshold mirrors the pace limit enforced in the prompt
+    const paceLimitMin = ({ relaxed: 360, moderate: 480, packed: 600 } as Record<string, number>)[
+      input.userPreferences?.pace ?? "moderate"
+    ] ?? 480;
+
+    const days: PlannedDay[] = (result.days ?? []).map((day) => transformDay(day, paceLimitMin));
     const totalScheduled = days.reduce((s, d) => s + d.scheduledActivityCount, 0);
     const dropped = result._dropped ?? [];
 

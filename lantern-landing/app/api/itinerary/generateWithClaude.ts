@@ -25,7 +25,9 @@ interface ItineraryRequest {
   userPreferences: {
     pace: "relaxed" | "moderate" | "packed";
     interests: string[];
-    budgetLevel?: "budget" | "mid" | "luxury";
+    budgetLevel?: "budget" | "moderate" | "premium";
+    wakeTime?: string;            // "HH:MM" 24h — from trip preferences
+    cuisinePreferences?: string[]; // e.g. ["Street food", "Ramen & noodles"]
   };
   flights?: {
     outboundArrivesAt?: string;
@@ -436,6 +438,22 @@ function recoverTruncatedJson(text: string): object | null {
 function buildPrompt(input: ItineraryRequest): string {
   const sortedCities = [...input.cities].sort((a, b) => a.order - b.order);
   const totalDays    = sortedCities.reduce((s, c) => s + c.days, 0);
+  const prefs        = input.userPreferences;
+
+  // ── Wake time ────────────────────────────────────────────────────────────
+  const wakeStr = prefs.wakeTime ?? "08:00";
+  const [wakeH, wakeM] = wakeStr.split(":").map(Number);
+  const wakeMin = wakeH * 60 + (wakeM ?? 0);
+  // Format as readable "8:00 AM" for the prompt
+  const wakeDisplay = `${wakeH > 12 ? wakeH - 12 : wakeH || 12}:${String(wakeM ?? 0).padStart(2, "0")} ${wakeH < 12 ? "AM" : "PM"}`;
+  // First sightseeing slot: wake + 45 min for breakfast
+  const sightH = String(Math.floor((wakeMin + 45) / 60)).padStart(2, "0");
+  const sightM = String((wakeMin + 45) % 60).padStart(2, "0");
+
+  // ── Pace → max sightseeing hours per day ────────────────────────────────
+  const paceLimitHours: Record<string, number> = { relaxed: 6, moderate: 8, packed: 10 };
+  const maxHours = paceLimitHours[prefs.pace] ?? 8;
+  const maxMin   = maxHours * 60;
 
   // ── City schedule with date ranges ──────────────────────────────────────
   const start = new Date(input.startDate + "T00:00:00");
@@ -531,29 +549,103 @@ function buildPrompt(input: ItineraryRequest): string {
     }
   }
 
+  // ── Budget rules ─────────────────────────────────────────────────────────
+  let budgetBlock = "";
+  if (prefs.budgetLevel === "budget") {
+    budgetBlock = `
+
+BUDGET-SAVVY RULES — NON-NEGOTIABLE:
+- EXCLUDE theme parks entirely (Tokyo Disneyland, DisneySea, Universal Studios Japan, etc.)
+- EXCLUDE paid attractions over $40/person unless they are a food/culinary experience
+- Meals: average $10–20/person — prioritize street food, ramen shops, standing sushi bars, izakayas, food markets
+- Prioritize FREE attractions: temples, shrines, parks, neighborhoods, markets, viewpoints
+- ALLOWED: cooking classes ($40–50 ok), food tours ($25–45 ok), market visits (free–$15)
+- DO NOT suggest expensive omakase, high-end kaiseki, or luxury hotel dining`;
+  } else if (prefs.budgetLevel === "premium") {
+    budgetBlock = `
+
+PREMIUM EXPERIENCE RULES:
+- Prioritize high-end, exclusive, and unique experiences
+- Include fine dining: omakase sushi, kaiseki, or Michelin-starred restaurants
+- Prefer private tours, skip crowded general-admission queues where premium options exist
+- Include at least one luxury or bucket-list experience per city`;
+  }
+
+  // ── Food integration ──────────────────────────────────────────────────────
+  const isFoodFocused = prefs.interests.some((i) =>
+    i === "food_focused" || i === "food" || i === "culinary",
+  );
+  let foodBlock = "";
+  if (isFoodFocused) {
+    foodBlock = `
+
+FOOD EXPERIENCES — AUTO-INCLUDE (in addition to listed activities):
+For each city, proactively schedule at least:
+1. Morning: a food market, fish market, or breakfast specialty spot (specific real name)
+2. Lunch: a local specialty restaurant — ramen counter, sushi stall, noodle shop, or bento spot (real place name)
+3. Dinner: an izakaya, yakitori bar, or food-focused evening experience (real place name)
+These are mandatory food anchors per city. Label them type "meal".`;
+  }
+
+  // ── Cuisine preferences ───────────────────────────────────────────────────
+  let cuisineBlock = "";
+  const cuisine = prefs.cuisinePreferences ?? [];
+  if (cuisine.length > 0) {
+    const rules: string[] = [];
+    if (cuisine.some((c) => c.toLowerCase().includes("street food")))
+      rules.push("Include at least one street food stall or night market food alley");
+    if (cuisine.some((c) => c.toLowerCase().includes("ramen")))
+      rules.push("Schedule a dedicated ramen restaurant visit (real shop name, not generic)");
+    if (cuisine.some((c) => c.toLowerCase().includes("izakaya")))
+      rules.push("Schedule at least one izakaya evening — specifically an izakaya-style dinner");
+    if (cuisine.some((c) => c.toLowerCase().includes("cooking")))
+      rules.push("If schedule permits, include a cooking class (sushi-making, ramen workshop, tempura class)");
+    if (cuisine.some((c) => c.toLowerCase().includes("sushi")))
+      rules.push("Include a sushi counter or sushi market experience");
+    if (cuisine.some((c) => c.toLowerCase().includes("fine dining") || c.toLowerCase().includes("omakase")))
+      rules.push("Include one omakase or high-end Japanese dining experience");
+    if (cuisine.some((c) => c.toLowerCase().includes("market")))
+      rules.push("Include at least one indoor or outdoor food market visit");
+    if (rules.length > 0) {
+      cuisineBlock = `
+
+CUISINE PREFERENCES (${cuisine.join(", ")}):
+${rules.map((r) => `- ${r}`).join("\n")}`;
+    }
+  }
+
+  // Fish market timing: only schedulable if wake time allows arriving by 06:30
+  const fishMarketNote = wakeH >= 7
+    ? " Note: fish markets like Tsukiji require 06:00 arrival — skip them if wake time is 07:00 or later."
+    : "";
+
   return `Generate a ${totalDays}-day travel itinerary.
 
 CITY SCHEDULE:
 ${cityScheduleLines.join("\n")}
 
 ACTIVITIES (${input.activities.length} total — each is tagged with which city/days it belongs to):
-${activityBlock}
+${activityBlock.length > 0 ? activityBlock : "  (No pre-saved activities — build the schedule from scratch)"}
+
+WAKE TIME — HARD CONSTRAINT: User wakes at ${wakeDisplay} (${wakeStr}). No activity of any kind may be scheduled before ${wakeStr}. The first scheduled item each day must be breakfast at ${wakeStr}. Sightseeing begins at ${sightH}:${sightM} at the earliest.${fishMarketNote}
+
+DAILY PACE LIMIT — HARD CONSTRAINT: User preference is "${prefs.pace}". Maximum ${maxHours}h (${maxMin} min) of combined sightseeing + meals per day. Do not schedule more. Prefer quality over quantity — a day with 4 great experiences beats a cramped 8-stop day.
 
 DUPLICATE RULE — CRITICAL: Each activity ID can appear AT MOST ONCE across all ${totalDays} days. "Itsukushima Jinja" and "Itsukushima Shrine" are the same place — pick one name and schedule it once only. Never schedule the same place twice under any variation of its name.
 
 GEOGRAPHIC RULE — ABSOLUTE: Each activity's city tag (e.g. [OSAKA-ONLY, Days 5–7]) tells you exactly which days it may appear. Scheduling a Kyoto activity on an Osaka day is wrong. Scheduling an Osaka activity on a Tokyo departure day is wrong. Check every placement.
 
-RESTAURANT TIMING RULE: Fish markets, breakfast cafes, and morning markets → 7am–12pm only. Lunch restaurants → 11:30am–2pm. Dinner → 5:30pm–8:30pm.
+RESTAURANT TIMING RULE: Breakfast cafes and morning markets → ${wakeStr}–12:00 only. Lunch → 11:30–14:00. Dinner → 17:30–20:30.${budgetBlock}${foodBlock}${cuisineBlock}
 
-PACE: ${input.userPreferences.pace} | Interests: ${input.userPreferences.interests.join(", ")}${input.userPreferences.budgetLevel ? ` | Budget: ${input.userPreferences.budgetLevel}` : ""}${flightBlock}
+PACE: ${prefs.pace} | Interests: ${prefs.interests.join(", ")}${prefs.budgetLevel ? ` | Budget: ${prefs.budgetLevel}` : ""}${flightBlock}
 
 General rules:
-- Meals: breakfast 7-9am, lunch 12-2pm, dinner 6-8pm
+- Meals: breakfast ${wakeStr}, lunch 12:00–14:00, dinner 18:00–20:30
 - Full-day activities [FULL-DAY] need their own day with only dinner added
 - Transition days: include a travel/transfer item when moving city to city
 - Keep "notes" and "reasoning" to 1 sentence each
 
-SELF-CHECK before finalizing: For each day verify (1) every activity's city tag matches the day's city, (2) no activity appears more than once across all days, (3) on the last day all activities finish before the departure cutoff.
+SELF-CHECK before finalizing: For each day verify (1) no item starts before ${wakeStr}, (2) total sightseeing + meals ≤ ${maxHours}h, (3) every activity's city tag matches the day's city, (4) no activity appears more than once, (5) on the last day all items finish before the departure cutoff.
 
 Return ONLY this JSON structure (no other text, no markdown):
 {
