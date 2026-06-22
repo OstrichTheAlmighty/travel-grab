@@ -52,9 +52,9 @@ function inferKind(type: string, title: string): SlotKind {
 
 function transformDay(day: ClaudeDay): PlannedDay {
   const slots: PlannedSlot[] = (day.schedule ?? []).map((item) => {
-    const startMinutes   = timeToMin(item.time ?? "09:00");
+    const startMinutes    = timeToMin(item.time ?? "09:00");
     const durationMinutes = parseDur(item.duration ?? "1h");
-    const kind           = inferKind(item.type ?? "activity", item.activity ?? "");
+    const kind            = inferKind(item.type ?? "activity", item.activity ?? "");
     return {
       kind,
       startMinutes,
@@ -65,7 +65,19 @@ function transformDay(day: ClaudeDay): PlannedDay {
     };
   });
 
-  const actSlots = slots.filter((s) => s.kind === "activity");
+  const actSlots       = slots.filter((s) => s.kind === "activity");
+  const totalActMin    = actSlots.reduce((s, sl) => s + sl.durationMinutes, 0);
+  const allScheduleMin = slots
+    .filter((s) => s.kind === "activity" || s.kind === "meal")
+    .reduce((s, sl) => s + sl.durationMinutes, 0);
+
+  const warnings: import("@/lib/itinerary/types").DayWarning[] = [];
+  if (allScheduleMin > 600) {
+    warnings.push({
+      type:    "packed",
+      message: `Long day — ${Math.round(allScheduleMin / 60)}h of activities & meals scheduled`,
+    });
+  }
 
   return {
     dayIndex:               (day.dayIndex ?? 1) - 1,
@@ -76,8 +88,8 @@ function transformDay(day: ClaudeDay): PlannedDay {
     daySummary:             day.reasoning,
     slots,
     scheduledActivityCount: actSlots.length,
-    totalActivityMinutes:   actSlots.reduce((s, sl) => s + sl.durationMinutes, 0),
-    warnings:               [],
+    totalActivityMinutes:   totalActMin,
+    warnings,
   };
 }
 

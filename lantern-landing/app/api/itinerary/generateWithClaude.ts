@@ -1,49 +1,66 @@
 import Anthropic from "@anthropic-ai/sdk";
 
+// ── Types ──────────────────────────────────────────────────────────────────────
+
+interface CityConfig {
+  name: string;
+  days: number;
+  order: number;
+}
+
+interface ActivityInput {
+  sourceId: string;
+  title: string;
+  category: string;
+  estimatedDurationHours: number;
+  isFullDay?: boolean;
+  city?: string;  // saved city from the Activities page search context
+}
+
 interface ItineraryRequest {
   startDate: string;
   endDate: string;
-  cities: {
-    name: string;
-    days: number;
-    order: number;
-  }[];
-  activities: {
-    sourceId: string;
-    title: string;
-    category: string;
-    estimatedDurationHours: number;
-    isFullDay?: boolean;
-  }[];
+  cities: CityConfig[];
+  activities: ActivityInput[];
   userPreferences: {
     pace: "relaxed" | "moderate" | "packed";
     interests: string[];
     budgetLevel?: "budget" | "mid" | "luxury";
   };
   flights?: {
-    outboundArrivesAt?: string;   // ISO timestamp — when flight lands on day 1
-    returnDepartsAt?: string;     // ISO timestamp — when return flight leaves on last day
-    arrivalAirport?: string;      // IATA code for inbound landing airport
-    departureAirport?: string;    // IATA code for return flight departure airport
+    outboundArrivesAt?: string;
+    returnDepartsAt?: string;
+    arrivalAirport?: string;
+    departureAirport?: string;
   };
 }
 
-interface DroppedActivity {
+export interface DroppedActivity {
   sourceId: string;
   title: string;
   reason: string;
 }
 
+interface ClaudeScheduleItem {
+  activity: string;
+  time: string;
+  duration: string;
+  type: string;
+  notes?: string;
+}
+
+interface ClaudeDay {
+  dayIndex: number;
+  date: string;
+  city: string;
+  theme: string;
+  reasoning?: string;
+  schedule: ClaudeScheduleItem[];
+}
+
 interface ClaudeItinerary {
   summary?: { theme: string; highlights: string[] };
-  days: {
-    dayIndex: number;
-    date: string;
-    city: string;
-    theme: string;
-    reasoning?: string;
-    schedule: { activity: string; time: string; duration: string; type: string; notes?: string }[];
-  }[];
+  days: ClaudeDay[];
 }
 
 export interface GenerateItineraryResult extends ClaudeItinerary {
@@ -105,46 +122,88 @@ export async function generateItinerary(input: ItineraryRequest): Promise<Genera
     }
   }
 
-  // ── Activity coverage ──────────────────────────────────────────────────────
-  const dropped = computeDropped(input.activities, itinerary);
-  const scheduledCount = (itinerary.days ?? [])
+  // ── Post-processing ────────────────────────────────────────────────────────
+
+  // 1. Remove duplicate activities (Claude sometimes schedules the same place twice)
+  const { cleaned, duplicateDropped } = deduplicateSchedule(itinerary);
+
+  // 2. Compute which input activities were not scheduled at all
+  const missed = computeMissed(input.activities, cleaned);
+
+  const dropped: DroppedActivity[] = [...duplicateDropped, ...missed];
+
+  // ── Logging ───────────────────────────────────────────────────────────────
+  const scheduledCount = (cleaned.days ?? [])
     .flatMap((d) => (d.schedule ?? []).filter((s) => s.type === "activity"))
     .length;
 
   console.log(
-    `[generateItinerary] input=${input.activities.length} scheduled=${scheduledCount} dropped=${dropped.length}`,
+    `[generateItinerary] input=${input.activities.length} scheduled=${scheduledCount}` +
+    ` dupes_removed=${duplicateDropped.length} missed=${missed.length}`,
   );
-  if (dropped.length > 0) {
-    console.log("[generateItinerary] Dropped activities:", dropped.map((d) => d.title).join(" | "));
+  if (duplicateDropped.length > 0) {
+    console.log("[generateItinerary] Duplicates removed:", duplicateDropped.map((d) => d.title).join(" | "));
+  }
+  if (missed.length > 0) {
+    console.log("[generateItinerary] Not scheduled:", missed.map((d) => d.title).join(" | "));
   }
 
-  return { ...itinerary, _dropped: dropped };
+  return { ...cleaned, _dropped: dropped };
 }
 
-// ── Helpers ────────────────────────────────────────────────────────────────────
+// ── Post-processing helpers ────────────────────────────────────────────────────
 
-function computeDropped(
-  inputActivities: ItineraryRequest["activities"],
+function deduplicateSchedule(itinerary: ClaudeItinerary): {
+  cleaned: ClaudeItinerary;
+  duplicateDropped: DroppedActivity[];
+} {
+  const seen = new Set<string>();
+  const duplicateDropped: DroppedActivity[] = [];
+
+  const cleanedDays = itinerary.days.map((day) => ({
+    ...day,
+    schedule: day.schedule.filter((item) => {
+      // Meals, logistics, and transfers are allowed to recur (breakfast every day, etc.)
+      if (item.type !== "activity") return true;
+
+      const key = normalise(item.activity);
+      if (seen.has(key)) {
+        duplicateDropped.push({
+          sourceId: "",
+          title:    item.activity,
+          reason:   "Duplicate — already scheduled on an earlier day (removed)",
+        });
+        return false;
+      }
+      seen.add(key);
+      return true;
+    }),
+  }));
+
+  return { cleaned: { ...itinerary, days: cleanedDays }, duplicateDropped };
+}
+
+function computeMissed(
+  inputActivities: ActivityInput[],
   itinerary: ClaudeItinerary,
 ): DroppedActivity[] {
-  // Build a normalised set of every activity title Claude scheduled
+  // Collect every activity title Claude scheduled (normalised)
   const scheduled = new Set<string>();
   for (const day of itinerary.days ?? []) {
     for (const item of day.schedule ?? []) {
       if (item.activity) {
-        const norm = item.activity.toLowerCase().trim();
-        scheduled.add(norm);
-        // Also add substrings so "Senso-ji Temple" matches "Senso-ji"
-        norm.split(/[\s–-]+/).forEach((w) => w.length > 4 && scheduled.add(w));
+        const n = normalise(item.activity);
+        scheduled.add(n);
+        // Add significant words so "Senso-ji Temple" matches "Senso-ji"
+        n.split(/[\s–\-/]+/).forEach((w) => w.length > 4 && scheduled.add(w));
       }
     }
   }
 
   return inputActivities
     .filter((a) => {
-      const title = a.title.toLowerCase().trim();
+      const title = normalise(a.title);
       if (scheduled.has(title)) return false;
-      // Partial match: if any scheduled item contains ≥60% of the input title
       for (const s of scheduled) {
         if (s.includes(title) || title.includes(s)) return false;
       }
@@ -153,8 +212,12 @@ function computeDropped(
     .map((a) => ({
       sourceId: a.sourceId,
       title:    a.title,
-      reason:   "Not scheduled — insufficient time in itinerary",
+      reason:   "Not scheduled — insufficient time or not assigned by AI",
     }));
+}
+
+function normalise(s: string): string {
+  return s.toLowerCase().replace(/[^a-z0-9\s]/g, "").trim();
 }
 
 function recoverTruncatedJson(text: string): object | null {
@@ -173,65 +236,124 @@ function recoverTruncatedJson(text: string): object | null {
   return null;
 }
 
-// ── Prompt ────────────────────────────────────────────────────────────────────
+// ── Prompt builder ─────────────────────────────────────────────────────────────
 
 function buildPrompt(input: ItineraryRequest): string {
-  const totalDays     = input.cities.reduce((sum, c) => sum + c.days, 0);
-  const citiesStr     = input.cities.map((c) => `${c.name} (${c.days} days)`).join(" → ");
-  const activitiesStr = input.activities
-    .map((a) => `- ${a.title} (${a.estimatedDurationHours}h, ${a.category})${a.isFullDay ? " [FULL-DAY]" : ""}`)
-    .join("\n");
+  const sortedCities = [...input.cities].sort((a, b) => a.order - b.order);
+  const totalDays    = sortedCities.reduce((s, c) => s + c.days, 0);
 
-  // ── Flight constraint block ──────────────────────────────────────────────
-  let flightBlock = "";
-  if (input.flights?.outboundArrivesAt || input.flights?.returnDepartsAt) {
-    flightBlock = "\n\nFLIGHT CONSTRAINTS — THESE ARE HARD RULES, DO NOT VIOLATE:";
+  // ── City schedule with date ranges ──────────────────────────────────────
+  const start = new Date(input.startDate + "T00:00:00");
+  let dayOffset = 0;
+  const cityScheduleLines: string[] = [];
+  const cityDateRanges: { name: string; startDay: number; endDay: number }[] = [];
 
-    if (input.flights.outboundArrivesAt) {
-      const arrDate = new Date(input.flights.outboundArrivesAt);
-      const arrTime = arrDate.toTimeString().slice(0, 5); // "HH:MM"
-      const [arrH, arrM] = arrTime.split(":").map(Number);
-      const firstActH = Math.min(23, arrH + 2);
-      const firstActTime = `${String(firstActH).padStart(2, "0")}:${String(arrM).padStart(2, "0")}`;
-      const airportNote = input.flights.arrivalAirport
-        ? ` at ${input.flights.arrivalAirport} airport`
-        : "";
-      flightBlock +=
-        `\n- DAY 1 (${input.startDate}): Outbound flight lands${airportNote} at ${arrTime}.` +
-        ` First sightseeing activity MUST NOT start before ${firstActTime}.` +
-        ` Start Day 1 with: airport arrival → immigration/baggage → transit to hotel → hotel check-in.` +
-        ` Only schedule light activities or dinner after ${firstActTime}.`;
-    }
+  for (const city of sortedCities) {
+    const from = new Date(start);
+    from.setDate(from.getDate() + dayOffset);
+    const to   = new Date(from);
+    to.setDate(to.getDate() + city.days - 1);
+    const fromStr = from.toISOString().slice(0, 10);
+    const toStr   = to.toISOString().slice(0, 10);
+    cityScheduleLines.push(
+      `  Days ${dayOffset + 1}–${dayOffset + city.days} (${fromStr} → ${toStr}): ${city.name}`,
+    );
+    cityDateRanges.push({ name: city.name, startDay: dayOffset + 1, endDay: dayOffset + city.days });
+    dayOffset += city.days;
+  }
 
-    if (input.flights.returnDepartsAt) {
-      const depDate   = new Date(input.flights.returnDepartsAt);
-      const depTime   = depDate.toTimeString().slice(0, 5); // "HH:MM"
-      const [depH, depM] = depTime.split(":").map(Number);
-      const transferH = Math.max(0, depH - 2);
-      const transferTime = `${String(transferH).padStart(2, "0")}:${String(depM).padStart(2, "0")}`;
-      const airport   = input.flights.departureAirport ?? "the departure airport";
-      flightBlock +=
-        `\n- LAST DAY (${input.endDate}): Return flight departs from ${airport} at ${depTime}.` +
-        ` Schedule airport transfer/departure as the LAST item, leaving hotel by ${transferTime}.` +
-        ` Use "${airport}" — do NOT use any other airport name.` +
-        ` Only schedule morning activities that finish before ${transferTime}.`;
+  // ── Activities grouped by city ───────────────────────────────────────────
+  const cityGroups = new Map<string, string[]>();
+  const flexGroup: string[] = [];
+
+  for (const city of sortedCities) {
+    cityGroups.set(city.name, []);
+  }
+
+  for (const a of input.activities) {
+    const line =
+      `  - [${a.sourceId.slice(0, 8)}] ${a.title}` +
+      ` (${a.estimatedDurationHours}h, ${a.category})` +
+      (a.isFullDay ? " [FULL-DAY — needs its own day]" : "");
+
+    // Match saved city to one of the trip cities
+    const savedCity = a.city?.toLowerCase().split(",")[0].trim() ?? "";
+    const matched = savedCity
+      ? sortedCities.find(
+          (c) =>
+            c.name.toLowerCase().includes(savedCity) ||
+            savedCity.includes(c.name.toLowerCase().split(",")[0].trim()),
+        )
+      : null;
+
+    if (matched) {
+      cityGroups.get(matched.name)!.push(line);
+    } else {
+      flexGroup.push(line);
     }
   }
 
-  return `Generate a ${totalDays}-day itinerary for: ${citiesStr}
-Dates: ${input.startDate} to ${input.endDate}
-Pace: ${input.userPreferences.pace} | Interests: ${input.userPreferences.interests.join(", ")}${input.userPreferences.budgetLevel ? ` | Budget: ${input.userPreferences.budgetLevel}` : ""}${flightBlock}
+  const activityBlock = [
+    ...sortedCities.map((c) => {
+      const acts = cityGroups.get(c.name) ?? [];
+      if (acts.length === 0) return null;
+      const range = cityDateRanges.find((r) => r.name === c.name)!;
+      return `${c.name} (Days ${range.startDay}–${range.endDay}):\n${acts.join("\n")}`;
+    }).filter(Boolean),
+    ...(flexGroup.length > 0 ? [`Any city (schedule where they fit):\n${flexGroup.join("\n")}`] : []),
+  ].join("\n\n");
 
-Activities to schedule (${input.activities.length} total — include as many as possible):
-${activitiesStr || "(none — build a sightseeing day)"}
+  // ── Flight constraints ───────────────────────────────────────────────────
+  let flightBlock = "";
+  if (input.flights?.outboundArrivesAt || input.flights?.returnDepartsAt) {
+    flightBlock = "\n\nFLIGHT CONSTRAINTS — HARD RULES:";
+
+    if (input.flights.outboundArrivesAt) {
+      const arr  = new Date(input.flights.outboundArrivesAt);
+      const arrT = arr.toTimeString().slice(0, 5);
+      const [h, m] = arrT.split(":").map(Number);
+      const firstT = `${String(Math.min(23, h + 2)).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+      const apNote = input.flights.arrivalAirport ? ` at ${input.flights.arrivalAirport}` : "";
+      flightBlock +=
+        `\n- Day 1 (${input.startDate}): Outbound lands${apNote} at ${arrT}.` +
+        ` No sightseeing before ${firstT}. Begin with: arrival → immigration → hotel check-in.`;
+    }
+
+    if (input.flights.returnDepartsAt) {
+      const dep  = new Date(input.flights.returnDepartsAt);
+      const depT = dep.toTimeString().slice(0, 5);
+      const [h, m] = depT.split(":").map(Number);
+      const leaveT = `${String(Math.max(0, h - 2)).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+      const ap = input.flights.departureAirport ?? "departure airport";
+      flightBlock +=
+        `\n- Last day (${input.endDate}): Return departs from ${ap} at ${depT}.` +
+        ` Leave hotel by ${leaveT}. Last schedule item must be departure to ${ap}. Use exactly "${ap}" — no other airport.`;
+    }
+  }
+
+  return `Generate a ${totalDays}-day travel itinerary.
+
+CITY SCHEDULE (activities MUST stay in their assigned city on the correct days):
+${cityScheduleLines.join("\n")}
+
+ACTIVITIES (${input.activities.length} total — schedule as many as possible):
+${activityBlock}
+
+DUPLICATE RULE — CRITICAL: Each activity ID (shown in brackets) can appear AT MOST ONCE across all ${totalDays} days. Never schedule the same place twice, even under a slightly different name.
+
+RESTAURANT TIMING RULE: Fish markets, breakfast cafes, and morning markets → 7am–12pm only. Lunch restaurants → 11:30am–2pm. Dinner → 5:30pm–8:30pm.
+
+GEOGRAPHIC RULE: Only schedule city-assigned activities on that city's days. Do not backtrack (e.g., do not insert a Tokyo activity into a Kyoto day or vice versa).
+
+PACE: ${input.userPreferences.pace} | Interests: ${input.userPreferences.interests.join(", ")}${input.userPreferences.budgetLevel ? ` | Budget: ${input.userPreferences.budgetLevel}` : ""}${flightBlock}
 
 General rules:
 - Meals: breakfast 7-9am, lunch 12-2pm, dinner 6-8pm
-- Full-day activities [FULL-DAY] get their own dedicated day with only dinner added
-- Account for city-to-city travel time on transition days
-- Keep "notes" and "reasoning" fields to 1 sentence max
+- Full-day activities [FULL-DAY] need their own day with only dinner added
+- Transition days: include a travel/transfer item when moving city to city
+- Keep "notes" and "reasoning" to 1 sentence each
 
-Return ONLY this JSON (no other text, no markdown fences):
+Return ONLY this JSON structure (no other text, no markdown):
 {
   "summary": {"theme": "...", "highlights": ["...", "..."]},
   "days": [
