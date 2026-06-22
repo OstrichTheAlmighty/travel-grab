@@ -35,12 +35,11 @@ Output ONLY a single valid JSON object — no markdown, no backticks, no comment
   const userPrompt = buildPrompt(input);
 
   const response = await client.messages.create({
-    model: "claude-3-5-sonnet-20241022",
+    model: "claude-sonnet-4-6",
     max_tokens: 8192,
     system: systemPrompt,
     messages: [
-      { role: "user",      content: userPrompt },
-      { role: "assistant", content: "{" },   // prefill — forces pure JSON, no preamble
+      { role: "user", content: userPrompt },
     ],
   });
 
@@ -51,8 +50,11 @@ Output ONLY a single valid JSON object — no markdown, no backticks, no comment
     throw new Error(`Unexpected response type: ${content.type}`);
   }
 
-  // The assistant was prefilled with "{" so we prepend it back
-  const rawText = "{" + content.text;
+  // Strip markdown fences if the model wrapped the response
+  let rawText = content.text.trim();
+  if (rawText.startsWith("```")) {
+    rawText = rawText.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "").trim();
+  }
 
   console.log(`[generateItinerary] stop_reason=${stopReason} chars=${rawText.length}`);
 
