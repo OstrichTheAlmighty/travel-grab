@@ -1,9 +1,5 @@
 import Anthropic from "@anthropic-ai/sdk";
 
-const client = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
-
 interface ItineraryRequest {
   startDate: string;
   endDate: string;
@@ -41,6 +37,7 @@ export async function generateItinerary(input: ItineraryRequest) {
 
 Output ONLY valid JSON with no markdown or explanations.`;
 
+  const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
   const userPrompt = buildPrompt(input);
 
   const response = await client.messages.create({
