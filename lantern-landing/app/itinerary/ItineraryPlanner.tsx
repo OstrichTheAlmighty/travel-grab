@@ -25,6 +25,17 @@ type SavedMeta = {
   city?:        string;  // destination searched when activity was saved
 };
 
+interface AiRecommendation {
+  id:            string;
+  title:         string;
+  city:          string;
+  category:      string;
+  estimatedCost: string;
+  duration:      string;
+  reason:        string;
+  tags:          string[];
+}
+
 type UIPace    = "relaxed" | "balanced" | "packed";
 type UITransit = "walking" | "public transit" | "taxi" | "mixed";
 
@@ -841,6 +852,18 @@ export default function ItineraryPlanner() {
   const [modalPlaceDetail,  setModalPlaceDetail]   = useState<PlaceDetailData | null>(null);
   const [modalDetailLoading, setModalDetailLoading] = useState(false);
 
+  // AI Recommendations panel
+  const [aiRecs,        setAiRecs]        = useState<AiRecommendation[]>([]);
+  const [aiRecsStatus,  setAiRecsStatus]  = useState<"idle" | "loading" | "loaded" | "error">("idle");
+  const [aiRecsFilter,  setAiRecsFilter]  = useState("all");
+  const [showAiRecs,    setShowAiRecs]    = useState(false);
+  const [dismissedIds,  setDismissedIds]  = useState<Set<string>>(new Set());
+  const [addedRecIds,   setAddedRecIds]   = useState<Set<string>>(new Set());
+
+  // Personalization extras (cuisine + budget tier, stored alongside trip)
+  const [cuisinePrefs, setCuisinePrefs] = useState<string[]>([]);
+  const [budgetTier,   setBudgetTier]   = useState<"budget" | "moderate" | "premium">("moderate");
+
   // Onboarding state (new users see a guided wizard; existing users skip to "done")
   type ObStep = "destination" | "dates" | "style" | "recommendations" | "cities" | "done";
   const [obStep,           setObStep]           = useState<ObStep>("done");
@@ -1094,6 +1117,56 @@ export default function ItineraryPlanner() {
       localStorage.removeItem("travelgrab:saved-activities-data");
     } catch { /* ignore */ }
     updateTripStore({ savedActivities: [] });
+  }
+
+  async function loadAiRecommendations() {
+    if (aiRecsStatus === "loading") return;
+    setAiRecsStatus("loading");
+    setAiRecs([]);
+    setDismissedIds(new Set());
+    setAddedRecIds(new Set());
+    try {
+      const res = await fetch("/api/recommendations", {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({
+          preferences:    obStyles,
+          cities:         trip.cities.filter((c) => c.city.trim()).map((c) => c.city),
+          budget:         budgetTier,
+          pace:           trip.pace,
+          cuisine:        cuisinePrefs,
+          existingTitles: Object.values(savedMeta).map((m) => m.title),
+        }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      const data = await res.json() as { recommendations: AiRecommendation[] };
+      setAiRecs(data.recommendations ?? []);
+      setAiRecsStatus("loaded");
+    } catch {
+      setAiRecsStatus("error");
+    }
+  }
+
+  function addAiRecToTrip(rec: AiRecommendation) {
+    const sourceId = `ai-rec-${rec.id}`;
+    if (savedIds.includes(sourceId)) return;
+    const meta: SavedMeta = {
+      title:        rec.title,
+      category:     rec.category === "hidden_gems" ? "hidden_gems" : rec.category,
+      neighborhood: rec.city,
+      duration:     rec.duration,
+      rating:       0,
+      city:         rec.city,
+    };
+    const newIds  = [...savedIds, sourceId];
+    const newMeta = { ...savedMeta, [sourceId]: meta };
+    setSavedIds(newIds);
+    setSavedMeta(newMeta);
+    setAddedRecIds((prev) => new Set([...prev, rec.id]));
+    try {
+      localStorage.setItem("travelgrab:saved-activities",      JSON.stringify(newIds));
+      localStorage.setItem("travelgrab:saved-activities-data", JSON.stringify(newMeta));
+    } catch { /* ignore */ }
   }
 
   function startOnboarding() {
@@ -1891,6 +1964,183 @@ export default function ItineraryPlanner() {
             )}
           </SectionCard>
 
+          {/* ── AI Recommends ── */}
+          {obStyles.length > 0 && trip.cities.some((c) => c.city.trim()) && (
+            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] overflow-hidden">
+              {/* Header toggle */}
+              <button
+                type="button"
+                onClick={() => {
+                  const next = !showAiRecs;
+                  setShowAiRecs(next);
+                  if (next && aiRecsStatus === "idle") {
+                    void loadAiRecommendations();
+                  }
+                }}
+                className="w-full flex items-center justify-between px-5 py-4 text-left"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-semibold text-white">AI Recommends</span>
+                  <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-lantern-mint/15 text-lantern-mint font-semibold tracking-wide">
+                    For you
+                  </span>
+                  {aiRecsStatus === "loaded" && aiRecs.length > 0 && (
+                    <span className="text-[10px] text-white/30">
+                      {aiRecs.filter((r) => !dismissedIds.has(r.id)).length} suggestions
+                    </span>
+                  )}
+                </div>
+                <span className={`text-white/30 text-xs transition-transform duration-200 ${showAiRecs ? "rotate-180" : ""}`}>
+                  ▾
+                </span>
+              </button>
+
+              {showAiRecs && (
+                <div className="px-5 pb-5 space-y-3 border-t border-white/[0.06]">
+                  {/* Loading */}
+                  {aiRecsStatus === "loading" && (
+                    <div className="flex items-center justify-center gap-3 py-6">
+                      <span className="h-4 w-4 rounded-full border-2 border-white/10 border-t-lantern-mint animate-spin" />
+                      <span className="text-xs text-white/40">Finding activities for you…</span>
+                    </div>
+                  )}
+
+                  {/* Error */}
+                  {aiRecsStatus === "error" && (
+                    <div className="py-4 text-center">
+                      <p className="text-xs text-red-400/70 mb-2">Couldn't load recommendations</p>
+                      <button
+                        type="button"
+                        onClick={() => { setAiRecsStatus("idle"); void loadAiRecommendations(); }}
+                        className="text-[11px] text-lantern-mint hover:underline"
+                      >
+                        Try again
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Loaded */}
+                  {aiRecsStatus === "loaded" && (() => {
+                    const FILTER_LABELS: Record<string, string> = {
+                      all: "All", food: "Food", culture: "Culture", adventure: "Adventure",
+                      nightlife: "Nightlife", nature: "Nature", hidden_gems: "Hidden Gems", luxury: "Luxury",
+                    };
+                    const available = aiRecs.filter((r) => !dismissedIds.has(r.id));
+                    const visible   = available.filter((r) => aiRecsFilter === "all" || r.category === aiRecsFilter);
+                    const cats      = ["all", ...Array.from(new Set(available.map((r) => r.category)))];
+
+                    return (
+                      <div className="space-y-3 pt-1">
+                        {/* Filter chips */}
+                        <div className="flex gap-1.5 flex-wrap">
+                          {cats.map((f) => (
+                            <button
+                              key={f}
+                              type="button"
+                              onClick={() => setAiRecsFilter(f)}
+                              className={`text-[10px] px-2.5 py-1 rounded-full border capitalize transition-colors ${
+                                aiRecsFilter === f
+                                  ? "border-lantern-mint/50 bg-lantern-mint/10 text-lantern-mint"
+                                  : "border-white/[0.08] text-white/35 hover:text-white/60"
+                              }`}
+                            >
+                              {FILTER_LABELS[f] ?? f}
+                            </button>
+                          ))}
+                        </div>
+
+                        {/* Cards */}
+                        {visible.length === 0 ? (
+                          <p className="text-xs text-white/25 text-center py-3">
+                            No more in this category.
+                          </p>
+                        ) : (
+                          <div className="space-y-2">
+                            {visible.map((rec) => {
+                              const isAdded  = addedRecIds.has(rec.id) || savedIds.includes(`ai-rec-${rec.id}`);
+                              const catStyle = CAT_STYLE[rec.category] ?? "text-white/50 bg-white/5 border-white/10";
+                              return (
+                                <div
+                                  key={rec.id}
+                                  className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-3.5"
+                                >
+                                  {/* Title row */}
+                                  <div className="flex items-start gap-2 mb-1.5">
+                                    <div className="flex-1 min-w-0">
+                                      <p className="text-xs font-semibold text-white leading-snug">{rec.title}</p>
+                                      <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
+                                        <span className="text-[10px] text-white/35">{rec.city}</span>
+                                        <span className="text-white/15">·</span>
+                                        <span className="text-[10px] text-white/35">{rec.duration}</span>
+                                        <span className="text-white/15">·</span>
+                                        <span className="text-[10px] text-white/35">{rec.estimatedCost}</span>
+                                      </div>
+                                    </div>
+                                    <button
+                                      type="button"
+                                      aria-label="Dismiss"
+                                      onClick={() => setDismissedIds((prev) => new Set([...prev, rec.id]))}
+                                      className="shrink-0 text-white/15 hover:text-white/45 transition-colors text-lg leading-none mt-0.5"
+                                    >
+                                      ×
+                                    </button>
+                                  </div>
+
+                                  {/* Reason */}
+                                  <p className="text-[10px] text-white/40 leading-relaxed italic mb-2.5">
+                                    {rec.reason}
+                                  </p>
+
+                                  {/* Tags + Add button */}
+                                  <div className="flex items-center justify-between gap-2">
+                                    <div className="flex gap-1 flex-wrap min-w-0">
+                                      <span className={`shrink-0 rounded-full border px-1.5 py-0.5 text-[9px] font-semibold capitalize ${catStyle}`}>
+                                        {rec.category === "hidden_gems" ? "Hidden Gem" : rec.category}
+                                      </span>
+                                      {rec.tags.slice(0, 2).map((tag) => (
+                                        <span
+                                          key={tag}
+                                          className="rounded-full border border-white/[0.07] px-1.5 py-0.5 text-[9px] text-white/28"
+                                        >
+                                          {tag}
+                                        </span>
+                                      ))}
+                                    </div>
+                                    <button
+                                      type="button"
+                                      onClick={() => { if (!isAdded) addAiRecToTrip(rec); }}
+                                      disabled={isAdded}
+                                      className={`shrink-0 text-[10px] font-semibold px-2.5 py-1 rounded-lg transition-colors ${
+                                        isAdded
+                                          ? "text-lantern-mint/60 bg-lantern-mint/10 cursor-default"
+                                          : "text-lantern-mint border border-lantern-mint/30 hover:bg-lantern-mint/10"
+                                      }`}
+                                    >
+                                      {isAdded ? "Added ✓" : "+ Add"}
+                                    </button>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+
+                        {/* Refresh */}
+                        <button
+                          type="button"
+                          onClick={() => void loadAiRecommendations()}
+                          className="text-[10px] text-white/25 hover:text-lantern-mint transition-colors w-full text-center pt-1"
+                        >
+                          ↺ Refresh recommendations
+                        </button>
+                      </div>
+                    );
+                  })()}
+                </div>
+              )}
+            </div>
+          )}
+
           {/* ── Preferences ── */}
           <SectionCard title="Preferences">
             <div className="grid grid-cols-2 gap-3">
@@ -1928,6 +2178,39 @@ export default function ItineraryPlanner() {
               value={trip.transit}
               onChange={(v) => updateTrip({ transit: v })}
             />
+
+            <ToggleGroup
+              label="Daily budget (per person)"
+              options={["budget", "moderate", "premium"] as ("budget" | "moderate" | "premium")[]}
+              value={budgetTier}
+              onChange={(v) => setBudgetTier(v)}
+              cols={3}
+            />
+
+            <div>
+              <FieldLabel label="Cuisine preferences" note="(affects AI recommendations)" />
+              <div className="flex flex-wrap gap-1.5">
+                {["Street food", "Ramen & noodles", "Izakaya & sake", "Fine dining", "Cooking classes", "Local markets", "Sushi & sashimi", "Vegetarian"].map((opt) => {
+                  const active = cuisinePrefs.includes(opt);
+                  return (
+                    <button
+                      key={opt}
+                      type="button"
+                      onClick={() => setCuisinePrefs((prev) =>
+                        prev.includes(opt) ? prev.filter((x) => x !== opt) : [...prev, opt]
+                      )}
+                      className={`rounded-full border px-2.5 py-1 text-[10px] font-medium transition-colors ${
+                        active
+                          ? "border-lantern-gold/50 bg-lantern-gold/10 text-lantern-gold"
+                          : "border-white/[0.08] text-white/35 hover:text-white/60"
+                      }`}
+                    >
+                      {opt}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </SectionCard>
 
           {/* ── Actions ── */}
