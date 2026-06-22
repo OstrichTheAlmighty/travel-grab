@@ -1222,6 +1222,9 @@ export default function ItineraryPlanner() {
           flights: {
             ...(outboundArrivesAt ? { outboundArrivesAt } : {}),
             ...(returnDepartsAt   ? { returnDepartsAt   } : {}),
+            // Airport IATA codes — only available when user selected a flight
+            ...(selectedFlight?.destination  ? { arrivalAirport:   selectedFlight.destination  } : {}),
+            ...(selectedFlight?.returnOrigin ? { departureAirport: selectedFlight.returnOrigin } : {}),
           },
         } : {}),
       };

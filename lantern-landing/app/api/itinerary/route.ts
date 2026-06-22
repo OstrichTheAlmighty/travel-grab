@@ -22,10 +22,6 @@ interface ClaudeDay {
   schedule:  ClaudeScheduleItem[];
 }
 
-interface ClaudeOutput {
-  summary?: { theme: string; highlights: string[] };
-  days:     ClaudeDay[];
-}
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
@@ -90,18 +86,19 @@ function transformDay(day: ClaudeDay): PlannedDay {
 export async function POST(req: NextRequest) {
   try {
     const input = await req.json();
-    const result = await generateItinerary(input) as ClaudeOutput;
+    const result = await generateItinerary(input);
 
     const days: PlannedDay[] = (result.days ?? []).map(transformDay);
     const totalScheduled = days.reduce((s, d) => s + d.scheduledActivityCount, 0);
+    const dropped = result._dropped ?? [];
 
     const plannerOutput: PlannerOutput = {
       days,
       meta: {
         solverDurationMs:         0,
         totalActivitiesScheduled: totalScheduled,
-        totalActivitiesDropped:   0,
-        droppedActivities:        [],
+        totalActivitiesDropped:   dropped.length,
+        droppedActivities:        dropped,
         conflicts:                [],
       },
     };
