@@ -82,10 +82,19 @@ export interface PlannedDay {
 
 // ── Planner metadata ──────────────────────────────────────────────────────────
 
+export interface DroppedActivitySuggestion {
+  type:             "remove_and_add" | "extend_city" | "increase_pace_day" | "increase_pace_trip";
+  action:           string;
+  benefit:          string;
+  canFitActivities: string[];
+  affectedDays?:    number[];
+}
+
 export interface DroppedActivity {
   sourceId: string;
   title:    string;
   reason:   string;
+  suggestions?: DroppedActivitySuggestion[];
   diagnostic?: {
     type: "pace_limited" | "duplicate" | "geographic" | "flight_conflict";
     // pace_limited

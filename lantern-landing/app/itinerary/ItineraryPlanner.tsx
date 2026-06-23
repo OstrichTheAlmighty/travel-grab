@@ -2335,47 +2335,106 @@ export default function ItineraryPlanner() {
                                 {!diag && (
                                   <p className="text-[11px] text-white/40">{d.reason}</p>
                                 )}
-                                <div className="flex flex-wrap gap-1.5 mt-2">
-                                  <button
-                                    onClick={() => setActiveTab("preferences")}
-                                    className="text-[10px] text-blue-300/70 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-400/15 rounded-md px-2 py-1 transition-colors"
-                                  >
-                                    Change pace in Preferences →
-                                  </button>
-                                  <button
-                                    onClick={() => setActiveTab("itinerary")}
-                                    className="text-[10px] text-white/40 bg-white/[0.04] hover:bg-white/[0.07] border border-white/[0.08] rounded-md px-2 py-1 transition-colors"
-                                  >
-                                    Remove another activity →
-                                  </button>
-                                </div>
+                                {d.suggestions && d.suggestions.length > 0 ? (
+                                  <div className="space-y-2 pt-2 mt-1 border-t border-white/[0.05]">
+                                    {d.suggestions.map((sug, si) => (
+                                      <button
+                                        key={si}
+                                        type="button"
+                                        onClick={() => setActiveTab(sug.type === "remove_and_add" ? "itinerary" : "preferences")}
+                                        className="block text-left w-full group"
+                                      >
+                                        <span className="text-[10px] text-blue-300/60 group-hover:text-blue-300/90 transition-colors group-hover:underline">
+                                          {sug.action}
+                                        </span>
+                                        {sug.benefit && (
+                                          <span className="block text-[10px] text-white/25 mt-0.5">
+                                            {sug.benefit}
+                                          </span>
+                                        )}
+                                      </button>
+                                    ))}
+                                  </div>
+                                ) : (
+                                  <div className="flex flex-wrap gap-1.5 mt-2">
+                                    <button
+                                      onClick={() => setActiveTab("preferences")}
+                                      className="text-[10px] text-blue-300/70 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-400/15 rounded-md px-2 py-1 transition-colors"
+                                    >
+                                      Change pace in Preferences →
+                                    </button>
+                                    <button
+                                      onClick={() => setActiveTab("itinerary")}
+                                      className="text-[10px] text-white/40 bg-white/[0.04] hover:bg-white/[0.07] border border-white/[0.08] rounded-md px-2 py-1 transition-colors"
+                                    >
+                                      Remove another activity →
+                                    </button>
+                                  </div>
+                                )}
                               </div>
                             )}
 
                             {/* Duplicate diagnostic */}
                             {diag?.type === "duplicate" && (
-                              <p className="text-[11px] text-white/40">
-                                {diag.duplicateOf ? (
-                                  <>Already scheduled as <span className="text-white/60">"{diag.duplicateOf}"</span></>
-                                ) : (
-                                  "Same location already appears earlier in the itinerary"
+                              <>
+                                <p className="text-[11px] text-white/40">
+                                  {diag.duplicateOf ? (
+                                    <>Already scheduled as <span className="text-white/60">"{diag.duplicateOf}"</span></>
+                                  ) : (
+                                    "Same location already appears earlier in the itinerary"
+                                  )}
+                                </p>
+                                {d.suggestions && d.suggestions.length > 0 && (
+                                  <div className="space-y-1.5 mt-2 pt-2 border-t border-white/[0.05]">
+                                    {d.suggestions.map((sug, si) => (
+                                      <div key={si}>
+                                        <p className="text-[10px] text-white/40">{sug.action}</p>
+                                        {sug.benefit && (
+                                          <p className="text-[10px] text-white/20 mt-0.5">{sug.benefit}</p>
+                                        )}
+                                      </div>
+                                    ))}
+                                  </div>
                                 )}
-                              </p>
+                              </>
                             )}
 
                             {/* Geographic diagnostic */}
                             {diag?.type === "geographic" && (
-                              <div>
-                                <p className="text-[11px] text-white/40">
-                                  Located in{" "}
-                                  <span className="text-white/60">{diag.activityCity}</span>
-                                  {" — "}scheduled on a{" "}
-                                  <span className="text-white/60">{diag.assignedCity?.split(",")[0]}</span> day
-                                </p>
-                                <p className="text-[10px] text-white/25 mt-1">
-                                  Will appear in the right city on regenerate.
-                                </p>
-                              </div>
+                              <>
+                                <div>
+                                  <p className="text-[11px] text-white/40">
+                                    Located in{" "}
+                                    <span className="text-white/60">{diag.activityCity}</span>
+                                    {" — "}scheduled on a{" "}
+                                    <span className="text-white/60">{diag.assignedCity?.split(",")[0]}</span> day
+                                  </p>
+                                  <p className="text-[10px] text-white/25 mt-1">
+                                    Will appear in the right city on regenerate.
+                                  </p>
+                                </div>
+                                {d.suggestions && d.suggestions.length > 0 && (
+                                  <div className="space-y-2 mt-2 pt-2 border-t border-white/[0.05]">
+                                    {d.suggestions.map((sug, si) => (
+                                      <button
+                                        key={si}
+                                        type="button"
+                                        onClick={() => setActiveTab("itinerary")}
+                                        className="block text-left w-full group"
+                                      >
+                                        <span className="text-[10px] text-blue-300/60 group-hover:text-blue-300/90 transition-colors group-hover:underline">
+                                          {sug.action}
+                                        </span>
+                                        {sug.benefit && (
+                                          <span className="block text-[10px] text-white/25 mt-0.5">
+                                            {sug.benefit}
+                                          </span>
+                                        )}
+                                      </button>
+                                    ))}
+                                  </div>
+                                )}
+                              </>
                             )}
 
                             {/* Flight conflict diagnostic */}

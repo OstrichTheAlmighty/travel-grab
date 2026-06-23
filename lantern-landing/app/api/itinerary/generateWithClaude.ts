@@ -37,10 +37,19 @@ interface ItineraryRequest {
   };
 }
 
+export interface DroppedActivitySuggestion {
+  type:             "remove_and_add" | "extend_city" | "increase_pace_day" | "increase_pace_trip";
+  action:           string;
+  benefit:          string;
+  canFitActivities: string[];
+  affectedDays?:    number[];
+}
+
 export interface DroppedActivity {
-  sourceId: string;
-  title: string;
-  reason: string;
+  sourceId:     string;
+  title:        string;
+  reason:       string;
+  suggestions?: DroppedActivitySuggestion[];
   diagnostic?: {
     type: "pace_limited" | "duplicate" | "geographic" | "flight_conflict";
     belongsInCity?:    string;
@@ -155,7 +164,11 @@ export async function generateItinerary(input: ItineraryRequest): Promise<Genera
   // 4. Find input activities Claude omitted entirely
   const missed = computeMissed(input.activities, cleaned, input, paceRange);
 
-  const dropped: DroppedActivity[] = [...duplicateDropped, ...geoViolations, ...lateViolations, ...missed];
+  const dropped: DroppedActivity[] = generateSuggestionsForDropped(
+    [...duplicateDropped, ...geoViolations, ...lateViolations, ...missed],
+    cleaned,
+    input,
+  );
 
   // ── Logging ───────────────────────────────────────────────────────────────
   const scheduledCount = (cleaned.days ?? [])
@@ -456,6 +469,111 @@ function computeMissed(
         },
       };
     });
+}
+
+// ── Suggestion generator ───────────────────────────────────────────────────────
+
+function generateSuggestionsForDropped(
+  dropped: DroppedActivity[],
+  itinerary: ClaudeItinerary,
+  input: ItineraryRequest,
+): DroppedActivity[] {
+  return dropped.map((d) => {
+    const diag = d.diagnostic;
+    if (!diag) return d;
+
+    if (diag.type === "pace_limited") {
+      const suggestions: DroppedActivitySuggestion[] = [];
+
+      // Suggestion 1: Remove one scheduled activity from the same city days to free a slot
+      const daysToSearch = diag.belongsInDays ?? [];
+      let removeAdded = false;
+      for (const dayNum of daysToSearch) {
+        if (removeAdded) break;
+        const dayData = itinerary.days.find((day) => day.dayIndex === dayNum);
+        if (!dayData) continue;
+        const removable = dayData.schedule.find((s) => s.type === "activity");
+        if (removable) {
+          suggestions.push({
+            type:             "remove_and_add",
+            action:           `Remove "${removable.activity}" from Day ${dayNum}`,
+            benefit:          `Frees ${removable.duration} — fits "${d.title}"`,
+            canFitActivities: [d.title],
+            affectedDays:     [dayNum],
+          });
+          removeAdded = true;
+        }
+      }
+
+      // Suggestion 2: Extend the city stay by 1 day
+      if (diag.belongsInCity && diag.belongsInCity !== "Flexible") {
+        const targetCityNorm = diag.belongsInCity.toLowerCase();
+        const cityConfig = input.cities.find((c) => {
+          const cn = normCity(c.name);
+          return cn.includes(targetCityNorm) || targetCityNorm.includes(cn);
+        });
+        if (cityConfig && cityConfig.days < 7) {
+          suggestions.push({
+            type:             "extend_city",
+            action:           `Extend ${diag.belongsInCity} stay by 1 day (${cityConfig.days}d → ${cityConfig.days + 1}d)`,
+            benefit:          `Adds ${diag.paceLimit ?? 5} more activity slots`,
+            canFitActivities: [d.title],
+          });
+        }
+      }
+
+      // Suggestion 3: Schedule one more activity on the least-full relevant day
+      if (daysToSearch.length > 0 && diag.dayUtilization && diag.paceLimit) {
+        const { dayUtilization, paceLimit } = diag;
+        let bestDay: { dayNum: number; count: number } | null = null;
+        for (const dayNum of daysToSearch) {
+          const count = dayUtilization[`day${dayNum}`] ?? paceLimit;
+          if (count < 8 && (!bestDay || count < bestDay.count)) {
+            bestDay = { dayNum, count };
+          }
+        }
+        if (bestDay) {
+          suggestions.push({
+            type:             "increase_pace_day",
+            action:           `Fit ${bestDay.count + 1} activities on Day ${bestDay.dayNum} (currently ${bestDay.count}/${paceLimit})`,
+            benefit:          `Least-busy ${diag.belongsInCity ?? ""} day — change pace in Preferences`,
+            canFitActivities: [d.title],
+            affectedDays:     [bestDay.dayNum],
+          });
+        }
+      }
+
+      return suggestions.length > 0 ? { ...d, suggestions } : d;
+    }
+
+    if (diag.type === "duplicate") {
+      return {
+        ...d,
+        suggestions: [{
+          type:             "remove_and_add",
+          action:           diag.duplicateOf
+            ? `"${diag.duplicateOf}" is already in the itinerary`
+            : "Same place already appears earlier",
+          benefit:          "Remove this from Saved to clean up your list",
+          canFitActivities: [],
+        }],
+      };
+    }
+
+    if (diag.type === "geographic") {
+      return {
+        ...d,
+        suggestions: [{
+          type:             "remove_and_add",
+          action:           `Move it to ${diag.activityCity} days in the Itinerary tab`,
+          benefit:          "Will schedule in the correct city on next regenerate",
+          canFitActivities: [d.title],
+        }],
+      };
+    }
+
+    return d; // flight_conflict — no useful suggestion
+  });
 }
 
 // ── Utilities ──────────────────────────────────────────────────────────────────
