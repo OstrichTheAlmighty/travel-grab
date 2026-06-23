@@ -14,12 +14,11 @@ interface ClaudeScheduleItem {
 }
 
 interface ClaudeDay {
-  dayIndex:  number;
-  date:      string;
-  city:      string;
-  theme:     string;
-  reasoning?: string;
-  schedule:  ClaudeScheduleItem[];
+  dayIndex: number;
+  date:     string;
+  city:     string;
+  theme:    string;
+  schedule: ClaudeScheduleItem[];
 }
 
 
@@ -98,7 +97,7 @@ function transformDay(day: ClaudeDay, paceMax: number): PlannedDay {
     theme:                  day.theme  ?? "",
     geographicArea:         (day.city  ?? "").split(",")[0].trim(),
     cityLabel:              day.city   ?? undefined,
-    daySummary:             day.reasoning,
+    daySummary:             undefined,
     slots,
     scheduledActivityCount: actSlots.length,
     totalActivityMinutes:   totalActMin,

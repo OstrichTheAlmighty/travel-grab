@@ -2134,65 +2134,7 @@ export default function ItineraryPlanner() {
                 );
               })()}
 
-              {trip.itinerary.meta.droppedActivities.length > 0 && (() => {
-                const dropped = trip.itinerary.meta.droppedActivities;
-                const cities = trip.cities.filter((c) => c.city.trim());
-                const isMulti = cities.length > 1;
-
-                if (isMulti) {
-                  const cityNames = cities.map((c) => c.city);
-                  const groups = new Map<string, typeof dropped>();
-                  cityNames.forEach((c) => groups.set(c, []));
-                  const ungrouped: typeof dropped = [];
-                  dropped.forEach((d) => {
-                    const match = cityNames.find((c) =>
-                      d.title.toLowerCase().includes(c.toLowerCase().split(",")[0].trim())
-                    );
-                    if (match) groups.get(match)!.push(d);
-                    else ungrouped.push(d);
-                  });
-                  if (ungrouped.length > 0) groups.set("Other", ungrouped);
-
-                  const nonEmptyGroups = [...groups.entries()].filter(([, acts]) => acts.length > 0);
-
-                  return (
-                    <div className="mt-4 rounded-xl border border-lantern-gold/20 bg-lantern-gold/[0.04] px-5 py-4">
-                      <p className="text-xs font-semibold text-lantern-gold mb-3">Also worth considering</p>
-                      <div className="space-y-3">
-                        {nonEmptyGroups.map(([city, acts]) => (
-                          <details key={city} open={nonEmptyGroups.length === 1}>
-                            <summary className="text-[11px] font-semibold text-white/50 cursor-pointer select-none mb-1">
-                              {city} <span className="font-normal text-white/30">({acts.length})</span>
-                            </summary>
-                            <ul className="mt-1 space-y-1 pl-2">
-                              {acts.map((d, i) => (
-                                <li key={i} className="text-xs text-white/35">
-                                  <span className="text-white/55">{d.title}</span> — {d.reason}
-                                </li>
-                              ))}
-                            </ul>
-                          </details>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                }
-
-                return (
-                  <div className="mt-4 rounded-xl border border-lantern-gold/20 bg-lantern-gold/[0.04] px-5 py-4">
-                    <p className="text-xs font-semibold text-lantern-gold mb-2">Also worth considering</p>
-                    <ul className="space-y-1">
-                      {dropped.map((d, i) => (
-                        <li key={i} className="text-xs text-white/35">
-                          <span className="text-white/55">{d.title}</span> — {d.reason}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                );
-              })()}
-
-              {trip.itinerary.meta.conflicts.length > 0 && (
+{trip.itinerary.meta.conflicts.length > 0 && (
                 <div className="mt-3 rounded-xl border border-white/[0.07] bg-white/[0.01] px-5 py-4">
                   <p className="text-xs font-semibold text-white/30 mb-2">Notes</p>
                   <ul className="space-y-1">

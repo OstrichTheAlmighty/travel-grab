@@ -56,12 +56,10 @@ interface ClaudeDay {
   date: string;
   city: string;
   theme: string;
-  reasoning?: string;
   schedule: ClaudeScheduleItem[];
 }
 
 interface ClaudeItinerary {
-  summary?: { theme: string; highlights: string[] };
   days: ClaudeDay[];
 }
 
@@ -75,22 +73,22 @@ export async function generateItinerary(input: ItineraryRequest): Promise<Genera
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
   const systemPrompt =
-    "You are an expert travel itinerary planner. " +
-    "Output ONLY a single valid JSON object — no markdown, no backticks, no text before or after the JSON.";
+    "You are a travel itinerary generator. Output ONLY valid JSON — no markdown, no backticks, no prose.";
 
   const userPrompt = buildPrompt(input);
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-6",
-    max_tokens: 8192,
-    system: systemPrompt,
+  const stream = client.messages.stream({
+    model:      "claude-sonnet-4-6",
+    max_tokens: 2000,
+    system: [{ type: "text", text: systemPrompt, cache_control: { type: "ephemeral" } }],
     messages: [{ role: "user", content: userPrompt }],
   });
 
+  const response  = await stream.finalMessage();
   const stopReason = response.stop_reason;
   const content    = response.content[0];
 
-  if (content.type !== "text") throw new Error(`Unexpected response type: ${content.type}`);
+  if (!content || content.type !== "text") throw new Error(`Unexpected response type: ${content?.type}`);
 
   let rawText = content.text.trim();
   if (rawText.startsWith("```")) {
@@ -444,8 +442,6 @@ function buildPrompt(input: ItineraryRequest): string {
   const wakeStr = prefs.wakeTime ?? "08:00";
   const [wakeH, wakeM] = wakeStr.split(":").map(Number);
   const wakeMin = wakeH * 60 + (wakeM ?? 0);
-  // Format as readable "8:00 AM" for the prompt
-  const wakeDisplay = `${wakeH > 12 ? wakeH - 12 : wakeH || 12}:${String(wakeM ?? 0).padStart(2, "0")} ${wakeH < 12 ? "AM" : "PM"}`;
   // First sightseeing slot: wake + 45 min for breakfast
   const sightH = String(Math.floor((wakeMin + 45) / 60)).padStart(2, "0");
   const sightM = String((wakeMin + 45) % 60).padStart(2, "0");
@@ -624,57 +620,27 @@ ${rules.map((r) => `- ${r}`).join("\n")}`;
     ? " Note: fish markets like Tsukiji require 06:00 arrival — skip them if wake time is 07:00 or later."
     : "";
 
-  return `Generate a ${totalDays}-day travel itinerary.
+  return `Generate a ${totalDays}-day itinerary.
 
-CITY SCHEDULE:
+SCHEDULE:
 ${cityScheduleLines.join("\n")}
 
-ACTIVITIES (${input.activities.length} total — each is tagged with which city/days it belongs to):
-${activityBlock.length > 0 ? activityBlock : "  (No pre-saved activities — build the schedule from scratch)"}
+ACTIVITIES (${input.activities.length} — each tagged with city/day range):
+${activityBlock.length > 0 ? activityBlock : "  (none — build from scratch)"}
 
-WAKE TIME — HARD CONSTRAINT: User wakes at ${wakeDisplay} (${wakeStr}). No activity of any kind may be scheduled before ${wakeStr}. The first scheduled item each day must be breakfast at ${wakeStr}. Sightseeing begins at ${sightH}:${sightM} at the earliest.${fishMarketNote}
+PACE: ${prefs.pace} → ${paceRange.min}–${paceRange.max} countable activities/day
+Count: sightseeing=1, meal=1, stroll=0.5, transport=0, hotel=0
+Dinner (18:00–20:30) excluded from count. Interests: ${prefs.interests.join(", ")}${prefs.budgetLevel ? ` | Budget: ${prefs.budgetLevel}` : ""}
 
-DAILY PACE — HARD CONSTRAINT: User preference is "${prefs.pace}". Schedule exactly ${paceRange.min}–${paceRange.max} countable activities per day.
+TIMING: Wake ${wakeStr}; sightseeing from ${sightH}:${sightM}.${fishMarketNote}
+Meals: breakfast ${wakeStr}–10:00 | lunch 11:30–14:00 | dinner 18:00–20:30
 
-Activity counting rules:
-- Sightseeing, culture, nature, adventure, shopping stop = 1 activity
-- Restaurant meal (breakfast, lunch, dinner) = 1 activity
-- Casual neighborhood stroll, short walk = 0.5 activity
-- City-to-city transport (bullet train, ferry, bus) = 0 — does NOT count
-- Hotel check-in / check-out = 0 — does NOT count
+CONSTRAINTS:
+1. Dedup — each place once only across all days ("Itsukushima Jinja" = "Itsukushima Shrine" = same)
+2. Geo — [CITY-ONLY, Days X–Y] tags absolute; never schedule outside tagged days
+3. Full-day [FULL-DAY] events get their own day (count as 1 + dinner)
+4. Transfer days: transit = 0 count; destination activities only after arrival${budgetBlock}${foodBlock}${cuisineBlock}${flightBlock}
 
-Dinner may be scheduled 18:00–20:30 regardless of pace — having dinner at 20:00 on a relaxed day is fine if the total count is still ${paceRange.min}–${paceRange.max}.
-Prefer depth over breadth: ${prefs.pace === "relaxed" ? "leave long gaps, let the traveller linger, avoid back-to-back stops" : prefs.pace === "moderate" ? "keep a natural rhythm with breathing room between stops" : "efficient routing, tightly sequenced stops — warn traveller this is a full day"}.
-
-DUPLICATE RULE — CRITICAL: Each activity ID can appear AT MOST ONCE across all ${totalDays} days. "Itsukushima Jinja" and "Itsukushima Shrine" are the same place — pick one name and schedule it once only. Never schedule the same place twice under any variation of its name.
-
-GEOGRAPHIC RULE — ABSOLUTE: Each activity's city tag (e.g. [OSAKA-ONLY, Days 5–7]) tells you exactly which days it may appear. Scheduling a Kyoto activity on an Osaka day is wrong. Scheduling an Osaka activity on a Tokyo departure day is wrong. Check every placement.
-
-MEAL TIMING RULE: Breakfast → ${wakeStr}–10:00. Lunch → 11:30–14:00. Dinner → 18:00–20:30 (dinner time does NOT affect the activity count — a relaxed day with 3 activities and dinner at 20:00 is perfectly valid).${budgetBlock}${foodBlock}${cuisineBlock}
-
-PACE: ${prefs.pace} (${paceRange.min}–${paceRange.max} countable activities/day) | Interests: ${prefs.interests.join(", ")}${prefs.budgetLevel ? ` | Budget: ${prefs.budgetLevel}` : ""}${flightBlock}
-
-General rules:
-- Full-day activities [FULL-DAY] need their own day; count them as 1 activity + dinner only
-- Transition days (city-to-city travel): the transfer itself = 0 count; only add activities at the destination after arrival
-- Keep "notes" and "reasoning" to 1 sentence each
-
-SELF-CHECK before finalizing: For each day verify (1) no item starts before ${wakeStr}, (2) countable activities (sightseeing + meals; NOT transport or hotel) total ${paceRange.min}–${paceRange.max} for the "${prefs.pace}" pace, (3) every activity's city tag matches the day's city, (4) no activity appears more than once across all days, (5) on the last day all items finish before the departure cutoff.
-
-Return ONLY this JSON structure (no other text, no markdown):
-{
-  "summary": {"theme": "...", "highlights": ["...", "..."]},
-  "days": [
-    {
-      "dayIndex": 1,
-      "date": "YYYY-MM-DD",
-      "city": "City, Country",
-      "theme": "...",
-      "reasoning": "1 sentence",
-      "schedule": [
-        {"time": "HH:MM", "activity": "...", "duration": "Xh", "type": "activity|meal|logistics|transfer", "notes": "1 sentence"}
-      ]
-    }
-  ]
-}`;
+Return ONLY this JSON — no text, no markdown:
+{"days":[{"dayIndex":1,"date":"YYYY-MM-DD","city":"City, Country","theme":"2–4 word label","schedule":[{"time":"HH:MM","activity":"...","duration":"Xh","type":"activity|meal|transfer","notes":"5 words max"}]}]}`;
 }
