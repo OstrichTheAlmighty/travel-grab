@@ -2226,13 +2226,39 @@ export default function ItineraryPlanner() {
 
         {/* ── Tab: Dropped activities ── */}
         {activeTab === "dropped" && trip.itinerary && (() => {
-          const dropped = [...trip.itinerary.meta.droppedActivities].sort((a, b) => {
-            const rank = (r: string) =>
-              r.startsWith("Duplicate") ? 0 : r.startsWith("Last-day") ? 1 : r.startsWith("Geo") || r.includes("wrong city") ? 2 : 3;
-            return rank(a.reason) - rank(b.reason);
-          });
+          const all = trip.itinerary.meta.droppedActivities;
 
-          if (dropped.length === 0) {
+          type DropKey = "time" | "duplicate" | "geo" | "flight";
+          const categorise = (r: string): DropKey =>
+            r.startsWith("Duplicate")  ? "duplicate" :
+            r.startsWith("Geographic") ? "geo"       :
+            r.startsWith("Last-day")   ? "flight"    : "time";
+
+          const shortReason = (r: string, key: DropKey): string => {
+            if (key === "duplicate") return "Same location already appears earlier in the itinerary";
+            if (key === "geo") {
+              const m = r.match(/in (.+?) but/);
+              return m ? `Belongs in ${m[1]}` : "Wrong city for this day";
+            }
+            if (key === "flight") {
+              const m = r.match(/ends at (\d+:\d+)/);
+              return m ? `Ends at ${m[1]} — after your airport check-in cutoff` : "Conflicts with flight departure";
+            }
+            return "No available time slot within the pace limit";
+          };
+
+          const GROUPS: { key: DropKey; icon: string; label: string }[] = [
+            { key: "time",      icon: "⏱",  label: "No time slot available" },
+            { key: "duplicate", icon: "⊘",  label: "Duplicate location" },
+            { key: "geo",       icon: "📍", label: "Geographic conflict" },
+            { key: "flight",    icon: "✈",  label: "Conflicts with flight" },
+          ];
+
+          const grouped = GROUPS
+            .map((g) => ({ ...g, items: all.filter((d) => categorise(d.reason) === g.key) }))
+            .filter((g) => g.items.length > 0);
+
+          if (all.length === 0) {
             return (
               <div className="flex flex-col items-center justify-center min-h-[220px] rounded-2xl border border-white/[0.06] bg-white/[0.01] p-10 text-center">
                 <p className="text-sm font-semibold text-white mb-1">All activities scheduled</p>
@@ -2243,21 +2269,38 @@ export default function ItineraryPlanner() {
 
           return (
             <div className="max-w-2xl">
-              <div className="mb-4">
+              <div className="mb-5">
                 <h2 className="text-base font-semibold text-white">Dropped activities</h2>
-                <p className="text-xs text-white/35 mt-0.5">
-                  {dropped.length} {dropped.length === 1 ? "place" : "places"} not included in the itinerary
+                <p className="text-xs text-white/35 mt-1 leading-relaxed">
+                  {grouped.map((g, i) => (
+                    <span key={g.key}>
+                      {i > 0 && <span className="mx-1 text-white/15">·</span>}
+                      <span className="text-white/50">{g.items.length}</span> {g.label.toLowerCase()}
+                    </span>
+                  ))}
                 </p>
               </div>
-              <div className="space-y-1.5">
-                {dropped.map((d, i) => (
-                  <div
-                    key={i}
-                    className="flex items-start gap-3 rounded-lg border border-white/[0.07] bg-white/[0.02] px-3 py-2.5"
-                  >
-                    <div className="flex-1 min-w-0">
-                      <p className="text-xs font-medium text-white/80 truncate">{d.title}</p>
-                      <p className="text-[11px] text-white/35 mt-0.5 leading-snug">{d.reason}</p>
+
+              <div className="space-y-6">
+                {grouped.map((g) => (
+                  <div key={g.key}>
+                    <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-2">
+                      {g.icon} {g.label} ({g.items.length})
+                    </p>
+                    <div className="space-y-1.5">
+                      {g.items.map((d, i) => (
+                        <div
+                          key={i}
+                          className="flex items-start gap-3 rounded-lg border border-white/[0.07] bg-white/[0.02] px-3 py-2.5"
+                        >
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs font-medium text-white/80 truncate">{d.title}</p>
+                            <p className="text-[11px] text-white/35 mt-0.5 leading-snug">
+                              {shortReason(d.reason, g.key)}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 ))}
