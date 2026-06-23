@@ -409,7 +409,7 @@ function TimelineSlot({
     const lineColor = slot.kind === "intercity_transfer" ? "border-lantern-violet/20" : "border-white/[0.06]";
     return (
       <div
-        className={`flex items-center gap-3 py-2.5 border-b ${lineColor} ${isClickable ? "cursor-pointer hover:bg-white/[0.02] -mx-2 px-2 rounded-lg transition-colors" : ""}`}
+        className={`group flex items-center gap-3 py-2.5 border-b ${lineColor} ${isClickable ? "cursor-pointer hover:bg-white/[0.02] -mx-2 px-2 rounded-lg transition-colors" : ""}`}
         onClick={isClickable ? () => onSlotClick(slot) : undefined}
       >
         <span className="text-[11px] font-mono text-white/30 w-16 shrink-0 tabular-nums">
@@ -429,7 +429,7 @@ function TimelineSlot({
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); onDelete(slot); }}
-            className="shrink-0 text-white/20 hover:text-red-400 transition-colors text-xs leading-none px-0.5"
+            className="shrink-0 opacity-0 group-hover:opacity-100 text-white/40 hover:text-red-400 transition-all text-xs leading-none px-0.5"
             title="Remove from itinerary"
           >
             ✕
@@ -450,7 +450,7 @@ function TimelineSlot({
         {!isLast && <div className={`flex-1 w-px mt-1 ${slot.kind === "intercity_transfer" ? "bg-lantern-violet/20" : "bg-white/[0.07]"}`} />}
       </div>
       <div
-        className={`flex-1 mb-4 rounded-xl border px-4 py-3 ${style.border} ${style.bg} ${isClickable ? "cursor-pointer hover:border-white/20 transition-colors" : ""}`}
+        className={`group flex-1 mb-4 rounded-xl border px-4 py-3 ${style.border} ${style.bg} ${isClickable ? "cursor-pointer hover:border-white/20 transition-colors" : ""}`}
         onClick={isClickable ? () => onSlotClick(slot) : undefined}
       >
         <div className="flex items-start justify-between gap-2">
@@ -478,7 +478,7 @@ function TimelineSlot({
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); onDelete(slot); }}
-                className="text-white/25 hover:text-red-400 transition-colors text-sm leading-none"
+                className="opacity-0 group-hover:opacity-100 text-white/40 hover:text-red-400 transition-all text-sm leading-none"
                 title="Remove from itinerary"
               >
                 ✕
@@ -2081,6 +2081,17 @@ export default function ItineraryPlanner() {
                       const day = itin.days[selectedDay];
                       if (!day) return;
                       const newSlots = day.slots.filter((s) => s !== slot);
+                      const droppedEntry: DroppedActivity = {
+                        sourceId: slot.sourceId ?? slot.title,
+                        title:    slot.title,
+                        reason:   "Manually removed from itinerary",
+                        diagnostic: {
+                          type:             "pace_limited",
+                          activityDuration: slot.durationMinutes,
+                          belongsInCity:    day.cityLabel ?? day.geographicArea,
+                        },
+                      };
+                      const alreadyDropped = itin.meta.droppedActivities.some((d) => d.title === slot.title);
                       updateTrip({
                         itinerary: {
                           ...itin,
@@ -2089,6 +2100,15 @@ export default function ItineraryPlanner() {
                               ? { ...d, slots: newSlots, scheduledActivityCount: newSlots.filter((s) => s.kind === "activity").length }
                               : d
                           ),
+                          meta: {
+                            ...itin.meta,
+                            droppedActivities: alreadyDropped
+                              ? itin.meta.droppedActivities
+                              : [...itin.meta.droppedActivities, droppedEntry],
+                            totalActivitiesDropped: alreadyDropped
+                              ? itin.meta.totalActivitiesDropped
+                              : itin.meta.totalActivitiesDropped + 1,
+                          },
                         },
                       });
                     }}
