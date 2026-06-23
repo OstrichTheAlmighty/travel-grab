@@ -1,45 +1,28 @@
 import Anthropic from "@anthropic-ai/sdk";
+import type { DroppedActivity, PlannerOutput } from "@/lib/itinerary/types";
 
-interface DropActivityInput {
-  activity: {
-    title: string;
-    diagnostic?: {
-      activityDuration?: number;
-      type?: string;
-      belongsInCity?: string;
-    };
-  };
-  itinerary: {
-    days: Array<{
-      dayIndex: number;
-      date: string;
-      city: string;
-      schedule: Array<{
-        activity: string;
-        time: string;
-        duration: string;
-        type: string;
-      }>;
-    }>;
-  };
-  tripPace: "relaxed" | "moderate" | "packed";
-}
+type UIPace = "relaxed" | "balanced" | "packed";
 
 export interface ClaudePlacement {
-  bestFitDays:     { dayIndex: number; city: string; reason: string }[];
-  swapSuggestions: { dayIndex: number; city: string; replaceActivityTitle: string; replaceActivityDuration: number; reason: string }[];
-  cannotFit:       boolean;
-  explanation:     string;
+  bestFitDays?:     { dayIndex: number; city: string; reason: string }[];
+  swapSuggestions?: { dayIndex: number; city: string; replaceActivityTitle: string; replaceActivityDuration: number; reason: string }[];
+  cannotFit:        boolean;
+  explanation:      string;
 }
 
 export async function POST(req: Request) {
   try {
-    const input = await req.json() as DropActivityInput;
-    const { activity, itinerary, tripPace } = input;
+    const { activity, itinerary, tripPace } = await req.json() as {
+      activity:  DroppedActivity;
+      itinerary: PlannerOutput;
+      tripPace:  UIPace;
+    };
 
     if (!activity || !itinerary) {
       return Response.json({ error: "Missing input" }, { status: 400 });
     }
+
+    const paceLabel = tripPace === "relaxed" ? "relaxed" : tripPace === "packed" ? "packed" : "moderate";
 
     const cityHint = activity.diagnostic?.belongsInCity &&
       activity.diagnostic.belongsInCity !== "Flexible"
@@ -49,11 +32,25 @@ export async function POST(req: Request) {
       ? ` (${activity.diagnostic.activityDuration} minutes)`
       : "";
 
+    const itinerarySummary = itinerary.days.map((day) => ({
+      dayIndex: day.dayIndex,
+      date:     day.date,
+      city:     day.cityLabel ?? day.geographicArea ?? `Day ${day.dayIndex + 1}`,
+      schedule: day.slots
+        .filter((s) => s.kind === "activity")
+        .map((s) => ({
+          activity: s.title,
+          time:     `${String(Math.floor(s.startMinutes / 60)).padStart(2, "0")}:${String(s.startMinutes % 60).padStart(2, "0")}`,
+          duration: `${s.durationMinutes}m`,
+          type:     s.category ?? "activity",
+        })),
+    }));
+
     const prompt =
       `You are a travel itinerary assistant. A user wants to add the following dropped activity to their trip:\n\n` +
       `Activity: "${activity.title}"${durationHint}${cityHint}\n\n` +
-      `Current itinerary (pace: ${tripPace}):\n` +
-      JSON.stringify(itinerary.days, null, 2) + "\n\n" +
+      `Current itinerary (pace: ${paceLabel}):\n` +
+      JSON.stringify(itinerarySummary, null, 2) + "\n\n" +
       `Find the best placement. Consider city matching (activity must be in the right city), ` +
       `day capacity (don't overload), and thematic fit with other activities on the day.\n\n` +
       `Rules:\n` +

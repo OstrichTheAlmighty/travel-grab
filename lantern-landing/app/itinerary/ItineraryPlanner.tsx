@@ -882,17 +882,16 @@ export default function ItineraryPlanner() {
   const [modalPlaceDetail,  setModalPlaceDetail]   = useState<PlaceDetailData | null>(null);
   const [modalDetailLoading, setModalDetailLoading] = useState(false);
   type ClaudePlacement = {
-    bestFitDays:     { dayIndex: number; city: string; reason: string }[];
-    swapSuggestions: { dayIndex: number; city: string; replaceActivityTitle: string; replaceActivityDuration: number; reason: string }[];
-    cannotFit:       boolean;
-    explanation:     string;
+    bestFitDays?:     { dayIndex: number; city: string; reason: string }[];
+    swapSuggestions?: { dayIndex: number; city: string; replaceActivityTitle: string; replaceActivityDuration: number; reason: string }[];
+    cannotFit:        boolean;
+    explanation:      string;
   };
   const [addActivityModal,  setAddActivityModal]   = useState<{
     activity:        DroppedActivity;
     confirmReplace?: { dayIndex: number; slot: PlannedSlot };
     placement?:      ClaudePlacement | null;
   } | null>(null);
-  const [analysisLoading, setAnalysisLoading] = useState<string | null>(null);
 
   // Tab navigation
   type ActiveTab = "itinerary" | "preferences" | "recommendations" | "saved" | "dropped";
@@ -2312,40 +2311,23 @@ export default function ItineraryPlanner() {
                   <button
                     type="button"
                     onClick={async () => {
-                      const key = d.title;
+                      if (!trip.itinerary) return;
                       setAddActivityModal({ activity: d });
-                      setAnalysisLoading(key);
                       try {
-                        const payload = {
-                          activity: { title: d.title, diagnostic: d.diagnostic },
-                          itinerary: {
-                            days: trip.itinerary!.days.map((day) => ({
-                              dayIndex: day.dayIndex,
-                              date:     day.date,
-                              city:     day.cityLabel ?? day.geographicArea ?? `Day ${day.dayIndex + 1}`,
-                              schedule: day.slots
-                                .filter((s) => s.kind === "activity")
-                                .map((s) => ({
-                                  activity: s.title,
-                                  time:     `${String(Math.floor(s.startMinutes / 60)).padStart(2, "0")}:${String(s.startMinutes % 60).padStart(2, "0")}`,
-                                  duration: `${s.durationMinutes}m`,
-                                  type:     s.category ?? "activity",
-                                })),
-                            })),
-                          },
-                          tripPace: trip.pace === "balanced" ? "moderate" : trip.pace,
-                        };
                         const res = await fetch("/api/itinerary/suggest-placement", {
                           method: "POST",
                           headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify(payload),
+                          body: JSON.stringify({
+                            activity: d,
+                            itinerary: trip.itinerary,
+                            tripPace: trip.pace,
+                          }),
                         });
-                        const placement = res.ok ? await res.json() : null;
-                        setAddActivityModal((prev) => prev ? { ...prev, placement } : null);
-                      } catch {
-                        setAddActivityModal((prev) => prev ? { ...prev, placement: null } : null);
-                      } finally {
-                        setAnalysisLoading(null);
+                        const placement = await res.json();
+                        setAddActivityModal({ activity: d, placement });
+                      } catch (err) {
+                        console.error("Placement analysis failed:", err);
+                        setAddActivityModal({ activity: d, placement: { cannotFit: true, explanation: "Analysis failed" } });
                       }
                     }}
                     className="shrink-0 px-3 py-1.5 rounded-lg border border-lantern-mint/30 text-lantern-mint text-xs hover:bg-lantern-mint/10 transition-colors"
@@ -2363,12 +2345,11 @@ export default function ItineraryPlanner() {
 
       {/* ── Add-activity modal ── */}
       {addActivityModal && trip.itinerary && (() => {
-        const { activity, confirmReplace } = addActivityModal;
-        const itin    = trip.itinerary;
-        const paceMax = trip.pace === "relaxed" ? 3 : trip.pace === "packed" ? 8 : 5;
-        const durMin  = activity.diagnostic?.activityDuration ?? 90;
+        const { activity, placement } = addActivityModal;
+        const itin = trip.itinerary;
+        const durMin = activity.diagnostic?.activityDuration ?? 90;
 
-        function commitAdd(targetDayIndex: number, removeSlot?: PlannedSlot) {
+        function addActivityToDay(dayIndex: number, swapRemoveTitle?: string) {
           const newSlot: PlannedSlot = {
             kind:            "activity",
             startMinutes:    14 * 60,
@@ -2382,257 +2363,128 @@ export default function ItineraryPlanner() {
             itinerary: {
               ...itin,
               days: itin.days.map((d) => {
-                if (d.dayIndex !== targetDayIndex) return d;
-                const base = removeSlot ? d.slots.filter((s) => s !== removeSlot) : d.slots;
-                const newSlots = [...base, newSlot].sort((a, b) => a.startMinutes - b.startMinutes);
-                const delta = removeSlot ? 0 : 1;
-                return { ...d, slots: newSlots, scheduledActivityCount: d.scheduledActivityCount + delta };
+                if (d.dayIndex !== dayIndex) return d;
+                const base = swapRemoveTitle
+                  ? d.slots.filter((s) => s.title !== swapRemoveTitle)
+                  : d.slots;
+                return {
+                  ...d,
+                  slots: [...base, newSlot].sort((a, b) => a.startMinutes - b.startMinutes),
+                  scheduledActivityCount: d.scheduledActivityCount + (swapRemoveTitle ? 0 : 1),
+                };
               }),
               meta: {
                 ...itin.meta,
                 droppedActivities:        newDropped,
                 totalActivitiesDropped:   newDropped.length,
-                totalActivitiesScheduled: removeSlot
+                totalActivitiesScheduled: swapRemoveTitle
                   ? itin.meta.totalActivitiesScheduled
                   : itin.meta.totalActivitiesScheduled + 1,
               },
             },
           });
           setActiveTab("itinerary");
-          setSelectedDay(targetDayIndex);
+          setSelectedDay(dayIndex);
           setAddActivityModal(null);
         }
 
+        // Loading state
+        if (!placement) {
+          return (
+            <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
+              <div className="bg-lantern-dark border border-white/[0.1] rounded-2xl p-8 max-w-md w-full mx-4">
+                <p className="text-white text-center">Claude is analyzing placement options...</p>
+              </div>
+            </div>
+          );
+        }
+
+        // Cannot fit
+        if (placement.cannotFit) {
+          return (
+            <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
+              <div className="bg-lantern-dark border border-white/[0.1] rounded-2xl p-8 max-w-md w-full mx-4">
+                <p className="text-white font-semibold mb-2">Cannot fit this activity</p>
+                <p className="text-white/60 text-sm mb-6">{placement.explanation}</p>
+                <button
+                  type="button"
+                  onClick={() => setAddActivityModal(null)}
+                  className="w-full px-4 py-2 bg-lantern-mint/10 border border-lantern-mint/30 text-lantern-mint rounded-lg hover:bg-lantern-mint/20 transition-colors"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          );
+        }
+
         return (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center"
-            onClick={() => setAddActivityModal(null)}
-          >
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-            <div
-              className="relative z-10 w-full max-w-lg mx-4 rounded-3xl border border-white/10 bg-[#0D1019] p-6"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                type="button"
-                onClick={() => setAddActivityModal(null)}
-                className="absolute top-4 right-4 text-white/40 hover:text-white/80 transition-colors"
-              >
-                ✕
-              </button>
-
-              {confirmReplace ? (
-                /* Step 2: confirm swap */
-                <div className="space-y-4">
+          <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
+            <div className="bg-lantern-dark border border-white/[0.1] rounded-2xl max-w-md w-full max-h-[80vh] overflow-y-auto">
+              <div className="p-6 border-b border-white/[0.1]">
+                <div className="flex items-start justify-between">
                   <div>
-                    <h2 className="text-base font-bold text-white">Replace activity?</h2>
-                    <p className="text-[11px] text-white/35 mt-0.5">Day {confirmReplace.dayIndex + 1}</p>
+                    <h2 className="text-white font-semibold">Add to itinerary</h2>
+                    <p className="text-white/40 text-sm mt-1">{activity.title} · {durMin}m</p>
                   </div>
-                  <div className="space-y-2">
-                    <div className="rounded-xl border border-red-500/20 bg-red-500/[0.04] px-4 py-3">
-                      <p className="text-[10px] text-red-400/60 font-semibold uppercase tracking-wider mb-0.5">Remove</p>
-                      <p className="text-sm text-white/70">{confirmReplace.slot.title}</p>
-                      <p className="text-[11px] text-white/30 mt-0.5">{confirmReplace.slot.durationMinutes}m</p>
-                    </div>
-                    <div className="flex items-center justify-center text-white/20 text-xs">↕</div>
-                    <div className="rounded-xl border border-lantern-mint/20 bg-lantern-mint/[0.04] px-4 py-3">
-                      <p className="text-[10px] text-lantern-mint/60 font-semibold uppercase tracking-wider mb-0.5">Add</p>
-                      <p className="text-sm text-white/90">{activity.title}</p>
-                      <p className="text-[11px] text-white/30 mt-0.5">{durMin}m · placed at 14:00</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-2 pt-1">
-                    <button
-                      type="button"
-                      onClick={() => setAddActivityModal((prev) => prev ? { ...prev, confirmReplace: undefined } : null)}
-                      className="flex-1 px-4 py-2.5 rounded-xl border border-white/[0.1] text-sm text-white/50 hover:text-white/80 transition-colors"
-                    >
-                      ← Back
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => commitAdd(confirmReplace.dayIndex, confirmReplace.slot)}
-                      className="flex-1 px-4 py-2.5 rounded-xl bg-lantern-mint text-ink text-sm font-bold hover:opacity-90 transition-opacity"
-                    >
-                      Replace
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setAddActivityModal(null)}
+                    className="text-white/40 hover:text-white"
+                  >
+                    ✕
+                  </button>
                 </div>
-              ) : (
-                /* Step 1: pick a day */
-                <>
-                  <h2 className="text-base font-bold text-white mb-1">Add to itinerary</h2>
-                  <p className="text-sm text-white/40 mb-4">
-                    {activity.title}
-                    {durMin && <> · {durMin}m</>}
-                  </p>
+              </div>
 
-                  <div className="space-y-2 max-h-[400px] overflow-y-auto pr-1">
-                    {(() => {
-                      if (analysisLoading === activity.title) {
-                        return (
-                          <div className="py-8 text-center">
-                            <p className="text-xs text-white/40">Claude is finding the best placement…</p>
-                          </div>
-                        );
-                      }
-
-                      if (addActivityModal.placement) {
-                        const { bestFitDays, swapSuggestions, cannotFit, explanation } = addActivityModal.placement;
-                        const totalOptions = bestFitDays.length + swapSuggestions.length;
-
-                        if (cannotFit || totalOptions === 0) {
-                          return (
-                            <div className="py-4 text-center">
-                              <p className="text-sm text-amber-400/70 mb-1">No good placement found</p>
-                              {explanation && (
-                                <p className="text-xs text-white/35">{explanation}</p>
-                              )}
-                            </div>
-                          );
-                        }
-
-                        return (
-                          <>
-                            {bestFitDays.map((opt) => (
-                              <button
-                                key={opt.dayIndex}
-                                type="button"
-                                onClick={() => commitAdd(opt.dayIndex)}
-                                className="w-full text-left p-3 rounded-xl border border-white/[0.08] hover:border-lantern-mint/40 hover:bg-white/[0.03] transition-colors"
-                              >
-                                <div className="flex items-start justify-between gap-3">
-                                  <div className="min-w-0">
-                                    <p className="text-sm font-semibold text-white">
-                                      Day {opt.dayIndex + 1}
-                                      <span className="font-normal text-white/40"> · {opt.city.split(",")[0]}</span>
-                                    </p>
-                                    {opt.reason && (
-                                      <p className="text-xs text-lantern-mint/60 mt-1">{opt.reason}</p>
-                                    )}
-                                  </div>
-                                  <span className="shrink-0 text-xs text-lantern-mint font-semibold">Free slot</span>
-                                </div>
-                              </button>
-                            ))}
-                            {swapSuggestions.map((swap) => (
-                              <button
-                                key={swap.dayIndex}
-                                type="button"
-                                onClick={() => {
-                                  const targetDay = itin.days.find((d) => d.dayIndex === swap.dayIndex);
-                                  const slotToRemove = targetDay?.slots.find(
-                                    (s) => s.kind === "activity" && s.title === swap.replaceActivityTitle,
-                                  ) ?? null;
-                                  if (slotToRemove) {
-                                    setAddActivityModal((prev) => prev
-                                      ? { ...prev, confirmReplace: { dayIndex: swap.dayIndex, slot: slotToRemove } }
-                                      : null);
-                                  } else {
-                                    commitAdd(swap.dayIndex);
-                                  }
-                                }}
-                                className="w-full text-left p-3 rounded-xl border border-amber-500/20 hover:border-amber-400/40 hover:bg-amber-500/[0.04] transition-colors"
-                              >
-                                <div className="flex items-start justify-between gap-3">
-                                  <div className="min-w-0">
-                                    <p className="text-sm font-semibold text-white">
-                                      Day {swap.dayIndex + 1}
-                                      <span className="font-normal text-white/40"> · {swap.city.split(",")[0]}</span>
-                                    </p>
-                                    <p className="text-xs text-amber-400/70 mt-0.5">
-                                      Replace &ldquo;{swap.replaceActivityTitle}&rdquo; ({swap.replaceActivityDuration}m)
-                                    </p>
-                                    {swap.reason && (
-                                      <p className="text-xs text-white/35 mt-1">{swap.reason}</p>
-                                    )}
-                                  </div>
-                                  <span className="shrink-0 text-xs text-amber-400/70 font-semibold">Swap →</span>
-                                </div>
-                              </button>
-                            ))}
-                          </>
-                        );
-                      }
-
-                      // Fallback: inline computation (Claude unavailable)
-                      const actCity    = activity.diagnostic?.belongsInCity?.toLowerCase();
-                      const isFlexible = !actCity || actCity === "flexible";
-                      const eligible   = itin.days.filter((day) => {
-                        if (isFlexible) return true;
-                        const dayCity = (day.cityLabel ?? "").toLowerCase().split(",")[0].trim();
-                        return dayCity.includes(actCity!) || actCity!.includes(dayCity);
-                      });
-                      const daysToShow = eligible.length > 0 ? eligible : itin.days;
-                      return daysToShow.map((day) => {
-                        const actSlots  = day.slots.filter((s) => s.kind === "activity");
-                        const actCount  = actSlots.length;
-                        const isFull    = actCount >= paceMax;
-                        const totalMin  = actSlots.reduce((sum, s) => sum + s.durationMinutes, 0);
-                        const removable = isFull
-                          ? [...actSlots].sort((a, b) => a.durationMinutes - b.durationMinutes)[0] ?? null
-                          : null;
-                        const blocked   = isFull && !removable;
-                        return (
-                          <button
-                            key={day.dayIndex}
-                            type="button"
-                            disabled={blocked}
-                            onClick={() => {
-                              if (isFull && removable) {
-                                setAddActivityModal((prev) => prev
-                                  ? { ...prev, confirmReplace: { dayIndex: day.dayIndex, slot: removable } }
-                                  : null);
-                              } else {
-                                commitAdd(day.dayIndex);
-                              }
-                            }}
-                            className={`w-full text-left p-3 rounded-xl border transition-colors ${
-                              blocked
-                                ? "border-white/[0.04] bg-white/[0.01] text-white/20 cursor-not-allowed"
-                                : isFull
-                                ? "border-amber-500/20 hover:border-amber-400/40 hover:bg-amber-500/[0.04]"
-                                : "border-white/[0.08] hover:border-lantern-mint/40 hover:bg-white/[0.03]"
-                            }`}
-                          >
-                            <div className="flex items-start justify-between gap-3">
-                              <div className="min-w-0">
-                                <p className={`text-sm font-semibold ${blocked ? "text-white/20" : "text-white"}`}>
-                                  Day {day.dayIndex + 1}
-                                  {(day.cityLabel || day.theme) && (
-                                    <span className="font-normal text-white/40"> · {day.cityLabel || day.theme}</span>
-                                  )}
-                                </p>
-                                <p className="text-xs text-white/35 mt-0.5">
-                                  {actCount}/{paceMax} activities · {totalMin}m used
-                                </p>
-                                {isFull && removable && (
-                                  <p className="text-xs text-amber-400/70 mt-1">
-                                    Replace &ldquo;{removable.title}&rdquo; ({removable.durationMinutes}m)
-                                  </p>
-                                )}
-                                {blocked && (
-                                  <p className="text-xs text-white/20 mt-1">Full — nothing to replace</p>
-                                )}
-                              </div>
-                              {!isFull && (
-                                <span className="shrink-0 text-xs text-lantern-mint font-semibold">Free slot</span>
-                              )}
-                              {isFull && removable && (
-                                <span className="shrink-0 text-xs text-amber-400/70 font-semibold">Swap →</span>
-                              )}
-                            </div>
-                          </button>
-                        );
-                      });
-                    })()}
+              <div className="p-6 space-y-3">
+                {placement.bestFitDays && placement.bestFitDays.length > 0 && (
+                  <div>
+                    <p className="text-white/40 text-xs font-semibold uppercase mb-2">Best Options</p>
+                    {placement.bestFitDays.map((suggestion, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => addActivityToDay(suggestion.dayIndex)}
+                        className="w-full text-left p-4 rounded-lg border border-lantern-mint/30 bg-white/[0.02] hover:bg-lantern-mint/10 hover:border-lantern-mint/50 transition-colors mb-2"
+                      >
+                        <p className="text-white font-semibold">Day {suggestion.dayIndex + 1} · {suggestion.city}</p>
+                        <p className="text-lantern-mint text-sm mt-1">{suggestion.reason}</p>
+                      </button>
+                    ))}
                   </div>
+                )}
 
-                  <p className="text-[10px] text-white/20 mt-3">
-                    Added at 14:00 as a placeholder — regenerate to optimise the schedule.
-                  </p>
-                </>
-              )}
+                {placement.swapSuggestions && placement.swapSuggestions.length > 0 && (
+                  <div>
+                    <p className="text-white/40 text-xs font-semibold uppercase mb-2">Or Swap With</p>
+                    {placement.swapSuggestions.map((suggestion, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => addActivityToDay(suggestion.dayIndex, suggestion.replaceActivityTitle)}
+                        className="w-full text-left p-4 rounded-lg border border-yellow-500/30 bg-white/[0.02] hover:bg-yellow-500/10 hover:border-yellow-500/50 transition-colors mb-2"
+                      >
+                        <p className="text-white font-semibold">Day {suggestion.dayIndex + 1} · {suggestion.city}</p>
+                        <p className="text-yellow-400 text-sm mt-1">
+                          Replace &ldquo;{suggestion.replaceActivityTitle}&rdquo; ({suggestion.replaceActivityDuration}m)
+                        </p>
+                        <p className="text-white/40 text-xs mt-2">{suggestion.reason}</p>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div className="p-4 border-t border-white/[0.1]">
+                <button
+                  type="button"
+                  onClick={() => setAddActivityModal(null)}
+                  className="w-full px-4 py-2 bg-white/[0.05] border border-white/[0.1] text-white/60 rounded-lg hover:bg-white/[0.1] transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         );
