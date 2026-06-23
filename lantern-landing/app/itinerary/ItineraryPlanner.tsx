@@ -447,11 +447,22 @@ function TimelineSlot({
           />
         ) : (
           <span
-            className={`flex-1 text-[13px] truncate ${slot.kind === "intercity_transfer" ? "text-lantern-violet font-medium" : "text-white/80"}`}
+            className={`flex-1 text-[13px] truncate ${slot.kind === "intercity_transfer" ? "text-lantern-violet font-medium" : "text-white/80"} ${slot.kind === "activity" && onRename ? "cursor-text" : ""}`}
             onDoubleClick={slot.kind === "activity" ? (e) => { e.stopPropagation(); onRename?.(slot); } : undefined}
+            title={slot.kind === "activity" && onRename ? "Double-click to rename" : undefined}
           >
             {slot.title}
           </span>
+        )}
+        {slot.kind === "activity" && onRename && !isRenaming && (
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); onRename(slot); }}
+            className="shrink-0 opacity-0 group-hover:opacity-100 text-white/30 hover:text-lantern-mint transition-all text-[10px] leading-none px-0.5"
+            title="Rename"
+          >
+            ✏
+          </button>
         )}
         <span className="text-[11px] text-white/25 shrink-0">{formatDuration(slot.durationMinutes)}</span>
         {cat && cat in CAT_STYLE && (
@@ -513,8 +524,9 @@ function TimelineSlot({
               />
             ) : (
               <p
-                className={`text-sm font-semibold leading-snug ${slot.kind === "intercity_transfer" ? "text-lantern-violet" : "text-white"}`}
+                className={`text-sm font-semibold leading-snug ${slot.kind === "intercity_transfer" ? "text-lantern-violet" : "text-white"} ${slot.kind === "activity" && onRename ? "cursor-text" : ""}`}
                 onDoubleClick={slot.kind === "activity" ? (e) => { e.stopPropagation(); onRename?.(slot); } : undefined}
+                title={slot.kind === "activity" && onRename ? "Double-click to rename" : undefined}
               >
                 {slot.title}
               </p>
@@ -534,6 +546,16 @@ function TimelineSlot({
               <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold capitalize ${CAT_STYLE[cat]}`}>
                 {cat}
               </span>
+            )}
+            {onRename && slot.kind === "activity" && !isRenaming && (
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); onRename(slot); }}
+                className="opacity-0 group-hover:opacity-100 text-white/30 hover:text-lantern-mint transition-all text-sm leading-none"
+                title="Rename"
+              >
+                ✏
+              </button>
             )}
             {onDelete && slot.kind !== "intercity_transfer" && slot.kind !== "airport_transfer" && (
               <button
