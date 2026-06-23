@@ -79,7 +79,7 @@ export async function generateItinerary(input: ItineraryRequest): Promise<Genera
 
   const response = await client.messages.create({
     model:      "claude-sonnet-4-6",
-    max_tokens: 2000,
+    max_tokens: 4000,
     system: [{ type: "text", text: systemPrompt, cache_control: { type: "ephemeral" } }],
     messages: [{ role: "user", content: userPrompt }],
   });
