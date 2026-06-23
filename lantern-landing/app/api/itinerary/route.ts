@@ -50,7 +50,22 @@ function inferKind(type: string, title: string): SlotKind {
   return "activity";
 }
 
-function transformDay(day: ClaudeDay, paceLimitMin: number): PlannedDay {
+// Count activities per the pace definition:
+// sightseeing/meal = 1, casual stroll = 0.5, transport/hotel = 0
+function countPaceActivities(slots: PlannedSlot[]): number {
+  let count = 0;
+  for (const s of slots) {
+    if (s.kind === "activity" || s.kind === "meal") {
+      const t = s.title.toLowerCase();
+      const isStroll = t.includes("stroll") || t.includes("wander") || t.includes("walk through") || t.includes("neighborhood walk");
+      count += isStroll ? 0.5 : 1;
+    }
+    // hotel_checkin, hotel_checkout, airport_transfer, intercity_transfer = 0
+  }
+  return count;
+}
+
+function transformDay(day: ClaudeDay, paceMax: number): PlannedDay {
   const slots: PlannedSlot[] = (day.schedule ?? []).map((item) => {
     const startMinutes    = timeToMin(item.time ?? "09:00");
     const durationMinutes = parseDur(item.duration ?? "1h");
@@ -65,17 +80,15 @@ function transformDay(day: ClaudeDay, paceLimitMin: number): PlannedDay {
     };
   });
 
-  const actSlots       = slots.filter((s) => s.kind === "activity");
-  const totalActMin    = actSlots.reduce((s, sl) => s + sl.durationMinutes, 0);
-  const allScheduleMin = slots
-    .filter((s) => s.kind === "activity" || s.kind === "meal")
-    .reduce((s, sl) => s + sl.durationMinutes, 0);
+  const actSlots    = slots.filter((s) => s.kind === "activity");
+  const totalActMin = actSlots.reduce((s, sl) => s + sl.durationMinutes, 0);
+  const paceCount   = countPaceActivities(slots);
 
   const warnings: import("@/lib/itinerary/types").DayWarning[] = [];
-  if (allScheduleMin > paceLimitMin) {
+  if (paceCount > paceMax) {
     warnings.push({
       type:    "packed",
-      message: `Long day — ${Math.round(allScheduleMin / 60)}h of activities & meals scheduled`,
+      message: `Busy day — ${paceCount} activities scheduled (target ≤ ${paceMax})`,
     });
   }
 
@@ -100,12 +113,12 @@ export async function POST(req: NextRequest) {
     const input = await req.json();
     const result = await generateItinerary(input);
 
-    // Warning threshold mirrors the pace limit enforced in the prompt
-    const paceLimitMin = ({ relaxed: 360, moderate: 480, packed: 600 } as Record<string, number>)[
+    // Warning threshold mirrors the activity-count pace limit in the prompt
+    const paceMax = ({ relaxed: 3, moderate: 5, packed: 8 } as Record<string, number>)[
       input.userPreferences?.pace ?? "moderate"
-    ] ?? 480;
+    ] ?? 5;
 
-    const days: PlannedDay[] = (result.days ?? []).map((day) => transformDay(day, paceLimitMin));
+    const days: PlannedDay[] = (result.days ?? []).map((day) => transformDay(day, paceMax));
     const totalScheduled = days.reduce((s, d) => s + d.scheduledActivityCount, 0);
     const dropped = result._dropped ?? [];
 

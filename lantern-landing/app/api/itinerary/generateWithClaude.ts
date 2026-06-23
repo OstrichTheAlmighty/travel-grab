@@ -450,10 +450,15 @@ function buildPrompt(input: ItineraryRequest): string {
   const sightH = String(Math.floor((wakeMin + 45) / 60)).padStart(2, "0");
   const sightM = String((wakeMin + 45) % 60).padStart(2, "0");
 
-  // ── Pace → max sightseeing hours per day ────────────────────────────────
-  const paceLimitHours: Record<string, number> = { relaxed: 6, moderate: 8, packed: 10 };
-  const maxHours = paceLimitHours[prefs.pace] ?? 8;
-  const maxMin   = maxHours * 60;
+  // ── Pace → max activity count per day ───────────────────────────────────
+  // Activities counted: sightseeing = 1, meal = 1, casual stroll = 0.5
+  // NOT counted: city-to-city transport, hotel check-in/out
+  const paceActivityCount: Record<string, { min: number; max: number }> = {
+    relaxed:  { min: 2, max: 3 },
+    moderate: { min: 4, max: 5 },
+    packed:   { min: 6, max: 8 },
+  };
+  const paceRange = paceActivityCount[prefs.pace] ?? paceActivityCount.moderate;
 
   // ── City schedule with date ranges ──────────────────────────────────────
   const start = new Date(input.startDate + "T00:00:00");
@@ -629,23 +634,32 @@ ${activityBlock.length > 0 ? activityBlock : "  (No pre-saved activities — bui
 
 WAKE TIME — HARD CONSTRAINT: User wakes at ${wakeDisplay} (${wakeStr}). No activity of any kind may be scheduled before ${wakeStr}. The first scheduled item each day must be breakfast at ${wakeStr}. Sightseeing begins at ${sightH}:${sightM} at the earliest.${fishMarketNote}
 
-DAILY PACE LIMIT — HARD CONSTRAINT: User preference is "${prefs.pace}". Maximum ${maxHours}h (${maxMin} min) of combined sightseeing + meals per day. Do not schedule more. Prefer quality over quantity — a day with 4 great experiences beats a cramped 8-stop day.
+DAILY PACE — HARD CONSTRAINT: User preference is "${prefs.pace}". Schedule exactly ${paceRange.min}–${paceRange.max} countable activities per day.
+
+Activity counting rules:
+- Sightseeing, culture, nature, adventure, shopping stop = 1 activity
+- Restaurant meal (breakfast, lunch, dinner) = 1 activity
+- Casual neighborhood stroll, short walk = 0.5 activity
+- City-to-city transport (bullet train, ferry, bus) = 0 — does NOT count
+- Hotel check-in / check-out = 0 — does NOT count
+
+Dinner may be scheduled 18:00–20:30 regardless of pace — having dinner at 20:00 on a relaxed day is fine if the total count is still ${paceRange.min}–${paceRange.max}.
+Prefer depth over breadth: ${prefs.pace === "relaxed" ? "leave long gaps, let the traveller linger, avoid back-to-back stops" : prefs.pace === "moderate" ? "keep a natural rhythm with breathing room between stops" : "efficient routing, tightly sequenced stops — warn traveller this is a full day"}.
 
 DUPLICATE RULE — CRITICAL: Each activity ID can appear AT MOST ONCE across all ${totalDays} days. "Itsukushima Jinja" and "Itsukushima Shrine" are the same place — pick one name and schedule it once only. Never schedule the same place twice under any variation of its name.
 
 GEOGRAPHIC RULE — ABSOLUTE: Each activity's city tag (e.g. [OSAKA-ONLY, Days 5–7]) tells you exactly which days it may appear. Scheduling a Kyoto activity on an Osaka day is wrong. Scheduling an Osaka activity on a Tokyo departure day is wrong. Check every placement.
 
-RESTAURANT TIMING RULE: Breakfast cafes and morning markets → ${wakeStr}–12:00 only. Lunch → 11:30–14:00. Dinner → 17:30–20:30.${budgetBlock}${foodBlock}${cuisineBlock}
+MEAL TIMING RULE: Breakfast → ${wakeStr}–10:00. Lunch → 11:30–14:00. Dinner → 18:00–20:30 (dinner time does NOT affect the activity count — a relaxed day with 3 activities and dinner at 20:00 is perfectly valid).${budgetBlock}${foodBlock}${cuisineBlock}
 
-PACE: ${prefs.pace} | Interests: ${prefs.interests.join(", ")}${prefs.budgetLevel ? ` | Budget: ${prefs.budgetLevel}` : ""}${flightBlock}
+PACE: ${prefs.pace} (${paceRange.min}–${paceRange.max} countable activities/day) | Interests: ${prefs.interests.join(", ")}${prefs.budgetLevel ? ` | Budget: ${prefs.budgetLevel}` : ""}${flightBlock}
 
 General rules:
-- Meals: breakfast ${wakeStr}, lunch 12:00–14:00, dinner 18:00–20:30
-- Full-day activities [FULL-DAY] need their own day with only dinner added
-- Transition days: include a travel/transfer item when moving city to city
+- Full-day activities [FULL-DAY] need their own day; count them as 1 activity + dinner only
+- Transition days (city-to-city travel): the transfer itself = 0 count; only add activities at the destination after arrival
 - Keep "notes" and "reasoning" to 1 sentence each
 
-SELF-CHECK before finalizing: For each day verify (1) no item starts before ${wakeStr}, (2) total sightseeing + meals ≤ ${maxHours}h, (3) every activity's city tag matches the day's city, (4) no activity appears more than once, (5) on the last day all items finish before the departure cutoff.
+SELF-CHECK before finalizing: For each day verify (1) no item starts before ${wakeStr}, (2) countable activities (sightseeing + meals; NOT transport or hotel) total ${paceRange.min}–${paceRange.max} for the "${prefs.pace}" pace, (3) every activity's city tag matches the day's city, (4) no activity appears more than once across all days, (5) on the last day all items finish before the departure cutoff.
 
 Return ONLY this JSON structure (no other text, no markdown):
 {
