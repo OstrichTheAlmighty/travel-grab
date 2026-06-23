@@ -425,7 +425,7 @@ function TimelineSlot({
             {cat}
           </span>
         )}
-        {onDelete && (
+        {onDelete && slot.kind !== "intercity_transfer" && slot.kind !== "airport_transfer" && (
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); onDelete(slot); }}
@@ -474,7 +474,7 @@ function TimelineSlot({
                 {cat}
               </span>
             )}
-            {onDelete && (
+            {onDelete && slot.kind !== "intercity_transfer" && slot.kind !== "airport_transfer" && (
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); onDelete(slot); }}
