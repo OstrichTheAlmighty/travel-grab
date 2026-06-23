@@ -2228,37 +2228,26 @@ export default function ItineraryPlanner() {
         {activeTab === "dropped" && trip.itinerary && (() => {
           const all = trip.itinerary.meta.droppedActivities;
 
-          type DropKey = "time" | "duplicate" | "geo" | "flight";
-          const categorise = (r: string): DropKey =>
-            r.startsWith("Duplicate")  ? "duplicate" :
-            r.startsWith("Geographic") ? "geo"       :
-            r.startsWith("Last-day")   ? "flight"    : "time";
+          type DiagType = "pace_limited" | "duplicate" | "geographic" | "flight_conflict";
 
-          const shortReason = (r: string, key: DropKey): string => {
-            if (key === "duplicate") return "Same location already appears earlier in the itinerary";
-            if (key === "geo") {
-              const m = r.match(/in (.+?) but/);
-              return m ? `Belongs in ${m[1]}` : "Wrong city for this day";
-            }
-            if (key === "flight") {
-              const m = r.match(/ends at (\d+:\d+)/);
-              return m ? `Ends at ${m[1]} — after your airport check-in cutoff` : "Conflicts with flight departure";
-            }
-            const durMatch = r.match(/\((\d+)m\)/);
-            return durMatch
-              ? `${durMatch[1]}m activity — couldn't fit within the daily pace limit`
-              : "Couldn't fit within the daily pace limit";
+          const getType = (d: (typeof all)[0]): DiagType => {
+            if (d.diagnostic?.type) return d.diagnostic.type;
+            // Backward compat: parse legacy reason strings from older generations
+            if (d.reason.startsWith("Duplicate"))  return "duplicate";
+            if (d.reason.startsWith("Geographic")) return "geographic";
+            if (d.reason.startsWith("Last-day"))   return "flight_conflict";
+            return "pace_limited";
           };
 
-          const GROUPS: { key: DropKey; icon: string; label: string }[] = [
-            { key: "time",      icon: "⏱",  label: "No time slot available" },
-            { key: "duplicate", icon: "⊘",  label: "Duplicate location" },
-            { key: "geo",       icon: "📍", label: "Geographic conflict" },
-            { key: "flight",    icon: "✈",  label: "Conflicts with flight" },
+          const GROUPS: { key: DiagType; icon: string; label: string }[] = [
+            { key: "pace_limited",    icon: "⏱",  label: "No time slot available" },
+            { key: "duplicate",       icon: "⊘",  label: "Duplicate location" },
+            { key: "geographic",      icon: "📍", label: "Geographic conflict" },
+            { key: "flight_conflict", icon: "✈",  label: "Conflicts with flight" },
           ];
 
           const grouped = GROUPS
-            .map((g) => ({ ...g, items: all.filter((d) => categorise(d.reason) === g.key) }))
+            .map((g) => ({ ...g, items: all.filter((d) => getType(d) === g.key) }))
             .filter((g) => g.items.length > 0);
 
           if (all.length === 0) {
@@ -2290,20 +2279,117 @@ export default function ItineraryPlanner() {
                     <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-2">
                       {g.icon} {g.label} ({g.items.length})
                     </p>
-                    <div className="space-y-1.5">
-                      {g.items.map((d, i) => (
-                        <div
-                          key={i}
-                          className="flex items-start gap-3 rounded-lg border border-white/[0.07] bg-white/[0.02] px-3 py-2.5"
-                        >
-                          <div className="flex-1 min-w-0">
-                            <p className="text-xs font-medium text-white/80 truncate">{d.title}</p>
-                            <p className="text-[11px] text-white/35 mt-0.5 leading-snug">
-                              {shortReason(d.reason, g.key)}
-                            </p>
+                    <div className="space-y-2">
+                      {g.items.map((d, i) => {
+                        const diag = d.diagnostic;
+                        return (
+                          <div
+                            key={i}
+                            className="rounded-xl border border-white/[0.07] bg-white/[0.02] px-3 py-3"
+                          >
+                            {/* Title + duration badge */}
+                            <div className="flex items-start justify-between gap-2 mb-1.5">
+                              <p className="text-xs font-medium text-white/80 leading-snug">{d.title}</p>
+                              {diag?.activityDuration && (
+                                <span className="shrink-0 text-[10px] text-white/30 bg-white/[0.06] rounded px-1.5 py-0.5">
+                                  {diag.activityDuration}m
+                                </span>
+                              )}
+                            </div>
+
+                            {/* Pace-limited diagnostic */}
+                            {(!diag || diag.type === "pace_limited") && (
+                              <div className="space-y-1.5">
+                                {diag?.belongsInCity && (
+                                  <p className="text-[11px] text-white/40">
+                                    {diag.belongsInCity !== "Flexible" ? (
+                                      <>
+                                        Belongs in{" "}
+                                        <span className="text-white/60">{diag.belongsInCity}</span>
+                                        {diag.belongsInDays && diag.belongsInDays.length > 0 && (
+                                          <> (Day{diag.belongsInDays.length > 1 ? "s" : ""}{" "}
+                                          {diag.belongsInDays.join(", ")})</>
+                                        )}
+                                      </>
+                                    ) : (
+                                      "Flexible — can go in any city"
+                                    )}
+                                  </p>
+                                )}
+                                {diag?.dayUtilization && diag.paceLimit && (
+                                  <p className="text-[11px] text-white/40 leading-relaxed">
+                                    {Object.entries(diag.dayUtilization).map(([dayKey, count], j) => {
+                                      const dayNum = dayKey.replace("day", "");
+                                      const full = count >= diag.paceLimit!;
+                                      return (
+                                        <span key={dayKey}>
+                                          {j > 0 && <span className="mx-1 text-white/15">·</span>}
+                                          <span className={full ? "text-amber-400/70" : "text-white/50"}>
+                                            Day {dayNum} ({count}/{diag.paceLimit})
+                                          </span>
+                                        </span>
+                                      );
+                                    })}
+                                  </p>
+                                )}
+                                {!diag && (
+                                  <p className="text-[11px] text-white/40">{d.reason}</p>
+                                )}
+                                <div className="flex flex-wrap gap-1.5 mt-2">
+                                  <button
+                                    onClick={() => setActiveTab("preferences")}
+                                    className="text-[10px] text-blue-300/70 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-400/15 rounded-md px-2 py-1 transition-colors"
+                                  >
+                                    Change pace in Preferences →
+                                  </button>
+                                  <button
+                                    onClick={() => setActiveTab("itinerary")}
+                                    className="text-[10px] text-white/40 bg-white/[0.04] hover:bg-white/[0.07] border border-white/[0.08] rounded-md px-2 py-1 transition-colors"
+                                  >
+                                    Remove another activity →
+                                  </button>
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Duplicate diagnostic */}
+                            {diag?.type === "duplicate" && (
+                              <p className="text-[11px] text-white/40">
+                                {diag.duplicateOf ? (
+                                  <>Already scheduled as <span className="text-white/60">"{diag.duplicateOf}"</span></>
+                                ) : (
+                                  "Same location already appears earlier in the itinerary"
+                                )}
+                              </p>
+                            )}
+
+                            {/* Geographic diagnostic */}
+                            {diag?.type === "geographic" && (
+                              <div>
+                                <p className="text-[11px] text-white/40">
+                                  Located in{" "}
+                                  <span className="text-white/60">{diag.activityCity}</span>
+                                  {" — "}scheduled on a{" "}
+                                  <span className="text-white/60">{diag.assignedCity?.split(",")[0]}</span> day
+                                </p>
+                                <p className="text-[10px] text-white/25 mt-1">
+                                  Will appear in the right city on regenerate.
+                                </p>
+                              </div>
+                            )}
+
+                            {/* Flight conflict diagnostic */}
+                            {diag?.type === "flight_conflict" && (
+                              <p className="text-[11px] text-white/40">
+                                Ends at{" "}
+                                <span className="text-white/60">{diag.activityEndsAt}</span>
+                                {" — "}airport check-in needed by{" "}
+                                <span className="text-amber-400/70">{diag.checkInDeadline}</span>
+                              </p>
+                            )}
                           </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
                 ))}

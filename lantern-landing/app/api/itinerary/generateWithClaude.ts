@@ -41,6 +41,19 @@ export interface DroppedActivity {
   sourceId: string;
   title: string;
   reason: string;
+  diagnostic?: {
+    type: "pace_limited" | "duplicate" | "geographic" | "flight_conflict";
+    belongsInCity?:    string;
+    belongsInDays?:    number[];
+    activityDuration?: number;
+    dayUtilization?:   Record<string, number>;
+    paceLimit?:        number;
+    duplicateOf?:      string;
+    activityCity?:     string;
+    assignedCity?:     string;
+    activityEndsAt?:   string;
+    checkInDeadline?:  string;
+  };
 }
 
 interface ClaudeScheduleItem {
@@ -71,6 +84,13 @@ export interface GenerateItineraryResult extends ClaudeItinerary {
 
 export async function generateItinerary(input: ItineraryRequest): Promise<GenerateItineraryResult> {
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
+  const paceActivityCount: Record<string, { min: number; max: number }> = {
+    relaxed:  { min: 2, max: 3 },
+    moderate: { min: 4, max: 5 },
+    packed:   { min: 6, max: 8 },
+  };
+  const paceRange = paceActivityCount[input.userPreferences.pace] ?? paceActivityCount.moderate;
 
   const systemPrompt =
     "You are a travel itinerary generator. Output ONLY valid JSON — no markdown, no backticks, no prose.";
@@ -133,7 +153,7 @@ export async function generateItinerary(input: ItineraryRequest): Promise<Genera
   const { cleaned, lateViolations } = validateLastDayTimeline(geoValidated, input.flights);
 
   // 4. Find input activities Claude omitted entirely
-  const missed = computeMissed(input.activities, cleaned);
+  const missed = computeMissed(input.activities, cleaned, input, paceRange);
 
   const dropped: DroppedActivity[] = [...duplicateDropped, ...geoViolations, ...lateViolations, ...missed];
 
@@ -192,7 +212,7 @@ function deduplicateSchedule(itinerary: ClaudeItinerary): {
   cleaned: ClaudeItinerary;
   duplicateDropped: DroppedActivity[];
 } {
-  const seen = new Set<string>();
+  const seen = new Map<string, string>(); // dedup key → original title
   const duplicateDropped: DroppedActivity[] = [];
 
   const cleanedDays = itinerary.days.map((day) => ({
@@ -204,13 +224,14 @@ function deduplicateSchedule(itinerary: ClaudeItinerary): {
       const key = toDedupeKey(item.activity);
       if (seen.has(key)) {
         duplicateDropped.push({
-          sourceId: "",
-          title:    item.activity,
-          reason:   "Duplicate: same location already scheduled on an earlier day",
+          sourceId:   "",
+          title:      item.activity,
+          reason:     "Duplicate location",
+          diagnostic: { type: "duplicate", duplicateOf: seen.get(key)! },
         });
         return false;
       }
-      seen.add(key);
+      seen.set(key, item.activity);
       return true;
     }),
   }));
@@ -293,9 +314,10 @@ function validateGeography(
 
       if (!citiesMatch(actCity, expectedCity)) {
         geoViolations.push({
-          sourceId: "",
-          title:    item.activity,
-          reason:   `Geographic: activity is in ${actCity} but this is a ${day.city} day`,
+          sourceId:   "",
+          title:      item.activity,
+          reason:     "Geographic conflict",
+          diagnostic: { type: "geographic", activityCity: actCity, assignedCity: day.city },
         });
         console.error(
           `[geo-validate] Removed "${item.activity}" from Day ${day.dayIndex} (${day.city}): ` +
@@ -354,9 +376,14 @@ function validateLastDayTimeline(
         const cutH = String(Math.floor(cutoffMin / 60)).padStart(2, "0");
         const cutM = String(cutoffMin % 60).padStart(2, "0");
         lateViolations.push({
-          sourceId: "",
-          title:    item.activity,
-          reason:   `Last-day conflict: ends at ${endH}:${endM} but airport check-in needed by ${cutH}:${cutM}`,
+          sourceId:   "",
+          title:      item.activity,
+          reason:     "Conflicts with flight departure",
+          diagnostic: {
+            type:            "flight_conflict",
+            activityEndsAt:  `${endH}:${endM}`,
+            checkInDeadline: `${cutH}:${cutM}`,
+          },
         });
         console.warn(
           `[timeline-validate] Removed "${item.activity}" from last day: ` +
@@ -378,14 +405,17 @@ function validateLastDayTimeline(
 function computeMissed(
   inputActivities: ActivityInput[],
   itinerary: ClaudeItinerary,
+  input: ItineraryRequest,
+  paceConfig: { min: number; max: number },
 ): DroppedActivity[] {
-  // Collect every activity title Claude scheduled (normalised)
   const scheduled = new Set<string>();
   for (const day of itinerary.days ?? []) {
     for (const item of day.schedule ?? []) {
       if (item.activity) scheduled.add(normalise(item.activity));
     }
   }
+
+  const dayToCity = computeDayToCityMap(input.cities);
 
   return inputActivities
     .filter((a) => {
@@ -396,11 +426,36 @@ function computeMissed(
       }
       return true;
     })
-    .map((a) => ({
-      sourceId: a.sourceId,
-      title:    a.title,
-      reason:   `No time slot available: ${a.title} (${Math.round(a.estimatedDurationHours * 60)}m) couldn't fit — check pace preference in Preferences`,
-    }));
+    .map((a) => {
+      const targetCity = a.city ? normCity(a.city) : null;
+
+      const belongsInDays = targetCity
+        ? [...dayToCity.entries()]
+            .filter(([, city]) => citiesMatch(city, targetCity))
+            .map(([dayNum]) => dayNum)
+        : [];
+
+      const dayUtilization: Record<string, number> = {};
+      for (const day of itinerary.days) {
+        if (targetCity && !citiesMatch(normCity(day.city), targetCity)) continue;
+        dayUtilization[`day${day.dayIndex}`] =
+          (day.schedule ?? []).filter((s) => s.type === "activity").length;
+      }
+
+      return {
+        sourceId: a.sourceId,
+        title:    a.title,
+        reason:   "Pace-limited",
+        diagnostic: {
+          type:             "pace_limited" as const,
+          belongsInCity:    targetCity ?? "Flexible",
+          belongsInDays:    belongsInDays.length > 0 ? belongsInDays : undefined,
+          activityDuration: Math.round(a.estimatedDurationHours * 60),
+          dayUtilization:   Object.keys(dayUtilization).length > 0 ? dayUtilization : undefined,
+          paceLimit:        paceConfig.max,
+        },
+      };
+    });
 }
 
 // ── Utilities ──────────────────────────────────────────────────────────────────

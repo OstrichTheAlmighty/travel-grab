@@ -86,6 +86,23 @@ export interface DroppedActivity {
   sourceId: string;
   title:    string;
   reason:   string;
+  diagnostic?: {
+    type: "pace_limited" | "duplicate" | "geographic" | "flight_conflict";
+    // pace_limited
+    belongsInCity?:    string;
+    belongsInDays?:    number[];
+    activityDuration?: number;
+    dayUtilization?:   Record<string, number>;
+    paceLimit?:        number;
+    // duplicate
+    duplicateOf?: string;
+    // geographic
+    activityCity?: string;
+    assignedCity?: string;
+    // flight_conflict
+    activityEndsAt?:  string;
+    checkInDeadline?: string;
+  };
 }
 
 export interface PlanningConflict {
