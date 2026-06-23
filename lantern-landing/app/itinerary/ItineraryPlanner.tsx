@@ -409,7 +409,7 @@ function TimelineSlot({
     const lineColor = slot.kind === "intercity_transfer" ? "border-lantern-violet/20" : "border-white/[0.06]";
     return (
       <div
-        className={`group flex items-center gap-3 py-2.5 border-b ${lineColor} ${isClickable ? "cursor-pointer hover:bg-white/[0.02] -mx-2 px-2 rounded-lg transition-colors" : ""}`}
+        className={`flex items-center gap-3 py-2.5 border-b ${lineColor} ${isClickable ? "cursor-pointer hover:bg-white/[0.02] -mx-2 px-2 rounded-lg transition-colors" : ""}`}
         onClick={isClickable ? () => onSlotClick(slot) : undefined}
       >
         <span className="text-[11px] font-mono text-white/30 w-16 shrink-0 tabular-nums">
@@ -425,11 +425,11 @@ function TimelineSlot({
             {cat}
           </span>
         )}
-        {onDelete && (
+        {onDelete && slot.kind === "activity" && (
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); onDelete(slot); }}
-            className="shrink-0 opacity-0 group-hover:opacity-100 text-white/20 hover:text-red-400 transition-all text-xs leading-none px-0.5"
+            className="shrink-0 text-white/20 hover:text-red-400 transition-colors text-xs leading-none px-0.5"
             title="Remove from itinerary"
           >
             ✕
@@ -450,7 +450,7 @@ function TimelineSlot({
         {!isLast && <div className={`flex-1 w-px mt-1 ${slot.kind === "intercity_transfer" ? "bg-lantern-violet/20" : "bg-white/[0.07]"}`} />}
       </div>
       <div
-        className={`group flex-1 mb-4 rounded-xl border px-4 py-3 ${style.border} ${style.bg} ${isClickable ? "cursor-pointer hover:border-white/20 transition-colors" : ""}`}
+        className={`flex-1 mb-4 rounded-xl border px-4 py-3 ${style.border} ${style.bg} ${isClickable ? "cursor-pointer hover:border-white/20 transition-colors" : ""}`}
         onClick={isClickable ? () => onSlotClick(slot) : undefined}
       >
         <div className="flex items-start justify-between gap-2">
@@ -474,11 +474,11 @@ function TimelineSlot({
                 {cat}
               </span>
             )}
-            {onDelete && (
+            {onDelete && slot.kind === "activity" && (
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); onDelete(slot); }}
-                className="opacity-0 group-hover:opacity-100 text-white/20 hover:text-red-400 transition-all text-sm leading-none"
+                className="text-white/25 hover:text-red-400 transition-colors text-sm leading-none"
                 title="Remove from itinerary"
               >
                 ✕
@@ -2350,33 +2350,24 @@ export default function ItineraryPlanner() {
                             {/* Pace-limited diagnostic */}
                             {(!diag || diag.type === "pace_limited") && (
                               <div className="space-y-1.5">
-                                {diag?.belongsInCity && diag.belongsInCity !== "Flexible" && (
-                                  <p className="text-[11px] text-white/40">
-                                    Belongs in{" "}
-                                    <span className="text-white/60">
-                                      {diag.belongsInCity.charAt(0).toUpperCase() + diag.belongsInCity.slice(1)}
-                                    </span>
-                                    {diag.belongsInDays && diag.belongsInDays.length > 0 && (
-                                      <> — Day{diag.belongsInDays.length > 1 ? "s" : ""}{" "}
-                                      {diag.belongsInDays.join(", ")}</>
-                                    )}
-                                  </p>
-                                )}
-                                {diag?.dayUtilization && diag.paceLimit && diag.belongsInDays && diag.belongsInDays.length > 0 && (
-                                  <p className="text-[11px] text-white/40 leading-relaxed">
-                                    {diag.belongsInDays.map((dayNum, j) => {
-                                      const count = diag.dayUtilization![`day${dayNum}`] ?? 0;
-                                      const full = count >= diag.paceLimit!;
+                                {diag?.dayUtilization && Object.keys(diag.dayUtilization).length > 0 ? (
+                                  <div className="mt-1 pt-1.5 border-t border-white/[0.05] space-y-0.5">
+                                    <p className="text-[10px] text-white/30 font-semibold mb-1">Where it fits:</p>
+                                    {Object.entries(diag.dayUtilization).map(([dayKey, count]) => {
+                                      const full = count >= (diag.paceLimit ?? 5);
                                       return (
-                                        <span key={dayNum}>
-                                          {j > 0 && <span className="mx-1 text-white/15">·</span>}
-                                          <span className={full ? "text-amber-400/70" : "text-white/50"}>
-                                            Day {dayNum} ({count}/{diag.paceLimit})
-                                          </span>
-                                        </span>
+                                        <p key={dayKey} className={`text-[11px] ${full ? "text-amber-400/70" : "text-white/45"}`}>
+                                          {dayKey.replace("day", "Day ")} ({count}/{diag.paceLimit ?? 5}){full ? " · full" : ""}
+                                        </p>
                                       );
                                     })}
+                                  </div>
+                                ) : diag?.belongsInCity && diag.belongsInCity !== "Flexible" ? (
+                                  <p className="text-[11px] text-white/40">
+                                    📍 {diag.belongsInCity.charAt(0).toUpperCase() + diag.belongsInCity.slice(1)}
                                   </p>
+                                ) : (
+                                  <p className="text-[11px] text-white/35">Flexible — any city</p>
                                 )}
                                 {!diag && (
                                   <p className="text-[11px] text-white/40">{d.reason}</p>
