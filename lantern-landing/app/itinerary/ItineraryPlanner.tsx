@@ -417,9 +417,11 @@ function TimelineSlot({
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); onEditTime(slot); }}
-            className="text-[11px] font-mono text-white/30 w-16 shrink-0 tabular-nums text-left hover:text-lantern-mint transition-colors"
+            className="group/time flex items-center gap-1 w-16 shrink-0 text-left hover:text-lantern-mint transition-colors"
+            title="Edit time"
           >
-            {formatTime(slot.startMinutes)}
+            <span className="text-[11px] font-mono tabular-nums">{formatTime(slot.startMinutes)}</span>
+            <span className="text-[9px] opacity-0 group-hover/time:opacity-100 transition-opacity">✏</span>
           </button>
         ) : (
           <span className="text-[11px] font-mono text-white/30 w-16 shrink-0 tabular-nums">
@@ -458,9 +460,11 @@ function TimelineSlot({
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); onEditTime(slot); }}
-            className="text-[11px] font-mono text-white/30 leading-none mb-1.5 hover:text-lantern-mint transition-colors"
+            className="group/time flex items-center gap-1 leading-none mb-1.5 text-white/30 hover:text-lantern-mint transition-colors"
+            title="Edit time"
           >
-            {formatTime(slot.startMinutes)}
+            <span className="text-[11px] font-mono">{formatTime(slot.startMinutes)}</span>
+            <span className="text-[9px] opacity-0 group-hover/time:opacity-100 transition-opacity">✏</span>
           </button>
         ) : (
           <span className="text-[11px] font-mono text-white/30 leading-none mb-1.5">
