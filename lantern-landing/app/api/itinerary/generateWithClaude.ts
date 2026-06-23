@@ -383,12 +383,7 @@ function computeMissed(
   const scheduled = new Set<string>();
   for (const day of itinerary.days ?? []) {
     for (const item of day.schedule ?? []) {
-      if (item.activity) {
-        const n = normalise(item.activity);
-        scheduled.add(n);
-        // Add significant words so "Senso-ji Temple" matches "Senso-ji"
-        n.split(/[\s–\-/]+/).forEach((w) => w.length > 4 && scheduled.add(w));
-      }
+      if (item.activity) scheduled.add(normalise(item.activity));
     }
   }
 
