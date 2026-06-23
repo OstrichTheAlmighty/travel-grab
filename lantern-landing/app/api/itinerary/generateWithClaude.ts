@@ -543,7 +543,19 @@ function generateSuggestionsForDropped(
         }
       }
 
-      return suggestions.length > 0 ? { ...d, suggestions } : d;
+      // Fallback: every pace-limited item gets at least a generic suggestion
+      if (suggestions.length === 0) {
+        const nextPace = input.userPreferences.pace === "relaxed" ? "Balanced" : "Packed";
+        const nextRange = input.userPreferences.pace === "relaxed" ? "4–5" : "6–8";
+        suggestions.push({
+          type:             "increase_pace_trip",
+          action:           `Switch to ${nextPace} pace in Preferences (${nextRange} activities/day)`,
+          benefit:          "Allows more activities per day across the whole trip",
+          canFitActivities: [d.title],
+        });
+      }
+
+      return { ...d, suggestions };
     }
 
     if (diag.type === "duplicate") {
