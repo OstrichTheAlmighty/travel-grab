@@ -881,10 +881,17 @@ export default function ItineraryPlanner() {
   const [detailSlot,        setDetailSlot]         = useState<PlannedSlot | null>(null);
   const [modalPlaceDetail,  setModalPlaceDetail]   = useState<PlaceDetailData | null>(null);
   const [modalDetailLoading, setModalDetailLoading] = useState(false);
+  type AnalyzedDay = {
+    dayIndex: number; city: string; activityCount: number; paceMax: number;
+    status: "free_slot" | "replace_suggested";
+    replaceTitle?: string; replaceDuration?: number; suggestion: string;
+  };
   const [addActivityModal,  setAddActivityModal]   = useState<{
-    activity:       DroppedActivity;
+    activity:        DroppedActivity;
     confirmReplace?: { dayIndex: number; slot: PlannedSlot };
+    analysis?:       { eligibleDays: AnalyzedDay[]; belongsInCity: string } | null;
   } | null>(null);
+  const [analysisLoading, setAnalysisLoading] = useState<string | null>(null);
 
   // Tab navigation
   type ActiveTab = "itinerary" | "preferences" | "recommendations" | "saved" | "dropped";
@@ -2308,10 +2315,35 @@ export default function ItineraryPlanner() {
                     </div>
                     <button
                       type="button"
-                      onClick={() => setAddActivityModal({ activity: d })}
-                      className="shrink-0 px-3 py-1.5 rounded-lg border border-lantern-mint/30 text-xs text-lantern-mint hover:bg-lantern-mint/10 transition-colors"
+                      disabled={analysisLoading === d.title}
+                      onClick={async () => {
+                        if (!trip.itinerary) return;
+                        setAnalysisLoading(d.title);
+                        try {
+                          const res = await fetch("/api/itinerary/analyze-dropped", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                              droppedActivity: d,
+                              itinerary:       trip.itinerary,
+                              tripPace:        trip.pace,
+                            }),
+                          });
+                          const analysis = res.ok ? await res.json() as { eligibleDays: AnalyzedDay[]; belongsInCity: string } : null;
+                          setAddActivityModal({ activity: d, analysis });
+                        } catch {
+                          setAddActivityModal({ activity: d, analysis: null });
+                        } finally {
+                          setAnalysisLoading(null);
+                        }
+                      }}
+                      className={`shrink-0 px-3 py-1.5 rounded-lg border text-xs transition-colors ${
+                        analysisLoading === d.title
+                          ? "border-white/10 text-white/30 cursor-wait"
+                          : "border-lantern-mint/30 text-lantern-mint hover:bg-lantern-mint/10"
+                      }`}
                     >
-                      + Add
+                      {analysisLoading === d.title ? "…" : "+ Add"}
                     </button>
                   </div>
                 );
@@ -2429,89 +2461,150 @@ export default function ItineraryPlanner() {
                     {durMin && <> · {durMin}m</>}
                   </p>
 
+                  {addActivityModal.analysis && addActivityModal.analysis.eligibleDays.length === 0 && (
+                    <p className="text-sm text-amber-400/70 mb-3">
+                      No free days in {addActivityModal.analysis.belongsInCity} — all slots are full or taken.
+                    </p>
+                  )}
+
                   <div className="space-y-2 max-h-[400px] overflow-y-auto pr-1">
                     {(() => {
-                      const actCity = activity.diagnostic?.belongsInCity?.toLowerCase();
+                      // Use server analysis if available, else compute inline
+                      if (addActivityModal.analysis) {
+                        const { eligibleDays, belongsInCity } = addActivityModal.analysis;
+                        const isFiltered = belongsInCity && belongsInCity !== "Flexible";
+                        return (
+                          <>
+                            {isFiltered && eligibleDays.length > 0 && (
+                              <p className="text-[10px] text-white/30 mb-2">
+                                Showing {eligibleDays.length} {eligibleDays.length === 1 ? "day" : "days"} in{" "}
+                                <span className="text-white/50">{belongsInCity}</span>
+                              </p>
+                            )}
+                            {eligibleDays.map((ed) => {
+                              const isReplace = ed.status === "replace_suggested";
+                              return (
+                                <button
+                                  key={ed.dayIndex}
+                                  type="button"
+                                  onClick={() => {
+                                    if (isReplace && ed.replaceTitle) {
+                                      const targetDay = itin.days.find((d) => d.dayIndex === ed.dayIndex);
+                                      const slotToRemove = targetDay?.slots.find(
+                                        (s) => s.kind === "activity" && s.title === ed.replaceTitle,
+                                      ) ?? null;
+                                      if (slotToRemove) {
+                                        setAddActivityModal((prev) => prev
+                                          ? { ...prev, confirmReplace: { dayIndex: ed.dayIndex, slot: slotToRemove } }
+                                          : null);
+                                        return;
+                                      }
+                                    }
+                                    commitAdd(ed.dayIndex);
+                                  }}
+                                  className={`w-full text-left p-3 rounded-xl border transition-colors ${
+                                    isReplace
+                                      ? "border-amber-500/20 hover:border-amber-400/40 hover:bg-amber-500/[0.04]"
+                                      : "border-white/[0.08] hover:border-lantern-mint/40 hover:bg-white/[0.03]"
+                                  }`}
+                                >
+                                  <div className="flex items-start justify-between gap-3">
+                                    <div className="min-w-0">
+                                      <p className="text-sm font-semibold text-white">
+                                        Day {ed.dayIndex + 1}
+                                        <span className="font-normal text-white/40"> · {ed.city.split(",")[0]}</span>
+                                      </p>
+                                      <p className="text-xs text-white/35 mt-0.5">
+                                        {ed.activityCount}/{ed.paceMax} activities
+                                      </p>
+                                      {isReplace && (
+                                        <p className="text-xs text-amber-400/70 mt-1">{ed.suggestion}</p>
+                                      )}
+                                    </div>
+                                    {!isReplace && (
+                                      <span className="shrink-0 text-xs text-lantern-mint font-semibold">Free slot</span>
+                                    )}
+                                    {isReplace && (
+                                      <span className="shrink-0 text-xs text-amber-400/70 font-semibold">Swap →</span>
+                                    )}
+                                  </div>
+                                </button>
+                              );
+                            })}
+                          </>
+                        );
+                      }
+
+                      // Fallback: inline computation (no analysis available)
+                      const actCity    = activity.diagnostic?.belongsInCity?.toLowerCase();
                       const isFlexible = !actCity || actCity === "flexible";
-                      const eligible = itin.days.filter((day) => {
+                      const eligible   = itin.days.filter((day) => {
                         if (isFlexible) return true;
                         const dayCity = (day.cityLabel ?? "").toLowerCase().split(",")[0].trim();
                         return dayCity.includes(actCity!) || actCity!.includes(dayCity);
                       });
                       const daysToShow = eligible.length > 0 ? eligible : itin.days;
-                      const filtered   = eligible.length > 0 && !isFlexible;
-                      return (
-                        <>
-                          {filtered && (
-                            <p className="text-[10px] text-white/30 mb-2">
-                              Showing {daysToShow.length} {daysToShow.length === 1 ? "day" : "days"} in{" "}
-                              <span className="text-white/50 capitalize">{actCity}</span>
-                            </p>
-                          )}
-                          {daysToShow.map((day) => {
-                      const actSlots  = day.slots.filter((s) => s.kind === "activity");
-                      const actCount  = actSlots.length;
-                      const isFull    = actCount >= paceMax;
-                      const totalMin  = actSlots.reduce((sum, s) => sum + s.durationMinutes, 0);
-                      const removable = isFull
-                        ? [...actSlots].sort((a, b) => a.durationMinutes - b.durationMinutes)[0] ?? null
-                        : null;
-                      const blocked   = isFull && !removable;
-
-                      return (
-                        <button
-                          key={day.dayIndex}
-                          type="button"
-                          disabled={blocked}
-                          onClick={() => {
-                            if (isFull && removable) {
-                              setAddActivityModal((prev) => prev
-                                ? { ...prev, confirmReplace: { dayIndex: day.dayIndex, slot: removable } }
-                                : null);
-                            } else {
-                              commitAdd(day.dayIndex);
-                            }
-                          }}
-                          className={`w-full text-left p-3 rounded-xl border transition-colors ${
-                            blocked
-                              ? "border-white/[0.04] bg-white/[0.01] text-white/20 cursor-not-allowed"
-                              : isFull
-                              ? "border-amber-500/20 hover:border-amber-400/40 hover:bg-amber-500/[0.04]"
-                              : "border-white/[0.08] hover:border-lantern-mint/40 hover:bg-white/[0.03]"
-                          }`}
-                        >
-                          <div className="flex items-start justify-between gap-3">
-                            <div className="min-w-0">
-                              <p className={`text-sm font-semibold ${blocked ? "text-white/20" : "text-white"}`}>
-                                Day {day.dayIndex + 1}
-                                {(day.cityLabel || day.theme) && (
-                                  <span className="font-normal text-white/40"> · {day.cityLabel || day.theme}</span>
-                                )}
-                              </p>
-                              <p className="text-xs text-white/35 mt-0.5">
-                                {actCount}/{paceMax} activities · {totalMin}m used
-                              </p>
-                              {isFull && removable && (
-                                <p className="text-xs text-amber-400/70 mt-1">
-                                  Replace &ldquo;{removable.title}&rdquo; ({removable.durationMinutes}m)
+                      return daysToShow.map((day) => {
+                        const actSlots  = day.slots.filter((s) => s.kind === "activity");
+                        const actCount  = actSlots.length;
+                        const isFull    = actCount >= paceMax;
+                        const totalMin  = actSlots.reduce((sum, s) => sum + s.durationMinutes, 0);
+                        const removable = isFull
+                          ? [...actSlots].sort((a, b) => a.durationMinutes - b.durationMinutes)[0] ?? null
+                          : null;
+                        const blocked   = isFull && !removable;
+                        return (
+                          <button
+                            key={day.dayIndex}
+                            type="button"
+                            disabled={blocked}
+                            onClick={() => {
+                              if (isFull && removable) {
+                                setAddActivityModal((prev) => prev
+                                  ? { ...prev, confirmReplace: { dayIndex: day.dayIndex, slot: removable } }
+                                  : null);
+                              } else {
+                                commitAdd(day.dayIndex);
+                              }
+                            }}
+                            className={`w-full text-left p-3 rounded-xl border transition-colors ${
+                              blocked
+                                ? "border-white/[0.04] bg-white/[0.01] text-white/20 cursor-not-allowed"
+                                : isFull
+                                ? "border-amber-500/20 hover:border-amber-400/40 hover:bg-amber-500/[0.04]"
+                                : "border-white/[0.08] hover:border-lantern-mint/40 hover:bg-white/[0.03]"
+                            }`}
+                          >
+                            <div className="flex items-start justify-between gap-3">
+                              <div className="min-w-0">
+                                <p className={`text-sm font-semibold ${blocked ? "text-white/20" : "text-white"}`}>
+                                  Day {day.dayIndex + 1}
+                                  {(day.cityLabel || day.theme) && (
+                                    <span className="font-normal text-white/40"> · {day.cityLabel || day.theme}</span>
+                                  )}
                                 </p>
+                                <p className="text-xs text-white/35 mt-0.5">
+                                  {actCount}/{paceMax} activities · {totalMin}m used
+                                </p>
+                                {isFull && removable && (
+                                  <p className="text-xs text-amber-400/70 mt-1">
+                                    Replace &ldquo;{removable.title}&rdquo; ({removable.durationMinutes}m)
+                                  </p>
+                                )}
+                                {blocked && (
+                                  <p className="text-xs text-white/20 mt-1">Full — nothing to replace</p>
+                                )}
+                              </div>
+                              {!isFull && (
+                                <span className="shrink-0 text-xs text-lantern-mint font-semibold">Free slot</span>
                               )}
-                              {blocked && (
-                                <p className="text-xs text-white/20 mt-1">Full — nothing to replace</p>
+                              {isFull && removable && (
+                                <span className="shrink-0 text-xs text-amber-400/70 font-semibold">Swap →</span>
                               )}
                             </div>
-                            {!isFull && (
-                              <span className="shrink-0 text-xs text-lantern-mint font-semibold">Free slot</span>
-                            )}
-                            {isFull && removable && (
-                              <span className="shrink-0 text-xs text-amber-400/70 font-semibold">Swap →</span>
-                            )}
-                          </div>
-                        </button>
-                      );
-                          })}
-                        </>
-                      );
+                          </button>
+                        );
+                      });
                     })()}
                   </div>
 
