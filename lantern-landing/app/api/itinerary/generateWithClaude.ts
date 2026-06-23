@@ -77,14 +77,13 @@ export async function generateItinerary(input: ItineraryRequest): Promise<Genera
 
   const userPrompt = buildPrompt(input);
 
-  const stream = client.messages.stream({
+  const response = await client.messages.create({
     model:      "claude-sonnet-4-6",
     max_tokens: 2000,
     system: [{ type: "text", text: systemPrompt, cache_control: { type: "ephemeral" } }],
     messages: [{ role: "user", content: userPrompt }],
   });
 
-  const response  = await stream.finalMessage();
   const stopReason = response.stop_reason;
   const content    = response.content[0];
 
