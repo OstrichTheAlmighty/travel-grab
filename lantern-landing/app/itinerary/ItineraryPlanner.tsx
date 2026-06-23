@@ -2300,29 +2300,25 @@ export default function ItineraryPlanner() {
                             {/* Pace-limited diagnostic */}
                             {(!diag || diag.type === "pace_limited") && (
                               <div className="space-y-1.5">
-                                {diag?.belongsInCity && (
+                                {diag?.belongsInCity && diag.belongsInCity !== "Flexible" && (
                                   <p className="text-[11px] text-white/40">
-                                    {diag.belongsInCity !== "Flexible" ? (
-                                      <>
-                                        Belongs in{" "}
-                                        <span className="text-white/60">{diag.belongsInCity}</span>
-                                        {diag.belongsInDays && diag.belongsInDays.length > 0 && (
-                                          <> (Day{diag.belongsInDays.length > 1 ? "s" : ""}{" "}
-                                          {diag.belongsInDays.join(", ")})</>
-                                        )}
-                                      </>
-                                    ) : (
-                                      "Flexible — can go in any city"
+                                    Belongs in{" "}
+                                    <span className="text-white/60">
+                                      {diag.belongsInCity.charAt(0).toUpperCase() + diag.belongsInCity.slice(1)}
+                                    </span>
+                                    {diag.belongsInDays && diag.belongsInDays.length > 0 && (
+                                      <> — Day{diag.belongsInDays.length > 1 ? "s" : ""}{" "}
+                                      {diag.belongsInDays.join(", ")}</>
                                     )}
                                   </p>
                                 )}
-                                {diag?.dayUtilization && diag.paceLimit && (
+                                {diag?.dayUtilization && diag.paceLimit && diag.belongsInDays && diag.belongsInDays.length > 0 && (
                                   <p className="text-[11px] text-white/40 leading-relaxed">
-                                    {Object.entries(diag.dayUtilization).map(([dayKey, count], j) => {
-                                      const dayNum = dayKey.replace("day", "");
+                                    {diag.belongsInDays.map((dayNum, j) => {
+                                      const count = diag.dayUtilization![`day${dayNum}`] ?? 0;
                                       const full = count >= diag.paceLimit!;
                                       return (
-                                        <span key={dayKey}>
+                                        <span key={dayNum}>
                                           {j > 0 && <span className="mx-1 text-white/15">·</span>}
                                           <span className={full ? "text-amber-400/70" : "text-white/50"}>
                                             Day {dayNum} ({count}/{diag.paceLimit})
