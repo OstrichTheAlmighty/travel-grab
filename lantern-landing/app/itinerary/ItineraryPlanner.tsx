@@ -1308,7 +1308,8 @@ export default function ItineraryPlanner() {
           title:                  m?.title    ?? id,
           category:               m?.category ?? "culture",
           estimatedDurationHours: Math.round((durationMinutes / 60) * 10) / 10,
-          city:                   m?.city     ?? undefined,
+          city:                   m?.city         ?? undefined,
+          neighborhood:           m?.neighborhood ?? undefined,
           ...(durationMinutes >= 300 ? { isFullDay: true } : {}),
         };
       });

@@ -14,7 +14,8 @@ interface ActivityInput {
   category: string;
   estimatedDurationHours: number;
   isFullDay?: boolean;
-  city?: string;  // saved city from the Activities page search context
+  city?: string;         // saved city from the Activities page search context
+  neighborhood?: string; // saved neighborhood — often contains city name as fallback
 }
 
 interface ItineraryRequest {
@@ -428,7 +429,8 @@ function computeMissed(
     }
   }
 
-  const dayToCity = computeDayToCityMap(input.cities);
+  const dayToCity  = computeDayToCityMap(input.cities);
+  const actCityMap = buildActivityCityMap(input.activities);
 
   return inputActivities
     .filter((a) => {
@@ -440,11 +442,27 @@ function computeMissed(
       return true;
     })
     .map((a) => {
-      const targetCity = a.city ? normCity(a.city) : null;
+      // 1. Explicit city metadata
+      let targetCity = a.city ? normCity(a.city) : null;
+
+      // 2. Title-based lookup against other activities that have cities
+      if (!targetCity) {
+        const detected = findActivityCity(a.title, actCityMap);
+        if (detected) targetCity = normCity(detected);
+      }
+
+      // 3. Neighborhood string often includes the city (e.g. "Higashiyama, Kyoto")
+      if (!targetCity && a.neighborhood) {
+        const nbhd = a.neighborhood.toLowerCase();
+        for (const cityConfig of input.cities) {
+          const cn = normCity(cityConfig.name);
+          if (nbhd.includes(cn)) { targetCity = cn; break; }
+        }
+      }
 
       const belongsInDays = targetCity
         ? [...dayToCity.entries()]
-            .filter(([, city]) => citiesMatch(city, targetCity))
+            .filter(([, city]) => citiesMatch(city, targetCity!))
             .map(([dayNum]) => dayNum)
         : [];
 
