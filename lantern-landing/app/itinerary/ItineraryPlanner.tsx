@@ -458,7 +458,7 @@ function TimelineSlot({
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); onRename(slot); }}
-            className="shrink-0 opacity-0 group-hover:opacity-100 text-white/30 hover:text-lantern-mint transition-all text-[10px] leading-none px-0.5"
+            className="shrink-0 opacity-0 group-hover:opacity-100 text-white/60 hover:text-lantern-mint transition-all text-sm leading-none px-1"
             title="Rename"
           >
             ✏
@@ -551,7 +551,7 @@ function TimelineSlot({
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); onRename(slot); }}
-                className="opacity-0 group-hover:opacity-100 text-white/30 hover:text-lantern-mint transition-all text-sm leading-none"
+                className="opacity-0 group-hover:opacity-100 text-white/60 hover:text-lantern-mint transition-all text-base leading-none"
                 title="Rename"
               >
                 ✏
