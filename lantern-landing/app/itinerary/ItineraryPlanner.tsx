@@ -425,7 +425,7 @@ function TimelineSlot({
             {cat}
           </span>
         )}
-        {onDelete && slot.kind === "activity" && (
+        {onDelete && (
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); onDelete(slot); }}
@@ -474,7 +474,7 @@ function TimelineSlot({
                 {cat}
               </span>
             )}
-            {onDelete && slot.kind === "activity" && (
+            {onDelete && (
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); onDelete(slot); }}
@@ -2081,7 +2081,9 @@ export default function ItineraryPlanner() {
                       const day = itin.days[selectedDay];
                       if (!day) return;
                       const newSlots = day.slots.filter((s) => s !== slot);
-                      const droppedEntry: DroppedActivity = {
+                      const isActivity = slot.kind === "activity";
+                      const alreadyDropped = isActivity && itin.meta.droppedActivities.some((d) => d.title === slot.title);
+                      const droppedEntry: DroppedActivity | null = isActivity && !alreadyDropped ? {
                         sourceId: slot.sourceId ?? slot.title,
                         title:    slot.title,
                         reason:   "Manually removed from itinerary",
@@ -2090,8 +2092,7 @@ export default function ItineraryPlanner() {
                           activityDuration: slot.durationMinutes,
                           belongsInCity:    day.cityLabel ?? day.geographicArea,
                         },
-                      };
-                      const alreadyDropped = itin.meta.droppedActivities.some((d) => d.title === slot.title);
+                      } : null;
                       updateTrip({
                         itinerary: {
                           ...itin,
@@ -2102,12 +2103,12 @@ export default function ItineraryPlanner() {
                           ),
                           meta: {
                             ...itin.meta,
-                            droppedActivities: alreadyDropped
-                              ? itin.meta.droppedActivities
-                              : [...itin.meta.droppedActivities, droppedEntry],
-                            totalActivitiesDropped: alreadyDropped
-                              ? itin.meta.totalActivitiesDropped
-                              : itin.meta.totalActivitiesDropped + 1,
+                            droppedActivities: droppedEntry
+                              ? [...itin.meta.droppedActivities, droppedEntry]
+                              : itin.meta.droppedActivities,
+                            totalActivitiesDropped: droppedEntry
+                              ? itin.meta.totalActivitiesDropped + 1
+                              : itin.meta.totalActivitiesDropped,
                           },
                         },
                       });
