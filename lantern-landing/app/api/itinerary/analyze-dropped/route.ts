@@ -38,6 +38,7 @@ function normCity(s: string): string {
 }
 
 function citiesMatch(a: string, b: string): boolean {
+  if (!a || !b) return false;
   return a.includes(b) || b.includes(a);
 }
 
@@ -64,7 +65,7 @@ export async function POST(req: Request) {
     const ineligibleDays: IneligibleDay[] = [];
 
     for (const day of itinerary.days) {
-      const dayCity     = normCity(day.cityLabel ?? day.theme ?? "");
+      const dayCity     = normCity(day.cityLabel ?? day.geographicArea ?? "");
       const cityOk      = isFlexible || citiesMatch(dayCity, actCity);
 
       if (!cityOk) {

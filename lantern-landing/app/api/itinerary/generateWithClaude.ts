@@ -460,6 +460,31 @@ function computeMissed(
         }
       }
 
+      // 4. Check if activity title contains any configured city name
+      if (!targetCity) {
+        const titleLower = a.title.toLowerCase();
+        for (const cityConfig of input.cities) {
+          const cityName = cityConfig.name.toLowerCase().split(",")[0].trim();
+          if (titleLower.includes(cityName)) {
+            targetCity = normCity(cityConfig.name);
+            break;
+          }
+        }
+      }
+
+      // 5. Check if activity was placed in itinerary and infer from placement
+      if (!targetCity) {
+        for (const day of itinerary.days) {
+          for (const item of day.schedule ?? []) {
+            if (item.type === "activity" && normalise(item.activity) === normalise(a.title)) {
+              targetCity = normCity(day.city);
+              break;
+            }
+          }
+          if (targetCity) break;
+        }
+      }
+
       const belongsInDays = targetCity
         ? [...dayToCity.entries()]
             .filter(([, city]) => citiesMatch(city, targetCity!))
