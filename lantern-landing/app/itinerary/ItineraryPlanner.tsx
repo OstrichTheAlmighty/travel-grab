@@ -881,7 +881,10 @@ export default function ItineraryPlanner() {
   const [detailSlot,        setDetailSlot]         = useState<PlannedSlot | null>(null);
   const [modalPlaceDetail,  setModalPlaceDetail]   = useState<PlaceDetailData | null>(null);
   const [modalDetailLoading, setModalDetailLoading] = useState(false);
-  const [addActivityModal,  setAddActivityModal]   = useState<{ activity: DroppedActivity } | null>(null);
+  const [addActivityModal,  setAddActivityModal]   = useState<{
+    activity:       DroppedActivity;
+    confirmReplace?: { dayIndex: number; slot: PlannedSlot };
+  } | null>(null);
 
   // Tab navigation
   type ActiveTab = "itinerary" | "preferences" | "recommendations" | "saved" | "dropped";
@@ -2499,12 +2502,12 @@ export default function ItineraryPlanner() {
 
       {/* ── Add-activity modal ── */}
       {addActivityModal && trip.itinerary && (() => {
-        const { activity } = addActivityModal;
+        const { activity, confirmReplace } = addActivityModal;
         const itin    = trip.itinerary;
         const paceMax = trip.pace === "relaxed" ? 3 : trip.pace === "packed" ? 8 : 5;
         const durMin  = activity.diagnostic?.activityDuration ?? 90;
 
-        function addToDay(targetDayIndex: number) {
+        function commitAdd(targetDayIndex: number, removeSlot?: PlannedSlot) {
           const newSlot: PlannedSlot = {
             kind:            "activity",
             startMinutes:    14 * 60,
@@ -2517,20 +2520,20 @@ export default function ItineraryPlanner() {
           updateTrip({
             itinerary: {
               ...itin,
-              days: itin.days.map((d) =>
-                d.dayIndex === targetDayIndex
-                  ? {
-                      ...d,
-                      slots: [...d.slots, newSlot].sort((a, b) => a.startMinutes - b.startMinutes),
-                      scheduledActivityCount: d.scheduledActivityCount + 1,
-                    }
-                  : d
-              ),
+              days: itin.days.map((d) => {
+                if (d.dayIndex !== targetDayIndex) return d;
+                const base = removeSlot ? d.slots.filter((s) => s !== removeSlot) : d.slots;
+                const newSlots = [...base, newSlot].sort((a, b) => a.startMinutes - b.startMinutes);
+                const delta = removeSlot ? 0 : 1;
+                return { ...d, slots: newSlots, scheduledActivityCount: d.scheduledActivityCount + delta };
+              }),
               meta: {
                 ...itin.meta,
                 droppedActivities:        newDropped,
                 totalActivitiesDropped:   newDropped.length,
-                totalActivitiesScheduled: itin.meta.totalActivitiesScheduled + 1,
+                totalActivitiesScheduled: removeSlot
+                  ? itin.meta.totalActivitiesScheduled
+                  : itin.meta.totalActivitiesScheduled + 1,
               },
             },
           });
@@ -2557,61 +2560,122 @@ export default function ItineraryPlanner() {
                 ✕
               </button>
 
-              <h2 className="text-base font-bold text-white mb-1">Add to itinerary</h2>
-              <p className="text-sm text-white/40 mb-4">
-                {activity.title}
-                {durMin && <> · {durMin}m</>}
-              </p>
-
-              <div className="space-y-2 max-h-[400px] overflow-y-auto pr-1">
-                {itin.days.map((day) => {
-                  const actSlots   = day.slots.filter((s) => s.kind === "activity");
-                  const actCount   = actSlots.length;
-                  const isFull     = actCount >= paceMax;
-                  const totalMin   = actSlots.reduce((sum, s) => sum + s.durationMinutes, 0);
-                  const removable  = isFull
-                    ? [...actSlots].sort((a, b) => a.durationMinutes - b.durationMinutes)[0] ?? null
-                    : null;
-
-                  return (
+              {confirmReplace ? (
+                /* Step 2: confirm swap */
+                <div className="space-y-4">
+                  <div>
+                    <h2 className="text-base font-bold text-white">Replace activity?</h2>
+                    <p className="text-[11px] text-white/35 mt-0.5">Day {confirmReplace.dayIndex + 1}</p>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="rounded-xl border border-red-500/20 bg-red-500/[0.04] px-4 py-3">
+                      <p className="text-[10px] text-red-400/60 font-semibold uppercase tracking-wider mb-0.5">Remove</p>
+                      <p className="text-sm text-white/70">{confirmReplace.slot.title}</p>
+                      <p className="text-[11px] text-white/30 mt-0.5">{confirmReplace.slot.durationMinutes}m</p>
+                    </div>
+                    <div className="flex items-center justify-center text-white/20 text-xs">↕</div>
+                    <div className="rounded-xl border border-lantern-mint/20 bg-lantern-mint/[0.04] px-4 py-3">
+                      <p className="text-[10px] text-lantern-mint/60 font-semibold uppercase tracking-wider mb-0.5">Add</p>
+                      <p className="text-sm text-white/90">{activity.title}</p>
+                      <p className="text-[11px] text-white/30 mt-0.5">{durMin}m · placed at 14:00</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 pt-1">
                     <button
-                      key={day.dayIndex}
                       type="button"
-                      onClick={() => addToDay(day.dayIndex)}
-                      className="w-full text-left p-3 rounded-xl border border-white/[0.08] hover:border-lantern-mint/40 hover:bg-white/[0.03] transition-colors"
+                      onClick={() => setAddActivityModal((prev) => prev ? { ...prev, confirmReplace: undefined } : null)}
+                      className="flex-1 px-4 py-2.5 rounded-xl border border-white/[0.1] text-sm text-white/50 hover:text-white/80 transition-colors"
                     >
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="min-w-0">
-                          <p className="text-sm font-semibold text-white">
-                            Day {day.dayIndex + 1}
-                            {(day.cityLabel || day.theme) && (
-                              <span className="font-normal text-white/40"> · {day.cityLabel || day.theme}</span>
-                            )}
-                          </p>
-                          <p className="text-xs text-white/35 mt-0.5">
-                            {actCount}/{paceMax} activities · {totalMin}m used
-                          </p>
-                          {isFull && removable && (
-                            <p className="text-xs text-amber-400/80 mt-1">
-                              Replace &ldquo;{removable.title}&rdquo; ({removable.durationMinutes}m) to fit this
-                            </p>
-                          )}
-                          {isFull && !removable && (
-                            <p className="text-xs text-red-400/70 mt-1">Full — no replaceable activities</p>
-                          )}
-                        </div>
-                        {!isFull && (
-                          <span className="shrink-0 text-xs text-lantern-mint font-semibold">Free slot</span>
-                        )}
-                      </div>
+                      ← Back
                     </button>
-                  );
-                })}
-              </div>
+                    <button
+                      type="button"
+                      onClick={() => commitAdd(confirmReplace.dayIndex, confirmReplace.slot)}
+                      className="flex-1 px-4 py-2.5 rounded-xl bg-lantern-mint text-ink text-sm font-bold hover:opacity-90 transition-opacity"
+                    >
+                      Replace
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                /* Step 1: pick a day */
+                <>
+                  <h2 className="text-base font-bold text-white mb-1">Add to itinerary</h2>
+                  <p className="text-sm text-white/40 mb-4">
+                    {activity.title}
+                    {durMin && <> · {durMin}m</>}
+                  </p>
 
-              <p className="text-[10px] text-white/20 mt-3">
-                Added at 14:00 as a placeholder — regenerate to optimise the schedule.
-              </p>
+                  <div className="space-y-2 max-h-[400px] overflow-y-auto pr-1">
+                    {itin.days.map((day) => {
+                      const actSlots  = day.slots.filter((s) => s.kind === "activity");
+                      const actCount  = actSlots.length;
+                      const isFull    = actCount >= paceMax;
+                      const totalMin  = actSlots.reduce((sum, s) => sum + s.durationMinutes, 0);
+                      const removable = isFull
+                        ? [...actSlots].sort((a, b) => a.durationMinutes - b.durationMinutes)[0] ?? null
+                        : null;
+                      const blocked   = isFull && !removable;
+
+                      return (
+                        <button
+                          key={day.dayIndex}
+                          type="button"
+                          disabled={blocked}
+                          onClick={() => {
+                            if (isFull && removable) {
+                              setAddActivityModal((prev) => prev
+                                ? { ...prev, confirmReplace: { dayIndex: day.dayIndex, slot: removable } }
+                                : null);
+                            } else {
+                              commitAdd(day.dayIndex);
+                            }
+                          }}
+                          className={`w-full text-left p-3 rounded-xl border transition-colors ${
+                            blocked
+                              ? "border-white/[0.04] bg-white/[0.01] text-white/20 cursor-not-allowed"
+                              : isFull
+                              ? "border-amber-500/20 hover:border-amber-400/40 hover:bg-amber-500/[0.04]"
+                              : "border-white/[0.08] hover:border-lantern-mint/40 hover:bg-white/[0.03]"
+                          }`}
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="min-w-0">
+                              <p className={`text-sm font-semibold ${blocked ? "text-white/20" : "text-white"}`}>
+                                Day {day.dayIndex + 1}
+                                {(day.cityLabel || day.theme) && (
+                                  <span className="font-normal text-white/40"> · {day.cityLabel || day.theme}</span>
+                                )}
+                              </p>
+                              <p className="text-xs text-white/35 mt-0.5">
+                                {actCount}/{paceMax} activities · {totalMin}m used
+                              </p>
+                              {isFull && removable && (
+                                <p className="text-xs text-amber-400/70 mt-1">
+                                  Replace &ldquo;{removable.title}&rdquo; ({removable.durationMinutes}m)
+                                </p>
+                              )}
+                              {blocked && (
+                                <p className="text-xs text-white/20 mt-1">Full — nothing to replace</p>
+                              )}
+                            </div>
+                            {!isFull && (
+                              <span className="shrink-0 text-xs text-lantern-mint font-semibold">Free slot</span>
+                            )}
+                            {isFull && removable && (
+                              <span className="shrink-0 text-xs text-amber-400/70 font-semibold">Swap →</span>
+                            )}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  <p className="text-[10px] text-white/20 mt-3">
+                    Added at 14:00 as a placeholder — regenerate to optimise the schedule.
+                  </p>
+                </>
+              )}
             </div>
           </div>
         );
