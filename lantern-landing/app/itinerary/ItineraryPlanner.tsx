@@ -2274,28 +2274,6 @@ export default function ItineraryPlanner() {
         {activeTab === "dropped" && trip.itinerary && (() => {
           const all = trip.itinerary.meta.droppedActivities;
 
-          type DiagType = "pace_limited" | "duplicate" | "geographic" | "flight_conflict";
-
-          const getType = (d: (typeof all)[0]): DiagType => {
-            if (d.diagnostic?.type) return d.diagnostic.type;
-            // Backward compat: parse legacy reason strings from older generations
-            if (d.reason.startsWith("Duplicate"))  return "duplicate";
-            if (d.reason.startsWith("Geographic")) return "geographic";
-            if (d.reason.startsWith("Last-day"))   return "flight_conflict";
-            return "pace_limited";
-          };
-
-          const GROUPS: { key: DiagType; icon: string; label: string }[] = [
-            { key: "pace_limited",    icon: "⏱",  label: "No time slot available" },
-            { key: "duplicate",       icon: "⊘",  label: "Duplicate location" },
-            { key: "geographic",      icon: "📍", label: "Geographic conflict" },
-            { key: "flight_conflict", icon: "✈",  label: "Conflicts with flight" },
-          ];
-
-          const grouped = GROUPS
-            .map((g) => ({ ...g, items: all.filter((d) => getType(d) === g.key) }))
-            .filter((g) => g.items.length > 0);
-
           if (all.length === 0) {
             return (
               <div className="flex flex-col items-center justify-center min-h-[220px] rounded-2xl border border-white/[0.06] bg-white/[0.01] p-10 text-center">
@@ -2306,193 +2284,38 @@ export default function ItineraryPlanner() {
           }
 
           return (
-            <div className="max-w-2xl">
-              <div className="mb-5">
-                <h2 className="text-base font-semibold text-white">Dropped activities</h2>
-                <p className="text-xs text-white/35 mt-1 leading-relaxed">
-                  {grouped.map((g, i) => (
-                    <span key={g.key}>
-                      {i > 0 && <span className="mx-1 text-white/15">·</span>}
-                      <span className="text-white/50">{g.items.length}</span> {g.label.toLowerCase()}
-                    </span>
-                  ))}
-                </p>
+            <div className="space-y-2 max-w-2xl">
+              <div className="mb-4">
+                <h2 className="text-base font-semibold text-white">{all.length} {all.length === 1 ? "activity" : "activities"} didn&apos;t fit</h2>
+                <p className="text-xs text-white/35 mt-1">Click &ldquo;+ Add&rdquo; to manually slot them into a day.</p>
               </div>
-
-              <div className="space-y-6">
-                {grouped.map((g) => (
-                  <div key={g.key}>
-                    <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-2">
-                      {g.icon} {g.label} ({g.items.length})
-                    </p>
-                    <div className="space-y-2">
-                      {g.items.map((d, i) => {
-                        const diag = d.diagnostic;
-                        return (
-                          <div
-                            key={i}
-                            className="rounded-xl border border-white/[0.07] bg-white/[0.02] px-3 py-3"
-                          >
-                            {/* Title + add button */}
-                            <div className="flex items-start justify-between gap-2 mb-1.5">
-                              <div className="flex-1 min-w-0">
-                                <p className="text-xs font-medium text-white/80 leading-snug">{d.title}</p>
-                                {diag?.activityDuration && (
-                                  <p className="text-[10px] text-white/30 mt-0.5">{diag.activityDuration}m</p>
-                                )}
-                              </div>
-                              <button
-                                type="button"
-                                onClick={() => setAddActivityModal({ activity: d })}
-                                className="shrink-0 px-2 py-1 rounded-md border border-lantern-mint/25 text-[10px] text-lantern-mint/70 hover:bg-lantern-mint/10 hover:border-lantern-mint/40 transition-colors whitespace-nowrap"
-                              >
-                                + Add
-                              </button>
-                            </div>
-
-                            {/* Pace-limited diagnostic */}
-                            {(!diag || diag.type === "pace_limited") && (
-                              <div className="space-y-1.5">
-                                {diag?.dayUtilization && Object.keys(diag.dayUtilization).length > 0 ? (
-                                  <div className="mt-1 pt-1.5 border-t border-white/[0.05] space-y-0.5">
-                                    <p className="text-[10px] text-white/30 font-semibold mb-1">Where it fits:</p>
-                                    {Object.entries(diag.dayUtilization).map(([dayKey, count]) => {
-                                      const full = count >= (diag.paceLimit ?? 5);
-                                      return (
-                                        <p key={dayKey} className={`text-[11px] ${full ? "text-amber-400/70" : "text-white/45"}`}>
-                                          {dayKey.replace("day", "Day ")} ({count}/{diag.paceLimit ?? 5}){full ? " · full" : ""}
-                                        </p>
-                                      );
-                                    })}
-                                  </div>
-                                ) : diag?.belongsInCity && diag.belongsInCity !== "Flexible" ? (
-                                  <p className="text-[11px] text-white/40">
-                                    📍 {diag.belongsInCity.charAt(0).toUpperCase() + diag.belongsInCity.slice(1)}
-                                  </p>
-                                ) : (
-                                  <p className="text-[11px] text-white/35">Flexible — any city</p>
-                                )}
-                                {!diag && (
-                                  <p className="text-[11px] text-white/40">{d.reason}</p>
-                                )}
-                                {d.suggestions && d.suggestions.length > 0 ? (
-                                  <div className="space-y-2 pt-2 mt-1 border-t border-white/[0.05]">
-                                    {d.suggestions.map((sug, si) => (
-                                      <button
-                                        key={si}
-                                        type="button"
-                                        onClick={() => setActiveTab(sug.type === "remove_and_add" ? "itinerary" : "preferences")}
-                                        className="block text-left w-full group"
-                                      >
-                                        <span className="text-[10px] text-blue-300/60 group-hover:text-blue-300/90 transition-colors group-hover:underline">
-                                          {sug.action}
-                                        </span>
-                                        {sug.benefit && (
-                                          <span className="block text-[10px] text-white/25 mt-0.5">
-                                            {sug.benefit}
-                                          </span>
-                                        )}
-                                      </button>
-                                    ))}
-                                  </div>
-                                ) : (
-                                  <div className="flex flex-wrap gap-1.5 mt-2">
-                                    <button
-                                      onClick={() => setActiveTab("preferences")}
-                                      className="text-[10px] text-blue-300/70 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-400/15 rounded-md px-2 py-1 transition-colors"
-                                    >
-                                      Change pace in Preferences →
-                                    </button>
-                                    <button
-                                      onClick={() => setActiveTab("itinerary")}
-                                      className="text-[10px] text-white/40 bg-white/[0.04] hover:bg-white/[0.07] border border-white/[0.08] rounded-md px-2 py-1 transition-colors"
-                                    >
-                                      Remove another activity →
-                                    </button>
-                                  </div>
-                                )}
-                              </div>
-                            )}
-
-                            {/* Duplicate diagnostic */}
-                            {diag?.type === "duplicate" && (
-                              <>
-                                <p className="text-[11px] text-white/40">
-                                  {diag.duplicateOf ? (
-                                    <>Already scheduled as <span className="text-white/60">"{diag.duplicateOf}"</span></>
-                                  ) : (
-                                    "Same location already appears earlier in the itinerary"
-                                  )}
-                                </p>
-                                {d.suggestions && d.suggestions.length > 0 && (
-                                  <div className="space-y-1.5 mt-2 pt-2 border-t border-white/[0.05]">
-                                    {d.suggestions.map((sug, si) => (
-                                      <div key={si}>
-                                        <p className="text-[10px] text-white/40">{sug.action}</p>
-                                        {sug.benefit && (
-                                          <p className="text-[10px] text-white/20 mt-0.5">{sug.benefit}</p>
-                                        )}
-                                      </div>
-                                    ))}
-                                  </div>
-                                )}
-                              </>
-                            )}
-
-                            {/* Geographic diagnostic */}
-                            {diag?.type === "geographic" && (
-                              <>
-                                <div>
-                                  <p className="text-[11px] text-white/40">
-                                    Located in{" "}
-                                    <span className="text-white/60">{diag.activityCity}</span>
-                                    {" — "}scheduled on a{" "}
-                                    <span className="text-white/60">{diag.assignedCity?.split(",")[0]}</span> day
-                                  </p>
-                                  <p className="text-[10px] text-white/25 mt-1">
-                                    Will appear in the right city on regenerate.
-                                  </p>
-                                </div>
-                                {d.suggestions && d.suggestions.length > 0 && (
-                                  <div className="space-y-2 mt-2 pt-2 border-t border-white/[0.05]">
-                                    {d.suggestions.map((sug, si) => (
-                                      <button
-                                        key={si}
-                                        type="button"
-                                        onClick={() => setActiveTab("itinerary")}
-                                        className="block text-left w-full group"
-                                      >
-                                        <span className="text-[10px] text-blue-300/60 group-hover:text-blue-300/90 transition-colors group-hover:underline">
-                                          {sug.action}
-                                        </span>
-                                        {sug.benefit && (
-                                          <span className="block text-[10px] text-white/25 mt-0.5">
-                                            {sug.benefit}
-                                          </span>
-                                        )}
-                                      </button>
-                                    ))}
-                                  </div>
-                                )}
-                              </>
-                            )}
-
-                            {/* Flight conflict diagnostic */}
-                            {diag?.type === "flight_conflict" && (
-                              <p className="text-[11px] text-white/40">
-                                Ends at{" "}
-                                <span className="text-white/60">{diag.activityEndsAt}</span>
-                                {" — "}airport check-in needed by{" "}
-                                <span className="text-amber-400/70">{diag.checkInDeadline}</span>
-                              </p>
-                            )}
-                          </div>
-                        );
-                      })}
+              {all.map((d, i) => {
+                const city = d.diagnostic?.belongsInCity;
+                const cityLabel = city && city !== "flexible"
+                  ? city.charAt(0).toUpperCase() + city.slice(1)
+                  : null;
+                return (
+                  <div
+                    key={i}
+                    className="flex items-center justify-between gap-3 rounded-lg border border-white/[0.07] bg-white/[0.02] px-3 py-2.5"
+                  >
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-medium text-white/80 truncate">{d.title}</p>
+                      <p className="text-[10px] text-white/35 mt-0.5">
+                        {d.diagnostic?.activityDuration ? `${d.diagnostic.activityDuration}m` : ""}
+                        {cityLabel && <> · {cityLabel}</>}
+                      </p>
                     </div>
+                    <button
+                      type="button"
+                      onClick={() => setAddActivityModal({ activity: d })}
+                      className="shrink-0 px-3 py-1.5 rounded-lg border border-lantern-mint/30 text-xs text-lantern-mint hover:bg-lantern-mint/10 transition-colors"
+                    >
+                      + Add
+                    </button>
                   </div>
-                ))}
-              </div>
+                );
+              })}
             </div>
           );
         })()}
@@ -2607,7 +2430,25 @@ export default function ItineraryPlanner() {
                   </p>
 
                   <div className="space-y-2 max-h-[400px] overflow-y-auto pr-1">
-                    {itin.days.map((day) => {
+                    {(() => {
+                      const actCity = activity.diagnostic?.belongsInCity?.toLowerCase();
+                      const isFlexible = !actCity || actCity === "flexible";
+                      const eligible = itin.days.filter((day) => {
+                        if (isFlexible) return true;
+                        const dayCity = (day.cityLabel ?? "").toLowerCase().split(",")[0].trim();
+                        return dayCity.includes(actCity!) || actCity!.includes(dayCity);
+                      });
+                      const daysToShow = eligible.length > 0 ? eligible : itin.days;
+                      const filtered   = eligible.length > 0 && !isFlexible;
+                      return (
+                        <>
+                          {filtered && (
+                            <p className="text-[10px] text-white/30 mb-2">
+                              Showing {daysToShow.length} {daysToShow.length === 1 ? "day" : "days"} in{" "}
+                              <span className="text-white/50 capitalize">{actCity}</span>
+                            </p>
+                          )}
+                          {daysToShow.map((day) => {
                       const actSlots  = day.slots.filter((s) => s.kind === "activity");
                       const actCount  = actSlots.length;
                       const isFull    = actCount >= paceMax;
@@ -2668,7 +2509,10 @@ export default function ItineraryPlanner() {
                           </div>
                         </button>
                       );
-                    })}
+                          })}
+                        </>
+                      );
+                    })()}
                   </div>
 
                   <p className="text-[10px] text-white/20 mt-3">
