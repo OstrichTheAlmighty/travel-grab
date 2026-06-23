@@ -387,6 +387,7 @@ function TransitConnector({ slot }: { slot: PlannedSlot }) {
 function TimelineSlot({
   slot, savedMeta, isLast, compact, onSlotClick, onDelete, onEditTime,
   onRename, isRenaming, renameValue, onRenameChange, onRenameCommit,
+  onDragStart, onDragEnd, isDragging,
 }: {
   slot:             PlannedSlot;
   savedMeta:        Record<string, SavedMeta>;
@@ -400,6 +401,9 @@ function TimelineSlot({
   renameValue?:     string;
   onRenameChange?:  (v: string) => void;
   onRenameCommit?:  () => void;
+  onDragStart?:     (slot: PlannedSlot) => void;
+  onDragEnd?:       () => void;
+  isDragging?:      boolean;
 }) {
   if (slot.kind === "free_time" && slot.transit) {
     return compact ? null : <TransitConnector slot={slot} />;
@@ -416,7 +420,10 @@ function TimelineSlot({
     const lineColor = slot.kind === "intercity_transfer" ? "border-lantern-violet/20" : "border-white/[0.06]";
     return (
       <div
-        className={`group flex items-center gap-3 py-2.5 border-b ${lineColor} ${isClickable ? "cursor-pointer hover:bg-white/[0.02] -mx-2 px-2 rounded-lg transition-colors" : ""}`}
+        className={`group flex items-center gap-3 py-2.5 border-b ${lineColor} ${isClickable ? "cursor-pointer hover:bg-white/[0.02] -mx-2 px-2 rounded-lg transition-colors" : ""} ${isDragging ? "opacity-40" : ""} ${slot.kind === "activity" && onDragStart ? "cursor-grab" : ""}`}
+        draggable={slot.kind === "activity" && !!onDragStart}
+        onDragStart={slot.kind === "activity" ? (e) => { e.dataTransfer.effectAllowed = "move"; onDragStart?.(slot); } : undefined}
+        onDragEnd={onDragEnd}
         onClick={isClickable ? () => onSlotClick(slot) : undefined}
       >
         {onEditTime && (slot.kind === "activity" || slot.kind === "meal") ? (
@@ -507,7 +514,10 @@ function TimelineSlot({
         {!isLast && <div className={`flex-1 w-px mt-1 ${slot.kind === "intercity_transfer" ? "bg-lantern-violet/20" : "bg-white/[0.07]"}`} />}
       </div>
       <div
-        className={`group flex-1 mb-4 rounded-xl border px-4 py-3 ${style.border} ${style.bg} ${isClickable ? "cursor-pointer hover:border-white/20 transition-colors" : ""}`}
+        className={`group flex-1 mb-4 rounded-xl border px-4 py-3 ${style.border} ${style.bg} ${isClickable ? "cursor-pointer hover:border-white/20 transition-colors" : ""} ${isDragging ? "opacity-40" : ""} ${slot.kind === "activity" && onDragStart ? "cursor-grab" : ""}`}
+        draggable={slot.kind === "activity" && !!onDragStart}
+        onDragStart={slot.kind === "activity" ? (e) => { e.dataTransfer.effectAllowed = "move"; onDragStart?.(slot); } : undefined}
+        onDragEnd={onDragEnd}
         onClick={isClickable ? () => onSlotClick(slot) : undefined}
       >
         <div className="flex items-start justify-between gap-2">
@@ -594,6 +604,7 @@ const WARNING_COLORS: Record<DayWarning["type"], string> = {
 function DayView({
   day, savedMeta, compact, onSlotClick, onDeleteSlot, onEditTime,
   onRename, renamingSlot, onRenameChange, onRenameCommit,
+  onDragStart, onDragEnd, draggingSlot,
 }: {
   day:             PlannedDay;
   savedMeta:       Record<string, SavedMeta>;
@@ -605,6 +616,9 @@ function DayView({
   renamingSlot?:   { slot: PlannedSlot; value: string } | null;
   onRenameChange?: (v: string) => void;
   onRenameCommit?: () => void;
+  onDragStart?:    (slot: PlannedSlot) => void;
+  onDragEnd?:      () => void;
+  draggingSlot?:   PlannedSlot | null;
 }) {
   return (
     <div>
@@ -655,6 +669,9 @@ function DayView({
             renameValue={renamingSlot?.slot === slot ? renamingSlot.value : undefined}
             onRenameChange={onRenameChange}
             onRenameCommit={onRenameCommit}
+            onDragStart={onDragStart}
+            onDragEnd={onDragEnd}
+            isDragging={draggingSlot === slot}
           />
         ))}
       </div>
@@ -997,6 +1014,8 @@ export default function ItineraryPlanner() {
     slot:     PlannedSlot;
     value:    string;
   } | null>(null);
+  const [dragging,    setDragging]    = useState<{ slot: PlannedSlot; sourceDayIndex: number } | null>(null);
+  const [dragOverDay, setDragOverDay] = useState<number | null>(null);
 
   // Tab navigation
   type ActiveTab = "itinerary" | "preferences" | "recommendations" | "saved" | "dropped";
@@ -2152,13 +2171,42 @@ export default function ItineraryPlanner() {
                 {trip.itinerary.days.map((day, i) => {
                   const cityShort = day.cityLabel ? day.cityLabel.split(",")[0].trim() : null;
                   const showCity  = cityShort && trip.cities.length > 1;
+                  const isDropTarget = dragging && dragOverDay === i && dragging.sourceDayIndex !== i;
                   return (
                     <button
                       key={i}
                       type="button"
                       onClick={() => setSelectedDay(i)}
+                      onDragOver={(e) => { if (dragging) { e.preventDefault(); setDragOverDay(i); } }}
+                      onDragLeave={() => setDragOverDay(null)}
+                      onDrop={(e) => {
+                        e.preventDefault();
+                        setDragOverDay(null);
+                        if (!dragging || !trip.itinerary || dragging.sourceDayIndex === i) { setDragging(null); return; }
+                        const { slot, sourceDayIndex } = dragging;
+                        updateTrip({
+                          itinerary: {
+                            ...trip.itinerary,
+                            days: trip.itinerary.days.map((d) => {
+                              if (d.dayIndex === sourceDayIndex) {
+                                const newSlots = d.slots.filter((s) => s !== slot);
+                                return { ...d, slots: newSlots, scheduledActivityCount: newSlots.filter((s) => s.kind === "activity").length };
+                              }
+                              if (d.dayIndex === i) {
+                                const newSlots = [...d.slots, slot].sort((a, b) => a.startMinutes - b.startMinutes);
+                                return { ...d, slots: newSlots, scheduledActivityCount: newSlots.filter((s) => s.kind === "activity").length };
+                              }
+                              return d;
+                            }),
+                          },
+                        });
+                        setSelectedDay(i);
+                        setDragging(null);
+                      }}
                       className={`shrink-0 rounded-xl border px-4 py-2.5 text-xs font-semibold transition-colors ${
-                        selectedDay === i
+                        isDropTarget
+                          ? "border-lantern-mint bg-lantern-mint/20 text-lantern-mint scale-105"
+                          : selectedDay === i
                           ? "border-lantern-mint/50 bg-lantern-mint/10 text-lantern-mint"
                           : "border-white/[0.08] bg-white/[0.02] text-white/40 hover:text-white/65"
                       }`}
@@ -2223,6 +2271,9 @@ export default function ItineraryPlanner() {
                       const m = String(slot.startMinutes % 60).padStart(2, "0");
                       setEditingTime({ dayIndex: selectedDay, slot, value: `${h}:${m}` });
                     }}
+                    onDragStart={(slot) => setDragging({ slot, sourceDayIndex: selectedDay })}
+                    onDragEnd={() => setDragging(null)}
+                    draggingSlot={dragging?.sourceDayIndex === selectedDay ? dragging.slot : null}
                     onRename={(slot) => setRenamingSlot({ dayIndex: selectedDay, slot, value: slot.title })}
                     renamingSlot={renamingSlot}
                     onRenameChange={(value) => setRenamingSlot((prev) => prev ? { ...prev, value } : null)}
