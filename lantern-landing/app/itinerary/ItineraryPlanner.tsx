@@ -1979,8 +1979,11 @@ export default function ItineraryPlanner() {
                   <p className="text-sm text-white/40 mt-1">
                     {trip.startDate && `${shortDate(trip.startDate)} – ${shortDate(endDate)} · `}
                     {trip.itinerary.days.length} {trip.itinerary.days.length === 1 ? "day" : "days"} ·{" "}
-                    {trip.itinerary.meta.totalActivitiesScheduled} activities ·{" "}
-                    {trip.itinerary.days.reduce((s, d) => s + d.slots.length, 0) - trip.itinerary.meta.totalActivitiesScheduled} meals &amp; transfers
+                    {activeActivityIds.length - trip.itinerary.meta.droppedActivities.length} of {activeActivityIds.length}{" "}
+                    {activeActivityIds.length === 1 ? "activity" : "activities"} scheduled
+                    {trip.itinerary.meta.droppedActivities.length > 0 && (
+                      <> · {trip.itinerary.meta.droppedActivities.length} dropped</>
+                    )}
                   </p>
                   {trip.itineraryGeneratedAt && (
                     <p className="text-[11px] text-white/20 mt-1">
