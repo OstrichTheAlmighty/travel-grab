@@ -385,14 +385,15 @@ function TransitConnector({ slot }: { slot: PlannedSlot }) {
 }
 
 function TimelineSlot({
-  slot, savedMeta, isLast, compact, onSlotClick, onDelete,
+  slot, savedMeta, isLast, compact, onSlotClick, onDelete, onEditTime,
 }: {
-  slot:        PlannedSlot;
-  savedMeta:   Record<string, SavedMeta>;
-  isLast:      boolean;
-  compact:     boolean;
-  onSlotClick: (slot: PlannedSlot) => void;
-  onDelete?:   (slot: PlannedSlot) => void;
+  slot:         PlannedSlot;
+  savedMeta:    Record<string, SavedMeta>;
+  isLast:       boolean;
+  compact:      boolean;
+  onSlotClick:  (slot: PlannedSlot) => void;
+  onDelete?:    (slot: PlannedSlot) => void;
+  onEditTime?:  (slot: PlannedSlot) => void;
 }) {
   if (slot.kind === "free_time" && slot.transit) {
     return compact ? null : <TransitConnector slot={slot} />;
@@ -412,9 +413,19 @@ function TimelineSlot({
         className={`group flex items-center gap-3 py-2.5 border-b ${lineColor} ${isClickable ? "cursor-pointer hover:bg-white/[0.02] -mx-2 px-2 rounded-lg transition-colors" : ""}`}
         onClick={isClickable ? () => onSlotClick(slot) : undefined}
       >
-        <span className="text-[11px] font-mono text-white/30 w-16 shrink-0 tabular-nums">
-          {formatTime(slot.startMinutes)}
-        </span>
+        {onEditTime && (slot.kind === "activity" || slot.kind === "meal") ? (
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); onEditTime(slot); }}
+            className="text-[11px] font-mono text-white/30 w-16 shrink-0 tabular-nums text-left hover:text-lantern-mint transition-colors"
+          >
+            {formatTime(slot.startMinutes)}
+          </button>
+        ) : (
+          <span className="text-[11px] font-mono text-white/30 w-16 shrink-0 tabular-nums">
+            {formatTime(slot.startMinutes)}
+          </span>
+        )}
         <div className={`h-1.5 w-1.5 rounded-full shrink-0 ${style.dot}`} />
         <span className={`flex-1 text-[13px] truncate ${slot.kind === "intercity_transfer" ? "text-lantern-violet font-medium" : "text-white/80"}`}>
           {slot.title}
@@ -443,9 +454,19 @@ function TimelineSlot({
   return (
     <div className="flex gap-3">
       <div className="flex flex-col items-center shrink-0 w-14">
-        <span className="text-[11px] font-mono text-white/30 leading-none mb-1.5">
-          {formatTime(slot.startMinutes)}
-        </span>
+        {onEditTime && (slot.kind === "activity" || slot.kind === "meal") ? (
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); onEditTime(slot); }}
+            className="text-[11px] font-mono text-white/30 leading-none mb-1.5 hover:text-lantern-mint transition-colors"
+          >
+            {formatTime(slot.startMinutes)}
+          </button>
+        ) : (
+          <span className="text-[11px] font-mono text-white/30 leading-none mb-1.5">
+            {formatTime(slot.startMinutes)}
+          </span>
+        )}
         <div className={`h-2.5 w-2.5 rounded-full border-2 border-ink shrink-0 ${style.dot}`} />
         {!isLast && <div className={`flex-1 w-px mt-1 ${slot.kind === "intercity_transfer" ? "bg-lantern-violet/20" : "bg-white/[0.07]"}`} />}
       </div>
@@ -509,13 +530,14 @@ const WARNING_COLORS: Record<DayWarning["type"], string> = {
 };
 
 function DayView({
-  day, savedMeta, compact, onSlotClick, onDeleteSlot,
+  day, savedMeta, compact, onSlotClick, onDeleteSlot, onEditTime,
 }: {
   day:           PlannedDay;
   savedMeta:     Record<string, SavedMeta>;
   compact:       boolean;
   onSlotClick:   (slot: PlannedSlot) => void;
   onDeleteSlot?: (slot: PlannedSlot) => void;
+  onEditTime?:   (slot: PlannedSlot) => void;
 }) {
   return (
     <div>
@@ -560,6 +582,7 @@ function DayView({
             compact={compact}
             onSlotClick={onSlotClick}
             onDelete={onDeleteSlot}
+            onEditTime={onEditTime}
           />
         ))}
       </div>
@@ -891,6 +914,11 @@ export default function ItineraryPlanner() {
     activity:        DroppedActivity;
     confirmReplace?: { dayIndex: number; slot: PlannedSlot };
     placement?:      ClaudePlacement | null;
+  } | null>(null);
+  const [editingTime, setEditingTime] = useState<{
+    dayIndex: number;
+    slot:     PlannedSlot;
+    value:    string; // "HH:MM" for <input type="time">
   } | null>(null);
 
   // Tab navigation
@@ -2113,6 +2141,11 @@ export default function ItineraryPlanner() {
                         },
                       });
                     }}
+                    onEditTime={(slot) => {
+                      const h = String(Math.floor(slot.startMinutes / 60)).padStart(2, "0");
+                      const m = String(slot.startMinutes % 60).padStart(2, "0");
+                      setEditingTime({ dayIndex: selectedDay, slot, value: `${h}:${m}` });
+                    }}
                   />
                 </div>
               )}
@@ -2510,6 +2543,61 @@ export default function ItineraryPlanner() {
           </div>
         );
       })()}
+
+      {/* ── Edit-time modal ── */}
+      {editingTime && trip.itinerary && (
+        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
+          <div className="bg-lantern-dark border border-white/[0.1] rounded-2xl max-w-sm w-full p-6">
+            <h2 className="text-white font-semibold mb-1">Edit start time</h2>
+            <p className="text-white/40 text-sm mb-5">{editingTime.slot.title}</p>
+
+            <input
+              type="time"
+              value={editingTime.value}
+              onChange={(e) => setEditingTime((prev) => prev ? { ...prev, value: e.target.value } : null)}
+              className="w-full bg-white/[0.05] border border-white/[0.1] rounded-lg px-4 py-3 text-white text-lg font-mono focus:outline-none focus:border-lantern-mint/50 mb-5"
+            />
+
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => setEditingTime(null)}
+                className="flex-1 px-4 py-2.5 bg-white/[0.05] border border-white/[0.1] text-white/60 rounded-lg hover:bg-white/[0.1] transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  if (!editingTime || !trip.itinerary) return;
+                  const [h, m] = editingTime.value.split(":").map(Number);
+                  const newStart = h * 60 + m;
+                  const duration = editingTime.slot.endMinutes - editingTime.slot.startMinutes;
+                  updateTrip({
+                    itinerary: {
+                      ...trip.itinerary,
+                      days: trip.itinerary.days.map((d) => {
+                        if (d.dayIndex !== editingTime.dayIndex) return d;
+                        const newSlots = d.slots
+                          .map((s) => s === editingTime.slot
+                            ? { ...s, startMinutes: newStart, endMinutes: newStart + duration }
+                            : s
+                          )
+                          .sort((a, b) => a.startMinutes - b.startMinutes);
+                        return { ...d, slots: newSlots };
+                      }),
+                    },
+                  });
+                  setEditingTime(null);
+                }}
+                className="flex-1 px-4 py-2.5 bg-lantern-mint text-ink font-semibold rounded-lg hover:opacity-90 transition-opacity"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
