@@ -895,7 +895,7 @@ export default function ItineraryPlanner() {
   const [analysisLoading, setAnalysisLoading] = useState<string | null>(null);
 
   // Tab navigation
-  type ActiveTab = "itinerary" | "preferences" | "recommendations" | "saved";
+  type ActiveTab = "itinerary" | "preferences" | "recommendations" | "saved" | "dropped";
   const [activeTab, setActiveTab] = useState<ActiveTab>("itinerary");
 
   // AI Recommendations panel
@@ -1827,6 +1827,7 @@ export default function ItineraryPlanner() {
             { key: "preferences",     label: "Preferences" },
             { key: "recommendations", label: "Recommendations" },
             { key: "saved",           label: `Saved (${activeActivityIds.length})` },
+            ...(trip.itinerary ? [{ key: "dropped" as const, label: `Dropped (${trip.itinerary.meta.droppedActivities.length})` }] : []),
           ] as const).map(({ key, label }) => (
             <button
               key={key}
@@ -2277,6 +2278,51 @@ export default function ItineraryPlanner() {
             onClearAll={clearSavedPlaces}
           />
         )}
+
+        {/* ── Tab: Dropped activities ── */}
+        {activeTab === "dropped" && trip.itinerary && (() => {
+          const dropped = trip.itinerary.meta.droppedActivities || [];
+
+          if (dropped.length === 0) {
+            return (
+              <div className="flex flex-col items-center justify-center min-h-[220px] rounded-2xl border border-white/[0.06] bg-white/[0.01] p-10 text-center">
+                <p className="text-sm font-semibold text-white mb-1">All activities scheduled</p>
+                <p className="text-xs text-white/35">Every saved place made it into the itinerary.</p>
+              </div>
+            );
+          }
+
+          return (
+            <div className="space-y-2 max-w-2xl">
+              <div className="mb-4">
+                <h2 className="text-base font-semibold text-white">{dropped.length} {dropped.length === 1 ? "activity" : "activities"} didn&apos;t fit</h2>
+                <p className="text-xs text-white/35 mt-1">Click &ldquo;+ Add&rdquo; and Claude will suggest the best placement.</p>
+              </div>
+              {dropped.map((d, i) => (
+                <div
+                  key={i}
+                  className="flex items-center justify-between gap-3 rounded-lg border border-white/[0.07] bg-white/[0.02] px-3 py-2.5"
+                >
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-medium text-white/80 truncate">{d.title}</p>
+                    <p className="text-[10px] text-white/35 mt-0.5">
+                      {d.diagnostic?.activityDuration ? `${d.diagnostic.activityDuration}m` : ""}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAddActivityModal({ activity: d });
+                    }}
+                    className="shrink-0 px-3 py-1.5 rounded-lg border border-lantern-mint/30 text-lantern-mint text-xs hover:bg-lantern-mint/10 transition-colors"
+                  >
+                    + Add
+                  </button>
+                </div>
+              ))}
+            </div>
+          );
+        })()}
 
       </div>
       )}
