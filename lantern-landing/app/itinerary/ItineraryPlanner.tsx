@@ -2550,16 +2550,34 @@ export default function ItineraryPlanner() {
 
       {/* ── Edit-time modal ── */}
       {editingTime && trip.itinerary && (
-        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-          <div className="bg-lantern-dark border border-white/[0.1] rounded-2xl max-w-sm w-full p-6">
-            <h2 className="text-white font-semibold mb-1">Edit start time</h2>
-            <p className="text-white/40 text-sm mb-5">{editingTime.slot.title}</p>
+        <div
+          className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
+          onClick={() => setEditingTime(null)}
+        >
+          <div
+            className="bg-[#0D1019] border border-white/[0.12] rounded-2xl max-w-sm w-full p-6 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-start justify-between mb-4">
+              <div>
+                <h2 className="text-white font-semibold">Change start time</h2>
+                <p className="text-white/50 text-sm mt-0.5 truncate max-w-[230px]">{editingTime.slot.title}</p>
+              </div>
+              <button type="button" onClick={() => setEditingTime(null)} className="text-white/30 hover:text-white/70 transition-colors ml-3 shrink-0">✕</button>
+            </div>
 
+            <div className="flex items-center gap-3 mb-4 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.06]">
+              <span className="text-[11px] text-white/35 uppercase tracking-wider">Current</span>
+              <span className="text-white/60 font-mono text-sm">{formatTime(editingTime.slot.startMinutes)}</span>
+            </div>
+
+            <label className="block text-white/50 text-xs mb-2 uppercase tracking-wider">New time</label>
             <input
               type="time"
               value={editingTime.value}
               onChange={(e) => setEditingTime((prev) => prev ? { ...prev, value: e.target.value } : null)}
-              className="w-full bg-white/[0.05] border border-white/[0.1] rounded-lg px-4 py-3 text-white text-lg font-mono focus:outline-none focus:border-lantern-mint/50 mb-5"
+              className="w-full bg-white/[0.05] border border-white/[0.15] rounded-lg px-4 py-3 text-white text-xl font-mono focus:outline-none focus:border-lantern-mint/60 mb-5"
+              autoFocus
             />
 
             <div className="flex gap-3">
