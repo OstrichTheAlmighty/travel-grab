@@ -399,7 +399,7 @@ function computeMissed(
     .map((a) => ({
       sourceId: a.sourceId,
       title:    a.title,
-      reason:   `Insufficient time: ${a.title} (${Math.round(a.estimatedDurationHours * 60)}m) couldn't fit within the daily pace limit`,
+      reason:   `No time slot available: ${a.title} (${Math.round(a.estimatedDurationHours * 60)}m) couldn't fit — check pace preference in Preferences`,
     }));
 }
 
