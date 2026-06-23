@@ -881,16 +881,16 @@ export default function ItineraryPlanner() {
   const [detailSlot,        setDetailSlot]         = useState<PlannedSlot | null>(null);
   const [modalPlaceDetail,  setModalPlaceDetail]   = useState<PlaceDetailData | null>(null);
   const [modalDetailLoading, setModalDetailLoading] = useState(false);
-  type PlacementResult = {
-    canAddOnDays:    { dayIndex: number; city: string; capacity: string; suggestion: string }[];
-    swapSuggestions: { dayIndex: number; city: string; replaceActivityTitle: string; replaceActivityDuration: number; suggestion: string }[];
-    mustExtendCity:  boolean;
-    noBestOption:    boolean;
+  type ClaudePlacement = {
+    bestFitDays:     { dayIndex: number; city: string; reason: string }[];
+    swapSuggestions: { dayIndex: number; city: string; replaceActivityTitle: string; replaceActivityDuration: number; reason: string }[];
+    cannotFit:       boolean;
+    explanation:     string;
   };
   const [addActivityModal,  setAddActivityModal]   = useState<{
     activity:        DroppedActivity;
     confirmReplace?: { dayIndex: number; slot: PlannedSlot };
-    placement?:      PlacementResult | null;
+    placement?:      ClaudePlacement | null;
   } | null>(null);
   const [analysisLoading, setAnalysisLoading] = useState<string | null>(null);
 
@@ -2311,8 +2311,42 @@ export default function ItineraryPlanner() {
                   </div>
                   <button
                     type="button"
-                    onClick={() => {
+                    onClick={async () => {
+                      const key = d.title;
                       setAddActivityModal({ activity: d });
+                      setAnalysisLoading(key);
+                      try {
+                        const payload = {
+                          activity: { title: d.title, diagnostic: d.diagnostic },
+                          itinerary: {
+                            days: trip.itinerary!.days.map((day) => ({
+                              dayIndex: day.dayIndex,
+                              date:     day.date,
+                              city:     day.cityLabel ?? day.geographicArea ?? `Day ${day.dayIndex + 1}`,
+                              schedule: day.slots
+                                .filter((s) => s.kind === "activity")
+                                .map((s) => ({
+                                  activity: s.title,
+                                  time:     `${String(Math.floor(s.startMinutes / 60)).padStart(2, "0")}:${String(s.startMinutes % 60).padStart(2, "0")}`,
+                                  duration: `${s.durationMinutes}m`,
+                                  type:     s.category ?? "activity",
+                                })),
+                            })),
+                          },
+                          tripPace: trip.pace === "balanced" ? "moderate" : trip.pace,
+                        };
+                        const res = await fetch("/api/itinerary/suggest-placement", {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify(payload),
+                        });
+                        const placement = res.ok ? await res.json() : null;
+                        setAddActivityModal((prev) => prev ? { ...prev, placement } : null);
+                      } catch {
+                        setAddActivityModal((prev) => prev ? { ...prev, placement: null } : null);
+                      } finally {
+                        setAnalysisLoading(null);
+                      }
                     }}
                     className="shrink-0 px-3 py-1.5 rounded-lg border border-lantern-mint/30 text-lantern-mint text-xs hover:bg-lantern-mint/10 transition-colors"
                   >
@@ -2435,16 +2469,24 @@ export default function ItineraryPlanner() {
 
                   <div className="space-y-2 max-h-[400px] overflow-y-auto pr-1">
                     {(() => {
-                      if (addActivityModal.placement) {
-                        const { canAddOnDays, swapSuggestions, mustExtendCity, noBestOption } = addActivityModal.placement;
-                        const totalOptions = canAddOnDays.length + swapSuggestions.length;
+                      if (analysisLoading === activity.title) {
+                        return (
+                          <div className="py-8 text-center">
+                            <p className="text-xs text-white/40">Claude is finding the best placement…</p>
+                          </div>
+                        );
+                      }
 
-                        if (noBestOption || totalOptions === 0) {
+                      if (addActivityModal.placement) {
+                        const { bestFitDays, swapSuggestions, cannotFit, explanation } = addActivityModal.placement;
+                        const totalOptions = bestFitDays.length + swapSuggestions.length;
+
+                        if (cannotFit || totalOptions === 0) {
                           return (
                             <div className="py-4 text-center">
                               <p className="text-sm text-amber-400/70 mb-1">No good placement found</p>
-                              {mustExtendCity && (
-                                <p className="text-xs text-white/35">Consider extending your stay in this city to fit this activity.</p>
+                              {explanation && (
+                                <p className="text-xs text-white/35">{explanation}</p>
                               )}
                             </div>
                           );
@@ -2452,7 +2494,7 @@ export default function ItineraryPlanner() {
 
                         return (
                           <>
-                            {canAddOnDays.map((opt) => (
+                            {bestFitDays.map((opt) => (
                               <button
                                 key={opt.dayIndex}
                                 type="button"
@@ -2465,9 +2507,8 @@ export default function ItineraryPlanner() {
                                       Day {opt.dayIndex + 1}
                                       <span className="font-normal text-white/40"> · {opt.city.split(",")[0]}</span>
                                     </p>
-                                    <p className="text-xs text-white/35 mt-0.5">{opt.capacity}</p>
-                                    {opt.suggestion && (
-                                      <p className="text-xs text-lantern-mint/60 mt-1">{opt.suggestion}</p>
+                                    {opt.reason && (
+                                      <p className="text-xs text-lantern-mint/60 mt-1">{opt.reason}</p>
                                     )}
                                   </div>
                                   <span className="shrink-0 text-xs text-lantern-mint font-semibold">Free slot</span>
@@ -2502,8 +2543,8 @@ export default function ItineraryPlanner() {
                                     <p className="text-xs text-amber-400/70 mt-0.5">
                                       Replace &ldquo;{swap.replaceActivityTitle}&rdquo; ({swap.replaceActivityDuration}m)
                                     </p>
-                                    {swap.suggestion && (
-                                      <p className="text-xs text-white/35 mt-1">{swap.suggestion}</p>
+                                    {swap.reason && (
+                                      <p className="text-xs text-white/35 mt-1">{swap.reason}</p>
                                     )}
                                   </div>
                                   <span className="shrink-0 text-xs text-amber-400/70 font-semibold">Swap →</span>
