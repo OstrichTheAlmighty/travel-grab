@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { PlannerOutput, PlannedDay, PlannedSlot, DayWarning } from "@/lib/itinerary/types";
+import type { PlannerOutput, PlannedDay, PlannedSlot, DayWarning, DroppedActivity } from "@/lib/itinerary/types";
 import {
   readTripStore, writeTripStore, updateTripStore, clearTripStore,
   TRAVEL_STYLE_LABELS, TRIP_STORE_DEFAULT,
@@ -385,13 +385,14 @@ function TransitConnector({ slot }: { slot: PlannedSlot }) {
 }
 
 function TimelineSlot({
-  slot, savedMeta, isLast, compact, onSlotClick,
+  slot, savedMeta, isLast, compact, onSlotClick, onDelete,
 }: {
   slot:        PlannedSlot;
   savedMeta:   Record<string, SavedMeta>;
   isLast:      boolean;
   compact:     boolean;
   onSlotClick: (slot: PlannedSlot) => void;
+  onDelete?:   (slot: PlannedSlot) => void;
 }) {
   if (slot.kind === "free_time" && slot.transit) {
     return compact ? null : <TransitConnector slot={slot} />;
@@ -423,6 +424,16 @@ function TimelineSlot({
           <span className={`shrink-0 hidden sm:inline-block rounded-full border px-1.5 py-0.5 text-[9px] font-semibold capitalize ${CAT_STYLE[cat]}`}>
             {cat}
           </span>
+        )}
+        {onDelete && (
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); onDelete(slot); }}
+            className="shrink-0 text-white/20 hover:text-red-400 transition-colors text-xs leading-none px-0.5"
+            title="Remove from itinerary"
+          >
+            ✕
+          </button>
         )}
       </div>
     );
@@ -457,11 +468,23 @@ function TimelineSlot({
               )}
             </div>
           </div>
-          {cat && cat in CAT_STYLE && (
-            <span className={`shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold capitalize ${CAT_STYLE[cat]}`}>
-              {cat}
-            </span>
-          )}
+          <div className="flex items-center gap-2 shrink-0">
+            {cat && cat in CAT_STYLE && (
+              <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold capitalize ${CAT_STYLE[cat]}`}>
+                {cat}
+              </span>
+            )}
+            {onDelete && (
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); onDelete(slot); }}
+                className="text-white/20 hover:text-red-400 transition-colors text-sm leading-none"
+                title="Remove from itinerary"
+              >
+                ✕
+              </button>
+            )}
+          </div>
         </div>
         {slot.explanation && (
           <p className="mt-2 text-[11px] text-white/35 leading-relaxed line-clamp-2">
@@ -486,12 +509,13 @@ const WARNING_COLORS: Record<DayWarning["type"], string> = {
 };
 
 function DayView({
-  day, savedMeta, compact, onSlotClick,
+  day, savedMeta, compact, onSlotClick, onDeleteSlot,
 }: {
-  day:         PlannedDay;
-  savedMeta:   Record<string, SavedMeta>;
-  compact:     boolean;
-  onSlotClick: (slot: PlannedSlot) => void;
+  day:           PlannedDay;
+  savedMeta:     Record<string, SavedMeta>;
+  compact:       boolean;
+  onSlotClick:   (slot: PlannedSlot) => void;
+  onDeleteSlot?: (slot: PlannedSlot) => void;
 }) {
   return (
     <div>
@@ -535,6 +559,7 @@ function DayView({
             isLast={i === day.slots.length - 1}
             compact={compact}
             onSlotClick={onSlotClick}
+            onDelete={onDeleteSlot}
           />
         ))}
       </div>
@@ -856,6 +881,10 @@ export default function ItineraryPlanner() {
   const [detailSlot,        setDetailSlot]         = useState<PlannedSlot | null>(null);
   const [modalPlaceDetail,  setModalPlaceDetail]   = useState<PlaceDetailData | null>(null);
   const [modalDetailLoading, setModalDetailLoading] = useState(false);
+  const [addActivityModal,  setAddActivityModal]   = useState<{
+    activity:         DroppedActivity;
+    selectedDayIndex: number | null; // null = step 1 (pick day), number = step 2 (confirm)
+  } | null>(null);
 
   // Tab navigation
   type ActiveTab = "itinerary" | "preferences" | "recommendations" | "saved" | "dropped";
@@ -2038,6 +2067,23 @@ export default function ItineraryPlanner() {
                     savedMeta={savedMeta}
                     compact={compactView}
                     onSlotClick={setDetailSlot}
+                    onDeleteSlot={(slot) => {
+                      const itin = trip.itinerary;
+                      if (!itin) return;
+                      const day = itin.days[selectedDay];
+                      if (!day) return;
+                      const newSlots = day.slots.filter((s) => s !== slot);
+                      updateTrip({
+                        itinerary: {
+                          ...itin,
+                          days: itin.days.map((d) =>
+                            d.dayIndex === day.dayIndex
+                              ? { ...d, slots: newSlots, scheduledActivityCount: newSlots.filter((s) => s.kind === "activity").length }
+                              : d
+                          ),
+                        },
+                      });
+                    }}
                   />
                 </div>
               )}
@@ -2287,14 +2333,21 @@ export default function ItineraryPlanner() {
                             key={i}
                             className="rounded-xl border border-white/[0.07] bg-white/[0.02] px-3 py-3"
                           >
-                            {/* Title + duration badge */}
+                            {/* Title + add button */}
                             <div className="flex items-start justify-between gap-2 mb-1.5">
-                              <p className="text-xs font-medium text-white/80 leading-snug">{d.title}</p>
-                              {diag?.activityDuration && (
-                                <span className="shrink-0 text-[10px] text-white/30 bg-white/[0.06] rounded px-1.5 py-0.5">
-                                  {diag.activityDuration}m
-                                </span>
-                              )}
+                              <div className="flex-1 min-w-0">
+                                <p className="text-xs font-medium text-white/80 leading-snug">{d.title}</p>
+                                {diag?.activityDuration && (
+                                  <p className="text-[10px] text-white/30 mt-0.5">{diag.activityDuration}m</p>
+                                )}
+                              </div>
+                              <button
+                                type="button"
+                                onClick={() => setAddActivityModal({ activity: d, selectedDayIndex: null })}
+                                className="shrink-0 px-2 py-1 rounded-md border border-lantern-mint/25 text-[10px] text-lantern-mint/70 hover:bg-lantern-mint/10 hover:border-lantern-mint/40 transition-colors whitespace-nowrap"
+                              >
+                                + Add
+                              </button>
                             </div>
 
                             {/* Pace-limited diagnostic */}
@@ -2455,6 +2508,146 @@ export default function ItineraryPlanner() {
 
       </div>
       )}
+
+      {/* ── Add-activity modal ── */}
+      {addActivityModal && trip.itinerary && (() => {
+        const { activity, selectedDayIndex } = addActivityModal;
+        const paceMax = trip.pace === "relaxed" ? 3 : trip.pace === "packed" ? 8 : 5;
+        const confirmDay = selectedDayIndex !== null
+          ? trip.itinerary.days.find((d) => d.dayIndex === selectedDayIndex) ?? null
+          : null;
+
+        return (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center"
+            onClick={() => setAddActivityModal(null)}
+          >
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+            <div
+              className="relative z-10 w-full max-w-md mx-4 rounded-3xl border border-white/10 bg-[#0D1019] p-6"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={() => setAddActivityModal(null)}
+                className="absolute top-4 right-4 text-white/30 hover:text-white/80 transition-colors text-lg leading-none"
+              >
+                ✕
+              </button>
+
+              {selectedDayIndex === null ? (
+                /* Step 1: pick a day */
+                <div className="space-y-4">
+                  <div>
+                    <h2 className="text-base font-bold text-white">Add to which day?</h2>
+                    <p className="text-[11px] text-white/40 mt-1">
+                      {activity.title}
+                      {activity.diagnostic?.activityDuration && <> · {activity.diagnostic.activityDuration}m</>}
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 max-h-72 overflow-y-auto pr-1">
+                    {trip.itinerary.days.map((day) => {
+                      const actCount = day.slots.filter((s) => s.kind === "activity").length;
+                      const isFull   = actCount >= paceMax;
+                      return (
+                        <button
+                          key={day.dayIndex}
+                          type="button"
+                          disabled={isFull}
+                          onClick={() => setAddActivityModal((prev) => prev ? { ...prev, selectedDayIndex: day.dayIndex } : null)}
+                          className={`rounded-xl border px-3 py-2.5 text-left text-xs font-medium transition-colors ${
+                            isFull
+                              ? "border-white/[0.05] bg-white/[0.01] text-white/20 cursor-not-allowed"
+                              : "border-white/[0.1] bg-white/[0.03] text-white hover:border-lantern-mint/40 hover:bg-lantern-mint/[0.07] cursor-pointer"
+                          }`}
+                        >
+                          <div className="font-semibold">Day {day.dayIndex + 1}</div>
+                          <div className="text-[10px] text-white/40 mt-0.5 truncate">{day.theme || day.cityLabel || ""}</div>
+                          <div className={`text-[10px] mt-1 ${isFull ? "text-white/20" : "text-white/35"}`}>
+                            {actCount}/{paceMax} activities{isFull ? " · full" : ""}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <p className="text-[10px] text-white/20">Greyed = at pace limit. Select a day to continue.</p>
+                </div>
+              ) : confirmDay ? (
+                /* Step 2: confirm */
+                <div className="space-y-4">
+                  <div>
+                    <h2 className="text-base font-bold text-white">Add to Day {confirmDay.dayIndex + 1}?</h2>
+                    <p className="text-[11px] text-white/40 mt-1">{confirmDay.theme || confirmDay.cityLabel || ""}</p>
+                  </div>
+                  <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] px-4 py-3 space-y-1">
+                    <p className="text-sm font-medium text-white">{activity.title}</p>
+                    {activity.diagnostic?.activityDuration && (
+                      <p className="text-[11px] text-white/40">{activity.diagnostic.activityDuration}m · Added at 14:00 (placeholder)</p>
+                    )}
+                  </div>
+                  <p className="text-[10px] text-white/25">
+                    The activity is added at 14:00 as a placeholder. You can regenerate any time to get a fully optimised schedule.
+                  </p>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setAddActivityModal((prev) => prev ? { ...prev, selectedDayIndex: null } : null)}
+                      className="flex-1 px-4 py-2.5 rounded-xl border border-white/[0.1] text-sm text-white/50 hover:text-white/80 transition-colors"
+                    >
+                      ← Back
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const itin = trip.itinerary;
+                        if (!itin || selectedDayIndex === null) return;
+                        const durMin = activity.diagnostic?.activityDuration ?? 90;
+                        const newSlot: PlannedSlot = {
+                          kind:            "activity",
+                          startMinutes:    14 * 60,
+                          endMinutes:      14 * 60 + durMin,
+                          durationMinutes: durMin,
+                          title:           activity.title,
+                          explanation:     "Added manually",
+                        };
+                        const newDropped = itin.meta.droppedActivities.filter(
+                          (da) => da.title !== activity.title,
+                        );
+                        updateTrip({
+                          itinerary: {
+                            ...itin,
+                            days: itin.days.map((d) =>
+                              d.dayIndex === selectedDayIndex
+                                ? {
+                                    ...d,
+                                    slots: [...d.slots, newSlot].sort((a, b) => a.startMinutes - b.startMinutes),
+                                    scheduledActivityCount: d.scheduledActivityCount + 1,
+                                  }
+                                : d
+                            ),
+                            meta: {
+                              ...itin.meta,
+                              droppedActivities:        newDropped,
+                              totalActivitiesDropped:   newDropped.length,
+                              totalActivitiesScheduled: itin.meta.totalActivitiesScheduled + 1,
+                            },
+                          },
+                        });
+                        setActiveTab("itinerary");
+                        setSelectedDay(selectedDayIndex);
+                        setAddActivityModal(null);
+                      }}
+                      className="flex-1 px-4 py-2.5 rounded-xl bg-lantern-mint text-ink text-sm font-bold hover:opacity-90 transition-opacity"
+                    >
+                      Add to itinerary
+                    </button>
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        );
+      })()}
     </div>
   );
 }
