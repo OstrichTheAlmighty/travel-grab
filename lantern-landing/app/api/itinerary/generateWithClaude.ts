@@ -206,7 +206,7 @@ function deduplicateSchedule(itinerary: ClaudeItinerary): {
         duplicateDropped.push({
           sourceId: "",
           title:    item.activity,
-          reason:   "Duplicate — same location already scheduled on an earlier day (removed)",
+          reason:   "Duplicate: same location already scheduled on an earlier day",
         });
         return false;
       }
@@ -295,7 +295,7 @@ function validateGeography(
         geoViolations.push({
           sourceId: "",
           title:    item.activity,
-          reason:   `Geographic error: activity is in ${actCity} but scheduled on a ${day.city} day`,
+          reason:   `Geographic: activity is in ${actCity} but this is a ${day.city} day`,
         });
         console.error(
           `[geo-validate] Removed "${item.activity}" from Day ${day.dayIndex} (${day.city}): ` +
@@ -399,7 +399,7 @@ function computeMissed(
     .map((a) => ({
       sourceId: a.sourceId,
       title:    a.title,
-      reason:   "Not scheduled — insufficient time or not assigned by AI",
+      reason:   `Insufficient time: ${a.title} (${Math.round(a.estimatedDurationHours * 60)}m) couldn't fit within the daily pace limit`,
     }));
 }
 

@@ -2244,7 +2244,10 @@ export default function ItineraryPlanner() {
               const m = r.match(/ends at (\d+:\d+)/);
               return m ? `Ends at ${m[1]} — after your airport check-in cutoff` : "Conflicts with flight departure";
             }
-            return "No available time slot within the pace limit";
+            const durMatch = r.match(/\((\d+)m\)/);
+            return durMatch
+              ? `${durMatch[1]}m activity — couldn't fit within the daily pace limit`
+              : "Couldn't fit within the daily pace limit";
           };
 
           const GROUPS: { key: DropKey; icon: string; label: string }[] = [
