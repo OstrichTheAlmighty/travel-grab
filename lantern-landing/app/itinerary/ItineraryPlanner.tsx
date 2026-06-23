@@ -386,14 +386,20 @@ function TransitConnector({ slot }: { slot: PlannedSlot }) {
 
 function TimelineSlot({
   slot, savedMeta, isLast, compact, onSlotClick, onDelete, onEditTime,
+  onRename, isRenaming, renameValue, onRenameChange, onRenameCommit,
 }: {
-  slot:         PlannedSlot;
-  savedMeta:    Record<string, SavedMeta>;
-  isLast:       boolean;
-  compact:      boolean;
-  onSlotClick:  (slot: PlannedSlot) => void;
-  onDelete?:    (slot: PlannedSlot) => void;
-  onEditTime?:  (slot: PlannedSlot) => void;
+  slot:             PlannedSlot;
+  savedMeta:        Record<string, SavedMeta>;
+  isLast:           boolean;
+  compact:          boolean;
+  onSlotClick:      (slot: PlannedSlot) => void;
+  onDelete?:        (slot: PlannedSlot) => void;
+  onEditTime?:      (slot: PlannedSlot) => void;
+  onRename?:        (slot: PlannedSlot) => void;
+  isRenaming?:      boolean;
+  renameValue?:     string;
+  onRenameChange?:  (v: string) => void;
+  onRenameCommit?:  () => void;
 }) {
   if (slot.kind === "free_time" && slot.transit) {
     return compact ? null : <TransitConnector slot={slot} />;
@@ -429,9 +435,24 @@ function TimelineSlot({
           </span>
         )}
         <div className={`h-1.5 w-1.5 rounded-full shrink-0 ${style.dot}`} />
-        <span className={`flex-1 text-[13px] truncate ${slot.kind === "intercity_transfer" ? "text-lantern-violet font-medium" : "text-white/80"}`}>
-          {slot.title}
-        </span>
+        {isRenaming ? (
+          <input
+            autoFocus
+            value={renameValue ?? slot.title}
+            onChange={(e) => onRenameChange?.(e.target.value)}
+            onBlur={() => onRenameCommit?.()}
+            onKeyDown={(e) => { if (e.key === "Enter") e.currentTarget.blur(); if (e.key === "Escape") onRenameCommit?.(); }}
+            onClick={(e) => e.stopPropagation()}
+            className="flex-1 bg-transparent border-b border-lantern-mint text-white/80 text-[13px] outline-none min-w-0"
+          />
+        ) : (
+          <span
+            className={`flex-1 text-[13px] truncate ${slot.kind === "intercity_transfer" ? "text-lantern-violet font-medium" : "text-white/80"}`}
+            onDoubleClick={slot.kind === "activity" ? (e) => { e.stopPropagation(); onRename?.(slot); } : undefined}
+          >
+            {slot.title}
+          </span>
+        )}
         <span className="text-[11px] text-white/25 shrink-0">{formatDuration(slot.durationMinutes)}</span>
         {cat && cat in CAT_STYLE && (
           <span className={`shrink-0 hidden sm:inline-block rounded-full border px-1.5 py-0.5 text-[9px] font-semibold capitalize ${CAT_STYLE[cat]}`}>
@@ -480,9 +501,24 @@ function TimelineSlot({
       >
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1 min-w-0">
-            <p className={`text-sm font-semibold leading-snug ${slot.kind === "intercity_transfer" ? "text-lantern-violet" : "text-white"}`}>
-              {slot.title}
-            </p>
+            {isRenaming ? (
+              <input
+                autoFocus
+                value={renameValue ?? slot.title}
+                onChange={(e) => onRenameChange?.(e.target.value)}
+                onBlur={() => onRenameCommit?.()}
+                onKeyDown={(e) => { if (e.key === "Enter") e.currentTarget.blur(); if (e.key === "Escape") onRenameCommit?.(); }}
+                onClick={(e) => e.stopPropagation()}
+                className="w-full bg-transparent border-b border-lantern-mint text-white font-semibold text-sm outline-none mb-1"
+              />
+            ) : (
+              <p
+                className={`text-sm font-semibold leading-snug ${slot.kind === "intercity_transfer" ? "text-lantern-violet" : "text-white"}`}
+                onDoubleClick={slot.kind === "activity" ? (e) => { e.stopPropagation(); onRename?.(slot); } : undefined}
+              >
+                {slot.title}
+              </p>
+            )}
             <div className="flex items-center gap-2 mt-1 flex-wrap">
               <span className="text-[11px] text-white/35">{formatDuration(slot.durationMinutes)}</span>
               {nbhd && (
@@ -535,13 +571,18 @@ const WARNING_COLORS: Record<DayWarning["type"], string> = {
 
 function DayView({
   day, savedMeta, compact, onSlotClick, onDeleteSlot, onEditTime,
+  onRename, renamingSlot, onRenameChange, onRenameCommit,
 }: {
-  day:           PlannedDay;
-  savedMeta:     Record<string, SavedMeta>;
-  compact:       boolean;
-  onSlotClick:   (slot: PlannedSlot) => void;
-  onDeleteSlot?: (slot: PlannedSlot) => void;
-  onEditTime?:   (slot: PlannedSlot) => void;
+  day:             PlannedDay;
+  savedMeta:       Record<string, SavedMeta>;
+  compact:         boolean;
+  onSlotClick:     (slot: PlannedSlot) => void;
+  onDeleteSlot?:   (slot: PlannedSlot) => void;
+  onEditTime?:     (slot: PlannedSlot) => void;
+  onRename?:       (slot: PlannedSlot) => void;
+  renamingSlot?:   { slot: PlannedSlot; value: string } | null;
+  onRenameChange?: (v: string) => void;
+  onRenameCommit?: () => void;
 }) {
   return (
     <div>
@@ -587,6 +628,11 @@ function DayView({
             onSlotClick={onSlotClick}
             onDelete={onDeleteSlot}
             onEditTime={onEditTime}
+            onRename={onRename}
+            isRenaming={renamingSlot?.slot === slot}
+            renameValue={renamingSlot?.slot === slot ? renamingSlot.value : undefined}
+            onRenameChange={onRenameChange}
+            onRenameCommit={onRenameCommit}
           />
         ))}
       </div>
@@ -923,6 +969,11 @@ export default function ItineraryPlanner() {
     dayIndex: number;
     slot:     PlannedSlot;
     value:    string; // "HH:MM" for <input type="time">
+  } | null>(null);
+  const [renamingSlot, setRenamingSlot] = useState<{
+    dayIndex: number;
+    slot:     PlannedSlot;
+    value:    string;
   } | null>(null);
 
   // Tab navigation
@@ -2149,6 +2200,27 @@ export default function ItineraryPlanner() {
                       const h = String(Math.floor(slot.startMinutes / 60)).padStart(2, "0");
                       const m = String(slot.startMinutes % 60).padStart(2, "0");
                       setEditingTime({ dayIndex: selectedDay, slot, value: `${h}:${m}` });
+                    }}
+                    onRename={(slot) => setRenamingSlot({ dayIndex: selectedDay, slot, value: slot.title })}
+                    renamingSlot={renamingSlot}
+                    onRenameChange={(value) => setRenamingSlot((prev) => prev ? { ...prev, value } : null)}
+                    onRenameCommit={() => {
+                      if (!renamingSlot || !trip.itinerary) return;
+                      updateTrip({
+                        itinerary: {
+                          ...trip.itinerary,
+                          days: trip.itinerary.days.map((d) => {
+                            if (d.dayIndex !== renamingSlot.dayIndex) return d;
+                            return {
+                              ...d,
+                              slots: d.slots.map((s) =>
+                                s === renamingSlot.slot ? { ...s, title: renamingSlot.value } : s
+                              ),
+                            };
+                          }),
+                        },
+                      });
+                      setRenamingSlot(null);
                     }}
                   />
                 </div>
