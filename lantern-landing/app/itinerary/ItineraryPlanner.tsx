@@ -504,8 +504,11 @@ function DayView({
           <p className="text-sm text-white/40 mt-0.5">{day.cityLabel}</p>
         )}
         <div className="flex gap-4 mt-2">
-          <span className="text-xs text-white/30">{day.scheduledActivityCount} activities</span>
-          <span className="text-xs text-white/30">{formatDuration(day.totalActivityMinutes)} of sightseeing</span>
+          <span className="text-xs text-white/30">
+            {day.scheduledActivityCount} {day.scheduledActivityCount === 1 ? "activity" : "activities"}
+            {" · "}
+            {day.slots.length - day.scheduledActivityCount} meals &amp; transfers
+          </span>
         </div>
         {day.warnings && day.warnings.length > 0 && (
           <div className="flex flex-wrap gap-1 mt-2 mb-1">
@@ -1976,7 +1979,8 @@ export default function ItineraryPlanner() {
                   <p className="text-sm text-white/40 mt-1">
                     {trip.startDate && `${shortDate(trip.startDate)} – ${shortDate(endDate)} · `}
                     {trip.itinerary.days.length} {trip.itinerary.days.length === 1 ? "day" : "days"} ·{" "}
-                    {trip.itinerary.meta.totalActivitiesScheduled} activities
+                    {trip.itinerary.meta.totalActivitiesScheduled} activities ·{" "}
+                    {trip.itinerary.days.reduce((s, d) => s + d.slots.length, 0) - trip.itinerary.meta.totalActivitiesScheduled} meals &amp; transfers
                   </p>
                   {trip.itineraryGeneratedAt && (
                     <p className="text-[11px] text-white/20 mt-1">
