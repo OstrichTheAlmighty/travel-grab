@@ -95,13 +95,6 @@ export interface GenerateItineraryResult extends ClaudeItinerary {
 export async function generateItinerary(input: ItineraryRequest): Promise<GenerateItineraryResult> {
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-  const paceActivityCount: Record<string, { min: number; max: number }> = {
-    relaxed:  { min: 2, max: 3 },
-    moderate: { min: 4, max: 5 },
-    packed:   { min: 6, max: 8 },
-  };
-  const paceRange = paceActivityCount[input.userPreferences.pace] ?? paceActivityCount.moderate;
-
   const systemPrompt =
     "You are a travel itinerary generator. Output ONLY valid JSON — no markdown, no backticks, no prose.";
 
@@ -162,14 +155,7 @@ export async function generateItinerary(input: ItineraryRequest): Promise<Genera
   // 3. Remove last-day activities that run into the flight check-in window
   const { cleaned, lateViolations } = validateLastDayTimeline(geoValidated, input.flights);
 
-  // 4. Find input activities Claude omitted entirely
-  const missed = computeMissed(input.activities, cleaned, input, paceRange);
-
-  const dropped: DroppedActivity[] = generateSuggestionsForDropped(
-    [...duplicateDropped, ...geoViolations, ...lateViolations, ...missed],
-    cleaned,
-    input,
-  );
+  const dropped: DroppedActivity[] = [...duplicateDropped, ...geoViolations, ...lateViolations];
 
   // ── Logging ───────────────────────────────────────────────────────────────
   const scheduledCount = (cleaned.days ?? [])
@@ -179,7 +165,7 @@ export async function generateItinerary(input: ItineraryRequest): Promise<Genera
   console.log(
     `[generateItinerary] input=${input.activities.length} scheduled=${scheduledCount}` +
     ` dupes=${duplicateDropped.length} geo_violations=${geoViolations.length}` +
-    ` late_violations=${lateViolations.length} missed=${missed.length}`,
+    ` late_violations=${lateViolations.length}`,
   );
   if (duplicateDropped.length > 0) {
     console.log("[generateItinerary] Duplicates removed:", duplicateDropped.map((d) => d.title).join(" | "));
@@ -189,9 +175,6 @@ export async function generateItinerary(input: ItineraryRequest): Promise<Genera
   }
   if (lateViolations.length > 0) {
     console.log("[generateItinerary] Late-day violations:", lateViolations.map((d) => d.title).join(" | "));
-  }
-  if (missed.length > 0) {
-    console.log("[generateItinerary] Not scheduled:", missed.map((d) => d.title).join(" | "));
   }
 
   return { ...cleaned, _dropped: dropped };
@@ -412,223 +395,6 @@ function validateLastDayTimeline(
   });
 
   return { cleaned: { ...itinerary, days: cleanedDays }, lateViolations };
-}
-
-// ── Missed-activity computation ────────────────────────────────────────────────
-
-function computeMissed(
-  inputActivities: ActivityInput[],
-  itinerary: ClaudeItinerary,
-  input: ItineraryRequest,
-  paceConfig: { min: number; max: number },
-): DroppedActivity[] {
-  const scheduled = new Set<string>();
-  for (const day of itinerary.days ?? []) {
-    for (const item of day.schedule ?? []) {
-      if (item.activity) scheduled.add(normalise(item.activity));
-    }
-  }
-
-  const dayToCity  = computeDayToCityMap(input.cities);
-  const actCityMap = buildActivityCityMap(input.activities);
-
-  return inputActivities
-    .filter((a) => {
-      const title = normalise(a.title);
-      if (scheduled.has(title)) return false;
-      for (const s of scheduled) {
-        if (s.includes(title) || title.includes(s)) return false;
-      }
-      return true;
-    })
-    .map((a) => {
-      // 1. Explicit city metadata
-      let targetCity = a.city ? normCity(a.city) : null;
-
-      // 2. Title-based lookup against other activities that have cities
-      if (!targetCity) {
-        const detected = findActivityCity(a.title, actCityMap);
-        if (detected) targetCity = normCity(detected);
-      }
-
-      // 3. Neighborhood string often includes the city (e.g. "Higashiyama, Kyoto")
-      if (!targetCity && a.neighborhood) {
-        const nbhd = a.neighborhood.toLowerCase();
-        for (const cityConfig of input.cities) {
-          const cn = normCity(cityConfig.name);
-          if (nbhd.includes(cn)) { targetCity = cn; break; }
-        }
-      }
-
-      // 4. Check if activity title contains any configured city name
-      if (!targetCity) {
-        const titleLower = a.title.toLowerCase();
-        for (const cityConfig of input.cities) {
-          const cityName = cityConfig.name.toLowerCase().split(",")[0].trim();
-          if (titleLower.includes(cityName)) {
-            targetCity = normCity(cityConfig.name);
-            break;
-          }
-        }
-      }
-
-      // 5. Check if activity was placed in itinerary and infer from placement
-      if (!targetCity) {
-        for (const day of itinerary.days) {
-          for (const item of day.schedule ?? []) {
-            if (item.type === "activity" && normalise(item.activity) === normalise(a.title)) {
-              targetCity = normCity(day.city);
-              break;
-            }
-          }
-          if (targetCity) break;
-        }
-      }
-
-      const belongsInDays = targetCity
-        ? [...dayToCity.entries()]
-            .filter(([, city]) => citiesMatch(city, targetCity!))
-            .map(([dayNum]) => dayNum)
-        : [];
-
-      const dayUtilization: Record<string, number> = {};
-      for (const day of itinerary.days) {
-        if (targetCity && !citiesMatch(normCity(day.city), targetCity)) continue;
-        dayUtilization[`day${day.dayIndex}`] =
-          (day.schedule ?? []).filter((s) => s.type === "activity").length;
-      }
-
-      return {
-        sourceId: a.sourceId,
-        title:    a.title,
-        reason:   "Pace-limited",
-        diagnostic: {
-          type:             "pace_limited" as const,
-          belongsInCity:    targetCity ?? "Flexible",
-          belongsInDays:    belongsInDays.length > 0 ? belongsInDays : undefined,
-          activityDuration: Math.round(a.estimatedDurationHours * 60),
-          dayUtilization:   Object.keys(dayUtilization).length > 0 ? dayUtilization : undefined,
-          paceLimit:        paceConfig.max,
-        },
-      };
-    });
-}
-
-// ── Suggestion generator ───────────────────────────────────────────────────────
-
-function generateSuggestionsForDropped(
-  dropped: DroppedActivity[],
-  itinerary: ClaudeItinerary,
-  input: ItineraryRequest,
-): DroppedActivity[] {
-  return dropped.map((d) => {
-    const diag = d.diagnostic;
-    if (!diag) return d;
-
-    if (diag.type === "pace_limited") {
-      const suggestions: DroppedActivitySuggestion[] = [];
-
-      // Suggestion 1: Remove one scheduled activity from the same city days to free a slot
-      const daysToSearch = diag.belongsInDays ?? [];
-      let removeAdded = false;
-      for (const dayNum of daysToSearch) {
-        if (removeAdded) break;
-        const dayData = itinerary.days.find((day) => day.dayIndex === dayNum);
-        if (!dayData) continue;
-        const removable = dayData.schedule.find((s) => s.type === "activity");
-        if (removable) {
-          suggestions.push({
-            type:             "remove_and_add",
-            action:           `Remove "${removable.activity}" from Day ${dayNum}`,
-            benefit:          `Frees ${removable.duration} — fits "${d.title}"`,
-            canFitActivities: [d.title],
-            affectedDays:     [dayNum],
-          });
-          removeAdded = true;
-        }
-      }
-
-      // Suggestion 2: Extend the city stay by 1 day
-      if (diag.belongsInCity && diag.belongsInCity !== "Flexible") {
-        const targetCityNorm = diag.belongsInCity.toLowerCase();
-        const cityConfig = input.cities.find((c) => {
-          const cn = normCity(c.name);
-          return cn.includes(targetCityNorm) || targetCityNorm.includes(cn);
-        });
-        if (cityConfig && cityConfig.days < 7) {
-          suggestions.push({
-            type:             "extend_city",
-            action:           `Extend ${diag.belongsInCity} stay by 1 day (${cityConfig.days}d → ${cityConfig.days + 1}d)`,
-            benefit:          `Adds ${diag.paceLimit ?? 5} more activity slots`,
-            canFitActivities: [d.title],
-          });
-        }
-      }
-
-      // Suggestion 3: Schedule one more activity on the least-full relevant day
-      if (daysToSearch.length > 0 && diag.dayUtilization && diag.paceLimit) {
-        const { dayUtilization, paceLimit } = diag;
-        let bestDay: { dayNum: number; count: number } | null = null;
-        for (const dayNum of daysToSearch) {
-          const count = dayUtilization[`day${dayNum}`] ?? paceLimit;
-          if (count < 8 && (!bestDay || count < bestDay.count)) {
-            bestDay = { dayNum, count };
-          }
-        }
-        if (bestDay) {
-          suggestions.push({
-            type:             "increase_pace_day",
-            action:           `Fit ${bestDay.count + 1} activities on Day ${bestDay.dayNum} (currently ${bestDay.count}/${paceLimit})`,
-            benefit:          `Least-busy ${diag.belongsInCity ?? ""} day — change pace in Preferences`,
-            canFitActivities: [d.title],
-            affectedDays:     [bestDay.dayNum],
-          });
-        }
-      }
-
-      // Fallback: every pace-limited item gets at least a generic suggestion
-      if (suggestions.length === 0) {
-        const nextPace = input.userPreferences.pace === "relaxed" ? "Balanced" : "Packed";
-        const nextRange = input.userPreferences.pace === "relaxed" ? "4–5" : "6–8";
-        suggestions.push({
-          type:             "increase_pace_trip",
-          action:           `Switch to ${nextPace} pace in Preferences (${nextRange} activities/day)`,
-          benefit:          "Allows more activities per day across the whole trip",
-          canFitActivities: [d.title],
-        });
-      }
-
-      return { ...d, suggestions };
-    }
-
-    if (diag.type === "duplicate") {
-      return {
-        ...d,
-        suggestions: [{
-          type:             "remove_and_add",
-          action:           diag.duplicateOf
-            ? `"${diag.duplicateOf}" is already in the itinerary`
-            : "Same place already appears earlier",
-          benefit:          "Remove this from Saved to clean up your list",
-          canFitActivities: [],
-        }],
-      };
-    }
-
-    if (diag.type === "geographic") {
-      return {
-        ...d,
-        suggestions: [{
-          type:             "remove_and_add",
-          action:           `Move it to ${diag.activityCity} days in the Itinerary tab`,
-          benefit:          "Will schedule in the correct city on next regenerate",
-          canFitActivities: [d.title],
-        }],
-      };
-    }
-
-    return d; // flight_conflict — no useful suggestion
-  });
 }
 
 // ── Utilities ──────────────────────────────────────────────────────────────────

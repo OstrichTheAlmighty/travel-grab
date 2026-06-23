@@ -881,15 +881,16 @@ export default function ItineraryPlanner() {
   const [detailSlot,        setDetailSlot]         = useState<PlannedSlot | null>(null);
   const [modalPlaceDetail,  setModalPlaceDetail]   = useState<PlaceDetailData | null>(null);
   const [modalDetailLoading, setModalDetailLoading] = useState(false);
-  type AnalyzedDay = {
-    dayIndex: number; city: string; activityCount: number; paceMax: number;
-    status: "free_slot" | "replace_suggested";
-    replaceTitle?: string; replaceDuration?: number; suggestion: string;
+  type PlacementResult = {
+    canAddOnDays:    { dayIndex: number; city: string; capacity: string; suggestion: string }[];
+    swapSuggestions: { dayIndex: number; city: string; replaceActivityTitle: string; replaceActivityDuration: number; suggestion: string }[];
+    mustExtendCity:  boolean;
+    noBestOption:    boolean;
   };
   const [addActivityModal,  setAddActivityModal]   = useState<{
     activity:        DroppedActivity;
     confirmReplace?: { dayIndex: number; slot: PlannedSlot };
-    analysis?:       { eligibleDays: AnalyzedDay[]; belongsInCity: string } | null;
+    placement?:      PlacementResult | null;
   } | null>(null);
   const [analysisLoading, setAnalysisLoading] = useState<string | null>(null);
 
@@ -2295,11 +2296,11 @@ export default function ItineraryPlanner() {
             <div className="space-y-2 max-w-2xl">
               <div className="mb-4">
                 <h2 className="text-base font-semibold text-white">{all.length} {all.length === 1 ? "activity" : "activities"} didn&apos;t fit</h2>
-                <p className="text-xs text-white/35 mt-1">Click &ldquo;+ Add&rdquo; to manually slot them into a day.</p>
+                <p className="text-xs text-white/35 mt-1">Click &ldquo;+ Add&rdquo; and Claude will suggest the best placement.</p>
               </div>
               {all.map((d, i) => {
                 const city = d.diagnostic?.belongsInCity;
-                const cityLabel = city && city !== "flexible"
+                const cityLabel = city && city !== "flexible" && city !== "Flexible"
                   ? city.charAt(0).toUpperCase() + city.slice(1)
                   : null;
                 return (
@@ -2321,7 +2322,7 @@ export default function ItineraryPlanner() {
                         if (!trip.itinerary) return;
                         setAnalysisLoading(d.title);
                         try {
-                          const res = await fetch("/api/itinerary/analyze-dropped", {
+                          const res = await fetch("/api/itinerary/suggest-activity-placement", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({
@@ -2330,10 +2331,10 @@ export default function ItineraryPlanner() {
                               tripPace:        trip.pace,
                             }),
                           });
-                          const analysis = res.ok ? await res.json() as { eligibleDays: AnalyzedDay[]; belongsInCity: string } : null;
-                          setAddActivityModal({ activity: d, analysis });
+                          const placement = res.ok ? await res.json() as PlacementResult : null;
+                          setAddActivityModal({ activity: d, placement });
                         } catch {
-                          setAddActivityModal({ activity: d, analysis: null });
+                          setAddActivityModal({ activity: d, placement: null });
                         } finally {
                           setAnalysisLoading(null);
                         }
@@ -2462,81 +2463,88 @@ export default function ItineraryPlanner() {
                     {durMin && <> · {durMin}m</>}
                   </p>
 
-                  {addActivityModal.analysis && addActivityModal.analysis.eligibleDays.length === 0 && (
-                    <p className="text-sm text-amber-400/70 mb-3">
-                      No free days in {addActivityModal.analysis.belongsInCity} — all slots are full or taken.
-                    </p>
-                  )}
-
                   <div className="space-y-2 max-h-[400px] overflow-y-auto pr-1">
                     {(() => {
-                      // Use server analysis if available, else compute inline
-                      if (addActivityModal.analysis) {
-                        const { eligibleDays, belongsInCity } = addActivityModal.analysis;
-                        const isFiltered = belongsInCity && belongsInCity !== "Flexible";
+                      if (addActivityModal.placement) {
+                        const { canAddOnDays, swapSuggestions, mustExtendCity, noBestOption } = addActivityModal.placement;
+                        const totalOptions = canAddOnDays.length + swapSuggestions.length;
+
+                        if (noBestOption || totalOptions === 0) {
+                          return (
+                            <div className="py-4 text-center">
+                              <p className="text-sm text-amber-400/70 mb-1">No good placement found</p>
+                              {mustExtendCity && (
+                                <p className="text-xs text-white/35">Consider extending your stay in this city to fit this activity.</p>
+                              )}
+                            </div>
+                          );
+                        }
+
                         return (
                           <>
-                            {isFiltered && eligibleDays.length > 0 && (
-                              <p className="text-[10px] text-white/30 mb-2">
-                                Showing {eligibleDays.length} {eligibleDays.length === 1 ? "day" : "days"} in{" "}
-                                <span className="text-white/50">{belongsInCity}</span>
-                              </p>
-                            )}
-                            {eligibleDays.map((ed) => {
-                              const isReplace = ed.status === "replace_suggested";
-                              return (
-                                <button
-                                  key={ed.dayIndex}
-                                  type="button"
-                                  onClick={() => {
-                                    if (isReplace && ed.replaceTitle) {
-                                      const targetDay = itin.days.find((d) => d.dayIndex === ed.dayIndex);
-                                      const slotToRemove = targetDay?.slots.find(
-                                        (s) => s.kind === "activity" && s.title === ed.replaceTitle,
-                                      ) ?? null;
-                                      if (slotToRemove) {
-                                        setAddActivityModal((prev) => prev
-                                          ? { ...prev, confirmReplace: { dayIndex: ed.dayIndex, slot: slotToRemove } }
-                                          : null);
-                                        return;
-                                      }
-                                    }
-                                    commitAdd(ed.dayIndex);
-                                  }}
-                                  className={`w-full text-left p-3 rounded-xl border transition-colors ${
-                                    isReplace
-                                      ? "border-amber-500/20 hover:border-amber-400/40 hover:bg-amber-500/[0.04]"
-                                      : "border-white/[0.08] hover:border-lantern-mint/40 hover:bg-white/[0.03]"
-                                  }`}
-                                >
-                                  <div className="flex items-start justify-between gap-3">
-                                    <div className="min-w-0">
-                                      <p className="text-sm font-semibold text-white">
-                                        Day {ed.dayIndex + 1}
-                                        <span className="font-normal text-white/40"> · {ed.city.split(",")[0]}</span>
-                                      </p>
-                                      <p className="text-xs text-white/35 mt-0.5">
-                                        {ed.activityCount}/{ed.paceMax} activities
-                                      </p>
-                                      {isReplace && (
-                                        <p className="text-xs text-amber-400/70 mt-1">{ed.suggestion}</p>
-                                      )}
-                                    </div>
-                                    {!isReplace && (
-                                      <span className="shrink-0 text-xs text-lantern-mint font-semibold">Free slot</span>
-                                    )}
-                                    {isReplace && (
-                                      <span className="shrink-0 text-xs text-amber-400/70 font-semibold">Swap →</span>
+                            {canAddOnDays.map((opt) => (
+                              <button
+                                key={opt.dayIndex}
+                                type="button"
+                                onClick={() => commitAdd(opt.dayIndex)}
+                                className="w-full text-left p-3 rounded-xl border border-white/[0.08] hover:border-lantern-mint/40 hover:bg-white/[0.03] transition-colors"
+                              >
+                                <div className="flex items-start justify-between gap-3">
+                                  <div className="min-w-0">
+                                    <p className="text-sm font-semibold text-white">
+                                      Day {opt.dayIndex + 1}
+                                      <span className="font-normal text-white/40"> · {opt.city.split(",")[0]}</span>
+                                    </p>
+                                    <p className="text-xs text-white/35 mt-0.5">{opt.capacity}</p>
+                                    {opt.suggestion && (
+                                      <p className="text-xs text-lantern-mint/60 mt-1">{opt.suggestion}</p>
                                     )}
                                   </div>
-                                </button>
-                              );
-                            })}
+                                  <span className="shrink-0 text-xs text-lantern-mint font-semibold">Free slot</span>
+                                </div>
+                              </button>
+                            ))}
+                            {swapSuggestions.map((swap) => (
+                              <button
+                                key={swap.dayIndex}
+                                type="button"
+                                onClick={() => {
+                                  const targetDay = itin.days.find((d) => d.dayIndex === swap.dayIndex);
+                                  const slotToRemove = targetDay?.slots.find(
+                                    (s) => s.kind === "activity" && s.title === swap.replaceActivityTitle,
+                                  ) ?? null;
+                                  if (slotToRemove) {
+                                    setAddActivityModal((prev) => prev
+                                      ? { ...prev, confirmReplace: { dayIndex: swap.dayIndex, slot: slotToRemove } }
+                                      : null);
+                                  } else {
+                                    commitAdd(swap.dayIndex);
+                                  }
+                                }}
+                                className="w-full text-left p-3 rounded-xl border border-amber-500/20 hover:border-amber-400/40 hover:bg-amber-500/[0.04] transition-colors"
+                              >
+                                <div className="flex items-start justify-between gap-3">
+                                  <div className="min-w-0">
+                                    <p className="text-sm font-semibold text-white">
+                                      Day {swap.dayIndex + 1}
+                                      <span className="font-normal text-white/40"> · {swap.city.split(",")[0]}</span>
+                                    </p>
+                                    <p className="text-xs text-amber-400/70 mt-0.5">
+                                      Replace &ldquo;{swap.replaceActivityTitle}&rdquo; ({swap.replaceActivityDuration}m)
+                                    </p>
+                                    {swap.suggestion && (
+                                      <p className="text-xs text-white/35 mt-1">{swap.suggestion}</p>
+                                    )}
+                                  </div>
+                                  <span className="shrink-0 text-xs text-amber-400/70 font-semibold">Swap →</span>
+                                </div>
+                              </button>
+                            ))}
                           </>
                         );
                       }
 
-                      // Fallback: inline computation (no analysis available)
+                      // Fallback: inline computation (Claude unavailable)
                       const actCity    = activity.diagnostic?.belongsInCity?.toLowerCase();
                       const isFlexible = !actCity || actCity === "flexible";
                       const eligible   = itin.days.filter((day) => {
