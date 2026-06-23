@@ -855,7 +855,7 @@ export default function ItineraryPlanner() {
   const [modalDetailLoading, setModalDetailLoading] = useState(false);
 
   // Tab navigation
-  type ActiveTab = "itinerary" | "preferences" | "recommendations" | "saved";
+  type ActiveTab = "itinerary" | "preferences" | "recommendations" | "saved" | "dropped";
   const [activeTab, setActiveTab] = useState<ActiveTab>("itinerary");
 
   // AI Recommendations panel
@@ -1786,6 +1786,7 @@ export default function ItineraryPlanner() {
             { key: "preferences",     label: "Preferences" },
             { key: "recommendations", label: "Recommendations" },
             { key: "saved",           label: `Saved (${activeActivityIds.length})` },
+            ...(trip.itinerary ? [{ key: "dropped" as const, label: `Dropped (${trip.itinerary.meta.droppedActivities.length})` }] : []),
           ] as const).map(({ key, label }) => (
             <button
               key={key}
@@ -2215,6 +2216,48 @@ export default function ItineraryPlanner() {
             onClearAll={clearSavedPlaces}
           />
         )}
+
+        {/* ── Tab: Dropped activities ── */}
+        {activeTab === "dropped" && trip.itinerary && (() => {
+          const dropped = [...trip.itinerary.meta.droppedActivities].sort((a, b) => {
+            const rank = (r: string) =>
+              r.startsWith("Duplicate") ? 0 : r.startsWith("Last-day") ? 1 : r.startsWith("Geo") || r.includes("wrong city") ? 2 : 3;
+            return rank(a.reason) - rank(b.reason);
+          });
+
+          if (dropped.length === 0) {
+            return (
+              <div className="flex flex-col items-center justify-center min-h-[220px] rounded-2xl border border-white/[0.06] bg-white/[0.01] p-10 text-center">
+                <p className="text-sm font-semibold text-white mb-1">All activities scheduled</p>
+                <p className="text-xs text-white/35">Every saved place made it into the itinerary.</p>
+              </div>
+            );
+          }
+
+          return (
+            <div className="max-w-2xl">
+              <div className="mb-4">
+                <h2 className="text-base font-semibold text-white">Dropped activities</h2>
+                <p className="text-xs text-white/35 mt-0.5">
+                  {dropped.length} {dropped.length === 1 ? "place" : "places"} not included in the itinerary
+                </p>
+              </div>
+              <div className="space-y-1.5">
+                {dropped.map((d, i) => (
+                  <div
+                    key={i}
+                    className="flex items-start gap-3 rounded-lg border border-white/[0.07] bg-white/[0.02] px-3 py-2.5"
+                  >
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-medium text-white/80 truncate">{d.title}</p>
+                      <p className="text-[11px] text-white/35 mt-0.5 leading-snug">{d.reason}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
 
       </div>
       )}
