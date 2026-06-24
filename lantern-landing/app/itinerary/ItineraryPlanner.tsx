@@ -420,11 +420,11 @@ function TimelineSlot({
     const lineColor = slot.kind === "intercity_transfer" ? "border-lantern-violet/20" : "border-white/[0.06]";
     return (
       <div
-        className={`group flex items-center gap-3 py-2.5 border-b ${lineColor} ${isClickable ? "cursor-pointer hover:bg-white/[0.02] -mx-2 px-2 rounded-lg transition-colors" : ""} ${isDragging ? "opacity-40" : ""} ${slot.kind === "activity" && onDragStart ? "cursor-grab" : ""}`}
+        className={`group flex items-center gap-3 py-2.5 border-b ${lineColor} ${isClickable && slot.kind !== "activity" ? "cursor-pointer hover:bg-white/[0.02] -mx-2 px-2 rounded-lg transition-colors" : ""} ${isDragging ? "opacity-40" : ""} ${slot.kind === "activity" && onDragStart ? "cursor-grab active:cursor-grabbing" : ""}`}
         draggable={slot.kind === "activity" && !!onDragStart}
         onDragStart={slot.kind === "activity" ? (e) => { e.dataTransfer.effectAllowed = "move"; onDragStart?.(slot); } : undefined}
         onDragEnd={onDragEnd}
-        onClick={isClickable ? () => onSlotClick(slot) : undefined}
+        onClick={isClickable && slot.kind !== "activity" ? () => onSlotClick(slot) : undefined}
       >
         {onEditTime && (slot.kind === "activity" || slot.kind === "meal") ? (
           <button
@@ -469,6 +469,16 @@ function TimelineSlot({
             title="Rename"
           >
             ✏
+          </button>
+        )}
+        {slot.kind === "activity" && (
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); onSlotClick(slot); }}
+            className="shrink-0 opacity-0 group-hover:opacity-100 text-white/40 hover:text-lantern-mint transition-all text-sm leading-none px-0.5"
+            title="View details"
+          >
+            ℹ
           </button>
         )}
         <span className="text-[11px] text-white/25 shrink-0">{formatDuration(slot.durationMinutes)}</span>
@@ -518,7 +528,7 @@ function TimelineSlot({
         draggable={slot.kind === "activity" && !!onDragStart}
         onDragStart={slot.kind === "activity" ? (e) => { e.dataTransfer.effectAllowed = "move"; onDragStart?.(slot); } : undefined}
         onDragEnd={onDragEnd}
-        onClick={isClickable ? () => onSlotClick(slot) : undefined}
+        onClick={isClickable && slot.kind !== "activity" ? () => onSlotClick(slot) : undefined}
       >
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1 min-w-0">
@@ -557,6 +567,16 @@ function TimelineSlot({
                 {cat}
               </span>
             )}
+            {slot.kind === "activity" && (
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); onSlotClick(slot); }}
+                className="opacity-0 group-hover:opacity-100 text-white/40 hover:text-lantern-mint transition-all text-base leading-none"
+                title="View details"
+              >
+                ℹ
+              </button>
+            )}
             {onRename && slot.kind === "activity" && !isRenaming && (
               <button
                 type="button"
@@ -583,9 +603,6 @@ function TimelineSlot({
           <p className="mt-2 text-[11px] text-white/35 leading-relaxed line-clamp-2">
             {slot.explanation}
           </p>
-        )}
-        {isClickable && slot.kind === "activity" && (
-          <p className="mt-1.5 text-[10px] text-white/20">Tap for details</p>
         )}
       </div>
     </div>
