@@ -104,6 +104,14 @@ interface TripStorage {
   itineraryGeneratedAt: string | null;
 }
 
+type StoredTrip = {
+  id:        string;
+  name:      string;
+  trip:      TripStorage;
+  createdAt: string;
+  updatedAt: string;
+};
+
 // ── Constants ──────────────────────────────────────────────────────────────────
 
 const TRIP_KEY   = "travelgrab_itinerary_trip_v1";
@@ -182,6 +190,25 @@ function tomorrowIso(): string {
 
 function todayIso(): string {
   return new Date().toISOString().slice(0, 10);
+}
+
+// ── Multi-trip storage helpers ─────────────────────────────────────────────────
+
+function generateTripId(): string { return crypto.randomUUID(); }
+function getAllTrips(): StoredTrip[] {
+  try {
+    const data = localStorage.getItem("travelgrab_trips_v2");
+    return data ? (JSON.parse(data) as StoredTrip[]) : [];
+  } catch { return []; }
+}
+function getCurrentTripId(): string | null {
+  return localStorage.getItem("travelgrab_current_trip_id");
+}
+function saveAllTrips(trips: StoredTrip[]): void {
+  localStorage.setItem("travelgrab_trips_v2", JSON.stringify(trips));
+}
+function setCurrentTripId(id: string): void {
+  localStorage.setItem("travelgrab_current_trip_id", id);
 }
 
 function shortDate(iso: string): string {
@@ -1187,6 +1214,14 @@ export default function ItineraryPlanner() {
   const [cuisinePrefs, setCuisinePrefs] = useState<string[]>([]);
   const [budgetTier,   setBudgetTier]   = useState<"budget" | "moderate" | "premium">("moderate");
 
+  const [editTripModal, setEditTripModal] = useState<{
+    open:          boolean;
+    tempStart:     string;
+    tempDuration:  number;
+    tempPace:      UIPace;
+    tempTransit:   UITransit;
+  }>({ open: false, tempStart: "", tempDuration: 7, tempPace: "balanced", tempTransit: "mixed" });
+
   // Onboarding state (new users see a guided wizard; existing users skip to "done")
   type ObStep = "destination" | "dates" | "style" | "recommendations" | "cities" | "done";
   const [obStep,           setObStep]           = useState<ObStep>("done");
@@ -1215,11 +1250,28 @@ export default function ItineraryPlanner() {
       if (ids)  setSavedIds(JSON.parse(ids) as string[]);
       if (meta) setSavedMeta(JSON.parse(meta) as Record<string, SavedMeta>);
 
-      // Try v2 store first (central trip store shared with other pages)
+      // 1. Try multi-trip v2 store first
+      const allTrips  = getAllTrips();
+      const currentId = getCurrentTripId();
+      if (allTrips.length > 0 && currentId) {
+        const stored = allTrips.find((t) => t.id === currentId);
+        if (stored) {
+          setTrip(stored.trip);
+          if (stored.trip.cities[0]?.city) {
+            setObDest(stored.trip.cities[0].city);
+            obDestRef.current = stored.trip.cities[0].city;
+            setObDestValidated(true);
+          }
+          setObStep("done");
+          setHydrated(true);
+          return;
+        }
+      }
+
+      // 2. Try canonical trip store (shared with Flights/Hotels/Activities pages)
       const v2 = readTripStore();
       if (v2 && v2.cityStops.length > 0) {
-        // Populate internal v1 form from v2 data
-        setTrip({
+        const loaded: TripStorage = {
           version:              1,
           cities:               v2.cityStops,
           startDate:            v2.startDate,
@@ -1233,20 +1285,26 @@ export default function ItineraryPlanner() {
           excludedActivityIds:  v2.excludedActivityIds,
           itinerary:            v2.itinerary,
           itineraryGeneratedAt: v2.itineraryGeneratedAt,
-        });
+        };
+        setTrip(loaded);
+        // Migrate into multi-trip store
+        const newId = generateTripId();
+        const migrated: StoredTrip = {
+          id:        newId,
+          name:      v2.cityStops[0]?.city?.split(",")[0] ?? "My Trip",
+          trip:      loaded,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        };
+        saveAllTrips([migrated]);
+        setCurrentTripId(newId);
+
         if (v2.selectedFlight) setSelectedFlight(v2.selectedFlight);
-        else {
-          const fs = localStorage.getItem(FLIGHT_KEY);
-          if (fs) setSelectedFlight(JSON.parse(fs) as SelectedFlight);
-        }
-        // selectedHotels is now a per-city map; use first city's hotel for display
-        const firstCity = v2.cityStops[0]?.city ?? "";
+        else { const fs = localStorage.getItem(FLIGHT_KEY); if (fs) setSelectedFlight(JSON.parse(fs) as SelectedFlight); }
+        const firstCity  = v2.cityStops[0]?.city ?? "";
         const firstHotel = v2.selectedHotels?.[firstCity] ?? null;
         if (firstHotel) setSelectedHotel(firstHotel);
-        else {
-          const hs = localStorage.getItem(HOTEL_KEY);
-          if (hs) setSelectedHotel(JSON.parse(hs) as SelectedHotel);
-        }
+        else { const hs = localStorage.getItem(HOTEL_KEY); if (hs) setSelectedHotel(JSON.parse(hs) as SelectedHotel); }
         if (v2.destinationRegion) { setObDest(v2.destinationRegion); obDestRef.current = v2.destinationRegion; setObDestValidated(true); }
         if (v2.travelStyles?.length) setObStyles(v2.travelStyles);
         if (v2.firstTime !== null)   setObFirstTime(v2.firstTime);
@@ -1255,7 +1313,7 @@ export default function ItineraryPlanner() {
         return;
       }
 
-      // Fall back to v1 store
+      // 3. Fall back to v1 single-trip key
       const hotelStored  = localStorage.getItem(HOTEL_KEY);
       const flightStored = localStorage.getItem(FLIGHT_KEY);
       if (hotelStored)  setSelectedHotel(JSON.parse(hotelStored) as SelectedHotel);
@@ -1266,7 +1324,17 @@ export default function ItineraryPlanner() {
         const parsed = JSON.parse(tripStored) as TripStorage;
         if (parsed.version === 1 && parsed.cities[0]?.city) {
           setTrip(parsed);
-          setObStep("done"); // existing user — skip onboarding
+          const newId = generateTripId();
+          const migrated: StoredTrip = {
+            id:        newId,
+            name:      parsed.cities[0].city.split(",")[0],
+            trip:      parsed,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          };
+          saveAllTrips([migrated]);
+          setCurrentTripId(newId);
+          setObStep("done");
           setHydrated(true);
           return;
         }
@@ -1284,12 +1352,21 @@ export default function ItineraryPlanner() {
     if (!hydrated || obStep !== "done") return;
     const timer = setTimeout(() => {
       try {
-        localStorage.setItem(TRIP_KEY, JSON.stringify(trip));
+        // Save into multi-trip store
+        const allTrips  = getAllTrips();
+        const currentId = getCurrentTripId();
+        if (currentId) {
+          const updated = allTrips.map((t) =>
+            t.id === currentId ? { ...t, trip, updatedAt: new Date().toISOString() } : t
+          );
+          saveAllTrips(updated);
+        }
+
         // Sync to canonical trip store so Flights/Hotels/Activities can read it
-        const primaryCity = trip.cities[0]?.city ?? "";
-        const existing = readTripStore();
+        const primaryCity    = trip.cities[0]?.city ?? "";
+        const existing       = readTripStore();
         const existingHotels = existing?.selectedHotels ?? {};
-        const updatedHotels = selectedHotel
+        const updatedHotels  = selectedHotel
           ? { ...existingHotels, [primaryCity]: selectedHotel }
           : existingHotels;
         updateTripStore({
@@ -2173,7 +2250,13 @@ export default function ItineraryPlanner() {
             <div className="flex items-center gap-4">
               <button
                 type="button"
-                onClick={startOnboarding}
+                onClick={() => setEditTripModal({
+                  open:         true,
+                  tempStart:    trip.startDate,
+                  tempDuration: trip.cities.reduce((s, c) => s + (c.days || 0), 0),
+                  tempPace:     trip.pace,
+                  tempTransit:  trip.transit,
+                })}
                 className="text-[11px] text-white/35 hover:text-lantern-mint transition-colors"
               >
                 Edit trip
@@ -3119,6 +3202,109 @@ export default function ItineraryPlanner() {
           </div>
         );
       })()}
+
+      {/* ── Edit Trip Modal ── */}
+      {editTripModal.open && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+             onClick={() => setEditTripModal((m) => ({ ...m, open: false }))}>
+          <div className="bg-[#0D1019] border border-white/[0.1] rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+               onClick={(e) => e.stopPropagation()}>
+            {/* Header */}
+            <div className="p-6 border-b border-white/[0.08] flex items-center justify-between sticky top-0 bg-[#0D1019] z-10">
+              <h2 className="text-white font-semibold">Edit trip</h2>
+              <button type="button"
+                onClick={() => setEditTripModal((m) => ({ ...m, open: false }))}
+                className="text-white/40 hover:text-white/80 transition-colors text-xl leading-none w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/[0.06]">
+                ✕
+              </button>
+            </div>
+
+            <div className="p-6 space-y-6">
+              {/* Destination (read-only) */}
+              <div>
+                <label className="text-xs text-white/40 block mb-1.5">Destination</label>
+                <div className="w-full rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-white/60 text-sm">
+                  {trip.cities.map((c) => c.city).filter(Boolean).join(" → ") || "—"}
+                </div>
+                <p className="text-[10px] text-white/25 mt-1">Cannot change destination after creation</p>
+              </div>
+
+              {/* Start date */}
+              <div>
+                <label className="text-xs text-white/40 block mb-1.5">Start date</label>
+                <input type="date" value={editTripModal.tempStart}
+                  onChange={(e) => setEditTripModal((m) => ({ ...m, tempStart: e.target.value }))}
+                  className="w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-white text-sm focus:border-lantern-mint/50 focus:outline-none [color-scheme:dark]"
+                />
+              </div>
+
+              {/* Trip length */}
+              <div>
+                <label className="text-xs text-white/40 block mb-1.5">
+                  Trip length — <span className="text-white/70">{editTripModal.tempDuration} days</span>
+                </label>
+                <input type="range" min="2" max="30" value={editTripModal.tempDuration}
+                  onChange={(e) => setEditTripModal((m) => ({ ...m, tempDuration: parseInt(e.target.value) }))}
+                  className="w-full accent-lantern-mint"
+                />
+              </div>
+
+              {/* Pace */}
+              <div>
+                <label className="text-xs text-white/40 block mb-2">Pace</label>
+                <div className="grid grid-cols-3 gap-2">
+                  {(["relaxed", "balanced", "packed"] as const).map((p) => (
+                    <button key={p} type="button"
+                      onClick={() => setEditTripModal((m) => ({ ...m, tempPace: p }))}
+                      className={`rounded-lg border py-2.5 text-xs font-medium capitalize transition-colors ${
+                        editTripModal.tempPace === p
+                          ? "border-lantern-mint/50 bg-lantern-mint/10 text-lantern-mint"
+                          : "border-white/[0.08] bg-white/[0.02] text-white/50 hover:text-white/80"
+                      }`}>
+                      {p}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Transit */}
+              <div>
+                <label className="text-xs text-white/40 block mb-2">Getting around</label>
+                <div className="grid grid-cols-2 gap-2">
+                  {(["walking", "public transit", "taxi", "mixed"] as const).map((t) => (
+                    <button key={t} type="button"
+                      onClick={() => setEditTripModal((m) => ({ ...m, tempTransit: t }))}
+                      className={`rounded-lg border py-2.5 text-xs font-medium capitalize transition-colors ${
+                        editTripModal.tempTransit === t
+                          ? "border-lantern-mint/50 bg-lantern-mint/10 text-lantern-mint"
+                          : "border-white/[0.08] bg-white/[0.02] text-white/50 hover:text-white/80"
+                      }`}>
+                      {t}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="p-6 border-t border-white/[0.08] space-y-3 sticky bottom-0 bg-[#0D1019]">
+              <button type="button"
+                onClick={() => {
+                  updateTrip({ startDate: editTripModal.tempStart, pace: editTripModal.tempPace, transit: editTripModal.tempTransit });
+                  setEditTripModal((m) => ({ ...m, open: false }));
+                }}
+                className="w-full px-4 py-3 bg-lantern-mint text-ink font-semibold rounded-lg hover:opacity-90 transition-opacity">
+                Save changes
+              </button>
+              <button type="button"
+                onClick={() => setEditTripModal((m) => ({ ...m, open: false }))}
+                className="w-full px-4 py-3 border border-white/[0.1] text-white/60 rounded-lg hover:bg-white/[0.05] transition-colors">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
