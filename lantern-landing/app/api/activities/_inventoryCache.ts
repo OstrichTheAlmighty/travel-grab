@@ -100,7 +100,10 @@ export async function readGeoCache(normalizedInput: string): Promise<GeoResult |
       viewport: data.viewport as GeoResult["viewport"],
     };
   } catch (err) {
-    console.warn("[inventoryCache/geo] read error:", String(err));
+    console.error("[inventoryCache/geo] read error:", {
+      message: String(err),
+      error: err instanceof Error ? err.message : 'unknown',
+    });
     return null;
   }
 }
@@ -208,6 +211,7 @@ export async function writeQueryCache(
   } catch (err) {
     console.error(`[inventoryCache/query] write FAILED: key=${cacheKey}`, {
       message: String(err),
+      error: err instanceof Error ? err.message : 'unknown',
       stack: err instanceof Error ? err.stack : undefined,
     });
   }
