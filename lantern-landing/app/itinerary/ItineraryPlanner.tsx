@@ -422,7 +422,12 @@ function TimelineSlot({
       <div
         className={`group flex items-center gap-3 py-2.5 border-b ${lineColor} select-none ${isClickable && slot.kind !== "activity" ? "cursor-pointer hover:bg-white/[0.02] -mx-2 px-2 rounded-lg transition-colors" : ""} ${isDragging ? "opacity-40" : ""} ${slot.kind === "activity" && onDragStart ? "cursor-grab active:cursor-grabbing" : ""}`}
         draggable={slot.kind === "activity" && !!onDragStart}
-        onDragStart={slot.kind === "activity" ? (e) => { e.dataTransfer.effectAllowed = "move"; e.dataTransfer.setData("text/plain", slot.title); onDragStart?.(slot); } : undefined}
+        onDragStart={slot.kind === "activity" ? (e) => {
+          if ((e.target as HTMLElement).closest("button")) { e.preventDefault(); return; }
+          e.dataTransfer.effectAllowed = "move";
+          e.dataTransfer.setData("text/plain", slot.title);
+          onDragStart?.(slot);
+        } : undefined}
         onDragEnd={onDragEnd}
         onClick={isClickable && slot.kind !== "activity" ? () => onSlotClick(slot) : undefined}
       >
@@ -528,9 +533,14 @@ function TimelineSlot({
         {!isLast && <div className={`flex-1 w-px mt-1 ${slot.kind === "intercity_transfer" ? "bg-lantern-violet/20" : "bg-white/[0.07]"}`} />}
       </div>
       <div
-        className={`group flex-1 mb-4 rounded-xl border px-4 py-3 ${style.border} ${style.bg} ${isClickable ? "cursor-pointer hover:border-white/20 transition-colors" : ""} ${isDragging ? "opacity-40" : ""} ${slot.kind === "activity" && onDragStart ? "cursor-grab" : ""}`}
+        className={`group flex-1 mb-4 rounded-xl border px-4 py-3 ${style.border} ${style.bg} select-none ${isClickable ? "cursor-pointer hover:border-white/20 transition-colors" : ""} ${isDragging ? "opacity-40" : ""} ${slot.kind === "activity" && onDragStart ? "cursor-grab" : ""}`}
         draggable={slot.kind === "activity" && !!onDragStart}
-        onDragStart={slot.kind === "activity" ? (e) => { e.dataTransfer.effectAllowed = "move"; e.dataTransfer.setData("text/plain", slot.title); onDragStart?.(slot); } : undefined}
+        onDragStart={slot.kind === "activity" ? (e) => {
+          if ((e.target as HTMLElement).closest("button")) { e.preventDefault(); return; }
+          e.dataTransfer.effectAllowed = "move";
+          e.dataTransfer.setData("text/plain", slot.title);
+          onDragStart?.(slot);
+        } : undefined}
         onDragEnd={onDragEnd}
         onClick={isClickable && slot.kind !== "activity" ? () => onSlotClick(slot) : undefined}
       >
