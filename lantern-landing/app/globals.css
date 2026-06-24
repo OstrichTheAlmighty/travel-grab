@@ -3,8 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: only dark;
-  background: #070a12;
+  color-scheme: light;
 }
 
 *,
@@ -27,9 +26,7 @@ html {
     Roboto,
     Arial,
     sans-serif;
-  /* Prevent browser from synthesising bold/italic variants */
   font-synthesis: none;
-  /* Consistent text rendering across platforms */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -38,13 +35,8 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 20% 10%, rgba(119, 167, 255, 0.18), transparent 30rem),
-    radial-gradient(circle at 82% 6%, rgba(143, 247, 208, 0.12), transparent 26rem),
-    linear-gradient(180deg, #070a12 0%, #0a0f1b 46%, #070a12 100%);
-  /* Explicit foreground — prevents browser defaults from bleeding through */
-  color: #f7fbff;
-  background-color: #070a12;
+  background-color: #ffffff;
+  color: #0a0a0a;
 }
 
 a {
@@ -53,62 +45,62 @@ a {
 }
 
 ::selection {
-  background: rgba(143, 247, 208, 0.28);
+  background: rgba(0, 180, 150, 0.15);
+  color: inherit;
 }
 
 /* ── Design-system component layer ────────────────────────────────────────────
-   Reusable classes built on the lantern token palette.
-   Primary = lantern-mint (#8FF7D0, light cyan).  Use text-ink (near-black)
-   on mint backgrounds for WCAG-AA contrast (~9.5:1).
-   Violet (#A78BFA) is reserved for AI/recommendation accents only.
+   Light theme. Primary accent = lantern-mint (#8FF7D0, seafoam).
+   AI/recommendation accent = teal-600 (#0d9488).
+   Text hierarchy: gray-900 / gray-600 / gray-400.
 ──────────────────────────────────────────────────────────────────────────── */
 @layer components {
   /* Full-width or inline primary CTA — mint fill, dark text */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2
            rounded-xl bg-lantern-mint px-6 py-3
-           text-sm font-bold text-ink
-           shadow-[0_0_24px_rgba(143,247,208,0.15)]
+           text-sm font-bold text-[#0A0A0A]
+           shadow-sm
            transition-all
-           hover:bg-lantern-mint/90 hover:shadow-[0_0_36px_rgba(143,247,208,0.25)]
+           hover:bg-lantern-mint/85 hover:shadow-md
            active:scale-[0.98]
            disabled:cursor-not-allowed disabled:opacity-50;
   }
 
-  /* Outline secondary — mint border + text, transparent fill */
+  /* Outline secondary — teal border + text */
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2
-           rounded-xl border border-lantern-mint/35 px-6 py-3
-           text-sm font-semibold text-lantern-mint
-           transition-colors hover:bg-lantern-mint/10
+           rounded-xl border border-teal-300 px-6 py-3
+           text-sm font-semibold text-teal-600
+           transition-colors hover:bg-teal-50
            disabled:cursor-not-allowed disabled:opacity-50;
   }
 
   /* Small inline action link/button */
   .btn-action {
     @apply inline-flex items-center justify-center gap-1.5
-           rounded-lg border border-lantern-mint/30 px-3 py-1.5
-           text-[11px] font-semibold text-lantern-mint
-           transition-colors hover:bg-lantern-mint/10;
+           rounded-lg border border-teal-200 px-3 py-1.5
+           text-[11px] font-semibold text-teal-600
+           transition-colors hover:bg-teal-50;
   }
 
-  /* Standard text input — consistent focus ring */
+  /* Standard text input */
   .input-field {
-    @apply w-full rounded-xl border border-white/10 bg-white/[0.04]
-           px-3.5 py-3 text-sm text-white placeholder-white/25
+    @apply w-full rounded-xl border border-gray-300 bg-white
+           px-3.5 py-3 text-sm text-gray-900 placeholder-gray-400
            outline-none transition-colors
-           hover:border-white/20
-           focus:border-lantern-mint/50 focus:bg-panel
-           [color-scheme:dark];
+           hover:border-gray-400
+           focus:border-teal-400 focus:ring-2 focus:ring-teal-100
+           [color-scheme:light];
   }
 
   /* Selected chip / filter pill */
   .chip-active {
-    @apply bg-lantern-mint/20 text-lantern-mint border border-lantern-mint/40;
+    @apply bg-teal-100 text-teal-700 border border-teal-300;
   }
 
   .chip-inactive {
-    @apply bg-white/[0.04] text-white/45 border border-white/[0.08]
-           hover:bg-white/[0.07] hover:text-white/70;
+    @apply bg-white text-gray-500 border border-gray-200
+           hover:bg-gray-50 hover:text-gray-700;
   }
 }

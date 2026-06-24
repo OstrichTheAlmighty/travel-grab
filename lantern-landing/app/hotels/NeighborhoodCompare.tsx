@@ -118,7 +118,7 @@ function generateVerdict(enriched: EnrichedSummary[]): {
 
 function ScoreBar({ score, won }: { score: number; won: boolean }) {
   return (
-    <div className="h-0.5 rounded-full bg-white/[0.06] mt-1.5 overflow-hidden">
+    <div className="h-0.5 rounded-full bg-gray-50 mt-1.5 overflow-hidden">
       <div
         className={`h-full rounded-full transition-all ${won ? "bg-lantern-mint/50" : "bg-white/18"}`}
         style={{ width: `${score}%` }}
@@ -173,17 +173,17 @@ function CompareModal({
     const values  = enriched.map((e) => getValue(e));
     const best    = higherWins ? Math.max(...values) : Math.min(...values.filter((v) => v > 0));
     return (
-      <div className={`grid ${gridClass} gap-2 py-2 border-b border-white/[0.04]`}>
-        <div className="text-[11px] text-white/35 font-medium self-center">{label}</div>
+      <div className={`grid ${gridClass} gap-2 py-2 border-b border-gray-100`}>
+        <div className="text-[11px] text-gray-400 font-medium self-center">{label}</div>
         {enriched.map((e, i) => {
           const val = getValue(e);
           const won = val > 0 && val === best;
           return (
             <div key={e.nbhd.id} className={`rounded-lg px-2 py-1.5 text-center ${won ? "bg-lantern-mint/[0.07]" : ""}`}>
-              <span className={`text-[13px] font-black tabular-nums ${won ? "text-lantern-mint" : "text-white/48"}`}>
+              <span className={`text-[13px] font-black tabular-nums ${won ? "text-teal-600" : "text-gray-900/48"}`}>
                 {val > 0 ? format(val) : "—"}
               </span>
-              {won && <span className="text-[9px] text-lantern-mint/70 ml-0.5">✓</span>}
+              {won && <span className="text-[9px] text-teal-500 ml-0.5">✓</span>}
             </div>
           );
         })}
@@ -195,20 +195,20 @@ function CompareModal({
     <div className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-[5vh]" onClick={onClose}>
       <div className="absolute inset-0 bg-black/72 backdrop-blur-sm" />
       <div
-        className="relative w-full max-w-2xl max-h-[88vh] overflow-y-auto rounded-2xl border border-white/[0.1] bg-[#0d0d14] shadow-2xl"
+        className="relative w-full max-w-2xl max-h-[88vh] overflow-y-auto rounded-2xl border border-gray-200 bg-white shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between px-5 py-4 border-b border-white/[0.07] bg-[#0d0d14]/95 backdrop-blur-sm">
+        <div className="sticky top-0 z-10 flex items-center justify-between px-5 py-4 border-b border-gray-200 bg-white/95 backdrop-blur-sm">
           <div>
-            <h2 className="text-sm font-bold text-white">Neighborhood Comparison</h2>
-            <p className="text-[11px] text-white/30 mt-0.5">
+            <h2 className="text-sm font-bold text-gray-900">Neighborhood Comparison</h2>
+            <p className="text-[11px] text-gray-400 mt-0.5">
               {enriched.map((e) => e.nbhd.name.split(" /")[0]).join(" · ")}
             </p>
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-white/[0.06] hover:bg-white/[0.12] transition-colors flex items-center justify-center text-white/50 hover:text-white/80 text-lg leading-none"
+            className="w-8 h-8 rounded-full bg-gray-50 hover:bg-gray-100 transition-colors flex items-center justify-center text-gray-500 hover:text-gray-700 text-lg leading-none"
             aria-label="Close comparison"
           >
             ×
@@ -217,36 +217,36 @@ function CompareModal({
 
         <div className="p-5">
           {/* ── Verdict ──────────────────────────────────────────────────── */}
-          <div className="rounded-xl border border-lantern-violet/20 bg-lantern-violet/[0.05] p-4 mb-5">
-            <div className="text-[9px] font-black uppercase tracking-widest text-lantern-violet/55 mb-2.5">
+          <div className="rounded-xl border border-teal-200 bg-teal-50 p-4 mb-5">
+            <div className="text-[9px] font-black uppercase tracking-widest text-teal-600/55 mb-2.5">
               TravelGrab Verdict
             </div>
             <div className="space-y-1.5 mb-3">
               {categoryLines.map((line, i) => (
-                <p key={i} className="text-[12px] text-white/75 leading-relaxed flex items-start gap-2">
-                  <svg className="w-2.5 h-2.5 text-lantern-violet/55 flex-shrink-0 mt-1" viewBox="0 0 8 8" fill="currentColor">
+                <p key={i} className="text-[12px] text-gray-700 leading-relaxed flex items-start gap-2">
+                  <svg className="w-2.5 h-2.5 text-teal-600/55 flex-shrink-0 mt-1" viewBox="0 0 8 8" fill="currentColor">
                     <circle cx="4" cy="4" r="3" />
                   </svg>
                   {line}
                 </p>
               ))}
             </div>
-            <div className="pt-2.5 border-t border-lantern-violet/15">
-              <p className="text-[12px] text-lantern-violet/90 font-semibold leading-relaxed">
+            <div className="pt-2.5 border-t border-teal-500/15">
+              <p className="text-[12px] text-teal-600/90 font-semibold leading-relaxed">
                 {recommendation}
               </p>
             </div>
           </div>
 
           {/* ── Column headers ────────────────────────────────────────── */}
-          <div className={`grid ${gridClass} gap-2 pb-3 mb-1 border-b border-white/[0.07]`}>
+          <div className={`grid ${gridClass} gap-2 pb-3 mb-1 border-b border-gray-200`}>
             <div />
             {enriched.map((e) => (
               <div key={e.nbhd.id} className="text-center">
-                <div className="text-[11px] font-bold text-white/85 leading-snug">
+                <div className="text-[11px] font-bold text-gray-800 leading-snug">
                   {e.nbhd.name.split(" /")[0].split(",")[0]}
                 </div>
-                <div className="text-[10px] text-white/28 mt-0.5">{e.count} hotel{e.count !== 1 ? "s" : ""}</div>
+                <div className="text-[10px] text-gray-400 mt-0.5">{e.count} hotel{e.count !== 1 ? "s" : ""}</div>
               </div>
             ))}
           </div>
@@ -262,15 +262,15 @@ function CompareModal({
                 );
 
                 return (
-                  <div key={cat.key} className={`grid ${gridClass} gap-2 py-2.5 border-b border-white/[0.04]`}>
-                    <div className="text-[11px] text-white/40 font-medium self-start pt-0.5">
+                  <div key={cat.key} className={`grid ${gridClass} gap-2 py-2.5 border-b border-gray-100`}>
+                    <div className="text-[11px] text-gray-500 font-medium self-start pt-0.5">
                       {cat.label}
                     </div>
                     {enriched.map((e) => {
                       if (!e.profile) {
                         return (
                           <div key={e.nbhd.id} className="text-center">
-                            <span className="text-[12px] text-white/18">—</span>
+                            <span className="text-[12px] text-gray-900/18">—</span>
                           </div>
                         );
                       }
@@ -282,11 +282,11 @@ function CompareModal({
                           className={`rounded-lg px-2 py-1.5 ${won ? "bg-lantern-mint/[0.07]" : isTie ? "bg-amber-500/[0.03]" : ""}`}
                         >
                           <div className="flex items-center justify-center gap-1">
-                            <span className={`text-[14px] font-black tabular-nums ${won ? "text-lantern-mint" : "text-white/52"}`}>
+                            <span className={`text-[14px] font-black tabular-nums ${won ? "text-teal-600" : "text-gray-600"}`}>
                               {score}
                             </span>
                             {won && (
-                              <svg className="w-2.5 h-2.5 text-lantern-mint/80" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                              <svg className="w-2.5 h-2.5 text-teal-600/80" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M1 5.5l3 3L9 2" />
                               </svg>
                             )}
@@ -303,14 +303,14 @@ function CompareModal({
               })}
             </div>
           ) : (
-            <p className="text-[11px] text-white/25 mb-4 py-2">
+            <p className="text-[11px] text-gray-300 mb-4 py-2">
               Detailed category scores are not yet available for this city. Check back soon.
             </p>
           )}
 
           {/* ── Live data rows ────────────────────────────────────────── */}
           <div>
-            <div className="text-[9px] font-black uppercase tracking-widest text-white/18 mb-2">
+            <div className="text-[9px] font-black uppercase tracking-widest text-gray-900/18 mb-2">
               Live from this search
             </div>
             <LiveRow
@@ -333,7 +333,7 @@ function CompareModal({
             />
             {hasProfiles && (
               <div className={`grid ${gridClass} gap-2 py-2.5`}>
-                <div className="text-[11px] text-white/35 font-medium self-center">Price Tier</div>
+                <div className="text-[11px] text-gray-400 font-medium self-center">Price Tier</div>
                 {enriched.map((e) => (
                   <div key={e.nbhd.id} className="text-center">
                     <span className="text-[13px] font-bold text-amber-400/65">
@@ -382,19 +382,19 @@ export function NeighborhoodCompare({
   return (
     <>
       {/* ── Trigger card ─────────────────────────────────────────────────── */}
-      <div className="mb-5 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4">
+      <div className="mb-5 rounded-2xl border border-gray-200 bg-gray-50 p-4">
         {/* Header row */}
         <div className="flex items-center justify-between mb-3">
           <div>
-            <span className="text-[9px] font-black uppercase tracking-widest text-white/28">
+            <span className="text-[9px] font-black uppercase tracking-widest text-gray-400">
               Compare Neighborhoods
             </span>
-            <p className="text-[11px] text-white/20 mt-0.5">
+            <p className="text-[11px] text-gray-300 mt-0.5">
               Select 2–4 areas · side-by-side breakdown
             </p>
           </div>
           {selected.length >= 2 && (
-            <span className="text-[10px] text-white/25">{selected.length} selected</span>
+            <span className="text-[10px] text-gray-300">{selected.length} selected</span>
           )}
         </div>
 
@@ -412,10 +412,10 @@ export function NeighborhoodCompare({
                 disabled={!isSelected && !canAdd}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold border transition-all ${
                   isSelected
-                    ? "bg-lantern-mint/15 border-lantern-mint/40 text-lantern-mint shadow-[0_0_0_1px_rgba(143,247,208,0.15)]"
+                    ? "bg-teal-50 border-teal-300 text-teal-600 shadow-[0_0_0_1px_rgba(143,247,208,0.15)]"
                     : canAdd
-                      ? "bg-white/[0.03] border-white/[0.09] text-white/40 hover:border-white/22 hover:text-white/60"
-                      : "bg-transparent border-white/[0.04] text-white/18 cursor-not-allowed"
+                      ? "bg-gray-50 border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-600"
+                      : "bg-transparent border-gray-100 text-gray-900/18 cursor-not-allowed"
                 }`}
               >
                 {isSelected && (

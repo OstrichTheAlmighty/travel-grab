@@ -309,8 +309,8 @@ function ItineraryDestinationInput({
   return (
     <div className="relative">
       <div className={`relative rounded-xl border transition-colors ${
-        error ? "border-red-500/50" : validated ? "border-lantern-mint/40" : "border-white/[0.12]"
-      } bg-white/[0.05]`}>
+        error ? "border-red-500/50" : validated ? "border-teal-300" : "border-gray-200"
+      } bg-gray-100`}>
         <input
           autoFocus
           type="text"
@@ -322,29 +322,29 @@ function ItineraryDestinationInput({
           placeholder="e.g. Japan, Southeast Asia, Tokyo…"
           autoComplete="off"
           spellCheck={false}
-          className="w-full bg-transparent px-4 py-3.5 text-base text-white placeholder:text-white/25 focus:outline-none pr-10"
+          className="w-full bg-transparent px-4 py-3.5 text-base text-gray-900 placeholder:text-gray-300 focus:outline-none pr-10"
         />
         <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-          {fetching && <span className="block h-3.5 w-3.5 rounded-full border-2 border-white/20 border-t-white/60 animate-spin" />}
-          {!fetching && validated && <span className="text-lantern-mint text-sm font-bold">✓</span>}
+          {fetching && <span className="block h-3.5 w-3.5 rounded-full border-2 border-gray-300 border-t-white/60 animate-spin" />}
+          {!fetching && validated && <span className="text-teal-600 text-sm font-bold">✓</span>}
         </div>
       </div>
       {error && <p className="text-xs text-red-400 mt-1.5 px-1">{error}</p>}
       {!error && !validated && value.trim().length > 0 && (
-        <p className="text-xs text-white/30 mt-1.5 px-1">Select a destination from the suggestions.</p>
+        <p className="text-xs text-gray-400 mt-1.5 px-1">Select a destination from the suggestions.</p>
       )}
       {open && suggestions.length > 0 && (
-        <ul className="absolute left-0 right-0 top-full mt-1 z-50 rounded-xl border border-white/[0.1] bg-[#0e1422] shadow-xl overflow-hidden">
+        <ul className="absolute left-0 right-0 top-full mt-1 z-50 rounded-xl border border-gray-200 bg-gray-50 shadow-xl overflow-hidden">
           {suggestions.map((s, i) => (
             <li key={s.placeId || i}>
               <button
                 onMouseDown={(e) => { e.preventDefault(); select(s); }}
                 className={`w-full text-left flex items-center gap-2 px-4 py-2.5 transition-colors ${
-                  i === activeIdx ? "bg-white/[0.08] text-white" : "text-white/70 hover:bg-white/[0.05] hover:text-white"
+                  i === activeIdx ? "bg-gray-100 text-gray-900" : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 }`}
               >
-                <span className="text-sm font-medium text-white truncate">{s.mainText}</span>
-                {s.secondaryText && <span className="text-xs text-white/40 flex-shrink-0">{s.secondaryText}</span>}
+                <span className="text-sm font-medium text-gray-900 truncate">{s.mainText}</span>
+                {s.secondaryText && <span className="text-xs text-gray-500 flex-shrink-0">{s.secondaryText}</span>}
               </button>
             </li>
           ))}
@@ -358,9 +358,9 @@ function ItineraryDestinationInput({
 
 function NavLink({ href, label, active }: { href: string; label: string; active: boolean }) {
   return active ? (
-    <span className="text-sm font-semibold text-lantern-violet">{label}</span>
+    <span className="text-sm font-semibold text-teal-600">{label}</span>
   ) : (
-    <Link href={href} className="text-sm font-medium text-white/45 hover:text-white/80 transition-colors">
+    <Link href={href} className="text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors">
       {label}
     </Link>
   );
@@ -391,22 +391,22 @@ interface PlaceDetailData {
 // ── Design tokens ──────────────────────────────────────────────────────────────
 
 const SLOT_STYLE: Record<string, { dot: string; border: string; bg: string }> = {
-  activity:           { dot: "bg-lantern-mint",   border: "border-lantern-mint/25",  bg: "bg-lantern-mint/[0.05]"  },
-  meal:               { dot: "bg-lantern-gold",   border: "border-lantern-gold/25",  bg: "bg-lantern-gold/[0.05]"  },
-  hotel_checkin:      { dot: "bg-white/25",       border: "border-white/10",         bg: "bg-white/[0.02]"         },
-  hotel_checkout:     { dot: "bg-white/25",       border: "border-white/10",         bg: "bg-white/[0.02]"         },
-  airport_transfer:   { dot: "bg-lantern-blue",   border: "border-lantern-blue/25",  bg: "bg-lantern-blue/[0.05]"  },
-  intercity_transfer: { dot: "bg-lantern-violet", border: "border-lantern-violet/30",bg: "bg-lantern-violet/[0.07]"},
-  free_time:          { dot: "bg-white/15",       border: "border-white/[0.07]",     bg: "bg-white/[0.01]"         },
+  activity:           { dot: "bg-lantern-mint",   border: "border-teal-400/25",  bg: "bg-lantern-mint/[0.05]"  },
+  meal:               { dot: "bg-amber-100",   border: "border-amber-300/25",  bg: "bg-amber-100/[0.05]"  },
+  hotel_checkin:      { dot: "bg-gray-200",       border: "border-gray-200",         bg: "bg-gray-50"         },
+  hotel_checkout:     { dot: "bg-gray-200",       border: "border-gray-200",         bg: "bg-gray-50"         },
+  airport_transfer:   { dot: "bg-blue-100",   border: "border-blue-200",  bg: "bg-blue-100/[0.05]"  },
+  intercity_transfer: { dot: "bg-teal-600", border: "border-teal-500/30",bg: "bg-teal-600/[0.07]"},
+  free_time:          { dot: "bg-gray-200",       border: "border-gray-200",     bg: "bg-white"         },
 };
 
 const CAT_STYLE: Record<string, string> = {
-  food:        "text-lantern-gold  bg-lantern-gold/10  border-lantern-gold/20",
+  food:        "text-amber-600  bg-amber-50  border-amber-200",
   nightlife:   "text-purple-400    bg-purple-400/10    border-purple-400/20",
-  culture:     "text-lantern-mint  bg-lantern-mint/10  border-lantern-mint/20",
+  culture:     "text-teal-600  bg-teal-50  border-teal-400/20",
   adventure:   "text-orange-400    bg-orange-400/10    border-orange-400/20",
   nature:      "text-green-400     bg-green-400/10     border-green-400/20",
-  luxury:      "text-lantern-gold  bg-lantern-gold/10  border-lantern-gold/20",
+  luxury:      "text-amber-600  bg-amber-50  border-amber-200",
   hidden_gems: "text-pink-400      bg-pink-400/10      border-pink-400/20",
 };
 
@@ -418,7 +418,7 @@ function TransitConnector({ slot }: { slot: PlannedSlot }) {
   const showKm = t.coordsSource !== "estimated" && t.distanceKm > 0;
   return (
     <div className="flex items-center gap-2 py-1.5 pl-[4.5rem]">
-      <span className="text-xs text-white/25">
+      <span className="text-xs text-gray-300">
         {icon} {t.durationMinutes}m{showKm ? ` · ${t.distanceKm.toFixed(1)} km` : ""}
       </span>
     </div>
@@ -466,10 +466,10 @@ function TimelineSlot({
 
   if (compact) {
     if (slot.kind === "free_time") return null; // hide free-time in compact
-    const lineColor = slot.kind === "intercity_transfer" ? "border-lantern-violet/20" : "border-white/[0.06]";
+    const lineColor = slot.kind === "intercity_transfer" ? "border-teal-200" : "border-gray-200";
     return (
       <div
-        className={`group flex items-center gap-3 py-2.5 border-b ${lineColor} select-none ${isClickable && slot.kind !== "activity" ? "cursor-pointer hover:bg-white/[0.02] -mx-2 px-2 rounded-lg transition-colors" : ""} ${isDragging ? "opacity-40" : ""} ${slot.kind === "activity" && onDragStart ? "cursor-grab active:cursor-grabbing" : ""}`}
+        className={`group flex items-center gap-3 py-2.5 border-b ${lineColor} select-none ${isClickable && slot.kind !== "activity" ? "cursor-pointer hover:bg-gray-50 -mx-2 px-2 rounded-lg transition-colors" : ""} ${isDragging ? "opacity-40" : ""} ${slot.kind === "activity" && onDragStart ? "cursor-grab active:cursor-grabbing" : ""}`}
         draggable={slot.kind === "activity" && !!onDragStart}
         onDragStart={slot.kind === "activity" ? (e) => {
           e.dataTransfer.effectAllowed = "move";
@@ -484,14 +484,14 @@ function TimelineSlot({
             type="button"
             draggable={false}
             onClick={(e) => { e.stopPropagation(); onEditTime(slot); }}
-            className="group/time flex items-center gap-1 w-16 shrink-0 text-left text-white/30 hover:text-lantern-mint transition-colors"
+            className="group/time flex items-center gap-1 w-16 shrink-0 text-left text-gray-400 hover:text-teal-600 transition-colors"
             title="Edit time"
           >
             <span className="text-[11px] font-mono tabular-nums underline decoration-dotted underline-offset-2">{formatTime(slot.startMinutes)}</span>
             <span className="text-[9px] opacity-40 group-hover/time:opacity-100 transition-opacity">✏</span>
           </button>
         ) : (
-          <span className="text-[11px] font-mono text-white/30 w-16 shrink-0 tabular-nums">
+          <span className="text-[11px] font-mono text-gray-400 w-16 shrink-0 tabular-nums">
             {formatTime(slot.startMinutes)}
           </span>
         )}
@@ -504,11 +504,11 @@ function TimelineSlot({
             onBlur={() => onRenameCommit?.()}
             onKeyDown={(e) => { if (e.key === "Enter") e.currentTarget.blur(); if (e.key === "Escape") onRenameCommit?.(); }}
             onClick={(e) => e.stopPropagation()}
-            className="flex-1 bg-transparent border-b border-lantern-mint text-white/80 text-[13px] outline-none min-w-0"
+            className="flex-1 bg-transparent border-b border-teal-400 text-gray-700 text-[13px] outline-none min-w-0"
           />
         ) : (
           <span
-            className={`flex-1 text-[13px] truncate ${slot.kind === "intercity_transfer" ? "text-lantern-violet font-medium" : "text-white/80"} ${slot.kind === "activity" && onRename ? "cursor-text" : ""}`}
+            className={`flex-1 text-[13px] truncate ${slot.kind === "intercity_transfer" ? "text-teal-600 font-medium" : "text-gray-700"} ${slot.kind === "activity" && onRename ? "cursor-text" : ""}`}
             onDoubleClick={slot.kind === "activity" ? (e) => { e.stopPropagation(); onRename?.(slot); } : undefined}
             title={slot.kind === "activity" && onRename ? "Double-click to rename" : undefined}
           >
@@ -520,7 +520,7 @@ function TimelineSlot({
             type="button"
             draggable={false}
             onClick={(e) => { e.stopPropagation(); onRename(slot); }}
-            className="shrink-0 opacity-0 group-hover:opacity-100 text-white/60 hover:text-lantern-mint transition-all text-sm leading-none px-1"
+            className="shrink-0 opacity-0 group-hover:opacity-100 text-gray-600 hover:text-teal-600 transition-all text-sm leading-none px-1"
             title="Rename"
           >
             ✏
@@ -531,13 +531,13 @@ function TimelineSlot({
             type="button"
             draggable={false}
             onClick={(e) => { e.stopPropagation(); onSlotClick(slot); }}
-            className="shrink-0 opacity-0 group-hover:opacity-100 text-white/40 hover:text-lantern-mint transition-all text-sm leading-none px-0.5"
+            className="shrink-0 opacity-0 group-hover:opacity-100 text-gray-500 hover:text-teal-600 transition-all text-sm leading-none px-0.5"
             title="View details"
           >
             ℹ
           </button>
         )}
-        <span className="text-[11px] text-white/25 shrink-0">{formatDuration(slot.durationMinutes)}</span>
+        <span className="text-[11px] text-gray-300 shrink-0">{formatDuration(slot.durationMinutes)}</span>
         {cat && cat in CAT_STYLE && (
           <span className={`shrink-0 hidden sm:inline-block rounded-full border px-1.5 py-0.5 text-[9px] font-semibold capitalize ${CAT_STYLE[cat]}`}>
             {cat}
@@ -548,7 +548,7 @@ function TimelineSlot({
             type="button"
             draggable={false}
             onClick={(e) => { e.stopPropagation(); onDelete(slot); }}
-            className="shrink-0 opacity-0 group-hover:opacity-100 text-white/40 hover:text-red-400 transition-all text-xs leading-none px-0.5"
+            className="shrink-0 opacity-0 group-hover:opacity-100 text-gray-500 hover:text-red-400 transition-all text-xs leading-none px-0.5"
             title="Remove from itinerary"
           >
             ✕
@@ -566,22 +566,22 @@ function TimelineSlot({
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); onEditTime(slot); }}
-            className="group/time flex items-center gap-1 leading-none mb-1.5 text-white/30 hover:text-lantern-mint transition-colors"
+            className="group/time flex items-center gap-1 leading-none mb-1.5 text-gray-400 hover:text-teal-600 transition-colors"
             title="Edit time"
           >
             <span className="text-[11px] font-mono underline decoration-dotted underline-offset-2">{formatTime(slot.startMinutes)}</span>
             <span className="text-[9px] opacity-40 group-hover/time:opacity-100 transition-opacity">✏</span>
           </button>
         ) : (
-          <span className="text-[11px] font-mono text-white/30 leading-none mb-1.5">
+          <span className="text-[11px] font-mono text-gray-400 leading-none mb-1.5">
             {formatTime(slot.startMinutes)}
           </span>
         )}
         <div className={`h-2.5 w-2.5 rounded-full border-2 border-ink shrink-0 ${style.dot}`} />
-        {!isLast && <div className={`flex-1 w-px mt-1 ${slot.kind === "intercity_transfer" ? "bg-lantern-violet/20" : "bg-white/[0.07]"}`} />}
+        {!isLast && <div className={`flex-1 w-px mt-1 ${slot.kind === "intercity_transfer" ? "bg-teal-100" : "bg-gray-100"}`} />}
       </div>
       <div
-        className={`group flex-1 mb-4 rounded-xl border px-4 py-3 ${style.border} ${style.bg} select-none ${isClickable ? "cursor-pointer hover:border-white/20 transition-colors" : ""} ${isDragging ? "opacity-40" : ""} ${slot.kind === "activity" && onDragStart ? "cursor-grab" : ""}`}
+        className={`group flex-1 mb-4 rounded-xl border px-4 py-3 ${style.border} ${style.bg} select-none ${isClickable ? "cursor-pointer hover:border-gray-300 transition-colors" : ""} ${isDragging ? "opacity-40" : ""} ${slot.kind === "activity" && onDragStart ? "cursor-grab" : ""}`}
         draggable={slot.kind === "activity" && !!onDragStart}
         onDragStart={slot.kind === "activity" ? (e) => {
           e.dataTransfer.effectAllowed = "move";
@@ -601,11 +601,11 @@ function TimelineSlot({
                 onBlur={() => onRenameCommit?.()}
                 onKeyDown={(e) => { if (e.key === "Enter") e.currentTarget.blur(); if (e.key === "Escape") onRenameCommit?.(); }}
                 onClick={(e) => e.stopPropagation()}
-                className="w-full bg-transparent border-b border-lantern-mint text-white font-semibold text-sm outline-none mb-1"
+                className="w-full bg-transparent border-b border-teal-400 text-gray-900 font-semibold text-sm outline-none mb-1"
               />
             ) : (
               <p
-                className={`text-sm font-semibold leading-snug ${slot.kind === "intercity_transfer" ? "text-lantern-violet" : "text-white"} ${slot.kind === "activity" && onRename ? "cursor-text" : ""}`}
+                className={`text-sm font-semibold leading-snug ${slot.kind === "intercity_transfer" ? "text-teal-600" : "text-gray-900"} ${slot.kind === "activity" && onRename ? "cursor-text" : ""}`}
                 onDoubleClick={slot.kind === "activity" ? (e) => { e.stopPropagation(); onRename?.(slot); } : undefined}
                 title={slot.kind === "activity" && onRename ? "Double-click to rename" : undefined}
               >
@@ -613,11 +613,11 @@ function TimelineSlot({
               </p>
             )}
             <div className="flex items-center gap-2 mt-1 flex-wrap">
-              <span className="text-[11px] text-white/35">{formatDuration(slot.durationMinutes)}</span>
+              <span className="text-[11px] text-gray-400">{formatDuration(slot.durationMinutes)}</span>
               {nbhd && (
                 <>
-                  <span className="text-white/15 text-xs">·</span>
-                  <span className="text-[11px] text-white/35">{nbhd}</span>
+                  <span className="text-gray-300 text-xs">·</span>
+                  <span className="text-[11px] text-gray-400">{nbhd}</span>
                 </>
               )}
             </div>
@@ -633,7 +633,7 @@ function TimelineSlot({
                 type="button"
                 draggable={false}
                 onClick={(e) => { e.stopPropagation(); onMoveUp(); }}
-                className="flex items-center justify-center w-8 h-8 rounded-lg text-white/40 hover:text-lantern-mint hover:bg-white/[0.06] transition-all text-base"
+                className="flex items-center justify-center w-8 h-8 rounded-lg text-gray-500 hover:text-teal-600 hover:bg-gray-50 transition-all text-base"
                 title="Move up"
               >
                 ↑
@@ -644,7 +644,7 @@ function TimelineSlot({
                 type="button"
                 draggable={false}
                 onClick={(e) => { e.stopPropagation(); onMoveDown(); }}
-                className="flex items-center justify-center w-8 h-8 rounded-lg text-white/40 hover:text-lantern-mint hover:bg-white/[0.06] transition-all text-base"
+                className="flex items-center justify-center w-8 h-8 rounded-lg text-gray-500 hover:text-teal-600 hover:bg-gray-50 transition-all text-base"
                 title="Move down"
               >
                 ↓
@@ -654,7 +654,7 @@ function TimelineSlot({
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); onSlotClick(slot); }}
-                className="flex items-center justify-center w-8 h-8 rounded-lg text-white/40 hover:text-lantern-mint hover:bg-white/[0.06] transition-all text-base"
+                className="flex items-center justify-center w-8 h-8 rounded-lg text-gray-500 hover:text-teal-600 hover:bg-gray-50 transition-all text-base"
                 title="View details"
               >
                 ℹ
@@ -664,7 +664,7 @@ function TimelineSlot({
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); onRename(slot); }}
-                className="flex items-center justify-center w-8 h-8 rounded-lg text-white/50 hover:text-lantern-mint hover:bg-white/[0.06] transition-all text-base"
+                className="flex items-center justify-center w-8 h-8 rounded-lg text-gray-500 hover:text-teal-600 hover:bg-gray-50 transition-all text-base"
                 title="Rename"
               >
                 ✏
@@ -674,7 +674,7 @@ function TimelineSlot({
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); onDelete(slot); }}
-                className="flex items-center justify-center w-8 h-8 rounded-lg text-white/40 hover:text-red-400 hover:bg-white/[0.06] transition-all text-base"
+                className="flex items-center justify-center w-8 h-8 rounded-lg text-gray-500 hover:text-red-400 hover:bg-gray-50 transition-all text-base"
                 title="Remove from itinerary"
               >
                 ✕
@@ -683,34 +683,34 @@ function TimelineSlot({
           </div>
         </div>
         {slot.explanation && (
-          <p className="mt-2 text-[11px] text-white/35 leading-relaxed line-clamp-2">
+          <p className="mt-2 text-[11px] text-gray-400 leading-relaxed line-clamp-2">
             {slot.explanation}
           </p>
         )}
         {slot.kind === "activity" && onEditNotes && (
-          <div className="mt-3 pt-3 border-t border-white/[0.06]">
+          <div className="mt-3 pt-3 border-t border-gray-200">
             <div className="flex items-center justify-between mb-1.5">
-              <span className="text-[10px] font-semibold text-white/25 uppercase tracking-wider">Notes</span>
+              <span className="text-[10px] font-semibold text-gray-300 uppercase tracking-wider">Notes</span>
               {noteEdit === null ? (
                 <button
                   type="button"
                   draggable={false}
                   onClick={(e) => { e.stopPropagation(); setNoteEdit(slot.note ?? ""); }}
-                  className="text-[10px] text-white/35 hover:text-lantern-mint transition-colors"
+                  className="text-[10px] text-gray-400 hover:text-teal-600 transition-colors"
                 >
                   {slot.note ? "Edit" : "+ Add"}
                 </button>
               ) : (
                 <div className="flex gap-2">
-                  <button type="button" draggable={false} onClick={(e) => { e.stopPropagation(); setNoteEdit(null); }} className="text-[10px] text-white/35 hover:text-white/60 transition-colors">Cancel</button>
-                  <button type="button" draggable={false} onClick={(e) => { e.stopPropagation(); onEditNotes(slot, noteEdit); setNoteEdit(null); }} className="text-[10px] text-lantern-mint font-semibold hover:opacity-80 transition-opacity">Save</button>
+                  <button type="button" draggable={false} onClick={(e) => { e.stopPropagation(); setNoteEdit(null); }} className="text-[10px] text-gray-400 hover:text-gray-600 transition-colors">Cancel</button>
+                  <button type="button" draggable={false} onClick={(e) => { e.stopPropagation(); onEditNotes(slot, noteEdit); setNoteEdit(null); }} className="text-[10px] text-teal-600 font-semibold hover:opacity-80 transition-opacity">Save</button>
                 </div>
               )}
             </div>
             {noteEdit === null ? (
               slot.note
-                ? <p className="text-[11px] text-white/45 leading-relaxed whitespace-pre-wrap">{slot.note}</p>
-                : <p className="text-[10px] text-white/20 italic">No notes</p>
+                ? <p className="text-[11px] text-gray-500 leading-relaxed whitespace-pre-wrap">{slot.note}</p>
+                : <p className="text-[10px] text-gray-300 italic">No notes</p>
             ) : (
               <textarea
                 autoFocus
@@ -719,22 +719,22 @@ function TimelineSlot({
                 onClick={(e) => e.stopPropagation()}
                 placeholder="Add your notes…"
                 rows={2}
-                className="select-text w-full bg-white/[0.04] border border-white/[0.12] rounded-lg px-3 py-2 text-[11px] text-white/80 placeholder-white/20 focus:outline-none focus:border-lantern-mint/50 resize-none"
+                className="select-text w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-[11px] text-gray-700 placeholder-white/20 focus:outline-none focus:border-teal-400 resize-none"
               />
             )}
           </div>
         )}
         {slot.kind === "activity" && onEditDuration && (
           <div className="mt-2 flex items-center gap-3">
-            <span className="text-[10px] font-semibold text-white/25 uppercase tracking-wider">Duration</span>
+            <span className="text-[10px] font-semibold text-gray-300 uppercase tracking-wider">Duration</span>
             {durationEdit === null ? (
               <>
-                <span className="text-[11px] text-white/45">{slot.durationMinutes}m</span>
+                <span className="text-[11px] text-gray-500">{slot.durationMinutes}m</span>
                 <button
                   type="button"
                   draggable={false}
                   onClick={(e) => { e.stopPropagation(); setDurationEdit(slot.durationMinutes); }}
-                  className="text-[10px] text-white/35 hover:text-lantern-mint transition-colors"
+                  className="text-[10px] text-gray-400 hover:text-teal-600 transition-colors"
                 >
                   Edit
                 </button>
@@ -753,21 +753,21 @@ function TimelineSlot({
                     value={durationEdit}
                     onChange={(e) => setDurationEdit(Number(e.target.value))}
                     onClick={(e) => e.stopPropagation()}
-                    className="select-text w-20 bg-white/[0.04] border border-white/[0.12] rounded-lg px-2 py-1 text-[11px] text-white/80 focus:outline-none focus:border-lantern-mint/50 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
+                    className="select-text w-20 bg-gray-50 border border-gray-200 rounded-lg px-2 py-1 text-[11px] text-gray-700 focus:outline-none focus:border-teal-400 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
                   />
-                  <span className="text-[10px] text-white/25">min</span>
+                  <span className="text-[10px] text-gray-300">min</span>
                   {durError && <span className="text-red-400 text-[10px]">{durError}</span>}
-                  <button type="button" draggable={false} onClick={(e) => { e.stopPropagation(); setDurationEdit(null); }} className="text-[10px] text-white/35 hover:text-white/60 transition-colors">Cancel</button>
-                  <button type="button" draggable={false} disabled={!!durError} onClick={(e) => { e.stopPropagation(); if (!durError) { onEditDuration(slot, clampedDur); setDurationEdit(null); } }} className={`text-[10px] font-semibold transition-opacity ${durError ? "text-white/20 cursor-not-allowed" : "text-lantern-mint hover:opacity-80"}`}>Save</button>
+                  <button type="button" draggable={false} onClick={(e) => { e.stopPropagation(); setDurationEdit(null); }} className="text-[10px] text-gray-400 hover:text-gray-600 transition-colors">Cancel</button>
+                  <button type="button" draggable={false} disabled={!!durError} onClick={(e) => { e.stopPropagation(); if (!durError) { onEditDuration(slot, clampedDur); setDurationEdit(null); } }} className={`text-[10px] font-semibold transition-opacity ${durError ? "text-gray-300 cursor-not-allowed" : "text-teal-600 hover:opacity-80"}`}>Save</button>
                 </>
               );
             })()}
           </div>
         )}
         {slot.kind === "activity" && (
-          <div className="mt-3 px-3 py-2.5 rounded-lg bg-white/[0.02] border border-white/[0.05]">
-            <p className="text-[10px] font-semibold text-white/30 uppercase tracking-wider mb-1">⏰ Why this time?</p>
-            <p className="text-[12px] text-white/40 italic leading-relaxed">
+          <div className="mt-3 px-3 py-2.5 rounded-lg bg-gray-50 border border-gray-100">
+            <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1">⏰ Why this time?</p>
+            <p className="text-[12px] text-gray-500 italic leading-relaxed">
               {slot.timeExplanation ?? "AI-scheduled for optimal experience"}
             </p>
           </div>
@@ -783,7 +783,7 @@ const WARNING_COLORS: Record<DayWarning["type"], string> = {
   transit_heavy:   "bg-blue-500/10 text-blue-400 border-blue-500/20",
   late_night:      "bg-violet-500/10 text-violet-400 border-violet-500/20",
   flight_recovery: "bg-red-500/10 text-red-400 border-red-500/20",
-  ai_note:         "bg-white/5 text-white/50 border-white/10",
+  ai_note:         "bg-gray-50 text-gray-500 border-gray-200",
 };
 
 function DayView({
@@ -814,15 +814,15 @@ function DayView({
   return (
     <div>
       <div className="mb-5">
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/25 mb-1">
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gray-300 mb-1">
           {longDate(day.date)}
         </p>
-        <h2 className="text-lg font-bold text-white">{day.theme || `Day ${day.dayIndex + 1}`}</h2>
+        <h2 className="text-lg font-bold text-gray-900">{day.theme || `Day ${day.dayIndex + 1}`}</h2>
         {day.cityLabel && (
-          <p className="text-sm text-white/40 mt-0.5">{day.cityLabel}</p>
+          <p className="text-sm text-gray-500 mt-0.5">{day.cityLabel}</p>
         )}
         <div className="flex gap-4 mt-2">
-          <span className="text-xs text-white/30">
+          <span className="text-xs text-gray-400">
             {day.scheduledActivityCount} {day.scheduledActivityCount === 1 ? "activity" : "activities"}
             {" · "}
             {day.slots.length - day.scheduledActivityCount} meals &amp; transfers
@@ -841,7 +841,7 @@ function DayView({
           </div>
         )}
         {day.daySummary && (
-          <p className="text-[11px] text-white/40 italic mt-2 mb-1 leading-relaxed">{day.daySummary}</p>
+          <p className="text-[11px] text-gray-500 italic mt-2 mb-1 leading-relaxed">{day.daySummary}</p>
         )}
       </div>
       <div>
@@ -873,7 +873,7 @@ function DayView({
           <button
             type="button"
             onClick={onQuickAdd}
-            className="mt-3 flex items-center gap-1.5 px-3 py-2 rounded-lg border border-white/[0.08] text-white/30 hover:text-lantern-mint hover:border-lantern-mint/30 text-xs transition-colors"
+            className="mt-3 flex items-center gap-1.5 px-3 py-2 rounded-lg border border-gray-200 text-gray-400 hover:text-teal-600 hover:border-teal-200 text-xs transition-colors"
           >
             <span className="text-sm leading-none">+</span> Add activity
           </button>
@@ -887,9 +887,9 @@ function DayView({
 
 function SectionCard({ title, children, action }: { title: string; children: ReactNode; action?: ReactNode }) {
   return (
-    <section className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5">
+    <section className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
       <div className="flex items-center justify-between mb-3">
-        <h2 className="text-sm font-semibold text-white">{title}</h2>
+        <h2 className="text-sm font-semibold text-gray-900">{title}</h2>
         {action}
       </div>
       <div className="space-y-3">{children}</div>
@@ -898,20 +898,20 @@ function SectionCard({ title, children, action }: { title: string; children: Rea
 }
 
 const inputCls =
-  "w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-3 py-2 text-sm text-white placeholder:text-white/20 focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors";
+  "w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder:text-gray-300 focus:border-teal-400 focus:outline-none focus:ring-1 focus:ring-teal-100 transition-colors";
 
 function FieldLabel({ label, note }: { label: string; note?: string }) {
   return (
-    <label className="text-xs text-white/40 block mb-1.5">
+    <label className="text-xs text-gray-500 block mb-1.5">
       {label}
-      {note && <span className="ml-1 text-white/20">{note}</span>}
+      {note && <span className="ml-1 text-gray-300">{note}</span>}
     </label>
   );
 }
 
 function CtaLink({ href, label }: { href: string; label: string }) {
   return (
-    <Link href={href} className="inline-flex items-center gap-1 text-xs text-white/35 hover:text-lantern-mint transition-colors">
+    <Link href={href} className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-teal-600 transition-colors">
       {label} <span>→</span>
     </Link>
   );
@@ -938,8 +938,8 @@ function ToggleGroup<T extends string>({
             onClick={() => onChange(opt)}
             className={`rounded-lg border py-2 text-xs font-medium capitalize transition-colors ${
               value === opt
-                ? "border-lantern-mint/50 bg-lantern-mint/10 text-lantern-mint"
-                : "border-white/[0.08] bg-white/[0.02] text-white/40 hover:text-white/65"
+                ? "border-teal-400 bg-teal-50 text-teal-600"
+                : "border-gray-200 bg-gray-50 text-gray-500 hover:text-gray-600"
             }`}
           >
             {opt}
@@ -968,7 +968,7 @@ function CityRow({
         placeholder={index === 0 ? "e.g. Tokyo, Japan" : "e.g. Kyoto, Japan"}
         value={stop.city}
         onChange={(e) => onUpdate({ city: e.target.value })}
-        className="flex-1 rounded-lg border border-white/[0.1] bg-white/[0.04] px-3 py-2 text-sm text-white placeholder:text-white/20 focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors"
+        className="flex-1 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder:text-gray-300 focus:border-teal-400 focus:outline-none focus:ring-1 focus:ring-teal-100 transition-colors"
       />
       <input
         type="number"
@@ -976,11 +976,11 @@ function CityRow({
         max={21}
         value={stop.days}
         onChange={(e) => onUpdate({ days: Math.max(1, parseInt(e.target.value) || 1) })}
-        className="w-14 rounded-lg border border-white/[0.1] bg-white/[0.04] px-2 py-2 text-sm text-white text-center focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors"
+        className="w-14 rounded-lg border border-gray-200 bg-gray-50 px-2 py-2 text-sm text-gray-900 text-center focus:border-teal-400 focus:outline-none focus:ring-1 focus:ring-teal-100 transition-colors"
       />
-      <span className="text-[11px] text-white/30 shrink-0">d</span>
+      <span className="text-[11px] text-gray-400 shrink-0">d</span>
       {canRemove ? (
-        <button type="button" onClick={onRemove} className="shrink-0 w-5 text-white/25 hover:text-red-400 transition-colors text-lg leading-none">
+        <button type="button" onClick={onRemove} className="shrink-0 w-5 text-gray-300 hover:text-red-400 transition-colors text-lg leading-none">
           ×
         </button>
       ) : (
@@ -1006,23 +1006,23 @@ function ActivityRow({
       onClick={onToggle}
       className={`w-full flex items-center gap-2.5 rounded-lg border px-3 py-2 text-left transition-all ${
         excluded
-          ? "border-white/[0.04] bg-transparent opacity-40 hover:opacity-60"
-          : "border-white/[0.07] bg-white/[0.02] hover:border-white/[0.12]"
+          ? "border-gray-100 bg-transparent opacity-40 hover:opacity-60"
+          : "border-gray-200 bg-gray-50 hover:border-gray-200"
       }`}
     >
       <div className={`shrink-0 h-3.5 w-3.5 rounded border flex items-center justify-center transition-colors ${
-        excluded ? "border-white/20 bg-transparent" : "border-lantern-mint/60 bg-lantern-mint/15"
+        excluded ? "border-gray-300 bg-transparent" : "border-teal-400 bg-teal-50"
       }`}>
         {!excluded && (
-          <svg viewBox="0 0 10 8" fill="none" className="w-2.5 h-2 text-lantern-mint" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg viewBox="0 0 10 8" fill="none" className="w-2.5 h-2 text-teal-600" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M1 4l3 3 5-6" />
           </svg>
         )}
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-xs font-medium text-white truncate">{meta?.title ?? id}</p>
+        <p className="text-xs font-medium text-gray-900 truncate">{meta?.title ?? id}</p>
         {meta && (
-          <p className="text-[10px] text-white/30 mt-0.5 truncate">
+          <p className="text-[10px] text-gray-400 mt-0.5 truncate">
             {[meta.neighborhood, meta.duration].filter(Boolean).join(" · ")}
           </p>
         )}
@@ -1045,7 +1045,7 @@ function SelectedFlightCard({
   onClear: () => void;
 }) {
   return (
-    <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-3.5 space-y-2">
+    <div className="rounded-xl border border-gray-200 bg-gray-50 p-3.5 space-y-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2 min-w-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -1057,48 +1057,48 @@ function SelectedFlightCard({
             className="rounded object-contain shrink-0"
             onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
           />
-          <span className="text-xs font-semibold text-white truncate">{flight.airline}</span>
+          <span className="text-xs font-semibold text-gray-900 truncate">{flight.airline}</span>
           {flight.flightNumber && (
-            <span className="text-[10px] text-white/35 shrink-0">{flight.flightNumber}</span>
+            <span className="text-[10px] text-gray-400 shrink-0">{flight.flightNumber}</span>
           )}
         </div>
-        <span className="text-xs font-bold text-white/60 shrink-0">
+        <span className="text-xs font-bold text-gray-600 shrink-0">
           ${Math.round(flight.price).toLocaleString()}
         </span>
       </div>
 
       {/* Outbound */}
-      <div className="flex items-center gap-2 rounded-lg bg-white/[0.025] border border-white/[0.05] px-3 py-2">
+      <div className="flex items-center gap-2 rounded-lg bg-gray-50 border border-gray-100 px-3 py-2">
         <div className="text-center shrink-0">
-          <div className="text-sm font-bold text-white">{fmt24(flight.departTime)}</div>
-          <div className="text-[10px] font-mono text-white/40">{flight.origin}</div>
+          <div className="text-sm font-bold text-gray-900">{fmt24(flight.departTime)}</div>
+          <div className="text-[10px] font-mono text-gray-500">{flight.origin}</div>
         </div>
         <div className="flex-1 text-center px-1">
-          <div className="text-[10px] text-white/30">{flight.duration}</div>
-          <div className="w-full h-px bg-white/10 my-1" />
-          <div className="text-[10px] text-white/25">{flight.stopLabel}</div>
+          <div className="text-[10px] text-gray-400">{flight.duration}</div>
+          <div className="w-full h-px bg-gray-100 my-1" />
+          <div className="text-[10px] text-gray-300">{flight.stopLabel}</div>
         </div>
         <div className="text-center shrink-0">
-          <div className="text-sm font-bold text-white">{fmt24(flight.arriveTime)}</div>
-          <div className="text-[10px] font-mono text-white/40">{flight.destination}</div>
+          <div className="text-sm font-bold text-gray-900">{fmt24(flight.arriveTime)}</div>
+          <div className="text-[10px] font-mono text-gray-500">{flight.destination}</div>
         </div>
       </div>
 
       {/* Return if present */}
       {flight.returnDepartTime && (
-        <div className="flex items-center gap-2 rounded-lg bg-white/[0.015] border border-white/[0.04] px-3 py-2">
+        <div className="flex items-center gap-2 rounded-lg bg-white/[0.015] border border-gray-100 px-3 py-2">
           <div className="text-center shrink-0">
-            <div className="text-sm font-bold text-white/70">{fmt24(flight.returnDepartTime)}</div>
-            <div className="text-[10px] font-mono text-white/30">{flight.returnOrigin}</div>
+            <div className="text-sm font-bold text-gray-700">{fmt24(flight.returnDepartTime)}</div>
+            <div className="text-[10px] font-mono text-gray-400">{flight.returnOrigin}</div>
           </div>
           <div className="flex-1 text-center px-1">
-            <div className="text-[10px] text-white/25">{flight.returnDuration}</div>
-            <div className="w-full h-px bg-white/[0.07] my-1" />
-            <div className="text-[10px] text-white/20">{flight.returnStopLabel}</div>
+            <div className="text-[10px] text-gray-300">{flight.returnDuration}</div>
+            <div className="w-full h-px bg-gray-100 my-1" />
+            <div className="text-[10px] text-gray-300">{flight.returnStopLabel}</div>
           </div>
           <div className="text-center shrink-0">
-            <div className="text-sm font-bold text-white/70">{fmt24(flight.returnArriveTime ?? "")}</div>
-            <div className="text-[10px] font-mono text-white/30">{flight.returnDestination}</div>
+            <div className="text-sm font-bold text-gray-700">{fmt24(flight.returnArriveTime ?? "")}</div>
+            <div className="text-[10px] font-mono text-gray-400">{flight.returnDestination}</div>
           </div>
         </div>
       )}
@@ -1108,7 +1108,7 @@ function SelectedFlightCard({
         <button
           type="button"
           onClick={onClear}
-          className="text-[11px] text-white/25 hover:text-red-400 transition-colors"
+          className="text-[11px] text-gray-300 hover:text-red-400 transition-colors"
         >
           Remove
         </button>
@@ -1126,7 +1126,7 @@ function SelectedHotelCard({
   onClear: () => void;
 }) {
   return (
-    <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] overflow-hidden">
+    <div className="rounded-xl border border-gray-200 bg-gray-50 overflow-hidden">
       {hotel.imageUrl && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
@@ -1138,20 +1138,20 @@ function SelectedHotelCard({
       )}
       <div className="p-3.5 space-y-2">
         <div>
-          <p className="text-sm font-semibold text-white leading-snug">{hotel.name}</p>
-          <p className="text-[11px] text-white/40 mt-0.5">
+          <p className="text-sm font-semibold text-gray-900 leading-snug">{hotel.name}</p>
+          <p className="text-[11px] text-gray-500 mt-0.5">
             {hotel.neighborhood}
             {hotel.pricePerNight > 0 && ` · $${Math.round(hotel.pricePerNight)}/night`}
           </p>
         </div>
         <div className="flex items-center gap-3">
           {hotel.rating > 0 && (
-            <span className="text-[11px] text-white/50">
+            <span className="text-[11px] text-gray-500">
               ★ {hotel.rating.toFixed(1)}
             </span>
           )}
           {hotel.aiScore > 0 && (
-            <span className="text-[11px] text-lantern-mint/70">
+            <span className="text-[11px] text-teal-500">
               TG score {hotel.aiScore}
             </span>
           )}
@@ -1161,7 +1161,7 @@ function SelectedHotelCard({
           <button
             type="button"
             onClick={onClear}
-            className="text-[11px] text-white/25 hover:text-red-400 transition-colors"
+            className="text-[11px] text-gray-300 hover:text-red-400 transition-colors"
           >
             Remove
           </button>
@@ -1871,17 +1871,17 @@ export default function ItineraryPlanner() {
   const hasItinerary = !!trip.itinerary;
 
   return (
-    <div className="min-h-screen bg-ink text-white">
+    <div className="min-h-screen bg-white text-gray-900">
 
       {/* Nav */}
-      <nav className="border-b border-white/[0.07] bg-ink/80 backdrop-blur-md sticky top-0 z-40">
+      <nav className="border-b border-gray-200 bg-white/80 backdrop-blur-md sticky top-0 z-40">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 flex items-center h-14 gap-6">
           <Link href="/" className="flex items-center gap-2 shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/travelgrab-logo.svg" alt="TravelGrab" width={36} height={36} className="h-9 w-9 object-contain" />
-            <span className="text-sm font-bold tracking-tight text-white/90">TravelGrab</span>
+            <span className="text-sm font-bold tracking-tight text-gray-800">TravelGrab</span>
           </Link>
-          <div className="h-4 w-px bg-white/10" />
+          <div className="h-4 w-px bg-gray-100" />
           <NavLink href="/flights"    label="Flights"    active={pathname === "/flights"} />
           <NavLink href="/hotels"     label="Hotels"     active={pathname === "/hotels"} />
           <NavLink href="/activities" label="Activities" active={pathname === "/activities"} />
@@ -1902,9 +1902,9 @@ export default function ItineraryPlanner() {
               return (
                 <div key={s} className="flex items-center gap-2">
                   <div className={`h-2 w-2 rounded-full transition-colors ${
-                    isActive ? "bg-lantern-mint" : isDone ? "bg-lantern-mint/40" : "bg-white/15"
+                    isActive ? "bg-lantern-mint" : isDone ? "bg-lantern-mint/40" : "bg-gray-200"
                   }`} />
-                  {i < 4 && <div className="h-px w-6 bg-white/10" />}
+                  {i < 4 && <div className="h-px w-6 bg-gray-100" />}
                 </div>
               );
             })}
@@ -1914,8 +1914,8 @@ export default function ItineraryPlanner() {
           {obStep === "destination" && (
             <div className="space-y-6">
               <div>
-                <h1 className="text-3xl font-bold text-white mb-2">Where are you going?</h1>
-                <p className="text-sm text-white/40">Enter a country, region, or city and select from suggestions.</p>
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">Where are you going?</h1>
+                <p className="text-sm text-gray-500">Enter a country, region, or city and select from suggestions.</p>
               </div>
               <ItineraryDestinationInput
                 value={obDest}
@@ -1954,12 +1954,12 @@ export default function ItineraryPlanner() {
           {obStep === "dates" && (
             <div className="space-y-6">
               <div>
-                <h1 className="text-3xl font-bold text-white mb-2">When are you going?</h1>
-                <p className="text-sm text-white/40">Set a start date and trip length, or pick a return date.</p>
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">When are you going?</h1>
+                <p className="text-sm text-gray-500">Set a start date and trip length, or pick a return date.</p>
               </div>
               <div className="space-y-4">
                 <div>
-                  <label className="text-xs text-white/40 block mb-1.5">Start date</label>
+                  <label className="text-xs text-gray-500 block mb-1.5">Start date</label>
                   <input
                     type="date"
                     value={obStart}
@@ -1974,12 +1974,12 @@ export default function ItineraryPlanner() {
                         setObReturn(d.toISOString().slice(0, 10));
                       }
                     }}
-                    className="w-full rounded-xl border border-white/[0.12] bg-white/[0.05] px-4 py-3 text-sm text-white focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors [color-scheme:dark]"
+                    className="w-full rounded-xl border border-gray-200 bg-gray-100 px-4 py-3 text-sm text-gray-900 focus:border-teal-400 focus:outline-none focus:ring-1 focus:ring-teal-100 transition-colors [color-scheme:light]"
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-white/40 block mb-1.5">
-                    Trip length — <span className="text-white/60 font-semibold">{obDuration} {obDuration === 1 ? "day" : "days"}</span>
+                  <label className="text-xs text-gray-500 block mb-1.5">
+                    Trip length — <span className="text-gray-600 font-semibold">{obDuration} {obDuration === 1 ? "day" : "days"}</span>
                   </label>
                   <input
                     type="range"
@@ -2000,7 +2000,7 @@ export default function ItineraryPlanner() {
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-white/40 block mb-1.5">Return date <span className="text-white/25">(optional)</span></label>
+                  <label className="text-xs text-gray-500 block mb-1.5">Return date <span className="text-gray-300">(optional)</span></label>
                   <input
                     type="date"
                     value={obReturn}
@@ -2016,12 +2016,12 @@ export default function ItineraryPlanner() {
                         if (diff >= 1 && diff <= 30) setObDuration(diff);
                       }
                     }}
-                    className="w-full rounded-xl border border-white/[0.12] bg-white/[0.05] px-4 py-3 text-sm text-white focus:border-lantern-mint/50 focus:outline-none focus:ring-1 focus:ring-lantern-mint/30 transition-colors [color-scheme:dark]"
+                    className="w-full rounded-xl border border-gray-200 bg-gray-100 px-4 py-3 text-sm text-gray-900 focus:border-teal-400 focus:outline-none focus:ring-1 focus:ring-teal-100 transition-colors [color-scheme:light]"
                   />
                 </div>
               </div>
               <div className="flex gap-3">
-                <button type="button" onClick={() => setObStep("destination")} className="flex-1 h-12 rounded-full border border-white/[0.1] text-sm text-white/50 hover:text-white/80 transition-colors">
+                <button type="button" onClick={() => setObStep("destination")} className="flex-1 h-12 rounded-full border border-gray-200 text-sm text-gray-500 hover:text-gray-700 transition-colors">
                   Back
                 </button>
                 <button
@@ -2040,11 +2040,11 @@ export default function ItineraryPlanner() {
           {obStep === "style" && (
             <div className="space-y-6">
               <div>
-                <h1 className="text-3xl font-bold text-white mb-2">How do you travel?</h1>
-                <p className="text-sm text-white/40">Select all that apply — we&apos;ll use this to recommend the right cities.</p>
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">How do you travel?</h1>
+                <p className="text-sm text-gray-500">Select all that apply — we&apos;ll use this to recommend the right cities.</p>
               </div>
               <div>
-                <p className="text-xs text-white/40 mb-3">First time visiting {obDest}?</p>
+                <p className="text-xs text-gray-500 mb-3">First time visiting {obDest}?</p>
                 <div className="grid grid-cols-2 gap-2">
                   {([true, false] as const).map((v) => (
                     <button
@@ -2053,8 +2053,8 @@ export default function ItineraryPlanner() {
                       onClick={() => setObFirstTime(obFirstTime === v ? null : v)}
                       className={`rounded-xl border py-2.5 text-sm font-medium transition-colors ${
                         obFirstTime === v
-                          ? "border-lantern-mint/50 bg-lantern-mint/10 text-lantern-mint"
-                          : "border-white/[0.08] bg-white/[0.02] text-white/50 hover:text-white/80"
+                          ? "border-teal-400 bg-teal-50 text-teal-600"
+                          : "border-gray-200 bg-gray-50 text-gray-500 hover:text-gray-700"
                       }`}
                     >
                       {v ? "Yes, first time" : "Been before"}
@@ -2063,7 +2063,7 @@ export default function ItineraryPlanner() {
                 </div>
               </div>
               <div>
-                <p className="text-xs text-white/40 mb-3">Travel style <span className="text-white/25">(pick all that apply)</span></p>
+                <p className="text-xs text-gray-500 mb-3">Travel style <span className="text-gray-300">(pick all that apply)</span></p>
                 <div className="grid grid-cols-2 gap-2">
                   {(Object.entries(TRAVEL_STYLE_LABELS) as [TravelStyle, string][]).map(([key, label]) => {
                     const selected = obStyles.includes(key);
@@ -2074,8 +2074,8 @@ export default function ItineraryPlanner() {
                         onClick={() => toggleObStyle(key)}
                         className={`rounded-xl border px-3 py-2.5 text-sm font-medium text-left transition-colors ${
                           selected
-                            ? "border-lantern-mint/50 bg-lantern-mint/10 text-lantern-mint"
-                            : "border-white/[0.08] bg-white/[0.02] text-white/50 hover:text-white/80"
+                            ? "border-teal-400 bg-teal-50 text-teal-600"
+                            : "border-gray-200 bg-gray-50 text-gray-500 hover:text-gray-700"
                         }`}
                       >
                         {label}
@@ -2089,7 +2089,7 @@ export default function ItineraryPlanner() {
                 <button
                   type="button"
                   onClick={() => setObStep("dates")}
-                  className="flex-1 h-12 rounded-full border border-white/[0.1] text-sm text-white/50 hover:text-white/80 transition-colors"
+                  className="flex-1 h-12 rounded-full border border-gray-200 text-sm text-gray-500 hover:text-gray-700 transition-colors"
                 >
                   Back
                 </button>
@@ -2110,22 +2110,22 @@ export default function ItineraryPlanner() {
             <div className="space-y-6">
               {obLoading && (
                 <div className="flex flex-col items-center justify-center py-20 text-center">
-                  <div className="h-10 w-10 rounded-full border-2 border-white/10 border-t-lantern-mint animate-spin mb-6" />
-                  <p className="text-base font-semibold text-white">Finding your best route…</p>
-                  <p className="text-sm text-white/35 mt-2">Planning {obDuration} days in {obDest}</p>
+                  <div className="h-10 w-10 rounded-full border-2 border-gray-200 border-t-lantern-mint animate-spin mb-6" />
+                  <p className="text-base font-semibold text-gray-900">Finding your best route…</p>
+                  <p className="text-sm text-gray-400 mt-2">Planning {obDuration} days in {obDest}</p>
                 </div>
               )}
               {!obLoading && obError && (
                 <div className="space-y-5">
                   <div>
-                    <h1 className="text-3xl font-bold text-white mb-2">Something went wrong</h1>
+                    <h1 className="text-3xl font-bold text-gray-900 mb-2">Something went wrong</h1>
                     <p className="text-sm text-red-400">{obError}</p>
                   </div>
                   <div className="flex gap-3">
                     <button
                       type="button"
                       onClick={() => { setObStep("style"); setObError(null); }}
-                      className="flex-1 h-12 rounded-full border border-white/[0.1] text-sm text-white/50 hover:text-white/80 transition-colors"
+                      className="flex-1 h-12 rounded-full border border-gray-200 text-sm text-gray-500 hover:text-gray-700 transition-colors"
                     >
                       Back
                     </button>
@@ -2142,21 +2142,21 @@ export default function ItineraryPlanner() {
               {!obLoading && !obError && obCities.length > 0 && (
                 <div className="space-y-6">
                   <div>
-                    <h1 className="text-3xl font-bold text-white mb-2">Your AI route</h1>
-                    {obSummary && <p className="text-sm text-white/50 leading-relaxed">{obSummary}</p>}
+                    <h1 className="text-3xl font-bold text-gray-900 mb-2">Your AI route</h1>
+                    {obSummary && <p className="text-sm text-gray-500 leading-relaxed">{obSummary}</p>}
                   </div>
                   <div className="space-y-3">
                     {obCities.map((stop, i) => (
-                      <div key={i} className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-4">
+                      <div key={i} className="rounded-xl border border-gray-200 bg-gray-50 p-4">
                         <div className="flex items-center justify-between mb-1">
-                          <p className="text-sm font-semibold text-white">{stop.city}</p>
-                          <span className="text-xs font-semibold text-lantern-mint">{stop.days}d</span>
+                          <p className="text-sm font-semibold text-gray-900">{stop.city}</p>
+                          <span className="text-xs font-semibold text-teal-600">{stop.days}d</span>
                         </div>
-                        {stop.why && <p className="text-[11px] text-white/40 leading-relaxed">{stop.why}</p>}
+                        {stop.why && <p className="text-[11px] text-gray-500 leading-relaxed">{stop.why}</p>}
                       </div>
                     ))}
                   </div>
-                  <div className="flex items-center justify-between text-xs text-white/30 px-1">
+                  <div className="flex items-center justify-between text-xs text-gray-400 px-1">
                     <span>{obCities.reduce((s, c) => s + c.days, 0)} days total</span>
                     <span>{obDest}</span>
                   </div>
@@ -2164,7 +2164,7 @@ export default function ItineraryPlanner() {
                     <button
                       type="button"
                       onClick={() => { setObStep("style"); setObError(null); }}
-                      className="flex-1 h-12 rounded-full border border-white/[0.1] text-sm text-white/50 hover:text-white/80 transition-colors"
+                      className="flex-1 h-12 rounded-full border border-gray-200 text-sm text-gray-500 hover:text-gray-700 transition-colors"
                     >
                       Back
                     </button>
@@ -2185,12 +2185,12 @@ export default function ItineraryPlanner() {
           {obStep === "cities" && (
             <div className="space-y-6">
               <div>
-                <h1 className="text-3xl font-bold text-white mb-2">Customize your route</h1>
-                <p className="text-sm text-white/40">Edit cities, adjust days, or add stops.</p>
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">Customize your route</h1>
+                <p className="text-sm text-gray-500">Edit cities, adjust days, or add stops.</p>
               </div>
               <div className="space-y-3">
                 {obCities.map((stop, i) => (
-                  <div key={i} className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-4 space-y-2">
+                  <div key={i} className="rounded-xl border border-gray-200 bg-gray-50 p-4 space-y-2">
                     <div className="flex items-center gap-3">
                       <input
                         type="text"
@@ -2200,27 +2200,27 @@ export default function ItineraryPlanner() {
                           updated[i] = { ...stop, city: e.target.value };
                           setObCities(updated);
                         }}
-                        className="flex-1 rounded-lg border border-white/[0.08] bg-white/[0.04] px-3 py-2 text-sm text-white placeholder:text-white/20 focus:border-lantern-mint/50 focus:outline-none"
+                        className="flex-1 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder:text-gray-300 focus:border-teal-400 focus:outline-none"
                       />
                       <div className="flex items-center gap-2 shrink-0">
-                        <button type="button" onClick={() => { const u=[...obCities]; u[i]={...stop,days:Math.max(1,stop.days-1)}; setObCities(u); }} className="w-7 h-7 rounded-lg border border-white/[0.1] text-white/50 hover:text-white flex items-center justify-center text-lg leading-none">−</button>
-                        <span className="text-sm font-semibold text-white w-12 text-center">{stop.days}d</span>
-                        <button type="button" onClick={() => { const u=[...obCities]; u[i]={...stop,days:stop.days+1}; setObCities(u); }} className="w-7 h-7 rounded-lg border border-white/[0.1] text-white/50 hover:text-white flex items-center justify-center text-lg leading-none">+</button>
+                        <button type="button" onClick={() => { const u=[...obCities]; u[i]={...stop,days:Math.max(1,stop.days-1)}; setObCities(u); }} className="w-7 h-7 rounded-lg border border-gray-200 text-gray-500 hover:text-gray-900 flex items-center justify-center text-lg leading-none">−</button>
+                        <span className="text-sm font-semibold text-gray-900 w-12 text-center">{stop.days}d</span>
+                        <button type="button" onClick={() => { const u=[...obCities]; u[i]={...stop,days:stop.days+1}; setObCities(u); }} className="w-7 h-7 rounded-lg border border-gray-200 text-gray-500 hover:text-gray-900 flex items-center justify-center text-lg leading-none">+</button>
                         {obCities.length > 1 && (
-                          <button type="button" onClick={() => setObCities(obCities.filter((_,j)=>j!==i))} className="w-7 h-7 text-white/25 hover:text-red-400 flex items-center justify-center text-lg leading-none">×</button>
+                          <button type="button" onClick={() => setObCities(obCities.filter((_,j)=>j!==i))} className="w-7 h-7 text-gray-300 hover:text-red-400 flex items-center justify-center text-lg leading-none">×</button>
                         )}
                       </div>
                     </div>
-                    {stop.why && <p className="text-[11px] text-white/35 pl-1">{stop.why}</p>}
+                    {stop.why && <p className="text-[11px] text-gray-400 pl-1">{stop.why}</p>}
                   </div>
                 ))}
               </div>
-              <div className="flex justify-between items-center text-xs text-white/30">
+              <div className="flex justify-between items-center text-xs text-gray-400">
                 <span>{obCities.reduce((s,c)=>s+c.days,0)} days total</span>
                 <button
                   type="button"
                   onClick={() => setObCities([...obCities, { city: "", days: 2, why: "" }])}
-                  className="text-lantern-mint/60 hover:text-lantern-mint transition-colors"
+                  className="text-teal-500 hover:text-teal-600 transition-colors"
                 >
                   + Add city
                 </button>
@@ -2229,7 +2229,7 @@ export default function ItineraryPlanner() {
                 <button
                   type="button"
                   onClick={() => setObStep("recommendations")}
-                  className="flex-1 h-12 rounded-full border border-white/[0.1] text-sm text-white/50 hover:text-white/80 transition-colors"
+                  className="flex-1 h-12 rounded-full border border-gray-200 text-sm text-gray-500 hover:text-gray-700 transition-colors"
                 >
                   Back
                 </button>
@@ -2252,7 +2252,7 @@ export default function ItineraryPlanner() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-6">
 
         {/* ── Tab bar ── */}
-        <div className="flex gap-0 border-b border-white/[0.07] mb-5 overflow-x-auto">
+        <div className="flex gap-0 border-b border-gray-200 mb-5 overflow-x-auto">
           {([
             { key: "itinerary",       label: "Itinerary" },
             { key: "preferences",     label: "Preferences" },
@@ -2271,8 +2271,8 @@ export default function ItineraryPlanner() {
               }}
               className={`shrink-0 px-5 py-2.5 text-sm font-medium border-b-2 -mb-px transition-colors ${
                 activeTab === key
-                  ? "border-lantern-mint text-white"
-                  : "border-transparent text-white/35 hover:text-white/65"
+                  ? "border-teal-400 text-gray-900"
+                  : "border-transparent text-gray-400 hover:text-gray-600"
               }`}
             >
               {label}
@@ -2282,13 +2282,13 @@ export default function ItineraryPlanner() {
 
         {/* ── Always-visible: trip + flight strip ── */}
         {(obDestRef.current || primaryCity) && (
-          <div className="flex flex-wrap items-start justify-between gap-3 pb-4 mb-5 border-b border-white/[0.05]">
+          <div className="flex flex-wrap items-start justify-between gap-3 pb-4 mb-5 border-b border-gray-100">
             <div className="flex flex-wrap items-center gap-4">
               <div>
-                <p className="text-sm font-semibold text-white">
+                <p className="text-sm font-semibold text-gray-900">
                   {obDestRef.current || trip.cities.map((c) => c.city).filter(Boolean).join(" → ")}
                 </p>
-                <p className="text-[11px] text-white/35 mt-0.5">
+                <p className="text-[11px] text-gray-400 mt-0.5">
                   {[
                     trip.startDate ? `${shortDate(trip.startDate)} – ${shortDate(endDate)}` : null,
                     `${totalDays}d`,
@@ -2297,7 +2297,7 @@ export default function ItineraryPlanner() {
                 </p>
               </div>
               {selectedFlight && (
-                <div className="flex items-center gap-2 rounded-lg border border-white/[0.07] bg-white/[0.02] px-3 py-1.5">
+                <div className="flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-3 py-1.5">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={`https://www.gstatic.com/flights/airline_logos/70px/${selectedFlight.airlineCode}.png`}
@@ -2307,17 +2307,17 @@ export default function ItineraryPlanner() {
                     className="rounded object-contain shrink-0 opacity-70"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
                   />
-                  <span className="text-[11px] font-mono text-white/40">{selectedFlight.origin}</span>
-                  <span className="text-white/20 text-xs">→</span>
-                  <span className="text-[11px] font-mono text-white/40">{selectedFlight.destination}</span>
-                  <span className="text-white/15">·</span>
-                  <span className="text-[11px] text-white/35">{fmt24(selectedFlight.departTime)}</span>
+                  <span className="text-[11px] font-mono text-gray-500">{selectedFlight.origin}</span>
+                  <span className="text-gray-300 text-xs">→</span>
+                  <span className="text-[11px] font-mono text-gray-500">{selectedFlight.destination}</span>
+                  <span className="text-gray-300">·</span>
+                  <span className="text-[11px] text-gray-400">{fmt24(selectedFlight.departTime)}</span>
                 </div>
               )}
               {selectedHotel && (
-                <div className="flex items-center gap-1.5 rounded-lg border border-white/[0.07] bg-white/[0.02] px-3 py-1.5">
-                  <span className="text-[10px] text-white/25">🏨</span>
-                  <span className="text-[11px] text-white/45 truncate max-w-[160px]">{selectedHotel.name}</span>
+                <div className="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-gray-50 px-3 py-1.5">
+                  <span className="text-[10px] text-gray-300">🏨</span>
+                  <span className="text-[11px] text-gray-500 truncate max-w-[160px]">{selectedHotel.name}</span>
                 </div>
               )}
             </div>
@@ -2331,7 +2331,7 @@ export default function ItineraryPlanner() {
                   setEditTransit(trip.transit);
                   setEditTripModal(true);
                 }}
-                className="text-[11px] text-white/35 hover:text-lantern-mint transition-colors"
+                className="text-[11px] text-gray-400 hover:text-teal-600 transition-colors"
               >
                 Edit trip
               </button>
@@ -2342,7 +2342,7 @@ export default function ItineraryPlanner() {
                     const cities = trip.cities.map((c) => c.city).filter(Boolean).join(",");
                     window.location.href = "/activities?cities=" + encodeURIComponent(cities);
                   }}
-                  className="text-[11px] text-lantern-mint/60 hover:text-lantern-mint transition-colors"
+                  className="text-[11px] text-teal-500 hover:text-teal-600 transition-colors"
                 >
                   + Add activities
                 </button>
@@ -2350,7 +2350,7 @@ export default function ItineraryPlanner() {
               <button
                 type="button"
                 onClick={startNewTrip}
-                className="text-[11px] text-white/25 hover:text-red-400 transition-colors"
+                className="text-[11px] text-gray-300 hover:text-red-400 transition-colors"
               >
                 New trip
               </button>
@@ -2381,7 +2381,7 @@ export default function ItineraryPlanner() {
               )}
             </button>
             {(!primaryCity || !trip.startDate) && !isGenerating && (
-              <p className="text-[11px] text-white/25">
+              <p className="text-[11px] text-gray-300">
                 {!primaryCity ? "Enter a destination in Preferences." : "Add a start date in Preferences."}
               </p>
             )}
@@ -2389,7 +2389,7 @@ export default function ItineraryPlanner() {
               <button
                 type="button"
                 onClick={() => { setSaveAsName(""); setSaveAsModal(true); }}
-                className="h-9 rounded-full border border-white/[0.1] px-4 text-xs font-medium text-white/40 hover:text-white/70 hover:border-white/20 transition-colors"
+                className="h-9 rounded-full border border-gray-200 px-4 text-xs font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 transition-colors"
               >
                 Save as…
               </button>
@@ -2401,14 +2401,14 @@ export default function ItineraryPlanner() {
                 <button
                   type="button"
                   onClick={() => setLoadDropdown((v) => !v)}
-                  className="h-9 rounded-full border border-white/[0.1] px-4 text-xs font-medium text-white/40 hover:text-white/70 hover:border-white/20 transition-colors"
+                  className="h-9 rounded-full border border-gray-200 px-4 text-xs font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 transition-colors"
                 >
                   Load trip ▾
                 </button>
                 {loadDropdown && (
-                  <div className="absolute right-0 top-full mt-1 bg-[#0D1019] border border-white/[0.1] rounded-xl shadow-2xl min-w-[200px] overflow-hidden">
+                  <div className="absolute right-0 top-full mt-1 bg-gray-50 border border-gray-200 rounded-xl shadow-2xl min-w-[200px] overflow-hidden">
                     {tripList.length === 0 ? (
-                      <p className="px-4 py-3 text-xs text-white/30">No saved trips</p>
+                      <p className="px-4 py-3 text-xs text-gray-400">No saved trips</p>
                     ) : (
                       tripList.map((t) => (
                         <button
@@ -2422,12 +2422,12 @@ export default function ItineraryPlanner() {
                             setCurrentTripId(t.id);
                             setLoadDropdown(false);
                           }}
-                          className={`w-full text-left flex items-center justify-between px-4 py-2.5 text-xs transition-colors hover:bg-white/[0.05] ${
-                            t.id === activeTripId ? "text-lantern-mint" : "text-white/60"
+                          className={`w-full text-left flex items-center justify-between px-4 py-2.5 text-xs transition-colors hover:bg-gray-100 ${
+                            t.id === activeTripId ? "text-teal-600" : "text-gray-600"
                           }`}
                         >
                           <span>{t.name}</span>
-                          {t.id === activeTripId && <span className="text-white/25 text-[10px]">current</span>}
+                          {t.id === activeTripId && <span className="text-gray-300 text-[10px]">current</span>}
                         </button>
                       ))
                     )}
@@ -2437,7 +2437,7 @@ export default function ItineraryPlanner() {
               <button
                 type="button"
                 onClick={clearTrip}
-                className="h-9 rounded-full border border-white/[0.06] px-4 text-xs font-medium text-white/30 hover:text-red-400 hover:border-red-400/20 transition-colors"
+                className="h-9 rounded-full border border-gray-200 px-4 text-xs font-medium text-gray-400 hover:text-red-400 hover:border-red-400/20 transition-colors"
               >
                 Clear trip
               </button>
@@ -2446,12 +2446,12 @@ export default function ItineraryPlanner() {
 
           {/* ── Itinerary output ── */}
           {!hasItinerary && !isGenerating && genStatus !== "error" && (
-            <div className="flex flex-col items-center justify-center min-h-[480px] rounded-2xl border border-white/[0.06] bg-white/[0.01] p-10 text-center">
-              <div className="h-14 w-14 rounded-2xl border border-white/[0.1] bg-white/[0.03] flex items-center justify-center text-2xl mb-5">
+            <div className="flex flex-col items-center justify-center min-h-[480px] rounded-2xl border border-gray-200 bg-white p-10 text-center">
+              <div className="h-14 w-14 rounded-2xl border border-gray-200 bg-gray-50 flex items-center justify-center text-2xl mb-5">
                 ✦
               </div>
-              <h1 className="text-2xl font-bold text-white mb-3">Build your itinerary</h1>
-              <p className="text-sm text-white/40 max-w-xs leading-relaxed">
+              <h1 className="text-2xl font-bold text-gray-900 mb-3">Build your itinerary</h1>
+              <p className="text-sm text-gray-500 max-w-xs leading-relaxed">
                 {savedIds.length === 0
                   ? "Save places on the Activities page, fill in your trip details, then click Generate."
                   : activeActivityIds.length === 0
@@ -2463,7 +2463,7 @@ export default function ItineraryPlanner() {
               {savedIds.length === 0 && (
                 <Link
                   href="/activities"
-                  className="mt-6 inline-flex h-9 items-center gap-1.5 rounded-full border border-lantern-mint/30 bg-lantern-mint/[0.08] px-5 text-xs font-semibold text-lantern-mint hover:bg-lantern-mint/15 transition-colors"
+                  className="mt-6 inline-flex h-9 items-center gap-1.5 rounded-full border border-teal-200 bg-lantern-mint/[0.08] px-5 text-xs font-semibold text-teal-600 hover:bg-teal-50 transition-colors"
                 >
                   Browse activities →
                 </Link>
@@ -2472,21 +2472,21 @@ export default function ItineraryPlanner() {
           )}
 
           {isGenerating && (
-            <div className="flex flex-col items-center justify-center min-h-[480px] rounded-2xl border border-white/[0.06] bg-white/[0.01] p-10 text-center">
-              <div className="h-10 w-10 rounded-full border-2 border-white/10 border-t-lantern-mint animate-spin mb-6" />
-              <p className="text-sm text-white/50">Clustering activities by geography…</p>
-              <p className="text-xs text-white/25 mt-2">Usually under a second</p>
+            <div className="flex flex-col items-center justify-center min-h-[480px] rounded-2xl border border-gray-200 bg-white p-10 text-center">
+              <div className="h-10 w-10 rounded-full border-2 border-gray-200 border-t-lantern-mint animate-spin mb-6" />
+              <p className="text-sm text-gray-500">Clustering activities by geography…</p>
+              <p className="text-xs text-gray-300 mt-2">Usually under a second</p>
             </div>
           )}
 
           {genStatus === "error" && !hasItinerary && (
             <div className="flex flex-col items-center justify-center min-h-[480px] rounded-2xl border border-red-500/20 bg-red-500/[0.03] p-10 text-center">
               <p className="text-sm font-semibold text-red-400 mb-2">Failed to generate itinerary</p>
-              <p className="text-xs text-white/30 mb-6">{genError}</p>
+              <p className="text-xs text-gray-400 mb-6">{genError}</p>
               <button
                 type="button"
                 onClick={generate}
-                className="text-xs text-lantern-mint border border-lantern-mint/30 rounded-lg px-4 py-2 hover:bg-lantern-mint/10 transition-colors"
+                className="text-xs text-teal-600 border border-teal-200 rounded-lg px-4 py-2 hover:bg-teal-50 transition-colors"
               >
                 Try again
               </button>
@@ -2497,10 +2497,10 @@ export default function ItineraryPlanner() {
             <div>
               <div className="flex items-start justify-between gap-4 mb-6">
                 <div>
-                  <h1 className="text-xl font-bold text-white">
+                  <h1 className="text-xl font-bold text-gray-900">
                     {trip.cities.map((c) => c.city).filter(Boolean).join(" → ") || "Your trip"}
                   </h1>
-                  <p className="text-sm text-white/40 mt-1">
+                  <p className="text-sm text-gray-500 mt-1">
                     {trip.startDate && `${shortDate(trip.startDate)} – ${shortDate(endDate)} · `}
                     {trip.itinerary.days.length} {trip.itinerary.days.length === 1 ? "day" : "days"} ·{" "}
                     {activeActivityIds.length - trip.itinerary.meta.droppedActivities.length} of {activeActivityIds.length}{" "}
@@ -2510,7 +2510,7 @@ export default function ItineraryPlanner() {
                     )}
                   </p>
                   {trip.itineraryGeneratedAt && (
-                    <p className="text-[11px] text-white/20 mt-1">
+                    <p className="text-[11px] text-gray-300 mt-1">
                       Generated {new Date(trip.itineraryGeneratedAt).toLocaleString()}
                     </p>
                   )}
@@ -2522,7 +2522,7 @@ export default function ItineraryPlanner() {
                   <button
                     type="button"
                     onClick={() => setCompactView((v) => !v)}
-                    className="text-[11px] text-white/35 hover:text-white/65 border border-white/10 rounded-lg px-3 py-1.5 transition-colors"
+                    className="text-[11px] text-gray-400 hover:text-gray-600 border border-gray-200 rounded-lg px-3 py-1.5 transition-colors"
                   >
                     {compactView ? "Detailed" : "Compact"}
                   </button>
@@ -2568,10 +2568,10 @@ export default function ItineraryPlanner() {
                       }}
                       className={`shrink-0 rounded-xl border px-4 py-2.5 text-xs font-semibold transition-colors ${
                         isDropTarget
-                          ? "border-lantern-mint bg-lantern-mint/20 text-lantern-mint scale-105"
+                          ? "border-teal-400 bg-teal-100 text-teal-600 scale-105"
                           : selectedDay === i
-                          ? "border-lantern-mint/50 bg-lantern-mint/10 text-lantern-mint"
-                          : "border-white/[0.08] bg-white/[0.02] text-white/40 hover:text-white/65"
+                          ? "border-teal-400 bg-teal-50 text-teal-600"
+                          : "border-gray-200 bg-gray-50 text-gray-500 hover:text-gray-600"
                       }`}
                     >
                       <span className="block">Day {i + 1}</span>
@@ -2585,7 +2585,7 @@ export default function ItineraryPlanner() {
               </div>
 
               {trip.itinerary.days[selectedDay] && (
-                <div className="rounded-2xl border border-white/[0.08] bg-white/[0.01] p-6">
+                <div className="rounded-2xl border border-gray-200 bg-white p-6">
                   <DayView
                     day={trip.itinerary.days[selectedDay]}
                     savedMeta={savedMeta}
@@ -2733,7 +2733,7 @@ export default function ItineraryPlanner() {
                   >
                     <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
                     <div
-                      className="relative z-10 w-full max-w-lg mx-4 mb-4 sm:mb-0 rounded-3xl border border-white/10 bg-[#0D1019] overflow-hidden shadow-2xl max-h-[90vh] flex flex-col"
+                      className="relative z-10 w-full max-w-lg mx-4 mb-4 sm:mb-0 rounded-3xl border border-gray-200 bg-gray-50 overflow-hidden shadow-2xl max-h-[90vh] flex flex-col"
                       onClick={(e) => e.stopPropagation()}
                     >
                       {/* Photo carousel — prefer Places photos, fall back to savedMeta photoRef */}
@@ -2749,18 +2749,18 @@ export default function ItineraryPlanner() {
                               className="w-full h-full object-cover"
                               alt={detailSlot.title}
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#0D1019] via-[#0D1019]/20 to-transparent" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-gray-50 via-[#0D1019]/20 to-transparent" />
                             {photos.length > 1 && (
                               <>
                                 <button type="button" onClick={() => setDetailActivePhoto((n) => Math.max(0, n - 1))} disabled={detailActivePhoto === 0}
-                                  className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all disabled:opacity-20">
+                                  className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/50 border border-gray-200 flex items-center justify-center text-gray-700 hover:text-gray-900 transition-all disabled:opacity-20">
                                   ‹
                                 </button>
                                 <button type="button" onClick={() => setDetailActivePhoto((n) => Math.min(photos.length - 1, n + 1))} disabled={detailActivePhoto === photos.length - 1}
-                                  className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all disabled:opacity-20">
+                                  className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/50 border border-gray-200 flex items-center justify-center text-gray-700 hover:text-gray-900 transition-all disabled:opacity-20">
                                   ›
                                 </button>
-                                <div className="absolute bottom-2 right-3 bg-black/55 rounded-full px-2 py-0.5 text-[10px] text-white/70">
+                                <div className="absolute bottom-2 right-3 bg-black/55 rounded-full px-2 py-0.5 text-[10px] text-gray-700">
                                   {detailActivePhoto + 1} / {photos.length}
                                 </div>
                               </>
@@ -2773,28 +2773,28 @@ export default function ItineraryPlanner() {
                         <div className="p-6">
                           <button
                             type="button"
-                            className="absolute top-4 right-4 z-10 text-white/40 hover:text-white/80 transition-colors text-lg leading-none"
+                            className="absolute top-4 right-4 z-10 text-gray-500 hover:text-gray-700 transition-colors text-lg leading-none"
                             onClick={() => setDetailSlot(null)}
                           >
                             ✕
                           </button>
 
                           {/* Title + meta */}
-                          <p className="text-[11px] font-mono text-white/30 mb-1">
+                          <p className="text-[11px] font-mono text-gray-400 mb-1">
                             {formatTime(detailSlot.startMinutes)} — {formatDuration(detailSlot.durationMinutes)}
                           </p>
-                          <h3 className="text-lg font-bold text-white mb-2">{detailSlot.title}</h3>
+                          <h3 className="text-lg font-bold text-gray-900 mb-2">{detailSlot.title}</h3>
                           <div className="flex items-center flex-wrap gap-2 mb-3">
                             {(modalPlaceDetail?.address ?? dMeta?.neighborhood) && (
-                              <span className="text-xs text-white/40">{modalPlaceDetail?.address ?? dMeta?.neighborhood}</span>
+                              <span className="text-xs text-gray-500">{modalPlaceDetail?.address ?? dMeta?.neighborhood}</span>
                             )}
                             {(modalPlaceDetail?.rating ?? (dMeta?.rating != null && dMeta.rating > 0 ? dMeta.rating : null)) != null && (
                               <>
-                                <span className="text-white/20">·</span>
-                                <span className="text-xs text-lantern-gold">
+                                <span className="text-gray-300">·</span>
+                                <span className="text-xs text-amber-600">
                                   ★ {(modalPlaceDetail?.rating ?? dMeta?.rating)!.toFixed(1)}
                                   {modalPlaceDetail?.userRatingCount && (
-                                    <span className="text-white/30 ml-1">({modalPlaceDetail.userRatingCount.toLocaleString()})</span>
+                                    <span className="text-gray-400 ml-1">({modalPlaceDetail.userRatingCount.toLocaleString()})</span>
                                   )}
                                 </span>
                               </>
@@ -2808,25 +2808,25 @@ export default function ItineraryPlanner() {
 
                           {/* Editorial summary / why visit */}
                           {(modalPlaceDetail?.editorialSummary ?? detailSlot.explanation) && (
-                            <p className="text-sm text-white/50 leading-relaxed mb-3">
+                            <p className="text-sm text-gray-500 leading-relaxed mb-3">
                               {modalPlaceDetail?.editorialSummary ?? detailSlot.explanation}
                             </p>
                           )}
 
                           {/* Loading indicator */}
                           {modalDetailLoading && (
-                            <p className="text-[10px] text-white/25 mb-2">Loading place details…</p>
+                            <p className="text-[10px] text-gray-300 mb-2">Loading place details…</p>
                           )}
 
                           {/* Hours */}
                           {modalPlaceDetail?.weekdayDescriptions && modalPlaceDetail.weekdayDescriptions.length > 0 && (
                             <details className="mb-2">
-                              <summary className="text-[11px] text-white/40 cursor-pointer select-none">
+                              <summary className="text-[11px] text-gray-500 cursor-pointer select-none">
                                 {modalPlaceDetail.openNow === false ? "🔴 Closed now" : modalPlaceDetail.openNow ? "🟢 Open now" : "⏰ Opening hours"}
                               </summary>
                               <ul className="mt-1 space-y-0.5 pl-4">
                                 {modalPlaceDetail.weekdayDescriptions.map((line, i) => (
-                                  <li key={i} className="text-[10px] text-white/40">{line}</li>
+                                  <li key={i} className="text-[10px] text-gray-500">{line}</li>
                                 ))}
                               </ul>
                             </details>
@@ -2836,13 +2836,13 @@ export default function ItineraryPlanner() {
                           {(modalPlaceDetail?.phone || modalPlaceDetail?.website || modalPlaceDetail?.googleMapsUri) && (
                             <div className="flex flex-wrap gap-x-4 gap-y-1 mb-3">
                               {modalPlaceDetail.phone && (
-                                <a href={`tel:${modalPlaceDetail.phone}`} className="text-[11px] text-white/40 hover:text-white/70 transition-colors">
+                                <a href={`tel:${modalPlaceDetail.phone}`} className="text-[11px] text-gray-500 hover:text-gray-700 transition-colors">
                                   📞 {modalPlaceDetail.phone}
                                 </a>
                               )}
                               {modalPlaceDetail.website && (
                                 <a href={modalPlaceDetail.website} target="_blank" rel="noopener noreferrer"
-                                  className="text-[11px] text-lantern-blue/80 hover:text-lantern-blue truncate max-w-[200px] transition-colors">
+                                  className="text-[11px] text-blue-600 hover:text-blue-600 truncate max-w-[200px] transition-colors">
                                   🌐 {modalPlaceDetail.website.replace(/^https?:\/\/(www\.)?/, "")}
                                 </a>
                               )}
@@ -2850,7 +2850,7 @@ export default function ItineraryPlanner() {
                                 <a
                                   href={modalPlaceDetail?.googleMapsUri ?? `https://maps.google.com/?q=${encodeURIComponent(detailSlot.title)}`}
                                   target="_blank" rel="noopener noreferrer"
-                                  className="text-[11px] text-lantern-blue/80 hover:text-lantern-blue transition-colors">
+                                  className="text-[11px] text-blue-600 hover:text-blue-600 transition-colors">
                                   🗺 Google Maps
                                 </a>
                               )}
@@ -2860,25 +2860,25 @@ export default function ItineraryPlanner() {
                           {/* Reviews */}
                           {modalPlaceDetail?.reviews && modalPlaceDetail.reviews.length > 0 && (
                             <div className="mb-4">
-                              <p className="text-[10px] font-semibold text-white/25 uppercase tracking-wider mb-2">Reviews</p>
+                              <p className="text-[10px] font-semibold text-gray-300 uppercase tracking-wider mb-2">Reviews</p>
                               <div className="space-y-3">
                                 {modalPlaceDetail.reviews.map((r, i) => (
-                                  <div key={i} className="rounded-lg bg-white/[0.03] border border-white/[0.05] p-3">
+                                  <div key={i} className="rounded-lg bg-gray-50 border border-gray-100 p-3">
                                     <div className="flex items-center gap-2 mb-1.5">
                                       {r.authorPhotoUri && (
                                         // eslint-disable-next-line @next/next/no-img-element
                                         <img src={r.authorPhotoUri} alt={r.authorName ?? ""} className="w-5 h-5 rounded-full object-cover" />
                                       )}
-                                      <span className="text-[11px] font-medium text-white/60">{r.authorName ?? "Anonymous"}</span>
+                                      <span className="text-[11px] font-medium text-gray-600">{r.authorName ?? "Anonymous"}</span>
                                       {r.rating != null && (
-                                        <span className="text-[10px] text-lantern-gold ml-auto">{"★".repeat(r.rating)}{"☆".repeat(5 - r.rating)}</span>
+                                        <span className="text-[10px] text-amber-600 ml-auto">{"★".repeat(r.rating)}{"☆".repeat(5 - r.rating)}</span>
                                       )}
                                     </div>
                                     {r.text && (
-                                      <p className="text-[11px] text-white/40 leading-relaxed line-clamp-3">{r.text}</p>
+                                      <p className="text-[11px] text-gray-500 leading-relaxed line-clamp-3">{r.text}</p>
                                     )}
                                     {r.timeAgo && (
-                                      <p className="text-[10px] text-white/20 mt-1">{r.timeAgo}</p>
+                                      <p className="text-[10px] text-gray-300 mt-1">{r.timeAgo}</p>
                                     )}
                                   </div>
                                 ))}
@@ -2887,20 +2887,20 @@ export default function ItineraryPlanner() {
                           )}
 
                           {/* Notes */}
-                          <div className="mt-2 border-t border-white/[0.06] pt-4">
+                          <div className="mt-2 border-t border-gray-200 pt-4">
                             <div className="flex items-center justify-between mb-2">
-                              <span className="text-[11px] font-semibold text-white/30 uppercase tracking-wider">Notes</span>
+                              <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Notes</span>
                               {noteEdit === null ? (
                                 <button
                                   type="button"
                                   onClick={() => setNoteEdit(detailSlot.note ?? "")}
-                                  className="text-[11px] text-white/40 hover:text-lantern-mint transition-colors"
+                                  className="text-[11px] text-gray-500 hover:text-teal-600 transition-colors"
                                 >
                                   {detailSlot.note ? "Edit" : "+ Add note"}
                                 </button>
                               ) : (
                                 <div className="flex gap-3">
-                                  <button type="button" onClick={() => setNoteEdit(null)} className="text-[11px] text-white/40 hover:text-white/70 transition-colors">Cancel</button>
+                                  <button type="button" onClick={() => setNoteEdit(null)} className="text-[11px] text-gray-500 hover:text-gray-700 transition-colors">Cancel</button>
                                   <button
                                     type="button"
                                     onClick={() => {
@@ -2918,7 +2918,7 @@ export default function ItineraryPlanner() {
                                       setDetailSlot(updated);
                                       setNoteEdit(null);
                                     }}
-                                    className="text-[11px] text-lantern-mint font-semibold hover:opacity-80 transition-opacity"
+                                    className="text-[11px] text-teal-600 font-semibold hover:opacity-80 transition-opacity"
                                   >
                                     Save
                                   </button>
@@ -2927,9 +2927,9 @@ export default function ItineraryPlanner() {
                             </div>
                             {noteEdit === null ? (
                               detailSlot.note ? (
-                                <p className="text-sm text-white/50 leading-relaxed whitespace-pre-wrap">{detailSlot.note}</p>
+                                <p className="text-sm text-gray-500 leading-relaxed whitespace-pre-wrap">{detailSlot.note}</p>
                               ) : (
-                                <p className="text-[12px] text-white/20 italic">No notes yet</p>
+                                <p className="text-[12px] text-gray-300 italic">No notes yet</p>
                               )
                             ) : (
                               <textarea
@@ -2938,20 +2938,20 @@ export default function ItineraryPlanner() {
                                 onChange={(e) => setNoteEdit(e.target.value)}
                                 placeholder="Add your notes…"
                                 rows={3}
-                                className="w-full bg-white/[0.04] border border-white/[0.12] rounded-lg px-3 py-2 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-lantern-mint/50 resize-none"
+                                className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 placeholder-white/20 focus:outline-none focus:border-teal-400 resize-none"
                               />
                             )}
                           </div>
 
                           {/* Duration */}
-                          <div className="mt-4 border-t border-white/[0.06] pt-4">
+                          <div className="mt-4 border-t border-gray-200 pt-4">
                             <div className="flex items-center justify-between mb-2">
-                              <span className="text-[11px] font-semibold text-white/30 uppercase tracking-wider">Duration</span>
+                              <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Duration</span>
                               {durationEdit === null ? (
-                                <button type="button" onClick={() => setDurationEdit(detailSlot.durationMinutes)} className="text-[11px] text-white/40 hover:text-lantern-mint transition-colors">Edit</button>
+                                <button type="button" onClick={() => setDurationEdit(detailSlot.durationMinutes)} className="text-[11px] text-gray-500 hover:text-teal-600 transition-colors">Edit</button>
                               ) : (
                                 <div className="flex gap-3">
-                                  <button type="button" onClick={() => setDurationEdit(null)} className="text-[11px] text-white/40 hover:text-white/70 transition-colors">Cancel</button>
+                                  <button type="button" onClick={() => setDurationEdit(null)} className="text-[11px] text-gray-500 hover:text-gray-700 transition-colors">Cancel</button>
                                   <button
                                     type="button"
                                     onClick={() => {
@@ -2970,7 +2970,7 @@ export default function ItineraryPlanner() {
                                       setDetailSlot(updated);
                                       setDurationEdit(null);
                                     }}
-                                    className="text-[11px] text-lantern-mint font-semibold hover:opacity-80 transition-opacity"
+                                    className="text-[11px] text-teal-600 font-semibold hover:opacity-80 transition-opacity"
                                   >
                                     Save
                                   </button>
@@ -2978,15 +2978,15 @@ export default function ItineraryPlanner() {
                               )}
                             </div>
                             {durationEdit === null ? (
-                              <p className="text-sm text-white/50">{detailSlot.durationMinutes}m</p>
+                              <p className="text-sm text-gray-500">{detailSlot.durationMinutes}m</p>
                             ) : (
                               <div className="flex items-center gap-2">
                                 <input
                                   autoFocus type="number" min={15} max={480} step={15} value={durationEdit}
                                   onChange={(e) => setDurationEdit(Number(e.target.value))}
-                                  className="w-28 bg-white/[0.04] border border-white/[0.12] rounded-lg px-3 py-2 text-sm text-white/80 focus:outline-none focus:border-lantern-mint/50 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
+                                  className="w-28 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:border-teal-400 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
                                 />
-                                <span className="text-sm text-white/30">minutes</span>
+                                <span className="text-sm text-gray-400">minutes</span>
                               </div>
                             )}
                           </div>
@@ -2995,7 +2995,7 @@ export default function ItineraryPlanner() {
                             <a
                               href={`https://maps.google.com/?q=${encodeURIComponent(detailSlot.title)}`}
                               target="_blank" rel="noopener noreferrer"
-                              className="mt-4 inline-flex items-center gap-1.5 text-xs text-lantern-blue hover:text-white transition-colors"
+                              className="mt-4 inline-flex items-center gap-1.5 text-xs text-blue-600 hover:text-gray-900 transition-colors"
                             >
                               Open in Google Maps →
                             </a>
@@ -3008,11 +3008,11 @@ export default function ItineraryPlanner() {
               })()}
 
 {trip.itinerary.meta.conflicts.length > 0 && (
-                <div className="mt-3 rounded-xl border border-white/[0.07] bg-white/[0.01] px-5 py-4">
-                  <p className="text-xs font-semibold text-white/30 mb-2">Notes</p>
+                <div className="mt-3 rounded-xl border border-gray-200 bg-white px-5 py-4">
+                  <p className="text-xs font-semibold text-gray-400 mb-2">Notes</p>
                   <ul className="space-y-1">
                     {trip.itinerary.meta.conflicts.map((c, i) => (
-                      <li key={i} className="text-xs text-white/30">{c.description}</li>
+                      <li key={i} className="text-xs text-gray-400">{c.description}</li>
                     ))}
                   </ul>
                 </div>
@@ -3095,9 +3095,9 @@ export default function ItineraryPlanner() {
 
           if (dropped.length === 0) {
             return (
-              <div className="flex flex-col items-center justify-center min-h-[220px] rounded-2xl border border-white/[0.06] bg-white/[0.01] p-10 text-center">
-                <p className="text-sm font-semibold text-white mb-1">All activities scheduled</p>
-                <p className="text-xs text-white/35">Every saved place made it into the itinerary.</p>
+              <div className="flex flex-col items-center justify-center min-h-[220px] rounded-2xl border border-gray-200 bg-white p-10 text-center">
+                <p className="text-sm font-semibold text-gray-900 mb-1">All activities scheduled</p>
+                <p className="text-xs text-gray-400">Every saved place made it into the itinerary.</p>
               </div>
             );
           }
@@ -3105,17 +3105,17 @@ export default function ItineraryPlanner() {
           return (
             <div className="space-y-2 max-w-2xl">
               <div className="mb-4">
-                <h2 className="text-base font-semibold text-white">{dropped.length} {dropped.length === 1 ? "activity" : "activities"} didn&apos;t fit</h2>
-                <p className="text-xs text-white/35 mt-1">Click &ldquo;+ Add&rdquo; and Claude will suggest the best placement.</p>
+                <h2 className="text-base font-semibold text-gray-900">{dropped.length} {dropped.length === 1 ? "activity" : "activities"} didn&apos;t fit</h2>
+                <p className="text-xs text-gray-400 mt-1">Click &ldquo;+ Add&rdquo; and Claude will suggest the best placement.</p>
               </div>
               {dropped.map((d, i) => (
                 <div
                   key={i}
-                  className="flex items-center justify-between gap-3 rounded-lg border border-white/[0.07] bg-white/[0.02] px-3 py-2.5"
+                  className="flex items-center justify-between gap-3 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2.5"
                 >
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium text-white/80 truncate">{d.title}</p>
-                    <p className="text-[10px] text-white/35 mt-0.5">
+                    <p className="text-xs font-medium text-gray-700 truncate">{d.title}</p>
+                    <p className="text-[10px] text-gray-400 mt-0.5">
                       {d.diagnostic?.activityDuration ? `${d.diagnostic.activityDuration}m` : ""}
                     </p>
                   </div>
@@ -3141,7 +3141,7 @@ export default function ItineraryPlanner() {
                         setAddActivityModal({ activity: d, placement: { cannotFit: true, explanation: "Analysis failed" } });
                       }
                     }}
-                    className="shrink-0 px-3 py-1.5 rounded-lg border border-lantern-mint/30 text-lantern-mint text-xs hover:bg-lantern-mint/10 transition-colors"
+                    className="shrink-0 px-3 py-1.5 rounded-lg border border-teal-200 text-teal-600 text-xs hover:bg-teal-50 transition-colors"
                   >
                     + Add
                   </button>
@@ -3204,8 +3204,8 @@ export default function ItineraryPlanner() {
         if (!placement) {
           return (
             <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
-              <div className="bg-lantern-dark border border-white/[0.1] rounded-2xl p-8 max-w-md w-full mx-4">
-                <p className="text-white text-center">Claude is analyzing placement options...</p>
+              <div className="bg-gray-50 border border-gray-200 rounded-2xl p-8 max-w-md w-full mx-4">
+                <p className="text-gray-900 text-center">Claude is analyzing placement options...</p>
               </div>
             </div>
           );
@@ -3215,13 +3215,13 @@ export default function ItineraryPlanner() {
         if (placement.cannotFit) {
           return (
             <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
-              <div className="bg-lantern-dark border border-white/[0.1] rounded-2xl p-8 max-w-md w-full mx-4">
-                <p className="text-white font-semibold mb-2">Cannot fit this activity</p>
-                <p className="text-white/60 text-sm mb-6">{placement.explanation}</p>
+              <div className="bg-gray-50 border border-gray-200 rounded-2xl p-8 max-w-md w-full mx-4">
+                <p className="text-gray-900 font-semibold mb-2">Cannot fit this activity</p>
+                <p className="text-gray-600 text-sm mb-6">{placement.explanation}</p>
                 <button
                   type="button"
                   onClick={() => setAddActivityModal(null)}
-                  className="w-full px-4 py-2 bg-lantern-mint/10 border border-lantern-mint/30 text-lantern-mint rounded-lg hover:bg-lantern-mint/20 transition-colors"
+                  className="w-full px-4 py-2 bg-teal-50 border border-teal-200 text-teal-600 rounded-lg hover:bg-teal-100 transition-colors"
                 >
                   Close
                 </button>
@@ -3232,17 +3232,17 @@ export default function ItineraryPlanner() {
 
         return (
           <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-            <div className="bg-lantern-dark border border-white/[0.1] rounded-2xl max-w-md w-full max-h-[80vh] overflow-y-auto">
-              <div className="p-6 border-b border-white/[0.1]">
+            <div className="bg-gray-50 border border-gray-200 rounded-2xl max-w-md w-full max-h-[80vh] overflow-y-auto">
+              <div className="p-6 border-b border-gray-200">
                 <div className="flex items-start justify-between">
                   <div>
-                    <h2 className="text-white font-semibold">Add to itinerary</h2>
-                    <p className="text-white/40 text-sm mt-1">{activity.title} · {durMin}m</p>
+                    <h2 className="text-gray-900 font-semibold">Add to itinerary</h2>
+                    <p className="text-gray-500 text-sm mt-1">{activity.title} · {durMin}m</p>
                   </div>
                   <button
                     type="button"
                     onClick={() => setAddActivityModal(null)}
-                    className="text-white/40 hover:text-white"
+                    className="text-gray-500 hover:text-gray-900"
                   >
                     ✕
                   </button>
@@ -3252,16 +3252,16 @@ export default function ItineraryPlanner() {
               <div className="p-6 space-y-3">
                 {placement.bestFitDays && placement.bestFitDays.length > 0 && (
                   <div>
-                    <p className="text-white/40 text-xs font-semibold uppercase mb-2">Best Options</p>
+                    <p className="text-gray-500 text-xs font-semibold uppercase mb-2">Best Options</p>
                     {placement.bestFitDays.map((suggestion, idx) => (
                       <button
                         key={idx}
                         type="button"
                         onClick={() => addActivityToDay(suggestion.dayIndex)}
-                        className="w-full text-left p-4 rounded-lg border border-lantern-mint/30 bg-white/[0.02] hover:bg-lantern-mint/10 hover:border-lantern-mint/50 transition-colors mb-2"
+                        className="w-full text-left p-4 rounded-lg border border-teal-200 bg-gray-50 hover:bg-teal-50 hover:border-teal-400 transition-colors mb-2"
                       >
-                        <p className="text-white font-semibold">Day {suggestion.dayIndex + 1} · {suggestion.city}</p>
-                        <p className="text-lantern-mint text-sm mt-1">{suggestion.reason}</p>
+                        <p className="text-gray-900 font-semibold">Day {suggestion.dayIndex + 1} · {suggestion.city}</p>
+                        <p className="text-teal-600 text-sm mt-1">{suggestion.reason}</p>
                       </button>
                     ))}
                   </div>
@@ -3269,30 +3269,30 @@ export default function ItineraryPlanner() {
 
                 {placement.swapSuggestions && placement.swapSuggestions.length > 0 && (
                   <div>
-                    <p className="text-white/40 text-xs font-semibold uppercase mb-2">Or Swap With</p>
+                    <p className="text-gray-500 text-xs font-semibold uppercase mb-2">Or Swap With</p>
                     {placement.swapSuggestions.map((suggestion, idx) => (
                       <button
                         key={idx}
                         type="button"
                         onClick={() => addActivityToDay(suggestion.dayIndex, suggestion.replaceActivityTitle)}
-                        className="w-full text-left p-4 rounded-lg border border-yellow-500/30 bg-white/[0.02] hover:bg-yellow-500/10 hover:border-yellow-500/50 transition-colors mb-2"
+                        className="w-full text-left p-4 rounded-lg border border-yellow-500/30 bg-gray-50 hover:bg-yellow-500/10 hover:border-yellow-500/50 transition-colors mb-2"
                       >
-                        <p className="text-white font-semibold">Day {suggestion.dayIndex + 1} · {suggestion.city}</p>
+                        <p className="text-gray-900 font-semibold">Day {suggestion.dayIndex + 1} · {suggestion.city}</p>
                         <p className="text-yellow-400 text-sm mt-1">
                           Replace &ldquo;{suggestion.replaceActivityTitle}&rdquo; ({suggestion.replaceActivityDuration}m)
                         </p>
-                        <p className="text-white/40 text-xs mt-2">{suggestion.reason}</p>
+                        <p className="text-gray-500 text-xs mt-2">{suggestion.reason}</p>
                       </button>
                     ))}
                   </div>
                 )}
               </div>
 
-              <div className="p-4 border-t border-white/[0.1]">
+              <div className="p-4 border-t border-gray-200">
                 <button
                   type="button"
                   onClick={() => setAddActivityModal(null)}
-                  className="w-full px-4 py-2 bg-white/[0.05] border border-white/[0.1] text-white/60 rounded-lg hover:bg-white/[0.1] transition-colors"
+                  className="w-full px-4 py-2 bg-gray-100 border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors"
                 >
                   Cancel
                 </button>
@@ -3318,28 +3318,28 @@ export default function ItineraryPlanner() {
             onClick={() => setEditingTime(null)}
           >
             <div
-              className="bg-[#0D1019] border border-white/[0.12] rounded-2xl max-w-sm w-full p-6 shadow-2xl"
+              className="bg-gray-50 border border-gray-200 rounded-2xl max-w-sm w-full p-6 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h2 className="text-white font-semibold">Change start time</h2>
-                  <p className="text-white/50 text-sm mt-0.5 truncate max-w-[230px]">{editingTime.slot.title}</p>
+                  <h2 className="text-gray-900 font-semibold">Change start time</h2>
+                  <p className="text-gray-500 text-sm mt-0.5 truncate max-w-[230px]">{editingTime.slot.title}</p>
                 </div>
-                <button type="button" onClick={() => setEditingTime(null)} className="text-white/30 hover:text-white/70 transition-colors ml-3 shrink-0">✕</button>
+                <button type="button" onClick={() => setEditingTime(null)} className="text-gray-400 hover:text-gray-700 transition-colors ml-3 shrink-0">✕</button>
               </div>
 
-              <div className="flex items-center gap-3 mb-4 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.06]">
-                <span className="text-[11px] text-white/35 uppercase tracking-wider">Current</span>
-                <span className="text-white/60 font-mono text-sm">{formatTime(editingTime.slot.startMinutes)}</span>
+              <div className="flex items-center gap-3 mb-4 px-3 py-2 rounded-lg bg-gray-50 border border-gray-200">
+                <span className="text-[11px] text-gray-400 uppercase tracking-wider">Current</span>
+                <span className="text-gray-600 font-mono text-sm">{formatTime(editingTime.slot.startMinutes)}</span>
               </div>
 
-              <label className="block text-white/50 text-xs mb-2 uppercase tracking-wider">New time</label>
+              <label className="block text-gray-500 text-xs mb-2 uppercase tracking-wider">New time</label>
               <input
                 type="time"
                 value={editingTime.value}
                 onChange={(e) => setEditingTime((prev) => prev ? { ...prev, value: e.target.value } : null)}
-                className="w-full bg-white/[0.05] border border-white/[0.15] rounded-lg px-4 py-3 text-white text-xl font-mono focus:outline-none focus:border-lantern-mint/60 mb-3"
+                className="w-full bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 text-xl font-mono focus:outline-none focus:border-teal-400 mb-3"
                 autoFocus
               />
               {timeError && (
@@ -3350,7 +3350,7 @@ export default function ItineraryPlanner() {
                 <button
                   type="button"
                   onClick={() => setEditingTime(null)}
-                  className="flex-1 px-4 py-2.5 bg-white/[0.05] border border-white/[0.1] text-white/60 rounded-lg hover:bg-white/[0.1] transition-colors"
+                  className="flex-1 px-4 py-2.5 bg-gray-100 border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors"
                 >
                   Cancel
                 </button>
@@ -3424,24 +3424,24 @@ export default function ItineraryPlanner() {
         return (
           <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
                onClick={() => setQuickAddModal((m) => ({ ...m, open: false }))}>
-            <div className="bg-[#0D1019] border border-white/[0.1] rounded-2xl max-w-sm w-full shadow-2xl"
+            <div className="bg-gray-50 border border-gray-200 rounded-2xl max-w-sm w-full shadow-2xl"
                  onClick={(e) => e.stopPropagation()}>
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h2 className="text-white font-semibold text-sm">Add activity</h2>
-                    <p className="text-[11px] text-white/35 mt-0.5">{dayLabel}</p>
+                    <h2 className="text-gray-900 font-semibold text-sm">Add activity</h2>
+                    <p className="text-[11px] text-gray-400 mt-0.5">{dayLabel}</p>
                   </div>
                   <button type="button"
                     onClick={() => setQuickAddModal((m) => ({ ...m, open: false }))}
-                    className="text-white/40 hover:text-white/80 transition-colors w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/[0.06] text-xl leading-none">
+                    className="text-gray-500 hover:text-gray-700 transition-colors w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-50 text-xl leading-none">
                     ✕
                   </button>
                 </div>
 
                 <div className="space-y-4">
                   <div>
-                    <label className="text-xs text-white/40 block mb-1.5">Activity name</label>
+                    <label className="text-xs text-gray-500 block mb-1.5">Activity name</label>
                     <input
                       type="text"
                       autoFocus
@@ -3449,19 +3449,19 @@ export default function ItineraryPlanner() {
                       value={quickAddModal.activityName}
                       onChange={(e) => setQuickAddModal((m) => ({ ...m, activityName: e.target.value }))}
                       onKeyDown={(e) => { if (e.key === "Enter") commitQuickAdd(); }}
-                      className="w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-white text-sm placeholder:text-white/20 focus:border-lantern-mint/50 focus:outline-none"
+                      className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 text-sm placeholder:text-gray-300 focus:border-teal-400 focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label className="text-xs text-white/40 block mb-1.5">
-                      Duration — <span className="text-white/70">{quickAddModal.durationMinutes} min</span>
+                    <label className="text-xs text-gray-500 block mb-1.5">
+                      Duration — <span className="text-gray-700">{quickAddModal.durationMinutes} min</span>
                     </label>
                     <input
                       type="number"
                       min={15} max={480} step={15}
                       value={quickAddModal.durationMinutes}
                       onChange={(e) => setQuickAddModal((m) => ({ ...m, durationMinutes: Math.max(15, Math.min(480, parseInt(e.target.value) || 90)) }))}
-                      className="w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-white text-sm focus:border-lantern-mint/50 focus:outline-none"
+                      className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 text-sm focus:border-teal-400 focus:outline-none"
                     />
                   </div>
                 </div>
@@ -3475,7 +3475,7 @@ export default function ItineraryPlanner() {
                   </button>
                   <button type="button"
                     onClick={() => setQuickAddModal((m) => ({ ...m, open: false }))}
-                    className="flex-1 border border-white/[0.1] text-white/60 rounded-lg px-4 py-2.5 hover:bg-white/[0.05] transition-colors">
+                    className="flex-1 border border-gray-200 text-gray-600 rounded-lg px-4 py-2.5 hover:bg-gray-100 transition-colors">
                     Cancel
                   </button>
                 </div>
@@ -3489,13 +3489,13 @@ export default function ItineraryPlanner() {
       {saveAsModal && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
              onClick={() => setSaveAsModal(false)}>
-          <div className="bg-[#0D1019] border border-white/[0.1] rounded-2xl max-w-sm w-full shadow-2xl"
+          <div className="bg-gray-50 border border-gray-200 rounded-2xl max-w-sm w-full shadow-2xl"
                onClick={(e) => e.stopPropagation()}>
             <div className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-white font-semibold">Save trip as</h2>
+                <h2 className="text-gray-900 font-semibold">Save trip as</h2>
                 <button type="button" onClick={() => setSaveAsModal(false)}
-                  className="text-white/40 hover:text-white/80 transition-colors w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/[0.06] text-xl leading-none">
+                  className="text-gray-500 hover:text-gray-700 transition-colors w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-50 text-xl leading-none">
                   ✕
                 </button>
               </div>
@@ -3521,7 +3521,7 @@ export default function ItineraryPlanner() {
                     setSaveAsModal(false);
                   }
                 }}
-                className="w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-white text-sm placeholder:text-white/20 focus:border-lantern-mint/50 focus:outline-none mb-4"
+                className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 text-sm placeholder:text-gray-300 focus:border-teal-400 focus:outline-none mb-4"
               />
               <div className="flex gap-3">
                 <button
@@ -3547,7 +3547,7 @@ export default function ItineraryPlanner() {
                   Save
                 </button>
                 <button type="button" onClick={() => setSaveAsModal(false)}
-                  className="flex-1 border border-white/[0.1] text-white/60 rounded-lg px-4 py-2.5 hover:bg-white/[0.05] transition-colors">
+                  className="flex-1 border border-gray-200 text-gray-600 rounded-lg px-4 py-2.5 hover:bg-gray-100 transition-colors">
                   Cancel
                 </button>
               </div>
@@ -3560,21 +3560,21 @@ export default function ItineraryPlanner() {
       {editTripModal && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
              onClick={() => setEditTripModal(false)}>
-          <div className="bg-[#0D1019] border border-white/[0.1] rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+          <div className="bg-gray-50 border border-gray-200 rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl"
                onClick={(e) => e.stopPropagation()}>
             {/* Header */}
-            <div className="p-6 border-b border-white/[0.08] flex items-center justify-between sticky top-0 bg-[#0D1019] z-10">
+            <div className="p-6 border-b border-gray-200 flex items-center justify-between sticky top-0 bg-gray-50 z-10">
               <div>
-                <h2 className="text-white font-semibold">Edit trip</h2>
+                <h2 className="text-gray-900 font-semibold">Edit trip</h2>
                 {activeTripId && tripList.find((t) => t.id === activeTripId)?.name && (
-                  <p className="text-[11px] text-white/30 mt-0.5">
+                  <p className="text-[11px] text-gray-400 mt-0.5">
                     {tripList.find((t) => t.id === activeTripId)!.name}
                   </p>
                 )}
               </div>
               <button type="button"
                 onClick={() => setEditTripModal(false)}
-                className="text-white/40 hover:text-white/80 transition-colors text-xl leading-none w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/[0.06]">
+                className="text-gray-500 hover:text-gray-700 transition-colors text-xl leading-none w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-50">
                 ✕
               </button>
             </div>
@@ -3587,7 +3587,7 @@ export default function ItineraryPlanner() {
                 return (
                   <>
                     <div>
-                      <label className="text-xs text-white/40 block mb-2">Destination</label>
+                      <label className="text-xs text-gray-500 block mb-2">Destination</label>
                       <div className="space-y-2">
                         {editCities.map((stop, i) => (
                           <CityRow
@@ -3606,7 +3606,7 @@ export default function ItineraryPlanner() {
                       </div>
                       <button type="button"
                         onClick={() => setEditCities((prev) => [...prev, { city: "", days: 1 }])}
-                        className="mt-2 text-[11px] text-white/30 hover:text-lantern-mint transition-colors">
+                        className="mt-2 text-[11px] text-gray-400 hover:text-teal-600 transition-colors">
                         + Add city
                       </button>
                     </div>
@@ -3614,14 +3614,14 @@ export default function ItineraryPlanner() {
                     {/* Dates */}
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="text-xs text-white/40 block mb-1.5">Start date</label>
+                        <label className="text-xs text-gray-500 block mb-1.5">Start date</label>
                         <input type="date" value={editStart}
                           onChange={(e) => setEditStart(e.target.value)}
-                          className="w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-3 py-2.5 text-white text-sm focus:border-lantern-mint/50 focus:outline-none [color-scheme:dark]"
+                          className="w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2.5 text-gray-900 text-sm focus:border-teal-400 focus:outline-none [color-scheme:light]"
                         />
                       </div>
                       <div>
-                        <label className="text-xs text-white/40 block mb-1.5">End date</label>
+                        <label className="text-xs text-gray-500 block mb-1.5">End date</label>
                         <input type="date" value={editEndDerived}
                           onChange={(e) => {
                             if (!editStart || !e.target.value) return;
@@ -3639,7 +3639,7 @@ export default function ItineraryPlanner() {
                               return next;
                             });
                           }}
-                          className="w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-3 py-2.5 text-white text-sm focus:border-lantern-mint/50 focus:outline-none [color-scheme:dark]"
+                          className="w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2.5 text-gray-900 text-sm focus:border-teal-400 focus:outline-none [color-scheme:light]"
                         />
                       </div>
                     </div>
@@ -3649,15 +3649,15 @@ export default function ItineraryPlanner() {
 
               {/* Pace */}
               <div>
-                <label className="text-xs text-white/40 block mb-2">Pace</label>
+                <label className="text-xs text-gray-500 block mb-2">Pace</label>
                 <div className="grid grid-cols-3 gap-2">
                   {(["relaxed", "balanced", "packed"] as const).map((p) => (
                     <button key={p} type="button"
                       onClick={() => setEditPace(p)}
                       className={`rounded-lg border py-2.5 text-xs font-medium capitalize transition-colors ${
                         editPace === p
-                          ? "border-lantern-mint/50 bg-lantern-mint/10 text-lantern-mint"
-                          : "border-white/[0.08] bg-white/[0.02] text-white/50 hover:text-white/80"
+                          ? "border-teal-400 bg-teal-50 text-teal-600"
+                          : "border-gray-200 bg-gray-50 text-gray-500 hover:text-gray-700"
                       }`}>
                       {p}
                     </button>
@@ -3667,15 +3667,15 @@ export default function ItineraryPlanner() {
 
               {/* Transit */}
               <div>
-                <label className="text-xs text-white/40 block mb-2">Getting around</label>
+                <label className="text-xs text-gray-500 block mb-2">Getting around</label>
                 <div className="grid grid-cols-2 gap-2">
                   {(["walking", "public transit", "taxi", "mixed"] as const).map((t) => (
                     <button key={t} type="button"
                       onClick={() => setEditTransit(t)}
                       className={`rounded-lg border py-2.5 text-xs font-medium capitalize transition-colors ${
                         editTransit === t
-                          ? "border-lantern-mint/50 bg-lantern-mint/10 text-lantern-mint"
-                          : "border-white/[0.08] bg-white/[0.02] text-white/50 hover:text-white/80"
+                          ? "border-teal-400 bg-teal-50 text-teal-600"
+                          : "border-gray-200 bg-gray-50 text-gray-500 hover:text-gray-700"
                       }`}>
                       {t}
                     </button>
@@ -3685,7 +3685,7 @@ export default function ItineraryPlanner() {
             </div>
 
             {/* Footer */}
-            <div className="p-6 border-t border-white/[0.08] space-y-3 sticky bottom-0 bg-[#0D1019]">
+            <div className="p-6 border-t border-gray-200 space-y-3 sticky bottom-0 bg-gray-50">
               <button type="button"
                 onClick={() => {
                   updateTrip({ startDate: editStart, cities: editCities, pace: editPace, transit: editTransit });
@@ -3696,7 +3696,7 @@ export default function ItineraryPlanner() {
               </button>
               <button type="button"
                 onClick={() => setEditTripModal(false)}
-                className="w-full px-4 py-3 border border-white/[0.1] text-white/60 rounded-lg hover:bg-white/[0.05] transition-colors">
+                className="w-full px-4 py-3 border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">
                 Cancel
               </button>
             </div>

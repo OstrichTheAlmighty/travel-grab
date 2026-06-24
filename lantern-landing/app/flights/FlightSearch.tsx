@@ -632,20 +632,20 @@ function searchLocations(query: string): Selection[] {
 // ── Score / indicator helpers ─────────────────────────────────────────────────
 
 function scoreColor(score: number): string {
-  if (score >= 85) return "text-lantern-mint";
-  if (score >= 70) return "text-lantern-blue";
-  return "text-lantern-gold";
+  if (score >= 85) return "text-teal-600";
+  if (score >= 70) return "text-blue-600";
+  return "text-amber-600";
 }
 
 function scoreBg(score: number): string {
-  if (score >= 85) return "bg-lantern-mint/15 text-lantern-mint border-lantern-mint/25";
-  if (score >= 70) return "bg-lantern-blue/15 text-lantern-blue border-lantern-blue/25";
-  return "bg-lantern-gold/15 text-lantern-gold border-lantern-gold/25";
+  if (score >= 85) return "bg-teal-50 text-teal-600 border-teal-400/25";
+  if (score >= 70) return "bg-blue-50 text-blue-600 border-blue-200";
+  return "bg-amber-100/15 text-amber-600 border-amber-300/25";
 }
 
 function indicatorColor(label: string): string {
-  if (["Great", "Good", "Low", "Excellent", "Morning", "Afternoon"].includes(label)) return "text-lantern-mint";
-  if (["Okay", "Moderate", "Basic", "Evening", "Early Morning"].includes(label)) return "text-lantern-gold";
+  if (["Great", "Good", "Low", "Excellent", "Morning", "Afternoon"].includes(label)) return "text-teal-600";
+  if (["Okay", "Moderate", "Basic", "Evening", "Early Morning"].includes(label)) return "text-amber-600";
   return "text-red-400"; // High, Very High, Limited, Late Night
 }
 
@@ -1077,16 +1077,16 @@ function AirportCombobox({
 
   return (
     <div className="relative flex-1 min-w-0">
-      <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-1.5 px-0.5">
+      <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 px-0.5">
         {label}
       </label>
       <div
         className={`relative flex items-center rounded-xl border transition-colors ${
-          open ? "border-lantern-mint/50 bg-panel" : "border-white/10 bg-white/[0.04] hover:border-white/20"
+          open ? "border-teal-400 bg-gray-50" : "border-gray-200 bg-gray-50 hover:border-gray-300"
         }`}
       >
         <svg
-          className="absolute left-3 w-4 h-4 text-white/30 pointer-events-none flex-shrink-0"
+          className="absolute left-3 w-4 h-4 text-gray-400 pointer-events-none flex-shrink-0"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -1100,7 +1100,7 @@ function AirportCombobox({
           type="text"
           value={inputValue}
           placeholder={placeholder}
-          className="w-full bg-transparent pl-9 pr-3.5 py-3 text-sm text-white placeholder-white/30 outline-none"
+          className="w-full bg-transparent pl-9 pr-3.5 py-3 text-sm text-gray-900 placeholder-white/30 outline-none"
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={handleChange}
@@ -1109,38 +1109,38 @@ function AirportCombobox({
         />
       </div>
       {open && suggestions.length > 0 && (
-        <ul className="absolute z-50 mt-1.5 w-full rounded-xl border border-white/10 bg-[#0e1422] shadow-card overflow-hidden">
+        <ul className="absolute z-50 mt-1.5 w-full rounded-xl border border-gray-200 bg-gray-50 shadow-card overflow-hidden">
           {suggestions.map((item, i) => (
             <li
               key={item.kind === "metro" ? item.id : item.code}
               onMouseDown={() => selectItem(item)}
               className={`flex items-center gap-3 px-3.5 py-2 cursor-pointer transition-colors ${
-                i === highlightedIndex ? "bg-lantern-violet/20" : "hover:bg-white/[0.06]"
+                i === highlightedIndex ? "bg-teal-100" : "hover:bg-gray-50"
               }`}
             >
               {item.kind === "metro" ? (
                 <>
-                  <span className="text-[10px] font-bold font-mono text-lantern-gold bg-lantern-gold/10 border border-lantern-gold/20 rounded px-1.5 py-0.5 flex-shrink-0 leading-tight">
+                  <span className="text-[10px] font-bold font-mono text-amber-600 bg-amber-50 border border-amber-200 rounded px-1.5 py-0.5 flex-shrink-0 leading-tight">
                     ALL
                   </span>
                   <div className="min-w-0 flex-1">
-                    <div className="text-sm text-white truncate">{item.label}</div>
-                    <div className="text-xs text-white/40 truncate">All airports: {item.codes.join(", ")}</div>
+                    <div className="text-sm text-gray-900 truncate">{item.label}</div>
+                    <div className="text-xs text-gray-500 truncate">All airports: {item.codes.join(", ")}</div>
                   </div>
-                  <span className="ml-auto text-[10px] font-semibold uppercase tracking-wider text-lantern-gold/50 flex-shrink-0">
+                  <span className="ml-auto text-[10px] font-semibold uppercase tracking-wider text-amber-500 flex-shrink-0">
                     metro
                   </span>
                 </>
               ) : (
                 <>
-                  <span className="text-xs font-bold font-mono text-lantern-blue w-8 flex-shrink-0">
+                  <span className="text-xs font-bold font-mono text-blue-600 w-8 flex-shrink-0">
                     {item.code}
                   </span>
                   <div className="min-w-0">
-                    <div className="text-sm text-white truncate">{item.city}</div>
-                    <div className="text-xs text-white/40 truncate">{item.name}</div>
+                    <div className="text-sm text-gray-900 truncate">{item.city}</div>
+                    <div className="text-xs text-gray-500 truncate">{item.name}</div>
                   </div>
-                  <span className="ml-auto text-xs text-white/25 flex-shrink-0">{item.country}</span>
+                  <span className="ml-auto text-xs text-gray-300 flex-shrink-0">{item.country}</span>
                 </>
               )}
             </li>
@@ -1171,15 +1171,15 @@ function toDisplayScore(v: number): number {
 }
 
 function breakdownColor(ds: number): string {
-  if (ds >= 60) return "text-lantern-mint";
-  if (ds >= 40) return "text-white/50";
-  return "text-lantern-gold";
+  if (ds >= 60) return "text-teal-600";
+  if (ds >= 40) return "text-gray-500";
+  return "text-amber-600";
 }
 
 function breakdownBarColor(ds: number): string {
   if (ds >= 60) return "bg-lantern-mint";
-  if (ds >= 40) return "bg-white/20";
-  return "bg-lantern-gold/70";
+  if (ds >= 40) return "bg-gray-200";
+  return "bg-amber-100/70";
 }
 
 // ── Trip impact descriptions ──────────────────────────────────────────────────
@@ -1236,17 +1236,17 @@ function RecommendationPanel({
   const priorityNote = buildPriorityNote(pick, priorities);
 
   return (
-    <div className="mb-4 max-w-3xl mx-auto rounded-xl border border-lantern-violet/40 bg-lantern-violet/[0.07] px-4 sm:px-5 py-4 shadow-[0_0_24px_rgba(139,92,246,0.10)]">
+    <div className="mb-4 max-w-3xl mx-auto rounded-xl border border-teal-300 bg-teal-600/[0.07] px-4 sm:px-5 py-4 shadow-md">
       {/* Header row */}
       <div className="flex items-start justify-between gap-3 mb-2.5">
         <div className="flex items-center gap-2 min-w-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/travelgrab-logo.svg" alt="" aria-hidden width={16} height={16} className="h-4 w-4 flex-shrink-0 object-contain" />
-          <span className="text-[10px] font-black uppercase tracking-widest text-lantern-violet">
+          <span className="text-[10px] font-black uppercase tracking-widest text-teal-600">
             TravelGrab Recommendation
           </span>
         </div>
-        <span className="text-lg font-black text-white tabular-nums leading-none flex-shrink-0">
+        <span className="text-lg font-black text-gray-900 tabular-nums leading-none flex-shrink-0">
           ${Math.round(pick.price_total).toLocaleString()}
         </span>
       </div>
@@ -1262,38 +1262,38 @@ function RecommendationPanel({
           className="rounded object-contain flex-shrink-0"
           onError={(e) => { e.currentTarget.style.display = "none"; }}
         />
-        <span className="font-bold text-white">{pick.airline}</span>
-        <span className="text-white/25">·</span>
-        <span className="font-mono font-semibold text-white/60">{pick.origin}</span>
-        <span className="text-white/30">→</span>
-        <span className="font-mono font-semibold text-white/60">{pick.destination}</span>
-        <span className="text-white/25">·</span>
-        <span className="text-white/50">{pick.duration}</span>
-        <span className="text-white/25">·</span>
-        <span className="text-white/50">{pick.stop_label}</span>
+        <span className="font-bold text-gray-900">{pick.airline}</span>
+        <span className="text-gray-300">·</span>
+        <span className="font-mono font-semibold text-gray-600">{pick.origin}</span>
+        <span className="text-gray-400">→</span>
+        <span className="font-mono font-semibold text-gray-600">{pick.destination}</span>
+        <span className="text-gray-300">·</span>
+        <span className="text-gray-500">{pick.duration}</span>
+        <span className="text-gray-300">·</span>
+        <span className="text-gray-500">{pick.stop_label}</span>
       </div>
 
       {/* Priority note (shown when a non-default priority is active) */}
       {priorityNote && (
-        <p className="text-[11px] text-lantern-violet/80 leading-relaxed mb-1.5">{priorityNote}</p>
+        <p className="text-[11px] text-teal-600 leading-relaxed mb-1.5">{priorityNote}</p>
       )}
 
       {/* Advisor sentence — suppressed when priorities are active (priorityNote leads instead) */}
       {!priorityNote && pick.recommendation_why && (
-        <p className="text-[11px] text-white/60 leading-relaxed mb-2">{pick.recommendation_why}</p>
+        <p className="text-[11px] text-gray-600 leading-relaxed mb-2">{pick.recommendation_why}</p>
       )}
 
       {/* vs others note — only shown in default mode when OpenAI populates it */}
       {!priorityNote && pick.comparison_summary && (
-        <p className="text-[11px] text-white/35 leading-relaxed mb-2.5">{pick.comparison_summary}</p>
+        <p className="text-[11px] text-gray-400 leading-relaxed mb-2.5">{pick.comparison_summary}</p>
       )}
 
       {/* Positive reason bullets — always shown */}
       {reasons.length > 0 && (
         <ul className="space-y-1 mb-2.5">
           {reasons.map((r, i) => (
-            <li key={i} className="flex gap-1.5 text-[11px] text-white/60 leading-relaxed">
-              <span className="text-lantern-violet mt-0.5 flex-shrink-0">›</span>
+            <li key={i} className="flex gap-1.5 text-[11px] text-gray-600 leading-relaxed">
+              <span className="text-teal-600 mt-0.5 flex-shrink-0">›</span>
               {r}
             </li>
           ))}
@@ -1302,8 +1302,8 @@ function RecommendationPanel({
 
       {/* Tradeoff line — shown after the positive bullets when priorities are active */}
       {priorityNote && pick.tradeoffs.length > 0 && (
-        <p className="text-[11px] text-white/38 leading-relaxed mb-3">
-          <span className="font-semibold text-white/50">Tradeoff:</span>{" "}
+        <p className="text-[11px] text-gray-400 leading-relaxed mb-3">
+          <span className="font-semibold text-gray-500">Tradeoff:</span>{" "}
           {pick.tradeoffs[0].charAt(0).toUpperCase() + pick.tradeoffs[0].slice(1)}.
         </p>
       )}
@@ -1311,7 +1311,7 @@ function RecommendationPanel({
       {/* CTA */}
       <button
         onClick={() => topPickRef.current?.scrollIntoView({ behavior: "smooth", block: "center" })}
-        className="inline-flex items-center gap-1.5 text-[11px] font-bold text-lantern-mint border border-lantern-mint/35 bg-lantern-mint/10 hover:bg-lantern-mint/15 rounded-lg px-3.5 py-1.5 transition-colors"
+        className="inline-flex items-center gap-1.5 text-[11px] font-bold text-teal-600 border border-teal-300 bg-teal-50 hover:bg-teal-50 rounded-lg px-3.5 py-1.5 transition-colors"
       >
         View top pick
         <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
@@ -1376,23 +1376,23 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
   if (top.length < 2) return null;
 
   const thCls =
-    "text-[9px] font-bold uppercase tracking-widest text-white/25 px-3 py-2.5 text-left whitespace-nowrap";
+    "text-[9px] font-bold uppercase tracking-widest text-gray-300 px-3 py-2.5 text-left whitespace-nowrap";
   const tdCls = "px-3 py-2.5 align-top";
 
   return (
     <div className="mb-4 max-w-3xl mx-auto">
       <div className="mb-2.5">
-        <span className="text-[10px] font-black uppercase tracking-widest text-white/35">
+        <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">
           Compare top picks
         </span>
-        <p className="text-[11px] text-white/25 mt-0.5">
+        <p className="text-[11px] text-gray-300 mt-0.5">
           See why TravelGrab ranked these options differently.
         </p>
       </div>
-      <div className="overflow-x-auto rounded-xl border border-white/[0.07]">
+      <div className="overflow-x-auto rounded-xl border border-gray-200">
         <table className="w-full min-w-[600px] border-collapse">
           <thead>
-            <tr className="border-b border-white/[0.07] bg-white/[0.025]">
+            <tr className="border-b border-gray-200 bg-gray-50">
               {["Flight", "Score", "Price", "Duration", "Stops", "Best for", "Tradeoff"].map((c) => (
                 <th key={c} className={thCls}>{c}</th>
               ))}
@@ -1402,8 +1402,8 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
             {top.map((o, i) => (
               <tr
                 key={i}
-                className={`border-b border-white/[0.04] last:border-0 ${
-                  o.is_recommended ? "bg-lantern-violet/[0.05]" : "bg-transparent"
+                className={`border-b border-gray-100 last:border-0 ${
+                  o.is_recommended ? "bg-teal-50" : "bg-transparent"
                 }`}
               >
                 {/* Flight */}
@@ -1420,14 +1420,14 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
                     />
                     <div className="min-w-0">
                       <div className="flex items-center gap-1 flex-wrap">
-                        <span className="text-[11px] font-semibold text-white leading-tight">{o.airline}</span>
+                        <span className="text-[11px] font-semibold text-gray-900 leading-tight">{o.airline}</span>
                         {o.is_recommended && (
-                          <span className="text-[8px] font-black uppercase tracking-widest text-lantern-violet border border-lantern-violet/40 bg-lantern-violet/10 rounded-full px-1.5 py-px leading-none">
+                          <span className="text-[8px] font-black uppercase tracking-widest text-teal-600 border border-teal-300 bg-teal-600/10 rounded-full px-1.5 py-px leading-none">
                             #1
                           </span>
                         )}
                       </div>
-                      <div className="text-[9px] font-mono text-white/30 mt-px">{o.flight_number}</div>
+                      <div className="text-[9px] font-mono text-gray-400 mt-px">{o.flight_number}</div>
                     </div>
                   </div>
                 </td>
@@ -1441,20 +1441,20 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
 
                 {/* Price */}
                 <td className={tdCls}>
-                  <span className="text-[12px] font-bold text-white tabular-nums whitespace-nowrap">
+                  <span className="text-[12px] font-bold text-gray-900 tabular-nums whitespace-nowrap">
                     ${Math.round(o.price_total).toLocaleString()}
                   </span>
                 </td>
 
                 {/* Duration */}
                 <td className={tdCls}>
-                  <span className="text-[11px] text-white/65 whitespace-nowrap">{o.duration}</span>
+                  <span className="text-[11px] text-gray-600 whitespace-nowrap">{o.duration}</span>
                 </td>
 
                 {/* Stops */}
                 <td className={tdCls}>
                   <span className={`text-[11px] font-medium whitespace-nowrap ${
-                    o.stops === 0 ? "text-lantern-mint" : "text-white/50"
+                    o.stops === 0 ? "text-teal-600" : "text-gray-500"
                   }`}>
                     {o.stop_label}
                   </span>
@@ -1468,16 +1468,16 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
                     </span>
                   )}
                   {o.wins_on[0] && (
-                    <p className="text-[10px] text-white/40 leading-snug max-w-[130px]">{o.wins_on[0]}</p>
+                    <p className="text-[10px] text-gray-500 leading-snug max-w-[130px]">{o.wins_on[0]}</p>
                   )}
                 </td>
 
                 {/* Tradeoff */}
                 <td className={tdCls}>
                   {o.tradeoffs[0] ? (
-                    <p className="text-[10px] text-white/40 leading-snug max-w-[130px]">{o.tradeoffs[0]}</p>
+                    <p className="text-[10px] text-gray-500 leading-snug max-w-[130px]">{o.tradeoffs[0]}</p>
                   ) : (
-                    <span className="text-[10px] text-white/20">—</span>
+                    <span className="text-[10px] text-gray-300">—</span>
                   )}
                 </td>
               </tr>
@@ -1573,8 +1573,8 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
       ref={cardRef}
       className={`rounded-xl border transition-all ${
         rec
-          ? "border-lantern-violet/40 bg-lantern-violet/[0.04] shadow-[0_0_32px_rgba(167,139,250,0.07)]"
-          : "border-white/[0.07] bg-white/[0.02]"
+          ? "border-teal-300 bg-teal-600/[0.04] shadow-md"
+          : "border-gray-200 bg-gray-50"
       }`}
     >
       <div className="p-4 sm:p-5">
@@ -1597,15 +1597,15 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                   if (sib) sib.style.display = "flex";
                 }}
               />
-              <div className="w-[22px] h-[22px] rounded bg-white/[0.08] items-center justify-center text-[9px] font-bold text-white/60 hidden">
+              <div className="w-[22px] h-[22px] rounded bg-gray-100 items-center justify-center text-[9px] font-bold text-gray-600 hidden">
                 {offer.airline_code.slice(0, 2)}
               </div>
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1.5 flex-wrap mb-1">
-                <span className="text-sm font-bold text-white leading-tight">{offer.airline}</span>
+                <span className="text-sm font-bold text-gray-900 leading-tight">{offer.airline}</span>
                 {rec && (
-                  <span className="text-[10px] font-black uppercase tracking-widest text-lantern-violet border border-lantern-violet/50 bg-lantern-violet/15 rounded-full px-2 py-0.5 leading-none">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-teal-600 border border-teal-400 bg-teal-50 rounded-full px-2 py-0.5 leading-none">
                     AI Pick
                   </span>
                 )}
@@ -1621,7 +1621,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                 )}
               </div>
               {!rec && offer.recommendation_why && (
-                <p className="text-[11px] leading-relaxed text-white/40">
+                <p className="text-[11px] leading-relaxed text-gray-500">
                   {offer.recommendation_why}
                 </p>
               )}
@@ -1631,7 +1631,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
             <div className={`text-2xl font-black tabular-nums leading-none ${scoreColor(offer.ai_score)}`}>
               ${Math.round(offer.price_total).toLocaleString()}
             </div>
-            <div className="text-[11px] text-white/35 mt-0.5">{offer.cabin}</div>
+            <div className="text-[11px] text-gray-400 mt-0.5">{offer.cabin}</div>
             {analysisOpen && (
               <>
                 <button
@@ -1641,7 +1641,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                   {offer.is_bookable === false ? "View booking options" : "Book this flight"}
                 </button>
                 {offer.is_bookable === false && (
-                  <p className="text-[10px] text-white/25 mt-1 leading-snug">
+                  <p className="text-[10px] text-gray-300 mt-1 leading-snug">
                     Opens matching Google Flights results. Price may vary.
                   </p>
                 )}
@@ -1653,74 +1653,74 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
         {/* ── Route bars ── */}
         <div className="mb-3 space-y-1.5">
           {offer.return_depart_time && (
-            <div className="text-[9px] text-white/25 font-bold uppercase tracking-wider px-1">Outbound</div>
+            <div className="text-[9px] text-gray-300 font-bold uppercase tracking-wider px-1">Outbound</div>
           )}
-          <div className="flex items-center gap-2 py-2 px-3 rounded-lg bg-white/[0.025] border border-white/[0.05]">
+          <div className="flex items-center gap-2 py-2 px-3 rounded-lg bg-gray-50 border border-gray-100">
             <div className="text-center flex-shrink-0 min-w-[3rem]">
-              <div className="text-base font-black text-white tabular-nums leading-tight">{offer.depart_time}</div>
-              <div className="text-[10px] font-mono font-bold text-white/40">{offer.origin}</div>
+              <div className="text-base font-black text-gray-900 tabular-nums leading-tight">{offer.depart_time}</div>
+              <div className="text-[10px] font-mono font-bold text-gray-500">{offer.origin}</div>
             </div>
             <div className="flex-1 flex flex-col items-center gap-0.5 min-w-0 px-1">
-              <div className="text-[10px] text-white/30 font-medium">{offer.duration}</div>
+              <div className="text-[10px] text-gray-400 font-medium">{offer.duration}</div>
               <div className="w-full flex items-center gap-1">
-                <div className="flex-1 h-px bg-white/10" />
-                <svg className="w-3 h-3 text-white/20 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <div className="flex-1 h-px bg-gray-100" />
+                <svg className="w-3 h-3 text-gray-300 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
                 </svg>
-                <div className="flex-1 h-px bg-white/10" />
+                <div className="flex-1 h-px bg-gray-100" />
               </div>
-              <div className="text-[10px] text-white/30 font-medium">
+              <div className="text-[10px] text-gray-400 font-medium">
                 {offer.stop_label}{offer.connection_airports ? ` · ${offer.connection_airports.replace(/,/g, ", ")}` : ""}
               </div>
             </div>
             <div className="text-center flex-shrink-0 min-w-[3rem]">
-              <div className="text-base font-black text-white tabular-nums leading-tight">{offer.arrive_time}</div>
-              <div className="text-[10px] font-mono font-bold text-white/40">{offer.destination}</div>
+              <div className="text-base font-black text-gray-900 tabular-nums leading-tight">{offer.arrive_time}</div>
+              <div className="text-[10px] font-mono font-bold text-gray-500">{offer.destination}</div>
             </div>
           </div>
           {offer.return_depart_time ? (
             <>
-              <div className="text-[9px] text-white/25 font-bold uppercase tracking-wider px-1">Return</div>
-              <div className="flex items-center gap-2 py-2 px-3 rounded-lg bg-white/[0.02] border border-white/[0.04]">
+              <div className="text-[9px] text-gray-300 font-bold uppercase tracking-wider px-1">Return</div>
+              <div className="flex items-center gap-2 py-2 px-3 rounded-lg bg-gray-50 border border-gray-100">
                 <div className="text-center flex-shrink-0 min-w-[3rem]">
-                  <div className="text-base font-black text-white/70 tabular-nums leading-tight">{offer.return_depart_time}</div>
-                  <div className="text-[10px] font-mono font-bold text-white/30">{offer.return_origin}</div>
+                  <div className="text-base font-black text-gray-700 tabular-nums leading-tight">{offer.return_depart_time}</div>
+                  <div className="text-[10px] font-mono font-bold text-gray-400">{offer.return_origin}</div>
                 </div>
                 <div className="flex-1 flex flex-col items-center gap-0.5 min-w-0 px-1">
-                  <div className="text-[10px] text-white/20 font-medium">{offer.return_duration}</div>
+                  <div className="text-[10px] text-gray-300 font-medium">{offer.return_duration}</div>
                   <div className="w-full flex items-center gap-1">
-                    <div className="flex-1 h-px bg-white/[0.07]" />
-                    <svg className="w-3 h-3 text-white/15 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                    <div className="flex-1 h-px bg-gray-100" />
+                    <svg className="w-3 h-3 text-gray-300 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
                     </svg>
-                    <div className="flex-1 h-px bg-white/[0.07]" />
+                    <div className="flex-1 h-px bg-gray-100" />
                   </div>
-                  <div className="text-[10px] text-white/20 font-medium">
+                  <div className="text-[10px] text-gray-300 font-medium">
                     {offer.return_stop_label}{offer.return_connection_airports ? ` · ${offer.return_connection_airports.replace(/,/g, ", ")}` : ""}
                   </div>
                 </div>
                 <div className="text-center flex-shrink-0 min-w-[3rem]">
-                  <div className="text-base font-black text-white/70 tabular-nums leading-tight">{offer.return_arrive_time}</div>
-                  <div className="text-[10px] font-mono font-bold text-white/30">{offer.return_destination}</div>
+                  <div className="text-base font-black text-gray-700 tabular-nums leading-tight">{offer.return_arrive_time}</div>
+                  <div className="text-[10px] font-mono font-bold text-gray-400">{offer.return_destination}</div>
                 </div>
               </div>
             </>
           ) : tripType === "roundtrip" && offer.source === "google_flights" ? (
             <>
-              <div className="text-[9px] text-white/25 font-bold uppercase tracking-wider px-1">Return</div>
-              <div className="flex items-center gap-2 py-2 px-3 rounded-lg bg-white/[0.02] border border-white/[0.04]">
+              <div className="text-[9px] text-gray-300 font-bold uppercase tracking-wider px-1">Return</div>
+              <div className="flex items-center gap-2 py-2 px-3 rounded-lg bg-gray-50 border border-gray-100">
                 <div className="flex-1 text-center">
                   {offer.booking_url ? (
                     <a
                       href={offer.booking_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[11px] text-white/35 hover:text-white/60 transition-colors underline underline-offset-2 decoration-white/20"
+                      className="text-[11px] text-gray-400 hover:text-gray-600 transition-colors underline underline-offset-2 decoration-white/20"
                     >
                       View complete round-trip itinerary on Google Flights
                     </a>
                   ) : (
-                    <span className="text-[11px] text-white/30">View complete round-trip itinerary on Google Flights</span>
+                    <span className="text-[11px] text-gray-400">View complete round-trip itinerary on Google Flights</span>
                   )}
                 </div>
               </div>
@@ -1730,10 +1730,10 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
 
         {/* ── AI Score bar ── */}
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-[11px] text-white/25 flex-shrink-0 w-14">AI Score</span>
-          <div className="flex-1 h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+          <span className="text-[11px] text-gray-300 flex-shrink-0 w-14">AI Score</span>
+          <div className="flex-1 h-1.5 rounded-full bg-gray-50 overflow-hidden">
             <div
-              className={`h-full rounded-full ${offer.ai_score >= 85 ? "bg-lantern-mint" : offer.ai_score >= 70 ? "bg-lantern-blue" : "bg-lantern-gold"}`}
+              className={`h-full rounded-full ${offer.ai_score >= 85 ? "bg-lantern-mint" : offer.ai_score >= 70 ? "bg-blue-100" : "bg-amber-100"}`}
               style={{ width: `${offer.ai_score}%` }}
             />
           </div>
@@ -1748,14 +1748,14 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
 
             {/* Why this flight */}
             {whyBullets.length > 0 && (
-              <div className={`rounded-lg px-3.5 py-2.5 ${rec ? "bg-lantern-violet/[0.08] border border-lantern-violet/20" : "bg-white/[0.03] border border-white/[0.06]"}`}>
-                <div className={`text-[10px] font-bold uppercase tracking-wider mb-1.5 ${rec ? "text-lantern-violet" : "text-white/30"}`}>
+              <div className={`rounded-lg px-3.5 py-2.5 ${rec ? "bg-teal-600/[0.08] border border-teal-200" : "bg-gray-50 border border-gray-200"}`}>
+                <div className={`text-[10px] font-bold uppercase tracking-wider mb-1.5 ${rec ? "text-teal-600" : "text-gray-400"}`}>
                   Why this flight
                 </div>
                 <ul className="space-y-1">
                   {whyBullets.map((b, i) => (
-                    <li key={i} className="flex gap-1.5 text-[11px] text-white/55 leading-relaxed">
-                      <span className={`mt-0.5 flex-shrink-0 ${rec ? "text-lantern-violet" : "text-white/30"}`}>›</span>
+                    <li key={i} className="flex gap-1.5 text-[11px] text-gray-600 leading-relaxed">
+                      <span className={`mt-0.5 flex-shrink-0 ${rec ? "text-teal-600" : "text-gray-400"}`}>›</span>
                       {b}
                     </li>
                   ))}
@@ -1766,11 +1766,11 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
             {/* Why not */}
             {whyNot.length > 0 && (
               <div>
-                <div className="text-[10px] font-bold text-lantern-gold/60 uppercase tracking-wider mb-1.5">Why not</div>
+                <div className="text-[10px] font-bold text-amber-600 uppercase tracking-wider mb-1.5">Why not</div>
                 <ul className="space-y-1">
                   {whyNot.map((w, i) => (
-                    <li key={i} className="flex gap-1.5 text-[11px] text-white/45 leading-relaxed">
-                      <svg className="w-3 h-3 text-lantern-gold/50 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+                    <li key={i} className="flex gap-1.5 text-[11px] text-gray-500 leading-relaxed">
+                      <svg className="w-3 h-3 text-amber-500 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
                         <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
                         <line x1={12} y1={9} x2={12} y2={13} /><line x1={12} y1={17} x2="12.01" y2={17} />
                       </svg>
@@ -1784,13 +1784,13 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
             {/* Trip impact blocks */}
             {tripImpact.length > 0 && (
               <div>
-                <div className="text-[10px] font-bold text-white/20 uppercase tracking-wider mb-2">Trip impact</div>
+                <div className="text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Trip impact</div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
                   {tripImpact.map(({ key, label, value, desc }) => (
-                    <div key={key} className="rounded-lg bg-white/[0.025] border border-white/[0.06] px-2.5 py-2">
-                      <div className="text-[10px] text-white/25 font-medium mb-0.5">{label}</div>
+                    <div key={key} className="rounded-lg bg-gray-50 border border-gray-200 px-2.5 py-2">
+                      <div className="text-[10px] text-gray-300 font-medium mb-0.5">{label}</div>
                       <div className={`text-[11px] font-bold mb-0.5 ${indicatorColor(value)}`}>{value}</div>
-                      {desc && <div className="text-[10px] text-white/25 leading-snug">{desc}</div>}
+                      {desc && <div className="text-[10px] text-gray-300 leading-snug">{desc}</div>}
                     </div>
                   ))}
                 </div>
@@ -1802,7 +1802,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
 
         {/* ── Flight details ── */}
         {detailsOpen && (
-          <div className="mt-3 rounded-lg bg-white/[0.02] border border-white/[0.05] px-3.5 py-3">
+          <div className="mt-3 rounded-lg bg-gray-50 border border-gray-100 px-3.5 py-3">
             <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
               {(
                 [
@@ -1829,8 +1829,8 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                 ] as [string, string][]
               ).map(([label, val]) => (
                 <div key={label} className="flex items-baseline gap-1.5">
-                  <span className="text-[10px] text-white/25 w-14 flex-shrink-0">{label}</span>
-                  <span className="text-[11px] text-white/60 font-medium">{val}</span>
+                  <span className="text-[10px] text-gray-300 w-14 flex-shrink-0">{label}</span>
+                  <span className="text-[11px] text-gray-600 font-medium">{val}</span>
                 </div>
               ))}
             </div>
@@ -1838,10 +1838,10 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
         )}
 
         {/* ── Action row ── */}
-        <div className="flex items-center gap-2 pt-3 mt-3 border-t border-white/[0.05]">
+        <div className="flex items-center gap-2 pt-3 mt-3 border-t border-gray-100">
           <button
             onClick={() => setScoreOpen(true)}
-            className="flex items-center gap-1.5 text-[11px] font-medium text-white/40 hover:text-white/70 border border-white/[0.08] hover:border-white/20 rounded-lg px-3 py-1.5 transition-colors"
+            className="flex items-center gap-1.5 text-[11px] font-medium text-gray-500 hover:text-gray-700 border border-gray-200 hover:border-gray-300 rounded-lg px-3 py-1.5 transition-colors"
           >
             <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
               <path d="M3 3v18h18" /><path d="m19 9-5 5-4-4-3 3" />
@@ -1858,8 +1858,8 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
               }}
               className={`flex items-center gap-1.5 text-[11px] font-medium border rounded-lg px-3 py-1.5 transition-colors ${
                 analysisOpen
-                  ? "text-white/60 border-white/15 bg-white/[0.04]"
-                  : "text-white/40 hover:text-white/70 border-white/[0.08] hover:border-white/20"
+                  ? "text-gray-600 border-gray-200 bg-gray-50"
+                  : "text-gray-500 hover:text-gray-700 border-gray-200 hover:border-gray-300"
               }`}
             >
               <svg
@@ -1877,14 +1877,14 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
           {!analysisOpen && (
             <button
               onClick={handleBookClick}
-              className="text-[11px] font-bold text-lantern-mint border border-lantern-mint/35 hover:bg-lantern-mint/10 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
+              className="text-[11px] font-bold text-teal-600 border border-teal-300 hover:bg-teal-50 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
             >
               {offer.is_bookable === false ? "View" : "Book"}
             </button>
           )}
           <button
             onClick={() => setDetailsOpen((o) => !o)}
-            className="flex items-center gap-1.5 text-[11px] font-medium text-white/40 hover:text-white/70 border border-white/[0.08] hover:border-white/20 rounded-lg px-3 py-1.5 transition-colors"
+            className="flex items-center gap-1.5 text-[11px] font-medium text-gray-500 hover:text-gray-700 border border-gray-200 hover:border-gray-300 rounded-lg px-3 py-1.5 transition-colors"
           >
             <svg
               className={`w-3 h-3 transition-transform ${detailsOpen ? "rotate-180" : ""}`}
@@ -1902,8 +1902,8 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
               onClick={onAddToItinerary}
               className={`ml-auto text-[11px] font-semibold rounded-lg px-2.5 py-1.5 transition-all border whitespace-nowrap ${
                 isAddedToItinerary
-                  ? "bg-lantern-mint/15 text-lantern-mint border-lantern-mint/30"
-                  : "text-white/40 border-white/[0.08] hover:border-lantern-mint/30 hover:text-lantern-mint/70"
+                  ? "bg-teal-50 text-teal-600 border-teal-200"
+                  : "text-gray-500 border-gray-200 hover:border-teal-200 hover:text-teal-500"
               }`}
             >
               {isAddedToItinerary ? "✓ In itinerary" : "+ Itinerary"}
@@ -1919,17 +1919,17 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
           onClick={() => setScoreOpen(false)}
         >
           <div
-            className="w-full max-w-xs rounded-2xl border border-white/10 bg-[#0d1220] p-5 shadow-2xl"
+            className="w-full max-w-xs rounded-2xl border border-gray-200 bg-gray-50 p-5 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start justify-between mb-4">
               <div>
-                <div className="text-sm font-bold text-white">Score Breakdown</div>
-                <div className="text-[11px] text-white/35 mt-0.5">{offer.airline} · {offer.flight_number}</div>
+                <div className="text-sm font-bold text-gray-900">Score Breakdown</div>
+                <div className="text-[11px] text-gray-400 mt-0.5">{offer.airline} · {offer.flight_number}</div>
               </div>
               <button
                 onClick={() => setScoreOpen(false)}
-                className="p-1 -mr-1 -mt-0.5 text-white/30 hover:text-white transition-colors rounded-lg hover:bg-white/[0.06]"
+                className="p-1 -mr-1 -mt-0.5 text-gray-400 hover:text-gray-900 transition-colors rounded-lg hover:bg-gray-50"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
                   <path d="M18 6 6 18M6 6l12 12" />
@@ -1937,7 +1937,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
               </button>
             </div>
 
-            <div className="flex items-start gap-3 mb-3 pb-3 border-b border-white/[0.07]">
+            <div className="flex items-start gap-3 mb-3 pb-3 border-b border-gray-200">
               <div className={`text-4xl font-black tabular-nums leading-none flex-shrink-0 ${scoreColor(offer.ai_score)}`}>
                 {offer.ai_score}
               </div>
@@ -1950,9 +1950,9 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                 {(() => {
                   const summary = labelSummary(offer.recommendation_label);
                   return summary ? (
-                    <p className="text-[11px] text-white/40 leading-relaxed">{summary}</p>
+                    <p className="text-[11px] text-gray-500 leading-relaxed">{summary}</p>
                   ) : offer.recommendation_why ? (
-                    <p className="text-[11px] text-white/40 leading-relaxed">{offer.recommendation_why}</p>
+                    <p className="text-[11px] text-gray-500 leading-relaxed">{offer.recommendation_why}</p>
                   ) : null;
                 })()}
               </div>
@@ -1960,16 +1960,16 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
 
             {(offer.ranking_why ?? []).length > 0 && (
               <div className="mb-3">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-white/25 mb-1.5">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-gray-300 mb-1.5">
                   Why this ranked here
                 </div>
                 <ul className="space-y-1">
                   {(offer.ranking_why ?? []).map((b, i) => (
                     <li key={i} className="flex items-start gap-1.5">
-                      <span className={`text-[11px] flex-shrink-0 leading-tight mt-px ${b.positive ? "text-lantern-mint" : "text-lantern-gold"}`}>
+                      <span className={`text-[11px] flex-shrink-0 leading-tight mt-px ${b.positive ? "text-teal-600" : "text-amber-600"}`}>
                         {b.positive ? "✓" : "✗"}
                       </span>
-                      <span className={`text-[11px] leading-snug ${b.positive ? "text-white/65" : "text-white/45"}`}>
+                      <span className={`text-[11px] leading-snug ${b.positive ? "text-gray-600" : "text-gray-500"}`}>
                         {b.text}
                       </span>
                     </li>
@@ -1980,13 +1980,13 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
 
             {priorities.length > 0 && (
               <div className="flex items-center gap-1.5 mb-2 text-[10px]">
-                <span className="text-white/30">Weighted for:</span>
-                <span className="text-lantern-violet/80 font-semibold">
+                <span className="text-gray-400">Weighted for:</span>
+                <span className="text-teal-600 font-semibold">
                   {priorities.map((p) => PRIORITY_CHIPS.find((c) => c.id === p)?.label ?? p).join(" + ")}
                 </span>
               </div>
             )}
-            <p className="text-[10px] text-white/25 leading-relaxed mb-3">
+            <p className="text-[10px] text-gray-300 leading-relaxed mb-3">
               Each metric scored 0–100 relative to this result set, then combined using your priority weights.
             </p>
 
@@ -1996,14 +1996,14 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                   <div key={key}>
                     <div className="flex items-center justify-between mb-1">
                       <div className="flex items-baseline gap-1.5">
-                        <span className="text-[11px] text-white/65">{label}</span>
-                        <span className="text-[10px] text-white/25">{weight}%</span>
+                        <span className="text-[11px] text-gray-600">{label}</span>
+                        <span className="text-[10px] text-gray-300">{weight}%</span>
                       </div>
                       <span className={`text-[11px] font-bold tabular-nums ${breakdownColor(displayScore)}`}>
                         {displayScore}
                       </span>
                     </div>
-                    <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
+                    <div className="h-1 rounded-full bg-gray-50 overflow-hidden">
                       <div
                         className={`h-full rounded-full ${breakdownBarColor(displayScore)}`}
                         style={{ width: `${displayScore}%` }}
@@ -2013,12 +2013,12 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                 ))}
               </div>
             ) : (
-              <p className="text-[11px] text-white/30 text-center py-2">Breakdown unavailable.</p>
+              <p className="text-[11px] text-gray-400 text-center py-2">Breakdown unavailable.</p>
             )}
 
             <button
               onClick={() => setScoreOpen(false)}
-              className="mt-4 w-full py-2 rounded-xl text-[11px] font-semibold text-white/40 border border-white/[0.08] hover:text-white/70 hover:border-white/20 transition-colors"
+              className="mt-4 w-full py-2 rounded-xl text-[11px] font-semibold text-gray-500 border border-gray-200 hover:text-gray-700 hover:border-gray-300 transition-colors"
             >
               Close
             </button>
@@ -2033,26 +2033,26 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
           onClick={() => setBookOpen(false)}
         >
           <div
-            className="w-full max-w-xs rounded-2xl border border-white/10 bg-[#0d1220] p-5 shadow-2xl"
+            className="w-full max-w-xs rounded-2xl border border-gray-200 bg-gray-50 p-5 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-9 h-9 rounded-full bg-lantern-violet/20 flex items-center justify-center flex-shrink-0">
-                <svg className="w-4 h-4 text-lantern-violet" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
+              <div className="w-9 h-9 rounded-full bg-teal-100 flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 text-teal-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
                   <path d="M12 19V5M5 12l7-7 7 7" />
                 </svg>
               </div>
               <div>
-                <div className="text-sm font-bold text-white">Booking not live yet</div>
-                <div className="text-[11px] text-white/35 mt-0.5">{offer.airline} · {offer.flight_number}</div>
+                <div className="text-sm font-bold text-gray-900">Booking not live yet</div>
+                <div className="text-[11px] text-gray-400 mt-0.5">{offer.airline} · {offer.flight_number}</div>
               </div>
             </div>
 
-            <p className="text-[12px] text-white/55 leading-relaxed mb-4">
+            <p className="text-[12px] text-gray-600 leading-relaxed mb-4">
               Booking is coming soon. We saved your interest in this flight.
             </p>
 
-            <div className="rounded-xl bg-white/[0.03] border border-white/[0.07] px-3.5 py-3 mb-4 space-y-1.5">
+            <div className="rounded-xl bg-gray-50 border border-gray-200 px-3.5 py-3 mb-4 space-y-1.5">
               {[
                 ["Route",    `${offer.origin} → ${offer.destination}`],
                 ["Flight",   offer.flight_number],
@@ -2062,15 +2062,15 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                 ["Score",    String(offer.ai_score)],
               ].map(([label, val]) => (
                 <div key={label} className="flex items-baseline justify-between gap-2">
-                  <span className="text-[10px] text-white/30">{label}</span>
-                  <span className="text-[11px] text-white/65 font-medium tabular-nums">{val}</span>
+                  <span className="text-[10px] text-gray-400">{label}</span>
+                  <span className="text-[11px] text-gray-600 font-medium tabular-nums">{val}</span>
                 </div>
               ))}
             </div>
 
             <button
               onClick={() => setBookOpen(false)}
-              className="w-full py-2 rounded-xl text-[12px] font-semibold text-white/50 border border-white/[0.10] hover:text-white/80 hover:border-white/25 transition-colors"
+              className="w-full py-2 rounded-xl text-[12px] font-semibold text-gray-500 border border-gray-200 hover:text-gray-700 hover:border-gray-300 transition-colors"
             >
               Got it
             </button>
@@ -2085,12 +2085,12 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
 
 function FeatureCard({ icon, title, body }: { icon: React.ReactNode; title: string; body: string }) {
   return (
-    <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-5">
-      <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-lantern-violet/15 text-lantern-violet">
+    <div className="rounded-xl border border-gray-200 bg-gray-50 p-5">
+      <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-teal-50 text-teal-600">
         {icon}
       </div>
-      <div className="mb-1 text-sm font-semibold text-white">{title}</div>
-      <div className="text-xs text-white/45 leading-relaxed">{body}</div>
+      <div className="mb-1 text-sm font-semibold text-gray-900">{title}</div>
+      <div className="text-xs text-gray-500 leading-relaxed">{body}</div>
     </div>
   );
 }
@@ -2270,9 +2270,9 @@ export default function FlightSearch() {
   void searchMeta;
 
   return (
-    <div className="min-h-screen bg-ink text-white">
+    <div className="min-h-screen bg-white text-gray-900">
       {/* Nav */}
-      <nav className="border-b border-white/[0.07] bg-ink/80 backdrop-blur-md sticky top-0 z-40">
+      <nav className="border-b border-gray-200 bg-white/80 backdrop-blur-md sticky top-0 z-40">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 flex items-center h-14 gap-6">
           <Link href="/" className="flex items-center gap-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -2283,57 +2283,57 @@ export default function FlightSearch() {
               height={36}
               className="h-9 w-9 flex-shrink-0 object-contain"
             />
-            <span className="text-sm font-bold tracking-tight text-white/90">TravelGrab</span>
+            <span className="text-sm font-bold tracking-tight text-gray-800">TravelGrab</span>
           </Link>
-          <div className="h-4 w-px bg-white/10" />
-          <span className="text-sm font-medium text-lantern-violet">Flights</span>
-          <Link href="/hotels"     className="text-sm font-medium text-white/45 hover:text-white/80 transition-colors">Hotels</Link>
-          <Link href="/activities" className="text-sm font-medium text-white/45 hover:text-white/80 transition-colors">Activities</Link>
-          <Link href="/itinerary"  className="text-sm font-medium text-white/45 hover:text-white/80 transition-colors">Itinerary</Link>
+          <div className="h-4 w-px bg-gray-100" />
+          <span className="text-sm font-medium text-teal-600">Flights</span>
+          <Link href="/hotels"     className="text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors">Hotels</Link>
+          <Link href="/activities" className="text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors">Activities</Link>
+          <Link href="/itinerary"  className="text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors">Itinerary</Link>
         </div>
       </nav>
 
       <main className="mx-auto max-w-5xl px-4 sm:px-6 py-8 sm:py-12">
         {/* Hero */}
         <div className="mb-7 text-center">
-          <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white mb-2">
+          <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-gray-900 mb-2">
             Find your flight
           </h1>
-          <p className="text-sm text-white/50 max-w-md mx-auto leading-relaxed">
+          <p className="text-sm text-gray-500 max-w-md mx-auto leading-relaxed">
             TravelGrab checks nearby airports automatically and ranks flights by comfort, timing, and value.
           </p>
         </div>
 
         {/* Trip context banner */}
         {tripContext && (
-          <div className="max-w-3xl mx-auto mb-4 rounded-xl border border-lantern-violet/20 bg-lantern-violet/[0.06] px-4 py-3 flex items-center justify-between gap-4">
+          <div className="max-w-3xl mx-auto mb-4 rounded-xl border border-teal-200 bg-teal-50 px-4 py-3 flex items-center justify-between gap-4">
             <div className="flex items-center gap-3 min-w-0">
-              <span className="text-lantern-violet text-sm">✦</span>
+              <span className="text-teal-600 text-sm">✦</span>
               <div className="min-w-0">
-                <p className="text-xs font-semibold text-white truncate">Trip to {tripContext.destination}</p>
-                <p className="text-[11px] text-white/40 mt-0.5">
+                <p className="text-xs font-semibold text-gray-900 truncate">Trip to {tripContext.destination}</p>
+                <p className="text-[11px] text-gray-500 mt-0.5">
                   Dates pre-filled from your trip plan · {new Date(tripContext.startDate + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })}–{new Date(tripContext.endDate + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })}
                 </p>
               </div>
             </div>
-            <Link href="/itinerary" className="shrink-0 text-[11px] text-lantern-violet/60 hover:text-lantern-violet transition-colors whitespace-nowrap">
+            <Link href="/itinerary" className="shrink-0 text-[11px] text-teal-500 hover:text-teal-600 transition-colors whitespace-nowrap">
               Edit trip →
             </Link>
           </div>
         )}
 
         {/* Search panel */}
-        <div className="max-w-3xl mx-auto rounded-2xl border border-white/[0.09] bg-white/[0.03] p-5 sm:p-6 mb-4 shadow-card">
+        <div className="max-w-3xl mx-auto rounded-2xl border border-gray-200 bg-gray-50 p-5 sm:p-6 mb-4 shadow-card">
           {/* Trip type toggle */}
-          <div className="flex gap-1 mb-4 bg-white/[0.04] border border-white/[0.07] rounded-xl p-1 w-fit">
+          <div className="flex gap-1 mb-4 bg-gray-50 border border-gray-200 rounded-xl p-1 w-fit">
             {(["roundtrip", "oneway"] as TripType[]).map((t) => (
               <button
                 key={t}
                 onClick={() => setTripType(t)}
                 className={`px-4 py-1.5 rounded-lg text-sm font-semibold transition-all ${
                   tripType === t
-                    ? "bg-lantern-mint/20 text-lantern-mint border border-lantern-mint/40"
-                    : "text-white/45 hover:text-white/70"
+                    ? "bg-teal-100 text-teal-600 border border-teal-300"
+                    : "text-gray-500 hover:text-gray-700"
                 }`}
               >
                 {t === "roundtrip" ? "Round Trip" : "One Way"}
@@ -2346,7 +2346,7 @@ export default function FlightSearch() {
             <AirportCombobox label="From" placeholder="City, metro, or airport" value={origin} onChange={setOrigin} />
             <button
               onClick={() => { const tmp = origin; setOrigin(destination); setDestination(tmp); }}
-              className="self-end mb-0.5 sm:self-center mt-auto sm:mt-6 p-2 rounded-xl border border-white/10 bg-white/[0.04] text-white/40 hover:text-white/80 hover:border-white/25 hover:bg-white/[0.08] transition-all flex-shrink-0"
+              className="self-end mb-0.5 sm:self-center mt-auto sm:mt-6 p-2 rounded-xl border border-gray-200 bg-gray-50 text-gray-500 hover:text-gray-700 hover:border-gray-300 hover:bg-gray-100 transition-all flex-shrink-0"
               title="Swap airports"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2}>
@@ -2360,41 +2360,41 @@ export default function FlightSearch() {
           {/* Dates + Travelers + Cabin */}
           <div className="flex flex-col sm:flex-row gap-2.5 mb-3">
             <div className="flex-1 min-w-0">
-              <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-1.5 px-0.5">Departure</label>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 px-0.5">Departure</label>
               <input
                 type="date"
                 min={today}
                 value={departureDate}
                 onChange={(e) => setDepartureDate(e.target.value)}
-                className="w-full rounded-xl border border-white/10 bg-white/[0.04] hover:border-white/20 focus:border-lantern-mint/50 focus:bg-panel px-3.5 py-3 text-sm text-white outline-none transition-colors [color-scheme:dark]"
+                className="w-full rounded-xl border border-gray-200 bg-gray-50 hover:border-gray-300 focus:border-teal-400 focus:bg-gray-50 px-3.5 py-3 text-sm text-gray-900 outline-none transition-colors [color-scheme:light]"
               />
             </div>
             {tripType === "roundtrip" && (
               <div className="flex-1 min-w-0">
-                <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-1.5 px-0.5">Return</label>
+                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 px-0.5">Return</label>
                 <input
                   type="date"
                   min={departureDate || today}
                   value={returnDate}
                   onChange={(e) => setReturnDate(e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.04] hover:border-white/20 focus:border-lantern-mint/50 focus:bg-panel px-3.5 py-3 text-sm text-white outline-none transition-colors [color-scheme:dark]"
+                  className="w-full rounded-xl border border-gray-200 bg-gray-50 hover:border-gray-300 focus:border-teal-400 focus:bg-gray-50 px-3.5 py-3 text-sm text-gray-900 outline-none transition-colors [color-scheme:light]"
                 />
               </div>
             )}
             <div className="w-full sm:w-32 flex-shrink-0">
-              <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-1.5 px-0.5">Travelers</label>
-              <div className="flex items-center rounded-xl border border-white/10 bg-white/[0.04] overflow-hidden">
-                <button onClick={() => setTravelers((n) => Math.max(1, n - 1))} className="px-3 py-3 text-white/50 hover:text-white hover:bg-white/[0.06] transition-colors text-lg leading-none">−</button>
-                <span className="flex-1 text-center text-sm font-semibold text-white">{travelers}</span>
-                <button onClick={() => setTravelers((n) => Math.min(9, n + 1))} className="px-3 py-3 text-white/50 hover:text-white hover:bg-white/[0.06] transition-colors text-lg leading-none">+</button>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 px-0.5">Travelers</label>
+              <div className="flex items-center rounded-xl border border-gray-200 bg-gray-50 overflow-hidden">
+                <button onClick={() => setTravelers((n) => Math.max(1, n - 1))} className="px-3 py-3 text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors text-lg leading-none">−</button>
+                <span className="flex-1 text-center text-sm font-semibold text-gray-900">{travelers}</span>
+                <button onClick={() => setTravelers((n) => Math.min(9, n + 1))} className="px-3 py-3 text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors text-lg leading-none">+</button>
               </div>
             </div>
             <div className="flex-1 min-w-0">
-              <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-1.5 px-0.5">Cabin</label>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 px-0.5">Cabin</label>
               <select
                 value={cabin}
                 onChange={(e) => setCabin(e.target.value as CabinClass)}
-                className="w-full rounded-xl border border-white/10 bg-white/[0.04] hover:border-white/20 focus:border-lantern-mint/50 focus:bg-panel px-3.5 py-3 text-sm text-white outline-none transition-colors appearance-none [color-scheme:dark]"
+                className="w-full rounded-xl border border-gray-200 bg-gray-50 hover:border-gray-300 focus:border-teal-400 focus:bg-gray-50 px-3.5 py-3 text-sm text-gray-900 outline-none transition-colors appearance-none [color-scheme:light]"
               >
                 {(Object.entries(CABIN_LABELS) as [CabinClass, string][]).map(([val, lbl]) => (
                   <option key={val} value={val}>{lbl}</option>
@@ -2404,15 +2404,15 @@ export default function FlightSearch() {
           </div>
 
           {/* What matters most? */}
-          <div className="mb-5 pt-3 border-t border-white/[0.06]">
+          <div className="mb-5 pt-3 border-t border-gray-200">
             <div className="flex items-center justify-between mb-2">
-              <div className="text-[10px] font-semibold text-white/30 uppercase tracking-wider">
+              <div className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">
                 What matters most?
               </div>
               {priorities.length > 0 && (
                 <button
                   onClick={() => setPriorities([])}
-                  className="text-[10px] text-white/25 hover:text-white/55 transition-colors"
+                  className="text-[10px] text-gray-300 hover:text-gray-600 transition-colors"
                 >
                   Clear
                 </button>
@@ -2437,10 +2437,10 @@ export default function FlightSearch() {
                     disabled={maxed}
                     className={`flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-semibold border transition-all ${
                       selected
-                        ? "bg-lantern-mint/20 text-lantern-mint border-lantern-mint/50 shadow-[0_0_0_1px_rgba(143,247,208,0.20)]"
+                        ? "bg-teal-100 text-teal-600 border-teal-400 shadow-[0_0_0_1px_rgba(143,247,208,0.20)]"
                         : maxed
-                        ? "bg-transparent text-white/15 border-white/[0.04] cursor-not-allowed"
-                        : "bg-transparent text-white/30 border-white/[0.09] hover:border-white/[0.18] hover:text-white/55"
+                        ? "bg-transparent text-gray-300 border-gray-100 cursor-not-allowed"
+                        : "bg-transparent text-gray-400 border-gray-200 hover:border-gray-300 hover:text-gray-600"
                     }`}
                   >
                     {selected && (
@@ -2453,22 +2453,22 @@ export default function FlightSearch() {
                 );
               })}
             </div>
-            <div className="mt-1.5 flex items-center gap-1 text-[10px] text-white/25">
+            <div className="mt-1.5 flex items-center gap-1 text-[10px] text-gray-300">
               <span>Ranking by:</span>
               {priorities.length === 0 ? (
                 <span>Best Overall</span>
               ) : (
                 priorities.map((p, i) => (
                   <span key={p} className="flex items-center gap-1">
-                    {i > 0 && <span className="text-white/15">+</span>}
-                    <span className="text-lantern-violet/70">
+                    {i > 0 && <span className="text-gray-300">+</span>}
+                    <span className="text-teal-600">
                       {PRIORITY_CHIPS.find((c) => c.id === p)?.label}
                     </span>
                   </span>
                 ))
               )}
               {priorities.length > 0 && priorities.length < 3 && (
-                <span className="text-white/15 ml-1">
+                <span className="text-gray-300 ml-1">
                   · {3 - priorities.length} more available
                 </span>
               )}
@@ -2485,7 +2485,7 @@ export default function FlightSearch() {
           <button
             onClick={() => { void handleSearch(); }}
             disabled={searchState === "loading"}
-            className="w-full py-3.5 rounded-xl font-bold text-sm text-ink bg-lantern-mint hover:bg-lantern-mint/90 shadow-[0_0_24px_rgba(143,247,208,0.15)] hover:shadow-[0_0_36px_rgba(143,247,208,0.25)] transition-all active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full py-3.5 rounded-xl font-bold text-sm text-ink bg-lantern-mint hover:bg-lantern-mint/90 shadow-sm hover:shadow-md transition-all active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {searchState === "loading" ? "Searching…" : "Search Flights"}
           </button>
@@ -2501,9 +2501,9 @@ export default function FlightSearch() {
               aria-hidden
               width={48}
               height={48}
-              className="h-12 w-12 object-contain animate-pulse drop-shadow-[0_0_12px_rgba(0,180,255,0.5)]"
+              className="h-12 w-12 object-contain animate-pulse drop-shadow-md"
             />
-            <div className="text-sm text-white/50">Searching live fares and ranking options…</div>
+            <div className="text-sm text-gray-500">Searching live fares and ranking options…</div>
           </div>
         )}
 
@@ -2511,7 +2511,7 @@ export default function FlightSearch() {
         {searchState === "error" && (
           <div className="mt-5 max-w-3xl mx-auto rounded-xl border border-red-500/20 bg-red-500/[0.06] px-5 py-4">
             <div className="text-sm font-semibold text-red-300 mb-1">{errorTitle}</div>
-            <div className="text-sm text-white/50">{errorBody}</div>
+            <div className="text-sm text-gray-500">{errorBody}</div>
           </div>
         )}
 
@@ -2521,18 +2521,18 @@ export default function FlightSearch() {
             {/* Search summary pill */}
             {searchedParams && (
               <div className="flex flex-wrap items-center justify-between gap-3 mb-4 max-w-3xl mx-auto">
-                <div className="inline-flex items-center gap-2 flex-wrap rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-xs">
-                  <span className="font-mono font-semibold text-white">{selectionCodes(searchedParams.origin)}</span>
-                  <span className="text-white/30">→</span>
-                  <span className="font-mono font-semibold text-white">{selectionCodes(searchedParams.destination)}</span>
-                  <span className="text-white/15">·</span>
-                  <span className="text-white/55">{searchedParams.tripType === "roundtrip" ? "Round trip" : "One way"}</span>
-                  <span className="text-white/15">·</span>
-                  <span className="text-white/55">{CABIN_LABELS[searchedParams.cabin]}</span>
-                  <span className="text-white/15">·</span>
-                  <span className="text-white/55">{searchedParams.travelers} traveler{searchedParams.travelers !== 1 ? "s" : ""}</span>
+                <div className="inline-flex items-center gap-2 flex-wrap rounded-full border border-gray-200 bg-gray-50 px-4 py-1.5 text-xs">
+                  <span className="font-mono font-semibold text-gray-900">{selectionCodes(searchedParams.origin)}</span>
+                  <span className="text-gray-400">→</span>
+                  <span className="font-mono font-semibold text-gray-900">{selectionCodes(searchedParams.destination)}</span>
+                  <span className="text-gray-300">·</span>
+                  <span className="text-gray-600">{searchedParams.tripType === "roundtrip" ? "Round trip" : "One way"}</span>
+                  <span className="text-gray-300">·</span>
+                  <span className="text-gray-600">{CABIN_LABELS[searchedParams.cabin]}</span>
+                  <span className="text-gray-300">·</span>
+                  <span className="text-gray-600">{searchedParams.travelers} traveler{searchedParams.travelers !== 1 ? "s" : ""}</span>
                 </div>
-                <span className="text-xs text-white/25">
+                <span className="text-xs text-gray-300">
                   Showing {Math.min(visibleCount, displayOffers.length)} of {displayOffers.length} unique itinerar{displayOffers.length !== 1 ? "ies" : "y"} — ranked by AI
                 </span>
               </div>
@@ -2641,7 +2641,7 @@ export default function FlightSearch() {
               <div className="flex justify-center pt-4 pb-8">
                 <button
                   onClick={() => setVisibleCount((v) => v + 20)}
-                  className="px-6 py-2.5 rounded-full text-sm font-semibold text-white/70 border border-white/10 bg-white/5 hover:bg-white/10 hover:text-white transition-colors"
+                  className="px-6 py-2.5 rounded-full text-sm font-semibold text-gray-700 border border-gray-200 bg-gray-50 hover:bg-gray-100 hover:text-gray-900 transition-colors"
                 >
                   Show more flights
                 </button>
@@ -2654,9 +2654,9 @@ export default function FlightSearch() {
         {searchState === "idle" && (
           <div className="mt-10 max-w-3xl mx-auto">
             <div className="text-center mb-6">
-              <div className="text-xs font-extrabold uppercase tracking-widest text-white/25 mb-2">How TravelGrab thinks</div>
-              <h2 className="text-lg sm:text-xl font-bold text-white/70 mb-1.5">More than just the lowest fare</h2>
-              <p className="text-sm text-white/35 max-w-sm mx-auto leading-relaxed">
+              <div className="text-xs font-extrabold uppercase tracking-widest text-gray-300 mb-2">How TravelGrab thinks</div>
+              <h2 className="text-lg sm:text-xl font-bold text-gray-700 mb-1.5">More than just the lowest fare</h2>
+              <p className="text-sm text-gray-400 max-w-sm mx-auto leading-relaxed">
                 TravelGrab's AI evaluates every option and explains which flight is actually worth booking.
               </p>
             </div>
