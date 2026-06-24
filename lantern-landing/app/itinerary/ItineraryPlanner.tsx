@@ -1216,7 +1216,7 @@ export default function ItineraryPlanner() {
 
   const [editTripModal, setEditTripModal] = useState(false);
   const [editStart,     setEditStart]     = useState("");
-  const [editDuration,  setEditDuration]  = useState(7);
+  const [editCities,    setEditCities]    = useState<CityStop[]>([]);
   const [editPace,      setEditPace]      = useState<UIPace>("balanced");
   const [editTransit,   setEditTransit]   = useState<UITransit>("mixed");
 
@@ -2250,7 +2250,7 @@ export default function ItineraryPlanner() {
                 type="button"
                 onClick={() => {
                   setEditStart(trip.startDate);
-                  setEditDuration(trip.cities.reduce((s, c) => s + (c.days || 0), 0));
+                  setEditCities(trip.cities.map((c) => ({ ...c })));
                   setEditPace(trip.pace);
                   setEditTransit(trip.transit);
                   setEditTripModal(true);
@@ -3218,34 +3218,72 @@ export default function ItineraryPlanner() {
             </div>
 
             <div className="p-6 space-y-6">
-              {/* Destination (read-only) */}
-              <div>
-                <label className="text-xs text-white/40 block mb-1.5">Destination</label>
-                <div className="w-full rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-white/60 text-sm">
-                  {trip.cities.map((c) => c.city).filter(Boolean).join(" → ") || "—"}
-                </div>
-                <p className="text-[10px] text-white/25 mt-1">Cannot change destination after creation</p>
-              </div>
+              {/* Cities (editable) */}
+              {(() => {
+                const editTotal = editCities.reduce((s, c) => s + (c.days || 0), 0);
+                const editEndDerived = editStart ? addDays(editStart, editTotal) : "";
+                return (
+                  <>
+                    <div>
+                      <label className="text-xs text-white/40 block mb-2">Destination</label>
+                      <div className="space-y-2">
+                        {editCities.map((stop, i) => (
+                          <CityRow
+                            key={i}
+                            stop={stop}
+                            index={i}
+                            canRemove={editCities.length > 1}
+                            onUpdate={(patch) =>
+                              setEditCities((prev) => prev.map((c, j) => j === i ? { ...c, ...patch } : c))
+                            }
+                            onRemove={() =>
+                              setEditCities((prev) => prev.filter((_, j) => j !== i))
+                            }
+                          />
+                        ))}
+                      </div>
+                      <button type="button"
+                        onClick={() => setEditCities((prev) => [...prev, { city: "", days: 1 }])}
+                        className="mt-2 text-[11px] text-white/30 hover:text-lantern-mint transition-colors">
+                        + Add city
+                      </button>
+                    </div>
 
-              {/* Start date */}
-              <div>
-                <label className="text-xs text-white/40 block mb-1.5">Start date</label>
-                <input type="date" value={editStart}
-                  onChange={(e) => setEditStart(e.target.value)}
-                  className="w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-white text-sm focus:border-lantern-mint/50 focus:outline-none [color-scheme:dark]"
-                />
-              </div>
-
-              {/* Trip length */}
-              <div>
-                <label className="text-xs text-white/40 block mb-1.5">
-                  Trip length — <span className="text-white/70">{editDuration} days</span>
-                </label>
-                <input type="range" min="2" max="30" value={editDuration}
-                  onChange={(e) => setEditDuration(parseInt(e.target.value))}
-                  className="w-full accent-lantern-mint"
-                />
-              </div>
+                    {/* Dates */}
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="text-xs text-white/40 block mb-1.5">Start date</label>
+                        <input type="date" value={editStart}
+                          onChange={(e) => setEditStart(e.target.value)}
+                          className="w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-3 py-2.5 text-white text-sm focus:border-lantern-mint/50 focus:outline-none [color-scheme:dark]"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs text-white/40 block mb-1.5">End date</label>
+                        <input type="date" value={editEndDerived}
+                          onChange={(e) => {
+                            if (!editStart || !e.target.value) return;
+                            const startMs = new Date(editStart + "T00:00:00").getTime();
+                            const endMs   = new Date(e.target.value + "T00:00:00").getTime();
+                            const newTotal = Math.round((endMs - startMs) / 86400000) + 1;
+                            if (newTotal < editCities.length) return;
+                            const diff = newTotal - editTotal;
+                            setEditCities((prev) => {
+                              const next = [...prev];
+                              next[next.length - 1] = {
+                                ...next[next.length - 1],
+                                days: Math.max(1, next[next.length - 1].days + diff),
+                              };
+                              return next;
+                            });
+                          }}
+                          className="w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-3 py-2.5 text-white text-sm focus:border-lantern-mint/50 focus:outline-none [color-scheme:dark]"
+                        />
+                      </div>
+                    </div>
+                  </>
+                );
+              })()}
 
               {/* Pace */}
               <div>
@@ -3288,7 +3326,7 @@ export default function ItineraryPlanner() {
             <div className="p-6 border-t border-white/[0.08] space-y-3 sticky bottom-0 bg-[#0D1019]">
               <button type="button"
                 onClick={() => {
-                  updateTrip({ startDate: editStart, pace: editPace, transit: editTransit });
+                  updateTrip({ startDate: editStart, cities: editCities, pace: editPace, transit: editTransit });
                   setEditTripModal(false);
                 }}
                 className="w-full px-4 py-3 bg-lantern-mint text-ink font-semibold rounded-lg hover:opacity-90 transition-opacity">
