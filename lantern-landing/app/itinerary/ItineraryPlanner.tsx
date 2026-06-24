@@ -374,6 +374,18 @@ interface PlaceDetailData {
   weekdayDescriptions?: string[];
   website?:             string;
   googleMapsUri?:       string;
+  editorialSummary?:    string;
+  phone?:               string;
+  photos?:              Array<{ name: string }>;
+  rating?:              number;
+  userRatingCount?:     number;
+  reviews?:             Array<{
+    authorName?:    string;
+    rating?:        number;
+    text?:          string;
+    timeAgo?:       string;
+    authorPhotoUri?: string;
+  }>;
 }
 
 // ── Design tokens ──────────────────────────────────────────────────────────────
@@ -1184,8 +1196,9 @@ export default function ItineraryPlanner() {
   const [detailSlot,        setDetailSlot]         = useState<PlannedSlot | null>(null);
   const [noteEdit,          setNoteEdit]           = useState<string | null>(null);
   const [durationEdit,      setDurationEdit]       = useState<number | null>(null);
-  const [modalPlaceDetail,  setModalPlaceDetail]   = useState<PlaceDetailData | null>(null);
+  const [modalPlaceDetail,   setModalPlaceDetail]   = useState<PlaceDetailData | null>(null);
   const [modalDetailLoading, setModalDetailLoading] = useState(false);
+  const [detailActivePhoto,  setDetailActivePhoto]  = useState(0);
   type ClaudePlacement = {
     bestFitDays?:     { dayIndex: number; city: string; reason: string }[];
     swapSuggestions?: { dayIndex: number; city: string; replaceActivityTitle: string; replaceActivityDuration: number; reason: string }[];
@@ -1443,21 +1456,7 @@ export default function ItineraryPlanner() {
     updateTripStore({ savedActivities: savedIds });
   }, [savedIds, hydrated]);
 
-  useEffect(() => {
-    if (hydrated && trip.itinerary && trip.itinerary.days[0]) {
-      const firstDay      = trip.itinerary.days[0];
-      const firstActivity = firstDay.slots[0];
-      console.log("=== FIRST ACTIVITY STRUCTURE ===");
-      console.log("Keys:", Object.keys(firstActivity));
-      console.log("Full object:", firstActivity);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      console.log("Has placeId?", (firstActivity as any).placeId);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      console.log("Has activityId?", (firstActivity as any).activityId);
-    }
-  }, [trip, hydrated]);
-
-  useEffect(() => { setNoteEdit(null); setDurationEdit(null); }, [detailSlot]);
+  useEffect(() => { setNoteEdit(null); setDurationEdit(null); setDetailActivePhoto(0); }, [detailSlot]);
 
   // ── Lazy-load place details when modal opens ──
   useEffect(() => {
@@ -1468,18 +1467,41 @@ export default function ItineraryPlanner() {
     setModalDetailLoading(true);
     fetch(`/api/activities/place?id=${encodeURIComponent(detailSlot.sourceId)}`)
       .then((r) => r.ok ? r.json() : null)
-      .then((data: { address?: string; openingHours?: { openNow?: boolean; weekdayDescriptions?: string[] }; website?: string; googleMapsUri?: string } | null) => {
-        if (data?.openingHours || data?.address || data?.website) {
-          setModalPlaceDetail({
-            address:             data.address,
-            openNow:             data.openingHours?.openNow,
-            weekdayDescriptions: data.openingHours?.weekdayDescriptions,
-            website:             data.website,
-            googleMapsUri:       data.googleMapsUri,
-          });
-        } else {
-          setModalPlaceDetail(null);
-        }
+      .then((data: {
+        formattedAddress?: string; shortFormattedAddress?: string;
+        regularOpeningHours?: { openNow?: boolean; weekdayDescriptions?: string[] };
+        websiteUri?: string; googleMapsUri?: string;
+        editorialSummary?: { text?: string };
+        nationalPhoneNumber?: string; internationalPhoneNumber?: string;
+        photos?: Array<{ name: string }>;
+        rating?: number; userRatingCount?: number;
+        reviews?: Array<{
+          authorAttribution?: { displayName?: string; photoUri?: string };
+          rating?: number;
+          text?: { text?: string };
+          relativePublishTimeDescription?: string;
+        }>;
+      } | null) => {
+        if (!data) { setModalPlaceDetail(null); return; }
+        setModalPlaceDetail({
+          address:             data.formattedAddress ?? data.shortFormattedAddress,
+          openNow:             data.regularOpeningHours?.openNow,
+          weekdayDescriptions: data.regularOpeningHours?.weekdayDescriptions,
+          website:             data.websiteUri,
+          googleMapsUri:       data.googleMapsUri,
+          editorialSummary:    data.editorialSummary?.text,
+          phone:               data.nationalPhoneNumber ?? data.internationalPhoneNumber,
+          photos:              data.photos,
+          rating:              data.rating,
+          userRatingCount:     data.userRatingCount,
+          reviews:             data.reviews?.slice(0, 5).map((r) => ({
+            authorName:    r.authorAttribution?.displayName,
+            authorPhotoUri: r.authorAttribution?.photoUri,
+            rating:         r.rating,
+            text:           r.text?.text,
+            timeAgo:        r.relativePublishTimeDescription,
+          })),
+        });
       })
       .catch(() => { setModalPlaceDetail(null); })
       .finally(() => setModalDetailLoading(false));
@@ -2711,220 +2733,274 @@ export default function ItineraryPlanner() {
                   >
                     <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
                     <div
-                      className="relative z-10 w-full max-w-lg mx-4 mb-4 sm:mb-0 rounded-3xl border border-white/10 bg-[#0D1019] overflow-hidden shadow-2xl"
+                      className="relative z-10 w-full max-w-lg mx-4 mb-4 sm:mb-0 rounded-3xl border border-white/10 bg-[#0D1019] overflow-hidden shadow-2xl max-h-[90vh] flex flex-col"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      {dMeta?.photoRef && (
-                        <div className="h-40 relative overflow-hidden">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={`/api/activities/photo?name=${dMeta.photoRef}`}
-                            className="w-full h-full object-cover"
-                            alt={detailSlot.title}
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#0D1019] via-[#0D1019]/30 to-transparent" />
-                        </div>
-                      )}
-                      <div className="p-6">
-                        <button
-                          type="button"
-                          className="absolute top-4 right-4 text-white/40 hover:text-white/80 transition-colors text-lg leading-none"
-                          onClick={() => setDetailSlot(null)}
-                        >
-                          ✕
-                        </button>
-                        <p className="text-[11px] font-mono text-white/30 mb-1">
-                          {formatTime(detailSlot.startMinutes)} — {formatDuration(detailSlot.durationMinutes)}
-                        </p>
-                        <h3 className="text-lg font-bold text-white mb-2">{detailSlot.title}</h3>
-                        <div className="flex items-center flex-wrap gap-2 mb-3">
-                          {dMeta?.neighborhood && (
-                            <span className="text-sm text-white/40">{dMeta.neighborhood}</span>
-                          )}
-                          {dMeta?.rating != null && dMeta.rating > 0 && (
-                            <>
-                              {dMeta?.neighborhood && <span className="text-white/20">·</span>}
-                              <span className="text-sm text-lantern-gold">★ {dMeta.rating.toFixed(1)}</span>
-                            </>
-                          )}
-                          {dMeta?.category && dMeta.category in CAT_STYLE && (
-                            <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold capitalize ${CAT_STYLE[dMeta.category]}`}>
-                              {dMeta.category}
-                            </span>
-                          )}
-                        </div>
-                        {detailSlot.explanation && (
-                          <p className="text-sm text-white/50 leading-relaxed">{detailSlot.explanation}</p>
-                        )}
-                        {modalDetailLoading && (
-                          <div className="text-[10px] text-white/30 mt-2">Loading details…</div>
-                        )}
-                        {modalPlaceDetail?.address && (
-                          <p className="text-[11px] text-white/50 mt-2 flex items-start gap-1.5">
-                            <span className="mt-0.5 opacity-70">📍</span>
-                            <span>{modalPlaceDetail.address}</span>
-                          </p>
-                        )}
-                        {modalPlaceDetail?.weekdayDescriptions && modalPlaceDetail.weekdayDescriptions.length > 0 && (
-                          <details className="mt-2">
-                            <summary className="text-[10px] text-white/40 cursor-pointer select-none">
-                              {modalPlaceDetail.openNow === false ? "🔴 Closed now" : modalPlaceDetail.openNow ? "🟢 Open now" : "Opening hours"}
-                            </summary>
-                            <ul className="mt-1 space-y-0.5">
-                              {modalPlaceDetail.weekdayDescriptions.map((line, i) => (
-                                <li key={i} className="text-[10px] text-white/40">{line}</li>
-                              ))}
-                            </ul>
-                          </details>
-                        )}
-                        {modalPlaceDetail?.website && (
-                          <a
-                            href={modalPlaceDetail.website}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="block mt-2 text-[11px] text-lantern-blue/80 hover:text-lantern-blue truncate"
-                          >
-                            🌐 {modalPlaceDetail.website.replace(/^https?:\/\/(www\.)?/, "")}
-                          </a>
-                        )}
-                        {/* Notes */}
-                        <div className="mt-4 border-t border-white/[0.06] pt-4">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-[11px] font-semibold text-white/30 uppercase tracking-wider">Notes</span>
-                            {noteEdit === null ? (
-                              <button
-                                type="button"
-                                onClick={() => setNoteEdit(detailSlot.note ?? "")}
-                                className="text-[11px] text-white/40 hover:text-lantern-mint transition-colors"
-                              >
-                                {detailSlot.note ? "Edit" : "+ Add note"}
-                              </button>
-                            ) : (
-                              <div className="flex gap-3">
-                                <button
-                                  type="button"
-                                  onClick={() => setNoteEdit(null)}
-                                  className="text-[11px] text-white/40 hover:text-white/70 transition-colors"
-                                >
-                                  Cancel
-                                </button>
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    if (!trip.itinerary) return;
-                                    const updated = { ...detailSlot, note: noteEdit };
-                                    updateTrip({
-                                      itinerary: {
-                                        ...trip.itinerary,
-                                        days: trip.itinerary.days.map((d) => ({
-                                          ...d,
-                                          slots: d.slots.map((s) => s === detailSlot ? updated : s),
-                                        })),
-                                      },
-                                    });
-                                    setDetailSlot(updated);
-                                    setNoteEdit(null);
-                                  }}
-                                  className="text-[11px] text-lantern-mint font-semibold hover:opacity-80 transition-opacity"
-                                >
-                                  Save
-                                </button>
-                              </div>
-                            )}
-                          </div>
-                          {noteEdit === null ? (
-                            detailSlot.note ? (
-                              <p className="text-sm text-white/50 leading-relaxed whitespace-pre-wrap">{detailSlot.note}</p>
-                            ) : (
-                              <p className="text-[12px] text-white/20 italic">No notes yet</p>
-                            )
-                          ) : (
-                            <textarea
-                              autoFocus
-                              value={noteEdit}
-                              onChange={(e) => setNoteEdit(e.target.value)}
-                              placeholder="Add your notes…"
-                              rows={3}
-                              className="w-full bg-white/[0.04] border border-white/[0.12] rounded-lg px-3 py-2 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-lantern-mint/50 resize-none"
+                      {/* Photo carousel — prefer Places photos, fall back to savedMeta photoRef */}
+                      {(() => {
+                        const photos = modalPlaceDetail?.photos ?? (dMeta?.photoRef ? [{ name: dMeta.photoRef }] : []);
+                        if (photos.length === 0) return null;
+                        return (
+                          <div className="h-44 relative overflow-hidden flex-shrink-0">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              key={photos[detailActivePhoto]?.name}
+                              src={`/api/activities/photo?name=${encodeURIComponent(photos[detailActivePhoto]?.name ?? "")}&w=800`}
+                              className="w-full h-full object-cover"
+                              alt={detailSlot.title}
                             />
-                          )}
-                        </div>
-
-                        {/* Duration */}
-                        <div className="mt-4 border-t border-white/[0.06] pt-4">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-[11px] font-semibold text-white/30 uppercase tracking-wider">Duration</span>
-                            {durationEdit === null ? (
-                              <button
-                                type="button"
-                                onClick={() => setDurationEdit(detailSlot.durationMinutes)}
-                                className="text-[11px] text-white/40 hover:text-lantern-mint transition-colors"
-                              >
-                                Edit
-                              </button>
-                            ) : (
-                              <div className="flex gap-3">
-                                <button
-                                  type="button"
-                                  onClick={() => setDurationEdit(null)}
-                                  className="text-[11px] text-white/40 hover:text-white/70 transition-colors"
-                                >
-                                  Cancel
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#0D1019] via-[#0D1019]/20 to-transparent" />
+                            {photos.length > 1 && (
+                              <>
+                                <button type="button" onClick={() => setDetailActivePhoto((n) => Math.max(0, n - 1))} disabled={detailActivePhoto === 0}
+                                  className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all disabled:opacity-20">
+                                  ‹
                                 </button>
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    if (!trip.itinerary || durationEdit === null) return;
-                                    const newDur = Math.max(15, Math.min(480, durationEdit));
-                                    const updated = { ...detailSlot, durationMinutes: newDur, endMinutes: detailSlot.startMinutes + newDur };
-                                    updateTrip({
-                                      itinerary: {
-                                        ...trip.itinerary,
-                                        days: trip.itinerary.days.map((d) => ({
-                                          ...d,
-                                          slots: d.slots
-                                            .map((s) => s === detailSlot ? updated : s)
-                                            .sort((a, b) => a.startMinutes - b.startMinutes),
-                                        })),
-                                      },
-                                    });
-                                    setDetailSlot(updated);
-                                    setDurationEdit(null);
-                                  }}
-                                  className="text-[11px] text-lantern-mint font-semibold hover:opacity-80 transition-opacity"
-                                >
-                                  Save
+                                <button type="button" onClick={() => setDetailActivePhoto((n) => Math.min(photos.length - 1, n + 1))} disabled={detailActivePhoto === photos.length - 1}
+                                  className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all disabled:opacity-20">
+                                  ›
                                 </button>
-                              </div>
+                                <div className="absolute bottom-2 right-3 bg-black/55 rounded-full px-2 py-0.5 text-[10px] text-white/70">
+                                  {detailActivePhoto + 1} / {photos.length}
+                                </div>
+                              </>
                             )}
                           </div>
-                          {durationEdit === null ? (
-                            <p className="text-sm text-white/50">{detailSlot.durationMinutes}m</p>
-                          ) : (
-                            <div className="flex items-center gap-2">
-                              <input
-                                autoFocus
-                                type="number"
-                                min={15}
-                                max={480}
-                                step={15}
-                                value={durationEdit}
-                                onChange={(e) => setDurationEdit(Number(e.target.value))}
-                                className="w-28 bg-white/[0.04] border border-white/[0.12] rounded-lg px-3 py-2 text-sm text-white/80 focus:outline-none focus:border-lantern-mint/50 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
-                              />
-                              <span className="text-sm text-white/30">minutes</span>
+                        );
+                      })()}
+
+                      <div className="overflow-y-auto flex-1">
+                        <div className="p-6">
+                          <button
+                            type="button"
+                            className="absolute top-4 right-4 z-10 text-white/40 hover:text-white/80 transition-colors text-lg leading-none"
+                            onClick={() => setDetailSlot(null)}
+                          >
+                            ✕
+                          </button>
+
+                          {/* Title + meta */}
+                          <p className="text-[11px] font-mono text-white/30 mb-1">
+                            {formatTime(detailSlot.startMinutes)} — {formatDuration(detailSlot.durationMinutes)}
+                          </p>
+                          <h3 className="text-lg font-bold text-white mb-2">{detailSlot.title}</h3>
+                          <div className="flex items-center flex-wrap gap-2 mb-3">
+                            {(modalPlaceDetail?.address ?? dMeta?.neighborhood) && (
+                              <span className="text-xs text-white/40">{modalPlaceDetail?.address ?? dMeta?.neighborhood}</span>
+                            )}
+                            {(modalPlaceDetail?.rating ?? (dMeta?.rating != null && dMeta.rating > 0 ? dMeta.rating : null)) != null && (
+                              <>
+                                <span className="text-white/20">·</span>
+                                <span className="text-xs text-lantern-gold">
+                                  ★ {(modalPlaceDetail?.rating ?? dMeta?.rating)!.toFixed(1)}
+                                  {modalPlaceDetail?.userRatingCount && (
+                                    <span className="text-white/30 ml-1">({modalPlaceDetail.userRatingCount.toLocaleString()})</span>
+                                  )}
+                                </span>
+                              </>
+                            )}
+                            {dMeta?.category && dMeta.category in CAT_STYLE && (
+                              <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold capitalize ${CAT_STYLE[dMeta.category]}`}>
+                                {dMeta.category}
+                              </span>
+                            )}
+                          </div>
+
+                          {/* Editorial summary / why visit */}
+                          {(modalPlaceDetail?.editorialSummary ?? detailSlot.explanation) && (
+                            <p className="text-sm text-white/50 leading-relaxed mb-3">
+                              {modalPlaceDetail?.editorialSummary ?? detailSlot.explanation}
+                            </p>
+                          )}
+
+                          {/* Loading indicator */}
+                          {modalDetailLoading && (
+                            <p className="text-[10px] text-white/25 mb-2">Loading place details…</p>
+                          )}
+
+                          {/* Hours */}
+                          {modalPlaceDetail?.weekdayDescriptions && modalPlaceDetail.weekdayDescriptions.length > 0 && (
+                            <details className="mb-2">
+                              <summary className="text-[11px] text-white/40 cursor-pointer select-none">
+                                {modalPlaceDetail.openNow === false ? "🔴 Closed now" : modalPlaceDetail.openNow ? "🟢 Open now" : "⏰ Opening hours"}
+                              </summary>
+                              <ul className="mt-1 space-y-0.5 pl-4">
+                                {modalPlaceDetail.weekdayDescriptions.map((line, i) => (
+                                  <li key={i} className="text-[10px] text-white/40">{line}</li>
+                                ))}
+                              </ul>
+                            </details>
+                          )}
+
+                          {/* Contact & links */}
+                          {(modalPlaceDetail?.phone || modalPlaceDetail?.website || modalPlaceDetail?.googleMapsUri) && (
+                            <div className="flex flex-wrap gap-x-4 gap-y-1 mb-3">
+                              {modalPlaceDetail.phone && (
+                                <a href={`tel:${modalPlaceDetail.phone}`} className="text-[11px] text-white/40 hover:text-white/70 transition-colors">
+                                  📞 {modalPlaceDetail.phone}
+                                </a>
+                              )}
+                              {modalPlaceDetail.website && (
+                                <a href={modalPlaceDetail.website} target="_blank" rel="noopener noreferrer"
+                                  className="text-[11px] text-lantern-blue/80 hover:text-lantern-blue truncate max-w-[200px] transition-colors">
+                                  🌐 {modalPlaceDetail.website.replace(/^https?:\/\/(www\.)?/, "")}
+                                </a>
+                              )}
+                              {(modalPlaceDetail?.googleMapsUri ?? detailSlot.sourceId) && (
+                                <a
+                                  href={modalPlaceDetail?.googleMapsUri ?? `https://maps.google.com/?q=${encodeURIComponent(detailSlot.title)}`}
+                                  target="_blank" rel="noopener noreferrer"
+                                  className="text-[11px] text-lantern-blue/80 hover:text-lantern-blue transition-colors">
+                                  🗺 Google Maps
+                                </a>
+                              )}
                             </div>
                           )}
-                        </div>
 
-                        <a
-                          href={`https://maps.google.com/?q=${encodeURIComponent(detailSlot.title)}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mt-4 inline-flex items-center gap-1.5 text-xs text-lantern-blue hover:text-white transition-colors"
-                        >
-                          Open in Google Maps →
-                        </a>
+                          {/* Reviews */}
+                          {modalPlaceDetail?.reviews && modalPlaceDetail.reviews.length > 0 && (
+                            <div className="mb-4">
+                              <p className="text-[10px] font-semibold text-white/25 uppercase tracking-wider mb-2">Reviews</p>
+                              <div className="space-y-3">
+                                {modalPlaceDetail.reviews.map((r, i) => (
+                                  <div key={i} className="rounded-lg bg-white/[0.03] border border-white/[0.05] p-3">
+                                    <div className="flex items-center gap-2 mb-1.5">
+                                      {r.authorPhotoUri && (
+                                        // eslint-disable-next-line @next/next/no-img-element
+                                        <img src={r.authorPhotoUri} alt={r.authorName ?? ""} className="w-5 h-5 rounded-full object-cover" />
+                                      )}
+                                      <span className="text-[11px] font-medium text-white/60">{r.authorName ?? "Anonymous"}</span>
+                                      {r.rating != null && (
+                                        <span className="text-[10px] text-lantern-gold ml-auto">{"★".repeat(r.rating)}{"☆".repeat(5 - r.rating)}</span>
+                                      )}
+                                    </div>
+                                    {r.text && (
+                                      <p className="text-[11px] text-white/40 leading-relaxed line-clamp-3">{r.text}</p>
+                                    )}
+                                    {r.timeAgo && (
+                                      <p className="text-[10px] text-white/20 mt-1">{r.timeAgo}</p>
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Notes */}
+                          <div className="mt-2 border-t border-white/[0.06] pt-4">
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-[11px] font-semibold text-white/30 uppercase tracking-wider">Notes</span>
+                              {noteEdit === null ? (
+                                <button
+                                  type="button"
+                                  onClick={() => setNoteEdit(detailSlot.note ?? "")}
+                                  className="text-[11px] text-white/40 hover:text-lantern-mint transition-colors"
+                                >
+                                  {detailSlot.note ? "Edit" : "+ Add note"}
+                                </button>
+                              ) : (
+                                <div className="flex gap-3">
+                                  <button type="button" onClick={() => setNoteEdit(null)} className="text-[11px] text-white/40 hover:text-white/70 transition-colors">Cancel</button>
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      if (!trip.itinerary) return;
+                                      const updated = { ...detailSlot, note: noteEdit };
+                                      updateTrip({
+                                        itinerary: {
+                                          ...trip.itinerary,
+                                          days: trip.itinerary.days.map((d) => ({
+                                            ...d,
+                                            slots: d.slots.map((s) => s === detailSlot ? updated : s),
+                                          })),
+                                        },
+                                      });
+                                      setDetailSlot(updated);
+                                      setNoteEdit(null);
+                                    }}
+                                    className="text-[11px] text-lantern-mint font-semibold hover:opacity-80 transition-opacity"
+                                  >
+                                    Save
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                            {noteEdit === null ? (
+                              detailSlot.note ? (
+                                <p className="text-sm text-white/50 leading-relaxed whitespace-pre-wrap">{detailSlot.note}</p>
+                              ) : (
+                                <p className="text-[12px] text-white/20 italic">No notes yet</p>
+                              )
+                            ) : (
+                              <textarea
+                                autoFocus
+                                value={noteEdit}
+                                onChange={(e) => setNoteEdit(e.target.value)}
+                                placeholder="Add your notes…"
+                                rows={3}
+                                className="w-full bg-white/[0.04] border border-white/[0.12] rounded-lg px-3 py-2 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-lantern-mint/50 resize-none"
+                              />
+                            )}
+                          </div>
+
+                          {/* Duration */}
+                          <div className="mt-4 border-t border-white/[0.06] pt-4">
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-[11px] font-semibold text-white/30 uppercase tracking-wider">Duration</span>
+                              {durationEdit === null ? (
+                                <button type="button" onClick={() => setDurationEdit(detailSlot.durationMinutes)} className="text-[11px] text-white/40 hover:text-lantern-mint transition-colors">Edit</button>
+                              ) : (
+                                <div className="flex gap-3">
+                                  <button type="button" onClick={() => setDurationEdit(null)} className="text-[11px] text-white/40 hover:text-white/70 transition-colors">Cancel</button>
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      if (!trip.itinerary || durationEdit === null) return;
+                                      const newDur = Math.max(15, Math.min(480, durationEdit));
+                                      const updated = { ...detailSlot, durationMinutes: newDur, endMinutes: detailSlot.startMinutes + newDur };
+                                      updateTrip({
+                                        itinerary: {
+                                          ...trip.itinerary,
+                                          days: trip.itinerary.days.map((d) => ({
+                                            ...d,
+                                            slots: d.slots.map((s) => s === detailSlot ? updated : s).sort((a, b) => a.startMinutes - b.startMinutes),
+                                          })),
+                                        },
+                                      });
+                                      setDetailSlot(updated);
+                                      setDurationEdit(null);
+                                    }}
+                                    className="text-[11px] text-lantern-mint font-semibold hover:opacity-80 transition-opacity"
+                                  >
+                                    Save
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                            {durationEdit === null ? (
+                              <p className="text-sm text-white/50">{detailSlot.durationMinutes}m</p>
+                            ) : (
+                              <div className="flex items-center gap-2">
+                                <input
+                                  autoFocus type="number" min={15} max={480} step={15} value={durationEdit}
+                                  onChange={(e) => setDurationEdit(Number(e.target.value))}
+                                  className="w-28 bg-white/[0.04] border border-white/[0.12] rounded-lg px-3 py-2 text-sm text-white/80 focus:outline-none focus:border-lantern-mint/50 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
+                                />
+                                <span className="text-sm text-white/30">minutes</span>
+                              </div>
+                            )}
+                          </div>
+
+                          {!modalPlaceDetail?.googleMapsUri && (
+                            <a
+                              href={`https://maps.google.com/?q=${encodeURIComponent(detailSlot.title)}`}
+                              target="_blank" rel="noopener noreferrer"
+                              className="mt-4 inline-flex items-center gap-1.5 text-xs text-lantern-blue hover:text-white transition-colors"
+                            >
+                              Open in Google Maps →
+                            </a>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -3092,6 +3168,7 @@ export default function ItineraryPlanner() {
             durationMinutes: durMin,
             title:           activity.title,
             explanation:     "Added manually",
+            sourceId:        activity.sourceId || undefined,
           };
           const newDropped = itin.meta.droppedActivities.filter((da) => da.title !== activity.title);
           updateTrip({
