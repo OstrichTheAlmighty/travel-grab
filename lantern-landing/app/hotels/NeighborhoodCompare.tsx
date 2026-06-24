@@ -174,7 +174,7 @@ function CompareModal({
     const best    = higherWins ? Math.max(...values) : Math.min(...values.filter((v) => v > 0));
     return (
       <div className={`grid ${gridClass} gap-2 py-2 border-b border-gray-100`}>
-        <div className="text-[11px] text-gray-400 font-medium self-center">{label}</div>
+        <div className="text-[11px] text-gray-700 font-medium self-center">{label}</div>
         {enriched.map((e, i) => {
           const val = getValue(e);
           const won = val > 0 && val === best;
@@ -202,13 +202,13 @@ function CompareModal({
         <div className="sticky top-0 z-10 flex items-center justify-between px-5 py-4 border-b border-gray-200 bg-white/95 backdrop-blur-sm">
           <div>
             <h2 className="text-sm font-bold text-gray-900">Neighborhood Comparison</h2>
-            <p className="text-[11px] text-gray-400 mt-0.5">
+            <p className="text-[11px] text-gray-700 mt-0.5">
               {enriched.map((e) => e.nbhd.name.split(" /")[0]).join(" · ")}
             </p>
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-gray-50 hover:bg-gray-100 transition-colors flex items-center justify-center text-gray-500 hover:text-gray-700 text-lg leading-none"
+            className="w-8 h-8 rounded-full bg-gray-50 hover:bg-gray-100 transition-colors flex items-center justify-center text-gray-700 hover:text-gray-700 text-lg leading-none"
             aria-label="Close comparison"
           >
             ×
@@ -246,7 +246,7 @@ function CompareModal({
                 <div className="text-[11px] font-bold text-gray-800 leading-snug">
                   {e.nbhd.name.split(" /")[0].split(",")[0]}
                 </div>
-                <div className="text-[10px] text-gray-400 mt-0.5">{e.count} hotel{e.count !== 1 ? "s" : ""}</div>
+                <div className="text-[10px] text-gray-700 mt-0.5">{e.count} hotel{e.count !== 1 ? "s" : ""}</div>
               </div>
             ))}
           </div>
@@ -263,7 +263,7 @@ function CompareModal({
 
                 return (
                   <div key={cat.key} className={`grid ${gridClass} gap-2 py-2.5 border-b border-gray-100`}>
-                    <div className="text-[11px] text-gray-500 font-medium self-start pt-0.5">
+                    <div className="text-[11px] text-gray-700 font-medium self-start pt-0.5">
                       {cat.label}
                     </div>
                     {enriched.map((e) => {
@@ -303,7 +303,7 @@ function CompareModal({
               })}
             </div>
           ) : (
-            <p className="text-[11px] text-gray-300 mb-4 py-2">
+            <p className="text-[11px] text-gray-700 mb-4 py-2">
               Detailed category scores are not yet available for this city. Check back soon.
             </p>
           )}
@@ -333,7 +333,7 @@ function CompareModal({
             />
             {hasProfiles && (
               <div className={`grid ${gridClass} gap-2 py-2.5`}>
-                <div className="text-[11px] text-gray-400 font-medium self-center">Price Tier</div>
+                <div className="text-[11px] text-gray-700 font-medium self-center">Price Tier</div>
                 {enriched.map((e) => (
                   <div key={e.nbhd.id} className="text-center">
                     <span className="text-[13px] font-bold text-amber-400/65">
@@ -386,15 +386,15 @@ export function NeighborhoodCompare({
         {/* Header row */}
         <div className="flex items-center justify-between mb-3">
           <div>
-            <span className="text-[9px] font-black uppercase tracking-widest text-gray-400">
+            <span className="text-[9px] font-black uppercase tracking-widest text-gray-700">
               Compare Neighborhoods
             </span>
-            <p className="text-[11px] text-gray-300 mt-0.5">
+            <p className="text-[11px] text-gray-700 mt-0.5">
               Select 2–4 areas · side-by-side breakdown
             </p>
           </div>
           {selected.length >= 2 && (
-            <span className="text-[10px] text-gray-300">{selected.length} selected</span>
+            <span className="text-[10px] text-gray-700">{selected.length} selected</span>
           )}
         </div>
 
@@ -414,7 +414,7 @@ export function NeighborhoodCompare({
                   isSelected
                     ? "bg-teal-50 border-teal-300 text-teal-600 shadow-[0_0_0_1px_rgba(143,247,208,0.15)]"
                     : canAdd
-                      ? "bg-gray-50 border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-600"
+                      ? "bg-gray-50 border-gray-200 text-gray-700 hover:border-gray-300 hover:text-gray-600"
                       : "bg-transparent border-gray-100 text-gray-900/18 cursor-not-allowed"
                 }`}
               >

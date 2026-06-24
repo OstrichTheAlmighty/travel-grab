@@ -566,7 +566,7 @@ function fitBg(label: string) {
     return "bg-blue-50 text-blue-600 border-blue-200";
   if (l.startsWith("partial") || l.includes("basic") || l.includes("budget") || l.includes("higher price"))
     return "bg-amber-100/15 text-amber-600 border-amber-300/25";
-  return "bg-gray-50 text-gray-500 border-gray-200";
+  return "bg-gray-50 text-gray-700 border-gray-200";
 }
 
 /** Per-card neighborhood fit label that adds preference context to the generic server label. */
@@ -960,7 +960,7 @@ function DestinationCombobox({
   return (
     <div ref={containerRef} className="relative">
       <div className="relative">
-        <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-300 pointer-events-none" viewBox="0 0 24 24" fill="currentColor">
+        <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-700 pointer-events-none" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
         </svg>
         <input
@@ -971,7 +971,7 @@ function DestinationCombobox({
           onKeyDown={handleKeyDown}
           placeholder="City name (e.g. Paris, New York, Tokyo)"
           autoComplete="off"
-          className="w-full rounded-xl border border-gray-200 bg-gray-50 hover:border-gray-300 focus:border-teal-400 focus:bg-gray-50 pl-9 pr-3.5 py-3 text-sm text-gray-900 placeholder-white/25 outline-none transition-colors"
+          className="w-full rounded-xl border border-gray-200 bg-gray-50 hover:border-gray-300 focus:border-teal-400 focus:bg-gray-50 pl-9 pr-3.5 py-3 text-sm text-gray-900 placeholder:text-gray-700 outline-none transition-colors"
         />
       </div>
 
@@ -985,12 +985,12 @@ function DestinationCombobox({
                 i === highlighted ? "bg-teal-50" : "hover:bg-gray-50"
               }`}
             >
-              <svg className="w-3 h-3 text-gray-300 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <svg className="w-3 h-3 text-gray-700 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
               </svg>
               <div className="min-w-0">
                 <div className="text-sm text-gray-900 truncate">{s.text}</div>
-                {s.secondary && <div className="text-xs text-gray-400 truncate">{s.secondary}</div>}
+                {s.secondary && <div className="text-xs text-gray-700 truncate">{s.secondary}</div>}
               </div>
             </li>
           ))}
@@ -1016,13 +1016,13 @@ function NeighborhoodChips({
   return (
     <div>
       <div className="flex items-center justify-between mb-2">
-        <div className={`font-semibold text-gray-500 uppercase tracking-wider ${compact ? "text-[9px]" : "text-[10px]"}`}>
+        <div className={`font-semibold text-gray-700 uppercase tracking-wider ${compact ? "text-[9px]" : "text-[10px]"}`}>
           What matters to you?
         </div>
         {selected.length > 0 && (
           <button
             onClick={onClear}
-            className="text-[10px] text-gray-300 hover:text-gray-600 transition-colors"
+            className="text-[10px] text-gray-700 hover:text-gray-600 transition-colors"
           >
             Clear
           </button>
@@ -1038,7 +1038,7 @@ function NeighborhoodChips({
               className={`flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-semibold border transition-all ${
                 active
                   ? "bg-teal-100 text-teal-600 border-teal-400 shadow-[0_0_0_1px_rgba(143,247,208,0.20)]"
-                  : "bg-transparent text-gray-400 border-gray-200 hover:border-gray-300 hover:text-gray-600"
+                  : "bg-transparent text-gray-700 border-gray-200 hover:border-gray-300 hover:text-gray-600"
               }`}
             >
               {active && (
@@ -1052,7 +1052,7 @@ function NeighborhoodChips({
         })}
       </div>
       {!compact && (
-        <p className="mt-1.5 text-[10px] text-gray-300 leading-relaxed">
+        <p className="mt-1.5 text-[10px] text-gray-700 leading-relaxed">
           {selected.length === 0
             ? "Select any that apply — rankings adjust to match."
             : `Ranking weighted for: ${selected.map((p) => NEIGHBORHOOD_PREFS.find((x) => x.id === p)?.label ?? p).join(", ")}.`}
@@ -1226,7 +1226,7 @@ function NeighborhoodRecommendation({
   return (
     <div className="mb-5">
       {/* ── Advisor headline — single declarative answer ─────────────────── */}
-      <p className="text-[12px] text-gray-500 mb-2.5 leading-snug">
+      <p className="text-[12px] text-gray-700 mb-2.5 leading-snug">
         {primaryPref
           ? <>For <span className="font-semibold text-gray-700">{prefLabelLower}</span>, we recommend staying in <span className="font-bold text-gray-800">{shortName}</span>.</>
           : <>Our top area pick for this search: <span className="font-bold text-gray-800">{shortName}</span>.</>
@@ -1262,7 +1262,7 @@ function NeighborhoodRecommendation({
         </div>
 
         {/* Row 3: count + price range */}
-        <div className="text-[11px] text-gray-500 mb-3">
+        <div className="text-[11px] text-gray-700 mb-3">
           {recommended.count} hotel{recommended.count !== 1 ? "s" : ""}
           {priceRange && <> · {priceRange}</>}
         </div>
@@ -1270,7 +1270,7 @@ function NeighborhoodRecommendation({
         {/* Why we recommend this area */}
         {whyBullets.length > 0 && (
           <div className="mb-3">
-            <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-1.5">
+            <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-1.5">
               Why this area
             </div>
             <div className="space-y-1.5">
@@ -1291,10 +1291,10 @@ function NeighborhoodRecommendation({
           <div className="mb-3 space-y-1.5">
             {altGrid.slice(0, 2).map((alt) => (
               <div key={alt.nbhd.id} className="flex items-start gap-2">
-                <span className="text-[10px] font-semibold text-gray-400 flex-shrink-0 whitespace-nowrap mt-[1px]">
+                <span className="text-[10px] font-semibold text-gray-700 flex-shrink-0 whitespace-nowrap mt-[1px]">
                   vs. {alt.nbhd.name}:
                 </span>
-                <span className="text-[10px] text-gray-400 leading-snug">{altWhyNot(alt)}</span>
+                <span className="text-[10px] text-gray-700 leading-snug">{altWhyNot(alt)}</span>
               </div>
             ))}
           </div>
@@ -1309,8 +1309,8 @@ function NeighborhoodRecommendation({
 
         {/* Coverage note — informational, not alarming */}
         {recommended.count < 5 && withHotels.length > 1 && (
-          <p className="text-[10px] text-gray-400 leading-relaxed mb-3">
-            <span className="font-semibold text-gray-400">Coverage note:</span>
+          <p className="text-[10px] text-gray-700 leading-relaxed mb-3">
+            <span className="font-semibold text-gray-700">Coverage note:</span>
             {" "}{recommended.count} hotel{recommended.count !== 1 ? "s" : ""} found in {shortName} for these dates.
             {" "}Also explore{" "}
             {withHotels.slice(1, 3).map((s, i, arr) => (
@@ -1348,7 +1348,7 @@ function NeighborhoodRecommendation({
           <div className="text-[10px] font-bold uppercase tracking-widest text-amber-400/80 mb-1.5">
             You picked {selectedSumm.nbhd.name} over {recommended.nbhd.name}
           </div>
-          <p className="text-[11px] text-gray-500 leading-relaxed mb-2">
+          <p className="text-[11px] text-gray-700 leading-relaxed mb-2">
             {comparisonCopy(selectedSumm)}
           </p>
           <button
@@ -1363,7 +1363,7 @@ function NeighborhoodRecommendation({
       {/* ── Also consider ────────────────────────────────────────────────── */}
       {altGrid.length > 0 && (
         <div>
-          <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-2 px-0.5">
+          <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-2 px-0.5">
             Also consider
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -1382,16 +1382,16 @@ function NeighborhoodRecommendation({
                   <div className="flex items-start justify-between gap-2 mb-1">
                     <span className="font-bold text-sm text-gray-900 leading-tight">{s.nbhd.name}</span>
                     {s.matchedPrefs.length > 0 && (
-                      <span className="text-[10px] text-gray-400 flex-shrink-0 mt-0.5">
+                      <span className="text-[10px] text-gray-700 flex-shrink-0 mt-0.5">
                         {s.matchedPrefs.length >= 2 ? "Strong fit" : "Good fit"}
                       </span>
                     )}
                   </div>
-                  <div className="text-[10px] text-gray-400 mb-1.5">
+                  <div className="text-[10px] text-gray-700 mb-1.5">
                     {s.count} hotel{s.count !== 1 ? "s" : ""}
                     {s.avgPrice > 0 && <> · avg ${s.avgPrice}/night</>}
                   </div>
-                  <p className="text-[10px] text-gray-400 leading-relaxed line-clamp-2 mb-1.5">
+                  <p className="text-[10px] text-gray-700 leading-relaxed line-clamp-2 mb-1.5">
                     {s.nbhd.description.split(".")[0]}.
                   </p>
                   <p className="text-[10px] text-teal-500 leading-snug">
@@ -1404,13 +1404,13 @@ function NeighborhoodRecommendation({
           {/* Hidden neighborhoods footer */}
           {withHotels.length > 4 && (
             <div className="mt-2 text-center">
-              <span className="text-[10px] text-gray-300">
+              <span className="text-[10px] text-gray-700">
                 +{withHotels.length - 4} more neighborhoods
                 {" "}({withHotels.slice(4).reduce((sum, s) => sum + s.count, 0)} hotels) ·{" "}
               </span>
               <button
                 onClick={() => onSelect(null)}
-                className="text-[10px] text-gray-400 hover:text-gray-600 transition-colors"
+                className="text-[10px] text-gray-700 hover:text-gray-600 transition-colors"
               >
                 Browse all hotels to explore them
               </button>
@@ -1444,10 +1444,10 @@ function NeighborhoodGuide({
     <div className="mb-5">
       <div className="flex items-center justify-between mb-2.5">
         <div>
-          <span className="text-xs font-black uppercase tracking-widest text-gray-400">
+          <span className="text-xs font-black uppercase tracking-widest text-gray-700">
             {guide.displayName} Neighborhoods
           </span>
-          <p className="text-[11px] text-gray-300 mt-0.5">
+          <p className="text-[11px] text-gray-700 mt-0.5">
             {selectedId
               ? <>Filtered to one neighborhood · <button onClick={() => onSelect(null)} className="text-teal-500 hover:text-teal-600 transition-colors font-semibold">Browse all {totalHotels} hotels</button></>
               : activeNbhdCount > 0
@@ -1458,7 +1458,7 @@ function NeighborhoodGuide({
         {selectedId && (
           <button
             onClick={() => onSelect(null)}
-            className="text-[11px] text-gray-400 hover:text-gray-700 transition-colors whitespace-nowrap ml-4 flex-shrink-0"
+            className="text-[11px] text-gray-700 hover:text-gray-700 transition-colors whitespace-nowrap ml-4 flex-shrink-0"
           >
             × Clear filter
           </button>
@@ -1499,7 +1499,7 @@ function NeighborhoodGuide({
 
               {/* Stats row */}
               {s && s.count > 0 && (
-                <div className="text-[10px] text-gray-400 mb-1 space-y-0.5">
+                <div className="text-[10px] text-gray-700 mb-1 space-y-0.5">
                   <div>
                     {s.count} hotel{s.count !== 1 ? "s" : ""}
                     {s.avgPrice > 0 && <> · avg ${s.avgPrice}/night</>}
@@ -1513,7 +1513,7 @@ function NeighborhoodGuide({
                 </div>
               )}
 
-              <p className="text-[11px] text-gray-500 leading-relaxed mb-2 flex-1 line-clamp-2">
+              <p className="text-[11px] text-gray-700 leading-relaxed mb-2 flex-1 line-clamp-2">
                 {n.description}
               </p>
 
@@ -1522,7 +1522,7 @@ function NeighborhoodGuide({
                 {n.tags.slice(0, 3).map((tag) => (
                   <span
                     key={tag}
-                    className="text-[10px] text-gray-400 border border-gray-200 bg-gray-50 rounded-full px-1.5 py-0.5 leading-none"
+                    className="text-[10px] text-gray-700 border border-gray-200 bg-gray-50 rounded-full px-1.5 py-0.5 leading-none"
                   >
                     {tag}
                   </span>
@@ -1531,7 +1531,7 @@ function NeighborhoodGuide({
 
               {/* Best hotel in area */}
               {s?.bestHotel && (
-                <div className="text-[10px] text-gray-300 mb-2 truncate">
+                <div className="text-[10px] text-gray-700 mb-2 truncate">
                   ★ {s.bestHotel.name}
                 </div>
               )}
@@ -1722,7 +1722,7 @@ function ReviewStars({ rating }: { rating: number }) {
   return (
     <span className="flex items-center gap-0.5">
       {[1, 2, 3, 4, 5].map((s) => (
-        <svg key={s} className={`w-3 h-3 ${s <= rating ? "text-amber-600" : "text-gray-300"}`} viewBox="0 0 24 24" fill="currentColor">
+        <svg key={s} className={`w-3 h-3 ${s <= rating ? "text-amber-600" : "text-gray-700"}`} viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
         </svg>
       ))}
@@ -1758,13 +1758,13 @@ function ReviewCard({
               className="w-7 h-7 rounded-full object-cover flex-shrink-0 bg-gray-50"
             />
           ) : (
-            <div className="w-7 h-7 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center text-[10px] font-bold text-gray-500">
+            <div className="w-7 h-7 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center text-[10px] font-bold text-gray-700">
               {review.authorName.charAt(0).toUpperCase()}
             </div>
           )}
           <div className="min-w-0">
             <div className="text-[12px] font-semibold text-gray-700 truncate">{review.authorName}</div>
-            <div className="text-[10px] text-gray-400">{review.relativeTime}</div>
+            <div className="text-[10px] text-gray-700">{review.relativeTime}</div>
           </div>
         </div>
         <ReviewStars rating={review.rating} />
@@ -1795,7 +1795,7 @@ function ReviewCard({
           )}
         </div>
       ) : (
-        <p className="text-[11px] text-gray-300 italic">No review text.</p>
+        <p className="text-[11px] text-gray-700 italic">No review text.</p>
       )}
 
       {review.externalUrl && (
@@ -1808,7 +1808,7 @@ function ReviewCard({
             author_name: review.authorName,
             rating:      review.rating,
           })}
-          className="inline-flex items-center gap-1 text-[10px] text-gray-300 hover:text-gray-500 transition-colors"
+          className="inline-flex items-center gap-1 text-[10px] text-gray-700 hover:text-gray-700 transition-colors"
         >
           <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
             <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
@@ -1848,8 +1848,8 @@ const INSIGHT_CATEGORIES = [
     key:     "notIdealFor"      as const,
     label:   "Not Ideal For",
     icon:    "•",
-    iconCls: "text-gray-400",
-    itemCls: "text-gray-500",
+    iconCls: "text-gray-700",
+    itemCls: "text-gray-700",
   },
 ] as const;
 
@@ -1874,11 +1874,11 @@ function ReviewInsightsPanel({
   return (
     <div className="border-t border-gray-200 pt-4">
       <div className="flex items-center gap-2 mb-3">
-        <span className="text-[10px] font-black uppercase tracking-widest text-gray-500">
+        <span className="text-[10px] font-black uppercase tracking-widest text-gray-700">
           Guest Review Insights
         </span>
         {!loading && summary?.limitedCoverage && (
-          <span className="text-[9px] text-gray-300 font-normal normal-case tracking-normal">
+          <span className="text-[9px] text-gray-700 font-normal normal-case tracking-normal">
             · limited sample
           </span>
         )}
@@ -1907,7 +1907,7 @@ function ReviewInsightsPanel({
                 key={cat.key}
                 className="rounded-lg border border-gray-200 bg-gray-50 p-3 space-y-1.5"
               >
-                <div className="text-[10px] font-bold text-gray-500 mb-1">{cat.label}</div>
+                <div className="text-[10px] font-bold text-gray-700 mb-1">{cat.label}</div>
                 {items.map((item, i) => (
                   <div key={i} className="flex items-start gap-1.5">
                     <span className={`text-[10px] flex-shrink-0 mt-px font-bold ${cat.iconCls}`}>
@@ -2110,7 +2110,7 @@ function GuestReviewsSection({
     });
 
   const barColor = (s: number) => s >= 65 ? "bg-lantern-mint" : s >= 45 ? "bg-gray-200" : "bg-amber-100/70";
-  const barText  = (s: number) => s >= 65 ? "text-teal-600" : s >= 45 ? "text-gray-500" : "text-amber-600";
+  const barText  = (s: number) => s >= 65 ? "text-teal-600" : s >= 45 ? "text-gray-700" : "text-amber-600";
   const overallPct = displayRating > 0 ? Math.round((displayRating / 5) * 100) : 0;
 
   const SORT_OPTIONS: { key: ReviewSortKey; label: string }[] = [
@@ -2122,7 +2122,7 @@ function GuestReviewsSection({
 
   return (
     <div>
-      <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-2">Guest Reviews</div>
+      <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-2">Guest Reviews</div>
       <div className="rounded-xl border border-gray-200 bg-gray-50 p-4 space-y-4">
 
         {/* Aggregate rating — always shown from whichever source is available */}
@@ -2134,7 +2134,7 @@ function GuestReviewsSection({
             <div className="flex-1">
               <ReviewStars rating={Math.round(displayRating)} />
               {displayCount > 0 && (
-                <div className="text-[10px] text-gray-400 mt-0.5">
+                <div className="text-[10px] text-gray-700 mt-0.5">
                   {displayCount.toLocaleString()} Google reviews
                 </div>
               )}
@@ -2184,7 +2184,7 @@ function GuestReviewsSection({
           <>
             {/* Search input */}
             <div className="relative">
-              <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-300 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+              <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-700 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
               </svg>
               <input
@@ -2192,12 +2192,12 @@ function GuestReviewsSection({
                 value={query}
                 onChange={(e) => handleQueryChange(e.target.value)}
                 placeholder="Search reviews for noise, room, breakfast..."
-                className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-gray-200 bg-gray-50 text-[12px] text-gray-700 placeholder:text-gray-300 focus:outline-none focus:border-blue-300 focus:bg-gray-50 transition-all"
+                className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-gray-200 bg-gray-50 text-[12px] text-gray-700 placeholder:text-gray-700 focus:outline-none focus:border-blue-300 focus:bg-gray-50 transition-all"
               />
               {query && (
                 <button
                   onClick={() => handleQueryChange("")}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-300 hover:text-gray-500"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-700 hover:text-gray-700"
                 >
                   <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
                     <path d="M18 6L6 18M6 6l12 12" />
@@ -2215,7 +2215,7 @@ function GuestReviewsSection({
                   className={`px-2.5 py-1 rounded-full text-[10px] font-semibold border transition-all ${
                     query.toLowerCase() === chip.toLowerCase()
                       ? "bg-blue-100 text-blue-600 border-blue-300"
-                      : "bg-transparent text-gray-400 border-gray-200 hover:text-gray-600 hover:border-gray-300"
+                      : "bg-transparent text-gray-700 border-gray-200 hover:text-gray-600 hover:border-gray-300"
                   }`}
                 >
                   {chip}
@@ -2227,7 +2227,7 @@ function GuestReviewsSection({
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
               {/* Sort chips */}
               <div className="flex items-center gap-1.5">
-                <span className="text-[10px] text-gray-300 font-semibold mr-0.5">Sort:</span>
+                <span className="text-[10px] text-gray-700 font-semibold mr-0.5">Sort:</span>
                 {SORT_OPTIONS.map(({ key, label }) => (
                   <button
                     key={key}
@@ -2235,7 +2235,7 @@ function GuestReviewsSection({
                     className={`px-2.5 py-1 rounded-full text-[10px] font-semibold border transition-all ${
                       sortKey === key
                         ? "bg-gray-100 text-gray-700 border-gray-300"
-                        : "text-gray-400 border-gray-200 hover:text-gray-500 hover:border-gray-200"
+                        : "text-gray-700 border-gray-200 hover:text-gray-700 hover:border-gray-200"
                     }`}
                   >
                     {label}
@@ -2245,14 +2245,14 @@ function GuestReviewsSection({
 
               {/* Rating filter */}
               <div className="flex items-center gap-1.5">
-                <span className="text-[10px] text-gray-300 font-semibold mr-0.5">Rating:</span>
+                <span className="text-[10px] text-gray-700 font-semibold mr-0.5">Rating:</span>
                 {/* "All" always enabled */}
                 <button
                   onClick={() => setRatingFilter("all")}
                   className={`px-2.5 py-1 rounded-full text-[10px] font-semibold border transition-all ${
                     ratingFilter === "all"
                       ? "bg-gray-100 text-gray-700 border-gray-300"
-                      : "text-gray-400 border-gray-200 hover:text-gray-500 hover:border-gray-200"
+                      : "text-gray-700 border-gray-200 hover:text-gray-700 hover:border-gray-200"
                   }`}
                 >
                   All
@@ -2268,13 +2268,13 @@ function GuestReviewsSection({
                       onClick={() => !isEmpty && setRatingFilter(f)}
                       className={`px-2.5 py-1 rounded-full text-[10px] font-semibold border transition-all ${
                         isEmpty
-                          ? "text-gray-300 border-gray-100 cursor-not-allowed"
+                          ? "text-gray-700 border-gray-100 cursor-not-allowed"
                           : ratingFilter === f
                             ? "bg-gray-100 text-gray-700 border-gray-300"
-                            : "text-gray-400 border-gray-200 hover:text-gray-500 hover:border-gray-200"
+                            : "text-gray-700 border-gray-200 hover:text-gray-700 hover:border-gray-200"
                       }`}
                     >
-                      {label}{!isEmpty && <span className="ml-1 text-gray-400">({count})</span>}
+                      {label}{!isEmpty && <span className="ml-1 text-gray-700">({count})</span>}
                     </button>
                   );
                 })}
@@ -2294,11 +2294,11 @@ function GuestReviewsSection({
                 ))}
               </div>
             ) : (
-              <p className="text-[11px] text-gray-400 py-2">No reviews in the current review sample match this search.</p>
+              <p className="text-[11px] text-gray-700 py-2">No reviews in the current review sample match this search.</p>
             )}
 
             {/* Provider-limit disclosure */}
-            <p className="text-[10px] text-gray-300 leading-relaxed border-t border-gray-100 pt-3">
+            <p className="text-[10px] text-gray-700 leading-relaxed border-t border-gray-100 pt-3">
               {providerLimitReached
                 ? "Showing a sample of available Google reviews. Full coverage may require additional sources."
                 : "Showing a sample of available Google reviews."}
@@ -2308,19 +2308,19 @@ function GuestReviewsSection({
 
         {/* Rate limited */}
         {!loading && error === "rate_limited" && (
-          <p className="text-[11px] text-gray-400">
+          <p className="text-[11px] text-gray-700">
             Review details are temporarily unavailable. Please try again shortly.
           </p>
         )}
 
         {/* No reviews from Places API */}
         {!loading && reviews.length === 0 && !error && (
-          <p className="text-[11px] text-gray-400">Review text is not currently available. Ratings are based on Google review aggregates.</p>
+          <p className="text-[11px] text-gray-700">Review text is not currently available. Ratings are based on Google review aggregates.</p>
         )}
 
         {/* Other API error — fall back to SerpAPI aggregate note */}
         {!loading && error && error !== "rate_limited" && serpRating > 0 && (
-          <p className="text-[10px] text-gray-300 leading-relaxed">
+          <p className="text-[10px] text-gray-700 leading-relaxed">
             Review text isn&apos;t available right now. Scoring uses the {serpRating.toFixed(1)}★ aggregate from {serpReviewCount.toLocaleString()} reviews.
           </p>
         )}
@@ -2394,7 +2394,7 @@ function HotelDetailDrawer({
   if (offer.score_breakdown.reviews < 45)     tradeoffs.push("Guest reviews below the search average.");
 
   const barColor = (s: number) => s >= 65 ? "bg-lantern-mint" : s >= 45 ? "bg-gray-200" : "bg-amber-100/70";
-  const barText  = (s: number) => s >= 65 ? "text-teal-600" : s >= 45 ? "text-gray-500" : "text-amber-600";
+  const barText  = (s: number) => s >= 65 ? "text-teal-600" : s >= 45 ? "text-gray-700" : "text-amber-600";
 
   const sortedAmenities = [...offer.amenities].sort((a, b) => {
     const KEY = ["pool", "gym", "fitness", "spa", "breakfast", "restaurant", "bar", "beach", "parking"];
@@ -2427,10 +2427,10 @@ function HotelDetailDrawer({
 
         {/* Sticky header */}
         <div className="flex items-center justify-between px-5 py-3 border-b border-gray-200 bg-gray-50/95 backdrop-blur-sm flex-shrink-0">
-          <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Research this hotel</span>
+          <span className="text-[10px] font-black uppercase tracking-widest text-gray-700">Research this hotel</span>
           <button
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:text-gray-900 hover:border-gray-300 transition-all"
+            className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 text-gray-700 hover:text-gray-900 hover:border-gray-300 transition-all"
           >
             <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
               <path d="M18 6L6 18M6 6l12 12" />
@@ -2474,19 +2474,19 @@ function HotelDetailDrawer({
               </div>
               {offer.inferred_neighborhood && (
                 <div className="flex items-center gap-1 mb-1">
-                  <svg className="w-3 h-3 text-gray-300" viewBox="0 0 24 24" fill="currentColor">
+                  <svg className="w-3 h-3 text-gray-700" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                   </svg>
-                  <span className="text-[11px] font-semibold text-gray-500">{offer.inferred_neighborhood}</span>
+                  <span className="text-[11px] font-semibold text-gray-700">{offer.inferred_neighborhood}</span>
                 </div>
               )}
               <h2 className="text-xl font-black text-gray-900 leading-tight">{offer.name}</h2>
-              {offer.address && <p className="text-xs text-gray-400 mt-0.5">{offer.address}</p>}
+              {offer.address && <p className="text-xs text-gray-700 mt-0.5">{offer.address}</p>}
             </div>
 
             {/* ── Overview ── */}
             <div>
-              <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-2">Overview</div>
+              <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-2">Overview</div>
               <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
                 <div className="flex items-center gap-4 flex-wrap">
                   {offer.star_rating > 0 && <StarRating count={offer.star_rating} />}
@@ -2495,9 +2495,9 @@ function HotelDetailDrawer({
                       <span className={`text-2xl font-black tabular-nums ${scoreColor(offer.ai_score)}`}>
                         {offer.overall_rating.toFixed(1)}
                       </span>
-                      <span className="text-[11px] text-gray-400">★</span>
+                      <span className="text-[11px] text-gray-700">★</span>
                       {offer.review_count > 0 && (
-                        <span className="text-[11px] text-gray-400">
+                        <span className="text-[11px] text-gray-700">
                           · {offer.review_count.toLocaleString()} reviews
                         </span>
                       )}
@@ -2510,7 +2510,7 @@ function HotelDetailDrawer({
                 </div>
                 {offer.hotel_type && offer.hotel_type !== "Hotel" && (
                   <div className="mt-3 border-t border-gray-100 pt-3">
-                    <span className="text-[11px] text-gray-400">{offer.hotel_type}</span>
+                    <span className="text-[11px] text-gray-700">{offer.hotel_type}</span>
                   </div>
                 )}
               </div>
@@ -2526,7 +2526,7 @@ function HotelDetailDrawer({
                   <p className="text-xs text-gray-600 leading-relaxed mb-1.5">{fitNote}</p>
                 )}
                 {offer.recommendation_why && (
-                  <p className="text-xs text-gray-500 leading-relaxed">{offer.recommendation_why}</p>
+                  <p className="text-xs text-gray-700 leading-relaxed">{offer.recommendation_why}</p>
                 )}
               </div>
             )}
@@ -2534,7 +2534,7 @@ function HotelDetailDrawer({
             {/* ── Why ranked here ── */}
             {offer.rank_bullets && offer.rank_bullets.length > 0 && (
               <div>
-                <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-2">
+                <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-2">
                   {offer.rank_position ? `Ranked #${offer.rank_position} in this search` : "Why this hotel ranked here"}
                 </div>
                 <div className="rounded-xl border border-gray-200 bg-gray-50 p-4 space-y-2.5">
@@ -2543,7 +2543,7 @@ function HotelDetailDrawer({
                       <svg className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-teal-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                         <path d="M20 6L9 17l-5-5" />
                       </svg>
-                      <span className="text-[12px] text-gray-500 leading-snug">{b}</span>
+                      <span className="text-[12px] text-gray-700 leading-snug">{b}</span>
                     </div>
                   ))}
                   {offer.rank_weakness && (
@@ -2552,7 +2552,7 @@ function HotelDetailDrawer({
                         <svg className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-amber-400/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                           <path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
                         </svg>
-                        <span className="text-[11px] text-gray-500 leading-snug">{offer.rank_weakness}</span>
+                        <span className="text-[11px] text-gray-700 leading-snug">{offer.rank_weakness}</span>
                       </div>
                     </div>
                   )}
@@ -2563,16 +2563,16 @@ function HotelDetailDrawer({
             {/* ── About this property ── */}
             {offer.description && offer.description.trim().length > 30 && (
               <div>
-                <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-2">About this property</div>
+                <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-2">About this property</div>
                 <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
-                  <p className="text-[12px] text-gray-500 leading-relaxed">{offer.description.trim()}</p>
+                  <p className="text-[12px] text-gray-700 leading-relaxed">{offer.description.trim()}</p>
                 </div>
               </div>
             )}
 
             {/* ── Score Breakdown ── */}
             <div>
-              <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-2">Score Breakdown</div>
+              <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-2">Score Breakdown</div>
               <div className="rounded-xl border border-gray-200 bg-gray-50 p-4 space-y-2.5">
                 {breakdownRows.map(({ key, label, score }) => (
                   <div key={key}>
@@ -2617,7 +2617,7 @@ function HotelDetailDrawer({
             {/* ── Risk Flags ── */}
             {offer.risk_flags && offer.risk_flags.length > 0 && (
               <div>
-                <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-2">Risk flags</div>
+                <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-2">Risk flags</div>
                 <div className="rounded-xl border border-amber-500/20 bg-amber-500/[0.03] p-4 space-y-2.5">
                   {offer.risk_flags.map((flag) => (
                     <div key={flag.key} className="flex items-start gap-2.5">
@@ -2628,7 +2628,7 @@ function HotelDetailDrawer({
                       </div>
                       <div className="min-w-0">
                         <div className="text-[11px] font-bold text-amber-300/80 leading-none mb-0.5">{flag.label}</div>
-                        <p className="text-[11px] text-gray-500 leading-snug">{flag.reason}</p>
+                        <p className="text-[11px] text-gray-700 leading-snug">{flag.reason}</p>
                       </div>
                     </div>
                   ))}
@@ -2639,9 +2639,9 @@ function HotelDetailDrawer({
             {/* ── Amenities ── */}
             {sortedAmenities.length > 0 && (
               <div>
-                <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-2">
+                <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-2">
                   Amenities
-                  <span className="ml-1.5 text-gray-300 normal-case font-normal tracking-normal">· tap for details</span>
+                  <span className="ml-1.5 text-gray-700 normal-case font-normal tracking-normal">· tap for details</span>
                 </div>
                 <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
                   <div className="flex flex-wrap gap-1.5 mb-3">
@@ -2657,7 +2657,7 @@ function HotelDetailDrawer({
                               ? "bg-blue-100 text-blue-600 border-blue-300"
                               : hasDetail
                                 ? "bg-gray-50 text-gray-600 border-gray-200 hover:border-gray-300 hover:text-gray-700 cursor-pointer"
-                                : "bg-gray-50 text-gray-400 border-gray-200 cursor-default"
+                                : "bg-gray-50 text-gray-700 border-gray-200 cursor-default"
                           }`}
                         >
                           {a}
@@ -2668,7 +2668,7 @@ function HotelDetailDrawer({
                   {activeAmenity && (
                     <div className="rounded-lg border border-blue-400/20 bg-blue-100/[0.04] px-3 py-2.5">
                       <div className="text-[11px] font-bold text-gray-600 mb-0.5">{activeAmenity}</div>
-                      <p className="text-[11px] text-gray-500 leading-relaxed">
+                      <p className="text-[11px] text-gray-700 leading-relaxed">
                         {getAmenityDetail(activeAmenity)
                           ?? "Amenity listed by this hotel. Contact them directly to confirm availability and details."}
                       </p>
@@ -2681,13 +2681,13 @@ function HotelDetailDrawer({
             {/* ── Neighborhood Context ── */}
             {nbhdCard && (
               <div>
-                <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-2">Neighborhood Context</div>
+                <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-2">Neighborhood Context</div>
                 <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
                   <div className="text-[11px] font-bold text-gray-600 mb-1.5">{nbhdCard.name}</div>
-                  <p className="text-xs text-gray-500 leading-relaxed mb-2.5">{nbhdCard.description}</p>
+                  <p className="text-xs text-gray-700 leading-relaxed mb-2.5">{nbhdCard.description}</p>
                   <div className="flex flex-wrap gap-1">
                     {nbhdCard.tags.slice(0, 5).map((tag) => (
-                      <span key={tag} className="text-[10px] text-gray-400 border border-gray-200 rounded-full px-1.5 py-0.5 leading-none">
+                      <span key={tag} className="text-[10px] text-gray-700 border border-gray-200 rounded-full px-1.5 py-0.5 leading-none">
                         {tag}
                       </span>
                     ))}
@@ -2714,7 +2714,7 @@ function HotelDetailDrawer({
                 </div>
                 <ul className="space-y-1.5">
                   {tradeoffs.map((t, i) => (
-                    <li key={i} className="text-[11px] text-gray-500 flex items-start gap-2">
+                    <li key={i} className="text-[11px] text-gray-700 flex items-start gap-2">
                       <span className="text-amber-400/50 flex-shrink-0">·</span>
                       {t}
                     </li>
@@ -2725,22 +2725,22 @@ function HotelDetailDrawer({
 
             {/* ── Price & Booking ── */}
             <div>
-              <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-2">Price & Booking</div>
+              <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-2">Price & Booking</div>
               <div className="rounded-xl border border-gray-200 bg-gray-50 p-4 space-y-3">
                 <div className="flex items-baseline gap-2 flex-wrap">
                   <span className={`text-2xl font-black tabular-nums ${scoreColor(offer.ai_score)}`}>
                     ${Math.round(offer.price_per_night).toLocaleString()}
                   </span>
-                  <span className="text-sm text-gray-500">/ night</span>
+                  <span className="text-sm text-gray-700">/ night</span>
                   {guests > 1 && (
-                    <span className="text-xs text-gray-300">
+                    <span className="text-xs text-gray-700">
                       · ${Math.round(offer.price_per_night / guests).toLocaleString()}/person
                     </span>
                   )}
                 </div>
                 {offer.nights > 1 && (
                   <div className="flex items-center justify-between border-t border-gray-100 pt-3">
-                    <span className="text-[11px] text-gray-400">Total ({offer.nights} nights)</span>
+                    <span className="text-[11px] text-gray-700">Total ({offer.nights} nights)</span>
                     <span className="text-[13px] font-bold text-gray-600">${Math.round(offer.total_price).toLocaleString()}</span>
                   </div>
                 )}
@@ -2748,19 +2748,19 @@ function HotelDetailDrawer({
                   <div className="flex items-center gap-6 border-t border-gray-100 pt-3">
                     {offer.check_in && (
                       <div>
-                        <div className="text-[9px] text-gray-300 uppercase tracking-wide mb-0.5">Check-in</div>
-                        <div className="text-[12px] text-gray-500 font-semibold">{offer.check_in}</div>
+                        <div className="text-[9px] text-gray-700 uppercase tracking-wide mb-0.5">Check-in</div>
+                        <div className="text-[12px] text-gray-700 font-semibold">{offer.check_in}</div>
                       </div>
                     )}
                     {offer.check_out && (
                       <div>
-                        <div className="text-[9px] text-gray-300 uppercase tracking-wide mb-0.5">Check-out</div>
-                        <div className="text-[12px] text-gray-500 font-semibold">{offer.check_out}</div>
+                        <div className="text-[9px] text-gray-700 uppercase tracking-wide mb-0.5">Check-out</div>
+                        <div className="text-[12px] text-gray-700 font-semibold">{offer.check_out}</div>
                       </div>
                     )}
                   </div>
                 )}
-                <p className="text-[10px] text-gray-300 leading-relaxed border-t border-gray-100 pt-3">
+                <p className="text-[10px] text-gray-700 leading-relaxed border-t border-gray-100 pt-3">
                   Prices are from the search results and may change at checkout.
                 </p>
               </div>
@@ -2787,12 +2787,12 @@ function HotelDetailDrawer({
               >
                 Check availability →
               </a>
-              <p className="text-[10px] text-gray-300 text-center leading-relaxed">
+              <p className="text-[10px] text-gray-700 text-center leading-relaxed">
                 Opens Google Hotels · Prices may change · Final booking happens off TravelGrab
               </p>
             </>
           ) : (
-            <p className="text-[11px] text-gray-300 text-center">No booking link available for this hotel.</p>
+            <p className="text-[11px] text-gray-700 text-center">No booking link available for this hotel.</p>
           )}
         </div>
       </div>
@@ -2868,7 +2868,7 @@ function HotelCard({
   }
 
   const barColor = (s: number) => s >= 65 ? "bg-lantern-mint" : s >= 45 ? "bg-gray-200" : "bg-amber-100/70";
-  const barText  = (s: number) => s >= 65 ? "text-teal-600" : s >= 45 ? "text-gray-500" : "text-amber-600";
+  const barText  = (s: number) => s >= 65 ? "text-teal-600" : s >= 45 ? "text-gray-700" : "text-amber-600";
 
   const visibleAmenities = offer.amenities.slice(0, 5);
 
@@ -2901,7 +2901,7 @@ function HotelCard({
             />
           ) : (
             <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg bg-gray-50 flex items-center justify-center flex-shrink-0">
-              <svg className="w-6 h-6 text-gray-300" viewBox="0 0 24 24" fill="currentColor">
+              <svg className="w-6 h-6 text-gray-700" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
               </svg>
             </div>
@@ -2942,7 +2942,7 @@ function HotelCard({
                       badge === "Best Reviews"  ? "bg-amber-500/15 text-amber-300 border-amber-500/30" :
                       badge === "Most Walkable" ? "bg-teal-500/15 text-teal-300 border-teal-500/30" :
                       badge === "Business Pick" ? "bg-sky-500/15 text-sky-300 border-sky-500/30" :
-                      "bg-gray-100 text-gray-500 border-gray-200"
+                      "bg-gray-100 text-gray-700 border-gray-200"
                     }`}>
                       {badge}
                     </span>
@@ -2957,10 +2957,10 @@ function HotelCard({
                 {/* Neighborhood badge */}
                 {offer.inferred_neighborhood && (
                   <div className="flex items-center gap-1 mb-0.5">
-                    <svg className="w-2.5 h-2.5 text-gray-300 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                    <svg className="w-2.5 h-2.5 text-gray-700 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                     </svg>
-                    <span className="text-[10px] font-semibold text-gray-400">
+                    <span className="text-[10px] font-semibold text-gray-700">
                       {offer.inferred_neighborhood}
                     </span>
                   </div>
@@ -2968,7 +2968,7 @@ function HotelCard({
 
                 <h3 className="text-sm font-bold text-gray-900 leading-tight">{offer.name}</h3>
                 {offer.address && (
-                  <p className="text-[11px] text-gray-400 mt-0.5 leading-tight truncate">{offer.address}</p>
+                  <p className="text-[11px] text-gray-700 mt-0.5 leading-tight truncate">{offer.address}</p>
                 )}
               </div>
 
@@ -2977,14 +2977,14 @@ function HotelCard({
                 <div className={`text-2xl font-black tabular-nums leading-none ${scoreColor(offer.ai_score)}`}>
                   ${Math.round(offer.price_per_night).toLocaleString()}
                 </div>
-                <div className="text-[11px] text-gray-400 mt-0.5">per night</div>
+                <div className="text-[11px] text-gray-700 mt-0.5">per night</div>
                 {guests > 1 && (
-                  <div className="text-[11px] text-gray-300 mt-0.5">
+                  <div className="text-[11px] text-gray-700 mt-0.5">
                     ${Math.round(offer.price_per_night / guests).toLocaleString()}/person
                   </div>
                 )}
                 {offer.nights > 1 && (
-                  <div className="text-[11px] text-gray-300 mt-0.5">
+                  <div className="text-[11px] text-gray-700 mt-0.5">
                     ${Math.round(offer.total_price).toLocaleString()} total
                   </div>
                 )}
@@ -3000,10 +3000,10 @@ function HotelCard({
                 </span>
               )}
               {offer.review_count > 0 && (
-                <span className="text-[11px] text-gray-400">({offer.review_count.toLocaleString()} reviews)</span>
+                <span className="text-[11px] text-gray-700">({offer.review_count.toLocaleString()} reviews)</span>
               )}
               {offer.hotel_type && offer.hotel_type !== "Hotel" && (
-                <span className="text-[10px] text-gray-300 uppercase tracking-wider">{offer.hotel_type}</span>
+                <span className="text-[10px] text-gray-700 uppercase tracking-wider">{offer.hotel_type}</span>
               )}
             </div>
           </div>
@@ -3035,17 +3035,17 @@ function HotelCard({
             {offer.rank_weakness && !isBestOverall && (
               <div className="flex items-start gap-2 mt-2 pt-2 border-t border-gray-100">
                 <span className="text-[9px] font-bold uppercase tracking-wider text-amber-400/60 flex-shrink-0 mt-[2px] whitespace-nowrap">Tradeoff</span>
-                <span className="text-[11px] text-gray-500 leading-snug">{offer.rank_weakness}</span>
+                <span className="text-[11px] text-gray-700 leading-snug">{offer.rank_weakness}</span>
               </div>
             )}
             {offer.skip_reason && (
               <div className="flex items-start gap-1.5 mt-1.5">
-                <span className="text-[10px] text-gray-300 leading-snug italic">{offer.skip_reason}</span>
+                <span className="text-[10px] text-gray-700 leading-snug italic">{offer.skip_reason}</span>
               </div>
             )}
           </div>
         ) : offer.recommendation_why ? (
-          <p className={`text-[11px] leading-relaxed mb-3 ${fitNote ? "text-gray-500" : "text-gray-500"}`}>
+          <p className={`text-[11px] leading-relaxed mb-3 ${fitNote ? "text-gray-700" : "text-gray-700"}`}>
             {offer.recommendation_why}
           </p>
         ) : null}
@@ -3076,14 +3076,14 @@ function HotelCard({
             <svg className="w-3 h-3 text-blue-600 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
             </svg>
-            <span className="text-[11px] text-gray-500">{offer.transit_note}</span>
+            <span className="text-[11px] text-gray-700">{offer.transit_note}</span>
           </div>
         ) : offer.nearby_walk && !isStreetIntersectionName(offer.nearby_walk.name) ? (
           <div className="flex items-center gap-1.5 mb-2.5">
-            <svg className="w-3 h-3 text-gray-300 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round">
+            <svg className="w-3 h-3 text-gray-700 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round">
               <circle cx="12" cy="12" r="10" /><path d="M12 8v4l3 3" />
             </svg>
-            <span className="text-[11px] text-gray-400">
+            <span className="text-[11px] text-gray-700">
               {offer.nearby_walk.minutes} min walk to {offer.nearby_walk.name}
             </span>
           </div>
@@ -3093,23 +3093,23 @@ function HotelCard({
         {visibleAmenities.length > 0 && (
           <div className="flex flex-wrap gap-1 mb-3">
             {visibleAmenities.map((a) => (
-              <span key={a} className="text-[10px] text-gray-500 border border-gray-200 bg-gray-50 rounded-full px-2 py-0.5">
+              <span key={a} className="text-[10px] text-gray-700 border border-gray-200 bg-gray-50 rounded-full px-2 py-0.5">
                 {a}
               </span>
             ))}
             {offer.amenities.length > 5 && (
-              <span className="text-[10px] text-gray-300 px-1">+{offer.amenities.length - 5} more</span>
+              <span className="text-[10px] text-gray-700 px-1">+{offer.amenities.length - 5} more</span>
             )}
           </div>
         )}
 
         {/* Footer: dates + score + CTA */}
         <div className="flex items-center justify-between gap-3 pt-3 border-t border-gray-100">
-          <div className="flex items-center gap-2 text-[11px] text-gray-400">
+          <div className="flex items-center gap-2 text-[11px] text-gray-700">
             <span>{formatDate(offer.check_in)}</span>
-            <span className="text-gray-300">→</span>
+            <span className="text-gray-700">→</span>
             <span>{formatDate(offer.check_out)}</span>
-            {offer.nights > 0 && <span className="text-gray-300">· {offer.nights}n</span>}
+            {offer.nights > 0 && <span className="text-gray-700">· {offer.nights}n</span>}
           </div>
 
           <div className="flex items-center gap-2">
@@ -3123,7 +3123,7 @@ function HotelCard({
               </button>
               <button
                 onClick={() => setBreakdownOpen((o) => !o)}
-                className="text-[9px] text-gray-300 hover:text-blue-600 transition-colors leading-none"
+                className="text-[9px] text-gray-700 hover:text-blue-600 transition-colors leading-none"
               >
                 {breakdownOpen ? "Hide" : "Why?"}
               </button>
@@ -3138,8 +3138,8 @@ function HotelCard({
                     isInCompare
                       ? "bg-blue-100 text-blue-600 border-blue-400/30"
                       : compareDisabled
-                        ? "text-gray-300 border-gray-100 cursor-not-allowed"
-                        : "text-gray-500 border-gray-200 hover:border-gray-300 hover:text-gray-600"
+                        ? "text-gray-700 border-gray-100 cursor-not-allowed"
+                        : "text-gray-700 border-gray-200 hover:border-gray-300 hover:text-gray-600"
                   }`}
                 >
                   {isInCompare ? "✓ Compare" : "Compare"}
@@ -3148,7 +3148,7 @@ function HotelCard({
               {onOpenDetail && (
                 <button
                   onClick={(e) => { e.stopPropagation(); onOpenDetail(); }}
-                  className="text-[11px] font-semibold text-gray-500 border border-gray-200 hover:border-gray-300 hover:text-gray-700 rounded-lg px-3 py-1.5 transition-all whitespace-nowrap"
+                  className="text-[11px] font-semibold text-gray-700 border border-gray-200 hover:border-gray-300 hover:text-gray-700 rounded-lg px-3 py-1.5 transition-all whitespace-nowrap"
                 >
                   Research
                 </button>
@@ -3159,7 +3159,7 @@ function HotelCard({
                   className={`text-[11px] font-semibold rounded-lg px-2.5 py-1.5 transition-all border whitespace-nowrap ${
                     isAddedToItinerary
                       ? "bg-teal-50 text-teal-600 border-teal-200"
-                      : "text-gray-500 border-gray-200 hover:border-teal-200 hover:text-teal-500"
+                      : "text-gray-700 border-gray-200 hover:border-teal-200 hover:text-teal-500"
                   }`}
                 >
                   {isAddedToItinerary ? "✓ In itinerary" : "+ Itinerary"}
@@ -3176,7 +3176,7 @@ function HotelCard({
                   >
                     Check availability
                   </a>
-                  <span className="text-[9px] text-gray-300">Opens Google Hotels · price may vary</span>
+                  <span className="text-[9px] text-gray-700">Opens Google Hotels · price may vary</span>
                 </div>
               )}
             </div>
@@ -3216,7 +3216,7 @@ function HotelCard({
 
           return (
             <div className="mt-3 pt-3 border-t border-gray-100">
-              <div className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-2.5">What drives this ranking</div>
+              <div className="text-[10px] font-bold uppercase tracking-wider text-gray-700 mb-2.5">What drives this ranking</div>
               <div className="space-y-3">
                 {contributions.sort((a, b) => b.pts - a.pts).map(({ label, score, pts }) => {
                   const evidence = breakdownEvidence(label, offer, avgPrice, prefsActive, activePrefs);
@@ -3226,7 +3226,7 @@ function HotelCard({
                         <div className="min-w-0 flex-1">
                           <span className="text-[10.5px] font-semibold text-gray-600 block leading-none mb-0.5">{label}</span>
                           {evidence && (
-                            <span className="text-[10px] text-gray-400 leading-snug">{evidence}</span>
+                            <span className="text-[10px] text-gray-700 leading-snug">{evidence}</span>
                           )}
                         </div>
                         <span className={`text-[11px] font-bold tabular-nums flex-shrink-0 ${barText(pts * 5)}`}>+{pts}</span>
@@ -3242,7 +3242,7 @@ function HotelCard({
                 })}
               </div>
               <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-gray-100">
-                <span className="text-[10px] text-gray-300">TravelGrab score</span>
+                <span className="text-[10px] text-gray-700">TravelGrab score</span>
                 <span className={`text-[12px] font-black tabular-nums ${scoreColor(offer.ai_score)}`}>{offer.ai_score}</span>
               </div>
             </div>
@@ -3259,7 +3259,7 @@ function HotelCard({
 function MetricInfo({ text }: { text: string }) {
   return (
     <span className="relative group inline-flex items-center ml-1 leading-none">
-      <span className="text-[9px] text-gray-300 hover:text-gray-500 cursor-default select-none transition-colors">ⓘ</span>
+      <span className="text-[9px] text-gray-700 hover:text-gray-700 cursor-default select-none transition-colors">ⓘ</span>
       <span className="absolute bottom-full left-0 mb-2 w-44 rounded-lg bg-gray-100 border border-gray-200 px-2.5 py-2 text-[10px] text-gray-600 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 whitespace-normal shadow-lg">
         {text}
       </span>
@@ -3444,7 +3444,7 @@ function CompareSummaryCards({ hotels }: { hotels: HotelOffer[] }) {
 function CompareSectionRow({ label, colCount }: { label: string; colCount: number }) {
   return (
     <tr>
-      <td colSpan={colCount + 1} className="pt-5 pb-1.5 text-[9px] font-black uppercase tracking-widest text-gray-300">
+      <td colSpan={colCount + 1} className="pt-5 pb-1.5 text-[9px] font-black uppercase tracking-widest text-gray-700">
         {label}
       </td>
     </tr>
@@ -3465,7 +3465,7 @@ function CompareScoreRow({
   const maxVal = Math.max(...vals.map(v => v.val), 1);
   return (
     <tr className="border-b border-gray-100">
-      <td className="py-3 pr-4 text-gray-500 text-[11px] whitespace-nowrap align-top">
+      <td className="py-3 pr-4 text-gray-700 text-[11px] whitespace-nowrap align-top">
         <span className="flex items-center gap-0.5">
           {label}
           {tooltip && <MetricInfo text={tooltip} />}
@@ -3518,7 +3518,7 @@ function CompareFloatingTray({
       <div className="pointer-events-auto rounded-2xl border border-gray-200 bg-white/97 backdrop-blur-xl shadow-[0_8px_48px_rgba(0,0,0,0.85)] px-4 py-3 flex items-center gap-3">
 
         {/* Label */}
-        <span className="text-[9px] font-black uppercase tracking-widest text-gray-300 flex-shrink-0 hidden sm:block">Compare</span>
+        <span className="text-[9px] font-black uppercase tracking-widest text-gray-700 flex-shrink-0 hidden sm:block">Compare</span>
 
         {/* Hotel slots */}
         <div className="flex items-center gap-2 flex-1 min-w-0 overflow-hidden">
@@ -3528,7 +3528,7 @@ function CompareFloatingTray({
                 {h.image_url
                   // eslint-disable-next-line @next/next/no-img-element
                   ? <img src={h.image_url} alt={h.name} className="w-full h-full object-cover" />
-                  : <span className="w-full h-full flex items-center justify-center text-gray-300 text-sm">🏨</span>
+                  : <span className="w-full h-full flex items-center justify-center text-gray-700 text-sm">🏨</span>
                 }
               </div>
               <span className="text-[11px] font-semibold text-gray-700 truncate max-w-[80px] sm:max-w-[110px]">
@@ -3536,7 +3536,7 @@ function CompareFloatingTray({
               </span>
               <button
                 onClick={() => onRemove(h.hotel_id)}
-                className="flex-shrink-0 text-gray-300 hover:text-gray-700 transition-colors ml-0.5"
+                className="flex-shrink-0 text-gray-700 hover:text-gray-700 transition-colors ml-0.5"
                 aria-label={`Remove ${h.name}`}
               >
                 <svg className="w-3 h-3" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
@@ -3549,7 +3549,7 @@ function CompareFloatingTray({
           {/* Empty slot hint */}
           {selected.length < 2 && (
             <div className="flex items-center gap-1.5 rounded-xl border border-dashed border-gray-200 px-3 py-1.5 flex-shrink-0">
-              <span className="text-[11px] text-gray-300">+ Add hotel</span>
+              <span className="text-[11px] text-gray-700">+ Add hotel</span>
             </div>
           )}
         </div>
@@ -3557,7 +3557,7 @@ function CompareFloatingTray({
         {/* CTA */}
         <div className="flex-shrink-0">
           {compareIds.length < 2 ? (
-            <span className="text-[11px] text-gray-300 whitespace-nowrap">1 more needed</span>
+            <span className="text-[11px] text-gray-700 whitespace-nowrap">1 more needed</span>
           ) : (
             <button
               onClick={onOpen}
@@ -3605,7 +3605,7 @@ function HotelComparePanel({
         <h2 className="text-sm font-bold text-gray-900">Compare Hotels</h2>
         <button
           onClick={onClose}
-          className="text-[11px] font-semibold text-gray-500 hover:text-gray-700 transition-colors flex items-center gap-1.5 border border-gray-200 rounded-lg px-3 py-1.5"
+          className="text-[11px] font-semibold text-gray-700 hover:text-gray-700 transition-colors flex items-center gap-1.5 border border-gray-200 rounded-lg px-3 py-1.5"
         >
           <svg className="w-3 h-3" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
             <path d="M1.5 1.5l7 7M8.5 1.5l-7 7" />
@@ -3641,7 +3641,7 @@ function HotelComparePanel({
                   <span className={`text-[10px] font-bold ${
                     verdictParts.confidence === "high"       ? "text-teal-600"
                     : verdictParts.confidence === "medium"   ? "text-amber-400"
-                    : "text-gray-400"
+                    : "text-gray-700"
                   }`}>
                     {verdictParts.confidence === "high"       ? "High Confidence"
                     : verdictParts.confidence === "medium"    ? "Medium Confidence"
@@ -3658,7 +3658,7 @@ function HotelComparePanel({
                   </p>
                 )}
                 {verdictParts.chooseIf && (
-                  <p className="text-[11px] text-gray-400 leading-relaxed">
+                  <p className="text-[11px] text-gray-700 leading-relaxed">
                     {verdictParts.chooseIf}
                   </p>
                 )}
@@ -3671,7 +3671,7 @@ function HotelComparePanel({
             <table className="w-full min-w-[500px] border-collapse text-[12px]">
               <thead>
                 <tr className="border-b border-gray-200">
-                  <th className="py-3 pr-4 text-left text-[10px] font-bold uppercase tracking-wider text-gray-300 w-28">Metric</th>
+                  <th className="py-3 pr-4 text-left text-[10px] font-bold uppercase tracking-wider text-gray-700 w-28">Metric</th>
                   {hotels.map(h => (
                     <th key={h.hotel_id} className="py-3 px-3 text-left min-w-[140px] align-top">
                       <div className="flex items-start gap-2">
@@ -3682,11 +3682,11 @@ function HotelComparePanel({
                         <div className="min-w-0">
                           <div className="text-[11px] font-bold text-gray-900 leading-snug line-clamp-2">{h.name}</div>
                           {h.inferred_neighborhood && (
-                            <div className="text-[9px] text-gray-400 mt-0.5">{h.inferred_neighborhood}</div>
+                            <div className="text-[9px] text-gray-700 mt-0.5">{h.inferred_neighborhood}</div>
                           )}
                         </div>
                       </div>
-                      <button onClick={() => onRemove(h.hotel_id)} className="mt-1.5 text-[9px] text-gray-300 hover:text-gray-500 transition-colors">
+                      <button onClick={() => onRemove(h.hotel_id)} className="mt-1.5 text-[9px] text-gray-700 hover:text-gray-700 transition-colors">
                         Remove
                       </button>
                     </th>
@@ -3702,7 +3702,7 @@ function HotelComparePanel({
                   const w = priceWinner(vals);
                   return (
                     <tr className="border-b border-gray-100">
-                      <td className="py-2.5 pr-4 text-gray-500 text-[11px]">Price/night</td>
+                      <td className="py-2.5 pr-4 text-gray-700 text-[11px]">Price/night</td>
                       {hotels.map(h => {
                         const isW = w?.id === h.hotel_id;
                         return (
@@ -3722,7 +3722,7 @@ function HotelComparePanel({
                   const nights = hotels[0]?.nights ?? 0;
                   return (
                     <tr className="border-b border-gray-100">
-                      <td className="py-2.5 pr-4 text-gray-500 text-[11px]">
+                      <td className="py-2.5 pr-4 text-gray-700 text-[11px]">
                         Total{nights > 0 ? ` (${nights}n)` : ""}
                       </td>
                       {hotels.map(h => {
@@ -3775,12 +3775,12 @@ function HotelComparePanel({
                 <CompareSectionRow label="Amenities" colCount={hotels.length} />
                 {COMPARE_AMENITY_ROWS.map(({ label, terms }) => (
                   <tr key={label} className="border-b border-gray-100">
-                    <td className="py-2 pr-4 text-gray-500 text-[11px]">{label}</td>
+                    <td className="py-2 pr-4 text-gray-700 text-[11px]">{label}</td>
                     {hotels.map(h => {
                       const has = hotelHasAmenity(h.amenities, terms as unknown as string[]);
                       return (
                         <td key={h.hotel_id} className="py-2 px-3 text-[12px]">
-                          <span className={has ? "text-teal-600" : "text-gray-300"}>{has ? "✓" : "–"}</span>
+                          <span className={has ? "text-teal-600" : "text-gray-700"}>{has ? "✓" : "–"}</span>
                         </td>
                       );
                     })}
@@ -3797,12 +3797,12 @@ function HotelComparePanel({
                     : null;
                   return (
                     <tr className="border-b border-gray-100">
-                      <td className="py-2.5 pr-4 text-gray-500 text-[11px]">Nearest walk</td>
+                      <td className="py-2.5 pr-4 text-gray-700 text-[11px]">Nearest walk</td>
                       {hotels.map(h => {
                         const isW = w?.id === h.hotel_id;
                         const nw = h.nearby_walk;
                         return (
-                          <td key={h.hotel_id} className={`py-2.5 px-3 text-[11px] ${isW ? "text-teal-600 font-bold" : "text-gray-500"}`}>
+                          <td key={h.hotel_id} className={`py-2.5 px-3 text-[11px] ${isW ? "text-teal-600 font-bold" : "text-gray-700"}`}>
                             {nw ? `${nw.minutes} min to ${nw.name}` : "–"}
                           </td>
                         );
@@ -3811,9 +3811,9 @@ function HotelComparePanel({
                   );
                 })()}
                 <tr>
-                  <td className="py-2.5 pr-4 text-gray-500 text-[11px]">Transit</td>
+                  <td className="py-2.5 pr-4 text-gray-700 text-[11px]">Transit</td>
                   {hotels.map(h => (
-                    <td key={h.hotel_id} className="py-2.5 px-3 text-[11px] text-gray-500">{h.transit_note || "–"}</td>
+                    <td key={h.hotel_id} className="py-2.5 px-3 text-[11px] text-gray-700">{h.transit_note || "–"}</td>
                   ))}
                 </tr>
 
@@ -3822,7 +3822,7 @@ function HotelComparePanel({
           </div>
 
           {/* Legend */}
-          <div className="mt-5 flex items-center gap-4 text-[10px] text-gray-300">
+          <div className="mt-5 flex items-center gap-4 text-[10px] text-gray-700">
             <div className="flex items-center gap-1.5">
               <div className="w-3 h-1.5 rounded-full bg-lantern-mint/50" />
               <span>Lowest price</span>
@@ -3920,7 +3920,7 @@ function RecommendedHotels({
   if (top3.length === 0) return null;
 
   const RANK_LABEL  = ["#1", "#2", "#3"];
-  const RANK_COLOR  = ["text-amber-400", "text-gray-500", "text-amber-700/70"];
+  const RANK_COLOR  = ["text-amber-400", "text-gray-700", "text-amber-700/70"];
   const CARD_STYLE  = [
     "border-amber-500/20 bg-amber-500/[0.04]",
     "border-gray-200 bg-gray-50",
@@ -3932,7 +3932,7 @@ function RecommendedHotels({
       {/* Header row */}
       <div className="flex items-center justify-between mb-2.5">
         <div>
-          <span className="text-[9px] font-black uppercase tracking-widest text-gray-400">
+          <span className="text-[9px] font-black uppercase tracking-widest text-gray-700">
             Top Picks For You
           </span>
           <p className="text-[11px] text-gray-900/18 mt-0.5">
@@ -3997,22 +3997,22 @@ function RecommendedHotels({
 
                 <div className="flex items-center gap-1.5 mb-1.5 flex-wrap">
                   {shortNbhd && (
-                    <span className="text-[10px] text-gray-400">{shortNbhd}</span>
+                    <span className="text-[10px] text-gray-700">{shortNbhd}</span>
                   )}
                   <span className="text-[10px] text-gray-900/18">·</span>
                   <span className="text-[11px] font-semibold text-gray-600">
                     ${Math.round(h.price_per_night)}
-                    <span className="text-[10px] text-gray-300 font-normal">/night</span>
+                    <span className="text-[10px] text-gray-700 font-normal">/night</span>
                   </span>
                   {h.overall_rating > 0 && (
                     <>
                       <span className="text-[10px] text-gray-900/18">·</span>
-                      <span className="text-[10px] text-gray-400">{h.overall_rating.toFixed(1)}★</span>
+                      <span className="text-[10px] text-gray-700">{h.overall_rating.toFixed(1)}★</span>
                     </>
                   )}
                 </div>
 
-                <p className="text-[11px] text-gray-500 leading-snug">{sentence}</p>
+                <p className="text-[11px] text-gray-700 leading-snug">{sentence}</p>
               </div>
             </div>
           );
@@ -4053,7 +4053,7 @@ function WhyTopRanks({ h1, h2 }: { h1: HotelOffer; h2: HotelOffer }) {
 
   return (
     <div className="rounded-xl border border-gray-100 bg-white px-4 py-3 -mt-1">
-      <span className="text-[9px] font-black uppercase tracking-[0.13em] text-gray-300 block mb-2">
+      <span className="text-[9px] font-black uppercase tracking-[0.13em] text-gray-700 block mb-2">
         Why {h1Short} ranks #1
       </span>
       <div className="space-y-1.5 mb-0">
@@ -4062,7 +4062,7 @@ function WhyTopRanks({ h1, h2 }: { h1: HotelOffer; h2: HotelOffer }) {
             <span className="flex-shrink-0 w-1 h-1 rounded-full bg-lantern-mint/40 mt-px" />
             <span className="text-[11.5px] text-gray-900/48">
               Better {d.label}
-              <span className="text-gray-300 ml-1 text-[10px]">(+{d.delta})</span>
+              <span className="text-gray-700 ml-1 text-[10px]">(+{d.delta})</span>
             </span>
           </div>
         ))}
@@ -4070,7 +4070,7 @@ function WhyTopRanks({ h1, h2 }: { h1: HotelOffer; h2: HotelOffer }) {
       {(tradeoffDim || h2PriceSavings >= 20) && (
         <div className="mt-2 pt-2 border-t border-gray-100 flex items-start gap-2">
           <span className="text-[9px] font-bold uppercase tracking-wider text-amber-400/40 flex-shrink-0 mt-px">Tradeoff</span>
-          <span className="text-[11px] text-gray-400 leading-snug">
+          <span className="text-[11px] text-gray-700 leading-snug">
             {h2PriceSavings >= 20 && tradeoffDim
               ? `${h2Short} saves $${h2PriceSavings}/night and has stronger ${tradeoffDim.label}`
               : h2PriceSavings >= 20
@@ -4123,8 +4123,8 @@ function HiddenGemCallout({ gem, topHotel, avgPrice }: {
     <div className="rounded-xl border border-teal-400/15 bg-lantern-mint/[0.03] px-4 py-3">
       <div className="flex items-center gap-2 mb-2">
         <span className="text-[9px] font-black uppercase tracking-[0.13em] text-teal-600/50">Hidden Gem</span>
-        <span className="text-[9px] text-gray-300">·</span>
-        <span className="text-[9px] text-gray-400">Best value in this search</span>
+        <span className="text-[9px] text-gray-700">·</span>
+        <span className="text-[9px] text-gray-700">Best value in this search</span>
       </div>
       <p className="text-[11.5px] text-gray-600 leading-snug mb-2">
         <span className="font-semibold text-gray-700">{gemShort}</span>
@@ -4326,7 +4326,7 @@ function BookThisOne({
                   : "Genuinely close — either is a reasonable choice.";
   const confColor = confidence === "high"       ? "text-teal-600"
                   : confidence === "medium"     ? "text-amber-400"
-                  : "text-gray-400";
+                  : "text-gray-700";
   const confDot   = confidence === "high"       ? "bg-lantern-mint"
                   : confidence === "medium"     ? "bg-amber-400"
                   : "bg-gray-200";
@@ -4342,7 +4342,7 @@ function BookThisOne({
           <span className={`w-1.5 h-1.5 rounded-full ${confDot} opacity-80`} />
           <div>
             <span className={`text-[10px] font-bold ${confColor}`}>{confLabel}</span>
-            <span className="text-[9px] text-gray-300 ml-1.5">{confDesc}</span>
+            <span className="text-[9px] text-gray-700 ml-1.5">{confDesc}</span>
           </div>
         </div>
       </div>
@@ -4361,7 +4361,7 @@ function BookThisOne({
         {/* Why */}
         {finalWhy.length > 0 && (
           <div>
-            <span className="text-[9.5px] font-bold uppercase tracking-widest text-gray-300 block mb-1.5">Why</span>
+            <span className="text-[9.5px] font-bold uppercase tracking-widest text-gray-700 block mb-1.5">Why</span>
             <ul className="space-y-1.5">
               {finalWhy.map((b, i) => (
                 <li key={i} className="flex items-start gap-2">
@@ -4376,12 +4376,12 @@ function BookThisOne({
         {/* Tradeoffs */}
         {tradeoffs.length > 0 && (
           <div>
-            <span className="text-[9.5px] font-bold uppercase tracking-widest text-gray-300 block mb-1.5">Tradeoffs</span>
+            <span className="text-[9.5px] font-bold uppercase tracking-widest text-gray-700 block mb-1.5">Tradeoffs</span>
             <ul className="space-y-1.5">
               {tradeoffs.map((t, i) => (
                 <li key={i} className="flex items-start gap-2">
                   <span className="flex-shrink-0 w-1 h-1 rounded-full bg-amber-400/50 mt-[5px]" />
-                  <span className="text-[12px] text-gray-500 leading-snug">{t}</span>
+                  <span className="text-[12px] text-gray-700 leading-snug">{t}</span>
                 </li>
               ))}
             </ul>
@@ -4393,7 +4393,7 @@ function BookThisOne({
 
         {/* Why not #2 */}
         <div>
-          <span className="text-[9.5px] font-bold uppercase tracking-widest text-gray-300 block mb-2">
+          <span className="text-[9.5px] font-bold uppercase tracking-widest text-gray-700 block mb-2">
             Why not {h2Short}?
           </span>
           <div className="grid grid-cols-2 gap-x-4 gap-y-1">
@@ -4406,7 +4406,7 @@ function BookThisOne({
                     {finalRunnerPros.map((p, i) => (
                       <li key={i} className="flex items-start gap-1.5">
                         <span className="flex-shrink-0 w-1 h-1 rounded-full bg-lantern-mint/35 mt-[5px]" />
-                        <span className="text-[11px] text-gray-500 leading-snug">{p}</span>
+                        <span className="text-[11px] text-gray-700 leading-snug">{p}</span>
                       </li>
                     ))}
                   </ul>
@@ -4417,7 +4417,7 @@ function BookThisOne({
             <div>
               {finalRunnerCons.length > 0 && (
                 <>
-                  <span className="text-[9px] font-bold uppercase tracking-wide text-gray-300 block mb-1">Cons</span>
+                  <span className="text-[9px] font-bold uppercase tracking-wide text-gray-700 block mb-1">Cons</span>
                   <ul className="space-y-1">
                     {finalRunnerCons.map((c, i) => (
                       <li key={i} className="flex items-start gap-1.5">
@@ -4435,14 +4435,14 @@ function BookThisOne({
         {/* Who should pick #2 */}
         {confidence !== "close-call" && finalWhoShouldPick.length > 0 && (
           <div>
-            <span className="text-[9.5px] font-bold uppercase tracking-widest text-gray-300 block mb-1.5">
+            <span className="text-[9.5px] font-bold uppercase tracking-widest text-gray-700 block mb-1.5">
               Choose {h2Short} instead if:
             </span>
             <ul className="space-y-1.5">
               {finalWhoShouldPick.map((w, i) => (
                 <li key={i} className="flex items-start gap-2">
                   <span className="flex-shrink-0 w-1 h-1 rounded-full bg-white/18 mt-[5px]" />
-                  <span className="text-[11.5px] text-gray-400 leading-snug">{w}</span>
+                  <span className="text-[11.5px] text-gray-700 leading-snug">{w}</span>
                 </li>
               ))}
             </ul>
@@ -4670,7 +4670,7 @@ function RecommendationPanel({
         </div>
         <span className="text-lg font-black text-gray-900 tabular-nums leading-none flex-shrink-0">
           ${Math.round(pick.price_per_night).toLocaleString()}
-          <span className="text-sm font-medium text-gray-500">/night</span>
+          <span className="text-sm font-medium text-gray-700">/night</span>
         </span>
       </div>
 
@@ -4684,7 +4684,7 @@ function RecommendationPanel({
       {/* Won because bullets (clear wins only) */}
       {!isCloseCall && wonBullets.length > 0 && (
         <div className="mb-3">
-          <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-1.5">Won because</div>
+          <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-1.5">Won because</div>
           <div className="space-y-1.5">
             {wonBullets.map((b, i) => (
               <div key={i} className="flex items-start gap-2">
@@ -4701,19 +4701,19 @@ function RecommendationPanel({
       {/* Score Drivers */}
       {scoreDrivers.length > 0 && (
         <div className="mb-3">
-          <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-2">Score Drivers</div>
+          <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-2">Score Drivers</div>
           <div className="space-y-2">
             {scoreDrivers.map((d, i) => (
               <div key={d.key} className="flex items-center gap-2">
-                <span className="text-[9px] text-gray-300 w-3 text-right flex-shrink-0 tabular-nums">{i + 1}.</span>
-                <span className="text-[11px] text-gray-500 flex-1 min-w-0 truncate">{d.label}</span>
+                <span className="text-[9px] text-gray-700 w-3 text-right flex-shrink-0 tabular-nums">{i + 1}.</span>
+                <span className="text-[11px] text-gray-700 flex-1 min-w-0 truncate">{d.label}</span>
                 <div className="h-1 w-14 rounded-full bg-gray-50 overflow-hidden flex-shrink-0">
                   <div
                     className={`h-full rounded-full ${i === 0 ? (isCloseCall ? "bg-amber-100" : "bg-teal-600") : "bg-gray-200"}`}
                     style={{ width: `${d.val}%` }}
                   />
                 </div>
-                <span className={`text-[10px] font-bold tabular-nums w-7 text-right flex-shrink-0 ${i === 0 ? (isCloseCall ? "text-amber-600" : "text-teal-600") : "text-gray-400"}`}>
+                <span className={`text-[10px] font-bold tabular-nums w-7 text-right flex-shrink-0 ${i === 0 ? (isCloseCall ? "text-amber-600" : "text-teal-600") : "text-gray-700"}`}>
                   +{d.pts}
                 </span>
               </div>
@@ -4725,38 +4725,38 @@ function RecommendationPanel({
       {/* Closest Alternative */}
       {runnerUp && (
         <div className="border-t border-gray-200 pt-3">
-          <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-2">
+          <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-2">
             Closest Alternative
           </div>
           <div className="flex items-start justify-between gap-2 mb-2">
             <div className="min-w-0">
               <div className="text-[11px] font-bold text-gray-700 leading-tight">{runnerUp.name}</div>
               {runnerUp.inferred_neighborhood && (
-                <div className="text-[10px] text-gray-400 mt-0.5">{runnerUp.inferred_neighborhood}</div>
+                <div className="text-[10px] text-gray-700 mt-0.5">{runnerUp.inferred_neighborhood}</div>
               )}
             </div>
             <div className="text-right flex-shrink-0">
-              <div className="text-[11px] font-bold text-gray-500 tabular-nums">${Math.round(runnerUp.price_per_night)}/night</div>
+              <div className="text-[11px] font-bold text-gray-700 tabular-nums">${Math.round(runnerUp.price_per_night)}/night</div>
               <div className={`text-[10px] font-bold ${scoreColor(runnerUp.ai_score)}`}>Score {runnerUp.ai_score}</div>
             </div>
           </div>
           <div className="space-y-1 mb-1.5">
-            <div className="text-[9px] text-gray-300 mb-0.5">What it does better</div>
+            <div className="text-[9px] text-gray-700 mb-0.5">What it does better</div>
             {altStrengths.slice(0, 2).map((s, i) => (
               <div key={i} className="flex items-start gap-2">
                 <svg className="w-2.5 h-2.5 text-teal-600/45 flex-shrink-0 mt-[3px]" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M1 6l3.5 3.5L11 2" />
                 </svg>
-                <span className="text-[10px] text-gray-500 leading-snug">{s}</span>
+                <span className="text-[10px] text-gray-700 leading-snug">{s}</span>
               </div>
             ))}
           </div>
           <div className="space-y-1">
-            <div className="text-[9px] text-gray-300 mb-0.5">Why it ranked lower</div>
+            <div className="text-[9px] text-gray-700 mb-0.5">Why it ranked lower</div>
             {altWeaknesses.slice(0, 2).map((w, i) => (
               <div key={i} className="flex items-start gap-1.5">
-                <span className="text-gray-300 flex-shrink-0 leading-[18px]">•</span>
-                <span className="text-[10px] text-gray-400 leading-snug">{w}</span>
+                <span className="text-gray-700 flex-shrink-0 leading-[18px]">•</span>
+                <span className="text-[10px] text-gray-700 leading-snug">{w}</span>
               </div>
             ))}
           </div>
@@ -4766,10 +4766,10 @@ function RecommendationPanel({
       {/* AI Pick not from recommended neighborhood */}
       {prefsActive && !pickInRecNbhd && recommendedSummary && (
         <div className="mt-3 pt-3 border-t border-gray-100">
-          <p className="text-[10px] text-gray-400 leading-relaxed">
-            <span className="text-gray-500 font-semibold">Not from the recommended area:</span>{" "}
+          <p className="text-[10px] text-gray-700 leading-relaxed">
+            <span className="text-gray-700 font-semibold">Not from the recommended area:</span>{" "}
             This hotel is in{" "}
-            <span className="text-gray-500">{pick.inferred_neighborhood || "a different neighborhood"}</span>,
+            <span className="text-gray-700">{pick.inferred_neighborhood || "a different neighborhood"}</span>,
             not {recommendedSummary.nbhd.name}. It ranked #1 because
             {pick.overall_rating >= 4.6
               ? " its outstanding guest reviews outweigh the neighborhood difference."
@@ -4795,7 +4795,7 @@ function FeatureCard({ icon, title, body }: { icon: React.ReactNode; title: stri
         {icon}
       </div>
       <div className="mb-1 text-sm font-semibold text-gray-900">{title}</div>
-      <div className="text-xs text-gray-500 leading-relaxed">{body}</div>
+      <div className="text-xs text-gray-700 leading-relaxed">{body}</div>
     </div>
   );
 }
@@ -5135,10 +5135,10 @@ export default function HotelSearch() {
             <span className="text-sm font-bold tracking-tight text-gray-800">TravelGrab</span>
           </Link>
           <div className="h-4 w-px bg-gray-100" />
-          <Link href="/flights"    className="text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors">Flights</Link>
+          <Link href="/flights"    className="text-sm font-medium text-gray-700 hover:text-gray-700 transition-colors">Flights</Link>
           <span className="text-sm font-medium text-teal-600">Hotels</span>
-          <Link href="/activities" className="text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors">Activities</Link>
-          <Link href="/itinerary"  className="text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors">Itinerary</Link>
+          <Link href="/activities" className="text-sm font-medium text-gray-700 hover:text-gray-700 transition-colors">Activities</Link>
+          <Link href="/itinerary"  className="text-sm font-medium text-gray-700 hover:text-gray-700 transition-colors">Itinerary</Link>
         </div>
       </nav>
 
@@ -5148,7 +5148,7 @@ export default function HotelSearch() {
           <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-gray-900 mb-2">
             Find your hotel
           </h1>
-          <p className="text-sm text-gray-500 max-w-md mx-auto leading-relaxed">
+          <p className="text-sm text-gray-700 max-w-md mx-auto leading-relaxed">
             Tell us the kind of area you want and we'll rank hotels by neighborhood fit, reviews, and value — not commission rates.
           </p>
         </div>
@@ -5160,7 +5160,7 @@ export default function HotelSearch() {
               <span className="text-teal-600 text-sm">✦</span>
               <div className="min-w-0">
                 <p className="text-xs font-semibold text-gray-900 truncate">Trip to {tripBannerDest}</p>
-                <p className="text-[11px] text-gray-500 mt-0.5">City and dates pre-filled from your trip plan</p>
+                <p className="text-[11px] text-gray-700 mt-0.5">City and dates pre-filled from your trip plan</p>
               </div>
             </div>
             <Link href="/itinerary" className="shrink-0 text-[11px] text-teal-500 hover:text-teal-600 transition-colors whitespace-nowrap">
@@ -5173,7 +5173,7 @@ export default function HotelSearch() {
         <div className="max-w-3xl mx-auto rounded-2xl border border-gray-200 bg-gray-50 p-5 sm:p-6 mb-4 shadow-card">
           {/* Destination */}
           <div className="mb-3">
-            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 px-0.5">
+            <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5 px-0.5">
               Destination
             </label>
             <DestinationCombobox
@@ -5187,12 +5187,12 @@ export default function HotelSearch() {
           {/* Dates */}
           <div className="flex flex-col sm:flex-row gap-2.5 mb-3">
             <div className="flex-1 min-w-0">
-              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 px-0.5">Check-in</label>
+              <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5 px-0.5">Check-in</label>
               <input type="date" min={today} value={checkIn} onChange={(e) => setCheckIn(e.target.value)}
                 className="w-full rounded-xl border border-gray-200 bg-gray-50 hover:border-gray-300 focus:border-teal-400 px-3.5 py-3 text-sm text-gray-900 outline-none transition-colors [color-scheme:light]" />
             </div>
             <div className="flex-1 min-w-0">
-              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 px-0.5">Check-out</label>
+              <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5 px-0.5">Check-out</label>
               <input type="date" min={checkIn || today} value={checkOut} onChange={(e) => setCheckOut(e.target.value)}
                 className="w-full rounded-xl border border-gray-200 bg-gray-50 hover:border-gray-300 focus:border-teal-400 px-3.5 py-3 text-sm text-gray-900 outline-none transition-colors [color-scheme:light]" />
             </div>
@@ -5201,19 +5201,19 @@ export default function HotelSearch() {
           {/* Guests + Rooms */}
           <div className="flex gap-2.5 mb-5">
             <div className="flex-1">
-              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 px-0.5">Guests</label>
+              <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5 px-0.5">Guests</label>
               <div className="flex items-center rounded-xl border border-gray-200 bg-gray-50 overflow-hidden">
-                <button onClick={() => setGuests((n) => Math.max(1, n - 1))} className="px-3 py-3 text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors text-lg leading-none">−</button>
+                <button onClick={() => setGuests((n) => Math.max(1, n - 1))} className="px-3 py-3 text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-colors text-lg leading-none">−</button>
                 <span className="flex-1 text-center text-sm font-semibold text-gray-900">{guests}</span>
-                <button onClick={() => setGuests((n) => Math.min(8, n + 1))} className="px-3 py-3 text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors text-lg leading-none">+</button>
+                <button onClick={() => setGuests((n) => Math.min(8, n + 1))} className="px-3 py-3 text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-colors text-lg leading-none">+</button>
               </div>
             </div>
             <div className="flex-1">
-              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 px-0.5">Rooms</label>
+              <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5 px-0.5">Rooms</label>
               <div className="flex items-center rounded-xl border border-gray-200 bg-gray-50 overflow-hidden">
-                <button onClick={() => setRooms((n) => Math.max(1, n - 1))} className="px-3 py-3 text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors text-lg leading-none">−</button>
+                <button onClick={() => setRooms((n) => Math.max(1, n - 1))} className="px-3 py-3 text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-colors text-lg leading-none">−</button>
                 <span className="flex-1 text-center text-sm font-semibold text-gray-900">{rooms}</span>
-                <button onClick={() => setRooms((n) => Math.min(4, n + 1))} className="px-3 py-3 text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors text-lg leading-none">+</button>
+                <button onClick={() => setRooms((n) => Math.min(4, n + 1))} className="px-3 py-3 text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-colors text-lg leading-none">+</button>
               </div>
             </div>
           </div>
@@ -5256,8 +5256,8 @@ export default function HotelSearch() {
               height={48}
               className="h-12 w-12 object-contain animate-pulse drop-shadow-md"
             />
-            <div className="text-sm text-gray-500">Searching hotels in {searchedDest}…</div>
-            <p className="text-xs text-gray-300">
+            <div className="text-sm text-gray-700">Searching hotels in {searchedDest}…</div>
+            <p className="text-xs text-gray-700">
               Ranking by reviews, location{selectedPrefs.length > 0 ? ", and neighborhood fit" : ", and value"}
             </p>
           </div>
@@ -5267,7 +5267,7 @@ export default function HotelSearch() {
         {searchState === "error" && (
           <div className="max-w-3xl mx-auto rounded-2xl border border-red-500/20 bg-red-500/[0.07] px-5 py-8 text-center">
             <div className="text-sm font-bold text-gray-900 mb-1">{errorTitle}</div>
-            <div className="text-xs text-gray-500 leading-relaxed">{errorBody}</div>
+            <div className="text-xs text-gray-700 leading-relaxed">{errorBody}</div>
           </div>
         )}
 
@@ -5404,14 +5404,14 @@ export default function HotelSearch() {
                         className={`px-4 py-1.5 rounded-[10px] text-[12px] font-semibold transition-all ${
                           searchMode === mode
                             ? "bg-lantern-mint text-ink shadow-sm"
-                            : "text-gray-400 hover:text-gray-600"
+                            : "text-gray-700 hover:text-gray-600"
                         }`}
                       >
                         {label}
                       </button>
                     ))}
                   </div>
-                  <p className="text-[10px] text-gray-300 text-center">
+                  <p className="text-[10px] text-gray-700 text-center">
                     {searchMode === "best-area"
                       ? "Recommends the best neighborhood for your trip, then shows hotels there"
                       : `All ${offers.length} hotels ranked by overall quality — neighborhoods hidden`}
@@ -5428,7 +5428,7 @@ export default function HotelSearch() {
                     className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-semibold transition-all ${
                       viewMode === "list"
                         ? "bg-teal-100 text-teal-600"
-                        : "text-gray-400 hover:text-gray-600 hover:bg-gray-50"
+                        : "text-gray-700 hover:text-gray-600 hover:bg-gray-50"
                     }`}
                   >
                     <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
@@ -5442,7 +5442,7 @@ export default function HotelSearch() {
                     className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-semibold transition-all ${
                       viewMode === "map"
                         ? "bg-teal-100 text-teal-600"
-                        : "text-gray-400 hover:text-gray-600 hover:bg-gray-50"
+                        : "text-gray-700 hover:text-gray-600 hover:bg-gray-50"
                     }`}
                   >
                     <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
@@ -5455,19 +5455,19 @@ export default function HotelSearch() {
                 </div>
 
                 {/* Hotel count */}
-                <div className="text-xs text-gray-500 flex-1 min-w-0 flex items-center flex-wrap gap-x-1">
+                <div className="text-xs text-gray-700 flex-1 min-w-0 flex items-center flex-wrap gap-x-1">
                   {selectedCard ? (
                     <>
                       <span className="font-semibold text-gray-700">
                         {showAllFallback ? offers.length : amenityFilteredOffers.length}
                       </span>
                       {!showAllFallback && (
-                        <span className="text-gray-300">of {offers.length}</span>
+                        <span className="text-gray-700">of {offers.length}</span>
                       )}
-                      <span className="text-gray-300">hotels in</span>
+                      <span className="text-gray-700">hotels in</span>
                       <span className="text-gray-600 font-semibold">{selectedCard.name.split(" /")[0]}</span>
                       {showAllFallback
-                        ? <span className="text-gray-300 ml-1">· no exact matches, showing all</span>
+                        ? <span className="text-gray-700 ml-1">· no exact matches, showing all</span>
                         : filteredOffers.length < offers.length && (
                             <button
                               onClick={() => setSelectedNeighborhood(null)}
@@ -5481,7 +5481,7 @@ export default function HotelSearch() {
                   ) : cityGuide && searchMode === "best-area" ? (
                     <>
                       <span className="font-semibold text-gray-700">{offers.length}</span>
-                      <span className="text-gray-300">hotels ·</span>
+                      <span className="text-gray-700">hotels ·</span>
                       <span className="text-gray-600 font-semibold">
                         {nbhdSummaries.filter((s) => s.count > 0).length} neighborhoods
                       </span>
@@ -5492,7 +5492,7 @@ export default function HotelSearch() {
                         const rest       = active.slice(3);
                         const hiddenHotels = rest.reduce((sum, s) => sum + s.count, 0);
                         return (
-                          <span className="text-gray-300 hidden sm:inline">
+                          <span className="text-gray-700 hidden sm:inline">
                             {" · "}
                             {shown.map((s) => s.nbhd.name.split(" /")[0]).join(" · ")}
                             {rest.length > 0 && (
@@ -5506,24 +5506,24 @@ export default function HotelSearch() {
                         );
                       })()}
                       {amenityFilters.length > 0 && (
-                        <span className="text-gray-300">· {amenityFilteredOffers.length} match filters</span>
+                        <span className="text-gray-700">· {amenityFilteredOffers.length} match filters</span>
                       )}
                     </>
                   ) : searchMode === "best-hotels" ? (
                     <>
-                      <span className="text-gray-300">All</span>
+                      <span className="text-gray-700">All</span>
                       <span className="font-semibold text-gray-700">{amenityFilteredOffers.length}</span>
-                      <span className="text-gray-300">hotels in {searchedDest}, ranked by quality</span>
+                      <span className="text-gray-700">hotels in {searchedDest}, ranked by quality</span>
                       {amenityFilters.length > 0 && (
-                        <span className="text-gray-300">· {amenityFilteredOffers.length} match filters</span>
+                        <span className="text-gray-700">· {amenityFilteredOffers.length} match filters</span>
                       )}
                     </>
                   ) : (
                     <>
                       <span className="font-semibold text-gray-700">{amenityFilteredOffers.length} hotels</span>
                       {amenityFilters.length > 0
-                        ? <span className="text-gray-300"> · filtered</span>
-                        : <span className="text-gray-300"> in {searchedDest}</span>}
+                        ? <span className="text-gray-700"> · filtered</span>
+                        : <span className="text-gray-700"> in {searchedDest}</span>}
                     </>
                   )}
                 </div>
@@ -5540,7 +5540,7 @@ export default function HotelSearch() {
                           className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold border transition-all ${
                             sortOrder === opt
                               ? "bg-teal-100 text-teal-600 border-teal-300"
-                              : "bg-transparent text-gray-400 border-gray-200 hover:text-gray-600 hover:border-gray-300"
+                              : "bg-transparent text-gray-700 border-gray-200 hover:text-gray-600 hover:border-gray-300"
                           }`}
                         >
                           {labels[opt]}
@@ -5554,7 +5554,7 @@ export default function HotelSearch() {
               {/* ── Prices last checked + Refresh ───────────────────────────── */}
               {lastFetchedAt && (
                 <div className="flex items-center gap-2 mb-3 px-1">
-                  <span className="text-[11px] text-gray-400">
+                  <span className="text-[11px] text-gray-700">
                     Prices last checked {(() => {
                       const ms = Date.now() - new Date(lastFetchedAt).getTime();
                       const mins = Math.round(ms / 60_000);
@@ -5686,7 +5686,7 @@ export default function HotelSearch() {
 
                   {/* Amenity quick-filters */}
                   <div className="flex items-center gap-1.5 mb-3 flex-wrap">
-                <span className="text-[10px] font-semibold text-gray-300 uppercase tracking-wider mr-1">Must have:</span>
+                <span className="text-[10px] font-semibold text-gray-700 uppercase tracking-wider mr-1">Must have:</span>
                   {AMENITY_FILTERS.map((f) => {
                     const active = amenityFilters.includes(f.id);
                     return (
@@ -5698,7 +5698,7 @@ export default function HotelSearch() {
                         className={`px-2.5 py-1 rounded-full text-[10px] font-semibold border transition-all ${
                           active
                             ? "bg-blue-100 text-blue-600 border-blue-300"
-                            : "bg-transparent text-gray-300 border-gray-200 hover:text-gray-500 hover:border-gray-200"
+                            : "bg-transparent text-gray-700 border-gray-200 hover:text-gray-700 hover:border-gray-200"
                         }`}
                       >
                         {f.label}
@@ -5708,7 +5708,7 @@ export default function HotelSearch() {
                   {amenityFilters.length > 0 && (
                     <button
                       onClick={() => setAmenityFilters([])}
-                      className="text-[10px] text-gray-300 hover:text-gray-500 transition-colors ml-1"
+                      className="text-[10px] text-gray-700 hover:text-gray-700 transition-colors ml-1"
                     >
                       Clear
                     </button>
@@ -5803,12 +5803,12 @@ export default function HotelSearch() {
                         className="inline-flex items-center gap-2 text-[12px] font-semibold text-gray-600 border border-gray-200 hover:border-gray-300 hover:text-gray-700 rounded-xl px-5 py-2.5 transition-all"
                       >
                         Load 20 More Hotels
-                        <span className="text-gray-300 font-normal">({cardList.length - visibleCount} remaining)</span>
+                        <span className="text-gray-700 font-normal">({cardList.length - visibleCount} remaining)</span>
                       </button>
                     </div>
                   )}
 
-                  <div className="mt-6 text-center text-[11px] text-gray-300 leading-relaxed">
+                  <div className="mt-6 text-center text-[11px] text-gray-700 leading-relaxed">
                     Prices from Google Hotels via SerpAPI · Same prices as Google Hotels, ranked by your preferences.
                   </div>
 

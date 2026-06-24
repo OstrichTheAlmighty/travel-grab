@@ -335,14 +335,14 @@ function ActivityCard({
             {activity.rating > 0 ? activity.rating.toFixed(1) : "—"}
           </span>
           {activity.reviewCount > 0 && (
-            <span className="text-[11px] text-gray-400">
+            <span className="text-[11px] text-gray-700">
               ({activity.reviewCount >= 1000
                 ? `${(activity.reviewCount / 1000).toFixed(0)}k`
                 : activity.reviewCount.toLocaleString()})
             </span>
           )}
           <span className="text-gray-900/[0.12] mx-0.5">·</span>
-          <span className="text-[11px] text-gray-400">{CATEGORY_LABEL[activity.category]}</span>
+          <span className="text-[11px] text-gray-700">{CATEGORY_LABEL[activity.category]}</span>
         </div>
 
         {/* Title */}
@@ -351,7 +351,7 @@ function ActivityCard({
         </h3>
 
         {/* Meta: location · duration · price */}
-        <div className="flex items-center flex-wrap gap-x-2 gap-y-1 text-[11px] text-gray-400 mb-3">
+        <div className="flex items-center flex-wrap gap-x-2 gap-y-1 text-[11px] text-gray-700 mb-3">
           <span className="flex items-center gap-1">
             <IconPin className="w-2.5 h-2.5 flex-shrink-0" />
             {activity.neighborhood}
@@ -368,7 +368,7 @@ function ActivityCard({
         </div>
 
         {/* Description */}
-        <p className="text-[12px] text-gray-500 leading-relaxed mb-3 line-clamp-3">
+        <p className="text-[12px] text-gray-700 leading-relaxed mb-3 line-clamp-3">
           {activity.description}
         </p>
 
@@ -378,7 +378,7 @@ function ActivityCard({
             {activity.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-[10px] text-gray-400 border border-gray-200 bg-gray-50 rounded-full px-2 py-0.5 leading-none"
+                className="text-[10px] text-gray-700 border border-gray-200 bg-gray-50 rounded-full px-2 py-0.5 leading-none"
               >
                 {tag}
               </span>
@@ -392,7 +392,7 @@ function ActivityCard({
           {/* Why visit? */}
           <button
             onClick={() => setShowWhy((v) => !v)}
-            className="flex items-center gap-1.5 text-[11px] text-gray-400 hover:text-gray-600 transition-colors"
+            className="flex items-center gap-1.5 text-[11px] text-gray-700 hover:text-gray-600 transition-colors"
           >
             <IconChevron
               className={`w-3 h-3 flex-shrink-0 transition-transform duration-200 ${showWhy ? "rotate-180" : ""}`}
@@ -404,7 +404,7 @@ function ActivityCard({
             className="overflow-hidden transition-all duration-300 ease-out"
             style={{ maxHeight: showWhy ? "160px" : "0px", opacity: showWhy ? 1 : 0 }}
           >
-            <p className="text-[12px] text-gray-500 leading-relaxed pl-4 border-l-2 border-teal-500/30 italic pb-1">
+            <p className="text-[12px] text-gray-700 leading-relaxed pl-4 border-l-2 border-teal-500/30 italic pb-1">
               {activity.whyVisit}
             </p>
           </div>
@@ -412,7 +412,7 @@ function ActivityCard({
           {/* View Details → opens in-app detail modal */}
           <button
             onClick={onViewDetails}
-            className="w-full h-9 rounded-xl bg-gray-100 border border-gray-200 text-[12px] font-semibold text-gray-500 hover:bg-gray-100 hover:text-gray-700 hover:border-gray-300 transition-all duration-200 active:scale-[0.98]"
+            className="w-full h-9 rounded-xl bg-gray-100 border border-gray-200 text-[12px] font-semibold text-gray-700 hover:bg-gray-100 hover:text-gray-700 hover:border-gray-300 transition-all duration-200 active:scale-[0.98]"
           >
             View Details →
           </button>
@@ -540,12 +540,12 @@ function ReviewInsightsSection({
 
   return (
     <div className="mb-6">
-      <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-3">
+      <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-3">
         Review Insights
       </div>
 
       {insights.limited && (
-        <p className="text-[11px] text-gray-300 italic mb-3">
+        <p className="text-[11px] text-gray-700 italic mb-3">
           Based on Google&apos;s limited review sample.
         </p>
       )}
@@ -559,12 +559,12 @@ function ReviewInsightsSection({
               <svg className="w-3 h-3 text-teal-600 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
-              <span className="text-[11px] font-bold text-gray-500">Guests love</span>
+              <span className="text-[11px] font-bold text-gray-700">Guests love</span>
             </div>
             <ul className="space-y-1.5">
               {insights.guestsLove.map((item, i) => (
-                <li key={i} className="flex items-start gap-1.5 text-[12px] text-gray-500 leading-snug">
-                  <span className="text-gray-300 flex-shrink-0 mt-px">·</span>
+                <li key={i} className="flex items-start gap-1.5 text-[12px] text-gray-700 leading-snug">
+                  <span className="text-gray-700 flex-shrink-0 mt-px">·</span>
                   {item}
                 </li>
               ))}
@@ -581,12 +581,12 @@ function ReviewInsightsSection({
                 <line x1="12" y1="9" x2="12" y2="13" />
                 <line x1="12" y1="17" x2="12.01" y2="17" />
               </svg>
-              <span className="text-[11px] font-bold text-gray-500">Watch out</span>
+              <span className="text-[11px] font-bold text-gray-700">Watch out</span>
             </div>
             <ul className="space-y-1.5">
               {insights.watchOut.map((item, i) => (
-                <li key={i} className="flex items-start gap-1.5 text-[12px] text-gray-500 leading-snug">
-                  <span className="text-gray-300 flex-shrink-0 mt-px">·</span>
+                <li key={i} className="flex items-start gap-1.5 text-[12px] text-gray-700 leading-snug">
+                  <span className="text-gray-700 flex-shrink-0 mt-px">·</span>
                   {item}
                 </li>
               ))}
@@ -601,13 +601,13 @@ function ReviewInsightsSection({
               <svg className="w-3 h-3 text-blue-600 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
               </svg>
-              <span className="text-[11px] font-bold text-gray-500">Best for</span>
+              <span className="text-[11px] font-bold text-gray-700">Best for</span>
             </div>
             <div className="flex flex-wrap gap-1.5">
               {insights.bestFor.map((item, i) => (
                 <span
                   key={i}
-                  className="text-[11px] text-gray-500 bg-gray-50 border border-gray-200 rounded-full px-2.5 py-1 leading-none"
+                  className="text-[11px] text-gray-700 bg-gray-50 border border-gray-200 rounded-full px-2.5 py-1 leading-none"
                 >
                   {item}
                 </span>
@@ -623,12 +623,12 @@ function ReviewInsightsSection({
               <svg className="w-3 h-3 text-amber-600 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7zm2 19v1a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-1h4z" />
               </svg>
-              <span className="text-[11px] font-bold text-gray-500">Tips from reviews</span>
+              <span className="text-[11px] font-bold text-gray-700">Tips from reviews</span>
             </div>
             <ul className="space-y-1.5">
               {insights.tips.map((item, i) => (
-                <li key={i} className="flex items-start gap-1.5 text-[12px] text-gray-500 leading-snug">
-                  <span className="text-gray-300 flex-shrink-0 mt-px">·</span>
+                <li key={i} className="flex items-start gap-1.5 text-[12px] text-gray-700 leading-snug">
+                  <span className="text-gray-700 flex-shrink-0 mt-px">·</span>
                   {item}
                 </li>
               ))}
@@ -713,11 +713,11 @@ function ActivityDetailModal({
       >
         {/* ── Sticky header ── */}
         <div className="flex items-center justify-between px-5 py-3 border-b border-gray-200 bg-gray-50/95 backdrop-blur-sm flex-shrink-0">
-          <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Place Details</span>
+          <span className="text-[10px] font-black uppercase tracking-widest text-gray-700">Place Details</span>
           <button
             onClick={onClose}
             aria-label="Close"
-            className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:text-gray-900 hover:border-gray-300 transition-all"
+            className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 text-gray-700 hover:text-gray-900 hover:border-gray-300 transition-all"
           >
             <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
               <path d="M18 6L6 18M6 6l12 12" />
@@ -812,7 +812,7 @@ function ActivityDetailModal({
             {/* ── Name + category + open status ── */}
             <div>
               <div className="flex items-center gap-2 flex-wrap mb-2">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 border border-gray-200 rounded-full px-2 py-0.5">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-700 border border-gray-200 rounded-full px-2 py-0.5">
                   {CATEGORY_LABEL[activity.category]}
                 </span>
                 {openNow !== undefined && (
@@ -823,7 +823,7 @@ function ActivityDetailModal({
                   </span>
                 )}
                 {loading && (
-                  <span className="text-[10px] text-gray-300 flex items-center gap-1">
+                  <span className="text-[10px] text-gray-700 flex items-center gap-1">
                     <svg className="w-3 h-3 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
                       <circle cx="12" cy="12" r="10" strokeDasharray="31.4" strokeDashoffset="10" />
                     </svg>
@@ -843,7 +843,7 @@ function ActivityDetailModal({
                   {rating > 0 ? rating.toFixed(1) : "—"}
                 </span>
                 {reviewCount > 0 && (
-                  <span className="text-[12px] text-gray-400">
+                  <span className="text-[12px] text-gray-700">
                     ({reviewCount >= 1000 ? `${Math.round(reviewCount / 1000)}k` : reviewCount.toLocaleString()} reviews)
                   </span>
                 )}
@@ -861,17 +861,17 @@ function ActivityDetailModal({
             {/* ── Address ── */}
             {address && (
               <div className="rounded-xl border border-gray-200 bg-gray-50 p-3.5 flex items-start gap-3">
-                <svg className="w-4 h-4 text-gray-300 flex-shrink-0 mt-px" viewBox="0 0 24 24" fill="currentColor">
+                <svg className="w-4 h-4 text-gray-700 flex-shrink-0 mt-px" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                 </svg>
-                <p className="text-[12px] text-gray-500 leading-relaxed">{address}</p>
+                <p className="text-[12px] text-gray-700 leading-relaxed">{address}</p>
               </div>
             )}
 
             {/* ── Editorial summary / About ── */}
             {summary && (
               <div>
-                <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-2">About</div>
+                <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-2">About</div>
                 <p className="text-[13px] text-gray-600 leading-relaxed">{summary}</p>
               </div>
             )}
@@ -885,7 +885,7 @@ function ActivityDetailModal({
             {/* ── Opening hours ── */}
             {hours.length > 0 && (
               <div>
-                <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-2">Hours</div>
+                <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-2">Hours</div>
                 <div className="rounded-xl border border-gray-200 bg-gray-50 overflow-hidden">
                   <button
                     onClick={() => setShowHours((v) => !v)}
@@ -893,13 +893,13 @@ function ActivityDetailModal({
                   >
                     <span className={`text-[12px] font-semibold ${
                       openNow === true  ? "text-emerald-400" :
-                      openNow === false ? "text-red-400/70"  : "text-gray-500"
+                      openNow === false ? "text-red-400/70"  : "text-gray-700"
                     }`}>
                       {openNow === true ? "Open now" : openNow === false ? "Closed now" : "See weekly hours"}
                       {!showHours && " — tap to expand"}
                     </span>
                     <svg
-                      className={`w-3.5 h-3.5 text-gray-400 transition-transform flex-shrink-0 ${showHours ? "rotate-180" : ""}`}
+                      className={`w-3.5 h-3.5 text-gray-700 transition-transform flex-shrink-0 ${showHours ? "rotate-180" : ""}`}
                       viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round"
                     >
                       <path d="M2 4l4 4 4-4" />
@@ -913,7 +913,7 @@ function ActivityDetailModal({
                         const dayHours = colonIdx >= 0 ? day.slice(colonIdx + 2) : "";
                         return (
                           <div key={i} className="flex text-[11px] gap-3">
-                            <span className="text-gray-400 w-24 flex-shrink-0">{dayName}</span>
+                            <span className="text-gray-700 w-24 flex-shrink-0">{dayName}</span>
                             <span className="text-gray-600">{dayHours || "—"}</span>
                           </div>
                         );
@@ -927,14 +927,14 @@ function ActivityDetailModal({
             {/* ── Contact & links ── */}
             {(phone || websiteUri || googleMapsUri) && (
               <div>
-                <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-2">Contact & links</div>
+                <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-2">Contact & links</div>
                 <div className="rounded-xl border border-gray-200 bg-gray-50 divide-y divide-gray-100 overflow-hidden">
                   {phone && (
                     <a
                       href={`tel:${phone}`}
-                      className="flex items-center gap-3 px-4 py-3 text-[12px] text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors"
+                      className="flex items-center gap-3 px-4 py-3 text-[12px] text-gray-700 hover:text-gray-700 hover:bg-gray-50 transition-colors"
                     >
-                      <svg className="w-3.5 h-3.5 flex-shrink-0 text-gray-300" viewBox="0 0 24 24" fill="currentColor">
+                      <svg className="w-3.5 h-3.5 flex-shrink-0 text-gray-700" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
                       </svg>
                       {phone}
@@ -945,9 +945,9 @@ function ActivityDetailModal({
                       href={websiteUri}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 px-4 py-3 text-[12px] text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors"
+                      className="flex items-center gap-3 px-4 py-3 text-[12px] text-gray-700 hover:text-gray-700 hover:bg-gray-50 transition-colors"
                     >
-                      <svg className="w-3.5 h-3.5 flex-shrink-0 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
+                      <svg className="w-3.5 h-3.5 flex-shrink-0 text-gray-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
                         <circle cx="12" cy="12" r="10" />
                         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                         <path d="M2 12h20" />
@@ -960,9 +960,9 @@ function ActivityDetailModal({
                       href={googleMapsUri}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 px-4 py-3 text-[12px] text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors"
+                      className="flex items-center gap-3 px-4 py-3 text-[12px] text-gray-700 hover:text-gray-700 hover:bg-gray-50 transition-colors"
                     >
-                      <svg className="w-3.5 h-3.5 flex-shrink-0 text-gray-300" viewBox="0 0 24 24" fill="currentColor">
+                      <svg className="w-3.5 h-3.5 flex-shrink-0 text-gray-700" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                       </svg>
                       Open in Google Maps
@@ -974,50 +974,50 @@ function ActivityDetailModal({
 
             {/* ── Practical tips ── */}
             <div>
-              <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-2">Practical Tips</div>
+              <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-2">Practical Tips</div>
               <div className="rounded-xl border border-gray-200 bg-gray-50 divide-y divide-gray-100 overflow-hidden">
 
                 <div className="flex items-start gap-3 px-4 py-3">
-                  <svg className="w-3.5 h-3.5 text-gray-300 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
+                  <svg className="w-3.5 h-3.5 text-gray-700 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
                     <circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" />
                   </svg>
                   <div>
-                    <div className="text-[10px] text-gray-400 mb-0.5">Estimated visit duration</div>
+                    <div className="text-[10px] text-gray-700 mb-0.5">Estimated visit duration</div>
                     <div className="text-[12px] text-gray-600">{activity.duration}</div>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3 px-4 py-3">
-                  <svg className="w-3.5 h-3.5 text-gray-300 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
+                  <svg className="w-3.5 h-3.5 text-gray-700 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
                     <circle cx="12" cy="12" r="5" />
                     <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
                   </svg>
                   <div>
-                    <div className="text-[10px] text-gray-400 mb-0.5">
-                      Best time to visit <span className="text-gray-300">(typical)</span>
+                    <div className="text-[10px] text-gray-700 mb-0.5">
+                      Best time to visit <span className="text-gray-700">(typical)</span>
                     </div>
                     <div className="text-[12px] text-gray-600">{getBestTime(types)}</div>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3 px-4 py-3">
-                  <svg className="w-3.5 h-3.5 text-gray-300 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="currentColor">
+                  <svg className="w-3.5 h-3.5 text-gray-700 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
                   </svg>
                   <div>
-                    <div className="text-[10px] text-gray-400 mb-0.5">
-                      Crowd level <span className="text-gray-300">(estimated from review volume)</span>
+                    <div className="text-[10px] text-gray-700 mb-0.5">
+                      Crowd level <span className="text-gray-700">(estimated from review volume)</span>
                     </div>
                     <div className="text-[12px] text-gray-600">{getCrowdLevel(reviewCount)}</div>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3 px-4 py-3">
-                  <svg className="w-3.5 h-3.5 text-gray-300 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
+                  <svg className="w-3.5 h-3.5 text-gray-700 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
                   </svg>
                   <div>
-                    <div className="text-[10px] text-gray-400 mb-0.5">Good for</div>
+                    <div className="text-[10px] text-gray-700 mb-0.5">Good for</div>
                     <div className="text-[12px] text-gray-600 capitalize">{getGoodFor(activity.badges, types)}</div>
                   </div>
                 </div>
@@ -1064,13 +1064,13 @@ function ActivityDetailModal({
 
               return (
                 <div>
-                  <div className="text-[9px] font-black uppercase tracking-widest text-gray-300 mb-2">
+                  <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-2">
                     Review sample
                   </div>
 
                   {/* Limitation notice + "Open full reviews" CTA */}
                   <div className="flex items-center justify-between gap-3 mb-3">
-                    <p className="text-[11px] text-gray-400 leading-snug">
+                    <p className="text-[11px] text-gray-700 leading-snug">
                       Google provides a limited review sample here
                       {allReviews.length > 0 && ` (${allReviews.length} shown)`}.
                     </p>
@@ -1087,7 +1087,7 @@ function ActivityDetailModal({
                   </div>
 
                   {detail && !loading && allReviews.length === 0 ? (
-                    <p className="text-[12px] text-gray-400 italic px-0.5">
+                    <p className="text-[12px] text-gray-700 italic px-0.5">
                       Review text is not available from Google for this place.
                     </p>
                   ) : (
@@ -1110,12 +1110,12 @@ function ActivityDetailModal({
                               className={`flex-shrink-0 rounded-full px-3 py-1 text-[11px] font-semibold border transition-all disabled:opacity-30 disabled:cursor-not-allowed ${
                                 reviewFilter === chip.id
                                   ? "bg-lantern-mint text-ink border-teal-400"
-                                  : "bg-gray-50 text-gray-500 border-gray-200 hover:bg-gray-100 hover:text-gray-700"
+                                  : "bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100 hover:text-gray-700"
                               }`}
                             >
                               {chip.label}
                               {chip.count > 0 && (
-                                <span className={`ml-1.5 tabular-nums ${reviewFilter === chip.id ? "text-gray-700" : "text-gray-300"}`}>
+                                <span className={`ml-1.5 tabular-nums ${reviewFilter === chip.id ? "text-gray-700" : "text-gray-700"}`}>
                                   {chip.count}
                                 </span>
                               )}
@@ -1128,7 +1128,7 @@ function ActivityDetailModal({
                       {allReviews.length > 0 && (
                         <div className="relative mb-3">
                           <svg
-                            className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-300 pointer-events-none"
+                            className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-700 pointer-events-none"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round"
                           >
                             <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
@@ -1138,12 +1138,12 @@ function ActivityDetailModal({
                             value={reviewSearch}
                             onChange={(e) => setReviewSearch(e.target.value)}
                             placeholder="Search reviews for crowds, kids, food, wait times…"
-                            className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-9 pr-3 py-2.5 text-[12px] text-gray-700 placeholder-white/20 outline-none focus:border-gray-300 focus:bg-gray-100 transition-all"
+                            className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-9 pr-3 py-2.5 text-[12px] text-gray-700 placeholder:text-gray-700 outline-none focus:border-gray-300 focus:bg-gray-100 transition-all"
                           />
                           {reviewSearch && (
                             <button
                               onClick={() => setReviewSearch("")}
-                              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-300 hover:text-gray-600 transition-colors"
+                              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-700 hover:text-gray-600 transition-colors"
                             >
                               <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
                                 <path d="M18 6L6 18M6 6l12 12" />
@@ -1155,7 +1155,7 @@ function ActivityDetailModal({
 
                       {/* No results after filtering */}
                       {allReviews.length > 0 && shownReviews.length === 0 && (
-                        <p className="text-[12px] text-gray-300 italic py-4 text-center">
+                        <p className="text-[12px] text-gray-700 italic py-4 text-center">
                           No reviews match your filter.
                         </p>
                       )}
@@ -1184,7 +1184,7 @@ function ActivityDetailModal({
                                   <div className="flex items-center gap-2 flex-wrap">
                                     <span className="text-[12px] font-semibold text-gray-700 truncate">{author}</span>
                                     {review.relativePublishTimeDescription && (
-                                      <span className="text-[10px] text-gray-300 flex-shrink-0">
+                                      <span className="text-[10px] text-gray-700 flex-shrink-0">
                                         {review.relativePublishTimeDescription}
                                       </span>
                                     )}
@@ -1194,7 +1194,7 @@ function ActivityDetailModal({
                                     {[1, 2, 3, 4, 5].map((s) => (
                                       <svg
                                         key={s}
-                                        className={`w-3 h-3 ${s <= stars ? "text-amber-400" : "text-gray-300"}`}
+                                        className={`w-3 h-3 ${s <= stars ? "text-amber-400" : "text-gray-700"}`}
                                         viewBox="0 0 24 24" fill="currentColor"
                                       >
                                         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
@@ -1208,7 +1208,7 @@ function ActivityDetailModal({
                                     href={link}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex-shrink-0 text-[10px] text-gray-300 hover:text-blue-600 transition-colors whitespace-nowrap"
+                                    className="flex-shrink-0 text-[10px] text-gray-700 hover:text-blue-600 transition-colors whitespace-nowrap"
                                   >
                                     View on Google ↗
                                   </a>
@@ -1228,7 +1228,7 @@ function ActivityDetailModal({
 
                       {/* Attribution */}
                       {allReviews.length > 0 && (
-                        <p className="text-[10px] text-gray-300 mt-3 text-center leading-relaxed">
+                        <p className="text-[10px] text-gray-700 mt-3 text-center leading-relaxed">
                           Reviews from Google · up to 5 returned by the Places API
                         </p>
                       )}
@@ -1256,7 +1256,7 @@ function ActivityDetailModal({
             ) : (
               <button
                 onClick={onClose}
-                className="flex-1 py-3 rounded-xl text-sm font-semibold text-gray-500 bg-gray-50 border border-gray-200 hover:bg-gray-100 transition-all"
+                className="flex-1 py-3 rounded-xl text-sm font-semibold text-gray-700 bg-gray-50 border border-gray-200 hover:bg-gray-100 transition-all"
               >
                 Close
               </button>
@@ -1309,7 +1309,7 @@ function CategoryFilter({
             className={`flex items-center gap-1.5 flex-shrink-0 rounded-full px-4 py-2 text-[12px] font-semibold border transition-all duration-200 whitespace-nowrap ${
               isActive
                 ? "bg-lantern-mint text-ink border-teal-400 shadow-md"
-                : "bg-gray-50 text-gray-500 border-gray-200 hover:bg-gray-100 hover:text-gray-700 hover:border-gray-300"
+                : "bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100 hover:text-gray-700 hover:border-gray-300"
             }`}
           >
             {f.icon && <span className="leading-none">{f.icon}</span>}
@@ -1317,7 +1317,7 @@ function CategoryFilter({
             {f.id !== "all" && count > 0 && (
               <span
                 className={`text-[10px] rounded-full px-1.5 py-0.5 leading-none tabular-nums ${
-                  isActive ? "bg-gray-200 text-gray-900" : "bg-gray-50 text-gray-400"
+                  isActive ? "bg-gray-200 text-gray-900" : "bg-gray-50 text-gray-700"
                 }`}
               >
                 {count.toLocaleString()}
@@ -1420,7 +1420,7 @@ function DestinationSearch({
         {/* Input area */}
         <div className="relative flex-1 min-w-0">
           <div className="flex items-center gap-3 px-3 py-2">
-            <IconPin className="w-4 h-4 text-gray-300 flex-shrink-0" />
+            <IconPin className="w-4 h-4 text-gray-700 flex-shrink-0" />
             <input
               ref={inputRef}
               type="text"
@@ -1438,17 +1438,17 @@ function DestinationSearch({
               placeholder="City, region, or country…"
               autoComplete="off"
               spellCheck={false}
-              className="w-full bg-transparent text-sm text-gray-900 placeholder-white/25 outline-none"
+              className="w-full bg-transparent text-sm text-gray-900 placeholder:text-gray-700 outline-none"
             />
             {fetching && (
-              <svg className="w-3.5 h-3.5 text-gray-400 animate-spin flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-3.5 h-3.5 text-gray-700 animate-spin flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
                 <circle cx="12" cy="12" r="10" strokeDasharray="31.4" strokeDashoffset="10" />
               </svg>
             )}
             {!fetching && value && (
               <button
                 onMouseDown={(e) => { e.preventDefault(); onChange(""); setSuggestions([]); setOpen(false); inputRef.current?.focus(); }}
-                className="text-gray-300 hover:text-gray-500 transition-colors flex-shrink-0 text-base leading-none"
+                className="text-gray-700 hover:text-gray-700 transition-colors flex-shrink-0 text-base leading-none"
               >×</button>
             )}
           </div>
@@ -1469,11 +1469,11 @@ function DestinationSearch({
                         : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                     }`}
                   >
-                    <IconPin className="w-3.5 h-3.5 text-gray-300 flex-shrink-0" />
+                    <IconPin className="w-3.5 h-3.5 text-gray-700 flex-shrink-0" />
                     <span className="min-w-0 truncate">
                       <span className="text-sm font-medium text-gray-900">{s.mainText}</span>
                       {s.secondaryText && (
-                        <span className="text-xs text-gray-500 ml-1.5">{s.secondaryText}</span>
+                        <span className="text-xs text-gray-700 ml-1.5">{s.secondaryText}</span>
                       )}
                     </span>
                   </button>
@@ -1518,8 +1518,8 @@ function EmptyState({ filter }: { filter: FilterId }) {
     return (
       <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
         <div className="text-5xl mb-4">🤍</div>
-        <h3 className="text-base font-bold text-gray-500 mb-2">No saved places yet</h3>
-        <p className="text-[13px] text-gray-300 max-w-xs mb-2">
+        <h3 className="text-base font-bold text-gray-700 mb-2">No saved places yet</h3>
+        <p className="text-[13px] text-gray-700 max-w-xs mb-2">
           Tap the ♥ on any activity to save it. Saved places stay here on this browser — no account needed.
         </p>
       </div>
@@ -1528,8 +1528,8 @@ function EmptyState({ filter }: { filter: FilterId }) {
   return (
     <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
       <div className="text-5xl mb-4">🔍</div>
-      <h3 className="text-base font-bold text-gray-500 mb-2">No activities found</h3>
-      <p className="text-[13px] text-gray-300">
+      <h3 className="text-base font-bold text-gray-700 mb-2">No activities found</h3>
+      <p className="text-[13px] text-gray-700">
         {filter === "free"
           ? "No free activities available for this destination."
           : filter === "browse_all"
@@ -1554,10 +1554,10 @@ function EmptySearchState({
   return (
     <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
       <div className="text-5xl mb-4">🔍</div>
-      <h3 className="text-base font-bold text-gray-500 mb-2">
+      <h3 className="text-base font-bold text-gray-700 mb-2">
         {isFiltered ? `No "${query}" results in ${filterLabel}` : `No results for "${query}"`}
       </h3>
-      <p className="text-[13px] text-gray-300 mb-4">
+      <p className="text-[13px] text-gray-700 mb-4">
         {isFiltered
           ? "This search term might match a different category."
           : "Try a different search term or browse by category."}
@@ -1578,8 +1578,8 @@ function ErrorState({ message, onRetry }: { message: string; onRetry: () => void
   return (
     <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
       <div className="text-5xl mb-4">⚠️</div>
-      <h3 className="text-base font-bold text-gray-500 mb-2">Something went wrong</h3>
-      <p className="text-[13px] text-gray-300 mb-5 max-w-xs">{message}</p>
+      <h3 className="text-base font-bold text-gray-700 mb-2">Something went wrong</h3>
+      <p className="text-[13px] text-gray-700 mb-5 max-w-xs">{message}</p>
       <button
         onClick={onRetry}
         className="px-5 py-2 rounded-xl bg-gray-50 border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-100 hover:text-gray-700 transition-all"
@@ -1725,18 +1725,18 @@ function ActivitySearchInput({
 }) {
   return (
     <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus-within:border-teal-400 transition-colors">
-      <IconSearch className="w-3.5 h-3.5 text-gray-300 flex-shrink-0" />
+      <IconSearch className="w-3.5 h-3.5 text-gray-700 flex-shrink-0" />
       <input
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder="Search sushi, ramen, temple, rooftop bar, anime…"
-        className="flex-1 bg-transparent text-sm text-gray-900 placeholder-white/20 outline-none"
+        className="flex-1 bg-transparent text-sm text-gray-900 placeholder:text-gray-700 outline-none"
       />
       {value && (
         <button
           onClick={() => onChange("")}
-          className="text-gray-300 hover:text-gray-500 transition-colors text-base leading-none px-1"
+          className="text-gray-700 hover:text-gray-700 transition-colors text-base leading-none px-1"
         >
           ×
         </button>
@@ -1804,13 +1804,13 @@ function ItineraryModal({
         <div className="flex items-start justify-between p-5 pb-4 border-b border-gray-200">
           <div>
             <h2 className="text-base font-bold text-gray-900 mb-1">Plan your itinerary</h2>
-            <p className="text-[12px] text-gray-400">
+            <p className="text-[12px] text-gray-700">
               {savedActivities.length} {savedActivities.length === 1 ? "place" : "places"} saved on this device
             </p>
           </div>
           <button
             onClick={onClose}
-            className="w-7 h-7 rounded-full bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-all text-sm"
+            className="w-7 h-7 rounded-full bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-700 hover:text-gray-700 hover:bg-gray-100 transition-all text-sm"
           >
             ×
           </button>
@@ -1824,7 +1824,7 @@ function ItineraryModal({
                 <span className="text-lg leading-none flex-shrink-0">{a.emoji}</span>
                 <div className="min-w-0">
                   <p className="text-gray-700 font-medium truncate">{a.title}</p>
-                  <p className="text-gray-400 truncate">{a.neighborhood} · {a.duration}</p>
+                  <p className="text-gray-700 truncate">{a.neighborhood} · {a.duration}</p>
                 </div>
               </li>
             ))}
@@ -1834,7 +1834,7 @@ function ItineraryModal({
         {/* Coming soon callout */}
         <div className="mx-5 mb-5 mt-2 rounded-xl border border-teal-500/25 bg-teal-600/8 px-4 py-3.5">
           <p className="text-[12px] text-teal-600 font-medium mb-1">Coming next</p>
-          <p className="text-[12px] text-gray-500 leading-relaxed">
+          <p className="text-[12px] text-gray-700 leading-relaxed">
             We&apos;ll turn your saved activities into a day-by-day plan — with travel times,
             opening hours, and neighbourhood grouping built in.
           </p>
@@ -2303,12 +2303,12 @@ export default function ActivitySearch() {
             <span className="text-sm font-bold tracking-tight text-gray-800">TravelGrab</span>
           </Link>
           <div className="h-4 w-px bg-gray-100" />
-          <Link href="/flights"    className="text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors">Flights</Link>
-          <Link href="/hotels"     className="text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors">Hotels</Link>
+          <Link href="/flights"    className="text-sm font-medium text-gray-700 hover:text-gray-700 transition-colors">Flights</Link>
+          <Link href="/hotels"     className="text-sm font-medium text-gray-700 hover:text-gray-700 transition-colors">Hotels</Link>
           <span                    className="text-sm font-semibold text-teal-600">Activities</span>
-          <Link href="/itinerary"  className="text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors">Itinerary</Link>
+          <Link href="/itinerary"  className="text-sm font-medium text-gray-700 hover:text-gray-700 transition-colors">Itinerary</Link>
           {savedIds.size > 0 && (
-            <div className="ml-auto flex items-center gap-1.5 text-[11px] text-gray-400">
+            <div className="ml-auto flex items-center gap-1.5 text-[11px] text-gray-700">
               <IconHeart filled className="w-3 h-3 text-red-400" />
               {savedIds.size} saved
             </div>
@@ -2320,7 +2320,7 @@ export default function ActivitySearch() {
 
         {/* ── Hero ── */}
         <div className="pt-12 pb-8 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-4 py-1.5 text-[11px] font-semibold text-gray-500 mb-5">
+          <div className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-4 py-1.5 text-[11px] font-semibold text-gray-700 mb-5">
             <span className={`w-1.5 h-1.5 rounded-full ${
               loading ? "bg-amber-400 animate-pulse" :
               result?.inventoryStatus === "building" ? "bg-amber-400 animate-pulse" :
@@ -2347,7 +2347,7 @@ export default function ActivitySearch() {
               {city}{country ? `, ${country}` : ""}
             </span>
           </h1>
-          <p className="text-gray-400 text-base max-w-md mx-auto">
+          <p className="text-gray-700 text-base max-w-md mx-auto">
             Hand-picked experiences across food, culture, nightlife, adventure, and more.
           </p>
         </div>
@@ -2355,7 +2355,7 @@ export default function ActivitySearch() {
         {/* ── Trip city chips (shown when itinerary has 2+ stops) ── */}
         {tripCities.length > 1 && (
           <div className="mb-3">
-            <p className="text-[11px] text-gray-400 mb-2 font-medium">Browse by city</p>
+            <p className="text-[11px] text-gray-700 mb-2 font-medium">Browse by city</p>
             <div
               className="flex gap-2 overflow-x-auto pb-0.5"
               style={{ scrollbarWidth: "none" } as React.CSSProperties}
@@ -2370,7 +2370,7 @@ export default function ActivitySearch() {
                     className={`flex-shrink-0 rounded-full px-4 py-1.5 text-xs font-semibold border transition-all whitespace-nowrap ${
                       isActive
                         ? "bg-teal-50 border-teal-300 text-teal-600"
-                        : "bg-gray-50 border-gray-200 text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                        : "bg-gray-50 border-gray-200 text-gray-700 hover:text-gray-700 hover:border-gray-300"
                     }`}
                   >
                     {cityShort}
@@ -2417,7 +2417,7 @@ export default function ActivitySearch() {
               className={`flex-shrink-0 rounded-full px-3 py-1.5 text-[11px] font-semibold border transition-all ${
                 activeSubTag === null
                   ? "bg-gray-100 text-gray-900 border-gray-300"
-                  : "bg-gray-50 text-gray-500 border-gray-200 hover:bg-gray-50 hover:text-gray-600"
+                  : "bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-50 hover:text-gray-600"
               }`}
             >
               All
@@ -2432,7 +2432,7 @@ export default function ActivitySearch() {
                   className={`flex-shrink-0 rounded-full px-3 py-1.5 text-[11px] font-semibold border transition-all whitespace-nowrap ${
                     activeSubTag === tag
                       ? "bg-gray-100 text-gray-900 border-gray-300"
-                      : "bg-gray-50 text-gray-500 border-gray-200 hover:bg-gray-50 hover:text-gray-600"
+                      : "bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-50 hover:text-gray-600"
                   }`}
                 >
                   {tag}
@@ -2445,7 +2445,7 @@ export default function ActivitySearch() {
         {/* ── Result count ── */}
         {result && !loading && (
           <div className="flex items-center justify-between mb-5">
-            <p className="text-[12px] text-gray-400">
+            <p className="text-[12px] text-gray-700">
               {isSearching
                 ? `${viewBase.length.toLocaleString()} ${viewBase.length === 1 ? "result" : "results"} for "${activityQuery}"${city ? ` in ${city}` : ""}`
                 : isFeatured
@@ -2460,7 +2460,7 @@ export default function ActivitySearch() {
               }
             </p>
             {savedIds.size > 0 && (
-              <p className="text-[11px] text-gray-300 flex items-center gap-1">
+              <p className="text-[11px] text-gray-700 flex items-center gap-1">
                 <IconHeart filled className="w-2.5 h-2.5 text-red-400/70" />
                 {savedIds.size} saved
               </p>

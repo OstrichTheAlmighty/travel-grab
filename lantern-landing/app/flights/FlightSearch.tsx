@@ -1077,7 +1077,7 @@ function AirportCombobox({
 
   return (
     <div className="relative flex-1 min-w-0">
-      <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 px-0.5">
+      <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5 px-0.5">
         {label}
       </label>
       <div
@@ -1086,7 +1086,7 @@ function AirportCombobox({
         }`}
       >
         <svg
-          className="absolute left-3 w-4 h-4 text-gray-400 pointer-events-none flex-shrink-0"
+          className="absolute left-3 w-4 h-4 text-gray-700 pointer-events-none flex-shrink-0"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -1100,7 +1100,7 @@ function AirportCombobox({
           type="text"
           value={inputValue}
           placeholder={placeholder}
-          className="w-full bg-transparent pl-9 pr-3.5 py-3 text-sm text-gray-900 placeholder-white/30 outline-none"
+          className="w-full bg-transparent pl-9 pr-3.5 py-3 text-sm text-gray-900 placeholder:text-gray-700 outline-none"
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={handleChange}
@@ -1125,7 +1125,7 @@ function AirportCombobox({
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="text-sm text-gray-900 truncate">{item.label}</div>
-                    <div className="text-xs text-gray-500 truncate">All airports: {item.codes.join(", ")}</div>
+                    <div className="text-xs text-gray-700 truncate">All airports: {item.codes.join(", ")}</div>
                   </div>
                   <span className="ml-auto text-[10px] font-semibold uppercase tracking-wider text-amber-500 flex-shrink-0">
                     metro
@@ -1138,9 +1138,9 @@ function AirportCombobox({
                   </span>
                   <div className="min-w-0">
                     <div className="text-sm text-gray-900 truncate">{item.city}</div>
-                    <div className="text-xs text-gray-500 truncate">{item.name}</div>
+                    <div className="text-xs text-gray-700 truncate">{item.name}</div>
                   </div>
-                  <span className="ml-auto text-xs text-gray-300 flex-shrink-0">{item.country}</span>
+                  <span className="ml-auto text-xs text-gray-700 flex-shrink-0">{item.country}</span>
                 </>
               )}
             </li>
@@ -1172,7 +1172,7 @@ function toDisplayScore(v: number): number {
 
 function breakdownColor(ds: number): string {
   if (ds >= 60) return "text-teal-600";
-  if (ds >= 40) return "text-gray-500";
+  if (ds >= 40) return "text-gray-700";
   return "text-amber-600";
 }
 
@@ -1263,14 +1263,14 @@ function RecommendationPanel({
           onError={(e) => { e.currentTarget.style.display = "none"; }}
         />
         <span className="font-bold text-gray-900">{pick.airline}</span>
-        <span className="text-gray-300">·</span>
+        <span className="text-gray-700">·</span>
         <span className="font-mono font-semibold text-gray-600">{pick.origin}</span>
-        <span className="text-gray-400">→</span>
+        <span className="text-gray-700">→</span>
         <span className="font-mono font-semibold text-gray-600">{pick.destination}</span>
-        <span className="text-gray-300">·</span>
-        <span className="text-gray-500">{pick.duration}</span>
-        <span className="text-gray-300">·</span>
-        <span className="text-gray-500">{pick.stop_label}</span>
+        <span className="text-gray-700">·</span>
+        <span className="text-gray-700">{pick.duration}</span>
+        <span className="text-gray-700">·</span>
+        <span className="text-gray-700">{pick.stop_label}</span>
       </div>
 
       {/* Priority note (shown when a non-default priority is active) */}
@@ -1285,7 +1285,7 @@ function RecommendationPanel({
 
       {/* vs others note — only shown in default mode when OpenAI populates it */}
       {!priorityNote && pick.comparison_summary && (
-        <p className="text-[11px] text-gray-400 leading-relaxed mb-2.5">{pick.comparison_summary}</p>
+        <p className="text-[11px] text-gray-700 leading-relaxed mb-2.5">{pick.comparison_summary}</p>
       )}
 
       {/* Positive reason bullets — always shown */}
@@ -1302,8 +1302,8 @@ function RecommendationPanel({
 
       {/* Tradeoff line — shown after the positive bullets when priorities are active */}
       {priorityNote && pick.tradeoffs.length > 0 && (
-        <p className="text-[11px] text-gray-400 leading-relaxed mb-3">
-          <span className="font-semibold text-gray-500">Tradeoff:</span>{" "}
+        <p className="text-[11px] text-gray-700 leading-relaxed mb-3">
+          <span className="font-semibold text-gray-700">Tradeoff:</span>{" "}
           {pick.tradeoffs[0].charAt(0).toUpperCase() + pick.tradeoffs[0].slice(1)}.
         </p>
       )}
@@ -1376,16 +1376,16 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
   if (top.length < 2) return null;
 
   const thCls =
-    "text-[9px] font-bold uppercase tracking-widest text-gray-300 px-3 py-2.5 text-left whitespace-nowrap";
+    "text-[9px] font-bold uppercase tracking-widest text-gray-700 px-3 py-2.5 text-left whitespace-nowrap";
   const tdCls = "px-3 py-2.5 align-top";
 
   return (
     <div className="mb-4 max-w-3xl mx-auto">
       <div className="mb-2.5">
-        <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">
+        <span className="text-[10px] font-black uppercase tracking-widest text-gray-700">
           Compare top picks
         </span>
-        <p className="text-[11px] text-gray-300 mt-0.5">
+        <p className="text-[11px] text-gray-700 mt-0.5">
           See why TravelGrab ranked these options differently.
         </p>
       </div>
@@ -1427,7 +1427,7 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
                           </span>
                         )}
                       </div>
-                      <div className="text-[9px] font-mono text-gray-400 mt-px">{o.flight_number}</div>
+                      <div className="text-[9px] font-mono text-gray-700 mt-px">{o.flight_number}</div>
                     </div>
                   </div>
                 </td>
@@ -1454,7 +1454,7 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
                 {/* Stops */}
                 <td className={tdCls}>
                   <span className={`text-[11px] font-medium whitespace-nowrap ${
-                    o.stops === 0 ? "text-teal-600" : "text-gray-500"
+                    o.stops === 0 ? "text-teal-600" : "text-gray-700"
                   }`}>
                     {o.stop_label}
                   </span>
@@ -1468,16 +1468,16 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
                     </span>
                   )}
                   {o.wins_on[0] && (
-                    <p className="text-[10px] text-gray-500 leading-snug max-w-[130px]">{o.wins_on[0]}</p>
+                    <p className="text-[10px] text-gray-700 leading-snug max-w-[130px]">{o.wins_on[0]}</p>
                   )}
                 </td>
 
                 {/* Tradeoff */}
                 <td className={tdCls}>
                   {o.tradeoffs[0] ? (
-                    <p className="text-[10px] text-gray-500 leading-snug max-w-[130px]">{o.tradeoffs[0]}</p>
+                    <p className="text-[10px] text-gray-700 leading-snug max-w-[130px]">{o.tradeoffs[0]}</p>
                   ) : (
-                    <span className="text-[10px] text-gray-300">—</span>
+                    <span className="text-[10px] text-gray-700">—</span>
                   )}
                 </td>
               </tr>
@@ -1621,7 +1621,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                 )}
               </div>
               {!rec && offer.recommendation_why && (
-                <p className="text-[11px] leading-relaxed text-gray-500">
+                <p className="text-[11px] leading-relaxed text-gray-700">
                   {offer.recommendation_why}
                 </p>
               )}
@@ -1631,7 +1631,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
             <div className={`text-2xl font-black tabular-nums leading-none ${scoreColor(offer.ai_score)}`}>
               ${Math.round(offer.price_total).toLocaleString()}
             </div>
-            <div className="text-[11px] text-gray-400 mt-0.5">{offer.cabin}</div>
+            <div className="text-[11px] text-gray-700 mt-0.5">{offer.cabin}</div>
             {analysisOpen && (
               <>
                 <button
@@ -1641,7 +1641,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                   {offer.is_bookable === false ? "View booking options" : "Book this flight"}
                 </button>
                 {offer.is_bookable === false && (
-                  <p className="text-[10px] text-gray-300 mt-1 leading-snug">
+                  <p className="text-[10px] text-gray-700 mt-1 leading-snug">
                     Opens matching Google Flights results. Price may vary.
                   </p>
                 )}
@@ -1653,61 +1653,61 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
         {/* ── Route bars ── */}
         <div className="mb-3 space-y-1.5">
           {offer.return_depart_time && (
-            <div className="text-[9px] text-gray-300 font-bold uppercase tracking-wider px-1">Outbound</div>
+            <div className="text-[9px] text-gray-700 font-bold uppercase tracking-wider px-1">Outbound</div>
           )}
           <div className="flex items-center gap-2 py-2 px-3 rounded-lg bg-gray-50 border border-gray-100">
             <div className="text-center flex-shrink-0 min-w-[3rem]">
               <div className="text-base font-black text-gray-900 tabular-nums leading-tight">{offer.depart_time}</div>
-              <div className="text-[10px] font-mono font-bold text-gray-500">{offer.origin}</div>
+              <div className="text-[10px] font-mono font-bold text-gray-700">{offer.origin}</div>
             </div>
             <div className="flex-1 flex flex-col items-center gap-0.5 min-w-0 px-1">
-              <div className="text-[10px] text-gray-400 font-medium">{offer.duration}</div>
+              <div className="text-[10px] text-gray-700 font-medium">{offer.duration}</div>
               <div className="w-full flex items-center gap-1">
                 <div className="flex-1 h-px bg-gray-100" />
-                <svg className="w-3 h-3 text-gray-300 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <svg className="w-3 h-3 text-gray-700 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
                 </svg>
                 <div className="flex-1 h-px bg-gray-100" />
               </div>
-              <div className="text-[10px] text-gray-400 font-medium">
+              <div className="text-[10px] text-gray-700 font-medium">
                 {offer.stop_label}{offer.connection_airports ? ` · ${offer.connection_airports.replace(/,/g, ", ")}` : ""}
               </div>
             </div>
             <div className="text-center flex-shrink-0 min-w-[3rem]">
               <div className="text-base font-black text-gray-900 tabular-nums leading-tight">{offer.arrive_time}</div>
-              <div className="text-[10px] font-mono font-bold text-gray-500">{offer.destination}</div>
+              <div className="text-[10px] font-mono font-bold text-gray-700">{offer.destination}</div>
             </div>
           </div>
           {offer.return_depart_time ? (
             <>
-              <div className="text-[9px] text-gray-300 font-bold uppercase tracking-wider px-1">Return</div>
+              <div className="text-[9px] text-gray-700 font-bold uppercase tracking-wider px-1">Return</div>
               <div className="flex items-center gap-2 py-2 px-3 rounded-lg bg-gray-50 border border-gray-100">
                 <div className="text-center flex-shrink-0 min-w-[3rem]">
                   <div className="text-base font-black text-gray-700 tabular-nums leading-tight">{offer.return_depart_time}</div>
-                  <div className="text-[10px] font-mono font-bold text-gray-400">{offer.return_origin}</div>
+                  <div className="text-[10px] font-mono font-bold text-gray-700">{offer.return_origin}</div>
                 </div>
                 <div className="flex-1 flex flex-col items-center gap-0.5 min-w-0 px-1">
-                  <div className="text-[10px] text-gray-300 font-medium">{offer.return_duration}</div>
+                  <div className="text-[10px] text-gray-700 font-medium">{offer.return_duration}</div>
                   <div className="w-full flex items-center gap-1">
                     <div className="flex-1 h-px bg-gray-100" />
-                    <svg className="w-3 h-3 text-gray-300 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                    <svg className="w-3 h-3 text-gray-700 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
                     </svg>
                     <div className="flex-1 h-px bg-gray-100" />
                   </div>
-                  <div className="text-[10px] text-gray-300 font-medium">
+                  <div className="text-[10px] text-gray-700 font-medium">
                     {offer.return_stop_label}{offer.return_connection_airports ? ` · ${offer.return_connection_airports.replace(/,/g, ", ")}` : ""}
                   </div>
                 </div>
                 <div className="text-center flex-shrink-0 min-w-[3rem]">
                   <div className="text-base font-black text-gray-700 tabular-nums leading-tight">{offer.return_arrive_time}</div>
-                  <div className="text-[10px] font-mono font-bold text-gray-400">{offer.return_destination}</div>
+                  <div className="text-[10px] font-mono font-bold text-gray-700">{offer.return_destination}</div>
                 </div>
               </div>
             </>
           ) : tripType === "roundtrip" && offer.source === "google_flights" ? (
             <>
-              <div className="text-[9px] text-gray-300 font-bold uppercase tracking-wider px-1">Return</div>
+              <div className="text-[9px] text-gray-700 font-bold uppercase tracking-wider px-1">Return</div>
               <div className="flex items-center gap-2 py-2 px-3 rounded-lg bg-gray-50 border border-gray-100">
                 <div className="flex-1 text-center">
                   {offer.booking_url ? (
@@ -1715,12 +1715,12 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                       href={offer.booking_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[11px] text-gray-400 hover:text-gray-600 transition-colors underline underline-offset-2 decoration-white/20"
+                      className="text-[11px] text-gray-700 hover:text-gray-600 transition-colors underline underline-offset-2 decoration-white/20"
                     >
                       View complete round-trip itinerary on Google Flights
                     </a>
                   ) : (
-                    <span className="text-[11px] text-gray-400">View complete round-trip itinerary on Google Flights</span>
+                    <span className="text-[11px] text-gray-700">View complete round-trip itinerary on Google Flights</span>
                   )}
                 </div>
               </div>
@@ -1730,7 +1730,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
 
         {/* ── AI Score bar ── */}
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-[11px] text-gray-300 flex-shrink-0 w-14">AI Score</span>
+          <span className="text-[11px] text-gray-700 flex-shrink-0 w-14">AI Score</span>
           <div className="flex-1 h-1.5 rounded-full bg-gray-50 overflow-hidden">
             <div
               className={`h-full rounded-full ${offer.ai_score >= 85 ? "bg-lantern-mint" : offer.ai_score >= 70 ? "bg-blue-100" : "bg-amber-100"}`}
@@ -1749,13 +1749,13 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
             {/* Why this flight */}
             {whyBullets.length > 0 && (
               <div className={`rounded-lg px-3.5 py-2.5 ${rec ? "bg-teal-600/[0.08] border border-teal-200" : "bg-gray-50 border border-gray-200"}`}>
-                <div className={`text-[10px] font-bold uppercase tracking-wider mb-1.5 ${rec ? "text-teal-600" : "text-gray-400"}`}>
+                <div className={`text-[10px] font-bold uppercase tracking-wider mb-1.5 ${rec ? "text-teal-600" : "text-gray-700"}`}>
                   Why this flight
                 </div>
                 <ul className="space-y-1">
                   {whyBullets.map((b, i) => (
                     <li key={i} className="flex gap-1.5 text-[11px] text-gray-600 leading-relaxed">
-                      <span className={`mt-0.5 flex-shrink-0 ${rec ? "text-teal-600" : "text-gray-400"}`}>›</span>
+                      <span className={`mt-0.5 flex-shrink-0 ${rec ? "text-teal-600" : "text-gray-700"}`}>›</span>
                       {b}
                     </li>
                   ))}
@@ -1769,7 +1769,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                 <div className="text-[10px] font-bold text-amber-600 uppercase tracking-wider mb-1.5">Why not</div>
                 <ul className="space-y-1">
                   {whyNot.map((w, i) => (
-                    <li key={i} className="flex gap-1.5 text-[11px] text-gray-500 leading-relaxed">
+                    <li key={i} className="flex gap-1.5 text-[11px] text-gray-700 leading-relaxed">
                       <svg className="w-3 h-3 text-amber-500 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
                         <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
                         <line x1={12} y1={9} x2={12} y2={13} /><line x1={12} y1={17} x2="12.01" y2={17} />
@@ -1784,13 +1784,13 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
             {/* Trip impact blocks */}
             {tripImpact.length > 0 && (
               <div>
-                <div className="text-[10px] font-bold text-gray-300 uppercase tracking-wider mb-2">Trip impact</div>
+                <div className="text-[10px] font-bold text-gray-700 uppercase tracking-wider mb-2">Trip impact</div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
                   {tripImpact.map(({ key, label, value, desc }) => (
                     <div key={key} className="rounded-lg bg-gray-50 border border-gray-200 px-2.5 py-2">
-                      <div className="text-[10px] text-gray-300 font-medium mb-0.5">{label}</div>
+                      <div className="text-[10px] text-gray-700 font-medium mb-0.5">{label}</div>
                       <div className={`text-[11px] font-bold mb-0.5 ${indicatorColor(value)}`}>{value}</div>
-                      {desc && <div className="text-[10px] text-gray-300 leading-snug">{desc}</div>}
+                      {desc && <div className="text-[10px] text-gray-700 leading-snug">{desc}</div>}
                     </div>
                   ))}
                 </div>
@@ -1829,7 +1829,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                 ] as [string, string][]
               ).map(([label, val]) => (
                 <div key={label} className="flex items-baseline gap-1.5">
-                  <span className="text-[10px] text-gray-300 w-14 flex-shrink-0">{label}</span>
+                  <span className="text-[10px] text-gray-700 w-14 flex-shrink-0">{label}</span>
                   <span className="text-[11px] text-gray-600 font-medium">{val}</span>
                 </div>
               ))}
@@ -1841,7 +1841,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
         <div className="flex items-center gap-2 pt-3 mt-3 border-t border-gray-100">
           <button
             onClick={() => setScoreOpen(true)}
-            className="flex items-center gap-1.5 text-[11px] font-medium text-gray-500 hover:text-gray-700 border border-gray-200 hover:border-gray-300 rounded-lg px-3 py-1.5 transition-colors"
+            className="flex items-center gap-1.5 text-[11px] font-medium text-gray-700 hover:text-gray-700 border border-gray-200 hover:border-gray-300 rounded-lg px-3 py-1.5 transition-colors"
           >
             <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
               <path d="M3 3v18h18" /><path d="m19 9-5 5-4-4-3 3" />
@@ -1859,7 +1859,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
               className={`flex items-center gap-1.5 text-[11px] font-medium border rounded-lg px-3 py-1.5 transition-colors ${
                 analysisOpen
                   ? "text-gray-600 border-gray-200 bg-gray-50"
-                  : "text-gray-500 hover:text-gray-700 border-gray-200 hover:border-gray-300"
+                  : "text-gray-700 hover:text-gray-700 border-gray-200 hover:border-gray-300"
               }`}
             >
               <svg
@@ -1884,7 +1884,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
           )}
           <button
             onClick={() => setDetailsOpen((o) => !o)}
-            className="flex items-center gap-1.5 text-[11px] font-medium text-gray-500 hover:text-gray-700 border border-gray-200 hover:border-gray-300 rounded-lg px-3 py-1.5 transition-colors"
+            className="flex items-center gap-1.5 text-[11px] font-medium text-gray-700 hover:text-gray-700 border border-gray-200 hover:border-gray-300 rounded-lg px-3 py-1.5 transition-colors"
           >
             <svg
               className={`w-3 h-3 transition-transform ${detailsOpen ? "rotate-180" : ""}`}
@@ -1903,7 +1903,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
               className={`ml-auto text-[11px] font-semibold rounded-lg px-2.5 py-1.5 transition-all border whitespace-nowrap ${
                 isAddedToItinerary
                   ? "bg-teal-50 text-teal-600 border-teal-200"
-                  : "text-gray-500 border-gray-200 hover:border-teal-200 hover:text-teal-500"
+                  : "text-gray-700 border-gray-200 hover:border-teal-200 hover:text-teal-500"
               }`}
             >
               {isAddedToItinerary ? "✓ In itinerary" : "+ Itinerary"}
@@ -1925,11 +1925,11 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
             <div className="flex items-start justify-between mb-4">
               <div>
                 <div className="text-sm font-bold text-gray-900">Score Breakdown</div>
-                <div className="text-[11px] text-gray-400 mt-0.5">{offer.airline} · {offer.flight_number}</div>
+                <div className="text-[11px] text-gray-700 mt-0.5">{offer.airline} · {offer.flight_number}</div>
               </div>
               <button
                 onClick={() => setScoreOpen(false)}
-                className="p-1 -mr-1 -mt-0.5 text-gray-400 hover:text-gray-900 transition-colors rounded-lg hover:bg-gray-50"
+                className="p-1 -mr-1 -mt-0.5 text-gray-700 hover:text-gray-900 transition-colors rounded-lg hover:bg-gray-50"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
                   <path d="M18 6 6 18M6 6l12 12" />
@@ -1950,9 +1950,9 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                 {(() => {
                   const summary = labelSummary(offer.recommendation_label);
                   return summary ? (
-                    <p className="text-[11px] text-gray-500 leading-relaxed">{summary}</p>
+                    <p className="text-[11px] text-gray-700 leading-relaxed">{summary}</p>
                   ) : offer.recommendation_why ? (
-                    <p className="text-[11px] text-gray-500 leading-relaxed">{offer.recommendation_why}</p>
+                    <p className="text-[11px] text-gray-700 leading-relaxed">{offer.recommendation_why}</p>
                   ) : null;
                 })()}
               </div>
@@ -1960,7 +1960,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
 
             {(offer.ranking_why ?? []).length > 0 && (
               <div className="mb-3">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-gray-300 mb-1.5">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-gray-700 mb-1.5">
                   Why this ranked here
                 </div>
                 <ul className="space-y-1">
@@ -1969,7 +1969,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                       <span className={`text-[11px] flex-shrink-0 leading-tight mt-px ${b.positive ? "text-teal-600" : "text-amber-600"}`}>
                         {b.positive ? "✓" : "✗"}
                       </span>
-                      <span className={`text-[11px] leading-snug ${b.positive ? "text-gray-600" : "text-gray-500"}`}>
+                      <span className={`text-[11px] leading-snug ${b.positive ? "text-gray-600" : "text-gray-700"}`}>
                         {b.text}
                       </span>
                     </li>
@@ -1980,13 +1980,13 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
 
             {priorities.length > 0 && (
               <div className="flex items-center gap-1.5 mb-2 text-[10px]">
-                <span className="text-gray-400">Weighted for:</span>
+                <span className="text-gray-700">Weighted for:</span>
                 <span className="text-teal-600 font-semibold">
                   {priorities.map((p) => PRIORITY_CHIPS.find((c) => c.id === p)?.label ?? p).join(" + ")}
                 </span>
               </div>
             )}
-            <p className="text-[10px] text-gray-300 leading-relaxed mb-3">
+            <p className="text-[10px] text-gray-700 leading-relaxed mb-3">
               Each metric scored 0–100 relative to this result set, then combined using your priority weights.
             </p>
 
@@ -1997,7 +1997,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                     <div className="flex items-center justify-between mb-1">
                       <div className="flex items-baseline gap-1.5">
                         <span className="text-[11px] text-gray-600">{label}</span>
-                        <span className="text-[10px] text-gray-300">{weight}%</span>
+                        <span className="text-[10px] text-gray-700">{weight}%</span>
                       </div>
                       <span className={`text-[11px] font-bold tabular-nums ${breakdownColor(displayScore)}`}>
                         {displayScore}
@@ -2013,12 +2013,12 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                 ))}
               </div>
             ) : (
-              <p className="text-[11px] text-gray-400 text-center py-2">Breakdown unavailable.</p>
+              <p className="text-[11px] text-gray-700 text-center py-2">Breakdown unavailable.</p>
             )}
 
             <button
               onClick={() => setScoreOpen(false)}
-              className="mt-4 w-full py-2 rounded-xl text-[11px] font-semibold text-gray-500 border border-gray-200 hover:text-gray-700 hover:border-gray-300 transition-colors"
+              className="mt-4 w-full py-2 rounded-xl text-[11px] font-semibold text-gray-700 border border-gray-200 hover:text-gray-700 hover:border-gray-300 transition-colors"
             >
               Close
             </button>
@@ -2044,7 +2044,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
               </div>
               <div>
                 <div className="text-sm font-bold text-gray-900">Booking not live yet</div>
-                <div className="text-[11px] text-gray-400 mt-0.5">{offer.airline} · {offer.flight_number}</div>
+                <div className="text-[11px] text-gray-700 mt-0.5">{offer.airline} · {offer.flight_number}</div>
               </div>
             </div>
 
@@ -2062,7 +2062,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                 ["Score",    String(offer.ai_score)],
               ].map(([label, val]) => (
                 <div key={label} className="flex items-baseline justify-between gap-2">
-                  <span className="text-[10px] text-gray-400">{label}</span>
+                  <span className="text-[10px] text-gray-700">{label}</span>
                   <span className="text-[11px] text-gray-600 font-medium tabular-nums">{val}</span>
                 </div>
               ))}
@@ -2070,7 +2070,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
 
             <button
               onClick={() => setBookOpen(false)}
-              className="w-full py-2 rounded-xl text-[12px] font-semibold text-gray-500 border border-gray-200 hover:text-gray-700 hover:border-gray-300 transition-colors"
+              className="w-full py-2 rounded-xl text-[12px] font-semibold text-gray-700 border border-gray-200 hover:text-gray-700 hover:border-gray-300 transition-colors"
             >
               Got it
             </button>
@@ -2090,7 +2090,7 @@ function FeatureCard({ icon, title, body }: { icon: React.ReactNode; title: stri
         {icon}
       </div>
       <div className="mb-1 text-sm font-semibold text-gray-900">{title}</div>
-      <div className="text-xs text-gray-500 leading-relaxed">{body}</div>
+      <div className="text-xs text-gray-700 leading-relaxed">{body}</div>
     </div>
   );
 }
@@ -2287,9 +2287,9 @@ export default function FlightSearch() {
           </Link>
           <div className="h-4 w-px bg-gray-100" />
           <span className="text-sm font-medium text-teal-600">Flights</span>
-          <Link href="/hotels"     className="text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors">Hotels</Link>
-          <Link href="/activities" className="text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors">Activities</Link>
-          <Link href="/itinerary"  className="text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors">Itinerary</Link>
+          <Link href="/hotels"     className="text-sm font-medium text-gray-700 hover:text-gray-700 transition-colors">Hotels</Link>
+          <Link href="/activities" className="text-sm font-medium text-gray-700 hover:text-gray-700 transition-colors">Activities</Link>
+          <Link href="/itinerary"  className="text-sm font-medium text-gray-700 hover:text-gray-700 transition-colors">Itinerary</Link>
         </div>
       </nav>
 
@@ -2299,7 +2299,7 @@ export default function FlightSearch() {
           <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-gray-900 mb-2">
             Find your flight
           </h1>
-          <p className="text-sm text-gray-500 max-w-md mx-auto leading-relaxed">
+          <p className="text-sm text-gray-700 max-w-md mx-auto leading-relaxed">
             TravelGrab checks nearby airports automatically and ranks flights by comfort, timing, and value.
           </p>
         </div>
@@ -2311,7 +2311,7 @@ export default function FlightSearch() {
               <span className="text-teal-600 text-sm">✦</span>
               <div className="min-w-0">
                 <p className="text-xs font-semibold text-gray-900 truncate">Trip to {tripContext.destination}</p>
-                <p className="text-[11px] text-gray-500 mt-0.5">
+                <p className="text-[11px] text-gray-700 mt-0.5">
                   Dates pre-filled from your trip plan · {new Date(tripContext.startDate + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })}–{new Date(tripContext.endDate + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })}
                 </p>
               </div>
@@ -2333,7 +2333,7 @@ export default function FlightSearch() {
                 className={`px-4 py-1.5 rounded-lg text-sm font-semibold transition-all ${
                   tripType === t
                     ? "bg-teal-100 text-teal-600 border border-teal-300"
-                    : "text-gray-500 hover:text-gray-700"
+                    : "text-gray-700 hover:text-gray-700"
                 }`}
               >
                 {t === "roundtrip" ? "Round Trip" : "One Way"}
@@ -2346,7 +2346,7 @@ export default function FlightSearch() {
             <AirportCombobox label="From" placeholder="City, metro, or airport" value={origin} onChange={setOrigin} />
             <button
               onClick={() => { const tmp = origin; setOrigin(destination); setDestination(tmp); }}
-              className="self-end mb-0.5 sm:self-center mt-auto sm:mt-6 p-2 rounded-xl border border-gray-200 bg-gray-50 text-gray-500 hover:text-gray-700 hover:border-gray-300 hover:bg-gray-100 transition-all flex-shrink-0"
+              className="self-end mb-0.5 sm:self-center mt-auto sm:mt-6 p-2 rounded-xl border border-gray-200 bg-gray-50 text-gray-700 hover:text-gray-700 hover:border-gray-300 hover:bg-gray-100 transition-all flex-shrink-0"
               title="Swap airports"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2}>
@@ -2360,7 +2360,7 @@ export default function FlightSearch() {
           {/* Dates + Travelers + Cabin */}
           <div className="flex flex-col sm:flex-row gap-2.5 mb-3">
             <div className="flex-1 min-w-0">
-              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 px-0.5">Departure</label>
+              <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5 px-0.5">Departure</label>
               <input
                 type="date"
                 min={today}
@@ -2371,7 +2371,7 @@ export default function FlightSearch() {
             </div>
             {tripType === "roundtrip" && (
               <div className="flex-1 min-w-0">
-                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 px-0.5">Return</label>
+                <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5 px-0.5">Return</label>
                 <input
                   type="date"
                   min={departureDate || today}
@@ -2382,15 +2382,15 @@ export default function FlightSearch() {
               </div>
             )}
             <div className="w-full sm:w-32 flex-shrink-0">
-              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 px-0.5">Travelers</label>
+              <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5 px-0.5">Travelers</label>
               <div className="flex items-center rounded-xl border border-gray-200 bg-gray-50 overflow-hidden">
-                <button onClick={() => setTravelers((n) => Math.max(1, n - 1))} className="px-3 py-3 text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors text-lg leading-none">−</button>
+                <button onClick={() => setTravelers((n) => Math.max(1, n - 1))} className="px-3 py-3 text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-colors text-lg leading-none">−</button>
                 <span className="flex-1 text-center text-sm font-semibold text-gray-900">{travelers}</span>
-                <button onClick={() => setTravelers((n) => Math.min(9, n + 1))} className="px-3 py-3 text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors text-lg leading-none">+</button>
+                <button onClick={() => setTravelers((n) => Math.min(9, n + 1))} className="px-3 py-3 text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-colors text-lg leading-none">+</button>
               </div>
             </div>
             <div className="flex-1 min-w-0">
-              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 px-0.5">Cabin</label>
+              <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5 px-0.5">Cabin</label>
               <select
                 value={cabin}
                 onChange={(e) => setCabin(e.target.value as CabinClass)}
@@ -2406,13 +2406,13 @@ export default function FlightSearch() {
           {/* What matters most? */}
           <div className="mb-5 pt-3 border-t border-gray-200">
             <div className="flex items-center justify-between mb-2">
-              <div className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">
+              <div className="text-[10px] font-semibold text-gray-700 uppercase tracking-wider">
                 What matters most?
               </div>
               {priorities.length > 0 && (
                 <button
                   onClick={() => setPriorities([])}
-                  className="text-[10px] text-gray-300 hover:text-gray-600 transition-colors"
+                  className="text-[10px] text-gray-700 hover:text-gray-600 transition-colors"
                 >
                   Clear
                 </button>
@@ -2439,8 +2439,8 @@ export default function FlightSearch() {
                       selected
                         ? "bg-teal-100 text-teal-600 border-teal-400 shadow-[0_0_0_1px_rgba(143,247,208,0.20)]"
                         : maxed
-                        ? "bg-transparent text-gray-300 border-gray-100 cursor-not-allowed"
-                        : "bg-transparent text-gray-400 border-gray-200 hover:border-gray-300 hover:text-gray-600"
+                        ? "bg-transparent text-gray-700 border-gray-100 cursor-not-allowed"
+                        : "bg-transparent text-gray-700 border-gray-200 hover:border-gray-300 hover:text-gray-600"
                     }`}
                   >
                     {selected && (
@@ -2453,14 +2453,14 @@ export default function FlightSearch() {
                 );
               })}
             </div>
-            <div className="mt-1.5 flex items-center gap-1 text-[10px] text-gray-300">
+            <div className="mt-1.5 flex items-center gap-1 text-[10px] text-gray-700">
               <span>Ranking by:</span>
               {priorities.length === 0 ? (
                 <span>Best Overall</span>
               ) : (
                 priorities.map((p, i) => (
                   <span key={p} className="flex items-center gap-1">
-                    {i > 0 && <span className="text-gray-300">+</span>}
+                    {i > 0 && <span className="text-gray-700">+</span>}
                     <span className="text-teal-600">
                       {PRIORITY_CHIPS.find((c) => c.id === p)?.label}
                     </span>
@@ -2468,7 +2468,7 @@ export default function FlightSearch() {
                 ))
               )}
               {priorities.length > 0 && priorities.length < 3 && (
-                <span className="text-gray-300 ml-1">
+                <span className="text-gray-700 ml-1">
                   · {3 - priorities.length} more available
                 </span>
               )}
@@ -2503,7 +2503,7 @@ export default function FlightSearch() {
               height={48}
               className="h-12 w-12 object-contain animate-pulse drop-shadow-md"
             />
-            <div className="text-sm text-gray-500">Searching live fares and ranking options…</div>
+            <div className="text-sm text-gray-700">Searching live fares and ranking options…</div>
           </div>
         )}
 
@@ -2511,7 +2511,7 @@ export default function FlightSearch() {
         {searchState === "error" && (
           <div className="mt-5 max-w-3xl mx-auto rounded-xl border border-red-500/20 bg-red-500/[0.06] px-5 py-4">
             <div className="text-sm font-semibold text-red-300 mb-1">{errorTitle}</div>
-            <div className="text-sm text-gray-500">{errorBody}</div>
+            <div className="text-sm text-gray-700">{errorBody}</div>
           </div>
         )}
 
@@ -2523,16 +2523,16 @@ export default function FlightSearch() {
               <div className="flex flex-wrap items-center justify-between gap-3 mb-4 max-w-3xl mx-auto">
                 <div className="inline-flex items-center gap-2 flex-wrap rounded-full border border-gray-200 bg-gray-50 px-4 py-1.5 text-xs">
                   <span className="font-mono font-semibold text-gray-900">{selectionCodes(searchedParams.origin)}</span>
-                  <span className="text-gray-400">→</span>
+                  <span className="text-gray-700">→</span>
                   <span className="font-mono font-semibold text-gray-900">{selectionCodes(searchedParams.destination)}</span>
-                  <span className="text-gray-300">·</span>
+                  <span className="text-gray-700">·</span>
                   <span className="text-gray-600">{searchedParams.tripType === "roundtrip" ? "Round trip" : "One way"}</span>
-                  <span className="text-gray-300">·</span>
+                  <span className="text-gray-700">·</span>
                   <span className="text-gray-600">{CABIN_LABELS[searchedParams.cabin]}</span>
-                  <span className="text-gray-300">·</span>
+                  <span className="text-gray-700">·</span>
                   <span className="text-gray-600">{searchedParams.travelers} traveler{searchedParams.travelers !== 1 ? "s" : ""}</span>
                 </div>
-                <span className="text-xs text-gray-300">
+                <span className="text-xs text-gray-700">
                   Showing {Math.min(visibleCount, displayOffers.length)} of {displayOffers.length} unique itinerar{displayOffers.length !== 1 ? "ies" : "y"} — ranked by AI
                 </span>
               </div>
@@ -2654,9 +2654,9 @@ export default function FlightSearch() {
         {searchState === "idle" && (
           <div className="mt-10 max-w-3xl mx-auto">
             <div className="text-center mb-6">
-              <div className="text-xs font-extrabold uppercase tracking-widest text-gray-300 mb-2">How TravelGrab thinks</div>
+              <div className="text-xs font-extrabold uppercase tracking-widest text-gray-700 mb-2">How TravelGrab thinks</div>
               <h2 className="text-lg sm:text-xl font-bold text-gray-700 mb-1.5">More than just the lowest fare</h2>
-              <p className="text-sm text-gray-400 max-w-sm mx-auto leading-relaxed">
+              <p className="text-sm text-gray-700 max-w-sm mx-auto leading-relaxed">
                 TravelGrab's AI evaluates every option and explains which flight is actually worth booking.
               </p>
             </div>

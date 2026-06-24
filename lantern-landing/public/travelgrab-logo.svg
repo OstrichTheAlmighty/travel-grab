@@ -1,8 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
   <!--
     TravelGrab mark: 270° arc (flight path) + map pin (destination)
-    Single accent color: #8FF7D0 (lantern-mint)
-    Dark body: #070A12 (ink)
+    Single accent color: #8FF7D0 (lantern-mint) on transparent/white bg
     No gradients, no glow filters — intentional flat design
   -->
 
@@ -19,7 +18,6 @@
 
   <!-- Airplane silhouette in the NE gap (~45° between 12 and 3)  -->
   <!-- Positioned at (54,14), rotated 45° so nose points northeast -->
-  <!-- Mint fill so it reads against the dark (#070A12) background -->
   <g transform="translate(54,14) rotate(45)">
     <rect x="-1.8" y="-6" width="3.6" height="11" rx="1.8" fill="#8FF7D0"/>
     <path d="M -1.8,-1 L -7.5,4.5 L -1.8,2.5 Z"  fill="#8FF7D0"/>
@@ -34,6 +32,6 @@
        C40,73 52,64 52,56 C52,49.5 47,44 40,44 Z"
     fill="#8FF7D0"
   />
-  <!-- Cutout circle creates a hollow ring inside the pin        -->
-  <circle cx="40" cy="55" r="4.5" fill="#070A12"/>
+  <!-- Cutout circle — white to show through on light backgrounds -->
+  <circle cx="40" cy="55" r="4.5" fill="white"/>
 </svg>

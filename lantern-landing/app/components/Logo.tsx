@@ -5,7 +5,7 @@ interface LogoProps {
   bgColor?: string;
 }
 
-export function Logo({ size = 32, className, bgColor = "#070A12" }: LogoProps) {
+export function Logo({ size = 32, className, bgColor = "white" }: LogoProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
