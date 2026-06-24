@@ -420,7 +420,7 @@ function TimelineSlot({
     const lineColor = slot.kind === "intercity_transfer" ? "border-lantern-violet/20" : "border-white/[0.06]";
     return (
       <div
-        className={`group flex items-center gap-3 py-2.5 border-b ${lineColor} ${isClickable && slot.kind !== "activity" ? "cursor-pointer hover:bg-white/[0.02] -mx-2 px-2 rounded-lg transition-colors" : ""} ${isDragging ? "opacity-40" : ""} ${slot.kind === "activity" && onDragStart ? "cursor-grab active:cursor-grabbing" : ""}`}
+        className={`group flex items-center gap-3 py-2.5 border-b ${lineColor} select-none ${isClickable && slot.kind !== "activity" ? "cursor-pointer hover:bg-white/[0.02] -mx-2 px-2 rounded-lg transition-colors" : ""} ${isDragging ? "opacity-40" : ""} ${slot.kind === "activity" && onDragStart ? "cursor-grab active:cursor-grabbing" : ""}`}
         draggable={slot.kind === "activity" && !!onDragStart}
         onDragStart={slot.kind === "activity" ? (e) => { e.dataTransfer.effectAllowed = "move"; e.dataTransfer.setData("text/plain", slot.title); onDragStart?.(slot); } : undefined}
         onDragEnd={onDragEnd}
@@ -429,6 +429,7 @@ function TimelineSlot({
         {onEditTime && (slot.kind === "activity" || slot.kind === "meal") ? (
           <button
             type="button"
+            draggable={false}
             onClick={(e) => { e.stopPropagation(); onEditTime(slot); }}
             className="group/time flex items-center gap-1 w-16 shrink-0 text-left text-white/30 hover:text-lantern-mint transition-colors"
             title="Edit time"
@@ -464,6 +465,7 @@ function TimelineSlot({
         {slot.kind === "activity" && onRename && !isRenaming && (
           <button
             type="button"
+            draggable={false}
             onClick={(e) => { e.stopPropagation(); onRename(slot); }}
             className="shrink-0 opacity-0 group-hover:opacity-100 text-white/60 hover:text-lantern-mint transition-all text-sm leading-none px-1"
             title="Rename"
@@ -474,6 +476,7 @@ function TimelineSlot({
         {slot.kind === "activity" && (
           <button
             type="button"
+            draggable={false}
             onClick={(e) => { e.stopPropagation(); onSlotClick(slot); }}
             className="shrink-0 opacity-0 group-hover:opacity-100 text-white/40 hover:text-lantern-mint transition-all text-sm leading-none px-0.5"
             title="View details"
@@ -490,6 +493,7 @@ function TimelineSlot({
         {onDelete && slot.kind !== "intercity_transfer" && slot.kind !== "airport_transfer" && (
           <button
             type="button"
+            draggable={false}
             onClick={(e) => { e.stopPropagation(); onDelete(slot); }}
             className="shrink-0 opacity-0 group-hover:opacity-100 text-white/40 hover:text-red-400 transition-all text-xs leading-none px-0.5"
             title="Remove from itinerary"
@@ -2194,7 +2198,7 @@ export default function ItineraryPlanner() {
                       key={i}
                       type="button"
                       onClick={() => setSelectedDay(i)}
-                      onDragOver={(e) => { if (dragging) { e.preventDefault(); setDragOverDay(i); } }}
+                      onDragOver={(e) => { e.preventDefault(); setDragOverDay(i); }}
                       onDragLeave={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setDragOverDay(null); }}
                       onDrop={(e) => {
                         e.preventDefault();
