@@ -387,7 +387,7 @@ function TransitConnector({ slot }: { slot: PlannedSlot }) {
 function TimelineSlot({
   slot, savedMeta, isLast, compact, onSlotClick, onDelete, onEditTime,
   onRename, isRenaming, renameValue, onRenameChange, onRenameCommit,
-  onDragStart, onDragEnd, isDragging,
+  onDragStart, onDragEnd, isDragging, onMoveUp, onMoveDown,
 }: {
   slot:             PlannedSlot;
   savedMeta:        Record<string, SavedMeta>;
@@ -404,6 +404,8 @@ function TimelineSlot({
   onDragStart?:     (slot: PlannedSlot) => void;
   onDragEnd?:       () => void;
   isDragging?:      boolean;
+  onMoveUp?:        () => void;
+  onMoveDown?:      () => void;
 }) {
   if (slot.kind === "free_time" && slot.transit) {
     return compact ? null : <TransitConnector slot={slot} />;
@@ -493,6 +495,28 @@ function TimelineSlot({
           <span className={`shrink-0 hidden sm:inline-block rounded-full border px-1.5 py-0.5 text-[9px] font-semibold capitalize ${CAT_STYLE[cat]}`}>
             {cat}
           </span>
+        )}
+        {slot.kind === "activity" && onMoveUp && (
+          <button
+            type="button"
+            draggable={false}
+            onClick={(e) => { e.stopPropagation(); onMoveUp(); }}
+            className="shrink-0 opacity-0 group-hover:opacity-100 text-white/40 hover:text-lantern-mint transition-all text-xs leading-none px-0.5"
+            title="Move up"
+          >
+            ↑
+          </button>
+        )}
+        {slot.kind === "activity" && onMoveDown && (
+          <button
+            type="button"
+            draggable={false}
+            onClick={(e) => { e.stopPropagation(); onMoveDown(); }}
+            className="shrink-0 opacity-0 group-hover:opacity-100 text-white/40 hover:text-lantern-mint transition-all text-xs leading-none px-0.5"
+            title="Move down"
+          >
+            ↓
+          </button>
         )}
         {onDelete && slot.kind !== "intercity_transfer" && slot.kind !== "airport_transfer" && (
           <button
@@ -633,7 +657,7 @@ const WARNING_COLORS: Record<DayWarning["type"], string> = {
 function DayView({
   day, savedMeta, compact, onSlotClick, onDeleteSlot, onEditTime,
   onRename, renamingSlot, onRenameChange, onRenameCommit,
-  onDragStart, onDragEnd, draggingSlot,
+  onDragStart, onDragEnd, draggingSlot, onMoveUp, onMoveDown,
 }: {
   day:             PlannedDay;
   savedMeta:       Record<string, SavedMeta>;
@@ -648,6 +672,8 @@ function DayView({
   onDragStart?:    (slot: PlannedSlot) => void;
   onDragEnd?:      () => void;
   draggingSlot?:   PlannedSlot | null;
+  onMoveUp?:       (slot: PlannedSlot) => void;
+  onMoveDown?:     (slot: PlannedSlot) => void;
 }) {
   return (
     <div>
@@ -701,6 +727,8 @@ function DayView({
             onDragStart={onDragStart}
             onDragEnd={onDragEnd}
             isDragging={draggingSlot === slot}
+            onMoveUp={slot.kind === "activity" && i > 0 ? () => onMoveUp?.(slot) : undefined}
+            onMoveDown={slot.kind === "activity" && i < day.slots.length - 1 ? () => onMoveDown?.(slot) : undefined}
           />
         ))}
       </div>
@@ -2307,6 +2335,32 @@ export default function ItineraryPlanner() {
                     onDragStart={(slot) => setDragging({ slot, sourceDayIndex: selectedDay })}
                     onDragEnd={() => setDragging(null)}
                     draggingSlot={dragging?.sourceDayIndex === selectedDay ? dragging.slot : null}
+                    onMoveUp={(slot) => {
+                      const itin = trip.itinerary;
+                      if (!itin) return;
+                      const day = itin.days[selectedDay];
+                      if (!day) return;
+                      const idx = day.slots.indexOf(slot);
+                      if (idx <= 0) return;
+                      const slots = [...day.slots];
+                      const a = slots[idx - 1], b = slots[idx];
+                      slots[idx - 1] = { ...b, startMinutes: a.startMinutes, endMinutes: a.startMinutes + b.durationMinutes };
+                      slots[idx]     = { ...a, startMinutes: b.startMinutes, endMinutes: b.startMinutes + a.durationMinutes };
+                      updateTrip({ itinerary: { ...itin, days: itin.days.map((d) => d.dayIndex === day.dayIndex ? { ...d, slots } : d) } });
+                    }}
+                    onMoveDown={(slot) => {
+                      const itin = trip.itinerary;
+                      if (!itin) return;
+                      const day = itin.days[selectedDay];
+                      if (!day) return;
+                      const idx = day.slots.indexOf(slot);
+                      if (idx < 0 || idx >= day.slots.length - 1) return;
+                      const slots = [...day.slots];
+                      const a = slots[idx], b = slots[idx + 1];
+                      slots[idx]     = { ...b, startMinutes: a.startMinutes, endMinutes: a.startMinutes + b.durationMinutes };
+                      slots[idx + 1] = { ...a, startMinutes: b.startMinutes, endMinutes: b.startMinutes + a.durationMinutes };
+                      updateTrip({ itinerary: { ...itin, days: itin.days.map((d) => d.dayIndex === day.dayIndex ? { ...d, slots } : d) } });
+                    }}
                     onRename={(slot) => setRenamingSlot({ dayIndex: selectedDay, slot, value: slot.title })}
                     renamingSlot={renamingSlot}
                     onRenameChange={(value) => setRenamingSlot((prev) => prev ? { ...prev, value } : null)}
