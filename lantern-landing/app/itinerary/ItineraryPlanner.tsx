@@ -581,9 +581,9 @@ function TimelineSlot({
               )}
             </div>
           </div>
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1 shrink-0">
             {cat && cat in CAT_STYLE && (
-              <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold capitalize ${CAT_STYLE[cat]}`}>
+              <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold capitalize mr-1 ${CAT_STYLE[cat]}`}>
                 {cat}
               </span>
             )}
@@ -592,7 +592,7 @@ function TimelineSlot({
                 type="button"
                 draggable={false}
                 onClick={(e) => { e.stopPropagation(); onMoveUp(); }}
-                className="opacity-0 group-hover:opacity-100 text-white/40 hover:text-lantern-mint transition-all text-sm leading-none"
+                className="flex items-center justify-center w-8 h-8 rounded-lg text-white/40 hover:text-lantern-mint hover:bg-white/[0.06] transition-all text-base"
                 title="Move up"
               >
                 ↑
@@ -603,7 +603,7 @@ function TimelineSlot({
                 type="button"
                 draggable={false}
                 onClick={(e) => { e.stopPropagation(); onMoveDown(); }}
-                className="opacity-0 group-hover:opacity-100 text-white/40 hover:text-lantern-mint transition-all text-sm leading-none"
+                className="flex items-center justify-center w-8 h-8 rounded-lg text-white/40 hover:text-lantern-mint hover:bg-white/[0.06] transition-all text-base"
                 title="Move down"
               >
                 ↓
@@ -613,7 +613,7 @@ function TimelineSlot({
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); onSlotClick(slot); }}
-                className="opacity-0 group-hover:opacity-100 text-white/40 hover:text-lantern-mint transition-all text-base leading-none"
+                className="flex items-center justify-center w-8 h-8 rounded-lg text-white/40 hover:text-lantern-mint hover:bg-white/[0.06] transition-all text-base"
                 title="View details"
               >
                 ℹ
@@ -623,7 +623,7 @@ function TimelineSlot({
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); onRename(slot); }}
-                className="opacity-0 group-hover:opacity-100 text-white/60 hover:text-lantern-mint transition-all text-base leading-none"
+                className="flex items-center justify-center w-8 h-8 rounded-lg text-white/50 hover:text-lantern-mint hover:bg-white/[0.06] transition-all text-base"
                 title="Rename"
               >
                 ✏
@@ -633,7 +633,7 @@ function TimelineSlot({
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); onDelete(slot); }}
-                className="opacity-0 group-hover:opacity-100 text-white/40 hover:text-red-400 transition-all text-sm leading-none"
+                className="flex items-center justify-center w-8 h-8 rounded-lg text-white/40 hover:text-red-400 hover:bg-white/[0.06] transition-all text-base"
                 title="Remove from itinerary"
               >
                 ✕
