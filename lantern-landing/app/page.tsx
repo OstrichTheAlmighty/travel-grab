@@ -45,13 +45,6 @@ const steps = [
   },
 ];
 
-const products = [
-  { href: "/flights",    label: "Flights",    desc: "Compare by seat, layover, timing" },
-  { href: "/hotels",     label: "Hotels",     desc: "Match by neighborhood + style" },
-  { href: "/activities", label: "Activities", desc: "Ranked by fit, not just stars" },
-  { href: "/itinerary",  label: "Itinerary",  desc: "Geo-optimized day plans" },
-];
-
 const betaItems = [
   "AI flight comparison",
   "Neighborhood-matched hotel rankings",
@@ -175,9 +168,6 @@ export default function Page() {
 
           <nav className="hidden items-center gap-8 md:flex">
             <a href="#how-it-works" className="text-sm text-gray-700 transition hover:text-gray-900">How it works</a>
-            <a href="/flights"      className="text-sm text-gray-700 transition hover:text-gray-900">Flights</a>
-            <a href="/hotels"       className="text-sm text-gray-700 transition hover:text-gray-900">Hotels</a>
-            <a href="/activities"   className="text-sm text-gray-700 transition hover:text-gray-900">Activities</a>
           </nav>
 
           <a
@@ -212,10 +202,10 @@ export default function Page() {
 
               <div className="mt-10 flex flex-wrap items-center gap-5">
                 <a
-                  href="/flights"
+                  href="#waitlist"
                   className="inline-flex h-12 items-center gap-2 rounded-lg bg-lantern-mint px-6 text-sm font-bold text-[#0A0A0A] shadow-[0_2px_12px_rgba(0,0,0,0.10)] transition hover:bg-lantern-mint/85 active:scale-[0.98]"
                 >
-                  Start planning
+                  Join the waitlist
                   <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
                   </svg>
@@ -342,61 +332,6 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── Try it now ───────────────────────────────────────────────────────── */}
-      <section className="border-t border-gray-200 bg-gray-50 px-6 py-24 sm:px-8">
-        <div className="mx-auto max-w-5xl">
-
-          <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-teal-600">
-                Available now · Free beta
-              </p>
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                Try it. No account needed.
-              </h2>
-              <p className="mt-4 max-w-[42ch] text-gray-700">
-                All four tools are live. Search real flights and hotels, explore activities,
-                or build a full itinerary for any city.
-              </p>
-            </div>
-            <div className="flex flex-shrink-0 flex-col gap-2.5 sm:items-end">
-              <a
-                href="/flights"
-                className="inline-flex h-11 items-center gap-2 rounded-lg bg-lantern-mint px-5 text-sm font-bold text-[#0A0A0A] transition hover:bg-lantern-mint/85"
-              >
-                Search flights →
-              </a>
-              <a
-                href="/hotels"
-                className="inline-flex h-11 items-center gap-2 rounded-lg border border-gray-200 bg-white px-5 text-sm font-semibold text-gray-600 transition hover:border-gray-300 hover:text-gray-900"
-              >
-                Browse hotels →
-              </a>
-            </div>
-          </div>
-
-          <div className="mt-12 grid border border-gray-200 sm:grid-cols-2 lg:grid-cols-4">
-            {products.map((p, i) => (
-              <a
-                key={p.href}
-                href={p.href}
-                className={[
-                  "group bg-white px-5 py-5 transition hover:bg-gray-50",
-                  i > 0 && i < 2  ? "border-t border-gray-200 sm:border-t-0 sm:border-l"           : "",
-                  i >= 2          ? "border-t border-gray-200 lg:border-l"                          : "",
-                  i === 3         ? "border-l border-gray-200"                                       : "",
-                ].join(" ")}
-              >
-                <p className="text-sm font-bold text-gray-700 transition group-hover:text-teal-600">
-                  {p.label} →
-                </p>
-                <p className="mt-1 font-mono text-[10px] text-gray-700">{p.desc}</p>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── Waitlist ─────────────────────────────────────────────────────────── */}
       <section id="waitlist" className="border-t border-gray-200 px-6 py-24 sm:px-8">
         <div className="mx-auto max-w-5xl">
@@ -478,10 +413,8 @@ export default function Page() {
             © {new Date().getFullYear()} {BRAND_NAME}
           </p>
           <nav className="flex gap-6" aria-label="Footer navigation">
-            <a href="/flights"    className="text-xs text-gray-700 transition hover:text-gray-700">Flights</a>
-            <a href="/hotels"     className="text-xs text-gray-700 transition hover:text-gray-700">Hotels</a>
-            <a href="/activities" className="text-xs text-gray-700 transition hover:text-gray-700">Activities</a>
-            <a href="/itinerary"  className="text-xs text-gray-700 transition hover:text-gray-700">Itinerary</a>
+            <a href="#how-it-works" className="text-xs text-gray-700 transition hover:text-gray-700">How it works</a>
+            <a href="#waitlist"     className="text-xs text-gray-700 transition hover:text-gray-700">Waitlist</a>
           </nav>
         </div>
       </footer>
