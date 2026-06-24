@@ -412,7 +412,7 @@ export function NeighborhoodCompare({
                 disabled={!isSelected && !canAdd}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold border transition-all ${
                   isSelected
-                    ? "bg-lantern-violet/15 border-lantern-violet/40 text-lantern-violet shadow-[0_0_0_1px_rgba(139,92,246,0.15)]"
+                    ? "bg-lantern-mint/15 border-lantern-mint/40 text-lantern-mint shadow-[0_0_0_1px_rgba(143,247,208,0.15)]"
                     : canAdd
                       ? "bg-white/[0.03] border-white/[0.09] text-white/40 hover:border-white/22 hover:text-white/60"
                       : "bg-transparent border-white/[0.04] text-white/18 cursor-not-allowed"
@@ -436,7 +436,7 @@ export function NeighborhoodCompare({
         <button
           onClick={() => setOpen(true)}
           disabled={selected.length < 2}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-lantern-violet/85 hover:bg-lantern-violet text-white text-[12px] font-bold transition-all disabled:opacity-35 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-lantern-mint hover:bg-lantern-mint/90 text-ink text-[12px] font-bold transition-all disabled:opacity-35 disabled:cursor-not-allowed"
         >
           <svg className="w-3.5 h-3.5" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
             <path d="M3 7h8M7 3l4 4-4 4" />

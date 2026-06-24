@@ -1082,7 +1082,7 @@ function AirportCombobox({
       </label>
       <div
         className={`relative flex items-center rounded-xl border transition-colors ${
-          open ? "border-lantern-violet/60 bg-panel" : "border-white/10 bg-white/[0.04] hover:border-white/20"
+          open ? "border-lantern-mint/50 bg-panel" : "border-white/10 bg-white/[0.04] hover:border-white/20"
         }`}
       >
         <svg
@@ -1311,7 +1311,7 @@ function RecommendationPanel({
       {/* CTA */}
       <button
         onClick={() => topPickRef.current?.scrollIntoView({ behavior: "smooth", block: "center" })}
-        className="inline-flex items-center gap-1.5 text-[11px] font-bold text-lantern-violet border border-lantern-violet/40 bg-lantern-violet/10 hover:bg-lantern-violet/20 rounded-lg px-3.5 py-1.5 transition-colors"
+        className="inline-flex items-center gap-1.5 text-[11px] font-bold text-lantern-mint border border-lantern-mint/35 bg-lantern-mint/10 hover:bg-lantern-mint/15 rounded-lg px-3.5 py-1.5 transition-colors"
       >
         View top pick
         <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
@@ -1636,7 +1636,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
               <>
                 <button
                   onClick={handleBookClick}
-                  className="mt-2 text-[11px] font-bold text-white bg-lantern-violet hover:bg-lantern-violet/80 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
+                  className="mt-2 text-[11px] font-bold text-ink bg-lantern-mint hover:bg-lantern-mint/90 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
                 >
                   {offer.is_bookable === false ? "View booking options" : "Book this flight"}
                 </button>
@@ -1877,7 +1877,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
           {!analysisOpen && (
             <button
               onClick={handleBookClick}
-              className="text-[11px] font-bold text-lantern-violet border border-lantern-violet/40 hover:bg-lantern-violet/10 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
+              className="text-[11px] font-bold text-lantern-mint border border-lantern-mint/35 hover:bg-lantern-mint/10 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
             >
               {offer.is_bookable === false ? "View" : "Book"}
             </button>
@@ -2332,7 +2332,7 @@ export default function FlightSearch() {
                 onClick={() => setTripType(t)}
                 className={`px-4 py-1.5 rounded-lg text-sm font-semibold transition-all ${
                   tripType === t
-                    ? "bg-lantern-violet/25 text-lantern-violet border border-lantern-violet/30"
+                    ? "bg-lantern-mint/20 text-lantern-mint border border-lantern-mint/40"
                     : "text-white/45 hover:text-white/70"
                 }`}
               >
@@ -2366,7 +2366,7 @@ export default function FlightSearch() {
                 min={today}
                 value={departureDate}
                 onChange={(e) => setDepartureDate(e.target.value)}
-                className="w-full rounded-xl border border-white/10 bg-white/[0.04] hover:border-white/20 focus:border-lantern-violet/60 focus:bg-panel px-3.5 py-3 text-sm text-white outline-none transition-colors [color-scheme:dark]"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.04] hover:border-white/20 focus:border-lantern-mint/50 focus:bg-panel px-3.5 py-3 text-sm text-white outline-none transition-colors [color-scheme:dark]"
               />
             </div>
             {tripType === "roundtrip" && (
@@ -2377,7 +2377,7 @@ export default function FlightSearch() {
                   min={departureDate || today}
                   value={returnDate}
                   onChange={(e) => setReturnDate(e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.04] hover:border-white/20 focus:border-lantern-violet/60 focus:bg-panel px-3.5 py-3 text-sm text-white outline-none transition-colors [color-scheme:dark]"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.04] hover:border-white/20 focus:border-lantern-mint/50 focus:bg-panel px-3.5 py-3 text-sm text-white outline-none transition-colors [color-scheme:dark]"
                 />
               </div>
             )}
@@ -2394,7 +2394,7 @@ export default function FlightSearch() {
               <select
                 value={cabin}
                 onChange={(e) => setCabin(e.target.value as CabinClass)}
-                className="w-full rounded-xl border border-white/10 bg-white/[0.04] hover:border-white/20 focus:border-lantern-violet/60 focus:bg-panel px-3.5 py-3 text-sm text-white outline-none transition-colors appearance-none [color-scheme:dark]"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.04] hover:border-white/20 focus:border-lantern-mint/50 focus:bg-panel px-3.5 py-3 text-sm text-white outline-none transition-colors appearance-none [color-scheme:dark]"
               >
                 {(Object.entries(CABIN_LABELS) as [CabinClass, string][]).map(([val, lbl]) => (
                   <option key={val} value={val}>{lbl}</option>
@@ -2437,7 +2437,7 @@ export default function FlightSearch() {
                     disabled={maxed}
                     className={`flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-semibold border transition-all ${
                       selected
-                        ? "bg-lantern-violet/30 text-lantern-violet border-lantern-violet/70 shadow-[0_0_0_1px_rgba(139,92,246,0.3)]"
+                        ? "bg-lantern-mint/20 text-lantern-mint border-lantern-mint/50 shadow-[0_0_0_1px_rgba(143,247,208,0.20)]"
                         : maxed
                         ? "bg-transparent text-white/15 border-white/[0.04] cursor-not-allowed"
                         : "bg-transparent text-white/30 border-white/[0.09] hover:border-white/[0.18] hover:text-white/55"
@@ -2485,7 +2485,7 @@ export default function FlightSearch() {
           <button
             onClick={() => { void handleSearch(); }}
             disabled={searchState === "loading"}
-            className="w-full py-3.5 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-lantern-violet via-[#7c3aed] to-[#6366f1] hover:from-[#8B5CF6] hover:via-[#7c3aed] hover:to-[#4F46E5] shadow-[0_0_24px_rgba(139,92,246,0.25)] hover:shadow-[0_0_36px_rgba(139,92,246,0.45)] transition-all active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full py-3.5 rounded-xl font-bold text-sm text-ink bg-lantern-mint hover:bg-lantern-mint/90 shadow-[0_0_24px_rgba(143,247,208,0.15)] hover:shadow-[0_0_36px_rgba(143,247,208,0.25)] transition-all active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {searchState === "loading" ? "Searching…" : "Search Flights"}
           </button>

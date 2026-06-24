@@ -1109,7 +1109,7 @@ function ActivityDetailModal({
                               disabled={chip.count === 0}
                               className={`flex-shrink-0 rounded-full px-3 py-1 text-[11px] font-semibold border transition-all disabled:opacity-30 disabled:cursor-not-allowed ${
                                 reviewFilter === chip.id
-                                  ? "bg-lantern-violet text-white border-lantern-violet"
+                                  ? "bg-lantern-mint text-ink border-lantern-mint"
                                   : "bg-white/[0.04] text-white/45 border-white/[0.08] hover:bg-white/[0.07] hover:text-white/70"
                               }`}
                             >
@@ -1249,7 +1249,7 @@ function ActivityDetailModal({
                 href={googleMapsUri}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 text-center py-3 rounded-xl text-sm font-bold text-white bg-lantern-violet hover:bg-lantern-violet/80 transition-colors shadow-[0_0_20px_rgba(139,92,246,0.20)]"
+                className="flex-1 text-center py-3 rounded-xl text-sm font-bold text-ink bg-lantern-mint hover:bg-lantern-mint/90 transition-colors shadow-[0_0_20px_rgba(143,247,208,0.15)]"
               >
                 Open in Google Maps →
               </a>
@@ -1308,7 +1308,7 @@ function CategoryFilter({
             onClick={() => onChange(f.id)}
             className={`flex items-center gap-1.5 flex-shrink-0 rounded-full px-4 py-2 text-[12px] font-semibold border transition-all duration-200 whitespace-nowrap ${
               isActive
-                ? "bg-lantern-violet text-white border-lantern-violet shadow-[0_0_20px_rgba(167,139,250,0.25)]"
+                ? "bg-lantern-mint text-ink border-lantern-mint shadow-[0_0_20px_rgba(143,247,208,0.20)]"
                 : "bg-white/[0.04] text-white/50 border-white/[0.09] hover:bg-white/[0.07] hover:text-white/75 hover:border-white/[0.16]"
             }`}
           >
@@ -1766,7 +1766,7 @@ function SavedBar({
         </div>
         <button
           onClick={onPlanItinerary}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-lantern-violet text-white text-[12px] font-semibold hover:bg-lantern-violet/85 transition-all duration-200 active:scale-[0.97] shadow-[0_0_20px_rgba(167,139,250,0.25)]"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-lantern-mint text-ink text-[12px] font-semibold hover:bg-lantern-mint/90 transition-all duration-200 active:scale-[0.97] shadow-[0_0_20px_rgba(143,247,208,0.15)]"
         >
           Plan from saved
           <span className="text-white/70">→</span>

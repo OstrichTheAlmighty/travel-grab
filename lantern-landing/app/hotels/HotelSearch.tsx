@@ -971,7 +971,7 @@ function DestinationCombobox({
           onKeyDown={handleKeyDown}
           placeholder="City name (e.g. Paris, New York, Tokyo)"
           autoComplete="off"
-          className="w-full rounded-xl border border-white/10 bg-white/[0.04] hover:border-white/20 focus:border-lantern-violet/60 focus:bg-panel pl-9 pr-3.5 py-3 text-sm text-white placeholder-white/25 outline-none transition-colors"
+          className="w-full rounded-xl border border-white/10 bg-white/[0.04] hover:border-white/20 focus:border-lantern-mint/50 focus:bg-panel pl-9 pr-3.5 py-3 text-sm text-white placeholder-white/25 outline-none transition-colors"
         />
       </div>
 
@@ -982,7 +982,7 @@ function DestinationCombobox({
               key={i}
               onMouseDown={() => selectSuggestion(s)}
               className={`flex items-center gap-3 px-3.5 py-2.5 cursor-pointer transition-colors ${
-                i === highlighted ? "bg-lantern-violet/20" : "hover:bg-white/[0.06]"
+                i === highlighted ? "bg-lantern-mint/15" : "hover:bg-white/[0.06]"
               }`}
             >
               <svg className="w-3 h-3 text-white/20 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -1037,7 +1037,7 @@ function NeighborhoodChips({
               onClick={() => onToggle(id)}
               className={`flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-semibold border transition-all ${
                 active
-                  ? "bg-lantern-violet/30 text-lantern-violet border-lantern-violet/70 shadow-[0_0_0_1px_rgba(139,92,246,0.3)]"
+                  ? "bg-lantern-mint/20 text-lantern-mint border-lantern-mint/50 shadow-[0_0_0_1px_rgba(143,247,208,0.20)]"
                   : "bg-transparent text-white/30 border-white/[0.09] hover:border-white/[0.22] hover:text-white/60"
               }`}
             >
@@ -1332,8 +1332,8 @@ function NeighborhoodRecommendation({
           onClick={() => onSelect(recIsSelected ? null : recommended.nbhd.id)}
           className={`text-[12px] font-bold px-4 py-2 rounded-lg transition-all ${
             recIsSelected
-              ? "bg-lantern-violet text-white"
-              : "bg-lantern-violet/12 text-lantern-violet hover:bg-lantern-violet/20 border border-lantern-violet/25"
+              ? "bg-lantern-mint text-ink"
+              : "bg-lantern-mint/12 text-lantern-mint hover:bg-lantern-mint/20 border border-lantern-mint/30"
           }`}
         >
           {recIsSelected
@@ -1476,7 +1476,7 @@ function NeighborhoodGuide({
               key={n.id}
               className={`rounded-xl border p-3 flex flex-col transition-all ${
                 isSelected
-                  ? "border-lantern-violet/50 bg-lantern-violet/[0.07] shadow-[0_0_0_1px_rgba(139,92,246,0.2)]"
+                  ? "border-lantern-mint/40 bg-lantern-mint/[0.06] shadow-[0_0_0_1px_rgba(143,247,208,0.15)]"
                   : "border-white/[0.07] bg-white/[0.02] hover:border-white/[0.14] hover:bg-white/[0.04]"
               }`}
             >
@@ -1540,7 +1540,7 @@ function NeighborhoodGuide({
                 onClick={() => onSelect(isSelected ? null : n.id)}
                 className={`w-full text-[11px] font-semibold rounded-lg py-1.5 transition-all mt-auto ${
                   isSelected
-                    ? "bg-lantern-violet text-white"
+                    ? "bg-lantern-mint text-ink"
                     : "bg-white/[0.06] text-white/55 hover:bg-white/[0.11] hover:text-white"
                 }`}
               >
@@ -2783,7 +2783,7 @@ function HotelDetailDrawer({
                   neighborhood: offer.inferred_neighborhood,
                   score:        offer.ai_score,
                 })}
-                className="block w-full text-center py-3 rounded-xl text-sm font-bold text-white bg-lantern-violet hover:bg-lantern-violet/80 transition-colors shadow-[0_0_20px_rgba(139,92,246,0.20)] mb-2"
+                className="block w-full text-center py-3 rounded-xl text-sm font-bold text-ink bg-lantern-mint hover:bg-lantern-mint/90 transition-colors shadow-[0_0_20px_rgba(143,247,208,0.15)] mb-2"
               >
                 Check availability →
               </a>
@@ -3172,7 +3172,7 @@ function HotelCard({
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => { e.stopPropagation(); track("hotel_availability_clicked", { hotel_name: offer.name, neighborhood: offer.inferred_neighborhood, score: offer.ai_score }); }}
-                    className="text-[11px] font-bold text-white bg-lantern-violet hover:bg-lantern-violet/80 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
+                    className="text-[11px] font-bold text-ink bg-lantern-mint hover:bg-lantern-mint/90 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
                   >
                     Check availability
                   </a>
@@ -5229,7 +5229,7 @@ export default function HotelSearch() {
           <button
             onClick={handleSearch}
             disabled={searchState === "loading"}
-            className="w-full py-3.5 rounded-xl text-sm font-black tracking-wide text-white bg-lantern-violet hover:bg-lantern-violet/80 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-[0_0_24px_rgba(139,92,246,0.25)] hover:shadow-[0_0_32px_rgba(139,92,246,0.35)]"
+            className="w-full py-3.5 rounded-xl text-sm font-black tracking-wide text-ink bg-lantern-mint hover:bg-lantern-mint/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-[0_0_24px_rgba(143,247,208,0.15)] hover:shadow-[0_0_32px_rgba(143,247,208,0.25)]"
           >
             {searchState === "loading" ? "Searching hotels…" : "Search hotels"}
           </button>
@@ -5403,7 +5403,7 @@ export default function HotelSearch() {
                         }}
                         className={`px-4 py-1.5 rounded-[10px] text-[12px] font-semibold transition-all ${
                           searchMode === mode
-                            ? "bg-lantern-violet text-white shadow-sm"
+                            ? "bg-lantern-mint text-ink shadow-sm"
                             : "text-white/35 hover:text-white/60"
                         }`}
                       >

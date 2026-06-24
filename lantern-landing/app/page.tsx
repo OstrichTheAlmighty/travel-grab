@@ -177,7 +177,7 @@ export default function Page() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <a
               href="#waitlist"
-              className="inline-flex h-14 items-center gap-2 rounded-full bg-gradient-to-r from-lantern-violet to-lantern-blue px-8 text-sm font-bold text-white shadow-glow transition hover:scale-[1.02] hover:opacity-90 active:scale-[0.98]"
+              className="inline-flex h-14 items-center gap-2 rounded-full bg-lantern-mint px-8 text-sm font-bold text-ink shadow-[0_0_32px_rgba(143,247,208,0.20)] transition hover:bg-lantern-mint/90 hover:shadow-[0_0_48px_rgba(143,247,208,0.30)] active:scale-[0.98]"
             >
               Join the waitlist
               <svg aria-hidden="true" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.4} viewBox="0 0 24 24">
@@ -430,7 +430,7 @@ export default function Page() {
                   )}
                   <button
                     type="submit"
-                    className="w-full rounded-xl bg-gradient-to-r from-lantern-violet to-lantern-blue py-3 text-sm font-bold text-white shadow-glow transition hover:opacity-90 active:scale-[0.98]"
+                    className="w-full rounded-xl bg-lantern-mint py-3 text-sm font-bold text-ink shadow-[0_0_24px_rgba(143,247,208,0.15)] transition hover:bg-lantern-mint/90 active:scale-[0.98]"
                   >
                     Join the waitlist
                   </button>
