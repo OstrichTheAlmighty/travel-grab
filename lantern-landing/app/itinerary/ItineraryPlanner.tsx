@@ -1021,6 +1021,7 @@ export default function ItineraryPlanner() {
   const [compactView,       setCompactView]        = useState(true);
   const [detailSlot,        setDetailSlot]         = useState<PlannedSlot | null>(null);
   const [noteEdit,          setNoteEdit]           = useState<string | null>(null);
+  const [durationEdit,      setDurationEdit]       = useState<number | null>(null);
   const [modalPlaceDetail,  setModalPlaceDetail]   = useState<PlaceDetailData | null>(null);
   const [modalDetailLoading, setModalDetailLoading] = useState(false);
   type ClaudePlacement = {
@@ -1198,7 +1199,7 @@ export default function ItineraryPlanner() {
     updateTripStore({ savedActivities: savedIds });
   }, [savedIds, hydrated]);
 
-  useEffect(() => { setNoteEdit(null); }, [detailSlot]);
+  useEffect(() => { setNoteEdit(null); setDurationEdit(null); }, [detailSlot]);
 
   // ── Lazy-load place details when modal opens ──
   useEffect(() => {
@@ -2477,6 +2478,73 @@ export default function ItineraryPlanner() {
                               rows={3}
                               className="w-full bg-white/[0.04] border border-white/[0.12] rounded-lg px-3 py-2 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-lantern-mint/50 resize-none"
                             />
+                          )}
+                        </div>
+
+                        {/* Duration */}
+                        <div className="mt-4 border-t border-white/[0.06] pt-4">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-[11px] font-semibold text-white/30 uppercase tracking-wider">Duration</span>
+                            {durationEdit === null ? (
+                              <button
+                                type="button"
+                                onClick={() => setDurationEdit(detailSlot.durationMinutes)}
+                                className="text-[11px] text-white/40 hover:text-lantern-mint transition-colors"
+                              >
+                                Edit
+                              </button>
+                            ) : (
+                              <div className="flex gap-3">
+                                <button
+                                  type="button"
+                                  onClick={() => setDurationEdit(null)}
+                                  className="text-[11px] text-white/40 hover:text-white/70 transition-colors"
+                                >
+                                  Cancel
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    if (!trip.itinerary || durationEdit === null) return;
+                                    const newDur = Math.max(15, Math.min(480, durationEdit));
+                                    const updated = { ...detailSlot, durationMinutes: newDur, endMinutes: detailSlot.startMinutes + newDur };
+                                    updateTrip({
+                                      itinerary: {
+                                        ...trip.itinerary,
+                                        days: trip.itinerary.days.map((d) => ({
+                                          ...d,
+                                          slots: d.slots
+                                            .map((s) => s === detailSlot ? updated : s)
+                                            .sort((a, b) => a.startMinutes - b.startMinutes),
+                                        })),
+                                      },
+                                    });
+                                    setDetailSlot(updated);
+                                    setDurationEdit(null);
+                                  }}
+                                  className="text-[11px] text-lantern-mint font-semibold hover:opacity-80 transition-opacity"
+                                >
+                                  Save
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                          {durationEdit === null ? (
+                            <p className="text-sm text-white/50">{detailSlot.durationMinutes}m</p>
+                          ) : (
+                            <div className="flex items-center gap-2">
+                              <input
+                                autoFocus
+                                type="number"
+                                min={15}
+                                max={480}
+                                step={15}
+                                value={durationEdit}
+                                onChange={(e) => setDurationEdit(Number(e.target.value))}
+                                className="w-28 bg-white/[0.04] border border-white/[0.12] rounded-lg px-3 py-2 text-sm text-white/80 focus:outline-none focus:border-lantern-mint/50 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
+                              />
+                              <span className="text-sm text-white/30">minutes</span>
+                            </div>
                           )}
                         </div>
 
