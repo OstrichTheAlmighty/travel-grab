@@ -43,9 +43,20 @@ export function logPlacesCall(entry: PlacesApiCall): void {
 let tablesReady: Promise<boolean> | null = null;
 
 async function _ensureTables(): Promise<boolean> {
-  if (!process.env.DATABASE_URL) return false;
+  console.log("[inventoryCache] _ensureTables() starting...");
+  console.log("[inventoryCache] DATABASE_URL present:", !!process.env.DATABASE_URL);
+  
+  if (!process.env.DATABASE_URL) {
+    console.error("[inventoryCache] FATAL: DATABASE_URL not set in env. Cache writes will fail.");
+    return false;
+  }
+
   try {
+    console.log("[inventoryCache] importing @/lib/db...");
     const { db } = await import("@/lib/db");
+    console.log("[inventoryCache] db imported successfully:", !!db);
+
+    console.log("[inventoryCache] creating geocode_cache table...");
     await db.execute(sql`
       CREATE TABLE IF NOT EXISTS geocode_cache (
         city_input  TEXT PRIMARY KEY,
@@ -58,6 +69,9 @@ async function _ensureTables(): Promise<boolean> {
         expires_at  TIMESTAMPTZ NOT NULL
       )
     `);
+    console.log("[inventoryCache] geocode_cache table OK");
+
+    console.log("[inventoryCache] creating places_query_cache table...");
     await db.execute(sql`
       CREATE TABLE IF NOT EXISTS places_query_cache (
         cache_key   TEXT PRIMARY KEY,
@@ -68,18 +82,29 @@ async function _ensureTables(): Promise<boolean> {
         expires_at  TIMESTAMPTZ NOT NULL
       )
     `);
+    console.log("[inventoryCache] places_query_cache table OK");
+
+    console.log("[inventoryCache] creating city index...");
     await db.execute(sql`
       CREATE INDEX IF NOT EXISTS places_query_cache_city_idx
       ON places_query_cache (city_key)
     `);
+    console.log("[inventoryCache] city_idx OK");
+
+    console.log("[inventoryCache] creating expires index...");
     await db.execute(sql`
       CREATE INDEX IF NOT EXISTS places_query_cache_expires_idx
       ON places_query_cache (expires_at)
     `);
-    console.log("[inventoryCache] tables ready");
+    console.log("[inventoryCache] expires_idx OK");
+
+    console.log("[inventoryCache] tables ready ✓");
     return true;
   } catch (err) {
-    console.warn("[inventoryCache] table setup failed:", String(err));
+    console.error("[inventoryCache] FATAL table setup error:", {
+      message: String(err),
+      stack: err instanceof Error ? err.stack : undefined,
+    });
     return false;
   }
 }
@@ -184,10 +209,21 @@ export async function writeQueryCache(
   cacheKey: string,
   entries: CachedEntry[],
 ): Promise<void> {
-  if (!await ensureTables()) return;
+  console.log(`[inventoryCache/query] writeQueryCache STARTING: cacheKey=${cacheKey}, entries=${entries.length}`);
+  
+  const tablesOk = await ensureTables();
+  if (!tablesOk) {
+    console.error(`[inventoryCache/query] writeQueryCache FAILED: ensureTables() returned false`);
+    return;
+  }
+
   const expiresAt = new Date(Date.now() + QUERY_TTL_DAYS * 864e5).toISOString();
+  
   try {
+    console.log(`[inventoryCache/query] importing @/lib/db...`);
     const { db } = await import("@/lib/db");
+    console.log(`[inventoryCache/query] db imported, executing INSERT...`);
+
     await db.execute(sql`
       INSERT INTO places_query_cache (cache_key, city_key, entries, entry_count, expires_at)
       VALUES (
@@ -200,8 +236,15 @@ export async function writeQueryCache(
         expires_at  = EXCLUDED.expires_at,
         created_at  = NOW()
     `);
+    
+    console.log(`[inventoryCache/query] writeQueryCache SUCCESS: cacheKey=${cacheKey}, entries=${entries.length} ✓`);
   } catch (err) {
-    console.warn(`[inventoryCache/query] write error key=${cacheKey}:`, String(err));
+    console.error(`[inventoryCache/query] writeQueryCache FAILED:`, {
+      cacheKey,
+      entryCount: entries.length,
+      errorMessage: String(err),
+      errorStack: err instanceof Error ? err.stack : undefined,
+    });
   }
 }
 
