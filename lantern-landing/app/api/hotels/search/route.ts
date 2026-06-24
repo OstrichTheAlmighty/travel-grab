@@ -2373,6 +2373,7 @@ function geoFilterHotels(
 // ── POST /api/hotels/search ───────────────────────────────────────────────────
 
 export async function POST(req: Request) {
+  try {
   const ip          = getClientIP(req);
   const limitResult = searchLimiter(ip);
   if (!limitResult.allowed) {
@@ -2569,4 +2570,11 @@ export async function POST(req: Request) {
     from_cache:       fromCache,
     offers:           scored,
   });
+  } catch (err) {
+    console.error("[hotel-search] unhandled error:", err instanceof Error ? err.stack : String(err));
+    return NextResponse.json(
+      { status: "error", message: "Hotel search encountered an unexpected error. Please try again." },
+      { status: 500 },
+    );
+  }
 }

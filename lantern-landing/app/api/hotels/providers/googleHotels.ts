@@ -9,10 +9,11 @@ import type {
 type R = Record<string, unknown>;
 
 // SerpAPI Google Hotels returns ~16-20 properties per page.
-// Each page costs 1 SerpAPI credit. 15 pages → up to ~300 hotels max.
+// Each page costs 1 SerpAPI credit. 3 pages → up to ~60 hotels, enough for scoring.
 // Pagination stops early when SerpAPI returns no next_page_token (provider exhausted).
 // MAX_PAGES is a hard safety ceiling to prevent runaway loops or unexpectedly deep APIs.
-const MAX_PAGES = 15;
+const MAX_PAGES = 3;
+const PAGE_TIMEOUT_MS = 8_000;
 
 function parseStarRating(hotelClass: string | undefined): number {
   if (!hotelClass) return 0;
@@ -127,7 +128,13 @@ export async function searchGoogleHotels(
 
     let resp: Response;
     try {
-      resp = await fetch(url, { headers: { Accept: "application/json" } });
+      const ac = new AbortController();
+      const tid = setTimeout(() => ac.abort(), PAGE_TIMEOUT_MS);
+      try {
+        resp = await fetch(url, { headers: { Accept: "application/json" }, signal: ac.signal });
+      } finally {
+        clearTimeout(tid);
+      }
     } catch (err) {
       console.error(`[google_hotels] page=${page} network error:`, String(err).slice(0, 120));
       stopReason = "network_error";
