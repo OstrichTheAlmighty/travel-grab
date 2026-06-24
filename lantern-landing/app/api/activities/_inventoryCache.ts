@@ -77,62 +77,16 @@ function ensureTables(): Promise<boolean> {
 
 const GEO_TTL_DAYS = 90;
 
-export async function readGeoCache(normalizedInput: string): Promise<GeoResult | null> {
-  if (!await ensureTables()) return null;
-  try {
-    const { data, error } = await getClient()!
-      .from("geocode_cache")
-      .select("city, country, lat, lng, viewport")
-      .eq("city_input", normalizedInput)
-      .gt("expires_at", new Date().toISOString())
-      .maybeSingle();
-    if (error) {
-      console.warn("[inventoryCache/geo] read error:", error.message);
-      return null;
-    }
-    if (!data) return null;
-    console.log(`[inventoryCache/geo] cache HIT for "${normalizedInput}" → ${data.city}`);
-    return {
-      city:     data.city as string,
-      country:  data.country as string,
-      lat:      Number(data.lat),
-      lng:      Number(data.lng),
-      viewport: data.viewport as GeoResult["viewport"],
-    };
-  } catch (err) {
-    console.error("[inventoryCache/geo] read error:", {
-      message: String(err),
-      error: err instanceof Error ? err.message : 'unknown',
-    });
-    return null;
-  }
+export async function readGeoCache(_normalizedInput: string): Promise<GeoResult | null> {
+  return null;
 }
 
-export async function writeGeoCache(normalizedInput: string, geo: GeoResult): Promise<void> {
-  if (!await ensureTables()) return;
-  const expiresAt = new Date(Date.now() + GEO_TTL_DAYS * 864e5).toISOString();
-  try {
-    const { error } = await getClient()!
-      .from("geocode_cache")
-      .upsert({
-        city_input: normalizedInput,
-        city:       geo.city,
-        country:    geo.country,
-        lat:        geo.lat,
-        lng:        geo.lng,
-        viewport:   geo.viewport,
-        expires_at: expiresAt,
-        created_at: new Date().toISOString(),
-      }, { onConflict: "city_input" });
-    if (error) console.warn("[inventoryCache/geo] write error:", error.message);
-  } catch (err) {
-    console.warn("[inventoryCache/geo] write error:", String(err));
-  }
+export async function writeGeoCache(_normalizedInput: string, _geo: GeoResult): Promise<void> {
+  // no-op
 }
 
 // ── Places query cache — 14-day TTL ──────────────────────────────────────────
 
-const QUERY_TTL_DAYS = 14;
 
 export function makeCacheKey(cityKey: string, g: { type?: string; query?: string }): string {
   const suffix = g.type
@@ -141,80 +95,16 @@ export function makeCacheKey(cityKey: string, g: { type?: string; query?: string
   return `${cityKey}||${suffix}`;
 }
 
-/** Returns Map<cacheKey, entries[]> for all non-expired rows of cityKey that have entry data, or null if unavailable. */
-export async function readCityCache(cityKey: string): Promise<Map<string, CachedEntry[]> | null> {
-  if (!await ensureTables()) return null;
-  try {
-    const { data: rows, error } = await getClient()!
-      .from("places_query_cache")
-      .select("cache_key, entries, entry_count")
-      .eq("city_key", cityKey)
-      .gt("expires_at", new Date().toISOString());
-    if (error) {
-      console.warn("[inventoryCache/city] read error:", error.message);
-      return null;
-    }
-    if (!rows || rows.length === 0) return null;
-    const map = new Map<string, CachedEntry[]>();
-    for (const row of rows) {
-      // Only include rows that actually have entry data stored
-      if (row.entries != null) {
-        map.set(row.cache_key as string, row.entries as CachedEntry[]);
-      }
-    }
-    if (map.size === 0) {
-      // All rows are metadata-only (no entries stored) — treat as cache miss so
-      // the caller rebuilds from Google Places rather than serving empty results
-      console.log(`[inventoryCache/city] ${rows.length} metadata-only rows for "${cityKey}" — treating as cache miss`);
-      return null;
-    }
-    console.log(`[inventoryCache/city] cache HIT for "${cityKey}" — ${map.size}/${rows.length} query rows with data`);
-    return map;
-  } catch (err) {
-    console.warn("[inventoryCache/city] read error:", String(err));
-    return null;
-  }
+export async function readCityCache(_cityKey: string): Promise<Map<string, CachedEntry[]> | null> {
+  return null;
 }
 
-/** Persist query metadata to Supabase (entries are kept in-memory only). Fire-and-forget — caller should .catch(() => {}). */
 export async function writeQueryCache(
-  cityKey: string,
+  _cityKey: string,
   cacheKey: string,
   entries: CachedEntry[],
 ): Promise<void> {
-  console.log(`[inventoryCache/query] writeQueryCache called: key=${cacheKey} count=${entries.length}`);
-
-  const tablesOk = await ensureTables();
-  if (!tablesOk) {
-    console.error(`[inventoryCache/query] skipping write — ensureTables() returned false`);
-    return;
-  }
-
-  const expiresAt = new Date(Date.now() + QUERY_TTL_DAYS * 864e5).toISOString();
-  try {
-    const { error } = await getClient()!
-      .from("places_query_cache")
-      .upsert({
-        cache_key:   cacheKey,
-        city_key:    cityKey,
-        entry_count: entries.length,
-        expires_at:  expiresAt,
-        created_at:  new Date().toISOString(),
-      }, { onConflict: "cache_key" });
-    if (error) {
-      console.error(`[inventoryCache/query] write FAILED: key=${cacheKey}`, {
-        message: error.message,
-      });
-    } else {
-      console.log(`[inventoryCache/query] writeQueryCache SUCCESS: key=${cacheKey} count=${entries.length}`);
-    }
-  } catch (err) {
-    console.error(`[inventoryCache/query] write FAILED: key=${cacheKey}`, {
-      message: String(err),
-      error: err instanceof Error ? err.message : 'unknown',
-      stack: err instanceof Error ? err.stack : undefined,
-    });
-  }
+  console.log(`[inventoryCache/query] writeQueryCache skipped (DB disabled): key=${cacheKey} count=${entries.length}`);
 }
 
 /** Delete expired rows from both tables. Call from a maintenance route or cron. */
