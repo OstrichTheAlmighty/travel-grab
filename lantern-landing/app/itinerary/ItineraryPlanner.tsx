@@ -1214,13 +1214,11 @@ export default function ItineraryPlanner() {
   const [cuisinePrefs, setCuisinePrefs] = useState<string[]>([]);
   const [budgetTier,   setBudgetTier]   = useState<"budget" | "moderate" | "premium">("moderate");
 
-  const [editTripModal, setEditTripModal] = useState<{
-    open:          boolean;
-    tempStart:     string;
-    tempDuration:  number;
-    tempPace:      UIPace;
-    tempTransit:   UITransit;
-  }>({ open: false, tempStart: "", tempDuration: 7, tempPace: "balanced", tempTransit: "mixed" });
+  const [editTripModal, setEditTripModal] = useState(false);
+  const [editStart,     setEditStart]     = useState("");
+  const [editDuration,  setEditDuration]  = useState(7);
+  const [editPace,      setEditPace]      = useState<UIPace>("balanced");
+  const [editTransit,   setEditTransit]   = useState<UITransit>("mixed");
 
   // Onboarding state (new users see a guided wizard; existing users skip to "done")
   type ObStep = "destination" | "dates" | "style" | "recommendations" | "cities" | "done";
@@ -2250,13 +2248,13 @@ export default function ItineraryPlanner() {
             <div className="flex items-center gap-4">
               <button
                 type="button"
-                onClick={() => setEditTripModal({
-                  open:         true,
-                  tempStart:    trip.startDate,
-                  tempDuration: trip.cities.reduce((s, c) => s + (c.days || 0), 0),
-                  tempPace:     trip.pace,
-                  tempTransit:  trip.transit,
-                })}
+                onClick={() => {
+                  setEditStart(trip.startDate);
+                  setEditDuration(trip.cities.reduce((s, c) => s + (c.days || 0), 0));
+                  setEditPace(trip.pace);
+                  setEditTransit(trip.transit);
+                  setEditTripModal(true);
+                }}
                 className="text-[11px] text-white/35 hover:text-lantern-mint transition-colors"
               >
                 Edit trip
@@ -3204,16 +3202,16 @@ export default function ItineraryPlanner() {
       })()}
 
       {/* ── Edit Trip Modal ── */}
-      {editTripModal.open && (
+      {editTripModal && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
-             onClick={() => setEditTripModal((m) => ({ ...m, open: false }))}>
+             onClick={() => setEditTripModal(false)}>
           <div className="bg-[#0D1019] border border-white/[0.1] rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl"
                onClick={(e) => e.stopPropagation()}>
             {/* Header */}
             <div className="p-6 border-b border-white/[0.08] flex items-center justify-between sticky top-0 bg-[#0D1019] z-10">
               <h2 className="text-white font-semibold">Edit trip</h2>
               <button type="button"
-                onClick={() => setEditTripModal((m) => ({ ...m, open: false }))}
+                onClick={() => setEditTripModal(false)}
                 className="text-white/40 hover:text-white/80 transition-colors text-xl leading-none w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/[0.06]">
                 ✕
               </button>
@@ -3232,8 +3230,8 @@ export default function ItineraryPlanner() {
               {/* Start date */}
               <div>
                 <label className="text-xs text-white/40 block mb-1.5">Start date</label>
-                <input type="date" value={editTripModal.tempStart}
-                  onChange={(e) => setEditTripModal((m) => ({ ...m, tempStart: e.target.value }))}
+                <input type="date" value={editStart}
+                  onChange={(e) => setEditStart(e.target.value)}
                   className="w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-white text-sm focus:border-lantern-mint/50 focus:outline-none [color-scheme:dark]"
                 />
               </div>
@@ -3241,10 +3239,10 @@ export default function ItineraryPlanner() {
               {/* Trip length */}
               <div>
                 <label className="text-xs text-white/40 block mb-1.5">
-                  Trip length — <span className="text-white/70">{editTripModal.tempDuration} days</span>
+                  Trip length — <span className="text-white/70">{editDuration} days</span>
                 </label>
-                <input type="range" min="2" max="30" value={editTripModal.tempDuration}
-                  onChange={(e) => setEditTripModal((m) => ({ ...m, tempDuration: parseInt(e.target.value) }))}
+                <input type="range" min="2" max="30" value={editDuration}
+                  onChange={(e) => setEditDuration(parseInt(e.target.value))}
                   className="w-full accent-lantern-mint"
                 />
               </div>
@@ -3255,9 +3253,9 @@ export default function ItineraryPlanner() {
                 <div className="grid grid-cols-3 gap-2">
                   {(["relaxed", "balanced", "packed"] as const).map((p) => (
                     <button key={p} type="button"
-                      onClick={() => setEditTripModal((m) => ({ ...m, tempPace: p }))}
+                      onClick={() => setEditPace(p)}
                       className={`rounded-lg border py-2.5 text-xs font-medium capitalize transition-colors ${
-                        editTripModal.tempPace === p
+                        editPace === p
                           ? "border-lantern-mint/50 bg-lantern-mint/10 text-lantern-mint"
                           : "border-white/[0.08] bg-white/[0.02] text-white/50 hover:text-white/80"
                       }`}>
@@ -3273,9 +3271,9 @@ export default function ItineraryPlanner() {
                 <div className="grid grid-cols-2 gap-2">
                   {(["walking", "public transit", "taxi", "mixed"] as const).map((t) => (
                     <button key={t} type="button"
-                      onClick={() => setEditTripModal((m) => ({ ...m, tempTransit: t }))}
+                      onClick={() => setEditTransit(t)}
                       className={`rounded-lg border py-2.5 text-xs font-medium capitalize transition-colors ${
-                        editTripModal.tempTransit === t
+                        editTransit === t
                           ? "border-lantern-mint/50 bg-lantern-mint/10 text-lantern-mint"
                           : "border-white/[0.08] bg-white/[0.02] text-white/50 hover:text-white/80"
                       }`}>
@@ -3290,14 +3288,14 @@ export default function ItineraryPlanner() {
             <div className="p-6 border-t border-white/[0.08] space-y-3 sticky bottom-0 bg-[#0D1019]">
               <button type="button"
                 onClick={() => {
-                  updateTrip({ startDate: editTripModal.tempStart, pace: editTripModal.tempPace, transit: editTripModal.tempTransit });
-                  setEditTripModal((m) => ({ ...m, open: false }));
+                  updateTrip({ startDate: editStart, pace: editPace, transit: editTransit });
+                  setEditTripModal(false);
                 }}
                 className="w-full px-4 py-3 bg-lantern-mint text-ink font-semibold rounded-lg hover:opacity-90 transition-opacity">
                 Save changes
               </button>
               <button type="button"
-                onClick={() => setEditTripModal((m) => ({ ...m, open: false }))}
+                onClick={() => setEditTripModal(false)}
                 className="w-full px-4 py-3 border border-white/[0.1] text-white/60 rounded-lg hover:bg-white/[0.05] transition-colors">
                 Cancel
               </button>
