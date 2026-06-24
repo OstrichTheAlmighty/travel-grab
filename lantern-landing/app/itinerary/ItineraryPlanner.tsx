@@ -778,7 +778,7 @@ function DayView({
   day, savedMeta, compact, onSlotClick, onDeleteSlot, onEditTime,
   onRename, renamingSlot, onRenameChange, onRenameCommit,
   onDragStart, onDragEnd, draggingSlot, onMoveUp, onMoveDown,
-  onEditNotes, onEditDuration,
+  onEditNotes, onEditDuration, onQuickAdd,
 }: {
   day:               PlannedDay;
   savedMeta:         Record<string, SavedMeta>;
@@ -797,6 +797,7 @@ function DayView({
   onMoveDown?:       (slot: PlannedSlot) => void;
   onEditNotes?:      (slot: PlannedSlot, note: string) => void;
   onEditDuration?:   (slot: PlannedSlot, minutes: number) => void;
+  onQuickAdd?:       () => void;
 }) {
   return (
     <div>
@@ -856,6 +857,15 @@ function DayView({
             onEditDuration={onEditDuration}
           />
         ))}
+        {onQuickAdd && (
+          <button
+            type="button"
+            onClick={onQuickAdd}
+            className="mt-3 flex items-center gap-1.5 px-3 py-2 rounded-lg border border-white/[0.08] text-white/30 hover:text-lantern-mint hover:border-lantern-mint/30 text-xs transition-colors"
+          >
+            <span className="text-sm leading-none">+</span> Add activity
+          </button>
+        )}
       </div>
     </div>
   );
@@ -1226,6 +1236,13 @@ export default function ItineraryPlanner() {
   const [saveAsModal,   setSaveAsModal]   = useState(false);
   const [saveAsName,    setSaveAsName]    = useState("");
   const [loadDropdown,  setLoadDropdown]  = useState(false);
+
+  const [quickAddModal, setQuickAddModal] = useState<{
+    open:            boolean;
+    dayIndex:        number | null;
+    activityName:    string;
+    durationMinutes: number;
+  }>({ open: false, dayIndex: null, activityName: "", durationMinutes: 90 });
 
   // Onboarding state (new users see a guided wizard; existing users skip to "done")
   type ObStep = "destination" | "dates" | "style" | "recommendations" | "cities" | "done";
@@ -2660,6 +2677,12 @@ export default function ItineraryPlanner() {
                       });
                       setRenamingSlot(null);
                     }}
+                    onQuickAdd={() => setQuickAddModal({
+                      open:            true,
+                      dayIndex:        selectedDay,
+                      activityName:    "",
+                      durationMinutes: 90,
+                    })}
                   />
                 </div>
               )}
@@ -3267,6 +3290,104 @@ export default function ItineraryPlanner() {
                 >
                   Save
                 </button>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* ── Quick-add activity modal ── */}
+      {quickAddModal.open && quickAddModal.dayIndex !== null && (() => {
+        const itin = trip.itinerary;
+        const day  = itin?.days.find((d) => d.dayIndex === quickAddModal.dayIndex);
+        const dayLabel = day
+          ? `Day ${day.dayIndex + 1}${day.cityLabel ? ` · ${day.cityLabel}` : ""}`
+          : `Day ${(quickAddModal.dayIndex ?? 0) + 1}`;
+
+        function commitQuickAdd() {
+          if (!itin || !quickAddModal.activityName.trim() || quickAddModal.dayIndex === null) return;
+          const dur       = Math.max(15, Math.min(480, quickAddModal.durationMinutes));
+          const lastEnd   = day ? Math.max(0, ...day.slots.map((s) => s.endMinutes)) : 9 * 60;
+          const startMin  = lastEnd > 0 ? lastEnd + 15 : 9 * 60;
+          const newSlot: PlannedSlot = {
+            kind:            "activity",
+            startMinutes:    startMin,
+            endMinutes:      startMin + dur,
+            durationMinutes: dur,
+            title:           quickAddModal.activityName.trim(),
+            explanation:     "",
+          };
+          updateTrip({
+            itinerary: {
+              ...itin,
+              days: itin.days.map((d) => {
+                if (d.dayIndex !== quickAddModal.dayIndex) return d;
+                const slots = [...d.slots, newSlot].sort((a, b) => a.startMinutes - b.startMinutes);
+                return { ...d, slots, scheduledActivityCount: slots.filter((s) => s.kind === "activity").length };
+              }),
+            },
+          });
+          setQuickAddModal({ open: false, dayIndex: null, activityName: "", durationMinutes: 90 });
+        }
+
+        return (
+          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+               onClick={() => setQuickAddModal((m) => ({ ...m, open: false }))}>
+            <div className="bg-[#0D1019] border border-white/[0.1] rounded-2xl max-w-sm w-full shadow-2xl"
+                 onClick={(e) => e.stopPropagation()}>
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <h2 className="text-white font-semibold text-sm">Add activity</h2>
+                    <p className="text-[11px] text-white/35 mt-0.5">{dayLabel}</p>
+                  </div>
+                  <button type="button"
+                    onClick={() => setQuickAddModal((m) => ({ ...m, open: false }))}
+                    className="text-white/40 hover:text-white/80 transition-colors w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/[0.06] text-xl leading-none">
+                    ✕
+                  </button>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-xs text-white/40 block mb-1.5">Activity name</label>
+                    <input
+                      type="text"
+                      autoFocus
+                      placeholder="e.g. Temple visit"
+                      value={quickAddModal.activityName}
+                      onChange={(e) => setQuickAddModal((m) => ({ ...m, activityName: e.target.value }))}
+                      onKeyDown={(e) => { if (e.key === "Enter") commitQuickAdd(); }}
+                      className="w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-white text-sm placeholder:text-white/20 focus:border-lantern-mint/50 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs text-white/40 block mb-1.5">
+                      Duration — <span className="text-white/70">{quickAddModal.durationMinutes} min</span>
+                    </label>
+                    <input
+                      type="number"
+                      min={15} max={480} step={15}
+                      value={quickAddModal.durationMinutes}
+                      onChange={(e) => setQuickAddModal((m) => ({ ...m, durationMinutes: Math.max(15, Math.min(480, parseInt(e.target.value) || 90)) }))}
+                      className="w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-white text-sm focus:border-lantern-mint/50 focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex gap-3 mt-5">
+                  <button type="button"
+                    disabled={!quickAddModal.activityName.trim()}
+                    onClick={commitQuickAdd}
+                    className="flex-1 bg-lantern-mint text-ink font-semibold rounded-lg px-4 py-2.5 hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed">
+                    Add to day
+                  </button>
+                  <button type="button"
+                    onClick={() => setQuickAddModal((m) => ({ ...m, open: false }))}
+                    className="flex-1 border border-white/[0.1] text-white/60 rounded-lg px-4 py-2.5 hover:bg-white/[0.05] transition-colors">
+                    Cancel
+                  </button>
+                </div>
               </div>
             </div>
           </div>
