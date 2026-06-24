@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { BRAND_NAME } from "@/lib/brand";
+import { Logo } from "@/app/components/Logo";
 
 const problems = [
   {
@@ -54,6 +55,97 @@ const betaItems = [
   'AI itinerary routing',
 ];
 
+const PREVIEW_FLIGHTS = [
+  {
+    airline:  'ANA',
+    sub:      'NH 8 · 13h 30m · 1 stop',
+    price:    '$1,247',
+    score:    94,
+    isBest:   true,
+  },
+  {
+    airline:  'United',
+    sub:      'UA 837 · 14h 15m · 1 stop',
+    price:    '$1,089',
+    score:    71,
+    isBest:   false,
+  },
+  {
+    airline:  'Delta',
+    sub:      'DL 295 · 16h 05m · 2 stops',
+    price:    '$978',
+    score:    68,
+    isBest:   false,
+  },
+];
+
+function FlightPreviewCard() {
+  return (
+    <div className="relative overflow-hidden rounded-xl border border-white/[0.09] bg-[#0C1018] shadow-[0_0_60px_rgba(143,247,208,0.05)]">
+
+      {/* Card header */}
+      <div className="flex items-center justify-between border-b border-white/[0.07] px-5 py-4">
+        <div>
+          <p className="text-sm font-bold text-white">JFK → NRT</p>
+          <p className="font-mono text-[10px] text-white/35">Sep 12 · Economy · 3 results</p>
+        </div>
+        <span className="rounded-md bg-lantern-violet/15 px-2 py-1 font-mono text-[9px] font-bold uppercase tracking-wider text-lantern-violet">
+          AI Ranked
+        </span>
+      </div>
+
+      {/* Flight rows */}
+      <div className="divide-y divide-white/[0.05]">
+        {PREVIEW_FLIGHTS.map((f) => (
+          <div
+            key={f.airline}
+            className={[
+              'flex items-center justify-between gap-4 px-5 py-4',
+              f.isBest ? 'bg-lantern-violet/[0.05]' : '',
+            ].join(' ')}
+          >
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2">
+                <p className="text-[13px] font-bold text-white">{f.airline}</p>
+                {f.isBest && (
+                  <span className="rounded bg-lantern-violet/20 px-1.5 py-0.5 font-mono text-[8px] font-bold uppercase tracking-wider text-lantern-violet">
+                    AI PICK
+                  </span>
+                )}
+              </div>
+              <p className="font-mono text-[10px] text-white/32">{f.sub}</p>
+            </div>
+
+            <div className="flex flex-shrink-0 flex-col items-end gap-1.5">
+              <div className="flex items-center gap-2">
+                <p className="font-mono text-[11px] font-bold text-white/60">{f.score}</p>
+                <div className="relative h-[3px] w-12 overflow-hidden rounded-full bg-white/10">
+                  <div
+                    className={f.isBest ? 'absolute inset-y-0 left-0 rounded-full bg-lantern-mint' : 'absolute inset-y-0 left-0 rounded-full bg-white/25'}
+                    style={{ width: `${(f.score / 94) * 100}%` }}
+                  />
+                </div>
+              </div>
+              <p className="text-[13px] font-semibold text-white/60">{f.price}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* AI reasoning footer */}
+      <div className="border-t border-white/[0.07] px-5 py-4">
+        <p className="mb-1 font-mono text-[9px] uppercase tracking-wider text-lantern-violet/55">
+          AI Reasoning
+        </p>
+        <p className="text-[11px] leading-relaxed text-white/42">
+          ANA scores highest on seat pitch, single-connection routing, and on-time
+          reliability — worth the $158 premium over United.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function Page() {
   const [email,     setEmail]     = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -87,14 +179,7 @@ export default function Page() {
       <header className="sticky top-0 z-50 border-b border-white/[0.07] bg-ink/95 backdrop-blur-sm">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4 sm:px-8">
           <a href="/" className="flex items-center gap-2.5">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/travelgrab-logo.svg"
-              alt="TravelGrab"
-              width={32}
-              height={32}
-              className="h-8 w-8 flex-shrink-0 object-contain"
-            />
+            <Logo size={32} className="flex-shrink-0" />
             <span className="text-sm font-bold tracking-tight text-white">{BRAND_NAME}</span>
           </a>
 
@@ -115,41 +200,63 @@ export default function Page() {
       </header>
 
       {/* ── Hero ─────────────────────────────────────────────────────────────── */}
-      <section className="px-6 pb-24 pt-20 sm:px-8 sm:pt-28 lg:pt-40">
-        <div className="mx-auto max-w-5xl">
+      <section className="relative overflow-hidden px-6 pb-24 pt-20 sm:px-8 sm:pt-28 lg:pt-36">
 
-          <p className="mb-6 font-mono text-xs font-medium uppercase tracking-[0.18em] text-lantern-mint">
-            Intelligent trip planning
-          </p>
+        {/* Subtle background arc — mirrors the logo mark at large scale */}
+        <svg
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-32 -top-24 h-[600px] w-[600px] opacity-[0.035]"
+          viewBox="0 0 600 600"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M 520,300 A 220,220 0 1,0 300,80" stroke="#8FF7D0" strokeWidth="2.5" strokeDasharray="10 8"/>
+          <circle cx="520" cy="300" r="7" fill="#8FF7D0"/>
+          <circle cx="300" cy="80" r="7" fill="#8FF7D0"/>
+        </svg>
 
-          <h1 className="text-[clamp(2.8rem,7vw,5.5rem)] font-black leading-[0.92] tracking-[-0.04em] text-white">
-            The travel advisor<br className="hidden sm:block" />
-            in your browser.
-          </h1>
+        <div className="mx-auto max-w-6xl">
+          <div className="grid items-center gap-14 lg:grid-cols-[1fr_420px] lg:gap-16">
 
-          <p className="mt-8 max-w-[44ch] text-lg leading-[1.65] text-white/52">
-            Flights ranked beyond price. Hotels matched to your neighborhood.
-            Itineraries built around geography. Reasoning behind every pick.
-          </p>
+            {/* Left: headline + CTA */}
+            <div>
+              <p className="mb-6 font-mono text-xs font-medium uppercase tracking-[0.18em] text-lantern-mint">
+                Intelligent trip planning
+              </p>
 
-          <div className="mt-10 flex flex-wrap items-center gap-5">
-            <a
-              href="/flights"
-              className="inline-flex h-12 items-center gap-2 rounded-lg bg-lantern-mint px-6 text-sm font-bold text-ink shadow-[0_0_24px_rgba(143,247,208,0.15)] transition hover:bg-lantern-mint/90 active:scale-[0.98]"
-            >
-              Start planning
-              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-            <a href="#how-it-works" className="text-sm text-white/35 transition hover:text-white/65">
-              See how it works →
-            </a>
+              <h1 className="text-[clamp(2.8rem,6vw,5rem)] font-black leading-[0.9] tracking-[-0.04em] text-white">
+                The travel advisor<br className="hidden sm:block" />
+                in your browser.
+              </h1>
+
+              <p className="mt-8 max-w-[44ch] text-lg leading-[1.65] text-white/52">
+                Flights ranked beyond price. Hotels matched to your neighborhood.
+                Itineraries built around geography. Reasoning behind every pick.
+              </p>
+
+              <div className="mt-10 flex flex-wrap items-center gap-5">
+                <a
+                  href="/flights"
+                  className="inline-flex h-12 items-center gap-2 rounded-lg bg-lantern-mint px-6 text-sm font-bold text-ink shadow-[0_0_24px_rgba(143,247,208,0.15)] transition hover:bg-lantern-mint/90 active:scale-[0.98]"
+                >
+                  Start planning
+                  <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </a>
+                <a href="#how-it-works" className="text-sm text-white/35 transition hover:text-white/65">
+                  See how it works →
+                </a>
+              </div>
+            </div>
+
+            {/* Right: live product preview */}
+            <FlightPreviewCard />
           </div>
         </div>
 
         {/* Product strip */}
-        <div className="mx-auto mt-20 max-w-5xl">
+        <div className="mx-auto mt-20 max-w-6xl">
           <div className="grid grid-cols-2 border border-white/[0.08] sm:grid-cols-4">
             {[
               { label: 'Flights',    tag: '12-variable ranking' },
@@ -161,8 +268,8 @@ export default function Page() {
                 key={s.label}
                 className={[
                   'px-5 py-4',
-                  i > 0               ? 'border-l border-white/[0.08]'            : '',
-                  i >= 2              ? 'border-t border-white/[0.08] sm:border-t-0' : '',
+                  i > 0               ? 'border-l border-white/[0.08]'               : '',
+                  i >= 2              ? 'border-t border-white/[0.08] sm:border-t-0'  : '',
                 ].join(' ')}
               >
                 <p className="text-[13px] font-semibold text-white">{s.label}</p>
@@ -364,14 +471,7 @@ export default function Page() {
       <footer className="border-t border-white/[0.07] px-6 py-8 sm:px-8">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/travelgrab-logo.svg"
-              alt=""
-              width={22}
-              height={22}
-              className="h-[22px] w-[22px] flex-shrink-0 object-contain"
-            />
+            <Logo size={22} className="flex-shrink-0 opacity-45" />
             <span className="text-sm font-semibold text-white/45">{BRAND_NAME}</span>
           </div>
           <p className="text-xs text-white/22">
