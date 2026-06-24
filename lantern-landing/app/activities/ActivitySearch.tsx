@@ -41,6 +41,42 @@ const CATEGORY_LABEL: Record<Category, string> = {
   hidden_gems: "Hidden Gem",
 };
 
+// ── Destination search localStorage cache (24h TTL, last 5 cities) ───────────
+
+const LS_CACHE_KEY = "tg_dest_cache_v1";
+const LS_CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
+const LS_CACHE_MAX = 5;
+
+type LsCacheEntry = { result: unknown; ts: number };
+type LsCache = Record<string, LsCacheEntry>;
+
+function lsGetDestination(key: string): unknown | null {
+  try {
+    const raw = localStorage.getItem(LS_CACHE_KEY);
+    if (!raw) return null;
+    const cache = JSON.parse(raw) as LsCache;
+    const entry = cache[key];
+    if (!entry) return null;
+    if (Date.now() - entry.ts > LS_CACHE_TTL) return null; // expired
+    return entry.result;
+  } catch { return null; }
+}
+
+function lsSetDestination(key: string, result: unknown): void {
+  try {
+    const raw = localStorage.getItem(LS_CACHE_KEY);
+    const cache: LsCache = raw ? (JSON.parse(raw) as LsCache) : {};
+    cache[key] = { result, ts: Date.now() };
+    // Evict oldest entries beyond limit
+    const keys = Object.keys(cache);
+    if (keys.length > LS_CACHE_MAX) {
+      const oldest = keys.sort((a, b) => cache[a].ts - cache[b].ts)[0];
+      delete cache[oldest];
+    }
+    localStorage.setItem(LS_CACHE_KEY, JSON.stringify(cache));
+  } catch { /* quota — ignore */ }
+}
+
 // ── Icons ─────────────────────────────────────────────────────────────────────
 
 function IconPin({ className }: { className?: string }) {
@@ -1827,9 +1863,20 @@ export default function ActivitySearch() {
   const fetchActivities = useCallback(async (dest: string, skipCache = false) => {
     const key = dest.trim().toLowerCase();
     if (!skipCache) {
-      const cached = clientCache.current.get(key);
-      if (cached) {
-        setResult(cached);
+      // 1. In-memory (fastest — same session, survives re-renders)
+      const mem = clientCache.current.get(key);
+      if (mem) {
+        setResult(mem);
+        setError(null);
+        return;
+      }
+      // 2. localStorage (survives page reloads and cold Vercel starts, 24h TTL)
+      const persisted = lsGetDestination(key);
+      if (persisted) {
+        console.log(`[activities] ls cache hit: ${key}`);
+        const r = persisted as SearchResult;
+        clientCache.current.set(key, r);
+        setResult(r);
         setError(null);
         return;
       }
@@ -1864,9 +1911,11 @@ export default function ActivitySearch() {
 
       clientCache.current.set(key, r);
       setResult(r);
-      // Persist to session storage so revisiting the page shows results instantly
+      // Persist so revisiting the page (or a cold server start) shows results instantly
       if (r.inventoryStatus !== "building") {
         try { sessionStorage.setItem(`tg_act_${key}`, JSON.stringify(r)); } catch { /* quota */ }
+        lsSetDestination(key, r); // localStorage: survives session + cold Vercel starts
+        console.log(`[activities] ls cache set: ${key}`);
       }
     } catch (err) {
       const msg = err instanceof Error ? err.message : "An unexpected error occurred.";
