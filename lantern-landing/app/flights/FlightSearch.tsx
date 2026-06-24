@@ -1403,7 +1403,9 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
               <tr
                 key={i}
                 className={`border-b border-gray-100 last:border-0 ${
-                  o.is_recommended ? "bg-teal-50" : "bg-transparent"
+                  o.is_recommended
+                    ? "bg-teal-50 [border-left:3px_solid_#14b8a6]"
+                    : "bg-transparent [border-left:3px_solid_transparent]"
                 }`}
               >
                 {/* Flight */}

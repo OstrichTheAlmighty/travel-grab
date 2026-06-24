@@ -3920,11 +3920,11 @@ function RecommendedHotels({
   if (top3.length === 0) return null;
 
   const RANK_LABEL  = ["#1", "#2", "#3"];
-  const RANK_COLOR  = ["text-amber-400", "text-gray-700", "text-amber-700/70"];
+  const RANK_COLOR  = ["text-amber-500", "text-teal-600", "text-gray-700"];
   const CARD_STYLE  = [
-    "border-amber-500/20 bg-amber-500/[0.04]",
-    "border-gray-200 bg-gray-50",
-    "border-gray-100 bg-white/[0.015]",
+    "border-amber-300 bg-amber-50 [border-left:3px_solid_#f59e0b]",
+    "border-teal-200  bg-teal-50  [border-left:3px_solid_#14b8a6]",
+    "border-gray-200  bg-white    [border-left:3px_solid_#e5e7eb]",
   ];
 
   return (

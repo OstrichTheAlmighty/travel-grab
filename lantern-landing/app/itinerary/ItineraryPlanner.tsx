@@ -391,23 +391,23 @@ interface PlaceDetailData {
 // ── Design tokens ──────────────────────────────────────────────────────────────
 
 const SLOT_STYLE: Record<string, { dot: string; border: string; bg: string }> = {
-  activity:           { dot: "bg-lantern-mint",   border: "border-teal-400/25",  bg: "bg-lantern-mint/[0.05]"  },
-  meal:               { dot: "bg-amber-100",   border: "border-amber-300/25",  bg: "bg-amber-100/[0.05]"  },
-  hotel_checkin:      { dot: "bg-gray-200",       border: "border-gray-200",         bg: "bg-gray-50"         },
-  hotel_checkout:     { dot: "bg-gray-200",       border: "border-gray-200",         bg: "bg-gray-50"         },
-  airport_transfer:   { dot: "bg-blue-100",   border: "border-blue-200",  bg: "bg-blue-100/[0.05]"  },
-  intercity_transfer: { dot: "bg-teal-600", border: "border-teal-500/30",bg: "bg-teal-600/[0.07]"},
-  free_time:          { dot: "bg-gray-200",       border: "border-gray-200",     bg: "bg-white"         },
+  activity:           { dot: "bg-teal-500",    border: "border-teal-200",   bg: "bg-teal-50/60"     },
+  meal:               { dot: "bg-amber-400",   border: "border-amber-200",  bg: "bg-amber-50/60"    },
+  hotel_checkin:      { dot: "bg-gray-300",    border: "border-gray-200",   bg: "bg-gray-50"        },
+  hotel_checkout:     { dot: "bg-gray-300",    border: "border-gray-200",   bg: "bg-gray-50"        },
+  airport_transfer:   { dot: "bg-blue-400",    border: "border-blue-200",   bg: "bg-blue-50/60"     },
+  intercity_transfer: { dot: "bg-teal-600",    border: "border-teal-300",   bg: "bg-teal-50"        },
+  free_time:          { dot: "bg-gray-200",    border: "border-gray-100",   bg: "bg-white"          },
 };
 
 const CAT_STYLE: Record<string, string> = {
-  food:        "text-amber-600  bg-amber-50  border-amber-200",
-  nightlife:   "text-purple-400    bg-purple-400/10    border-purple-400/20",
-  culture:     "text-teal-600  bg-teal-50  border-teal-400/20",
-  adventure:   "text-orange-400    bg-orange-400/10    border-orange-400/20",
-  nature:      "text-green-400     bg-green-400/10     border-green-400/20",
-  luxury:      "text-amber-600  bg-amber-50  border-amber-200",
-  hidden_gems: "text-pink-400      bg-pink-400/10      border-pink-400/20",
+  food:        "text-amber-700  bg-amber-50  border-amber-200",
+  nightlife:   "text-purple-700 bg-purple-50 border-purple-200",
+  culture:     "text-teal-700   bg-teal-50   border-teal-200",
+  adventure:   "text-orange-700 bg-orange-50 border-orange-200",
+  nature:      "text-green-700  bg-green-50  border-green-200",
+  luxury:      "text-amber-700  bg-amber-50  border-amber-200",
+  hidden_gems: "text-pink-700   bg-pink-50   border-pink-200",
 };
 
 // ── Timeline ──────────────────────────────────────────────────────────────────
@@ -778,12 +778,12 @@ function TimelineSlot({
 }
 
 const WARNING_COLORS: Record<DayWarning["type"], string> = {
-  packed:          "bg-amber-500/10 text-amber-400 border-amber-500/20",
-  food_heavy:      "bg-orange-500/10 text-orange-400 border-orange-500/20",
-  transit_heavy:   "bg-blue-500/10 text-blue-400 border-blue-500/20",
-  late_night:      "bg-violet-500/10 text-violet-400 border-violet-500/20",
-  flight_recovery: "bg-red-500/10 text-red-400 border-red-500/20",
-  ai_note:         "bg-gray-50 text-gray-700 border-gray-200",
+  packed:          "bg-amber-50  text-amber-700  border-amber-200",
+  food_heavy:      "bg-orange-50 text-orange-700 border-orange-200",
+  transit_heavy:   "bg-blue-50   text-blue-700   border-blue-200",
+  late_night:      "bg-purple-50 text-purple-700 border-purple-200",
+  flight_recovery: "bg-red-50    text-red-700    border-red-200",
+  ai_note:         "bg-teal-50   text-teal-700   border-teal-200",
 };
 
 function DayView({
@@ -814,9 +814,14 @@ function DayView({
   return (
     <div>
       <div className="mb-5">
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gray-700 mb-1">
-          {longDate(day.date)}
-        </p>
+        <div className="flex items-center gap-3 mb-1">
+          <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-teal-500 text-[11px] font-bold text-white flex-shrink-0 shadow-sm">
+            {day.dayIndex + 1}
+          </span>
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gray-700">
+            {longDate(day.date)}
+          </p>
+        </div>
         <h2 className="text-lg font-bold text-gray-900">{day.theme || `Day ${day.dayIndex + 1}`}</h2>
         {day.cityLabel && (
           <p className="text-sm text-gray-700 mt-0.5">{day.cityLabel}</p>
@@ -2568,10 +2573,10 @@ export default function ItineraryPlanner() {
                       }}
                       className={`shrink-0 rounded-xl border px-4 py-2.5 text-xs font-semibold transition-colors ${
                         isDropTarget
-                          ? "border-teal-400 bg-teal-100 text-teal-600 scale-105"
+                          ? "border-teal-400 bg-teal-100 text-teal-700 scale-105"
                           : selectedDay === i
-                          ? "border-teal-400 bg-teal-50 text-teal-600"
-                          : "border-gray-200 bg-gray-50 text-gray-700 hover:text-gray-600"
+                          ? "border-teal-500 bg-teal-500 text-white shadow-sm"
+                          : "border-gray-200 bg-white text-gray-700 hover:border-teal-200 hover:text-teal-600"
                       }`}
                     >
                       <span className="block">Day {i + 1}</span>

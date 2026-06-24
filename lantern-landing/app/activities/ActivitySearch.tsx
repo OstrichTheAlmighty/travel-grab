@@ -43,6 +43,26 @@ const CATEGORY_LABEL: Record<Category, string> = {
   hidden_gems: "Hidden Gem",
 };
 
+const CATEGORY_BADGE: Record<string, string> = {
+  food:        "bg-amber-50  text-amber-700  border-amber-200",
+  nightlife:   "bg-purple-50 text-purple-700 border-purple-200",
+  culture:     "bg-teal-50   text-teal-700   border-teal-200",
+  adventure:   "bg-orange-50 text-orange-700 border-orange-200",
+  nature:      "bg-green-50  text-green-700  border-green-200",
+  luxury:      "bg-amber-50  text-amber-700  border-amber-200",
+  hidden_gems: "bg-pink-50   text-pink-700   border-pink-200",
+};
+
+const CATEGORY_BORDER: Record<string, string> = {
+  food:        "border-l-amber-400",
+  nightlife:   "border-l-purple-400",
+  culture:     "border-l-teal-400",
+  adventure:   "border-l-orange-400",
+  nature:      "border-l-green-400",
+  luxury:      "border-l-amber-500",
+  hidden_gems: "border-l-pink-400",
+};
+
 // ── Destination search localStorage cache (24h TTL, last 5 cities) ───────────
 
 const LS_CACHE_KEY = "tg_dest_cache_v1";
@@ -262,7 +282,7 @@ function ActivityCard({
   const hasPhoto = Boolean(activity.photoRef) && !imgFailed;
 
   return (
-    <div className="group flex flex-col rounded-2xl border border-gray-200 bg-gray-50 overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.55)] hover:border-gray-300">
+    <div className={`group flex flex-col rounded-2xl border border-gray-200 border-l-[3px] ${CATEGORY_BORDER[activity.category] ?? "border-l-teal-400"} bg-white overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_28px_rgba(0,0,0,0.10)] hover:border-gray-300`}>
 
       {/* ── Hero ── */}
       <div className="relative h-52 overflow-hidden flex-shrink-0">
@@ -341,8 +361,9 @@ function ActivityCard({
                 : activity.reviewCount.toLocaleString()})
             </span>
           )}
-          <span className="text-gray-900/[0.12] mx-0.5">·</span>
-          <span className="text-[11px] text-gray-700">{CATEGORY_LABEL[activity.category]}</span>
+          <span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-semibold leading-none ${CATEGORY_BADGE[activity.category] ?? "bg-gray-50 text-gray-600 border-gray-200"}`}>
+            {CATEGORY_LABEL[activity.category]}
+          </span>
         </div>
 
         {/* Title */}
@@ -1308,8 +1329,8 @@ function CategoryFilter({
             onClick={() => onChange(f.id)}
             className={`flex items-center gap-1.5 flex-shrink-0 rounded-full px-4 py-2 text-[12px] font-semibold border transition-all duration-200 whitespace-nowrap ${
               isActive
-                ? "bg-lantern-mint text-ink border-teal-400 shadow-md"
-                : "bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100 hover:text-gray-700 hover:border-gray-300"
+                ? "bg-teal-500 text-white border-teal-500 shadow-sm"
+                : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50 hover:border-teal-200 hover:text-teal-700"
             }`}
           >
             {f.icon && <span className="leading-none">{f.icon}</span>}
