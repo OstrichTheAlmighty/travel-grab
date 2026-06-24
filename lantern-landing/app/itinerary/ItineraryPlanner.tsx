@@ -1443,6 +1443,20 @@ export default function ItineraryPlanner() {
     updateTripStore({ savedActivities: savedIds });
   }, [savedIds, hydrated]);
 
+  useEffect(() => {
+    if (hydrated && trip.itinerary && trip.itinerary.days[0]) {
+      const firstDay      = trip.itinerary.days[0];
+      const firstActivity = firstDay.slots[0];
+      console.log("=== FIRST ACTIVITY STRUCTURE ===");
+      console.log("Keys:", Object.keys(firstActivity));
+      console.log("Full object:", firstActivity);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      console.log("Has placeId?", (firstActivity as any).placeId);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      console.log("Has activityId?", (firstActivity as any).activityId);
+    }
+  }, [trip, hydrated]);
+
   useEffect(() => { setNoteEdit(null); setDurationEdit(null); }, [detailSlot]);
 
   // ── Lazy-load place details when modal opens ──
