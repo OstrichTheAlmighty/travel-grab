@@ -1,9 +1,11 @@
 interface LogoProps {
   size?: number;
   className?: string;
+  /** Background color behind the logo — used for the map-pin inner circle cutout */
+  bgColor?: string;
 }
 
-export function Logo({ size = 32, className }: LogoProps) {
+export function Logo({ size = 32, className, bgColor = "#070A12" }: LogoProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -35,8 +37,8 @@ export function Logo({ size = 32, className }: LogoProps) {
         d="M40,44 C33,44 28,49.5 28,56 C28,64 40,73 40,73 C40,73 52,64 52,56 C52,49.5 47,44 40,44 Z"
         fill="#8FF7D0"
       />
-      {/* Inner cutout — must match the page/bg color, defaults to #070A12 */}
-      <circle cx="40" cy="55" r="4.5" fill="#070A12" />
+      {/* Inner cutout — painted with bgColor to fake transparency */}
+      <circle cx="40" cy="55" r="4.5" fill={bgColor} />
     </svg>
   );
 }
