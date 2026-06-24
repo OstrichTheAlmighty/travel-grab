@@ -102,6 +102,8 @@ interface TripStorage {
   excludedActivityIds:  string[];
   itinerary:            PlannerOutput | null;
   itineraryGeneratedAt: string | null;
+  savedActivityIds?:    string[];
+  savedActivityMeta?:   Record<string, SavedMeta>;
 }
 
 type StoredTrip = {
@@ -1262,6 +1264,11 @@ export default function ItineraryPlanner() {
           setTrip(stored.trip);
           setTripList(allTrips);
           setActiveTripId(currentId);
+          // Per-trip activities override global localStorage
+          if (stored.trip.savedActivityIds) {
+            setSavedIds(stored.trip.savedActivityIds);
+            setSavedMeta(stored.trip.savedActivityMeta ?? {});
+          }
           if (stored.trip.cities[0]?.city) {
             setObDest(stored.trip.cities[0].city);
             obDestRef.current = stored.trip.cities[0].city;
@@ -1361,18 +1368,19 @@ export default function ItineraryPlanner() {
     if (!hydrated || obStep !== "done") return;
     const timer = setTimeout(() => {
       try {
-        // Save into multi-trip store
-        const storedTrips = getAllTrips();
-        const currentId   = getCurrentTripId();
+        // Save into multi-trip store (activities bundled with trip)
+        const storedTrips      = getAllTrips();
+        const currentId        = getCurrentTripId();
+        const tripWithActivity: TripStorage = { ...trip, savedActivityIds: savedIds, savedActivityMeta: savedMeta };
         if (currentId) {
           const exists  = storedTrips.some((t) => t.id === currentId);
           const now     = new Date().toISOString();
           const updated = exists
-            ? storedTrips.map((t) => t.id === currentId ? { ...t, trip, updatedAt: now } : t)
+            ? storedTrips.map((t) => t.id === currentId ? { ...t, trip: tripWithActivity, updatedAt: now } : t)
             : [...storedTrips, {
                 id:        currentId,
                 name:      trip.cities[0]?.city?.split(",")[0] ?? "My Trip",
-                trip,
+                trip:      tripWithActivity,
                 createdAt: now,
                 updatedAt: now,
               }];
@@ -1410,7 +1418,7 @@ export default function ItineraryPlanner() {
       } catch { /* ignore */ }
     }, 400);
     return () => clearTimeout(timer);
-  }, [trip, hydrated, obStep, obStyles, obFirstTime, selectedFlight, selectedHotel]);
+  }, [trip, savedIds, savedMeta, hydrated, obStep, obStyles, obFirstTime, selectedFlight, selectedHotel]);
 
   // ── Sync saved activities to canonical trip store ──
   useEffect(() => {
@@ -2274,6 +2282,18 @@ export default function ItineraryPlanner() {
               >
                 Edit trip
               </button>
+              {trip.cities.some((c) => c.city.trim()) && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    const cities = trip.cities.map((c) => c.city).filter(Boolean).join(",");
+                    window.location.href = "/activities?cities=" + encodeURIComponent(cities);
+                  }}
+                  className="text-[11px] text-lantern-mint/60 hover:text-lantern-mint transition-colors"
+                >
+                  + Add activities
+                </button>
+              )}
               <button
                 type="button"
                 onClick={startNewTrip}
@@ -2343,6 +2363,8 @@ export default function ItineraryPlanner() {
                           type="button"
                           onClick={() => {
                             setTrip(t.trip);
+                            setSavedIds(t.trip.savedActivityIds ?? []);
+                            setSavedMeta(t.trip.savedActivityMeta ?? {});
                             setActiveTripId(t.id);
                             setCurrentTripId(t.id);
                             setLoadDropdown(false);
