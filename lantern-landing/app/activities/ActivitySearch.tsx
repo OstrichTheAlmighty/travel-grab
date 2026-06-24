@@ -5,6 +5,7 @@ import { readTripStore, updateTripStore } from "@/lib/trip-store";
 import Link from "next/link";
 import type { Activity, Badge, Category } from "./data/types";
 import { DESTINATION_DATA } from "./data/tokyo";
+import { supabase } from "@/lib/supabase";
 
 // ── Filter config ─────────────────────────────────────────────────────────────
 
@@ -76,6 +77,83 @@ function lsSetDestination(key: string, result: unknown): void {
     }
     localStorage.setItem(LS_CACHE_KEY, JSON.stringify(cache));
   } catch { /* quota — ignore */ }
+}
+
+// ── Supabase → Activity mapping ───────────────────────────────────────────────
+
+const CATEGORY_GRADIENT: Record<Category, string> = {
+  food:        "radial-gradient(ellipse at 30% 25%, rgba(194,65,12,0.95) 0%, rgba(120,53,15,0.85) 45%, rgba(12,8,4,1) 100%)",
+  nightlife:   "radial-gradient(ellipse at 70% 20%, rgba(79,70,229,0.85) 0%, rgba(30,27,75,0.9) 50%, rgba(5,5,18,1) 100%)",
+  culture:     "radial-gradient(ellipse at 35% 30%, rgba(109,40,217,0.9) 0%, rgba(76,29,149,0.85) 45%, rgba(8,4,18,1) 100%)",
+  adventure:   "radial-gradient(ellipse at 25% 45%, rgba(13,148,136,0.9) 0%, rgba(6,78,59,0.85) 45%, rgba(3,10,8,1) 100%)",
+  nature:      "radial-gradient(ellipse at 50% 20%, rgba(21,128,61,0.9) 0%, rgba(20,83,45,0.85) 45%, rgba(3,10,5,1) 100%)",
+  luxury:      "radial-gradient(ellipse at 60% 30%, rgba(161,107,20,0.9) 0%, rgba(120,53,15,0.8) 45%, rgba(10,7,3,1) 100%)",
+  hidden_gems: "radial-gradient(ellipse at 35% 40%, rgba(147,51,234,0.9) 0%, rgba(88,28,135,0.85) 45%, rgba(8,3,15,1) 100%)",
+};
+
+const CATEGORY_EMOJI: Record<Category, string> = {
+  food: "🍜", nightlife: "🌃", culture: "🎭", adventure: "⚡",
+  nature: "🌿", luxury: "✨", hidden_gems: "💎",
+};
+
+const VALID_CATEGORIES = new Set<Category>([
+  "food", "nightlife", "culture", "adventure", "nature", "luxury", "hidden_gems",
+]);
+const VALID_BADGES = new Set<Badge>([
+  "hidden_gem", "worth_the_splurge", "family_friendly", "popular", "free",
+]);
+
+type SupabaseRow = {
+  id: string;
+  place_id: string;
+  title: string;
+  city: string;
+  category: string | null;
+  description: string | null;
+  image_url: string | null;
+  google_places_data: Record<string, unknown> | null;
+  created_at: string;
+};
+
+function rowToActivity(row: SupabaseRow): Activity {
+  const gd   = (row.google_places_data ?? {}) as Record<string, unknown>;
+  const raw  = (row.category ?? "culture") as Category;
+  const cat: Category = VALID_CATEGORIES.has(raw) ? raw : "culture";
+
+  const rawBadges = (gd.badges as string[] | undefined) ?? [];
+  const badges    = rawBadges.filter((b): b is Badge => VALID_BADGES.has(b as Badge));
+
+  const loc    = gd.location as { latitude?: number; longitude?: number } | undefined;
+  const hours  = gd.regularOpeningHours as { openNow?: boolean } | undefined;
+
+  return {
+    id:           row.place_id || row.id,
+    placeId:      row.place_id || undefined,
+    title:        row.title,
+    neighborhood: (gd.neighborhood as string | undefined)
+                  ?? (gd.shortFormattedAddress as string | undefined)
+                  ?? row.city,
+    duration:     (gd.duration as string | undefined) ?? "1–2 hours",
+    price:        (gd.price as string | undefined)
+                  ?? ((gd.isFree as boolean | undefined) ? "Free" : "Varies"),
+    isFree:       (gd.isFree as boolean | undefined) ?? false,
+    rating:       (gd.rating as number | undefined) ?? 0,
+    reviewCount:  (gd.userRatingCount as number | undefined) ?? 0,
+    description:  row.description ?? "",
+    whyVisit:     (gd.whyVisit as string | undefined) ?? row.description ?? "",
+    category:     cat,
+    tags:         (gd.tags as string[] | undefined) ?? [],
+    badges,
+    emoji:        (gd.emoji as string | undefined) ?? CATEGORY_EMOJI[cat],
+    gradient:     CATEGORY_GRADIENT[cat],
+    photoRef:     row.image_url ?? undefined,
+    websiteUri:   (gd.websiteUri as string | undefined),
+    googleMapsUri:(gd.googleMapsUri as string | undefined),
+    openNow:      hours?.openNow,
+    lat:          loc?.latitude,
+    lng:          loc?.longitude,
+    querySources: (gd.querySources as string[] | undefined),
+  };
 }
 
 // ── Icons ─────────────────────────────────────────────────────────────────────
@@ -1907,6 +1985,38 @@ export default function ActivitySearch() {
     if (!skipCache) setActivityQuery(""); // clear activity search when switching destinations
 
     try {
+      // 4. Supabase database — fast query, zero Google API cost
+      if (supabase) {
+        const cityName = dest.split(",")[0].trim();
+        const { data: rows, error: sbError } = await supabase
+          .from("activities")
+          .select("*")
+          .ilike("city", cityName)
+          .limit(200)
+          .order("title", { ascending: true });
+
+        if (sbError) {
+          console.warn("[activities] Supabase query failed:", sbError.message);
+        } else if (rows && rows.length > 0) {
+          const activities = (rows as SupabaseRow[]).map(rowToActivity);
+          const r: SearchResult = {
+            activities,
+            city:            cityName,
+            country:         dest.includes(",") ? dest.split(",").slice(1).join(",").trim() : "",
+            source:          "supabase",
+            inventoryStatus: "ready",
+            inventorySize:   activities.length,
+          };
+          clientCache.current.set(key, r);
+          lsSetDestination(key, r);
+          setResult(r);
+          setError(null);
+          return; // finally { setLoading(false) } handles cleanup
+        }
+        // No rows → fall through to Google Places API
+      }
+
+      // 5. Google Places API
       const res  = await fetch(`/api/activities/search?destination=${encodeURIComponent(dest.trim())}`);
       const data = await res.json() as {
         activities?: Activity[]; city?: string; country?: string; source?: string; error?: string;
