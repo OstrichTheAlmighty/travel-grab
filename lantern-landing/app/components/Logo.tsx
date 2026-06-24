@@ -7,24 +7,47 @@ export function Logo({ size = 32, className }: LogoProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 40 40"
+      viewBox="0 0 100 100"
       fill="none"
       width={size}
       height={size}
       className={className}
       aria-hidden="true"
     >
-      {/* Flight path: departs lower-left, curves up to upper-right */}
+      <defs>
+        <linearGradient id="tg-pin" x1="0.1" y1="0" x2="0.9" y2="1">
+          <stop offset="0%"   stopColor="#1e3a8a" />
+          <stop offset="55%"  stopColor="#2563eb" />
+          <stop offset="100%" stopColor="#0d9488" />
+        </linearGradient>
+      </defs>
+
+      {/* Pin / teardrop — blue-to-teal gradient */}
       <path
-        d="M 5 35 C 5 12 30 5 33 5"
-        stroke="#8FF7D0"
-        strokeWidth="3.5"
-        strokeLinecap="round"
+        d="M 50 96 C 22 76, 14 62, 14 44 A 36 36 0 0 0 86 44 C 86 62, 78 76, 50 96 Z"
+        fill="url(#tg-pin)"
       />
-      {/* Departure dot */}
-      <circle cx="5" cy="35" r="4" fill="#8FF7D0" />
-      {/* Arrival arrowhead — curve arrives horizontally, arrow points right */}
-      <path d="M 39 5 L 33 2 L 33 8 Z" fill="#8FF7D0" />
+
+      {/* Airplane — dark navy, pointing upper-right, right wing exits the pin */}
+      <g transform="translate(54,34) rotate(-45)">
+        <ellipse cx="0" cy="0" rx="4" ry="14" fill="#0f172a" />
+        <path d="M -3 -1 L -28 13 L -28 18 L -3 7 Z" fill="#0f172a" />
+        <path d="M  3 -1 L  28 13 L  28 18 L  3 7 Z" fill="#0f172a" />
+        <path d="M -2 10 L -11 19 L -11 23 L -2 14 Z" fill="#0f172a" />
+        <path d="M  2 10 L  11 19 L  11 23 L  2 14 Z" fill="#0f172a" />
+      </g>
+
+      {/* Route: 3 waypoints connected by arc */}
+      <path
+        d="M 30 72 Q 50 64 70 72"
+        stroke="rgba(255,255,255,0.8)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <circle cx="30" cy="72" r="3.5" fill="white" />
+      <circle cx="50" cy="64" r="3.5" fill="white" />
+      <circle cx="70" cy="72" r="3.5" fill="white" />
     </svg>
   );
 }
