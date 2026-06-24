@@ -698,24 +698,29 @@ function TimelineSlot({
                   Edit
                 </button>
               </>
-            ) : (
-              <>
-                <input
-                  autoFocus
-                  type="number"
-                  min={15}
-                  max={480}
-                  step={15}
-                  value={durationEdit}
-                  onChange={(e) => setDurationEdit(Number(e.target.value))}
-                  onClick={(e) => e.stopPropagation()}
-                  className="select-text w-20 bg-white/[0.04] border border-white/[0.12] rounded-lg px-2 py-1 text-[11px] text-white/80 focus:outline-none focus:border-lantern-mint/50 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
-                />
-                <span className="text-[10px] text-white/25">min</span>
-                <button type="button" draggable={false} onClick={(e) => { e.stopPropagation(); setDurationEdit(null); }} className="text-[10px] text-white/35 hover:text-white/60 transition-colors">Cancel</button>
-                <button type="button" draggable={false} onClick={(e) => { e.stopPropagation(); onEditDuration(slot, Math.max(15, Math.min(480, durationEdit))); setDurationEdit(null); }} className="text-[10px] text-lantern-mint font-semibold hover:opacity-80 transition-opacity">Save</button>
-              </>
-            )}
+            ) : (() => {
+              const clampedDur = Math.max(15, Math.min(480, durationEdit));
+              const durError = slot.startMinutes + clampedDur > 1440 ? "Exceeds midnight" : null;
+              return (
+                <>
+                  <input
+                    autoFocus
+                    type="number"
+                    min={15}
+                    max={480}
+                    step={15}
+                    value={durationEdit}
+                    onChange={(e) => setDurationEdit(Number(e.target.value))}
+                    onClick={(e) => e.stopPropagation()}
+                    className="select-text w-20 bg-white/[0.04] border border-white/[0.12] rounded-lg px-2 py-1 text-[11px] text-white/80 focus:outline-none focus:border-lantern-mint/50 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
+                  />
+                  <span className="text-[10px] text-white/25">min</span>
+                  {durError && <span className="text-red-400 text-[10px]">{durError}</span>}
+                  <button type="button" draggable={false} onClick={(e) => { e.stopPropagation(); setDurationEdit(null); }} className="text-[10px] text-white/35 hover:text-white/60 transition-colors">Cancel</button>
+                  <button type="button" draggable={false} disabled={!!durError} onClick={(e) => { e.stopPropagation(); if (!durError) { onEditDuration(slot, clampedDur); setDurationEdit(null); } }} className={`text-[10px] font-semibold transition-opacity ${durError ? "text-white/20 cursor-not-allowed" : "text-lantern-mint hover:opacity-80"}`}>Save</button>
+                </>
+              );
+            })()}
           </div>
         )}
       </div>
@@ -2452,15 +2457,24 @@ export default function ItineraryPlanner() {
                     onEditDuration={(slot, minutes) => {
                       const itin = trip.itinerary;
                       if (!itin) return;
+                      const timeDelta = minutes - slot.durationMinutes;
                       updateTrip({
                         itinerary: {
                           ...itin,
-                          days: itin.days.map((d) => d.dayIndex === selectedDay ? {
-                            ...d,
-                            slots: d.slots
-                              .map((s) => s === slot ? { ...s, durationMinutes: minutes, endMinutes: s.startMinutes + minutes } : s)
-                              .sort((a, b) => a.startMinutes - b.startMinutes),
-                          } : d),
+                          days: itin.days.map((d) => {
+                            if (d.dayIndex !== selectedDay) return d;
+                            const idx = d.slots.indexOf(slot);
+                            return {
+                              ...d,
+                              slots: d.slots
+                                .map((s, i) => {
+                                  if (s === slot) return { ...s, durationMinutes: minutes, endMinutes: s.startMinutes + minutes };
+                                  if (i > idx) return { ...s, startMinutes: s.startMinutes + timeDelta, endMinutes: s.endMinutes + timeDelta };
+                                  return s;
+                                })
+                                .sort((a, b) => a.startMinutes - b.startMinutes),
+                            };
+                          }),
                         },
                       });
                     }}
@@ -3014,77 +3028,89 @@ export default function ItineraryPlanner() {
       })()}
 
       {/* ── Edit-time modal ── */}
-      {editingTime && trip.itinerary && (
-        <div
-          className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
-          onClick={() => setEditingTime(null)}
-        >
+      {editingTime && trip.itinerary && (() => {
+        const [newH, newM] = (editingTime.value || "00:00").split(":").map(Number);
+        const newStart = (newH || 0) * 60 + (newM || 0);
+        const arrivalMinutes = selectedFlight?.arriveTime && editingTime.dayIndex === 0
+          ? (() => { const [ah, am] = selectedFlight.arriveTime.split(":").map(Number); return ah * 60 + am; })()
+          : null;
+        const timeError = arrivalMinutes !== null && newStart < arrivalMinutes
+          ? `Cannot schedule before arrival at ${fmt24(selectedFlight!.arriveTime)}`
+          : null;
+        return (
           <div
-            className="bg-[#0D1019] border border-white/[0.12] rounded-2xl max-w-sm w-full p-6 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
+            className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
+            onClick={() => setEditingTime(null)}
           >
-            <div className="flex items-start justify-between mb-4">
-              <div>
-                <h2 className="text-white font-semibold">Change start time</h2>
-                <p className="text-white/50 text-sm mt-0.5 truncate max-w-[230px]">{editingTime.slot.title}</p>
+            <div
+              className="bg-[#0D1019] border border-white/[0.12] rounded-2xl max-w-sm w-full p-6 shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <h2 className="text-white font-semibold">Change start time</h2>
+                  <p className="text-white/50 text-sm mt-0.5 truncate max-w-[230px]">{editingTime.slot.title}</p>
+                </div>
+                <button type="button" onClick={() => setEditingTime(null)} className="text-white/30 hover:text-white/70 transition-colors ml-3 shrink-0">✕</button>
               </div>
-              <button type="button" onClick={() => setEditingTime(null)} className="text-white/30 hover:text-white/70 transition-colors ml-3 shrink-0">✕</button>
-            </div>
 
-            <div className="flex items-center gap-3 mb-4 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.06]">
-              <span className="text-[11px] text-white/35 uppercase tracking-wider">Current</span>
-              <span className="text-white/60 font-mono text-sm">{formatTime(editingTime.slot.startMinutes)}</span>
-            </div>
+              <div className="flex items-center gap-3 mb-4 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.06]">
+                <span className="text-[11px] text-white/35 uppercase tracking-wider">Current</span>
+                <span className="text-white/60 font-mono text-sm">{formatTime(editingTime.slot.startMinutes)}</span>
+              </div>
 
-            <label className="block text-white/50 text-xs mb-2 uppercase tracking-wider">New time</label>
-            <input
-              type="time"
-              value={editingTime.value}
-              onChange={(e) => setEditingTime((prev) => prev ? { ...prev, value: e.target.value } : null)}
-              className="w-full bg-white/[0.05] border border-white/[0.15] rounded-lg px-4 py-3 text-white text-xl font-mono focus:outline-none focus:border-lantern-mint/60 mb-5"
-              autoFocus
-            />
+              <label className="block text-white/50 text-xs mb-2 uppercase tracking-wider">New time</label>
+              <input
+                type="time"
+                value={editingTime.value}
+                onChange={(e) => setEditingTime((prev) => prev ? { ...prev, value: e.target.value } : null)}
+                className="w-full bg-white/[0.05] border border-white/[0.15] rounded-lg px-4 py-3 text-white text-xl font-mono focus:outline-none focus:border-lantern-mint/60 mb-3"
+                autoFocus
+              />
+              {timeError && (
+                <p className="text-red-400 text-xs mb-3">{timeError}</p>
+              )}
 
-            <div className="flex gap-3">
-              <button
-                type="button"
-                onClick={() => setEditingTime(null)}
-                className="flex-1 px-4 py-2.5 bg-white/[0.05] border border-white/[0.1] text-white/60 rounded-lg hover:bg-white/[0.1] transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  if (!editingTime || !trip.itinerary) return;
-                  const [h, m] = editingTime.value.split(":").map(Number);
-                  const newStart = h * 60 + m;
-                  const duration = editingTime.slot.endMinutes - editingTime.slot.startMinutes;
-                  updateTrip({
-                    itinerary: {
-                      ...trip.itinerary,
-                      days: trip.itinerary.days.map((d) => {
-                        if (d.dayIndex !== editingTime.dayIndex) return d;
-                        const newSlots = d.slots
-                          .map((s) => s === editingTime.slot
-                            ? { ...s, startMinutes: newStart, endMinutes: newStart + duration }
-                            : s
-                          )
-                          .sort((a, b) => a.startMinutes - b.startMinutes);
-                        return { ...d, slots: newSlots };
-                      }),
-                    },
-                  });
-                  setEditingTime(null);
-                }}
-                className="flex-1 px-4 py-2.5 bg-lantern-mint text-ink font-semibold rounded-lg hover:opacity-90 transition-opacity"
-              >
-                Save
-              </button>
+              <div className="flex gap-3 mt-2">
+                <button
+                  type="button"
+                  onClick={() => setEditingTime(null)}
+                  className="flex-1 px-4 py-2.5 bg-white/[0.05] border border-white/[0.1] text-white/60 rounded-lg hover:bg-white/[0.1] transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  disabled={!!timeError}
+                  onClick={() => {
+                    if (!editingTime || !trip.itinerary || timeError) return;
+                    const duration = editingTime.slot.endMinutes - editingTime.slot.startMinutes;
+                    updateTrip({
+                      itinerary: {
+                        ...trip.itinerary,
+                        days: trip.itinerary.days.map((d) => {
+                          if (d.dayIndex !== editingTime.dayIndex) return d;
+                          const newSlots = d.slots
+                            .map((s) => s === editingTime.slot
+                              ? { ...s, startMinutes: newStart, endMinutes: newStart + duration }
+                              : s
+                            )
+                            .sort((a, b) => a.startMinutes - b.startMinutes);
+                          return { ...d, slots: newSlots };
+                        }),
+                      },
+                    });
+                    setEditingTime(null);
+                  }}
+                  className={`flex-1 px-4 py-2.5 bg-lantern-mint text-ink font-semibold rounded-lg transition-opacity ${timeError ? "opacity-40 cursor-not-allowed" : "hover:opacity-90"}`}
+                >
+                  Save
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
     </div>
   );
 }
