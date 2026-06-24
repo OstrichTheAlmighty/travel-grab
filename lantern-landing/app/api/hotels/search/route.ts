@@ -1358,6 +1358,24 @@ function computeNeighborhoodFit(
       if (pref === "sightseeing" && summLower.includes("sights"))    score += 15;
       if (pref === "quiet"       && summLower.includes("quiet"))     score += 15;
       if (pref === "nightlife"   && summLower.includes("nightlife")) score += 15;
+
+      // Google Places never classifies neighborhoods as "luxury", so supplement
+      // with hotel intrinsics: star rating, amenities, and description keywords.
+      if (pref === "luxury") {
+        if (hotel.starRating >= 5)      score += 35;
+        else if (hotel.starRating >= 4) score += 20;
+        const luxSignals = PREF_SIGNALS.luxury;
+        const amenLower = hotel.amenities.map((a) => a.toLowerCase());
+        let amenHits = 0;
+        for (const t of luxSignals.amenityTerms) {
+          if (amenLower.some((a) => a.includes(t))) amenHits++;
+        }
+        score += Math.min(25, amenHits * 12);
+        const descLower = hotel.description.toLowerCase();
+        let descHits = 0;
+        for (const t of luxSignals.descTerms) { if (descLower.includes(t)) descHits++; }
+        score += Math.min(20, descHits * 7);
+      }
     } else {
       // ── Keyword fallback (SerpAPI data only) ──────────────────────────────
       const signals = PREF_SIGNALS[pref];
