@@ -78,7 +78,7 @@ async function _ensureTables(): Promise<boolean> {
       CREATE TABLE IF NOT EXISTS places_query_cache (
         cache_key   TEXT PRIMARY KEY,
         city_key    TEXT NOT NULL,
-        entries     JSONB NOT NULL,
+        entries     JSONB,
         entry_count INTEGER NOT NULL DEFAULT 0,
         created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         expires_at  TIMESTAMPTZ NOT NULL
@@ -87,6 +87,14 @@ async function _ensureTables(): Promise<boolean> {
     console.log("[inventoryCache] places_query_cache table OK");
   } catch (err) {
     console.warn("[inventoryCache] CREATE TABLE warning (places_query_cache):", String(err));
+  }
+
+  try {
+    // Drop NOT NULL on entries for existing tables that were created with the old schema
+    await db.execute(sql`ALTER TABLE places_query_cache ALTER COLUMN entries DROP NOT NULL`);
+    console.log("[inventoryCache] places_query_cache.entries column is now nullable");
+  } catch {
+    // Column already nullable or table doesn't exist yet — both fine
   }
 
   try {
@@ -178,22 +186,31 @@ export function makeCacheKey(cityKey: string, g: { type?: string; query?: string
   return `${cityKey}||${suffix}`;
 }
 
-/** Returns Map<cacheKey, entries[]> for all non-expired rows of cityKey, or null if unavailable. */
+/** Returns Map<cacheKey, entries[]> for all non-expired rows of cityKey that have entry data, or null if unavailable. */
 export async function readCityCache(cityKey: string): Promise<Map<string, CachedEntry[]> | null> {
   if (!await ensureTables()) return null;
   try {
     const { db } = await import("@/lib/db");
-    const rows = await db.execute<{ cache_key: string; entries: unknown }>(sql`
-      SELECT cache_key, entries
+    const rows = await db.execute<{ cache_key: string; entries: unknown; entry_count: number }>(sql`
+      SELECT cache_key, entries, entry_count
       FROM places_query_cache
       WHERE city_key = ${cityKey} AND expires_at > NOW()
     `);
     if (rows.length === 0) return null;
     const map = new Map<string, CachedEntry[]>();
     for (const row of rows) {
-      map.set(row.cache_key, row.entries as CachedEntry[]);
+      // Only include rows that actually have entry data stored
+      if (row.entries != null) {
+        map.set(row.cache_key, row.entries as CachedEntry[]);
+      }
     }
-    console.log(`[inventoryCache/city] cache HIT for "${cityKey}" — ${rows.length} query rows`);
+    if (map.size === 0) {
+      // All rows are metadata-only (no entries stored) — treat as cache miss so
+      // the caller rebuilds from Google Places rather than serving empty results
+      console.log(`[inventoryCache/city] ${rows.length} metadata-only rows for "${cityKey}" — treating as cache miss`);
+      return null;
+    }
+    console.log(`[inventoryCache/city] cache HIT for "${cityKey}" — ${map.size}/${rows.length} query rows with data`);
     return map;
   } catch (err) {
     console.warn("[inventoryCache/city] read error:", String(err));
@@ -201,13 +218,13 @@ export async function readCityCache(cityKey: string): Promise<Map<string, Cached
   }
 }
 
-/** Persist one query's results to DB. Fire-and-forget — caller should .catch(() => {}). */
+/** Persist query metadata to DB (entries are kept in-memory only). Fire-and-forget — caller should .catch(() => {}). */
 export async function writeQueryCache(
   cityKey: string,
   cacheKey: string,
   entries: CachedEntry[],
 ): Promise<void> {
-  console.log(`[inventoryCache/query] writeQueryCache called: key=${cacheKey} entries=${entries.length}`);
+  console.log(`[inventoryCache/query] writeQueryCache called: key=${cacheKey} count=${entries.length}`);
 
   const tablesOk = await ensureTables();
   if (!tablesOk) {
@@ -219,18 +236,17 @@ export async function writeQueryCache(
   try {
     const { db } = await import("@/lib/db");
     await db.execute(sql`
-      INSERT INTO places_query_cache (cache_key, city_key, entries, entry_count, expires_at)
+      INSERT INTO places_query_cache (cache_key, city_key, entry_count, expires_at)
       VALUES (
-        ${cacheKey}, ${cityKey}, ${JSON.stringify(entries)},
+        ${cacheKey}, ${cityKey},
         ${entries.length}, ${expiresAt}::timestamptz
       )
       ON CONFLICT (cache_key) DO UPDATE SET
-        entries     = EXCLUDED.entries,
         entry_count = EXCLUDED.entry_count,
         expires_at  = EXCLUDED.expires_at,
         created_at  = NOW()
     `);
-    console.log(`[inventoryCache/query] write OK: key=${cacheKey} entries=${entries.length} ✓`);
+    console.log(`[inventoryCache/query] writeQueryCache SUCCESS: key=${cacheKey} count=${entries.length}`);
   } catch (err) {
     console.error(`[inventoryCache/query] write FAILED: key=${cacheKey}`, {
       message: String(err),
