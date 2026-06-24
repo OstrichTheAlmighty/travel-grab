@@ -61,9 +61,10 @@ export interface PlannedSlot {
   title:           string;
   location?:       LatLng;
   transit?:        TransitInfo;   // travel TO this slot from the previous one
-  explanation:     string;
-  note?:           string;
-  category?:       string;        // activity category — set when kind === "activity"
+  explanation:        string;
+  note?:              string;
+  timeExplanation?:   string;     // why this specific time was chosen
+  category?:          string;     // activity category — set when kind === "activity"
 }
 
 export interface PlannedDay {

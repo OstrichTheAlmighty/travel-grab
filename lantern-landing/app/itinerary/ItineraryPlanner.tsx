@@ -723,6 +723,14 @@ function TimelineSlot({
             })()}
           </div>
         )}
+        {slot.kind === "activity" && (
+          <div className="mt-3 px-3 py-2.5 rounded-lg bg-white/[0.02] border border-white/[0.05]">
+            <p className="text-[10px] font-semibold text-white/30 uppercase tracking-wider mb-1">⏰ Why this time?</p>
+            <p className="text-[12px] text-white/40 italic leading-relaxed">
+              {slot.timeExplanation ?? "AI-scheduled for optimal experience"}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
