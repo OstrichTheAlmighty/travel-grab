@@ -423,7 +423,6 @@ function TimelineSlot({
         className={`group flex items-center gap-3 py-2.5 border-b ${lineColor} select-none ${isClickable && slot.kind !== "activity" ? "cursor-pointer hover:bg-white/[0.02] -mx-2 px-2 rounded-lg transition-colors" : ""} ${isDragging ? "opacity-40" : ""} ${slot.kind === "activity" && onDragStart ? "cursor-grab active:cursor-grabbing" : ""}`}
         draggable={slot.kind === "activity" && !!onDragStart}
         onDragStart={slot.kind === "activity" ? (e) => {
-          if ((e.target as HTMLElement).closest("button")) { e.preventDefault(); return; }
           e.dataTransfer.effectAllowed = "move";
           e.dataTransfer.setData("text/plain", slot.title);
           onDragStart?.(slot);
@@ -536,7 +535,6 @@ function TimelineSlot({
         className={`group flex-1 mb-4 rounded-xl border px-4 py-3 ${style.border} ${style.bg} select-none ${isClickable ? "cursor-pointer hover:border-white/20 transition-colors" : ""} ${isDragging ? "opacity-40" : ""} ${slot.kind === "activity" && onDragStart ? "cursor-grab" : ""}`}
         draggable={slot.kind === "activity" && !!onDragStart}
         onDragStart={slot.kind === "activity" ? (e) => {
-          if ((e.target as HTMLElement).closest("button")) { e.preventDefault(); return; }
           e.dataTransfer.effectAllowed = "move";
           e.dataTransfer.setData("text/plain", slot.title);
           onDragStart?.(slot);
@@ -1022,6 +1020,7 @@ export default function ItineraryPlanner() {
   const [saveNotice,        setSaveNotice]         = useState(false);
   const [compactView,       setCompactView]        = useState(true);
   const [detailSlot,        setDetailSlot]         = useState<PlannedSlot | null>(null);
+  const [noteEdit,          setNoteEdit]           = useState<string | null>(null);
   const [modalPlaceDetail,  setModalPlaceDetail]   = useState<PlaceDetailData | null>(null);
   const [modalDetailLoading, setModalDetailLoading] = useState(false);
   type ClaudePlacement = {
@@ -1198,6 +1197,8 @@ export default function ItineraryPlanner() {
     if (!hydrated) return;
     updateTripStore({ savedActivities: savedIds });
   }, [savedIds, hydrated]);
+
+  useEffect(() => { setNoteEdit(null); }, [detailSlot]);
 
   // ── Lazy-load place details when modal opens ──
   useEffect(() => {
@@ -2416,6 +2417,69 @@ export default function ItineraryPlanner() {
                             🌐 {modalPlaceDetail.website.replace(/^https?:\/\/(www\.)?/, "")}
                           </a>
                         )}
+                        {/* Notes */}
+                        <div className="mt-4 border-t border-white/[0.06] pt-4">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-[11px] font-semibold text-white/30 uppercase tracking-wider">Notes</span>
+                            {noteEdit === null ? (
+                              <button
+                                type="button"
+                                onClick={() => setNoteEdit(detailSlot.note ?? "")}
+                                className="text-[11px] text-white/40 hover:text-lantern-mint transition-colors"
+                              >
+                                {detailSlot.note ? "Edit" : "+ Add note"}
+                              </button>
+                            ) : (
+                              <div className="flex gap-3">
+                                <button
+                                  type="button"
+                                  onClick={() => setNoteEdit(null)}
+                                  className="text-[11px] text-white/40 hover:text-white/70 transition-colors"
+                                >
+                                  Cancel
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    if (!trip.itinerary) return;
+                                    const updated = { ...detailSlot, note: noteEdit };
+                                    updateTrip({
+                                      itinerary: {
+                                        ...trip.itinerary,
+                                        days: trip.itinerary.days.map((d) => ({
+                                          ...d,
+                                          slots: d.slots.map((s) => s === detailSlot ? updated : s),
+                                        })),
+                                      },
+                                    });
+                                    setDetailSlot(updated);
+                                    setNoteEdit(null);
+                                  }}
+                                  className="text-[11px] text-lantern-mint font-semibold hover:opacity-80 transition-opacity"
+                                >
+                                  Save
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                          {noteEdit === null ? (
+                            detailSlot.note ? (
+                              <p className="text-sm text-white/50 leading-relaxed whitespace-pre-wrap">{detailSlot.note}</p>
+                            ) : (
+                              <p className="text-[12px] text-white/20 italic">No notes yet</p>
+                            )
+                          ) : (
+                            <textarea
+                              autoFocus
+                              value={noteEdit}
+                              onChange={(e) => setNoteEdit(e.target.value)}
+                              placeholder="Add your notes…"
+                              rows={3}
+                              className="w-full bg-white/[0.04] border border-white/[0.12] rounded-lg px-3 py-2 text-sm text-white/80 placeholder-white/20 focus:outline-none focus:border-lantern-mint/50 resize-none"
+                            />
+                          )}
+                        </div>
+
                         <a
                           href={`https://maps.google.com/?q=${encodeURIComponent(detailSlot.title)}`}
                           target="_blank"
