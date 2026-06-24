@@ -388,25 +388,31 @@ function TimelineSlot({
   slot, savedMeta, isLast, compact, onSlotClick, onDelete, onEditTime,
   onRename, isRenaming, renameValue, onRenameChange, onRenameCommit,
   onDragStart, onDragEnd, isDragging, onMoveUp, onMoveDown,
+  onEditNotes, onEditDuration,
 }: {
-  slot:             PlannedSlot;
-  savedMeta:        Record<string, SavedMeta>;
-  isLast:           boolean;
-  compact:          boolean;
-  onSlotClick:      (slot: PlannedSlot) => void;
-  onDelete?:        (slot: PlannedSlot) => void;
-  onEditTime?:      (slot: PlannedSlot) => void;
-  onRename?:        (slot: PlannedSlot) => void;
-  isRenaming?:      boolean;
-  renameValue?:     string;
-  onRenameChange?:  (v: string) => void;
-  onRenameCommit?:  () => void;
-  onDragStart?:     (slot: PlannedSlot) => void;
-  onDragEnd?:       () => void;
-  isDragging?:      boolean;
-  onMoveUp?:        () => void;
-  onMoveDown?:      () => void;
+  slot:              PlannedSlot;
+  savedMeta:         Record<string, SavedMeta>;
+  isLast:            boolean;
+  compact:           boolean;
+  onSlotClick:       (slot: PlannedSlot) => void;
+  onDelete?:         (slot: PlannedSlot) => void;
+  onEditTime?:       (slot: PlannedSlot) => void;
+  onRename?:         (slot: PlannedSlot) => void;
+  isRenaming?:       boolean;
+  renameValue?:      string;
+  onRenameChange?:   (v: string) => void;
+  onRenameCommit?:   () => void;
+  onDragStart?:      (slot: PlannedSlot) => void;
+  onDragEnd?:        () => void;
+  isDragging?:       boolean;
+  onMoveUp?:         () => void;
+  onMoveDown?:       () => void;
+  onEditNotes?:      (slot: PlannedSlot, note: string) => void;
+  onEditDuration?:   (slot: PlannedSlot, minutes: number) => void;
 }) {
+  const [noteEdit,     setNoteEdit]     = useState<string | null>(null);
+  const [durationEdit, setDurationEdit] = useState<number | null>(null);
+
   if (slot.kind === "free_time" && slot.transit) {
     return compact ? null : <TransitConnector slot={slot} />;
   }
@@ -496,28 +502,6 @@ function TimelineSlot({
             {cat}
           </span>
         )}
-        {slot.kind === "activity" && onMoveUp && (
-          <button
-            type="button"
-            draggable={false}
-            onClick={(e) => { e.stopPropagation(); onMoveUp(); }}
-            className="shrink-0 opacity-0 group-hover:opacity-100 text-white/40 hover:text-lantern-mint transition-all text-xs leading-none px-0.5"
-            title="Move up"
-          >
-            ↑
-          </button>
-        )}
-        {slot.kind === "activity" && onMoveDown && (
-          <button
-            type="button"
-            draggable={false}
-            onClick={(e) => { e.stopPropagation(); onMoveDown(); }}
-            className="shrink-0 opacity-0 group-hover:opacity-100 text-white/40 hover:text-lantern-mint transition-all text-xs leading-none px-0.5"
-            title="Move down"
-          >
-            ↓
-          </button>
-        )}
         {onDelete && slot.kind !== "intercity_transfer" && slot.kind !== "airport_transfer" && (
           <button
             type="button"
@@ -603,6 +587,28 @@ function TimelineSlot({
                 {cat}
               </span>
             )}
+            {slot.kind === "activity" && onMoveUp && (
+              <button
+                type="button"
+                draggable={false}
+                onClick={(e) => { e.stopPropagation(); onMoveUp(); }}
+                className="opacity-0 group-hover:opacity-100 text-white/40 hover:text-lantern-mint transition-all text-sm leading-none"
+                title="Move up"
+              >
+                ↑
+              </button>
+            )}
+            {slot.kind === "activity" && onMoveDown && (
+              <button
+                type="button"
+                draggable={false}
+                onClick={(e) => { e.stopPropagation(); onMoveDown(); }}
+                className="opacity-0 group-hover:opacity-100 text-white/40 hover:text-lantern-mint transition-all text-sm leading-none"
+                title="Move down"
+              >
+                ↓
+              </button>
+            )}
             {slot.kind === "activity" && (
               <button
                 type="button"
@@ -640,6 +646,78 @@ function TimelineSlot({
             {slot.explanation}
           </p>
         )}
+        {slot.kind === "activity" && onEditNotes && (
+          <div className="mt-3 pt-3 border-t border-white/[0.06]">
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-[10px] font-semibold text-white/25 uppercase tracking-wider">Notes</span>
+              {noteEdit === null ? (
+                <button
+                  type="button"
+                  draggable={false}
+                  onClick={(e) => { e.stopPropagation(); setNoteEdit(slot.note ?? ""); }}
+                  className="text-[10px] text-white/35 hover:text-lantern-mint transition-colors"
+                >
+                  {slot.note ? "Edit" : "+ Add"}
+                </button>
+              ) : (
+                <div className="flex gap-2">
+                  <button type="button" draggable={false} onClick={(e) => { e.stopPropagation(); setNoteEdit(null); }} className="text-[10px] text-white/35 hover:text-white/60 transition-colors">Cancel</button>
+                  <button type="button" draggable={false} onClick={(e) => { e.stopPropagation(); onEditNotes(slot, noteEdit); setNoteEdit(null); }} className="text-[10px] text-lantern-mint font-semibold hover:opacity-80 transition-opacity">Save</button>
+                </div>
+              )}
+            </div>
+            {noteEdit === null ? (
+              slot.note
+                ? <p className="text-[11px] text-white/45 leading-relaxed whitespace-pre-wrap">{slot.note}</p>
+                : <p className="text-[10px] text-white/20 italic">No notes</p>
+            ) : (
+              <textarea
+                autoFocus
+                value={noteEdit}
+                onChange={(e) => setNoteEdit(e.target.value)}
+                onClick={(e) => e.stopPropagation()}
+                placeholder="Add your notes…"
+                rows={2}
+                className="select-text w-full bg-white/[0.04] border border-white/[0.12] rounded-lg px-3 py-2 text-[11px] text-white/80 placeholder-white/20 focus:outline-none focus:border-lantern-mint/50 resize-none"
+              />
+            )}
+          </div>
+        )}
+        {slot.kind === "activity" && onEditDuration && (
+          <div className="mt-2 flex items-center gap-3">
+            <span className="text-[10px] font-semibold text-white/25 uppercase tracking-wider">Duration</span>
+            {durationEdit === null ? (
+              <>
+                <span className="text-[11px] text-white/45">{slot.durationMinutes}m</span>
+                <button
+                  type="button"
+                  draggable={false}
+                  onClick={(e) => { e.stopPropagation(); setDurationEdit(slot.durationMinutes); }}
+                  className="text-[10px] text-white/35 hover:text-lantern-mint transition-colors"
+                >
+                  Edit
+                </button>
+              </>
+            ) : (
+              <>
+                <input
+                  autoFocus
+                  type="number"
+                  min={15}
+                  max={480}
+                  step={15}
+                  value={durationEdit}
+                  onChange={(e) => setDurationEdit(Number(e.target.value))}
+                  onClick={(e) => e.stopPropagation()}
+                  className="select-text w-20 bg-white/[0.04] border border-white/[0.12] rounded-lg px-2 py-1 text-[11px] text-white/80 focus:outline-none focus:border-lantern-mint/50 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
+                />
+                <span className="text-[10px] text-white/25">min</span>
+                <button type="button" draggable={false} onClick={(e) => { e.stopPropagation(); setDurationEdit(null); }} className="text-[10px] text-white/35 hover:text-white/60 transition-colors">Cancel</button>
+                <button type="button" draggable={false} onClick={(e) => { e.stopPropagation(); onEditDuration(slot, Math.max(15, Math.min(480, durationEdit))); setDurationEdit(null); }} className="text-[10px] text-lantern-mint font-semibold hover:opacity-80 transition-opacity">Save</button>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -658,22 +736,25 @@ function DayView({
   day, savedMeta, compact, onSlotClick, onDeleteSlot, onEditTime,
   onRename, renamingSlot, onRenameChange, onRenameCommit,
   onDragStart, onDragEnd, draggingSlot, onMoveUp, onMoveDown,
+  onEditNotes, onEditDuration,
 }: {
-  day:             PlannedDay;
-  savedMeta:       Record<string, SavedMeta>;
-  compact:         boolean;
-  onSlotClick:     (slot: PlannedSlot) => void;
-  onDeleteSlot?:   (slot: PlannedSlot) => void;
-  onEditTime?:     (slot: PlannedSlot) => void;
-  onRename?:       (slot: PlannedSlot) => void;
-  renamingSlot?:   { slot: PlannedSlot; value: string } | null;
-  onRenameChange?: (v: string) => void;
-  onRenameCommit?: () => void;
-  onDragStart?:    (slot: PlannedSlot) => void;
-  onDragEnd?:      () => void;
-  draggingSlot?:   PlannedSlot | null;
-  onMoveUp?:       (slot: PlannedSlot) => void;
-  onMoveDown?:     (slot: PlannedSlot) => void;
+  day:               PlannedDay;
+  savedMeta:         Record<string, SavedMeta>;
+  compact:           boolean;
+  onSlotClick:       (slot: PlannedSlot) => void;
+  onDeleteSlot?:     (slot: PlannedSlot) => void;
+  onEditTime?:       (slot: PlannedSlot) => void;
+  onRename?:         (slot: PlannedSlot) => void;
+  renamingSlot?:     { slot: PlannedSlot; value: string } | null;
+  onRenameChange?:   (v: string) => void;
+  onRenameCommit?:   () => void;
+  onDragStart?:      (slot: PlannedSlot) => void;
+  onDragEnd?:        () => void;
+  draggingSlot?:     PlannedSlot | null;
+  onMoveUp?:         (slot: PlannedSlot) => void;
+  onMoveDown?:       (slot: PlannedSlot) => void;
+  onEditNotes?:      (slot: PlannedSlot, note: string) => void;
+  onEditDuration?:   (slot: PlannedSlot, minutes: number) => void;
 }) {
   return (
     <div>
@@ -729,6 +810,8 @@ function DayView({
             isDragging={draggingSlot === slot}
             onMoveUp={slot.kind === "activity" && i > 0 ? () => onMoveUp?.(slot) : undefined}
             onMoveDown={slot.kind === "activity" && i < day.slots.length - 1 ? () => onMoveDown?.(slot) : undefined}
+            onEditNotes={onEditNotes}
+            onEditDuration={onEditDuration}
           />
         ))}
       </div>
@@ -1046,7 +1129,7 @@ export default function ItineraryPlanner() {
   const [genError,          setGenError]           = useState<string | null>(null);
   const [selectedDay,       setSelectedDay]        = useState(0);
   const [saveNotice,        setSaveNotice]         = useState(false);
-  const [compactView,       setCompactView]        = useState(true);
+  const [compactView,       setCompactView]        = useState(false);
   const [detailSlot,        setDetailSlot]         = useState<PlannedSlot | null>(null);
   const [noteEdit,          setNoteEdit]           = useState<string | null>(null);
   const [durationEdit,      setDurationEdit]       = useState<number | null>(null);
@@ -2360,6 +2443,26 @@ export default function ItineraryPlanner() {
                       slots[idx]     = { ...b, startMinutes: a.startMinutes, endMinutes: a.startMinutes + b.durationMinutes };
                       slots[idx + 1] = { ...a, startMinutes: b.startMinutes, endMinutes: b.startMinutes + a.durationMinutes };
                       updateTrip({ itinerary: { ...itin, days: itin.days.map((d) => d.dayIndex === day.dayIndex ? { ...d, slots } : d) } });
+                    }}
+                    onEditNotes={(slot, note) => {
+                      const itin = trip.itinerary;
+                      if (!itin) return;
+                      updateTrip({ itinerary: { ...itin, days: itin.days.map((d) => d.dayIndex === selectedDay ? { ...d, slots: d.slots.map((s) => s === slot ? { ...s, note } : s) } : d) } });
+                    }}
+                    onEditDuration={(slot, minutes) => {
+                      const itin = trip.itinerary;
+                      if (!itin) return;
+                      updateTrip({
+                        itinerary: {
+                          ...itin,
+                          days: itin.days.map((d) => d.dayIndex === selectedDay ? {
+                            ...d,
+                            slots: d.slots
+                              .map((s) => s === slot ? { ...s, durationMinutes: minutes, endMinutes: s.startMinutes + minutes } : s)
+                              .sort((a, b) => a.startMinutes - b.startMinutes),
+                          } : d),
+                        },
+                      });
                     }}
                     onRename={(slot) => setRenamingSlot({ dayIndex: selectedDay, slot, value: slot.title })}
                     renamingSlot={renamingSlot}
