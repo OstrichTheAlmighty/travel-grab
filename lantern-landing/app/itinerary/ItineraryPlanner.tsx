@@ -1168,7 +1168,6 @@ export default function ItineraryPlanner() {
   const [genStatus,         setGenStatus]         = useState<"idle" | "generating" | "error">("idle");
   const [genError,          setGenError]           = useState<string | null>(null);
   const [selectedDay,       setSelectedDay]        = useState(0);
-  const [saveNotice,        setSaveNotice]         = useState(false);
   const [compactView,       setCompactView]        = useState(false);
   const [detailSlot,        setDetailSlot]         = useState<PlannedSlot | null>(null);
   const [noteEdit,          setNoteEdit]           = useState<string | null>(null);
@@ -1220,6 +1219,12 @@ export default function ItineraryPlanner() {
   const [editPace,      setEditPace]      = useState<UIPace>("balanced");
   const [editTransit,   setEditTransit]   = useState<UITransit>("mixed");
 
+  const [tripList,      setTripList]      = useState<StoredTrip[]>([]);
+  const [activeTripId,  setActiveTripId]  = useState<string | null>(null);
+  const [saveAsModal,   setSaveAsModal]   = useState(false);
+  const [saveAsName,    setSaveAsName]    = useState("");
+  const [loadDropdown,  setLoadDropdown]  = useState(false);
+
   // Onboarding state (new users see a guided wizard; existing users skip to "done")
   type ObStep = "destination" | "dates" | "style" | "recommendations" | "cities" | "done";
   const [obStep,           setObStep]           = useState<ObStep>("done");
@@ -1255,6 +1260,8 @@ export default function ItineraryPlanner() {
         const stored = allTrips.find((t) => t.id === currentId);
         if (stored) {
           setTrip(stored.trip);
+          setTripList(allTrips);
+          setActiveTripId(currentId);
           if (stored.trip.cities[0]?.city) {
             setObDest(stored.trip.cities[0].city);
             obDestRef.current = stored.trip.cities[0].city;
@@ -1296,6 +1303,8 @@ export default function ItineraryPlanner() {
         };
         saveAllTrips([migrated]);
         setCurrentTripId(newId);
+        setTripList([migrated]);
+        setActiveTripId(newId);
 
         if (v2.selectedFlight) setSelectedFlight(v2.selectedFlight);
         else { const fs = localStorage.getItem(FLIGHT_KEY); if (fs) setSelectedFlight(JSON.parse(fs) as SelectedFlight); }
@@ -1332,6 +1341,8 @@ export default function ItineraryPlanner() {
           };
           saveAllTrips([migrated]);
           setCurrentTripId(newId);
+          setTripList([migrated]);
+          setActiveTripId(newId);
           setObStep("done");
           setHydrated(true);
           return;
@@ -1351,13 +1362,22 @@ export default function ItineraryPlanner() {
     const timer = setTimeout(() => {
       try {
         // Save into multi-trip store
-        const allTrips  = getAllTrips();
-        const currentId = getCurrentTripId();
+        const storedTrips = getAllTrips();
+        const currentId   = getCurrentTripId();
         if (currentId) {
-          const updated = allTrips.map((t) =>
-            t.id === currentId ? { ...t, trip, updatedAt: new Date().toISOString() } : t
-          );
+          const exists  = storedTrips.some((t) => t.id === currentId);
+          const now     = new Date().toISOString();
+          const updated = exists
+            ? storedTrips.map((t) => t.id === currentId ? { ...t, trip, updatedAt: now } : t)
+            : [...storedTrips, {
+                id:        currentId,
+                name:      trip.cities[0]?.city?.split(",")[0] ?? "My Trip",
+                trip,
+                createdAt: now,
+                updatedAt: now,
+              }];
           saveAllTrips(updated);
+          setTripList(updated);
         }
 
         // Sync to canonical trip store so Flights/Hotels/Activities can read it
@@ -1472,14 +1492,6 @@ export default function ItineraryPlanner() {
     } catch { /* ignore */ }
   }
 
-  function saveTrip() {
-    try {
-      localStorage.setItem(TRIP_KEY, JSON.stringify(trip));
-      setSaveNotice(true);
-      setTimeout(() => setSaveNotice(false), 2000);
-    } catch { /* ignore */ }
-  }
-
   function clearTrip() {
     const fresh = { ...DEFAULT_TRIP, startDate: tomorrowIso() };
     setTrip(fresh);
@@ -1506,6 +1518,9 @@ export default function ItineraryPlanner() {
     setObError(null);
     obDestRef.current = "";
     clearTripStore();
+    const freshId = generateTripId();
+    setCurrentTripId(freshId);
+    setActiveTripId(freshId);
     setObStep("destination");
   }
 
@@ -2297,18 +2312,53 @@ export default function ItineraryPlanner() {
                 {!primaryCity ? "Enter a destination in Preferences." : "Add a start date in Preferences."}
               </p>
             )}
-            <div className="flex gap-2 ml-auto">
+            <div className="flex gap-2 ml-auto items-center">
               <button
                 type="button"
-                onClick={saveTrip}
-                className={`h-9 rounded-full border px-4 text-xs font-medium transition-colors ${
-                  saveNotice
-                    ? "border-lantern-mint/40 text-lantern-mint"
-                    : "border-white/[0.1] text-white/40 hover:text-white/70 hover:border-white/20"
-                }`}
+                onClick={() => { setSaveAsName(""); setSaveAsModal(true); }}
+                className="h-9 rounded-full border border-white/[0.1] px-4 text-xs font-medium text-white/40 hover:text-white/70 hover:border-white/20 transition-colors"
               >
-                {saveNotice ? "Saved ✓" : "Save trip"}
+                Save as…
               </button>
+              {/* Load trip dropdown */}
+              {loadDropdown && (
+                <div className="fixed inset-0 z-10" onClick={() => setLoadDropdown(false)} />
+              )}
+              <div className="relative z-20">
+                <button
+                  type="button"
+                  onClick={() => setLoadDropdown((v) => !v)}
+                  className="h-9 rounded-full border border-white/[0.1] px-4 text-xs font-medium text-white/40 hover:text-white/70 hover:border-white/20 transition-colors"
+                >
+                  Load trip ▾
+                </button>
+                {loadDropdown && (
+                  <div className="absolute right-0 top-full mt-1 bg-[#0D1019] border border-white/[0.1] rounded-xl shadow-2xl min-w-[200px] overflow-hidden">
+                    {tripList.length === 0 ? (
+                      <p className="px-4 py-3 text-xs text-white/30">No saved trips</p>
+                    ) : (
+                      tripList.map((t) => (
+                        <button
+                          key={t.id}
+                          type="button"
+                          onClick={() => {
+                            setTrip(t.trip);
+                            setActiveTripId(t.id);
+                            setCurrentTripId(t.id);
+                            setLoadDropdown(false);
+                          }}
+                          className={`w-full text-left flex items-center justify-between px-4 py-2.5 text-xs transition-colors hover:bg-white/[0.05] ${
+                            t.id === activeTripId ? "text-lantern-mint" : "text-white/60"
+                          }`}
+                        >
+                          <span>{t.name}</span>
+                          {t.id === activeTripId && <span className="text-white/25 text-[10px]">current</span>}
+                        </button>
+                      ))
+                    )}
+                  </div>
+                )}
+              </div>
               <button
                 type="button"
                 onClick={clearTrip}
@@ -3201,6 +3251,77 @@ export default function ItineraryPlanner() {
         );
       })()}
 
+      {/* ── Save As Modal ── */}
+      {saveAsModal && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+             onClick={() => setSaveAsModal(false)}>
+          <div className="bg-[#0D1019] border border-white/[0.1] rounded-2xl max-w-sm w-full shadow-2xl"
+               onClick={(e) => e.stopPropagation()}>
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-white font-semibold">Save trip as</h2>
+                <button type="button" onClick={() => setSaveAsModal(false)}
+                  className="text-white/40 hover:text-white/80 transition-colors w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/[0.06] text-xl leading-none">
+                  ✕
+                </button>
+              </div>
+              <input
+                type="text"
+                autoFocus
+                placeholder="e.g. Japan 2026"
+                value={saveAsName}
+                onChange={(e) => setSaveAsName(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && saveAsName.trim()) {
+                    const now     = new Date().toISOString();
+                    const updated = tripList.map((t) =>
+                      t.id === activeTripId
+                        ? { ...t, name: saveAsName.trim(), trip, updatedAt: now }
+                        : t
+                    );
+                    const finalList = activeTripId && updated.some((t) => t.id === activeTripId)
+                      ? updated
+                      : [...tripList, { id: activeTripId ?? generateTripId(), name: saveAsName.trim(), trip, createdAt: now, updatedAt: now }];
+                    saveAllTrips(finalList);
+                    setTripList(finalList);
+                    setSaveAsModal(false);
+                  }
+                }}
+                className="w-full rounded-lg border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-white text-sm placeholder:text-white/20 focus:border-lantern-mint/50 focus:outline-none mb-4"
+              />
+              <div className="flex gap-3">
+                <button
+                  type="button"
+                  disabled={!saveAsName.trim()}
+                  onClick={() => {
+                    if (!saveAsName.trim()) return;
+                    const now     = new Date().toISOString();
+                    const updated = tripList.map((t) =>
+                      t.id === activeTripId
+                        ? { ...t, name: saveAsName.trim(), trip, updatedAt: now }
+                        : t
+                    );
+                    const finalList = activeTripId && updated.some((t) => t.id === activeTripId)
+                      ? updated
+                      : [...tripList, { id: activeTripId ?? generateTripId(), name: saveAsName.trim(), trip, createdAt: now, updatedAt: now }];
+                    saveAllTrips(finalList);
+                    setTripList(finalList);
+                    setSaveAsModal(false);
+                  }}
+                  className="flex-1 bg-lantern-mint text-ink font-semibold rounded-lg px-4 py-2.5 hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed"
+                >
+                  Save
+                </button>
+                <button type="button" onClick={() => setSaveAsModal(false)}
+                  className="flex-1 border border-white/[0.1] text-white/60 rounded-lg px-4 py-2.5 hover:bg-white/[0.05] transition-colors">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* ── Edit Trip Modal ── */}
       {editTripModal && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
@@ -3209,7 +3330,14 @@ export default function ItineraryPlanner() {
                onClick={(e) => e.stopPropagation()}>
             {/* Header */}
             <div className="p-6 border-b border-white/[0.08] flex items-center justify-between sticky top-0 bg-[#0D1019] z-10">
-              <h2 className="text-white font-semibold">Edit trip</h2>
+              <div>
+                <h2 className="text-white font-semibold">Edit trip</h2>
+                {activeTripId && tripList.find((t) => t.id === activeTripId)?.name && (
+                  <p className="text-[11px] text-white/30 mt-0.5">
+                    {tripList.find((t) => t.id === activeTripId)!.name}
+                  </p>
+                )}
+              </div>
               <button type="button"
                 onClick={() => setEditTripModal(false)}
                 className="text-white/40 hover:text-white/80 transition-colors text-xl leading-none w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/[0.06]">
