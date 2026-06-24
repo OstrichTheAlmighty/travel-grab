@@ -162,7 +162,7 @@ export default function Page() {
       <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur-sm">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4 sm:px-8">
           <a href="/" className="flex items-center gap-2.5">
-            <Logo size={32} bgColor="white" className="flex-shrink-0" />
+            <Logo size={32} className="flex-shrink-0" />
             <span className="text-sm font-bold tracking-tight text-gray-900">{BRAND_NAME}</span>
           </a>
 
@@ -406,7 +406,7 @@ export default function Page() {
       <footer className="border-t border-gray-200 bg-white px-6 py-8 sm:px-8">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <Logo size={22} bgColor="white" className="flex-shrink-0 opacity-50" />
+            <Logo size={22} className="flex-shrink-0 opacity-50" />
             <span className="text-sm font-semibold text-gray-700">{BRAND_NAME}</span>
           </div>
           <p className="text-xs text-gray-700">
