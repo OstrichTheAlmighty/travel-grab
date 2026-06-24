@@ -5,12 +5,13 @@ import type { PlannerOutput, PlannedDay, PlannedSlot, SlotKind } from "@/lib/iti
 // ── Claude output types ────────────────────────────────────────────────────────
 
 interface ClaudeScheduleItem {
-  time:            string;
-  activity:        string;
-  duration:        string;
-  type:            string;
-  notes?:          string;
-  recommendation?: string;
+  time:             string;
+  activity:         string;
+  duration:         string;
+  type:             string;
+  notes?:           string;
+  recommendation?:  string;
+  timeExplanation?: string;
 }
 
 interface ClaudeDay {
@@ -74,8 +75,9 @@ function transformDay(day: ClaudeDay, paceMax: number): PlannedDay {
       startMinutes,
       endMinutes:    startMinutes + durationMinutes,
       durationMinutes,
-      title:         item.activity ?? "",
-      explanation:   item.notes ?? item.recommendation ?? "",
+      title:           item.activity ?? "",
+      explanation:     item.notes ?? item.recommendation ?? "",
+      timeExplanation: item.timeExplanation ?? undefined,
     };
   });
 
