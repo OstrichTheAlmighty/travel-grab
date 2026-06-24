@@ -51,12 +51,11 @@ async function _ensureTables(): Promise<boolean> {
     return false;
   }
 
-  try {
-    console.log("[inventoryCache] importing db client...");
-    const { db } = await import("@/lib/db");
-    console.log("[inventoryCache] db client imported successfully");
+  console.log("[inventoryCache] importing db client...");
+  const { db } = await import("@/lib/db");
+  console.log("[inventoryCache] db client imported successfully");
 
-    console.log("[inventoryCache] creating geocode_cache table...");
+  try {
     await db.execute(sql`
       CREATE TABLE IF NOT EXISTS geocode_cache (
         city_input  TEXT PRIMARY KEY,
@@ -70,8 +69,11 @@ async function _ensureTables(): Promise<boolean> {
       )
     `);
     console.log("[inventoryCache] geocode_cache table OK");
+  } catch (err) {
+    console.warn("[inventoryCache] CREATE TABLE warning (geocode_cache):", String(err));
+  }
 
-    console.log("[inventoryCache] creating places_query_cache table...");
+  try {
     await db.execute(sql`
       CREATE TABLE IF NOT EXISTS places_query_cache (
         cache_key   TEXT PRIMARY KEY,
@@ -83,7 +85,11 @@ async function _ensureTables(): Promise<boolean> {
       )
     `);
     console.log("[inventoryCache] places_query_cache table OK");
+  } catch (err) {
+    console.warn("[inventoryCache] CREATE TABLE warning (places_query_cache):", String(err));
+  }
 
+  try {
     await db.execute(sql`
       CREATE INDEX IF NOT EXISTS places_query_cache_city_idx
       ON places_query_cache (city_key)
@@ -92,15 +98,13 @@ async function _ensureTables(): Promise<boolean> {
       CREATE INDEX IF NOT EXISTS places_query_cache_expires_idx
       ON places_query_cache (expires_at)
     `);
-    console.log("[inventoryCache] tables ready ✓");
-    return true;
+    console.log("[inventoryCache] indexes OK");
   } catch (err) {
-    console.error("[inventoryCache] FATAL table setup error:", {
-      message: String(err),
-      stack: err instanceof Error ? err.stack : undefined,
-    });
-    return false;
+    console.warn("[inventoryCache] CREATE TABLE warning (indexes):", String(err));
   }
+
+  console.log("[inventoryCache] _ensureTables() done — proceeding with DATABASE_URL ✓");
+  return true;
 }
 
 function ensureTables(): Promise<boolean> {
