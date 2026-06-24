@@ -10,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: `${BRAND_NAME} — Plan the trip that actually fits you`,
-  description: `${BRAND_NAME} helps you choose better flights, smarter hotels, worthwhile activities, and an itinerary that saves time instead of wasting it.`,
+  title: `${BRAND_NAME} — The travel advisor in your browser`,
+  description: `Flights ranked by more than price. Hotels matched to your neighborhood. Itineraries built around geography. Reasoning behind every recommendation.`,
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
