@@ -103,7 +103,7 @@ export async function generateItinerary(input: ItineraryRequest): Promise<Genera
 
   const response = await client.messages.create({
     model:      "claude-sonnet-4-6",
-    max_tokens: 6000,
+    max_tokens: 8000,
     system: [{ type: "text", text: systemPrompt, cache_control: { type: "ephemeral" } }],
     messages: [{ role: "user", content: userPrompt }],
   });
@@ -630,25 +630,19 @@ CONSTRAINTS:
 3. Full-day [FULL-DAY] events get their own day (count as 1 + dinner)
 4. Transfer days: transit = 0 count; destination activities only after arrival${budgetBlock}${foodBlock}${cuisineBlock}${flightBlock}
 
-TIME EXPLANATIONS — required for every activity and meal slot:
-For each scheduled item, write a timeExplanation (1–2 sentences) saying WHY this specific time was chosen. Be specific — mention actual timing benefits, crowd patterns, light quality, local customs, or sequencing logic. Use these patterns:
+TIME EXPLANATIONS — required only for slots with type "activity":
+For each activity, include a timeExplanation field: one concise sentence (max 20 words) explaining WHY this specific time was chosen.
 
-Crowd & atmosphere:
-- Temples/shrines early (8–10am): "Early morning visit before tour groups arrive (peak crowds 10am–1pm); traditional shrine etiquette favors quiet first light"
-- Markets mid-morning (9–11am): "Vendors are active and stalls fully stocked; produce freshest before midday heat"
-- Night markets dusk (6–7pm): "Lanterns light up at dusk, stalls open from 6pm, mystical evening atmosphere"
+Examples by pattern:
+- Temples/shrines 8–10am: "Early morning before crowds peak at 10am; peaceful atmosphere and best light."
+- Markets 9–11am: "Stalls fully stocked, vendors active before midday heat sets in."
+- Outdoor sites morning/evening: "Avoids midday heat and harsh overhead light; golden hour enhances the experience."
+- Off-peak meals 11:30am or 5:30pm: "Before the lunch/dinner rush for shorter waits and quieter atmosphere."
+- Sequencing: "Follows nearby morning activity to minimize travel and maintain momentum."
+- Night markets/illuminations 6–7pm: "Opens at dusk when lanterns light up and evening atmosphere peaks."
 
-Light & photography:
-- Golden hour (+1h after sunrise, −1h before sunset): "Golden hour light ideal for photography; soft shadows on historic architecture"
-- Avoid midday outdoor (12–3pm summer): "Scheduled post-lunch to avoid midday heat and harsh overhead light"
-
-Sequencing & logistics:
-- Off-peak meals (11:30am lunch, 5:30pm dinner): "Before the lunch rush; minimal wait and quieter atmosphere than peak noon"
-- Heavy → light: "After a full morning of walking, this nearby activity keeps momentum without backtracking"
-- Rest slot: "Afternoon lull (2–4pm) aligns with natural energy dip; brief rest before evening program"
-
-For transfers, hotels, and airport slots, write a brief logistical reason (e.g. "Allows time for immigration and baggage claim before hotel check-in").
+Omit timeExplanation entirely for meals, transfers, hotel check-in/out, and logistics slots.
 
 Return ONLY this JSON — no text, no markdown:
-{"days":[{"dayIndex":1,"date":"YYYY-MM-DD","city":"City, Country","theme":"2–4 word label","schedule":[{"time":"HH:MM","activity":"...","duration":"Xh","type":"activity|meal|transfer","notes":"5 words max","timeExplanation":"Why this specific time (1–2 sentences)"}]}]}`;
+{"days":[{"dayIndex":1,"date":"YYYY-MM-DD","city":"City, Country","theme":"2–4 word label","schedule":[{"time":"HH:MM","activity":"...","duration":"Xh","type":"activity|meal|transfer","notes":"5 words max","timeExplanation":"One sentence for activity slots only"}]}]}`;
 }
