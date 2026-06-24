@@ -59,40 +59,12 @@ let tablesReady: Promise<boolean> | null = null;
 
 async function _ensureTables(): Promise<boolean> {
   console.log("[inventoryCache] _ensureTables() starting...");
-  console.log("[inventoryCache] NEXT_PUBLIC_SUPABASE_URL present:", !!process.env.NEXT_PUBLIC_SUPABASE_URL);
-  console.log("[inventoryCache] SUPABASE_SERVICE_ROLE_KEY present:", !!process.env.SUPABASE_SERVICE_ROLE_KEY);
-
   const client = getClient();
   if (!client) {
-    console.error("[inventoryCache] FATAL: Supabase env vars not set — cache writes will be skipped.");
+    console.error("[inventoryCache] FATAL: Supabase env vars not set");
     return false;
   }
-
-  console.log("[inventoryCache] checking geocode_cache table...");
-  try {
-    const { error } = await client.from("geocode_cache").select("city_input").limit(1);
-    if (error) {
-      console.warn("[inventoryCache] CREATE TABLE warning (geocode_cache):", error.message);
-    } else {
-      console.log("[inventoryCache] geocode_cache table OK");
-    }
-  } catch (err) {
-    console.warn("[inventoryCache] CREATE TABLE warning (geocode_cache):", String(err));
-  }
-
-  console.log("[inventoryCache] checking places_query_cache table...");
-  try {
-    const { error } = await client.from("places_query_cache").select("cache_key").limit(1);
-    if (error) {
-      console.warn("[inventoryCache] CREATE TABLE warning (places_query_cache):", error.message);
-    } else {
-      console.log("[inventoryCache] places_query_cache table OK");
-    }
-  } catch (err) {
-    console.warn("[inventoryCache] CREATE TABLE warning (places_query_cache):", String(err));
-  }
-
-  console.log("[inventoryCache] _ensureTables() done — proceeding with Supabase ✓");
+  console.log("[inventoryCache] Supabase client ready ✓");
   return true;
 }
 
