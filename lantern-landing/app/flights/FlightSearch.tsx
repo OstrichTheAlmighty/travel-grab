@@ -3,6 +3,8 @@
 import { useRef, useState, useEffect, useCallback, useMemo } from "react";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
+import { fetchWithAuth } from "@/lib/fetch-with-auth";
+import UsageBanner from "@/app/components/UsageBanner";
 import { readTripStore, updateTripStore } from "@/lib/trip-store";
 
 // ── Airport data ──────────────────────────────────────────────────────────────
@@ -2204,7 +2206,7 @@ export default function FlightSearch() {
     const destCodes = getAirportCodes(destination!);
 
     try {
-      const res = await fetch("/api/flights/search", {
+      const res = await fetchWithAuth("/api/flights/search", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -2230,6 +2232,12 @@ export default function FlightSearch() {
       if (data.status === "rate_limited") {
         setErrorTitle("Too many searches");
         setErrorBody(data.message ?? "Please wait a few minutes before searching again.");
+        setSearchState("error");
+        return;
+      }
+      if (data.status === "quota_exceeded" || (data as { limitReached?: boolean }).limitReached) {
+        setErrorTitle("Daily limit reached");
+        setErrorBody(data.message ?? "You've used all your free flight searches today. Resets at midnight UTC.");
         setSearchState("error");
         return;
       }
@@ -2323,6 +2331,8 @@ export default function FlightSearch() {
             </Link>
           </div>
         )}
+
+        <UsageBanner feature="flights" />
 
         {/* Search panel */}
         <div className="max-w-3xl mx-auto rounded-2xl border border-gray-200 bg-gray-50 p-5 sm:p-6 mb-4 shadow-card">

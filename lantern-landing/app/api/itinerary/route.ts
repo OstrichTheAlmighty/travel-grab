@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getUserFromRequest } from "@/lib/auth-server";
+import { checkUsage, incrementUsage } from "@/lib/usage";
 import { generateItinerary } from "./generateWithClaude";
 import type { PlannerOutput, PlannedDay, PlannedSlot, SlotKind } from "@/lib/itinerary/types";
 
@@ -111,6 +113,19 @@ function transformDay(day: ClaudeDay, paceMax: number): PlannedDay {
 
 export async function POST(req: NextRequest) {
   try {
+    // Per-user daily quota
+    const authUser = await getUserFromRequest(req);
+    if (authUser) {
+      const { allowed, count, limit } = await checkUsage(authUser.id, "itinerary");
+      if (!allowed) {
+        return NextResponse.json(
+          { error: `Daily limit reached — ${count}/${limit} itineraries generated today. Resets at midnight UTC.`, limitReached: true },
+          { status: 429 }
+        );
+      }
+      incrementUsage(authUser.id, "itinerary");
+    }
+
     const input = await req.json();
     const result = await generateItinerary(input);
 

@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import type { ReactNode } from "react";
+import { fetchWithAuth } from "@/lib/fetch-with-auth";
+import UsageBanner from "@/app/components/UsageBanner";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { PlannerOutput, PlannedDay, PlannedSlot, DayWarning, DroppedActivity } from "@/lib/itinerary/types";
@@ -1788,15 +1790,15 @@ export default function ItineraryPlanner() {
         } : {}),
       };
 
-      const res = await fetch("/api/itinerary", {
+      const res = await fetchWithAuth("/api/itinerary", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
 
       if (!res.ok) {
-        const err = await res.json().catch(() => ({})) as Record<string, string>;
-        throw new Error(err.error ?? `HTTP ${res.status}`);
+        const err = await res.json().catch(() => ({})) as Record<string, string | boolean>;
+        throw new Error(String(err.error ?? `HTTP ${res.status}`));
       }
 
       const raw  = await res.json() as PlannerOutput & { _debugCityAssignment?: unknown };
@@ -2255,6 +2257,8 @@ export default function ItineraryPlanner() {
       {/* ── Main planner (shown after onboarding) ── */}
       {obStep === "done" && (
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-6">
+
+        <UsageBanner feature="itinerary" />
 
         {/* ── Tab bar ── */}
         <div className="flex gap-0 border-b border-gray-200 mb-5 overflow-x-auto">

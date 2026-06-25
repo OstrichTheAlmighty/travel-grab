@@ -3,6 +3,8 @@
 import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import { readTripStore, updateTripStore } from "@/lib/trip-store";
 import Link from "next/link";
+import { fetchWithAuth } from "@/lib/fetch-with-auth";
+import UsageBanner from "@/app/components/UsageBanner";
 import type { Activity, Badge, Category } from "./data/types";
 import { DESTINATION_DATA } from "./data/tokyo";
 import { supabase } from "@/lib/supabase";
@@ -2038,14 +2040,16 @@ export default function ActivitySearch() {
       }
 
       // 5. Google Places API
-      const res  = await fetch(`/api/activities/search?destination=${encodeURIComponent(dest.trim())}`);
+      const res  = await fetchWithAuth(`/api/activities/search?destination=${encodeURIComponent(dest.trim())}`);
       const data = await res.json() as {
         activities?: Activity[]; city?: string; country?: string; source?: string; error?: string;
+        limitReached?: boolean;
         inventoryStatus?: "building" | "ready"; inventorySize?: number;
         inventoryProgress?: { completed: number; total: number };
         _debug?: { cacheSource: string; apiCallsMade: number; entriesLoaded: number };
       };
 
+      if (res.status === 429 && data.limitReached) throw new Error(data.error ?? "Daily limit reached. Resets at midnight UTC.");
       if (!res.ok || data.error) throw new Error(data.error ?? `HTTP ${res.status}`);
       if (!data.activities?.length) throw new Error("No activities found for this destination.");
 
@@ -2372,6 +2376,8 @@ export default function ActivitySearch() {
             Hand-picked experiences across food, culture, nightlife, adventure, and more.
           </p>
         </div>
+
+        <UsageBanner feature="activities" />
 
         {/* ── Trip city chips (shown when itinerary has 2+ stops) ── */}
         {tripCities.length > 1 && (

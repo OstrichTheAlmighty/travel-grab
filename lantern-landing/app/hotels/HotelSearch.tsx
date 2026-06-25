@@ -4,6 +4,8 @@ import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
+import { fetchWithAuth } from "@/lib/fetch-with-auth";
+import UsageBanner from "@/app/components/UsageBanner";
 import { readTripStore, updateTripStore } from "@/lib/trip-store";
 import type { Review, ReviewsResult, ReviewSummary } from "@/lib/reviews/types";
 import { NeighborhoodCompare } from "./NeighborhoodCompare";
@@ -5018,16 +5020,22 @@ export default function HotelSearch() {
       };
       console.log("[hotel-search] request_sent:", requestBody);
 
-      const res = await fetch("/api/hotels/search", {
+      const res = await fetchWithAuth("/api/hotels/search", {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(requestBody),
       });
 
       if (res.status === 429) {
+        const errData = await res.json().catch(() => ({})) as { limitReached?: boolean; message?: string };
         track("api_rate_limited", { route: "hotel-search" });
-        setErrorTitle("Too many searches");
-        setErrorBody("You've made too many search requests. Please wait a few minutes and try again.");
+        if (errData.limitReached) {
+          setErrorTitle("Daily limit reached");
+          setErrorBody(errData.message ?? "You've used all your free hotel searches today. Resets at midnight UTC.");
+        } else {
+          setErrorTitle("Too many searches");
+          setErrorBody("You've made too many search requests. Please wait a few minutes and try again.");
+        }
         setSearchState("error"); return;
       }
 
@@ -5168,6 +5176,8 @@ export default function HotelSearch() {
             </Link>
           </div>
         )}
+
+        <UsageBanner feature="hotels" />
 
         {/* ── Search panel ─────────────────────────────────────────────────── */}
         <div className="max-w-3xl mx-auto rounded-2xl border border-gray-200 bg-gray-50 p-5 sm:p-6 mb-4 shadow-card">

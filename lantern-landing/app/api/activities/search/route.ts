@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getUserFromRequest } from "@/lib/auth-server";
+import { checkUsage, incrementUsage } from "@/lib/usage";
 import type { Activity } from "../../../activities/data/types";
 import { DESTINATION_DATA } from "../../../activities/data/tokyo";
 import {
@@ -98,6 +100,19 @@ export async function GET(req: NextRequest) {
   const destination = (req.nextUrl.searchParams.get("destination") ?? "").trim();
   if (!destination) {
     return NextResponse.json({ error: "destination is required" }, { status: 400 });
+  }
+
+  // Per-user daily quota
+  const authUser = await getUserFromRequest(req);
+  if (authUser) {
+    const { allowed, count, limit } = await checkUsage(authUser.id, "activities");
+    if (!allowed) {
+      return NextResponse.json(
+        { error: `Daily limit reached — ${count}/${limit} activity searches used today. Resets at midnight UTC.`, limitReached: true },
+        { status: 429 }
+      );
+    }
+    incrementUsage(authUser.id, "activities");
   }
 
   const apiKey = (process.env.GOOGLE_PLACES_API_KEY ?? "").trim();

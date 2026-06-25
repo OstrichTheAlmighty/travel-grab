@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { getUserFromRequest } from "@/lib/auth-server";
+import { checkUsage, incrementUsage } from "@/lib/usage";
 import { searchGoogleHotels } from "../providers/googleHotels";
 import { enrichWithGooglePlaces } from "../providers/googlePlaces";
 import type { PlacesEnrichment } from "../providers/googlePlaces";
@@ -2397,6 +2399,19 @@ export async function POST(req: Request) {
   if (!limitResult.allowed) {
     console.warn(`[hotel-search] rate limited: ${ip}`);
     return rateLimitedResponse(limitResult.resetAt);
+  }
+
+  // Per-user daily quota
+  const authUser = await getUserFromRequest(req);
+  if (authUser) {
+    const { allowed, count, limit } = await checkUsage(authUser.id, "hotels");
+    if (!allowed) {
+      return NextResponse.json(
+        { status: "quota_exceeded", limitReached: true, message: `Daily limit reached — ${count}/${limit} hotel searches used today. Resets at midnight UTC.` },
+        { status: 429 }
+      );
+    }
+    incrementUsage(authUser.id, "hotels");
   }
 
   let body: Record<string, unknown>;
