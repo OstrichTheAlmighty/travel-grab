@@ -3,6 +3,8 @@
 import { FormEvent, useState } from "react";
 import { BRAND_NAME } from "@/lib/brand";
 import { Logo } from "@/app/components/Logo";
+import { useAuth } from "@/app/components/AuthProvider";
+import { supabase } from "@/lib/supabase";
 
 const problems = [
   {
@@ -129,9 +131,15 @@ function FlightPreviewCard() {
 }
 
 export default function Page() {
+  const { user, loading: authLoading } = useAuth();
   const [email,     setEmail]     = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [error,     setError]     = useState("");
+
+  async function handleLogout() {
+    if (!supabase) return;
+    await supabase.auth.signOut();
+  }
 
   async function handleWaitlist(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -170,12 +178,31 @@ export default function Page() {
             <a href="#how-it-works" className="text-sm text-gray-700 transition hover:text-gray-900">How it works</a>
           </nav>
 
-          <a
-            href="#waitlist"
-            className="rounded-lg bg-lantern-mint px-4 py-2 text-sm font-bold text-[#0A0A0A] transition hover:bg-lantern-mint/85 active:scale-[0.97]"
-          >
-            Join waitlist
-          </a>
+          {!authLoading && user ? (
+            <div className="flex items-center gap-3">
+              <span className="hidden text-sm text-gray-600 sm:block truncate max-w-[160px]">
+                {user.email}
+              </span>
+              <button
+                onClick={handleLogout}
+                className="rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 transition hover:border-gray-300 hover:text-gray-900"
+              >
+                Log out
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-3">
+              <a href="/auth/login" className="hidden text-sm text-gray-700 transition hover:text-gray-900 sm:block">
+                Log in
+              </a>
+              <a
+                href="/auth/signup"
+                className="rounded-lg bg-lantern-mint px-4 py-2 text-sm font-bold text-[#0A0A0A] transition hover:bg-lantern-mint/85 active:scale-[0.97]"
+              >
+                Sign up
+              </a>
+            </div>
+          )}
         </div>
       </header>
 
@@ -202,16 +229,16 @@ export default function Page() {
 
               <div className="mt-10 flex flex-wrap items-center gap-5">
                 <a
-                  href="#waitlist"
+                  href="/itinerary"
                   className="inline-flex h-12 items-center gap-2 rounded-lg bg-lantern-mint px-6 text-sm font-bold text-[#0A0A0A] shadow-[0_2px_12px_rgba(0,0,0,0.10)] transition hover:bg-lantern-mint/85 active:scale-[0.98]"
                 >
-                  Join the waitlist
+                  Start planning
                   <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
                   </svg>
                 </a>
-                <a href="#how-it-works" className="text-sm text-gray-700 transition hover:text-gray-700">
-                  See how it works →
+                <a href="/auth/signup" className="text-sm text-gray-700 transition hover:text-gray-900">
+                  Create free account →
                 </a>
               </div>
             </div>

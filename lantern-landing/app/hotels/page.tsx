@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import HotelSearch from "./HotelSearch";
-import DemoGuard from "@/app/components/DemoGuard";
+import AuthGuard from "@/app/components/AuthGuard";
 
 export const metadata: Metadata = {
   title: "Hotel Search — TravelGrab",
@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 
 export default function HotelsPage() {
   return (
-    <DemoGuard>
+    <AuthGuard>
       <HotelSearch />
-    </DemoGuard>
+    </AuthGuard>
   );
 }

@@ -1,5 +1,5 @@
 import ActivitySearch from "./ActivitySearch";
-import DemoGuard from "@/app/components/DemoGuard";
+import AuthGuard from "@/app/components/AuthGuard";
 
 export const metadata = {
   title: "Activities – TravelGrab",
@@ -8,8 +8,8 @@ export const metadata = {
 
 export default function ActivitiesPage() {
   return (
-    <DemoGuard>
+    <AuthGuard>
       <ActivitySearch />
-    </DemoGuard>
+    </AuthGuard>
   );
 }
