@@ -1509,6 +1509,9 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
   const [analysisOpen, setAnalysisOpen] = useState(rec);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [bookOpen, setBookOpen] = useState(false);
+  const [returnOpen, setReturnOpen] = useState(false);
+
+  const hasReturn = !!(offer.return_depart_time || (tripType === "roundtrip" && offer.source === "google_flights"));
 
   useEffect(() => {
     if (!scoreOpen) return;
@@ -1636,6 +1639,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
 
         {/* ── Route bars ── */}
         <div className="mb-2 space-y-1">
+          {/* Outbound */}
           <div className="flex items-center gap-2 py-1.5 px-2.5 rounded-lg bg-gray-50 border border-gray-100">
             <div className="text-center flex-shrink-0 min-w-[3rem]">
               <div className="text-sm font-bold text-gray-900 tabular-nums leading-tight">{offer.depart_time}</div>
@@ -1659,52 +1663,69 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
               <div className="text-[10px] font-mono font-bold text-gray-700">{offer.destination}</div>
             </div>
           </div>
-          {offer.return_depart_time ? (
+
+          {/* Return toggle + bar */}
+          {hasReturn && (
             <>
-              <div className="flex items-center gap-2 py-1.5 px-2.5 rounded-lg bg-gray-50 border border-gray-100">
-                <div className="text-center flex-shrink-0 min-w-[3rem]">
-                  <div className="text-sm font-bold text-gray-700 tabular-nums leading-tight">{offer.return_depart_time}</div>
-                  <div className="text-[10px] font-mono font-bold text-gray-700">{offer.return_origin}</div>
-                </div>
-                <div className="flex-1 flex flex-col items-center gap-0.5 min-w-0 px-1">
-                  <div className="text-[10px] text-gray-700 font-medium">{offer.return_duration}</div>
-                  <div className="w-full flex items-center gap-1">
-                    <div className="flex-1 h-px bg-gray-100" />
-                    <svg className="w-3 h-3 text-gray-700 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
-                    </svg>
-                    <div className="flex-1 h-px bg-gray-100" />
+              <button
+                onClick={() => setReturnOpen((o) => !o)}
+                className="flex items-center gap-1 text-[10px] font-medium text-gray-700 hover:text-gray-900 transition-colors px-1 py-0.5"
+              >
+                <svg
+                  className={`w-3 h-3 transition-transform ${returnOpen ? "rotate-180" : ""}`}
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+                {returnOpen ? "Hide return" : "Show return"}
+              </button>
+
+              {returnOpen && (
+                offer.return_depart_time ? (
+                  <div className="flex items-center gap-2 py-1.5 px-2.5 rounded-lg bg-gray-50 border border-gray-100">
+                    <div className="text-center flex-shrink-0 min-w-[3rem]">
+                      <div className="text-sm font-bold text-gray-700 tabular-nums leading-tight">{offer.return_depart_time}</div>
+                      <div className="text-[10px] font-mono font-bold text-gray-700">{offer.return_origin}</div>
+                    </div>
+                    <div className="flex-1 flex flex-col items-center gap-0.5 min-w-0 px-1">
+                      <div className="text-[10px] text-gray-700 font-medium">{offer.return_duration}</div>
+                      <div className="w-full flex items-center gap-1">
+                        <div className="flex-1 h-px bg-gray-100" />
+                        <svg className="w-3 h-3 text-gray-700 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
+                        </svg>
+                        <div className="flex-1 h-px bg-gray-100" />
+                      </div>
+                      <div className="text-[10px] text-gray-700 font-medium">
+                        {offer.return_stop_label}{offer.return_connection_airports ? ` · ${offer.return_connection_airports.replace(/,/g, ", ")}` : ""}
+                      </div>
+                    </div>
+                    <div className="text-center flex-shrink-0 min-w-[3rem]">
+                      <div className="text-sm font-bold text-gray-700 tabular-nums leading-tight">{offer.return_arrive_time}</div>
+                      <div className="text-[10px] font-mono font-bold text-gray-700">{offer.return_destination}</div>
+                    </div>
                   </div>
-                  <div className="text-[10px] text-gray-700 font-medium">
-                    {offer.return_stop_label}{offer.return_connection_airports ? ` · ${offer.return_connection_airports.replace(/,/g, ", ")}` : ""}
+                ) : (
+                  <div className="flex items-center gap-2 py-1.5 px-2.5 rounded-lg bg-gray-50 border border-gray-100">
+                    <div className="flex-1 text-center">
+                      {offer.booking_url ? (
+                        <a
+                          href={offer.booking_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[11px] text-gray-700 hover:text-gray-600 transition-colors underline underline-offset-2"
+                        >
+                          View complete round-trip on Google Flights
+                        </a>
+                      ) : (
+                        <span className="text-[11px] text-gray-700">View complete round-trip on Google Flights</span>
+                      )}
+                    </div>
                   </div>
-                </div>
-                <div className="text-center flex-shrink-0 min-w-[3rem]">
-                  <div className="text-sm font-bold text-gray-700 tabular-nums leading-tight">{offer.return_arrive_time}</div>
-                  <div className="text-[10px] font-mono font-bold text-gray-700">{offer.return_destination}</div>
-                </div>
-              </div>
+                )
+              )}
             </>
-          ) : tripType === "roundtrip" && offer.source === "google_flights" ? (
-            <>
-              <div className="flex items-center gap-2 py-1.5 px-2.5 rounded-lg bg-gray-50 border border-gray-100">
-                <div className="flex-1 text-center">
-                  {offer.booking_url ? (
-                    <a
-                      href={offer.booking_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[11px] text-gray-700 hover:text-gray-600 transition-colors underline underline-offset-2 decoration-white/20"
-                    >
-                      View complete round-trip itinerary on Google Flights
-                    </a>
-                  ) : (
-                    <span className="text-[11px] text-gray-700">View complete round-trip itinerary on Google Flights</span>
-                  )}
-                </div>
-              </div>
-            </>
-          ) : null}
+          )}
         </div>
 
         {/* ── AI Score bar ── */}
@@ -1817,7 +1838,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
         )}
 
         {/* ── Action row ── */}
-        <div className="flex items-center gap-2 pt-2 mt-2 border-t border-gray-100">
+        <div className="flex flex-wrap items-center gap-1.5 pt-2 mt-2 border-t border-gray-100">
           <button
             onClick={() => setScoreOpen(true)}
             className="flex items-center gap-1.5 text-[11px] font-medium text-gray-700 hover:text-gray-700 border border-gray-200 hover:border-gray-300 rounded-lg px-3 py-1.5 transition-colors"
@@ -1879,7 +1900,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
           {onAddToItinerary && (
             <button
               onClick={onAddToItinerary}
-              className={`ml-auto text-[11px] font-semibold rounded-lg px-2.5 py-1.5 transition-all border whitespace-nowrap ${
+              className={`text-[11px] font-semibold rounded-lg px-2.5 py-1.5 transition-all border whitespace-nowrap ${
                 isAddedToItinerary
                   ? "bg-teal-50 text-teal-600 border-teal-200"
                   : "text-gray-700 border-gray-200 hover:border-teal-200 hover:text-teal-500"
