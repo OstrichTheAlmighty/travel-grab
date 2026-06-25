@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirm your TravelGrab account</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f9fafb;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color:#f9fafb;padding:48px 20px;">
+    <tr>
+      <td align="center">
+        <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="max-width:520px;">
+
+          <!-- Logo bar -->
+          <tr>
+            <td style="padding-bottom:24px;" align="center">
+              <table cellpadding="0" cellspacing="0" role="presentation">
+                <tr>
+                  <td style="vertical-align:middle;padding-right:9px;">
+                    <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="tg" x1="0.1" y1="0" x2="0.9" y2="1">
+                          <stop offset="0%"   stop-color="#1e3a8a"/>
+                          <stop offset="55%"  stop-color="#2563eb"/>
+                          <stop offset="100%" stop-color="#0d9488"/>
+                        </linearGradient>
+                      </defs>
+                      <path d="M 50 96 C 22 76, 14 62, 14 44 A 36 36 0 0 0 86 44 C 86 62, 78 76, 50 96 Z" fill="url(#tg)"/>
+                      <g transform="translate(54,34) rotate(-45)">
+                        <ellipse cx="0" cy="0" rx="4" ry="14" fill="#0f172a"/>
+                        <path d="M -3 -1 L -28 13 L -28 18 L -3 7 Z" fill="#0f172a"/>
+                        <path d="M  3 -1 L  28 13 L  28 18 L  3 7 Z" fill="#0f172a"/>
+                        <path d="M -2 10 L -11 19 L -11 23 L -2 14 Z" fill="#0f172a"/>
+                        <path d="M  2 10 L  11 19 L  11 23 L  2 14 Z" fill="#0f172a"/>
+                      </g>
+                      <circle cx="30" cy="72" r="3.5" fill="white"/>
+                      <circle cx="50" cy="64" r="3.5" fill="white"/>
+                      <circle cx="70" cy="72" r="3.5" fill="white"/>
+                    </svg>
+                  </td>
+                  <td style="vertical-align:middle;">
+                    <span style="font-size:15px;font-weight:700;color:#0a0a0a;letter-spacing:-0.02em;">TravelGrab</span>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Card -->
+          <tr>
+            <td style="background-color:#ffffff;border-radius:12px;border:1px solid #e5e7eb;overflow:hidden;">
+
+              <!-- Card body -->
+              <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                <tr>
+                  <td style="padding:40px 40px 32px;">
+                    <h1 style="margin:0 0 10px;font-size:22px;font-weight:700;color:#0a0a0a;letter-spacing:-0.02em;line-height:1.2;">
+                      Confirm your email
+                    </h1>
+                    <p style="margin:0 0 28px;font-size:15px;line-height:1.65;color:#4b5563;">
+                      Thanks for signing up for TravelGrab — the travel advisor in your browser.
+                      Click below to confirm your email address and activate your account.
+                    </p>
+
+                    <!-- CTA button -->
+                    <table cellpadding="0" cellspacing="0" role="presentation" style="margin-bottom:28px;">
+                      <tr>
+                        <td style="background-color:#8ff7d0;border-radius:8px;">
+                          <a href="{{ .ConfirmationURL }}"
+                             style="display:inline-block;padding:13px 28px;font-size:14px;font-weight:700;color:#0a0a0a;text-decoration:none;letter-spacing:-0.01em;">
+                            Confirm email address
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <!-- Fallback link -->
+                    <p style="margin:0 0 6px;font-size:12px;color:#9ca3af;">
+                      Or paste this link into your browser:
+                    </p>
+                    <p style="margin:0;font-size:12px;color:#6b7280;word-break:break-all;line-height:1.5;">
+                      {{ .ConfirmationURL }}
+                    </p>
+                  </td>
+                </tr>
+
+                <!-- Divider + footer -->
+                <tr>
+                  <td style="padding:20px 40px 28px;border-top:1px solid #f3f4f6;">
+                    <p style="margin:0;font-size:12px;color:#9ca3af;line-height:1.7;">
+                      If you didn&apos;t create a TravelGrab account, you can safely ignore this email.<br>
+                      &copy; 2026 TravelGrab &mdash; The travel advisor in your browser.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
