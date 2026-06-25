@@ -9,10 +9,11 @@ import type { FlightSearchProvider } from "./types";
 export function getEnabledProviders(env: NodeJS.ProcessEnv): FlightSearchProvider[] {
   const providers: FlightSearchProvider[] = [];
 
-  const duffelKey = (env.DUFFEL_API_KEY ?? "").trim();
-  if (duffelKey) {
-    providers.push(new DuffelProvider(duffelKey));
-  }
+  // Duffel disabled temporarily — ScrapeBadger-only mode for result count debugging.
+  // Re-enable by restoring the block below once ScrapeBadger counts look right.
+  // const duffelKey = (env.DUFFEL_API_KEY ?? "").trim();
+  // if (duffelKey) { providers.push(new DuffelProvider(duffelKey)); }
+  void DuffelProvider; // keep import live
 
   // ScrapeBadger takes priority over SerpAPI; falls back to SerpAPI if not configured.
   const scrapeBadgerKey = (env.SCRAPEBADGER_API_KEY ?? "").trim();

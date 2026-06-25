@@ -51,6 +51,7 @@ export class ScrapeBadgerProvider implements FlightSearchProvider {
       outbound_date: params.departure_date,
       trip_type:     params.trip_type === "roundtrip" ? "1" : "2",
       currency:      "USD",
+      limit:         "50",
     });
 
     if (params.trip_type === "roundtrip" && params.return_date) {
@@ -98,6 +99,9 @@ export class ScrapeBadgerProvider implements FlightSearchProvider {
 
     const searchMetadata = (body.search_metadata as R | undefined) ?? {};
     const googleUrl = (searchMetadata.google_flights_url as string | undefined) ?? "";
+
+    // Log top-level keys to diagnose response structure on first integration
+    console.log(`[scrapebadger] TOP_LEVEL_KEYS: ${Object.keys(body).join(", ")}`);
 
     console.log(`\n[google_flights][debug] ═══════════════════════════════════════════════`);
     console.log(`RAW_SCRAPEBADGER_OFFERS=${allRaw.length}  (best=${best.length} other=${other.length})`);
