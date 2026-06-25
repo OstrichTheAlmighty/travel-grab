@@ -991,24 +991,11 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
     return { offers: [], meta: { status: "not_configured", message: "Flight search is temporarily unavailable." } };
   }
 
-  // ── 1. Call all providers in parallel, expanding origin to metro airports ──
-  // For Google Flights (SerpAPI), search from each airport in the metro group
-  // to multiply result volume. Duffel searches once with the requested origin.
-  const origins = expandOrigins(params.origin).slice(0, 3); // max 3 parallel searches per provider
-  const expandedCalls: Array<{ provider: ReturnType<typeof getEnabledProviders>[number]; searchParams: typeof params }> = [];
-  for (const p of providers) {
-    if (p.source === "google_flights") {
-      for (const origin of origins) {
-        expandedCalls.push({ provider: p, searchParams: { ...params, origin } });
-      }
-    } else {
-      expandedCalls.push({ provider: p, searchParams: params });
-    }
-  }
-
+  // ── 1. One call per provider — no metro expansion ────────────────────────────
   const settled = await Promise.allSettled(
-    expandedCalls.map(({ provider, searchParams }) => provider.search(searchParams))
+    providers.map((p) => p.search(params))
   );
+  const expandedCalls = providers.map((p) => ({ provider: p, searchParams: params }));
 
   const allProviderOffers: ProviderOffer[] = [];
   const allDebugRows: PerOfferDebugRow[] = [];

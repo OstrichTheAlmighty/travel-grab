@@ -9,21 +9,13 @@ import type { FlightSearchProvider } from "./types";
 export function getEnabledProviders(env: NodeJS.ProcessEnv): FlightSearchProvider[] {
   const providers: FlightSearchProvider[] = [];
 
-  // Duffel disabled temporarily — ScrapeBadger-only mode for result count debugging.
-  // Re-enable by restoring the block below once ScrapeBadger counts look right.
-  // const duffelKey = (env.DUFFEL_API_KEY ?? "").trim();
-  // if (duffelKey) { providers.push(new DuffelProvider(duffelKey)); }
-  void DuffelProvider; // keep import live
+  // Duffel disabled — SerpAPI single-call mode.
+  void DuffelProvider;
+  void ScrapeBadgerProvider;
 
-  // ScrapeBadger takes priority over SerpAPI; falls back to SerpAPI if not configured.
-  const scrapeBadgerKey = (env.SCRAPEBADGER_API_KEY ?? "").trim();
-  if (scrapeBadgerKey) {
-    providers.push(new ScrapeBadgerProvider(scrapeBadgerKey));
-  } else {
-    const serpapiKey = (env.SERPAPI_API_KEY ?? "").trim();
-    if (serpapiKey) {
-      providers.push(new GoogleFlightsProvider(serpapiKey));
-    }
+  const serpapiKey = (env.SERPAPI_API_KEY ?? "").trim();
+  if (serpapiKey) {
+    providers.push(new GoogleFlightsProvider(serpapiKey));
   }
 
   // Amadeus — uncomment and set AMADEUS_API_KEY + AMADEUS_API_SECRET to enable.
