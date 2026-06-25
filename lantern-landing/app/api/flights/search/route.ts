@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getUserFromRequest } from "@/lib/auth-server";
+import { getUserFromRequest, isAdminRequest } from "@/lib/auth-server";
 import { checkUsage, incrementUsage } from "@/lib/usage";
 import { getEnabledProviders } from "../providers";
 import type { PerOfferDebugRow, ProviderOffer } from "../providers/types";
@@ -1386,17 +1386,19 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Per-user daily quota
-  const authUser = await getUserFromRequest(req);
-  if (authUser) {
-    const { allowed, count, limit } = await checkUsage(authUser.id, "flights");
-    if (!allowed) {
-      return NextResponse.json(
-        { status: "quota_exceeded", limitReached: true, message: `Daily limit reached — ${count}/${limit} flight searches used today. Resets at midnight UTC.` },
-        { status: 429 }
-      );
+  // Per-user daily quota (skipped for admin)
+  if (!isAdminRequest(req)) {
+    const authUser = await getUserFromRequest(req);
+    if (authUser) {
+      const { allowed, count, limit } = await checkUsage(authUser.id, "flights");
+      if (!allowed) {
+        return NextResponse.json(
+          { status: "quota_exceeded", limitReached: true, message: `Daily limit reached — ${count}/${limit} flight searches used today. Resets at midnight UTC.` },
+          { status: 429 }
+        );
+      }
+      incrementUsage(authUser.id, "flights"); // optimistic, fire-and-forget
     }
-    incrementUsage(authUser.id, "flights"); // optimistic, fire-and-forget
   }
 
   let body: Record<string, unknown>;
