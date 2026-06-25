@@ -100,25 +100,27 @@ export class ScrapeBadgerProvider implements FlightSearchProvider {
     const searchMetadata = (body.search_metadata as R | undefined) ?? {};
     const googleUrl = (searchMetadata.google_flights_url as string | undefined) ?? "";
 
-    // Log top-level keys to diagnose response structure on first integration
     console.log(`[scrapebadger] TOP_LEVEL_KEYS: ${Object.keys(body).join(", ")}`);
+    console.log(`[scrapebadger] RAW best=${best.length} other=${other.length} total=${allRaw.length}`);
 
-    console.log(`\n[google_flights][debug] ═══════════════════════════════════════════════`);
-    console.log(`RAW_SCRAPEBADGER_OFFERS=${allRaw.length}  (best=${best.length} other=${other.length})`);
-    if (allRaw.length > 0) {
-      const fr = allRaw[0];
-      const allKeys = Object.keys(fr);
-      const returnKeys = allKeys.filter((k) => /return|back|inbound/i.test(k));
-      console.log(`FIRST_RAW_RESULT keys: ${allKeys.join(", ")}`);
-      console.log(`FIRST_RAW_RESULT return-related keys: ${returnKeys.join(", ") || "NONE"}`);
+    // Log first item from each array so we can spot structural differences
+    if (best.length > 0) {
+      console.log(`[scrapebadger] BEST[0] keys: ${Object.keys(best[0]).join(", ")}`);
+      console.log(`[scrapebadger] BEST[0] has flights array: ${Array.isArray(best[0].flights)}, len=${(best[0].flights as unknown[])?.length ?? "n/a"}`);
     }
-    console.log(`[google_flights][debug] ═══════════════════════════════════════════════\n`);
+    if (other.length > 0) {
+      console.log(`[scrapebadger] OTHER[0] keys: ${Object.keys(other[0]).join(", ")}`);
+      console.log(`[scrapebadger] OTHER[0] has flights array: ${Array.isArray(other[0].flights)}, len=${(other[0].flights as unknown[])?.length ?? "n/a"}`);
+      console.log(`[scrapebadger] OTHER[0] price: ${String(other[0].price ?? "(missing)")}`);
+    }
 
     const normalizeStats: NormalizeStats = { passedBasicParsing: 0, dropReasons: new Map(), incompleteCount: 0 };
     const offers: ProviderOffer[] = [];
     const perOfferRows: PerOfferDebugRow[] = [];
 
-    for (const raw of allRaw) {
+    for (let idx = 0; idx < allRaw.length; idx++) {
+      const raw = allRaw[idx];
+      const isOther = idx >= best.length;
       const flights = (raw.flights as R[] | undefined) ?? [];
       const first   = flights[0] ?? {};
       const airlineName = (first.airline as string | undefined) ?? "";
@@ -137,7 +139,13 @@ export class ScrapeBadgerProvider implements FlightSearchProvider {
         source:      "google_flights",
       });
 
+      const prevPassed = normalizeStats.passedBasicParsing;
+      const prevDrops  = normalizeStats.dropReasons.size;
       const offer = this.normalizeOffer(raw, params.origin, params.destination, params.trip_type, googleUrl, normalizeStats);
+      if (!offer && isOther && (normalizeStats.passedBasicParsing === prevPassed || normalizeStats.dropReasons.size > prevDrops)) {
+        const reason = [...normalizeStats.dropReasons.entries()].at(-1);
+        if (reason) console.log(`[scrapebadger] other[${idx - best.length}] DROPPED reason=${reason[0]} keys=${Object.keys(raw).join(",")}`);
+      }
       if (offer) offers.push(offer);
     }
 
