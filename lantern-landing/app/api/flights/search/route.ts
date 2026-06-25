@@ -1130,9 +1130,9 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
     console.log(`OFFERS_BEFORE_DEDUP_BY_SOURCE  ${bySourceStr}`);
   }
 
-  // ── 3. Deduplicate across providers ───────────────────────────────────────
-  const normed = deduplicateOffers(normedFlights);
-  console.log(`\nAFTER_DEDUPLICATION=${normed.length}  (dropped ${normedFlights.length - normed.length})`);
+  // ── 3. Deduplication disabled — pass all normalized offers through ──────────
+  const normed = normedFlights.map((o) => ({ ...o, dedupe_group_size: 1 }));
+  console.log(`\nDEDUP_DISABLED total=${normed.length}`);
   {
     const bySource = new Map<string, number>();
     for (const o of normed) bySource.set(o.source ?? "unknown", (bySource.get(o.source ?? "unknown") ?? 0) + 1);
