@@ -99,6 +99,11 @@ export class GoogleFlightsProvider implements FlightSearchProvider {
     const other = (body.other_flights as R[] | undefined) ?? [];
     const allRaw = [...best, ...other];
 
+    // ── Easy-scan summary lines ───────────────────────────────────────────────
+    console.log(`[serpapi] RAW_RESPONSE_COUNT: ${allRaw.length}  (best_flights=${best.length} other_flights=${other.length})`);
+    console.log(`[serpapi] RESPONSE_FIELD_NAMES: ${Object.keys(body).join(", ")}`);
+    // ─────────────────────────────────────────────────────────────────────────
+
     // Google Flights URL for this exact search (from SerpAPI metadata)
     const searchMetadata = (body.search_metadata as R | undefined) ?? {};
     const serpApiGoogleUrl = (searchMetadata.google_flights_url as string | undefined) ?? "";
@@ -175,6 +180,7 @@ export class GoogleFlightsProvider implements FlightSearchProvider {
     console.log(`[google_flights][pipeline] SERPAPI_DROPPED_MISSING_SEGMENTS=${droppedMissingSegments}`);
     console.log(`[google_flights][pipeline] SERPAPI_SURVIVED_VALIDATION=${offers.length}`);
     console.log(`[google_flights][pipeline] SERPAPI_DROPPED_REASON_COUNTS=${reasonSummary}`);
+    console.log(`[serpapi] FINAL_RESULTS: ${offers.length}  (dropped ${allRaw.length - offers.length} of ${allRaw.length})`);
     // ── End pipeline debug ────────────────────────────────────────────────────
 
     // ── Debug: top normalized result ──────────────────────────────────────────
