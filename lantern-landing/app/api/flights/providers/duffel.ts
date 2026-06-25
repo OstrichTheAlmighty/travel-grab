@@ -87,8 +87,10 @@ export class DuffelProvider implements FlightSearchProvider {
     const t0 = Date.now();
     let resp: Response;
 
+    // return_offers=true makes Duffel block until all offers are ready and return
+    // them inline, avoiding a separate polling step and giving 100+ results.
     try {
-      resp = await fetch("https://api.duffel.com/air/offer_requests", {
+      resp = await fetch("https://api.duffel.com/air/offer_requests?return_offers=true", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${this.apiKey}`,
@@ -115,8 +117,44 @@ export class DuffelProvider implements FlightSearchProvider {
       return emptyResult(requestPayloadJson, latencyMs, resp.status);
     }
 
-    const body = await resp.json() as { data?: { offers?: R[] } };
-    const rawOffers = body?.data?.offers ?? [];
+    const body = await resp.json() as {
+      data?: { id?: string; offers?: R[] };
+      meta?: { after?: string | null };
+    };
+    const offerRequestId = body?.data?.id ?? "";
+    let rawOffers: R[] = body?.data?.offers ?? [];
+    let afterCursor: string | null = body?.meta?.after ?? null;
+
+    // Paginate through remaining offer pages (Duffel uses cursor-based pagination).
+    // Cap at 3 extra pages (~600 additional offers) to stay within the 55s timeout.
+    let pagesFetched = 0;
+    while (afterCursor && offerRequestId && pagesFetched < 3) {
+      pagesFetched++;
+      try {
+        const pageUrl =
+          `https://api.duffel.com/air/offers` +
+          `?offer_request_id=${encodeURIComponent(offerRequestId)}` +
+          `&limit=200&sort=total_amount` +
+          `&after=${encodeURIComponent(afterCursor)}`;
+        const pageResp = await fetch(pageUrl, {
+          headers: {
+            Authorization: `Bearer ${this.apiKey}`,
+            "Duffel-Version": "v2",
+            Accept: "application/json",
+          },
+        });
+        if (!pageResp.ok) break;
+        const pageBody = await pageResp.json() as { data?: R[]; meta?: { after?: string | null } };
+        const pageOffers = pageBody?.data ?? [];
+        if (!pageOffers.length) break;
+        rawOffers = rawOffers.concat(pageOffers);
+        afterCursor = pageBody?.meta?.after ?? null;
+        console.log(`[duffel] page ${pagesFetched}: +${pageOffers.length} offers (total ${rawOffers.length})`);
+      } catch (pageErr) {
+        console.error(`[duffel] pagination page ${pagesFetched} error:`, String(pageErr).slice(0, 120));
+        break;
+      }
+    }
 
     const offers: ProviderOffer[] = [];
     const perOfferRows: PerOfferDebugRow[] = [];
