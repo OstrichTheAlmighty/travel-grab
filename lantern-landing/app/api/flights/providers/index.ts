@@ -1,6 +1,7 @@
 import { AmadeusProvider } from "./amadeus";
 import { DuffelProvider } from "./duffel";
 import { GoogleFlightsProvider } from "./googleFlights";
+import { ScrapeBadgerProvider } from "./scrapeBadger";
 import type { FlightSearchProvider } from "./types";
 
 // Returns every provider that has valid credentials in the environment.
@@ -13,9 +14,15 @@ export function getEnabledProviders(env: NodeJS.ProcessEnv): FlightSearchProvide
     providers.push(new DuffelProvider(duffelKey));
   }
 
-  const serpapiKey = (env.SERPAPI_API_KEY ?? "").trim();
-  if (serpapiKey) {
-    providers.push(new GoogleFlightsProvider(serpapiKey));
+  // ScrapeBadger takes priority over SerpAPI; falls back to SerpAPI if not configured.
+  const scrapeBadgerKey = (env.SCRAPEBADGER_API_KEY ?? "").trim();
+  if (scrapeBadgerKey) {
+    providers.push(new ScrapeBadgerProvider(scrapeBadgerKey));
+  } else {
+    const serpapiKey = (env.SERPAPI_API_KEY ?? "").trim();
+    if (serpapiKey) {
+      providers.push(new GoogleFlightsProvider(serpapiKey));
+    }
   }
 
   // Amadeus — uncomment and set AMADEUS_API_KEY + AMADEUS_API_SECRET to enable.
