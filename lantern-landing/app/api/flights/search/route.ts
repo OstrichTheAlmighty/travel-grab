@@ -991,8 +991,24 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
     return { offers: [], meta: { status: "not_configured", message: "Flight search is temporarily unavailable." } };
   }
 
-  // ── 1. Call all providers in parallel ─────────────────────────────────────
-  const settled = await Promise.allSettled(providers.map((p) => p.search(params)));
+  // ── 1. Call all providers in parallel, expanding origin to metro airports ──
+  // For Google Flights (SerpAPI), search from each airport in the metro group
+  // to multiply result volume. Duffel searches once with the requested origin.
+  const origins = expandOrigins(params.origin).slice(0, 3); // max 3 parallel searches per provider
+  const expandedCalls: Array<{ provider: ReturnType<typeof getEnabledProviders>[number]; searchParams: typeof params }> = [];
+  for (const p of providers) {
+    if (p.source === "google_flights") {
+      for (const origin of origins) {
+        expandedCalls.push({ provider: p, searchParams: { ...params, origin } });
+      }
+    } else {
+      expandedCalls.push({ provider: p, searchParams: params });
+    }
+  }
+
+  const settled = await Promise.allSettled(
+    expandedCalls.map(({ provider, searchParams }) => provider.search(searchParams))
+  );
 
   const allProviderOffers: ProviderOffer[] = [];
   const allDebugRows: PerOfferDebugRow[] = [];
@@ -1016,7 +1032,7 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
   let serpapiStatus = serpapiEnvKey ? "key present — awaiting response" : "missing key";
 
   for (const [i, result] of settled.entries()) {
-    const p = providers[i];
+    const p = expandedCalls[i].provider;
     if (result.status === "fulfilled") {
       const { offers, debug } = result.value;
       allProviderOffers.push(...offers);
@@ -1367,6 +1383,41 @@ function validateRequest(body: Record<string, unknown>): [ValidatedParams | null
     },
     null,
   ];
+}
+
+// ── Metro airport expansion ───────────────────────────────────────────────────
+// Maps any airport in a metro area to its full set. We search each origin in
+// the group and merge results, giving 3-4× more unique flights for hub cities.
+
+const METRO_AIRPORTS: Record<string, string[]> = {
+  // New York
+  JFK: ["JFK", "LGA", "EWR"], LGA: ["JFK", "LGA", "EWR"], EWR: ["JFK", "LGA", "EWR"],
+  // London
+  LHR: ["LHR", "LGW"], LGW: ["LHR", "LGW"], STN: ["LHR", "LGW", "STN"],
+  // Chicago
+  ORD: ["ORD", "MDW"], MDW: ["ORD", "MDW"],
+  // Los Angeles
+  LAX: ["LAX", "BUR", "LGB"], BUR: ["LAX", "BUR"], LGB: ["LAX", "LGB"],
+  // San Francisco Bay
+  SFO: ["SFO", "OAK", "SJC"], OAK: ["SFO", "OAK"], SJC: ["SFO", "SJC"],
+  // Washington DC
+  DCA: ["DCA", "IAD", "BWI"], IAD: ["DCA", "IAD", "BWI"], BWI: ["DCA", "IAD", "BWI"],
+  // Miami
+  MIA: ["MIA", "FLL"], FLL: ["MIA", "FLL"],
+  // Dallas
+  DFW: ["DFW", "DAL"], DAL: ["DFW", "DAL"],
+  // Houston
+  IAH: ["IAH", "HOU"], HOU: ["IAH", "HOU"],
+  // Tokyo
+  NRT: ["NRT", "HND"], HND: ["NRT", "HND"],
+  // Paris
+  CDG: ["CDG", "ORY"], ORY: ["CDG", "ORY"],
+  // Milan
+  MXP: ["MXP", "LIN"], LIN: ["MXP", "LIN"],
+};
+
+function expandOrigins(code: string): string[] {
+  return METRO_AIRPORTS[code] ?? [code];
 }
 
 // ── Route handler ─────────────────────────────────────────────────────────────
