@@ -1,6 +1,7 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { BRAND_NAME } from "@/lib/brand";
 import { Logo } from "@/app/components/Logo";
 import { useAuth } from "@/app/components/AuthProvider";
@@ -130,6 +131,21 @@ function FlightPreviewCard() {
   );
 }
 
+function ComingSoonBanner() {
+  const params = useSearchParams();
+  if (!params.get("coming_soon")) return null;
+  return (
+    <div className="border-b border-amber-200 bg-amber-50 px-6 py-3 text-center">
+      <p className="text-sm text-amber-800">
+        <span className="font-semibold">Features coming soon.</span>{" "}
+        <a href="#waitlist" className="underline underline-offset-2 hover:text-amber-900">
+          Join the waitlist for early access.
+        </a>
+      </p>
+    </div>
+  );
+}
+
 export default function Page() {
   const { user, loading: authLoading } = useAuth();
   const [email,     setEmail]     = useState("");
@@ -165,6 +181,7 @@ export default function Page() {
   return (
     /* Light theme scoped to landing page — globals.css keeps dark defaults for product pages */
     <main className="min-h-screen bg-white text-[#0A0A0A] [color-scheme:light]">
+      <Suspense><ComingSoonBanner /></Suspense>
 
       {/* ── Nav ──────────────────────────────────────────────────────────────── */}
       <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur-sm">
@@ -227,18 +244,12 @@ export default function Page() {
                 Itineraries built around geography. Reasoning behind every pick.
               </p>
 
-              <div className="mt-10 flex flex-wrap items-center gap-5">
+              <div className="mt-10">
                 <a
-                  href="/itinerary"
+                  href="#waitlist"
                   className="inline-flex h-12 items-center gap-2 rounded-lg bg-lantern-mint px-6 text-sm font-bold text-[#0A0A0A] shadow-[0_2px_12px_rgba(0,0,0,0.10)] transition hover:bg-lantern-mint/85 active:scale-[0.98]"
                 >
-                  Start planning
-                  <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
-                  </svg>
-                </a>
-                <a href="/auth/signup" className="text-sm text-gray-700 transition hover:text-gray-900">
-                  Create free account →
+                  Join waitlist
                 </a>
               </div>
             </div>
@@ -261,29 +272,6 @@ export default function Page() {
           </div>
         </div>
 
-        {/* Product strip */}
-        <div className="mx-auto mt-20 max-w-6xl">
-          <div className="grid grid-cols-2 border border-gray-200 sm:grid-cols-4">
-            {[
-              { label: "Flights",    tag: "12-variable ranking" },
-              { label: "Hotels",     tag: "Neighborhood matching" },
-              { label: "Activities", tag: "Fit-first curation" },
-              { label: "Itinerary",  tag: "Geo-optimized routes" },
-            ].map((s, i) => (
-              <div
-                key={s.label}
-                className={[
-                  "bg-white px-5 py-4",
-                  i > 0  ? "border-l border-gray-200"                    : "",
-                  i >= 2 ? "border-t border-gray-200 sm:border-t-0"      : "",
-                ].join(" ")}
-              >
-                <p className="text-[13px] font-semibold text-gray-900">{s.label}</p>
-                <p className="mt-0.5 font-mono text-[10px] text-gray-700">{s.tag}</p>
-              </div>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* ── Why it matters ───────────────────────────────────────────────────── */}
