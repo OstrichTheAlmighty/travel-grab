@@ -1581,10 +1581,10 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
           : "border-gray-200 bg-gray-50"
       }`}
     >
-      <div className="p-4 sm:p-5">
+      <div className="p-3 sm:p-4">
 
-        {/* ── Header: airline + advisor sentence + price ── */}
-        <div className="flex items-start justify-between gap-3 mb-3">
+        {/* ── Header: airline + badge + price ── */}
+        <div className="flex items-start justify-between gap-3 mb-2">
           <div className="flex items-start gap-2.5 min-w-0 flex-1">
             <div className="flex-shrink-0 mt-0.5">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -1606,7 +1606,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
               </div>
             </div>
             <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-1.5 flex-wrap mb-1">
+              <div className="flex items-center gap-1.5 flex-wrap">
                 <span className="text-sm font-bold text-gray-900 leading-tight">{offer.airline}</span>
                 {rec && (
                   <span className="text-[10px] font-black uppercase tracking-widest text-teal-600 border border-teal-400 bg-teal-50 rounded-full px-2 py-0.5 leading-none">
@@ -1624,44 +1624,21 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                   </span>
                 )}
               </div>
-              {!rec && offer.recommendation_why && (
-                <p className="text-[11px] leading-relaxed text-gray-700">
-                  {offer.recommendation_why}
-                </p>
-              )}
             </div>
           </div>
           <div className="text-right flex-shrink-0">
-            <div className={`text-2xl font-black tabular-nums leading-none ${scoreColor(offer.ai_score)}`}>
+            <div className={`text-xl font-black tabular-nums leading-none ${scoreColor(offer.ai_score)}`}>
               ${Math.round(offer.price_total).toLocaleString()}
             </div>
             <div className="text-[11px] text-gray-700 mt-0.5">{offer.cabin}</div>
-            {analysisOpen && (
-              <>
-                <button
-                  onClick={handleBookClick}
-                  className="mt-2 text-[11px] font-bold text-ink bg-lantern-mint hover:bg-lantern-mint/90 rounded-lg px-3 py-1.5 transition-colors whitespace-nowrap"
-                >
-                  {offer.is_bookable === false ? "View booking options" : "Book this flight"}
-                </button>
-                {offer.is_bookable === false && (
-                  <p className="text-[10px] text-gray-700 mt-1 leading-snug">
-                    Opens matching Google Flights results. Price may vary.
-                  </p>
-                )}
-              </>
-            )}
           </div>
         </div>
 
         {/* ── Route bars ── */}
-        <div className="mb-3 space-y-1.5">
-          {offer.return_depart_time && (
-            <div className="text-[9px] text-gray-700 font-bold uppercase tracking-wider px-1">Outbound</div>
-          )}
-          <div className="flex items-center gap-2 py-2 px-3 rounded-lg bg-gray-50 border border-gray-100">
+        <div className="mb-2 space-y-1">
+          <div className="flex items-center gap-2 py-1.5 px-2.5 rounded-lg bg-gray-50 border border-gray-100">
             <div className="text-center flex-shrink-0 min-w-[3rem]">
-              <div className="text-base font-black text-gray-900 tabular-nums leading-tight">{offer.depart_time}</div>
+              <div className="text-sm font-bold text-gray-900 tabular-nums leading-tight">{offer.depart_time}</div>
               <div className="text-[10px] font-mono font-bold text-gray-700">{offer.origin}</div>
             </div>
             <div className="flex-1 flex flex-col items-center gap-0.5 min-w-0 px-1">
@@ -1678,16 +1655,15 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
               </div>
             </div>
             <div className="text-center flex-shrink-0 min-w-[3rem]">
-              <div className="text-base font-black text-gray-900 tabular-nums leading-tight">{offer.arrive_time}</div>
+              <div className="text-sm font-bold text-gray-900 tabular-nums leading-tight">{offer.arrive_time}</div>
               <div className="text-[10px] font-mono font-bold text-gray-700">{offer.destination}</div>
             </div>
           </div>
           {offer.return_depart_time ? (
             <>
-              <div className="text-[9px] text-gray-700 font-bold uppercase tracking-wider px-1">Return</div>
-              <div className="flex items-center gap-2 py-2 px-3 rounded-lg bg-gray-50 border border-gray-100">
+              <div className="flex items-center gap-2 py-1.5 px-2.5 rounded-lg bg-gray-50 border border-gray-100">
                 <div className="text-center flex-shrink-0 min-w-[3rem]">
-                  <div className="text-base font-black text-gray-700 tabular-nums leading-tight">{offer.return_depart_time}</div>
+                  <div className="text-sm font-bold text-gray-700 tabular-nums leading-tight">{offer.return_depart_time}</div>
                   <div className="text-[10px] font-mono font-bold text-gray-700">{offer.return_origin}</div>
                 </div>
                 <div className="flex-1 flex flex-col items-center gap-0.5 min-w-0 px-1">
@@ -1704,15 +1680,14 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
                   </div>
                 </div>
                 <div className="text-center flex-shrink-0 min-w-[3rem]">
-                  <div className="text-base font-black text-gray-700 tabular-nums leading-tight">{offer.return_arrive_time}</div>
+                  <div className="text-sm font-bold text-gray-700 tabular-nums leading-tight">{offer.return_arrive_time}</div>
                   <div className="text-[10px] font-mono font-bold text-gray-700">{offer.return_destination}</div>
                 </div>
               </div>
             </>
           ) : tripType === "roundtrip" && offer.source === "google_flights" ? (
             <>
-              <div className="text-[9px] text-gray-700 font-bold uppercase tracking-wider px-1">Return</div>
-              <div className="flex items-center gap-2 py-2 px-3 rounded-lg bg-gray-50 border border-gray-100">
+              <div className="flex items-center gap-2 py-1.5 px-2.5 rounded-lg bg-gray-50 border border-gray-100">
                 <div className="flex-1 text-center">
                   {offer.booking_url ? (
                     <a
@@ -1733,7 +1708,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
         </div>
 
         {/* ── AI Score bar ── */}
-        <div className="flex items-center gap-2 mb-3">
+        <div className="flex items-center gap-2 mb-2">
           <span className="text-[11px] text-gray-700 flex-shrink-0 w-14">AI Score</span>
           <div className="flex-1 h-1.5 rounded-full bg-gray-50 overflow-hidden">
             <div
@@ -1748,18 +1723,18 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
 
         {/* ── Analysis section: expanded on rec, toggleable on others ── */}
         {analysisOpen && (
-          <div className="space-y-3 mt-1">
+          <div className="space-y-2">
 
             {/* Why this flight */}
             {whyBullets.length > 0 && (
-              <div className={`rounded-lg px-3.5 py-2.5 ${rec ? "bg-teal-600/[0.08] border border-teal-200" : "bg-gray-50 border border-gray-200"}`}>
-                <div className={`text-[10px] font-bold uppercase tracking-wider mb-1.5 ${rec ? "text-teal-600" : "text-gray-700"}`}>
+              <div className={`rounded-lg px-3 py-2 ${rec ? "bg-teal-600/[0.08] border border-teal-200" : "bg-gray-50 border border-gray-200"}`}>
+                <div className={`text-[10px] font-bold uppercase tracking-wider mb-1 ${rec ? "text-teal-600" : "text-gray-700"}`}>
                   Why this flight
                 </div>
-                <ul className="space-y-1">
+                <ul className="space-y-0.5">
                   {whyBullets.map((b, i) => (
-                    <li key={i} className="flex gap-1.5 text-[11px] text-gray-600 leading-relaxed">
-                      <span className={`mt-0.5 flex-shrink-0 ${rec ? "text-teal-600" : "text-gray-700"}`}>›</span>
+                    <li key={i} className="flex gap-1.5 text-[11px] text-gray-600 leading-snug">
+                      <span className={`flex-shrink-0 ${rec ? "text-teal-600" : "text-gray-700"}`}>›</span>
                       {b}
                     </li>
                   ))}
@@ -1770,10 +1745,10 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
             {/* Why not */}
             {whyNot.length > 0 && (
               <div>
-                <div className="text-[10px] font-bold text-amber-600 uppercase tracking-wider mb-1.5">Why not</div>
-                <ul className="space-y-1">
+                <div className="text-[10px] font-bold text-amber-600 uppercase tracking-wider mb-1">Why not</div>
+                <ul className="space-y-0.5">
                   {whyNot.map((w, i) => (
-                    <li key={i} className="flex gap-1.5 text-[11px] text-gray-700 leading-relaxed">
+                    <li key={i} className="flex gap-1.5 text-[11px] text-gray-700 leading-snug">
                       <svg className="w-3 h-3 text-amber-500 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
                         <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
                         <line x1={12} y1={9} x2={12} y2={13} /><line x1={12} y1={17} x2="12.01" y2={17} />
@@ -1788,10 +1763,10 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
             {/* Trip impact blocks */}
             {tripImpact.length > 0 && (
               <div>
-                <div className="text-[10px] font-bold text-gray-700 uppercase tracking-wider mb-2">Trip impact</div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+                <div className="text-[10px] font-bold text-gray-700 uppercase tracking-wider mb-1">Trip impact</div>
+                <div className="grid grid-cols-2 gap-1">
                   {tripImpact.map(({ key, label, value, desc }) => (
-                    <div key={key} className="rounded-lg bg-gray-50 border border-gray-200 px-2.5 py-2">
+                    <div key={key} className="rounded-lg bg-gray-50 border border-gray-200 px-2 py-1.5">
                       <div className="text-[10px] text-gray-700 font-medium mb-0.5">{label}</div>
                       <div className={`text-[11px] font-bold mb-0.5 ${indicatorColor(value)}`}>{value}</div>
                       {desc && <div className="text-[10px] text-gray-700 leading-snug">{desc}</div>}
@@ -1842,7 +1817,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
         )}
 
         {/* ── Action row ── */}
-        <div className="flex items-center gap-2 pt-3 mt-3 border-t border-gray-100">
+        <div className="flex items-center gap-2 pt-2 mt-2 border-t border-gray-100">
           <button
             onClick={() => setScoreOpen(true)}
             className="flex items-center gap-1.5 text-[11px] font-medium text-gray-700 hover:text-gray-700 border border-gray-200 hover:border-gray-300 rounded-lg px-3 py-1.5 transition-colors"
