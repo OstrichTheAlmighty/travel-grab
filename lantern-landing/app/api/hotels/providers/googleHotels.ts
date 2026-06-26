@@ -12,7 +12,7 @@ type R = Record<string, unknown>;
 // Each page costs 1 SerpAPI credit. 3 pages → up to ~60 hotels, enough for scoring.
 // Pagination stops early when SerpAPI returns no next_page_token (provider exhausted).
 // MAX_PAGES is a hard safety ceiling to prevent runaway loops or unexpectedly deep APIs.
-const MAX_PAGES = 3;
+const MAX_PAGES = 5;
 const PAGE_TIMEOUT_MS = 8_000;
 
 function parseStarRating(hotelClass: string | undefined): number {
