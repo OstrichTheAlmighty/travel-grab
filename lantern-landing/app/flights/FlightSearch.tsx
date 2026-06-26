@@ -1551,7 +1551,15 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
 
     if (offer.is_bookable === false) {
       track("google_flights_clicked", sharedProps);
-      if (offer.booking_url) {
+      if (departureDate) {
+        const affiliateUrl = buildAviasalesUrl({
+          origin: offer.origin,
+          destination: offer.destination,
+          departureDate,
+          returnDate: returnDate || undefined,
+        });
+        window.open(affiliateUrl, "_blank", "noopener,noreferrer");
+      } else if (offer.booking_url) {
         window.open(offer.booking_url, "_blank", "noopener,noreferrer");
       }
       return;
@@ -1672,7 +1680,7 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
               onClick={(e) => { e.stopPropagation(); handleBookClick(); }}
               className="text-[11px] font-bold text-[#0A0A0A] bg-lantern-mint hover:bg-lantern-mint/85 rounded-lg px-2.5 py-1.5 transition-colors whitespace-nowrap"
             >
-              {offer.is_bookable === false ? "View" : "Book"}
+              Book
             </button>
             <svg
               className={`w-3.5 h-3.5 text-gray-400 flex-shrink-0 transition-transform ${expanded ? "rotate-180" : ""}`}
