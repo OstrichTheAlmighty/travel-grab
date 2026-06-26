@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect, useCallback, useMemo } from "react";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
+import { buildAviasalesUrl } from "@/app/utils/affiliate";
 import { fetchWithAuth } from "@/lib/fetch-with-auth";
 import UsageBanner from "@/app/components/UsageBanner";
 import { readTripStore, updateTripStore } from "@/lib/trip-store";
@@ -1506,7 +1507,7 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
 
 // ── FlightCard ────────────────────────────────────────────────────────────────
 
-function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isAddedToItinerary, onAddToItinerary }: {
+function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isAddedToItinerary, onAddToItinerary, departureDate, returnDate }: {
   offer: FlightOffer;
   cardRef?: React.RefObject<HTMLDivElement | null>;
   priorityWeights: Record<string, number>;
@@ -1514,6 +1515,8 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
   tripType?: string;
   isAddedToItinerary?: boolean;
   onAddToItinerary?: () => void;
+  departureDate?: string;
+  returnDate?: string;
 }) {
   const rec = offer.is_recommended;
   const [scoreOpen, setScoreOpen] = useState(false);
@@ -1560,6 +1563,16 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...sharedProps, depart_time: offer.depart_time, arrive_time: offer.arrive_time, priorities, timestamp: new Date().toISOString() }),
     }).catch(() => undefined);
+    if (departureDate) {
+      const affiliateUrl = buildAviasalesUrl({
+        origin: offer.origin,
+        destination: offer.destination,
+        departureDate,
+        returnDate: returnDate || undefined,
+      });
+      window.open(affiliateUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
     setBookOpen(true);
   };
 
@@ -2100,6 +2113,7 @@ export default function FlightSearch() {
   const [errorBody, setErrorBody] = useState("");
   const [searchedParams, setSearchedParams] = useState<{
     origin: Selection; destination: Selection; tripType: TripType; cabin: CabinClass; travelers: number;
+    departureDate: string; returnDate: string;
   } | null>(null);
   const [itineraryFlightKey, setItineraryFlightKey] = useState<string | null>(null);
 
@@ -2172,7 +2186,7 @@ export default function FlightSearch() {
     });
 
     setSearchState("loading");
-    setSearchedParams({ origin: origin!, destination: destination!, tripType, cabin, travelers });
+    setSearchedParams({ origin: origin!, destination: destination!, tripType, cabin, travelers, departureDate, returnDate });
 
     const originCodes = getAirportCodes(origin!);
     const destCodes = getAirportCodes(destination!);
@@ -2588,6 +2602,8 @@ export default function FlightSearch() {
                   priorityWeights={activeWeights}
                   priorities={priorities}
                   tripType={searchedParams?.tripType}
+                  departureDate={searchedParams?.departureDate}
+                  returnDate={searchedParams?.returnDate}
                   isAddedToItinerary={`${offer.airline_code}|${offer.flight_number}|${offer.depart_time}` === itineraryFlightKey}
                   onAddToItinerary={() => {
                     const flightKey = `${offer.airline_code}|${offer.flight_number}|${offer.depart_time}`;
