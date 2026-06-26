@@ -1703,7 +1703,7 @@ export default function ItineraryPlanner() {
   const [hydrated, setHydrated] = useState(false);
 
   // Cross-page selected hotel/flight (from Hotels/Flights pages)
-  const [selectedHotel,  setSelectedHotel]  = useState<SelectedHotel | null>(null);
+  const [selectedHotels, setSelectedHotels] = useState<Record<string, SelectedHotel>>({});
   const [selectedFlight,       setSelectedFlight]       = useState<SelectedFlight | null>(null);
   const [selectedReturnFlight, setSelectedReturnFlight] = useState<SelectedFlight | null>(null);
 
@@ -1743,7 +1743,7 @@ export default function ItineraryPlanner() {
   const [dragOverDay, setDragOverDay] = useState<number | null>(null);
 
   // Tab navigation
-  type ActiveTab = "itinerary" | "preferences" | "recommendations" | "saved" | "dropped";
+  type ActiveTab = "itinerary" | "preferences" | "travel" | "recommendations" | "saved" | "dropped";
   const [activeTab, setActiveTab] = useState<ActiveTab>("itinerary");
 
   // AI Recommendations panel
@@ -1832,9 +1832,13 @@ export default function ItineraryPlanner() {
           else { const fs = localStorage.getItem(FLIGHT_KEY); if (fs) setSelectedFlight(JSON.parse(fs) as SelectedFlight); }
           if (shared?.selectedReturnFlight) setSelectedReturnFlight(shared.selectedReturnFlight);
           const firstCity  = stored.trip.cities[0]?.city ?? "";
-          const firstHotel = shared?.selectedHotels?.[firstCity] ?? null;
-          if (firstHotel) setSelectedHotel(firstHotel);
-          else { const hs = localStorage.getItem(HOTEL_KEY); if (hs) setSelectedHotel(JSON.parse(hs) as SelectedHotel); }
+          const hotelsMap = (shared?.selectedHotels ?? {}) as Record<string, SelectedHotel>;
+          if (Object.keys(hotelsMap).length > 0) {
+            setSelectedHotels(hotelsMap);
+          } else {
+            const hs = localStorage.getItem(HOTEL_KEY);
+            if (hs && firstCity) setSelectedHotels({ [firstCity]: JSON.parse(hs) as SelectedHotel });
+          }
           if (shared?.travelStyles?.length) setObStyles(shared.travelStyles);
           if (shared?.firstTime !== null && shared?.firstTime !== undefined) setObFirstTime(shared.firstTime);
           setObStep("done");
@@ -1879,10 +1883,14 @@ export default function ItineraryPlanner() {
         if (v2.selectedFlight) setSelectedFlight(v2.selectedFlight);
         else { const fs = localStorage.getItem(FLIGHT_KEY); if (fs) setSelectedFlight(JSON.parse(fs) as SelectedFlight); }
         if (v2.selectedReturnFlight) setSelectedReturnFlight(v2.selectedReturnFlight);
-        const firstCity  = v2.cityStops[0]?.city ?? "";
-        const firstHotel = v2.selectedHotels?.[firstCity] ?? null;
-        if (firstHotel) setSelectedHotel(firstHotel);
-        else { const hs = localStorage.getItem(HOTEL_KEY); if (hs) setSelectedHotel(JSON.parse(hs) as SelectedHotel); }
+        const firstCity    = v2.cityStops[0]?.city ?? "";
+        const hotelsMap2   = (v2.selectedHotels ?? {}) as Record<string, SelectedHotel>;
+        if (Object.keys(hotelsMap2).length > 0) {
+          setSelectedHotels(hotelsMap2);
+        } else {
+          const hs = localStorage.getItem(HOTEL_KEY);
+          if (hs && firstCity) setSelectedHotels({ [firstCity]: JSON.parse(hs) as SelectedHotel });
+        }
         if (v2.destinationRegion) { setObDest(v2.destinationRegion); obDestRef.current = v2.destinationRegion; setObDestValidated(true); }
         if (v2.travelStyles?.length) setObStyles(v2.travelStyles);
         if (v2.firstTime !== null)   setObFirstTime(v2.firstTime);
@@ -1894,8 +1902,8 @@ export default function ItineraryPlanner() {
       // 3. Fall back to v1 single-trip key
       const hotelStored  = localStorage.getItem(HOTEL_KEY);
       const flightStored = localStorage.getItem(FLIGHT_KEY);
-      if (hotelStored)  setSelectedHotel(JSON.parse(hotelStored) as SelectedHotel);
       if (flightStored) setSelectedFlight(JSON.parse(flightStored) as SelectedFlight);
+      // hotel stored without city key — will be re-keyed below once we know the city
       const v3 = readTripStore();
       if (v3?.selectedReturnFlight) setSelectedReturnFlight(v3.selectedReturnFlight);
 
@@ -1904,6 +1912,7 @@ export default function ItineraryPlanner() {
         const parsed = JSON.parse(tripStored) as TripStorage;
         if (parsed.version === 1 && parsed.cities[0]?.city) {
           setTrip(parsed);
+          if (hotelStored) setSelectedHotels({ [parsed.cities[0].city]: JSON.parse(hotelStored) as SelectedHotel });
           const newId = generateTripId();
           const migrated: StoredTrip = {
             id:        newId,
@@ -1956,11 +1965,6 @@ export default function ItineraryPlanner() {
 
         // Sync to canonical trip store so Flights/Hotels/Activities can read it
         const primaryCity    = trip.cities[0]?.city ?? "";
-        const existing       = readTripStore();
-        const existingHotels = existing?.selectedHotels ?? {};
-        const updatedHotels  = selectedHotel
-          ? { ...existingHotels, [primaryCity]: selectedHotel }
-          : existingHotels;
         updateTripStore({
           cityStops:            trip.cities,
           startDate:            trip.startDate,
@@ -1979,12 +1983,12 @@ export default function ItineraryPlanner() {
           travelStyles:         obStyles,
           firstTime:            obFirstTime,
           selectedFlight:       selectedFlight ?? null,
-          selectedHotels:       updatedHotels,
+          selectedHotels:       selectedHotels,
         });
       } catch { /* ignore */ }
     }, 400);
     return () => clearTimeout(timer);
-  }, [trip, savedIds, savedMeta, hydrated, obStep, obStyles, obFirstTime, selectedFlight, selectedHotel]);
+  }, [trip, savedIds, savedMeta, hydrated, obStep, obStyles, obFirstTime, selectedFlight, selectedHotels]);
 
   // ── Sync saved activities to canonical trip store ──
   useEffect(() => {
@@ -2091,11 +2095,18 @@ export default function ItineraryPlanner() {
     });
   }
 
-  function clearHotel() {
-    setSelectedHotel(null);
+  function clearHotel(cityKey: string) {
+    setSelectedHotels((prev) => {
+      const next = { ...prev };
+      delete next[cityKey];
+      return next;
+    });
     try {
-      localStorage.removeItem(HOTEL_KEY);
-      updateTripStore({ selectedHotels: {} });
+      const existing = readTripStore()?.selectedHotels ?? {};
+      const updated  = { ...existing };
+      delete (updated as Record<string, unknown>)[cityKey];
+      updateTripStore({ selectedHotels: updated });
+      if (Object.keys(updated).length === 0) localStorage.removeItem(HOTEL_KEY);
     } catch { /* ignore */ }
   }
 
@@ -2125,7 +2136,7 @@ export default function ItineraryPlanner() {
 
   function startNewTrip() {
     clearTrip();
-    setSelectedHotel(null);
+    setSelectedHotels({});
     setSelectedFlight(null);
     setObDest("");
     setObDestValidated(false);
@@ -2819,6 +2830,7 @@ export default function ItineraryPlanner() {
           {([
             { key: "itinerary",       label: "Itinerary" },
             { key: "preferences",     label: "Preferences" },
+            { key: "travel",          label: "Flights & Hotels" },
             { key: "recommendations", label: "Recommendations" },
             { key: "saved",           label: `Saved (${activeActivityIds.length})` },
             ...(trip.itinerary ? [{ key: "dropped" as const, label: `Dropped (${trip.itinerary.meta.droppedActivities.length})` }] : []),
@@ -2877,10 +2889,13 @@ export default function ItineraryPlanner() {
                   <span className="text-[11px] text-gray-700">{fmt24(selectedFlight.departTime)}</span>
                 </div>
               )}
-              {selectedHotel && (
+              {Object.values(selectedHotels).length > 0 && (
                 <div className="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-gray-50 px-3 py-1.5">
                   <span className="text-[10px] text-gray-700">🏨</span>
-                  <span className="text-[11px] text-gray-700 truncate max-w-[160px]">{selectedHotel.name}</span>
+                  <span className="text-[11px] text-gray-700 truncate max-w-[160px]">{Object.values(selectedHotels)[0]?.name}</span>
+                  {Object.values(selectedHotels).length > 1 && (
+                    <span className="text-[10px] text-gray-700">+{Object.values(selectedHotels).length - 1}</span>
+                  )}
                 </div>
               )}
             </div>
@@ -3714,23 +3729,130 @@ export default function ItineraryPlanner() {
             setBudgetTier={setBudgetTier}
             cuisinePrefs={cuisinePrefs}
             setCuisinePrefs={setCuisinePrefs}
-            selectedFlight={selectedFlight}
-            selectedReturnFlight={selectedReturnFlight}
-            selectedHotel={selectedHotel}
-            manualArrivalTime={trip.manualArrivalTime}
-            manualDepartureTime={trip.manualDepartureTime}
-            manualHotelName={trip.manualHotelName}
-            onUpdateManualArrival={(v) => updateTrip({ manualArrivalTime: v })}
-            onUpdateManualDeparture={(v) => updateTrip({ manualDepartureTime: v })}
-            onUpdateManualHotel={(v) => updateTrip({ manualHotelName: v })}
-            onClearFlight={clearFlight}
-            onClearReturnFlight={clearReturnFlight}
-            onClearHotel={clearHotel}
             obStyles={obStyles}
             obFirstTime={obFirstTime}
             onEditTrip={startOnboarding}
           />
         )}
+
+        {/* ── Tab: Flights & Hotels ── */}
+        {activeTab === "travel" && (() => {
+          const isMultiCity = trip.cities.length > 1;
+          const firstCity2  = trip.cities[0]?.city ?? "";
+          const lastCity    = trip.cities[trip.cities.length - 1]?.city ?? "";
+          return (
+            <div className="max-w-xl space-y-4">
+
+              {/* Outbound flight */}
+              <section className="rounded-2xl border border-gray-200 bg-white p-5">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-sm font-semibold text-gray-900">{isMultiCity ? "Outbound flight" : "Flight"}</h3>
+                  <span className="text-[11px] text-gray-400">(optional)</span>
+                </div>
+                {selectedFlight ? (
+                  <SelectedFlightCard flight={selectedFlight} onClear={clearFlight} />
+                ) : (
+                  <div className="space-y-3">
+                    <div>
+                      <label className="text-xs text-gray-500 block mb-1.5">Arrival date &amp; time</label>
+                      <input
+                        type="datetime-local"
+                        value={trip.manualArrivalTime}
+                        onChange={(e) => updateTrip({ manualArrivalTime: e.target.value })}
+                        className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 focus:border-teal-400 focus:outline-none focus:ring-1 focus:ring-teal-300 transition-colors"
+                      />
+                    </div>
+                    {!isMultiCity && (
+                      <div>
+                        <label className="text-xs text-gray-500 block mb-1.5">Return departure date &amp; time</label>
+                        <input
+                          type="datetime-local"
+                          value={trip.manualDepartureTime}
+                          onChange={(e) => updateTrip({ manualDepartureTime: e.target.value })}
+                          className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 focus:border-teal-400 focus:outline-none focus:ring-1 focus:ring-teal-300 transition-colors"
+                        />
+                      </div>
+                    )}
+                    <Link
+                      href={firstCity2 ? `/flights?autofill_to=${encodeURIComponent(firstCity2)}` : "/flights"}
+                      className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-teal-600 transition-colors"
+                    >
+                      Search on Flights and add <span>→</span>
+                    </Link>
+                  </div>
+                )}
+              </section>
+
+              {/* Return flight — multi-city only */}
+              {isMultiCity && (
+                <section className="rounded-2xl border border-gray-200 bg-white p-5">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-sm font-semibold text-gray-900">Return flight</h3>
+                    <span className="text-[11px] text-gray-400">(optional)</span>
+                  </div>
+                  {selectedReturnFlight ? (
+                    <SelectedFlightCard flight={selectedReturnFlight} onClear={clearReturnFlight} />
+                  ) : (
+                    <div className="space-y-3">
+                      <div>
+                        <label className="text-xs text-gray-500 block mb-1.5">Departure date &amp; time</label>
+                        <input
+                          type="datetime-local"
+                          value={trip.manualDepartureTime}
+                          onChange={(e) => updateTrip({ manualDepartureTime: e.target.value })}
+                          className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 focus:border-teal-400 focus:outline-none focus:ring-1 focus:ring-teal-300 transition-colors"
+                        />
+                      </div>
+                      <Link
+                        href={lastCity ? `/flights?autofill_from=${encodeURIComponent(lastCity)}&mode=return` : "/flights?mode=return"}
+                        className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-teal-600 transition-colors"
+                      >
+                        Search on Flights and add <span>→</span>
+                      </Link>
+                    </div>
+                  )}
+                </section>
+              )}
+
+              {/* Hotel per city */}
+              {trip.cities.filter((s) => s.city.trim()).map((stop, i) => {
+                const cityKey = stop.city;
+                const hotel   = selectedHotels[cityKey];
+                const label   = isMultiCity ? `Hotel · ${stop.city.split(",")[0]}` : "Hotel / base";
+                return (
+                  <section key={i} className="rounded-2xl border border-gray-200 bg-white p-5">
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-sm font-semibold text-gray-900">{label}</h3>
+                      <span className="text-[11px] text-gray-400">(optional)</span>
+                    </div>
+                    {hotel ? (
+                      <SelectedHotelCard hotel={hotel} onClear={() => clearHotel(cityKey)} />
+                    ) : (
+                      <div className="space-y-3">
+                        <div>
+                          <label className="text-xs text-gray-500 block mb-1.5">Hotel name or neighborhood</label>
+                          <input
+                            type="text"
+                            placeholder="e.g. Park Hyatt Shinjuku"
+                            value={i === 0 ? trip.manualHotelName : ""}
+                            onChange={(e) => { if (i === 0) updateTrip({ manualHotelName: e.target.value }); }}
+                            className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:border-teal-400 focus:outline-none focus:ring-1 focus:ring-teal-300 transition-colors"
+                          />
+                        </div>
+                        <Link
+                          href={cityKey ? `/hotels?city=${encodeURIComponent(cityKey)}` : "/hotels"}
+                          className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-teal-600 transition-colors"
+                        >
+                          Search on Hotels and add <span>→</span>
+                        </Link>
+                      </div>
+                    )}
+                  </section>
+                );
+              })}
+            </div>
+          );
+        })()}
 
         {/* ── Tab: Recommendations ── */}
         {activeTab === "recommendations" && (

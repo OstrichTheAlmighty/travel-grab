@@ -4862,28 +4862,30 @@ export default function HotelSearch() {
     } catch { /* ignore */ }
   }, []);
 
-  // Pre-fill destination and dates from canonical trip store
+  // Pre-fill destination and dates from canonical trip store (or ?city= URL param)
   useEffect(() => {
     try {
+      const cityParam = new URLSearchParams(window.location.search).get("city");
       const trip = readTripStore();
-      if (!trip || trip.cityStops.length === 0) return;
-      const firstStop = trip.cityStops[0];
-      if (firstStop.city) {
-        setDestination(firstStop.city);
+      const baseStop = trip?.cityStops.find((s) => s.city === cityParam) ?? trip?.cityStops[0];
+      const cityToUse = cityParam || baseStop?.city || "";
+
+      if (cityToUse) {
+        setDestination(cityToUse);
         setSelectedPlace({
-          text:      firstStop.city.split(",")[0].trim(),
-          secondary: firstStop.city,
-          label:     firstStop.city,
+          text:      cityToUse.split(",")[0].trim(),
+          secondary: cityToUse,
+          label:     cityToUse,
         });
-        const bannerDest = trip.destinationRegion || trip.cityStops.map(c => c.city).join(" → ");
+        const bannerDest = trip?.destinationRegion || trip?.cityStops.map(c => c.city).join(" → ") || cityToUse;
         setTripBannerDest(bannerDest);
       }
-      if (trip.startDate) {
+      if (trip?.startDate) {
         setCheckIn(trip.startDate);
-        // Checkout = end of first city stop only (not total trip length)
-        const firstCityDays = Math.max(1, firstStop.days || 1);
+        // Checkout = end of the matched city stop
+        const stopDays = Math.max(1, baseStop?.days || 1);
         const checkout = new Date(trip.startDate + "T00:00:00");
-        checkout.setDate(checkout.getDate() + firstCityDays);
+        checkout.setDate(checkout.getDate() + stopDays);
         setCheckOut(checkout.toISOString().slice(0, 10));
       }
     } catch { /* ignore */ }
@@ -5789,9 +5791,10 @@ export default function HotelSearch() {
                               try {
                                 localStorage.setItem("travelgrab_selected_hotel_v1", JSON.stringify(data));
                                 setItineraryHotelId(offer.hotel_id);
-                                // Save under the city key so the itinerary can look it up by city
-                                const tripStore = readTripStore();
-                                const cityKey = tripStore?.cityStops[0]?.city ?? destination;
+                                // Save under the city key so the itinerary can look it up per city
+                                const tripStore  = readTripStore();
+                                const urlCity    = new URLSearchParams(window.location.search).get("city");
+                                const cityKey    = urlCity ?? tripStore?.cityStops[0]?.city ?? destination;
                                 const updatedHotels = {
                                   ...(tripStore?.selectedHotels ?? {}),
                                   [cityKey]: data,
