@@ -86,8 +86,9 @@ export interface TripStore {
   pace:                "relaxed" | "balanced" | "packed";
   transit:             "walking" | "public transit" | "taxi" | "mixed";
   // Cross-page selections
-  selectedFlight:      TripSelectedFlight | null;
-  selectedHotels:      Record<string, TripSelectedHotel>;   // keyed by city name
+  selectedFlight:        TripSelectedFlight | null;
+  selectedReturnFlight:  TripSelectedFlight | null;
+  selectedHotels:        Record<string, TripSelectedHotel>;   // keyed by city name
   savedActivities:     string[];                            // activity IDs
   // Legacy itinerary fields
   manualArrivalTime:   string;
@@ -115,6 +116,7 @@ export const TRIP_STORE_DEFAULT: TripStore = {
   pace:                 "balanced",
   transit:              "public transit",
   selectedFlight:       null,
+  selectedReturnFlight: null,
   selectedHotels:       {},
   savedActivities:      [],
   manualArrivalTime:    "",

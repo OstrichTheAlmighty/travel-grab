@@ -6,7 +6,6 @@ import Link from "next/link";
 import { fetchWithAuth } from "@/lib/fetch-with-auth";
 import UsageBanner from "@/app/components/UsageBanner";
 import type { Activity, Badge, Category } from "./data/types";
-import { DESTINATION_DATA } from "./data/tokyo";
 import { supabase } from "@/lib/supabase";
 
 // ── Filter config ─────────────────────────────────────────────────────────────
@@ -1982,25 +1981,6 @@ export default function ActivitySearch() {
         setError(null);
         return;
       }
-    }
-
-    // 3. Curated data — instant, zero API calls
-    const curatedEntry = Object.entries(DESTINATION_DATA).find(([k]) => k.toLowerCase() === key);
-    if (curatedEntry) {
-      const [, curated] = curatedEntry;
-      const r: SearchResult = {
-        activities:      curated.activities,
-        city:            curated.city,
-        country:         curated.country,
-        source:          "curated",
-        inventoryStatus: "ready",
-        inventorySize:   curated.activities.length,
-      };
-      clientCache.current.set(key, r);
-      setResult(r);
-      setError(null);
-      if (!skipCache) setActivityQuery("");
-      return;
     }
 
     setLoading(true);

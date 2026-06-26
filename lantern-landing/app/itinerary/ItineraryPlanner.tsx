@@ -12,6 +12,7 @@ import {
   TRAVEL_STYLE_LABELS, TRIP_STORE_DEFAULT,
 } from "@/lib/trip-store";
 import type { TravelStyle } from "@/lib/trip-store";
+import type { Activity } from "@/app/activities/data/types";
 import { PreferencesPanel } from "./components/PreferencesPanel";
 import { RecommendationsPanel } from "./components/RecommendationsPanel";
 import { SavedPlacesPanel } from "./components/SavedPlacesPanel";
@@ -232,6 +233,14 @@ function longDate(iso: string): string {
 function timeToMinutes(t: string): number {
   const [h, m] = t.split(":").map(Number);
   return h * 60 + (m ?? 0);
+}
+
+function fmtMins(mins: number): string {
+  const h = Math.floor(mins / 60);
+  const m = mins % 60;
+  if (h === 0) return `${m}m`;
+  if (m === 0) return `${h}h`;
+  return `${h}h ${m}m`;
 }
 
 // Format "HH:MM" 24h to "8:30 AM"
@@ -779,6 +788,482 @@ function TimelineSlot({
   );
 }
 
+const GAP_CAT_STYLE: Record<string, string> = {
+  food:        "text-amber-600  bg-amber-50  border-amber-200",
+  nightlife:   "text-purple-600 bg-purple-50 border-purple-200",
+  culture:     "text-teal-600   bg-teal-50   border-teal-200",
+  adventure:   "text-orange-600 bg-orange-50 border-orange-200",
+  nature:      "text-green-600  bg-green-50  border-green-200",
+  luxury:      "text-amber-600  bg-amber-50  border-amber-200",
+  hidden_gems: "text-pink-600   bg-pink-50   border-pink-200",
+};
+
+function GapActivityCard({
+  id, meta, onInsert, onViewDetail,
+}: {
+  id:            string;
+  meta:          SavedMeta;
+  onInsert:      (id: string, meta: SavedMeta) => void;
+  onViewDetail?: (id: string, meta: SavedMeta) => void;
+}) {
+  const [imgFailed, setImgFailed] = useState(false);
+  const catStyle = meta.category && meta.category in GAP_CAT_STYLE ? GAP_CAT_STYLE[meta.category] : "text-gray-500 bg-gray-50 border-gray-200";
+  const hasPhoto = !!meta.photoRef && !imgFailed;
+  const GRAD: Record<string, string> = {
+    food: "from-amber-400 to-orange-500", nightlife: "from-purple-500 to-indigo-600",
+    culture: "from-teal-400 to-cyan-600", adventure: "from-orange-400 to-red-500",
+    nature: "from-green-400 to-emerald-600", luxury: "from-yellow-400 to-amber-500",
+    hidden_gems: "from-pink-400 to-rose-500",
+  };
+  const grad = meta.category ? (GRAD[meta.category] ?? "from-gray-400 to-gray-600") : "from-gray-400 to-gray-600";
+
+  return (
+    <div className="flex flex-col rounded-xl border border-gray-200 bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+      {/* Photo */}
+      <div className="relative h-36 shrink-0">
+        {hasPhoto ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={`/api/activities/photo?name=${encodeURIComponent(meta.photoRef!)}`}
+            alt={meta.title}
+            className="w-full h-full object-cover"
+            onError={() => setImgFailed(true)}
+          />
+        ) : (
+          <div className={`w-full h-full bg-gradient-to-br ${grad} flex items-center justify-center`}>
+            <span className="text-white/60 text-3xl">
+              {meta.category === "food" ? "🍜" : meta.category === "culture" ? "🏛️" : meta.category === "nature" ? "🌿" : meta.category === "nightlife" ? "🌃" : "✦"}
+            </span>
+          </div>
+        )}
+        {meta.category && (
+          <span className={`absolute top-2 left-2 rounded-full border px-2 py-0.5 text-[10px] font-semibold capitalize backdrop-blur-sm ${catStyle}`}>
+            {meta.category === "hidden_gems" ? "Hidden Gem" : meta.category}
+          </span>
+        )}
+      </div>
+
+      {/* Body */}
+      <div className="flex flex-col flex-1 p-3 gap-1.5">
+        <p className="text-sm font-semibold text-gray-900 leading-snug line-clamp-2">{meta.title}</p>
+        <p className="text-[11px] text-gray-400">
+          {[meta.neighborhood, meta.duration].filter(Boolean).join(" · ")}
+        </p>
+        {meta.rating > 0 && (
+          <p className="text-[11px] text-amber-500 font-medium">★ {meta.rating.toFixed(1)}</p>
+        )}
+        <div className="mt-auto flex gap-1.5">
+          {onViewDetail && (
+            <button
+              type="button"
+              onClick={() => onViewDetail(id, meta)}
+              className="flex-1 rounded-lg border border-gray-200 text-gray-600 text-xs font-semibold py-2 hover:border-gray-300 hover:bg-gray-50 transition-colors"
+            >
+              Details
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={() => onInsert(id, meta)}
+            className="flex-1 rounded-lg bg-teal-500 text-white text-xs font-semibold py-2 hover:bg-teal-600 transition-colors"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GapSuggestion({
+  freeMinutes,
+  afterSlot,
+  daySlots,
+  city,
+  onInsert,
+}: {
+  freeMinutes: number;
+  afterSlot:   PlannedSlot;
+  daySlots:    PlannedSlot[];
+  city:        string;
+  onInsert:    (id: string, meta: SavedMeta) => void;
+}) {
+  const [open,          setOpen]          = useState(false);
+  const [catFilter,     setCatFilter]     = useState("all");
+  const [detailAct,     setDetailAct]     = useState<{ id: string; meta: SavedMeta } | null>(null);
+  const [detailData,    setDetailData]    = useState<PlaceDetailData | null>(null);
+  const [detailLoading, setDetailLoading] = useState(false);
+  const [detailPhoto,   setDetailPhoto]   = useState(0);
+  const [apiResults,    setApiResults]    = useState<Activity[]>([]);
+  const [apiLoading,    setApiLoading]    = useState(false);
+  const [apiFetched,    setApiFetched]    = useState(false);
+
+  useEffect(() => {
+    if (!detailAct) { setDetailData(null); return; }
+    setDetailLoading(true);
+    setDetailData(null);
+    setDetailPhoto(0);
+    fetch(`/api/activities/place?id=${encodeURIComponent(detailAct.id)}`)
+      .then((r) => r.ok ? r.json() : null)
+      .then((data: {
+        formattedAddress?: string; shortFormattedAddress?: string;
+        regularOpeningHours?: { openNow?: boolean; weekdayDescriptions?: string[] };
+        websiteUri?: string; googleMapsUri?: string;
+        editorialSummary?: { text?: string };
+        nationalPhoneNumber?: string; internationalPhoneNumber?: string;
+        photos?: Array<{ name: string }>;
+        rating?: number; userRatingCount?: number;
+        reviews?: Array<{
+          authorAttribution?: { displayName?: string; photoUri?: string };
+          rating?: number;
+          text?: { text?: string };
+          relativePublishTimeDescription?: string;
+        }>;
+      } | null) => {
+        if (!data) { setDetailData(null); return; }
+        setDetailData({
+          address:             data.formattedAddress ?? data.shortFormattedAddress,
+          openNow:             data.regularOpeningHours?.openNow,
+          weekdayDescriptions: data.regularOpeningHours?.weekdayDescriptions,
+          website:             data.websiteUri,
+          googleMapsUri:       data.googleMapsUri,
+          editorialSummary:    data.editorialSummary?.text,
+          phone:               data.nationalPhoneNumber ?? data.internationalPhoneNumber,
+          photos:              data.photos,
+          rating:              data.rating,
+          userRatingCount:     data.userRatingCount,
+          reviews:             data.reviews?.slice(0, 5).map((r) => ({
+            authorName:     r.authorAttribution?.displayName,
+            authorPhotoUri: r.authorAttribution?.photoUri,
+            rating:         r.rating,
+            text:           r.text?.text,
+            timeAgo:        r.relativePublishTimeDescription,
+          })),
+        });
+      })
+      .catch(() => {})
+      .finally(() => setDetailLoading(false));
+  }, [detailAct?.id]);
+
+  void afterSlot;
+
+  const scheduledTitles = new Set(daySlots.map((s) => s.title.toLowerCase()));
+  const allCandidates = apiResults.filter((a) => {
+    const dur = parseDuration(a.duration);
+    return dur <= freeMinutes && !scheduledTitles.has(a.title.toLowerCase());
+  });
+  const cats = ["all", ...Array.from(new Set(allCandidates.map((a) => a.category).filter(Boolean)))];
+  const candidates = allCandidates
+    .filter((a) => catFilter === "all" || a.category === catFilter)
+    .sort((a, b) => parseDuration(a.duration) - parseDuration(b.duration));
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => {
+          setOpen(true);
+          setCatFilter("all");
+          setDetailAct(null);
+          if (!apiFetched && city) {
+            setApiLoading(true);
+            fetch(`/api/activities/search?destination=${encodeURIComponent(city)}`)
+              .then((r) => r.ok ? r.json() : null)
+              .then((data: { activities?: Activity[] } | null) => {
+                if (data?.activities) setApiResults(data.activities);
+                setApiFetched(true);
+              })
+              .catch(() => { setApiFetched(true); })
+              .finally(() => setApiLoading(false));
+          }
+        }}
+        className="w-full flex items-center gap-2 rounded-lg border border-dashed border-gray-200 bg-gray-50/60 px-3.5 py-2 my-1.5 text-xs text-gray-400 hover:border-teal-300 hover:text-teal-600 hover:bg-teal-50/40 transition-colors"
+      >
+        <span className="text-sm leading-none">+</span>
+        <span>
+          <span className="font-semibold text-gray-500">{fmtMins(freeMinutes)} free</span>
+          {" — add an activity here"}
+        </span>
+        <span className="ml-auto">→</span>
+      </button>
+
+      {open && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => { setOpen(false); setDetailAct(null); }}>
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+
+          {/* Modal */}
+          <div
+            className="relative w-full max-w-3xl max-h-[85vh] flex flex-col rounded-2xl bg-white shadow-2xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 shrink-0">
+              <div>
+                <h2 className="text-base font-bold text-gray-900">Add to this gap</h2>
+                <p className="text-xs text-gray-400 mt-0.5">
+                  {fmtMins(freeMinutes)} available
+                  {apiLoading ? " · Searching activities…" : candidates.length > 0 ? ` · ${candidates.length} ${candidates.length === 1 ? "activity" : "activities"} fit` : apiFetched ? " · No activities found" : ""}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => { setOpen(false); setDetailAct(null); }}
+                className="h-8 w-8 flex items-center justify-center rounded-full text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors text-lg leading-none"
+              >
+                ×
+              </button>
+            </div>
+
+            {/* Category filter chips — hidden in detail view */}
+            {!detailAct && cats.length > 2 && (
+              <div className="flex gap-1.5 px-5 py-3 border-b border-gray-100 overflow-x-auto shrink-0">
+                {cats.map((cat) => (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => setCatFilter(cat)}
+                    className={`shrink-0 text-xs px-3 py-1 rounded-full border capitalize transition-colors ${
+                      catFilter === cat
+                        ? "border-teal-400 bg-teal-50 text-teal-700"
+                        : "border-gray-200 text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                    }`}
+                  >
+                    {cat === "all" ? "All" : cat === "hidden_gems" ? "Hidden Gems" : cat}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Detail view — shown when a card's "Details" is clicked */}
+            {detailAct ? (
+              <div className="flex-1 overflow-y-auto">
+                {/* Detail header */}
+                <div className="sticky top-0 z-10 flex items-center gap-3 px-5 py-3 border-b border-gray-100 bg-white shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setDetailAct(null)}
+                    className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-teal-600 transition-colors"
+                  >
+                    ← Back to results
+                  </button>
+                </div>
+
+                {/* Photo carousel */}
+                {(() => {
+                  const photos = detailData?.photos ?? (detailAct.meta.photoRef ? [{ name: detailAct.meta.photoRef }] : []);
+                  if (photos.length === 0) return null;
+                  return (
+                    <div className="h-52 relative overflow-hidden shrink-0">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        key={photos[detailPhoto]?.name}
+                        src={`/api/activities/photo?name=${encodeURIComponent(photos[detailPhoto]?.name ?? "")}&w=800`}
+                        className="w-full h-full object-cover"
+                        alt={detailAct.meta.title}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                      {photos.length > 1 && (
+                        <>
+                          <button type="button" onClick={() => setDetailPhoto((n) => Math.max(0, n - 1))} disabled={detailPhoto === 0}
+                            className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/50 flex items-center justify-center text-white hover:bg-black/70 transition-all disabled:opacity-20">
+                            ‹
+                          </button>
+                          <button type="button" onClick={() => setDetailPhoto((n) => Math.min(photos.length - 1, n + 1))} disabled={detailPhoto === photos.length - 1}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/50 flex items-center justify-center text-white hover:bg-black/70 transition-all disabled:opacity-20">
+                            ›
+                          </button>
+                          <div className="absolute bottom-2 right-3 bg-black/55 rounded-full px-2 py-0.5 text-[10px] text-white">
+                            {detailPhoto + 1} / {photos.length}
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  );
+                })()}
+
+                {/* Detail body */}
+                <div className="p-5">
+                  {/* Title + meta */}
+                  <h3 className="text-lg font-bold text-gray-900 mb-1">{detailAct.meta.title}</h3>
+                  <div className="flex items-center flex-wrap gap-2 mb-3">
+                    {(detailData?.address ?? detailAct.meta.neighborhood) && (
+                      <span className="text-xs text-gray-500">{detailData?.address ?? detailAct.meta.neighborhood}</span>
+                    )}
+                    {(detailData?.rating ?? (detailAct.meta.rating > 0 ? detailAct.meta.rating : null)) != null && (
+                      <>
+                        <span className="text-gray-300">·</span>
+                        <span className="text-xs text-amber-600">
+                          ★ {(detailData?.rating ?? detailAct.meta.rating).toFixed(1)}
+                          {detailData?.userRatingCount && (
+                            <span className="text-gray-400 ml-1">({detailData.userRatingCount.toLocaleString()})</span>
+                          )}
+                        </span>
+                      </>
+                    )}
+                    {detailAct.meta.duration && (
+                      <span className="text-xs text-gray-400">{detailAct.meta.duration}</span>
+                    )}
+                    {detailAct.meta.category && detailAct.meta.category in GAP_CAT_STYLE && (
+                      <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold capitalize ${GAP_CAT_STYLE[detailAct.meta.category]}`}>
+                        {detailAct.meta.category === "hidden_gems" ? "Hidden Gem" : detailAct.meta.category}
+                      </span>
+                    )}
+                  </div>
+
+                  {detailLoading && (
+                    <p className="text-[11px] text-gray-400 mb-3">Loading details…</p>
+                  )}
+
+                  {/* Editorial summary */}
+                  {detailData?.editorialSummary && (
+                    <p className="text-sm text-gray-700 leading-relaxed mb-4">{detailData.editorialSummary}</p>
+                  )}
+
+                  {/* Hours */}
+                  {detailData?.weekdayDescriptions && detailData.weekdayDescriptions.length > 0 && (
+                    <details className="mb-3">
+                      <summary className="text-[11px] text-gray-500 cursor-pointer select-none">
+                        {detailData.openNow === false ? "🔴 Closed now" : detailData.openNow ? "🟢 Open now" : "⏰ Opening hours"}
+                      </summary>
+                      <ul className="mt-1 space-y-0.5 pl-4">
+                        {detailData.weekdayDescriptions.map((line, i) => (
+                          <li key={i} className="text-[10px] text-gray-500">{line}</li>
+                        ))}
+                      </ul>
+                    </details>
+                  )}
+
+                  {/* Contact & links */}
+                  {(detailData?.phone || detailData?.website || detailData?.googleMapsUri) && (
+                    <div className="flex flex-wrap gap-x-4 gap-y-1 mb-4">
+                      {detailData.phone && (
+                        <a href={`tel:${detailData.phone}`} className="text-[11px] text-gray-500 hover:text-gray-700 transition-colors">
+                          📞 {detailData.phone}
+                        </a>
+                      )}
+                      {detailData.website && (
+                        <a href={detailData.website} target="_blank" rel="noopener noreferrer"
+                          className="text-[11px] text-blue-600 hover:text-blue-800 truncate max-w-[240px] transition-colors">
+                          🌐 {detailData.website.replace(/^https?:\/\/(www\.)?/, "")}
+                        </a>
+                      )}
+                      {detailData.googleMapsUri && (
+                        <a href={detailData.googleMapsUri} target="_blank" rel="noopener noreferrer"
+                          className="text-[11px] text-blue-600 hover:text-blue-800 transition-colors">
+                          🗺 Google Maps
+                        </a>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Reviews */}
+                  {detailData?.reviews && detailData.reviews.length > 0 && (
+                    <div className="mb-4">
+                      <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-2">Reviews</p>
+                      <div className="space-y-2">
+                        {detailData.reviews.map((r, i) => (
+                          <div key={i} className="rounded-lg bg-gray-50 border border-gray-100 p-3">
+                            <div className="flex items-center gap-2 mb-1">
+                              {r.authorPhotoUri && (
+                                // eslint-disable-next-line @next/next/no-img-element
+                                <img src={r.authorPhotoUri} alt={r.authorName ?? ""} className="w-5 h-5 rounded-full object-cover" />
+                              )}
+                              <span className="text-[11px] font-medium text-gray-600">{r.authorName ?? "Anonymous"}</span>
+                              {r.rating != null && (
+                                <span className="text-[10px] text-amber-500 ml-auto">{"★".repeat(r.rating)}{"☆".repeat(5 - r.rating)}</span>
+                              )}
+                            </div>
+                            {r.text && <p className="text-[11px] text-gray-600 leading-relaxed line-clamp-3">{r.text}</p>}
+                            {r.timeAgo && <p className="text-[10px] text-gray-400 mt-1">{r.timeAgo}</p>}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Add button */}
+                  <button
+                    type="button"
+                    onClick={() => { onInsert(detailAct.id, detailAct.meta); setOpen(false); setDetailAct(null); }}
+                    className="w-full rounded-xl bg-teal-500 text-white text-sm font-semibold py-3 hover:bg-teal-600 transition-colors"
+                  >
+                    Add to itinerary
+                  </button>
+                </div>
+              </div>
+            ) : (
+            /* Grid */
+            <div className="flex-1 overflow-y-auto p-5">
+              {apiLoading ? (
+                <div className="flex flex-col items-center justify-center py-16 text-center">
+                  <div className="h-8 w-8 rounded-full border-2 border-gray-200 border-t-teal-400 animate-spin mb-4" />
+                  <p className="text-sm text-gray-400">Finding activities that fit…</p>
+                </div>
+              ) : candidates.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-16 text-center">
+                  <p className="text-sm text-gray-400 mb-3">
+                    {apiFetched
+                      ? "No activities fit this time slot — they may all be too long for the available gap."
+                      : "Open the Activities page to load activities for this destination first."}
+                  </p>
+                  <Link
+                    href="/activities"
+                    onClick={() => setOpen(false)}
+                    className="text-sm font-semibold text-teal-600 hover:text-teal-700"
+                  >
+                    Browse activities →
+                  </Link>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {candidates.map((activity) => {
+                    const id = activity.placeId ?? activity.id;
+                    const meta: SavedMeta = {
+                      title:        activity.title,
+                      category:     activity.category,
+                      neighborhood: activity.neighborhood,
+                      duration:     activity.duration,
+                      rating:       activity.rating,
+                      photoRef:     activity.photoRef,
+                      lat:          activity.lat,
+                      lng:          activity.lng,
+                    };
+                    return (
+                      <GapActivityCard
+                        key={id}
+                        id={id}
+                        meta={meta}
+                        onInsert={(id, meta) => { onInsert(id, meta); setOpen(false); }}
+                        onViewDetail={(id, meta) => setDetailAct({ id, meta })}
+                      />
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+            )}
+
+            {/* Footer — hidden in detail view */}
+            {!detailAct && (
+              <div className="px-5 py-3 border-t border-gray-100 shrink-0 flex items-center justify-between">
+                <p className="text-[11px] text-gray-400">Showing activities that fit the {fmtMins(freeMinutes)} gap</p>
+                <Link
+                  href="/activities"
+                  onClick={() => setOpen(false)}
+                  className="text-xs font-medium text-teal-600 hover:text-teal-700 transition-colors"
+                >
+                  Browse all activities →
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
 const WARNING_COLORS: Record<DayWarning["type"], string> = {
   packed:          "bg-amber-50  text-amber-700  border-amber-200",
   food_heavy:      "bg-orange-50 text-orange-700 border-orange-200",
@@ -789,14 +1274,15 @@ const WARNING_COLORS: Record<DayWarning["type"], string> = {
 };
 
 function DayView({
-  day, savedMeta, compact, onSlotClick, onDeleteSlot, onEditTime,
+  day, savedMeta, compact, city, onSlotClick, onDeleteSlot, onEditTime,
   onRename, renamingSlot, onRenameChange, onRenameCommit,
   onDragStart, onDragEnd, draggingSlot, onMoveUp, onMoveDown,
-  onEditNotes, onEditDuration, onQuickAdd,
+  onEditNotes, onEditDuration, onQuickAdd, onInsertAfterGap,
 }: {
   day:               PlannedDay;
   savedMeta:         Record<string, SavedMeta>;
   compact:           boolean;
+  city?:             string;
   onSlotClick:       (slot: PlannedSlot) => void;
   onDeleteSlot?:     (slot: PlannedSlot) => void;
   onEditTime?:       (slot: PlannedSlot) => void;
@@ -809,9 +1295,10 @@ function DayView({
   draggingSlot?:     PlannedSlot | null;
   onMoveUp?:         (slot: PlannedSlot) => void;
   onMoveDown?:       (slot: PlannedSlot) => void;
-  onEditNotes?:      (slot: PlannedSlot, note: string) => void;
-  onEditDuration?:   (slot: PlannedSlot, minutes: number) => void;
-  onQuickAdd?:       () => void;
+  onEditNotes?:        (slot: PlannedSlot, note: string) => void;
+  onEditDuration?:     (slot: PlannedSlot, minutes: number) => void;
+  onQuickAdd?:         () => void;
+  onInsertAfterGap?:   (afterSlot: PlannedSlot, id: string, meta: SavedMeta) => void;
 }) {
   return (
     <div>
@@ -852,30 +1339,54 @@ function DayView({
         )}
       </div>
       <div>
-        {day.slots.map((slot, i) => (
-          <TimelineSlot
-            key={i}
-            slot={slot}
-            savedMeta={savedMeta}
-            isLast={i === day.slots.length - 1}
-            compact={compact}
-            onSlotClick={onSlotClick}
-            onDelete={onDeleteSlot}
-            onEditTime={onEditTime}
-            onRename={onRename}
-            isRenaming={renamingSlot?.slot === slot}
-            renameValue={renamingSlot?.slot === slot ? renamingSlot.value : undefined}
-            onRenameChange={onRenameChange}
-            onRenameCommit={onRenameCommit}
-            onDragStart={onDragStart}
-            onDragEnd={onDragEnd}
-            isDragging={draggingSlot === slot}
-            onMoveUp={slot.kind === "activity" && i > 0 ? () => onMoveUp?.(slot) : undefined}
-            onMoveDown={slot.kind === "activity" && i < day.slots.length - 1 ? () => onMoveDown?.(slot) : undefined}
-            onEditNotes={onEditNotes}
-            onEditDuration={onEditDuration}
-          />
-        ))}
+        {day.slots.map((slot, i) => {
+          const next = day.slots[i + 1];
+          // Net free time = raw gap minus transit time to next slot
+          const rawGap       = next ? next.startMinutes - slot.endMinutes : 0;
+          const transitMins  = next?.transit?.durationMinutes ?? 0;
+          const freeMinutes  = rawGap - transitMins;
+          // Show gap card only between substantive slots (skip free_time connectors)
+          const showGap = !compact
+            && slot.kind !== "free_time"
+            && next != null
+            && next.kind !== "free_time"
+            && freeMinutes >= 90;
+
+          return (
+            <span key={i}>
+              <TimelineSlot
+                slot={slot}
+                savedMeta={savedMeta}
+                isLast={i === day.slots.length - 1}
+                compact={compact}
+                onSlotClick={onSlotClick}
+                onDelete={onDeleteSlot}
+                onEditTime={onEditTime}
+                onRename={onRename}
+                isRenaming={renamingSlot?.slot === slot}
+                renameValue={renamingSlot?.slot === slot ? renamingSlot.value : undefined}
+                onRenameChange={onRenameChange}
+                onRenameCommit={onRenameCommit}
+                onDragStart={onDragStart}
+                onDragEnd={onDragEnd}
+                isDragging={draggingSlot === slot}
+                onMoveUp={slot.kind === "activity" && i > 0 ? () => onMoveUp?.(slot) : undefined}
+                onMoveDown={slot.kind === "activity" && i < day.slots.length - 1 ? () => onMoveDown?.(slot) : undefined}
+                onEditNotes={onEditNotes}
+                onEditDuration={onEditDuration}
+              />
+              {showGap && onInsertAfterGap && (
+                <GapSuggestion
+                  freeMinutes={freeMinutes}
+                  afterSlot={slot}
+                  daySlots={day.slots}
+                  city={city ?? ""}
+                  onInsert={(id, meta) => onInsertAfterGap(slot, id, meta)}
+                />
+              )}
+            </span>
+          );
+        })}
         {onQuickAdd && (
           <button
             type="button"
@@ -1193,7 +1704,8 @@ export default function ItineraryPlanner() {
 
   // Cross-page selected hotel/flight (from Hotels/Flights pages)
   const [selectedHotel,  setSelectedHotel]  = useState<SelectedHotel | null>(null);
-  const [selectedFlight, setSelectedFlight] = useState<SelectedFlight | null>(null);
+  const [selectedFlight,       setSelectedFlight]       = useState<SelectedFlight | null>(null);
+  const [selectedReturnFlight, setSelectedReturnFlight] = useState<SelectedFlight | null>(null);
 
   // UI state
   const [genStatus,         setGenStatus]         = useState<"idle" | "generating" | "error">("idle");
@@ -1246,6 +1758,8 @@ export default function ItineraryPlanner() {
   const [budgetTier,   setBudgetTier]   = useState<"budget" | "moderate" | "premium">("moderate");
 
   const [editTripModal, setEditTripModal] = useState(false);
+  const [flightAddedBanner,       setFlightAddedBanner]       = useState(false);
+  const [returnFlightAddedBanner, setReturnFlightAddedBanner] = useState(false);
   const [editStart,     setEditStart]     = useState("");
   const [editCities,    setEditCities]    = useState<CityStop[]>([]);
   const [editPace,      setEditPace]      = useState<UIPace>("balanced");
@@ -1281,7 +1795,8 @@ export default function ItineraryPlanner() {
   const [obError,          setObError]          = useState<string | null>(null);
 
   // Tracks destinationRegion for display in the summary banner
-  const obDestRef = useRef("");
+  const obDestRef        = useRef("");
+  const autoRegenDoneRef = useRef(false);
 
   // ── Load from localStorage on mount ──
   useEffect(() => {
@@ -1311,6 +1826,17 @@ export default function ItineraryPlanner() {
             obDestRef.current = stored.trip.cities[0].city;
             setObDestValidated(true);
           }
+          // Read cross-page selections from the shared v3 store (Flights/Hotels pages write here)
+          const shared = readTripStore();
+          if (shared?.selectedFlight) setSelectedFlight(shared.selectedFlight);
+          else { const fs = localStorage.getItem(FLIGHT_KEY); if (fs) setSelectedFlight(JSON.parse(fs) as SelectedFlight); }
+          if (shared?.selectedReturnFlight) setSelectedReturnFlight(shared.selectedReturnFlight);
+          const firstCity  = stored.trip.cities[0]?.city ?? "";
+          const firstHotel = shared?.selectedHotels?.[firstCity] ?? null;
+          if (firstHotel) setSelectedHotel(firstHotel);
+          else { const hs = localStorage.getItem(HOTEL_KEY); if (hs) setSelectedHotel(JSON.parse(hs) as SelectedHotel); }
+          if (shared?.travelStyles?.length) setObStyles(shared.travelStyles);
+          if (shared?.firstTime !== null && shared?.firstTime !== undefined) setObFirstTime(shared.firstTime);
           setObStep("done");
           setHydrated(true);
           return;
@@ -1352,6 +1878,7 @@ export default function ItineraryPlanner() {
 
         if (v2.selectedFlight) setSelectedFlight(v2.selectedFlight);
         else { const fs = localStorage.getItem(FLIGHT_KEY); if (fs) setSelectedFlight(JSON.parse(fs) as SelectedFlight); }
+        if (v2.selectedReturnFlight) setSelectedReturnFlight(v2.selectedReturnFlight);
         const firstCity  = v2.cityStops[0]?.city ?? "";
         const firstHotel = v2.selectedHotels?.[firstCity] ?? null;
         if (firstHotel) setSelectedHotel(firstHotel);
@@ -1369,6 +1896,8 @@ export default function ItineraryPlanner() {
       const flightStored = localStorage.getItem(FLIGHT_KEY);
       if (hotelStored)  setSelectedHotel(JSON.parse(hotelStored) as SelectedHotel);
       if (flightStored) setSelectedFlight(JSON.parse(flightStored) as SelectedFlight);
+      const v3 = readTripStore();
+      if (v3?.selectedReturnFlight) setSelectedReturnFlight(v3.selectedReturnFlight);
 
       const tripStored = localStorage.getItem(TRIP_KEY);
       if (tripStored) {
@@ -1462,6 +1991,24 @@ export default function ItineraryPlanner() {
     if (!hydrated) return;
     updateTripStore({ savedActivities: savedIds });
   }, [savedIds, hydrated]);
+
+  // ── Show "flight added" banner when arriving from flight selection ──
+  useEffect(() => {
+    if (!hydrated || autoRegenDoneRef.current) return;
+    autoRegenDoneRef.current = true;
+    try {
+      if (sessionStorage.getItem("tg_flight_added") === "1") {
+        sessionStorage.removeItem("tg_flight_added");
+        setFlightAddedBanner(true);
+        setActiveTab("itinerary");
+      }
+      if (sessionStorage.getItem("tg_return_flight_added") === "1") {
+        sessionStorage.removeItem("tg_return_flight_added");
+        setReturnFlightAddedBanner(true);
+        setActiveTab("itinerary");
+      }
+    } catch { /* ignore */ }
+  }, [hydrated]);
 
   useEffect(() => { setNoteEdit(null); setDurationEdit(null); setDetailActivePhoto(0); }, [detailSlot]);
 
@@ -1557,6 +2104,13 @@ export default function ItineraryPlanner() {
     try {
       localStorage.removeItem(FLIGHT_KEY);
       updateTripStore({ selectedFlight: null });
+    } catch { /* ignore */ }
+  }
+
+  function clearReturnFlight() {
+    setSelectedReturnFlight(null);
+    try {
+      updateTripStore({ selectedReturnFlight: null });
     } catch { /* ignore */ }
   }
 
@@ -2370,6 +2924,78 @@ export default function ItineraryPlanner() {
         {/* ── Tab: Itinerary ── */}
         {activeTab === "itinerary" && (
         <div>
+          {/* Return flight-added prompt banner */}
+          {returnFlightAddedBanner && selectedReturnFlight && (
+            <div className="flex items-center justify-between gap-3 rounded-xl border border-teal-200 bg-teal-50 px-4 py-3 mb-4">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <span className="text-base shrink-0">✈️</span>
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold text-teal-800">
+                    Return flight {selectedReturnFlight.origin} → {selectedReturnFlight.destination} added
+                  </p>
+                  <p className="text-[11px] text-teal-600 mt-0.5">
+                    Regenerate your itinerary to block out your departure time.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                {primaryCity && trip.startDate && (
+                  <button
+                    type="button"
+                    onClick={() => { setReturnFlightAddedBanner(false); void generate(); }}
+                    className="h-8 rounded-lg bg-teal-600 px-3 text-xs font-semibold text-white hover:bg-teal-700 transition-colors"
+                  >
+                    Regenerate
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setReturnFlightAddedBanner(false)}
+                  className="text-teal-400 hover:text-teal-600 transition-colors text-lg leading-none"
+                  aria-label="Dismiss"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Outbound flight-added prompt banner */}
+          {flightAddedBanner && selectedFlight && (
+            <div className="flex items-center justify-between gap-3 rounded-xl border border-teal-200 bg-teal-50 px-4 py-3 mb-4">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <span className="text-base shrink-0">✈️</span>
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold text-teal-800">
+                    {selectedFlight.origin} → {selectedFlight.destination} added
+                  </p>
+                  <p className="text-[11px] text-teal-600 mt-0.5">
+                    Regenerate your itinerary to block out arrival and departure times.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                {primaryCity && trip.startDate && (
+                  <button
+                    type="button"
+                    onClick={() => { setFlightAddedBanner(false); void generate(); }}
+                    className="h-8 rounded-lg bg-teal-600 px-3 text-xs font-semibold text-white hover:bg-teal-700 transition-colors"
+                  >
+                    Regenerate
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setFlightAddedBanner(false)}
+                  className="text-teal-400 hover:text-teal-600 transition-colors text-lg leading-none"
+                  aria-label="Dismiss"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* Generate + save/clear actions */}
           <div className="flex flex-wrap items-center gap-3 mb-6">
             <button
@@ -2599,6 +3225,7 @@ export default function ItineraryPlanner() {
                     day={trip.itinerary.days[selectedDay]}
                     savedMeta={savedMeta}
                     compact={compactView}
+                    city={primaryCity}
                     onSlotClick={setDetailSlot}
                     onDeleteSlot={(slot) => {
                       const itin = trip.itinerary;
@@ -2728,6 +3355,39 @@ export default function ItineraryPlanner() {
                       activityName:    "",
                       durationMinutes: 90,
                     })}
+                    onInsertAfterGap={(afterSlot, id, meta) => {
+                      const itin = trip.itinerary;
+                      if (!itin) return;
+                      const day = itin.days[selectedDay];
+                      if (!day) return;
+                      const dur = parseDuration(meta.duration);
+                      const newSlot: PlannedSlot = {
+                        kind:            "activity",
+                        startMinutes:    afterSlot.endMinutes,
+                        durationMinutes: dur,
+                        endMinutes:      afterSlot.endMinutes + dur,
+                        title:           meta.title,
+                        sourceId:        id,
+                        explanation:     meta.neighborhood ?? "",
+                        category:        meta.category,
+                      };
+                      const insertIdx = day.slots.indexOf(afterSlot) + 1;
+                      const newSlots  = [
+                        ...day.slots.slice(0, insertIdx),
+                        newSlot,
+                        ...day.slots.slice(insertIdx),
+                      ];
+                      updateTrip({
+                        itinerary: {
+                          ...itin,
+                          days: itin.days.map((d) =>
+                            d.dayIndex === day.dayIndex
+                              ? { ...d, slots: newSlots, scheduledActivityCount: newSlots.filter((s) => s.kind === "activity").length }
+                              : d
+                          ),
+                        },
+                      });
+                    }}
                   />
                 </div>
               )}
@@ -3055,6 +3715,7 @@ export default function ItineraryPlanner() {
             cuisinePrefs={cuisinePrefs}
             setCuisinePrefs={setCuisinePrefs}
             selectedFlight={selectedFlight}
+            selectedReturnFlight={selectedReturnFlight}
             selectedHotel={selectedHotel}
             manualArrivalTime={trip.manualArrivalTime}
             manualDepartureTime={trip.manualDepartureTime}
@@ -3063,6 +3724,7 @@ export default function ItineraryPlanner() {
             onUpdateManualDeparture={(v) => updateTrip({ manualDepartureTime: v })}
             onUpdateManualHotel={(v) => updateTrip({ manualHotelName: v })}
             onClearFlight={clearFlight}
+            onClearReturnFlight={clearReturnFlight}
             onClearHotel={clearHotel}
             obStyles={obStyles}
             obFirstTime={obFirstTime}

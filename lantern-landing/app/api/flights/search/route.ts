@@ -48,14 +48,14 @@ const searchCache = new Map<string, CacheEntry>();
 
 function buildCacheKey(params: ValidatedParams, priorities: string[]): string {
   return JSON.stringify({
-    o:    params.origin,
-    d:    params.destination,
+    o:    [...params.originAirports].sort().join(","),
+    d:    [...params.destinationAirports].sort().join(","),
     dep:  params.departure_date,
     ret:  params.return_date,
     cab:  params.cabin_class,
     pax:  params.adults,
     type: params.trip_type,
-    pri:  [...priorities].sort(), // sorted for key stability
+    pri:  [...priorities].sort(),
   });
 }
 
@@ -64,6 +64,8 @@ function buildCacheKey(params: ValidatedParams, priorities: string[]): string {
 interface ValidatedParams {
   origin: string;
   destination: string;
+  originAirports: string[];
+  destinationAirports: string[];
   departure_date: string;
   return_date: string | null;
   adults: number;
@@ -991,11 +993,31 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
     return { offers: [], meta: { status: "not_configured", message: "Flight search is temporarily unavailable." } };
   }
 
-  // ── 1. One call per provider — no metro expansion ────────────────────────────
-  const settled = await Promise.allSettled(
-    providers.map((p) => p.search(params))
+  // ── 1. Fan out across all origin × destination airport pairs ────────────────
+  // For metro group selections (e.g. SF Bay = SFO/OAK/SJC, Tokyo = HND/NRT) we
+  // build a cartesian product of pairs so every airport combination is searched.
+  const MAX_SEARCH_PAIRS = 6;
+  const searchPairs: Array<{ origin: string; destination: string }> = [];
+  outer: for (const o of params.originAirports) {
+    for (const d of params.destinationAirports) {
+      searchPairs.push({ origin: o, destination: d });
+      if (searchPairs.length >= MAX_SEARCH_PAIRS) break outer;
+    }
+  }
+  console.log(
+    `[metro-expand] ${searchPairs.length} pair(s): ` +
+    searchPairs.map((p) => `${p.origin}→${p.destination}`).join(", ")
   );
-  const expandedCalls = providers.map((p) => ({ provider: p, searchParams: params }));
+
+  const expandedCalls = providers.flatMap((p) =>
+    searchPairs.map((pair) => ({
+      provider: p,
+      pairParams: { ...params, origin: pair.origin, destination: pair.destination },
+    }))
+  );
+  const settled = await Promise.allSettled(
+    expandedCalls.map(({ provider, pairParams }) => provider.search(pairParams))
+  );
 
   const allProviderOffers: ProviderOffer[] = [];
   const allDebugRows: PerOfferDebugRow[] = [];
@@ -1327,8 +1349,8 @@ async function loadFlightOffers(params: ValidatedParams): Promise<{
         after_ranking: normed.length,
         rendered_offers: enriched.length,
         cheapest_rendered: cheapestRendered > 0 ? `$${cheapestRendered.toFixed(0)}` : "n/a",
-        origin_airports: params.origin,
-        destination_airports: params.destination,
+        origin_airports: params.originAirports.join(", "),
+        destination_airports: params.destinationAirports.join(", "),
       },
     },
   };
@@ -1358,10 +1380,25 @@ function validateRequest(body: Record<string, unknown>): [ValidatedParams | null
   const validCabins = ["economy", "premium_economy", "business", "first"];
   const validTypes = ["roundtrip", "oneway"];
 
+  // Extract metro airport arrays sent by the client; fall back to server-side expansion.
+  const parseAirportArray = (val: unknown, fallback: string): string[] => {
+    if (Array.isArray(val)) {
+      const codes = (val as unknown[])
+        .map((c) => String(c).trim().toUpperCase())
+        .filter((c) => /^[A-Z]{3}$/.test(c));
+      if (codes.length > 0 && codes.includes(fallback)) return codes;
+    }
+    return expandOrigins(fallback);
+  };
+  const originAirports = parseAirportArray(body.origin_airports, origin);
+  const destinationAirports = parseAirportArray(body.destination_airports, destination);
+
   return [
     {
       origin,
       destination,
+      originAirports,
+      destinationAirports,
       departure_date,
       return_date,
       adults,

@@ -442,6 +442,17 @@ type Airport = (typeof AIRPORTS)[0];
 type AirportEntry = Airport & { kind: "airport" };
 type Selection = MetroGroup | AirportEntry;
 type TripType = "roundtrip" | "oneway";
+
+// Match a free-form city string (e.g. "Tokyo, Japan") to a MetroGroup or Airport
+function findSelectionForCity(cityStr: string): Selection | null {
+  const q = cityStr.split(",")[0].trim().toLowerCase();
+  if (!q) return null;
+  const metro = METRO_GROUPS.find((m) => m.searchTerms.some((t) => t === q));
+  if (metro) return metro;
+  const airport = AIRPORTS.find((a) => a.city.toLowerCase() === q);
+  if (airport) return { ...airport, kind: "airport" as const };
+  return null;
+}
 type CabinClass = "economy" | "premium_economy" | "business" | "first";
 type SearchState = "idle" | "loading" | "results" | "error";
 
@@ -2057,7 +2068,8 @@ export default function FlightSearch() {
 
   const [origin, setOrigin] = useState<Selection | null>(null);
   const [destination, setDestination] = useState<Selection | null>(null);
-  const [tripType, setTripType] = useState<TripType>("roundtrip");
+  const [tripType, setTripType] = useState<TripType>("oneway");
+  const [isReturnMode, setIsReturnMode] = useState(false);
   const [departureDate, setDepartureDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
   const [travelers, setTravelers] = useState(1);
@@ -2104,18 +2116,33 @@ export default function FlightSearch() {
   // Trip context banner state
   const [tripContext, setTripContext] = useState<{ destination: string; startDate: string; endDate: string } | null>(null);
 
-  // Pre-fill departure/return dates from canonical trip store and show context banner
+  // Pre-fill departure/return dates from canonical trip store and show context banner.
+  // Also reads URL params: ?autofill_to=<city>, ?autofill_from=<city>, ?mode=return
   useEffect(() => {
     try {
+      // URL param auto-fill
+      const params = new URLSearchParams(window.location.search);
+      const autofillTo   = params.get("autofill_to");
+      const autofillFrom = params.get("autofill_from");
+      const returnMode   = params.get("mode") === "return";
+      if (autofillTo)   { const sel = findSelectionForCity(autofillTo);   if (sel) setDestination(sel); }
+      if (autofillFrom) { const sel = findSelectionForCity(autofillFrom); if (sel) setOrigin(sel); }
+      if (returnMode)   { setIsReturnMode(true); setTripType("oneway"); }
+
       const trip = readTripStore();
       if (!trip || !trip.startDate || trip.cityStops.length === 0) return;
-      if (!departureDate) setDepartureDate(trip.startDate);
       const totalDays = trip.cityStops.reduce((s, c) => s + (c.days || 0), 0);
       const retDate = new Date(trip.startDate + "T00:00:00");
       retDate.setDate(retDate.getDate() + Math.max(1, totalDays));
       const retIso = retDate.toISOString().slice(0, 10);
-      if (!returnDate) setReturnDate(retIso);
-      // Show context banner showing where the trip is going
+      if (returnMode) {
+        // For return flight, suggest the last day as the departure date
+        if (!departureDate) setDepartureDate(retIso);
+      } else {
+        if (!departureDate) setDepartureDate(trip.startDate);
+        if (!returnDate) setReturnDate(retIso);
+      }
+      // Show context banner
       const dest = trip.destinationRegion || trip.cityStops.map(c => c.city).join(" → ");
       if (dest) setTripContext({ destination: dest, startDate: trip.startDate, endDate: retIso });
     } catch { /* ignore */ }
@@ -2252,7 +2279,7 @@ export default function FlightSearch() {
         {/* Hero */}
         <div className="mb-7 text-center">
           <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-gray-900 mb-2">
-            Find your flight
+            {isReturnMode ? "Book your return flight" : "Find your flight"}
           </h1>
           <p className="text-sm text-gray-700 max-w-md mx-auto leading-relaxed">
             TravelGrab checks nearby airports automatically and ranks flights by comfort, timing, and value.
@@ -2586,9 +2613,16 @@ export default function FlightSearch() {
                       returnStopLabel:    offer.return_stop_label,
                     };
                     try {
-                      localStorage.setItem("travelgrab_selected_flight_v1", JSON.stringify(data));
-                      setItineraryFlightKey(flightKey);
-                      updateTripStore({ selectedFlight: data });
+                      if (isReturnMode) {
+                        updateTripStore({ selectedReturnFlight: data });
+                        sessionStorage.setItem("tg_return_flight_added", "1");
+                      } else {
+                        localStorage.setItem("travelgrab_selected_flight_v1", JSON.stringify(data));
+                        setItineraryFlightKey(flightKey);
+                        updateTripStore({ selectedFlight: data });
+                        sessionStorage.setItem("tg_flight_added", "1");
+                      }
+                      window.location.href = "/itinerary";
                     } catch { /* ignore */ }
                   }}
                 />
