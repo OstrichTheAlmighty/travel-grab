@@ -2300,6 +2300,116 @@ export default function ItineraryPlanner() {
     setObStep("done");
   }
 
+  // ── Apply flight times to existing itinerary (non-destructive) ──
+  // Only patches the arrival day (outbound) or departure day (return).
+  // Activities bumped off those days are moved to excludedActivityIds so they
+  // appear in the Dropped tab and can be restored by the user.
+  // Falls back to a full generate() when no itinerary exists yet.
+  function applyFlightToItinerary(which: "outbound" | "return") {
+    const current = trip.itinerary;
+    if (!current || current.days.length === 0) {
+      void generate();
+      return;
+    }
+
+    function fmtMin(minutes: number): string {
+      const h = Math.floor(minutes / 60).toString().padStart(2, "0");
+      const m = (minutes % 60).toString().padStart(2, "0");
+      return `${h}:${m}`;
+    }
+
+    const days = current.days.map((d) => ({ ...d, slots: [...d.slots] }));
+    const newlyExcluded: string[] = [];
+    const newlyDropped: import("@/lib/itinerary/types").DroppedActivity[] = [];
+
+    function displace(day: typeof days[number]) {
+      for (const slot of day.slots) {
+        if (slot.kind === "activity" && slot.sourceId && !trip.excludedActivityIds.includes(slot.sourceId)) {
+          newlyExcluded.push(slot.sourceId);
+          newlyDropped.push({
+            sourceId: slot.sourceId,
+            title:    slot.title,
+            reason:   which === "outbound"
+              ? "Arrival day — tap to restore once you know your schedule"
+              : "Departure day — tap to restore once you know your schedule",
+          });
+        }
+      }
+    }
+
+    if (which === "outbound" && selectedFlight?.arriveTime) {
+      const [h, m]         = selectedFlight.arriveTime.split(":").map(Number);
+      const arrMins        = h * 60 + m;
+      const transferEndMins = Math.min(arrMins + 90, 23 * 60);
+      const day0            = days[0];
+      if (day0) {
+        displace(day0);
+        days[0] = {
+          ...day0,
+          slots: [{
+            kind:            "airport_transfer",
+            startMinutes:    arrMins,
+            endMinutes:      transferEndMins,
+            durationMinutes: transferEndMins - arrMins,
+            title:           `Arrive ${selectedFlight.destination} — airport transfer`,
+            explanation:     `Flight lands at ${selectedFlight.arriveTime}. Allow ~90 min for baggage, customs, and transfer to your hotel.`,
+          }],
+          scheduledActivityCount: 0,
+          totalActivityMinutes:   0,
+          theme:       "Arrival day",
+          daySummary:  `Your flight arrives at ${selectedFlight.arriveTime}. Check in, rest, and explore the neighbourhood.`,
+          warnings:    [],
+        };
+      }
+    }
+
+    if (which === "return") {
+      const departTime = selectedReturnFlight?.departTime ?? selectedFlight?.returnDepartTime;
+      if (departTime) {
+        const [h, m]       = departTime.split(":").map(Number);
+        const deptMins     = h * 60 + m;
+        const airportByMin = Math.max(0, deptMins - 180);
+        const lastDay      = days[days.length - 1];
+        if (lastDay) {
+          displace(lastDay);
+          days[days.length - 1] = {
+            ...lastDay,
+            slots: [{
+              kind:            "airport_transfer",
+              startMinutes:    airportByMin,
+              endMinutes:      deptMins,
+              durationMinutes: deptMins - airportByMin,
+              title:           `Depart — transfer to airport`,
+              explanation:     `Flight departs at ${departTime}. Leave for the airport by ${fmtMin(airportByMin)} to allow time for check-in and security.`,
+            }],
+            scheduledActivityCount: 0,
+            totalActivityMinutes:   0,
+            theme:      "Departure day",
+            daySummary: `Your return flight departs at ${departTime}. Pack up and head to the airport by ${fmtMin(airportByMin)}.`,
+            warnings:   [],
+          };
+        }
+      }
+    }
+
+    const updatedExcluded = [...new Set([...trip.excludedActivityIds, ...newlyExcluded])];
+    const existingDropped = current.meta.droppedActivities.filter(
+      (d) => !newlyExcluded.includes(d.sourceId)
+    );
+
+    const updated: PlannerOutput = {
+      ...current,
+      days,
+      meta: {
+        ...current.meta,
+        droppedActivities: [...existingDropped, ...newlyDropped],
+        totalActivitiesDropped: existingDropped.length + newlyDropped.length,
+      },
+    };
+
+    updateTrip({ itinerary: updated, excludedActivityIds: updatedExcluded });
+  }
+
   // ── Generate ──
   async function generate() {
     if (!primaryCity) return;
@@ -2993,7 +3103,7 @@ export default function ItineraryPlanner() {
                     Return flight {selectedReturnFlight.origin} → {selectedReturnFlight.destination} added
                   </p>
                   <p className="text-[11px] text-teal-600 mt-0.5">
-                    Regenerate your itinerary to block out your departure time.
+                    {trip.itinerary ? "Update your last day to block departure time — other days stay untouched." : "Generate your itinerary to block out departure time."}
                   </p>
                 </div>
               </div>
@@ -3001,10 +3111,10 @@ export default function ItineraryPlanner() {
                 {primaryCity && trip.startDate && (
                   <button
                     type="button"
-                    onClick={() => { setReturnFlightAddedBanner(false); void generate(); }}
+                    onClick={() => { setReturnFlightAddedBanner(false); applyFlightToItinerary("return"); }}
                     className="h-8 rounded-lg bg-teal-600 px-3 text-xs font-semibold text-white hover:bg-teal-700 transition-colors"
                   >
-                    Regenerate
+                    {trip.itinerary ? "Update last day" : "Generate"}
                   </button>
                 )}
                 <button
@@ -3029,7 +3139,7 @@ export default function ItineraryPlanner() {
                     {selectedFlight.origin} → {selectedFlight.destination} added
                   </p>
                   <p className="text-[11px] text-teal-600 mt-0.5">
-                    Regenerate your itinerary to block out arrival and departure times.
+                    {trip.itinerary ? "Update Day 1 to block arrival time — other days stay untouched." : "Generate your itinerary to block out arrival time."}
                   </p>
                 </div>
               </div>
@@ -3037,10 +3147,10 @@ export default function ItineraryPlanner() {
                 {primaryCity && trip.startDate && (
                   <button
                     type="button"
-                    onClick={() => { setFlightAddedBanner(false); void generate(); }}
+                    onClick={() => { setFlightAddedBanner(false); applyFlightToItinerary("outbound"); }}
                     className="h-8 rounded-lg bg-teal-600 px-3 text-xs font-semibold text-white hover:bg-teal-700 transition-colors"
                   >
-                    Regenerate
+                    {trip.itinerary ? "Update Day 1" : "Generate"}
                   </button>
                 )}
                 <button
