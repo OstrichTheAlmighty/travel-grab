@@ -13,6 +13,8 @@ export function buildAviasalesUrl(params: {
     infants:          "0",
     trip_class:       "0",
     marker:           "H4L4KIUE",
+    locale:           "en",
+    currency:         "USD",
   });
   if (params.returnDate) p.set("return_date", params.returnDate);
   return `https://search.aviasales.com/flights/?${p.toString()}`;
