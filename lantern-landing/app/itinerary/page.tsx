@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ItineraryPlanner from "./ItineraryPlanner";
 import AuthGuard from "@/app/components/AuthGuard";
+import DemoGuard from "@/app/components/DemoGuard";
 
 export const metadata: Metadata = {
   title: "Plan your itinerary — TravelGrab",
@@ -9,8 +10,10 @@ export const metadata: Metadata = {
 
 export default function ItineraryPage() {
   return (
-    <AuthGuard>
-      <ItineraryPlanner />
-    </AuthGuard>
+    <DemoGuard>
+      <AuthGuard>
+        <ItineraryPlanner />
+      </AuthGuard>
+    </DemoGuard>
   );
 }
