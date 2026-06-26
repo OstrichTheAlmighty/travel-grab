@@ -34,7 +34,7 @@ export default function SignupPage() {
     }
 
     if (data.session) {
-      router.push("/itinerary");
+      router.push("/flights");
     } else {
       setDone(true);
       setLoading(false);

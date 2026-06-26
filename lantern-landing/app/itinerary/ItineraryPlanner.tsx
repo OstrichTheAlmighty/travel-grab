@@ -1787,6 +1787,7 @@ export default function ItineraryPlanner() {
   const [obStart,          setObStart]          = useState("");
   const [obReturn,         setObReturn]         = useState("");
   const [obDuration,       setObDuration]       = useState(7);
+  const [obTravelers,      setObTravelers]      = useState(1);
   const [obFirstTime,      setObFirstTime]      = useState<boolean | null>(null);
   const [obStyles,         setObStyles]         = useState<TravelStyle[]>([]);
   const [obCities,         setObCities]         = useState<{ city: string; days: number; why: string }[]>([]);
@@ -1841,6 +1842,7 @@ export default function ItineraryPlanner() {
           }
           if (shared?.travelStyles?.length) setObStyles(shared.travelStyles);
           if (shared?.firstTime !== null && shared?.firstTime !== undefined) setObFirstTime(shared.firstTime);
+          if (shared?.travelers && shared.travelers > 1) setObTravelers(shared.travelers);
           setObStep("done");
           setHydrated(true);
           return;
@@ -2284,6 +2286,7 @@ export default function ItineraryPlanner() {
       startDate,
       returnDate,
       tripLength,
+      travelers:         obTravelers,
       travelStyles:      obStyles,
       firstTime:         obFirstTime,
       wakeTime:          trip.wakeTime,
@@ -2590,6 +2593,24 @@ export default function ItineraryPlanner() {
                     }}
                     className="w-full rounded-xl border border-gray-200 bg-gray-100 px-4 py-3 text-sm text-gray-900 focus:border-teal-400 focus:outline-none focus:ring-1 focus:ring-teal-100 transition-colors [color-scheme:light]"
                   />
+                </div>
+                <div>
+                  <label className="text-xs text-gray-700 block mb-1.5">
+                    Travelers — <span className="text-gray-600 font-semibold">{obTravelers} {obTravelers === 1 ? "person" : "people"}</span>
+                  </label>
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setObTravelers(Math.max(1, obTravelers - 1))}
+                      className="w-10 h-10 rounded-full border border-gray-200 text-lg font-bold text-gray-700 hover:border-gray-300 transition-colors flex items-center justify-center"
+                    >−</button>
+                    <span className="w-8 text-center text-sm font-semibold text-gray-900">{obTravelers}</span>
+                    <button
+                      type="button"
+                      onClick={() => setObTravelers(Math.min(9, obTravelers + 1))}
+                      className="w-10 h-10 rounded-full border border-gray-200 text-lg font-bold text-gray-700 hover:border-gray-300 transition-colors flex items-center justify-center"
+                    >+</button>
+                  </div>
                 </div>
               </div>
               <div className="flex gap-3">

@@ -9,7 +9,7 @@ import { BRAND_NAME } from "@/lib/brand";
 function LoginForm() {
   const router       = useRouter();
   const searchParams = useSearchParams();
-  const redirect     = searchParams.get("redirect") ?? "/itinerary";
+  const redirect     = searchParams.get("redirect") ?? "/flights";
 
   const [email,    setEmail]    = useState("");
   const [password, setPassword] = useState("");

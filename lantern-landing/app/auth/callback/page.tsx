@@ -21,14 +21,14 @@ export default function AuthCallback() {
           if (error) {
             setError("This confirmation link has expired or already been used.");
           } else {
-            router.replace("/itinerary");
+            router.replace("/flights");
           }
         });
     } else {
       // Hash-based tokens (older Supabase flow)
       supabase.auth.getSession().then(({ data: { session } }) => {
         if (session) {
-          router.replace("/itinerary");
+          router.replace("/flights");
         } else {
           setError("Invalid or expired confirmation link.");
         }

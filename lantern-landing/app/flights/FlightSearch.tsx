@@ -2152,6 +2152,7 @@ export default function FlightSearch() {
       if (returnMode)   { setIsReturnMode(true); setTripType("oneway"); }
 
       const trip = readTripStore();
+      if (trip?.travelers && trip.travelers > 1) setTravelers(trip.travelers);
       if (!trip || !trip.startDate || trip.cityStops.length === 0) return;
       const totalDays = trip.cityStops.reduce((s, c) => s + (c.days || 0), 0);
       const retDate = new Date(trip.startDate + "T00:00:00");

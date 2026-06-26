@@ -4880,6 +4880,7 @@ export default function HotelSearch() {
         const bannerDest = trip?.destinationRegion || trip?.cityStops.map(c => c.city).join(" → ") || cityToUse;
         setTripBannerDest(bannerDest);
       }
+      if (trip?.travelers && trip.travelers > 1) setGuests(trip.travelers);
       if (trip?.startDate) {
         setCheckIn(trip.startDate);
         // Checkout = end of the matched city stop
