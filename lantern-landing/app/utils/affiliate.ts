@@ -1,15 +1,19 @@
-function ddmm(isoDate: string): string {
-  const [, month, day] = isoDate.split("-");
-  return `${day}${month}`;
-}
-
 export function buildAviasalesUrl(params: {
   origin: string;
   destination: string;
   departureDate: string;
   returnDate?: string;
 }): string {
-  const route = `${params.origin}${ddmm(params.departureDate)}${params.destination}1`;
-  const returnSegment = params.returnDate ? ddmm(params.returnDate) : "";
-  return `https://www.aviasales.com/search/${route}${returnSegment}?marker=H4L4KIUE`;
+  const p = new URLSearchParams({
+    origin_iata:      params.origin,
+    destination_iata: params.destination,
+    depart_date:      params.departureDate,
+    adults:           "1",
+    children:         "0",
+    infants:          "0",
+    trip_class:       "0",
+    marker:           "H4L4KIUE",
+  });
+  if (params.returnDate) p.set("return_date", params.returnDate);
+  return `https://search.aviasales.com/flights/?${p.toString()}`;
 }
