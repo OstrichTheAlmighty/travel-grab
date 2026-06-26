@@ -136,6 +136,16 @@ export async function GET(req: NextRequest) {
   // Get or create inventory (waits up to 7s for first batch on a new city)
   const inv = await getOrCreateInventory(destination, apiKey);
 
+  // ── Cache / path diagnostics ────────────────────────────────────────────────
+  console.log(`[activities/search] destination="${destination}"`);
+  console.log(`[activities/search] RAW_INVENTORY_COUNT: ${inv?.entries.size ?? 0}  status=${inv?.status ?? "null"}  cacheSource=${inv?.cacheSource ?? "n/a"}  queriesCompleted=${inv?.queriesCompleted ?? 0}/${inv?.queriesTotal ?? 0}`);
+  if (!inv || inv.entries.size === 0) {
+    console.warn(`[activities/search] PATH=mock_fallback — inv null or empty, Tokyo hardcoded data returned for "${destination}"`);
+  } else {
+    console.log(`[activities/search] PATH=live_api — returning ${inv.entries.size} raw places for "${destination}"`);
+  }
+  // ───────────────────────────────────────────────────────────────────────────
+
   if (!inv || inv.entries.size === 0) {
     console.warn(`[activities/search] no inventory for "${destination}" — mock fallback`);
     const mock = DESTINATION_DATA["Tokyo, Japan"];
