@@ -1779,7 +1779,7 @@ export default function ItineraryPlanner() {
   }>({ open: false, dayIndex: null, activityName: "", durationMinutes: 90 });
 
   // Onboarding state (new users see a guided wizard; existing users skip to "done")
-  type ObStep = "destination" | "dates" | "style" | "recommendations" | "cities" | "done";
+  type ObStep = "destination" | "travelers" | "dates" | "style" | "recommendations" | "cities" | "done";
   const [obStep,           setObStep]           = useState<ObStep>("done");
   const [obDest,           setObDest]           = useState("");
   const [obDestValidated,  setObDestValidated]  = useState(false);
@@ -2469,8 +2469,8 @@ export default function ItineraryPlanner() {
         <div className="mx-auto max-w-lg px-4 sm:px-6 py-16">
           {/* Step indicators */}
           <div className="flex items-center gap-2 mb-10 justify-center">
-            {(["destination", "dates", "style", "recommendations", "cities"] as const).map((s, i) => {
-              const steps = ["destination", "dates", "style", "recommendations", "cities"] as const;
+            {(["destination", "travelers", "dates", "style", "recommendations", "cities"] as const).map((s, i) => {
+              const steps = ["destination", "travelers", "dates", "style", "recommendations", "cities"] as const;
               const stepIdx = steps.indexOf(obStep as typeof steps[number]);
               const isActive = s === obStep;
               const isDone = i < stepIdx;
@@ -2479,7 +2479,7 @@ export default function ItineraryPlanner() {
                   <div className={`h-2 w-2 rounded-full transition-colors ${
                     isActive ? "bg-lantern-mint" : isDone ? "bg-lantern-mint/40" : "bg-gray-200"
                   }`} />
-                  {i < 4 && <div className="h-px w-6 bg-gray-100" />}
+                  {i < 5 && <div className="h-px w-6 bg-gray-100" />}
                 </div>
               );
             })}
@@ -2516,12 +2516,50 @@ export default function ItineraryPlanner() {
                     return;
                   }
                   setObDestError(null);
-                  setObStep("dates");
+                  setObStep("travelers");
                 }}
                 className="w-full h-12 rounded-full bg-lantern-mint text-ink text-sm font-bold transition hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed"
               >
                 Next
               </button>
+            </div>
+          )}
+
+          {/* Step: travelers */}
+          {obStep === "travelers" && (
+            <div className="space-y-8">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">Who&apos;s traveling?</h1>
+                <p className="text-sm text-gray-700">We&apos;ll use this to size flight and hotel searches.</p>
+              </div>
+              <div className="flex items-center justify-center gap-6 py-6">
+                <button
+                  type="button"
+                  onClick={() => setObTravelers(Math.max(1, obTravelers - 1))}
+                  className="w-14 h-14 rounded-full border border-gray-200 text-2xl font-bold text-gray-700 hover:border-gray-400 transition-colors flex items-center justify-center"
+                >−</button>
+                <div className="text-center">
+                  <span className="text-6xl font-black text-gray-900">{obTravelers}</span>
+                  <p className="text-sm text-gray-500 mt-1">{obTravelers === 1 ? "traveler" : "travelers"}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setObTravelers(Math.min(9, obTravelers + 1))}
+                  className="w-14 h-14 rounded-full border border-gray-200 text-2xl font-bold text-gray-700 hover:border-gray-400 transition-colors flex items-center justify-center"
+                >+</button>
+              </div>
+              <div className="flex gap-3">
+                <button type="button" onClick={() => setObStep("destination")} className="flex-1 h-12 rounded-full border border-gray-200 text-sm text-gray-700 hover:text-gray-700 transition-colors">
+                  Back
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setObStep("dates")}
+                  className="flex-[2] h-12 rounded-full bg-lantern-mint text-ink text-sm font-bold transition hover:opacity-90"
+                >
+                  Next
+                </button>
+              </div>
             </div>
           )}
 
@@ -2594,27 +2632,9 @@ export default function ItineraryPlanner() {
                     className="w-full rounded-xl border border-gray-200 bg-gray-100 px-4 py-3 text-sm text-gray-900 focus:border-teal-400 focus:outline-none focus:ring-1 focus:ring-teal-100 transition-colors [color-scheme:light]"
                   />
                 </div>
-                <div>
-                  <label className="text-xs text-gray-700 block mb-1.5">
-                    Travelers — <span className="text-gray-600 font-semibold">{obTravelers} {obTravelers === 1 ? "person" : "people"}</span>
-                  </label>
-                  <div className="flex items-center gap-3">
-                    <button
-                      type="button"
-                      onClick={() => setObTravelers(Math.max(1, obTravelers - 1))}
-                      className="w-10 h-10 rounded-full border border-gray-200 text-lg font-bold text-gray-700 hover:border-gray-300 transition-colors flex items-center justify-center"
-                    >−</button>
-                    <span className="w-8 text-center text-sm font-semibold text-gray-900">{obTravelers}</span>
-                    <button
-                      type="button"
-                      onClick={() => setObTravelers(Math.min(9, obTravelers + 1))}
-                      className="w-10 h-10 rounded-full border border-gray-200 text-lg font-bold text-gray-700 hover:border-gray-300 transition-colors flex items-center justify-center"
-                    >+</button>
-                  </div>
-                </div>
               </div>
               <div className="flex gap-3">
-                <button type="button" onClick={() => setObStep("destination")} className="flex-1 h-12 rounded-full border border-gray-200 text-sm text-gray-700 hover:text-gray-700 transition-colors">
+                <button type="button" onClick={() => setObStep("travelers")} className="flex-1 h-12 rounded-full border border-gray-200 text-sm text-gray-700 hover:text-gray-700 transition-colors">
                   Back
                 </button>
                 <button
@@ -2750,9 +2770,12 @@ export default function ItineraryPlanner() {
                     ))}
                   </div>
                   <div className="flex items-center justify-between text-xs text-gray-700 px-1">
-                    <span>{obCities.reduce((s, c) => s + c.days, 0)} days total</span>
+                    <span>{obCities.reduce((s, c) => s + c.days, 0)} days total · {obTravelers} {obTravelers === 1 ? "traveler" : "travelers"}</span>
                     <span>{obDest}</span>
                   </div>
+                  <p className="text-[11px] text-gray-400 text-center px-2">
+                    You can edit cities, dates, and preferences at any time from the Preferences tab.
+                  </p>
                   <div className="flex gap-3">
                     <button
                       type="button"
