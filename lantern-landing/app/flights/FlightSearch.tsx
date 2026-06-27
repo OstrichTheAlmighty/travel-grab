@@ -295,9 +295,11 @@ const AIRPORTS = [
   { code: "HND", city: "Tokyo",          name: "Haneda",                         country: "Japan" },
   { code: "KIX", city: "Osaka",          name: "Kansai Intl",                    country: "Japan" },
   { code: "ITM", city: "Osaka",          name: "Itami Airport",                  country: "Japan" },
+  { code: "HIJ", city: "Hiroshima",      name: "Hiroshima Airport",              country: "Japan" },
   { code: "CTS", city: "Sapporo",        name: "New Chitose Airport",            country: "Japan" },
   { code: "FUK", city: "Fukuoka",        name: "Fukuoka Airport",                country: "Japan" },
   { code: "NGO", city: "Nagoya",         name: "Chubu Centrair Intl",            country: "Japan" },
+  { code: "KMQ", city: "Kanazawa",       name: "Komatsu Airport",                country: "Japan" },
   { code: "OKA", city: "Okinawa",        name: "Naha Airport",                   country: "Japan" },
   { code: "ICN", city: "Seoul",          name: "Incheon Intl",                   country: "South Korea" },
   { code: "GMP", city: "Seoul",          name: "Gimpo Intl",                     country: "South Korea" },
@@ -411,11 +413,11 @@ const METRO_GROUPS: MetroGroup[] = [
   // ── Asia ──
   {
     kind: "metro", id: "TYO", label: "Tokyo Area", codes: ["HND", "NRT"],
-    searchTerms: ["tokyo", "hnd", "nrt", "haneda", "narita"],
+    searchTerms: ["tokyo", "hnd", "nrt", "haneda", "narita", "hakone", "nikko", "kamakura", "yokohama"],
   },
   {
     kind: "metro", id: "OSA", label: "Osaka Area", codes: ["KIX", "ITM"],
-    searchTerms: ["osaka", "osa", "kix", "itm", "kansai", "itami"],
+    searchTerms: ["osaka", "osa", "kix", "itm", "kansai", "itami", "kyoto", "nara"],
   },
   {
     kind: "metro", id: "SEL", label: "Seoul Area", codes: ["ICN", "GMP"],
