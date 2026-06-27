@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState, Suspense } from "react";
+import { FormEvent, useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { BRAND_NAME } from "@/lib/brand";
 import { Logo } from "@/app/components/Logo";
@@ -151,6 +151,14 @@ export default function Page() {
   const [email,     setEmail]     = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [error,     setError]     = useState("");
+  const [isOwner,   setIsOwner]   = useState(false);
+
+  useEffect(() => {
+    const expectedKey = process.env.NEXT_PUBLIC_DEMO_KEY ?? "";
+    const storedKey   = (() => { try { return localStorage.getItem("travelgrab_demo_access_v1"); } catch { return null; } })();
+    const demoEnabled = process.env.NEXT_PUBLIC_DEMO_ENABLED === "true";
+    setIsOwner(demoEnabled || (!!expectedKey && storedKey === expectedKey));
+  }, []);
 
   async function handleLogout() {
     if (!supabase) return;
@@ -207,7 +215,7 @@ export default function Page() {
                 Log out
               </button>
             </div>
-          ) : (
+          ) : isOwner ? (
             <div className="flex items-center gap-3">
               <a href="/auth/login" className="hidden text-sm text-gray-700 transition hover:text-gray-900 sm:block">
                 Log in
@@ -219,7 +227,7 @@ export default function Page() {
                 Sign up
               </a>
             </div>
-          )}
+          ) : null}
         </div>
       </header>
 
