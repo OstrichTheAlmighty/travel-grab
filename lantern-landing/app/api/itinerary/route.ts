@@ -6,7 +6,7 @@ import type { PlannerOutput, PlannedDay, PlannedSlot, SlotKind } from "@/lib/iti
 
 export const runtime     = "nodejs";
 export const dynamic     = "force-dynamic";
-export const maxDuration = 60; // Claude can take 30–50s for a 20-day itinerary
+export const maxDuration = 300; // streaming keeps connection alive; 300s for Pro plan safety net
 
 // ── Claude output types ────────────────────────────────────────────────────────
 
@@ -116,51 +116,70 @@ function transformDay(day: ClaudeDay, paceMax: number): PlannedDay {
 // ── Route handler ──────────────────────────────────────────────────────────────
 
 export async function POST(req: NextRequest) {
-  try {
-    // Per-user daily quota (skipped for admin)
-    if (!isAdminRequest(req)) {
-      const authUser = await getUserFromRequest(req);
-      if (authUser) {
-        const { allowed, count, limit } = await checkUsage(authUser.id, "itinerary");
-        if (!allowed) {
-          return NextResponse.json(
-            { error: `Daily limit reached — ${count}/${limit} itineraries generated today. Resets at midnight UTC.`, limitReached: true },
-            { status: 429 }
-          );
-        }
-        incrementUsage(authUser.id, "itinerary");
+  // Auth + quota must be checked before the stream starts — can't send non-200 once streaming begins
+  if (!isAdminRequest(req)) {
+    const authUser = await getUserFromRequest(req);
+    if (authUser) {
+      const { allowed, count, limit } = await checkUsage(authUser.id, "itinerary");
+      if (!allowed) {
+        return NextResponse.json(
+          { error: `Daily limit reached — ${count}/${limit} itineraries generated today. Resets at midnight UTC.`, limitReached: true },
+          { status: 429 }
+        );
       }
+      incrementUsage(authUser.id, "itinerary");
     }
-
-    const input = await req.json();
-    const result = await generateItinerary(input);
-
-    // Warning threshold mirrors the activity-count pace limit in the prompt
-    const paceMax = ({ relaxed: 3, moderate: 5, packed: 8 } as Record<string, number>)[
-      input.userPreferences?.pace ?? "moderate"
-    ] ?? 5;
-
-    const days: PlannedDay[] = (result.days ?? []).map((day) => transformDay(day, paceMax));
-    const totalScheduled = days.reduce((s, d) => s + d.scheduledActivityCount, 0);
-    const dropped = result._dropped ?? [];
-
-    const plannerOutput: PlannerOutput = {
-      days,
-      meta: {
-        solverDurationMs:         0,
-        totalActivitiesScheduled: totalScheduled,
-        totalActivitiesDropped:   dropped.length,
-        droppedActivities:        dropped,
-        conflicts:                [],
-      },
-    };
-
-    return NextResponse.json(plannerOutput);
-  } catch (error) {
-    console.error("Itinerary generation error:", error);
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Unknown error" },
-      { status: 500 },
-    );
   }
+
+  const input = await req.json();
+  const paceMax = ({ relaxed: 3, moderate: 5, packed: 8 } as Record<string, number>)[
+    input.userPreferences?.pace ?? "moderate"
+  ] ?? 5;
+
+  const encoder = new TextEncoder();
+
+  const stream = new ReadableStream({
+    async start(controller) {
+      const send = (obj: unknown) => {
+        try { controller.enqueue(encoder.encode(JSON.stringify(obj) + "\n")); } catch { /* closed */ }
+      };
+
+      // Heartbeat every 3 s keeps the Vercel connection alive while Claude generates
+      const heartbeat = setInterval(() => send({ type: "ping" }), 3000);
+
+      try {
+        const result = await generateItinerary(input);
+        const days: PlannedDay[] = (result.days ?? []).map((day) => transformDay(day, paceMax));
+        const totalScheduled = days.reduce((s, d) => s + d.scheduledActivityCount, 0);
+        const dropped = result._dropped ?? [];
+
+        const plannerOutput: PlannerOutput = {
+          days,
+          meta: {
+            solverDurationMs:         0,
+            totalActivitiesScheduled: totalScheduled,
+            totalActivitiesDropped:   dropped.length,
+            droppedActivities:        dropped,
+            conflicts:                [],
+          },
+        };
+
+        send({ type: "done", data: plannerOutput });
+      } catch (error) {
+        console.error("Itinerary generation error:", error);
+        send({ type: "error", error: error instanceof Error ? error.message : "Unknown error" });
+      } finally {
+        clearInterval(heartbeat);
+        controller.close();
+      }
+    },
+  });
+
+  return new Response(stream, {
+    headers: {
+      "Content-Type":  "application/x-ndjson",
+      "Cache-Control": "no-cache",
+      "Connection":    "keep-alive",
+    },
+  });
 }

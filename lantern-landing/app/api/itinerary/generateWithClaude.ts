@@ -108,7 +108,7 @@ export async function generateItinerary(input: ItineraryRequest): Promise<Genera
       system: [{ type: "text", text: systemPrompt, cache_control: { type: "ephemeral" } }],
       messages: [{ role: "user", content: userPrompt }],
     },
-    { timeout: 55_000 }, // fail before Vercel's 60s hard kill
+    { timeout: 270_000 }, // 270 s — well within the 300 s maxDuration
   );
 
   const stopReason = response.stop_reason;

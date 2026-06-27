@@ -2479,7 +2479,32 @@ export default function ItineraryPlanner() {
         throw new Error(String(err.error ?? `HTTP ${res.status}`));
       }
 
-      const raw  = await res.json() as PlannerOutput & { _debugCityAssignment?: unknown };
+      // Read NDJSON stream — server sends heartbeat pings while Claude generates,
+      // then a final {"type":"done","data":{...}} line with the itinerary.
+      if (!res.body) throw new Error("No response body from itinerary API");
+      const reader  = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buf    = "";
+      let result: PlannerOutput | null = null;
+
+      readLoop: while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buf += decoder.decode(value, { stream: true });
+        const lines = buf.split("\n");
+        buf = lines.pop() ?? "";
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed) continue;
+          const msg = JSON.parse(trimmed) as { type: string; data?: PlannerOutput; error?: string };
+          if (msg.type === "done" && msg.data) { result = msg.data; break readLoop; }
+          if (msg.type === "error") throw new Error(msg.error ?? "Unknown error");
+          // "ping" → ignore
+        }
+      }
+
+      if (!result) throw new Error("No itinerary received from server");
+      const raw  = result as PlannerOutput & { _debugCityAssignment?: unknown };
       const data = raw as PlannerOutput;
 
       // ── Browser-visible city assignment debug ─────────────────────────────
