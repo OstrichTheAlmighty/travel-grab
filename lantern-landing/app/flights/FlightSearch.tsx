@@ -1553,10 +1553,15 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
       track("google_flights_clicked", sharedProps);
       if (departureDate) {
         const affiliateUrl = buildAviasalesUrl({
-          origin: offer.origin,
-          destination: offer.destination,
+          origin:        offer.origin,
+          destination:   offer.destination,
           departureDate,
-          returnDate: returnDate || undefined,
+          returnDate:    returnDate || undefined,
+          airlineCode:   offer.airline_code,
+          flightNumber:  `${offer.airline_code}${offer.flight_number}`,
+          departTime:    offer.depart_time?.split("T")[1]?.slice(0, 5),
+          price:         offer.price_total,
+          currency:      offer.currency,
         });
         window.open(affiliateUrl, "_blank", "noopener,noreferrer");
       } else if (offer.booking_url) {
@@ -1573,10 +1578,15 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
     }).catch(() => undefined);
     if (departureDate) {
       const affiliateUrl = buildAviasalesUrl({
-        origin: offer.origin,
-        destination: offer.destination,
+        origin:        offer.origin,
+        destination:   offer.destination,
         departureDate,
-        returnDate: returnDate || undefined,
+        returnDate:    returnDate || undefined,
+        airlineCode:   offer.airline_code,
+        flightNumber:  `${offer.airline_code}${offer.flight_number}`,
+        departTime:    offer.depart_time?.split("T")[1]?.slice(0, 5),
+        price:         offer.price_total,
+        currency:      offer.currency,
       });
       window.open(affiliateUrl, "_blank", "noopener,noreferrer");
       return;
