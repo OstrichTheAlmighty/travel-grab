@@ -1278,6 +1278,7 @@ function DayView({
   onRename, renamingSlot, onRenameChange, onRenameCommit,
   onDragStart, onDragEnd, draggingSlot, onMoveUp, onMoveDown,
   onEditNotes, onEditDuration, onQuickAdd, onInsertAfterGap,
+  onRelaxDay, relaxing,
 }: {
   day:               PlannedDay;
   savedMeta:         Record<string, SavedMeta>;
@@ -1299,6 +1300,8 @@ function DayView({
   onEditDuration?:     (slot: PlannedSlot, minutes: number) => void;
   onQuickAdd?:         () => void;
   onInsertAfterGap?:   (afterSlot: PlannedSlot, id: string, meta: SavedMeta) => void;
+  onRelaxDay?:         () => void;
+  relaxing?:           boolean;
 }) {
   return (
     <div>
@@ -1336,6 +1339,22 @@ function DayView({
         )}
         {day.daySummary && (
           <p className="text-[11px] text-gray-700 italic mt-2 mb-1 leading-relaxed">{day.daySummary}</p>
+        )}
+        {onRelaxDay && (
+          <button
+            onClick={onRelaxDay}
+            disabled={relaxing}
+            className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-teal-200 bg-teal-50 px-3 py-1.5 text-[11px] font-medium text-teal-700 transition hover:bg-teal-100 disabled:cursor-wait disabled:opacity-60"
+          >
+            {relaxing ? (
+              <>
+                <span className="inline-block h-3 w-3 animate-spin rounded-full border border-teal-600 border-t-transparent" />
+                Making day lighter…
+              </>
+            ) : (
+              "Make this day more relaxed"
+            )}
+          </button>
         )}
       </div>
       <div>
@@ -1740,7 +1759,8 @@ export default function ItineraryPlanner() {
     value:    string;
   } | null>(null);
   const [dragging,    setDragging]    = useState<{ slot: PlannedSlot; sourceDayIndex: number } | null>(null);
-  const [dragOverDay, setDragOverDay] = useState<number | null>(null);
+  const [dragOverDay,       setDragOverDay]       = useState<number | null>(null);
+  const [relaxingDayIndex, setRelaxingDayIndex] = useState<number | null>(null);
 
   // Tab navigation
   type ActiveTab = "itinerary" | "preferences" | "travel" | "recommendations" | "saved" | "dropped";
@@ -2574,6 +2594,59 @@ export default function ItineraryPlanner() {
     } catch (e) {
       setGenError(e instanceof Error ? e.message : "Something went wrong.");
       setGenStatus("error");
+    }
+  }
+
+  async function relaxDay(dayIndex: number) {
+    if (!trip.itinerary) return;
+    const day = trip.itinerary.days[dayIndex];
+    if (!day) return;
+    setRelaxingDayIndex(dayIndex);
+    try {
+      const res = await fetchWithAuth("/api/itinerary/relax-day", {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({ day, wakeTime: trip.wakeTime }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({})) as Record<string, string>;
+        throw new Error(String(err.error ?? `HTTP ${res.status}`));
+      }
+      if (!res.body) throw new Error("No response body");
+      const reader  = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buf = "";
+      let relaxedDay: PlannedDay | null = null;
+
+      relaxLoop: while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buf += decoder.decode(value, { stream: true });
+        const lines = buf.split("\n");
+        buf = lines.pop() ?? "";
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed) continue;
+          const msg = JSON.parse(trimmed) as { type: string; data?: PlannedDay; error?: string };
+          if (msg.type === "done" && msg.data) { relaxedDay = msg.data; break relaxLoop; }
+          if (msg.type === "error") throw new Error(msg.error ?? "Unknown error");
+        }
+      }
+
+      if (!relaxedDay) throw new Error("No response from server");
+
+      updateTrip({
+        itinerary: {
+          ...trip.itinerary,
+          days: trip.itinerary.days.map((d) =>
+            d.dayIndex === dayIndex ? { ...relaxedDay!, dayIndex } : d
+          ),
+        },
+      });
+    } catch (e) {
+      console.error("[relax-day]", e);
+    } finally {
+      setRelaxingDayIndex(null);
     }
   }
 
@@ -3582,6 +3655,8 @@ export default function ItineraryPlanner() {
                         },
                       });
                     }}
+                    onRelaxDay={() => void relaxDay(selectedDay)}
+                    relaxing={relaxingDayIndex === selectedDay}
                   />
                 </div>
               )}

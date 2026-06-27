@@ -631,7 +631,8 @@ CONSTRAINTS:
 1. Dedup — each place once only across all days ("Itsukushima Jinja" = "Itsukushima Shrine" = same)
 2. Geo — [CITY-ONLY, Days X–Y] tags absolute; never schedule outside tagged days
 3. Full-day [FULL-DAY] events get their own day (count as 1 + dinner)
-4. Transfer days: transit = 0 count; destination activities only after arrival${budgetBlock}${foodBlock}${cuisineBlock}${flightBlock}
+4. Transfer days: transit = 0 count; destination activities only after arrival
+5. Meals — NEVER place two meal slots consecutively. Standard: 1 breakfast + 1 lunch + 1 dinner, each at least 2 h apart. The ONLY exception is two tiny tastings (≤30 min each) in the same neighborhood — if you do this, add a notes field explaining why both are needed back-to-back.${budgetBlock}${foodBlock}${cuisineBlock}${flightBlock}
 
 TIME EXPLANATIONS — required only for slots with type "activity":
 For each activity, include a timeExplanation field: one concise sentence (max 20 words) explaining WHY this specific time was chosen.
