@@ -4000,7 +4000,7 @@ export default function ItineraryPlanner() {
               {/* Outbound flight */}
               <section className="rounded-2xl border border-gray-200 bg-white p-5">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-sm font-semibold text-gray-900">{isMultiCity ? "Outbound flight" : "Flight"}</h3>
+                  <h3 className="text-sm font-semibold text-gray-900">Outbound flight</h3>
                   <span className="text-[11px] text-gray-400">(optional)</span>
                 </div>
                 {selectedFlight ? (
@@ -4027,12 +4027,22 @@ export default function ItineraryPlanner() {
                         />
                       </div>
                     )}
-                    <Link
-                      href={firstCity2 ? `/flights?autofill_to=${encodeURIComponent(firstCity2)}` : "/flights"}
-                      className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-teal-600 transition-colors"
-                    >
-                      Search on Flights and add <span>→</span>
-                    </Link>
+                    <div className="flex flex-col gap-1.5">
+                      <Link
+                        href={firstCity2 ? `/flights?autofill_to=${encodeURIComponent(firstCity2)}` : "/flights"}
+                        className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-teal-600 transition-colors"
+                      >
+                        Search outbound flight <span>→</span>
+                      </Link>
+                      {!isMultiCity && (
+                        <Link
+                          href={lastCity ? `/flights?autofill_from=${encodeURIComponent(lastCity)}&mode=return` : "/flights?mode=return"}
+                          className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-teal-600 transition-colors"
+                        >
+                          Search return flight <span>→</span>
+                        </Link>
+                      )}
+                    </div>
                   </div>
                 )}
               </section>
@@ -4061,7 +4071,7 @@ export default function ItineraryPlanner() {
                         href={lastCity ? `/flights?autofill_from=${encodeURIComponent(lastCity)}&mode=return` : "/flights?mode=return"}
                         className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-teal-600 transition-colors"
                       >
-                        Search on Flights and add <span>→</span>
+                        Search return flight <span>→</span>
                       </Link>
                     </div>
                   )}
