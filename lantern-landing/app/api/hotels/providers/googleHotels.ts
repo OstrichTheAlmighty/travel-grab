@@ -9,10 +9,10 @@ import type {
 type R = Record<string, unknown>;
 
 // SerpAPI Google Hotels returns ~16-20 properties per page.
-// Each page costs 1 SerpAPI credit. 3 pages → up to ~60 hotels, enough for scoring.
+// Each page costs 1 SerpAPI credit. 2 pages → ~35 hotels, enough for scoring.
 // Pagination stops early when SerpAPI returns no next_page_token (provider exhausted).
-// MAX_PAGES is a hard safety ceiling to prevent runaway loops or unexpectedly deep APIs.
-const MAX_PAGES = 5;
+// MAX_PAGES capped at 2 to keep Google Places enrichment cost at ~$1.20/search.
+const MAX_PAGES = 2;
 const PAGE_TIMEOUT_MS = 8_000;
 
 function parseStarRating(hotelClass: string | undefined): number {

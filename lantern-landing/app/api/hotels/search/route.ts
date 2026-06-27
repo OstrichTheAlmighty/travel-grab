@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import { getUserFromRequest, isAdminRequest } from "@/lib/auth-server";
 import { checkUsage, incrementUsage } from "@/lib/usage";
-import { searchLiteApiHotels } from "../providers/liteapi";
-import type { NearbyPlace, PlacesEnrichment, ProviderHotel } from "../providers/types";
+import { searchGoogleHotels } from "../providers/googleHotels";
+import { enrichWithGooglePlaces } from "../providers/googlePlaces";
+import type { PlacesEnrichment } from "../providers/googlePlaces";
+import type { NearbyPlace, ProviderHotel } from "../providers/types";
 import { createRateLimiter, getClientIP, rateLimitedResponse } from "@/lib/rate-limit";
 
 // 20 requests per 10 minutes per IP — hotel search triggers multiple downstream API calls
@@ -2435,9 +2437,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ status: "error", message: "destination, check_in, and check_out are required." }, { status: 400 });
   }
 
-  const liteApiKey = (process.env.LITEAPI_API_KEY ?? "").trim();
+  // TODO: Replace with Duffel Stays API once approved (DUFFEL_API_KEY in Vercel)
+  const serpApiKey   = (process.env.SERPAPI_API_KEY       ?? "").trim();
+  const placesApiKey = (process.env.GOOGLE_PLACES_API_KEY ?? "").trim();
 
-  if (!liteApiKey) {
+  if (!serpApiKey) {
     return NextResponse.json({ status: "not_configured", message: "Hotel search is temporarily unavailable." }, { status: 200 });
   }
 
@@ -2466,25 +2470,48 @@ export async function POST(req: Request) {
     rawCount         = cached.rawCount;
     geoFilteredCount = cached.geoFilteredCount;
   } else {
-    console.log(`LITEAPI_CALL hotel_search ${force_refresh ? "force_refresh" : "cache_miss"} ${cacheKey}`);
+    if (force_refresh) {
+      console.log(`SERPAPI_CALL hotel_search force_refresh ${cacheKey}`);
+    } else {
+      console.log(`SERPAPI_CALL hotel_search cache_miss ${cacheKey}`);
+    }
 
-    const liteResult = await searchLiteApiHotels(
-      { destination, check_in, check_out, guests, rooms },
-      liteApiKey,
-    );
+    const serpResult = await searchGoogleHotels({ destination, check_in, check_out, guests, rooms }, serpApiKey);
 
-    if (liteResult.hotels.length === 0) {
+    if (serpResult.hotels.length === 0) {
       return NextResponse.json({ status: "empty", message: `No hotels found for "${destination}". Try a different city name.`, offers: [] });
     }
 
     // ── Pipeline stage 1: deduplicate ──────────────────────────────────────────
-    const deduped = deduplicateHotels(liteResult.hotels);
+    const deduped = deduplicateHotels(serpResult.hotels);
     console.log(
-      `[pipeline:1-fetch]  destination="${destination}"  raw=${liteResult.rawCount}  after_dedup=${deduped.length}  (${liteResult.latencyMs}ms)`,
+      `[pipeline:1-fetch]  destination="${destination}"  pages=${serpResult.pagesFetched}  raw=${serpResult.rawCount}  after_dedup=${deduped.length}  (serp=${serpResult.latencyMs}ms)`,
     );
 
-    // ── No geo-filter or Places enrichment — LiteAPI returns city-scoped results ─
+    console.log(`[pipeline:1-fetch]  first ${Math.min(10, deduped.length)} hotels (pre-filter):`);
+    deduped.slice(0, 10).forEach((h, i) =>
+      console.log(`  [${i + 1}] "${h.name}" | ${h.address} | lat=${h.latitude ?? "?"} lng=${h.longitude ?? "?"}`)
+    );
+
+    // ── Pipeline stage 2: geo-filter ────────────────────────────────────────────
+    let geoFiltered = deduped;
+    if (placesApiKey) {
+      const geoCenter = await geocodeDestination(destination, placesApiKey, place_id || undefined);
+      if (geoCenter) {
+        geoFiltered = geoFilterHotels(deduped, geoCenter, destination);
+      } else {
+        console.warn(`[pipeline:2-geo]  geocoding failed for "${destination}" — skipping geo filter`);
+      }
+    } else {
+      console.warn(`[pipeline:2-geo]  no Places API key — skipping geo filter`);
+    }
+    console.log(`[pipeline:2-geo]  after_geo_filter=${geoFiltered.length}  (removed ${deduped.length - geoFiltered.length})`);
+
+    // ── Pipeline stage 3: Places enrichment ─────────────────────────────────────
     enrichments = new Map<string, PlacesEnrichment>();
+    if (placesApiKey) {
+      enrichments = await enrichWithGooglePlaces(geoFiltered, destination, placesApiKey);
+    }
 
     // ── Store in server cache ────────────────────────────────────────────────────
     if (cache.size >= MAX_CACHE_ENTRIES) {
@@ -2495,20 +2522,20 @@ export async function POST(req: Request) {
       }
     }
     cache.set(cacheKey, {
-      rawHotels:        deduped,
+      rawHotels:        geoFiltered,
       enrichments,
       fetchedAt:        now,
-      rawCount:         liteResult.rawCount,
-      pagesFetched:     1,
-      geoFilteredCount: deduped.length,
+      rawCount:         serpResult.rawCount,
+      pagesFetched:     serpResult.pagesFetched,
+      geoFilteredCount: geoFiltered.length,
     });
-    console.log(`[hotel-cache] stored ${deduped.length} hotels for "${cacheKey}" (cache size: ${cache.size})`);
+    console.log(`[hotel-cache] stored ${geoFiltered.length} hotels for "${cacheKey}" (cache size: ${cache.size})`);
 
-    rawHotels        = deduped;
+    rawHotels        = geoFiltered;
     fetchedAt        = now;
     fromCache        = false;
-    rawCount         = liteResult.rawCount;
-    geoFilteredCount = deduped.length;
+    rawCount         = serpResult.rawCount;
+    geoFilteredCount = geoFiltered.length;
   }
 
   // ── Pipeline stage 4: score (always runs — prefs may differ per request) ──────

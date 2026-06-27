@@ -1,16 +1,4 @@
-export type HotelSource = "google_hotels" | "liteapi";
-
-// Kept here so the scoring pipeline compiles after Google Places enrichment was removed.
-// Enrichments are always an empty Map now; the fields default gracefully in scoreHotels().
-export interface PlacesEnrichment {
-  neighborhood:    string;
-  locationSummary: string;
-  transitNote:     string;
-  bestFor:         string[];
-  lat:             number;
-  lng:             number;
-  source:          "places";
-}
+export type HotelSource = "google_hotels";
 
 export interface NearbyTransportation {
   type: string;       // "Walking", "Subway", "Bus", etc.
