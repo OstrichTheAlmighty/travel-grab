@@ -1,4 +1,5 @@
 import type { ProviderHotel } from "./types";
+import { readHotelEnrichmentCache, writeHotelEnrichmentCache } from "./enrichmentCache";
 
 // ── Paris arrondissement → neighborhood profiles ───────────────────────────────
 // Postal codes 75001–75020 map to named areas with characteristic traits and
@@ -86,8 +87,18 @@ async function enrichOne(
   const TIMEOUT_MS = 4500;
   const PLACES_BASE = "https://places.googleapis.com/v1/places";
 
+  // ── L2 cache check (Supabase) — skip both Places API calls if cached ────────
+  const cached = await readHotelEnrichmentCache(hotel.name, destination);
+  if (cached) {
+    console.log(`[hotel_enrich] CACHE_HIT  "${hotel.name}" / "${destination}"`);
+    return cached.enrichment;
+  }
+  console.log(`[hotel_enrich] CACHE_MISS "${hotel.name}" / "${destination}" — calling Places API`);
+
   // ── Text Search: find the hotel, get coordinates + address ──────────────────
   let lat = 0, lng = 0, formattedAddress = "", postalCode = "";
+  let googlePlaceId = "";
+  let textSearchResult: unknown = null;
   try {
     const res = await fetchWithTimeout(
       `${PLACES_BASE}:searchText`,
@@ -96,7 +107,7 @@ async function enrichOne(
         headers: {
           "Content-Type":    "application/json",
           "X-Goog-Api-Key":  apiKey,
-          "X-Goog-FieldMask": "places.location,places.formattedAddress,places.addressComponents",
+          "X-Goog-FieldMask": "places.id,places.location,places.formattedAddress,places.addressComponents",
         },
         body: JSON.stringify({ textQuery: `${hotel.name} ${destination}`, maxResultCount: 1 }),
       },
@@ -107,9 +118,11 @@ async function enrichOne(
     const p = body.places?.[0];
     if (!p?.location?.latitude || !p?.location?.longitude) return null;
 
+    googlePlaceId    = p.id ?? "";
     lat              = p.location.latitude;
     lng              = p.location.longitude;
     formattedAddress = p.formattedAddress ?? "";
+    textSearchResult = p;
 
     // Postal code from addressComponents (most reliable for Paris arr.)
     for (const c of p.addressComponents ?? []) {
@@ -131,6 +144,7 @@ async function enrichOne(
   const transitStations: Array<{ name: string; meters: number; type: "subway" | "train" | "tram" | "transit" }> = [];
   const landmarks:       Array<{ name: string; meters: number }> = [];
   let restaurantCount = 0;
+  let nearbySearchResult: unknown = null;
 
   try {
     const res = await fetchWithTimeout(
@@ -160,6 +174,7 @@ async function enrichOne(
 
     if (res.ok) {
       const body = await res.json() as { places?: GPlace[] };
+      nearbySearchResult = body.places ?? null;
       for (const p of body.places ?? []) {
         const name   = p.displayName?.text ?? "";
         const types  = p.types ?? [];
@@ -253,7 +268,7 @@ async function enrichOne(
 
   const locationSummary = traits.slice(0, 3).join(", ");
 
-  return {
+  const enrichment: PlacesEnrichment = {
     neighborhood:    neighborhood || hotel.address.split(",").slice(0, 2).join(",").trim(),
     locationSummary,
     transitNote,
@@ -262,6 +277,18 @@ async function enrichOne(
     lng,
     source: "places",
   };
+
+  // Write to Supabase cache (fire-and-forget — doesn't block response)
+  writeHotelEnrichmentCache(
+    googlePlaceId,
+    hotel.name,
+    destination,
+    enrichment,
+    textSearchResult,
+    nearbySearchResult,
+  ).catch(() => {});
+
+  return enrichment;
 }
 
 // ── Batch enrichment ──────────────────────────────────────────────────────────
