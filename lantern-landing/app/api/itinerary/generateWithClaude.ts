@@ -101,12 +101,15 @@ export async function generateItinerary(input: ItineraryRequest): Promise<Genera
 
   const userPrompt = buildPrompt(input);
 
-  const response = await client.messages.create({
-    model:      "claude-sonnet-4-6",
-    max_tokens: 8000,
-    system: [{ type: "text", text: systemPrompt, cache_control: { type: "ephemeral" } }],
-    messages: [{ role: "user", content: userPrompt }],
-  });
+  const response = await client.messages.create(
+    {
+      model:      "claude-sonnet-4-6",
+      max_tokens: 8000,
+      system: [{ type: "text", text: systemPrompt, cache_control: { type: "ephemeral" } }],
+      messages: [{ role: "user", content: userPrompt }],
+    },
+    { timeout: 55_000 }, // fail before Vercel's 60s hard kill
+  );
 
   const stopReason = response.stop_reason;
   const content    = response.content[0];

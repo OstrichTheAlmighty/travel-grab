@@ -4,6 +4,10 @@ import { checkUsage, incrementUsage } from "@/lib/usage";
 import { generateItinerary } from "./generateWithClaude";
 import type { PlannerOutput, PlannedDay, PlannedSlot, SlotKind } from "@/lib/itinerary/types";
 
+export const runtime     = "nodejs";
+export const dynamic     = "force-dynamic";
+export const maxDuration = 60; // Claude can take 30–50s for a 20-day itinerary
+
 // ── Claude output types ────────────────────────────────────────────────────────
 
 interface ClaudeScheduleItem {
