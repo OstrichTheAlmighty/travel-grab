@@ -28,7 +28,6 @@ interface LiteApiHotelData {
   name?:               string;
   hotelDescription?:   string;
   description?:        string;
-  // flat lat/lng (some API versions) OR nested in address
   latitude?:           number;
   longitude?:          number;
   address?:            LiteApiAddress;
@@ -41,26 +40,77 @@ interface LiteApiHotelData {
 }
 
 interface LiteApiRateEntry {
-  hotelId?:    string;
-  currency?:   string;
-  // Structure varies — handle both known shapes
-  roomTypes?:  Array<{ offerRetailRate?: { amount?: number; currency?: string } }>;
-  rooms?:      Array<{ rates?: Array<{ price?: { offerPrice?: number }; retailRate?: { total?: Array<{ amount?: number; currency?: string }> } }> }>;
+  hotelId?:   string;
+  currency?:  string;
+  roomTypes?: Array<{ offerRetailRate?: { amount?: number; currency?: string } }>;
+  rooms?:     Array<{
+    rates?: Array<{
+      price?:       { offerPrice?: number };
+      retailRate?:  { total?: Array<{ amount?: number; currency?: string }> };
+    }>;
+  }>;
 }
 
-// ── Shared fetch helper ───────────────────────────────────────────────────────
+// ── Auth-format detection ─────────────────────────────────────────────────────
+
+type AuthFormat = "bearer" | "x-api-key" | "apiKey";
+
+const AUTH_FORMATS: AuthFormat[] = ["bearer", "x-api-key", "apiKey"];
 
 const LITEAPI_BASE = "https://api.liteapi.travel/v3.0";
 
-function headers(apiKey: string, withJson = false): Record<string, string> {
-  const h: Record<string, string> = { "X-API-Key": apiKey, Accept: "application/json" };
+function authHeaders(
+  apiKey:   string,
+  format:   AuthFormat,
+  withJson  = false,
+): Record<string, string> {
+  const h: Record<string, string> = { Accept: "application/json" };
+  if (format === "bearer")    h["Authorization"] = `Bearer ${apiKey}`;
+  if (format === "x-api-key") h["X-API-Key"]     = apiKey;
+  if (format === "apiKey")    h["apiKey"]         = apiKey;
   if (withJson) h["Content-Type"] = "application/json";
   return h;
 }
 
+// Probe all three auth formats against /data/countries (cheap, no params needed).
+// Returns the first format that gets HTTP 200, or null if all fail.
+export async function detectAuthFormat(apiKey: string): Promise<AuthFormat | null> {
+  const probeUrl = `${LITEAPI_BASE}/data/countries`;
+  console.log(`[liteapi/auth] probing auth formats against ${probeUrl}`);
+  console.log(`[liteapi/auth] key prefix: ${apiKey.slice(0, 8)}...`);
+
+  for (const format of AUTH_FORMATS) {
+    let resp: Response;
+    try {
+      resp = await fetch(probeUrl, {
+        headers: authHeaders(apiKey, format),
+        signal:  AbortSignal.timeout(8_000),
+      });
+    } catch (err) {
+      console.log(`[liteapi/auth] format="${format}" → network error: ${String(err)}`);
+      continue;
+    }
+    console.log(`[liteapi/auth] format="${format}" → HTTP ${resp.status}`);
+    if (resp.ok) {
+      console.log(`[liteapi/auth] ✓ working auth format: "${format}"`);
+      return format;
+    }
+    // Log body on 401 so we can see the error message
+    if (resp.status === 401) {
+      const text = await resp.text().catch(() => "");
+      console.log(`[liteapi/auth] format="${format}" 401 body: ${text.slice(0, 200)}`);
+    }
+  }
+
+  console.error(`[liteapi/auth] ✗ all auth formats failed`);
+  return null;
+}
+
+// ── Shared fetch helper ───────────────────────────────────────────────────────
+
 async function apiFetch<T>(
-  url: string,
-  init: RequestInit,
+  url:   string,
+  init:  RequestInit,
   label: string,
 ): Promise<T | null> {
   console.log(`[liteapi/${label}] ${init.method ?? "GET"} ${url}`);
@@ -87,12 +137,16 @@ async function apiFetch<T>(
 
 // ── Step 1: Find city ID ──────────────────────────────────────────────────────
 
-async function findCityId(search: string, apiKey: string): Promise<string | null> {
+async function findCityId(
+  search: string,
+  apiKey: string,
+  format: AuthFormat,
+): Promise<string | null> {
   const body = await apiFetch<{ data?: LiteApiCity[] }>(
     `${LITEAPI_BASE}/data/cities`,
     {
       method:  "POST",
-      headers: headers(apiKey, true),
+      headers: authHeaders(apiKey, format, true),
       body:    JSON.stringify({ search }),
     },
     "cities",
@@ -123,12 +177,13 @@ async function findCityId(search: string, apiKey: string): Promise<string | null
 async function getHotelsByCityId(
   cityId: string,
   apiKey: string,
-  limit = 100,
+  format: AuthFormat,
+  limit  = 100,
 ): Promise<LiteApiHotelData[]> {
   const qs   = new URLSearchParams({ cityId, limit: String(limit) });
   const body = await apiFetch<{ data?: LiteApiHotelData[] }>(
     `${LITEAPI_BASE}/data/hotels?${qs}`,
-    { headers: headers(apiKey) },
+    { headers: authHeaders(apiKey, format) },
     "hotels",
   );
 
@@ -153,6 +208,7 @@ async function getRates(
   checkOut: string,
   adults:   number,
   apiKey:   string,
+  format:   AuthFormat,
 ): Promise<Map<string, { price: number; currency: string }>> {
   const prices = new Map<string, { price: number; currency: string }>();
   if (hotelIds.length === 0) return prices;
@@ -161,7 +217,7 @@ async function getRates(
     `${LITEAPI_BASE}/hotels/rates`,
     {
       method:  "POST",
-      headers: headers(apiKey, true),
+      headers: authHeaders(apiKey, format, true),
       body:    JSON.stringify({
         hotelIds,
         checkIn,
@@ -175,15 +231,12 @@ async function getRates(
 
   if (!body) return prices;
 
-  // Log the raw structure so we can verify field names
-  const preview = JSON.stringify(body).slice(0, 1200);
-  console.log(`[liteapi/rates] raw (first 1200 chars): ${preview}`);
+  console.log(`[liteapi/rates] raw (first 1200 chars): ${JSON.stringify(body).slice(0, 1200)}`);
 
-  // Parse defensively — handles two known LiteAPI rate shapes
-  const rawBody  = body as Record<string, unknown>;
-  const dataArr  = Array.isArray(rawBody.data) ? rawBody.data as LiteApiRateEntry[]
-                 : Array.isArray(rawBody.hotels) ? rawBody.hotels as LiteApiRateEntry[]
-                 : [];
+  const rawBody = body as Record<string, unknown>;
+  const dataArr = Array.isArray(rawBody.data)   ? rawBody.data   as LiteApiRateEntry[]
+                : Array.isArray(rawBody.hotels)  ? rawBody.hotels as LiteApiRateEntry[]
+                : [];
 
   for (const h of dataArr) {
     const id = h.hotelId;
@@ -260,7 +313,7 @@ function mapToProviderHotel(
     ? [h.address.street, h.address.city, h.address.country].filter(Boolean).join(", ")
     : "";
 
-  const photos       = extractPhotos(h);
+  const photos        = extractPhotos(h);
   const pricePerNight = rate?.price ?? 0;
 
   return {
@@ -298,21 +351,28 @@ export async function searchLiteApiHotels(
 ): Promise<HotelProviderResult> {
   const t0 = Date.now();
 
+  // Probe auth format first — logs which header works (or fails)
+  const format = await detectAuthFormat(apiKey);
+  if (!format) {
+    console.error("[liteapi] aborting: no working auth format");
+    return { hotels: [], rawCount: 0, pagesFetched: 0, requestUrl: LITEAPI_BASE, latencyMs: Date.now() - t0 };
+  }
+
   // Step 1: city → city ID
-  const cityId = await findCityId(params.destination, apiKey);
+  const cityId = await findCityId(params.destination, apiKey, format);
   if (!cityId) {
     return { hotels: [], rawCount: 0, pagesFetched: 0, requestUrl: LITEAPI_BASE, latencyMs: Date.now() - t0 };
   }
 
   // Step 2: city ID → hotel list (static data)
-  const hotelList = await getHotelsByCityId(cityId, apiKey, 100);
+  const hotelList = await getHotelsByCityId(cityId, apiKey, format, 100);
   if (hotelList.length === 0) {
     return { hotels: [], rawCount: 0, pagesFetched: 0, requestUrl: LITEAPI_BASE, latencyMs: Date.now() - t0 };
   }
 
   // Step 3: hotel IDs → rates (cap at 50 for latency)
   const hotelIds = hotelList.slice(0, 50).map((h) => h.id).filter((id): id is string => !!id);
-  const rates    = await getRates(hotelIds, params.check_in, params.check_out, params.guests, apiKey);
+  const rates    = await getRates(hotelIds, params.check_in, params.check_out, params.guests, apiKey, format);
 
   // Combine and map
   const hotels: ProviderHotel[] = [];
