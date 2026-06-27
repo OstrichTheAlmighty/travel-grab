@@ -278,15 +278,15 @@ async function enrichOne(
     source: "places",
   };
 
-  // Write to Supabase cache (fire-and-forget — doesn't block response)
-  writeHotelEnrichmentCache(
+  // Await the cache write so Vercel doesn't kill it before it completes
+  await writeHotelEnrichmentCache(
     googlePlaceId,
     hotel.name,
     destination,
     enrichment,
     textSearchResult,
     nearbySearchResult,
-  ).catch(() => {});
+  );
 
   return enrichment;
 }

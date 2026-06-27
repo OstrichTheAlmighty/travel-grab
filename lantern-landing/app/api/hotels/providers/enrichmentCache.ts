@@ -1,10 +1,6 @@
 /**
  * Persistent L2 cache for Google Places hotel enrichment results.
  *
- * Flow: enrichOne() checks this cache before calling the Places API.
- * On a miss it calls the API, builds the enrichment, and writes here.
- * On a hit it skips both Places API calls (~$0.034 saved per hotel).
- *
  * Table: hotel_enrichment_cache  (see migrations/hotel_enrichment_cache.sql)
  * Key:   hotel_name (case-insensitive) + destination (lowercase)
  */
@@ -12,12 +8,17 @@
 import { supabaseAdmin } from "@/lib/db";
 import type { PlacesEnrichment } from "./googlePlaces";
 
+// Log at module load so we can confirm env vars are present in Vercel
+console.log("[cache-init] service role key set:", !!process.env.SUPABASE_SERVICE_ROLE_KEY);
+console.log("[cache-init] supabase url set:     ", !!process.env.NEXT_PUBLIC_SUPABASE_URL);
+console.log("[cache-init] supabaseAdmin ready:  ", supabaseAdmin !== null);
+
 const TABLE = "hotel_enrichment_cache";
 
 interface CacheRow {
-  google_place_id:  string;
-  enrichment_data:  PlacesEnrichment;
-  hit_count:        number;
+  google_place_id: string;
+  enrichment_data: PlacesEnrichment;
+  hit_count:       number;
 }
 
 export async function readHotelEnrichmentCache(
@@ -33,11 +34,14 @@ export async function readHotelEnrichmentCache(
       .eq("destination", destination.toLowerCase().trim())
       .maybeSingle();
 
-    if (error || !data) return null;
+    if (error) {
+      console.error(`[cache-read] ERROR for "${hotelName}":`, error.message, error.code);
+      return null;
+    }
+    if (!data) return null;
 
     const row = data as CacheRow;
 
-    // Fire-and-forget usage tracking — doesn't block the response
     void Promise.resolve(
       supabaseAdmin
         .from(TABLE)
@@ -46,38 +50,61 @@ export async function readHotelEnrichmentCache(
     ).catch(() => {});
 
     return { enrichment: row.enrichment_data, placeId: row.google_place_id };
-  } catch {
+  } catch (e) {
+    console.error(`[cache-read] EXCEPTION for "${hotelName}":`, e instanceof Error ? e.message : e);
     return null;
   }
 }
 
 export async function writeHotelEnrichmentCache(
-  googlePlaceId: string,
+  placeId: string,
   hotelName: string,
   destination: string,
   enrichment: PlacesEnrichment,
-  textSearchResult?: unknown,
-  nearbySearchResult?: unknown,
+  textSearch?: unknown,
+  nearbySearch?: unknown,
 ): Promise<void> {
-  if (!supabaseAdmin || !googlePlaceId) return;
+  console.log(`[cache-write] ATTEMPTING: "${hotelName}" / "${destination}" placeId=${placeId || "(empty)"}`);
+
+  if (!supabaseAdmin) {
+    console.error(`[cache-write] SKIPPED: supabaseAdmin is null (env vars missing?)`);
+    return;
+  }
+  if (!placeId) {
+    console.error(`[cache-write] SKIPPED: no placeId for "${hotelName}"`);
+    return;
+  }
+
   try {
-    await supabaseAdmin
+    const { error, status } = await supabaseAdmin
       .from(TABLE)
       .upsert(
         {
-          google_place_id:      googlePlaceId,
+          google_place_id:      placeId,
           hotel_name:           hotelName,
           destination:          destination.toLowerCase().trim(),
           enrichment_data:      enrichment,
-          text_search_result:   textSearchResult ?? null,
-          nearby_search_result: nearbySearchResult ?? null,
+          text_search_result:   textSearch ?? null,
+          nearby_search_result: nearbySearch ?? null,
           cached_at:            new Date().toISOString(),
           last_used_at:         new Date().toISOString(),
           hit_count:            1,
         },
-        { onConflict: "google_place_id", ignoreDuplicates: true },
+        { onConflict: "google_place_id" },
       );
-  } catch {
-    // Cache write is non-fatal — enrichment already returned to caller
+
+    if (error) {
+      console.error(`[cache-write] FAILED "${hotelName}":`, JSON.stringify({
+        message: error.message,
+        details: error.details,
+        hint:    error.hint,
+        code:    error.code,
+        status,
+      }));
+    } else {
+      console.log(`[cache-write] SUCCESS "${hotelName}" status=${status}`);
+    }
+  } catch (e) {
+    console.error(`[cache-write] EXCEPTION "${hotelName}":`, e instanceof Error ? e.message : e);
   }
 }
