@@ -1507,7 +1507,7 @@ function CompareTable({ offers }: { offers: FlightOffer[] }) {
 
 // ── FlightCard ────────────────────────────────────────────────────────────────
 
-function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isAddedToItinerary, onAddToItinerary, departureDate, returnDate }: {
+function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isAddedToItinerary, onAddToItinerary, departureDate, returnDate, adults = 1 }: {
   offer: FlightOffer;
   cardRef?: React.RefObject<HTMLDivElement | null>;
   priorityWeights: Record<string, number>;
@@ -1517,10 +1517,12 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
   onAddToItinerary?: () => void;
   departureDate?: string;
   returnDate?: string;
+  adults?: number;
 }) {
   const rec = offer.is_recommended;
-  const [scoreOpen, setScoreOpen] = useState(false);
-  const [bookOpen, setBookOpen] = useState(false);
+  const [scoreOpen,   setScoreOpen]   = useState(false);
+  const [bookOpen,    setBookOpen]    = useState(false);
+  const [bookLoading, setBookLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
   const hasReturn = !!(offer.return_depart_time || (tripType === "roundtrip" && offer.source === "google_flights"));
@@ -1539,7 +1541,9 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
     return () => window.removeEventListener("keydown", onKey);
   }, [bookOpen]);
 
-  const handleBookClick = () => {
+  const handleBookClick = async () => {
+    if (bookLoading) return;
+
     const sharedProps = {
       airline:      offer.airline,
       flight:       offer.flight_number,
@@ -1549,6 +1553,44 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
       score:        offer.ai_score,
     };
 
+    // ── Try Duffel Links first (when we have a departure date) ────────────────
+    if (departureDate) {
+      setBookLoading(true);
+      let duffelUrl: string | null = null;
+      try {
+        const resp = await fetch("/api/flights/duffel-link", {
+          method:  "POST",
+          headers: { "Content-Type": "application/json" },
+          body:    JSON.stringify({
+            origin:      offer.origin,
+            destination: offer.destination,
+            departDate:  departureDate,
+            returnDate:  returnDate || undefined,
+            adults,
+          }),
+          signal: AbortSignal.timeout(5_000),
+        });
+        if (resp.ok) {
+          const data = await resp.json() as { url?: string };
+          if (data.url) duffelUrl = data.url;
+        } else {
+          const detail = await resp.text().catch(() => "");
+          console.log(`[booking] duffel_links → HTTP ${resp.status} ${detail.slice(0, 80)} — falling back`);
+        }
+      } catch (err) {
+        console.log("[booking] duffel_links → timeout/error:", String(err).slice(0, 80), "— falling back");
+      }
+      setBookLoading(false);
+
+      if (duffelUrl) {
+        console.log("[booking] duffel_links → redirecting");
+        track(offer.is_bookable === false ? "google_flights_clicked" : "duffel_booking_clicked", sharedProps);
+        window.open(duffelUrl, "_blank", "noopener,noreferrer");
+        return;
+      }
+    }
+
+    // ── White Label fallback ──────────────────────────────────────────────────
     if (offer.is_bookable === false) {
       track("google_flights_clicked", sharedProps);
       if (departureDate) {
@@ -1572,9 +1614,9 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
 
     track("duffel_booking_clicked", sharedProps);
     fetch("/api/booking-intent", {
-      method: "POST",
+      method:  "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...sharedProps, depart_time: offer.depart_time, arrive_time: offer.arrive_time, priorities, timestamp: new Date().toISOString() }),
+      body:    JSON.stringify({ ...sharedProps, depart_time: offer.depart_time, arrive_time: offer.arrive_time, priorities, timestamp: new Date().toISOString() }),
     }).catch(() => undefined);
     if (departureDate) {
       const affiliateUrl = buildAviasalesUrl({
@@ -1687,10 +1729,11 @@ function FlightCard({ offer, cardRef, priorityWeights, priorities, tripType, isA
               <div className="text-[9px] text-gray-500 mt-0.5">{offer.cabin}</div>
             </div>
             <button
-              onClick={(e) => { e.stopPropagation(); handleBookClick(); }}
-              className="text-[11px] font-bold text-[#0A0A0A] bg-lantern-mint hover:bg-lantern-mint/85 rounded-lg px-2.5 py-1.5 transition-colors whitespace-nowrap"
+              onClick={(e) => { e.stopPropagation(); void handleBookClick(); }}
+              disabled={bookLoading}
+              className="text-[11px] font-bold text-[#0A0A0A] bg-lantern-mint hover:bg-lantern-mint/85 disabled:opacity-60 disabled:cursor-wait rounded-lg px-2.5 py-1.5 transition-colors whitespace-nowrap min-w-[46px]"
             >
-              Book
+              {bookLoading ? "..." : "Book"}
             </button>
             <svg
               className={`w-3.5 h-3.5 text-gray-400 flex-shrink-0 transition-transform ${expanded ? "rotate-180" : ""}`}
@@ -2623,6 +2666,7 @@ export default function FlightSearch() {
                   tripType={searchedParams?.tripType}
                   departureDate={searchedParams?.departureDate}
                   returnDate={searchedParams?.returnDate}
+                  adults={searchedParams?.travelers ?? 1}
                   isAddedToItinerary={`${offer.airline_code}|${offer.flight_number}|${offer.depart_time}` === itineraryFlightKey}
                   onAddToItinerary={() => {
                     const flightKey = `${offer.airline_code}|${offer.flight_number}|${offer.depart_time}`;
