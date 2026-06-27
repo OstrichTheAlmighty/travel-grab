@@ -1764,7 +1764,7 @@ export default function ItineraryPlanner() {
 
   // Tab navigation
   type ActiveTab = "itinerary" | "preferences" | "travel" | "recommendations" | "saved" | "dropped";
-  const [activeTab, setActiveTab] = useState<ActiveTab>("itinerary");
+  const [activeTab, setActiveTab] = useState<ActiveTab>("preferences");
 
   // AI Recommendations panel
   const [aiRecs,        setAiRecs]        = useState<AiRecommendation[]>([]);
@@ -2022,6 +2022,8 @@ export default function ItineraryPlanner() {
   useEffect(() => {
     if (!hydrated || autoRegenDoneRef.current) return;
     autoRegenDoneRef.current = true;
+    // Returning users who already have an itinerary go straight to it
+    if (trip.itinerary) setActiveTab("itinerary");
     try {
       if (sessionStorage.getItem("tg_flight_added") === "1") {
         sessionStorage.removeItem("tg_flight_added");
@@ -3080,8 +3082,8 @@ export default function ItineraryPlanner() {
         {/* ── Tab bar ── */}
         <div className="flex gap-0 border-b border-gray-200 mb-5 overflow-x-auto">
           {([
-            { key: "itinerary",       label: "Itinerary" },
             { key: "preferences",     label: "Preferences" },
+            { key: "itinerary",       label: "Itinerary" },
             { key: "travel",          label: "Flights & Hotels" },
             { key: "recommendations", label: "Recommendations" },
             { key: "saved",           label: `Saved (${activeActivityIds.length})` },
@@ -3260,6 +3262,22 @@ export default function ItineraryPlanner() {
                   ×
                 </button>
               </div>
+            </div>
+          )}
+
+          {/* Preferences nudge — only shown before first generation */}
+          {!hasItinerary && (
+            <div className="mb-5 flex items-center justify-between gap-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3">
+              <p className="text-sm text-amber-800">
+                <strong>Set your preferences first</strong> — destination, dates, pace, and interests help Claude build the right itinerary on the first try.
+              </p>
+              <button
+                type="button"
+                onClick={() => setActiveTab("preferences")}
+                className="shrink-0 rounded-lg border border-amber-300 bg-white px-3 py-1.5 text-xs font-semibold text-amber-800 hover:bg-amber-50 transition-colors"
+              >
+                Open Preferences
+              </button>
             </div>
           )}
 
@@ -3962,31 +3980,54 @@ export default function ItineraryPlanner() {
 
         {/* ── Tab: Preferences ── */}
         {activeTab === "preferences" && (
-          <PreferencesPanel
-            cities={trip.cities}
-            startDate={trip.startDate}
-            endDate={endDate}
-            totalDays={totalDays}
-            onUpdateCity={(i, patch) => updateCity(i, patch)}
-            onAddCity={addCity}
-            onRemoveCity={removeCity}
-            onUpdateStartDate={(v) => updateTrip({ startDate: v })}
-            wakeTime={trip.wakeTime}
-            bedTime={trip.bedTime}
-            pace={trip.pace}
-            transit={trip.transit}
-            onUpdateWakeTime={(v) => updateTrip({ wakeTime: v })}
-            onUpdateBedTime={(v) => updateTrip({ bedTime: v })}
-            onUpdatePace={(v) => updateTrip({ pace: v })}
-            onUpdateTransit={(v) => updateTrip({ transit: v })}
-            budgetTier={budgetTier}
-            setBudgetTier={setBudgetTier}
-            cuisinePrefs={cuisinePrefs}
-            setCuisinePrefs={setCuisinePrefs}
-            obStyles={obStyles}
-            obFirstTime={obFirstTime}
-            onEditTrip={startOnboarding}
-          />
+          <div>
+            {!hasItinerary && (
+              <div className="mb-5 rounded-xl border border-teal-200 bg-teal-50 px-4 py-3 text-sm text-teal-800">
+                Fill in your destination, dates, and trip style below — then click <strong>Build My Itinerary</strong> when you&apos;re ready. Each generation uses AI credits, so getting preferences right first saves a regeneration.
+              </div>
+            )}
+            <PreferencesPanel
+              cities={trip.cities}
+              startDate={trip.startDate}
+              endDate={endDate}
+              totalDays={totalDays}
+              onUpdateCity={(i, patch) => updateCity(i, patch)}
+              onAddCity={addCity}
+              onRemoveCity={removeCity}
+              onUpdateStartDate={(v) => updateTrip({ startDate: v })}
+              wakeTime={trip.wakeTime}
+              bedTime={trip.bedTime}
+              pace={trip.pace}
+              transit={trip.transit}
+              onUpdateWakeTime={(v) => updateTrip({ wakeTime: v })}
+              onUpdateBedTime={(v) => updateTrip({ bedTime: v })}
+              onUpdatePace={(v) => updateTrip({ pace: v })}
+              onUpdateTransit={(v) => updateTrip({ transit: v })}
+              budgetTier={budgetTier}
+              setBudgetTier={setBudgetTier}
+              cuisinePrefs={cuisinePrefs}
+              setCuisinePrefs={setCuisinePrefs}
+              obStyles={obStyles}
+              obFirstTime={obFirstTime}
+              onEditTrip={startOnboarding}
+            />
+            <div className="mt-8 pt-6 border-t border-gray-100">
+              <button
+                type="button"
+                onClick={() => setActiveTab("itinerary")}
+                disabled={!primaryCity || !trip.startDate}
+                className="inline-flex h-11 items-center gap-2 rounded-2xl bg-lantern-mint px-7 text-sm font-bold text-ink transition hover:opacity-90 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-30 disabled:cursor-not-allowed disabled:scale-100"
+              >
+                <span className="text-base">✦</span>
+                {hasItinerary ? "Back to Itinerary" : "Build My Itinerary →"}
+              </button>
+              {(!primaryCity || !trip.startDate) && (
+                <p className="mt-2 text-[11px] text-gray-500">
+                  {!primaryCity ? "Add a destination above to continue." : "Add a start date above to continue."}
+                </p>
+              )}
+            </div>
+          </div>
         )}
 
         {/* ── Tab: Flights & Hotels ── */}
