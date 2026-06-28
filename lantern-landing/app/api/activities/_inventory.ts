@@ -421,7 +421,7 @@ export function mapToActivity(
   extraTags: string[] = [],
 ): Activity {
   const types       = place.types ?? [];
-  const { price, isFree } = estimatePrice(place.priceLevel);
+  const { price: basePrice, isFree: isFreeByPrice } = estimatePrice(place.priceLevel);
   const neighborhood = extractNeighborhood(place, city);
   const badges      = generateBadges(place);
 
@@ -436,13 +436,14 @@ export function mapToActivity(
     finalCategory = "luxury";
   }
 
-  // Infer free admission for public parks, shrines, and temples that lack a price level.
-  // (Google sometimes returns undefined priceLevel for paid-entry temples, so we only add
-  // the badge when the type strongly implies free public access.)
-  const freeByType = new Set(["park", "natural_feature"]);
-  if (!badges.includes("free") && place.priceLevel === undefined) {
-    if (types.some((t) => freeByType.has(t))) badges.push("free");
-  }
+  // Infer free admission for place types that are almost always free when Google
+  // doesn't report a price level (paid attractions almost always have priceLevel set).
+  const freeByType = new Set(["park", "natural_feature", "beach", "hiking_area", "shrine"]);
+  const isFreeByType = !place.priceLevel && types.some((t) => freeByType.has(t));
+  if (isFreeByType && !badges.includes("free")) badges.push("free");
+
+  const isFree = isFreeByPrice || isFreeByType;
+  const price  = isFree ? "Free" : basePrice;
 
   return {
     id:           place.id,

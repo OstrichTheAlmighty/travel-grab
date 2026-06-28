@@ -147,6 +147,21 @@ function rowToActivity(row: SupabaseRow): Activity {
   const loc    = gd.location as { latitude?: number; longitude?: number } | undefined;
   const hours  = gd.regularOpeningHours as { openNow?: boolean } | undefined;
 
+  // Derive isFree from multiple signals — the stored isFree field may be stale
+  // (migration bug: parks got "free" badge but isFree left as false)
+  const gdTypes   = (gd.types as string[] | undefined) ?? [];
+  const gdPrice   = (gd.price as string | undefined) ?? "";
+  const priceLevel = (gd.priceLevel as string | undefined);
+  const freeTypes  = new Set(["park", "natural_feature", "beach", "hiking_area", "shrine"]);
+  const isFreeByType = !priceLevel && gdTypes.some((t) => freeTypes.has(t));
+  const isFree = !!(
+    (gd.isFree as boolean | undefined)
+    || badges.includes("free")
+    || priceLevel === "PRICE_LEVEL_FREE"
+    || gdPrice === "Free"
+    || isFreeByType
+  );
+
   return {
     id:           row.place_id || row.id,
     placeId:      row.place_id || undefined,
@@ -155,9 +170,8 @@ function rowToActivity(row: SupabaseRow): Activity {
                   ?? (gd.shortFormattedAddress as string | undefined)
                   ?? row.city,
     duration:     (gd.duration as string | undefined) ?? "1–2 hours",
-    price:        (gd.price as string | undefined)
-                  ?? ((gd.isFree as boolean | undefined) ? "Free" : "Varies"),
-    isFree:       (gd.isFree as boolean | undefined) ?? false,
+    price:        isFree ? "Free" : (gdPrice || "Varies"),
+    isFree,
     rating:       (gd.rating as number | undefined) ?? 0,
     reviewCount:  (gd.userRatingCount as number | undefined) ?? 0,
     description:  row.description ?? "",
@@ -314,6 +328,14 @@ function ActivityCard({
 
         {/* Bottom fade to panel bg */}
         <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-panel/70 to-transparent pointer-events-none z-10" />
+
+        {/* Michelin star badge */}
+        {activity.tags?.includes("Michelin") && (
+          <div className="absolute bottom-3 left-3 z-20 flex items-center gap-1 rounded-full bg-black/70 backdrop-blur-sm border border-red-500/40 px-2 py-1">
+            <span className="text-red-400 text-[11px] leading-none">★</span>
+            <span className="text-[9px] font-bold text-white uppercase tracking-wide leading-none">Michelin</span>
+          </div>
+        )}
 
         {/* Save button */}
         <button
