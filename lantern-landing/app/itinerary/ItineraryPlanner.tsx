@@ -4069,16 +4069,47 @@ export default function ItineraryPlanner() {
               obFirstTime={obFirstTime}
               onEditTrip={startOnboarding}
             />
-            <div className="mt-8 pt-6 border-t border-gray-100">
-              <button
-                type="button"
-                onClick={() => setActiveTab("itinerary")}
-                disabled={!primaryCity || !trip.startDate}
-                className="inline-flex h-11 items-center gap-2 rounded-2xl bg-lantern-mint px-7 text-sm font-bold text-ink transition hover:opacity-90 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-30 disabled:cursor-not-allowed disabled:scale-100"
-              >
-                <span className="text-base">✦</span>
-                {hasItinerary ? "Back to Itinerary" : "Build My Itinerary →"}
-              </button>
+            {/* Activities nudge */}
+            <div className="mt-6 rounded-xl border border-gray-200 bg-gray-50 p-4">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-sm font-semibold text-gray-900 mb-1">
+                    {savedIds.length > 0
+                      ? `${savedIds.length} activit${savedIds.length === 1 ? "y" : "ies"} saved`
+                      : "Add activities (optional)"}
+                  </p>
+                  <p className="text-xs text-gray-500 leading-relaxed">
+                    {savedIds.length > 0
+                      ? "Claude will schedule these into your itinerary and fill in the rest of your days."
+                      : "Browse the Activities page to save places you want to visit. Claude will fit them into your schedule automatically."}
+                  </p>
+                </div>
+                <Link
+                  href={primaryCity ? `/activities?city=${encodeURIComponent(primaryCity)}` : "/activities"}
+                  className="shrink-0 inline-flex h-8 items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 text-xs font-medium text-gray-700 hover:border-teal-400 hover:text-teal-700 transition-colors"
+                >
+                  {savedIds.length > 0 ? "Add more" : "Browse Activities"} <span>→</span>
+                </Link>
+              </div>
+            </div>
+
+            <div className="mt-5 pt-5 border-t border-gray-100">
+              <div className="flex flex-wrap items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("itinerary")}
+                  disabled={!primaryCity || !trip.startDate}
+                  className="inline-flex h-11 items-center gap-2 rounded-2xl bg-lantern-mint px-7 text-sm font-bold text-ink transition hover:opacity-90 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-30 disabled:cursor-not-allowed disabled:scale-100"
+                >
+                  <span className="text-base">✦</span>
+                  {hasItinerary ? "Back to Itinerary" : "Build My Itinerary →"}
+                </button>
+                {savedIds.length > 0 && !hasItinerary && primaryCity && trip.startDate && (
+                  <p className="text-xs text-gray-400">
+                    Your {savedIds.length} saved place{savedIds.length === 1 ? "" : "s"} will be included — Claude fills in the rest.
+                  </p>
+                )}
+              </div>
               {(!primaryCity || !trip.startDate) && (
                 <p className="mt-2 text-[11px] text-gray-500">
                   {!primaryCity ? "Add a destination above to continue." : "Add a start date above to continue."}
