@@ -41,7 +41,15 @@ export async function POST(req: NextRequest) {
 
   const systemPrompt = `You are an expert travel planner. Suggest an ideal multi-city itinerary. Return ONLY valid JSON with no markdown or explanatory prose.`;
 
-  const userPrompt = `Plan a ${days}-day trip to: "${region}". Travel style: ${styleLabel}.${firstTimeStr}
+  const destinations = region.split(",").map((s) => s.trim()).filter(Boolean);
+  const isMultiDestination = destinations.length > 1;
+  const destinationNote = isMultiDestination
+    ? `The traveler wants to visit these destinations IN THIS ORDER: ${destinations.map((d, i) => `${i + 1}. ${d}`).join("; ")}. Suggest cities within each destination in that sequence — all cities from destination 1 first, then destination 2, etc. Include at least one city per destination.`
+    : `Destination: "${region}"`;
+
+  const userPrompt = `Plan a ${days}-day trip. Travel style: ${styleLabel}.${firstTimeStr}
+
+${destinationNote}
 
 Return a JSON object:
 {
@@ -55,7 +63,8 @@ Rules:
 - Total days across all cityStops must equal exactly ${days}
 - Each city must be specific (e.g. "Kyoto, Japan" not just "Japan")
 - If the input is already a specific city, return just that one city with all ${days} days
-- For countries/regions, suggest 2–5 cities that form a logical travel route (minimize backtracking)
+- For a single country/region, suggest 2–5 cities that form a logical travel route (minimize backtracking)
+- For multiple destinations (in order), group cities by destination — visit each destination fully before moving on
 - Weight city selection toward the stated travel styles`;
 
   try {

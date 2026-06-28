@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 import { fetchWithAuth } from "@/lib/fetch-with-auth";
 import UsageBanner from "@/app/components/UsageBanner";
@@ -1804,6 +1804,7 @@ export default function ItineraryPlanner() {
   const [obDest,           setObDest]           = useState("");
   const [obDestValidated,  setObDestValidated]  = useState(false);
   const [obDestError,      setObDestError]      = useState<string | null>(null);
+  const [obExtraDests, setObExtraDests] = useState<{ value: string; validated: boolean; error: string | null }[]>([]);
   const [obStart,          setObStart]          = useState("");
   const [obReturn,         setObReturn]         = useState("");
   const [obDuration,       setObDuration]       = useState(7);
@@ -2165,6 +2166,7 @@ export default function ItineraryPlanner() {
     setObDest("");
     setObDestValidated(false);
     setObDestError(null);
+    setObExtraDests([]);
     setObStart("");
     setObReturn("");
     setObDuration(7);
@@ -2245,6 +2247,7 @@ export default function ItineraryPlanner() {
     setObStep("destination");
     setObError(null);
     setObCities([]);
+    setObExtraDests([]);
   }
 
   function toggleObStyle(style: TravelStyle) {
@@ -2259,12 +2262,15 @@ export default function ItineraryPlanner() {
     setObCities([]);
     setObSummary("");
     setObStep("recommendations");
+    const allDestsStr = [obDest.trim(), ...obExtraDests.map((d) => d.value.trim())]
+      .filter(Boolean)
+      .join(", ");
     try {
       const res = await fetch("/api/itinerary/suggest-cities", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          region:       obDest.trim(),
+          region:       allDestsStr,
           travelStyles: obStyles,
           durationDays: obDuration,
           firstTime:    obFirstTime,
@@ -2299,11 +2305,12 @@ export default function ItineraryPlanner() {
       return d.toISOString().slice(0, 10);
     })();
     updateTrip({ cities, startDate });
-    obDestRef.current = obDest;
+    const allDestsLabel = [obDest.trim(), ...obExtraDests.map((d) => d.value.trim())].filter(Boolean).join(", ");
+    obDestRef.current = allDestsLabel;
     // Write immediately to canonical store so other pages see it right away
     writeTripStore({
       ...TRIP_STORE_DEFAULT,
-      destinationRegion: obDest,
+      destinationRegion: allDestsLabel,
       cityStops:         cities,
       startDate,
       returnDate,
@@ -2700,31 +2707,82 @@ export default function ItineraryPlanner() {
             <div className="space-y-6">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900 mb-2">Where are you going?</h1>
-                <p className="text-sm text-gray-700">Enter a country, region, or city and select from suggestions.</p>
+                <p className="text-sm text-gray-700">Enter a country, region, or city. Add multiple for a multi-country trip — order matters.</p>
               </div>
-              <ItineraryDestinationInput
-                value={obDest}
-                validated={obDestValidated}
-                error={obDestError}
-                onChange={(v) => {
-                  setObDest(v);
-                  setObDestValidated(false);
-                  if (!v) setObDestError(null);
-                }}
-                onValidate={(normalized) => {
-                  setObDest(normalized);
-                  setObDestValidated(true);
-                  setObDestError(null);
-                }}
-              />
+              <div className="space-y-3">
+                {/* First destination */}
+                <div className="flex items-start gap-3">
+                  {obExtraDests.length > 0 && (
+                    <span className="mt-3.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal-100 text-[10px] font-bold text-teal-700">1</span>
+                  )}
+                  <div className="flex-1">
+                    <ItineraryDestinationInput
+                      value={obDest}
+                      validated={obDestValidated}
+                      error={obDestError}
+                      onChange={(v) => {
+                        setObDest(v);
+                        setObDestValidated(false);
+                        if (!v) setObDestError(null);
+                      }}
+                      onValidate={(normalized) => {
+                        setObDest(normalized);
+                        setObDestValidated(true);
+                        setObDestError(null);
+                      }}
+                    />
+                  </div>
+                </div>
+                {obExtraDests.map((extra, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <span className="mt-3.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal-100 text-[10px] font-bold text-teal-700">{i + 2}</span>
+                    <div className="flex-1">
+                      <ItineraryDestinationInput
+                        value={extra.value}
+                        validated={extra.validated}
+                        error={extra.error}
+                        onChange={(v) => {
+                          setObExtraDests((prev) => prev.map((d, j) => j === i ? { ...d, value: v, validated: false, error: v ? d.error : null } : d));
+                        }}
+                        onValidate={(normalized) => {
+                          setObExtraDests((prev) => prev.map((d, j) => j === i ? { value: normalized, validated: true, error: null } : d));
+                        }}
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setObExtraDests((prev) => prev.filter((_, j) => j !== i))}
+                      className="mt-3 w-7 h-7 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-400 hover:bg-red-50 transition-colors text-base leading-none"
+                      aria-label="Remove destination"
+                    >×</button>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => setObExtraDests((prev) => [...prev, { value: "", validated: false, error: null }])}
+                  className="inline-flex items-center gap-1.5 text-xs text-teal-600 hover:text-teal-700 font-medium transition-colors pl-8"
+                >
+                  <span className="text-sm leading-none">+</span> Add another country / region
+                </button>
+              </div>
               <button
                 type="button"
                 disabled={!obDest.trim()}
                 onClick={() => {
+                  let hasError = false;
                   if (!obDestValidated) {
                     setObDestError("Choose a destination from the suggestions.");
-                    return;
+                    hasError = true;
                   }
+                  const updatedExtras = obExtraDests.map((d) => {
+                    if (d.value.trim() && !d.validated) return { ...d, error: "Choose a destination from the suggestions." };
+                    return d;
+                  });
+                  if (updatedExtras.some((d) => d.error)) {
+                    setObExtraDests(updatedExtras);
+                    hasError = true;
+                  }
+                  if (hasError) return;
                   setObDestError(null);
                   setObStep("travelers");
                 }}
@@ -2867,7 +2925,7 @@ export default function ItineraryPlanner() {
                 <p className="text-sm text-gray-700">Select all that apply — we&apos;ll use this to recommend the right cities.</p>
               </div>
               <div>
-                <p className="text-xs text-gray-700 mb-3">First time visiting {obDest}?</p>
+                <p className="text-xs text-gray-700 mb-3">First time visiting {[obDest, ...obExtraDests.map((d) => d.value)].filter(Boolean).join(" + ")}?</p>
                 <div className="grid grid-cols-2 gap-2">
                   {([true, false] as const).map((v) => (
                     <button
@@ -2935,7 +2993,7 @@ export default function ItineraryPlanner() {
                 <div className="flex flex-col items-center justify-center py-20 text-center">
                   <div className="h-10 w-10 rounded-full border-2 border-gray-200 border-t-lantern-mint animate-spin mb-6" />
                   <p className="text-base font-semibold text-gray-900">Finding your best route…</p>
-                  <p className="text-sm text-gray-700 mt-2">Planning {obDuration} days in {obDest}</p>
+                  <p className="text-sm text-gray-700 mt-2">Planning {obDuration} days in {[obDest, ...obExtraDests.map((d) => d.value)].filter(Boolean).join(" + ")}</p>
                 </div>
               )}
               {!obLoading && obError && (
@@ -2981,7 +3039,7 @@ export default function ItineraryPlanner() {
                   </div>
                   <div className="flex items-center justify-between text-xs text-gray-700 px-1">
                     <span>{obCities.reduce((s, c) => s + c.days, 0)} days total · {obTravelers} {obTravelers === 1 ? "traveler" : "travelers"}</span>
-                    <span>{obDest}</span>
+                    <span>{[obDest, ...obExtraDests.map((d) => d.value)].filter(Boolean).join(" + ")}</span>
                   </div>
                   <p className="text-[11px] text-gray-400 text-center px-2">
                     You can edit cities, dates, and preferences at any time from the Preferences tab.
@@ -4119,13 +4177,41 @@ export default function ItineraryPlanner() {
                 </section>
               )}
 
-              {/* Hotel per city */}
-              {trip.cities.filter((s) => s.city.trim()).map((stop, i) => {
-                const cityKey = stop.city;
-                const hotel   = selectedHotels[cityKey];
-                const label   = isMultiCity ? `Hotel · ${stop.city.split(",")[0]}` : "Hotel / base";
-                return (
-                  <section key={i} className="rounded-2xl border border-gray-200 bg-white p-5">
+              {/* Hotel per city — with connecting flight cards between country transitions */}
+              {(() => {
+                const validCities = trip.cities.filter((s) => s.city.trim());
+                const getCountry = (city: string) => {
+                  const parts = city.split(",");
+                  return parts.length > 1 ? parts[parts.length - 1].trim().toLowerCase() : city.trim().toLowerCase();
+                };
+                return validCities.map((stop, i) => {
+                  const prevStop = i > 0 ? validCities[i - 1] : null;
+                  const crossesBorder = prevStop && getCountry(prevStop.city) !== getCountry(stop.city);
+                  const cityKey = stop.city;
+                  const hotel   = selectedHotels[cityKey];
+                  const label   = isMultiCity ? `Hotel · ${stop.city.split(",")[0]}` : "Hotel / base";
+                  return (
+                    <React.Fragment key={i}>
+                      {crossesBorder && prevStop && (
+                        <section className="rounded-2xl border border-blue-100 bg-blue-50 p-5">
+                          <div className="flex items-center justify-between mb-3">
+                            <h3 className="text-sm font-semibold text-blue-900">
+                              Connecting flight · {prevStop.city.split(",")[0]} → {stop.city.split(",")[0]}
+                            </h3>
+                            <span className="text-[11px] text-blue-400">international</span>
+                          </div>
+                          <p className="text-xs text-blue-700 mb-3">
+                            You&apos;re crossing from {getCountry(prevStop.city).replace(/\b\w/g, (c) => c.toUpperCase())} to {getCountry(stop.city).replace(/\b\w/g, (c) => c.toUpperCase())} — you&apos;ll need a flight between these cities.
+                          </p>
+                          <Link
+                            href={`/flights?autofill_from=${encodeURIComponent(prevStop.city)}&autofill_to=${encodeURIComponent(stop.city)}`}
+                            className="inline-flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-medium transition-colors"
+                          >
+                            Search connecting flight <span>→</span>
+                          </Link>
+                        </section>
+                      )}
+                  <section className="rounded-2xl border border-gray-200 bg-white p-5">
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="text-sm font-semibold text-gray-900">{label}</h3>
                       <span className="text-[11px] text-gray-400">(optional)</span>
@@ -4153,8 +4239,10 @@ export default function ItineraryPlanner() {
                       </div>
                     )}
                   </section>
-                );
-              })}
+                    </React.Fragment>
+                  );
+                });
+              })()}
             </div>
           );
         })()}
