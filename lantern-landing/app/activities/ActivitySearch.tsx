@@ -239,6 +239,11 @@ function IconChevron({ className }: { className?: string }) {
   );
 }
 
+// Handles both freshly-mapped and cached Activity objects — isFree may be stale in old cache
+function activityIsFree(a: Activity): boolean {
+  return a.isFree || a.badges.includes("free" as Badge) || a.price === "Free";
+}
+
 function IconSearch({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
@@ -2250,7 +2255,7 @@ export default function ActivitySearch() {
     const c: Partial<Record<FilterId, number>> = {};
     for (const a of fullDataset) {
       c[a.category] = (c[a.category] ?? 0) + 1;
-      if (a.isFree) c.free = (c.free ?? 0) + 1;
+      if (activityIsFree(a)) c.free = (c.free ?? 0) + 1;
       if (savedIds.has(a.id)) c.saved = (c.saved ?? 0) + 1;
     }
     if (fullDataset.length > 0) c.browse_all = fullDataset.length;
@@ -2263,7 +2268,7 @@ export default function ActivitySearch() {
   const subTagCounts = useMemo((): Map<string, number> => {
     if (activeFilter === "all" || activeFilter === "browse_all" || isSearching) return new Map();
     let base: Activity[];
-    if (activeFilter === "free")        base = fullDataset.filter((a) => a.isFree);
+    if (activeFilter === "free")        base = fullDataset.filter(activityIsFree);
     else if (activeFilter === "saved")  base = fullDataset.filter((a) => savedIds.has(a.id));
     else if (activeFilter in CATEGORY_LABEL) base = fullDataset.filter((a) => a.category === activeFilter);
     else base = [];
@@ -2284,7 +2289,7 @@ export default function ActivitySearch() {
     if (isSearching) {
       let base = fullDataset;
       if (activeFilter !== "all" && activeFilter !== "browse_all") {
-        if (activeFilter === "free")         base = base.filter((a) => a.isFree);
+        if (activeFilter === "free")         base = base.filter(activityIsFree);
         else if (activeFilter === "saved")   base = base.filter((a) => savedIds.has(a.id));
         else if (activeFilter in CATEGORY_LABEL) base = base.filter((a) => a.category === activeFilter);
       }
@@ -2296,7 +2301,7 @@ export default function ActivitySearch() {
       return activeSubTag ? fullDataset.filter((a) => a.tags.some((t) => t === activeSubTag)) : fullDataset;
     }
     let base: Activity[];
-    if (activeFilter === "free") base = fullDataset.filter((a) => a.isFree);
+    if (activeFilter === "free") base = fullDataset.filter(activityIsFree);
     else base = fullDataset.filter((a) => a.category === activeFilter);
     return activeSubTag ? base.filter((a) => a.tags.some((t) => t === activeSubTag)) : base;
   }, [isSearching, activeFilter, activityQuery, fullDataset, featured, activeSubTag, savedIds]);
