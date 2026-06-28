@@ -25,7 +25,9 @@ export function middleware(req: NextRequest) {
   }
 
   if (BLOCKED.some((p) => pathname === p || pathname.startsWith(p + "/"))) {
-    return NextResponse.redirect(new URL("/?coming_soon=1", req.url));
+    if (process.env.NEXT_PUBLIC_DEMO_ENABLED !== "true") {
+      return NextResponse.redirect(new URL("/?coming_soon=1", req.url));
+    }
   }
 
   return NextResponse.next();
