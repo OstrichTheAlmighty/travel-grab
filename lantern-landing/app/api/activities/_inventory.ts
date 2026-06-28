@@ -1,6 +1,7 @@
 // Shared inventory store — imported by search/route.ts and inventory/status/route.ts.
 // Module-level state persists for the lifetime of the Node.js server process.
 
+import { after } from "next/server";
 import type { Activity, Category, Badge } from "../../activities/data/types";
 import {
   readGeoCache, writeGeoCache,
@@ -976,9 +977,25 @@ export async function getOrCreateInventory(
       inventoryStore.set(cityKey, inv);
       // Run missing queries in the background using skipKeys to avoid re-fetching cached ones
       const skipKeys = new Set(dbCache.keys());
-      buildInventoryBatched(inv, apiKey, skipKeys).catch((err) => {
-        console.error(`[inventory/build] error for "${inv.city}":`, err);
-        inv.status = "ready";
+      const buildStart = Date.now();
+      console.log(`[inventory/build/after] ${inv.city}: registering background build — ${SEARCH_GROUPS.length - skipKeys.size} queries remaining`);
+      const partialBuildPromise = buildInventoryBatched(inv, apiKey, skipKeys);
+      after(async () => {
+        console.log(`[inventory/build/after] ${inv.city}: after() callback started`);
+        try {
+          await partialBuildPromise;
+          const elapsed = Date.now() - buildStart;
+          console.log(
+            `[inventory/build/after] ${inv.city}: build finished — ` +
+            `${inv.entries.size} activities indexed — ${elapsed}ms total`,
+          );
+        } catch (err) {
+          console.error(
+            `[inventory/build/after] ${inv.city}: build error:`,
+            err instanceof Error ? err.message : String(err),
+          );
+          inv.status = "ready";
+        }
       });
       return inv;
     }
@@ -998,9 +1015,25 @@ export async function getOrCreateInventory(
   };
   inventoryStore.set(cityKey, inv);
 
-  buildInventoryBatched(inv, apiKey, new Set()).catch((err) => {
-    console.error(`[inventory/build] fatal error for "${inv.city}":`, err);
-    inv.status = "ready";  // unblock clients even on error
+  const buildStart = Date.now();
+  console.log(`[inventory/build/after] ${inv.city}: registering full build — ${SEARCH_GROUPS.length} query groups`);
+  const buildPromise = buildInventoryBatched(inv, apiKey, new Set());
+  after(async () => {
+    console.log(`[inventory/build/after] ${inv.city}: after() callback started (full build)`);
+    try {
+      await buildPromise;
+      const elapsed = Date.now() - buildStart;
+      console.log(
+        `[inventory/build/after] ${inv.city}: build finished — ` +
+        `${inv.entries.size} activities indexed — ${elapsed}ms total`,
+      );
+    } catch (err) {
+      console.error(
+        `[inventory/build/after] ${inv.city}: build error:`,
+        err instanceof Error ? err.message : String(err),
+      );
+      inv.status = "ready";  // unblock clients even on error
+    }
   });
 
   // Wait for the seed batch (first 12 queries) to complete before returning.

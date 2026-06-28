@@ -10,6 +10,9 @@ import {
   type CityInventory,
 } from "../_inventory";
 
+export const runtime = "nodejs";
+export const maxDuration = 300;
+
 // ── AI whyVisit generation ────────────────────────────────────────────────────
 // Runs at response time. Results are cached inside CityInventory.entries[id].whyVisit
 // so they are not regenerated on subsequent requests.
