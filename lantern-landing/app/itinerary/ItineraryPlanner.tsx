@@ -2163,6 +2163,13 @@ export default function ItineraryPlanner() {
     clearTrip();
     setSelectedHotels({});
     setSelectedFlight(null);
+    // Clear saved activities — each trip has its own set
+    setSavedIds([]);
+    setSavedMeta({});
+    try {
+      localStorage.removeItem("travelgrab:saved-activities");
+      localStorage.removeItem("travelgrab:saved-activities-data");
+    } catch { /* ignore */ }
     setObDest("");
     setObDestValidated(false);
     setObDestError(null);
@@ -3394,8 +3401,14 @@ export default function ItineraryPlanner() {
                           type="button"
                           onClick={() => {
                             setTrip(t.trip);
-                            setSavedIds(t.trip.savedActivityIds ?? []);
-                            setSavedMeta(t.trip.savedActivityMeta ?? {});
+                            const ids  = t.trip.savedActivityIds ?? [];
+                            const meta = t.trip.savedActivityMeta ?? {};
+                            setSavedIds(ids);
+                            setSavedMeta(meta);
+                            try {
+                              localStorage.setItem("travelgrab:saved-activities",      JSON.stringify(ids));
+                              localStorage.setItem("travelgrab:saved-activities-data", JSON.stringify(meta));
+                            } catch { /* ignore */ }
                             setActiveTripId(t.id);
                             setCurrentTripId(t.id);
                             setLoadDropdown(false);
