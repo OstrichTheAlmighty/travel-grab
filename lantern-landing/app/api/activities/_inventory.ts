@@ -7,6 +7,7 @@ import {
   readCityCache, writeQueryCache, makeCacheKey,
   type CachedEntry,
 } from "./_inventoryCache";
+import { supabaseAdmin } from "@/lib/db";
 
 // ── Google Places API types ───────────────────────────────────────────────────
 
@@ -764,6 +765,108 @@ export async function buildInventoryBatched(
   inv.apiCallsMade = apiCallsMade;
   const elapsed = inv.builtAt - inv.buildStartedAt;
   console.log(`[inventory/build] ${inv.city}: COMPLETE — ${inv.entries.size} unique places in ${elapsed}ms (${apiCallsMade} API calls)`);
+
+  // Persist to Supabase so future searches for this city cost nothing
+  await writeInventoryToSupabase(inv).catch((err) => {
+    console.error(`[inventory/cache-write] error for "${inv.city}":`, err);
+  });
+}
+
+// ── Permanent Supabase cache write ────────────────────────────────────────────
+
+async function writeInventoryToSupabase(inv: CityInventory): Promise<void> {
+  if (!supabaseAdmin) {
+    console.warn("[inventory/cache-write] supabaseAdmin not available — skipping");
+    return;
+  }
+
+  const rows: Array<{
+    place_id: string;
+    title: string;
+    city: string;
+    category: string;
+    description: string | null;
+    image_url: string | null;
+    google_places_data: Record<string, unknown>;
+  }> = [];
+
+  for (const entry of inv.entries.values()) {
+    try {
+      const { place } = entry;
+      const types = place.types ?? [];
+
+      const { price: basePrice, isFree: isFreeByPrice } = estimatePrice(place.priceLevel);
+      const freeByTypeSet = new Set(["park", "natural_feature", "beach", "hiking_area", "shrine"]);
+      const isFreeByType = !place.priceLevel && types.some((t) => freeByTypeSet.has(t));
+      const isFree = isFreeByPrice || isFreeByType;
+      const price = isFree ? "Free" : basePrice;
+
+      const neighborhood = extractNeighborhood(place, inv.city);
+      const badges = generateBadges(place);
+      if (isFreeByType && !badges.includes("free")) badges.push("free");
+
+      let category: Category = entry.category;
+      if (badges.includes("hidden_gem") && !["food", "nightlife", "luxury"].includes(category)) {
+        category = "hidden_gems";
+      }
+      if (category === "food" && place.priceLevel === "PRICE_LEVEL_VERY_EXPENSIVE") {
+        category = "luxury";
+      }
+
+      const tags = [...new Set([...buildTags(types), ...entry.tags])].slice(0, 8);
+      const emoji = pickEmoji(types) || CATEGORY_EMOJI[category];
+      const description = buildDescription(place, neighborhood);
+      const whyVisit = entry.whyVisit || buildWhyVisit(place, category, inv.city);
+
+      rows.push({
+        place_id:    place.id,
+        title:       place.displayName?.text ?? "(unnamed)",
+        city:        inv.city,
+        category,
+        description: description || null,
+        image_url:   place.photos?.[0]?.name ?? null,
+        google_places_data: {
+          rating:                place.rating,
+          userRatingCount:       place.userRatingCount,
+          formattedAddress:      place.formattedAddress,
+          shortFormattedAddress: place.shortFormattedAddress,
+          regularOpeningHours:   place.regularOpeningHours,
+          websiteUri:            place.websiteUri,
+          googleMapsUri:         place.googleMapsUri,
+          location:              place.location,
+          types:                 place.types,
+          priceLevel:            place.priceLevel,
+          neighborhood,
+          duration:              estimateDuration(types),
+          price,
+          isFree,
+          whyVisit,
+          tags,
+          badges,
+          emoji,
+          querySources: entry.querySources,
+        },
+      });
+    } catch (err) {
+      console.warn(`[inventory/cache-write] skipped ${entry.place.id}: ${String(err)}`);
+    }
+  }
+
+  if (rows.length === 0) return;
+
+  const UPSERT_BATCH = 100;
+  let upserted = 0;
+  for (let i = 0; i < rows.length; i += UPSERT_BATCH) {
+    const batch = rows.slice(i, i + UPSERT_BATCH);
+    const { error } = await supabaseAdmin.from("activities").upsert(batch, { onConflict: "place_id" });
+    if (error) {
+      console.error(`[inventory/cache-write] batch ${Math.floor(i / UPSERT_BATCH) + 1} error:`, error.message);
+    } else {
+      upserted += batch.length;
+    }
+  }
+
+  console.log(`[inventory/cache-write] ${inv.city}: wrote ${upserted}/${rows.length} places to Supabase permanently`);
 }
 
 // ── DB cache reconstruction ───────────────────────────────────────────────────
