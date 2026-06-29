@@ -1,8 +1,10 @@
 import type { WikimediaCache } from "./wikimediaCache";
-import type { WikidataEntity, WikidataSearchResult } from "./wikimediaTypes";
+import type { WikipediaSearchPage, WikidataEntity, WikidataSearchResult } from "./wikimediaTypes";
 
 const WIKIDATA_API = "https://www.wikidata.org/w/api.php";
 const COMMONS_API = "https://commons.wikimedia.org/w/api.php";
+const JA_WIKIPEDIA_API = "https://ja.wikipedia.org/w/api.php";
+const EN_WIKIPEDIA_API = "https://en.wikipedia.org/w/api.php";
 const USER_AGENT = process.env.WIKIMEDIA_USER_AGENT ?? "TravelGrabFSQEnrichment/0.1 (local pilot; contact: https://travelgrab.app)";
 
 function chunks<T>(values: T[], size: number): T[][] {
@@ -66,6 +68,25 @@ export class WikimediaClient {
       for (const entity of Object.values(response.entities ?? {})) if (!entity.id.startsWith("-")) result.set(entity.id, entity);
     }
     return result;
+  }
+
+  async searchWikipedia(query: string, language: "ja" | "en"): Promise<WikipediaSearchPage[]> {
+    const response = await this.request<{ query?: { pages?: Array<{ title?: string; pageprops?: { wikibase_item?: string }; coordinates?: Array<{ lat?: number; lon?: number }>; terms?: { description?: string[] } }> } }>(language === "ja" ? JA_WIKIPEDIA_API : EN_WIKIPEDIA_API, {
+      action: "query", generator: "search", gsrsearch: query, gsrnamespace: "0", gsrlimit: "5",
+      prop: "pageprops|coordinates|pageterms", wbptterms: "description", redirects: "1",
+    });
+    return (response.query?.pages ?? []).map((page) => ({
+      title: page.title ?? "", wikidataId: page.pageprops?.wikibase_item,
+      description: page.terms?.description?.[0], lat: page.coordinates?.[0]?.lat, lng: page.coordinates?.[0]?.lon,
+      route: language === "ja" ? "jawiki_search" as const : "enwiki_search" as const,
+    })).filter((page) => Boolean(page.title));
+  }
+
+  async nearbyWikidata(lat: number, lng: number, radiusM: number): Promise<string[]> {
+    const response = await this.request<{ query?: { geosearch?: Array<{ title?: string }> } }>(WIKIDATA_API, {
+      action: "query", list: "geosearch", gscoord: `${lat}|${lng}`, gsradius: String(Math.min(10_000, Math.max(10, Math.round(radiusM)))), gslimit: "20", gsnamespace: "0",
+    });
+    return (response.query?.geosearch ?? []).map((result) => result.title ?? "").filter((title) => /^Q\d+$/.test(title));
   }
 
   async getCommonsImageMetadata(files: string[]): Promise<Map<string, Record<string, string>>> {

@@ -1,7 +1,32 @@
 import type { CuratedActivity } from "./curation";
 
 export type CatalogClassification = "tokyo_core" | "broader_tokyo" | "metro_excursion" | "reserve";
-export type WikimediaMatchStatus = "verified" | "possible" | "unmatched";
+export type WikimediaEligibility = "high_wikimedia_likelihood" | "medium_wikimedia_likelihood" | "low_wikimedia_likelihood" | "not_expected_to_have_wikimedia_entity";
+export type WikimediaMatchStatus = "verified" | "probable_manual_review" | "rejected" | "unmatched";
+export type CandidateRoute = "wikidata_ja" | "wikidata_en" | "wikidata_alternate" | "jawiki_search" | "enwiki_search" | "nearby_wikidata";
+
+export interface QueryAttempt {
+  route: CandidateRoute;
+  query: string;
+  language?: "ja" | "en";
+  resultIds: string[];
+  failed?: boolean;
+}
+
+export interface CandidateEvaluationAudit {
+  wikidataId: string;
+  routes: CandidateRoute[];
+  label?: string;
+  description?: string;
+  score: number;
+  entityTypes: string[];
+  coordinateDistanceM?: number;
+  coordinateRadiusM: number;
+  coordinatePolicy: string;
+  signals: string[];
+  rejectionReasons: string[];
+  decision: "accepted" | "manual_review" | "rejected";
+}
 
 export interface WikimediaImage {
   file: string;
@@ -31,10 +56,17 @@ export interface WikimediaEnrichment {
   match_signals: string[];
   rejection_reasons: string[];
   language_sitelinks: number;
+  coordinate_radius_m?: number;
+  coordinate_policy?: string;
 }
 
 export interface EnrichedActivity extends CuratedActivity {
   catalog_classification: CatalogClassification;
+  wikimedia_eligibility: WikimediaEligibility;
+  wikimedia_eligibility_reasons: string[];
+  selection_stratum?: string;
+  query_attempts: QueryAttempt[];
+  candidate_entities: CandidateEvaluationAudit[];
   original_category: string;
   corrected_category: string;
   inclusion_reasons: string[];
@@ -69,4 +101,13 @@ export interface WikimediaRunStats {
   cacheHits: number;
   failures: number;
   retries: number;
+}
+
+export interface WikipediaSearchPage {
+  title: string;
+  wikidataId?: string;
+  description?: string;
+  lat?: number;
+  lng?: number;
+  route: "jawiki_search" | "enwiki_search";
 }

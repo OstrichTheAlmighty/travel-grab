@@ -6,8 +6,10 @@ import type { CuratedActivity } from "@/scripts/fsq/lib/curation";
 import { catalogClassification, correctedCategory } from "@/scripts/fsq/lib/fsqCorrections";
 import { WikimediaCache } from "@/scripts/fsq/lib/wikimediaCache";
 import { WikimediaClient } from "@/scripts/fsq/lib/wikimediaClient";
-import { imageFromMetadata, scoreForDisplay } from "@/scripts/fsq/lib/wikimediaEnrichment";
-import { chooseWikidataMatch, evaluateWikidataEntity } from "@/scripts/fsq/lib/wikimediaMatcher";
+import { imageFromMetadata, scoreForDisplay, shouldApplyEnrichment } from "@/scripts/fsq/lib/wikimediaEnrichment";
+import { classifyWikimediaEligibility } from "@/scripts/fsq/lib/wikimediaEligibility";
+import { chooseWikidataMatch, coordinateRadiusPolicy, evaluateWikidataEntity, typeCompatibility } from "@/scripts/fsq/lib/wikimediaMatcher";
+import { generateQueryVariants, removeMacrons } from "@/scripts/fsq/lib/wikimediaQueries";
 import type { WikidataEntity, WikimediaEnrichment } from "@/scripts/fsq/lib/wikimediaTypes";
 
 function activity(overrides: Partial<CuratedActivity> = {}): CuratedActivity {
@@ -37,12 +39,12 @@ describe("Wikidata entity matching", () => {
     const result = chooseWikidataMatch(activity(), [entity()], typeEntities);
     expect(result.status).toBe("verified");
     expect(result.best?.signals).toContain("exact_normalized_name");
-    expect(result.best?.signals).toContain("coordinates_within_150m");
+    expect(result.best?.signals).toContain("coordinates_strong_within_policy");
   });
 
   it("rejects a loose substring business near a landmark", () => {
     const candidate = entity({ labels: { en: { language: "en", value: "Tokyo Tower Portrait Studio" } }, aliases: {}, descriptions: { en: { language: "en", value: "portrait studio business inside Tokyo Tower" } }, sitelinks: {} });
-    expect(chooseWikidataMatch(activity(), [candidate], typeEntities).status).toBe("unmatched");
+    expect(chooseWikidataMatch(activity(), [candidate], typeEntities).status).toBe("rejected");
   });
 
   it("rejects a business containing a district name", () => {
@@ -50,24 +52,75 @@ describe("Wikidata entity matching", () => {
     const candidate = entity({ labels: { en: { language: "en", value: "Harajuku Photo Studio" } }, aliases: {}, descriptions: { en: { language: "en", value: "photography business in Harajuku" } } });
     const evaluated = evaluateWikidataEntity(source, candidate, typeEntities);
     expect(evaluated.rejectionReasons).toContain("business_entity_type_incompatible");
-    expect(chooseWikidataMatch(source, [candidate], typeEntities).status).toBe("unmatched");
+    expect(chooseWikidataMatch(source, [candidate], typeEntities).status).toBe("rejected");
   });
 
   it("rejects Meiji Jingu Stadium for Meiji Jingū shrine", () => {
     const source = activity({ title: "明治神宮 (Meiji Jingu Shrine)", source_metadata: { geography: "tokyo_core_23_wards", locality: "Shibuya", fsq_category_labels: ["Community and Government > Spiritual Center > Shrine"] } });
     const stadium = entity({ labels: { en: { language: "en", value: "Meiji Jingu Stadium" } }, aliases: {}, descriptions: { en: { language: "en", value: "baseball stadium in Tokyo" } } });
-    expect(chooseWikidataMatch(source, [stadium], typeEntities).status).toBe("unmatched");
+    expect(chooseWikidataMatch(source, [stadium], typeEntities).status).toBe("rejected");
   });
 
   it("rejects proximity-only candidates", () => {
     const nearby = entity({ labels: { en: { language: "en", value: "Unrelated Office" } }, aliases: {}, descriptions: { en: { language: "en", value: "company office" } }, sitelinks: {} });
-    expect(chooseWikidataMatch(activity(), [nearby], typeEntities).status).toBe("unmatched");
+    expect(chooseWikidataMatch(activity(), [nearby], typeEntities).status).toBe("rejected");
   });
 
   it("rejects creative works and generic concepts sharing a place name", () => {
     const district = activity({ title: "高円寺純情商店街", source_metadata: { geography: "tokyo_core_23_wards", fsq_category_labels: ["Landmarks and Outdoors > States and Municipalities > Neighborhood"] } });
     const novel = entity({ labels: { ja: { language: "ja", value: "高円寺純情商店街" } }, aliases: {}, descriptions: { en: { language: "en", value: "1986 novel" } }, sitelinks: {} });
-    expect(chooseWikidataMatch(district, [novel], typeEntities).status).toBe("unmatched");
+    expect(chooseWikidataMatch(district, [novel], typeEntities).status).toBe("rejected");
+  });
+
+  it("rejects a market merchant as the market entity", () => {
+    const source = activity({ title: "築地場外市場", source_metadata: { geography: "tokyo_core_23_wards", fsq_category_labels: ["Retail > Market > Fish Market"] } });
+    expect(typeCompatibility(source, "fish merchant shop at Tsukiji market").compatible).toBe(false);
+    expect(typeCompatibility(source, "public fish market in Tokyo").compatible).toBe(true);
+  });
+
+  it("uses wider radii for districts and metro excursions", () => {
+    const building = coordinateRadiusPolicy(activity());
+    const district = coordinateRadiusPolicy(activity({ source_metadata: { geography: "tokyo_core_23_wards", fsq_category_labels: ["Landmarks and Outdoors > Neighborhood"] } }));
+    const metro = coordinateRadiusPolicy(activity({ source_metadata: { geography: "yokohama_or_outside_tokyo", fsq_category_labels: ["Arts and Entertainment > Amusement Park"] } }));
+    expect(building.radiusM).toBe(400);
+    expect(district.radiusM).toBeGreaterThan(building.radiusM);
+    expect(metro.radiusM).toBeGreaterThan(district.radiusM);
+  });
+
+  it("keeps probable matches manual-only", () => {
+    const source = activity({ title: "Example Museum", source_metadata: { geography: "tokyo_core_23_wards", fsq_category_labels: ["Arts and Entertainment > Museum"] } });
+    const candidate = entity({ labels: { en: { language: "en", value: "Example Museum" } }, aliases: {}, descriptions: { en: { language: "en", value: "museum in Tokyo" } }, claims: { P31: [{ mainsnak: { datavalue: { value: { id: "Q570116" } } } }] }, sitelinks: {} });
+    const match = chooseWikidataMatch(source, [candidate], new Map([["Q570116", entity({ id: "Q570116", labels: { en: { language: "en", value: "museum" } }, claims: {}, sitelinks: {} })]]));
+    expect(match.status).toBe("probable_manual_review");
+    expect(shouldApplyEnrichment(match.status)).toBe(false);
+  });
+
+  it("does not auto-apply an abstract match for a not-expected generic place", () => {
+    const source = activity({ title: "Picnic Area", website: undefined, source_metadata: { geography: "tokyo_core_23_wards", fsq_category_labels: ["Arts and Entertainment > Amusement Park > Attraction"] } });
+    const concept = entity({ labels: { en: { language: "en", value: "Picnic Area" } }, descriptions: { en: { language: "en", value: "type of area for outdoor dining" } }, aliases: {}, claims: { P31: [{ mainsnak: { datavalue: { value: { id: "Q570116" } } } }] }, sitelinks: { enwiki: { site: "enwiki", title: "Picnic area" } } });
+    expect(chooseWikidataMatch(source, [concept], typeEntities).status).not.toBe("verified");
+  });
+});
+
+describe("eligibility and query generation", () => {
+  it("classifies notable museums as high likelihood", () => {
+    const source = activity({ title: "Tokyo History Museum", website: "https://museum.example", source_metadata: { geography: "tokyo_core_23_wards", fsq_category_labels: ["Arts and Entertainment > Museum > History Museum"] } });
+    expect(classifyWikimediaEligibility(source).eligibility).toBe("high_wikimedia_likelihood");
+  });
+
+  it("classifies generic subordinate exhibits as not expected", () => {
+    const source = activity({ title: "お化け屋敷", website: undefined, source_metadata: { geography: "tokyo_core_23_wards", fsq_category_labels: ["Arts and Entertainment > Amusement Park > Attraction"] } });
+    expect(classifyWikimediaEligibility(source).eligibility).toBe("not_expected_to_have_wikimedia_entity");
+  });
+
+  it("generates Japanese, English, parentheses, macron, and locality variants", () => {
+    const source = activity({ title: "浅草寺 (Sensō-ji Temple)", source_metadata: { geography: "tokyo_core_23_wards", locality: "Taito", fsq_category_labels: ["Community > Buddhist Temple"] } });
+    const variants = generateQueryVariants(source);
+    expect(variants.some((variant) => variant.query === "浅草寺")).toBe(true);
+    expect(variants.some((variant) => variant.query === "Sensō-ji Temple")).toBe(true);
+    expect(variants.some((variant) => /Senso-ji Temple/i.test(variant.query))).toBe(true);
+    expect(variants.some((variant) => /東京|Taito|Tokyo/.test(variant.query) && variant.kind === "locality")).toBe(true);
+    expect(removeMacrons("Sensō-ji")).toBe("Senso-ji");
   });
 });
 
@@ -83,6 +136,12 @@ describe("prominence and corrections", () => {
     const benchmark = activity({ curation: { ...activity().curation, selection_reasons: ["major_attraction"] } });
     const ordinary = activity({ curation: { ...activity().curation, selection_reasons: [] } });
     expect(scoreForDisplay(benchmark, rich, "tokyo_core").score).toBe(scoreForDisplay(ordinary, rich, "tokyo_core").score);
+  });
+
+  it("does not excessively penalize unmatched records", () => {
+    const unmatched: WikimediaEnrichment = { alternate_names: [], entity_types: [], match_status: "unmatched", match_confidence: 0, match_signals: [], rejection_reasons: [], language_sitelinks: 0 };
+    const difference = scoreForDisplay(activity(), rich, "tokyo_core").score - scoreForDisplay(activity(), unmatched, "tokyo_core").score;
+    expect(difference).toBeLessThanOrEqual(22);
   });
 
   it("corrects the theater and separates metro excursions", () => {
@@ -129,6 +188,22 @@ describe("persistent cache", () => {
     await expect(client.search("Missing", "en")).rejects.toThrow(/Cached Wikimedia request failure/);
     expect(fetchMock).toHaveBeenCalledTimes(3);
     expect(cache.stats.cacheHits).toBe(1);
+  });
+
+  it.each(["ja", "en"] as const)("resolves %s Wikipedia pages to Wikidata IDs", async (language) => {
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), `wikimedia-${language}-wiki-`)); directories.push(directory);
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response(JSON.stringify({ query: { pages: [{ title: "Tokyo Tower", pageprops: { wikibase_item: "Q1771" }, coordinates: [{ lat: 35.65, lon: 139.74 }], terms: { description: ["tower"] } }] } }), { status: 200 })));
+    const pages = await new WikimediaClient(new WikimediaCache(directory), 0).searchWikipedia("Tokyo Tower", language);
+    expect(pages[0]).toMatchObject({ wikidataId: "Q1771", route: language === "ja" ? "jawiki_search" : "enwiki_search" });
+  });
+
+  it("generates bounded nearby Wikidata candidates", async () => {
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), "wikimedia-nearby-")); directories.push(directory);
+    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({ query: { geosearch: [{ title: "Q1771" }, { title: "NotAnItem" }] } }), { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+    const ids = await new WikimediaClient(new WikimediaCache(directory), 0).nearbyWikidata(35.65, 139.74, 400);
+    expect(ids).toEqual(["Q1771"]);
+    expect(String(fetchMock.mock.calls[0][0])).toContain("gsradius=400");
   });
 });
 
