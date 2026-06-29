@@ -5,6 +5,8 @@ import type { Activity } from "../../../activities/data/types";
 import { DESTINATION_DATA } from "../../../activities/data/tokyo";
 import {
   getOrCreateInventory,
+  getLoadedInventory,
+  runtimeGoogleActivityBuildEnabled,
   convertInventoryToActivities,
   SKIP_TYPES,
   type CityInventory,
@@ -136,8 +138,21 @@ export async function GET(req: NextRequest) {
     });
   }
 
-  // Get or create inventory (waits up to 7s for first batch on a new city)
-  const inv = await getOrCreateInventory(destination, apiKey);
+  // A public request may read an inventory already loaded by an explicit admin
+  // workflow, but must never launch the high-fan-out Google builder by default.
+  const runtimeBuildAllowed = runtimeGoogleActivityBuildEnabled();
+  const inv = runtimeBuildAllowed
+    ? await getOrCreateInventory(destination, apiKey)
+    : getLoadedInventory(destination);
+
+  if (!inv && !runtimeBuildAllowed) {
+    return NextResponse.json({
+      error: "This city catalog has not been built yet.",
+      cityNotBuilt: true,
+      source: "catalog_unavailable",
+      activities: [],
+    }, { status: 404 });
+  }
 
   // ── Cache / path diagnostics ────────────────────────────────────────────────
   console.log(`[activities/search] destination="${destination}"`);
@@ -249,6 +264,8 @@ export async function GET(req: NextRequest) {
       _debug: {
         cacheSource:   inv.cacheSource ?? "api",
         apiCallsMade:  inv.apiCallsMade ?? inv.queriesCompleted,
+        searchGroups:  inv.queriesCompleted,
+        googleHttpRequests: inv.googleHttpRequests ?? { textSearch: 0, nearbySearch: 0, geocoding: 0 },
         entriesLoaded: inv.entries.size,
       },
     } : {}),

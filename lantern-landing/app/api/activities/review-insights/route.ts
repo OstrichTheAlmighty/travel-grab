@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { canSpend, recordGoogleUsage, recordServerCacheHit } from "@/lib/activities/google-usage";
 
 // POST /api/activities/review-insights
 // Body: { placeId, placeName, category, reviews: [{text, rating}] }
@@ -45,6 +46,7 @@ export async function POST(req: NextRequest) {
   // Cache hit
   const hit = cache.get(placeId);
   if (hit && Date.now() - hit.ts < CACHE_TTL) {
+    recordServerCacheHit();
     console.log(`[review-insights] cache hit placeId="${placeId}"`);
     return NextResponse.json(hit.insights);
   }
@@ -59,6 +61,10 @@ export async function POST(req: NextRequest) {
       guestsLove: [], watchOut: [], bestFor: [], tips: [], limited: true,
     };
     return NextResponse.json(empty);
+  }
+
+  if (!canSpend("review_insights") || !recordGoogleUsage("review_insights")) {
+    return NextResponse.json({ downgraded: true, capReached: true }, { status: 200 });
   }
 
   const isLimited = reviews.length < 3;

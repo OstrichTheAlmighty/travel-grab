@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "migrate:activities": "npx tsx scripts/migrate-activities.ts",
+    "activities:google-build": "npx tsx scripts/activities/buildGoogleCity.ts",
     "activities:fsq-smoke": "npx tsx scripts/fsq/smokeTest.ts",
     "activities:fsq": "npx tsx scripts/fsq/importCity.ts",
     "activities:fsq-compare": "npx tsx scripts/fsq/compare.ts",

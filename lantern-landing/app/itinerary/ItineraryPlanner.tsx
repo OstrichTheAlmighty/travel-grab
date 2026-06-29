@@ -16,6 +16,8 @@ import type { Activity } from "@/app/activities/data/types";
 import { PreferencesPanel } from "./components/PreferencesPanel";
 import { RecommendationsPanel } from "./components/RecommendationsPanel";
 import { SavedPlacesPanel } from "./components/SavedPlacesPanel";
+import { activityPhotoUrl, fetchGooglePlaceDetail } from "@/lib/activities/google-place-client";
+import type { GooglePlaceDetail } from "@/lib/activities/google-place-details";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -387,7 +389,10 @@ interface PlaceDetailData {
   googleMapsUri?:       string;
   editorialSummary?:    string;
   phone?:               string;
-  photos?:              Array<{ name: string }>;
+  photos?:              Array<{
+    name: string;
+    authorAttributions?: Array<{ displayName?: string; uri?: string }>;
+  }>;
   rating?:              number;
   userRatingCount?:     number;
   reviews?:             Array<{
@@ -397,6 +402,27 @@ interface PlaceDetailData {
     timeAgo?:       string;
     authorPhotoUri?: string;
   }>;
+}
+
+function toPlannerPlaceDetail(data: GooglePlaceDetail): PlaceDetailData {
+  return {
+    address: data.formattedAddress ?? data.shortFormattedAddress,
+    openNow: data.regularOpeningHours?.openNow,
+    weekdayDescriptions: data.regularOpeningHours?.weekdayDescriptions,
+    website: data.websiteUri,
+    googleMapsUri: data.googleMapsUri,
+    phone: data.nationalPhoneNumber ?? data.internationalPhoneNumber,
+    photos: data.photos,
+    rating: data.rating,
+    userRatingCount: data.userRatingCount,
+    reviews: data.reviews?.slice(0, 5).map((review) => ({
+      authorName: review.authorAttribution?.displayName,
+      authorPhotoUri: review.authorAttribution?.photoUri,
+      rating: review.rating,
+      text: review.text?.text,
+      timeAgo: review.relativePublishTimeDescription,
+    })),
+  };
 }
 
 // ── Design tokens ──────────────────────────────────────────────────────────────
@@ -824,7 +850,7 @@ function GapActivityCard({
         {hasPhoto ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={`/api/activities/photo?name=${encodeURIComponent(meta.photoRef!)}`}
+            src={activityPhotoUrl(meta.photoRef!, 800)}
             alt={meta.title}
             className="w-full h-full object-cover"
             onError={() => setImgFailed(true)}
@@ -903,45 +929,8 @@ function GapSuggestion({
     setDetailLoading(true);
     setDetailData(null);
     setDetailPhoto(0);
-    fetch(`/api/activities/place?id=${encodeURIComponent(detailAct.id)}`)
-      .then((r) => r.ok ? r.json() : null)
-      .then((data: {
-        formattedAddress?: string; shortFormattedAddress?: string;
-        regularOpeningHours?: { openNow?: boolean; weekdayDescriptions?: string[] };
-        websiteUri?: string; googleMapsUri?: string;
-        editorialSummary?: { text?: string };
-        nationalPhoneNumber?: string; internationalPhoneNumber?: string;
-        photos?: Array<{ name: string }>;
-        rating?: number; userRatingCount?: number;
-        reviews?: Array<{
-          authorAttribution?: { displayName?: string; photoUri?: string };
-          rating?: number;
-          text?: { text?: string };
-          relativePublishTimeDescription?: string;
-        }>;
-      } | null) => {
-        if (!data) { setDetailData(null); return; }
-        setDetailData({
-          address:             data.formattedAddress ?? data.shortFormattedAddress,
-          openNow:             data.regularOpeningHours?.openNow,
-          weekdayDescriptions: data.regularOpeningHours?.weekdayDescriptions,
-          website:             data.websiteUri,
-          googleMapsUri:       data.googleMapsUri,
-          editorialSummary:    data.editorialSummary?.text,
-          phone:               data.nationalPhoneNumber ?? data.internationalPhoneNumber,
-          photos:              data.photos,
-          rating:              data.rating,
-          userRatingCount:     data.userRatingCount,
-          reviews:             data.reviews?.slice(0, 5).map((r) => ({
-            authorName:     r.authorAttribution?.displayName,
-            authorPhotoUri: r.authorAttribution?.photoUri,
-            rating:         r.rating,
-            text:           r.text?.text,
-            timeAgo:        r.relativePublishTimeDescription,
-          })),
-        });
-      })
-      .catch(() => {})
+    void fetchGooglePlaceDetail(detailAct.id, "modal_standard")
+      .then((data) => setDetailData(data ? toPlannerPlaceDetail(data) : null))
       .finally(() => setDetailLoading(false));
   }, [detailAct?.id]);
 
@@ -1058,11 +1047,16 @@ function GapSuggestion({
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         key={photos[detailPhoto]?.name}
-                        src={`/api/activities/photo?name=${encodeURIComponent(photos[detailPhoto]?.name ?? "")}&w=800`}
+                        src={activityPhotoUrl(photos[detailPhoto]?.name ?? "", 800)}
                         className="w-full h-full object-cover"
                         alt={detailAct.meta.title}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                      {photos[detailPhoto]?.authorAttributions?.length ? (
+                        <p className="absolute bottom-2 left-3 rounded bg-black/60 px-2 py-1 text-[9px] text-white">
+                          Photo: {photos[detailPhoto].authorAttributions!.map((author) => author.displayName).filter(Boolean).join(", ")}
+                        </p>
+                      ) : null}
                       {photos.length > 1 && (
                         <>
                           <button type="button" onClick={() => setDetailPhoto((n) => Math.max(0, n - 1))} disabled={detailPhoto === 0}
@@ -1225,7 +1219,6 @@ function GapSuggestion({
                       neighborhood: activity.neighborhood,
                       duration:     activity.duration,
                       rating:       activity.rating,
-                      photoRef:     activity.photoRef,
                       lat:          activity.lat,
                       lng:          activity.lng,
                     };
@@ -2048,45 +2041,8 @@ export default function ItineraryPlanner() {
       return;
     }
     setModalDetailLoading(true);
-    fetch(`/api/activities/place?id=${encodeURIComponent(detailSlot.sourceId)}`)
-      .then((r) => r.ok ? r.json() : null)
-      .then((data: {
-        formattedAddress?: string; shortFormattedAddress?: string;
-        regularOpeningHours?: { openNow?: boolean; weekdayDescriptions?: string[] };
-        websiteUri?: string; googleMapsUri?: string;
-        editorialSummary?: { text?: string };
-        nationalPhoneNumber?: string; internationalPhoneNumber?: string;
-        photos?: Array<{ name: string }>;
-        rating?: number; userRatingCount?: number;
-        reviews?: Array<{
-          authorAttribution?: { displayName?: string; photoUri?: string };
-          rating?: number;
-          text?: { text?: string };
-          relativePublishTimeDescription?: string;
-        }>;
-      } | null) => {
-        if (!data) { setModalPlaceDetail(null); return; }
-        setModalPlaceDetail({
-          address:             data.formattedAddress ?? data.shortFormattedAddress,
-          openNow:             data.regularOpeningHours?.openNow,
-          weekdayDescriptions: data.regularOpeningHours?.weekdayDescriptions,
-          website:             data.websiteUri,
-          googleMapsUri:       data.googleMapsUri,
-          editorialSummary:    data.editorialSummary?.text,
-          phone:               data.nationalPhoneNumber ?? data.internationalPhoneNumber,
-          photos:              data.photos,
-          rating:              data.rating,
-          userRatingCount:     data.userRatingCount,
-          reviews:             data.reviews?.slice(0, 5).map((r) => ({
-            authorName:    r.authorAttribution?.displayName,
-            authorPhotoUri: r.authorAttribution?.photoUri,
-            rating:         r.rating,
-            text:           r.text?.text,
-            timeAgo:        r.relativePublishTimeDescription,
-          })),
-        });
-      })
-      .catch(() => { setModalPlaceDetail(null); })
+    void fetchGooglePlaceDetail(detailSlot.sourceId, "modal_standard")
+      .then((data) => setModalPlaceDetail(data ? toPlannerPlaceDetail(data) : null))
       .finally(() => setModalDetailLoading(false));
   }, [detailSlot?.sourceId]);
 
@@ -3772,11 +3728,16 @@ export default function ItineraryPlanner() {
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                               key={photos[detailActivePhoto]?.name}
-                              src={`/api/activities/photo?name=${encodeURIComponent(photos[detailActivePhoto]?.name ?? "")}&w=800`}
+                              src={activityPhotoUrl(photos[detailActivePhoto]?.name ?? "", 800)}
                               className="w-full h-full object-cover"
                               alt={detailSlot.title}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-gray-50 via-[#0D1019]/20 to-transparent" />
+                            {photos[detailActivePhoto]?.authorAttributions?.length ? (
+                              <p className="absolute bottom-2 left-3 rounded bg-black/60 px-2 py-1 text-[9px] text-white">
+                                Photo: {photos[detailActivePhoto].authorAttributions!.map((author) => author.displayName).filter(Boolean).join(", ")}
+                              </p>
+                            ) : null}
                             {photos.length > 1 && (
                               <>
                                 <button type="button" onClick={() => setDetailActivePhoto((n) => Math.max(0, n - 1))} disabled={detailActivePhoto === 0}

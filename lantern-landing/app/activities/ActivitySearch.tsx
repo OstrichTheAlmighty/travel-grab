@@ -7,6 +7,10 @@ import { fetchWithAuth } from "@/lib/fetch-with-auth";
 import UsageBanner from "@/app/components/UsageBanner";
 import type { Activity, Badge, Category } from "./data/types";
 import { supabase } from "@/lib/supabase";
+import { activityPhotoUrl, fetchGooglePlaceDetail } from "@/lib/activities/google-place-client";
+import type {
+  GooglePlaceDetail as PlaceDetail,
+} from "@/lib/activities/google-place-details";
 
 // ── Filter config ─────────────────────────────────────────────────────────────
 
@@ -85,19 +89,9 @@ function lsGetDestination(key: string): unknown | null {
   } catch { return null; }
 }
 
-function lsSetDestination(key: string, result: unknown): void {
-  try {
-    const raw = localStorage.getItem(LS_CACHE_KEY);
-    const cache: LsCache = raw ? (JSON.parse(raw) as LsCache) : {};
-    cache[key] = { result, ts: Date.now() };
-    // Evict oldest entries beyond limit
-    const keys = Object.keys(cache);
-    if (keys.length > LS_CACHE_MAX) {
-      const oldest = keys.sort((a, b) => cache[a].ts - cache[b].ts)[0];
-      delete cache[oldest];
-    }
-    localStorage.setItem(LS_CACHE_KEY, JSON.stringify(cache));
-  } catch { /* quota — ignore */ }
+function lsSetDestination(_key: string, _result: unknown): void {
+  // Legacy destination caches remain readable until a later migration, but new
+  // Google-derived activity/photo payloads are not written to persistent storage.
 }
 
 // ── Supabase → Activity mapping ───────────────────────────────────────────────
@@ -322,7 +316,7 @@ function ActivityCard({
         {hasPhoto && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={`/api/activities/photo?name=${encodeURIComponent(activity.photoRef!)}`}
+            src={activityPhotoUrl(activity.photoRef!, 800)}
             alt={activity.title}
             loading="lazy"
             className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105 ${imgLoaded ? "opacity-100" : "opacity-0"}`}
@@ -480,37 +474,6 @@ interface ReviewInsights {
   bestFor:    string[];
   tips:       string[];
   limited:    boolean;
-}
-
-// ── Place Detail type (mirrors /api/activities/place response) ────────────────
-
-interface PlaceReview {
-  name?: string;
-  relativePublishTimeDescription?: string;
-  rating?: number;
-  text?: { text: string; languageCode?: string };
-  authorAttribution?: { displayName?: string; uri?: string; photoUri?: string };
-  publishTime?: string;
-  googleMapsUri?: string;
-}
-
-interface PlaceDetail {
-  id: string;
-  displayName?: { text: string };
-  photos?: Array<{ name: string; widthPx?: number; heightPx?: number }>;
-  rating?: number;
-  userRatingCount?: number;
-  formattedAddress?: string;
-  shortFormattedAddress?: string;
-  types?: string[];
-  regularOpeningHours?: { openNow?: boolean; weekdayDescriptions?: string[] };
-  priceLevel?: string;
-  websiteUri?: string;
-  googleMapsUri?: string;
-  nationalPhoneNumber?: string;
-  internationalPhoneNumber?: string;
-  editorialSummary?: { text: string };
-  reviews?: PlaceReview[];
 }
 
 // ── Practical-tip helpers (all labeled as estimated in the UI) ────────────────
@@ -698,6 +661,8 @@ function ActivityDetailModal({
   loading,
   insights,
   insightsLoading,
+  onLoadGallery,
+  onLoadReviews,
   onClose,
 }: {
   activity: Activity;
@@ -705,12 +670,16 @@ function ActivityDetailModal({
   loading: boolean;
   insights: ReviewInsights | null;
   insightsLoading: boolean;
+  onLoadGallery: () => void;
+  onLoadReviews: () => void;
   onClose: () => void;
 }) {
   const [activePhoto,   setActivePhoto]   = useState(0);
   const [showHours,     setShowHours]     = useState(false);
   const [reviewFilter,  setReviewFilter]  = useState<"all" | "5" | "4" | "lte3">("all");
   const [reviewSearch,  setReviewSearch]  = useState("");
+  const reviewSectionRef = useRef<HTMLDivElement | null>(null);
+  const requestedReviews = useRef(false);
 
   // Close on Escape and lock body scroll
   useEffect(() => {
@@ -730,13 +699,27 @@ function ActivityDetailModal({
     setReviewSearch("");
   }, [detail]);
 
+  useEffect(() => {
+    requestedReviews.current = false;
+    const node = reviewSectionRef.current;
+    if (!node || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting) && !requestedReviews.current) {
+        requestedReviews.current = true;
+        onLoadReviews();
+      }
+    }, { rootMargin: "160px" });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [activity.id, onLoadReviews]);
+
   // Resolve fields — prefer detail data, fall back to card data
   const photos        = detail?.photos ?? (activity.photoRef ? [{ name: activity.photoRef }] : []);
   const name          = detail?.displayName?.text ?? activity.title;
   const rating        = detail?.rating        ?? activity.rating;
   const reviewCount   = detail?.userRatingCount ?? activity.reviewCount;
   const address       = detail?.formattedAddress ?? detail?.shortFormattedAddress ?? activity.neighborhood;
-  const summary       = detail?.editorialSummary?.text ?? activity.description;
+  const summary       = activity.description;
   const openNow       = detail?.regularOpeningHours?.openNow ?? activity.openNow;
   const hours         = detail?.regularOpeningHours?.weekdayDescriptions ?? [];
   const types         = detail?.types ?? [];
@@ -785,10 +768,34 @@ function ActivityDetailModal({
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   key={photos[activePhoto]?.name}
-                  src={`/api/activities/photo?name=${encodeURIComponent(photos[activePhoto]?.name ?? "")}&w=1200`}
+                  src={activityPhotoUrl(photos[activePhoto]?.name ?? "", 1200)}
                   alt={`${name} — photo ${activePhoto + 1}`}
                   className="w-full h-full object-cover"
+                  onClick={onLoadGallery}
                 />
+                {photos.length === 1 && (
+                  <button
+                    type="button"
+                    onClick={onLoadGallery}
+                    className="absolute bottom-3 left-3 rounded-full bg-black/55 px-3 py-1.5 text-[10px] font-semibold text-white backdrop-blur-sm"
+                  >
+                    View gallery
+                  </button>
+                )}
+                {photos[activePhoto]?.authorAttributions?.length ? (
+                  <p className="absolute bottom-3 right-3 max-w-[60%] rounded bg-black/60 px-2 py-1 text-[9px] text-white">
+                    Photo: {photos[activePhoto].authorAttributions!.map((author, index) => (
+                      <span key={author.uri ?? index}>
+                        {index > 0 ? ", " : ""}
+                        {author.uri ? (
+                          <a href={author.uri} target="_blank" rel="noopener noreferrer" className="underline">
+                            {author.displayName ?? `Contributor ${index + 1}`}
+                          </a>
+                        ) : (author.displayName ?? `Contributor ${index + 1}`)}
+                      </span>
+                    ))}
+                  </p>
+                ) : null}
                 {/* Nav arrows */}
                 {photos.length > 1 && (
                   <>
@@ -834,7 +841,7 @@ function ActivityDetailModal({
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={`/api/activities/photo?name=${encodeURIComponent(photo.name)}&w=120`}
+                        src={activityPhotoUrl(photo.name, 120)}
                         alt={`Thumbnail ${i + 1}`}
                         className="w-full h-full object-cover"
                       />
@@ -1112,7 +1119,7 @@ function ActivityDetailModal({
               const countLt3 = allReviews.filter((r) => (r.rating ?? 0) <= 3).length;
 
               return (
-                <div>
+                <div ref={reviewSectionRef}>
                   <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-2">
                     Review sample
                   </div>
@@ -1292,6 +1299,16 @@ function ActivityDetailModal({
 
         {/* ── Sticky footer CTAs ── */}
         <div className="flex-shrink-0 p-4 border-t border-gray-200 bg-gray-50/95 backdrop-blur-sm">
+          <p className="mb-2 text-center text-[9px] text-gray-500">
+            Place data © Google
+            {detail?.attributions?.map((attribution, index) => (
+              attribution.providerUri ? (
+                <a key={`${attribution.providerUri}-${index}`} href={attribution.providerUri} target="_blank" rel="noopener noreferrer" className="ml-1 underline">
+                  {attribution.provider ?? "Data provider"}
+                </a>
+              ) : <span key={index} className="ml-1">{attribution.provider}</span>
+            ))}
+          </p>
           <div className="flex gap-2">
             {googleMapsUri ? (
               <a
@@ -1906,6 +1923,8 @@ interface SearchResult {
   _debug?: {
     cacheSource:   string;
     apiCallsMade:  number;
+    searchGroups?: number;
+    googleHttpRequests?: { textSearch: number; nearbySearch: number; geocoding: number };
     entriesLoaded: number;
   };
 }
@@ -1929,7 +1948,6 @@ export default function ActivitySearch() {
   const [modalLoading,       setModalLoading]       = useState(false);
   const [modalInsights,      setModalInsights]      = useState<ReviewInsights | null>(null);
   const [modalInsightsLoading, setModalInsightsLoading] = useState(false);
-  const detailsCache  = useRef(new Map<string, PlaceDetail>());
   const insightsCache = useRef(new Map<string, ReviewInsights | null>());
 
   // Mount — load saved activities, preload session cache, prefill from trip store
@@ -1980,7 +1998,10 @@ export default function ActivitySearch() {
 
   useEffect(() => {
     try {
-      localStorage.setItem("travelgrab:saved-activities-data", JSON.stringify(savedMeta));
+      const persistenceSafe = Object.fromEntries(
+        Object.entries(savedMeta).map(([id, { photoRef: _legacyPhotoRef, ...meta }]) => [id, meta]),
+      );
+      localStorage.setItem("travelgrab:saved-activities-data", JSON.stringify(persistenceSafe));
     } catch { /* ignore quota errors */ }
   }, [savedMeta]);
 
@@ -2053,7 +2074,13 @@ export default function ActivitySearch() {
         limitReached?: boolean;
         inventoryStatus?: "building" | "ready"; inventorySize?: number;
         inventoryProgress?: { completed: number; total: number };
-        _debug?: { cacheSource: string; apiCallsMade: number; entriesLoaded: number };
+        _debug?: {
+          cacheSource: string;
+          apiCallsMade: number;
+          searchGroups?: number;
+          googleHttpRequests?: { textSearch: number; nearbySearch: number; geocoding: number };
+          entriesLoaded: number;
+        };
       };
 
       if (res.status === 429 && data.limitReached) throw new Error(data.error ?? "Daily limit reached. Resets at midnight UTC.");
@@ -2142,7 +2169,6 @@ export default function ActivitySearch() {
             neighborhood: activity.neighborhood,
             duration:     activity.duration,
             rating:       activity.rating,
-            photoRef:     activity.photoRef,
             lat:          activity.lat,
             lng:          activity.lng,
             city:         destination,  // current search city — used for multi-city itinerary assignment
@@ -2184,6 +2210,11 @@ export default function ActivitySearch() {
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json() as ReviewInsights;
+      if (!Array.isArray(data.guestsLove) || !Array.isArray(data.watchOut) || !Array.isArray(data.bestFor) || !Array.isArray(data.tips)) {
+        insightsCache.current.set(placeId, null);
+        setModalInsights(null);
+        return;
+      }
       insightsCache.current.set(placeId, data);
       setModalInsights(data);
     } catch (err) {
@@ -2204,24 +2235,10 @@ export default function ActivitySearch() {
     const placeId = activity.placeId;
     if (!placeId) return; // show modal with card data only
 
-    // Load from detail cache or fetch
-    const cached = detailsCache.current.get(placeId);
-    if (cached) {
-      setModalDetail(cached);
-      // Insights may already be cached too
-      void fetchInsights(placeId, cached, activity);
-      return;
-    }
-
     setModalLoading(true);
     try {
-      const res  = await fetch(`/api/activities/place?id=${encodeURIComponent(placeId)}`);
-      if (!res.ok) throw new Error("Failed to load place details");
-      const data = await res.json() as PlaceDetail;
-      detailsCache.current.set(placeId, data);
-      setModalDetail(data);
-      // Fetch insights concurrently once we have the reviews
-      void fetchInsights(placeId, data, activity);
+      const data = await fetchGooglePlaceDetail(placeId, "modal_standard");
+      if (data) setModalDetail(data);
     } catch {
       // Non-fatal: modal still shows with card-level data
       setModalDetail(null);
@@ -2229,6 +2246,23 @@ export default function ActivitySearch() {
       setModalLoading(false);
     }
   }
+
+  const loadModalGallery = useCallback(async () => {
+    const placeId = modalActivity?.placeId;
+    if (!placeId) return;
+    const gallery = await fetchGooglePlaceDetail(placeId, "modal_gallery");
+    if (gallery) setModalDetail((current) => current ? { ...current, photos: gallery.photos } : gallery);
+  }, [modalActivity?.placeId]);
+
+  const loadModalReviews = useCallback(async () => {
+    const activity = modalActivity;
+    const placeId = activity?.placeId;
+    if (!activity || !placeId) return;
+    const reviews = await fetchGooglePlaceDetail(placeId, "modal_rich_reviews");
+    if (!reviews) return;
+    setModalDetail((current) => ({ ...(current ?? { id: placeId }), ...reviews }));
+    await fetchInsights(placeId, reviews, activity);
+  }, [modalActivity]);
 
   function closeDetails() {
     setModalActivity(null);
@@ -2551,6 +2585,8 @@ export default function ActivitySearch() {
           loading={modalLoading}
           insights={modalInsights}
           insightsLoading={modalInsightsLoading}
+          onLoadGallery={loadModalGallery}
+          onLoadReviews={loadModalReviews}
           onClose={closeDetails}
         />
       )}
