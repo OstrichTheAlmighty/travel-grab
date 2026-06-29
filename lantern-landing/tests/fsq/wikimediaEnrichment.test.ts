@@ -6,10 +6,12 @@ import type { CuratedActivity } from "@/scripts/fsq/lib/curation";
 import { catalogClassification, correctedCategory } from "@/scripts/fsq/lib/fsqCorrections";
 import { WikimediaCache } from "@/scripts/fsq/lib/wikimediaCache";
 import { WikimediaClient } from "@/scripts/fsq/lib/wikimediaClient";
-import { imageFromMetadata, scoreForDisplay, shouldApplyEnrichment } from "@/scripts/fsq/lib/wikimediaEnrichment";
+import { classifyWithoutEnrichment, imageFromMetadata, scoreForDisplay, shouldApplyEnrichment } from "@/scripts/fsq/lib/wikimediaEnrichment";
 import { classifyWikimediaEligibility } from "@/scripts/fsq/lib/wikimediaEligibility";
 import { chooseWikidataMatch, coordinateRadiusPolicy, evaluateWikidataEntity, typeCompatibility } from "@/scripts/fsq/lib/wikimediaMatcher";
-import { generateQueryVariants, removeMacrons } from "@/scripts/fsq/lib/wikimediaQueries";
+import { generateQueryVariants, normalizeQueryText, removeMacrons } from "@/scripts/fsq/lib/wikimediaQueries";
+import { REVIEWED_ENTITY_OVERRIDES, findReviewedOverride, validateReviewedOverride, type ReviewedEntityOverride } from "@/scripts/fsq/lib/wikimediaOverrides";
+import { buildRankingCalibration } from "@/scripts/fsq/lib/rankingCalibration";
 import type { WikidataEntity, WikimediaEnrichment } from "@/scripts/fsq/lib/wikimediaTypes";
 
 function activity(overrides: Partial<CuratedActivity> = {}): CuratedActivity {
@@ -78,6 +80,18 @@ describe("Wikidata entity matching", () => {
     expect(typeCompatibility(source, "public fish market in Tokyo").compatible).toBe(true);
   });
 
+  it("rejects the former Tsukiji wholesale market for the current outer market", () => {
+    const source = activity({ title: "築地場外市場", source_metadata: { geography: "tokyo_core_23_wards", fsq_category_labels: ["Retail > Market > Fish Market"] } });
+    const former = entity({ labels: { ja: { language: "ja", value: "築地市場" }, en: { language: "en", value: "Tsukiji fish market" } }, descriptions: { en: { language: "en", value: "former demolished wholesale market" } }, aliases: { ja: [{ language: "ja", value: "築地場外市場" }] } });
+    expect(chooseWikidataMatch(source, [former], typeEntities).status).toBe("rejected");
+  });
+
+  it("uses exact Japanese common-name aliases", () => {
+    const source = activity({ title: "明治神宮", source_metadata: { geography: "tokyo_core_23_wards", fsq_category_labels: ["Community > Shrine"] } });
+    const candidate = entity({ labels: { en: { language: "en", value: "Meiji Jingū" } }, aliases: { ja: [{ language: "ja", value: "明治神宮" }] }, descriptions: { en: { language: "en", value: "Shinto shrine in Tokyo" } } });
+    expect(evaluateWikidataEntity(source, candidate, typeEntities).signals).toContain("exact_normalized_name");
+  });
+
   it("uses wider radii for districts and metro excursions", () => {
     const building = coordinateRadiusPolicy(activity());
     const district = coordinateRadiusPolicy(activity({ source_metadata: { geography: "tokyo_core_23_wards", fsq_category_labels: ["Landmarks and Outdoors > Neighborhood"] } }));
@@ -121,6 +135,28 @@ describe("eligibility and query generation", () => {
     expect(variants.some((variant) => /Senso-ji Temple/i.test(variant.query))).toBe(true);
     expect(variants.some((variant) => /東京|Taito|Tokyo/.test(variant.query) && variant.kind === "locality")).toBe(true);
     expect(removeMacrons("Sensō-ji")).toBe("Senso-ji");
+  });
+
+  it("normalizes full-width text and Japanese punctuation", () => {
+    expect(normalizeQueryText("Ｔｏｋｙｏ　Ｔｏｗｅｒ－東京")).toBe("Tokyo Tower-東京");
+    const variants = generateQueryVariants(activity({ title: "森・美術館" }));
+    expect(variants.some((variant) => variant.query === "森美術館")).toBe(true);
+  });
+});
+
+describe("reviewed overrides", () => {
+  const source = activity({ source_record_id: "4b56a5e8f964a5208e1728e3" });
+  const reviewed: ReviewedEntityOverride = { fsqPlaceId: "4b56a5e8f964a5208e1728e3", wikidataId: "Q183536", entityLabel: "Tokyo Tower", fsqCoordinates: { lat: 35.65858, lng: 139.74544 }, wikidataCoordinates: { lat: 35.6586, lng: 139.7454 }, reviewReason: "Human reviewed exact tower entity", reviewedBy: "reviewer", reviewedAt: "2026-06-28" };
+
+  it("validates and exposes reviewed overrides for audit", () => {
+    expect(validateReviewedOverride(reviewed, source)).toEqual([]);
+    expect(findReviewedOverride(source, [reviewed])).toEqual(reviewed);
+  });
+
+  it("rejects malformed overrides and prohibits automatic registry entries", () => {
+    expect(validateReviewedOverride({ ...reviewed, wikidataId: "bad" }, source)).toContain("invalid_wikidata_id");
+    expect(REVIEWED_ENTITY_OVERRIDES).toHaveLength(0);
+    expect(Object.isFrozen(REVIEWED_ENTITY_OVERRIDES)).toBe(true);
   });
 });
 
@@ -197,6 +233,21 @@ describe("persistent cache", () => {
     expect(pages[0]).toMatchObject({ wikidataId: "Q1771", route: language === "ja" ? "jawiki_search" : "enwiki_search" });
   });
 
+  it("reports Wikipedia redirect resolution", async () => {
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), "wikimedia-redirect-")); directories.push(directory);
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response(JSON.stringify({ query: { redirects: [{ from: "Tokyo Tower (old)", to: "Tokyo Tower" }], pages: [{ title: "Tokyo Tower", pageprops: { wikibase_item: "Q1771" } }] } }), { status: 200 })));
+    const pages = await new WikimediaClient(new WikimediaCache(directory), 0).searchWikipedia("Tokyo Tower (old)", "en");
+    expect(pages[0].redirects).toEqual([{ from: "Tokyo Tower (old)", to: "Tokyo Tower" }]);
+  });
+
+  it("resolves merged or redirected Wikidata IDs", async () => {
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), "wikidata-redirect-")); directories.push(directory);
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response(JSON.stringify({ redirects: [{ from: "Q1", to: "Q2" }], entities: { Q2: { id: "Q2", labels: { en: { language: "en", value: "Canonical" } } } } }), { status: 200 })));
+    const client = new WikimediaClient(new WikimediaCache(directory), 0);
+    expect((await client.getEntities(["Q1"])).has("Q2")).toBe(true);
+    expect(client.getEntityRedirects().get("Q1")).toBe("Q2");
+  });
+
   it("generates bounded nearby Wikidata candidates", async () => {
     const directory = fs.mkdtempSync(path.join(os.tmpdir(), "wikimedia-nearby-")); directories.push(directory);
     const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({ query: { geosearch: [{ title: "Q1771" }, { title: "NotAnItem" }] } }), { status: 200 }));
@@ -207,8 +258,19 @@ describe("persistent cache", () => {
   });
 });
 
+describe("diversity-aware ranking", () => {
+  it("caps one entity type at 40% of the top 30", () => {
+    const rows = [
+      ...Array.from({ length: 20 }, (_, index) => classifyWithoutEnrichment(activity({ id: `museum-${index}`, source_record_id: `museum-${index}`, title: `Museum ${index}`, source_metadata: { geography: "tokyo_core_23_wards", fsq_category_labels: ["Arts and Entertainment > Museum"] }, curation: { ...activity().curation, score: 150 - index } }))),
+      ...Array.from({ length: 10 }, (_, index) => classifyWithoutEnrichment(activity({ id: `park-${index}`, source_record_id: `park-${index}`, title: `Named Park ${index}`, category: "nature", source_metadata: { geography: "tokyo_core_23_wards", fsq_category_labels: ["Landmarks and Outdoors > Park"] }, curation: { ...activity().curation, score: 100 - index } }))),
+      ...Array.from({ length: 10 }, (_, index) => classifyWithoutEnrichment(activity({ id: `food-${index}`, source_record_id: `food-${index}`, title: `Distinctive Restaurant ${index}`, category: "food", source_metadata: { geography: "tokyo_core_23_wards", fsq_category_labels: ["Dining and Drinking > Restaurant"] }, curation: { ...activity().curation, score: 90 - index } }))),
+    ];
+    expect(buildRankingCalibration(rows).maxTop30EntityTypeShare).toBeLessThanOrEqual(0.4);
+  });
+});
+
 describe("enrichment safety", () => {
-  const files = ["scripts/fsq/enrichCity.ts", "scripts/fsq/lib/wikimediaClient.ts", "scripts/fsq/lib/wikimediaEnrichment.ts"];
+  const files = ["scripts/fsq/enrichCity.ts", "scripts/fsq/diagnoseWikimedia.ts", "scripts/fsq/lib/wikimediaClient.ts", "scripts/fsq/lib/wikimediaEnrichment.ts"];
   const source = files.map((file) => fs.readFileSync(path.join(process.cwd(), file), "utf8")).join("\n");
 
   it("contains no Supabase or paid-provider calls", () => expect(source).not.toMatch(/from\s+["']@supabase|createClient\s*\(|https?:\/\/[^\s"']*(?:googleapis|viator)|\.insert\(|\.upsert\(/i));

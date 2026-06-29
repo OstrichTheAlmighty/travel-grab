@@ -4,7 +4,7 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import dotenv from "dotenv";
 import type { NormalizedActivity } from "../../lib/activities/types";
-import { getGoogleCoords, type GoogleRow } from "../overture/lib/matcher";
+import { getGoogleCoords, type GoogleRow } from "../activities/lib/google";
 import { TOKYO_MAJOR_ATTRACTIONS, findGoogleAttractionBenchmark, haversineM } from "./lib/attractions";
 import { classifyTokyoGeography } from "./lib/geography";
 import { paginateGoogleRows } from "./lib/googlePagination";

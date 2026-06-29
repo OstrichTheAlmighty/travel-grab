@@ -14,115 +14,25 @@
  *   - Proximity alone is never enough to confirm a match
  */
 
-import { normalizeName } from "./dedup";
+import { haversineM } from "../../activities/lib/geo";
+import { getGoogleCoords, type GoogleRow } from "../../activities/lib/google";
+import {
+  areCategoriesCompatible,
+  isPlaceholderName,
+  isWeakName,
+  tokenJaccard,
+} from "../../activities/lib/matching";
+import { normalizeName } from "../../activities/lib/names";
 import type { MatchDecision, PlaceMatch } from "./types";
 
-// ── Haversine (local copy — dedup.ts version is not exported) ─────────────────
-
-function haversineM(lat1: number, lng1: number, lat2: number, lng2: number): number {
-  const R = 6_371_000;
-  const dLat = ((lat2 - lat1) * Math.PI) / 180;
-  const dLng = ((lng2 - lng1) * Math.PI) / 180;
-  const a =
-    Math.sin(dLat / 2) ** 2 +
-    Math.cos((lat1 * Math.PI) / 180) *
-      Math.cos((lat2 * Math.PI) / 180) *
-      Math.sin(dLng / 2) ** 2;
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
-// ── Google row shape ──────────────────────────────────────────────────────────
-
-export interface GoogleRow {
-  id: string;
-  title: string;
-  city: string;
-  category: string | null;
-  image_url: string | null;
-  google_places_data: Record<string, unknown> | null;
-}
-
-export function getGoogleCoords(g: GoogleRow): { lat: number; lng: number } | null {
-  const gd = g.google_places_data as {
-    location?: { latitude?: number; longitude?: number };
-  } | null;
-  const lat = gd?.location?.latitude;
-  const lng = gd?.location?.longitude;
-  if (typeof lat !== "number" || typeof lng !== "number" || lat === 0 || lng === 0) return null;
-  return { lat, lng };
-}
-
-// ── Weak / generic name detection ─────────────────────────────────────────────
-//
-// These names provide no useful identity signal and must never be used as
-// evidence for a match. Examples: "Studio", "スタジオ", "Room 3".
-
-const GENERIC_NAME_SET = new Set([
-  // English generic terms (exact normalized match)
-  "studio", "room", "office", "rental", "space", "lab", "lounge",
-  "salon", "club", "school", "class", "center", "centre", "hall",
-  "shop", "store", "spot", "place", "area", "zone",
-]);
-
-// Placeholder patterns: all-caps codes like "COMINGSOON", "COMINGSOON_shibuya"
-// or pure symbol strings. Checked against the raw (unnormalized) title.
-const PLACEHOLDER_RE = /^[A-Z][A-Z0-9_-]{3,}$/;
-
-export function isWeakName(normalizedName: string): boolean {
-  const n = normalizedName.trim();
-  if (n.length < 3) return true;
-  if (GENERIC_NAME_SET.has(n)) return true;
-  return false;
-}
-
-export function isPlaceholderName(rawTitle: string): boolean {
-  return PLACEHOLDER_RE.test(rawTitle.replace(/\s+/g, ""));
-}
-
-// ── Category compatibility ────────────────────────────────────────────────────
-//
-// Returns false only when the two categories are clearly incompatible —
-// i.e. matching them would indicate a data error, not a borderline case.
-// Unknown Google categories (null) are treated as compatible.
-
-const COMPATIBLE_PAIRS = new Set<string>([
-  "food:nightlife",     "nightlife:food",
-  "food:culture",       "culture:food",
-  "food:luxury",        "luxury:food",
-  "food:hidden_gems",   "hidden_gems:food",
-  "culture:adventure",  "adventure:culture",
-  "culture:nature",     "nature:culture",
-  "culture:luxury",     "luxury:culture",
-  "culture:hidden_gems","hidden_gems:culture",
-  "nightlife:adventure","adventure:nightlife",
-  "nightlife:hidden_gems","hidden_gems:nightlife",
-  "nature:adventure",   "adventure:nature",
-  "nature:hidden_gems", "hidden_gems:nature",
-  "luxury:hidden_gems", "hidden_gems:luxury",
-  "luxury:adventure",   "adventure:luxury",
-]);
-
-export function areCategoriesCompatible(a: string, b: string | null): boolean {
-  if (!b) return true;
-  if (a === b) return true;
-  return COMPATIBLE_PAIRS.has(`${a}:${b}`);
-}
-
-// ── Token Jaccard ─────────────────────────────────────────────────────────────
-//
-// Jaccard similarity on word tokens after normalization.
-// Tokens shorter than 2 characters are dropped.
-
-export function tokenJaccard(a: string, b: string): number {
-  if (!a || !b) return 0;
-  const tokA = new Set(a.split(/\s+/).filter((w) => w.length > 1));
-  const tokB = new Set(b.split(/\s+/).filter((w) => w.length > 1));
-  if (tokA.size === 0 || tokB.size === 0) return 0;
-  let inter = 0;
-  for (const t of tokA) if (tokB.has(t)) inter++;
-  const union = tokA.size + tokB.size - inter;
-  return union === 0 ? 0 : inter / union;
-}
+export { getGoogleCoords } from "../../activities/lib/google";
+export type { GoogleRow } from "../../activities/lib/types";
+export {
+  areCategoriesCompatible,
+  isPlaceholderName,
+  isWeakName,
+  tokenJaccard,
+} from "../../activities/lib/matching";
 
 // ── Input shape ───────────────────────────────────────────────────────────────
 

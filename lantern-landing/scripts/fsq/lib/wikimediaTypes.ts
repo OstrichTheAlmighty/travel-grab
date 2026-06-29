@@ -3,7 +3,7 @@ import type { CuratedActivity } from "./curation";
 export type CatalogClassification = "tokyo_core" | "broader_tokyo" | "metro_excursion" | "reserve";
 export type WikimediaEligibility = "high_wikimedia_likelihood" | "medium_wikimedia_likelihood" | "low_wikimedia_likelihood" | "not_expected_to_have_wikimedia_entity";
 export type WikimediaMatchStatus = "verified" | "probable_manual_review" | "rejected" | "unmatched";
-export type CandidateRoute = "wikidata_ja" | "wikidata_en" | "wikidata_alternate" | "jawiki_search" | "enwiki_search" | "nearby_wikidata";
+export type CandidateRoute = "wikidata_ja" | "wikidata_en" | "wikidata_alternate" | "jawiki_search" | "enwiki_search" | "nearby_wikidata" | "reviewed_override";
 
 export interface QueryAttempt {
   route: CandidateRoute;
@@ -11,6 +11,7 @@ export interface QueryAttempt {
   language?: "ja" | "en";
   resultIds: string[];
   failed?: boolean;
+  redirectResolved?: Array<{ from: string; to: string }>;
 }
 
 export interface CandidateEvaluationAudit {
@@ -18,6 +19,10 @@ export interface CandidateEvaluationAudit {
   routes: CandidateRoute[];
   label?: string;
   description?: string;
+  aliases: string[];
+  japaneseWikipediaTitle?: string;
+  englishWikipediaTitle?: string;
+  coordinates?: { lat: number; lng: number };
   score: number;
   entityTypes: string[];
   coordinateDistanceM?: number;
@@ -77,6 +82,7 @@ export interface EnrichedActivity extends CuratedActivity {
   display_score_components: Array<{ signal: string; amount: number }>;
   display_penalties: string[];
   final_display_score: number;
+  manual_override?: { wikidataId: string; label: string; reviewReason: string; reviewedAt: string; reviewedBy: string };
 }
 
 export interface WikidataEntity {
@@ -110,4 +116,5 @@ export interface WikipediaSearchPage {
   lat?: number;
   lng?: number;
   route: "jawiki_search" | "enwiki_search";
+  redirects?: Array<{ from: string; to: string }>;
 }

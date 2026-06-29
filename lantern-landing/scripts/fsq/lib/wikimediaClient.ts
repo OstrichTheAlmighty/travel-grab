@@ -13,6 +13,7 @@ function chunks<T>(values: T[], size: number): T[][] {
 
 export class WikimediaClient {
   private lastRequestAt = 0;
+  private readonly entityRedirects = new Map<string, string>();
 
   constructor(private readonly cache: WikimediaCache, private readonly minimumDelayMs = 125) {}
 
@@ -62,23 +63,32 @@ export class WikimediaClient {
     const result = new Map<string, WikidataEntity>();
     for (const batch of chunks([...new Set(ids)].sort(), 50)) {
       if (!batch.length) continue;
-      const response = await this.request<{ entities?: Record<string, WikidataEntity> }>(WIKIDATA_API, {
-        action: "wbgetentities", ids: batch.join("|"), props: "labels|aliases|descriptions|claims|sitelinks", languages: "ja|en",
+      const response = await this.request<{ entities?: Record<string, WikidataEntity>; redirects?: Array<{ from?: string; to?: string }> | Record<string, string> }>(WIKIDATA_API, {
+        action: "wbgetentities", ids: batch.join("|"), props: "labels|aliases|descriptions|claims|sitelinks", languages: "ja|en", redirects: "yes",
       });
+      if (Array.isArray(response.redirects)) {
+        for (const redirect of response.redirects) if (redirect.from && redirect.to) this.entityRedirects.set(redirect.from, redirect.to);
+      } else {
+        for (const [from, to] of Object.entries(response.redirects ?? {})) this.entityRedirects.set(from, to);
+      }
       for (const entity of Object.values(response.entities ?? {})) if (!entity.id.startsWith("-")) result.set(entity.id, entity);
     }
     return result;
   }
 
+  getEntityRedirects(): Map<string, string> { return new Map(this.entityRedirects); }
+
   async searchWikipedia(query: string, language: "ja" | "en"): Promise<WikipediaSearchPage[]> {
-    const response = await this.request<{ query?: { pages?: Array<{ title?: string; pageprops?: { wikibase_item?: string }; coordinates?: Array<{ lat?: number; lon?: number }>; terms?: { description?: string[] } }> } }>(language === "ja" ? JA_WIKIPEDIA_API : EN_WIKIPEDIA_API, {
+    const response = await this.request<{ query?: { redirects?: Array<{ from?: string; to?: string }>; normalized?: Array<{ from?: string; to?: string }>; pages?: Array<{ title?: string; pageprops?: { wikibase_item?: string }; coordinates?: Array<{ lat?: number; lon?: number }>; terms?: { description?: string[] } }> } }>(language === "ja" ? JA_WIKIPEDIA_API : EN_WIKIPEDIA_API, {
       action: "query", generator: "search", gsrsearch: query, gsrnamespace: "0", gsrlimit: "5",
       prop: "pageprops|coordinates|pageterms", wbptterms: "description", redirects: "1",
     });
+    const redirects = [...(response.query?.normalized ?? []), ...(response.query?.redirects ?? [])].filter((entry): entry is { from: string; to: string } => Boolean(entry.from && entry.to));
     return (response.query?.pages ?? []).map((page) => ({
       title: page.title ?? "", wikidataId: page.pageprops?.wikibase_item,
       description: page.terms?.description?.[0], lat: page.coordinates?.[0]?.lat, lng: page.coordinates?.[0]?.lon,
       route: language === "ja" ? "jawiki_search" as const : "enwiki_search" as const,
+      redirects,
     })).filter((page) => Boolean(page.title));
   }
 

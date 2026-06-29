@@ -1,4 +1,4 @@
-import type { GoogleRow } from "../../overture/lib/matcher";
+import type { GoogleRow } from "../../activities/lib/types";
 
 export async function paginateGoogleRows(
   total: number,

@@ -5,6 +5,7 @@ import { classifyWikimediaEligibility } from "./wikimediaEligibility";
 import type { WikimediaClient } from "./wikimediaClient";
 import { activityNames, chooseWikidataMatch, entityCoordinates, entityStringClaim, entityTypeIds } from "./wikimediaMatcher";
 import { generateQueryVariants } from "./wikimediaQueries";
+import { findReviewedOverride } from "./wikimediaOverrides";
 import type { CandidateRoute, EnrichedActivity, QueryAttempt, WikidataEntity, WikimediaEnrichment, WikimediaImage, WikimediaRunStats } from "./wikimediaTypes";
 
 function stripHtml(value: string): string {
@@ -84,13 +85,15 @@ export async function enrichActivities(activities: CuratedActivity[], client: Wi
   const routeMaps = new Map<string, Map<string, CandidateRoute[]>>();
   const attempts = new Map<string, QueryAttempt[]>();
   const candidateIds = new Set<string>();
-  const addCandidates = (activity: CuratedActivity, route: CandidateRoute, query: string, ids: string[], language?: "ja" | "en", failed = false) => {
+  const addCandidates = (activity: CuratedActivity, route: CandidateRoute, query: string, ids: string[], language?: "ja" | "en", failed = false, redirectResolved?: Array<{ from: string; to: string }>) => {
     const routeMap = routeMaps.get(activity.id) ?? new Map<string, CandidateRoute[]>();
     for (const id of ids) { routeMap.set(id, [...new Set([...(routeMap.get(id) ?? []), route])]); candidateIds.add(id); }
     routeMaps.set(activity.id, routeMap);
-    attempts.set(activity.id, [...(attempts.get(activity.id) ?? []), { route, query, language, resultIds: ids, failed }]);
+    attempts.set(activity.id, [...(attempts.get(activity.id) ?? []), { route, query, language, resultIds: ids, failed, redirectResolved }]);
   };
   for (const activity of activities) {
+    const reviewedOverride = findReviewedOverride(activity);
+    if (reviewedOverride) addCandidates(activity, "reviewed_override", reviewedOverride.reviewReason, [reviewedOverride.wikidataId]);
     const eligibility = classifyWikimediaEligibility(activity).eligibility;
     const variants = generateQueryVariants(activity);
     const queryLimit = eligibility === "high_wikimedia_likelihood" ? 4 : eligibility === "medium_wikimedia_likelihood" ? 3 : eligibility === "low_wikimedia_likelihood" ? 2 : 1;
@@ -104,7 +107,7 @@ export async function enrichActivities(activities: CuratedActivity[], client: Wi
         const variant = variants.find((candidate) => candidate.language === language);
         if (!variant) continue;
         const route: CandidateRoute = language === "ja" ? "jawiki_search" : "enwiki_search";
-        try { addCandidates(activity, route, variant.query, (await client.searchWikipedia(variant.query, language)).map((page) => page.wikidataId).filter((id): id is string => Boolean(id)), language); }
+        try { const pages = await client.searchWikipedia(variant.query, language); addCandidates(activity, route, variant.query, pages.map((page) => page.wikidataId).filter((id): id is string => Boolean(id)), language, false, pages.flatMap((page) => page.redirects ?? [])); }
         catch { addCandidates(activity, route, variant.query, [], language, true); }
       }
     }
@@ -115,6 +118,10 @@ export async function enrichActivities(activities: CuratedActivity[], client: Wi
     }
   }
   const entities = await client.getEntities([...candidateIds]);
+  for (const routes of routeMaps.values()) for (const [from, to] of client.getEntityRedirects()) if (routes.has(from)) {
+    routes.set(to, [...new Set([...(routes.get(to) ?? []), ...(routes.get(from) ?? [])])]);
+    routes.delete(from);
+  }
   const typeIds = [...new Set([...entities.values()].flatMap(entityTypeIds))];
   const typeEntities = await client.getEntities(typeIds);
   const preliminary = activities.map((activity) => {
@@ -159,6 +166,7 @@ export async function enrichActivities(activities: CuratedActivity[], client: Wi
     }
     const classification = catalogClassification(activity);
     const eligibility = classifyWikimediaEligibility(activity);
+    const reviewedOverride = findReviewedOverride(activity);
     const display = scoreForDisplay(activity, enrichment, classification);
     return {
       ...activity,
@@ -173,7 +181,9 @@ export async function enrichActivities(activities: CuratedActivity[], client: Wi
       candidate_entities: match.evaluated.map((candidate) => ({
         wikidataId: candidate.entity.id, routes: candidate.routes, label: candidate.entity.labels?.en?.value ?? candidate.entity.labels?.ja?.value,
         description: candidate.entity.descriptions?.en?.value ?? candidate.entity.descriptions?.ja?.value,
-        score: candidate.score, entityTypes: candidate.typeLabels, coordinateDistanceM: candidate.distanceM,
+        aliases: Object.values(candidate.entity.aliases ?? {}).flat().map((alias) => alias.value),
+        japaneseWikipediaTitle: candidate.entity.sitelinks?.jawiki?.title, englishWikipediaTitle: candidate.entity.sitelinks?.enwiki?.title,
+        coordinates: entityCoordinates(candidate.entity), score: candidate.score, entityTypes: candidate.typeLabels, coordinateDistanceM: candidate.distanceM,
         coordinateRadiusM: candidate.coordinateRadiusM, coordinatePolicy: candidate.coordinatePolicy,
         signals: candidate.signals, rejectionReasons: candidate.rejectionReasons,
         decision: match.status === "verified" && candidate.entity.id === match.best?.entity.id ? "accepted" : match.status === "probable_manual_review" && candidate.entity.id === match.best?.entity.id ? "manual_review" : "rejected",
@@ -184,6 +194,7 @@ export async function enrichActivities(activities: CuratedActivity[], client: Wi
       display_score_components: display.components,
       display_penalties: display.penalties,
       final_display_score: display.score,
+      manual_override: reviewedOverride ? { wikidataId: reviewedOverride.wikidataId, label: reviewedOverride.entityLabel, reviewReason: reviewedOverride.reviewReason, reviewedAt: reviewedOverride.reviewedAt, reviewedBy: reviewedOverride.reviewedBy } : undefined,
     };
   });
   assignDisplayRanks(result);

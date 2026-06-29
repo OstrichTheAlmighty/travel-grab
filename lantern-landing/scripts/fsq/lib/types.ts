@@ -1,5 +1,5 @@
 import type { Category } from "../../../app/activities/data/types";
-import type { BoundingBox, AttractionStatus } from "../../overture/lib/types";
+import type { BoundingBox, AttractionStatus } from "../../activities/lib/types";
 
 // ── Re-export shared types for convenience ────────────────────────────────────
 export type { BoundingBox, AttractionStatus };

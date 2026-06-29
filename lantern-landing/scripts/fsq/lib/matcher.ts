@@ -1,7 +1,8 @@
 import type { NormalizedActivity } from "../../../lib/activities/types";
-import { getGoogleCoords, tokenJaccard, areCategoriesCompatible, type GoogleRow } from "../../overture/lib/matcher";
-import { normalizeName, trigramSimilarity } from "./dedup";
-import { haversineM } from "./attractions";
+import { getGoogleCoords, type GoogleRow } from "../../activities/lib/google";
+import { areCategoriesCompatible, tokenJaccard } from "../../activities/lib/matching";
+import { normalizeName, trigramSimilarity } from "../../activities/lib/names";
+import { haversineM } from "../../activities/lib/geo";
 
 export type FsqMatchDecision = "confirmed_match" | "possible_match" | "rejected_match";
 

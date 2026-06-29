@@ -1,6 +1,6 @@
 import type { NormalizedActivity } from "../../../lib/activities/types";
-import type { GoogleRow } from "../../overture/lib/matcher";
-import { getGoogleCoords } from "../../overture/lib/matcher";
+import { getGoogleCoords, type GoogleRow } from "../../activities/lib/google";
+import { haversineM } from "../../activities/lib/geo";
 import { normalizeName, trigramSimilarity } from "./dedup";
 import { categoriesFromRow } from "./categoryMap";
 import { rejectionReason } from "./relevanceFilter";
@@ -46,13 +46,7 @@ export const TOKYO_MAJOR_ATTRACTIONS: MajorAttractionDefinition[] = [
   ["Tokyo DisneySea", ["東京ディズニーシー", "tokyo disneysea", "tokyo disney sea"], 35.6267, 139.8856, /theme park|amusement/i],
 ].map(([name, aliases, lat, lng, compatibleCategory]) => ({ name, aliases, lat, lng, compatibleCategory })) as MajorAttractionDefinition[];
 
-export function haversineM(lat1: number, lng1: number, lat2: number, lng2: number): number {
-  const radius = 6_371_000;
-  const dLat = ((lat2 - lat1) * Math.PI) / 180;
-  const dLng = ((lng2 - lng1) * Math.PI) / 180;
-  const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
-  return radius * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
+export { haversineM } from "../../activities/lib/geo";
 
 function strongNameEvidence(candidate: string, aliases: string[]): boolean {
   const normalized = normalizeName(candidate);
