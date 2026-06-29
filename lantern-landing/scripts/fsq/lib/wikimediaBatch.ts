@@ -29,6 +29,21 @@ export interface BatchOutputPaths {
   review: string;
 }
 
+export interface EligibilityBatchMetadata {
+  city: string;
+  executionMode: "eligibility_batch";
+  eligibility: WikimediaEligibility;
+  totalCuratedRecords: number;
+  totalEligibleRecords: number;
+  duplicateFsqIdsRemoved: number;
+  batch: number;
+  batchSize: number;
+  startIndex: number;
+  endIndexInclusive: number;
+  selectedRecordCount: number;
+  persistentCacheEnabled: true;
+}
+
 const ELIGIBILITY_ALIASES: Record<string, { value: WikimediaEligibility; slug: EnrichmentCliOptions["eligibilitySlug"] }> = {
   high: { value: "high_wikimedia_likelihood", slug: "high" },
   high_wikimedia_likelihood: { value: "high_wikimedia_likelihood", slug: "high" },

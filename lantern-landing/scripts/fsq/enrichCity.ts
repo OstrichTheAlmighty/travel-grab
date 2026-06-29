@@ -7,25 +7,10 @@ import { WikimediaCache } from "./lib/wikimediaCache";
 import { WikimediaClient } from "./lib/wikimediaClient";
 import { assignDisplayRanks, buildEnrichmentReport, classifyWithoutEnrichment, enrichActivities } from "./lib/wikimediaEnrichment";
 import { selectStratifiedPilot } from "./lib/wikimediaEligibility";
-import { batchOutputPaths, parseEnrichmentArgs, selectEligibilityBatch } from "./lib/wikimediaBatch";
+import { batchOutputPaths, parseEnrichmentArgs, selectEligibilityBatch, type EligibilityBatchMetadata } from "./lib/wikimediaBatch";
 import type { EnrichedActivity } from "./lib/wikimediaTypes";
 
-interface BatchMetadata {
-  city: string;
-  executionMode: "eligibility_batch";
-  eligibility: string;
-  totalCuratedRecords: number;
-  totalEligibleRecords: number;
-  duplicateFsqIdsRemoved: number;
-  batch: number;
-  batchSize: number;
-  startIndex: number;
-  endIndexInclusive: number;
-  selectedRecordCount: number;
-  persistentCacheEnabled: true;
-}
-
-function csv(rows: EnrichedActivity[], metadata?: BatchMetadata): string {
+function csv(rows: EnrichedActivity[], metadata?: EligibilityBatchMetadata): string {
   const metadataHeader = metadata ? ["execution_mode", "requested_eligibility", "batch", "batch_size", "start_index", "end_index", "selected_record_count"] : [];
   const header = [...metadataHeader, "display_rank", "fsq_place_id", "name", "english_name", "category", "catalog_classification", "eligibility", "selection_stratum", "wikidata_id", "proposed_wikidata_id", "japanese_wikipedia_title", "english_wikipedia_title", "match_confidence", "coordinate_distance_m", "coordinate_radius_m", "coordinate_policy", "queries_attempted", "candidate_count", "candidate_summary", "short_description", "image_available", "image_license", "attribution", "prominence_signals", "score_components", "penalties", "final_score", "match_status"];
   const escape = (value: unknown) => `"${String(value ?? "").replaceAll('"', '""')}"`;
@@ -56,7 +41,7 @@ async function main(): Promise<void> {
   const cache = new WikimediaCache(path.join(outputDir, "wikimedia-cache"));
   const client = new WikimediaClient(cache);
   const requiredIds = new Set((curationReport.majorAttractions ?? []).map((row) => row.fsqPlaceId).filter((id): id is string => Boolean(id)));
-  let batchMetadata: BatchMetadata | undefined;
+  let batchMetadata: EligibilityBatchMetadata | undefined;
   let selection: Array<{ activity: CuratedActivity; stratum: string }>;
   if (options.mode === "eligibility_batch") {
     const selected = selectEligibilityBatch(input, options.eligibility!, options.batchSize!, options.batch!);
