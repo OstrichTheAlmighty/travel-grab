@@ -8,6 +8,14 @@
     "start": "next start",
     "lint": "next lint",
     "migrate:activities": "npx tsx scripts/migrate-activities.ts",
+    "activities:fsq-smoke": "npx tsx scripts/fsq/smokeTest.ts",
+    "activities:fsq": "npx tsx scripts/fsq/importCity.ts",
+    "activities:fsq-compare": "npx tsx scripts/fsq/compare.ts",
+    "activities:fsq-curate": "npx tsx scripts/fsq/curateCity.ts",
+    "activities:fsq-audit": "npx tsx scripts/fsq/auditCuration.ts",
+    "activities:fsq-enrich": "npx tsx scripts/fsq/enrichCity.ts",
+    "activities:overture": "npx tsx scripts/overture/importCity.ts",
+    "activities:compare": "npx tsx scripts/overture/compare.ts",
     "test": "vitest run"
   },
   "dependencies": {
@@ -32,6 +40,7 @@
     "autoprefixer": "10.4.20",
     "dotenv": "^17.4.2",
     "drizzle-kit": "^0.31.10",
+    "duckdb": "^1.4.4",
     "eslint": "9.16.0",
     "eslint-config-next": "^16.2.9",
     "postcss": "8.4.49",

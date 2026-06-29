@@ -10,3 +10,7 @@ yarn-error.log*
 pnpm-debug.log*
 .next/
 node_modules/
+# Overture pilot output (local only — never committed)
+scripts/overture/output/
+# FSQ scripts must never commit generated query output.
+scripts/fsq/output/

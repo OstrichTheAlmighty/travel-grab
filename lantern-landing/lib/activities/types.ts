@@ -79,4 +79,29 @@ export interface NormalizedActivity {
   source: ActivitySource;
   /** ISO timestamp of when the normalized record was built */
   built_at?: string;
+
+  /**
+   * Local-language primary name when it differs from the English title.
+   * Populated by the Overture adapter (e.g. Japanese: "東京タワー").
+   * Used by the cross-provider entity-matching pipeline.
+   */
+  name_local?: string;
+  /**
+   * All language variants of the name keyed by BCP-47 language code.
+   * Populated by the Overture adapter from names.common entries.
+   * Example: { "en": "Tokyo Tower", "ja": "東京タワー", "ja-Latn": "Tōkyō Tawā" }
+   */
+  name_alts?: Record<string, string>;
+
+  /**
+   * Source attribution — populated when the provider aggregates data from
+   * multiple upstream datasets (e.g. Overture Places, which combines Meta,
+   * OpenStreetMap, and other contributors).
+   */
+  source_dataset?: string;     // primary contributing dataset (e.g. "meta")
+  source_record_id?: string;   // original record ID in that dataset
+  attribution?: string;        // human-readable attribution string
+  license?: string;            // SPDX license identifier or descriptive name
+  /** Provider-specific source fields preserved without shaping the shared UI model. */
+  source_metadata?: Record<string, unknown>;
 }
