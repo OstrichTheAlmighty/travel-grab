@@ -270,7 +270,7 @@ describe("diversity-aware ranking", () => {
 });
 
 describe("enrichment safety", () => {
-  const files = ["scripts/fsq/enrichCity.ts", "scripts/fsq/diagnoseWikimedia.ts", "scripts/fsq/lib/wikimediaClient.ts", "scripts/fsq/lib/wikimediaEnrichment.ts"];
+  const files = ["scripts/fsq/enrichCity.ts", "scripts/fsq/diagnoseWikimedia.ts", "scripts/fsq/lib/wikimediaBatch.ts", "scripts/fsq/lib/wikimediaClient.ts", "scripts/fsq/lib/wikimediaEnrichment.ts"];
   const source = files.map((file) => fs.readFileSync(path.join(process.cwd(), file), "utf8")).join("\n");
 
   it("contains no Supabase or paid-provider calls", () => expect(source).not.toMatch(/from\s+["']@supabase|createClient\s*\(|https?:\/\/[^\s"']*(?:googleapis|viator)|\.insert\(|\.upsert\(/i));
