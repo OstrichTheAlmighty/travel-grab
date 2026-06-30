@@ -11,6 +11,12 @@ import { activityPhotoUrl, fetchGooglePlaceDetail } from "@/lib/activities/googl
 import type {
   GooglePlaceDetail as PlaceDetail,
 } from "@/lib/activities/google-place-details";
+import { mergeGalleryPhotos } from "@/lib/activities/google-place-details";
+import {
+  beginGoogleModalTrace,
+  finishGoogleModalTrace,
+  recordGoogleModalTrace,
+} from "@/lib/activities/google-modal-trace";
 
 // ── Filter config ─────────────────────────────────────────────────────────────
 
@@ -678,7 +684,9 @@ function ActivityDetailModal({
   const [showHours,     setShowHours]     = useState(false);
   const [reviewFilter,  setReviewFilter]  = useState<"all" | "5" | "4" | "lte3">("all");
   const [reviewSearch,  setReviewSearch]  = useState("");
+  const [heroFailed,    setHeroFailed]    = useState(false);
   const reviewSectionRef = useRef<HTMLDivElement | null>(null);
+  const modalScrollRef = useRef<HTMLDivElement | null>(null);
   const requestedReviews = useRef(false);
 
   // Close on Escape and lock body scroll
@@ -702,13 +710,14 @@ function ActivityDetailModal({
   useEffect(() => {
     requestedReviews.current = false;
     const node = reviewSectionRef.current;
-    if (!node || typeof IntersectionObserver === "undefined") return;
+    const scrollRoot = modalScrollRef.current;
+    if (!node || !scrollRoot || typeof IntersectionObserver === "undefined") return;
     const observer = new IntersectionObserver((entries) => {
       if (entries.some((entry) => entry.isIntersecting) && !requestedReviews.current) {
         requestedReviews.current = true;
         onLoadReviews();
       }
-    }, { rootMargin: "160px" });
+    }, { root: scrollRoot, rootMargin: "160px 0px" });
     observer.observe(node);
     return () => observer.disconnect();
   }, [activity.id, onLoadReviews]);
@@ -726,6 +735,8 @@ function ActivityDetailModal({
   const websiteUri    = detail?.websiteUri    ?? activity.websiteUri;
   const googleMapsUri = detail?.googleMapsUri ?? activity.googleMapsUri;
   const phone         = detail?.nationalPhoneNumber ?? detail?.internationalPhoneNumber;
+
+  useEffect(() => setHeroFailed(false), [photos[activePhoto]?.name]);
 
   return (
     <>
@@ -758,21 +769,32 @@ function ActivityDetailModal({
         </div>
 
         {/* ── Scrollable content ── */}
-        <div className="flex-1 overflow-y-auto">
+        <div ref={modalScrollRef} className="flex-1 overflow-y-auto">
 
           {/* Photo gallery — show immediately from card data, upgrade when detail loads */}
           {photos.length > 0 ? (
             <div>
               {/* Main photo */}
-              <div className="relative h-64 sm:h-80 bg-gray-50 overflow-hidden">
+              <div className="relative h-64 sm:h-80 overflow-hidden" style={{ background: activity.gradient }}>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-7xl select-none">{activity.emoji}</span>
+                </div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  key={photos[activePhoto]?.name}
-                  src={activityPhotoUrl(photos[activePhoto]?.name ?? "", 1200)}
-                  alt={`${name} — photo ${activePhoto + 1}`}
-                  className="w-full h-full object-cover"
-                  onClick={onLoadGallery}
-                />
+                {!heroFailed && (
+                  <img
+                    key={photos[activePhoto]?.name}
+                    src={activityPhotoUrl(photos[activePhoto]?.name ?? "", 1200)}
+                    alt={`${name} — photo ${activePhoto + 1}`}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    onClick={onLoadGallery}
+                    onLoad={() => recordGoogleModalTrace({ type: "photo", resource: photos[activePhoto]?.name ?? "", width: 1200, outcome: "loaded" })}
+                    onError={() => {
+                      setHeroFailed(true);
+                      recordGoogleModalTrace({ type: "photo", resource: photos[activePhoto]?.name ?? "", width: 1200, outcome: "failed" });
+                      recordGoogleModalTrace({ type: "fallback", fallback: "activity_gradient" });
+                    }}
+                  />
+                )}
                 {photos.length === 1 && (
                   <button
                     type="button"
@@ -833,17 +855,24 @@ function ActivityDetailModal({
                     <button
                       key={photo.name}
                       onClick={() => setActivePhoto(i)}
-                      className={`flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden border-2 transition-all ${
+                      className={`relative flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden border-2 transition-all ${
                         i === activePhoto
                           ? "border-teal-500/70 opacity-100"
                           : "border-transparent opacity-45 hover:opacity-75"
                       }`}
+                      style={{ background: activity.gradient }}
                     >
+                      <span className="absolute inset-0 flex items-center justify-center text-xl">{activity.emoji}</span>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={activityPhotoUrl(photo.name, 120)}
                         alt={`Thumbnail ${i + 1}`}
-                        className="w-full h-full object-cover"
+                        className="absolute inset-0 w-full h-full object-cover"
+                        onLoad={() => recordGoogleModalTrace({ type: "photo", resource: photo.name, width: 120, outcome: "loaded" })}
+                        onError={(event) => {
+                          event.currentTarget.style.display = "none";
+                          recordGoogleModalTrace({ type: "photo", resource: photo.name, width: 120, outcome: "failed" });
+                        }}
                       />
                     </button>
                   ))}
@@ -2198,6 +2227,7 @@ export default function ActivitySearch() {
 
     setModalInsightsLoading(true);
     try {
+      recordGoogleModalTrace({ type: "insights", outcome: "requested" });
       const res = await fetch("/api/activities/review-insights", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -2213,20 +2243,24 @@ export default function ActivitySearch() {
       if (!Array.isArray(data.guestsLove) || !Array.isArray(data.watchOut) || !Array.isArray(data.bestFor) || !Array.isArray(data.tips)) {
         insightsCache.current.set(placeId, null);
         setModalInsights(null);
+        recordGoogleModalTrace({ type: "insights", outcome: "failed" });
         return;
       }
       insightsCache.current.set(placeId, data);
       setModalInsights(data);
+      recordGoogleModalTrace({ type: "insights", outcome: "received" });
     } catch (err) {
       console.warn("[review-insights] fetch failed:", err instanceof Error ? err.message : String(err));
       insightsCache.current.set(placeId, null);
       setModalInsights(null);
+      recordGoogleModalTrace({ type: "insights", outcome: "failed" });
     } finally {
       setModalInsightsLoading(false);
     }
   }
 
   async function openDetails(activity: Activity) {
+    beginGoogleModalTrace(activity.id, activity.placeId ?? "");
     setModalActivity(activity);
     setModalDetail(null);
     setModalInsights(null);
@@ -2251,20 +2285,30 @@ export default function ActivitySearch() {
     const placeId = modalActivity?.placeId;
     if (!placeId) return;
     const gallery = await fetchGooglePlaceDetail(placeId, "modal_gallery");
-    if (gallery) setModalDetail((current) => current ? { ...current, photos: gallery.photos } : gallery);
+    if (gallery) {
+      setModalDetail((current) => current
+        ? { ...current, photos: mergeGalleryPhotos(current.photos, gallery.photos) }
+        : gallery);
+    }
   }, [modalActivity?.placeId]);
 
   const loadModalReviews = useCallback(async () => {
     const activity = modalActivity;
     const placeId = activity?.placeId;
     if (!activity || !placeId) return;
+    recordGoogleModalTrace({ type: "reviews", outcome: "requested" });
     const reviews = await fetchGooglePlaceDetail(placeId, "modal_rich_reviews");
-    if (!reviews) return;
+    if (!reviews) {
+      recordGoogleModalTrace({ type: "reviews", outcome: "failed" });
+      return;
+    }
+    recordGoogleModalTrace({ type: "reviews", outcome: "received" });
     setModalDetail((current) => ({ ...(current ?? { id: placeId }), ...reviews }));
     await fetchInsights(placeId, reviews, activity);
   }, [modalActivity]);
 
   function closeDetails() {
+    finishGoogleModalTrace();
     setModalActivity(null);
     setModalDetail(null);
     setModalLoading(false);

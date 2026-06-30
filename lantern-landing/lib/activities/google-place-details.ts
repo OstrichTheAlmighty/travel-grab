@@ -102,3 +102,14 @@ export function sanitizeDetailResponse(
   }
   return { id: detail.id, photos: detail.photos, detailLevel: level };
 }
+
+export function mergeGalleryPhotos(
+  current: GooglePhotoMetadata[] | undefined,
+  gallery: GooglePhotoMetadata[] | undefined,
+): GooglePhotoMetadata[] | undefined {
+  if (!current?.[0]) return gallery;
+  if (!gallery?.length) return current;
+  // Google can mint a different resource name for the same lead photo on each
+  // Details response. Keep the already-loaded hero and use the remaining gallery.
+  return [current[0], ...gallery.slice(1)];
+}

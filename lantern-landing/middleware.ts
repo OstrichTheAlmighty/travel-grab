@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const BLOCKED: string[] = ["/flights", "/hotels", "/activities"];
+const BLOCKED: string[] = ["/flights", "/hotels", "/activities", "/itinerary"];
 const ADMIN_COOKIE = "tg_admin";
 const UNLOCK_KEY   = process.env.ADMIN_UNLOCK_KEY ?? "tg_owner_2026";
 
@@ -34,5 +34,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/flights/:path*", "/hotels/:path*", "/activities/:path*"],
+  matcher: ["/", "/flights/:path*", "/hotels/:path*", "/activities/:path*", "/itinerary/:path*"],
 };

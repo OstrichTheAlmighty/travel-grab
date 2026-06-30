@@ -1,6 +1,7 @@
 "use client";
 
 import type { GoogleDetailLevel, GooglePlaceDetail } from "./google-place-details";
+import { recordGoogleModalTrace } from "./google-modal-trace";
 
 export interface GoogleClientDiagnostics {
   networkRequests: number;
@@ -21,6 +22,7 @@ export async function fetchGooglePlaceDetail(
   const cached = resolved.get(key);
   if (cached && cached.expiresAt > Date.now()) {
     diagnostics.cacheHits++;
+    recordGoogleModalTrace({ type: "detail", level, outcome: "cache_hit" });
     return cached.detail;
   }
   if (cached) resolved.delete(key);
@@ -28,20 +30,32 @@ export async function fetchGooglePlaceDetail(
   const pending = inFlight.get(key);
   if (pending) {
     diagnostics.inFlightDeduplicationHits++;
+    recordGoogleModalTrace({ type: "detail", level, outcome: "in_flight_hit" });
     return pending;
   }
 
   const request = (async () => {
     diagnostics.networkRequests++;
+    recordGoogleModalTrace({ type: "detail", level, outcome: "request" });
     const response = await fetch(
       `/api/activities/place?id=${encodeURIComponent(placeId)}&level=${encodeURIComponent(level)}`,
     );
-    if (!response.ok) return null;
+    if (!response.ok) {
+      recordGoogleModalTrace({ type: "detail", level, outcome: "failed" });
+      return null;
+    }
     const detail = await response.json() as GooglePlaceDetail & { capReached?: boolean };
-    if (detail.capReached) return null;
+    if (detail.capReached) {
+      recordGoogleModalTrace({ type: "detail", level, outcome: "failed" });
+      return null;
+    }
     resolved.set(key, { detail, expiresAt: Date.now() + TTL_MS });
+    recordGoogleModalTrace({ type: "detail", level, outcome: "success" });
     return detail;
-  })().catch(() => null);
+  })().catch(() => {
+    recordGoogleModalTrace({ type: "detail", level, outcome: "failed" });
+    return null;
+  });
 
   inFlight.set(key, request);
   try {

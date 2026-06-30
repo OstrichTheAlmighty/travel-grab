@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import {
   GOOGLE_DETAIL_FIELD_MASKS,
+  mergeGalleryPhotos,
   sanitizeDetailResponse,
 } from "../lib/activities/google-place-details";
 import {
@@ -52,6 +53,13 @@ describe("Google Activities phase-one controls", () => {
     expect(result.reviews).toBeUndefined();
   });
 
+  it("keeps the already-loaded hero when gallery metadata arrives", () => {
+    expect(mergeGalleryPhotos(
+      [{ name: "working-hero" }],
+      [{ name: "reminted-lead" }, { name: "second" }],
+    )).toEqual([{ name: "working-hero" }, { name: "second" }]);
+  });
+
   it("isolates rich reviews and gallery fields", () => {
     expect(GOOGLE_DETAIL_FIELD_MASKS.modal_rich_reviews.split(",")).toContain("reviews");
     expect(GOOGLE_DETAIL_FIELD_MASKS.modal_gallery).toBe("id,photos");
@@ -88,6 +96,26 @@ describe("Google Activities phase-one controls", () => {
     expect(itinerary).toContain('fetchGooglePlaceDetail(detailSlot.sourceId, "modal_standard")');
     expect(itinerary).not.toContain("fetch(`/api/activities/place");
     expect(activities.indexOf("await fetchInsights")).toBeGreaterThan(activities.indexOf('"modal_rich_reviews"'));
+    expect(activities).toContain("{ root: scrollRoot, rootMargin:");
+    expect(activities).not.toContain('new IntersectionObserver((entries) => {\n      if (entries.some((entry) => entry.isIntersecting) && !requestedReviews.current) {\n        requestedReviews.current = true;\n        onLoadReviews();\n      }\n    }, { rootMargin:');
+  });
+
+  it("does not let the demo gate redirect an authorized itinerary user", () => {
+    const page = readFileSync(resolve(root, "app/itinerary/page.tsx"), "utf8");
+    const middleware = readFileSync(resolve(root, "middleware.ts"), "utf8");
+    expect(page).toContain("<AuthGuard>");
+    expect(page).not.toContain("DemoGuard");
+    expect(page).toContain("<ItineraryPlanner />");
+    expect(middleware).toContain('"/itinerary/:path*"');
+  });
+
+  it("initial modal open requests standard details only", () => {
+    const source = readFileSync(resolve(root, "app/activities/ActivitySearch.tsx"), "utf8");
+    const openBlock = source.slice(source.indexOf("async function openDetails"), source.indexOf("const loadModalGallery"));
+    expect(openBlock).toContain('"modal_standard"');
+    expect(openBlock).not.toContain("modal_gallery");
+    expect(openBlock).not.toContain("modal_rich_reviews");
+    expect(openBlock).not.toContain("review-insights");
   });
 
   it("does not automatically persist newly built Google inventory", () => {
