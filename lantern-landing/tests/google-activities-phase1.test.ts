@@ -106,7 +106,7 @@ describe("Google Activities phase-one controls", () => {
     expect(page).toContain("<AuthGuard>");
     expect(page).not.toContain("DemoGuard");
     expect(page).toContain("<ItineraryPlanner />");
-    expect(middleware).toContain('"/itinerary/:path*"');
+    expect(middleware).not.toContain('"/itinerary/:path*"');
   });
 
   it("initial modal open requests standard details only", () => {
