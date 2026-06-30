@@ -16,6 +16,11 @@ import type { Activity } from "@/app/activities/data/types";
 import { PreferencesPanel } from "./components/PreferencesPanel";
 import { RecommendationsPanel } from "./components/RecommendationsPanel";
 import { SavedPlacesPanel } from "./components/SavedPlacesPanel";
+import {
+  countScheduledActivities,
+  rescheduleArrivalDay,
+  rescheduleDepartureDay,
+} from "@/lib/itinerary/flight-day-update";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -2006,12 +2011,13 @@ export default function ItineraryPlanner() {
           travelStyles:         obStyles,
           firstTime:            obFirstTime,
           selectedFlight:       selectedFlight ?? null,
+          selectedReturnFlight: selectedReturnFlight ?? null,
           selectedHotels:       selectedHotels,
         });
       } catch { /* ignore */ }
     }, 400);
     return () => clearTimeout(timer);
-  }, [trip, savedIds, savedMeta, hydrated, obStep, obStyles, obFirstTime, selectedFlight, selectedHotels]);
+  }, [trip, savedIds, savedMeta, hydrated, obStep, obStyles, obFirstTime, selectedFlight, selectedReturnFlight, selectedHotels]);
 
   // ── Sync saved activities to canonical trip store ──
   useEffect(() => {
@@ -2099,6 +2105,12 @@ export default function ItineraryPlanner() {
   const primaryCity       = trip.cities[0]?.city?.trim() ?? "";
   const endDate           = addDays(trip.startDate, totalDays);
   const activeActivityIds = savedIds.filter((id) => !trip.excludedActivityIds.includes(id));
+  const displayedActivityTotal = activeActivityIds.length > 0
+    ? activeActivityIds.length
+    : (trip.itinerary?.meta.totalActivitiesScheduled ?? 0) + (trip.itinerary?.meta.totalActivitiesDropped ?? 0);
+  const displayedActivityScheduled = activeActivityIds.length > 0
+    ? Math.max(0, activeActivityIds.length - (trip.itinerary?.meta.totalActivitiesDropped ?? 0))
+    : (trip.itinerary?.meta.totalActivitiesScheduled ?? 0);
 
   function updateCity(i: number, patch: Partial<CityStop>) {
     updateTrip({ cities: trip.cities.map((c, j) => (j === i ? { ...c, ...patch } : c)) });
@@ -2338,8 +2350,8 @@ export default function ItineraryPlanner() {
 
   // ── Apply flight times to existing itinerary (non-destructive) ──
   // Only patches the arrival day (outbound) or departure day (return).
-  // Activities bumped off those days are moved to excludedActivityIds so they
-  // appear in the Dropped tab and can be restored by the user.
+  // Existing activities and hotel slots are rescheduled around the flight;
+  // they are never silently moved to Dropped/excluded.
   // Falls back to a full generate() when no itinerary exists yet.
   function applyFlightToItinerary(which: "outbound" | "return") {
     const current = trip.itinerary;
@@ -2355,23 +2367,6 @@ export default function ItineraryPlanner() {
     }
 
     const days = current.days.map((d) => ({ ...d, slots: [...d.slots] }));
-    const newlyExcluded: string[] = [];
-    const newlyDropped: import("@/lib/itinerary/types").DroppedActivity[] = [];
-
-    function displace(day: typeof days[number]) {
-      for (const slot of day.slots) {
-        if (slot.kind === "activity" && slot.sourceId && !trip.excludedActivityIds.includes(slot.sourceId)) {
-          newlyExcluded.push(slot.sourceId);
-          newlyDropped.push({
-            sourceId: slot.sourceId,
-            title:    slot.title,
-            reason:   which === "outbound"
-              ? "Arrival day — tap to restore once you know your schedule"
-              : "Departure day — tap to restore once you know your schedule",
-          });
-        }
-      }
-    }
 
     if (which === "outbound" && selectedFlight?.arriveTime) {
       const [h, m]         = selectedFlight.arriveTime.split(":").map(Number);
@@ -2379,23 +2374,19 @@ export default function ItineraryPlanner() {
       const transferEndMins = Math.min(arrMins + 90, 23 * 60);
       const day0            = days[0];
       if (day0) {
-        displace(day0);
-        days[0] = {
-          ...day0,
-          slots: [{
+        const transfer: PlannedSlot = {
             kind:            "airport_transfer",
             startMinutes:    arrMins,
             endMinutes:      transferEndMins,
             durationMinutes: transferEndMins - arrMins,
             title:           `Arrive ${selectedFlight.destination} — airport transfer`,
             explanation:     `Flight lands at ${selectedFlight.arriveTime}. Allow ~90 min for baggage, customs, and transfer to your hotel.`,
-          }],
-          scheduledActivityCount: 0,
-          totalActivityMinutes:   0,
-          theme:       "Arrival day",
-          daySummary:  `Your flight arrives at ${selectedFlight.arriveTime}. Check in, rest, and explore the neighbourhood.`,
-          warnings:    [],
         };
+        days[0] = rescheduleArrivalDay(
+          day0,
+          transfer,
+          `Your flight arrives at ${selectedFlight.arriveTime}.`,
+        );
       }
     }
 
@@ -2407,43 +2398,33 @@ export default function ItineraryPlanner() {
         const airportByMin = Math.max(0, deptMins - 180);
         const lastDay      = days[days.length - 1];
         if (lastDay) {
-          displace(lastDay);
-          days[days.length - 1] = {
-            ...lastDay,
-            slots: [{
+          const transfer: PlannedSlot = {
               kind:            "airport_transfer",
               startMinutes:    airportByMin,
               endMinutes:      deptMins,
               durationMinutes: deptMins - airportByMin,
               title:           `Depart — transfer to airport`,
               explanation:     `Flight departs at ${departTime}. Leave for the airport by ${fmtMin(airportByMin)} to allow time for check-in and security.`,
-            }],
-            scheduledActivityCount: 0,
-            totalActivityMinutes:   0,
-            theme:      "Departure day",
-            daySummary: `Your return flight departs at ${departTime}. Pack up and head to the airport by ${fmtMin(airportByMin)}.`,
-            warnings:   [],
           };
+          days[days.length - 1] = rescheduleDepartureDay(
+            lastDay,
+            transfer,
+            `Your return flight departs at ${departTime}.`,
+          );
         }
       }
     }
-
-    const updatedExcluded = [...new Set([...trip.excludedActivityIds, ...newlyExcluded])];
-    const existingDropped = current.meta.droppedActivities.filter(
-      (d) => !newlyExcluded.includes(d.sourceId)
-    );
 
     const updated: PlannerOutput = {
       ...current,
       days,
       meta: {
         ...current.meta,
-        droppedActivities: [...existingDropped, ...newlyDropped],
-        totalActivitiesDropped: existingDropped.length + newlyDropped.length,
+        totalActivitiesScheduled: countScheduledActivities(days),
       },
     };
 
-    updateTrip({ itinerary: updated, excludedActivityIds: updatedExcluded });
+    updateTrip({ itinerary: updated });
   }
 
   // ── Generate ──
@@ -2473,8 +2454,9 @@ export default function ItineraryPlanner() {
           ? new Date(trip.manualArrivalTime).toISOString()
           : null;
 
-      const returnDepartsAt = selectedFlight?.returnDepartTime
-        ? `${endDate}T${selectedFlight.returnDepartTime}:00`
+      const returnDepartureTime = selectedReturnFlight?.departTime ?? selectedFlight?.returnDepartTime;
+      const returnDepartsAt = returnDepartureTime
+        ? `${endDate}T${returnDepartureTime}:00`
         : trip.manualDepartureTime
           ? new Date(trip.manualDepartureTime).toISOString()
           : null;
@@ -2499,7 +2481,9 @@ export default function ItineraryPlanner() {
             ...(returnDepartsAt   ? { returnDepartsAt   } : {}),
             // Airport IATA codes — only available when user selected a flight
             ...(selectedFlight?.destination  ? { arrivalAirport:   selectedFlight.destination  } : {}),
-            ...(selectedFlight?.returnOrigin ? { departureAirport: selectedFlight.returnOrigin } : {}),
+            ...((selectedReturnFlight?.origin ?? selectedFlight?.returnOrigin)
+              ? { departureAirport: selectedReturnFlight?.origin ?? selectedFlight?.returnOrigin }
+              : {}),
           },
         } : {}),
       };
@@ -3494,8 +3478,8 @@ export default function ItineraryPlanner() {
                   <p className="text-sm text-gray-700 mt-1">
                     {trip.startDate && `${shortDate(trip.startDate)} – ${shortDate(endDate)} · `}
                     {trip.itinerary.days.length} {trip.itinerary.days.length === 1 ? "day" : "days"} ·{" "}
-                    {activeActivityIds.length - trip.itinerary.meta.droppedActivities.length} of {activeActivityIds.length}{" "}
-                    {activeActivityIds.length === 1 ? "activity" : "activities"} scheduled
+                    {displayedActivityScheduled} of {displayedActivityTotal}{" "}
+                    {displayedActivityTotal === 1 ? "activity" : "activities"} scheduled
                     {trip.itinerary.meta.droppedActivities.length > 0 && (
                       <> · {trip.itinerary.meta.droppedActivities.length} dropped</>
                     )}
