@@ -3482,7 +3482,7 @@ function CompareScoreRow({
             <div className="space-y-1.5">
               <div className="h-1.5 rounded-full bg-gray-50 overflow-hidden">
                 <div
-                  className={`h-full rounded-full ${isW ? "bg-teal-600" : "bg-white/[0.16]"}`}
+                  className={`h-full rounded-full ${isW ? "bg-teal-600" : "bg-gray-200"}`}
                   style={{ width: `${barPct}%` }}
                 />
               </div>
@@ -3601,10 +3601,15 @@ function HotelComparePanel({
   const verdictParts = buildVerdictParts(hotels);
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-black/75 backdrop-blur-sm">
+    <div
+      className="fixed inset-0 z-50 flex flex-col bg-white text-gray-900"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="hotel-compare-title"
+    >
       {/* Header */}
-      <div className="flex-shrink-0 border-b border-gray-200 bg-gray-50/98 backdrop-blur-md px-4 sm:px-6 py-4 flex items-center justify-between">
-        <h2 className="text-sm font-bold text-gray-900">Compare Hotels</h2>
+      <div className="flex-shrink-0 border-b border-gray-200 bg-white px-4 sm:px-6 py-4 flex items-center justify-between shadow-sm">
+        <h2 id="hotel-compare-title" className="text-sm font-bold text-gray-900">Compare Hotels</h2>
         <button
           onClick={onClose}
           className="text-[11px] font-semibold text-gray-700 hover:text-gray-700 transition-colors flex items-center gap-1.5 border border-gray-200 rounded-lg px-3 py-1.5"
@@ -3617,7 +3622,7 @@ function HotelComparePanel({
       </div>
 
       {/* Scrollable body */}
-      <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-5">
+      <div className="flex-1 overflow-y-auto overscroll-contain bg-white px-4 sm:px-6 py-5">
         <div className="max-w-4xl mx-auto">
 
           {/* Summary award cards */}
@@ -3655,7 +3660,7 @@ function HotelComparePanel({
                 <p className="text-[12.5px] text-gray-800 font-semibold leading-snug">{verdictParts.headline}</p>
                 <p className="text-[11.5px] text-gray-600 leading-relaxed">{verdictParts.explanation}</p>
                 {verdictParts.tradeoff && (
-                  <p className="text-[11px] text-amber-300/60 leading-relaxed pt-0.5">
+                  <p className="text-[11px] text-amber-700 leading-relaxed pt-0.5">
                     {verdictParts.tradeoff}
                   </p>
                 )}
@@ -3834,7 +3839,7 @@ function HotelComparePanel({
               <span>Highest score</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <div className="w-3 h-1.5 rounded-full bg-white/[0.16]" />
+              <div className="w-3 h-1.5 rounded-full bg-gray-200" />
               <span>Other</span>
             </div>
           </div>
