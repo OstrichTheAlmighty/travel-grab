@@ -11,9 +11,23 @@ import {
   SKIP_TYPES,
   type CityInventory,
 } from "../_inventory";
+import type { ActivitySearchApiResponse } from "@/lib/activities/activity-search-state";
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
+
+function cityNotBuiltPayload(destination: string): ActivitySearchApiResponse {
+  const parts = destination.split(",").map((part) => part.trim()).filter(Boolean);
+  return {
+    error: "This city catalog has not been built yet.",
+    cityNotBuilt: true,
+    requestedDestination: destination,
+    city: parts[0] ?? destination,
+    country: parts.slice(1).join(", "),
+    source: "catalog_unavailable",
+    activities: [],
+  };
+}
 
 // ── AI whyVisit generation ────────────────────────────────────────────────────
 // Runs at response time. Results are cached inside CityInventory.entries[id].whyVisit
@@ -124,10 +138,18 @@ export async function GET(req: NextRequest) {
 
   const apiKey = (process.env.GOOGLE_PLACES_API_KEY ?? "").trim();
 
-  // No API key — return mock data
+  // No API key — retain the Tokyo development fixture, but never present it as
+  // another destination's inventory.
   if (!apiKey) {
-    console.warn("[activities/search] GOOGLE_PLACES_API_KEY not set — returning mock data");
-    const mock = DESTINATION_DATA["Tokyo, Japan"];
+    const requestedCity = destination.split(",")[0].trim().toLowerCase();
+    const mockEntry = Object.entries(DESTINATION_DATA).find(([name]) =>
+      name.split(",")[0].trim().toLowerCase() === requestedCity,
+    );
+    if (!mockEntry) {
+      return NextResponse.json(cityNotBuiltPayload(destination), { status: 404 });
+    }
+    console.warn("[activities/search] GOOGLE_PLACES_API_KEY not set — returning matching development fixture");
+    const mock = mockEntry[1];
     return NextResponse.json({
       activities:      mock.activities,
       city:            mock.city,
@@ -146,34 +168,32 @@ export async function GET(req: NextRequest) {
     : getLoadedInventory(destination);
 
   if (!inv && !runtimeBuildAllowed) {
-    return NextResponse.json({
-      error: "This city catalog has not been built yet.",
-      cityNotBuilt: true,
-      source: "catalog_unavailable",
-      activities: [],
-    }, { status: 404 });
+    return NextResponse.json(cityNotBuiltPayload(destination), { status: 404 });
   }
 
   // ── Cache / path diagnostics ────────────────────────────────────────────────
   console.log(`[activities/search] destination="${destination}"`);
   console.log(`[activities/search] RAW_INVENTORY_COUNT: ${inv?.entries.size ?? 0}  status=${inv?.status ?? "null"}  cacheSource=${inv?.cacheSource ?? "n/a"}  queriesCompleted=${inv?.queriesCompleted ?? 0}/${inv?.queriesTotal ?? 0}`);
   if (!inv || inv.entries.size === 0) {
-    console.warn(`[activities/search] PATH=mock_fallback — inv null or empty, Tokyo hardcoded data returned for "${destination}"`);
+    console.warn(`[activities/search] PATH=empty_inventory — no places returned for "${destination}"`);
   } else {
     console.log(`[activities/search] PATH=live_api — returning ${inv.entries.size} raw places for "${destination}"`);
   }
   // ───────────────────────────────────────────────────────────────────────────
 
-  if (!inv || inv.entries.size === 0) {
-    console.warn(`[activities/search] no inventory for "${destination}" — mock fallback`);
-    const mock = DESTINATION_DATA["Tokyo, Japan"];
+  if (!inv) {
+    return NextResponse.json(cityNotBuiltPayload(destination), { status: 404 });
+  }
+
+  if (inv.entries.size === 0) {
     return NextResponse.json({
-      activities:      mock.activities,
-      city:            mock.city,
-      country:         mock.country,
-      source:          "mock_fallback",
-      inventoryStatus: "ready" as const,
-      inventorySize:   mock.activities.length,
+      activities:        [],
+      city:              inv.city,
+      country:           inv.country,
+      source:            "places_api",
+      inventoryStatus:   inv.status,
+      inventorySize:     0,
+      inventoryProgress: { completed: inv.queriesCompleted, total: inv.queriesTotal },
     });
   }
 

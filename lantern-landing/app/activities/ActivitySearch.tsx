@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useRef, useEffect, useCallback } from "react";
+import { useState, useMemo, useRef, useEffect, useCallback, useReducer } from "react";
 import { readTripStore, updateTripStore } from "@/lib/trip-store";
 import Link from "next/link";
 import { fetchWithAuth } from "@/lib/fetch-with-auth";
@@ -17,6 +17,15 @@ import {
   finishGoogleModalTrace,
   recordGoogleModalTrace,
 } from "@/lib/activities/google-modal-trace";
+import {
+  INITIAL_ACTIVITY_LOAD_STATE,
+  activityLoadReducer,
+  activityResultMatchesDestination,
+  classifyActivitySearchResponse,
+  deriveActivityPageState,
+  type ActivitySearchApiResponse,
+  type ActivitySearchResult,
+} from "@/lib/activities/activity-search-state";
 
 // ── Filter config ─────────────────────────────────────────────────────────────
 
@@ -1606,65 +1615,73 @@ function DestinationSearch({
   );
 }
 
-// ── Empty / Error states ──────────────────────────────────────────────────────
+// ── Explicit page states ──────────────────────────────────────────────────────
 
-function EmptyState({ filter }: { filter: FilterId }) {
-  if (filter === "saved") {
-    return (
-      <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
-        <div className="text-5xl mb-4">🤍</div>
-        <h3 className="text-base font-bold text-gray-700 mb-2">No saved places yet</h3>
-        <p className="text-[13px] text-gray-700 max-w-xs mb-2">
-          Tap the ♥ on any activity to save it. Saved places stay here on this browser — no account needed.
-        </p>
-      </div>
-    );
-  }
+function CityNotBuiltState({ city, onSearchAnother }: { city: string; onSearchAnother: () => void }) {
   return (
     <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
-      <div className="text-5xl mb-4">🔍</div>
-      <h3 className="text-base font-bold text-gray-700 mb-2">No activities found</h3>
-      <p className="text-[13px] text-gray-700">
-        {filter === "free"
-          ? "No free activities available for this destination."
-          : filter === "browse_all"
-          ? "No activities have been loaded yet."
-          : `No ${FILTERS.find((f) => f.id === filter)?.label ?? filter} activities in the results.`}
+      <div className="text-5xl mb-4">🗺️</div>
+      <h3 className="text-base font-bold text-gray-800 mb-2">
+        TravelGrab activities are not available in {city || "this city"} yet
+      </h3>
+      <p className="text-[13px] text-gray-600 mb-5 max-w-md leading-relaxed">
+        We’re currently expanding our curated activity coverage. Search another destination to explore available recommendations.
       </p>
+      <button
+        onClick={onSearchAnother}
+        className="px-5 py-2.5 rounded-xl bg-teal-500 text-white text-sm font-semibold hover:bg-teal-600 transition-colors"
+      >
+        Search another city
+      </button>
     </div>
   );
 }
 
-function EmptySearchState({
+function EmptyResultsState({
+  city,
   query,
   activeFilter,
-  onClearFilter,
+  onClear,
 }: {
+  city: string;
   query: string;
   activeFilter: FilterId;
-  onClearFilter: () => void;
+  onClear: () => void;
 }) {
-  const isFiltered = activeFilter !== "all" && activeFilter !== "browse_all" && activeFilter !== "saved";
-  const filterLabel = FILTERS.find((f) => f.id === activeFilter)?.label ?? String(activeFilter);
+  const filterLabel = FILTERS.find((filter) => filter.id === activeFilter)?.label;
+  const hasQuery = query.trim().length > 0;
+  const hasFilter = activeFilter !== "all" && activeFilter !== "browse_all";
+  const title = activeFilter === "saved"
+    ? "No saved places match this view"
+    : hasQuery
+      ? `No activities match “${query.trim()}”`
+      : `No ${filterLabel?.toLowerCase() ?? "activities"} match these filters`;
+
   return (
     <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
       <div className="text-5xl mb-4">🔍</div>
-      <h3 className="text-base font-bold text-gray-700 mb-2">
-        {isFiltered ? `No "${query}" results in ${filterLabel}` : `No results for "${query}"`}
-      </h3>
-      <p className="text-[13px] text-gray-700 mb-4">
-        {isFiltered
-          ? "This search term might match a different category."
-          : "Try a different search term or browse by category."}
+      <h3 className="text-base font-bold text-gray-800 mb-2">{title}</h3>
+      <p className="text-[13px] text-gray-600 mb-5 max-w-sm">
+        The {city} catalog is available, but no activities match the current search or filters.
       </p>
-      {isFiltered && (
+      {(hasQuery || hasFilter) && (
         <button
-          onClick={onClearFilter}
-          className="px-4 py-2 rounded-lg bg-gray-50 border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-700 transition-all"
+          onClick={onClear}
+          className="px-5 py-2 rounded-xl bg-gray-50 border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition-colors"
         >
-          Search all categories
+          Clear search and filters
         </button>
       )}
+    </div>
+  );
+}
+
+function IdleState() {
+  return (
+    <div className="col-span-full flex flex-col items-center justify-center py-16 text-center">
+      <div className="text-4xl mb-3">📍</div>
+      <h3 className="text-base font-bold text-gray-800 mb-1">Search for a destination</h3>
+      <p className="text-[13px] text-gray-600">Enter a city above to explore its available activities.</p>
     </div>
   );
 }
@@ -1941,23 +1958,6 @@ function ItineraryModal({
 
 // ── Main Component ────────────────────────────────────────────────────────────
 
-interface SearchResult {
-  activities: Activity[];
-  city: string;
-  country: string;
-  source?: string;
-  inventoryStatus?: "building" | "ready";
-  inventorySize?: number;
-  inventoryProgress?: { completed: number; total: number };
-  _debug?: {
-    cacheSource:   string;
-    apiCallsMade:  number;
-    searchGroups?: number;
-    googleHttpRequests?: { textSearch: number; nearbySearch: number; geocoding: number };
-    entriesLoaded: number;
-  };
-}
-
 export default function ActivitySearch() {
   const [destination,        setDestination]        = useState("Tokyo, Japan");
   const [activityQuery,      setActivityQuery]      = useState("");
@@ -1967,9 +1967,10 @@ export default function ActivitySearch() {
   const [savedMeta,          setSavedMeta]          = useState<Record<string, { title: string; category: string; neighborhood: string; duration: string; rating: number; photoRef?: string; lat?: number; lng?: number; city?: string }>>({});
   const [tripCities,         setTripCities]         = useState<string[]>([]); // city stops from itinerary
   const [showItineraryModal, setShowItineraryModal] = useState(false);
-  const [loading,            setLoading]            = useState(false);
-  const [error,              setError]              = useState<string | null>(null);
-  const [result,             setResult]             = useState<SearchResult | null>(null);
+  const [loadState, dispatchLoad] = useReducer(activityLoadReducer, INITIAL_ACTIVITY_LOAD_STATE);
+  const { status: requestState, result, error, requestedDestination } = loadState;
+  const loading = requestState === "loading";
+  const [page, setPage] = useState(1);
 
   // ── Detail modal state ──
   const [modalActivity,      setModalActivity]      = useState<Activity | null>(null);
@@ -1978,6 +1979,11 @@ export default function ActivitySearch() {
   const [modalInsights,      setModalInsights]      = useState<ReviewInsights | null>(null);
   const [modalInsightsLoading, setModalInsightsLoading] = useState(false);
   const insightsCache = useRef(new Map<string, ReviewInsights | null>());
+  const clientCache = useRef(new Map<string, ActivitySearchResult>());
+  const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const requestSequenceRef = useRef(0);
+  const requestAbortRef = useRef<AbortController | null>(null);
+  const requestedDestinationRef = useRef(INITIAL_ACTIVITY_LOAD_STATE.requestedDestination);
 
   // Mount — load saved activities, preload session cache, prefill from trip store
   useEffect(() => {
@@ -1995,7 +2001,7 @@ export default function ActivitySearch() {
         const k = sessionStorage.key(i);
         if (k?.startsWith("tg_act_")) {
           const raw = sessionStorage.getItem(k);
-          if (raw) clientCache.current.set(k.slice(7), JSON.parse(raw) as SearchResult);
+          if (raw) clientCache.current.set(k.slice(7), JSON.parse(raw) as ActivitySearchResult);
         }
       }
     } catch { /* ignore */ }
@@ -2034,35 +2040,41 @@ export default function ActivitySearch() {
     } catch { /* ignore quota errors */ }
   }, [savedMeta]);
 
-  // Client-side cache keyed by lowercased destination — cleared when inventory finishes building
-  const clientCache = useRef(new Map<string, SearchResult>());
-  const pollingRef  = useRef<ReturnType<typeof setInterval> | null>(null);
-
   const fetchActivities = useCallback(async (dest: string, skipCache = false) => {
     const key = dest.trim().toLowerCase();
+    const requestId = ++requestSequenceRef.current;
+    requestAbortRef.current?.abort();
+    const controller = new AbortController();
+    requestAbortRef.current = controller;
+
+    const previousKey = requestedDestinationRef.current.trim().toLowerCase();
+    const destinationChanged = key !== previousKey;
+    requestedDestinationRef.current = dest.trim();
+    dispatchLoad({ type: "start", requestId, destination: dest.trim() });
+    setResultPageDefaults(destinationChanged);
+
     if (!skipCache) {
       // 1. In-memory (fastest — same session, survives re-renders)
       const mem = clientCache.current.get(key);
-      if (mem) {
-        setResult(mem);
-        setError(null);
+      if (mem && activityResultMatchesDestination(mem, dest)) {
+        dispatchLoad({ type: "loaded", requestId, result: mem });
+        requestAbortRef.current = null;
         return;
+      } else if (mem) {
+        clientCache.current.delete(key);
+        try { sessionStorage.removeItem(`tg_act_${key}`); } catch { /* ignore */ }
       }
       // 2. localStorage (survives page reloads and cold Vercel starts, 24h TTL)
       const persisted = lsGetDestination(key);
-      if (persisted) {
+      if (persisted && activityResultMatchesDestination(persisted as ActivitySearchResult, dest)) {
         console.log(`[activities] ls cache hit: ${key}`);
-        const r = persisted as SearchResult;
+        const r = persisted as ActivitySearchResult;
         clientCache.current.set(key, r);
-        setResult(r);
-        setError(null);
+        dispatchLoad({ type: "loaded", requestId, result: r });
+        requestAbortRef.current = null;
         return;
       }
     }
-
-    setLoading(true);
-    setError(null);
-    if (!skipCache) setActivityQuery(""); // clear activity search when switching destinations
 
     try {
       // 4. Supabase database — fast query, zero Google API cost
@@ -2075,11 +2087,13 @@ export default function ActivitySearch() {
           .limit(200)
           .order("title", { ascending: true });
 
+        if (requestId !== requestSequenceRef.current) return;
+
         if (sbError) {
           console.warn("[activities] Supabase query failed:", sbError.message);
         } else if (rows && rows.length > 0) {
           const activities = (rows as SupabaseRow[]).map(rowToActivity);
-          const r: SearchResult = {
+          const r: ActivitySearchResult = {
             activities,
             city:            cityName,
             country:         dest.includes(",") ? dest.split(",").slice(1).join(",").trim() : "",
@@ -2089,34 +2103,32 @@ export default function ActivitySearch() {
           };
           clientCache.current.set(key, r);
           lsSetDestination(key, r);
-          setResult(r);
-          setError(null);
-          return; // finally { setLoading(false) } handles cleanup
+          dispatchLoad({ type: "loaded", requestId, result: r });
+          return;
         }
         // No rows → fall through to Google Places API
       }
 
       // 5. Google Places API
-      const res  = await fetchWithAuth(`/api/activities/search?destination=${encodeURIComponent(dest.trim())}`);
-      const data = await res.json() as {
-        activities?: Activity[]; city?: string; country?: string; source?: string; error?: string;
-        limitReached?: boolean;
-        inventoryStatus?: "building" | "ready"; inventorySize?: number;
-        inventoryProgress?: { completed: number; total: number };
-        _debug?: {
-          cacheSource: string;
-          apiCallsMade: number;
-          searchGroups?: number;
-          googleHttpRequests?: { textSearch: number; nearbySearch: number; geocoding: number };
-          entriesLoaded: number;
-        };
-      };
+      const res = await fetchWithAuth(
+        `/api/activities/search?destination=${encodeURIComponent(dest.trim())}`,
+        { signal: controller.signal },
+      );
+      const data = await res.json() as ActivitySearchApiResponse;
+
+      if (requestId !== requestSequenceRef.current) return;
+
+      const responseState = classifyActivitySearchResponse(res.ok, data);
+      if (responseState === "city_not_built") {
+        dispatchLoad({ type: "city_not_built", requestId });
+        return;
+      }
 
       if (res.status === 429 && data.limitReached) throw new Error(data.error ?? "Daily limit reached. Resets at midnight UTC.");
-      if (!res.ok || data.error) throw new Error(data.error ?? `HTTP ${res.status}`);
-      if (!data.activities?.length) throw new Error("No activities found for this destination.");
+      if (responseState === "request_failed") throw new Error(data.error ?? `HTTP ${res.status}`);
+      if (!data.activities) throw new Error("The activity response was incomplete.");
 
-      const r: SearchResult = {
+      const r: ActivitySearchResult = {
         activities:        data.activities,
         city:              data.city    ?? dest.split(",")[0].trim(),
         country:           data.country ?? dest.split(",").pop()?.trim() ?? "",
@@ -2128,7 +2140,7 @@ export default function ActivitySearch() {
       };
 
       clientCache.current.set(key, r);
-      setResult(r);
+      dispatchLoad({ type: "loaded", requestId, result: r });
       // Persist so revisiting the page (or a cold server start) shows results instantly
       if (r.inventoryStatus !== "building") {
         try { sessionStorage.setItem(`tg_act_${key}`, JSON.stringify(r)); } catch { /* quota */ }
@@ -2136,12 +2148,31 @@ export default function ActivitySearch() {
         console.log(`[activities] ls cache set: ${key}`);
       }
     } catch (err) {
+      if (controller.signal.aborted || requestId !== requestSequenceRef.current) return;
       const msg = err instanceof Error ? err.message : "An unexpected error occurred.";
-      setError(msg);
+      dispatchLoad({ type: "request_failed", requestId, error: msg });
     } finally {
-      setLoading(false);
+      if (requestId === requestSequenceRef.current && requestAbortRef.current === controller) {
+        requestAbortRef.current = null;
+      }
     }
   }, []);
+
+  function setResultPageDefaults(destinationChanged: boolean) {
+    setPage(1);
+    setModalActivity(null);
+    setModalDetail(null);
+    setModalLoading(false);
+    setModalInsights(null);
+    setModalInsightsLoading(false);
+    if (destinationChanged) {
+      setActivityQuery("");
+      setActiveFilter("all");
+      setActiveSubTag(null);
+    }
+  }
+
+  useEffect(() => () => requestAbortRef.current?.abort(), []);
 
   // Poll inventory status while it's building; refresh once it's ready
   useEffect(() => {
@@ -2151,21 +2182,24 @@ export default function ActivitySearch() {
     }
 
     const cityKey = result.city.toLowerCase();
+    const pollRequestId = loadState.requestId;
+    const pollDestination = requestedDestination;
     pollingRef.current = setInterval(async () => {
       try {
         const res  = await fetch(`/api/activities/inventory/status?city=${encodeURIComponent(cityKey)}`);
         if (!res.ok) return;
         const data = await res.json() as { status: string; count: number };
+        if (pollRequestId !== requestSequenceRef.current) return;
 
         if (data.status === "ready") {
           clearInterval(pollingRef.current!);
           pollingRef.current = null;
           // Clear stale cache entry and re-fetch the full inventory
-          clientCache.current.delete(destination.trim().toLowerCase());
-          void fetchActivities(destination, true);
+          clientCache.current.delete(pollDestination.trim().toLowerCase());
+          void fetchActivities(pollDestination, true);
         } else {
           // Update the live count without re-fetching all activities
-          setResult((prev) => prev ? { ...prev, inventorySize: data.count } : prev);
+          dispatchLoad({ type: "update_inventory_size", requestId: pollRequestId, size: data.count });
         }
       } catch { /* ignore network errors during polling */ }
     }, 3000);
@@ -2173,7 +2207,7 @@ export default function ActivitySearch() {
     return () => {
       if (pollingRef.current) { clearInterval(pollingRef.current); pollingRef.current = null; }
     };
-  }, [result?.inventoryStatus, result?.city, destination, fetchActivities]);
+  }, [result?.inventoryStatus, result?.city, requestedDestination, loadState.requestId, fetchActivities]);
 
   function handleSearch(overrideValue?: string) {
     const dest = (overrideValue ?? destination).trim();
@@ -2385,21 +2419,44 @@ export default function ActivitySearch() {
   }, [isSearching, activeFilter, activityQuery, fullDataset, featured, activeSubTag, savedIds]);
 
   // Pagination — reset page whenever the view changes
-  const [page, setPage] = useState(1);
   useEffect(() => { setPage(1); }, [viewBase]);
 
   const PAGE_SIZE = 24;
   const displayed = viewBase.slice(0, page * PAGE_SIZE);
   const hasMore   = displayed.length < viewBase.length;
 
-  const city    = result?.city    ?? destination.split(",")[0].trim();
-  const country = result?.country ?? destination.split(",").pop()?.trim() ?? "";
+  const pageState = deriveActivityPageState(
+    requestState,
+    result !== null,
+    displayed.length,
+  );
+
+  const city    = result?.city    ?? requestedDestination.split(",")[0].trim();
+  const country = result?.country ?? requestedDestination.split(",").slice(1).join(",").trim();
 
   // All saved activities from the current dataset (for modal list + sticky bar)
   const savedActivities = useMemo(
     () => fullDataset.filter((a) => savedIds.has(a.id)),
     [fullDataset, savedIds],
   );
+
+  function clearSearchAndFilters() {
+    setActivityQuery("");
+    setActiveFilter("all");
+    setActiveSubTag(null);
+    setPage(1);
+  }
+
+  function searchAnotherCity() {
+    requestAbortRef.current?.abort();
+    const requestId = ++requestSequenceRef.current;
+    requestedDestinationRef.current = "";
+    setDestination("");
+    clearSearchAndFilters();
+    dispatchLoad({ type: "reset", requestId, destination: "" });
+  }
+
+  const showInventoryControls = pageState === "loaded" || pageState === "empty_search_results";
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
@@ -2432,15 +2489,21 @@ export default function ActivitySearch() {
         <div className="pt-12 pb-8 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-4 py-1.5 text-[11px] font-semibold text-gray-700 mb-5">
             <span className={`w-1.5 h-1.5 rounded-full ${
-              loading ? "bg-amber-400 animate-pulse" :
+              pageState === "loading" ? "bg-amber-400 animate-pulse" :
               result?.inventoryStatus === "building" ? "bg-amber-400 animate-pulse" :
-              "bg-lantern-mint animate-pulse"
+              pageState === "request_failed" ? "bg-red-400" :
+              pageState === "city_not_built" ? "bg-gray-400" :
+              "bg-lantern-mint"
             }`} />
-            {loading
+            {pageState === "loading"
               ? "Indexing city…"
               : result?.inventoryStatus === "building"
                 ? `Indexing ${city} — ${(result.inventorySize ?? 0).toLocaleString()} places found so far…`
-                : result
+                : pageState === "city_not_built"
+                  ? `${city || "This city"} is not available yet`
+                  : pageState === "request_failed"
+                    ? "Activity search could not be completed"
+                    : result
                   ? `${(result.inventorySize ?? result.activities.length).toLocaleString()} places indexed in ${city}`
                   : "Discover experiences"}
             {process.env.NODE_ENV !== "production" && result?._debug && (
@@ -2452,9 +2515,9 @@ export default function ActivitySearch() {
             )}
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight leading-tight mb-3">
-            Discover the best of{" "}
+            {pageState === "idle" ? "Discover activities in " : "Discover the best of "}
             <span className="bg-gradient-to-r from-lantern-violet via-lantern-blue to-lantern-mint bg-clip-text text-transparent">
-              {city}{country ? `, ${country}` : ""}
+              {city ? `${city}${country ? `, ${country}` : ""}` : "your next destination"}
             </span>
           </h1>
           <p className="text-gray-700 text-base max-w-md mx-auto">
@@ -2503,23 +2566,26 @@ export default function ActivitySearch() {
           />
         </div>
 
-        {/* ── Activity search ── */}
-        <div className="mb-6">
-          <ActivitySearchInput value={activityQuery} onChange={setActivityQuery} />
-        </div>
+        {/* Inventory-specific search and filters never remain visible for another city. */}
+        {showInventoryControls && (
+          <>
+            <div className="mb-6">
+              <ActivitySearchInput value={activityQuery} onChange={setActivityQuery} />
+            </div>
 
-        {/* ── Category filter strip ── */}
-        <div className="mb-4">
-          <CategoryFilter
-            active={activeFilter}
-            onChange={setActiveFilter}
-            counts={counts}
-            savedCount={savedIds.size}
-          />
-        </div>
+            <div className="mb-4">
+              <CategoryFilter
+                active={activeFilter}
+                onChange={setActiveFilter}
+                counts={counts}
+                savedCount={savedIds.size}
+              />
+            </div>
+          </>
+        )}
 
         {/* ── Sub-category chips (within a category, hidden in Featured / search mode) ── */}
-        {!isSearching && activeFilter !== "all" && subTagCounts.size > 0 && (
+        {showInventoryControls && !isSearching && activeFilter !== "all" && subTagCounts.size > 0 && (
           <div
             className="flex gap-2 overflow-x-auto pb-1 mb-4"
             style={{ scrollbarWidth: "none" } as React.CSSProperties}
@@ -2555,7 +2621,7 @@ export default function ActivitySearch() {
         )}
 
         {/* ── Result count ── */}
-        {result && !loading && (
+        {result && pageState !== "loading" && (
           <div className="flex items-center justify-between mb-5">
             <p className="text-[12px] text-gray-700">
               {isSearching
@@ -2582,11 +2648,20 @@ export default function ActivitySearch() {
 
         {/* ── Grid ── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-          {loading ? (
+          {pageState === "loading" ? (
             Array.from({ length: 9 }).map((_, i) => <SkeletonCard key={i} />)
-          ) : error ? (
-            <ErrorState message={error} onRetry={() => fetchActivities(destination)} />
-          ) : displayed.length > 0 ? (
+          ) : pageState === "city_not_built" ? (
+            <CityNotBuiltState city={city} onSearchAnother={searchAnotherCity} />
+          ) : pageState === "request_failed" ? (
+            <ErrorState message={error ?? "The activity request failed."} onRetry={() => fetchActivities(requestedDestination, true)} />
+          ) : pageState === "empty_search_results" ? (
+            <EmptyResultsState
+              city={city}
+              query={activityQuery}
+              activeFilter={activeFilter}
+              onClear={clearSearchAndFilters}
+            />
+          ) : pageState === "loaded" ? (
             displayed.map((activity) => (
               <ActivityCard
                 key={activity.id}
@@ -2596,19 +2671,13 @@ export default function ActivitySearch() {
                 onViewDetails={() => openDetails(activity)}
               />
             ))
-          ) : isSearching ? (
-            <EmptySearchState
-              query={activityQuery}
-              activeFilter={activeFilter}
-              onClearFilter={() => setActiveFilter("all")}
-            />
           ) : (
-            <EmptyState filter={activeFilter} />
+            <IdleState />
           )}
         </div>
 
         {/* ── Load more ── */}
-        {!loading && hasMore && (
+        {pageState === "loaded" && hasMore && (
           <div className="flex flex-col items-center gap-2 mt-10">
             <button
               onClick={() => setPage((p) => p + 1)}
